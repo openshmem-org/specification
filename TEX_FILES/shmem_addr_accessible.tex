@@ -1,29 +1,27 @@
-       Determines whether an address is accessible via OpenSHMEM data transfers operations from the specified  remote  processing
-       element (PE).
+\bAPI{SHMEM\_ADDR\_ACCESSIBLE}{Determines whether an address is accessible via OpenSHMEM data transfers operations from the specified  remote  processing element (PE).}
 
-SYNOPSIS
-       C/C++:
+%SYNOPSIS
+\synC
+	  int shmem\_addr\_accessible(void *addr, int pe);
+%*\synCE
 
-	  int shmem_addr_accessible(void *addr, int pe);
-
-       Fortran:
-
-	  LOGICAL LOG, SHMEM_ADDR_ACCESSIBLE
-
+\synF
+	  LOGICAL LOG, SHMEM\_ADDR\_ACCESSIBLE
 	  INTEGER pe
+	  LOG = SHMEM\_ADDR\_ACCESSIBLE(addr, pe)
+%*\synFE
 
-	  LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
+%DESCRIPTION
 
-DESCRIPTION
+%Arguments
+\desB{
+       \argRow{IN}{addr}{Data object on the local PE.}
+       \argRow{IN}{pe}{Integer id of a remote PE.}
+}
 
-Arguments
-
-       IN	addr	Data object on the local PE.
-       IN	pe	Integer id of a remote PE.
-
-API Description
-
-       shmem_addr_accessible  is  a  query  function  that indicates whether a
+%API Description
+{
+       shmem\_addr\_accessible  is  a  query  function  that indicates whether a
        local address is accessible via SHMEM  operations  from	the  specified
        remote PE.
 
@@ -38,19 +36,34 @@ API Description
        symmetric  between  processes  running from different executable files.
        Data allocated from  the	 symmetric  heap  (shmalloc  or	 shpalloc)  is
        symmetric across the same or different executable files.
+}
 
-Return Value
+%API Description Table
+{
+		\desTB{}
+		{
+				\cRow{}{}
+		}
+		%Return Value
+		{		
+				C/C++: The  return value is 1 if addr is a symmetric data object and
+				 accessible via OpenSHMEM operations from the specified remote PE;
+				 otherwise,it is 0.
 
-       C/C++:	 The  return value is 1 if addr is a symmetric data object and
-		 accessible via OpenSHMEM operations from the specified remote PE;
-		 otherwise,it is 0.
+				Fortran: The return value is .TRUE. if addr is a symmetric data object
+				 and accessible via OpenSHMEM operations from the specified remote
+				 PE; otherwise, it is .FALSE..
+		}
+}
 
-       Fortran:	 The return value is .TRUE. if addr is a symmetric data object
-		 and accessible via OpenSHMEM operations from the specified remote
-		 PE; otherwise, it is .FALSE..
+%NOTES
+{}
 
-NOTES
-
-EXAMPLES
-
-
+%EXAMPLES
+\exampleB{
+	\exampleITEM
+					{}
+					{}
+					{}
+}
+\eAPI
