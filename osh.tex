@@ -1,0 +1,814 @@
+% Version as of April 8, 1997
+
+%   ----------------------------------------------------------------------
+%   osh.tex inspired by mpi-macs.tex  --- man page macros,
+%                discuss, missing, mpifunc macros
+%
+% ----------------------------------------------------------------------
+
+% TeX if definitions.  These are defined here so (a) there is one place to
+% change the defaults and (b) so that they can be changed by reading a
+% configuration file
+% Control the use of color
+\newif\ifusecolor
+\usecolortrue
+% Control whether changes are highlighted
+\newif\ifshowchange
+\showchangetrue
+% Control whether deleted text is shown
+\newif\ifshowdelete
+\showdeletetrue
+% Control the use of change "bars" (really markers).  Note that
+% both changetrue and changebarstrue must not be set
+\newif\ifchangebars
+\changebarsfalse
+% Control whether tickets are indicated in the margins (or inline, when 
+% they occur in inner mode.  Note that this has no effect if \showchangetrue
+% is not set
+\newif\ifshowtickets
+\showticketstrue
+% For publisher's additions in the printed book
+\newif\ifbookprinting
+\bookprintingfalse
+
+%
+% There are a number of features that are controlled by LaTeX if commands.
+% This step allows you to control these through a configuration file
+% This file should contain valid LaTeX commands, including comments (using
+% the standard % character for comments)
+%
+% Known commands include:
+% \showchangetrue   - Show changes/additions (from a previous version)
+% \showdeletetrue   - Show deleted text (deleted from a previous version)
+% \changebarstrue   - Show change "bars" around changes (really begin/end
+%                     markers in the output file)
+% \usecolortrue     - Use color to show changes
+% 
+\newread\cfgin
+
+%
+% General text color update macros
+% These permit the use of nesting of the color changes, as well as
+% a "do not change" option
+%
+\ifusecolor
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{purple}{rgb}{0.8,0,1}
+\let\XA=\expandafter
+% Definition for "Use current color"
+\def\ColorSame{same}
+% Create a stack that is 5 deep (no arrays in TeX)
+\def\ColorS{black}
+\def\ColorSi{same}
+\def\ColorSii{same}
+\def\ColorSiii{same}
+\def\ColorSiiii{same}
+% Stack pointer
+\newcount\ColorStackP 
+\ColorStackP=0
+% Push a new color
+\def\ColorPush#1{%
+\global\advance\ColorStackP 1\relax%
+\ifnum\ColorStackP>4\message{Font Color stack too deep}\fi%
+\ifnum\ColorStackP=1\global\def\ColorSi{#1}\else
+\ifnum\ColorStackP=2\global\def\ColorSii{#1}\else
+\ifnum\ColorStackP=3\global\def\ColorSiii{#1}\else
+\ifnum\ColorStackP=4\global\def\ColorSiiii{#1}%
+\fi
+\fi
+\fi
+\fi
+\def\ColorCur{#1}%
+\ifx \ColorCur\ColorSame \relax\else \color{#1}\fi
+}
+% Pop that color
+\def\ColorPop{\global\advance\ColorStackP -1\relax%
+\ifnum\ColorStackP<0\message{Font Color stack < 0}\fi%
+\ifnum\ColorStackP=0\def\ColorCur{\ColorS}\else
+\ifnum\ColorStackP=1\def\ColorCur{\ColorSi}\else
+\ifnum\ColorStackP=2\def\ColorCur{\ColorSii}\else
+\ifnum\ColorStackP=3\def\ColorCur{\ColorSiii}\else
+\ifnum\ColorStackP=4\def\ColorCur{\ColorSiiii}%
+\fi
+\fi
+\fi
+\fi
+\fi%\typeout{cur = \ColorCur and same = \ColorSame}%
+\ifx\ColorCur\ColorSame\relax\else\color{\ColorCur}\fi%
+}
+% A synonym for color that is controlled by the \usecolortrue command
+\def\Color#1{\color{#1}}
+\else
+\def\ColorPush#1{}
+\def\ColorPop{}
+\def\Color#1{}
+\fi % \ifusecolor
+
+\ifshowdelete
+\def\nocomment{\catcode`\%=9}
+\def\restorecomment{\catcode`\%=14}
+\else
+\let\nocomment=\relax
+\let\restorecomment=\relax
+\fi
+
+\ifchangebars
+\def\BegChange{\begchange}
+\def\EndChange{\endchange}
+\else
+\let\BegChange=\relax
+\let\EndChange=\relax
+\fi
+
+\ifshowchange
+%
+% Use margin par for the ticket number unless marginpar won't work, in 
+% which case inline the ticket number.  To do more would require special
+% code for the TeX output routine, which isn't worth it for what we need 
+% here.
+% Note that the changebars and the ticket both use marginpar, and if both 
+% are used at the same time, LaTeX may run out of floats
+\ifchangebars
+\def\ticket#1{\relax}
+\else
+\ifshowtickets
+\def\ticket#1{\ifinner[ticket#1.]\else\protect\marginpar[\mbox{\hbox to \marginparwidth{\hss ticket#1.\hspace{30pt}}}]{\hbox to \marginparwidth{\hspace{30pt}ticket#1.\hss}}\fi}
+\else
+\def\ticket#1{\relax}
+\fi % showtickets
+\fi % changebars
+\fi
+
+% fancyvrb defines Verbatim, which is a slightly better Verbatim environment
+% Regrettably, the key feature needed, commandchars, does not work correctly
+% in our environment (it doesn't accept arbitrary grouping characters).
+% See README-2.2 for instructions on using Verbatim along with the above 
+% update macros.
+%\usepackage{fancyvrb}
+
+
+\def\snir{\relax}
+\def\rins{\relax}
+
+
+% To make the changes without showing the location or old source: 
+%    \newcommand{\CHANGE}[2]{}
+%    \newcommand{\INTO}[1]{#1}
+%    \newcommand{\ADD}[2]{#2}
+ %   \newcommand{\DELETE}[2]{}
+
+ 
+% available: red green blue cyan yellow magenta
+ \def\RVWCAP/{}                                                       % shortcut for Review item 23.a - capitalization of titles (in \section}
+% \def\RVWcap/{\mpiiidotiMergeFromREVIEWbegin{23.a}}                   % shortcut for Review item 23.a - capitalization of titles
+\def\RVWcap/{}                                                       % shortcut for Review item 23.a - capitalization of titles
+ 
+\def\OnlyForAutomaticAnnexGeneration#1{}% deleting the content were the macro is used; but preserving it for the Annex
+
+ 
+% This macro enables that all "_" (underscore) characters in the pfd
+% file are searchable, and that cut&paste will copy the "_" as underscore. 
+% Without the following macro, the \_ is treated in searches and cut&paste
+% as a " " (space character). 
+% This macro does not modify the behavior of _ in math or in verbatim 
+% environments. In verbatim environments, the "_" is always treated
+% as a searchable character.
+%
+\DeclareRobustCommand{\_}{\texttt{\char`\_}} 
+% 
+
+% From MPI-2.0
+% ------------
+ 
+% Place some penalty for doing the break
+% The penalty for a ``\gb'' should be greater than a \hyphenpenalty.
+% \hyphenpenalty is 50 in plain.tex.
+\def\gb{\penalty10000\hskip 0pt plus 8em\penalty4800\hskip 0pt plus-8em%
+\penalty10000}
+
+% A theorem-like environment for code Examples (S. Otto) see Lamport, pg 58
+%
+% Note that because we use a theorem environment that resets the counter
+% with every chapter, pdflatex will issue a warning for each example that
+% has the same number as an example in another chapter.  This is too hard
+% to fix (the easist way is to not use the theorem environment and roll
+% a custom environment, including adding the necessary low-level commands
+% for the pdf link support.
+%\newtheorem{example}{Example}[chapter]
+% Theorems have \em text; we want \rm.  The easiest way to fix this, 
+% since we are not using Theorems, is to change the @begintheorem macro
+\makeatletter
+\def\@begintheorem#1#2{\rm \trivlist \item[\hskip \labelsep{\bf #1\ #2}]}
+\makeatother
+% Use \exindex{MPI\_FUNC} to generate an index entry for MPI
+% functions/constants 
+%\newcommand{\exindex}[1]{\relax}
+%\newcommand{\exindex}[1]{\index{EXAMPLES:#1}}
+
+% a couple of commands from Marc Snir, modified S. Otto
+
+%\newlength{\discussSpace}
+%\setlength{\discussSpace}{.4cm}
+
+%\newenvironment{funcdef}[1]{
+%    \vspace{\codeSpace}
+%    \noindent
+%    \samepage
+%    \hangindent 7em\hangafter=1
+%    {\funcNoIndex{{\prefix}#1}}\mpifuncmainindex{#1}
+%    \MPIfunclist
+%}{\end{list} \vspace{\codeSpace}}
+
+%\newcommand{\function}[1]{{\raggedright \hangindent 7em\hangafter=1\tt #1 \par \vspace{0.1in}}}
+%\newcommand{\CM}{Communication Middleware}
+% Watermark
+%
+% For release please remove waternark and lino
+% DRAFT !!!
+\usepackage{draftwatermark}
+
+% max depth for table of content
+\setcounter{tocdepth}{4}
+% set path to figures
+\graphicspath{{./figures/}}
+
+\newcommand{\openshmem} {
+OpenSHMEM % \textsuperscript{{\small \texttrademark}}
+}
+\newcommand{\insertDocVersion}{1.0 FINAL}
+\newcommand{\deprecate}[1]{\textcolor{Gray}{#1 (deprecated)}}
+%\renewcommand\linenumberfont{\normalfont\scriptsize\sffamily}
+
+\hypersetup{pdftitle={\openshmem Specification Draft},
+ pdfauthor={HPC Tools, University of Houston},
+ pdfkeywords={Specification, Draft, \openshmem, SHMEM, PGAS, Partitioned, Global, Address, Gasnet, Parallel}}
+ 
+\definecolor{gray}{rgb}{0.92,0.92,0.92}
+\lstset{ %
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  basicstyle=\footnotesize,
+  breaklines=true,                 % sets automatic line breaking
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  %frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  %keywordstyle=\color{blue},       % keyword style
+  %language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+ % numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  %numbersep=5pt,                   % how far the line-numbers are from the code
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  %tabsize=2,                       % sets default tabsize to 2 spaces
+  %title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}\newcommand{\discuss}[1]{}
+
+% long discussion
+\bgroup\catcode`\{=10\catcode`\}=10\catcode`\[=1\catcode`\]=2\long\gdef\Eatdiscussion#1end{discussion}[\relax\end[discussion]]\relax\egroup\newenvironment{discussion}{\bgroup\def\do##1{\catcode`##1=10}\dospecials\Eatdiscussion}{\egroup}
+
+\newcommand{\missing}[1]{}
+
+\newcommand{\alter}[1]{}
+
+\newcommand{\status}[1]{}
+
+% special comment command for last round
+%\newcommand{\question}[1]{\vspace{\discussSpace} {\small {\bf Question:} #1} \vspace{\discussSpace}}
+\newcommand{\question}[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Use this to make pages start on the right side
+\newcommand{\startchap}[0]{\cleardoublepage}
+%\newcommand{\startchap}[0]{\relax}
+
+%\newlength{\codeSpace}
+%\setlength{\codeSpace}{.4cm}
+
+
+\def\RMA/{\textsf{RMA}}    % RMA macro -- see TEX Book, pg 8,204 bloody TEX!!
+
+\newcommand{\uu}[1]{\underline{\hyperpage{#1}}} 
+\newcommand{\typedefindex}[1]{\index{TYPEDEF:#1}}
+\newcommand{\cdeclindex}[1]{\index{CONST:#1}}        %  for index entry of C declarations like MPI_Comm
+\newcommand{\cdeclmainindex}[1]{\index{CONST:#1|uu}}
+ 
+\def\MPIfunclist{
+    \begin{list}{}{                     % see pg 113 of Lamport's book
+        \setlength{\leftmargin}{105pt}
+        \setlength{\labelwidth}{80pt}
+        \setlength{\labelsep}{10pt}
+        \setlength{\itemindent}{0pt}
+        \setlength{\itemsep}{0pt}
+        \setlength{\topsep}{2pt}
+    }
+}
+
+\newlength{\codeSpace}
+\setlength{\codeSpace}{.4cm}
+
+\newcommand{\IN}[0]{{\small IN}}
+\newcommand{\OUT}[0]{{\small OUT}}
+\newcommand{\INOUT}[0]{{\small INOUT}}
+\newcommand{\prefix}[0]{{LLC\_}}
+
+\newcommand{\mpiarg}[1]{\gb\textsf{#1}} 
+
+\newcommand{\funcarg}[3]{\item[\hbox to 30pt{\textsf{#1} \hfill} \mpiarg{#2}\hfill]{\small #3}}
+
+\def\gb{\penalty10000\hskip 0pt plus 8em\penalty4800\hskip 0pt plus-8em%
+\penalty10000}
+\newcommand{\funcNoIndex}[1]{\gb\textsf{#1}}
+\newcommand{\mpifuncmainindex}[1]{\index{#1|uu}}
+
+% special for functions that you don't want listed in index.
+% This was added for showing corrections to functions already listed.
+\newenvironment{funcdefnolist}[1]{      
+    \vspace{\codeSpace}
+    \vspace{\codeSpace}
+    \noindent
+    \samepage
+    {\func{#1}}
+    \begin{list}{}{                     % see pg 113 of Lamport's book
+        \setlength{\leftmargin}{200pt} 
+        \setlength{\labelwidth}{180pt} 
+        \setlength{\labelsep}{10pt} 
+        \setlength{\itemindent}{0pt}
+        \setlength{\itemsep}{0pt}
+        \setlength{\topsep}{5pt}
+    }
+}{\end{list} \vspace{\codeSpace}}
+
+
+\newenvironment{ffuncdef}[1]{   
+    \vspace{\codeSpace}
+    \noindent
+    Fortran binding:
+
+    \noindent
+    \samepage
+    {\ffunc{#1}}
+    \begin{list}{}{                     % see pg 113 of Lamport's book
+        \setlength{\leftmargin}{200pt} 
+        \setlength{\labelwidth}{180pt} 
+        \setlength{\labelsep}{10pt} 
+        \setlength{\itemindent}{0pt}
+        \setlength{\itemsep}{0pt}
+        \setlength{\topsep}{5pt}
+    }
+}{\end{list} \vspace{\codeSpace}}
+
+                                        % see page 77, the TeX book.
+\newcommand{\cfunc}[1]{\gb\textsf{#1}}
+\newcommand{\ffunc}[1]{\gb\textsf{#1}}
+\newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}}
+\newcommand{\constskip}[1]{\protect\gb\protect{\textsf{\small #1}}}
+% for ones from  MPI-1
+\newcommand{\consti}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}} % constants/handles - language independent
+%\newcommand{\consti}[1]{\protect\gb\protect{\small\sf #1}\index{CONST:#1}} % constants/handles - language independent
+\newcommand{\constiskip}[1]{\protect\gb\protect{\textsf{\small #1}}}             % ... same, but not in the Constant Index
+\newcommand{\constitemtwo}[3]{\item[\const{#1}, \const{#2}\hfill]{#3}}
+\newcommand{\constitemthree}[4]{\item[\const{#1}, \const{#2}, \const{#3}\hfill]{#4}}
+% for ones that don't go in index
+\newcommand{\constskipitem}[2]{\item[\constskip{#1}\hfill]{#2}}
+% \newcommand{\carg}[1]{\gb\textsf{#1}}                  % currently not used
+% \newcommand{\farg}[1]{\gb\textsf{#1}}                  % currently not used
+\newcommand{\type}[1]{\gb\textsf{#1}\index{CONST:#1}}  % datatype handles
+%
+\newcommand{\gtype}[1]{\textsf{#1}} % generic (language independent) type
+\newcommand{\shorttype}[1]{\textsf{#1}\index{CONST:#1}}  % ... same but without \gb panelty
+\newcommand{\ctype}[1]{\gb\texttt{#1}}                 % - and corresponding C type
+\newcommand{\ftype}[1]{\gb\texttt{#1}}                 % - and corresponding Fortran type
+%
+% Info is for MPI_Info predefined strings.  \infokey{keyname} and
+% \infoval{keyvaluename}
+\newcommand{\info}[1]{\protect\gb\protect{\small\sf #1}\index{CONST:#1}}
+\newcommand{\infoval}[1]{\protect\gb\protect{\small\sf #1}\index{CONST:#1}}
+\let\infokey=\infoval
+\newcommand{\infoskip}[1]{\protect\gb\protect{\small\sf #1}}
+%
+\newcommand{\error}[1]{\protect\gb\protect{\small\sf #1}\index{CONST:#1}}
+\newcommand{\errorskip}[1]{\protect\gb\protect{\small\sf #1}}
+\newcommand{\errori}[1]{\protect\gb\protect{\small\sf #1}}
+
+
+\def\class{$\langle$CLASS$\rangle$}
+
+\newenvironment{constlist}[0]{  
+    \vspace{\codeSpace}
+    \noindent
+    \begin{list}{}{                     % see pg 113 of Lamport's book
+        \setlength{\leftmargin}{200pt} 
+        \setlength{\labelwidth}{190pt} 
+        \setlength{\labelsep}{10pt} 
+        \setlength{\itemindent}{10pt}
+        \setlength{\itemsep}{-5pt}
+        \setlength{\topsep}{-5pt}
+    }
+}{\end{list} \vspace{\codeSpace}}
+
+%       some commands from Bill Gropp
+
+\def\code#1{\texttt{#1}}
+\def\setmargin#1{\begingroup\leftmargin #1 \advance\leftmargin\labelsep 
+                 \leftmargini #1 \advance\leftmargini\labelsep}
+\def\esetmargin{\endgroup}
+\def\ibamount{3.0cm\relax}
+\def\ibaamount{4.0cm}
+\def\ibdamount{4.5cm}
+\def\ibcamount{2.0cm}
+\def\ib#1{\hbox to \ibamount{#1\hfil}}
+\def\iba#1{\hbox to \ibaamount{#1\hfil}}
+\def\ibd#1{\hbox to \ibdamount{#1\hfil}}
+\def\ibc#1{\hbox to \ibcamount{#1\hfil}}
+
+% Use \code{...} for code fragments
+%\def\code#1{\texttt{#1}}
+% Use \df{name} for a definition of name in the text
+\def\df#1{{\bf #1}}
+% Use \note{text} for marginal notes
+\def\note#1{\marginpar{\bf #1}}
+
+%
+% Get line numbers in the gutters.  Thanks to Guy Steele and HPFF!
+%
+
+\makeatletter
+%
+% This is used to put line numbers on plain pages.  Used in draft.tex
+%
+\def\withlinenumbers{\relax
+  \def\@evenfoot{\hbox to 0pt{\hss\LineNumberRuler\hskip 1.5pc}\hfil}\relax
+  \def\@oddfoot{\hfil\hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}}
+
+\def\LineNumberRuler{\vbox to 0pt{\vss\normalsize \baselineskip13.6pt
+    \lineskip 1pt \normallineskip 1pt \def\baselinestretch{1}\relax
+    \LNR{1}\LNR{2}\LNR{3}\LNR{4}\LNR{5}\LNR{6}\LNR{7}\LNR{8}\LNR{9}
+    \LNR{10}\LNR{11}\LNR{12}\LNR{13}\LNR{14}
+        \LNR{15}\LNR{16}\LNR{17}\LNR{18}\LNR{19}
+    \LNR{20}\LNR{21}\LNR{22}\LNR{23}\LNR{24}
+        \LNR{25}\LNR{26}\LNR{27}\LNR{28}\LNR{29}
+    \LNR{30}\LNR{31}\LNR{32}\LNR{33}\LNR{34}\LNR{35}
+        \LNR{36}\LNR{37}\LNR{38}\LNR{39}
+    \LNR{40}\LNR{41}\LNR{42}\LNR{43}\LNR{44}
+        \LNR{45}\LNR{46}\LNR{47}\LNR{48}
+    \vskip 31pt}}
+\def\LNR#1{\hbox to 1pc{\hfil\tiny#1\hfil}}
+
+% jmm; merge the withlinenumbers stuff into
+% the centered page numbers that tex defines by default
+\def\ps@plainwithlinenumbers{\let\@mkboth\@gobbletwo
+     \def\@oddhead{}
+     \def\@oddfoot{\hfil\rm\thepage\hfil
+       \hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}
+     \def\@evenhead{}
+     \def\@evenfoot{\hbox to 0pt{\hss
+     \LineNumberRuler\hskip 1.5pc}\rm\hfil\thepage\hfil}}
+
+% The old version; uncommenting the withlinenumbers part didn't
+% work because that macro replaced the footer definition that
+% did page numbering.
+%\def\ps@plainwithlinenumbers{\ps@plain}%\withlinenumbers}
+% end jmm changes
+
+%
+% 1st page of a chapter has its own page style, so we have to put line
+% numbers in here also.
+%
+\newwrite\chappages
+\immediate\openout\chappages=chappage.txt
+\def\writespace{ }
+%
+% Contents is done with \chapter*{Contents}, so we need to turn off the
+% line numbers in this case.  Easiest to look at def
+%
+\def\incontents{0}
+\newif\ifcontents
+\contentsfalse
+\def\chapter{\clearpage \ifcontents\else\thispagestyle{plainwithlinenumbers}\fi
+        \write\chappages{Chapter \thechapter\writespace - \the\count0}
+        \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter}
+
+%
+% Change "Chapter" to "Chapter", "Appendix" to "Annex"
+%
+\renewcommand{\chaptername}{Chapter} 
+\renewcommand{\appendixname}{Annex} 
+% ... old code does not work correctly with pdflatex  
+% \def\@chapapp{Chapter}
+% \def\appendix{\par
+%  \setcounter{chapter}{0}
+%  \setcounter{section}{0}
+%  \def\@chapapp{Annex}
+%  \def\thechapter{\Alph{chapter}}}
+
+\makeatother
+
+
+%
+% Also from HPFF.  These look potentially useful.
+%
+
+\newenvironment{rationale}{\begin{list}{}{}\item[]{\it Rationale.}
+}{{\rm ({\it End of rationale.})} \end{list}}
+
+\newenvironment{implementors}{\begin{list}{}{}\item[]{\it Advice
+        to implementors.}
+}{{\rm ({\it End of advice to implementors.})} \end{list}}
+
+\newenvironment{users}{\begin{list}{}{}\item[]{\it Advice to users.}
+}{{\rm ({\it End of advice to users.})} \end{list}}
+
+
+
+%
+% Use Sans Serif font for sections, etc.  S. Otto
+%
+\makeatletter
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+-.2ex}{2.3ex plus .2ex}{\Large\sf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+-.2ex}{1.5ex plus .2ex}{\large\sf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
+-1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex 
+minus .2ex}{-1em}{\normalsize\sf}}
+\makeatother
+%
+% An Editor's Note macro
+%
+\def\ednote#1{{\sl Editor's note: #1}}
+
+% a way to comment out large sections of text
+\newcommand{\commentOut}[1]{{}}
+
+%
+%  A few commands to help in writing MPI man pages
+%
+\def\twoc#1#2{
+\begin{list}
+{\hbox to95pt{#1\hfil}}
+{\setlength{\leftmargin}{120pt}
+ \setlength{\labelwidth}{95pt}
+ \setlength{\labelsep}{0pt}
+ \setlength{\partopsep}{0pt}
+ \setlength{\parskip}{0pt}
+ \setlength{\topsep}{0pt}
+}
+\item
+{#2}
+\end{list}
+}
+\outer\long\def\onec#1{
+\begin{list}
+{}
+{\setlength{\leftmargin}{25pt}
+ \setlength{\labelwidth}{0pt}
+ \setlength{\labelsep}{0pt}
+ \setlength{\partopsep}{0pt}
+ \setlength{\parskip}{0pt}
+ \setlength{\topsep}{0pt}
+}
+\item
+{#1}
+\end{list}
+}
+\def\manhead#1{\noindent{\bf{#1}}}
+
+\makeatletter
+%
+% make our own index environment that can have a different
+% title than just "Index" -- S. Otto
+%
+\def\@index{Index}
+\def\@introtext{}  % MPI-2.1
+\newif\if@restonecol
+\def\myindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+\columnseprule \z@
+%\columnsep 35pt\twocolumn[\@makeschapterhead{Index}]
+ %\@mkboth{INDEX}{INDEX}\thispagestyle{plain}\parindent\z@
+%\columnsep 35pt\twocolumn[\@makeschapterhead{\@index}]
+\columnsep 35pt\twocolumn[\@makeschapterhead{\@index}\@introtext\vspace{15pt}] % MPI-2.1
+ \@mkboth{\@index}{\@index}\thispagestyle{plain}\parindent\z@
+ \parskip\z@ plus .3pt\relax\let\item\@idxitem}
+\def\@idxitem{\par\hangindent 40pt}
+\def\subitem{\par\hangindent 40pt \hspace*{20pt}}
+\def\subsubitem{\par\hangindent 40pt \hspace*{30pt}}
+\def\endmyindex{\if@restonecol\onecolumn\else\clearpage\fi}
+\def\indexspace{\par \vskip 10pt plus 5pt minus 3pt\relax}
+\makeatother
+
+%macros for language binding: mpibind, mpifbind, and fargs:
+
+
+\def\fargs{\\\advance\leftskip 2em}
+
+\raggedbottom
+
+% from binding chapter for appendix B.
+% -*- latex -*-
+
+\makeatletter
+\newbox\arg@box
+
+\def\separator{\rule{\linewidth}{0.5pt}}
+\def\function#1{\texttt{#1}}
+\def\variable#1{\texttt{#1}}
+
+\def\subtitle{\pagebreak[3]\@ifstar{\@subtit@star}{\@subtit@norm}}
+\def\@subtit@star#1{
+  \item[\hbox{\normalsize\sf\begin{tabular}[t]{l}#1\end{tabular}}\hfill]
+  \hfil\par
+  \expandafter{\let\par=\space\ignorespaces\let\par=\endgraf}
+}
+\def\@subtit@norm#1{
+  \setbox\arg@box=\hbox{\normalsize\sf\begin{tabular}[t]{l}#1\end{tabular}}
+  \ifdim \wd\arg@box > \labelwidth \item[\copy\arg@box\hfill]\hfil\par
+  \else \dp\arg@box=0pt \item[\copy\arg@box\hfill] \fi
+  \expandafter{\let\par=\space\ignorespaces\let\par=\endgraf}
+}
+
+\newenvironment{manpage}[3]{\@beginManpage#1\@@#2\@@#3\@@}{\@endManpage}
+
+\def\@beginManpage#1\@@#2\@@#3\@@{
+  \addcontentsline{toc}{subsection}{#2}
+  \clearpage    
+  \begin{list}{}{
+      \setlength\labelwidth{1.2in}
+      \setlength\leftmargin{\labelwidth}
+      \addtolength\leftmargin{\labelsep}
+      \topsep  5pt plus 2pt minus 2pt
+      \itemsep 5pt plus 2pt minus 2pt
+      \parsep 10pt plus 2pt minus 2pt
+      \raggedbottom
+      }
+    }
+
+\def\@endManpage{\end{list} \clearpage \flushbottom}
+
+\makeatother
+
+% The next set of macros define change marks for the document
+%----------------------------------------------------------------------
+% intended for general change marks not associated with a certain version
+%\def\begchange{\marginpar[\hspace*{-60pt}\mbox{\hspace*{10pt}
+%$\top$ \tiny (General)}]{\mbox{$\top$ \tiny (General)}}}
+%\def\endchange{\marginpar[\hspace*{-60pt}\mbox{\hspace*{10pt}
+%$\bot$ \tiny (General)}]{\mbox{$\bot$ \tiny (General)}}}
+%
+% These versions are careful to generate no extraneous error messages 
+% about overfull boxes
+%
+% Because they use marginpar, they can't be used everywhere.  If 
+% marginpar isn't available, they do *not* add any marks.
+%
+\def\begchange{\ifinner\else\protect\marginpar[\mbox{\hbox to
+    \marginparwidth{\hss\mbox{\hspace*{10pt}$\top$ \tiny
+        (Fin2)}\hspace*{30pt}}}]{\hbox to \marginparwidth{\mbox{$\top$ \tiny (Fin2)}\hss}}\fi}
+\def\endchange{\ifinner\else\protect\marginpar[\mbox{\hbox to \marginparwidth{\hss\mbox{\hspace*{10pt}$\bot$ \tiny (Fin2)}\hspace*{30pt}}}]{\hbox to \marginparwidth{\mbox{$\bot$ \tiny (Fin2)}\hss}}\fi}
+%get rid of these change marks
+%\def\begchange{}
+%\def\endchange{}
+
+%\def\begchange{\ifinner\else\protect\fi}
+%\def\endchange{\ifinner\else\fi}
+
+% change marks for June draft
+\def\begchangejune{}
+\def\endchangejune{}
+
+% change marks for July draft
+\def\begchangejuly{}
+\def\endchangejuly{}
+
+% change marks for Sept draft
+\def\begchangesept{}
+\def\endchangesept{}
+
+% change marks for Oct draft
+\def\begchangeoct{}
+\def\endchangeoct{}
+
+% change marks for Dec draft - for RT
+\def\begchangedec{}
+\def\endchangedec{}
+
+% change marks for Jan draft
+\def\begchangejan{}
+\def\endchangejan{}
+
+% change marks for February draft - for RT
+\def\begchangefeb{}
+\def\endchangefeb{}
+
+% change marks for March draft
+\def\begchangemar{}
+\def\endchangemar{}
+\def\begchangemarch{}
+\def\endchangemarch{}
+
+% change marks for April draft
+\def\begchangeapr{}
+\def\endchangeapr{}
+
+% change marks for first final draft
+\def\begchangefini{}
+\def\endchangefini{}
+
+% change marks for second final draft
+\def\begchangefinii{}
+\def\endchangefinii{}
+
+%\def\begchangefiniii{\marginpar[\mbox{\hbox to
+%    \marginparwidth{\hss\mbox{\hspace*{10pt}$\top$ \tiny
+%        (Fin3)}\hspace*{30pt}}}]{\hbox to \marginparwidth{\mbox{$\top$ \tiny (Fin3)}\hss}}}
+%\def\endchangefiniii{\marginpar[\mbox{\hbox to \marginparwidth{\hss\mbox{\hspace*{10pt}$\bot$ \tiny (Fin3)}\hspace*{30pt}}}]{\hbox to \marginparwidth{\mbox{$\bot$ \tiny (Fin3)}\hss}}}
+%get rid of these change marks
+\def\begchangefiniii{}
+\def\endchangefiniii{}
+%----------------------------------------------------------------------
+
+\newcommand{\bAPI}[2]{
+\section{#1}\hfill
+#2
+\begin{description}
+  \item[SYNOPSIS] \hfill \\ \\
+}
+
+\newcommand{\eAPI}{
+\end{description}
+}
+
+\newcommand{\synC}{
+  \textbf{C/C++:}\\
+  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt]
+}
+
+\newcommand{\synCE}{
+\end{lstlisting} 
+} 
+
+\newcommand{\synFE}{
+\end{lstlisting} 
+} 
+
+\newcommand{\synF}{
+  \hfill \\        
+       \textbf{FORTRAN:}\\	 
+	    \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=3pt]
+}
+\newcommand{\aC}[1] {\textit{#1}}
+\newcommand{\sC}[1] {\textbf{#1}}
+\newcommand{\aF}[1]{\textit{#1}}
+
+ \newcommand{\desB}[4] {
+   \item[DESCRIPTION] \hfill \\
+     \begin{description}
+       \item[Arguments] \hfill \\  \\
+       #1
+      \hfill \\ 
+       \item[API description] \hfill \\ \\
+       #2 \hfill \\ \\
+       #3
+       \end{description}
+      \notesB{#4}        
+ }  
+\newcommand{\argRow}[3] {
+   \begin{tabular}{p{2cm} p{2cm} p{10cm}}
+   \textbf{#1} & \textit{#2} & {#3} \\ 
+   \end{tabular} 
+}
+\newcommand{\desTB}[3] {#1 \\
+    \begin{tabular}{p{5cm} p{9cm}}
+       \hline
+      Routine & Data Type of target and source\\
+       \hline \tabularnewline
+       \end{tabular}\\
+        #2
+        \hfill \\
+       \item[Return Values] \hfill \\
+       #3 
+ }  
+
+\newcommand{\cRow}[2]{
+ \begin{tabular}{p{5cm} p{9cm}}
+ #1 & #2 \tabularnewline
+  \end{tabular}\\
+}
+
+\newcommand{\notesB}[1]{
+\item[NOTES] \hfill \\
+#1
+\\
+}
+
+\newcommand{\exampleB}[1] {
+\item[EXAMPLES] \hfill \\
+      #1
+}
+
+\newcommand{\exampleITEM}[3] {
+ #1
+ \lstinputlisting[language={C}, tabsize=2, basicstyle=\footnotesize] {#2}	
+ #3 
+}

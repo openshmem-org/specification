@@ -1,0 +1,47 @@
+       Transfers one data item from a remote Processing Element (PE)
+
+SYNOPSIS
+       C or C++:
+
+	  char shmem_char_g(char *addr, int pe);
+
+	  short shmem_short_g(short *addr, int pe);
+
+	  int shmem_int_g(int *addr, int pe);
+
+	  long shmem_long_g(long *addr, int pe);
+
+	  long long  shmem_longlong_g(long long *addr, int pe);
+
+	  float shmem_float_g(float *addr, int pe);
+
+	  double shmem_double_g(double *addr, int pe);
+
+	  long double shmem_longdouble_g(long double *addr, int pe);
+
+DESCRIPTION
+
+Arguments
+
+	IN       addr   The remotely accessible array element or scalar data object.
+
+       IN	pe     The number of the remote PE on which addr resides.
+
+API Description
+
+       These  routines	provide	 a  very low latency get capability for single
+       elements of most basic types.
+
+Return Value
+
+	Returns a single element of type specificed in the Synopsis.
+
+NOTES
+
+EXAMPLE
+
+	The following shmem_long_g example is for C/C++ programs:
+
+       \lstinputlisting[language=C]{shmem_g_example.c}
+
+

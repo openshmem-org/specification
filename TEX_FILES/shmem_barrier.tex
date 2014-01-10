@@ -1,0 +1,84 @@
+Performs a barrier operation on a subset of processing
+       elements (PEs)
+
+SYNOPSIS
+       C or C++:
+
+	  void shmem_barrier(int PE_start, int logPE_stride, int PE_size, long
+	  *pSync);
+
+       Fortran:
+
+	  INTEGER PE_start, logPE_stride, PE_size
+	  INTEGER pSync(SHMEM_BARRIER_SYNC_SIZE)
+
+	  CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
+
+DESCRIPTION
+
+Arguments
+
+ 	IN      PE_start	   The lowest virtual PE number of  the	 active	 set  of  PEs.
+				   PE_start  must  be  of  type	 integer.   If	you  are using
+		   		   Fortran, it must be a default integer value.
+
+       IN	logPE_stride       The log (base 2) of the stride between consecutive  virtual
+			   	   PE numbers in the active set.  logPE_stride must be of type
+		   		   integer.  If you are using Fortran, it must	be  a  default
+		   		   integer value.
+
+	IN       PE_size	   The	number	of  PEs in the active set.  PE_size must be of
+				   type integer.  If you are  using  Fortran,  it  must	 be  a
+		  		   default integer value.
+
+	IN       pSync		   A  symmetric	 work  array.  In C/C++, pSync must be of type
+				   int and size _SHMEM_BARRIER_SYNC_SIZE.  In  Fortran,	 pSync
+				   must	 be  of type integer and size SHMEM_BARRIER_SYNC_SIZE.
+		  		   If you are using Fortran, it	 must  be  a  default  integer
+		  		   type.  Every element of this array must be initialized to 0
+		  		   before any of the PEs in the active set enter shmem_barrier
+		  		   the first time.
+   
+
+API Description
+
+       shmem_barrier is a collective synchronization routine.  Control returns
+       from shmem_barrier after all  PEs  in  the  active  set	(specified  by
+       PE_start, logPE_stride, and PE_size) have called shmem_barrier.
+
+       As  with	 all OpenSHMEM collective routines, each of these routines assumes
+       that only PEs in the active set call the routine.  If a PE not  in  the
+       active  set  calls  a  OpenSHMEM  collective	 routine,  undefined  behavior
+       results.
+
+       The  values  of	arguments  PE_start, logPE_stride, and PE_size must be
+       equal on all PEs in the active set.  The same work array must be passed
+       in pSync to all PEs in the active set.
+
+       shmem_barrier  ensures  that  all  previously  issued  local stores and
+       previously issued remote memory updates done by any of the PEs  in  the
+       active  set  (by	 using	OpenSHMEM  calls,  for  example  shmem_put) are
+       complete before returning.
+
+       The  same  pSync	 array	may  be	 reused	 on   consecutive   calls   to
+       shmem_barrier if the same active PE set is used.
+
+Return Values
+  
+	None.
+
+NOTES
+
+       If the pSync array is initialized at run time, be sure to use some type
+       of synchronization, for example, a call to shmem_barrier_all(), before
+       calling shmem_barrier for the first time.
+
+       If  the	active	set  does  not	change,	 shmem_barrier	can  be called
+       repeatedly with the same pSync array.   No  additional  synchronization
+       beyond  that implied by shmem_barrier itself is necessary in this case.
+
+EXAMPLES
+	The following barrier example is for C/C++ programs:
+
+       \lstinputlisting[language=C]{shmem_barrier_example.c}
+

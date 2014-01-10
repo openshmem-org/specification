@@ -1,0 +1,85 @@
+       Performs an atomic swap to a
+       remote data object
+
+SYNOPSIS
+       C or C++:
+
+	  double shmem_double_swap(double *target, double value, int pe);
+
+	  float shmem_float_swap(float *target, float value, int pe);
+
+	  int shmem_int_swap(int *target, int value, int pe);
+
+	  long shmem_long_swap(long *target, long value, int pe);
+
+	  long long shmem_longlong_swap(long long *target,  long  long	value,
+	  int pe);
+
+	  long shmem_swap(long *target, long value, int pe);
+
+       Fortran:
+
+	  INTEGER pe
+
+	  INTEGER SHMEM_SWAP
+	  ires = SHMEM_SWAP(target, value, pe)
+
+	  INTEGER(KIND=4) SHMEM_INT4_SWAP
+	  ires = SHMEM_INT4_SWAP(target, value, pe)
+
+	  INTEGER(KIND=8) SHMEM_INT8_SWAP
+	  ires = SHMEM_INT8_SWAP(target, value, pe)
+
+	  REAL(KIND=4) SHMEM_REAL4_SWAP
+	  res = SHMEM_REAL4_SWAP(target, value, pe)
+
+	  REAL(KIND=8) SHMEM_REAL8_SWAP
+	  res = SHMEM_REAL8_SWAP(target, value, pe)
+
+DESCRIPTION
+
+Arguments
+
+	OUT       target	 The  remotely accessible integer data object to be updated on
+		 the remote PE.	 If you are using C/C++, the  type  of	target
+		 should	 match	that  implied in the SYNOPSIS section.	If you
+		 are using Fortran, it must be of the following type:
+
+		      Routine		       Data Type
+
+		      SHMEM_SWAP	       Integer of default kind
+
+		      SHMEM_INT4_SWAP	       4-byte integer
+
+		      SHMEM_INT8_SWAP	       8-byte integer
+
+		      SHMEM_REAL4_SWAP	       4-byte real
+
+		      SHMEM_REAL8_SWAP	       8-byte real
+
+       IN	value	 Value to be atomically written to the remote  PE.   value  is
+		 the same type as target.
+
+       IN	pe	 An integer that indicates the PE number on which target is to
+		 be updated.  If you are using Fortran, it must be  a  default
+		 integer value.
+
+API Description
+
+       shmem_swap  performs  an	 atomic	 swap operation. It writes value value
+       into target on processing element (PE)  pe  and	returns	 the  previous
+       contents of target as an atomic operation.
+
+Return Values
+
+       The contents that had been at the target address on the remote PE prior
+       to the swap is returned.
+
+NOTES
+       The term remotely accessible is defined in the Introduction.
+
+EXAMPLES
+
+	The  following  simple  example uses  shmem_long_swap  in a C program.           
+
+        \lstinputlisting[language=C]{shmem_swap_example.c}

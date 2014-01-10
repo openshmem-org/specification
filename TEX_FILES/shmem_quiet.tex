@@ -1,0 +1,46 @@
+       Waits  for  completion of all outstanding remote writes
+       issued by a processing element (PE).
+
+SYNOPSIS
+       C or C++:
+
+	  void shmem_quiet(void);
+
+       Fortran:
+
+	  CALL SHMEM_QUIET
+
+DESCRIPTION
+
+Arguments
+
+	None.
+
+API Description
+
+       shmem_quiet ensures ordering of put (remote write) operations.  All put
+       operations  issued  to any processing element (PE) prior to the call to
+       shmem_quiet are guaranteed to be visible to all other PEs no later than
+       any   subsequent	  memory   load	 or  store,  remote  put  or  get,  or
+       synchronization operations that follow the call to shmem_quiet.
+
+Return Value
+
+	None.
+
+NOTES
+       shmem_quiet is most useful as a way of ensuring ordering of delivery of
+       several	put  operations.   For	example,  you might use shmem_quiet to
+       await delivery of a block of data before	 issuing  another  put,	 which
+       sets a completion flag on another PE.
+
+       shmem_quiet   is	  not	usually	  needed  if  shmem_barrier_all()  or
+       shmem_barrier() are called.  The barrier routines  all	wait  for  the
+       completion of outstanding remote writes (puts).
+
+EXAMPLES
+
+	The  following  simple  example	uses  shmem_quiet  in a Fortran
+       program.	 
+
+	\lstinputlisting[language=C]{shmem_quiet_example.f90}

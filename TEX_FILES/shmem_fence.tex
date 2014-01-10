@@ -1,0 +1,40 @@
+       Assures ordering of delivery of puts.
+
+SYNOPSIS
+       C or C++:
+
+	  void shmem_fence(void);
+
+       Fortran:
+
+	  CALL SHMEM_FENCE
+
+DESCRIPTION
+
+Arguments
+ 
+	None.
+
+API Description
+
+       This  function ensures ordering of put (remote write) operations.   All
+       put operations issued to a particular remote  processing	 element  (PE)
+       prior  to the call to shmem_fence are guaranteed to be delivered before
+       any subsequent put operations to the same PE which follow the  call  to
+       shmem_fence.
+
+Return Value
+
+	None.
+
+NOTES
+       The  shmem_quiet	 function  should  be  called  if  ordering of puts is
+       desired when multiple remote PEs are involved.
+
+EXAMPLE
+       The following shmem_fence example is for C/C++ programs:
+
+	\lstinputlisting[language=C]{shmem_fence_example.c}
+
+        Put1 will be delivered before put3 and put2 will be delivered before put4.
+

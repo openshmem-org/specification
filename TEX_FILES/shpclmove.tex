@@ -1,0 +1,43 @@
+       Extends  a symmetric heap block or copies the contents of
+       the block into a larger block.
+
+SYNOPSIS
+       POINTER (addr, A(1))
+       INTEGER length, status, abort
+       CALL SHPCLMOVE (addr, length, status, abort)
+
+DESCRIPTION
+       The SHPCLMOVE function either extends a symmetric  heap	block  if  the
+       block  is  followed by a large enough free block or copies the contents
+       of the existing block to a larger  block	 and  returns  a  status  code
+       indicating that the block was moved.  This function also can reduce the
+       size of a block if the new length is less than  the  old	 length.   All
+       processing  elements  (PEs)  in	a program must call SHPCLMOVE with the
+       same value of addr to maintain symmetric heap consistency; if  any  PEs
+       are missing, the program hangs.
+
+       The SHPCLMOVE function accepts the following arguments:
+
+       Argument	      Description
+       addr	      On  entry, first word address of the block to change; on
+		      exit, the new address of the block if it was moved.
+       length	      Requested new total length in words (input).   One  word
+		      is 32 bits.
+       status	      Status  is 0 if the block was extended in place, 1 if it
+		      was moved, and a negative integer for the type of	 error
+		      detected (output).
+       abort	      Abort code.  Nonzero requests abort on error; 0 requests
+		      an error code (input).
+
+RETURN VALUES
+       Error conditions are as follows:
+
+       Code	      Condition
+       -1	      Length is not an integer greater than 0.
+       -2	      No more memory is available from the system (checked  if
+		      the  block  cannot  be  extended and the free space list
+		      does not include a large enough block).
+       -3	      Address is outside the bounds of the symmetric heap.
+       -4	      Block is already free.
+       -5	      Address is not at the beginning of a block.
+

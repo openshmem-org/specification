@@ -1,0 +1,152 @@
+       Copies  strided  data	 to  a specified processing element (PE).
+
+SYNOPSIS
+
+       C or C++:
+
+	  void	shmem_double_iput(double  *target,   const   double   *source,
+	  ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+
+	  void	shmem_float_iput(float *target, const float *source, ptrdiff_t
+	  tst, ptrdiff_t sst, size_t nelems, int pe);
+
+	  void shmem_int_iput(int *target, const int *source,  ptrdiff_t  tst,
+	  ptrdiff_t sst, size_t nelems, int pe);
+
+	  void	shmem_iput32(void  *target, const void *source, ptrdiff_t tst,
+	  ptrdiff_t sst, size_t nelems, int pe);
+
+	  void shmem_iput64(void *target, const void *source,  ptrdiff_t  tst,
+	  ptrdiff_t sst, size_t nelems, int pe);
+
+	  void	shmem_iput128(void *target, const void *source, ptrdiff_t tst,
+	  ptrdiff_t sst, size_t nelems, int pe);
+
+	  void shmem_long_iput(long *target,  const  long  *source,  ptrdiff_t
+	  tst, ptrdiff_t sst, size_t nelems, int pe);
+
+	  void	shmem_longdouble_iput(long  double  *target, const long double
+	  *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+
+	  void shmem_longlong_iput(long long *target, const long long *source,
+	  ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+
+	  void	shmem_short_iput(short *target, const short *source, ptrdiff_t
+	  tst, ptrdiff_t sst, size_t nelems, int pe);
+
+       Fortran:
+
+	  INTEGER tst, sst, nelems, pe
+
+	  CALL SHMEM_COMPLEX_IPUT(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_DOUBLE_IPUT(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_INTEGER_IPUT(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_IPUT4(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_IPUT8(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_IPUT32(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_IPUT64(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_IPUT128(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_LOGICAL_IPUT(target, source, tst, sst, nelems, pe)
+
+	  CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe)
+
+DESCRIPTION
+
+Arguments
+
+ 	OUT      target	 Array to be updated on the remote PE.	This data object  must
+		 be remotely accessible.
+
+       IN	source	 Array containing the data to be copied.
+
+       IN	tst	 The  stride between consecutive elements of the target array.
+		 The stride is scaled by the element size of the target array.
+		 A  value of 1 indicates contiguous data.  tst must be of type
+		 integer.  If you are using Fortran,  it  must	be  a  default
+		 integer value.
+
+       IN	sst	 The  stride between consecutive elements of the source array.
+		 The stride is scaled by the element size of the source array.
+		 A  value of 1 indicates contiguous data.  sst must be of type
+		 integer.  If you are using Fortran,  it  must	be  a  default
+		 integer value.
+
+       IN	nelems	 Number of elements in the target and source arrays.  nelems must
+		 be of type integer.  If you are using Fortran, it must	 be  a
+		 constant, variable, or array element of default integer type.
+
+       IN	pe	 PE number of the remote PE.  pe must be of type integer.   If
+		 you  are  using  Fortran, it must be a constant, variable, or
+		 array element of default integer type.
+
+API Description
+
+       The iput routines provide  a method  for  copying 
+       strided	data elements of an array  from  the  local PE  to strided locations 
+       of a symmetric array on a
+       different PE.  The routines return when the data has been copied out of
+       the  source  array  on the local PE but not necessarily before the data
+       has been delivered to the remote data object.
+
+       The target and source data objects must conform to typing  constraints,
+       which are as follows:
+
+       Routine			     Data Type of target and source
+
+       shmem_iput32, shmem_iput4     Any  noncharacter type that has a storage
+				     size equal to 32 bits.
+
+       shmem_iput64, shmem_iput8     Any noncharacter type that has a  storage
+				     size equal to 64 bits.
+
+       shmem_iput128		     Any  noncharacter type that has a storage
+				     size equal to 128 bits.
+
+       shmem_short_iput		     Elements of type short.
+
+       shmem_int_iput		     Elements of type int.
+
+       shmem_long_iput		     Elements of type long.
+
+       shmem_longlong_iput	     Elements of type long long.
+
+       shmem_float_iput		     Elements of type float.
+
+       shmem_double_iput	     Elements of type double.
+
+       shmem_longdouble_iput	     Elements of type long double.
+
+       SHMEM_COMPLEX_IPUT	     Elements of type complex of default size.
+
+       SHMEM_DOUBLE_IPUT (Fortran)   Elements of type double precision.
+
+       SHMEM_INTEGER_IPUT	     Elements of type integer.
+
+       SHMEM_LOGICAL_IPUT	     Elements of type logical.
+
+       SHMEM_REAL_IPUT		     Elements of type real.
+
+       If  you	are  using  Fortran,  data types must be of default size.  For
+       example,	 a  real  variable  must  be  declared	as  REAL,  REAL*4   or
+       REAL(KIND=4).
+
+Return Value
+  
+	None.
+
+NOTES
+       See Introduction for a definition of the term remotely accessible.
+
+EXAMPLES
+       Consider	  the  following  simple  shmem_long_iput  example  for	 C/C++
+       programs.
+
+	\lstinputlisting[language=C]{shmem_iput_example.c}

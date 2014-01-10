@@ -1,0 +1,58 @@
+       Returns  a	 pointer  to  a	 data  object  on  a specified
+       processing element (PE).
+
+SYNOPSIS
+       C or C++:
+
+	  void *shmem_ptr(void *target, int pe);
+
+       Fortran:
+
+	  POINTER (PTR, POINTEE)
+	  INTEGER pe
+	  PTR = SHMEM_PTR(target, pe)
+
+DESCRIPTION
+
+Arguments
+
+	IN       target	 The symmetric data object to be referenced.
+
+       IN	pe	 An integer that indicates the PE number on which target is to
+		 be accessed.  If you are using Fortran, it must be a  default
+		 integer value.
+
+API Description
+
+       shmem_ptr returns an address that may be	 used  to  directly  reference
+       target on the specified PE.  This address can be assigned to a pointer.
+       After that, ordinary loads and stores to this  remote  address  may  be
+       performed.
+
+       When a sequence of loads (gets) and stores (puts) to a data object on a
+       remote PE does not match the access pattern provided in	a OpenSHMEM data
+       transfer	  routine   like  shmem_put32()  or  shmem_real_iget(),  the
+       shmem_ptr function can provide an efficient  means  to  accomplish  the
+       communication.
+
+Return Value
+
+       shmem_ptr returns a pointer to the data object on the specified	remote
+       PE.   If target is not remotely accessible, a NULL pointer is returned.
+
+NOTES
+       The shmem_ptr function is available  only  on  systems  where  ordinary
+       memory  loads  and  stores  are	used  to  implement OpenSHMEM put and get
+       operations. When calling shmem_ptr, you pass the address on  the	calling	 PE  for  a  symmetric
+       array on the remote PE.
+
+EXAMPLES
+
+       This  Fortran  program calls shmem_ptr and then PE 0 writes to the BIGD
+       array on PE 1:
+
+	\lstinputlisting[language=C]{shmem_ptr_example.f90}
+
+       This is the equivalent program written in C:
+
+	\lstinputlisting[language=C]{shmem_ptr_example.c}

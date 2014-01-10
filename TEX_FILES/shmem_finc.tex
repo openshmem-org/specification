@@ -1,0 +1,53 @@
+       Performs an atomic fetch-and-increment  operation
+       on a remote data object.
+
+SYNOPSIS
+       C or C++:
+
+	  int shmem_int_finc(int *target, int pe);
+
+	  long shmem_long_finc(long *target, int pe);
+
+	  long long shmem_longlong_finc(long long *target, int pe);
+
+       Fortran:
+
+	  INTEGER pe
+
+	  INTEGER(KIND=4) SHMEM_INT4_FINC, target4
+
+	  INTEGER(KIND=8) SHMEM_INT8_FINC, target8
+
+	  ires4 = SHMEM_INT4_FINC(target4, pe)
+
+	  ires8 = SHMEM_INT8_FINC(target8, pe)
+
+DESCRIPTION
+
+Arguments
+
+	IN       target	 The  remotely accessible integer data object to be updated on
+		 the remote PE.	 The type of target should match that  implied
+		 in the SYNOPSIS section.
+
+       IN	pe	 An integer that indicates the PE number on which target is to
+		 be updated. If you are using Fortran, it must	be  a  default
+		 integer value.
+API Description
+
+       These functions perform a fetch-and-increment operation.	 The target on
+       processing element (PE) pe is increased by one and the function returns
+       the previous contents of target as an atomic operation.
+
+Return Value
+
+       The contents that had been at the target address on the remote PE prior
+       to the increment. The data type of the return value is the same as the target.
+
+NOTES
+
+EXAMPLE
+	The following shmem_finc example is for C/C++ programs:
+
+       \lstinputlisting[language=C]{shmem_finc_example.c}
+	

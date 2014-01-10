@@ -1,0 +1,41 @@
+Returns processing element (PE) information.
+
+SYNOPSIS
+       C or C++:
+
+	  int shmem_n_pes(void);
+	  
+	  int _num_pes (void);
+
+       Fortran:
+
+	  INTEGER SHMEM_N_PES, N_PES
+
+	  NPES = SHMEM_N_PES()
+	  
+	  N_PES = NUM_PES()
+
+DESCRIPTION
+
+Arguments
+
+       None.
+
+API Description
+
+       The  function  returns	the  number  of	 PEs  running  in   an
+       application.
+
+Return Value
+
+	Integer -  Number  of  PEs  running the SPMD application.
+
+NOTES      
+
+       For OpenSHMEM Specification 1.1 the use of _my_pe() has been deprecated. Although OpenSHMEM libraries are required to support the call, application developers are encouraged to use shmem_my_pe() instead.
+
+EXAMPLES
+       The following shmem_n_pes example is for C/C++ programs:
+      
+       \lstinputlisting[language=C]{shmem_npes_example.c}
+

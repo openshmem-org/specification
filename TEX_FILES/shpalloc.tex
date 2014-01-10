@@ -1,0 +1,47 @@
+       Allocates a block of memory from the symmetric heap
+
+SYNOPSIS
+       POINTER (addr, A(1))
+       INTEGER (length, errcode, abort)
+       CALL SHPALLOC(addr, length, errcode, abort)
+
+DESCRIPTION
+
+Arguments
+
+	IN       addr	      First word address of the allocated block (output).
+       IN	length	      Number  of  words of memory requested (input).  One word
+		      is 32 bits.
+       IN	errcode	      Error code is 0 if no error was detected; otherwise,  it
+		      is  a  negative  integer	code  for  the	type  of error
+		      (output).
+       IN	abort	      Abort code; nonzero requests abort on error; 0  requests
+		      an error code (input).
+API Description
+
+       SHPALLOC	 allocates a block of memory from the program's symmetric heap
+       that is greater than or equal  to  the  size  requested.	  To  maintain
+       symmetric  heap	consistency,  all PEs in an program must call SHPALLOC
+       with the same value of length; if any  processing  elements  (PEs)  are
+       missing, the program will hang.
+
+
+       By using the Fortran POINTER mechanism in the following manner, you can
+       use array A to refer to the block allocated by SHPALLOC: POINTER (addr,
+       A())
+
+Return Value
+
+       Error conditions are as follows:
+
+       Error Code     Condition
+	     -1	      Length is not an integer greater than 0.
+	     -2	      No more memory is available from the system (checked  if
+		      the  request  cannot  be	satisfied  from	 the available
+		      blocks on the symmetric heap).
+NOTES
+       The total size of the symmetric heap is determined at job startup.  One
+       may  adjust  the	 size  of  the	heap  using   the   SMA_SYMMETRIC_SIZE
+       environment  variable (if available).	
+
+

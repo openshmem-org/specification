@@ -1,0 +1,83 @@
+\documentclass[10pt]{book}
+\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{ifthen}
+\usepackage[table]{xcolor}
+\usepackage{textcomp}
+\usepackage{alltt}
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[pdftex,
+            pagebackref=true,
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\else
+\usepackage[ps2pdf,
+            pagebackref=true,chapter
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\usepackage{pspicture}
+\fi
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{sectsty}
+
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{sectsty}
+\usepackage[titles]{tocloft}
+\usepackage{doxygen}
+\usepackage{prettyref}
+\usepackage{mdwlist}
+\usepackage{enumitem}
+\usepackage{framed, color}  %SP
+\usepackage{pbox} %SP
+\definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
+
+\usepackage{draftcopy}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+
+%%%%%%%%%%%%%%%Borrowed from MPI Spec%%%%%%%%
+
+\include{osh}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeindex
+
+% Make content "clickable"
+\begin{document}
+\hypersetup{pageanchor=true,citecolor=blue}
+
+% Set Header
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE,LO]{\insertDocVersion}
+\fancyhead[CO,CE]{--- DRAFT ---}
+\fancyfoot[CE,CO]{\thepage}
+
+%\include{coverpage}
+
+%\setcounter{tocdepth}{2}
+%\tableofcontents
+
+\mainmatter  % included for use of documenttype 'book' 
+\pagestyle{headings}  \withlinenumbers
+ 
+\startchap
+\section*{Remote Data Update} 
+\input{shmem_put}
+
+
+\end{document}

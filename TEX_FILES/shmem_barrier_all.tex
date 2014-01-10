@@ -1,0 +1,40 @@
+Registers  the  arrival of a processing element (PE) at a barrier and suspends PE execution until all other PEs arrive at the barrier and all local and remote memory updates are completed.
+
+SYNOPSIS
+       C or C++:
+
+	  void barrier(void);
+
+	  void shmem_barrier_all(void);
+
+       Fortran:
+
+	  CALL BARRIER
+
+	  CALL SHMEM_BARRIER_ALL
+
+DESCRIPTION
+
+Arguments
+       None.
+
+API Description
+
+       The  shmem_barrier_all  function	 registers  the	 arrival  of a PE at a
+       barrier.	 Barriers are a fast mechanism for synchronizing  all  PEs  at
+       once.  This routine causes a PE to suspend execution until all PEs have
+       called shmem_barrier_all.  This function must be used with PEs  started
+       by start_pes().
+
+       Prior  to  synchronizing	 with  other  PEs,  shmem_barrier_all  ensures
+       completion of all previously issued  local  memory  stores  and	remote
+       memory	updates	 issued	 via  shared  memory  routine  calls  such  as
+       shmem_put32().
+
+Return Value
+       None.
+
+EXAMPLES
+	The following shmem_barrier_all example is for C/C++ programs:
+
+       \lstinputlisting[language=C]{shmem_barrierall_example.c}

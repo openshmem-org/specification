@@ -1,0 +1,42 @@
+Returns processing element (PE) information.
+
+SYNOPSIS
+       C or C++:
+
+	  int shmem_my_pe(void);
+
+	  int _my_pe (void);
+
+       Fortran:
+
+	  INTEGER SHMEM_MY_PE, ME
+
+	  MYPE = SHMEM_MY_PE()
+	  
+	  ME = MY_PE ()
+
+DESCRIPTION
+
+Arguments
+
+       None.
+
+API Description
+
+       This function returns the processing element (PE) number of the calling
+       PE.   It accepts no arguments.	The result is an integer between 0 and
+       npes - 1, where npes is the total number of PEs executing  the  current
+       program.
+
+Return Value       
+    
+       Integer - Between 0 and npes - 1
+
+NOTES
+       For OpenSHMEM Specification 1.1 the use of _my_pe() has been deprecated. Although OpenSHMEM libraries are required to support the call, application developers are encouraged to use shmem_my_pe() instead.
+
+EXAMPLES
+
+       The following shmem_my_pe example is for C/C++ programs:
+
+       \lstinputlisting[language=C]{EXAMPLES/shmem_mype_example.c}

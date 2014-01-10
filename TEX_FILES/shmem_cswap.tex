@@ -1,0 +1,74 @@
+       Performs an atomic conditional swap to a	remote
+       data object.
+
+SYNOPSIS
+       C or C++:
+
+	  int shmem_int_cswap(int *target, int cond, int value, int pe);
+
+	  long shmem_long_cswap(long *target, long cond, long value, int pe);
+
+	  long	shmem_longlong_cswap(longlong *target, longlong cond, longlong
+	  value, int pe);
+
+       Fortran:
+
+	  INTEGER pe
+
+	  INTEGER(KIND=4) SHMEM_INT4_CSWAP
+	  ires = SHMEM_INT4_CSWAP(target, cond, value, pe)
+
+	  INTEGER(KIND=8) SHMEM_INT8_CSWAP
+	  ires = SHMEM_INT8_CSWAP(target, cond, value, pe)
+
+DESCRIPTION
+
+Arguments
+
+
+       OUT	target	 The  remotely accessible integer data object to be updated on
+		 the remote PE.	 If you are using  C/C++,  the	data  type  of
+		 target should match that implied in the SYNOPSIS section.  If
+		 you are using Fortran, it must be of the following type:
+
+		 Routine	       Data Type
+
+		 SHMEM_INT4_CSWAP      4-byte integer
+
+		 SHMEM_INT8_CSWAP      8-byte integer
+
+       IN	cond	 cond is compared to the remote target value.  If cond and the
+		 remote	 target	 are  equal,  then  value  is swapped into the
+		 remote target.	 Otherwise, the remote	target	is  unchanged.
+		 In  either  case,  the	 old  value  of	 the  remote target is
+		 returned as the function return value.	 cond must be  of  the
+		 same data type as target.
+
+       IN	value	 The  value  to be atomically written to the remote PE.	 value
+		 must be the same data type as target.
+
+       IN	pe	 An integer that indicates the PE number upon which target  is
+		 to  be	 updated.   If	you  are  using	 Fortran, it must be a
+		 default integer value.
+API Description
+
+       The conditional swap routines conditionally update a target data object
+       on  an  arbitrary processing element (PE) and return the prior contents
+       of the data object in one  atomic  operation.   
+
+Return Value
+
+       The contents that had been in the target data object on the  remote  PE
+       prior to the conditional swap. Data type is the same as the target data type.
+
+	
+NOTES
+
+
+EXAMPLES
+
+       The   following	call  ensures  that  the  first	 PE  to	 exectute  the
+       conditional swap will successfully write its PE number  to  race_winner
+       on PE 0.
+	
+	\lstinputlisting[language=C]{shmem_cswap_example.c}
