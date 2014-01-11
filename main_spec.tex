@@ -48,6 +48,8 @@
 \usepackage{wrapfig}
 
 \newcommand{\OSH}{\emph{OpenSHMEM}}
+\newcommand{\rcomment}[1]
+    {{\color{red}\textsf{#1}}}
 %%%%%%%%%%%%%%%Borrowed from MPI Spec%%%%%%%%
 
 \include{osh}
@@ -79,6 +81,7 @@
 \section*{Remote Data Update} 
 \input{TEX_FILES/shmem_put}
 \input{TEX_FILES/shmem_fence}
+\input{TEX_FILES/shmem_finc}
 
 
 \end{document}
