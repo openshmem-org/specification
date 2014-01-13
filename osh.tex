@@ -761,7 +761,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\sC}[1] {\textbf{#1}}
 \newcommand{\aF}[1]{\textit{#1}}
 
- \newcommand{\desB}[4] {
+ \newcommand{\desB}[3] {
    \item[DESCRIPTION] \hfill \\
      \begin{description}
        \item[Arguments] \hfill \\  \\
@@ -771,14 +771,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
        #2 \hfill \\ \\
        #3
        \end{description}
-      \notesB{#4}        
  }  
 \newcommand{\argRow}[3] {
    \begin{tabular}{p{2cm} p{2cm} p{10cm}}
    \textbf{#1} & \textit{#2} & {#3} \\ 
    \end{tabular} 
 }
-\newcommand{\desTB}[3] {#1 \\
+\newcommand{\desTB}[2] {#1 \\
     \begin{tabular}{p{5cm} p{9cm}}
        \hline
       Routine & Data Type of target and source\\
@@ -786,9 +785,12 @@ minus .2ex}{-1em}{\normalsize\sf}}
        \end{tabular}\\
         #2
         \hfill \\
-       \item[Return Values] \hfill \\
-       #3 
- }  
+}  
+\newcommand{\desR}[1]
+{
+  \item[Return Values] \hfill \\
+       #1 \hfill \\
+}
 
 \newcommand{\cRow}[2]{
  \begin{tabular}{p{5cm} p{9cm}}
