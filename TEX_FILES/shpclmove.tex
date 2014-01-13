@@ -7,6 +7,21 @@ SYNOPSIS
        CALL SHPCLMOVE (addr, length, status, abort)
 
 DESCRIPTION
+
+Arguments
+
+       INOUT	addr	      On  entry, first word address of the block to change; on
+		      exit, the new address of the block if it was moved.
+       IN	length	      Requested new total length in words.   One  word
+		      is 32 bits.
+       OUT	status	      Status  is 0 if the block was extended in place, 1 if it
+		      was moved, and a negative integer for the type of	 error
+		      detected.
+       IN	abort	      Abort code.  Nonzero requests abort on error; 0 requests
+		      an error code.
+
+API Description
+
        The SHPCLMOVE function either extends a symmetric  heap	block  if  the
        block  is  followed by a large enough free block or copies the contents
        of the existing block to a larger  block	 and  returns  a  status  code
@@ -16,20 +31,8 @@ DESCRIPTION
        same value of addr to maintain symmetric heap consistency; if  any  PEs
        are missing, the program hangs.
 
-       The SHPCLMOVE function accepts the following arguments:
+Return Value
 
-       Argument	      Description
-       addr	      On  entry, first word address of the block to change; on
-		      exit, the new address of the block if it was moved.
-       length	      Requested new total length in words (input).   One  word
-		      is 32 bits.
-       status	      Status  is 0 if the block was extended in place, 1 if it
-		      was moved, and a negative integer for the type of	 error
-		      detected (output).
-       abort	      Abort code.  Nonzero requests abort on error; 0 requests
-		      an error code (input).
-
-RETURN VALUES
        Error conditions are as follows:
 
        Code	      Condition
@@ -40,4 +43,7 @@ RETURN VALUES
        -3	      Address is outside the bounds of the symmetric heap.
        -4	      Block is already free.
        -5	      Address is not at the beginning of a block.
+
+NOTES
+
 

@@ -1,4 +1,4 @@
-       Returns a memory block to the symmetric heap
+       Returns a memory block to the symmetric heap.
 
 SYNOPSIS
        POINTER (addr, A(1))
@@ -6,23 +6,26 @@ SYNOPSIS
        CALL SHPDEALLC(addr, errcode, abort)
 
 DESCRIPTION
+
+Arguments
+
+       IN	addr	      First word address of the block to deallocate.
+       OUT	errcode	      Error  code is 0 if no error was detected; otherwise, it
+		      is a  negative  integer  code  for  the  type  of	 error.
+       IN	abort	      Abort code.  Nonzero requests abort on error; 0 requests
+		      an error code.
+
+API Description
+
        SHPDEALLC  returns  a block of memory (allocated using SHPALLOC) to the
        list of available space in the symmetric heap.  To  maintain  symmetric
        heap  consistency, all processing elements (PEs) in a program must call
        SHPDEALLC with the same value of addr; if  any  PEs  are	 missing,  the
        program hangs.
 
-       The SHPDEALLC function accepts the following arguments:
 
-       Argument	      Description
-       addr	      First word address of the block to deallocate (input).
-       errcode	      Error  code is 0 if no error was detected; otherwise, it
-		      is a  negative  integer  code  for  the  type  of	 error
-		      (output).
-       abort	      Abort code.  Nonzero requests abort on error; 0 requests
-		      an error code (input).
+Return Value
 
-RETURN VALUES
        Error conditions are as follows:
 
        Code	      Condition
@@ -30,3 +33,4 @@ RETURN VALUES
        -4	      Block is already free.
        -5	      Address is not at the beginning of the block.
 
+NOTES
