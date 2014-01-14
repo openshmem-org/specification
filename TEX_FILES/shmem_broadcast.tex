@@ -1,152 +1,286 @@
-Broadcasts a block  of  data from  one  processing element (PE) to one or more target PEs.
+\bAPI{SHMEM\_BROADCAST}{Broadcasts a block  of  data from  one  processing element (PE) to one or more target PEs.}
+\synC   %Synopisis for C API
+ void shmem_broadcast32(void *target, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
+ void shmem_broadcast64(void *target, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
+%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+\synF   %Synopsis for FORTRAN API
+ INTEGER nlong, PE_root, PE_start, logPE_stride, PE_size
+ INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
+ CALL SHMEM_BROADCAST4(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, fIpSync)
+ CALL SHMEM_BROADCAST8(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, pSync)
+ CALL SHMEM_BROADCAST32(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, pSync)
+ CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, pSync)
+%*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-SYNOPSIS
-       C or C++:
+% Arguments table. If no arguments you can use \argRow{NONE}{}{} 
+\desB{  
+\argRow{OUT}{target}{A symmetric data object.} 
+\argRow{IN}{source}{A symmetric data object that can be of any data type that is permissible for the target argument.}
+\argRow{IN}{nlong}{The number of elements in source. For shmem\_broadcast32 and shmem\_broadcast4, this is the number of 32-bit
+		   halfwords. nlong must be of type integer. If you are using Fortran, it must be a default integer value.}
+\argRow{IN}{PE\_root}{Zero-based ordinal of the PE, with respect to the active
+		   set,	from which the data is copied. Must be greater than
+		   or equal to 0 and less than PE\_size. PE\_root must be of
+		   type integer. If you are using Fortran, it must be a default integer value.}
+\argRow{IN}{PE\_start}{The lowest virtual PE number of the active set of PEs.
+		   PE\_start must be of type integer. If	you are using
+		   Fortran, it must be a default integer value.}
+\argRow{IN}{logPE\_stride}{
+		   The log (base 2) of the stride between consecutive virtual
+		   PE numbers in the active set. log\_PE\_stride must be of
+		   type integer. If you are using Fortran, it must be a
+		   default integer value.}
 
-	  void	shmem_broadcast32(void	*target,  const	 void  *source, size_t
-	  nlong, int PE_root, int PE_start,  int  logPE_stride,	 int  PE_size,
-	  long *pSync);
+\argRow{IN}{PE\_size}{
+		   The number of PEs in the active set. PE\_size must be of
+		   type integer. If you are using Fortran, it must be a
+		   default integer value.}
 
-	  void	shmem_broadcast64(void	*target,  const	 void  *source, size_t
-	  nlong, int PE_root, int PE_start,  int  logPE_stride,	 int  PE_size,
-	  long *pSync);
-
-       Fortran:
-
-	  INTEGER nlong, PE_root, PE_start, logPE_stride, PE_size
-
-	  INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
-
-	  CALL	SHMEM_BROADCAST4(target,  source,  nlong,  PE_root,  PE_start,
-	  logPE_stride, PE_size, fIpSync)
-
-	  CALL	SHMEM_BROADCAST8(target,  source,  nlong,  PE_root,  PE_start,
-	  logPE_stride, PE_size, pSync)
-
-	  CALL	SHMEM_BROADCAST32(target,  source,  nlong,  PE_root, PE_start,
-	  logPE_stride, PE_size, pSync)
-
-	  CALL SHMEM_BROADCAST64(target,  source,  nlong,  PE_root,  PE_start,
-	  logPE_stride, PE_size, pSync)
-
-DESCRIPTION
-
-Arguments
-
-       OUT	target	   A symmetric data object with	 one  of  the  following  data
-			   types:
-
-			   Routine		 Data Type and Language
-
-			   shmem_broadcast8, 
-			   shmem_broadcast64	 Any  noncharacter  type  that	has an
-						 element size of 64 bits.  No  Fortran
-						 derived types or C/C++ structures are
-						 allowed.
-
-			   shmem_broadcast32	 Any noncharacter  type	 that  has  an
-						 element  size of 32 bits.  No Fortran
-						 derived types or C/C++ structures are
-						 allowed.
-
-			   shmem_broadcast4	 Any  noncharacter  type  that	has an
-						 element size of 32 bits.
-
-       IN	source	   A symmetric data object that can be of any data  type  that
-			   is permissible for the target argument.
-
-       IN	nlong	   The	number	of  elements in source.	 For shmem_broadcast32
-		   and	shmem_broadcast4,  this	 is  the  number   of	32-bit
-		   halfwords.	nlong  must  be	 of  type integer.  If you are
-		   using Fortran, it must be a default integer value.
-
-	IN       PE_root	   Zero-based ordinal of the PE, with respect  to  the	active
-		   set,	 from  which the data is copied.  Must be greater than
-		   or equal to 0 and less than PE_size.	 PE_root  must	be  of
-		   type	 integer.   If	you  are  using	 Fortran, it must be a
-		   default integer value.
-
-       IN	PE_start	   The lowest virtual PE number of  the	 active	 set  of  PEs.
-		   PE_start  must  be  of  type	 integer.   If	you  are using
-		   Fortran, it must be a default integer value.
-
-       IN	logPE_stride
-		   The log (base 2) of the stride between consecutive  virtual
-		   PE  numbers	in  the	 active set.  log_PE_stride must be of
-		   type integer.  If you are  using  Fortran,  it  must	 be  a
-		   default integer value.
-
-       IN	PE_size	   The	number	of  PEs in the active set.  PE_size must be of
-		   type integer.  If you are  using  Fortran,  it  must	 be  a
-		   default integer value.
-
-       IN	pSync	   A  symmetric	 work  array.  In C/C++, pSync must be of type
-		   long and size _SHMEM_BCAST_SYNC_SIZE.   In  Fortran,	 pSync
-		   must	 be  of	 type  integer and size SHMEM_BCAST_SYNC_SIZE.
-		   Every element of this array must be	initialized  with  the
-		   value  _SHMEM_SYNC_VALUE (in C/C++) or SHMEM_SYNC_VALUE (in
+\argRow{IN}{pSync}{
+		   A symmetric work array. In C/C++, pSync must be of type
+		   long and size \_SHMEM\_BCAST\_SYNC\_SIZE. In Fortran, pSync
+		   must be of type integer and size SHMEM\_BCAST\_SYNC\_SIZE.
+		   Every element of this array must be initialized with the
+		   value \_SHMEM\_SYNC\_VALUE (in C/C++) or SHMEM\_SYNC\_VALUE (in
 		   Fortran) before any of the PEs  in  the  active  set	 enter
-		   shmem_barrier().
+		   shmem\_barrier().}
+}
+%API description
+{   
+\OSH{} broadcast routines are collective routines.
+They copy data object source on the processor specified by PE\_root and
+store the values at target on the other PEs specified by the triplet
+PE\_start, logPE\_stride, PE\_size. The data is not copied to the target
+area on the root PE.
 
-API Description
+As with all \OSH{} collective routines, each of these routines assumes
+that only PEs in the active set call the routine. If a PE not in the
+active set calls a \OSH{} collective routine, undefined behavior
+results.
 
-       OpenSHMEM broadcast routines are collective routines.
-       They copy data object source on the processor specified by PE_root  and
-       store  the  values  at target on the other PEs specified by the triplet
-       PE_start, logPE_stride, PE_size.	 The data is not copied to the	target
-       area on the root PE.
+The values of arguments PE\_root, PE\_start, logPE\_stride, and PE\_size
+must be equal on all PEs in the active set. The same target and source
+data objects and the same pSync work array must be passed to all PEs in
+the active set.
 
-       As  with	 all OpenSHMEM collective routines, each of these routines assumes
-       that only PEs in the active set call the routine.  If a PE not  in  the
-       active  set  calls  a  OpenSHMEM  collective	 routine,  undefined  behavior
-       results.
+Before any PE calls a broadcast	routine, you must ensure that the
+following conditions exist (synchronization via a barrier or some other
+method is often needed to ensure this): The pSync array on all PEs in
+the active set is not still in use from a prior call to a broadcast
+routine. The target array on all PEs in the active set is ready to
+accept the broadcast data.
 
-       The  values  of	arguments PE_root, PE_start, logPE_stride, and PE_size
-       must be equal on all PEs in the active set.  The same target and source
-       data objects and the same pSync work array must be passed to all PEs in
-       the active set.
-
-       Before any PE calls a broadcast	routine,  you  must  ensure  that  the
-       following conditions exist (synchronization via a barrier or some other
-       method is often needed to ensure this): The pSync array on all  PEs  in
-       the  active  set	 is  not still in use from a prior call to a broadcast
-       routine.	 The target array on all PEs in the active  set	 is  ready  to
-       accept the broadcast data.
-
-       Upon  return  from  a broadcast routine, the following are true for the
-       local PE: If the current PE is not the root PE, the target data	object
-       is updated.  The values in the pSync array are restored to the original
-       values.
-
-Return Value
-       
-	None.
-
-NOTES
-
-       All OpenSHMEM broadcast routines restore pSync to  its  original  contents.
-       Multiple	 calls	to OpenSHMEM routines that use the same pSync array do not
+Upon return from a broadcast routine, the following are true for the
+local PE: If the current PE is not the root PE, the target data	object
+is updated. The values in the pSync array are restored to the original
+values.
+}
+%API Description Tabl
+{
+\desTB { 
+The  target  and source data  objects must conform to certain typing
+constraints, which are as follows: } 
+{
+\cRow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter type that has an
+		      element size of 64 bits. No Fortran
+		      derived types or C/C++ structures are
+		      allowed.}
+\cRow{shmem\_broadcast32}{Any noncharacter type that has an
+		      element size of 32 bits. No Fortran
+		      derived types or C/C++ structures are
+		      allowed.}
+\cRow{shmem\_broadcast4}{Any noncharacter type that has an
+		      element size of 32 bits.}
+}
+    %Return Values     
+    {None.}
+}
+% Notes. If there are no notes, this field can be left empty.
+{
+       All \OSH{} broadcast routines restore pSync to its original contents.
+       Multiple	calls to \OSH{} routines that use the same pSync array do not
        require that pSync be reinitialized after the first call.
 
        You must ensure the that the pSync array is not being updated by any PE
-       in  the active set while any of the PEs participates in processing of a
-       OpenSHMEM broadcast routine.	 Be careful to avoid these situations: If  the
+       in the active set while any of the PEs participates in processing of a
+       \OSH{} broadcast routine. Be careful to avoid these situations: If the
        pSync array is initialized at run time, some type of synchronization is
        needed to ensure that all PEs in the working set have initialized pSync
-       before  any  of	them  enter  a	SHMEM  routine	called	with the pSync
-       synchronization array.  A pSync array may be  reused  on	 a  subsequent
-       OpenSHMEM  broadcast	 routine only if none of the PEs in the active set are
-       still processing a prior OpenSHMEM broadcast routine	 call  that  used  the
-       same  pSync  array.  In general, this can be ensured only by doing some
-       type of	synchronization.   However,  in	 the  special  case  of	 SHMEM
-       routines	 being	called	with the same active set, you can allocate two
+       before any of them enter a \OSH{} routine called with the pSync
+       synchronization array. A pSync array may be reused on a subsequent
+       \OSH{} broadcast routine only if none of the PEs in the active set are
+       still processing a prior \OSH{} broadcast routine call that used the
+       same pSync array. In general, this can be ensured only by doing some
+       type of synchronization. However, in the special case of \OSH{}
+       routines being called with the same active set, you can allocate two
        pSync arrays and alternate between them on successive calls.
+}
+%Example
+\exampleB{
+    %For each example, you can enter it as an item.
+    \exampleITEM
+    {In the following examples, the call to shmem\_broadcast64 copies	source
+    on PE 4 to target on PEs 5, 6, and 7. C/C+ example:}
+    {./EXAMPLES/shmem_broadcast_example.c}
+    {}
+    \exampleITEM
+    {Fortran example:}
+    {./EXAMPLES/shmem_broadcast_example.f90}
+    {}
+}  	
+\eAPI 
 
-EXAMPLES
-
-       In the following examples, the call to shmem_broadcast64 copies	source
-       on PE 4 to target on PEs 5, 6, and 7.
-
-       \lstinputlisting[language=C]{shmem_broadcast_example.c}
-
-       \lstinputlisting[language=C]{shmem_broadcast_example.f90}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Broadcasts a block  of  data from  one  processing element (PE) to one or more target PEs.
+% 
+% SYNOPSIS
+%        C or C++:
+% 
+% 	  void	shmem_broadcast32(void	*target,  const	 void  *source, size_t
+% 	  nlong, int PE_root, int PE_start,  int  logPE_stride,	 int  PE_size,
+% 	  long *pSync);
+% 
+% 	  void	shmem_broadcast64(void	*target,  const	 void  *source, size_t
+% 	  nlong, int PE_root, int PE_start,  int  logPE_stride,	 int  PE_size,
+% 	  long *pSync);
+% 
+%        Fortran:
+% 
+% 	  INTEGER nlong, PE_root, PE_start, logPE_stride, PE_size
+% 
+% 	  INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
+% 
+% 	  CALL	SHMEM_BROADCAST4(target,  source,  nlong,  PE_root,  PE_start,
+% 	  logPE_stride, PE_size, fIpSync)
+% 
+% 	  CALL	SHMEM_BROADCAST8(target,  source,  nlong,  PE_root,  PE_start,
+% 	  logPE_stride, PE_size, pSync)
+% 
+% 	  CALL	SHMEM_BROADCAST32(target,  source,  nlong,  PE_root, PE_start,
+% 	  logPE_stride, PE_size, pSync)
+% 
+% 	  CALL SHMEM_BROADCAST64(target,  source,  nlong,  PE_root,  PE_start,
+% 	  logPE_stride, PE_size, pSync)
+% 
+% DESCRIPTION
+% 
+% Arguments
+% 
+%        OUT	target	   A symmetric data object with	 one  of  the  following  data
+% 			   types:
+% 
+% 			   Routine		 Data Type and Language
+% 
+% 			   shmem_broadcast8, 
+% 			   shmem_broadcast64	 Any  noncharacter  type  that	has an
+% 						 element size of 64 bits.  No  Fortran
+% 						 derived types or C/C++ structures are
+% 						 allowed.
+% 
+% 			   shmem_broadcast32	 Any noncharacter  type	 that  has  an
+% 						 element  size of 32 bits.  No Fortran
+% 						 derived types or C/C++ structures are
+% 						 allowed.
+% 
+% 			   shmem_broadcast4	 Any  noncharacter  type  that	has an
+% 						 element size of 32 bits.
+% 
+%        IN	source	   A symmetric data object that can be of any data  type  that
+% 			   is permissible for the target argument.
+% 
+%        IN	nlong	   The	number	of  elements in source.	 For shmem_broadcast32
+% 		   and	shmem_broadcast4,  this	 is  the  number   of	32-bit
+% 		   halfwords.	nlong  must  be	 of  type integer.  If you are
+% 		   using Fortran, it must be a default integer value.
+% 
+% 	IN       PE_root	   Zero-based ordinal of the PE, with respect  to  the	active
+% 		   set,	 from  which the data is copied.  Must be greater than
+% 		   or equal to 0 and less than PE_size.	 PE_root  must	be  of
+% 		   type	 integer.   If	you  are  using	 Fortran, it must be a
+% 		   default integer value.
+% 
+%        IN	PE_start	   The lowest virtual PE number of  the	 active	 set  of  PEs.
+% 		   PE_start  must  be  of  type	 integer.   If	you  are using
+% 		   Fortran, it must be a default integer value.
+% 
+%        IN	logPE_stride
+% 		   The log (base 2) of the stride between consecutive  virtual
+% 		   PE  numbers	in  the	 active set.  log_PE_stride must be of
+% 		   type integer.  If you are  using  Fortran,  it  must	 be  a
+% 		   default integer value.
+% 
+%        IN	PE_size	   The	number	of  PEs in the active set.  PE_size must be of
+% 		   type integer.  If you are  using  Fortran,  it  must	 be  a
+% 		   default integer value.
+% 
+%        IN	pSync	   A  symmetric	 work  array.  In C/C++, pSync must be of type
+% 		   long and size _SHMEM_BCAST_SYNC_SIZE.   In  Fortran,	 pSync
+% 		   must	 be  of	 type  integer and size SHMEM_BCAST_SYNC_SIZE.
+% 		   Every element of this array must be	initialized  with  the
+% 		   value  _SHMEM_SYNC_VALUE (in C/C++) or SHMEM_SYNC_VALUE (in
+% 		   Fortran) before any of the PEs  in  the  active  set	 enter
+% 		   shmem_barrier().
+% 
+% API Description
+% 
+%        OpenSHMEM broadcast routines are collective routines.
+%        They copy data object source on the processor specified by PE_root  and
+%        store  the  values  at target on the other PEs specified by the triplet
+%        PE_start, logPE_stride, PE_size.	 The data is not copied to the	target
+%        area on the root PE.
+% 
+%        As  with	 all OpenSHMEM collective routines, each of these routines assumes
+%        that only PEs in the active set call the routine.  If a PE not  in  the
+%        active  set  calls  a  OpenSHMEM  collective	 routine,  undefined  behavior
+%        results.
+% 
+%        The  values  of	arguments PE_root, PE_start, logPE_stride, and PE_size
+%        must be equal on all PEs in the active set.  The same target and source
+%        data objects and the same pSync work array must be passed to all PEs in
+%        the active set.
+% 
+%        Before any PE calls a broadcast	routine,  you  must  ensure  that  the
+%        following conditions exist (synchronization via a barrier or some other
+%        method is often needed to ensure this): The pSync array on all  PEs  in
+%        the  active  set	 is  not still in use from a prior call to a broadcast
+%        routine.	 The target array on all PEs in the active  set	 is  ready  to
+%        accept the broadcast data.
+% 
+%        Upon  return  from  a broadcast routine, the following are true for the
+%        local PE: If the current PE is not the root PE, the target data	object
+%        is updated.  The values in the pSync array are restored to the original
+%        values.
+% 
+% Return Value
+%        
+% 	None.
+% 
+% NOTES
+% 
+%        All OpenSHMEM broadcast routines restore pSync to  its  original  contents.
+%        Multiple	 calls	to OpenSHMEM routines that use the same pSync array do not
+%        require that pSync be reinitialized after the first call.
+% 
+%        You must ensure the that the pSync array is not being updated by any PE
+%        in  the active set while any of the PEs participates in processing of a
+%        OpenSHMEM broadcast routine.	 Be careful to avoid these situations: If  the
+%        pSync array is initialized at run time, some type of synchronization is
+%        needed to ensure that all PEs in the working set have initialized pSync
+%        before  any  of	them  enter  a	SHMEM  routine	called	with the pSync
+%        synchronization array.  A pSync array may be  reused  on	 a  subsequent
+%        OpenSHMEM  broadcast	 routine only if none of the PEs in the active set are
+%        still processing a prior OpenSHMEM broadcast routine	 call  that  used  the
+%        same  pSync  array.  In general, this can be ensured only by doing some
+%        type of	synchronization.   However,  in	 the  special  case  of	 SHMEM
+%        routines	 being	called	with the same active set, you can allocate two
+%        pSync arrays and alternate between them on successive calls.
+% 
+% EXAMPLES
+% 
+%        In the following examples, the call to shmem_broadcast64 copies	source
+%        on PE 4 to target on PEs 5, 6, and 7.
+% 
+%        \lstinputlisting[language=C]{shmem_broadcast_example.c}
+% 
+%        \lstinputlisting[language=C]{shmem_broadcast_example.f90}
