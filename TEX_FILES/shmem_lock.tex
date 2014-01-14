@@ -23,18 +23,12 @@ I = SHMEM_TEST_LOCK(lock)
        The shmem\_set\_lock routine sets a mutual exclusion lock after  waiting
        for  the lock  to be freed by any other PE currently holding the lock.
        Waiting PEs  are  assured  of  getting	the  lock  in  a   first-come,
-       first-served manner.
-
-       The   shmem\_clear\_lock  routine releases  a  lock  previously  set  by
+       first-served manner.The   shmem\_clear\_lock  routine releases  a  lock  previously  set  by
        shmem\_set\_lock  after  ensuring that  all  local  and  remote	stores
-       initiated in the critical region are complete.
-
-       The shmem\_test\_lock function sets a mutual exclusion lock only if it is
+       initiated in the critical region are complete. The shmem\_test\_lock function sets a mutual exclusion lock only if it is
        currently cleared.  By using this function, a PE can avoid blocking  on
        a set lock.  If the lock is currently set, the function returns without
-       waiting.
-
-       These routines are appropriate for protecting a	critical  region  from
+       waiting. These routines are appropriate for protecting a critical  region  from
        simultaneous  update  by multiple  PEs.	  
 }
 {
