@@ -59,9 +59,7 @@
 
 %API Description Table.
 {
-     \desTB{ If you	are using Fortran, data types must be of default size. For
-       example,	a real  variable  must be  declared as  REAL,  REAL*4,  or
-       REAL(KIND=4). The target and source data objects must conform to typing  constraints,
+     \desTB{The target and source data objects must conform to typing  constraints,
        which are as follows:}
        {
        \cRow{shmem\_iget32, shmem\_iget4}{Any  noncharacter type that has a storage
@@ -85,7 +83,9 @@
        }
     %Return Values     
       \desR{None.}
-      \notesB{}
+      \notesB{If you are using Fortran, data types must be of default size. For
+       example,	a real  variable  must be  declared as  REAL,  REAL*4,  or
+       REAL(KIND=4).}
 }
 \exampleB{
        \exampleITEM
