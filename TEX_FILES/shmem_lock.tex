@@ -1,67 +1,57 @@
-       Releases, locks, and tests a mutual exclusion memory lock
+ \bAPI{SHMEM\_LOCK}{Releases, locks, and tests a mutual exclusion memory lock.}
+\synC
+void shmem_clear_lock(long *lock);
+void shmem_set_lock(long *lock);
+int shmem_test_lock(long *lock);
+%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
-SYNOPSIS
-       C or C++:
+\synF   %Synopsis for FORTRAN API
+INTEGER lock, SHMEM_TEST_LOCK
+CALL SHMEM_CLEAR_LOCK(lock)
+CALL SHMEM_SET_LOCK(lock)
+I = SHMEM_TEST_LOCK(lock)
+ %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-	  void shmem_clear_lock(long *lock);
-
-	  void shmem_set_lock(long *lock);
-
-	  int shmem_test_lock(long *lock);
-
-       Fortran:
-
-	  INTEGER lock, SHMEM_TEST_LOCK
-
-	  CALL SHMEM_CLEAR_LOCK(lock)
-
-	  CALL SHMEM_SET_LOCK(lock)
-
-	  I = SHMEM_TEST_LOCK(lock)
-
-DESCRIPTION
-
-Arguments
-
-       IN	lock	 A symmetric data object that is a scalar variable or an array
-		 of  length  1.	  This	data  object  must  be set to 0 on all
+\desB{
+   \argRow{IN}{lock}{	 A symmetric data object that is a scalar variable or an array
+		 of  length  1. This	data  object  must  be set to 0 on all
 		 processing elements (PEs) prior to the first use.  lock  must
-		 be  of	 type  long.   If you are using Fortran, it must be of
-		 default kind.
-
-API Description
-
-       The shmem_set_lock routine sets a mutual exclusion lock	after  waiting
-       for  the	 lock  to be freed by any other PE currently holding the lock.
-       Waiting	PEs  are  assured  of  getting	the  lock  in  a   first-come,
+		 be  of type  long. If you are using Fortran, it must be of
+		 default kind.}
+}
+{
+       The shmem\_set\_lock routine sets a mutual exclusion lock after  waiting
+       for  the lock  to be freed by any other PE currently holding the lock.
+       Waiting PEs  are  assured  of  getting	the  lock  in  a   first-come,
        first-served manner.
 
-       The   shmem_clear_lock  routine	releases  a  lock  previously  set  by
-       shmem_set_lock  after  ensuring	that  all  local  and  remote	stores
+       The   shmem\_clear\_lock  routine releases  a  lock  previously  set  by
+       shmem\_set\_lock  after  ensuring that  all  local  and  remote	stores
        initiated in the critical region are complete.
 
-       The shmem_test_lock function sets a mutual exclusion lock only if it is
+       The shmem\_test\_lock function sets a mutual exclusion lock only if it is
        currently cleared.  By using this function, a PE can avoid blocking  on
        a set lock.  If the lock is currently set, the function returns without
        waiting.
 
        These routines are appropriate for protecting a	critical  region  from
-       simultaneous  update  by	 multiple  PEs.	  
-
-Return Value
-
-       The shmem_test_lock function returns  0	if  the	 lock  was  originally
-       cleared	and  this  call	 was  able  to	set the lock.  A value of 1 is
+       simultaneous  update  by multiple  PEs.	  
+}
+{
+\desR{
+       The shmem\_test\_lock function returns  0	if  the lock  was  originally
+       cleared and  this  call was  able  to set the lock.  A value of 1 is
        returned if the lock had been set and the call returned without waiting
-       to set the lock.
+       to set the lock.}
 
-NOTES
+\notesB{
        The term symmetric data object is defined in Introduction.
+}
+}
 
-EXAMPLE
-	
-	
-wing  simple  example	uses  shmem_logical_iget  in a Fortran
-       program.	 
-
-	\lstinputlisting[language=C]{shmem_lock_example.c}
+\exampleB {
+\exampleITEM	
+ {The following  simple  example uses  shmem\_lock  in a C program.}
+ {./EXAMPLES/shmem_lock_example.c}{}
+}
+\eAPI
