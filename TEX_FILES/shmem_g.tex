@@ -1,5 +1,4 @@
 \bAPI{SHMEM\_G}{Transfers one data item from a remote Processing Element (PE)}
-
 \synC   %Synopisis for C API
 
  char shmem_char_g(char *addr, int pe);
@@ -11,36 +10,28 @@
  double shmem_double_g(double *addr, int pe);
  long double shmem_longdouble_g(long double *addr, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
-
-\synF   %Synopsis for FORTRAN API
-
- %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
-
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
-	
     \argRow{IN}{addr}{The remotely accessible array element or scalar data
     object.}
-    \argRow{IN}{pe}{ The number of the remote PE on which addr resides.}
+    \argRow{IN}{pe}{The number of the remote PE on which addr resides.}
  }
 %API description
 {
   These  routines	provide	 a  very low latency get capability for single elements of most basic types. 
 }
-
-%API Description Table.
+%This newline is required 
 {
-
-    %Return Values     
-      {Returns a single element of type specificed in the synopsis.}
+%API Description Table.
+\desR{
+    %Return Values    
+    {Returns a single element of type specificed in the synopsis.}
 }
-
 
 % Notes. If there are no notes, this field can be left empty.
-{
+\notesB{
+ }
 }
-
-\rcomment{Manju: This should be a return value not Notes}
 \exampleB{
     \exampleITEM
 	{The following shmem\_long\_g example is for C/C++ programs:}

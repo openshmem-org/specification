@@ -37,19 +37,18 @@
    processing element (PE) pe is increased by one and the function returns
    the previous contents of target as an atomic operation.
 }
-
 %API Description Table.
 {
     %Return Values     
-{The contents that had been at the target address on the remote PE prior to the increment. The data type of the return value is the same as the target.}
-}
-
-
+\desR{The contents that had been at the target address on the remote PE prior to the increment. The data type of the return value is the same as the target.}
 % Notes. If there are no notes, this field can be left empty.
-{
+\notesB{
+}
 }
 
-\rcomment{Manju: This should be a return value not Notes}
+\rcomment{Manju: Seems like the indent for notes and return depends on whether
+there is a newline before (API Description Table) or not. We might have to fix
+it}
 
 \exampleB{
        \exampleITEM

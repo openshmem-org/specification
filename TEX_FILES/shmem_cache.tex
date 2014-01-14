@@ -1,61 +1,119 @@
-       Controls data cache utilities.
+\bAPI{SHMEM\_CACHE}{Controls data cache utilities.}
+\synC   %Synopisis for C API
+void shmem_clear_cache_inv(void);
+void shmem_set_cache_inv(void);
+void shmem_clear_cache_line_inv(void *target);
+void shmem_set_cache_line_inv(void *target);
+void shmem_udcflush(void);
+void shmem_udcflush_line(void *target);
+%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+\synF   %Synopsis for FORTRAN API
+CALL SHMEM_CLEAR_CACHE_INV
+CALL SHMEM_SET_CACHE_INV
+CALL SHMEM_SET_CACHE_LINE_INV(target)
+CALL SHMEM_UDCFLUSH
+CALL SHMEM_UDCFLUSH_LINE(target)
+%*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-SYNOPSIS
-       C or C++:
+% Arguments table. If no arguments you can use \argRow{NONE}{}{} 
+\desB{  
+\argRow{IN}{target}{A data object that is local to the processing element (PE).
+		 target can be of any noncharacter type. If you are using
+		 Fortran, it can be of any kind.}
+}
+%API description
+{   
+shmem\_set\_cache\_inv enables automatic cache coherency mode.
 
-	  void shmem_clear_cache_inv(void);
+shmem\_set\_cache\_line\_inv enables automatic cache coherency mode for the
+cache line associated with the address of target only.
 
-	  void shmem_set_cache_inv(void);
+shmem\_clear\_cache\_inv disables automatic cache coherency mode
+previously enabled by shmem\_set\_cache\_inv or shmem\_set\_cache\_line\_inv.
 
-	  void shmem_clear_cache_line_inv(void *target);
+shmem\_udcflush makes the entire user data cache coherent.
 
-	  void shmem_set_cache_line_inv(void *target);
+shmem\_udcflush\_line makes coherent the cache line that corresponds with
+the address specified by target.
+}
+%API Description Tabl
+{
+\desTB {}{}
+    %Return Values     
+    {None.}
+}
+% Notes. If there are no notes, this field can be left empty.
+{
+These routines have been retained for improved backward compatability
+with legacy architectures. They are not required to be supported and where 
+provided they may have no effect on cacheline states.
+}
+%Example
+\exampleB{
+    %For each example, you can enter it as an item.
+None.
+}  	
+\eAPI 
 
-	  void shmem_udcflush(void);
-
-	  void shmem_udcflush_line(void *target);
-
-       Fortran:
-
-	  CALL SHMEM_CLEAR_CACHE_INV
-
-	  CALL SHMEM_SET_CACHE_INV
-
-	  CALL SHMEM_SET_CACHE_LINE_INV(target)
-
-	  CALL SHMEM_UDCFLUSH
-
-	  CALL SHMEM_UDCFLUSH_LINE(target)
-
-DESCRIPTION
-
-Arguments
-
-	IN       target	 A  data  object that is local to the processing element (PE).
-		 target can be of any noncharacter type.   If  you  are	 using
-		 Fortran, it can be of any kind.
-
-API Description
-
-       shmem_set_cache_inv enables automatic cache coherency mode.
-
-       shmem_set_cache_line_inv enables automatic cache coherency mode for the
-       cache line associated with the address of target only.
-
-       shmem_clear_cache_inv   disables	  automatic   cache   coherency	  mode
-       previously  enabled by shmem_set_cache_inv or shmem_set_cache_line_inv.
-
-       shmem_udcflush makes the entire user data cache coherent.
-
-       shmem_udcflush_line makes coherent the cache line that corresponds with
-       the address specified by target.
-
-Return Value
-
-	None.
-
-NOTES
-       These  routines	have been retained for improved backward compatability
-       with legacy architectures.  They are not	 required to be supported and where 
-       provided they may have no effect on cacheline states.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Controls data cache utilities.
+% 
+% SYNOPSIS
+%        C or C++:
+% 
+% 	  void shmem_clear_cache_inv(void);
+% 
+% 	  void shmem_set_cache_inv(void);
+% 
+% 	  void shmem_clear_cache_line_inv(void *target);
+% 
+% 	  void shmem_set_cache_line_inv(void *target);
+% 
+% 	  void shmem_udcflush(void);
+% 
+% 	  void shmem_udcflush_line(void *target);
+% 
+%        Fortran:
+% 
+% 	  CALL SHMEM_CLEAR_CACHE_INV
+% 
+% 	  CALL SHMEM_SET_CACHE_INV
+% 
+% 	  CALL SHMEM_SET_CACHE_LINE_INV(target)
+% 
+% 	  CALL SHMEM_UDCFLUSH
+% 
+% 	  CALL SHMEM_UDCFLUSH_LINE(target)
+% 
+% DESCRIPTION
+% 
+% Arguments
+% 
+% 	IN       target	 A  data  object that is local to the processing element (PE).
+% 		 target can be of any noncharacter type.   If  you  are	 using
+% 		 Fortran, it can be of any kind.
+% 
+% API Description
+% 
+%        shmem_set_cache_inv enables automatic cache coherency mode.
+% 
+%        shmem_set_cache_line_inv enables automatic cache coherency mode for the
+%        cache line associated with the address of target only.
+% 
+%        shmem_clear_cache_inv   disables	  automatic   cache   coherency	  mode
+%        previously  enabled by shmem_set_cache_inv or shmem_set_cache_line_inv.
+% 
+%        shmem_udcflush makes the entire user data cache coherent.
+% 
+%        shmem_udcflush_line makes coherent the cache line that corresponds with
+%        the address specified by target.
+% 
+% Return Value
+% 
+% 	None.
+% 
+% NOTES
+%        These  routines	have been retained for improved backward compatability
+%        with legacy architectures.  They are not	 required to be supported and where 
+%        provided they may have no effect on cacheline states.
+% 
