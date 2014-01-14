@@ -22,7 +22,7 @@ PTR = SHMEM_PTR(target, pe)
        performed.
 
        When a sequence of loads (gets) and stores (puts) to a data object on a
-       remote PE does not match the access pattern provided in	a OpenSHMEM data
+       remote PE does not match the access pattern provided in	a \openshmem data
        transfer routine   like  shmem\_put32()  or  shmem\_real\_iget(),  the
        shmem\_ptr function can provide an efficient  means  to  accomplish  the
        communication.
@@ -32,7 +32,7 @@ PTR = SHMEM_PTR(target, pe)
        PE. If target is not remotely accessible, a NULL pointer is returned.
 }
 \notesB{The shmem\_ptr function is available  only  on  systems  where  ordinary
-       memory  loads  and  stores  are	used  to  implement OpenSHMEM put and get
+       memory  loads  and  stores  are	used  to  implement \openshmem put and get
        operations. When calling shmem\_ptr, you pass the address on the calling	PE  for a symmetric
        array on the remote PE.}
 }

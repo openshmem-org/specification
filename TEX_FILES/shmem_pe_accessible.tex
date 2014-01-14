@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_PE\_ACCESSIBLE}{Determines whether a processing element (PE) is accessible via OpenSHMEM's data transfer operations.}
+\bAPI{SHMEM\_PE\_ACCESSIBLE}{Determines whether a processing element (PE) is accessible via \openshmem's data transfer operations.}
 \synC     
 int shmem_pe_accessible(int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
@@ -14,26 +14,22 @@ LOG = SHMEM_PE_ACCESSIBLE(pe)
 }
 {
        shmem\_pe\_accessible is  a  query function  that indicates  whether  a
-       specified PE is accessible via OpenSHMEM from the local PE.
-
-       For example, on  SGI	Altix  series  systems, OpenSHMEM	is  supported  across multiple
-       partitioned hosts and InfiniBand connected hosts.
-
-       When running multiple executable MPI applications using OpenSHMEM on an Altix,
-       full OpenSHMEM support is available between processes running from the same
-       executable file.	 However, SHMEM support between processes of different
+       specified PE is accessible via \openshmem from the local PE. For example, on  SGI	Altix  series  systems, \openshmem	is  supported  across multiple
+       partitioned hosts and InfiniBand connected hosts. When running multiple executable MPI applications using \openshmem on an Altix,
+       full \openshmem support is available between processes running from the same
+       executable file. However, \openshmem support between processes of different
        executable  files  is  supported only for data objects on the symmetric
        heap, since static data objects are  not symmetric  between  different
-       executable  files.   The shmem\_pe\_accessible function on Altix returns
+       executable  files. The shmem\_pe\_accessible function on Altix returns
        TRUE only if  the  remote  PE  is  a  process  running  from  the  same
-       executable  file	 as  the  local PE, indicating that full OpenSHMEM support
+       executable  file	 as  the  local PE, indicating that full \openshmem support
        (static memory and symmetric heap) is available.
 }
 {
 \desR{C:	 The return value is 1 if the specified PE is a	 valid	remote
-		 PE for SHMEM functions; otherwise,it is 0. \\ \\
-	  Fortran:	 The  return  value  is	 .TRUE. if the specified PE is a valid
-		 remote PE for SHMEM functions; otherwise, it is .FALSE..	 
+		 PE for \openshmem functions; otherwise,it is 0. \\ \\
+	  Fortran:	 The  return  value  is .TRUE. if the specified PE is a valid
+		 remote PE for \openshmem functions; otherwise, it is .FALSE..	 
 		 }
 
 \notesB{}
