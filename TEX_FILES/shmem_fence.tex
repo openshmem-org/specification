@@ -1,5 +1,4 @@
 \bAPI{SHMEM\_FENCE}{Assures ordering of delivery of puts}
-
 \synC   %Synopisis for C API
  
  void shmem_fence(void);
@@ -22,20 +21,19 @@
     any subsequent put operations to the same PE which follow the  call  to
     shmem\_fence.
 }
-
-%API Description Table.
 {
-
+%API Description Table.
+\desR{
     %Return Values     
-      {None.}
+    None.
 }
-
 
 % Notes. If there are no notes, this field can be left empty.
-{
+\notesB{
     The  shmem\_quiet	 function  should  be  called  if  ordering of puts is
     desired when multiple remote PEs are involved.
-}
+ }
+} % end of DesB
 
 \exampleB{
        \exampleITEM
@@ -45,4 +43,3 @@
        put4.}
 }
 \eAPI
-
