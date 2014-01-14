@@ -1,40 +1,86 @@
-Registers  the  arrival of a processing element (PE) at a barrier and suspends PE execution until all other PEs arrive at the barrier and all local and remote memory updates are completed.
+\bAPI{SHMEM\_BARRIER\_ALL}{Registers the arrival of a processing element (PE) at a barrier and suspends PE execution until all other PEs arrive at the barrier and all local and remote memory updates are completed.}
+\synC   %Synopisis for C API
+ void barrier(void);
+ void shmem_barrier_all(void);
+%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+\synF   %Synopsis for FORTRAN API
+ CALL BARRIER
+ CALL SHMEM_BARRIER_ALL
+%*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-SYNOPSIS
-       C or C++:
+% Arguments table. If no arguments you can use \argRow{NONE}{}{} 
+\desB{  
+    \argRow{None.}{}{} 
+}
+%API description
+{   
+    The shmem\_barrier\_all function registers the arrival of a PE at a
+    barrier. Barriers are a fast mechanism for synchronizing all PEs at
+    once. This routine causes a PE to suspend execution until all PEs have
+    called shmem\_barrier\_all. This function must be used with PEs started
+    by start\_pes().
 
-	  void barrier(void);
-
-	  void shmem_barrier_all(void);
-
-       Fortran:
-
-	  CALL BARRIER
-
-	  CALL SHMEM_BARRIER_ALL
-
-DESCRIPTION
-
-Arguments
-       None.
-
-API Description
-
-       The  shmem_barrier_all  function	 registers  the	 arrival  of a PE at a
-       barrier.	 Barriers are a fast mechanism for synchronizing  all  PEs  at
-       once.  This routine causes a PE to suspend execution until all PEs have
-       called shmem_barrier_all.  This function must be used with PEs  started
-       by start_pes().
-
-       Prior  to  synchronizing	 with  other  PEs,  shmem_barrier_all  ensures
-       completion of all previously issued  local  memory  stores  and	remote
-       memory	updates	 issued	 via  shared  memory  routine  calls  such  as
-       shmem_put32().
-
-Return Value
-       None.
-
-EXAMPLES
-	The following shmem_barrier_all example is for C/C++ programs:
-
-       \lstinputlisting[language=C]{shmem_barrierall_example.c}
+    Prior to synchronizing with other PEs, shmem\_barrier\_all ensures
+    completion of all previously issued local memory stores and remote
+    memory updates issued via shared memory routine calls such as
+    shmem\_put32().
+}
+%API Description Table. 
+{
+    \desTB{}{}
+    %Return Values     
+    {None.}
+}
+% Notes. If there are no notes, this field can be left empty.
+{None.}
+%Example
+\exampleB{
+    %For each example, you can enter it as an item.
+    \exampleITEM
+    { The following shmem\_put example is for C/C++ programs:}
+    {./EXAMPLES/shmem_barrierall_example.c}
+    {} 
+}  	
+\eAPI 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Registers  the  arrival of a processing element (PE) at a barrier and suspends PE execution until all other PEs arrive at the barrier and all local and remote memory updates are completed.
+% 
+% SYNOPSIS
+%        C or C++:
+% 
+% 	  void barrier(void);
+% 
+% 	  void shmem_barrier_all(void);
+% 
+%        Fortran:
+% 
+% 	  CALL BARRIER
+% 
+% 	  CALL SHMEM_BARRIER_ALL
+% 
+% DESCRIPTION
+% 
+% Arguments
+%        None.
+% 
+% API Description
+% 
+%        The  shmem_barrier_all  function	 registers  the	 arrival  of a PE at a
+%        barrier.	 Barriers are a fast mechanism for synchronizing  all  PEs  at
+%        once.  This routine causes a PE to suspend execution until all PEs have
+%        called shmem_barrier_all.  This function must be used with PEs  started
+%        by start_pes().
+% 
+%        Prior  to  synchronizing	 with  other  PEs,  shmem_barrier_all  ensures
+%        completion of all previously issued  local  memory  stores  and	remote
+%        memory	updates	 issued	 via  shared  memory  routine  calls  such  as
+%        shmem_put32().
+% 
+% Return Value
+%        None.
+% 
+% EXAMPLES
+% 	The following shmem_barrier_all example is for C/C++ programs:
+% 
+%        \lstinputlisting[language=C]{shmem_barrierall_example.c}
