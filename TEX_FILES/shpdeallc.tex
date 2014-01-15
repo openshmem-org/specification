@@ -11,6 +11,7 @@
        \argRow{OUT}{errcode}{Error  code is 0 if no error was detected; otherwise, it is a  negative  integer  code  for  the  type  of	 error.}
        \argRow{IN}{abort}{Abort code.  Nonzero requests abort on error; 0 requests
 		      an error code.}
+ }
 %API description
  {
        SHPDEALLC  returns  a block of memory (allocated using SHPALLOC) to the
@@ -20,15 +21,21 @@
        program hangs.
   }
  %Return Values     
-\desR{       
-Error conditions are as follows:
-
-       Code	      Condition
-       -3	      Address is outside the bounds of the symmetric heap.
-       -4	      Block is already free.
-       -5	      Address is not at the beginning of the block.
-}
+\desR{Error conditions are as follows: }
+%       \begin{tabular}{p{2cm} p{6cm}}
+%       \textbf{Code}&\textbf{Condition}
+%       \end{tabular}\\
+%       \begin{tabular}{p{2cm} p{6cm}}
+%       {-3}	&      {Address is outside the bounds of the symmetric heap.}
+%      \end{tabular}\\
+%       \begin{tabular}{p{2cm} p{6cm}}
+%       {       -4}	 &     {Block is already free.}
+%       \end{tabular}\\
+%       \begin{tabular}{p{2cm} p{6cm}}
+%       {-5}	  &    {Address is not at the beginning of the block.}
+%       \end{tabular}\\
 \notesB{   }
+} %end of DesB
 %Example
 \exampleB{}
 \eAPI 
