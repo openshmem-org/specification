@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_GET}{Copies data from a specified processing element (PE).}
+\bAPI{SHMEM\_GET}{Copies data from a specified \ac{PE}.}
 \synC   %Synopisis for C API
 
  void shmem_double_get(double *target, const double  *source, size_t nelems, int pe);
@@ -31,21 +31,21 @@
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
 	 \argRow{OUT}{target}{Local data object to be updated.}
-     \argRow{IN}{source}{Data object on the PE identified by pe that contains the data to be copied. 
+     \argRow{IN}{source}{Data object on the \ac{PE} identified by pe that contains the data to be copied. 
      This data object must be remotely accessible.}
      \argRow{IN}{nelems}{Number of elements in the target and source arrays. nelems must
 		 be  of	 type integer.	If you are using Fortran, it must be a
 		 constant, variable, or array element of default integer type.}
-       \argRow{IN}{pe}{PE  number of the remote PE.  pe must be of type integer. If
+       \argRow{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  pe must be of type integer. If
 		 you are using Fortran, it must be a constant, variable, or
 		 array element of default integer type.}
  }
 %API description
 {
    The  get	 routines  provide  a  method for copying a
-   contiguous symmetric data object from a different PE to a contiguous data object
-   on  a  the  local  PE. The  routines return  after the data has been
-   delivered to the target array on the local PE. 
+   contiguous symmetric data object from a different \ac{PE} to a contiguous data object
+   on  a  the  local  \ac{PE}. The  routines return  after the data has been
+   delivered to the target array on the local \ac{PE}. 
 }
 %API Description Table.
 {
@@ -91,5 +91,4 @@
         {}
 }
 \rcomment{Manju: Fortran examples are not clearly readable \\}
-\rcomment{Manju: API Description Table - Should we have a newline after table description ? Should we have a period after the description ?}
 \eAPI
