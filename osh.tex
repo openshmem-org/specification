@@ -728,6 +728,10 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \def\endchangefiniii{}
 %----------------------------------------------------------------------
 
+\newcommand{\OSH}{\emph{OpenSHMEM}}
+\newcommand{\rcomment}[1]
+    {{\color{red}\textsf{#1}}}
+
 \newcommand{\bAPI}[2]{
 \section{#1}%\hfill
 #2\hfill
@@ -814,3 +818,18 @@ minus .2ex}{-1em}{\normalsize\sf}}
  \lstinputlisting[language={C}, tabsize=2, basicstyle=\footnotesize] {#2}	
  #3 
 }
+
+\newcommand{\exampleITEMF}[3] {
+ #1
+ \lstinputlisting[language={Fortran}, tabsize=2, basicstyle=\footnotesize] {#2}	
+ #3 
+}
+
+\newcommand{\FUNC}[1] {\textit{#1}}
+
+% Add acronyms here
+\begin{acronym}
+\acro{PE}{\emph{Processing Element}}
+
+\end{acronym}
+

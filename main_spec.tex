@@ -47,9 +47,7 @@
 \usepackage{fancyhdr}
 \usepackage{wrapfig}
 
-\newcommand{\OSH}{\emph{OpenSHMEM}}
-\newcommand{\rcomment}[1]
-    {{\color{red}\textsf{#1}}}
+\usepackage[nolist]{acronym}
 %%%%%%%%%%%%%%%Borrowed from MPI Spec%%%%%%%%
 
 \include{osh}
@@ -94,7 +92,7 @@
 %\input{TEX_FILES/shpdeallc.tex} %Swaroop
 \startchap
 \section*{Remote Memory Operations}
-%\input{TEX_FILES/shmem_put.tex} %Oscar
+\input{TEX_FILES/shmem_put.tex} %Oscar
 %\input{TEX_FILES/shmem_p.tex} %Oscar
 %\input{TEX_FILES/shmem_iput.tex} %Oscar
 %\input{TEX_FILES/shmem_get.tex} %Manju
@@ -133,4 +131,5 @@
 %  -> Compilation
 %  -> Writing OpenSHMEM Programs
 %  -> Application written in Fortran
+
 \end{document}

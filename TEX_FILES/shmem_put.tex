@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_PUT}{The  put routines  provide  a method for copying data from a contiguous local data object to a data object on a specified PE.}
+\bAPI{SHMEM\_PUT}{The  put routines  provide  a method for copying data from a contiguous local data object to a data object on a specified \ac{PE}.}
 \synC   %Synopisis for C API
  void shmem_double_put(double target, const double *source, size_t len, int pe);
  void shmem_float_put(float *target, const float *source, size_t len, int pe);
@@ -41,7 +41,7 @@
        array on the local PE.
        The delivery of data words into the data object on the  destination  PE
        may  occur  in  any order.  Furthermore,	 two successive put operations
-       may deliver  data  out  of  order  unless  a  call  to  shmem\_fence  is
+       may deliver  data  out  of  order  unless  a  call  to \FUNC{shmem\_fence}  is
        introduced between the two calls.   
  }
  %API Description Table. 
@@ -79,7 +79,7 @@
 \exampleB{
 %For each example, you can enter it as an item.
                   \exampleITEM
-                  { The following shmem\_put example is for  programs:}
+                  { The following \FUNC{shmem\_put} example is for  programs:}
                  {./EXAMPLES/shmem_put_example.c}
                  {} 
                  }  	
