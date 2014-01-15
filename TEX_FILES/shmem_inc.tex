@@ -1,50 +1,50 @@
-       Performs an atomic fetch-and-increment  operation
-       on a remote data object.
+\bAPI{SHMEM\_INC}{Performs an atomic fetch-and-increment  operation on a remote data object.}
+\synC   %Synopisis for C API
+ 
+ void shmem_int_inc(int *target, int pe);
+ void shmem_long_inc(long *target, int pe);
+ void shmem_longlong_inc(long long *target, int pe);
+%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
-SYNOPSIS
-       C or C++:
+\synF   %Synopsis for FORTRAN API
 
-	  void shmem_int_inc(int *target, int pe);
+ INTEGER pe
+ INTEGER(KIND=4) target4
+ INTEGER(KIND=8) target8
+ CALL SHMEM_INT4_INC(target4, pe)
+ CALL SHMEM_INT8_INC(target8, pe)
+%*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-	  void shmem_long_inc(long *target, int pe);
+% Arguments table. If no arguments you can use \argRow{NONE}{}{} 
+\desB{  
+   	\argRow{IN}{target}{The remotely accessible integer data object to be updated on
+	 the remote PE. The type of target should match that implied
+	 in the SYNOPSIS section. }
+   \argRow{IN}{pe}{An integer that indicates the PE number on which target is to
+	 be  updated. If you are using Fortran, it must be a default
+	 integer value.}
+ }
+%API description
+{
+   These  functions	 perform  an  atomic increment operation on the target data object on processing element (PE) pe.
+}
+{
+%API Description Table.
+\desR{
+    %Return Values     
+    None.
+}
 
-	  void shmem_longlong_inc(long long *target, int pe);
+% Notes. If there are no notes, this field can be left empty.
+\notesB{
+     The term remotely accessible is defined in the Introduction.
+}
+} % end of DesB
 
-       Fortran:
-
-	  INTEGER pe
-
-	  INTEGER(KIND=4) target4
-
-	  INTEGER(KIND=8) target8
-
-	  CALL SHMEM_INT4_INC(target4, pe)
-
-	  CALL SHMEM_INT8_INC(target8, pe)
-
-DESCRIPTION
-
-Arguments
-
-	IN       target	 The remotely accessible integer data object to be updated  on
-		 the  remote PE.  The type of target should match that implied
-		 in the SYNOPSIS section.
-
-       IN	pe	 An integer that indicates the PE number on which target is to
-		 be  updated.  If  you are using Fortran, it must be a default
-		 integer value.
-
-API Description
-
-       These  functions	 perform  an  atomic increment operation on the target
-       data object on processing element (PE) pe.
-
-
-NOTES
-       The term remotely accessible is defined in the Introduction.
-
-EXAMPLE
-
-	The following shmem_int_inc example is for C/C++ programs:
-
-       \lstinputlisting[language=C]{shmem_inc_example.c}
+\exampleB{
+       \exampleITEM
+       { The following shmem\_int\_inc example is for C/C++ programs: }
+       {./EXAMPLES/shmem_inc_example.c}
+       {}
+}
+\eAPI
