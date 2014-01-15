@@ -1,47 +1,36 @@
-       Allocates a block of memory from the symmetric heap
+\bAPI{SHPALLOC}{Allocates a block of memory from the symmetric heap.}
 
-SYNOPSIS
+\synF   %Synopsis for FORTRAN API
        POINTER (addr, A(1))
        INTEGER (length, errcode, abort)
        CALL SHPALLOC(addr, length, errcode, abort)
+ %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-DESCRIPTION
-
-Arguments
-
-	IN       addr	      First word address of the allocated block (output).
-       IN	length	      Number  of  words of memory requested (input).  One word
-		      is 32 bits.
-       IN	errcode	      Error code is 0 if no error was detected; otherwise,  it
-		      is  a  negative  integer	code  for  the	type  of error
-		      (output).
-       IN	abort	      Abort code; nonzero requests abort on error; 0  requests
-		      an error code (input).
-API Description
-
-       SHPALLOC	 allocates a block of memory from the program's symmetric heap
+% Arguments table. If no arguments you can use \argRow{NONE}{}{} 
+\desB{  
+ \argRow{OUT}{addr}{First word address of the allocated block.}
+ \argRow{IN}{length}{Number of words of memory requested. One word is 32 bits.}
+ \argRow{OUT}{errcode}{Error code is 0 if no error was detected; otherwise,  it is  a  negative  integer	code  for  the	type  of error.}
+ \argRow{IN}{abort}{Abort code; nonzero requests abort on error; 0  requests
+		      an error code.}
+}
+ %API description
+ {   SHPALLOC	 allocates a block of memory from the program's symmetric heap
        that is greater than or equal  to  the  size  requested.	  To  maintain
        symmetric  heap	consistency,  all PEs in an program must call SHPALLOC
-       with the same value of length; if any  processing  elements  (PEs)  are
+       with the same value of length; if any PEs  are
        missing, the program will hang.
-
-
+       
        By using the Fortran POINTER mechanism in the following manner, you can
        use array A to refer to the block allocated by SHPALLOC: POINTER (addr,
        A())
-
-Return Value
-
-       Error conditions are as follows:
-
-       Error Code     Condition
-	     -1	      Length is not an integer greater than 0.
-	     -2	      No more memory is available from the system (checked  if
-		      the  request  cannot  be	satisfied  from	 the available
-		      blocks on the symmetric heap).
-NOTES
+       }
+ %Return Values     
+\desR{  Error Code -1 indicates that the length is not an integer greater than 0, while error code -2 indicates that no more memory is available from the system (checked  if the  request  cannot  be	satisfied  from	 the available blocks on the symmetric heap).
+}
+\notesB{  
        The total size of the symmetric heap is determined at job startup.  One
        may  adjust  the	 size  of  the	heap  using   the   SMA_SYMMETRIC_SIZE
        environment  variable (if available).	
-
-
+}
+\eAPI 

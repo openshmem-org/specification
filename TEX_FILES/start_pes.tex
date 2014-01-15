@@ -1,38 +1,31 @@
-       Called  at the beginning of an OpenSHMEM program to initialize
-       the execution environment.
+\bAPI{START\_PES}{Called  at the beginning of an OpenSHMEM program to initialize
+       the execution environment.}
+\synC   %Synopisis for C API       C or C++:
+void start_pes(int npes);
+%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
-SYNOPSIS
+\synF   %Synopsis for FORTRAN API
+ %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-       C or C++:
+% Arguments table. If no arguments you can use \argRow{NONE}{}{} 
+\desB{  
+       \argRow{npes}{	 Unused}{ Should be set to 0.}
+}
+ %API description
+ {   The start\_pes routine should be the first statement in a OpenSHMEM parallel
+       program.}
 
-	  void start_pes(int npes);
+\desR{None.}
 
-       Fortran:
-
-	  CALL START_PES(npes)
-
-DESCRIPTION
-
-Arguments
-
-       npes	 Unused.  Should be set to 0.
-
-API Description
-
-       The start_pes routine should be the first statement in a OpenSHMEM parallel
-       program.
-
-Return Value
-
-	None.
-
-NOTES
-       If  the	start_pes  call	 is  not  the  first  statement	 in a program,
-       unexpected results may occur on some architectures.
-
-
-EXAMPLES
-       This is a simple program that calls shmem_integer_put():
-
-	\lstinputlisting[language=C]{../EXAMPLES/shmem_startpes_example.c}
-
+% Notes. If there are no notes, this field can be left empty.
+\notesB{  If  the	start\_pes  call	 is  not  the  first  statement in a program,
+} %end of DesB
+%Example
+\exampleB{
+%For each example, you can enter it as an item.
+                  \exampleITEM
+                  { This is a simple program that calls shmem_integer_put():}
+                 {./EXAMPLES/shmem_startpes_example.c}
+ {} 
+}  	
+\eAPI 
