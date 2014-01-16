@@ -2,12 +2,15 @@
 
 %SYNOPSIS
 \synC
-       void *shmalloc(size\_t size);
+       void *shmalloc(size_t size);
        void shfree(void *ptr);
-       void *shrealloc(void *ptr, size\_t size);
-       void *shmemalign(size\_t alignment, size\_t size);
-       extern long malloc\_error;
+       void *shrealloc(void *ptr, size_t size);
+       void *shmemalign(size_t alignment, size_t size);
+       extern long malloc_error;
 %*\synCE
+
+\synF
+%*\synFE
 
 %DESCRIPTION
 
@@ -48,29 +51,27 @@
        allocated, the block to which ptr points is unchanged.
 
        The shmalloc, shfree, and shrealloc  functions  are  provided  so  that
-       multiple	 PEs  in  an  application  can	allocate  symmetric,  remotely
+       multiple	 \ac{PE}s  in  an  application  can	allocate  symmetric,  remotely
        accessible memory blocks.  These memory blocks can then	be  used  with
        (shmem)	communication  routines.   Each	 of  these  functions call the
        shmem\_barrier\_all() function before returning; this ensures  that  all
-       PEs  participate in the memory allocation, and that the memory on other
-       PEs can be used	as  soon  as  the  local  PE  returns.	 The  user  is
+       \ac{PE}s  participate in the memory allocation, and that the memory on other
+       \ac{PE}s can be used	as  soon  as  the  local  \ac{PE}  returns.	 The  user  is
        responsible  for	 calling these functions with identical argument(s) on
-       all PEs; if differing size arguments are used, subsequent calls may not
-       return the same symmetric heap address on all PEs.
+       all \ac{PE}s; if differing size arguments are used, subsequent calls may not
+       return the same symmetric heap address on all \ac{PE}s.
 }
-
 %API Description Table
 {
-
 		\desTB{}
 		{
 				\cRow{}{}
 		}
 
 		%Return Value
-		{
+		\desR{
 					 The shmalloc function returns a pointer to the allocated	 space	(which
-					 should  be  identical on all PEs); otherwise, it returns a null pointer
+					 should  be  identical on all \ac{PE}s); otherwise, it returns a null pointer
 					 (with malloc\_error set).
 
 					 The shfree function returns no value.
@@ -79,23 +80,27 @@
 					 may   have   moved);   otherwise,  it  returns  a  null	pointer	 (with
 					 malloc\_error set).
 		}
-}
 
-%NOTES
-{       The total size of the symmetric heap is determined at job startup.  One
-       can  adjust  the	 size  of  the	heap  using   the   SMA\_SYMMETRIC\_SIZE
-       environment  variable (where available).	
+		%NOTES
+		\notesB{      
+					 The total size of the symmetric heap is determined at job startup.  One
+					 can  adjust  the	 size  of  the	heap  using   the   SMA\_SYMMETRIC\_SIZE
+					 environment  variable (where available).	
 
-       The shmalloc, shfree, and shrealloc functions differ from  the  private
-       heap  allocation	 functions in that all PEs in an application must call
-       them (a barrier is used to ensure this).
+					 The shmalloc, shfree, and shrealloc functions differ from  the  private
+					 heap  allocation	 functions in that all \ac{PE}s in an application must call
+					 them (a barrier is used to ensure this).
+		}
 }
 
 %EXAMPLES
-\example{
+\rcomment{Tommy: Code will not compile without example, need example for shfree. \\}
+
+\exampleB{
+		\exampleITEM
 		{The following shmalloc example is for C/C++ programs:}
-		{./EXAMPLE/shfree.c}
+		{./EXAMPLES/shmem_npes_example.c}
 		{}
 }
 
-%       \lstinputlisting[language=C]{shmem_shmalloc_example.c}
+\eAPI
