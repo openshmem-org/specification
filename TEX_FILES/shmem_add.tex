@@ -18,7 +18,7 @@
 %Arguments
 \desB{
        \argRow{OUT}{target}{The remotely accessible integer data object to be updated  on
-	        	 the  remote  PE. If you are using C/C++, the type of target
+	        	 the  remote  \ac{PE}. If you are using C/C++, the type of target
 		         should match that implied in the SYNOPSIS  section.   If  you
 			 			 are  using  the  Fortran compiler, it must be of type integer
 			 			 with an element size of 4  bytes  for	SHMEM\_INT4\_ADD	and  8
@@ -27,14 +27,14 @@
 			 				 C/C++, the type of value should match	that  implied  in  the
 			 				 SYNOPSIS  section.   If  you are using Fortran, it must be of
 			 				 type integer with an element size of target.}
-       \argRow{IN}{pe}{An integer that indicates the PE number upon which target  is
+       \argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which target  is
 			 					to  be	 updated. If	you  are  using	 Fortran, it must be a
 			 					default integer value.}
 }
 %API Description
 {
 	\desTB {The shmem\_add routine performs an atomic add operation.	It adds value
-       to target on Processing Element (PE) pe and atomically increments the
+       to target on Processing Element (\ac{PE}) pe and atomically increments the
        target without returning the value.}
 	{
 		\cRow{}{}
