@@ -2,21 +2,21 @@
 
 %SYNOPSIS
 \synC
-	  void shmem\_int\_add(int *target, int value, int pe);
-	  void shmem\_long\_add(long *target, long value, int pe);
-	  void shmem\_longlong\_add(long long *target, long long value, int pe);
+	  void shmem_int_add(int *target, int value, int pe);
+	  void shmem_long_add(long *target, long value, int pe);
+	  void shmem_longlong_add(long long *target, long long value, int pe);
 %*\synCE
 
 \synF
 	  INTEGER pe
-	  CALL SHMEM\_INT4\_ADD(target, value, pe)
-	  CALL SHMEM\_INT8\_ADD(target, value, pe)
-%*synFE
+	  CALL SHMEM_INT4_ADD(target, value, pe)
+	  CALL SHMEM_INT8_ADD(target, value, pe)
+%*\synFE
 
 %DESCRIPTION
  
 %Arguments
-\descB{
+\desB{
        \argRow{OUT}{target}{The remotely accessible integer data object to be updated  on
 	        	 the  remote  PE. If you are using C/C++, the type of target
 		         should match that implied in the SYNOPSIS  section.   If  you
@@ -31,7 +31,6 @@
 			 					to  be	 updated. If	you  are  using	 Fortran, it must be a
 			 					default integer value.}
 }
-
 %API Description
 {
 	\desTB {The shmem\_add routine performs an atomic add operation.	It adds value
@@ -43,14 +42,15 @@
 	
 	%Return Value
   {None.}
-}
 
-%NOTES
-{The term remotely accessible is defined in the Introduction.}
+	%NOTES
+	{The term remotely accessible is defined in the Introduction.}
+}
 
 \exampleB{
 		\exampleITEM
 		{}
+		{./EXAMPLES/shmem_fadd_example.c}
 		{}
 }
 
