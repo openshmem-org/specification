@@ -1,9 +1,11 @@
 \bAPI{START\_PES}{Called  at the beginning of an \openshmem program to initialize the execution environment.}
-\synC   %Synopisis for C API       C or C++:
+\synC   %Synopisis for C API 
+
 void start_pes(int npes);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
+
 CALL START_PES(npes)
  %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
@@ -13,17 +15,21 @@ CALL START_PES(npes)
 }
  %API description
  {   The start\_pes routine should be the first statement in a OpenSHMEM parallel
-       program.}
-
-\desR{None.}
-
+       program.
+ }
+ %API Description Table. 
+{
+    {} 
+ %Return Values     
+\desR{ None. }
+}%end of DesB
 % Notes. If there are no notes, this field can be left empty.
-\notesB{  If  the	start\_pes  call	 is  not  the  first  statement in a program,  unexpected results may occur.
-} %end of DesB
+\notesB{  If  the	start\_pes  call	 is  not  the  first  statement in a program,  unexpected results may occur.}
+
 %Example
 \exampleB{
 %For each example, you can enter it as an item.
-                  \exampleITEM
+                  \exampleITEMF
                   { This is a simple program that calls shmem\_integer\_put():}
                  {./EXAMPLES/shmem_startpes_example.f90}
  {} 

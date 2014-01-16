@@ -1,5 +1,7 @@
-\bAPI{Extends  a symmetric heap block or copies the contents of the block into a larger block.}
+\bAPI{SHPCLMOVE}{Extends  a symmetric heap block or copies the contents of the block into a larger block.}
+
 \synF   %Synopsis for FORTRAN API
+
        POINTER (addr, A(1))
        INTEGER length, status, abort
        CALL SHPCLMOVE (addr, length, status, abort)
@@ -23,23 +25,21 @@
        of the existing block to a larger  block	 and  returns  a  status  code
        indicating that the block was moved.  This function also can reduce the
        size of a block if the new length is less than  the  old	 length.   All
-       PEs  in	a program must call SHPCLMOVE with the
-       same value of addr to maintain symmetric heap consistency; if  any  PEs
+       \ac{PE}s  in a program must call SHPCLMOVE with the
+       same value of addr to maintain symmetric heap consistency; if  any  \ac{PE}s
        are missing, the program hangs.
  }
-\desR{       
-Error conditions are as follows:
-
-       Code	      Condition
-       -1	      Length is not an integer greater than 0.
-       -2	      No more memory is available from the system (checked  if
-		      the  block  cannot  be  extended and the free space list
-		      does not include a large enough block).
-       -3	      Address is outside the bounds of the symmetric heap.
-       -4	      Block is already free.
-       -5	      Address is not at the beginning of a block.
-}
+ %API Description Table. 
+{
+{}
+ %Return Values     
+\desR{ }
+\cRow{Error Code} {Condition}
+\cRow{ -1 } {Length is not an integer greater than 0}
+\cRow{-2} { No more memory is available from the system (checked  if the  request  cannot  be	satisfied from the available blocks on the symmetric heap).}
+\cRow{-3}{	 Address is outside the bounds of the symmetric heap.}
+\cRow{-4}{Block is already free.}
+\cRow{-5}{Address is not at the beginning of a block.}
+}%end of DesB
 \notesB{ }   
-%Example
-\exampleB{}
 \eAPI 
