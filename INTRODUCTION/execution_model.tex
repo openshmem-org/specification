@@ -1,0 +1,76 @@
+
+\section{Execution Model}
+
+This section describes the Execution Model of an \openshmem application.
+
+\openshmem uses a Single Process Multiple Data (SPMD) approach to express
+parallelism. An \openshmem application makes use of multiple processors,
+referred to as Processing Elements or PEs, to complete operations
+in parallel.
+
+% OpenSHMEM applications may be launched using a dispatcher program,
+% but it is not required. This dispatcher program may perform steps
+% needed by the implementation to start the application on the desired
+% processing elements. The following is an example of using a dispatcher:
+% \lstinline[language=bash]!oshrun -np 4 myprogram!
+
+\openshmem requires initialization before using any of the library
+routines. To this end, the program issues a call to the \textbf{start\_pes()}
+routine. \textbf{start\_pes()} performs any required initialization
+steps, such as setting up the symmetric heap for every PE and creating
+the PE numbers. The symmetric heap is one of the memory spaces
+that is remotely accessible by all PEs. The symmetric heap is discussed
+further in the Memory Model section. The PE numbers are the
+identifiers used to refer to each of the PEs involved in the execution.
+These PE numbers are integers assigned in a monotonically
+increasing manner from zero to the total number of PEs minus 1.
+
+Data transfer in \openshmem is possible through several one-sided put
+(for write) and get (for read) operations, as well as various collective
+routines such as broadcasts and reductions.
+
+Query routines are available to gather information about the execution.
+\openshmem also provides synchronization routines to coordinate data
+transfers and other operations. 
+
+It is up to the implementation how to handle the finalization of the
+\openshmem library and any other resources initialized by the library:
+there is currently no explicit call for the programmer.
+
+% TONY: trying to keep the ``note to'' with the preceding text (so no
+% pagebreak between text and its note).  Not sure how to do this ``for
+% real'' so just forcing a break before the subsection for now.
+
+\pagebreak
+
+\subsection{Communication Progress}
+
+The \openshmem model assumes that computation and communication are
+naturally overlapped.  \openshmem programs are expected to exhibit
+progression of communication both with and without \openshmem calls.
+
+Consider a PE that is engaged in a long computation with no \openshmem calls.
+Other PEs must be able to communicate (put/get,
+collective, atomic) with that computationally-bound PE without that PE
+issuing any explicit \openshmem calls.
+
+\openshmem communication calls involving that PE must progress
+regardless of when that PE next engages in an \openshmem call.
+
+\textbf{Note to implementers:} progress will often be ensured through
+the use of a dedicated progress thread in software, or through
+network hardware that offloads communication handling from processors.
+
+\subsection{Atomicity Guarantees}
+
+\openshmem contains a number of routines that operate on symmetric data
+atomically.  These routines guarantee that accesses by \openshmem's
+atomic operations will be exclusive, but do not guarantee exclusivity
+in combination with other routines, either inside \openshmem's or
+outside.
+
+For example: during the execution of a remote integer increment
+operation on a symmetric variable ``x'', no other \openshmem atomic
+operation may access ``x''.  After the increment, ``x'' will have
+increased its value by 1 on the target PE, at which point other
+atomic operations may then modify that ``x''.

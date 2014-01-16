@@ -1,0 +1,44 @@
+
+\section{Undefined Behavior}
+
+
+\subsection{Undefined Behavior in \openshmem}
+
+The specification provides guidelines to the expected behavior of
+various library routines. In cases where routines are improperly used
+or the input is not in accordance with the specification, undefined
+behavior may be observed. Depending on the implementation there are
+many interpretations of undefined behavior. 
+
+$\;$
+
+$ $%
+\begin{tabular}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
+\hline 
+\textbf{Inappropriate Usage} & \textbf{Undefined Behavior}\tabularnewline
+\hline 
+\hline 
+Uninitialized library & If \openshmem is not initialized through a call to \linebreak \textbf{start\_pes()},
+subsequent accesses to \openshmem routines have undefined results.
+An implementation may choose, for example, to try to continue or abort
+immediately upon the first call to an uninitialized routine.\tabularnewline
+\hline 
+Accessing non-existent PEs & If a communications routine accesses a non-existent PE then the \openshmem
+library can choose to handle this situation in an implementation-defined
+way. For example, the library may issue an error message saying that
+the PE accessed is outside the range of accessible PEs, or may exit
+without a warning.\tabularnewline
+\hline 
+Use of non-symmetric variables & Some routines require remotely accessible variables to perform their
+function. A {}``put'' to a non-symmetric variable can be trapped
+where possible and the library can abort the program. Another implementation
+may choose to continue either with a warning or silently.\tabularnewline
+\hline 
+Non-symmetric Variables & The symmetric memory management routines are collectives, which means
+that all PEs in the program must issue the same shmalloc() call with
+the same size request. \openshmem implementations should detect the
+size mismatch and return error information to the caller. Implementations
+may also produce an error message. Program behavior after a mismatched
+shmalloc() call is undefined.\tabularnewline
+\hline 
+\end{tabular}

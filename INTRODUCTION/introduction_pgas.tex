@@ -1,0 +1,168 @@
+
+\section{What is SHMEM ?}
+
+This section is an introduction to previous work on SHMEM. We begin
+with a quick overview of the Partitioned Global Address Space model,
+which is the basis for SHMEM's data sharing strategy.
+
+
+\subsection{Partitioned Global Address Space}
+
+Conventional Parallel Programming Models can be broadly classified
+into 2 types: 
+\begin{description}
+\item [{{Shared-Memory~Model:}}] in this model all processors interact
+with a globally available memory space. 
+\item [{{Distributed-Memory~Model:}}] in this model each processor has
+its own memory to work with and can only directly access the data
+that resides in its memory. When a processor needs data from another
+processor an explicit function call must be made to communicate with
+the target processor. 
+\end{description}
+The current high performance computing architectures prefer a combination
+of the above mentioned memory models, which is referred to \textbf{Partitioned
+Global Address Space} or PGAS for short. In PGAS, each processing
+element (PE) has access to its own private local memory and also to
+a shared memory space. This programming model enhances performance
+by exposing data/thread locality. PGAS programming languages include
+\textbf{Unified Parallel C (UPC)}, \textbf{Co-Array Fortran (CAF)},
+\textbf{Titanium}, \textbf{X-10} and \textbf{Chapel}.
+
+More information about PGAS can be found at the PGAS Forum website.\cite{pgasfor}
+
+
+\subsection{SHMEM}
+
+% SGI asked for this to be removed to protect the trademark
+%
+%      SHMEM stands for \textbf{SH}ared \textbf{MEM}ory.
+
+SHMEM is a library API that allows its participating processes (the
+places where work occurs are called Processing Elements or PEs) to
+view a Partitioned Global Address Space. Each PE is able to see
+variables with a common name, but each PE has its own local copy
+of the variable.
+
+The SHMEM library provides inter-processor communication using data
+passing and one-sided communication techniques. SHMEM differs from
+the Message Passing Interface (MPI), currently the most widely used
+communication model, in that the latter generally uses two-sided communication
+(MPI now also includes one-sided calls). In two-sided communication,
+both sides of the exchange (source and destination) are required to
+participate actively. The one-sided communication mechanism decouples
+data transfer and synchronization, reducing communication overhead,
+resulting in faster communication patterns. Figure \ref{fig:Communication-Scheme}
+shows diagrams for one-sided and two-sided communications.\medskip{}
+
+
+%\begin{center}
+%\begin{figure}[H]
+%\begin{centering}
+%\includegraphics[scale=0.7]{media/communication} 
+%\par\end{centering}
+%
+%\caption{Communication Scheme\label{fig:Communication-Scheme}}
+%\end{figure}
+%
+%\par\end{center}
+
+\medskip{}
+The following are some of the communication operations available in
+SHMEM:
+\begin{enumerate}
+\item \textbf{Data Transfers }
+
+\begin{enumerate}
+\item One-sided puts : the initiator PE (active side) specifies the local
+data to be written to the target PE's (passive side) memory. 
+\item One-sided gets : an explicit fetch operation is used to copy a variable
+amount of data from a remote process and store it locally.\end{enumerate}
+\begin{description}
+\item [{{Note:}}] By avoiding the need for matching send and receive
+calls, SHMEM simplifies the communication process by reducing the
+number of calls required to have one PE interact with other PEs. 
+\end{description}
+\item \textbf{Synchronization Mechanisms }
+
+\begin{enumerate}
+\item Fence: Ensures ordering of PUT operations to a specific PE. 
+\item Quiet: Ensures ordering of PUT operations to all PEs. 
+\item Barrier: A collective synchronization routine in which no PE may leave
+the barrier prior to all PEs entering the barrier. 
+\end{enumerate}
+\item \textbf{Collective Communication}
+
+\begin{enumerate}
+\item Broadcast: Copy a block of data from one PE to one or more target
+PEs. 
+\item Collection: Concatenate elements from the source array to a target
+array over the specified PEs. 
+\item Reduction: Perform an associative binary operation over the specified
+PEs. 
+\end{enumerate}
+\item \textbf{Address Manipulation}
+
+\begin{enumerate}
+\item Allocating and deallocating memory blocks in the symmetric space.
+\end{enumerate}
+\item \textbf{Locks}
+
+\begin{enumerate}
+\item Implementation of mutual exclusion.
+\end{enumerate}
+\item \textbf{Atomic Memory Operations}
+
+\begin{enumerate}
+\item Swap, Conditional Swap, Add and Increment 
+\end{enumerate}
+\item \textbf{Data Cache control}
+
+\begin{enumerate}
+\item Implementation of mechanisms to exploit the capabilities of hardware
+cache if available.
+\end{enumerate}
+\end{enumerate}
+\begin{description}
+\item [{{Note:}}] More information about \openshmem routines can be found
+in the Library Routines section.
+\end{description}
+
+\subsection{History of SHMEM}
+\begin{description}
+\item [{{Cray~SHMEM~(MP-SHMEM,~LC-SHMEM):}}] Cray first introduced
+SHMEM in 1993 for its Cray T3D systems. Cray SHMEM was also used in
+other models: T3E, PVP and XT series. 
+\item [{{SGI~SHMEM~(SGI-SHMEM):}}] Cray Research merged with Silicon
+Graphics (SGI) in February 1996. At this point SHMEM was incorporated
+into SGI's Message Passing Toolkit (MPT). The platforms supported
+were - SGI Irix, Origin and Altix. 
+\item [{{Quadrics~SHMEM~(Q-SHMEM):}}] an optimized API for the Quadrics
+QsNet interconnect. It included SGI extensions and provided non-blocking
+puts and gets. A joint effort from HCS Lab \& Quadrics incorporated
+a program profiling interface called PSHMEM that can aid in the execution
+analysis of SHMEM programs. 
+\end{description}
+The success of SHMEM's performance attracted several vendors to provide
+implementations (with varying names and features) for their systems.
+Some of them include: 
+\begin{description}
+\item [{{HP~SHMEM:}}] Based on the Quadrics API. It is included in the
+UPC product kit. 
+\item [{{Cyclops-64~SHMEM~(C64-SHMEM):}}] this SHMEM API supports the
+Cyclops-64 architecture. Most of the core features of Cray SHMEM are
+available with some additional interfaces specific to the Cyclops-64
+architecture. %
+%\begin{comment}
+%Forcing new line, can't get \LaTeX{} to do it automatically.
+%\end{comment}
+
+\item [{{IBM~SHMEM:}}] An implementation created by IBM intended for
+internal use only. 
+\item [{{TurboSHMEM:}}] This implementation uses IBM's Low-Level API
+(LAPI) technology to obtain optimized one-sided communication for
+the put/get operations. This allows applications written with the
+SHMEM API to run on IBM platforms with minimal source code changes. 
+\item [{{GPSHMEM:}}] This implementation of SHMEM aims at providing full
+portability of applications. It is built mostly with Cray T3D components
+and functionalities and provides MPI and ARMCI support. This project
+is no longer maintained. \end{description}
