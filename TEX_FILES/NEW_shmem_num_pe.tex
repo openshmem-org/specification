@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_NUM\_PE}{Returns processing element (PE) information.}
+\bAPI{SHMEM\_NUM\_\ac{PE}}{Returns processing element (\ac{PE}) information.}
 
 %Synopsis C
 \synC
@@ -8,9 +8,9 @@
 
 %Synopsis F
 \synF
-	  INTEGER SHMEM_N_PES, N_PES
-	  NPES = SHMEM_N_PES()
-	  N_PES = NUM_PES()
+	  INTEGER SHMEM_N_\ac{PE}S, N_\ac{PE}S
+	  N\ac{PE}S = SHMEM_N_\ac{PE}S()
+	  N_\ac{PE}S = NUM_\ac{PE}S()
 %*\synFE
 
 %DESCRIPTION
@@ -21,7 +21,7 @@
 }
 %API Description
 {
-	The function returns the number of PEs running in an application.
+	The function returns the number of \ac{PE}s running in an application.
 }
 %API Description Table.
 {
@@ -30,7 +30,7 @@
 				\cRow{}{}
 		}
 		%Return Value
-		\desR{Integer -  Number  of  PEs  running the SPMD application.}
+		\desR{Integer -  Number  of  \ac{PE}s  running the SPMD application.}
 		%NOTES      
 		\notesB{
 				For OpenSHMEM Specification 1.1 the use of \_my\_pe() has been deprecated. Although OpenSHMEM libraries are required to support the call, application developers are encouraged to use shmem\_my\_pe() instead.
