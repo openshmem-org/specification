@@ -1,10 +1,12 @@
 \bAPI{SHMEM\_CSWAP}{Performs an atomic conditional swap to a remote data object.}
 \synC   %Synopisis for C API
+
 int shmem_int_cswap(int *target, int cond, int value, int pe);
 long shmem_long_cswap(long *target, long cond, long value, int pe);
 long shmem_longlong_cswap(longlong *target, longlong cond, longlong value, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
+
 INTEGER pe
 INTEGER(KIND=4) SHMEM_INT4_CSWAP
 ires = SHMEM_INT4_CSWAP(target, cond, value, pe)
@@ -15,24 +17,24 @@ ires = SHMEM_INT8_CSWAP(target, cond, value, pe)
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
 \argRow{OUT}{target}{The remotely accessible integer data object to be updated on
-		 the remote PE. }
+		 the remote \ac{PE}. }
                  % If you are using  C/C++, the data type of
 		 % target should match that implied in the SYNOPSIS section.} 
-\argRow{IN}{cond}{cond is compared to the remote target value. If cond and the
-		 remote	target are equal, then value is swapped into the
+\argRow{IN}{cond}{\VAR{cond} is compared to the remote target value. If \VAR{cond} and the
+		 remote	target are equal, then \VAR{value} is swapped into the
 		 remote target.	Otherwise, the remote target is unchanged.
 		 In either case, the old value of the remote target is
-		 returned as the function return value. cond must be of the
+		 returned as the function return value. \VAR{cond} must be of the
 		 same data type as target.}
-\argRow{IN}{value}{The value to be atomically written to the remote PE. value
+\argRow{IN}{value}{The \VAR{value} to be atomically written to the remote \ac{PE}. \VAR{value}
 	         must be the same data type as target.}
-\argRow{IN}{pe}{An integer that indicates the PE number upon which target  is
+\argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which target  is
 	  to be updated. If you are using Fortran, it must be a default integer value.}
 }
 %API description
 {   
 The conditional swap routines conditionally update a target data object
-on an arbitrary processing element (PE) and return the prior contents
+on an arbitrary \ac{PE} and return the prior contents
 of the data object in one atomic operation.   
 }
 %API Description Tabl
@@ -43,7 +45,7 @@ constraints, which are as follows: }
 \cRow{SHMEM\_INT4\_CSWAP}{4-byte integer.}
 \cRow{SHMEM\_INT8\_CSWAP}{8-byte integer.}
 }
-{The contents that had been in the target data object on the remote PE
+{The contents that had been in the target data object on the remote \ac{PE}
 prior to the conditional swap. Data type is the same as the target data type.}
 }
 % Notes. If there are no notes, this field can be left empty.
@@ -52,9 +54,9 @@ prior to the conditional swap. Data type is the same as the target data type.}
 \exampleB{
     %For each example, you can enter it as an item.
     \exampleITEM
-    {The following call ensures that the first PE to execute the
-     conditional swap will successfully write its PE number to race\_winner
-     on PE 0.}
+    {The following call ensures that the first \ac{PE} to execute the
+     conditional swap will successfully write its \ac{PE} number to race\_winner
+     on \ac{PE} 0.}
     {./EXAMPLES/shmem_cswap_example.c}
     {}
 }  	

@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_COLLECT}{Concatenates blocks of data from multiple processing elements (PEs) to an array in every PE.}
+\bAPI{SHMEM\_COLLECT}{Concatenates blocks of data from multiple \ac{PE}s to an array in every \ac{PE}.}
 \synC   %Synopisis for C API
 void shmem_collect32(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_collect64(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
@@ -23,12 +23,12 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 \desB{  
 \argRow{OUT}{target}{A symmetric array.	The  target  argument  must  be	 large
 	    enough to accept the concatenation of the source arrays on
-	    all PEs.  The data types are as follows:
-	    For shmem\_collect8, shmem\_collect64, shmem\_fcollect8,  and
-	    shmem\_fcollect64, any data type with an element size of 64
+	    all \ac{PE}s.  The data types are as follows:
+	    For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, and
+	    \FUNC{shmem\_fcollect64}, any data type with an element size of 64
 	    bits.  Fortran derived types, Fortran character type,  and
-	    C/C++  structures  are not permitted.  For shmem\_collect4,
-	    shmem\_collect32,  shmem\_fcollect4,	and  shmem\_fcollect32,
+	    C/C++  structures  are not permitted.  For \FUNC{shmem\_collect4},
+	    \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32},
 	    any	 data  type  with an element size of 32 bits.  Fortran
 	    derived  types,  Fortran   character   type,   and	 C/C++
 	    structures are not permitted.}
@@ -37,90 +37,91 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 \argRow{IN}{nelems}{The number of elements in the source array.	 nelems must be
 	    of	type  integer.	If you are using Fortran, it must be a
 	    default integer value.}
-\argRow{IN}{PE\_start}{The lowest virtual PE number of the	 active	 set  of  PEs.
-	    PE\_start  must  be	of  type  integer.   If	 you are using
+\argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the active set of \ac{PE}s.
+	    \VAR{PE\_start} must be	of type integer. If you are using
 	    Fortran, it must be a default integer value.}
 \argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive virtual
-	    PE	numbers	 in  the  active set.  logPE\_stride must be of
+	    \ac{PE}	numbers in the active set. \VAR{logPE\_stride} must be of
 	    type integer.  If you are using  Fortran,  it  must	 be  a
 	    default integer value.}
-\argRow{IN}{PE\_size}{The number	 of PEs in the active set.  PE\_size must be of
-	    type integer.  If you are using  Fortran,  it  must	 be  a
+\argRow{IN}{PE\_size}{The number of \ac{PE}s in the active set. \VAR{PE\_size} must be of
+	    type integer.  If you are using  Fortran, it must be a
 	    default integer value.}
-\argRow{IN}{pSync}{A symmetric  work array.  In C/C++, pSync must be of type
-	    long and size \_SHMEM\_COLLECT\_SYNC\_SIZE.  In Fortran, pSync
-	    must  be of type integer and size SHMEM\_COLLECT\_SYNC\_SIZE.
+\argRow{IN}{pSync}{A symmetric  work array.  In C/C++, \VAR{pSync} must be of type
+	    long and size \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE}.  In Fortran, \VAR{pSync}
+	    must  be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
 	    If you are using Fortran, it must  be  a  default  integer
-	    value.   Every  element  of this array must be initialized
-	    with   the	 value	 \_SHMEM\_SYNC\_VALUE   in	   C/C++    or
-	    SHMEM\_SYNC\_VALUE  in  Fortran before any of the PEs in the
-	    active set enter shmem\_barrier().}
+	    value. Every  element  of this array must be initialized
+	    with the value \CONST{\_SHMEM\_SYNC\_VALUE} in C/C++ or
+	    \CONST{SHMEM\_SYNC\_VALUE} in Fortran before any of the \ac{PE}s in the
+	    active set enter \FUNC{shmem\_barrier()}.}
 }
 %API description
 {   
 \OSH{} collect and fcollect routines concatenate
-nelems 64-bit or 32-bit data items from the source array into the target
-array, over the set of PEs defined by PE\_start, log2PE\_stride, and
-PE\_size, in processor number order. The resultant target array
-contains the contribution from PE PE\_start first, then the contribution
-from PE PE\_start + PE\_stride second, and so on.  The collected result
-is written to the target array for all PEs in the active set.
+\VAR{nelems} 64-bit or 32-bit data items from the source array into the target
+array, over the set of \ac{PE}s defined by \VAR{PE\_start}, \VAR{log2PE\_stride}, and
+\VAR{PE\_size}, in processor number order. The resultant target array
+contains the contribution from \ac{PE} \VAR{PE\_start} first, then the contribution
+from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result
+is written to the target array for all \ac{PE}s in the active set.
 
 The fcollect routines require that nelems be the same value in all
-participating PEs, while the collect routines allow nelems to vary from
-PE to PE.
+participating \ac{PE}s, while the collect routines allow nelems to vary from
+\ac{PE} to \ac{PE}.
 
 As with all \OSH{} collective routines, each of these routines assumes
-that only PEs in the active set call the routine. If a PE not in the
+that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the
 active set calls a \OSH{} collective routine, undefined behavior
 results.
 
-The values of arguments PE\_start, logPE\_stride, and PE\_size must be
-equal on all PEs in the active set. The same target and source arrays
-and the same pSync work array must be passed to all PEs in the active
+The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be
+equal on all \ac{PE}s in the active set. The same target and source arrays
+and the same \VAR{pSync} work array must be passed to all \ac{PE}s in the active
 set.
 
 Upon return from a collective routine, the following are true for the
-local PE: The target array is updated. The values in the pSync array
+local \ac{PE}: The target array is updated. The values in the \VAR{pSync} array
 are restored to the original values.
 }
 {
-\desTB {}{}
-    %Return Values     
-    {None.}
+{
+%Return Values     
+\desR{None.}
 }
 % Notes. If there are no notes, this field can be left empty.
-{
-All \OSH{} collective routines reset the values in pSync before they
-return, so a particular pSync buffer need only be initialized the first
+\notesB{
+All \OSH{} collective routines reset the values in \VAR{pSync} before they
+return, so a particular \VAR{pSync} buffer need only be initialized the first
 time it is used.
 
-You  must ensure that the pSync array is not being updated on any PE in
-the active set while any of the PEs participate in processing of a
+You  must ensure that the \VAR{pSync} array is not being updated on any \ac{PE} in
+the active set while any of the \ac{PE}s participate in processing of a
 \OSH{} collective routine. Be careful to avoid these situations: If the
-pSync array is initialized at run time, some type of synchronization is
-needed to ensure that all PEs in the working set have initialized pSync
-before any of them  enter a \OSH{} routine called with the pSync
-synchronization	array. A pSync array can be reused on a subsequent
-\OSH{} collective routine only if none of the PEs in the active set  are
+\VAR{pSync} array is initialized at run time, some type of synchronization is
+needed to ensure that all \ac{PE}s in the working set have initialized \VAR{pSync}
+before any of them  enter a \OSH{} routine called with the \VAR{pSync}
+synchronization	array. A \VAR{pSync} array can be reused on a subsequent
+\OSH{} collective routine only if none of the \ac{PE}s in the active set  are
 still processing a  prior \OSH{} collective routine call that used the
-same pSync array. In general, this may be ensured only by doing some
+same \VAR{pSync} array. In general, this may be ensured only by doing some
 type of synchronization. However, in the special case of SHMEM
 routines being called with the same active set, you can allocate two
-pSync arrays and alternate between them on successive calls.
+\VAR{pSync} arrays and alternate between them on successive calls.
 
-The collective routines operate on active PE sets that have a
-non-power-of-two PE\_size with some performance degradation. They
-operate with no performance degradation when nelems is a
+The collective routines operate on active \ac{PE} sets that have a
+non-power-of-two \VAR{PE\_size} with some performance degradation. They
+operate with no performance degradation when \VAR{nelems} is a
 non-power-of-two value.
+}
 }
 %Example
 \exampleB{
-    \exampleITEM{The following shmem\_collect example is for C/C++ programs:}
+    \exampleITEM{The following \FUNC{shmem\_collec}t example is for C/C++ programs:}
     {./EXAMPLES/shmem_collect_example.c}
     {}
     %For each example, you can enter it as an item.
-    \exampleITEM{The following SHMEM\_COLLECT example is for Fortran programs:}
+    \exampleITEMF{The following \FUNC{SHMEM\_COLLECT} example is for Fortran programs:}
     {./EXAMPLES/shmem_collect_example.f90}
     {}
 }  	
