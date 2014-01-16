@@ -16,9 +16,9 @@
 %API description
 {
     This  function ensures ordering of put (remote write) operations. All
-    put operations issued to a particular remote  processing element (PE)
+    put operations issued to a particular remote  \ac{PE}
     prior  to the call to shmem\_fence are guaranteed to be delivered before
-    any subsequent put operations to the same PE which follow the  call  to
+    any subsequent put operations to the same \ac{PE} which follow the  call  to
     shmem\_fence.
 }
 {
@@ -31,7 +31,7 @@
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
     The  shmem\_quiet	 function  should  be  called  if  ordering of puts is
-    desired when multiple remote PEs are involved.
+    desired when multiple remote \ac{PE}s are involved.
  }
 } % end of DesB
 
