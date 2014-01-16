@@ -1,5 +1,7 @@
 \bAPI{SHPDEALLC}{Returns a memory block to the symmetric heap.}
+
 \synF   %Synopsis for FORTRAN API
+
        POINTER (addr, A(1))
        INTEGER errcode, abort
        CALL SHPDEALLC(addr, errcode, abort)
@@ -11,24 +13,26 @@
        \argRow{OUT}{errcode}{Error  code is 0 if no error was detected; otherwise, it is a  negative  integer  code  for  the  type  of	 error.}
        \argRow{IN}{abort}{Abort code.  Nonzero requests abort on error; 0 requests
 		      an error code.}
+ }
 %API description
  {
        SHPDEALLC  returns  a block of memory (allocated using SHPALLOC) to the
        list of available space in the symmetric heap.  To  maintain  symmetric
-       heap  consistency, all PEs in a program must call
-       SHPDEALLC with the same value of addr; if  any  PEs  are	 missing,  the
+       heap  consistency, all \ac{PE}s in a program must call
+       SHPDEALLC with the same value of addr; if  any  \ac{PE}s  are	 missing,  the
        program hangs.
   }
+%API Description Table. 
+{
+{}
  %Return Values     
-\desR{       
-Error conditions are as follows:
-
-       Code	      Condition
-       -3	      Address is outside the bounds of the symmetric heap.
-       -4	      Block is already free.
-       -5	      Address is not at the beginning of the block.
-}
-\notesB{   }
-%Example
-\exampleB{}
+\desR{ }
+\cRow{Error Code} {Condition}
+\cRow{ -1 } {Length is not an integer greater than 0}
+\cRow{-2} { No more memory is available from the system (checked  if the  request  cannot  be	satisfied from the available blocks on the symmetric heap).}
+\cRow{-3}{	 Address is outside the bounds of the symmetric heap.}
+\cRow{-4}{Block is already free.}
+\cRow{-5}{Address is not at the beginning of a block.}
+}%end of DesB
+\notesB{ }   
 \eAPI 
