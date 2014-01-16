@@ -1,5 +1,7 @@
-\bAPI{SHMEM\_WAIT}{Wait for  a variable  on the local PE to change.}
+\bAPI{SHMEM\_WAIT}{Wait for  a variable  on the local \ac{PE} to change.}
+
 \synC   %Synopisis for C API
+
 void shmem_int_wait(int *var, int value);
 void shmem_int_wait_until(int *var, int cond, int value);
 void shmem_long_wait(long *var, long value);
@@ -11,7 +13,9 @@ void shmem_short_wait_until(short *var, int cond, short value);
 void shmem_wait(long *ivar, long cmp_value);
 void shmem_wait_until(long *ivar, int cmp, long value);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+
 \synF   %Synopsis for FORTRAN API
+
 CALL SHMEM_INT4_WAIT(ivar, cmp_value)
 CALL SHMEM_INT4_WAIT_UNTIL(ivar, cmp, cmp_value)
 CALL SHMEM_INT8_WAIT(ivar, cmp_value)
@@ -26,73 +30,73 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 	       another PE.  If you are using C/C++, the type  of  ivar	should
 	       match  that  implied in the SYNOPSIS section.} 
 \argRow{IN}{cmp}{The  compare  operator  that compares ivar with cmp\_value.  cmp
-	       must be of type integer.	 If you are using Fortran, it must  be
+	       must be of type integer. If you are using Fortran, it must  be
 	       of  default  kind.   If	you  are  using C/C++, the type of cmp
 	       should  match  that  implied  in	 the  SYNOPSIS	section.}        
 \argRow{IN}{cmp\_value}{cmp\_value must be of type integer.  If you are using C/C++, the
 	       type of cmp_value should match that  implied  in	 the  SYNOPSIS
-	       section.	  If  you  are	using  Fortran,	 cmp\_value  must be an
+	       section. If  you  are using  Fortran,	 cmp\_value  must be an
 	       integer of the same size and kind as ivar.}
-
+}
 %API description
 { 
-       shmem_wait and shmem_wait_until wait for ivar to be changed by a remote
+       shmem\_wait and shmem\_wait\_until wait for ivar to be changed by a remote
        write or atomic swap issued by a different processor.   These  routines
        can  be	used  for  point-to-point directed synchronization.  A call to
-       shmem_wait does not return until some other processor writes  a	value,
-       not  equal to cmp_value, into ivar on the waiting processor.  A call to
-       shmem_wait_until does not return until  some  other  processor  changes
-       ivar  to	 satisfy  the  condition  implied  by cmp and cmp_value.  This
+       shmem\_wait does not return until some other processor writes  a	value,
+       not  equal to cmp\_value, into ivar on the waiting processor.  A call to
+       shmem\_wait\_until does not return until  some  other  processor  changes
+       ivar  to	 satisfy  the  condition  implied  by cmp and cmp\_value.  This
        mechanism is useful when a processor needs to  tell  another  processor
        that it has completed some action.
-       }
+       The shmem\_wait  routines	 return when  ivar  is	 no  longer  equal  to
+       cmp\_value. The  shmem\_wait\_until  routines	 return	when  the compare condition is
+       true.  The compare condition is defined by the ivar  argument  compared
+       with the cmp\_value using the comparison operator, cmp. 
+  }
  %API Description Table. 
 {
  % If there is no Description Table and return, this field can be 
-  \desTB { 
-       The shmem_wait  routines	 return	 when  ivar  is	 no  longer  equal  to
-       cmp_value. The  shmem_wait_until  routines	 return	when  the compare condition is
-       true.  The compare condition is defined by the ivar  argument  compared
-       with the cmp_value using the comparison operator, cmp. If you are using Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
- {
+  \desTB {If you are using Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
+  {
 \cRow{Function}	{Type of ivar}
-\cRow{shmem_wait, shmem_wait_until}{default INTEGER}
-\cRow{shmem_int4_wait, shmem_int4_wait_until}{INTEGER*4}
-\cRow{shmem_int8_wait, shmem_int8_wait_until}{INTEGER*8}
+\cRow{shmem\_wait, shmem\_wait\_until}{default INTEGER}
+\cRow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
+\cRow{shmem\_int8\_wait, shmem\_int8\_wait\_until}{INTEGER*8}
 }
-\desTB { The following cmp values are supported:}
- {
-\cRow{cmp Value}{Comparison}
-\cRow{SHMEM_CMP_EQ	}{  Equal}
-\cRow{SHMEM_CMP_NE}{Not equal}
-\cRow{SHMEM_CMP_GT}{Greater than}
-\cRow{SHMEM_CMP_LE}{Less than or equal to}
-\cRow{SHMEM_CMP_LT}{Less than}
-\cRow{SHMEM_CMP_GE	}{Greater than or equal to}
-}
+%\desTB { The following cmp values are supported:}
+% {
+%\cRow{cmp Value}{Comparison}
+%\cRow{SHMEM\_CMP\_EQ	}{  Equal}
+%\cRow{SHMEM\_CMP\_NE}{Not equal}
+%\cRow{SHMEM\_CMP\_GT}{Greater than}
+%\cRow{SHMEM\_CMP\_LE}{Less than or equal to}
+%\cRow{SHMEM\_CMP\_LT}{Less than}
+%\cRow{SHMEM\_CMP\_GE	}{Greater than or equal to}
+%}
  %Return Values     
 \desR{None.}
+}%end Description Table.
 \notesB{}
-}
 \exampleB{
 %For each example, you can enter it as an item.
- \exampleITEM
+ \exampleITEMF
  { The following call returns when variable ivar is not equal to 100:}
 {./EXAMPLES/shmem_wait1_example.f90}
  {}
- \exampleITEM
- { The following call to SHMEM_INT8_WAIT_UNTIL	is  equivalent to the call to SHMEM_INT8_WAIT in example 1:}
+ \exampleITEMF
+ { The following call to SHMEM\_INT8\_WAIT\_UNTIL	is  equivalent to the call to SHMEM\_INT8\_WAIT in example 1:}
 {./EXAMPLES/shmem_wait2_example.f90}
  {}
- \exampleITEM
+ \exampleITEMF
  {The following C/C++ call waits until the sign bit in ivar
        is set by a transfer from a remote PE:}
 {./EXAMPLES/shmem_wait3_example.f90}
  {}
- \exampleITEM
+ \exampleITEMF
  {The following Fortran example is in the context of a
        subroutine:}
-{./EXAMPLES/shmem_wait4_example.c}
+{./EXAMPLES/shmem_wait4_example.f90}
  {}
 }
 \eAPI 
