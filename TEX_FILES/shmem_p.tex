@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_P}{Copies one data item to a remote processing element (PE).}
+\bAPI{SHMEM\_P}{Copies one data item to a remote \ac{PE}.}
 \synC 
 void shmem_char_p(char *addr, char value, int pe);
 void shmem_short_p(short *addr, short value, int pe);
@@ -11,24 +11,24 @@ void shmem_longdouble_p(long double *addr, long double value, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \desB{
-   \argRow{IN}{addr}{The  remotely	accessible array element or scalar data object
-		 which will receive the data on the remote PE.}
-   \argRow{IN}{value}{The value to be transferred to addr on the remote PE.}
-   \argRow{IN}{pe}{The number of the remote PE.}
+   \argRow{IN}{addr}{The  remotely accessible array element or scalar data object
+		 which will receive the data on the remote \ac{PE}.}
+   \argRow{IN}{value}{The value to be transferred to \VAR{addr} on the remote \ac{PE}.}
+   \argRow{IN}{pe}{The number of the remote \ac{PE}.}
 }
 {     These routines provide a very low latency  put  capability  for single
        elements of most basic types.
 
-       As with shmem\_put(), these functions start the remote transfer and may
-       return	before the   data  is delivered  to the  remote PE.  Use
-       shmem\_quiet() to force completion of all remote PUT transfers.
+       As with \FUNC{shmem\_put}, these functions start the remote transfer and may
+       return	before the   data  is delivered  to the  remote \ac{PE}.  Use
+       \FUNC{shmem\_quiet} to force completion of all remote \FUNC{PUT} transfers.
 }
 {
 \desR{None.}
 \notesB{}
 }
 \exampleB {
-\exampleITEM{The  following  simple  example	uses  shmem\_double\_p  in a C program.}	 
+\exampleITEM{The  following  simple  example	uses  \FUNC{shmem\_double\_p}  in a C program.}	 
     	               {./EXAMPLES/shmem_p_example.c}{}
 	               }
 \eAPI

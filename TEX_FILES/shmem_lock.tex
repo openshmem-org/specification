@@ -14,25 +14,25 @@ I = SHMEM_TEST_LOCK(lock)
 \desB{
    \argRow{IN}{lock}{	 A symmetric data object that is a scalar variable or an array
 		 of  length  1. This	data  object  must  be set to 0 on all
-		 processing elements (PEs) prior to the first use.  lock  must
+		 processing elements (\ac{PE}s) prior to the first use.  lock  must
 		 be  of type  long. If you are using Fortran, it must be of
 		 default kind.}
 }
 {
-       The shmem\_set\_lock routine sets a mutual exclusion lock after  waiting
-       for  the lock  to be freed by any other PE currently holding the lock.
-       Waiting PEs  are  assured  of  getting	the  lock  in  a   first-come,
-       first-served manner.The   shmem\_clear\_lock  routine releases  a  lock  previously  set  by
-       shmem\_set\_lock  after  ensuring that  all  local  and  remote	stores
-       initiated in the critical region are complete. The shmem\_test\_lock function sets a mutual exclusion lock only if it is
-       currently cleared.  By using this function, a PE can avoid blocking  on
+       The \FUNC{shmem\_set\_lock} routine sets a mutual exclusion lock after  waiting
+       for  the lock  to be freed by any other \ac{PE} currently holding the lock.
+       Waiting \ac{PE}s  are  assured  of  getting	the  lock  in  a   first-come,
+       first-served manner.The \FUNC{shmem\_clear\_lock}  routine releases  a  lock  previously  set  by
+       \FUNC{shmem\_set\_lock}  after  ensuring that  all  local  and  remote	 stores
+       initiated in the critical region are complete. The \FUNC{shmem\_test\_lock} function sets a mutual exclusion lock only if it is
+       currently cleared.  By using this function, a \ac{PE} can avoid blocking  on
        a set lock.  If the lock is currently set, the function returns without
-       waiting. These routines are appropriate for protecting a critical  region  from
-       simultaneous  update  by multiple  PEs.	  
+       waiting. These routines are appropriate for protecting a critical region from
+       simultaneous  update  by multiple  \ac{PE}s.	  
 }
 {
 \desR{
-       The shmem\_test\_lock function returns  0	if  the lock  was  originally
+       The \FUNC{shmem\_test\_lock} function returns 0 if  the lock  was  originally
        cleared and  this  call was  able  to set the lock.  A value of 1 is
        returned if the lock had been set and the call returned without waiting
        to set the lock.}
@@ -44,7 +44,7 @@ I = SHMEM_TEST_LOCK(lock)
 
 \exampleB {
 \exampleITEM	
- {The following  simple  example uses  shmem\_lock  in a C program.}
+ {The following  simple example uses  \FUNC{shmem\_lock}  in a C program.}
  {./EXAMPLES/shmem_lock_example.c}{}
 }
 \eAPI

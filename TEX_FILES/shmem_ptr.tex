@@ -1,5 +1,5 @@
-\bAPI{SHMEM\_PTR}{Returns  a pointer  to  a	 data  object  on  a specified
-       processing element (PE).}
+\bAPI{SHMEM\_PTR}{Returns  a pointer to a data object on a specified
+       \ac{PE}.}
 \synC
 void *shmem_ptr(void *target, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
@@ -11,35 +11,35 @@ PTR = SHMEM_PTR(target, pe)
 
 \desB{
 \argRow{IN}{target}{The symmetric data object to be referenced.}
-\argRow{IN}{pe}{An integer that indicates the PE number on which target is to
+\argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which target is to
 		 be accessed.  If you are using Fortran, it must be a  default
 		 integer value.}
 }
 {
-       shmem\_ptr returns an address that may be used  to  directly  reference
-       target on the specified PE.  This address can be assigned to a pointer.
+       \FUNC{shmem\_ptr} returns an address that may be used  to  directly  reference
+       target on the specified \ac{PE}.  This address can be assigned to a pointer.
        After that, ordinary loads and stores to this  remote  address  may  be
        performed.
 
        When a sequence of loads (gets) and stores (puts) to a data object on a
-       remote PE does not match the access pattern provided in	a \openshmem data
-       transfer routine   like  shmem\_put32()  or  shmem\_real\_iget(),  the
-       shmem\_ptr function can provide an efficient  means  to  accomplish  the
+       remote \ac{PE} does not match the access pattern provided in	a \openshmem data
+       transfer routine like \FUNC{shmem\_put32}  or  \FUNC{shmem\_real\_iget},  the
+       \FUNC{shmem\_ptr} function can provide an efficient  means  to  accomplish  the
        communication.
 }
 {
- \desR{shmem\_ptr returns a pointer to the data object on the specified	remote
-       PE. If target is not remotely accessible, a NULL pointer is returned.
+ \desR{\FUNC{shmem\_ptr} returns a pointer to the data object on the specified	 remote
+       \ac{PE}. If target is not remotely accessible, a \CONST{NULL} pointer is returned.
 }
-\notesB{The shmem\_ptr function is available  only  on  systems  where  ordinary
+\notesB{The \FUNC{shmem\_ptr} function is available  only  on  systems  where  ordinary
        memory  loads  and  stores  are	used  to  implement \openshmem put and get
-       operations. When calling shmem\_ptr, you pass the address on the calling	PE  for a symmetric
-       array on the remote PE.}
+       operations. When calling \FUNC{shmem\_ptr}, you pass the address on the calling \ac{PE}  for a symmetric
+       array on the remote \ac{PE}.}
 }
 
 \exampleB{
-       \exampleITEM{This  Fortran  program calls shmem\_ptr and then PE 0 writes to the BIGD
-       array on PE 1:}{./EXAMPLES/shmem_ptr_example.f90}{}
+       \exampleITEM{This  Fortran  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to the \VAR{BIGD}
+       array on \ac{PE} 1:}{./EXAMPLES/shmem_ptr_example.f90}{}
        \exampleITEM{This is the equivalent program written in C:}
        {./EXAMPLES/shmem_ptr_example.c}}{}
 
