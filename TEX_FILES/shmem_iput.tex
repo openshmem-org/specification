@@ -1,39 +1,35 @@
-\bAPI{SHMEM\_IPUT}{Copies  strided  data to  a specified processing element (PE).}
+\bAPI{SHMEM\_IPUT}{Copies  strided  data to  a specified \ac{PE}.}
 \synC
-	  void	shmem_double_iput(double  *target,   const   double   *source,
-	  ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-	  void	shmem_float_iput(float *target, const float *source, ptrdiff_t
-	  tst, ptrdiff_t sst, size_t nelems, int pe);
-	  void shmem_int_iput(int *target, const int *source,  ptrdiff_t  tst,
-	  ptrdiff_t sst, size_t nelems, int pe);
-	  void	shmem_iput32(void  *target, const void *source, ptrdiff_t tst,
-	  ptrdiff_t sst, size_t nelems, int pe);
-	  void shmem_iput64(void *target, const void *source,  ptrdiff_t  tst,
-	  ptrdiff_t sst, size_t nelems, int pe);
-	  void	shmem_iput128(void *target, const void *source, ptrdiff_t tst,
-	  ptrdiff_t sst, size_t nelems, int pe);
-	  void shmem_long_iput(long *target,  const  long  *source,  ptrdiff_t
-	  tst, ptrdiff_t sst, size_t nelems, int pe);
-	  void	shmem_longdouble_iput(long  double  *target, const long double
-	  *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-	  void shmem_longlong_iput(long long *target, const long long *source,
-	  ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-	  void	shmem_short_iput(short *target, const short *source, ptrdiff_t
-	  tst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_double_iput(double *target, const double *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_float_iput(float *target, const float *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_int_iput(int *target, const int *source,  ptrdiff_t  tst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iput32(void  *target, const void *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iput64(void *target, const void *source,  ptrdiff_t  tst,
+ptrdiff_t sst, size_t nelems, int pe);
+void	shmem_iput128(void *target, const void *source, ptrdiff_t tst,
+ptrdiff_t sst, size_t nelems, int pe);
+void shmem_long_iput(long *target,  const  long  *source,  ptrdiff_t
+tst, ptrdiff_t sst, size_t nelems, int pe);
+void	shmem_longdouble_iput(long  double  *target, const long double
+*source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_longlong_iput(long long *target, const long long *source,
+ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
+void	shmem_short_iput(short *target, const short *source, ptrdiff_t
+tst, ptrdiff_t sst, size_t nelems, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
-	  INTEGER tst, sst, nelems, pe
-	  CALL SHMEM_COMPLEX_IPUT(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_DOUBLE_IPUT(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_INTEGER_IPUT(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_IPUT4(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_IPUT8(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_IPUT32(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_IPUT64(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_IPUT128(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_LOGICAL_IPUT(target, source, tst, sst, nelems, pe)
-	  CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe)
+INTEGER tst, sst, nelems, pe
+CALL SHMEM_COMPLEX_IPUT(target, source, tst, sst, nelems, pe)
+CALL SHMEM_DOUBLE_IPUT(target, source, tst, sst, nelems, pe)
+CALL SHMEM_INTEGER_IPUT(target, source, tst, sst, nelems, pe)
+CALL SHMEM_IPUT4(target, source, tst, sst, nelems, pe)
+CALL SHMEM_IPUT8(target, source, tst, sst, nelems, pe)
+CALL SHMEM_IPUT32(target, source, tst, sst, nelems, pe)
+CALL SHMEM_IPUT64(target, source, tst, sst, nelems, pe)
+CALL SHMEM_IPUT128(target, source, tst, sst, nelems, pe)
+CALL SHMEM_LOGICAL_IPUT(target, source, tst, sst, nelems, pe)
+CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe)
 %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 \desB{
