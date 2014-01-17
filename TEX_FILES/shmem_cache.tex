@@ -1,6 +1,5 @@
 \bAPI{SHMEM\_CACHE}{Controls data cache utilities.}
 \synC   %Synopisis for C API
-
 void shmem_clear_cache_inv(void);
 void shmem_set_cache_inv(void);
 void shmem_clear_cache_line_inv(void *target);
@@ -9,7 +8,6 @@ void shmem_udcflush(void);
 void shmem_udcflush_line(void *target);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
-
 CALL SHMEM_CLEAR_CACHE_INV
 CALL SHMEM_SET_CACHE_INV
 CALL SHMEM_SET_CACHE_LINE_INV(target)

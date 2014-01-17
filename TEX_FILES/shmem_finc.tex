@@ -2,22 +2,19 @@
 }
 
 \synC   %Synopisis for C API
- 
- int shmem_int_finc(int *target, int pe);
- long shmem_long_finc(long *target, int pe);
- long long shmem_longlong_finc(long long *target, int pe);
+int shmem_int_finc(int *target, int pe);
+long shmem_long_finc(long *target, int pe);
+long long shmem_longlong_finc(long long *target, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
-
 
 \rcomment{Manju: Do we need the pe, ires4, ires8 ? }
 
 \synF   %Synopsis for FORTRAN API
-
- INTEGER pe 
- INTEGER(KIND=4) SHMEM_INT4_FINC, target4
- INTEGER(KIND=8) SHMEM_INT8_FINC, target8
- ires4 = SHMEM_INT4_FINC(target4, pe)
- ires8 = SHMEM_INT8_FINC(target8, pe)
+INTEGER pe 
+INTEGER(KIND=4) SHMEM_INT4_FINC, target4
+INTEGER(KIND=8) SHMEM_INT8_FINC, target8
+ires4 = SHMEM_INT4_FINC(target4, pe)
+ires8 = SHMEM_INT8_FINC(target8, pe)
 %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
@@ -40,7 +37,7 @@
 %API Description Table.
 {
     %Return Values     
-\desR{The contents that had been at the target address on the remote \ac{PE} prior to the increment. The data type of the return value is the same as the target.}
+\desR{The contents that had been at the target address on the remote \ac{PE} prior to the increment. The data type of the return value is the same as the target.} 
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
 }

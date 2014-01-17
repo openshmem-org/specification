@@ -1,11 +1,9 @@
 \bAPI{START\_PES}{Called  at the beginning of an \openshmem program to initialize the execution environment.}
 \synC   %Synopisis for C API 
-
 void start_pes(int npes);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
-
 CALL START_PES(npes)
  %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
@@ -22,9 +20,12 @@ CALL START_PES(npes)
     {} 
  %Return Values     
 \desR{ None. }
+
+\notesB{ If  the	start\_pes  call	 is  not  the  first  statement in a program,  unexpected results may occur.}
+
 }%end of DesB
 % Notes. If there are no notes, this field can be left empty.
-\notesB{  If  the	start\_pes  call	 is  not  the  first  statement in a program,  unexpected results may occur.}
+
 
 %Example
 \exampleB{

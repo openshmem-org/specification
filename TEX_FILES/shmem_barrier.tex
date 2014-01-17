@@ -2,13 +2,13 @@
 
 %SYNOPSIS
 \synC
-	  void shmem_barrier(int PE_start, int logPE_stride, int PE_size, long *pSync);
+void shmem_barrier(int PE_start, int logPE_stride, int PE_size, long *pSync);
 %*\synCE
 
 \synF
-	  INTEGER PE_start, logPE_stride, PE_size
-	  INTEGER pSync(SHMEM_BARRIER_SYNC_SIZE)
-	  CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
+INTEGER PE_start, logPE_stride, PE_size
+INTEGER pSync(SHMEM_BARRIER_SYNC_SIZE)
+CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 %*\synFE
 
 %DESCRIPTION

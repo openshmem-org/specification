@@ -1,12 +1,10 @@
 \bAPI{SHMEM\_CSWAP}{Performs an atomic conditional swap to a remote data object.}
 \synC   %Synopisis for C API
-
 int shmem_int_cswap(int *target, int cond, int value, int pe);
 long shmem_long_cswap(long *target, long cond, long value, int pe);
 long shmem_longlong_cswap(longlong *target, longlong cond, longlong value, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
-
 INTEGER pe
 INTEGER(KIND=4) SHMEM_INT4_CSWAP
 ires = SHMEM_INT4_CSWAP(target, cond, value, pe)

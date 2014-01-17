@@ -1,13 +1,11 @@
 \bAPI{SHMEM\_COLLECT}{Concatenates blocks of data from multiple \ac{PE}s to an array in every \ac{PE}.}
 \synC   %Synopisis for C API
-
 void shmem_collect32(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_collect64(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_fcollect32(void *target, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_fcollect64(void *target, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
-
 INTEGER nelems
 INTEGER PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_COLLECT_SYNC_SIZE)
