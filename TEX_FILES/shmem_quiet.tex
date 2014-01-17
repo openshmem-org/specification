@@ -1,46 +1,49 @@
 \bAPI{SHMEM\_QUIET}{Waits  for  completion of all outstanding remote writes issued by a PE.}
+
 \synC   %Synopisis for C API
+
 void shmem_quiet(void);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
+
 CALL SHMEM_QUIET
  %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{}
 \desB{
-	\argRow{NONE}{}{}}
-
+	\argRow{None.}{}{}
+	}
 %API description
- {
-       shmem_quiet ensures ordering of put (remote write) operations.  All put
-       operations  issued  to any processing element (PE) prior to the call to
-       shmem_quiet are guaranteed to be visible to all other PEs no later than
-       any   subsequent	  memory   load	 or  store,  remote  put  or  get,  or
-       synchronization operations that follow the call to shmem_quiet.
+ { 
+ The shmem\_quiet routine ensures ordering of put (remote write) operations.  All put operations  issued  to any \ac{PE} prior to the call to shmem\_quiet are guaranteed to be visible to all other \ac{PE}s no later than any   subsequent	  memory   load	 or  store,  remote  put  or  get,  or synchronization operations that follow the call to shmem\_quiet.
 }
+ %API Description Table. 
+{
+{}
  %Return Values
 \desR{None.}
+}%end of DesB
 
 % Notes. If there are no notes, this field can be left empty.
 \notesB{ 
-       shmem_quiet is most useful as a way of ensuring ordering of delivery of
-       several	put  operations.   For	example,  you might use shmem_quiet to
-       await delivery of a block of data before	 issuing  another  put,	 which
-       sets a completion flag on another PE.
+       shmem\_quiet is most useful as a way of ensuring ordering of delivery of
+       several put  operations. For example,  you might use shmem\_quiet to
+       await delivery of a block of data before issuing  another  put, which
+       sets a completion flag on another \ac{PE}.
 
-       shmem_quiet   is	  not	usually	  needed  if  shmem_barrier_all()  or
-       shmem_barrier() are called.  The barrier routines  all	wait  for  the
+       shmem\_quiet is not	usually needed  if   \FUNC{shmem\_barrier\_all}  or
+        \FUNC{shmem\_barrier} are called.  The barrier routines  all wait  for  the
        completion of outstanding remote writes (puts).
-
 }
-} %end of DesB
 %Example
 \exampleB{
-	{The  following  simple  example	uses  shmem_quiet  in a Fortran
+%For each example, you can enter it as an item.
+        \exampleITEMF
+	{The  following  simple  example uses  shmem\_quiet  in a Fortran
        program:}	 
        {./EXAMPLES/shmem_quiet_example.f90}
        {}
-                 }
+}
 \eAPI
 

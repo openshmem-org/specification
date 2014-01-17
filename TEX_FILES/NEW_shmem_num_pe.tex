@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_NUM\_PE}{Returns processing element (PE) information.}
+\bAPI{SHMEM\_NUM\_PE}{Returns processing element (\ac{PE}) information.}
 
 %Synopsis C
 \synC
@@ -9,7 +9,7 @@
 %Synopsis F
 \synF
 	  INTEGER SHMEM_N_PES, N_PES
-	  NPES = SHMEM_N_PES()
+	  N\PES = SHMEM_N_PES()
 	  N_PES = NUM_PES()
 %*\synFE
 
@@ -17,15 +17,12 @@
 
 %Arguments
 \desB{
-	\argRow{None}{}{}
+	\argRow{NONE}{}{}
 }
-
 %API Description
 {
-	The  function  returns	the  number  of	 PEs  running  in   an
-	application.
+	The function returns the number of \ac{PE}s running in an application.
 }
-
 %API Description Table.
 {
 		\desTB{}
@@ -33,18 +30,19 @@
 				\cRow{}{}
 		}
 		%Return Value
-		{Integer -  Number  of  PEs  running the SPMD application.}
-}
-%NOTES      
-{
-		For OpenSHMEM Specification 1.1 the use of \_my\_pe() has been deprecated. Although OpenSHMEM libraries are required to support the call, application developers are encouraged to use shmem\_my\_pe() instead.
+		\desR{Integer -  Number  of  \ac{PE}s  running the SPMD application.}
+		%NOTES      
+		\notesB{
+				For OpenSHMEM Specification 1.1 the use of \_my\_pe() has been deprecated. Although OpenSHMEM libraries are required to support the call, application developers are encouraged to use shmem\_my\_pe() instead.
+		}
 }
 
+
 %EXAMPLES
-\example{
+\exampleB{
 	\exampleITEM
 	{The following shmem\_n\_pes example is for C/C++ programs:}
-	{./EXAMPLES/shmem_num_pe_example.c}
+	{./EXAMPLES/shmem_npes_example.c}
 	{}
 }
 \eAPI
