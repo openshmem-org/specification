@@ -1,11 +1,13 @@
 \bAPI{SHMEM\_COLLECT}{Concatenates blocks of data from multiple \ac{PE}s to an array in every \ac{PE}.}
 \synC   %Synopisis for C API
+
 void shmem_collect32(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_collect64(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_fcollect32(void *target, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_fcollect64(void *target, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
+
 INTEGER nelems
 INTEGER PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_COLLECT_SYNC_SIZE)
@@ -54,7 +56,7 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 	    value. Every  element  of this array must be initialized
 	    with the value \CONST{\_SHMEM\_SYNC\_VALUE} in C/C++ or
 	    \CONST{SHMEM\_SYNC\_VALUE} in Fortran before any of the \ac{PE}s in the
-	    active set enter \FUNC{shmem\_barrier()}.}
+	    active set enter \FUNC{shmem\_barrier}.}
 }
 %API description
 {   
