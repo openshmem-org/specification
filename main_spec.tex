@@ -90,23 +90,23 @@
 \input{TEX_FILES/start_pes.tex} %Swaroop
 \input{TEX_FILES/NEW_shmem_my_pe.tex} %Tommy
 \input{TEX_FILES/NEW_shmem_num_pe.tex}%Tommy
-%\input{TEX_FILES/shmem_pe_accessible} %Oscar
+\input{TEX_FILES/shmem_pe_accessible} %Oscar
 \input{TEX_FILES/shmem_addr_accessible}%Tommy
-%\input{TEX_FILES/shmem_ptr.tex} %Oscar
-%\startchap
+\input{TEX_FILES/shmem_ptr.tex} %Oscar
+\startchap
 \section*{Memory Management Operations}
 \input{TEX_FILES/shfree.tex}%Tommy
 \input{TEX_FILES/shpalloc.tex} %Swaroop
 \input{TEX_FILES/shpclmove.tex} %Swaroop
 \input{TEX_FILES/shpdeallc.tex} %Swaroop
-%\startchap
+\startchap
 \section*{Remote Memory Operations}
 \input{TEX_FILES/shmem_put.tex} %Oscar
-%\input{TEX_FILES/shmem_p.tex} %Oscar
+\input{TEX_FILES/shmem_p.tex} %Oscar
 \input{TEX_FILES/shmem_iput.tex} %Oscar
-%\input{TEX_FILES/shmem_get.tex} %Manju
-%\input{TEX_FILES/shmem_g.tex} %Manju
-%\input{TEX_FILES/shmem_iget.tex} %Manju
+\input{TEX_FILES/shmem_get.tex} %Manju
+\input{TEX_FILES/shmem_g.tex} %Manju
+\input{TEX_FILES/shmem_iget.tex} %Manju
 \startchap
 \section*{Collective Operations}
 \input{TEX_FILES/shmem_barrier_all.tex} %Pasha
@@ -114,7 +114,7 @@
 \input{TEX_FILES/shmem_broadcast.tex} %Pasha
 \input{TEX_FILES/shmem_collect.tex} %Pasha
 %\input{TEX_FILES/shmem_reductions.tex} %Swaroop
-%\startchap
+\startchap
 \section*{Memory Ordering Operations} %SP: Adding a chapter to include fence and quiet
 \input{TEX_FILES/shmem_fence.tex} %Manju
 \input{TEX_FILES/shmem_quiet.tex} %Swaroop
@@ -131,16 +131,17 @@
 %\input{TEX_FILES/shmem_fadd.tex}%Pasha
 \startchap
 \section*{Distributed Locking Operations}
-%\input{TEX_FILES/shmem_lock.tex} %Oscar
+\input{TEX_FILES/shmem_lock.tex} %Oscar
 \startchap
 \section*{Deprecated API}
-%\input{TEX_FILES/shmem_cache.tex} %Pasha
+\input{TEX_FILES/shmem_cache.tex} %Pasha
 \startchap
 \section*{ Using OpenSHMEM Reference Implementation}
 %  -> Compilation
 %  -> Writing OpenSHMEM Programs
 %  -> Application written in Fortran
-
+\input{INTRODUCTION/compile_exec_applications.tex}
+\input{INTRODUCTION/writing_programs.tex}
 
 % Manju: Don't move the definitions to the front, it requires to be after content
 % Add acronyms here
