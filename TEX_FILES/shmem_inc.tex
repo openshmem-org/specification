@@ -1,18 +1,16 @@
 \bAPI{SHMEM\_INC}{Performs an atomic fetch-and-increment  operation on a remote data object.}
 \synC   %Synopisis for C API
- 
- void shmem_int_inc(int *target, int pe);
- void shmem_long_inc(long *target, int pe);
- void shmem_longlong_inc(long long *target, int pe);
+void shmem_int_inc(int *target, int pe);
+void shmem_long_inc(long *target, int pe);
+void shmem_longlong_inc(long long *target, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
-
- INTEGER pe
- INTEGER(KIND=4) target4
- INTEGER(KIND=8) target8
- CALL SHMEM_INT4_INC(target4, pe)
- CALL SHMEM_INT8_INC(target8, pe)
+INTEGER pe
+INTEGER(KIND=4) target4
+INTEGER(KIND=8) target8
+CALL SHMEM_INT4_INC(target4, pe)
+CALL SHMEM_INT8_INC(target8, pe)
 %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 

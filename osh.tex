@@ -246,7 +246,8 @@ OpenSHMEM % \textsuperscript{{\small \texttrademark}}
 \definecolor{gray}{rgb}{0.92,0.92,0.92}
 \lstset{ %
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  basicstyle=\footnotesize,
+  basicstyle=\ttfamily\footnotesize,
+  %identifierstyle=\ttfamily\itshape,
   breaklines=true,                 % sets automatic line breaking
   escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
@@ -261,7 +262,7 @@ OpenSHMEM % \textsuperscript{{\small \texttrademark}}
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
   %tabsize=2,                       % sets default tabsize to 2 spaces
-  %title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  %title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }\newcommand{\discuss}[1]{}
 
 % long discussion
@@ -745,7 +746,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \newcommand{\synC}{
   \textbf{C/C++:}\\
-  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt]
+  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}]
 }
 
 \newcommand{\synCE}{
@@ -759,7 +760,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\synF}{
   \hfill \\        
        \textbf{FORTRAN:}\\	 
-	    \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=3pt]
+	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}]
 }
 \newcommand{\aC}[1] {\textit{#1}}
 \newcommand{\sC}[1] {\textbf{#1}}
@@ -803,7 +804,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 }
 
 \newcommand{\notesB}[1]{
-\item[NOTES] \hfill \\
+\item[Notes] \hfill \\
 #1
 \\
 }
@@ -815,13 +816,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \newcommand{\exampleITEM}[3] {
  #1
- \lstinputlisting[language={C}, tabsize=2, basicstyle=\footnotesize] {#2}	
+ \lstinputlisting[language={C}, tabsize=2, basicstyle=\ttfamily\footnotesize, morekeywords={size_t}] {#2}	
  #3 
 }
 
 \newcommand{\exampleITEMF}[3] {
  #1
- \lstinputlisting[language={Fortran}, tabsize=2, basicstyle=\footnotesize] {#2}	
+ \lstinputlisting[language={Fortran}, tabsize=2, basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}] {#2}
  #3 
 }
 

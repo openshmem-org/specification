@@ -1,7 +1,6 @@
 \bAPI{SHMEM\_SWAP}{Performs an atomic swap to a remote data object.}
        
 \synC 	  
-
 double shmem_double_swap(double *target, double value, int pe);
 float shmem_float_swap(float *target, float value, int pe);
 int shmem_int_swap(int *target, int value, int pe);
@@ -11,7 +10,6 @@ long shmem_swap(long *target, long value, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API	 
-
 INTEGER pe
 INTEGER SHMEM_SWAP
 ires = SHMEM_SWAP(target, value, pe)
@@ -29,11 +27,11 @@ res = SHMEM_REAL8_SWAP(target, value, pe)
 \desB{  
 \argRow{OUT}{target}{The  remotely accessible integer data object to be updated on
 		 the remote \ac{PE}.	 If you are using C/C++, the  type  of	target
-		 should	 match	that  implied in the SYNOPSIS section.}
+		 should match that  implied in the SYNOPSIS section.}
 \argRow{IN}{value}{Value to be atomically written to the remote  \ac{PE}.   value  is
 		 the same type as target.}
 \argRow{IN}{pe}{ An integer that indicates the \ac{PE} number on which target is to
-		 be updated.  If you are using Fortran, it must be  a  default
+		 be updated. If you are using Fortran, it must be  a  default
 		 integer value.}
 }
 %API description
@@ -63,7 +61,7 @@ res = SHMEM_REAL8_SWAP(target, value, pe)
     %For each example, you can enter it as an item.
     \exampleITEM
     {The following call ensures that the first \ac{PE} to execute the
-     conditional swap will successfully write its \ac{PE} number to race\_winner
+     conditional swap will successfully write its \ac{PE} number to \VAR{race\_winner}
      on \ac{PE} 0.}
     {./EXAMPLES/shmem_swap_example.c}
 {}

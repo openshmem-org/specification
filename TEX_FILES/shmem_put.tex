@@ -1,35 +1,33 @@
 \bAPI{SHMEM\_PUT}{The  put routines  provide  a method for copying data from a contiguous local data object to a data object on a specified \ac{PE}.}
 
 \synC   %Synopisis for C API
-
- void shmem_double_put(double target, const double *source, size_t len, int pe);
- void shmem_float_put(float *target, const float *source, size_t len, int pe);
- void shmem_int_put(int *target, const int *source, size_t len, int pe);
- void shmem_long_put(long *target, const long *source, size_t len, int pe);
- void shmem_longdouble_put(long double *target, const long double *source, size_t len, int pe);
- void shmem_longlong_put(long long *target, const long long *source, size_t len, int pe);
- void shmem_put32(void *target, const void *source, size_t len, int pe);
- void shmem_put64(void *target, const void *source, size_t len, int pe);
- void shmem_put128(void *target, const void *source, size_t len, int pe);
- void shmem_putmem(void *target, const void *source, size_t len, int pe);
- void shmem_short_put(short*target, const short*source, size_t len, int pe);
+void shmem_double_put(double target, const double *source, size_t len, int pe);
+void shmem_float_put(float *target, const float *source, size_t len, int pe);
+void shmem_int_put(int *target, const int *source, size_t len, int pe);
+void shmem_long_put(long *target, const long *source, size_t len, int pe);
+void shmem_longdouble_put(long double *target, const long double *source, size_t len, int pe);
+void shmem_longlong_put(long long *target, const long long *source, size_t len, int pe);
+void shmem_put32(void *target, const void *source, size_t len, int pe);
+void shmem_put64(void *target, const void *source, size_t len, int pe);
+void shmem_put128(void *target, const void *source, size_t len, int pe);
+void shmem_putmem(void *target, const void *source, size_t len, int pe);
+void shmem_short_put(short*target, const short*source, size_t len, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
-
- CALL SHMEM_CHARACTER_PUT (target, source, len, pe)
- CALL SHMEM_COMPLEX_PUT (target, source, len, pe)
- CALL SHMEM_DOUBLE_PUT (target, source, len, pe)
- CALL SHMEM_INTEGER_PUT (target, source, len, pe)
- CALL SHMEM_LOGICAL_PUT (target, source, len, pe)
- CALL SHMEM_PUT (target, source, len, pe)
- CALL SHMEM_PUT4 (target, source, len, pe)
- CALL SHMEM_PUT8 (target, source, len, pe)
- CALL SHMEM_PUT32 (target, source, len, pe)
- CALL SHMEM_PUT64 (target, source, len, pe)
- CALL SHMEM_PUT128 (target, source, len, pe)
- CALL SHMEM_PUTMEM (target, source, len, pe)
- CALL SHMEM_REAL_PUT (target, source, len, pe)
+CALL SHMEM_CHARACTER_PUT (target, source, len, pe)
+CALL SHMEM_COMPLEX_PUT (target, source, len, pe)
+CALL SHMEM_DOUBLE_PUT (target, source, len, pe)
+CALL SHMEM_INTEGER_PUT (target, source, len, pe)
+CALL SHMEM_LOGICAL_PUT (target, source, len, pe)
+CALL SHMEM_PUT (target, source, len, pe)
+CALL SHMEM_PUT4 (target, source, len, pe)
+CALL SHMEM_PUT8 (target, source, len, pe)
+CALL SHMEM_PUT32 (target, source, len, pe)
+CALL SHMEM_PUT64 (target, source, len, pe)
+CALL SHMEM_PUT128 (target, source, len, pe)
+CALL SHMEM_PUTMEM (target, source, len, pe)
+CALL SHMEM_REAL_PUT (target, source, len, pe)
  %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 

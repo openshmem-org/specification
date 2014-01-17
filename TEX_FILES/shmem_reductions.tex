@@ -1,7 +1,6 @@
 \bAPI{SHMEM\_REDUCTIONS}{Performs a logical operations across a set of \ac{PE}s.}
 
 \synC %Synopisis for C API
-
 %AND
 void shmem_int_and_to_all(int *target, int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
 void shmem_long_and_to_all(long *target, long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
@@ -45,14 +44,14 @@ void shmem_longlong_prod_to_all(long long *target, long long *source, int nreduc
 void shmem_short_prod_to_all(short	*target, short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 %OR
 void shmem_int_or_to_all(int *target, int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void	shmem_long_or_to_all(long *target, long *source, int nreduce, int PE_start,	 int logPE_stride, int PE_size, long *pWrk, long *pSync);
+void	shmem_long_or_to_all(long *target, long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
 void	shmem_longlong_or_to_all(long long *target, long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
-void	 shmem_short_or_to_all(short *target,	 short	 *source, int nreduce, int PE_start, int logPE_stride, int PE_size,	 short	*pWrk, long *pSync);
+void	 shmem_short_or_to_all(short *target, short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 %XOR
 void shmem_int_xor_to_all(int *target, int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
 void	shmem_long_xor_to_all(long *target, long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
 void shmem_longlong_xor_to_all(long long *target, long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
-void	 shmem_short_xor_to_all(short	*target, short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void shmem_short_xor_to_all(short	*target, short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 %*\synCE %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF %Synopsis for FORTRAN API
@@ -99,15 +98,15 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{   
-       \argRow{IN}{target}{A symmetric array, of length nreduce elements, to receive the result of the reduction operations. The data type of target varies with the version of the reduction routine being called. When calling from C/C++,	refer to the SYNOPSIS section for data type information. 
+       \argRow{IN}{target}{A symmetric array, of length \VAR{nreduce} elements, to receive the result of the reduction operations. The data type of target varies with the version of the reduction routine being called. When calling from C/C++,	refer to the SYNOPSIS section for data type information. 
       		 
-	\argRow{IN}{source}{ A symmetric array, of length nreduce elements, that contains one element for each separate reduction operation.	The source argument must have the same data type as target.}
-        \argRow{IN}{nreduce	}{The number	 of elements in the target and source arrays. nreduce must be of type	integer. If you are using Fortran, it must be a default integer value.}
+	\argRow{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that contains one element for each separate reduction operation.	The source argument must have the same data type as target.}
+        \argRow{IN}{nreduce	}{The number	 of elements in the target and source arrays. nreduce must be of type integer. If you are using Fortran, it must be a default integer value.}
         \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the active set of \ac{PE}s. PE\_start must be of type integer. If you are using Fortran, it must be a default integer value.}
         \argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive virtual \ac{PE} numbers in the active set. logPE\_stride must be of type integer. If you are using Fortran, it must be a default integer value.}
         \argRow{IN}{PE\_size	}{The number of \ac{PE}s in the active set. PE\_size must	be of type integer. If	 you are using Fortran, it must be a default integer value.}
-        \argRow{IN}{pWrk}{A symmetric work array. The pWrk argument must have the same data type as target. In C/C++,	this contains max(nreduce/2 + 1, \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE) elements. In Fortran, this contains max(nreduce/2 + 1, SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE) elements.}
-        \argRow{IN}{pSync}{A symmetric work array. In C/C++, pSync must be of type long and size \_SHMEM\_REDUCE\_SYNC\_SIZE. In Fortran, pSync must be of type integer and size SHMEM\_REDUCE\_SYNC\_SIZE. If you are using Fortran, it must be a default integer value. Every element of this array must be initialized with the	 value \_SHMEM\_SYNC\_VALUE (in C/C++) or SHMEM\_SYNC\_VALUE (in Fortran) before any of the \ac{PE}s in the active set enter the reduction routine.}
+        \argRow{IN}{pWrk}{A symmetric work array. The pWrk argument must have the same data type as target. In C/C++,	this contains max(\VAR{nreduce}/2 + 1, \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements. In Fortran, this contains max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements.}
+        \argRow{IN}{pSync}{A symmetric work array. In C/C++, \VAR{pSync} must be of type long and size \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}. In Fortran, \VAR{pSync} must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. If you are using Fortran, it must be a default integer value. Every element of this array must be initialized with the value \CONST{\_SHMEM\_SYNC\_VALUE} (in C/C++) or \CONST{SHMEM\_SYNC\_VALUE} (in Fortran) before any of the \ac{PE}s in the active set enter the reduction routine.}
  %API description
  {  
  \openshmem reduction	routines compute one or more
@@ -130,7 +129,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
  results.
 
  
- The values of arguments nreduce, PE\_start, logPE\_stride, and PE\_size
+ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
  must be equal on all \ac{PE}s in the active set. The same target and source
  arrays, and the same pWrk and pSync work arrays, must be passed to all
  \ac{PE}s in the active set.
@@ -139,11 +138,11 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
  following conditions exist (synchronization via a barrier or some other
  method is often needed to ensure this): The pWrk and pSync arrays on
  all \ac{PE}s in the active set are not still in use from a prior call	 to a
- collective SHMEM routine. The target array on all \ac{PE}s in the active
+ collective \openshmem routine. The target array on all \ac{PE}s in the active
  set is ready to accept the results of the reduction.
 
- Upon return from a reduction routine, the following are	true for the
- local \ac{PE}: The target array is updated. The values in the pSync array
+ Upon return from a reduction routine, the following are true for the
+ local \ac{PE}: The target array is updated. The values in the \VAR{pSync} array
  are restored to the original values.
 }
  \desTB { When calling from Fortran, the target date types are as follows:}
@@ -188,26 +187,26 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 }%end of DesB
 % Notes. If there are no notes, this field can be left empty.
 \notesB{  
- The terms collective, symmetric,	 and cache aligned are defined in
+ The terms collective, symmetric, and cache aligned are defined in
  the Introduction.
 
- All SHMEM reduction routines	reset the values in pSync before they
+ All \openshmem reduction routines reset the values in pSync before they
  return, so a particular pSync buffer need only be initialized the first
  time it is used.
 
- You must ensure that the pSync array is not being updated on any \ac{PE} in
- the active set while any of the \ac{PE}s participate	 in processing	 of a
- SHMEM reduction routine.	 Be careful to avoid the following situations:
- If the	pSync array is initialized at run	time, some type of
- synchronization	is needed to	ensure that all \ac{PE}s in the working set
- have initialized pSync before any of them enter a SHMEM routine	called
- with the pSync	 synchronization array. A pSync or pWrk array can be
+ You must ensure that the \VAR{pSync} array is not being updated on any \ac{PE} in
+ the active set while any of the \ac{PE}s participate in processing of a
+ SHMEM reduction routine. Be careful to avoid the following situations:
+ If the pSync array is initialized at run	time, some type of synchronization is needed to
+ ensure that all \ac{PE}s in the working set have initialized \VAR{pSync} before any of 
+ them enter an \openshmem routine called
+ with the \VAR{pSync} synchronization array. A \VAR{pSync} or \VAR{pWrk} array can be
  reused in a subsequent reduction routine call only if none of the \ac{PE}s
- in the	active set are still processing a prior reduction routine call
- that used the same pSync or pWrk	 arrays. In general,	 this can be
+ in the active set are still processing a prior reduction routine call
+ that used the same \VAR{pSync} or \VAR{pWrk} arrays. In general,	 this can be
  assured	only by doing some type of synchronization. However, in the
  special case of reduction routines being called with the same	active
- set, you can allocate two pSync and pWrk arrays and alternate between
+ set, you can allocate two \VAR{pSync} and \VAR{pWrk} arrays and alternate between
  them on successive calls.
 }
 
@@ -215,38 +214,38 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 \exampleB{
 %For each example, you can enter it as an item.
                   \exampleITEMF
-                  { This Fortran example statically initializes the pSync array and finds the logical AND of the integer variable FOO across all even \ac{PE}s.}
+                  { This Fortran example statically initializes the \VAR{pSync} array and finds the logical AND of the integer variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_and_example.90}
                   {}
                    \exampleITEMF
-	          {This Fortran example statically initializes the pSync array
+	          {This Fortran example statically initializes the \VAR{pSync} array
  and finds the maximum value of real variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_max_example.90}
                   {}
                   \exampleITEMF
-                  { This Fortran example statically initializes the pSync array
- and finds the	minimum value of real variable FOO across all the even
+                  { This Fortran example statically initializes the \VAR{pSync} array
+ and finds the minimum value of real variable FOO across all the even
  \ac{PE}s.}
                  {./EXAMPLES/shmem_min_example.90}
                  {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the pSync array
+                  {This Fortran example statically initializes the \VAR{pSync} array
  and finds the sum of the real variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_sum_example.90}
                   {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the pSync array
+                  {This Fortran example statically initializes the \VAR{pSync} array
  and finds the product of the real variable FOO across all the even \ac{PE}s.}
                   {./EXAMPLES/shmem_prod_example.90}
                   {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the pSync array
- and finds the	logical OR of the integer variable FOO across all even
+                  {This Fortran example statically initializes the \VAR{pSync} array
+ and finds the logical OR of the integer variable FOO across all even
  \ac{PE}s.}
                  {./EXAMPLES/shmem_or_example.90}
                  {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the pSync array
+                  {This Fortran example statically initializes the \VAR{pSync} array
  and computes the exclusive XOR of variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_xor_example.90}
                    {} 
