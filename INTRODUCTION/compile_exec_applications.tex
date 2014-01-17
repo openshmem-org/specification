@@ -1,0 +1,82 @@
+
+\section{Compiling and Running Applications}
+
+The \openshmem specification is silent regarding how \openshmem programs
+are compiled, linked and run. This section shows some examples of
+how wrapper programs could be utilized to compile and launch applications.
+The commands are styled after wrapper programs found in many MPI implementations.
+
+
+\subsection{Compilation}
+
+
+\subsubsection{Applications written in C}
+
+Assuming that the implementation provides a wrapper program named
+\textbf{oshcc}, to aid in the compilation of C applications, the wrapper
+could be called as follows:
+
+\begin{lstlisting}[language=bash]
+oshcc <compiler options> -o myprogram myprogram.c
+\end{lstlisting}
+
+
+The program arguments for \textbf{oshcc} are:
+\begin{description}
+\item [{<compiler\ options>}] Options understood by the underlying C compiler
+called by \textbf{oshcc}.
+\end{description}
+
+\subsection{Applications written in C++}
+
+Assuming that the implementation provides a wrapper program named
+\textbf{oshCC}, to aid in the compilation of C++ applications, the
+wrapper could be called as follows:
+
+\begin{lstlisting}[language=bash]
+oshCC <compiler options> -o myprogram myprogram.cpp
+\end{lstlisting}
+
+
+The program arguments for \textbf{oshCC} are:
+\begin{description}
+\item [{<compiler\ options>}] Options understood by the underlying C++
+compiler called by \textbf{oshCC}.
+\end{description}
+
+\subsection{Applications written in Fortran}
+
+Assuming that the implementation provides a wrapper program named
+\textbf{oshfort}, to aid in the compilation of Fortran applications,
+the wrapper could be called as follows:
+
+\begin{lstlisting}[language=bash]
+oshfort <compiler options> -o myprogram myprogram.f
+\end{lstlisting}
+
+
+The program arguments for \textbf{oshfort} are:
+\begin{description}
+\item [{<compiler\ options>}] Options understood by the underlying Fortran
+compiler called by \textbf{oshfort}.
+\end{description}
+
+\section{Running Applications}
+
+Assuming that the implementation provides a wrapper program named
+\textbf{oshrun}, to launch \openshmem applications, the wrapper could
+be called as follows:
+
+\begin{lstlisting}[language=bash]
+oshrun <additional options> -np <#> <program> <program arguments>
+\end{lstlisting}
+
+
+The program arguments for \textbf{oshrun} are:
+\begin{description}
+\item [{<additional\ options>}] options passed to the underlying launcher
+\item [{-np~<\#>}] The number of processing elements (PEs) to be used
+in the execution.
+\item [{<program>}] The program executable to be launched
+\item [{<program\ arguments>}] flags and other parameters to pass to the program
+\end{description}
