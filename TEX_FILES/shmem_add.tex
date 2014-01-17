@@ -32,19 +32,14 @@ CALL SHMEM_INT8_ADD(target, value, pe)
 			 					default integer value.}
 }
 %API Description
+{The shmem\_add routine performs an atomic add operation.	It adds value
+ to target on Processing Element (\ac{PE}) pe and atomically increments the
+ target without returning the value.
+ }
 {
-	\desTB {The shmem\_add routine performs an atomic add operation.	It adds value
-       to target on Processing Element (\ac{PE}) pe and atomically increments the
-       target without returning the value.}
-	{
-		\cRow{}{}
-	}
-	
-	%Return Value
-  {None.}
-
+  \desR{None.}
 	%NOTES
-	{The term remotely accessible is defined in the Introduction.}
+   \notesB{The term remotely accessible is defined in the Introduction.}
 }
 
 \exampleB{
