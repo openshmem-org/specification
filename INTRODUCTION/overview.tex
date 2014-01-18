@@ -1,0 +1,74 @@
+\section{Overview}
+\openshmem{} is a PGAS library interface specification. In the PGAS model each process has a local and 
+global memory which it can access. \openshmem{} provides interfaces to 
+perform communication and synchronization operations on both local and global memory. 
+It is not a language, unlike UPC, CAF, Titanium, X-10 and Chapel, which are all
+PGAS languages.
+
+\openshmem{} specification is a result of effort to standardize widely available SHMEM implementations. 
+The initial goal of the standard is to consolidate existing SHMEM specifications, and  pave the way for 
+improvement of the specification with community involvement. The standardization of the specification 
+would enable portability of SHMEM programs, and  vendors to build and optimize their hardware 
+architecture for one specification.
+
+\openshmem{} specification has routines, constants, variables, and language bindings for C and Fortran.
+Some of important \openshmem{} operations are as follows:
+
+\begin{enumerate}
+\item \textbf{Data Transfers }
+
+\begin{enumerate}
+\item One-sided puts : the initiator \ac{PE} (active side) specifies the local
+data to be written to the target \ac{PE}'s (passive side) memory. 
+\item One-sided gets : an explicit fetch operation is used to copy a variable
+amount of data from a remote process and store it locally.\end{enumerate}
+\begin{description}
+\item [{{Note:}}] By avoiding the need for matching send and receive
+calls, \openshmem simplifies the communication process by reducing the
+number of calls required to have one \ac{PE} interact with other \ac{PE}s. 
+\end{description}
+\item \textbf{Synchronization Mechanisms }
+
+\begin{enumerate}
+\item Fence: Ensures ordering of PUT operations to a specific \ac{PE}. 
+\item Quiet: Ensures ordering of PUT operations to all \ac{PE}s. 
+\item Barrier: A collective synchronization routine in which no \ac{PE} may leave
+the barrier prior to all \ac{PE}s entering the barrier. 
+\end{enumerate}
+\item \textbf{Collective Communication}
+
+\begin{enumerate}
+\item Broadcast: Copy a block of data from one \ac{PE} to one or more target
+PEs. 
+\item Collection: Concatenate elements from the source array to a target
+array over the specified \ac{PE}s. 
+\item Reduction: Perform an associative binary operation over the specified
+\ac{PE}s. 
+\end{enumerate}
+\item \textbf{Address Manipulation}
+
+\begin{enumerate}
+\item Allocating and deallocating memory blocks in the symmetric space.
+\end{enumerate}
+\item \textbf{Locks}
+
+\begin{enumerate}
+\item Implementation of mutual exclusion.
+\end{enumerate}
+\item \textbf{Atomic Memory Operations}
+
+\begin{enumerate}
+\item Swap, Conditional Swap, Add and Increment 
+\end{enumerate}
+\item \textbf{Data Cache control}
+
+\begin{enumerate}
+\item Implementation of mechanisms to exploit the capabilities of hardware
+cache if available.
+\end{enumerate}
+\end{enumerate}
+\begin{description}
+\item [{{Note:}}] More information about \openshmem routines can be found
+in the Library Routines section.
+\end{description}
+
