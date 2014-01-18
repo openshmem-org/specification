@@ -1,30 +1,27 @@
 \bAPI{SHPALLOC}{Allocates a block of memory from the symmetric heap.}
-
 \synF   %Synopsis for FORTRAN API
 POINTER (addr, A(1))
 INTEGER (length, errcode, abort)
 CALL SHPALLOC(addr, length, errcode, abort)
  %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
-
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
  \argRow{OUT}{addr}{First word address of the allocated block.}
  \argRow{IN}{length}{Number of words of memory requested. One word is 32 bits.}
- \argRow{OUT}{errcode}{Error code is 0 if no error was detected; otherwise,  it is  a  negative  integer	code  for  the	type  of error.}
- \argRow{IN}{abort}{Abort code; nonzero requests abort on error; 0  requests
+ \argRow{OUT}{errcode}{Error code is \CONST{0} if no error was detected; otherwise,  it is  a  negative  integer code for  the type  of error.}
+ \argRow{IN}{abort}{Abort code; nonzero requests abort on error; \CONST{0}  requests
 		      an error code.}
 }
  %API description
  {   
- SHPALLOC	 allocates a block of memory from the program's symmetric heap
-       that is greater than or equal  to  the  size  requested.	  To  maintain
-       symmetric  heap	consistency,  all  \ac{PE}s in an program must call SHPALLOC
-       with the same value of length; if any  \ac{PE}s  are
-       missing, the program will hang.
+       \FUNC{SHPALLOC} allocates a block of memory from the program's symmetric heap
+       that is greater than or equal  to  the  size  requested.	  To  maintain symmetric heap 
+       consistency,  all  \ac{PE}s in an program must call \FUNC{SHPALLOC} with the same 
+       value of length; if any  \ac{PE}s  are missing, the program will hang.
        
-       By using the Fortran POINTER mechanism in the following manner, you can
-       use array A to refer to the block allocated by SHPALLOC: POINTER (addr,
-       A())
+       By using the Fortran \CONST{POINTER} mechanism in the following manner, you can
+       use array \VAR{A} to refer to the block allocated by \FUNC{SHPALLOC}: \CONST{POINTER} (\VAR{addr},
+       \VAR{A}())
   }
  %API Description Table. 
 {
@@ -32,13 +29,13 @@ CALL SHPALLOC(addr, length, errcode, abort)
  %Return Values     
 \desR{ }
 \cRow{Error Code} {Condition}
-\cRow{ -1 } {Length is not an integer greater than 0}
-\cRow{-2} { No more memory is available from the system (checked  if the  request  cannot  be	satisfied  from	 the available blocks on the symmetric heap).}
+\cRow{ \CONST{-1} } {Length is not an integer greater than \CONST{0}}
+\cRow{\CONST{-2}} { No more memory is available from the system (checked  if the  request  cannot  be	satisfied from the available blocks on the symmetric heap).}
 }%end of DesB
 
 \notesB{  
        The total size of the symmetric heap is determined at job startup.  One
-       may  adjust  the	 size  of  the	heap  using   the   SMA\_SYMMETRIC\_SIZE
+       may  adjust  the	 size  of  the	heap  using   the   \CONST{SMA\_SYMMETRIC\_SIZE}
        environment  variable (if available).	
 }
 %Example

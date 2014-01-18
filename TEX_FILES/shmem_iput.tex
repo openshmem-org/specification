@@ -29,27 +29,26 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe)
 \argRow{OUT}{target}{Array to be updated on the remote \ac{PE}. This data object  must
 		 be remotely accessible.}
 \argRow{IN}{source}{Array containing the data to be copied.}
-\argRow{IN}{tst}{The  stride between consecutive elements of the target array.
+\argRow{IN}{tst}{The stride between consecutive elements of the target array.
 		 The stride is scaled by the element size of the target array.
-		 A  value of 1 indicates contiguous data.  \VAR{tst} must be of type
-		 integer.  If you are using Fortran,  it must	be  a  default
-		 integer value.}
+		 A  value of \CONST{1} indicates contiguous data.  \VAR{tst} must be of type
+		 integer.  If you are using Fortran,  it must	be  a default integer value.}
 \argRow{IN}{sst}{The  stride between consecutive elements of the source array.
 		 The stride is scaled by the element size of the source array.
-		 A  value of 1 indicates contiguous data.  \VAR{sst} must be of type
+		 A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be of type
 		 integer.  If you are using Fortran,  it  must	be  a  default
 		 integer value.}
 \argRow{IN}{nelems}{Number of elements in the target and source arrays.  \VAR{nelems} must
 		 be of type integer.  If you are using Fortran, it must be  a
 		 constant, variable, or array element of default integer type.}
-\argRow{IN}{pe}{PE number of the remote \ac{PE}.  \VAR{pe} must be of type integer.   If
+\argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer.   If
 		 you  are  using  Fortran, it must be a constant, variable, or
 		 array element of default integer type.}
 }
 {
 
-       The iput routines provide  a method  for  copying 
-       strided data elements of an array  from  the  local PE  to strided locations 
+       The \FUNC{iput} routines provide  a method  for  copying 
+       strided data elements of an array  from  the  local \ac{PE} to strided locations 
        of a symmetric array on a different \ac{PE}.  The routines return when the data has been copied out of
        the  source  array  on the local \ac{PE} but not necessarily before the data
        has been delivered to the remote data object.
@@ -59,11 +58,11 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe)
        which are as follows:}
       {
      \cRow{shmem\_iput32, shmem\_iput4}{Any  noncharacter type that has a storage
-				     size equal to 32 bits.}
+				     size equal to \CONST{32} bits.}
      \cRow{shmem\_iput64, shmem\_iput8}{Any noncharacter type that has a  storage
-				     size equal to 64 bits.}
+				     size equal to \CONST{64} bits.}
      \cRow{shmem\_iput128}{Any  noncharacter type that has a storage
-				     size equal to 128 bits.}
+				     size equal to \CONST{128} bits.}
      \cRow{shmem\_short\_iput}{Elements of type short.}
      \cRow{shmem\_int\_iput}{Elements of type short.}
      \cRow{shmem\_long\_iput}{Elements of type long.}
@@ -81,8 +80,8 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe)
 
 \notesB{
        If  you	are  using  Fortran,  data types must be of default size.  For
-       example, a  real  variable  must  be  declared as  REAL,  REAL*4   or
-       REAL(KIND=4). See Introduction for a definition of the term remotely accessible.
+       example, a  real  variable  must  be  declared as  \CONST{REAL}, \CONST{REAL*4}   or
+       \CONST{REAL(KIND=4)}. See Introduction for a definition of the term remotely accessible.
 }
 }
 \exampleB{

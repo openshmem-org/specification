@@ -1,5 +1,4 @@
 \bAPI{SHMEM\_SWAP}{Performs an atomic swap to a remote data object.}
-       
 \synC 	  
 double shmem_double_swap(double *target, double value, int pe);
 float shmem_float_swap(float *target, float value, int pe);
@@ -28,26 +27,26 @@ res = SHMEM_REAL8_SWAP(target, value, pe)
 \argRow{OUT}{target}{The  remotely accessible integer data object to be updated on
 		 the remote \ac{PE}.	 If you are using C/C++, the  type  of	target
 		 should match that  implied in the SYNOPSIS section.}
-\argRow{IN}{value}{Value to be atomically written to the remote  \ac{PE}.   value  is
+\argRow{IN}{value}{Value to be atomically written to the remote  \ac{PE}. \VAR{value}  is
 		 the same type as target.}
 \argRow{IN}{pe}{ An integer that indicates the \ac{PE} number on which target is to
 		 be updated. If you are using Fortran, it must be  a  default
 		 integer value.}
 }
 %API description
-{          shmem\_swap  performs  an atomic swap operation. It writes value value
+{      \FUNC{shmem\_swap}  performs  an atomic swap operation. It writes value \VAR{value}
        into target on \ac{PE}  and	returns the  previous
        contents of target as an atomic operation. 
 }
 %API Description Table
 {
-\desTB {If you are using Fortran, target must be of the following type:}
+\desTB {If you are using Fortran, \VAR{target} must be of the following type:}
 {
 \cRow{SHMEM\_SWAP}{Integer of default kind}
-\cRow{SHMEM\_INT4\_SWAP}{4-byte integer}
-\cRow{SHMEM\_INT8\_SWAP}{ 8-byte integer}
-\cRow{SHMEM\_REAL4\_SWAP}{4-byte real}
-\cRow{SHMEM\_REAL8\_SWAP}{8-byte real}
+\cRow{SHMEM\_INT4\_SWAP}{\CONST{4}-byte integer}
+\cRow{SHMEM\_INT8\_SWAP}{\CONST{8}-byte integer}
+\cRow{SHMEM\_REAL4\_SWAP}{\CONST{4}-byte real}
+\cRow{SHMEM\_REAL8\_SWAP}{\CONST{8}-byte real}
 }
  %Return Values     
 \desR{
@@ -55,14 +54,14 @@ res = SHMEM_REAL8_SWAP(target, value, pe)
        to the swap is returned.
 }
 }%end of DesB% Notes. If there are no notes, this field can be left empty.
-\notesB{}
+\notesB{None.}
 %Example
 \exampleB{
     %For each example, you can enter it as an item.
     \exampleITEM
     {The following call ensures that the first \ac{PE} to execute the
      conditional swap will successfully write its \ac{PE} number to \VAR{race\_winner}
-     on \ac{PE} 0.}
+     on \ac{PE} \CONST{0}.}
     {./EXAMPLES/shmem_swap_example.c}
 {}
 }  	

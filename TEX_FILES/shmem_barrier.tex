@@ -1,5 +1,4 @@
-\bAPI{SHMEM\_BARRIER}{Performs a barrier operation on a subset of processing elements (\ac{PE}s)}
-
+\bAPI{SHMEM\_BARRIER}{Performs a barrier operation on a subset of \ac{PE}s}
 %SYNOPSIS
 \synC
 void shmem_barrier(int PE_start, int logPE_stride, int PE_size, long *pSync);
@@ -15,19 +14,18 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 
 %Arguments
 \desB{
- 	\argRow{IN}{\ac{PE}\_start}{The lowest virtual \ac{PE} number of  the	 active	 set  of  \ac{PE}s.
-				   \ac{PE}\_start  must  be  of  type	 integer.   If	you  are using
+ 	\argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of  the active set  of  \ac{PE}s.
+				   \VAR{PE\_start}  must  be  of  type	 integer.   If you  are using
 		   		   Fortran, it must be a default integer value.}
-	\argRow{IN}{log\ac{PE}\_stride}{The log (base 2) of the stride between consecutive  virtual
-			   	   \ac{PE} numbers in the active set.  log\ac{PE}\_stride must be of type
+	\argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive  virtual
+			   	   \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type
 		   		   integer.  If you are using Fortran, it must	be  a  default
 		   		   integer value.}
-	\argRow{IN}{\ac{PE}\_size}{The	number	of  \ac{PE}s in the active set.  \ac{PE}\_size must be of
-				   type integer.  If you are  using  Fortran,  it  must	 be  a
-		  		   default integer value.}
-	\argRow{IN}{pSync}{	A  symmetric	 work  array.  In C/C++, pSync must be of type
-						int and size \_SHMEM\_BARRIER\_SYNC\_SIZE.  In  Fortran,	 pSync
-						must	 be  of type integer and size SHMEM\_BARRIER\_SYNC\_SIZE.
+	\argRow{IN}{PE\_size}{The numberof  \ac{PE}s in the active set.  \VAR{PE\_size} must be of
+				   type integer.  If you are  using  Fortran, it must be a default integer value.}
+	\argRow{IN}{pSync}{	A  symmetric work  array.  In C/C++, pSync must be of type
+						int and size \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE}.  In  Fortran, \VAR{pSync}
+						must	 be  of type integer and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.
 						If you are using Fortran, it	 must  be  a  default  integer
 						type.  Every element of this array must be initialized to 0
 						before any of the \ac{PE}s in the active set enter shmem\_barrier
@@ -35,49 +33,43 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 } 
 %API Description
 {
-       shmem\_barrier is a collective synchronization routine.  Control returns
-       from shmem\_barrier after all  \ac{PE}s  in  the  active  set	(specified  by
-       \ac{PE}\_start, log\ac{PE}\_stride, and \ac{PE}\_size) have called shmem\_barrier.
+       \FUNC{shmem\_barrier} is a collective synchronization routine.  Control returns
+       from \FUNC{shmem\_barrier} after all  \ac{PE}s  in  the  active  set (specified  by
+       \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}) have called \FUNC{shmem\_barrier}.
 
-       As  with	 all OpenSHMEM collective routines, each of these routines assumes
+       As  with all \openshmem collective routines, each of these routines assumes
        that only \ac{PE}s in the active set call the routine.  If a \ac{PE} not  in  the
-       active  set  calls  a  OpenSHMEM  collective	 routine,  undefined  behavior
+       active  set  calls a \openshmem collective	 routine,  undefined  behavior
        results.
 
-       The  values  of	arguments  \ac{PE}\_start, log\ac{PE}i\_stride, and \ac{PE}i\_size must be
+       The  values of arguments  \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be
        equal on all \ac{PE}s in the active set.  The same work array must be passed
-       in pSync to all \ac{PE}s in the active set.
+       in \VAR{pSync} to all \ac{PE}s in the active set.
 
-       shmem\_barrier  ensures  that  all  previously  issued  local stores and
+       \FUNC{shmem\_barrier}  ensures  that  all  previously  issued  local stores and
        previously issued remote memory updates done by any of the \ac{PE}s  in  the
-       active  set  (by	 using	OpenSHMEM  calls,  for  example  shmem\_put) are
+       active  set  (by using \openshmem  calls,  for  example  \FUNC{shmem\_put}) are
        complete before returning.
 
-       The  same  pSync	 array	may  be	 reused	 on   consecutive   calls   to
-       shmem\_barrier if the same active \ac{PE} set is used.
+       The  same  \VAR{pSync} array may  be reused on consecutive calls   to
+       \FUNC{shmem\_barrier} if the same active \ac{PE} set is used.
 }
 %API Description Table
 {
-%		\desTB{ }
-%		{
-%			\cRow{}{}
-%		}
-
 		%Return Values
 		\desR{None.}
-		
+	
 		%NOTES
 		\notesB{
-					 If the pSync array is initialized at run time, be sure to use some type
-					 of synchronization, for example, a call to shmem\_barrier\_all(), before
-					 calling shmem\_barrier for the first time.
+					 If the \VAR{pSync} array is initialized at run time, be sure to use some type
+					 of synchronization, for example, a call to \FUNC{shmem\_barrier\_all}, before
+					 calling \FUNC{shmem\_barrier} for the first time.
 
-					 If  the	active	set  does  not	change,	 shmem\_barrier	can  be called
-					 repeatedly with the same pSync array.   No  additional  synchronization
-					 beyond  that implied by shmem\_barrier itself is necessary in this case.
+					 If  the active set  does  not change, \FUNC{shmem\_barrier} can  be called
+					 repeatedly with the same \VAR{pSync} array.   No  additional  synchronization
+					 beyond  that implied by \FUNC{shmem\_barrier} itself is necessary in this case.
 		}
 }
-
 %EXAMPLES
 \exampleB{
 	\exampleITEM

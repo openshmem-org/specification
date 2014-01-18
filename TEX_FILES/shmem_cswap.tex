@@ -19,7 +19,7 @@ ires = SHMEM_INT8_CSWAP(target, cond, value, pe)
                  % If you are using  C/C++, the data type of
 		 % target should match that implied in the SYNOPSIS section.} 
 \argRow{IN}{cond}{\VAR{cond} is compared to the remote \VAR{target} value. If \VAR{cond} and the
-		 remote	\VAR{target} are equal, then \VAR{value} is swapped into the
+		 remote \VAR{target} are equal, then \VAR{value} is swapped into the
 		 remote \VAR{target}. Otherwise, the remote \VAR{target} is unchanged.
 		 In either case, the old value of the remote \VAR{target} is
 		 returned as the function return value. \VAR{cond} must be of the
@@ -40,8 +40,8 @@ of the data object in one atomic operation.
 \desTB {The  \VAR{target}  and source data  objects must conform to certain typing
 constraints, which are as follows: } 
 {
-\cRow{SHMEM\_INT4\_CSWAP}{4-byte integer.}
-\cRow{SHMEM\_INT8\_CSWAP}{8-byte integer.}
+\cRow{SHMEM\_INT4\_CSWAP}{\CONST{4}-byte integer.}
+\cRow{SHMEM\_INT8\_CSWAP}{\CONST{8}-byte integer.}
 }
 \desR{The contents that had been in the \VAR{target} data object on the remote \ac{PE}
 prior to the conditional swap. Data type is the same as the \VAR{target} data type.}
@@ -53,8 +53,8 @@ prior to the conditional swap. Data type is the same as the \VAR{target} data ty
     %For each example, you can enter it as an item.
     \exampleITEM
     {The following call ensures that the first \ac{PE} to execute the
-     conditional swap will successfully write its \ac{PE} number to race\_winner
-     on \ac{PE} 0.}
+     conditional swap will successfully write its \ac{PE} number to \VAR{race\_winner}
+     on \ac{PE} \CONST{0}.}
     {./EXAMPLES/shmem_cswap_example.c}
     {}
 }  	

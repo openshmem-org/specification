@@ -1,7 +1,6 @@
-\bAPI{SHMEM\_FINC}{Performs an atomic fetch-and-increment  operation on a remote data object.
-}
-
+\bAPI{SHMEM\_FINC}{Performs an atomic fetch-and-increment  operation on a remote data object.}
 \synC   %Synopisis for C API
+
 int shmem_int_finc(int *target, int pe);
 long shmem_long_finc(long *target, int pe);
 long long shmem_longlong_finc(long long *target, int pe);
@@ -19,19 +18,17 @@ ires8 = SHMEM_INT8_FINC(target8, pe)
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
-
-	\argRow{IN}{target}{The  remotely accessible integer data object to be updated on
+	\argRow{IN}{target}{The remotely accessible integer data object to be updated on
 		 the remote \ac{PE}.	 The type of target should match that  implied
 		 in the SYNOPSIS section.}
-
     \argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which target is to
-		 be updated. If you are using Fortran, it must	be  a  default
+		 be updated. If you are using Fortran, it must be  a  default
 		 integer value.}
  }
 %API description
 {
    These functions perform a fetch-and-increment operation. The target on
-   \ac{PE} pe is increased by one and the function returns
+   \ac{PE} \VAR{pe} is increased by one and the function returns
    the previous contents of target as an atomic operation.
 }
 %API Description Table.
@@ -39,8 +36,7 @@ ires8 = SHMEM_INT8_FINC(target8, pe)
     %Return Values     
 \desR{The contents that had been at the target address on the remote \ac{PE} prior to the increment. The data type of the return value is the same as the target.} 
 % Notes. If there are no notes, this field can be left empty.
-\notesB{
-}
+\notesB{None.}
 }
 
 \rcomment{Manju: Seems like the indent for notes and return depends on whether

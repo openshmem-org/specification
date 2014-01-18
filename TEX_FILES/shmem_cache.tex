@@ -1,5 +1,6 @@
 \bAPI{SHMEM\_CACHE}{Controls data cache utilities.}
 \synC   %Synopisis for C API
+
 void shmem_clear_cache_inv(void);
 void shmem_set_cache_inv(void);
 void shmem_clear_cache_line_inv(void *target);
@@ -42,9 +43,9 @@ the address specified by \VAR{target}.
 \desR{None.}
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
-These routines have been retained for improved backward compatability
+These routines have been retained for improved backward compatibility
 with legacy architectures. They are not required to be supported and where 
-provided they may have no effect on cacheline states.
+provided they may have no effect on cache line states.
 }
 }
 %Example

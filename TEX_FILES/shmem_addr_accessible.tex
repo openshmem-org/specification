@@ -1,7 +1,7 @@
-\bAPI{SHMEM\_ADDR\_ACCESSIBLE}{Determines whether an address is accessible via OpenSHMEM data transfers operations from the specified  remote  processing element (\ac{PE}).}
-
+\bAPI{SHMEM\_ADDR\_ACCESSIBLE}{Determines whether an address is accessible via OpenSHMEM data transfers operations from the specified  remote \ac{PE}.}
 %SYNOPSIS
 \synC
+
 int shmem_addr_accessible(void *addr, int pe);
 %*\synCE
 
@@ -20,49 +20,46 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
 }
 %API Description
 {
-       shmem\_addr\_accessible  is  a  query  function  that indicates whether a
-       local address is accessible via SHMEM  operations  from	the  specified
+       \FUNC{shmem\_addr\_accessible}  is  a  query  function  that indicates whether a
+       local address is accessible via \openshmem operations  from the  specified
        remote \ac{PE}.
        
-			 This function verifies that the data object is symmetric and accessible
-       with respect to a remote \ac{PE} via OpenSHMEM  data  transfer  functions.   The
-       specified address addr is a data object on the local \ac{PE}.
+       This function verifies that the data object is symmetric and accessible
+       with respect to a remote \ac{PE} via \openshmem  data  transfer  functions.   The
+       specified address \VAR{addr} is a data object on the local \ac{PE}.
 
-       On  SGI	Altix series systems, for multiple executable MPI applications
-       that use SHMEM functions, it is important to note that  static  memory,
-       such  as	 a  Fortran  common  block  or C global variable, is symmetric
+       For example, in  SGI Altix series systems, for multiple executable MPI applications
+       that use \openshmem functions, it is important to note that  static  memory,
+       such  as a  Fortran  common  block  or C global variable, is symmetric
        between processes running from the same executable  file,  but  is  not
        symmetric  between  processes  running from different executable files.
-       Data allocated from  the	 symmetric  heap  (shmalloc  or	 shpalloc)  is
+       Data allocated from  the symmetric  heap  (\FUNC{shmalloc} or	\FUNC{shpalloc})  is
        symmetric across the same or different executable files.
 }
 %API Description Table
 {
-		\desTB{}
-		{
-				\cRow{}{}
-		}
+%		\desTB{}
+%		{
+%				\cRow{}{}
+%		}
 		%Return Value
 		\desR{		
-				C/C++: The  return value is 1 if addr is a symmetric data object and
-				 accessible via OpenSHMEM operations from the specified remote \ac{PE};
-				 otherwise,it is 0.
+				C/C++: The  return value is \CONST{1} if \VAR{addr} is a symmetric data object and
+				 accessible via \openshmem operations from the specified remote \ac{PE};
+				 otherwise,it is \CONST{0}.
 
-				Fortran: The return value is .TRUE. if addr is a symmetric data object
-				 and accessible via OpenSHMEM operations from the specified remote
-				 \ac{PE}; otherwise, it is .FALSE..
+				Fortran: The return value is \CONST{.TRUE.} if \VAR{addr} is a symmetric data object
+				 and accessible via \openshmem operations from the specified remote
+				 \ac{PE}; otherwise, it is \CONST{.FALSE.}.
 		}
 		%NOTES	
-		\notesB{
-		}
+		\notesB{None.}
 }
-
-
-%EXAMPLES
-\exampleB{
-	\exampleITEM
-	{TEST}
-	{./EXAMPLES/shmem_npes_example.c}
-	{}
-}
+%%EXAMPLES
+%\exampleB{
+%	\exampleITEM
+%	{TEST}
+%	{./EXAMPLES/shmem_npes_example.c}
+%	{}
+%}
 \eAPI

@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_BARRIER\_ALL}{Registers the arrival of a processing element \ac{PE} at a barrier and suspends \ac{PE} execution until all other \ac{PE}s arrive at the barrier and all local and remote memory updates are completed.}
+\bAPI{SHMEM\_BARRIER\_ALL}{Registers the arrival of a \ac{PE} at a barrier and suspends \ac{PE} execution until all other \ac{PE}s arrive at the barrier and all local and remote memory updates are completed.}
 \synC   %Synopisis for C API
 void barrier(void);
 void shmem_barrier_all(void);
@@ -7,7 +7,6 @@ void shmem_barrier_all(void);
 CALL BARRIER
 CALL SHMEM_BARRIER_ALL
 %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
-
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
     \argRow{None.}{}{} 

@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_FENCE}{Assures ordering of delivery of puts}
+\bAPI{SHMEM\_FENCE}{Assures ordering of delivery of puts.}
 \synC   %Synopisis for C API
 
 void shmem_fence(void);
@@ -17,9 +17,9 @@ CALL SHMEM_FENCE
 {
     This  function ensures ordering of put (remote write) operations. All
     put operations issued to a particular remote  \ac{PE}
-    prior  to the call to shmem\_fence are guaranteed to be delivered before
+    prior  to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before
     any subsequent put operations to the same \ac{PE} which follow the  call  to
-    shmem\_fence.
+    \FUNC{shmem\_fence}.
 }
 {
 %API Description Table.
@@ -37,9 +37,9 @@ CALL SHMEM_FENCE
 
 \exampleB{
        \exampleITEM
-       { The following shmem\_fence example is for C/C++ programs: }
+       { The following \FUNC{shmem\_fence} example is for C/C++ programs: }
        {./EXAMPLES/shmem_fence_example.c}
-       {Put1 will be delivered before put3 and put2 will be delivered before
-       put4.}
+       {\VAR{Put1} will be delivered before \VAR{put3} and \VAR{put2} will be delivered before
+       \VAR{put4}.}
 }
 \eAPI
