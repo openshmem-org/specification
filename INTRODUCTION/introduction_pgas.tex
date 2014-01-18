@@ -1,9 +1,9 @@
 
-\section{What is SHMEM ?}
+\section{What is \openshmem?}
 
-This section is an introduction to previous work on SHMEM. We begin
+This section is an introduction to previous work on \openshmem. We begin
 with a quick overview of the Partitioned Global Address Space model,
-which is the basis for SHMEM's data sharing strategy.
+which is the basis for \openshmem's data sharing strategy.
 
 
 \subsection{Partitioned Global Address Space}
@@ -31,20 +31,20 @@ by exposing data/thread locality. PGAS programming languages include
 More information about PGAS can be found at the PGAS Forum website.\cite{pgasfor}
 
 
-\subsection{SHMEM}
+\subsection{\openshmem}
 
 % SGI asked for this to be removed to protect the trademark
 %
 %      SHMEM stands for \textbf{SH}ared \textbf{MEM}ory.
 
-SHMEM is a library API that allows its participating processes (the
+\openshmem is a library API that allows its participating processes (the
 places where work occurs are called Processing Elements or PEs) to
 view a Partitioned Global Address Space. Each PE is able to see
 variables with a common name, but each PE has its own local copy
 of the variable.
 
-The SHMEM library provides inter-processor communication using data
-passing and one-sided communication techniques. SHMEM differs from
+The \openshmem library provides inter-processor communication using data
+passing and one-sided communication techniques. \openshmem differs from
 the Message Passing Interface (MPI), currently the most widely used
 communication model, in that the latter generally uses two-sided communication
 (MPI now also includes one-sided calls). In two-sided communication,
@@ -68,37 +68,37 @@ shows diagrams for one-sided and two-sided communications.\medskip{}
 
 \medskip{}
 The following are some of the communication operations available in
-SHMEM:
+\openshmem:
 \begin{enumerate}
 \item \textbf{Data Transfers }
 
 \begin{enumerate}
-\item One-sided puts : the initiator PE (active side) specifies the local
-data to be written to the target PE's (passive side) memory. 
+\item One-sided puts : the initiator \ac{PE} (active side) specifies the local
+data to be written to the target \ac{PE}'s (passive side) memory. 
 \item One-sided gets : an explicit fetch operation is used to copy a variable
 amount of data from a remote process and store it locally.\end{enumerate}
 \begin{description}
 \item [{{Note:}}] By avoiding the need for matching send and receive
-calls, SHMEM simplifies the communication process by reducing the
-number of calls required to have one PE interact with other PEs. 
+calls, \openshmem simplifies the communication process by reducing the
+number of calls required to have one \ac{PE} interact with other \ac{PE}s. 
 \end{description}
 \item \textbf{Synchronization Mechanisms }
 
 \begin{enumerate}
-\item Fence: Ensures ordering of PUT operations to a specific PE. 
-\item Quiet: Ensures ordering of PUT operations to all PEs. 
-\item Barrier: A collective synchronization routine in which no PE may leave
-the barrier prior to all PEs entering the barrier. 
+\item Fence: Ensures ordering of PUT operations to a specific \ac{PE}. 
+\item Quiet: Ensures ordering of PUT operations to all \ac{PE}s. 
+\item Barrier: A collective synchronization routine in which no \ac{PE} may leave
+the barrier prior to all \ac{PE}s entering the barrier. 
 \end{enumerate}
 \item \textbf{Collective Communication}
 
 \begin{enumerate}
-\item Broadcast: Copy a block of data from one PE to one or more target
+\item Broadcast: Copy a block of data from one \ac{PE} to one or more target
 PEs. 
 \item Collection: Concatenate elements from the source array to a target
-array over the specified PEs. 
+array over the specified \ac{PE}s. 
 \item Reduction: Perform an associative binary operation over the specified
-PEs. 
+\ac{PE}s. 
 \end{enumerate}
 \item \textbf{Address Manipulation}
 
@@ -127,7 +127,7 @@ cache if available.
 in the Library Routines section.
 \end{description}
 
-\subsection{History of SHMEM}
+\subsection{History of \openshmem}
 \begin{description}
 \item [{{Cray~SHMEM~(MP-SHMEM,~LC-SHMEM):}}] Cray first introduced
 SHMEM in 1993 for its Cray T3D systems. Cray SHMEM was also used in
