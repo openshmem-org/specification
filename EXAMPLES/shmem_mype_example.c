@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <shmem.h>
-main()
+int main(void)
 {
    start_pes(0);
    int me = _my_pe();
