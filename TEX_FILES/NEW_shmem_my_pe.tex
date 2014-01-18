@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_MY\_PE}{Returns processing element (\ac{PE}) information.}
+\bAPI{SHMEM\_MY\_PE}{Returns the number of the calling \ac{PE}.}
 
 %Synopsis C
 \synC
@@ -22,8 +22,8 @@ ME = MY_PE ()
 %API Description
 {
 	This function returns the processing element (\ac{PE}) number of the calling
-  \ac{PE}.   It accepts no arguments.	The result is an integer between 0 and
-  npes - 1, where npes is the total number of \ac{PE}s executing  the  current
+  \ac{PE}.   It accepts no arguments.	The result is an integer between \CONST{0} and
+  \VAR{npes} - \CONST{1}, where \VAR{npes} is the total number of \ac{PE}s executing  the  current
   program.
 }
 %API Description Table.
@@ -34,12 +34,12 @@ ME = MY_PE ()
 %	}
 
 	%Return Value       
-  \desR{Integer - Between 0 and npes - 1}
+  \desR{Integer - Between \CONST{0} and \VAR{npes} - \CONST{1}}
 
 	%NOTES
 	\notesB{
-		For OpenSHMEM Specification 1.1 the use of \_my\_pe() has been deprecated. Although OpenSHMEM libraries are required to support the call, application developers are encouraged to use shmem\_my\_pe() instead.
-	}
+		For \openshmem Specification 1.1 the use of \FUNC{\_my\_pe} has been deprecated. Although \openshmem libraries are required to support the call, application developers are encouraged to use \FUNC{shmem\_my\_pe} instead.
+     }
 }
 %EXAMPLES
 \exampleB{

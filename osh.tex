@@ -280,7 +280,6 @@ OpenSHMEM % \textsuperscript{{\small \texttrademark}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Use this to make pages start on the right side
-\newcommand{\startchap}[0]{\cleardoublepage}
 %\newcommand{\startchap}[0]{\relax}
 
 %\newlength{\codeSpace}
@@ -728,6 +727,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \def\begchangefiniii{}
 \def\endchangefiniii{}
 %----------------------------------------------------------------------
+\newcommand{\startchap}[0]{%\cleardoublepage
+}
 
 \newcommand{\OSH}{\emph{OpenSHMEM}}
 \newcommand{\rcomment}[1]

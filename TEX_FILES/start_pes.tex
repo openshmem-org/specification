@@ -1,4 +1,4 @@
-\bAPI{START\_PES}{Called  at the beginning of an \openshmem program to initialize the execution environment.}
+\bAPI{START\_PES}{Called at the beginning of an \openshmem program to initialize the execution environment.}
 \synC   %Synopisis for C API 
 
 void start_pes(int npes);
@@ -11,19 +11,18 @@ CALL START_PES(npes)
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
-       \argRow{npes}{	 Unused}{ Should be set to 0.}
+       \argRow{npes}{Unused}{ Should be set to \CONST{0}.}
 }
  %API description
- {   The start\_pes routine should be the first statement in a OpenSHMEM parallel
+ {   The \FUNC{start\_pes} routine should be the first statement in a OpenSHMEM parallel
        program.
  }
  %API Description Table. 
 {
-    {} 
  %Return Values     
 \desR{ None. }
 
-\notesB{ If  the	start\_pes  call	 is  not  the  first  statement in a program,  unexpected results may occur.}
+\notesB{ If  the	\FUNC{start\_pes}  call is  not  the  first  statement in a program, unexpected results may occur.}
 
 }%end of DesB
 % Notes. If there are no notes, this field can be left empty.
@@ -33,7 +32,7 @@ CALL START_PES(npes)
 \exampleB{
 %For each example, you can enter it as an item.
                   \exampleITEMF
-                  { This is a simple program that calls shmem\_integer\_put():}
+                  { This is a simple program that calls \FUNC{start\_pes}:}
                  {./EXAMPLES/shmem_startpes_example.f90}
  {} 
 }  	
