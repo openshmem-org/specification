@@ -30,7 +30,7 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
 
        For example, in  SGI Altix series systems, for multiple executable MPI applications
        that use \openshmem functions, it is important to note that  static  memory,
-       such  as a  Fortran  common  block  or C global variable, is symmetric
+       such  as a  \Fortran{}  common  block  or \Clang{} global variable, is symmetric
        between processes running from the same executable  file,  but  is  not
        symmetric  between  processes  running from different executable files.
        Data allocated from  the symmetric  heap  (\FUNC{shmalloc} or	\FUNC{shpalloc})  is
@@ -44,11 +44,11 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
 %		}
 		%Return Value
 		\desR{		
-				C/C++: The  return value is \CONST{1} if \VAR{addr} is a symmetric data object and
+				\CorCpp: The  return value is \CONST{1} if \VAR{addr} is a symmetric data object and
 				 accessible via \openshmem operations from the specified remote \ac{PE};
 				 otherwise,it is \CONST{0}.
 
-				Fortran: The return value is \CONST{.TRUE.} if \VAR{addr} is a symmetric data object
+				\Fortran: The return value is \CONST{.TRUE.} if \VAR{addr} is a symmetric data object
 				 and accessible via \openshmem operations from the specified remote
 				 \ac{PE}; otherwise, it is \CONST{.FALSE.}.
 		}

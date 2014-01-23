@@ -12,7 +12,7 @@ PTR = SHMEM_PTR(target, pe)
 \desB{
 \argRow{IN}{target}{The symmetric data object to be referenced.}
 \argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which target is to
-		 be accessed.  If you are using Fortran, it must be a  default
+		 be accessed.  If you are using \Fortran, it must be a  default
 		 integer value.}
 }
 {
@@ -38,9 +38,9 @@ PTR = SHMEM_PTR(target, pe)
 }
 
 \exampleB{
-       \exampleITEM{This  Fortran  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to the \VAR{BIGD}
+       \exampleITEM{This  \Fortran{}  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to the \VAR{BIGD}
        array on \ac{PE} 1:}{./EXAMPLES/shmem_ptr_example.f90}{}
-       \exampleITEM{This is the equivalent program written in C:}
+       \exampleITEM{This is the equivalent program written in \Clang:}
        {./EXAMPLES/shmem_ptr_example.c}}{}
 
 \eAPI
