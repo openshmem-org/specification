@@ -84,8 +84,10 @@
 \input{INTRODUCTION/language_bindings}
 \input{INTRODUCTION/memory_model}
 \input{INTRODUCTION/execution_model}
-\input{INTRODUCTION/synchronization_model}
-\input{INTRODUCTION/undefined_behavior}
+\input{INTRODUCTION/environment_variables.tex}
+%\input{INTRODUCTION/synchronization_model} %SP:Moving to remote memory operations section as per discussion on 1/21/14
+
+\clearpage
 
 \startchap
 \section*{Library Setup and Query Operations}%SP: Merging two operations 
@@ -103,6 +105,7 @@
 \input{TEX_FILES/shpdeallc.tex} %Swaroop
 \startchap
 \section*{Remote Memory Operations}
+\input{INTRODUCTION/synchronization_model}
 \input{TEX_FILES/shmem_put.tex} %Oscar
 \input{TEX_FILES/shmem_p.tex} %Oscar
 \input{TEX_FILES/shmem_iput.tex} %Oscar
@@ -144,6 +147,8 @@
 %  -> Application written in Fortran
 \input{INTRODUCTION/compile_exec_applications.tex}
 \input{INTRODUCTION/writing_programs.tex}
+\input{INTRODUCTION/undefined_behavior}
+
 
 % Manju: Don't move the definitions to the front, it requires to be after content
 % Add acronyms here
