@@ -25,15 +25,15 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{  
 \argRow{OUT}{ivar}{A remotely accessible integer variable that is being updated by
-	       another PE.  If you are using C/C++, the type  of  ivar	should
+	       another PE.  If you are using \CorCpp, the type  of  ivar	should
 	       match  that  implied in the SYNOPSIS section.} 
 \argRow{IN}{cmp}{The  compare  operator  that compares ivar with cmp\_value.  cmp
-	       must be of type integer. If you are using Fortran, it must  be
-	       of  default  kind.   If	you  are  using C/C++, the type of cmp
+	       must be of type integer. If you are using \Fortran, it must  be
+	       of  default  kind.   If	you  are  using \CorCpp, the type of cmp
 	       should  match  that  implied  in	 the  SYNOPSIS	section.}        
-\argRow{IN}{cmp\_value}{cmp\_value must be of type integer.  If you are using C/C++, the
+\argRow{IN}{cmp\_value}{cmp\_value must be of type integer.  If you are using \CorCpp, the
 	       type of cmp_value should match that  implied  in	 the  SYNOPSIS
-	       section. If  you  are using  Fortran,	 cmp\_value  must be an
+	       section. If  you  are using  \Fortran,	 cmp\_value  must be an
 	       integer of the same size and kind as ivar.}
 }
 %API description
@@ -55,7 +55,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
  %API Description Table. 
 {
  % If there is no Description Table and return, this field can be 
-  \desTB {If you are using Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
+  \desTB {If you are using \Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
   {
 \cRow{Function}	{Type of ivar}
 \cRow{shmem\_wait, shmem\_wait\_until}{default INTEGER}
@@ -87,12 +87,12 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 {./EXAMPLES/shmem_wait2_example.f90}
  {}
  \exampleITEMF
- {The following C/C++ call waits until the sign bit in ivar
+ {The following \CorCpp{} call waits until the sign bit in ivar
        is set by a transfer from a remote PE:}
 {./EXAMPLES/shmem_wait3_example.f90}
  {}
  \exampleITEMF
- {The following Fortran example is in the context of a
+ {The following \Fortran{} example is in the context of a
        subroutine:}
 {./EXAMPLES/shmem_wait4_example.f90}
  {}
