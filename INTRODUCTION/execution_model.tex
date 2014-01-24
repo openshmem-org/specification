@@ -22,7 +22,7 @@
 \openshmem uses a Single Process Multiple Data (SPMD) approach to express
 parallelism.  An \openshmem application makes use of multiple processors,
 referred to as Processing Elements or PEs, to complete operations
-in parallel. Although all PEs execute the same program, they may have different execution paths and will executes asynchronously following Fortran or program execution in C. Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of PEs are specified at runtime.
+in parallel. Although all PEs execute the same program, they may have different execution paths and will execute asynchronously following Fortran or program execution in C. Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of PEs are specified at runtime.
 
 \openshmem requires initialization before using any of the library
 routines. To this end, the program must  issue a call to the \textbf{start\_pes()}
@@ -35,7 +35,7 @@ increasing manner from zero to the total number of PEs minus 1. The PEs do not e
 %that is remotely accessible by all PEs. The symmetric heap is discussed
 %further in the Memory Model section. The PE numbers are the
 %identifiers used to refer to each of the PEs involved in the execution.
-Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs. Another	term  for  symmetric data objects is "remotely accessible data objects."  In the interface definitions for SHMEM data  transfer	 functions,  one or more of the parameters are typically required to be symmetric or remotely accessible. The following kinds of data objects are symmetric:
+Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs. Another	term  for  symmetric data objects is "remotely accessible data objects."  In the interface definitions for \openshmem data  transfer	 functions,  one or more of the parameters are typically required to be symmetric or remotely accessible. The following kinds of data objects are symmetric:
 \begin{itemize}
   \item Fortran data objects in common blocks or with the  SAVE  attribute. These data objects	must not be defined in a dynamic shared object (DSO).
   \item Non-stack C and C++ variables.   These  data	objects must  not  be defined in a DSO.
