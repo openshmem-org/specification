@@ -20,7 +20,7 @@ ires = SHMEM_INT8_FADD(target, value, pe)
 \argRow{IN}{value}{The \VAR{value} to be atomically added to \VAR{target}. The type of
 	 \VAR{value} should match that implied in the SYNOPSIS section.}
 \argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which \VAR{target} is to
-	 be updated. If you are using Fortran, it must be a default integer value.}
+	 be updated. If you are using \Fortran, it must be a default integer value.}
 }
 %API description
 {
@@ -42,7 +42,7 @@ to the atomic addition operation. The data type of return value is the same as t
 
 \exampleB{
        \exampleITEM
-	{The following \FUNC{shmem\_fadd} example is for C/C++ programs:}
+	{The following \FUNC{shmem\_fadd} example is for \CorCpp{} programs:}
         {./EXAMPLES/shmem_fadd_example.c}
         {}
 }
