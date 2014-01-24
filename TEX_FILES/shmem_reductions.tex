@@ -110,14 +110,14 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 
 % Arguments table. If no arguments you can use \argRow{NONE}{}{} 
 \desB{   
-       \argRow{IN}{target}{A symmetric array, of length \VAR{nreduce} elements, to receive the result of the reduction operations. The data type of target varies with the version of the reduction routine being called. When calling from C/C++,	refer to the SYNOPSIS section for data type information. }
+       \argRow{IN}{target}{A symmetric array, of length \VAR{nreduce} elements, to receive the result of the reduction operations. The data type of target varies with the version of the reduction routine being called. When calling from \CorCpp,	refer to the SYNOPSIS section for data type information. }
 	\argRow{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that contains one element for each separate reduction operation.	The source argument must have the same data type as target.}
-        \argRow{IN}{\VAR{nreduce}}{The number of elements in the target and source arrays. \VAR{nreduce} must be of type integer. If you are using Fortran, it must be a default integer value.}
-        \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the active set of \ac{PE}s. PE\_start must be of type integer. If you are using Fortran, it must be a default integer value.}
-        \argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive virtual \ac{PE} numbers in the active set. logPE\_stride must be of type integer. If you are using Fortran, it must be a default integer value.}
-        \argRow{IN}{PE\_size}{The number of \ac{PE}s in the active set. PE\_size must	be of type integer. If	 you are using Fortran, it must be a default integer value.}
-        \argRow{IN}{pWrk}{A symmetric work array. The pWrk argument must have the same data type as target. In C/C++,	this contains max(\VAR{nreduce}/2 + 1, \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements. In Fortran, this contains max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements.}
-        \argRow{IN}{pSync}{A symmetric work array. In C/C++, \VAR{pSync} must be of type long and size \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}. In Fortran, \VAR{pSync} must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. If you are using Fortran, it must be a default integer value. Every element of this array must be initialized with the value \CONST{\_SHMEM\_SYNC\_VALUE} (in C/C++) or \CONST{SHMEM\_SYNC\_VALUE} (in Fortran) before any of the \ac{PE}s in the active set enter the reduction routine.}
+        \argRow{IN}{\VAR{nreduce}}{The number of elements in the target and source arrays. \VAR{nreduce} must be of type integer. If you are using \Fortran, it must be a default integer value.}
+        \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the active set of \ac{PE}s. PE\_start must be of type integer. If you are using \Fortran, it must be a default integer value.}
+        \argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive virtual \ac{PE} numbers in the active set. logPE\_stride must be of type integer. If you are using \Fortran, it must be a default integer value.}
+        \argRow{IN}{PE\_size}{The number of \ac{PE}s in the active set. PE\_size must	be of type integer. If	 you are using \Fortran, it must be a default integer value.}
+        \argRow{IN}{pWrk}{A symmetric work array. The pWrk argument must have the same data type as target. In \CorCpp,	this contains max(\VAR{nreduce}/2 + 1, \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements. In \Fortran, this contains max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements.}
+        \argRow{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be of type long and size \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran, \VAR{pSync} must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. If you are using \Fortran, it must be a default integer value. Every element of this array must be initialized with the value \CONST{\_SHMEM\_SYNC\_VALUE} (in \CorCpp) or \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \ac{PE}s in the active set enter the reduction routine.}
  %API description
  {  
  \openshmem reduction	routines compute one or more
@@ -155,7 +155,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
  local \ac{PE}: The target array is updated. The values in the \VAR{pSync} array
  are restored to the original values.
 }
- \desTB { When calling from Fortran, the target date types are as follows:}
+ \desTB { When calling from \Fortran, the target date types are as follows:}
         {
 		  \cRow{Routine}{Data Type}
 		  \cRow{shmem\_int8\_and\_to\_all}{Integer, with an element size of 8 bytes.}
@@ -171,12 +171,12 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 		  \cRow{shmem\_real8\_min\_to\_all}{Real, with an element size of 8 bytes.}
 		  \cRow{shmem\_real16\_min\_to\_all}{Real,with an element size of 16 bytes.}
 		  \cRow{shmem\_comp4\_sum\_to\_all}{COMPLEX(KIND=4).}
-		  \cRow{shmem\_comp8\_sum\_to\_all}{Complex. If you are using Fortran, it must be a default complex value.}
+		  \cRow{shmem\_comp8\_sum\_to\_all}{Complex. If you are using \Fortran, it must be a default complex value.}
 		  \cRow{shmem\_int4\_sum\_to\_all}{INTEGER(KIND=4).}
-		  \cRow{shmem\_int8\_sum\_to\_all}{Integer. If you are using Fortran, it must be a default integer value.}
+		  \cRow{shmem\_int8\_sum\_to\_all}{Integer. If you are using \Fortran, it must be a default integer value.}
 		  \cRow{shmem\_real4\_sum\_to\_all}{REAL(KIND=4).}
-		  \cRow{shmem\_real8\_sum\_to\_all}{	 Real. If you are using Fortran, it must be a default real value.}
-		  \cRow{shmem\_real16\_sum\_to\_all}{	 Real. If you are using Fortran, it must be a default real value.}
+		  \cRow{shmem\_real8\_sum\_to\_all}{	 Real. If you are using \Fortran, it must be a default real value.}
+		  \cRow{shmem\_real16\_sum\_to\_all}{	 Real. If you are using \Fortran, it must be a default real value.}
 		  \cRow{shmem\_comp4\_prod\_to\_all	}{ Complex, with an element size	equal to two 4-byte real values. }		  \cRow{shmem\_comp8\_prod\_to\_all	}{ Complex, with an element size	equal to two 8-byte real values.}
 		  \cRow{shmem\_int4\_prod\_to\_all}{Integer, with an element size of 4 bytes.}
 		  \cRow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
@@ -222,38 +222,38 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 \exampleB{
 %For each example, you can enter it as an item.
                   \exampleITEMF
-                  { This Fortran example statically initializes the \VAR{pSync} array and finds the logical AND of the integer variable FOO across all even \ac{PE}s.}
+                  { This \Fortran{} example statically initializes the \VAR{pSync} array and finds the logical AND of the integer variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_and_example.90}
                   {}
                    \exampleITEMF
-	          {This Fortran example statically initializes the \VAR{pSync} array
+	          {This \Fortran{} example statically initializes the \VAR{pSync} array
  and finds the maximum value of real variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_max_example.90}
                   {}
                   \exampleITEMF
-                  { This Fortran example statically initializes the \VAR{pSync} array
+                  { This \Fortran{} example statically initializes the \VAR{pSync} array
  and finds the minimum value of real variable FOO across all the even
  \ac{PE}s.}
                  {./EXAMPLES/shmem_min_example.90}
                  {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the \VAR{pSync} array
+                  {This \Fortran{} example statically initializes the \VAR{pSync} array
  and finds the sum of the real variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_sum_example.90}
                   {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the \VAR{pSync} array
+                  {This \Fortran{} example statically initializes the \VAR{pSync} array
  and finds the product of the real variable FOO across all the even \ac{PE}s.}
                   {./EXAMPLES/shmem_prod_example.90}
                   {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the \VAR{pSync} array
+                  {This \Fortran{} example statically initializes the \VAR{pSync} array
  and finds the logical OR of the integer variable FOO across all even
  \ac{PE}s.}
                  {./EXAMPLES/shmem_or_example.90}
                  {}
                  \exampleITEMF
-                  {This Fortran example statically initializes the \VAR{pSync} array
+                  {This \Fortran{} example statically initializes the \VAR{pSync} array
  and computes the exclusive XOR of variable FOO across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_xor_example.90}
                    {} 
