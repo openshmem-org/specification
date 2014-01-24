@@ -16,17 +16,17 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 \desB{
  	\argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of  the active set  of  \ac{PE}s.
 				   \VAR{PE\_start}  must  be  of  type	 integer.   If you  are using
-		   		   Fortran, it must be a default integer value.}
+		   		   \Fortran, it must be a default integer value.}
 	\argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive  virtual
 			   	   \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type
-		   		   integer.  If you are using Fortran, it must	be  a  default
+		   		   integer.  If you are using \Fortran, it must	be  a  default
 		   		   integer value.}
 	\argRow{IN}{PE\_size}{The numberof  \ac{PE}s in the active set.  \VAR{PE\_size} must be of
-				   type integer.  If you are  using  Fortran, it must be a default integer value.}
-	\argRow{IN}{pSync}{	A  symmetric work  array.  In C/C++, pSync must be of type
-						int and size \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE}.  In  Fortran, \VAR{pSync}
+				   type integer.  If you are  using  \Fortran, it must be a default integer value.}
+	\argRow{IN}{pSync}{	A  symmetric work  array.  In \CorCpp, pSync must be of type
+						int and size \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE}.  In  \Fortran, \VAR{pSync}
 						must	 be  of type integer and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.
-						If you are using Fortran, it	 must  be  a  default  integer
+						If you are using \Fortran, it	 must  be  a  default  integer
 						type.  Every element of this array must be initialized to 0
 						before any of the \ac{PE}s in the active set enter shmem\_barrier
 						the first time.}
@@ -73,7 +73,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 %EXAMPLES
 \exampleB{
 	\exampleITEM
-	{The following barrier example is for C/C++ programs:}
+	{The following barrier example is for \CorCpp{} programs:}
 	{./EXAMPLES/shmem_barrier_example.c}
 	{}
 }

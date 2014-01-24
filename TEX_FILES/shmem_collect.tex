@@ -26,34 +26,34 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 	    all \ac{PE}s.  The data types are as follows:
 	    For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, and
 	    \FUNC{shmem\_fcollect64}, any data type with an element size of 64
-	    bits.  Fortran derived types, Fortran character type,  and
-	    C/C++  structures  are not permitted.  For \FUNC{shmem\_collect4},
+	    bits.  \Fortran{} derived types, \Fortran{} character type,  and
+	    \CorCpp{}  structures  are not permitted.  For \FUNC{shmem\_collect4},
 	    \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32},
-	    any	 data  type  with an element size of \CONST{32} bits.  Fortran
-	    derived  types,  Fortran   character   type,   and C/C++
+	    any	 data  type  with an element size of \CONST{32} bits.  \Fortran{}
+	    derived  types,  \Fortran{}   character   type,   and \CorCpp{}
 	    structures are not permitted.}
 \argRow{IN}{source}{A symmetric   data  object  that	can  be of  any  type
 	    permissible for the target argument.}
 \argRow{IN}{nelems}{The number of elements in the source array.	 nelems must be
-	    of	type  integer.	If you are using Fortran, it must be a
+	    of	type  integer.	If you are using \Fortran, it must be a
 	    default integer value.}
 \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the active set of \ac{PE}s.
 	    \VAR{PE\_start} must be of type integer. If you are using
-	    Fortran, it must be a default integer value.}
+	    \Fortran, it must be a default integer value.}
 \argRow{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between consecutive virtual
 	    \ac{PE}	numbers in the active set. \VAR{logPE\_stride} must be of
-	    type integer.  If you are using  Fortran,  it  must be  a
+	    type integer.  If you are using  \Fortran,  it  must be  a
 	    default integer value.}
 \argRow{IN}{PE\_size}{The number of \ac{PE}s in the active set. \VAR{PE\_size} must be of
-	    type integer.  If you are using  Fortran, it must be a
+	    type integer.  If you are using  \Fortran, it must be a
 	    default integer value.}
-\argRow{IN}{pSync}{A symmetric  work array.  In C/C++, \VAR{pSync} must be of type
-	    long and size \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE}.  In Fortran, \VAR{pSync}
+\argRow{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of type
+	    long and size \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE}.  In \Fortran, \VAR{pSync}
 	    must  be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
-	    If you are using Fortran, it must  be  a  default  integer
+	    If you are using \Fortran, it must  be  a  default  integer
 	    value. Every  element  of this array must be initialized
-	    with the value \CONST{\_SHMEM\_SYNC\_VALUE} in C/C++ or
-	    \CONST{SHMEM\_SYNC\_VALUE} in Fortran before any of the \ac{PE}s in the
+	    with the value \CONST{\_SHMEM\_SYNC\_VALUE} in \CorCpp{} or
+	    \CONST{SHMEM\_SYNC\_VALUE} in \Fortran{} before any of the \ac{PE}s in the
 	    active set enter \FUNC{shmem\_barrier}.}
 }
 %API description
@@ -117,11 +117,11 @@ non-power-of-two value.
 }
 %Example
 \exampleB{
-    \exampleITEM{The following \FUNC{shmem\_collec}t example is for C/C++ programs:}
+    \exampleITEM{The following \FUNC{shmem\_collec}t example is for \CorCpp{} programs:}
     {./EXAMPLES/shmem_collect_example.c}
     {}
     %For each example, you can enter it as an item.
-    \exampleITEMF{The following \FUNC{SHMEM\_COLLECT} example is for Fortran programs:}
+    \exampleITEMF{The following \FUNC{SHMEM\_COLLECT} example is for \Fortran{} programs:}
     {./EXAMPLES/shmem_collect_example.f90}
     {}
 }  	
