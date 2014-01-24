@@ -19,7 +19,7 @@ CALL SHPALLOC(addr, length, errcode, abort)
        consistency,  all  \ac{PE}s in an program must call \FUNC{SHPALLOC} with the same 
        value of length; if any  \ac{PE}s  are missing, the program will hang.
        
-       By using the Fortran \CONST{POINTER} mechanism in the following manner, you can
+       By using the \Fortran{} \CONST{POINTER} mechanism in the following manner, you can
        use array \VAR{A} to refer to the block allocated by \FUNC{SHPALLOC}: \CONST{POINTER} (\VAR{addr},
        \VAR{A}())
   }
