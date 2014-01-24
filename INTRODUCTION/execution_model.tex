@@ -8,20 +8,9 @@
 %   *Each PE executes asynchronously following Fortran or program execution in C [ISO/IEC00 Sec. 5.1.2.3]
 %   *Each PE will have a unique global identifier and the execution of a program may depend on the PE id, if executed in SPMD.
 %   *PE id may be used for library calls synchronizations, control flow constructs language  in C/Fortran
-%   *PE may allocate symmetric data objects via a symmetric heap 
+%   *PE may allocate symmetric data objects via a symmetric heap %SP: Does not cover global and static.
 %   *As of now, PEs may finish execution at any time by returning from the main function. (no call to shmem_finalize yet!)
 %   
-%  %Memory model
-%    *Each OpenSHMEM PEs may have symmetric memory that is accessible by other PEs. 
-%    *Symmetric memory is a region of memory where all the an instance of a data objects is replicated across PEs, have 
-%     the same the same layout and relative offset.
-%    *All PEs can allocate a symmetric data objects using the symmetric heap, but they must do so as a collective operation. (is there a barrier after shmalloc?)
-%    *All writes to symmetric memory are relaxed (I'm not sure if this is the completion semantics) and are guaranteed to be visible to other PEs after a barrier_all, barrier(?), quiet, (what about wait? does it means iti sonly visible to me?) 
-%    *Calls to barrier, barrier_all, quiet, wait, lock, atomics, are meant to guarantee memory consistency across PEs.
-%    *Read/Writes to symmetic data object may appear after startpe or after a the symmetric data object has been allocated in the symmetric heap (if it is a dynamic).
-%    *Operations like reduction, collect, etc guarantee memory consistency after completion(?)
-%    *Data races are possible in OpenSHMEM if multiple PEs write/read a symmetric data object from a single PE without proper synchronization.  
-
 %This comes from the UPC spec:
 %The memory consistency model in a language defines the order in which the results of write operations may be observed through read operations.
 %The behavior of a OpenSHMEM program may depend on the timing of accesses to symetric variables on PEs, so in general a program defines a set of possible executions, 
@@ -30,30 +19,29 @@
     
 
 \section{Execution Model}
-
-This section describes the Execution Model of an \openshmem application.
-
 \openshmem uses a Single Process Multiple Data (SPMD) approach to express
-parallelism. An \openshmem application makes use of multiple processors,
+parallelism.  An \openshmem application makes use of multiple processors,
 referred to as Processing Elements or PEs, to complete operations
-in parallel.
-
-% OpenSHMEM applications may be launched using a dispatcher program,
-% but it is not required. This dispatcher program may perform steps
-% needed by the implementation to start the application on the desired
-% processing elements. The following is an example of using a dispatcher:
-% \lstinline[language=bash]!oshrun -np 4 myprogram!
+in parallel. Although all PEs execute the same program, they may have different execution paths and will executes asynchronously following Fortran or program execution in C. Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of PEs are specified at runtime.
 
 \openshmem requires initialization before using any of the library
-routines. To this end, the program issues a call to the \textbf{start\_pes()}
-routine. \textbf{start\_pes()} performs any required initialization
+routines. To this end, the program must  issue a call to the \textbf{start\_pes()}
+routine before any other OpenSHMEM library operations. \textbf{start\_pes()} performs any required initialization
 steps, such as setting up the symmetric heap for every PE and creating
-the PE numbers. The symmetric heap is one of the memory spaces
-that is remotely accessible by all PEs. The symmetric heap is discussed
-further in the Memory Model section. The PE numbers are the
-identifiers used to refer to each of the PEs involved in the execution.
-These PE numbers are integers assigned in a monotonically
-increasing manner from zero to the total number of PEs minus 1.
+the PE numbers which act like unique global identifiers for the duration of the program. These PE numbers are integers assigned in a monotonically
+increasing manner from zero to the total number of PEs minus 1. The PEs do not exist till after \textbf{start\_pes()} returns.
+
+%The symmetric heap is one of the memory spaces
+%that is remotely accessible by all PEs. The symmetric heap is discussed
+%further in the Memory Model section. The PE numbers are the
+%identifiers used to refer to each of the PEs involved in the execution.
+Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs. Another	term  for  symmetric data objects is "remotely accessible data objects."  In the interface definitions for SHMEM data  transfer	 functions,  one or more of the parameters are typically required to be symmetric or remotely accessible. The following kinds of data objects are symmetric:
+\begin{itemize}
+  \item Fortran data objects in common blocks or with the  SAVE  attribute. These data objects	must not be defined in a dynamic shared object (DSO).
+  \item Non-stack C and C++ variables.   These  data	objects must  not  be defined in a DSO.
+  \item Fortran arrays allocated with \textit{shpalloc} 
+  \item C and C++ data allocated by \textit{shmalloc}
+\end{itemize}       
 
 Data transfer in \openshmem is possible through several one-sided put
 (for write) and get (for read) operations, as well as various collective
@@ -98,3 +86,14 @@ operation on a symmetric variable ``x'', no other \openshmem atomic
 operation may access ``x''.  After the increment, ``x'' will have
 increased its value by 1 on the target PE, at which point other
 atomic operations may then modify that ``x''.
+
+%  %Memory model
+%    *Each OpenSHMEM PEs may have symmetric memory that is accessible by other PEs. 
+%    *Symmetric memory is a region of memory where all the an instance of a data objects is replicated across PEs, have 
+%     the same the same layout and relative offset.
+%    *All PEs can allocate a symmetric data objects using the symmetric heap, but they must do so as a collective operation. (is there a barrier after shmalloc?)
+%    *All writes to symmetric memory are relaxed (I'm not sure if this is the completion semantics) and are guaranteed to be visible to other PEs after a barrier_all, barrier(?), quiet, (what about wait? does it means iti sonly visible to me?) 
+%    *Calls to barrier, barrier_all, quiet, wait, lock, atomics, are meant to guarantee memory consistency across PEs.
+%    *Read/Writes to symmetic data object may appear after startpe or after a the symmetric data object has been allocated in the symmetric heap (if it is a dynamic).
+%    *Operations like reduction, collect, etc guarantee memory consistency after completion(?)
+%    *Data races are possible in OpenSHMEM if multiple PEs write/read a symmetric data object from a single PE without proper synchronization.  
