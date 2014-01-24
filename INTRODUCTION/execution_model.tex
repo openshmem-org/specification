@@ -45,7 +45,7 @@ Consistent with the SPMD nature of the \openshmem programming model  is  the con
 
 Data transfer in \openshmem is possible through several one-sided put
 (for write) and get (for read) operations, as well as various collective
-routines such as broadcasts and reductions.
+routines such as broadcasts and reductions. Since the library provides the flexibility of one-sided operations the execution pattern is depends on the how the programmer decides to distribute work amongst different PEs and the synchronization and ordering operations used.
 
 Query routines are available to gather information about the execution.
 \openshmem also provides synchronization routines to coordinate data
@@ -53,7 +53,7 @@ transfers and other operations.
 
 It is up to the implementation how to handle the finalization of the
 \openshmem library and any other resources initialized by the library:
-there is currently no explicit call for the programmer.
+there is currently no explicit call defined in the \openshmem specification.
 
 \subsection{Communication Progress}
 
