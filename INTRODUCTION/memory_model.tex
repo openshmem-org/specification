@@ -1,7 +1,38 @@
+%Outline
+%%Exectution model
+%   *Define what is a OpenSHMEM program: a set of processes (either SPMD or MIMD?) where each process has its own 'local' (private) memory and symmetric memory regions that may be accessible by any PEs.
+%   *Each OpenSHMEM process is called a processing element (PE)
+%   *Each PE may be mapped to many to one hardware cores/threads or less.
+%   *The number of PEs is specified at launch/runtime.
+%   *Each PE must call startpe to initialize the OpenSHMEM runtime, before any other call for OpenSHMEM. There is an implicit barrier at startpe.
+%   *Each PE executes asynchronously following Fortran or program execution in C [ISO/IEC00 Sec. 5.1.2.3]
+%   *Each PE will have a unique global identifier and the execution of a program may depend on the PE id, if executed in SPMD.
+%   *PE id may be used for library calls synchronizations, control flow constructs language  in C/Fortran
+%   *PE may allocate symmetric data objects via a symmetric heap 
+%   *As of now, PEs may finish execution at any time by returning from the main function. (no call to shmem_finalize yet!)
+%   
+%  %Memory model
+%    *Each OpenSHMEM PEs may have symmetric memory that is accessible by other PEs. 
+%    *Symmetric memory is a region of memory where all the an instance of a data objects is replicated across PEs, have 
+%     the same the same layout and relative offset.
+%    *All PEs can allocate a symmetric data objects using the symmetric heap, but they must do so as a collective operation. (is there a barrier after shmalloc?)
+%    *All writes to symmetric memory are relaxed (I'm not sure if this is the completion semantics) and are guaranteed to be visible to other PEs after a barrier_all, barrier(?), quiet, (what about wait? does it means iti sonly visible to me?) 
+%    *Calls to barrier, barrier_all, quiet, wait, lock, atomics, are meant to guarantee memory consistency across PEs.
+%    *Read/Writes to symmetic data object may appear after startpe or after a the symmetric data object has been allocated in the symmetric heap (if it is a dynamic).
+%    *Operations like reduction, collect, etc guarantee memory consistency after completion(?)
+%    *Data races are possible in OpenSHMEM if multiple PEs write/read a symmetric data object from a single PE without proper synchronization.  
+%
+%This comes from the UPC spec:
+%The memory consistency model in a language defines the order in which the results of write operations may be observed through read operations.
+%The behavior of a OpenSHMEM program may depend on the timing of accesses to symetric variables on PEs, so in general a program defines a set of possible executions, 
+%rather than a single execution. The memory consistency model constrains the set of possible executions for a given program; the user may then rely 
+%on properties that are true of all of those executions.
+
+
 
 \section{Memory Model}
 
-The \openshmem specification defines how data is stored in the memory
+The \openshmem{} specification defines how data is stored in the memory
 of each PE and how data objects are made remotely accessible to all
 other PEs.
 
