@@ -32,8 +32,8 @@ CALL SHMEM_REAL_PUT (target, source, len, pe)
 \desB{  
        \argRow{IN}{target}{Data object to be updated on the remote \ac{PE}. This data object must be remotely accessible.}
        \argRow{OUT}{source}{Data object containing the data to be copied.}
-       \argRow{IN}{len}{Number of elements in the \VAR{target} and \VAR{source} arrays. \VAR{len} must be of type integer. If you are using Fortran, it must be a constant, variable, or array element of default integer type.}
-        \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be of type integer. If you are using Fortran, it must be a constant, variable, or array element of default integer type.}
+       \argRow{IN}{len}{Number of elements in the \VAR{target} and \VAR{source} arrays. \VAR{len} must be of type integer. If you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
+        \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be of type integer. If you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
  }
  %API description
  {   The  routines  return  after the data has been copied out of the source
@@ -50,7 +50,7 @@ CALL SHMEM_REAL_PUT (target, source, len, pe)
     The  target  and source data  objects must conform to certain typing
     constraints, which are as follows: } 
     {
-       \cRow{shmem\_putmem}{ Fortran:  Any noncharacter type. C:	 Any data  type.   len	is  scaled  in bytes.} 
+       \cRow{shmem\_putmem}{ \Fortran:  Any noncharacter type. \Clang:	 Any data  type.   len	is  scaled  in bytes.} 
        \cRow{shmem\_put4, shmem\_put32}{Any  noncharacter type that has a storage size equal to \CONST{32} bits. }
        \cRow{shmem\_put4, shmem\_put32}{Any  noncharacter type that has a storage size equal to \CONST{32} bits.}
        \cRow{shmem\_put8,  shmem\_put64}{Any noncharacter type that has a  storage size equal to \CONST{64} bits.}
@@ -69,7 +69,7 @@ CALL SHMEM_REAL_PUT (target, source, len, pe)
 \desR{None.}
 
 % Notes. If there are no notes, this field can be left empty.
-\notesB{    If you are using Fortran, data types must  be  of  default  size.   For
+\notesB{    If you are using \Fortran, data types must  be  of  default  size.   For
        example, a  real  variable  must  be  declared as  \CONST{REAL},  \CONST{REAL*4},  or
        \CONST{REAL(KIND=4)}.       
 }

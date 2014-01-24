@@ -33,10 +33,10 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe)
      \argRow{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe} that contains the data to be copied. 
      This data object must be remotely accessible.}
      \argRow{IN}{nelems}{Number of elements in the target and source arrays. \VAR{nelems} must
-		 be of type integer. If you are using Fortran, it must be a
+		 be of type integer. If you are using \Fortran, it must be a
 		 constant, variable, or array element of default integer type.}
        \argRow{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must be of type integer. If
-		 you are using Fortran, it must be a constant, variable, or array element of default integer type.}
+		 you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
  }
 %API description
 {
@@ -50,7 +50,7 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe)
     \desTB{The  target and source data objects must conform to typing constraints,
        which are as follows:}
        {
-     \cRow{shmem\_getmem}{Fortran: Any noncharacter type. C: Any  data  type.
+     \cRow{shmem\_getmem}{\Fortran: Any noncharacter type. \Clang: Any  data  type.
     nelems is scaled in bytes.}
       \cRow{ shmem\_get4, shmem\_get32}{Any  noncharacter type that has a storage
 				     size equal to \CONST{32} bits.}
@@ -71,7 +71,7 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe)
 				     and target variables are ignored.}
        \cRow{SHMEM\_COMPLEX\_GET}{Elements of type complex of default
        size.}
-      \cRow{SHMEM\_DOUBLE\_GET}{Fortran: Elements of type double precision.}
+      \cRow{SHMEM\_DOUBLE\_GET}{\Fortran: Elements of type double precision.}
       \cRow{SHMEM\_INTEGER\_GET}{Elements of type integer.}
        \cRow{SHMEM\_LOGICAL\_GET}{Elements of type logical.}
        \cRow{SHMEM\_REAL\_GET}{Elements of type real.}
@@ -84,9 +84,9 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe)
 }
 \exampleB{
        \exampleITEMF
-        {Consider this simple example for Fortran.}
+        {Consider this simple example for \Fortran.}
         {./EXAMPLES/shmem_get_example.f90}
         {}
 }
-\rcomment{Manju: Fortran examples are not clearly readable \\}
+\rcomment{Manju: \Fortran{} examples are not clearly readable \\}
 \eAPI
