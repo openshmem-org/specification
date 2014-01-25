@@ -1,20 +1,18 @@
 
-\section{The \openshmem Project}
+\section{The \openshmem{} Project}
 %\subsection{What is \openshmem ?}
 
-There are currently various SHMEM implementations available for
+\openshmem{} is a specification that aims at consolidating the different
+SHMEM versions provided by vendors, laboratories and universities 
+into a single widely accepted specification. There are currently various vendor-specific SHMEM implementations available for
 different platforms. These versions have subtle differences from one
 another, and generally, code written using any one of these
-implementations is not directly portable to the others.
-
-\openshmem aims to address this situation by creating a process that
-builds a new, open specification to consolidate the various extant
-SHMEM versions into a widely accepted standard.
-
-A result of this process will be an initial reference implementation
-based on the SGI SHMEM that can serve as a starting point for vendors
-and library developers. New features and enhancements can be incorporated
-by the community as agreed and desired. Additionally, \openshmem aims
+implementations is not directly portable to the others. Additionally, \openshmem{} aims
 to produce a portable specification enabling programmers to write
 SHMEM code that will run with little effort on as many different platforms
 as possible.
+
+The \openshmem{} specification is widely accepted by the community and is the de-facto
+standard for SHMEM.  For vendors interested in implementing OpenSHMEM, there is an open source reference implementation
+that can serve as a starting point for vendors and library developers to develop their own libraries or to experiment with extensions. 
+This reference implementation is available at www.openshmem.org.
