@@ -7,19 +7,19 @@
 % and Fortran programs that use constants defined by \openshmem must
 % \lstinline[basicstyle={\ttfamily},language=Fortran]!include 'mpp/shmem.fh'!. 
 
-C and C++ programs that use the \openshmem library \emph{must}
+\Clang{} and \Cpp{} programs that use the \openshmem library \emph{must}
 
 \begin{lstlisting}[language=C++]
 #include <shmem.h>
 \end{lstlisting}
 
-All Fortran \openshmem programs \emph{should}
+All \Fortran{} \openshmem programs \emph{should}
 
 \begin{lstlisting}[language=Fortran]
 include 'shmem.fh'
 \end{lstlisting}
 
-and Fortran \openshmem programs that use constants defined by \openshmem
+and \Fortran{} \openshmem programs that use constants defined by \openshmem
 \emph{must}
 
 \begin{lstlisting}[language=Fortran]
@@ -29,13 +29,13 @@ include 'shmem.fh'
 \subsubsection{Compatibility Note}
 
 Implementations \emph{must} also provide these header files so that
-they can be referenced in C and C++ as
+they can be referenced in \Clang{} and \Cpp{} as
 
 \begin{lstlisting}[language=C++]
 #include <mpp/shmem.h>
 \end{lstlisting}
 
-and in Fortran as
+and in \Fortran{} as
 
 \begin{lstlisting}[language=Fortran]
 include 'mpp/shmem.fh'

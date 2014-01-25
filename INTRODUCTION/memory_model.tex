@@ -28,35 +28,33 @@
 %rather than a single execution. The memory consistency model constrains the set of possible executions for a given program; the user may then rely 
 %on properties that are true of all of those executions.
 
-
-
 \section{Memory Model}
 
-The \openshmem{} specification defines how data is stored in the memory
-of each PE and how data objects are made remotely accessible to all
-other PEs.
+In \openshmem{} each \ac{PE } contains local private memory and  symmetric memory that 
+are accessible by all\ac{PE}s. Data objects accessible by all the \ac{PE}s are defined as symmetric objects.
+A  symmetric data object can be any object stored in the global or static sections of the code as defined by the memory model of ~\Clang{} or ~\Fortran (\emph{e.g.} in the ELF executable format), 
+or allocated in a symmetric heap.  All instances of the same symmetric object have the same \textit{relative memory offset}, size and type on all \ac{PE}s. 
+%Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs.
+Another term  for  symmetric data objects is "remotely accessible data objects."  The following kinds of data objects are symmetric:
+\begin{itemize}
+  \item Fortran data objects in common blocks or with the  SAVE  attribute. These data objects	must not be defined in a dynamic shared object (DSO).
+  \item Non-stack C and C++ variables.   These  data	objects must  not  be defined in a DSO.
+  \item Fortran arrays allocated with \textit{shpalloc} 
+  \item C and C++ data allocated by \textit{shmalloc}
+\end{itemize}       
 
-Data objects can be stored in a private local memory address or in
-a remotely accessible memory address space. Objects in the private
-address space can only be accessed by the PE itself; these data objects
-cannot be accessed by other PEs via \openshmem routines. Remotely accessible
-objects, however, can be accessed by remote PEs using \openshmem routines.
-Remotely accessible data objects are also known as Symmetric Objects.
-An object is symmetric if it has a corresponding object with the same
-type, size and offset on all other PEs. Examples of Symmetric Objects
-are static and global variables in C and C++, which are often allocated
-at the same address on all PEs where the program is being executed
-(\emph{e.g.} in the ELF executable format). See Figure \ref{fig:SymmetricHeap1}
-for an example of how Symmetric Memory Objects may be arranged in
-memory.
+In \openshmem, access to symmetric objects is done via  one-sided put (for write) and gets (for read) calls as well as various collective
+calls such as broadcasts and reductions.  Atleast one of the the parameters (target or source) of these calls is required to be symmetric or remotely accessible. 
 
-\openshmem routines allow the creation of dynamically allocated Symmetric
-data objects. These objects are created in a special memory region
-called the Symmetric Heap, which is created during execution at locations
-determined by the implementation, meaning the Symmetric Heap may be
-in different memory regions on different PEs. \openshmem has nothing
+All \ac{PE}s may allocate symmetric data objects on the symmetric heap, but they must do so as a collective operation. 
+The memory region of the symmetric heap, which is created by all \ac{PE}s during the program initialization is implementation dependent and 
+may be different on all the \ac{PE}s. \openshmem has nothing
 to say regarding the underlying memory layout; it is up to the implementation
-to decide how to handle the Symmetric Heap.
+to decide how to implement the symmetric heap. Private data objects in \openshmem are stored in the local memory of each \ac{PE} 
+and follow the memory model of \Clang{} or \Fortran{}. Objects that reside in the private address space can only be accessed by the PE itself; these data objects
+cannot be accessed by other PEs via \openshmem{} routines. 
+
+
 
 %\begin{figure}[H]
 %\noindent \begin{centering}

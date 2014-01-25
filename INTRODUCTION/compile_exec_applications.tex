@@ -10,10 +10,10 @@ The commands are styled after wrapper programs found in many MPI implementations
 \subsection{Compilation}
 
 
-\subsubsection{Applications written in C}
+\subsubsection{Applications written in \Clang}
 
 Assuming that the implementation provides a wrapper program named
-\textbf{oshcc}, to aid in the compilation of C applications, the wrapper
+\textbf{oshcc}, to aid in the compilation of \Clang{} applications, the wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
@@ -23,14 +23,14 @@ oshcc <compiler options> -o myprogram myprogram.c
 
 The program arguments for \textbf{oshcc} are:
 \begin{description}
-\item [{<compiler\ options>}] Options understood by the underlying C compiler
+\item [{<compiler\ options>}] Options understood by the underlying \Clang{} compiler
 called by \textbf{oshcc}.
 \end{description}
 
-\subsection{Applications written in C++}
+\subsection{Applications written in \Cpp}
 
 Assuming that the implementation provides a wrapper program named
-\textbf{oshCC}, to aid in the compilation of C++ applications, the
+\textbf{oshCC}, to aid in the compilation of \Cpp{} applications, the
 wrapper could be called as follows:
 
 \begin{lstlisting}[language=bash]
@@ -40,14 +40,14 @@ oshCC <compiler options> -o myprogram myprogram.cpp
 
 The program arguments for \textbf{oshCC} are:
 \begin{description}
-\item [{<compiler\ options>}] Options understood by the underlying C++
+\item [{<compiler\ options>}] Options understood by the underlying \Cpp{}
 compiler called by \textbf{oshCC}.
 \end{description}
 
-\subsection{Applications written in Fortran}
+\subsection{Applications written in \Fortran}
 
 Assuming that the implementation provides a wrapper program named
-\textbf{oshfort}, to aid in the compilation of Fortran applications,
+\textbf{oshfort}, to aid in the compilation of \Fortran{} applications,
 the wrapper could be called as follows:
 
 \begin{lstlisting}[language=bash]
@@ -57,7 +57,7 @@ oshfort <compiler options> -o myprogram myprogram.f
 
 The program arguments for \textbf{oshfort} are:
 \begin{description}
-\item [{<compiler\ options>}] Options understood by the underlying Fortran
+\item [{<compiler\ options>}] Options understood by the underlying \Fortran{}
 compiler called by \textbf{oshfort}.
 \end{description}
 

@@ -19,39 +19,40 @@
     
 
 \section{Execution Model}
-\openshmem uses a Single Process Multiple Data (SPMD) approach to express
-parallelism.  An \openshmem application makes use of multiple processors,
-referred to as Processing Elements or PEs, to complete operations
-in parallel. Although all PEs execute the same program, they may have different execution paths and will execute asynchronously following Fortran or program execution in C. Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of PEs are specified at runtime.
+%\openshmem  can use a single process multiple data (SPMD) or MIMD 
+%parallelism.  An \openshmem application makes use of multiple processors,
+%referred to as Processing Elements or PEs, to complete operations
+%in parallel. 
+An OpenSHMEM program consists of a set of processes, called \ac{PEs} where each process has its own 'local' (private) memory and symmetric memory regions that may be accessible by any PEs.
+Although all PEs executes in an SPMD-like fashion, they may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang{}. Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of PEs is specified at runtime.
 
-\openshmem requires initialization before using any of the library
-routines. To this end, the program must  issue a call to the \textbf{start\_pes()}
-routine before any other OpenSHMEM library operations. \textbf{start\_pes()} performs any required initialization
-steps, such as setting up the symmetric heap for every PE and creating
-the PE numbers which act like unique global identifiers for the duration of the program. These PE numbers are integers assigned in a monotonically
-increasing manner from zero to the total number of PEs minus 1. The PEs do not exist till after \textbf{start\_pes()} returns.
+\openshmem requires initialization before using any of the OpenSHMEM library
+routines by calling \textbf{start\_pes()} during the initialization phase of a program. 
+The PEs do not exist till after \textbf{start\_pes()} returns. \textbf{start\_pes()} performs any required initialization steps, such as setting up the symmetric heap for every PE and creating
+the PE numbers which act like unique global identifiers for the duration of the program. These PE identifiers are integers assigned in a monotonically
+increasing manner from zero to the total number of PEs minus 1. PE identifiers may be used for library calls synchronizations, or control flow constructs of \Clang{} or \Fortran{}
 
 %The symmetric heap is one of the memory spaces
 %that is remotely accessible by all PEs. The symmetric heap is discussed
 %further in the Memory Model section. The PE numbers are the
 %identifiers used to refer to each of the PEs involved in the execution.
-Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs. Another	term  for  symmetric data objects is "remotely accessible data objects."  In the interface definitions for \openshmem data  transfer	 functions,  one or more of the parameters are typically required to be symmetric or remotely accessible. The following kinds of data objects are symmetric:
-\begin{itemize}
-  \item Fortran data objects in common blocks or with the  SAVE  attribute. These data objects	must not be defined in a dynamic shared object (DSO).
-  \item Non-stack C and C++ variables.   These  data	objects must  not  be defined in a DSO.
-  \item Fortran arrays allocated with \textit{shpalloc} 
-  \item C and C++ data allocated by \textit{shmalloc}
-\end{itemize}       
-
-Data transfer in \openshmem is possible through several one-sided put
-(for write) and get (for read) operations, as well as various collective
-routines such as broadcasts and reductions. Since the library provides the flexibility of one-sided operations the execution pattern is depends on the how the programmer decides to distribute work amongst different PEs and the synchronization and ordering operations used.
-
-Query routines are available to gather information about the execution.
-\openshmem also provides synchronization routines to coordinate data
-transfers and other operations. 
-
-It is up to the implementation how to handle the finalization of the
+%Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs. Another	term  for  symmetric data objects is "remotely accessible data objects."  In the interface definitions for \openshmem data  transfer	 functions,  one or more of the parameters are typically required to be symmetric or remotely accessible. The following kinds of data objects are symmetric:
+%\begin{itemize}
+%  \item Fortran data objects in common blocks or with the  SAVE  attribute. These data objects	must not be defined in a dynamic shared object (DSO).
+%  \item Non-stack C and C++ variables.   These  data	objects must  not  be defined in a DSO.
+%  \item Fortran arrays allocated with \textit{shpalloc} 
+%  \item C and C++ data allocated by \textit{shmalloc}
+%\end{itemize}       
+%
+%Data transfer in \openshmem is possible through several one-sided put
+%(for write) and get (for read) operations, as well as various collective
+%routines such as broadcasts and reductions. Since the library provides the flexibility of one-sided operations the execution pattern is depends on the how the programmer decides to distribute work amongst different PEs and the synchronization and ordering operations used.
+%
+%Query routines are available to gather information about the execution.
+%\openshmem also provides synchronization routines to coordinate data
+%transfers and other operations. 
+As of now, an OpenSHMEM program finishes execution by returning from the main function. 
+It is up to the implementation on how to handle the finalization of the
 \openshmem library and any other resources initialized by the library:
 there is currently no explicit call defined in the \openshmem specification.
 

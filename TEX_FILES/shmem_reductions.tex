@@ -108,7 +108,7 @@ CALL SHMEM_INT4_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
  %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
-% Arguments table. If no arguments you can use \argRow{NONE}{}{} 
+% Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{   
        \argRow{IN}{target}{A symmetric array, of length \VAR{nreduce} elements, to receive the result of the reduction operations. The data type of target varies with the version of the reduction routine being called. When calling from \CorCpp,	refer to the SYNOPSIS section for data type information. }
 	\argRow{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that contains one element for each separate reduction operation.	The source argument must have the same data type as target.}
