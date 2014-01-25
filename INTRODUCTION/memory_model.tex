@@ -30,10 +30,9 @@
 
 \section{Memory Model}
 
-In \openshmem{} each \ac{PE } contains local private memory and  symmetric memory that 
-are accessible by all\ac{PE}s. Data objects accessible by all the \ac{PE}s are defined as symmetric objects.
-A  symmetric data object can be any object stored in the global or static sections of the code as defined by the memory model of ~\Clang{} or ~\Fortran (\emph{e.g.} in the ELF executable format), 
-or allocated in a symmetric heap.  All instances of the same symmetric object have the same \textit{relative memory offset}, size and type on all \ac{PE}s. 
+In \openshmem{} each \ac{PE } has access to its own local private memory (\textbf{not} accessible to other PEs) and  a remotely accessible symmetric memory that 
+can be read by or written to by all\ac{PE}s. Data objects accessible by all the \ac{PE}s are defined as symmetric objects.
+A  symmetric data object can be any object stored in the global or static sections of the code as defined by the memory model of ~\Clang{} or ~\Fortran (\emph{e.g.} in the ELF executable format), or allocated in a symmetric heap.  All instances of the same symmetric object have the same \textit{relative memory offset}, size and type on all \ac{PE}s. 
 %Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs.
 Another term  for  symmetric data objects is "remotely accessible data objects."  The following kinds of data objects are symmetric:
 \begin{itemize}
@@ -43,8 +42,8 @@ Another term  for  symmetric data objects is "remotely accessible data objects."
   \item C and C++ data allocated by \textit{shmalloc}
 \end{itemize}       
 
-In \openshmem, access to symmetric objects is done via  one-sided put (for write) and gets (for read) calls as well as various collective
-calls such as broadcasts and reductions.  Atleast one of the the parameters (target or source) of these calls is required to be symmetric or remotely accessible. 
+In \openshmem, access to symmetric objects is done via one-sided put (for write) and gets (for read) calls as well as various collective
+calls such as broadcasts and reductions.  At least one of the the parameters (target or source) of these calls is required to be symmetric or remotely accessible. 
 
 All \ac{PE}s may allocate symmetric data objects on the symmetric heap, but they must do so as a collective operation. 
 The memory region of the symmetric heap, which is created by all \ac{PE}s during the program initialization is implementation dependent and 
