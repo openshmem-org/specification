@@ -30,7 +30,7 @@
 
 \section{Memory Model}
 
-In \openshmem{} each \ac{PE } has access to its own local private memory (\textbf{not} accessible to other PEs) and  a remotely accessible symmetric memory that 
+In \openshmem{} each \ac{PE} has access to its own local private memory (\textbf{not} accessible to other PEs) and  a remotely accessible symmetric memory that 
 can be read by or written to by all\ac{PE}s. Data objects accessible by all the \ac{PE}s are defined as symmetric objects.
 A  symmetric data object can be any object stored in the global or static sections of the code as defined by the memory model of ~\Clang{} or ~\Fortran (\emph{e.g.} in the ELF executable format), or allocated in a symmetric heap.  All instances of the same symmetric object have the same \textit{relative memory offset}, size and type on all \ac{PE}s. 
 %Consistent with the SPMD nature of the \openshmem programming model  is  the concept of symmetric data objects.  These are arrays or variables that exist with the same size,  type,	 and  relative	address	 on  all  PEs.
