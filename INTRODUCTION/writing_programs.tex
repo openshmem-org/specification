@@ -43,10 +43,3 @@ include 'mpp/shmem.fh'
 
 for backward compatbility with OpensHMEM 1.0 and SGI SHMEM.
 
-\subsection{Initialization}
-
-An \openshmem program must call \textbf{start\_pes() }before any other \openshmem routine. If
-\textbf{start\_pes()} is not called first, the subsequent behavior of
-\openshmem is undefined.  Calling \textbf{start\_pes()} more than once
-has no subsequent effect. The parameter to \textbf{start\_pes()} is
-ignored; the number of PEs is taken from the invoking environment.
