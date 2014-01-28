@@ -1,0 +1,25 @@
+\section{Programming Model Overview}
+The \openshmem programming model consists of library functions that provide
+low-latency, high-bandwidth communication  for  use  in  highly  parallelized 
+scalable programs. The functions in the \openshmem \ac{API} provide a programming 
+model for exchanging data between cooperating parallel processes. The resulting programs are similar 
+in style to \ac{MPI} programs. The \openshmem \ac{API} can be used either alone 
+or in combination with \ac{MPI} functions in the same parallel program.
+
+A \openshmem program is \ac{SPMD} in style. The
+\openshmem  processes,  called  processing elements or \ac{PE}s, all start at the
+same time, and they all run the same program.  Usually the \ac{PE}s  perform
+computation on their own subdomains of the larger problem, and periodically 
+communicate with other \ac{PE}s to exchange information on which the
+next computation phase depends.The \openshmem functions minimize the overhead associated with data transfer
+requests, maximize bandwidth, and minimize data latency.  Data latency
+is  the  period  of  time that starts when a \ac{PE} initiates a transfer of data 
+and ends when a \ac{PE} can use the data.
+
+\openshmem functions support remote data transfer through \FUNC{put} operations, which  transfer data to a 
+different \ac{PE}, get operations, which transfer data from a different \ac{PE}, and remote pointers, which 
+allow direct  references  to  data objects owned by another \ac{PE}.  Other operations supported are \FUNC{collective} 
+\FUNC{broadcast} and \FUNC{reduction}, \FUNC{barrier synchronization}, and \FUNC{atomic memory operations}. 
+An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
+or local data object.
+
