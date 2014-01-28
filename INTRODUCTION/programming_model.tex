@@ -18,13 +18,13 @@ and ends when a \ac{PE} can use the data.
 
 \openshmem functions support remote data transfer through \FUNC{put} operations, which  transfer data to a 
 different \ac{PE}, get operations, which transfer data from a different \ac{PE}, and remote pointers, which 
-allow direct  references  to  data objects owned by another \ac{PE}.  Other operations supported are \FUNC{collective} 
+allow direct  references  to  data objects owned by another \ac{PE}. Other operations supported are \FUNC{collective} 
 \FUNC{broadcast} and \FUNC{reduction}, \FUNC{barrier synchronization}, and \FUNC{atomic memory operations}. 
 An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
 or local data object.
 
 The \openshmem{} specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
-An overview of the important \openshmem{} operations is described below:
+The \Cpp{} interface is currently the same as that for \Clang. An overview of the important \openshmem{} operations is described below:
 
 \begin{enumerate}
 \item \textbf{Data Transfers }

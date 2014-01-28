@@ -27,6 +27,8 @@ An \openshmem program consists of a set of processes, called \ac{PE}s where each
 Although \openshmem follows the SPMD execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang. Each \ac{PE} may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
 
 \openshmem requires initialization before using any of the OpenSHMEM library
+routines by calling \textbf{start\_pes()} .%during the initialization phase of a program. %SP:repetitive.
+The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes} performs any required initialization steps, such as setting up the symmetric heap for every \ac{PE} and creating and assigning \ac{PE} numbers which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran{}. Some collective operations require the creation of an \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the \activeset{} calls a \openshmem{} collective routine, undefined  behavior results.
 
 %The symmetric heap is one of the memory spaces
 %that is remotely accessible by all PEs. The symmetric heap is discussed
@@ -98,10 +100,10 @@ in combination with other routines, either inside OpenSHMEM's or
 outside.
 
 For example: during the execution of a remote integer increment
-operation on a symmetric variable ``x'', no other \openshmem atomic
-operation may access ``x''.  After the increment, ``x'' will have
+operation on a symmetric variable \VAR{x}, no other \openshmem atomic
+operation may access \VAR{x}.  After the increment, \VAR{x} will have
 increased its value by 1 on the target \ac{PE}, at which point other
-atomic operations may then modify that ``x''.
+atomic operations may then modify that \VAR{x}.
 
 %  %Memory model
 %    *Each OpenSHMEM PEs may have symmetric memory that is accessible by other PEs. 
