@@ -23,13 +23,13 @@
 %parallelism.  An \openshmem application makes use of multiple processors,
 %referred to as Processing Elements or PEs, to complete operations
 %in parallel. 
-Although \openshmem follows the SPMD execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang. Each \ac{PE} may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
+Although \openshmem follows the SPMD execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang.  Each \ac{PE} may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
 
 \openshmem requires initialization before using any of the \openshmem library
-routines by calling \textbf{start\_pes()} .%during the initialization phase of a program. %SP:repetitive.
-The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes} performs any required initialization steps, such as setting up the symmetric heap for every \ac{PE} and creating and assigning \ac{PE} numbers which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. Some collective operations require the creation of an \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the \activeset{} calls an \openshmem{} collective routine, undefined  behavior results.
+routines by calling \textbf{start\_pes()}.  %during the initialization phase of a program. %SP:repetitive.
+The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes} performs any required initialization steps, such as setting up the symmetric heap for every \ac{PE} and creating and assigning \ac{PE} numbers which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. Some collective operations require the creation of an \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the \activeset{} calls an \openshmem collective routine, undefined  behavior results.
 An OpenSHMEM program consists of a set of processes, called \ac{PE}s where each process has its own 'local' (private) memory and symmetric memory regions that may be accessible by any \ac{PE}s.
-Although \openshmem follows the \ac{SPMD} execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang{} or \Cpp{}. Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
+Although \openshmem follows the \ac{SPMD} execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang{} or \Cpp.  Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
 
 \openshmem requires initialization before using any of the OpenSHMEM library
 routines by calling \FUNC{start\_pes}.%during the initialization phase of a program. %SP:repetitive.
@@ -37,8 +37,7 @@ The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes
 which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers 
 are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran{}. Some collective operations require the creation of an 
 \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the \activeset{} calls a 
-\openshmem{} collective routine, undefined  behavior results.
->>>>>>> c831d17fe1d9bed5d7b4f923717bd68cd76ba664
+\openshmem collective routine, undefined  behavior results.
 
 %The symmetric heap is one of the memory spaces
 %that is remotely accessible by all PEs. The symmetric heap is discussed
