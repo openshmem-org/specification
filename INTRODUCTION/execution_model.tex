@@ -28,7 +28,7 @@ Although \openshmem follows the SPMD execution model, different \ac{PE}s may hav
 
 \openshmem requires initialization before using any of the OpenSHMEM library
 routines by calling \textbf{start\_pes()} .%during the initialization phase of a program. %SP:repetitive.
-The PEs do not exist till after \textbf{start\_pes()} returns. \textbf{start\_pes()} performs any required initialization steps, such as setting up the symmetric heap for every PE and creating and assigning PE numbers which act like unique global identifiers for the duration of the program. These PE identifiers are integers assigned in a monotonically increasing manner from zero to the total number of PEs minus 1. PE identifiers are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran{}. Some collective operations require the creation of an active set, which is  group of PEs that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the active set calls a SHMEM collective routine,  undefined  behavior results.
+The PEs do not exist till after \textbf{start\_pes()} returns. \textbf{start\_pes()} performs any required initialization steps, such as setting up the symmetric heap for every PE and creating and assigning PE numbers which act like unique global identifiers for the duration of the program. These PE identifiers are integers assigned in a monotonically increasing manner from zero to the total number of PEs minus 1. PE identifiers are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran{}. Some collective operations require the creation of an \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the \activeset{} calls a \openshmem{} collective routine, undefined  behavior results.
 
 %The symmetric heap is one of the memory spaces
 %that is remotely accessible by all PEs. The symmetric heap is discussed
@@ -82,7 +82,7 @@ collective functions. There are two special cases:
 \item The \FUNC{shmem\_barrier} function allows the same \VAR{pSync} array to be used
           on consecutive calls as long as the active \ac{PE} set does not change.
 \item  If the same collective function is called multiple times with the
-          same active set, the calls may alternate between two \VAR{pSync} arrays.
+          same \activeset, the calls may alternate between two \VAR{pSync} arrays.
           The \openshmem{} functions guarantee that a first call is completely finished by 
           all \ac{PE}s by the time processing of a third  call  begins  on
           any \ac{PE}.          
