@@ -23,3 +23,63 @@ allow direct  references  to  data objects owned by another \ac{PE}.  Other oper
 An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
 or local data object.
 
+The \openshmem{} specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
+An overview of the important \openshmem{} operations is described below:
+
+\begin{enumerate}
+\item \textbf{Data Transfers }
+
+\begin{enumerate}
+\item One-sided \FUNC{puts} : the initiator \ac{PE} (active side) specifies the local
+data to be written to the target \ac{PE}'s (passive side) memory. 
+\item One-sided \FUNC{gets} : an explicit fetch operation is used to copy a variable
+amount of data from a remote process and store it locally.\end{enumerate}
+\begin{description}
+\item [{{Note:}}] By avoiding the need for matching send and receive
+calls, \openshmem simplifies the communication process by reducing the
+number of calls required to have one \ac{PE} interact with other \ac{PE}s. 
+\end{description}
+\item \textbf{Synchronization Mechanisms }
+
+\begin{enumerate}
+\item \FUNC{Fence}: Ensures ordering of PUT operations to a specific \ac{PE}. 
+\item \FUNC{Quiet}: Ensures ordering of PUT operations to all \ac{PE}s. 
+\item \FUNC{Barrier}: A collective synchronization routine in which no \ac{PE} may leave
+the barrier prior to all \ac{PE}s entering the barrier. 
+\end{enumerate}
+\item \textbf{Collective Communication}
+
+\begin{enumerate}
+\item \FUNC{Broadcast}: Copy a block of data from one \ac{PE} to one or more remote
+PEs. 
+\item \FUNC{Collection}: Concatenate elements from the source array to a target
+array over the specified \ac{PE}s. 
+\item \FUNC{Reduction}: Perform an associative binary operation over the specified
+\ac{PE}s. 
+\end{enumerate}
+\item \textbf{Address Manipulation}
+
+\begin{enumerate}
+\item Allocating and deallocating memory blocks in the symmetric space.
+\end{enumerate}
+\item \textbf{Locks}
+
+\begin{enumerate}
+\item Implementation of mutual exclusion.
+\end{enumerate}
+\item \textbf{Atomic Memory Operations}
+
+\begin{enumerate}
+\item Swap, Conditional Swap, Add and Increment 
+\end{enumerate}
+\item \textbf{Data Cache control}
+
+\begin{enumerate}
+\item Implementation of mechanisms to exploit the capabilities of hardware
+cache if available.
+\end{enumerate}
+\end{enumerate}
+\begin{description}
+\item [{{Note:}}] More information about \openshmem routines can be found
+in the Library Routines section.
+\end{description}
