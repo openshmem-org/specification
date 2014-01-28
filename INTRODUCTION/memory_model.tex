@@ -28,10 +28,9 @@
 %rather than a single execution. The memory consistency model constrains the set of possible executions for a given program; the user may then rely 
 %on properties that are true of all of those executions.
 
-
-
 \section{Memory Model}
 
+<<<<<<< HEAD
 The \openshmem specification defines how data is stored in the memory
 of each \ac{PE} and how data objects are made remotely accessible to all
 other \ac{PE}s.
@@ -56,7 +55,11 @@ called the Symmetric Heap, which is created during execution at locations
 determined by the implementation, meaning the Symmetric Heap may be
 in different memory regions on different \ac{PE}s. \openshmem has nothing
 to say regarding the underlying memory layout; it is up to the implementation
-to decide how to handle the Symmetric Heap.
+to decide how to implement the symmetric heap. Private data objects in \openshmem are stored in the local memory of each \ac{PE} 
+and follow the memory model of \Clang{} or \Fortran{}. Objects that reside in the private address space can only be accessed by the PE itself; these data objects
+cannot be accessed by other PEs via \openshmem{} routines. 
+
+
 
 %\begin{figure}[H]
 %\noindent \begin{centering}

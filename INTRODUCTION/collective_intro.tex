@@ -1,0 +1,34 @@
+\section{Collective Operations}
+Collective operation is defined as communication or synchronization operation 
+on a group of \ac{PE}s called \activeset{}. The collective operations requires all
+\ac{PE}s in the \activeset{} to simulatenously call the operation. 
+A \ac{PE} that is not a part of \activeset{} calling the collective 
+operation results in an undefined behavior.
+
+The \activeset{} is defined by arguments PE\_start, logPE\_stride, 
+and PE\_size. The PE\_start is the starting \ac{PE} number, a log (base 2) of logPE\_stride 
+is the stride between \ac{PE}s, and PE\_size is the number of \ac{PE}s 
+participating in the \activeset{}. All \ac{PE}s participating in the 
+collective operations provides the same values for these arguments. 
+ 
+Another argument important to the collective operation is pSync, a symmetric work 
+array. All \ac{PE}s participating in a collective should pass the same
+pSync array. On completion of a collective call, the pSync is restored to its 
+original contents. The reuse of pSync array is allowed for a \ac{PE}, if all previous collective 
+operations using the pSync array is completed by all participating 
+\ac{PE}s. One can use a synchronization collective operation such as \barrier{}
+to ensure completion of previous collective operations.
+
+All collective operations defined in the specification are blocking. The 
+collective operations return on completion. The collective operation 
+The collective operations defined in the \openshmem{} specification 
+are :
+
+\begin{itemize}
+\item[] \broadcast{} 
+\item[] \barrier{}
+\item[] \barrierall{}
+\item[] \collect{}
+\item[] \reduction{} 
+\end{itemize} 
+

@@ -78,13 +78,15 @@
 \startchap
 \section*{Introduction}
 %\input{INTRODUCTION/introduction}
-\input{INTRODUCTION/overview}
+%\input{INTRODUCTION/overview}
 %\input{INTRODUCTION/introduction_pgas}
 \input{INTRODUCTION/osh_project}
-\input{INTRODUCTION/language_bindings}
+\input{INTRODUCTION/programming_model}
 \input{INTRODUCTION/memory_model}
 \input{INTRODUCTION/execution_model}
+\input{INTRODUCTION/library_constants.tex}
 \input{INTRODUCTION/environment_variables.tex}
+\input{INTRODUCTION/language_bindings}
 %\input{INTRODUCTION/synchronization_model} %SP:Moving to remote memory operations section as per discussion on 1/21/14
 
 \clearpage
@@ -113,7 +115,8 @@
 \input{TEX_FILES/shmem_g.tex} %Manju
 \input{TEX_FILES/shmem_iget.tex} %Manju
 \startchap
-\section*{Collective Operations}
+%\section*{Collective Operations}
+\input{INTRODUCTION/collective_intro}
 \input{TEX_FILES/shmem_barrier_all.tex} %Pasha
 \input{TEX_FILES/shmem_barrier.tex} %Tommy
 \input{TEX_FILES/shmem_broadcast.tex} %Pasha
@@ -127,7 +130,8 @@
 \section*{Point-to-point synchronization functions}%SP: Adding a chapter to include wait and wait until 
 %\input{TEX_FILES/shmem_wait.tex} %Swaroop
 \startchap
-\section*{Atomic Operations}
+%\section*{Atomic Operations}
+\input{INTRODUCTION/atomics_intro}
 \input{TEX_FILES/shmem_add.tex}%Tommy
 \input{TEX_FILES/shmem_cswap.tex} %Pasha
 \input{TEX_FILES/shmem_swap.tex} %Swaroop
@@ -154,7 +158,10 @@
 % Add acronyms here
 \begin{acronym}
 \acro{PE}{\emph{Processing Element}}
-\acro{PGAS}{emph{Partitioned Global Address Space}}
+\acro{PGAS}{\emph{Partitioned Global Address Space}}
+\acro{API}{\emph{Application Programming Interface}}
+\acro{MPI}{\emph{Message Passing Interface}}
+\acro{SPMD}{\emph{Single Program Multiple Data}}
 \end{acronym}
 
 \end{document}
