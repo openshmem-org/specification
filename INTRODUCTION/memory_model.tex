@@ -56,8 +56,8 @@ determined by the implementation, meaning the Symmetric Heap may be
 in different memory regions on different \ac{PE}s. \openshmem has nothing
 to say regarding the underlying memory layout; it is up to the implementation
 to decide how to implement the symmetric heap. Private data objects in \openshmem are stored in the local memory of each \ac{PE} 
-and follow the memory model of \Clang{} or \Fortran{}. Objects that reside in the private address space can only be accessed by the PE itself; these data objects
-cannot be accessed by other PEs via \openshmem{} routines. 
+and follow the memory model of \Clang{} or \Fortran{}. Objects that reside in the private address space can only be accessed by the \ac{PE} itself; these data objects
+cannot be accessed by other PEs via \openshmem routines. 
 
 
 
