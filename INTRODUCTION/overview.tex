@@ -1,18 +1,18 @@
 \section{Overview}
-\openshmem{} is a one-sided \ac{PGAS} library interface specification. In the \ac{PGAS} model, each process has local (or private) and 
-globally shared memory that can be accessible by all processes where portions of the shared memory may have affinity to a particular process. 
-\openshmem{} implements \ac{PGAS} using symmetric memory data objects to share information among processes or \ac{PE}s.   
-\openshmem{} provides interfaces to perform communication and synchronization operations on both local and symmetric memory. 
-\openshmem{} is a library and unlike UPC, CAF, Titanium, X10 and Chapel, which are all
-PGAS languages, it relies on the programmer to create, destroy, access symmetric data objects, and synchronize \ac{PE}s using library calls.
+\openshmem is a \ac{PGAS} library interface specification. In the \ac{PGAS} model each process has a local and 
+globally shared memory where portions of the shared memory may have affinity to a particular process. \openshmem 
+implements \ac{PGAS} using symmetric memory to share information among processes or \ac{PE}s.   
+It provides interfaces to perform communication and synchronization operations on both local and symmetric memory. 
+\openshmem is a library and unlike UPC, CAF, Titanium, X10 and Chapel, which are all
+PGAS languages, it relies on the programmer to use the library calls correctly.
 
 The \openshmem specification is a result of effort to standardize widely available SHMEM implementations. 
-The initial goal of the specification is to consolidate the existing vendor SHMEM implementations into a single specification, and  pave the way for 
-a de-facto standard for SHMEM driven by the \openshmem community. A de-facto standard enables portability of SHMEM programs, and 
+The initial goal of the specification is to consolidate existing vendor SHMEM implementations, and  pave the way for 
+a defacto standard for SHMEM with community involvement. This enables portability of SHMEM programs, and 
 allows vendors to build and optimize their hardware architecture for OpenSHMEM.
 
-The \openshmem{} specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
-Some of important \openshmem{} operations that you can do with \openshmem are as follows:
+The \openshmem specification defines routines, constants, variables, and language bindings for \Clang{} and \Fortran.
+Some of important \openshmem operations are as follows:
 
 \begin{enumerate}
 \item \textbf{Data Transfers }
@@ -24,7 +24,7 @@ data to be written to the target \ac{PE}'s (passive side) memory.
 amount of data from a remote process and store it locally.\end{enumerate}
 \begin{description}
 \item [{{Note:}}] By avoiding the need for matching send and receive
-calls, \openshmem simplifies the communication process by reducing the
+calls, \openshmem{}simplifies the communication process by reducing the
 number of calls required to have one \ac{PE} interact with other \ac{PE}s. 
 \end{description}
 \item \textbf{Synchronization Mechanisms }
@@ -39,7 +39,7 @@ the barrier prior to all \ac{PE}s entering the barrier.
 
 \begin{enumerate}
 \item Broadcast: Copy a block of data from one \ac{PE} to one or more remote
-PEs. 
+\ac{PE}s. 
 \item Collection: Concatenate elements from the source array to a target
 array over the specified \ac{PE}s. 
 \item Reduction: Perform an associative binary operation over the specified
