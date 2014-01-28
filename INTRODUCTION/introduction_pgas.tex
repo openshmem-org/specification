@@ -22,10 +22,10 @@ the target processor.
 The current high performance computing architectures prefer a combination
 of the above mentioned memory models, which is referred to \textbf{Partitioned
 Global Address Space} or PGAS for short. In PGAS, each processing
-element (PE) has access to its own private local memory and also to
+element (\ac{PE}) has access to its own private local memory and also to
 a shared memory space. This programming model enhances performance
 by exposing data/thread locality. PGAS programming languages include
-\textbf{Unified Parallel C (UPC)}, \textbf{Co-Array Fortran (CAF)},
+\textbf{Unified Parallel \Clang (UPC)}, \textbf{Co-Array \Fortran (CAF)},
 \textbf{Titanium}, \textbf{X-10} and \textbf{Chapel}.
 
 More information about PGAS can be found at the PGAS Forum website.\cite{pgasfor}
@@ -38,9 +38,9 @@ More information about PGAS can be found at the PGAS Forum website.\cite{pgasfor
 %      SHMEM stands for \textbf{SH}ared \textbf{MEM}ory.
 
 \openshmem is a library API that allows its participating processes (the
-places where work occurs are called Processing Elements or PEs) to
-view a Partitioned Global Address Space. Each PE is able to see
-variables with a common name, but each PE has its own local copy
+places where work occurs are called Processing Elements or \ac{PE}s) to
+view a Partitioned Global Address Space. Each \ac{PE} is able to see
+variables with a common name, but each \ac{PE} has its own local copy
 of the variable.
 
 The \openshmem library provides inter-processor communication using data
@@ -94,7 +94,7 @@ the barrier prior to all \ac{PE}s entering the barrier.
 
 \begin{enumerate}
 \item Broadcast: Copy a block of data from one \ac{PE} to one or more target
-PEs. 
+\ac{PE}s. 
 \item Collection: Concatenate elements from the source array to a target
 array over the specified \ac{PE}s. 
 \item Reduction: Perform an associative binary operation over the specified
