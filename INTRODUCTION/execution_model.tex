@@ -23,8 +23,13 @@
 %parallelism.  An \openshmem application makes use of multiple processors,
 %referred to as Processing Elements or PEs, to complete operations
 %in parallel. 
+Although \openshmem follows the SPMD execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang.  Each \ac{PE} may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
+
+\openshmem requires initialization before using any of the \openshmem library
+routines by calling \textbf{start\_pes()}.  %during the initialization phase of a program. %SP:repetitive.
+The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes} performs any required initialization steps, such as setting up the symmetric heap for every \ac{PE} and creating and assigning \ac{PE} numbers which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. Some collective operations require the creation of an \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the \activeset{} calls an \openshmem collective routine, undefined  behavior results.
 An OpenSHMEM program consists of a set of processes, called \ac{PE}s where each process has its own 'local' (private) memory and symmetric memory regions that may be accessible by any \ac{PE}s.
-Although \openshmem follows the \ac{SPMD} execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang{} or \Cpp{}. Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
+Although \openshmem follows the \ac{SPMD} execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang{} or \Cpp.  Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
 
 \openshmem requires initialization before using any of the OpenSHMEM library
 routines by calling \FUNC{start\_pes}.%during the initialization phase of a program. %SP:repetitive.
@@ -32,7 +37,7 @@ The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes
 which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers 
 are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran{}. Some collective operations require the creation of an 
 \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the active set call the routine. If a \ac{PE} not in the \activeset{} calls a 
-\openshmem{} collective routine, undefined  behavior results.
+\openshmem collective routine, undefined  behavior results.
 
 %The symmetric heap is one of the memory spaces
 %that is remotely accessible by all PEs. The symmetric heap is discussed
@@ -53,7 +58,7 @@ are used for other \openshmem library calls (such as collective synchronization)
 %Query routines are available to gather information about the execution.
 %\openshmem also provides synchronization routines to coordinate data
 %transfers and other operations. 
-As of now, an \openshmem{} program finishes execution by returning from the main function. 
+As of now, an \openshmem program finishes execution by returning from the main function. 
 It is up to the implementation on how to handle the finalization of the
 \openshmem library and any other resources initialized by the library:
 there is currently no explicit call defined in the \openshmem specification.
@@ -75,23 +80,23 @@ network hardware that offloads communication handling from processors.
 
 \subsection{Using the Symmetric \VAR{Work} and \VAR{pSync} Arrays}
 
-Multiple \VAR{pSync} arrays are often needed if a particular \ac{PE} calls a \openshmem{}
+Multiple \VAR{pSync} arrays are often needed if a particular \ac{PE} calls a \openshmem
 collective  function twice without intervening barrier synchronization.
 Problems would occur if some \ac{PE}s in the active set for call 2 arrive at
 call 2 before processing of call 1 is complete by all \ac{PE}s in the call 1
 active set.  You can use  \FUNC{shmem\_barrier}  or  \FUNC{shmem\_barrier\_all}  to
-perform  a  barrier  synchronization between consecutive calls to \openshmem{}
+perform  a  barrier  synchronization between consecutive calls to \openshmem
 collective functions. There are two special cases:
 \begin{itemize}
 \item The \FUNC{shmem\_barrier} function allows the same \VAR{pSync} array to be used
           on consecutive calls as long as the active \ac{PE} set does not change.
 \item  If the same collective function is called multiple times with the
           same \activeset, the calls may alternate between two \VAR{pSync} arrays.
-          The \openshmem{} functions guarantee that a first call is completely finished by 
+          The \openshmem functions guarantee that a first call is completely finished by 
           all \ac{PE}s by the time processing of a third  call  begins  on
           any \ac{PE}.          
 \end{itemize}
-Because  the \openshmem{} functions restore \VAR{pSync} to its original contents,
+Because  the \openshmem functions restore \VAR{pSync} to its original contents,
 multiple calls that use the same \VAR{pSync} array do not require that \VAR{pSync}
 be reinitialized after the first call.
 
@@ -100,7 +105,7 @@ be reinitialized after the first call.
 \openshmem contains a number of routines that operate on symmetric data
 atomically.  These routines guarantee that accesses by \openshmem's
 atomic operations will be exclusive, but do not guarantee exclusivity
-in combination with other routines, either inside \openshmem's or
+in combination with other routines, either inside OpenSHMEM's or
 outside.
 
 For example: during the execution of a remote integer increment
