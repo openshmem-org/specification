@@ -1,34 +1,37 @@
 \section{Programming Model Overview}
-The \openshmem programming model consists of library functions that provide
-low-latency, high-bandwidth communication  for  use  in  highly  parallelized 
-scalable programs. The functions in the \openshmem \ac{API} provide a programming 
-model for exchanging data between cooperating parallel processes. The resulting programs are similar 
-in style to \ac{MPI} programs. The \openshmem \ac{API} can be used either alone 
-or in combination with \ac{MPI} functions in the same parallel program.
+%SP: Addressing suggestions from discussion on 01/28/2014 Merging the commented portions into the body. 
+%The \openshmem programming model consists of library functions that provide
+%low-latency, high-bandwidth communication  for  use  in  highly  parallelized 
+%scalable programs. The functions in the \openshmem \ac{API} provide a programming 
+%model for exchanging data between cooperating parallel processes. The resulting programs are similar 
+%in style to \ac{MPI} programs. The \openshmem \ac{API} can be used either alone 
+%or in combination with \ac{MPI} functions in the same parallel program.
 
 \openshmem implements a \ac{PGAS} model. In the \ac{PGAS} model, each process has a local and 
-globally shared memory where portions of the shared memory may have affinity to a particular process. \openshmem 
-implements \ac{PGAS} by providing symmetric memory data objects to share information among processes or \ac{PE}s.   
-It provides interfaces to perform communication and synchronization operations on both local and symmetric memory data objects. 
+globally shared memory where portions of the shared memory may have affinity to a particular process. 
+\openshmem implements \ac{PGAS} by providing symmetric data objects to share information among processes or \ac{PE}s. 
+The \openshmem  library functions provide low-latency, high-bandwidth communication API for  use  in  highly  parallelized 
+scalable programs. The API allows communication and synchronization operations on both local and symmetric data objects. 
 \openshmem is a library and unlike UPC, CAF, Titanium, X10 and Chapel, which are all
 PGAS languages, it relies on the programmer to use the library calls correctly to implement the semantics of its programming model.
 
-A \openshmem program is \ac{SPMD} in style. The
+A \openshmem program is currently \ac{SPMD} in style. The
 \openshmem  processes,  called  processing elements or \ac{PE}s, all start at the
 same time, and they all run the same program.  Usually the \ac{PE}s  perform
 computation on their own subdomains of the larger problem, and periodically 
 communicate with other \ac{PE}s to exchange information on which the
-next computation phase depends.The \openshmem functions minimize the overhead associated with data transfer
-requests, maximize bandwidth, and minimize data latency.  Data latency
-is  the  period  of  time that starts when a \ac{PE} initiates a transfer of data 
+next computation phase depends.
+%The \openshmem functions minimize the overhead associated with data transfer requests, maximize bandwidth, and minimize data latency.  %SP:repeat
+Data latency is  the  period  of  time that starts when a \ac{PE} initiates a transfer of data 
 and ends when a \ac{PE} can use the data.
 
-\openshmem functions support remote data transfer through \FUNC{put} operations, which  transfer data to a 
-different \ac{PE}, get operations, which transfer data from a different \ac{PE}, and remote pointers, which 
-allow direct  references  to  data objects owned by another \ac{PE}. Other operations supported are \FUNC{collective} 
-\FUNC{broadcast} and \FUNC{reduction}, \FUNC{barrier synchronization}, and \FUNC{atomic memory operations}. 
-An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
-or local data object.
+%SP: Addressing suggestions from discussion on 01/28/2014
+%\openshmem functions support remote data transfer through \FUNC{put} operations, which  transfer data to a 
+%different \ac{PE}, get operations, which transfer data from a different \ac{PE}, and remote pointers, which 
+%allow direct  references  to  data objects owned by another \ac{PE}. Other operations supported are \FUNC{collective} 
+%\FUNC{broadcast} and \FUNC{reduction}, \FUNC{barrier synchronization}, and \FUNC{atomic memory operations}. 
+%An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
+%or local data object.
 
 The \openshmem{} specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
 The \Cpp{} interface is currently the same as that for \Clang. An overview of the important \openshmem{} operations is described below:
@@ -37,15 +40,17 @@ The \Cpp{} interface is currently the same as that for \Clang. An overview of th
 \item \textbf{Data Transfers }
 
 \begin{enumerate}
-\item One-sided \FUNC{puts} : the initiator \ac{PE} (active side) specifies the local
-data to be written to the target \ac{PE}'s (passive side) memory. 
-\item One-sided \FUNC{gets} : an explicit fetch operation is used to copy a variable
-amount of data from a remote process and store it locally.\end{enumerate}
+\item One-sided \FUNC{puts} : the local \ac{PE} specifies the source
+data (local or symmetric) to be written to the symmetric target on the remote \ac{PE}. 
+\item One-sided \FUNC{gets} : an explicit fetch operation is used to copy a symmetric source variable
+from a remote \ac{PE} and store it to a variable on the local \ac{PE}.\end{enumerate}
+
 \begin{description}
 \item [{{Note:}}] By avoiding the need for matching send and receive
 calls, \openshmem simplifies the communication process by reducing the
 number of calls required to have one \ac{PE} interact with other \ac{PE}s. 
 \end{description}
+
 \item \textbf{Synchronization Mechanisms }
 
 \begin{enumerate}
