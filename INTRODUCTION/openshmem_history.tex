@@ -1,0 +1,37 @@
+\section*{History of \openshmem{}}
+\begin{description}
+\item [{{Cray~SHMEM~(MP-SHMEM,~LC-SHMEM):}}] Cray first introduced
+SHMEM in 1993 for its Cray T3D systems. Cray SHMEM was also used in
+other models: T3E, PVP and XT series. 
+\item [{{SGI~SHMEM~(SGI-SHMEM):}}] Cray Research merged with Silicon
+Graphics (SGI) in February 1996. At this point SHMEM was incorporated
+into SGI's Message Passing Toolkit (MPT). The platforms supported
+were - SGI Irix, Origin and Altix. 
+\item [{{Quadrics~SHMEM~(Q-SHMEM):}}] an optimized API for the Quadrics
+QsNet interconnect. It included SGI extensions and provided non-blocking
+puts and gets. A joint effort from HCS Lab \& Quadrics incorporated
+a program profiling interface called PSHMEM that can aid in the execution
+analysis of SHMEM programs. 
+\end{description}
+The success of SHMEM's performance attracted several vendors to provide
+implementations (with varying names and features) for their systems.
+Some of them include: 
+\begin{description}
+\item [{{HP~SHMEM:}}] Based on the Quadrics API. It is included in the
+UPC product kit. 
+\item [{{Cyclops-64~SHMEM~(C64-SHMEM):}}] this SHMEM API supports the
+Cyclops-64 architecture. Most of the core features of Cray SHMEM are
+available with some additional interfaces specific to the Cyclops-64
+architecture. 
+
+\item [{{IBM~SHMEM:}}] An implementation created by IBM intended for
+internal use only. 
+\item [{{TurboSHMEM:}}] This implementation uses IBM's Low-Level API
+(LAPI) technology to obtain optimized one-sided communication for
+the put/get operations. This allows applications written with the
+SHMEM API to run on IBM platforms with minimal source code changes. 
+\item [{{GPSHMEM:}}] This implementation of SHMEM aims at providing full
+portability of applications. It is built mostly with Cray T3D components
+and functionalities and provides MPI and ARMCI support. This project
+is no longer maintained. 
+\end{description}

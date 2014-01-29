@@ -78,16 +78,24 @@
 \renewcommand{\thesection}{\arabic{section}} 
 \startchap
 \section*{Introduction}
+\label{sec:intro}
 %\input{INTRODUCTION/introduction}
 %\input{INTRODUCTION/overview}
 %\input{INTRODUCTION/introduction_pgas}
 \input{INTRODUCTION/osh_project}
+\label{subsec:osh_project}
 \input{INTRODUCTION/programming_model}
+\label{subsec:programming_model}
 \input{INTRODUCTION/memory_model}
+\label{subsec:memory_model}
 \input{INTRODUCTION/execution_model}
+\label{subsec:execution_model}
 \input{INTRODUCTION/library_constants.tex}
+\label{subsec:library_constants}
 \input{INTRODUCTION/environment_variables.tex}
+\label{subsec:environment_variables}
 \input{INTRODUCTION/language_bindings}
+\label{subsec:language_bindings}
 %\input{INTRODUCTION/synchronization_model} %SP:Moving to remote memory operations section as per discussion on 1/21/14
 
 \clearpage
@@ -153,6 +161,11 @@
 \input{INTRODUCTION/compile_exec_applications.tex}
 \input{INTRODUCTION/writing_programs.tex}
 \input{INTRODUCTION/undefined_behavior}
+
+\clearpage
+\startchap
+\input{INTRODUCTION/openshmem_history.tex}
+\label{sec:openshmem_history}
 
 
 % Manju: Don't move the definitions to the front, it requires to be after content
