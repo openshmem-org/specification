@@ -55,23 +55,24 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
  %API Description Table. 
 {
  % If there is no Description Table and return, this field can be 
-  \desTB { If you are using \Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
+  \desTBC{ If you are using \Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
+  {Function}{Type of \VAR{ivar}}
  {
-     \cRow{Function}{Type of ivar}
+ %\cRow{Function}{Type of ivar}
      \cRow{shmem\_wait, shmem\_wait\_until}{default INTEGER}
      \cRow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
 \cRow{shmem\_int8\_wait, shmem\_int8\_wait\_until}{INTEGER*8}
 }
 
-\desTB { The following cmp values are supported:}
+\desTBC{ The following \VAR{cmp} values are supported:}{cpm Value}{Comparison}
  {
-\cRow{cmp Value}{Comparison}
+%\cRow{cmp Value}{Comparison}
 \cRow{SHMEM\_CMP\_EQ	}{  Equal}
 \cRow{SHMEM\_CMP\_NE}{Not equal}
 \cRow{SHMEM\_CMP\_GT}{Greater than}
 \cRow{SHMEM\_CMP\_LE}{Less than or equal to}
 \cRow{SHMEM\_CMP\_LT}{Less than}
-\cRow{SHMEM\_CMP\_GE	}{Greater than or equal to}
+\cRow{SHMEM\_CMP\_GE}{Greater than or equal to}
 }
 
 %Return Values     
