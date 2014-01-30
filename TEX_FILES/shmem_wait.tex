@@ -29,10 +29,10 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 	       match  that  implied in the SYNOPSIS section.} 
 \argRow{IN}{cmp}{The  compare  operator  that compares ivar with cmp\_value.  cmp
 	       must be of type integer. If you are using \Fortran, it must  be
-	       of  default  kind.   If	you  are  using \CorCpp, the type of cmp
+	       of  default  kind.  If you  are  using \CorCpp, the type of cmp
 	       should  match  that  implied  in	 the  SYNOPSIS	section.}        
 \argRow{IN}{cmp\_value}{cmp\_value must be of type integer.  If you are using \CorCpp, the
-	       type of cmp_value should match that  implied  in	 the  SYNOPSIS
+	       type of cmp\_value should match that  implied  in	 the  SYNOPSIS
 	       section. If  you  are using  \Fortran,	 cmp\_value  must be an
 	       integer of the same size and kind as ivar.}
 }
@@ -55,27 +55,30 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
  %API Description Table. 
 {
  % If there is no Description Table and return, this field can be 
-  \desTB {If you are using \Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
-  {
-\cRow{Function}	{Type of ivar}
-\cRow{shmem\_wait, shmem\_wait\_until}{default INTEGER}
-\cRow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
+  \desTB { If you are using \Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
+ {
+     \cRow{Function}{Type of ivar}
+     \cRow{shmem\_wait, shmem\_wait\_until}{default INTEGER}
+     \cRow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
 \cRow{shmem\_int8\_wait, shmem\_int8\_wait\_until}{INTEGER*8}
 }
-%\desTB { The following cmp values are supported:}
-% {
-%\cRow{cmp Value}{Comparison}
-%\cRow{SHMEM\_CMP\_EQ	}{  Equal}
-%\cRow{SHMEM\_CMP\_NE}{Not equal}
-%\cRow{SHMEM\_CMP\_GT}{Greater than}
-%\cRow{SHMEM\_CMP\_LE}{Less than or equal to}
-%\cRow{SHMEM\_CMP\_LT}{Less than}
-%\cRow{SHMEM\_CMP\_GE	}{Greater than or equal to}
-%}
- %Return Values     
+
+\desTB { The following cmp values are supported:}
+ {
+\cRow{cmp Value}{Comparison}
+\cRow{SHMEM\_CMP\_EQ	}{  Equal}
+\cRow{SHMEM\_CMP\_NE}{Not equal}
+\cRow{SHMEM\_CMP\_GT}{Greater than}
+\cRow{SHMEM\_CMP\_LE}{Less than or equal to}
+\cRow{SHMEM\_CMP\_LT}{Less than}
+\cRow{SHMEM\_CMP\_GE	}{Greater than or equal to}
+}
+
+%Return Values     
 \desR{None.}
-}%end Description Table.
-\notesB{}
+%end Description Table.
+\notesB{None.}
+}
 \exampleB{
 %For each example, you can enter it as an item.
  \exampleITEMF
