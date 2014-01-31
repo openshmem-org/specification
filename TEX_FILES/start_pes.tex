@@ -14,15 +14,17 @@ CALL START_PES(npes)
        \argRow{npes}{Unused}{ Should be set to \CONST{0}.}
 }
  %API description
- {   The \FUNC{start\_pes} routine should be the first statement in a OpenSHMEM parallel
-       program.
+ {   
+     The \FUNC{start\_pes} routine should be used to initialize the \openshmem execution environment.  parallel
+     An \openshmem application must call to \FUNC{start\_pes} before calling any other \openshmem routine.
+     
  }
  %API Description Table. 
 {
  %Return Values     
 \desR{ None. }
 
-\notesB{ If  the	\FUNC{start\_pes}  call is  not  the  first  statement in a program, unexpected results may occur.}
+\notesB{ If \FUNC{start\_pes}  is  not called before any other \openshmem call, unexpected behavior may occur.}
 
 }%end of DesB
 % Notes. If there are no notes, this field can be left empty.
