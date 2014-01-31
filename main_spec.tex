@@ -70,7 +70,7 @@
 
 \include{coverpage}
 
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 \tableofcontents
 
 \mainmatter  % included for use of documenttype 'book' 
@@ -102,45 +102,46 @@
 \clearpage
 
 \startchap
-\section*{Library Setup and Query Operations}%SP: Merging two operations 
+\section{OpenSHMEM Library API}
+\subsection{Library Setup and Query Operations}%SP: Merging two operations 
 \input{TEX_FILES/start_pes.tex} %Swaroop
 \input{TEX_FILES/NEW_shmem_my_pe.tex} %Tommy
 \input{TEX_FILES/NEW_shmem_num_pe.tex}%Tommy
 \input{TEX_FILES/shmem_pe_accessible} %Oscar
 \input{TEX_FILES/shmem_addr_accessible}%Tommy
 \input{TEX_FILES/shmem_ptr.tex} %Oscar
-\startchap
-\section*{Memory Management Operations}
+%\startchap
+\subsection{Memory Management Operations}
 \input{TEX_FILES/shfree.tex}%Tommy
 \input{TEX_FILES/shpalloc.tex} %Swaroop
 \input{TEX_FILES/shpclmove.tex} %Swaroop
 \input{TEX_FILES/shpdeallc.tex} %Swaroop
-\startchap
-\section*{Remote Memory Operations}
-\input{INTRODUCTION/synchronization_model}
+%\startchap
+\subsection{Remote Memory Operations}
+\input{INTRODUCTION/synchronization_model.tex}
 \input{TEX_FILES/shmem_put.tex} %Oscar
 \input{TEX_FILES/shmem_p.tex} %Oscar
 \input{TEX_FILES/shmem_iput.tex} %Oscar
 \input{TEX_FILES/shmem_get.tex} %Manju
 \input{TEX_FILES/shmem_g.tex} %Manju
 \input{TEX_FILES/shmem_iget.tex} %Manju
-\startchap
-%\section*{Collective Operations}
-\input{INTRODUCTION/collective_intro}
+%\startchap
+\subsection{Collective Operations}
+\input{INTRODUCTION/collective_intro.tex}
 \input{TEX_FILES/shmem_barrier_all.tex} %Pasha
 \input{TEX_FILES/shmem_barrier.tex} %Tommy
 \input{TEX_FILES/shmem_broadcast.tex} %Pasha
 \input{TEX_FILES/shmem_collect.tex} %Pasha
 \input{TEX_FILES/shmem_reductions.tex} %Swaroop
-\startchap
-\section*{Memory Ordering Operations} %SP: Adding a chapter to include fence and quiet
+%\startchap
+\subsection{Memory Ordering Operations} %SP: Adding a chapter to include fence and quiet
 \input{TEX_FILES/shmem_fence.tex} %Manju
 \input{TEX_FILES/shmem_quiet.tex} %Swaroop
-\startchap
-\section*{Point-to-point synchronization functions}%SP: Adding a chapter to include wait and wait until 
+%\startchap
+\subsection{Point-to-point synchronization functions}%SP: Adding a chapter to include wait and wait until 
 \input{TEX_FILES/shmem_wait.tex} %Swaroop
-\startchap
-%\section*{Atomic Operations}
+%\startchap
+\subsection{Atomic Operations}
 \input{INTRODUCTION/atomics_intro}
 \input{TEX_FILES/shmem_add.tex}%Tommy
 \input{TEX_FILES/shmem_cswap.tex} %Pasha
@@ -148,14 +149,15 @@
 \input{TEX_FILES/shmem_finc.tex} %Manju
 \input{TEX_FILES/shmem_inc.tex} %Manju
 \input{TEX_FILES/shmem_fadd.tex}%Pasha
-\startchap
-\section*{Distributed Locking Operations}
+%\startchap
+\subsection{Distributed Locking Operations}
 \input{TEX_FILES/shmem_lock.tex} %Oscar
-\startchap
-\section*{Deprecated API}
+%\startchap
+\subsection{Deprecated API}
 \input{TEX_FILES/shmem_cache.tex} %Pasha
 
 \clearpage
+
 \startchap
 %  -> Compilation
 %  -> Writing OpenSHMEM Programs
@@ -166,6 +168,7 @@
 
 \clearpage
 \startchap
+\section{History of \openshmem{}}
 \input{INTRODUCTION/openshmem_history.tex}
 \label{sec:openshmem_history}
 

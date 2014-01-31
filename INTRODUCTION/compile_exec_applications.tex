@@ -5,7 +5,7 @@ are compiled, linked and run. This section shows some examples of
 how wrapper programs are utilized in the \openshmem{} Reference Implementation to compile and launch applications.
 %The commands are styled after wrapper programs found in many MPI implementations.
 \subsection{Compilation}
-\subsubsection{Applications written in \Clang}
+\subsubsection*{Applications written in \Clang}
 
 The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshcc}, to aid in the compilation of \Clang{} applications, the wrapper
 could be called as follows:
@@ -16,7 +16,7 @@ oshcc <compiler options> -o myprogram myprogram.c
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the underlying \Clang{} compiler.
 
 
-\subsubsection{Applications written in \Cpp}
+\subsubsection*{Applications written in \Cpp}
 
 The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshCC}, to aid in the compilation of \Cpp{} applications, the
 wrapper could be called as follows:
@@ -27,7 +27,7 @@ oshCC <compiler options> -o myprogram myprogram.cpp
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the underlying \Cpp{} compiler called by \textbf{oshCC}.
 
 
-\subsubsection{Applications written in \Fortran}
+\subsubsection*{Applications written in \Fortran}
 
 The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshfort}, to aid in the compilation of \Fortran{} applications,
 the wrapper could be called as follows:
