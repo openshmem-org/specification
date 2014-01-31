@@ -36,8 +36,8 @@ I = SHMEM_TEST_LOCK(lock)
        to set the lock.}
 
 \notesB{
-       The term symmetric data object is defined in Introduction. The lock variable should always be initialized to zero and accessed only by the  \openshmem locking API.
-       Changing the value of the lock variable by other means without using the \openshmem API, can lead to undefined behavior.             
+       The term symmetric data object is defined in Introduction. The lock variable should always be initialized to zero and accessed only by the  \openshmem locking \ac{API}.
+       Changing the value of the lock variable by other means without using the \openshmem \ac{API}, can lead to undefined behavior.             
 %       Section 41, there was discussion on the list about putting in language about the opacity of the lock variable after the routines have touched it.  Initialize to zero, then only the API should be allowed to use it, cannot %guarantee any value meaningful to the programmer and any reset could lead to bad things.  Do we want to tighten this up in this version? (e.g. from Brian Barrett)
 }
 }
