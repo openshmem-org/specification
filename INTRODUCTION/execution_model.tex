@@ -105,13 +105,13 @@ be reinitialized after the first call.
 \openshmem contains a number of routines that operate on symmetric data
 atomically.  These routines guarantee that accesses by \openshmem's
 atomic operations will be exclusive, but do not guarantee exclusivity
-in combination with other routines, either inside OpenSHMEM's or
+in combination with other routines, either inside \openshmem or
 outside.
 
 For example: during the execution of a remote integer increment
 operation on a symmetric variable \VAR{x}, no other \openshmem atomic
 operation may access \VAR{x}.  After the increment, \VAR{x} will have
-increased its value by 1 on the target \ac{PE}, at which point other
+increased its value by \CONST{1} on the target \ac{PE}, at which point other
 atomic operations may then modify that \VAR{x}.
 
 %  %Memory model
