@@ -6,6 +6,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage[usenames,dvipsnames]{color}
+\usepackage{amsmath}
 \usepackage{ifthen}
 \usepackage[table]{xcolor}
 \usepackage{textcomp}
@@ -153,13 +154,14 @@
 \startchap
 \section*{Deprecated API}
 \input{TEX_FILES/shmem_cache.tex} %Pasha
+
+\clearpage
 \startchap
-\section*{ Using OpenSHMEM Reference Implementation}
 %  -> Compilation
 %  -> Writing OpenSHMEM Programs
 %  -> Application written in Fortran
-\input{INTRODUCTION/compile_exec_applications.tex}
 \input{INTRODUCTION/writing_programs.tex}
+\input{INTRODUCTION/compile_exec_applications.tex}
 \input{INTRODUCTION/undefined_behavior}
 
 \clearpage

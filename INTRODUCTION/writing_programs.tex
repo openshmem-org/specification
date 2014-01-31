@@ -1,6 +1,6 @@
-\section{Writing \openshmem Programs}
+\section{Writing \openshmem{} Programs}
 
-\subsection{Incorporating \openshmem into Programs}
+\subsection{Incorporating \openshmem{} into Programs}
 
 % C and C++ programs that use the \openshmem library must \texttt{\textbf{}}\lstinline[basicstyle={\ttfamily},language={C++}]!#include <mpp/shmem.h>!.
 % Fortran programs should \lstinline[basicstyle={\ttfamily},language=Fortran]!include 'mpp/shmem.fh'!;
@@ -26,7 +26,7 @@ and \Fortran{} \openshmem programs that use constants defined by \openshmem
 include 'shmem.fh'
 \end{lstlisting}
 
-\subsubsection{Compatibility Note}
+\subsubsection{\textbf{Important Compatibility Note}}
 
 Implementations \emph{must} also provide these header files so that
 they can be referenced in \Clang{} and \Cpp{} as

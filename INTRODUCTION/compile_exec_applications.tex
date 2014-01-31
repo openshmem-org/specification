@@ -1,82 +1,63 @@
-
 \section{Compiling and Running Applications}
 
-The \openshmem specification is silent regarding how \openshmem programs
+As of now the \openshmem{} specification is silent regarding how \openshmem{} programs
 are compiled, linked and run. This section shows some examples of
-how wrapper programs could be utilized to compile and launch applications.
-The commands are styled after wrapper programs found in many MPI implementations.
-
-
+how wrapper programs are utilized in the \openshmem{} Reference Implementation to compile and launch applications.
+%The commands are styled after wrapper programs found in many MPI implementations.
 \subsection{Compilation}
-
-
 \subsubsection{Applications written in \Clang}
 
-Assuming that the implementation provides a wrapper program named
-\textbf{oshcc}, to aid in the compilation of \Clang{} applications, the wrapper
+The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshcc}, to aid in the compilation of \Clang{} applications, the wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshcc <compiler options> -o myprogram myprogram.c
 \end{lstlisting}
+Where the $\langle\mbox{compiler options}\rangle$ are options understood by the underlying \Clang{} compiler.
 
 
-The program arguments for \textbf{oshcc} are:
-\begin{description}
-\item [{<compiler\ options>}] Options understood by the underlying \Clang{} compiler
-called by \textbf{oshcc}.
-\end{description}
+\subsubsection{Applications written in \Cpp}
 
-\subsection{Applications written in \Cpp}
-
-Assuming that the implementation provides a wrapper program named
-\textbf{oshCC}, to aid in the compilation of \Cpp{} applications, the
+The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshCC}, to aid in the compilation of \Cpp{} applications, the
 wrapper could be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshCC <compiler options> -o myprogram myprogram.cpp
 \end{lstlisting}
+Where the $\langle\mbox{compiler options}\rangle$ are options understood by the underlying \Cpp{} compiler called by \textbf{oshCC}.
 
 
-The program arguments for \textbf{oshCC} are:
-\begin{description}
-\item [{<compiler\ options>}] Options understood by the underlying \Cpp{}
-compiler called by \textbf{oshCC}.
-\end{description}
+\subsubsection{Applications written in \Fortran}
 
-\subsection{Applications written in \Fortran}
-
-Assuming that the implementation provides a wrapper program named
-\textbf{oshfort}, to aid in the compilation of \Fortran{} applications,
+The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshfort}, to aid in the compilation of \Fortran{} applications,
 the wrapper could be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshfort <compiler options> -o myprogram myprogram.f
 \end{lstlisting}
+Where the $\langle\mbox{compiler options}\rangle$ are options understood by the underlying \Fortran{} compiler called by \textbf{oshfort}.
 
+\subsection{Running Applications}
 
-The program arguments for \textbf{oshfort} are:
-\begin{description}
-\item [{<compiler\ options>}] Options understood by the underlying \Fortran{}
-compiler called by \textbf{oshfort}.
-\end{description}
-
-\section{Running Applications}
-
-Assuming that the implementation provides a wrapper program named
-\textbf{oshrun}, to launch \openshmem applications, the wrapper could
+The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshrun}, to launch \openshmem applications, the wrapper could
 be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshrun <additional options> -np <#> <program> <program arguments>
 \end{lstlisting}
-
-
 The program arguments for \textbf{oshrun} are:
-\begin{description}
-\item [{<additional\ options>}] options passed to the underlying launcher
-\item [{-np~<\#>}] The number of processing elements (PEs) to be used
-in the execution.
-\item [{<program>}] The program executable to be launched
-\item [{<program\ arguments>}] flags and other parameters to pass to the program
-\end{description}
+
+\begin{tabular}{p{0.3\textwidth}p{0.6\textwidth}}
+$\langle\mbox{additional options}\rangle$ & {Options passed to the underlying launcher.}\tabularnewline
+-np $\langle\mbox{\#}\rangle$ & {The number of processing elements (PEs) to be used in the execution.}\tabularnewline
+$\langle\mbox{program}\rangle$ & {The program executable to be launched.}\tabularnewline
+$\langle\mbox{program arguments}\rangle$ & {Flags and other parameters to pass to the program.}\tabularnewline
+\end{tabular}
+
+%\begin{description}
+%\item[$\langle\mbox{additional options}\rangle$] options passed to the underlying launcher
+%\item[-np $\langle\mbox{\#}\rangle$] The number of processing elements (PEs) to be used
+%in the execution.
+%\item [$\langle\mbox{program}\rangle$] The program executable to be launched
+%\item [$\langle\mbox{program arguments}\rangle$] flags and other parameters to pass to the program
+%\end{description}
