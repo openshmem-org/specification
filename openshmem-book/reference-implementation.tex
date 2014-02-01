@@ -1,0 +1,615 @@
+%
+% Copyright (c) 2011, 2012
+%   University of Houston System and Oak Ridge National Laboratory.
+% 
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+% 
+% o Redistributions of source code must retain the above copyright notice,
+%   this list of conditions and the following disclaimer.
+% 
+% o Redistributions in binary form must reproduce the above copyright
+%   notice, this list of conditions and the following disclaimer in the
+%   documentation and/or other materials provided with the distribution.
+% 
+% o Neither the name of the University of Houston System, Oak Ridge
+%   National Laboratory nor the names of its contributors may be used to
+%   endorse or promote products derived from this software without specific
+%   prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+% A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+% HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+% SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+% TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+% PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+% LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+% NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+%
+
+
+\chapter{Implementation Of The Reference \openshmem Library}
+
+Along with the new specification for \openshmem, there is a reference
+library that tracks the development of the specification, and acts as
+a testbed for the evolution of the specification.  This chapter
+discusses the implementation of the reference library.
+
+\section{Implementation Strategy}
+
+One important goal of the reference implementation is not to be tied
+to a particular environment, so it can be used on different platforms
+and gain wider exposure for \openshmem.  To this end we have used
+GASNet~\cite{gasnet} initially to abstract away from a particular
+interconnect and platform, although there is nothing to stop a more
+direct approach being used to target specific hardware, as for example
+in MVAPICH2-X~\cite{mvapich2-x}.  Internally, the reference
+implementation of \openshmem provides private APIs for memory
+management, the communications layer, tracing and debugging, and
+support for adaptivity to choose things like a barrier algorithm at
+run-time.
+
+\subsection{GASNet}
+
+GASNet~\cite{gasnet} (\textbf{G}lobal-\textbf{A}ddress \textbf{S}pace
+\textbf{Net}working) is a low-level library that has been used to
+implement the runtime of a number of popular HPC PGAS languages, such
+as Unified Parallel C~\cite{upc}, Chapel~\cite{chapel} and Co-Array
+Fortran~\cite{coarray}.
+
+GASNet manages the start-up of a program and coordinates between the
+``nodes'' that make up the program.  It also makes available to all
+nodes information about all the other nodes, such as where memory
+segments have been allocated.  The details of this are discusssed
+below.
+
+GASNet provides an abstraction away from the underlying hardware on a
+given platform.  Hardware-specific interfaces are implemented as
+modules, called ``conduits'': there are conduits for all the prevalent
+communication systems in HPC systems, including networks such as
+Ethernet, Infiniband, portals and Myrinet, and one specifically for
+shared-memory multiprocessor machines (SMP).  Support for onduits is
+detected when GASNet is configured and can further be enabled or
+disabled according to requirements.
+
+Three different communication scenarios are supported via ''segments'':
+
+\begin{table}[h]
+  \begin{center}
+    \caption{GASNet Segment Configurations}
+    \begin{tabular}{|p{0.2\textwidth}|p{0.7\textwidth}|}
+      \hline 
+      Segment Name & Intended for \ldots \tabularnewline
+      \hline
+      \hline 
+      fast & a ``reasonable'' size symmetric segment and
+      implementation-specific tuning for fastest data access \tabularnewline
+      \hline 
+      large & a larger symmetric segment and this may impose some data access penalty \tabularnewline
+      \hline 
+      everything & the entire process' memory space is available, not just a managed data segment \tabularnewline
+      \hline 
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Segments are how GASNet manages the per-node memory areas that are
+remotely accessible to other nodes.  Not all conduits are supported
+with all 3 segment configurations, which has implications for how
+\openshmem's ``symmetric'' variables are handled, and this is discussed
+below.
+
+\subsection{How \openshmem uses GASNet}
+
+GASNet provides access to the symmetric memory areas. A memory
+management library marshals accesses to these areas during allocation
+and freeing of symmetric variables in user code, usually through a
+call like \texttt{shmalloc()} or \texttt{shfree()}.
+
+When the program does \texttt{gasnet\_attach()} and asks for segment
+information, each PE has access to an array of segments, 1 segment
+per PE. Each PE initializes a memory pool within its own segment.
+The set up is handled either by GASNet internally (``fast''/''large''
+model) or by \openshmem itself (``everything'' model). The table of
+segments allows any PE to know the virtual location and size of the
+segment belonging to any other PE.
+
+If the platform allows it, GASNet can align all the segments at the
+same address, which means that all PEs see the same address for
+symmetric variables and there's no address translation.
+
+In the general case though, segments are not aligned (e.g.\ due to a
+security measure like process address space randomization by the
+OS). However, each PE can see the addresses of the segments of the
+other PEs locally, and can therefore do address translation.
+
+Currently alignment is not checked for, so we're coding to the
+``worst case scenario''. That just adds a \emph{small} overhead if
+the segments are in fact aligned. The library should at some point
+introduce code that differentiates between aligned and non-aligned
+environments with optimized code for the former case (GASNet provides
+a macro you can test against).
+
+\subsubsection{Segment Models}
+
+The library currently has best support for the ``everything''
+model. This model allows the entire process space to be addressed
+remotely. Communication with dynamically allocated data and with
+global data is equally easy.
+
+For the ``fast'' and ``large'' models, only the area of the process
+memory managed by GASNet is exposed for remote access. This means
+extra support has to be added to handle communication with global
+variables, because only the symmetric heap is visible.
+This is done via Active Messages.
+
+For the SMP conduit, PSHM support is required to run parallel threaded
+programs with \openshmem. This excludes the ``everything'' model (at
+least for the architectures to hand).
+
+\subsection{\openshmem Initialization \& Finalization}
+
+The \texttt{start\_pes} call handles setting up the \openshmem runtime,
+and eventual shutdown. Shutdown is implicit in user code, there is no
+call to do this in SGI SHMEM, so we register an exit handler to be
+called when \texttt{main()} exits. (Cray SHMEM has an explicit
+finalize call, however, and a proposal for a profiling interface has
+suggested introducing this to \openshmem.) The segment exchange is a
+target for future optimization: in large programs, the start-up time
+will become burdensome due to the large number of address/size
+communications. Strategies for avoiding this include lazy
+initialization and hierarchical or directory-based lookups.
+
+\subsection{Communications Substrate}
+
+The \openshmem library has been written to sit on top of any
+communications library that can provide the required
+functionality. Initially we have targetted GASNet.
+
+\subsection{Servicing Communications}
+
+GASNet provides this functionality in some cases. The mainline code
+needs to spin on variable waits (e.g.\ shmem\_long\_waituntil) to poll
+GASNet, otherwise progress is automatic via a servicer unit.  This is
+implemented with a progress thread that polls in a continuous loop.
+
+\subsection{Memory Management}
+
+Initially we tried to use the TLSF~\cite{tlsf} library (as used in the
+SiCortex SHMEM implementation) but this proved to have weird
+interactions with Open-MPI. Tracking program progress with valgrind
+\cite{valgrind} suggested that system memory calls were being
+intercepted.
+
+So, following the Chapel~\cite{chapel} lead, we now use the
+``dlmalloc''~\cite{dlmalloc} library to manage allocations in the
+symmetric memory space.
+
+\subsection{Point-to-point routines}
+
+Point-to-point operations are a thin layer on top of GASNet. The
+non-blocking put operations with implicit handles provide a way to
+subsequently fence and barrier. However, tracking individual handles
+explicitly with a hash table keyed on the address of symmetric
+variables may give better performance, and this needs to be looked
+into.
+
+The Quadrics extensions that add non-blocking calls into the API
+proper have already been requested for the \openshmem development. An
+initial attempt at these are already in the library and they pass the
+Cray verification tests.
+
+\subsection{Atomic Operations}
+
+Atomic operations include swaps, fetch-and-add and locks (discussed
+separately in \ref{sub:Locks}). The first two are handled via GASNet's
+Active Messages. Increment was originally layered on top of add
+(increment is simply a special case of add) but was rewritten with its
+own handlers. The payload for increment can be ever so slightly
+smaller than for add since there's no need to pass the value to
+add. At large scale, even such a small saving could pay off.
+
+Earlier versions of the implementation had a single handler lock
+variable per operation (one for all adds, one for all increments,
+\emph{etc.}).  However, there is now a hash table to allocate and
+manage per-target-address handler locks. Large-scale atomic
+operations, like add-scatters across multiple variables could easily
+benefit from this, as the lock granularity then permits concurrent
+discrete memory accesses.
+
+\subsection{\label{sub:Locks}Locks}
+
+\openshmem provides routines to claim, release and test global
+locks~\footnote{Not to be confused with GASNet's Active Message
+  Handler Locks.}.  These can be used for mutual-exclusion
+regions. Our implementation is from the Quadrics library, which is a
+version of the Mellor-Crummy-Scott
+algorithm~\cite{Mellor-Crummey:1991:ASS:103727.103729}.  The locks are
+layered on top of \openshmem primitives, so there are no Elan
+dependencies.
+
+\subsection{Barrier and broadcast}
+
+The initial version is naive, making the root of the broadcast a
+bottleneck.  This is partly intentional, to allow scope to explore
+better algorithms and work out how to demonstrate and document the
+improvements. We would like to collect some locality information
+inside the library to help decide communication order inside these
+algorithms: PEs that differ in rank by large amounts are likely to be
+further away topologically too, so by sending to more distant PEs
+first, we can stagger the network traffic and balance the latencies
+better. A proper measurement of ``distance'' is needed here. The
+``hwloc'' package~\cite{hwloc} provides a per-system distance metric
+in NUMA terms. An extension could e.g.\ just multiply the distance by
+some constant when moving off-node to penalize network traffic.
+
+\subsection{Collects}
+
+The collector routines concatenate (parts of) source arrays on an
+active set of PEs into a target array on all of those PEs.
+
+\begin{description}
+\item[collect] is the general routine in which each participating PE
+  can write different amounts of data.
+\item[fcollect] is an optimization in which all participating PEs
+  \emph{must} contribute the same amount of data. This means we can
+  just pre-compute where each PE writes to their targets.
+\end{description}
+
+Two approaches were considered for ``collect'':
+
+\begin{enumerate}
+\item initial exchange of sizes ``from the left'' so each PE can
+  compute its write locations; then same as \texttt{fcollect}
+\item wavefront: PEs wait for notification from PEs before them in the
+  set (lower numbered). This passes the offsets across the set.
+\end{enumerate}
+
+The library uses the ``wavefront''. The ``exchange'' method
+potentially generates a network storm as all PEs wait to work out
+where to write, then all write at once, whereas the ``wavefront''
+staggers the offset notification with a wave of writes moving up the
+PE numbers.
+
+\subsection{Reductions}
+
+Reductions coalesce data from a number of PEs into either a single
+variable or array on all participating PEs. The coalescing involves
+some kind of arithmetic or logic operation (e.g.\ sum, product,
+exclusive-or).  Currently probably naive, using gets. A version with
+puts that can overlap communication and the computation of the
+reduction operation should be more scalable. However, the code is
+rather compact and all ops use the same template. A future version of
+\openshmem may add user-defined reductions, and in fact the framework
+for this is already in place: all that is needed is a specification of
+the SHMEM API.
+
+\subsection{Address and PE Accessibility}
+
+\openshmem allows us to test whether PEs are currently reachable, and
+whether addresses on remote PEs are addressable. GASNet is used to
+``ping'' the remote PE and then we wait for an ``ack'' with a
+configurable timeout. Remains to be seen how useful this is, and
+whether it can be used for future fault tolerance issues.
+
+\subsection{Tracing Facility}
+
+This library contains \textquotedblleft{}trace
+points\textquotedblright{} with categorized messages. These are listed
+in section \ref{sec:Environment-Variables}
+
+A high-resolution clock is maintained to timestamp such messages.
+Numerically sorting the output on the first field can thus help
+understand the order in which events happened.
+
+\subsection{C++}
+
+The C++ interface is basically the C one. There is one point of
+contention, namely complex numbers. The SGI documentation refers only
+to the use of C99~\cite{c99} ``complex'' modifiers, not to C++'s
+\texttt{complex<T>}.  The use of complex number routines
+(e.g.\ reductions) in C++ is thus not clearly specified.
+
+\subsection{Fortran}
+
+The Fortran interface is very similar to that of C. The names of
+various routines are different to accommodate the various type
+differences, e.g.\ \texttt{shmem\_integer\_put()} instead of
+\texttt{shmem\_int\_put()}.
+
+The biggest difference is in the symmetric memory management routines.
+These have completely different names and parameters compared to the C
+interface.
+
+The \openshmem implementation handles Fortran with a very thin wrapper
+on top of C. Mostly this involves catching Fortran's pass-by-reference
+variables and dereferencing them in the underlying C call.
+
+The main development has been on a CentOS platform with GNU
+4.1.2-redhat.  There seem to be some issues with this compilers'
+handling of cray-pointers: even the simplest programs (no \openshmem
+content at all) produce a segmentation fault. Later versions
+(4.5.0 and newer) behave better.
+
+\section{Undefined Behavior}
+
+Many routines are currently specified only in terms of ``correct''
+behavior. What happens when something goes wrong is not always
+specified.  This section attempts to set out a few of these scenarios
+\begin{itemize}
+\item put to PE out of range: suppose we do a put to ``right
+neighbor'' (\(pe + 1\)). The highest-numbered PE will attempt to
+communicate with a PE that does not exist.
+\item library not initialized: virtually all \openshmem routines will
+have major problems if the library has not been
+initialized. Implementations can handle this situation in different
+ways.
+\end{itemize}
+
+\section{Environment Variables\label{sec:Environment-Variables}}
+
+The behavior of the \openshmem library can be controlled via a number
+of environment variables. For SGI compatibility reasons, we support
+the ``SMA'' variables:
+
+% force the SGI table now
+\clearpage
+
+\begin{table}[!h]
+  \begin{center}
+    \caption{SGI Environment Variables}
+    \begin{tabular}{|l|l|}
+      \hline 
+      Variable & Function\tabularnewline
+      \hline
+      \hline 
+      \texttt{SMA\_VERSION} & print the library version at start-up\tabularnewline
+      \hline 
+      \texttt{SMA\_INFO} & print helpful text about all these environment variables\tabularnewline
+      \hline 
+      \texttt{SMA\_SYMMETRIC\_SIZE} & number of bytes to allocate for symmetric heap\tabularnewline
+      \hline 
+      \texttt{SMA\_DEBUG} & enable debugging messages\tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+and our own new ones:
+
+\begin{description}
+\item[{\texttt{SHMEM\_LOG\_LEVELS}:}] a comma, space, or semi-colon separated
+  list of logging/trace facilities to enable debugging messages. The
+  facilities currently include the case-insensitive names:
+  
+  \begin{table}[!h]
+    \begin{center}
+      \caption{Logging Facility Names}
+      \begin{tabular}{|l|l|}
+        \hline 
+        Facility & Meaning\tabularnewline
+        \hline
+        \hline 
+        FATAL & something unrecoverable happened, abort\tabularnewline
+        \hline
+
+        DEBUG & used for debugging purposes\tabularnewline
+        \hline
+        INFO & something interesting happened\tabularnewline
+        \hline
+        SYMBOLS & to inspect the symbol table information\tabularnewline
+        \hline
+        VERSION & about the library version\tabularnewline
+        \hline
+
+        INIT & set-up of the program\tabularnewline
+        \hline
+        FINALIZE & tear-down of the program\tabularnewline
+        \hline
+        NOTICE & important event, but non-fatal (see below)\tabularnewline
+        \hline
+        AUTH & when something is attempted but not allowed\tabularnewline
+        \hline
+        MEMORY & symmetric memory information\tabularnewline
+        \hline
+        CACHE & cache flushing operations\tabularnewline
+        \hline
+        BARRIER & about barrier operations\tabularnewline
+        \hline
+        BROADCAST & about broadcast operation\tabularnewline
+        \hline
+        COLLECT & about collect and fcollect operation\tabularnewline
+        \hline
+        QUIET & tracing network quiet events\tabularnewline
+        \hline
+        FENCE & tracing network fence events\tabularnewline
+        \hline
+        REDUCTION & about reduction operations\tabularnewline
+        \hline
+        LOCK & related to setting, testing and clearing locks\tabularnewline
+        \hline
+        SERVICE & related to the network service thread\tabularnewline
+        \hline
+        PROFILING & for the PSHMEM profiling interface\tabularnewline
+        \hline
+        MODULES & loadable modules for different implementations of routines\tabularnewline
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+\item [{\texttt{SHMEM\_LOG\_FILE}:}] a filename to which to write log
+  messages.  All PEs append to this file. The default is for all PEs to
+  write to standard error. Per-PE log files might be an interesting
+  addition.
+\item [{\texttt{SHMEM\_SYMMETRIC\_HEAP\_SIZE}:}] the number of bytes
+  to allocate for the symmetric heap area. Can scale units with ``K'',
+  ``M'' etc. modifiers. The default is 2G.
+\item [{\texttt{SHMEM\_BARRIER\_ALGORITHM}:}] the version of the
+  barrier to use. The default is ``naive''. Designed to allow people
+  to plug other variants in easily and test.
+\item [{\texttt{SHMEM\_BARRIER\_ALL\_ALGORITHM}:}] as for
+  \texttt{SHMEM\_BARRIER\_ALGORITHM}, but separating these two allows us
+  to optimize if e.g.\ hardware has special support for global barriers.
+\item [{\texttt{SHMEM\_PE\_ACCESSIBLE\_TIMEOUT}:}] the number of
+  seconds to wait for PEs to reply to accessiblity checks. The default
+  is 1.0 (i.e.\ may be fractional).  Currently not used.
+\end{description}
+
+\section{Alternate collective algorithms}
+
+A module system coupled with the above environment variables allows
+for runtime decisions to be made about which algorithm should be used
+for different collective routines.  These are installed as dynamic
+objects and the selected algorithm is then loaded as needed.  Each
+module defines a structure that maps the interface it provides to its
+routines.  The choice of algorithm can also be steered through an
+optional configuration file (overridden by the environment variables).
+The file is
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Configuration File Location}]
+<installdir>/lib/modules/config
+\end{lstlisting}
+\end{minipage}
+
+and has a simple
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Configuration File Format}]
+algorithm = implementation
+\end{lstlisting}
+\end{minipage}
+
+format, e.g.\
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Configuration File Example}]
+default = tree
+barrier-all = bruck
+\end{lstlisting}
+\end{minipage}
+
+\section{Compiling and Running Programs}
+
+\subsection{SGI SHMEM}
+
+SHMEM for the SGI Altix family of machines is provided as part of the
+Message-Passing Toolkit (MPT) in the ProPack~\cite{ProPack}
+suite. Compilation uses a standard C, C++ or Fortran compiler
+(e.g.\ GNU~\cite{gcc} or Intel~\cite{intelcomp} suites) and links
+against the SMA and MPI libraries:
+
+\begin{lstlisting}[caption={Compiling and Linking SGI SHMEM}]
+$ gcc -o prog prog.c -lsma -lmpi
+\end{lstlisting}
+
+and a compiled program (C, C++ and Fortran) is run like this via the
+MPI launcher:
+
+\begin{lstlisting}[label=oshrun,caption={Running a program on 8 processors with the SGI SHMEM Implementation}]
+$ mpirun -np 8 ./prog
+\end{lstlisting}
+
+\subsection{\openshmem}
+
+In order to abstract the compilation and launching process for
+\openshmem we have provided wrapper programs in the reference
+implementation:
+
+\begin{table}[h]
+  \begin{center}
+    \caption{Wrapper Programs}
+    \begin{tabular}{| l | l |}
+      \hline
+      \texttt{oshcc} & compile and link C programs \tabularnewline
+      \hline
+      \texttt{oshCC} & compile and link C++ programs \tabularnewline
+      \hline
+      \texttt{oshfort} & compile and link F77/F90 programs \tabularnewline
+      \hline
+      \texttt{oshrun} & to launch programs \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+The similarity to the style of wrappers found in many MPI
+implementations is obvious and intentional.
+
+So to compile with the reference implementation, the wrapper program
+can be used as in listing~\ref{oshcc} to compile and link a C program:
+
+\begin{lstlisting}[numbers=none,label=oshcc,caption={Compiling and Linking C with the \openshmem Reference Implementation}]
+$ oshcc -O3 -o prog prog.c
+\end{lstlisting}
+
+and a compiled program (C, C++ and Fortran) is run like this:
+
+\begin{lstlisting}[label=oshrun,caption={Running a program on 8 processors with the \openshmem Reference Implementation}]
+$ oshrun -np 8 ./prog
+\end{lstlisting}
+
+\subsection*{Note to Implementers}
+
+There is \emph{no} requirement in \openshmem to provide wrapper
+programs like this, it's merely a convenience that helped during the
+development of the reference implementation.  It does help
+implementations hide the details from programmers to simplify use of
+\openshmem, though.
+
+\section{Configuration and Installation}
+
+There is a top-level \texttt{configure} script that is a simplified
+version of the GNU autotools. This script will eventually become the
+GNU setup and will do lots more feature tests. So the usual procedure
+applies:
+
+\begin{lstlisting}
+$ /path/to/source/configure [--options...]
+$ make
+$ make install
+\end{lstlisting}
+
+The \texttt{configure} script accepts a
+% make sure we get a real double-dash
+\texttt{-{}-help} option that lists all the various settings.
+
+\subsection*{Note}
+You must run \texttt{configure} from a separate build directory, not
+from the source tree.
+
+\section{Accessing \openshmem Headers and Libraries}
+
+There is a useful tool called \texttt{pkg-config}~\cite{pkg-config}
+that abstracts access to components of the installation.  With
+\texttt{pkg-config} you can ask \openshmem where its header files are,
+and which libraries it needs to link programs.
+
+E.g.
+
+\begin{lstlisting}[numbers=none,label=pkg-config-cflags,caption={Finding the \openshmem header directory}]
+$ pkg-config --cflags openshmem
+-I/opt/openshmem/include
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=none,label=pkg-config-libs,caption={Finding the \openshmem libraries}]
+$ pkg-config --libs openshmem
+-Wl,-rpath,/opt/openshmem/lib -L/opt/openshmem/lib -L/opt/gasnet/fast/lib \
+   -L/usr/lib64/gcc/x86_64-suse-linux/4.6 -lopenshmem -lgasnet-ibv-par -libverbs \
+  -lpthread -lrt -lgcc -lm
+\end{lstlisting}
+
+You can then integrate these settings into your own compilation and linking commands, e.g.
+
+\begin{lstlisting}[numbers=none,label=pkg-config-usage,caption={Compiling with pkg-config}]
+$ gcc -c $(pkg-config --cflags openshmem) prog1.c
+$ gcc -c $(pkg-config --cflags openshmem) prog2.c
+$ gcc -o prog prog1.o prog2.o $(pkg-config --libs openshmem)
+\end{lstlisting}

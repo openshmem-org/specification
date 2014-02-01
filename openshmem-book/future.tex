@@ -1,0 +1,158 @@
+%
+% Copyright (c) 2011, 2012
+%   University of Houston System and Oak Ridge National Laboratory.
+% 
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+% 
+% o Redistributions of source code must retain the above copyright notice,
+%   this list of conditions and the following disclaimer.
+% 
+% o Redistributions in binary form must reproduce the above copyright
+%   notice, this list of conditions and the following disclaimer in the
+%   documentation and/or other materials provided with the distribution.
+% 
+% o Neither the name of the University of Houston System, Oak Ridge
+%   National Laboratory nor the names of its contributors may be used to
+%   endorse or promote products derived from this software without specific
+%   prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+% A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+% HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+% SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+% TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+% PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+% LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+% NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+%
+
+
+\chapter{The Future of the \openshmem Specification}
+
+Presenting ideas for extending or enhancing the API.  A look at
+future technology considerations, e.g.\ how exascale might impact
+design decisions.
+
+We have a number of examples of proposed extensions in the SoW.
+
+\section{non-blocking puts and gets}
+
+put/get routines that return per-communication handles to the
+caller. The handles can be tested later for completion (present in
+Cray and Quadrics SHMEMs, for example)
+
+\section{split-phase collectives}
+
+e.g.\ split-phase shmalloc, barriers, broadcasts
+
+\section{locality}
+
+exposing information about node and cluster topology to the library
+and/or its API
+
+\section{regularized namespace}
+
+currently routines are a mixture of ``shmem\_'' prefixes,
+``start\_pes'', ``\_my\_pe'' and others. Providing an API with a
+consistent naming scheme would be useful, e.g.\
+
+\begin{lstlisting}[language=OSH2+C]
+shmem_init (int *argc, char ***argv)
+
+shmem_finalize ()
+
+shmem_malloc ()
+
+shmem_my_pe ()
+\end{lstlisting}
+
+\section{Fortran module, C++ namespace}
+
+provide better language support
+
+\section{complex numbers}
+
+The C++ interface is basically the C one. There is one point of
+contention, namely complex numbers. The SGI documentation refers only
+to the use of C99 ``complex'' modifiers, not to C++'s
+\texttt{complex<T>}.  The use of complex number routines (e.g.\
+reductions) in C++ is thus not clearly specified.
+
+For example, \texttt{shmem\_sum\_to\_all} has a C variant
+
+\begin{lstlisting}[language=OSH+C]
+void shmem_complexd_sum_to_all (double complex *target,
+                                double complex *source,
+                                ...)
+\end{lstlisting}
+
+but in C++, complex doubles would be represented as
+
+\begin{lstlisting}[language=OSH+C]
+void shmem_complexd_sum_to_all (complex<double> *target,
+                                complex<double> *source,
+                                ...)
+\end{lstlisting}
+
+\section{User-defined reductions}
+
+\section{thread-safety}
+
+providing thread-safe SHMEM routines that can operate in hybrid
+threaded environments, e.g. alongside OpenMP;
+
+\section{fault-tolerance}
+
+\openshmem currently operates under the assumption that there is a
+fixed set of PEs available at launch-time and that these remain
+accessible for the entire life-time of the program run. Allowing
+\openshmem to handle system failures such as nodes becoming
+unavailable makes it more attractive for large-scale systems.
+
+2 routines, \texttt{shmem\_pe\_accessible} and
+\texttt{shmem\_addr\_accessible} are available in the SGI API.  These
+are intended for determining the role of PEs in SGI's particular
+environment, which can have mixed-mode MPI and SHMEM programs.
+\texttt{shmem\_pe\_accessible} test whether a given rank of the
+program is running MPI or SHMEM, and \texttt{shmem\_addr\_accessible}
+tests whether a remote address can be reached as a SHMEM PE rather
+than an MPI rank.
+
+However, these, or similar, routines could be retained for
+fault-tolerance purposes.
+
+\section{Return Types}
+
+Alongside fault-tolerance, many of the routines in the current API are
+``void'', that is, they return no value to the calling program.
+\texttt{start\_pes} is one example.  Adding return status information
+would be useful to allow the program to gracefully trap errors or
+other unexpected circumstances, e.g.
+
+\begin{lstlisting}[language=OSH2+C]
+int
+main (int argc, char *argv[])
+{
+  int s = shmem_init (&argc, &argv);
+
+  if (s != 0)
+    {
+      fprintf (stderr, ..., shmem_error (s), ...);
+    }
+
+  ...
+}
+\end{lstlisting}
+
+\section{tools}
+
+that help programming in PGAS environments
+
+\section{where is PGAS going in general?}

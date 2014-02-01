@@ -1,0 +1,261 @@
+%
+% Copyright (c) 2011, 2012
+%   University of Houston System and Oak Ridge National Laboratory.
+% 
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+% 
+% o Redistributions of source code must retain the above copyright notice,
+%   this list of conditions and the following disclaimer.
+% 
+% o Redistributions in binary form must reproduce the above copyright
+%   notice, this list of conditions and the following disclaimer in the
+%   documentation and/or other materials provided with the distribution.
+% 
+% o Neither the name of the University of Houston System, Oak Ridge
+%   National Laboratory nor the names of its contributors may be used to
+%   endorse or promote products derived from this software without specific
+%   prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+% A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+% HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+% SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+% TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+% PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+% LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+% NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+%
+
+\chapter{Introduction to \openshmem}
+
+This is where we talk about all that history and PGAS stuff.
+
+\section{What is Parallel Programming?}
+
+Maybe a little history of sequential programming, and then talk about
+concurrency vs.\ parallelism.
+
+\section{Parallel Programming Models}
+
+Shared-memory, vs.\ distributed: data- vs.\ task-centric.
+
+MPMD and SPMD~\cite{SPMD}.
+
+\section{What is a Global Address Space?}
+
+One notional memory that covers the entire extent of the program, even
+across separate machines in a cluster.  Could talk about NUMAlink~\cite{NUMAlink},
+ScaleMP~\cite{scalemp} \& virtualization technologies.
+
+\section{What is a Partitioned Global Address Space?}
+
+Contrast with GAS, concentrate on private and shared memory regions.
+
+Talk about PGAS languages and libraries with some examples.  We've mentioned
+them above but here we want to get into some detail.
+
+\subsection{Unified Parallel C}
+
+Unified Parallel C~\cite{upc} (UPC) is an extension to the well-known
+C language.  UPC has a single, shared memory space in which variables
+``belong'' to a particular processor in an SPMD environment.
+
+\subsection{Co-Array Fortran}
+
+Co-Array Fortran~\cite{coarray} (CAF) is an extension to standard
+Fortran that allows access to data stored in other \emph{places}.  CAF
+is now part of the Fortran 2008 specification.
+
+CAF partitions its data spaces into \emph{images} (analogous to MPI's
+``ranks'' and \openshmem{}'s Processing Elements) numbered from $1..N$ in
+keeping with Fortran's default style of array indexing.
+Programs run in the SPMD style and access variables on images with
+the bracket syntax, e.g.\ A(1)[2] is a reference to element 1 of array
+``A'' on image 2.
+
+CAF preserves sequential semantics on such assignments, so
+opportunities for overlap are minimal within the application source
+code.  Compiler optimization techniques such as code motion, hoisting
+and loop fission/fusion will be required to analyze the code and
+rearrange remote accesses by the compiler's runtime.
+
+\todo{References to compiler optimizations}
+
+\subsection{DARPA HPCS Languages}
+
+The DARPA HPCS program~\cite{DARPA:HPCS} was set up to develop tools to
+support multi-petaflop systems.  Languages developed under this
+program include:
+
+\subsubsection{Chapel}
+
+Chapel~\cite{chapel} is a high-level language developed by Cray Inc.
+It is a new language that draws primarily from earlier languages
+ZPL~\cite{zpl} and HPF~\cite{hpf}.  Chapel supports a multithreaded
+\emph{global view} model that allows programmers to reason about
+distributed data structures in a natural way.
+
+\subsubsection{X10}
+
+X10 is a language developed by IBM.  Blah blah.  The language is
+implicitly parallel and object-oriented, and looks similar to Java or
+Scala.
+
+\subsubsection{Fortress}
+
+Fortress~\cite{Fortress} is a language designed by Sun Microsystems.
+It provides implicit parallelism with a syntax reminiscent of Haskell
+and ML.  Fortress was developed as part of the DARPA HPCS program, but
+was not selected to continue in that program.  The Fortress project
+has since been closed and the language is no longer under development.
+
+\todo{citations}
+
+\section{History of SHMEM}
+
+SHMEM~\cite{sgi_tut_000} has a long history as a parallel programming
+model, having been used extensively on a number of products since
+1993, including Cray T3D, Cray X1E, the Cray XT3/4, SGI Origin, SGI
+Altix, clusters based on the Quadrics interconnect, and to a very
+limited extent, Infiniband based clusters.
+
+\begin{itemize}
+\item A SHMEM Timeline
+  \begin{itemize}
+  \item Cray SHMEM
+    \begin{itemize}
+    \item SHMEM first introduced by Cray Research Inc. in 1993 for Cray T3D
+    \item Cray is acquired by SGI in 1996
+    \item Cray is acquired by Tera in 2000 (MTA)
+    \item Platforms: Cray T3D, T3E, C90, J90, SV1, SV2, X1, X2, XE, XMT, XT
+    \end{itemize}
+  \item SGI SHMEM
+    \begin{itemize}
+    \item SGI purchases  Cray Research Inc. and SHMEM was integrated into
+      SGI's Message Passing Toolkit (MPT)
+    \item SGI currently owns the rights to SHMEM and \openshmem
+    \item Platforms: Origin, Altix 4700, Altix XE, Altix ICE, Altix UV
+    \item SGI was purchased by Rackable Systems in 2009
+    \item SGI and Open Source Software Solutions, Inc. (OSSS) signed a
+      SHMEM trademark licensing agreement, in 2010
+    \end{itemize}
+  \item Other Implementations
+    \begin{itemize}
+    \item Quadrics (Vega UK, Ltd.)
+    \item Hewlett Packard
+    \item GPSHMEM
+    \item IBM
+    \item QLogic
+    \item Mellanox
+    \item University of Houston
+    \item University of Florida
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+Despite being supported by a variety of vendors there is no standard
+defining the SHMEM memory model or programming interface. Consistencies
+(where they exist) and extensions across the various implementations have
+been driven by the needs of an enthusiastic user community. The lack of a
+SHMEM standard has allowed each implementation to differ in both interface
+and semantics from vendor to vendor and even product line to product line,
+which has to this point limited broader acceptance.
+
+\section{Towards an \openshmem standard}
+
+When comparing the various implementations of SHMEM and other RMA APIs,
+we see that semantics vary dramatically. Not only do SHMEM RMA semantics
+differ from other RMA implementations (as expected)  but different SHMEM
+implementations differ from each other. Support for primitive data types
+varies. Discontiguous RMA operations and Atomic RMA operations are not
+uniformly supported. Synchronization and completion semantics differ
+substantially which can cause valid programs on one architecture to be
+completely invalid on another. Symmetric data objects that dramatically
+aid the programmer are unique to the SHMEM model but are not uniformly
+supported. There are a number of capabilities that are available from
+implementations that differ from the SGI SHMEM base-line version. Below
+is a brief list of potential future additions to \openshmem:
+
+\begin{itemize}
+  \item Support for Multiple Host Channel Adapters (Rails)
+  \item Support for non-Blocking Transfers
+  \item Support for Events
+  \item Additional Atomic Memory Operations and Collectives
+  \item Locks
+  \begin{itemize}
+    \item shmem\_set\_lock
+    \item shmem\_clear\_lock
+    \item shmem\_test\_lock
+  \end{itemize}
+  \item Potential options for NUMA/Hybrid architectures
+  \item Additional communications transport mechanisms
+  \item \openshmem I/O library enhancements
+  \item \openshmem tools and Compiler enhancements
+  \item Enabling exa-scale applications
+\end{itemize}
+
+An \openshmem standard can address the lack of uniformity across the
+available SHMEM implementations. Standardization levels can be established
+to provide a base level that all SHMEM implementations must support in
+order to meet the standard, with higher levels available for additional
+functionality and platform specific features. \\
+
+In 2008, an initial dialogue was started between SGI and a small not-for-profit
+company called Open Source Software Solutions, Inc.(OSSS).
+The purpose of the dialogue was to determine if an agreement could be reached
+for SGI's approval of an open source version of SHMEM that would serve
+as an umbrella standard under which to unify all of the already existing
+implementations into one cohesive API.  As part of this discussion, OSSS
+held a BOF on \openshmem at SC08 to discuss this plan. The BOF was well
+attended by all of the vendors interested in supporting \openshmem/SHMEM,
+and many of the interested parties in the SHMEM user community. The
+unanimous opinion of the attendees favored continuing the process toward
+developing \openshmem as a community standard.  The final agreement
+between SGI and OSSS was signed in 2010. The agreement allows OSSS to
+use the name \openshmem and directly reference SHMEM going forward. The
+base version of \openshmem V1.0 is based on the SGI man pages.  The ``look
+and feel'' of \openshmem needs to preserve the original ``look and feel''
+of the SGI SHMEM.  \openshmem version 1.0 has been released and input
+for version 2.0 is being actively solicited.
+
+There are a number of enhancements under discussion for version 2.0 and
+future offerings. Some of the features specific to one implementation
+or another as listed in the preceding tables and elements will be
+incorporated into later versions of \openshmem.  \openshmem will be
+supported on a variety of commodity networks (including Infiniband
+from both Mellanox and QLogic) as well as several proprietary
+networks (Cray, SGI, HP, and IBM).
+
+The \openshmem mail reflector is hosted
+at ORNL and can be joined by sending a request via the \openshmem list
+server (GNU MailMan~\cite{mailman}) at
+\begin{verbatim}
+openshmem-join@email.ornl.gov
+\end{verbatim}
+Future enhancements and RFIs will be sent to developers and other interested
+parties via this mechanism.
+
+Source code examples, Validation and
+Verification suites, performance analysis and \openshmem compliance is
+hosted at the \openshmem website at
+\begin{verbatim}
+http://www.openshmem.org/
+\end{verbatim}
+and the \openshmem standard is owned and maintained by OSSS.
+
+With the inexorable march toward exa-scale, programming methodologies such
+as \openshmem will certainly find their place in enabling extreme scale
+architectures.  By virtue of decoupling data motion from synchronization,
+\openshmem exposes the potential for synergistic application improvements
+by scaling more readily than two-sided models, and by minimizing data
+motion, thus affording the possibility of concomitant savings in power
+consumption by applications.  These gains, along with portability,
+programmability, productivity, and adoption, will secure \openshmem a
+place for future extreme scale systems.
