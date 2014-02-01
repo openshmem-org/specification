@@ -10,13 +10,25 @@ is the stride between \ac{PE}s, and PE\_size is the number of \ac{PE}s
 participating in the \activeset{}. All \ac{PE}s participating in the 
 collective operations provides the same values for these arguments. 
  
-Another argument important to the collective operation is pSync, a symmetric work 
+Another argument important to the collective operation is pSync, which is a symmetric work 
 array. All \ac{PE}s participating in a collective should pass the same
 pSync array. On completion of a collective call, the pSync is restored to its 
 original contents. The reuse of pSync array is allowed for a \ac{PE}, if all previous collective 
 operations using the pSync array is completed by all participating 
 \ac{PE}s. One can use a synchronization collective operation such as \barrier{}
-to ensure completion of previous collective operations.
+to ensure completion of previous collective operations. The two cases below
+show the reuse of pSync array:
+
+\begin{itemize}
+\item The \FUNC{shmem\_barrier} function allows the same \VAR{pSync} array to be used
+          on consecutive calls as long as the active \ac{PE} set does not change.
+\item  If the same collective function is called multiple times with the
+          same \activeset, the calls may alternate between two \VAR{pSync} arrays.
+          The \openshmem functions guarantee that a first call is completely finished by 
+          all \ac{PE}s by the time processing of a third  call  begins  on
+          any \ac{PE}.          
+\end{itemize}
+
 
 All collective operations defined in the specification are blocking. The 
 collective operations return on completion. The collective operation 
