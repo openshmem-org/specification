@@ -2,6 +2,8 @@
 
 \subsection*{Incorporating \openshmem{} into Programs}
 
+
+
 % C and C++ programs that use the \openshmem library must \texttt{\textbf{}}\lstinline[basicstyle={\ttfamily},language={C++}]!#include <mpp/shmem.h>!.
 % Fortran programs should \lstinline[basicstyle={\ttfamily},language=Fortran]!include 'mpp/shmem.fh'!;
 % and Fortran programs that use constants defined by \openshmem must
@@ -42,4 +44,9 @@ include 'mpp/shmem.fh'
 \end{lstlisting}
 
 for backward compatibility with OpensHMEM 1.0 and SGI SHMEM.
+\\
+\\
+The following example illustrates the use of symmetric data objects. Note the declaration of the  \VAR{static short target} array and its use as the remote destination in \openshmem short \FUNC{put}. The use of the \VAR{static} keyword results in the \VAR{target} array being symmetric on \ac{PE} \CONST{0} and \ac{PE} \CONST{1}. Each \ac{PE} is able to transfer data to the target array by simply specifying the local address of the symmetric data object which is to receive the data. This aids programmability as the address of the target need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to the RMA (Remote memory operation). Conversely, the declaration of the \VAR{short source} array is asymmetric. Because the \FUNC{put} handles the references to the \VAR{source} array only on the active (local) side, the asymmetric source object is handled correctly.
+
+ \exampleITEM{}{./EXAMPLES/writing_shmem_example.c}{} 
 
