@@ -8,7 +8,7 @@
 %   *Each PE executes asynchronously following Fortran or program execution in C [ISO/IEC00 Sec. 5.1.2.3]
 %   *Each PE will have a unique global identifier and the execution of a program may depend on the PE id, if executed in SPMD.
 %   *PE id may be used for library calls synchronizations, control flow constructs language  in C/Fortran
-%   *PE may allocate symmetric data objects via a symmetric heap %SP: Does not cover global and static.
+%   *PE may allocate symmetric data objects via a symmetric heap  during execution%SP: Does not cover global and static.
 %   *As of now, PEs may finish execution at any time by returning from the main function. (no call to shmem_finalize yet!)
 %   
 %This comes from the UPC spec:
