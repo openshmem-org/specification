@@ -21,9 +21,10 @@ same time, and they all run the same program.  Usually the \ac{PE}s  perform
 computation on their own subdomains of the larger problem, and periodically 
 communicate with other \ac{PE}s to exchange information on which the
 next computation phase depends.
-%The \openshmem functions minimize the overhead associated with data transfer requests, maximize bandwidth, and minimize data latency.  %SP:repeat
-Data latency is  the  period  of  time that starts when a \ac{PE} initiates a transfer of data 
-and ends when a \ac{PE} can use the data.
+%SP: Addressing suggestions from discussion on 01/31/2014
+The \openshmem data-transfer functions are one-sided in nature. This means that a local \ac{PE} executing a data-transfer does not require the participation of the remote \ac{PE} to complete the operation. This allows for overlap between communication and computation which hides data-transfer latencies, making \openshmem ideal for applications with unstructured communication patterns.
+%Data latency is  the  period  of  time that starts when a \ac{PE} initiates a transfer of data 
+%and ends when a \ac{PE} can use the data. %SP: What about put? Not guaranteed till synchronization is hit.
 
 %SP: Addressing suggestions from discussion on 01/28/2014
 %\openshmem functions support remote data transfer through \FUNC{put} operations, which  transfer data to a 
