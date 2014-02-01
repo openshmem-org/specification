@@ -1,7 +1,24 @@
 \section{Language Bindings and Conformance}
 
-\openshmem is available with \Clang{} and \Fortran{} bindings.  The \Cpp{}
-interface is currently the same as that for \Clang.  An \openshmem implementation can be conformant to one or both of the
-interfaces.  An implementation that provides e.g.\ only a \Clang{} interface may claim to conform to the \openshmem specification with respect to
-the \Clang{} language, but not to \Fortran{} and should make this clear in its documentation.  An implementation that provides both \Clang{} and \Fortran{} bindings may claim
-complete conformance.
+%\openshmem is available with \Clang{} and \Fortran{} bindings.  The \Cpp{}
+%interface is currently the same as that for \Clang.  An \openshmem implementation can be conformant to one or both of the
+%interfaces.  An implementation that provides e.g.\ only a \Clang{} interface may claim to conform to the \openshmem specification with respect to
+%the \Clang{} language, but not to \Fortran{} and should make this clear in its documentation.  An implementation that provides both \Clang{} and \Fortran{} bindings may claim
+%complete conformance.
+
+
+\openshmem provides bindings for \Clang{} and \Fortran{} languages. Any
+implementation that provide \Clang{} can claim conformance to the specification.
+
+All \openshmem{} functions are prefixed with \shmemprefix{}, except these
+functions are expections :
+\begin{itemize}
+\item start\_pes{}
+\item shfree{}
+\item shpalloc{}
+\item shpclmove{}
+\item shpdellc{}
+\end{itemize}
+
+The \openshmem{} programs should avoid using function names, variables, or
+identifiers with the prefix \shmemprefix{} or above names. 
