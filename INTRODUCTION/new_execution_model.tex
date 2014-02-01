@@ -1,0 +1,88 @@
+%Outline
+%%Exectution model
+%   *Define what is a OpenSHMEM program: a set of processes (either SPMD or MIMD?) where each process has its own 'local' (private) memory and symmetric memory regions that may be accessible by any PEs.
+%   *Each OpenSHMEM process is called a processing element (PE)
+%   *Each PE may be mapped to many to one hardware cores/threads or less.
+%   *The number of PEs is specified at launch/runtime.
+%   *Each PE must call startpe to initialize the OpenSHMEM runtime, before any other call for OpenSHMEM. There is an implicit barrier at startpe.
+%   *Each PE executes asynchronously following Fortran or program execution in C [ISO/IEC00 Sec. 5.1.2.3]
+%   *Each PE will have a unique global identifier and the execution of a program may depend on the PE id, if executed in SPMD.
+%   *PE id may be used for library calls synchronizations, control flow constructs language  in C/Fortran
+%   *PE may allocate symmetric data objects via a symmetric heap  during execution%SP: Does not cover global and static.
+%   *As of now, PEs may finish execution at any time by returning from the main function. (no call to shmem_finalize yet!)
+%   
+%This comes from the UPC spec:
+%The memory consistency model in a language defines the order in which the results of write operations may be observed through read operations.
+%The behavior of a OpenSHMEM program may depend on the timing of accesses to symetric variables on PEs, so in general a program defines a set of possible executions, 
+%rather than a single execution. The memory consistency model constrains the set of possible executions for a given program; the user may then rely 
+%on properties that are true of all of those executions.
+    
+
+\section{Execution Model}
+An OpenSHMEM program consists of a set of processes, called \ac{PE}s that execute and communicate with each other via \openshmem calls in a \ac{SPMD}-like execution model. In \openshmem different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang.  All \ac{PE} may be mapped 1-to-1 to hardware cores/threads or less where the number of \ac{PE}s  is specified at runtime. An \openshmem program should start by calling the initialization function \FUNC{start \_pes}  before using any of the other \openshmem library routines.  \ac{PE}s do not exist until after all the calls to \FUNC{start\_pes} return. During execution, each \ac{PE} is assigned a unique global identifier for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (such as collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. 
+As of now, an \openshmem program finishes execution by returning from the main function. 
+It is up to the implementation on how to handle the finalization of the
+\openshmem library and any other resources initialized by the library:
+there is currently no explicit call defined in the \openshmem specification.
+
+\subsection{Communication Progress}
+
+The \openshmem model assumes that computation and communication are
+naturally overlapped.  \openshmem programs are expected to exhibit
+progression of communication both with and without \openshmem calls.
+Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls.
+Other \ac{PE}s must be able to communicate (put/get,
+collective, atomic) with that computationally-bound \ac{PE} without that \ac{PE}
+issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} must progress
+regardless of when that \ac{PE} next engages in an \openshmem call.
+
+\textbf{Note to implementers:} progress will often be ensured through
+the use of a dedicated progress thread in software, or through
+network hardware that offloads communication handling from processors.
+
+%\subsection{Using the Symmetric \VAR{Work} and \VAR{pSync} Arrays}
+
+%Multiple \VAR{pSync} arrays are often needed if a particular \ac{PE} calls a \openshmem
+%collective  function twice without intervening barrier synchronization.
+%Problems would occur if some \ac{PE}s in the \activeset{} for call 2 arrive at
+%call 2 before processing of call 1 is complete by all \ac{PE}s in the call 1
+%\activeset.  You can use  \FUNC{shmem\_barrier}  or  \FUNC{shmem\_barrier\_all}  to
+%perform  a  barrier  synchronization between consecutive calls to \openshmem
+%collective functions. There are two special cases:
+%\begin{itemize}
+%\item The \FUNC{shmem\_barrier} function allows the same \VAR{pSync} array to be used
+%          on consecutive calls as long as the active \ac{PE} set does not change.
+%\item  If the same collective function is called multiple times with the
+%          same \activeset, the calls may alternate between two \VAR{pSync} arrays.
+%          The \openshmem functions guarantee that a first call is completely finished by 
+%          all \ac{PE}s by the time processing of a third  call  begins  on
+%          any \ac{PE}.          
+%\end{itemize}
+%Because  the \openshmem functions restore \VAR{pSync} to its original contents,
+%multiple calls that use the same \VAR{pSync} array do not require that \VAR{pSync}
+%be reinitialized after the first call.
+
+\subsection{Atomicity Guarantees}
+
+\openshmem contains a number of routines that operate on symmetric data
+atomically.  These routines guarantee that accesses by \openshmem's
+atomic operations will be exclusive, but do not guarantee exclusivity
+in combination with other routines, either inside \openshmem or
+outside.
+
+For example: during the execution of a remote integer increment
+operation on a symmetric variable \VAR{x}, no other \openshmem atomic
+operation may access \VAR{x}.  After the increment, \VAR{x} will have
+increased its value by \CONST{1} on the target \ac{PE}, at which point other
+atomic operations may then modify that \VAR{x}.
+
+%  %Memory model
+%    *Each OpenSHMEM PEs may have symmetric memory that is accessible by other PEs. 
+%    *Symmetric memory is a region of memory where all the an instance of a data objects is replicated across PEs, have 
+%     the same the same layout and relative offset.
+%    *All PEs can allocate a symmetric data objects using the symmetric heap, but they must do so as a collective operation. (is there a barrier after shmalloc?)
+%    *All writes to symmetric memory are relaxed (I'm not sure if this is the completion semantics) and are guaranteed to be visible to other PEs after a barrier_all, barrier(?), quiet, (what about wait? does it means iti sonly visible to me?) 
+%    *Calls to barrier, barrier_all, quiet, wait, lock, atomics, are meant to guarantee memory consistency across PEs.
+%    *Read/Writes to symmetic data object may appear after startpe or after a the symmetric data object has been allocated in the symmetric heap (if it is a dynamic).
+%    *Operations like reduction, collect, etc guarantee memory consistency after completion(?)
+%    *Data races are possible in OpenSHMEM if multiple PEs write/read a symmetric data object from a single PE without proper synchronization.  
