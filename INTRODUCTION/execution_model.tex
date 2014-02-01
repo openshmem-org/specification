@@ -63,10 +63,10 @@ It is up to the implementation on how to handle the finalization of the
 \openshmem library and any other resources initialized by the library:
 there is currently no explicit call defined in the \openshmem specification.
 
-\subsection{Communication Progress}
+\subsection{Progress of \openshmem operations}
 
 The \openshmem model assumes that computation and communication are
-naturally overlapped.  \openshmem programs are expected to exhibit
+naturally overlapped.  High quality \openshmem implementations must insure that programs exhibit %SP: Changing MUST to may as per discussion on 01/31/2014
 progression of communication both with and without \openshmem calls.
 Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls.
 Other \ac{PE}s must be able to communicate (put/get,
