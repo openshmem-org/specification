@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_COLLECT}{Concatenates blocks of data from multiple \ac{PE}s to an array in every \ac{PE}.}
+\bAPI{SHMEM\_COLLECT, SHMEM\_FCOLLECT}{Concatenates blocks of data from multiple \ac{PE}s to an array in every \ac{PE}.}
 \synC   %Synopisis for C API
 void shmem_collect32(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_collect64(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
