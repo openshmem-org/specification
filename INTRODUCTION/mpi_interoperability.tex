@@ -1,33 +1,25 @@
-\section{\ac{MPI} Interoperability}
-
+\subsection{\ac{MPI} Interoperability}
+\begin{sloppypar} %SP: to prevent constants from running into margins.
 \openshmem functions can be used in conjunction  with  \ac{MPI}
-functions  in  the  same  application.   Programs that use both \ac{MPI} and
-\openshmem functions should call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the call
+functions  in  the  same  application.   For example, on SGI systems, programs that use both \ac{MPI} and
+\openshmem functions call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the call
 to  the \FUNC{start\_pes} function.  \openshmem \ac{PE} numbers are equal to the \ac{MPI} rank
 within the \CONST{MPI\_COMM\_WORLD} environment variable.  Note  that  this  precludes 
 use of \openshmem functions between processes in different \CONST{MPI\_COMM\_WORLD}s. 
 \ac{MPI} processes started using the \FUNC{MPI\_Comm\_spawn}  function,  for
 example,  cannot  use  \openshmem functions to communicate with their parent
 \ac{MPI} processes.
-
- In \ac{MPI} jobs that use TCP/sockets for inter-host communication,  you  can
- use \openshmem functions to communicate with processes running on the same
- host.  Use the \FUNC{shmem\_pe\_accessible} function to determine if a remote \ac{PE}
- is accessible via \openshmem communication from the local \ac{PE}. When  running  an  \ac{MPI} application involving multiple executable files,
- one can use \openshmem functions to communicate with processes running  from
- the same or different executable files, provided that the communication
- is limited to symmetric data objects.  It is  important  to  note  that
- static  memory, such as a Fortran common block or C global variable, is
- symmetric between processes running from the same executable file,  but
+\end{sloppypar}
+On SGI systems \ac{MPI} jobs that use TCP/sockets for inter-host communication, \openshmem functions can be used to communicate with processes running on the same
+ host.  The \FUNC{shmem\_pe\_accessible} function can be used to determine if a remote \ac{PE}
+ is accessible via \openshmem communication from the local \ac{PE}. When  running  an  \ac{MPI} application involving multiple executable files, \openshmem functions can be used to communicate with processes running  from the same or different executable files, provided that the communication is limited to symmetric data objects.  On these systems, static  memory, such as a Fortran common block or C global variable, is symmetric between processes running from the same executable file,  but
  is  not  symmetric  between processes running from different executable
  files.  Data allocated from the symmetric heap (\FUNC{shmalloc}  or  \FUNC{shpalloc})
- is  symmetric  across  the same or different executable files. Use the
- \FUNC{shmem\_addr\_accessible} function to  determine  if  a  local  address  is
+ is  symmetric  across  the same or different executable files. The function 
+ \FUNC{shmem\_addr\_accessible} can be used to determine  if  a  local  address  is
  accessible via \openshmem communication from a remote \ac{PE}.
 
- Note  that  the  \FUNC{shmem\_pe\_accessible} function returns \CONST{TRUE} only if the
- remote \ac{PE} is a process running from the same  executable  file  as  the
- local PE, indicating that full \openshmem support (static memory and symmetric heap) 
- is available. When using \openshmem functions within an \ac{MPI} program, one  should  use  the
- \ac{MPI}  memory placement environment variables when using non-default memory 
+ Another important feature of these systems is that the  \FUNC{shmem\_pe\_accessible} function returns \CONST{TRUE} only if the remote \ac{PE} is a process running from the same  executable  file  as  the
+ local PE, indicating that full \openshmem support (static memory and symmetric heap) is available. When using \openshmem functions within an \ac{MPI} program, the use of 
+ \ac{MPI}  memory placement environment variables is required when using non-default memory 
  placement options.
