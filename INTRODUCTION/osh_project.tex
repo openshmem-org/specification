@@ -20,28 +20,31 @@ is. 2) Second paragraph, IMO, this gives a impression that \openshmem{} effort i
 consolodiation. Rather, it should be that only 1.0 and 1.1 have this aim. 
 Future version is not aimed at consolodition. How does these two paragraphs 
 look ?}
+\rcomment{ \\ Oscar: 1) OpenSHMEM does not provide a global view of memory that is addressable by all PEs (like UPC, Chapel, where there is a PGAS address space). Instead
+it provides partioned-view of data, where symmetric data objects are accessible by all PEs. We need to avoid saying that OpenSHMEM provides a shared addressable space. 
+}
 
 \openshmem is a \ac{PGAS} library interface specification. In the \ac{PGAS} model, each process has access to 
 local private and globally shared memory, where portions of the shared memory may have affinity to a particular process. \openshmem
-defines interfaces for defining partitioned global address space, and
-interfaces for communication and synchronization on the address space. 
+defines interfaces for implementing a \ac{PGAS} program 111 access symmetric data objects ,  communication and synchronization on the address space. 
 
-
-The \openshmem{} 1.0 and 1.1 are the first open source SHMEM specifications,
-which are a consolidation of various SHMEM specifications. 
-The main goal of these versions is to consolidate different SHMEM versions
+\rcomment{Oscar: 2 OpenSHMEM I'm not sure if a spec can be defined as open source}
+\openshmem is the first community-driven SHMEM specification,
+which is a consolidation of various SHMEM specifications that addresses SHMEM community needs. 
+One of the goals of \openshmem is to consolidate different SHMEM versions
 provided by the vendors, laboratories, and universities into a single open
-source specification. The different SHMEM specifications have a subtle
-difference, as a conseuquence, SHMEM programs written using any one of these 
-implementations is not necessarily portable to the others. 
+source specification. In the past, different SHMEM implementations have a subtle
+differences, and as a consequence, SHMEM programs written using any one of these 
+implementations was portable across systems. 
 More details on the history of the \openshmem are available in this
 \hyperref[sec:openshmem_history]{section}.
 
-The \openshmem{} 1.0 and 1.1 standardization efforts are driven by \ac{ORNL} and \ac{UH} 
+The \openshmem standardization effort is driven by \ac{ORNL} and \ac{UH} 
 with significant input from the \openshmem{} community. Besides the
 specification, the effort included providing a reference implementation,
  and building infrastructure for the standardization process.
 The specifications and the reference implementations are available here: 
 www.openshmem.org.
 
-\rcomment{Manju: Do we have to add a paragraph about the role of OSS ?} 
+\rcomment{Manju: Do we have to add a paragraph about the role of OSS ?}
+\rcomment{Probably not, up-to Steve} 
