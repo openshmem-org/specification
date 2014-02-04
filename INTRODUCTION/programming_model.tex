@@ -38,10 +38,9 @@ The \openshmem data-transfer functions are one-sided in nature. This means that 
 
 \rcomment{Manju: [The idea is to talk SPMD. We are talking about nature of interfaces rather than 
  the interfaces that enable SPMD. Replace the second paragraph with the one below ?]}
-
+\rcomment{\\ Oscar: I'm good with this change. minor change to say the SPMD can be used to decompose work\\}
 The \openshmem{} interfaces can be used to implement \ac{SPMD} style programs. It provides interfaces 
-to start the \openshmem{} processes in parallel, and communication and synchronization interfaces for data and control distribution. These interfaces can be leveraged to divide a problem to into multiple sub-problems that can solved independently or with co-ordination using the communication and synchronization interfaces.
-
+to start the \openshmem{} processes in parallel, and communication and synchronization interfaces to access data and decompose the work across \ac{PE}s . These interfaces can be leveraged to divide a problem to into multiple sub-problems that can solved independently or with co-ordination using the communication and synchronization interfaces.
 The \openshmem specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
 The \Cpp{} interface is currently the same as that for \Clang. An overview of the important \openshmem operations is described below:
 
