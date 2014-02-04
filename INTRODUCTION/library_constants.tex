@@ -4,45 +4,37 @@
 Below are the library constants for the reduction operations.
 The constants that start with SHMEM\_* are for \Fortran{} and 
 \_SHMEM\_* for \Clang.
-
-\subsubsection*{SHMEM\_BCAST\_SYNC\_SIZE, \_SHMEM\_BCAST\_SYNC\_SIZE}
-
-Length of the pSync arrays needed for broadcast operations. The value
+\newline
+\newline
+\begin{tabular}{|p{0.4\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{Constant} & \textbf{Description}
+\tabularnewline
+\hline 
+\hline 
+\vtop{\hbox{\CorCpp:} \hbox{\hspace*{12mm} \const{\_SHMEM\_BCAST\_SYNC\_SIZE}} \hbox{} \hbox{\strut \Fortran:} \hbox{\hspace*{12mm} \const{SHMEM\_BCAST\_SYNC\_SIZE}}} & Length of the pSync arrays needed for broadcast operations. The value
 of this constant is implementation specific. Refer to the \textbf{Broadcast
 Routines} section under \textbf{Library Routines} for more information
-about the usage of this constant.
-
-
-\subsubsection*{SHMEM\_SYNC\_VALUE, \_SHMEM\_SYNC\_VALUE}
-
-Holds the value used to initialize the elements of pSync arrays. The
-value of this constant is implementation specific.
-
-
-\subsubsection*{SHMEM\_REDUCE\_SYNC\_SIZE, \_SHMEM\_REDUCE\_SYNC\_SIZE}
-
-Length of the work arrays needed for reduction operations. The value
+about the usage of this constant. \tabularnewline
+\hline 
+\vtop{\hbox{\CorCpp:} \hbox{\hspace*{12mm} \const{\_SHMEM\_SYNC\_VALUE}} \hbox{} \hbox{\strut \Fortran:} \hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_VALUE}}} & Holds the value used to initialize the elements of pSync arrays. The
+value of this constant is implementation specific.\tabularnewline
+\hline
+\vtop{\hbox{\CorCpp:} \hbox{\hspace*{12mm} \const{\_SHMEM\_REDUCE\_SYNC\_SIZE}} \hbox{} \hbox{\strut \Fortran:} \hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_SYNC\_SIZE}}} & Length of the work arrays needed for reduction operations. The value
 of this constant is implementation specific. Refer to the \textbf{Reduction
 Routines} section under \textbf{Library Routines} for more information
-about the usage of this constant.
-
-
-\subsubsection*{SHMEM\_BARRIER\_SYNC\_SIZE, \_SHMEM\_BARRIER\_SYNC\_SIZE }
-
-Length of the work array needed for barrier operations. The value
+about the usage of this constant.\tabularnewline
+\hline
+\vtop{\hbox{\CorCpp:} \hbox{\hspace*{12mm} \const{\_SHMEM\_BARRIER\_SYNC\_SIZE}} \hbox{} \hbox{\strut \Fortran:} \hbox{\hspace*{12mm} \const{SHMEM\_BARRIER\_SYNC\_SIZE}}} & Length of the work array needed for barrier operations. The value
 of this constant is implementation specific. Refer to the \textbf{Barrier
 Synchronization Routines} section under \textbf{Library Routines}
-for more information about the usage of this constant.
-
-
-\subsubsection*{SHMEM\_COLLECT\_SYNC\_SIZE, \_SHMEM\_COLLECT\_SYNC\_SIZE }
-
-Length of the work array needed for collect operations. The value
+for more information about the usage of this constant.\tabularnewline
+\hline
+\vtop{\hbox{\CorCpp:}\hbox{\hspace*{12mm} \const{\_SHMEM\_COLLECT\_SYNC\_SIZE}} \hbox{} \hbox{\strut \Fortran:} \hbox{\hspace*{12mm} \const{SHMEM\_COLLECT\_SYNC\_SIZE}}} & Length of the work array needed for collect operations. The value
 of this constant is implementation specific. Refer to the \textbf{Collect
 Routines} section under \textbf{Library Routines} for more information
-about the usage of this constant.
-
-
-\subsubsection*{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE, \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE }
-
-Minimum length of work arrays used in various collective operations.
+about the usage of this constant.\tabularnewline
+\hline
+\vtop{\hbox{\CorCpp:} \hbox{\hspace*{12mm} \const{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}} \hbox{} \hbox{\strut \Fortran:} \hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}}} & Minimum length of work arrays used in various collective operations.\tabularnewline
+\hline
+\end{tabular}

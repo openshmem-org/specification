@@ -14,3 +14,34 @@ as possible. To know more about the history of \openshmem, see the section on \h
 The \openshmem specification is widely accepted by the community and is the de-facto
 standard for SHMEM.  For vendors interested in implementing OpenSHMEM, there is an open source reference implementation
 that can serve as a starting point to develop their own libraries or to experiment with extensions. The reference implementation is available at www.openshmem.org.
+
+\rcomment{Manju: 1) We are introducing \openshmem{} without describing what it
+is. 2) Second paragraph, IMO, this gives a impression that \openshmem{} effort is all about
+consolodiation. Rather, it should be that only 1.0 and 1.1 have this aim. 
+Future version is not aimed at consolodition. How does these two paragraphs 
+look ?}
+
+\openshmem is a \ac{PGAS} library interface specification. In the \ac{PGAS} model, each process has access to 
+local private and globally shared memory, where portions of the shared memory may have affinity to a particular process. \openshmem
+defines interfaces for defining partitioned global address space, and
+interfaces for communication and synchronization on the address space. 
+
+
+The \openshmem{} 1.0 and 1.1 are the first open source SHMEM specifications,
+which are a consolidation of various SHMEM specifications. 
+The main goal of these versions is to consolidate different SHMEM versions
+provided by the vendors, laboratories, and universities into a single open
+source specification. The different SHMEM specifications have a subtle
+difference, as a conseuquence, SHMEM programs written using any one of these 
+implementations is not necessarily portable to the others. 
+More details on the history of the \openshmem are available in this
+\hyperref[sec:openshmem_history]{section}.
+
+The \openshmem{} 1.0 and 1.1 standardization efforts are driven by \ac{ORNL} and \ac{UH} 
+with significant input from the \openshmem{} community. Besides the
+specification, the effort included providing a reference implementation,
+ and building infrastructure for the standardization process.
+The specifications and the reference implementations are available here: 
+www.openshmem.org.
+
+\rcomment{Manju: Do we have to add a paragraph about the role of OSS ?} 

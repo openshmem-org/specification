@@ -14,6 +14,8 @@ The \openshmem library functions provide low-latency, high-bandwidth communicati
 scalable programs. The \ac{API} allows communication and synchronization operations on both local and symmetric data objects. 
 \openshmem is a library and unlike UPC, CAF, Titanium, X10 and Chapel, which are all
 PGAS languages, it relies on the programmer to use the library calls correctly to implement the semantics of its programming model.
+\rcomment{Manju: To do - Make sure the first paragraph does not say the same
+things has first paragraph of Section 1}
 
 An \openshmem program is currently \ac{SPMD} in style. The
 \openshmem  processes, called \ac{PE}s, all start at the
@@ -33,6 +35,12 @@ The \openshmem data-transfer functions are one-sided in nature. This means that 
 %\FUNC{broadcast} and \FUNC{reduction}, \FUNC{barrier synchronization}, and \FUNC{atomic memory operations}. 
 %An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
 %or local data object.
+
+\rcomment{Manju: [The idea is to talk SPMD. We are talking about nature of interfaces rather than 
+ the interfaces that enable SPMD. Replace the second paragraph with the one below ?]}
+
+The \openshmem{} interfaces can be used to implement \ac{SPMD} style programs. It provides interfaces 
+to start the \openshmem{} processes in parallel, and communication and synchronization interfaces for data and control distribution. These interfaces can be leveraged to divide a problem to into multiple sub-problems that can solved independently or with co-ordination using the communication and synchronization interfaces.
 
 The \openshmem specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
 The \Cpp{} interface is currently the same as that for \Clang. An overview of the important \openshmem operations is described below:
