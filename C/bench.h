@@ -264,18 +264,18 @@ static void bench_end (timer *t, int64 iters, char *work)
          const char *units[4] = {"", "K", "M", "G"};
          int i = 0;
       
-      rate = iters/wall;
-      while (i < 3) {
-	if (rate > 999.999) {
-	   rate /= 1024.;
-	   i++;
-	}
-	else
-	   break;
-      }
+         rate = iters/wall;
+         while (i < 3) {
+	   if (rate > 999.999) {
+	      rate /= 1024.;
+	      i++;
+	   }
+	   else
+	      break;
+         }
       
-      printf ("%s %8.4f %s %s per second\n",
-	      END_ST, rate, units[i], work);
+         printf ("%s %8.4f %s %s per second\n",
+	         END_ST, rate, units[i], work);
       }
    }
 }
