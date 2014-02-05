@@ -6,7 +6,6 @@
 %model for exchanging data between cooperating parallel processes. The resulting programs are similar 
 %in style to \ac{MPI} programs. The \openshmem \ac{API} can be used either alone 
 %or in combination with \ac{MPI} functions in the same parallel program.
-
 \openshmem implements a \ac{PGAS} model. In the \ac{PGAS} model, each process has a local and 
 globally shared memory where portions of the shared memory may have affinity to a particular process. 
 \openshmem implements \ac{PGAS} by defining symmetric data objects as a mechanism to share information among \openshmem processes or \ac{PE}. 
@@ -14,17 +13,18 @@ The \openshmem library functions provide low-latency, high-bandwidth communicati
 scalable programs. The \ac{API} allows communication and synchronization operations on both local and symmetric data objects. 
 \openshmem is a library and unlike UPC, CAF, Titanium, X10 and Chapel, which are all
 PGAS languages, it relies on the programmer to use the library calls correctly to implement the semantics of its programming model.
-\rcomment{Manju: To do - Make sure the first paragraph does not say the same
-things has first paragraph of Section 1}
-
-An \openshmem program is currently \ac{SPMD} in style. The
-\openshmem  processes, called \ac{PE}s, all start at the
-same time, and they all run the same program. Usually the \ac{PE}s perform
-computation on their own subdomains of the larger problem, and periodically 
-communicate with other \ac{PE}s to exchange information on which the
-next computation phase depends.
-%SP: Addressing suggestions from discussion on 01/31/2014
 The \openshmem data-transfer functions are one-sided in nature. This means that a local \ac{PE} executing a data-transfer does not require the participation of the remote \ac{PE} to complete the operation. This allows for overlap between communication and computation which hides data-transfer latencies, making \openshmem ideal for applications with unstructured communication patterns.
+%\rcomment{Manju: To do - Make sure the first paragraph does not say the same
+%things has first paragraph of Section 1}
+
+%An \openshmem program is currently \ac{SPMD} in style. The
+%\openshmem  processes, called \ac{PE}s, all start at the
+%same time, and they all run the same program. Usually the \ac{PE}s perform
+%computation on their own subdomains of the larger problem, and periodically 
+%communicate with other \ac{PE}s to exchange information on which the
+%next computation phase depends.
+%SP: Addressing suggestions from discussion on 01/31/2014
+
 %Data latency is  the  period  of  time that starts when a \ac{PE} initiates a transfer of data 
 %and ends when a \ac{PE} can use the data. %SP: What about put? Not guaranteed till synchronization is hit.
 
@@ -36,11 +36,11 @@ The \openshmem data-transfer functions are one-sided in nature. This means that 
 %An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
 %or local data object.
 
-\rcomment{Manju: [The idea is to talk SPMD. We are talking about nature of interfaces rather than 
- the interfaces that enable SPMD. Replace the second paragraph with the one below ?]}
-\rcomment{\\ Oscar: I'm good with this change. minor change to say the SPMD can be used to decompose work\\}
+%\rcomment{Manju: [The idea is to talk SPMD. We are talking about nature of interfaces rather than 
+% the interfaces that enable SPMD. Replace the second paragraph with the one below ?]}
+%\rcomment{\\ Oscar: I'm good with this change. minor change to say the SPMD can be used to decompose work\\}
 The \openshmem{} interfaces can be used to implement \ac{SPMD} style programs. It provides interfaces 
-to start the \openshmem{} processes in parallel, and communication and synchronization interfaces to access data and decompose the work across \ac{PE}s . These interfaces can be leveraged to divide a problem to into multiple sub-problems that can solved independently or with co-ordination using the communication and synchronization interfaces.
+to start the \openshmem{} \ac{PE}s in parallel, and communication and synchronization interfaces to access symmetric data objects across \ac{PE}s. These interfaces can be leveraged to divide a problem to into multiple sub-problems that can solved independently or with co-ordination using the communication and synchronization interfaces.
 The \openshmem specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
 The \Cpp{} interface is currently the same as that for \Clang. An overview of the important \openshmem operations is described below:
 
