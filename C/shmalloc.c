@@ -10,9 +10,9 @@
 int
 main(void)
 {
-  long *x;
-  start_pes(0);
-  x = (long *) shmalloc(sizeof(*x));
-  shfree(x);
-  return 0;
+   long *x;
+   start_pes(0);
+   x = (long *) shmalloc(sizeof(*x));
+   shfree(x);
+   return 0;
 }
