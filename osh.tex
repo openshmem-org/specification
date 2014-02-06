@@ -859,5 +859,108 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\activeset}{\textit{Active~set}}
 \newcommand{\shmemprefix}{\textit{SHMEM\_}}
 
+\def\StandardListing {
+  \lstset {
+    basicstyle=\scriptsize\ttfamily,
+    backgroundcolor=\color{ListingBG},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=tlBR,
+    frameround=tttt,
+    numbers=none,
+    caption=\lstname
+  }
+}
 
+% annotated program source should be line numbered though
+
+\def\ProgramNumberedListing {
+  \StandardListing
+  \lstset {
+    numbers=left,
+    numberstyle=\footnotesize
+  }
+}
+
+% new command to show program listings
+
+\newcommand{\numberedlisting}[2] {
+  \ProgramNumberedListing
+  \lstinputlisting[#1]{#2}
+  \StandardListing
+}
+
+\lstdefinelanguage{OSH+C}[]{C}{
+  classoffset=1,
+  morekeywords={
+    _SHMEM_BCAST_SYNC_SIZE, _SHMEM_SYNC_VALUE,
+    start_pes,
+    my_pe, _my_pe, shmem_my_pe,
+    num_pes, _num_pes, shmem_n_pes,
+    shmem_int_p, shmem_short_p, shmem_long_p,
+    shmem_int_put, shmem_short_put, shmem_long_put,
+    shmem_barrier_all, shmem_barrier,
+    shmalloc,  shfree, shrealloc,
+    shmem_broadcast32, shmem_broadcast64,
+    shmem_short_inc, shmem_int_inc, shmem_long_inc,
+    shmem_short_add, shmem_int_add, shmem_long_add,
+    shmem_short_finc, shmem_int_finc, shmem_long_finc,
+    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
+    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
+    shmem_long_sum_to_all,
+    shmem_complexd_sum_to_all,
+  },
+  keywordstyle=\color{blue}\textbf,
+  classoffset=0,
+  sensitive=true
+}
+
+\lstdefinelanguage{OSH2+C}[]{OSH+C}{
+  classoffset=1,
+  morekeywords={
+    shmem_init,
+    shmem_finalize,
+    shmem_malloc,
+    shmem_my_pe,
+    shmem_error,
+  },
+  keywordstyle=\color{blue}\textbf,
+  classoffset=0,
+  sensitive=true
+}
+
+\lstdefinelanguage{OSH+F}[]{Fortran}{
+  classoffset=1,
+  morekeywords={
+    SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
+    start_pes,
+    my_pe, shmem_my_pe,
+    num_pes, shmem_n_pes,
+    shmem_int_p, shmem_short_p, shmem_long_p,
+    shmem_int_put, shmem_short_put, shmem_long_put,
+    shmem_barrier_all, shmem_barrier,
+    shpalloc,  shpdeallc, shpclmove,
+    shmem_broadcast32, shmem_broadcast64,
+    shmem_broadcast4, shmem_broadcast8,
+    shmem_short_inc, shmem_int_inc, shmem_long_inc,
+    shmem_short_add, shmem_int_add, shmem_long_add,
+    shmem_short_finc, shmem_int_finc, shmem_long_finc,
+    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
+    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
+    shmem_long_sum_to_all,
+  },
+  keywordstyle=\color{blue}\textbf,
+  classoffset=0,
+  sensitive=false
+}
+
+\newcommand{\outputlisting}[2] {
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+  \lstinputlisting[#1]{#2}
+  \StandardListing
+\vspace{0.1in}
+\end{minipage}
+}
 

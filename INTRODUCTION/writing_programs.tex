@@ -2,51 +2,47 @@
 
 \subsection*{Incorporating \openshmem{} into Programs}
 
+In this section we describe how to write a ``Hello World" \openshmem program.
+To write a ``Hello World" \openshmem program we need to 
 
+\begin{itemize}
+\item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran)
+\item Add the initialization call \FUNC{start\_pes}, (line 9) use
+  single integer argument, 0, which is ignored~\footnote{The unused
+    argument is for compatibility with older SHMEM implementations.}.
+\item Use \openshmem calls to query the \ac{PE} id (line 10) and the total number of \ac{PE}s (line 11).
+\item there is no explicit finalize call, either a return from
+  \texttt{main()} (line 13) or an explicit \texttt{exit()} acts as an
+  implicit \openshmem finalization.
+\item In \openshmem the order in which lines appear
+  in the output is not fixed as \ac{PE}s execute asynchronously in parallel.
+\end{itemize}
 
-% C and C++ programs that use the \openshmem library must \texttt{\textbf{}}\lstinline[basicstyle={\ttfamily},language={C++}]!#include <mpp/shmem.h>!.
-% Fortran programs should \lstinline[basicstyle={\ttfamily},language=Fortran]!include 'mpp/shmem.fh'!;
-% and Fortran programs that use constants defined by \openshmem must
-% \lstinline[basicstyle={\ttfamily},language=Fortran]!include 'mpp/shmem.fh'!. 
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+\numberedlisting{label=openshmem-hello,language=OSH+C}{EXAMPLES/hello-openshmem.c}
+\outputlisting{language=bash,caption={Expected Output (4
+    processors)}}{EXAMPLES/hello-openshmem-c.output}
+\vspace{0.1in}
+\end{minipage}
 
-\Clang{} and \Cpp{} programs that use the \openshmem library \emph{must}
+\openshmem also has a Fortran API, so for completeness we now give the
+same program written in Fortran in listing~\ref{openshmem-hello-f90}:
 
-\begin{lstlisting}[language=C++]
-#include <shmem.h>
-\end{lstlisting}
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+\numberedlisting{label=openshmem-hello-f90,language=OSH+F}{EXAMPLES/hello-openshmem.f90}
+\outputlisting{language=bash,caption={Expected Output (4
+    processors)}}{EXAMPLES/hello-openshmem-f90.output}
+\vspace{0.1in}
+\end{minipage}
 
-All \Fortran{} \openshmem programs \emph{should}
+The following example shows a more complex \openshmem program that illustrates the use of symmetric data objects. Note the declaration of the  \VAR{static short target} array and its use as the remote destination in \openshmem short \FUNC{put}. The use of the \VAR{static} keyword results in the \VAR{target} array being symmetric on \ac{PE} \CONST{0} and \ac{PE} \CONST{1}. Each \ac{PE} is able to transfer data to the target array by simply specifying the local address of the symmetric data object which is to receive the data. This aids programmability as the address of the target need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to the RMA (Remote memory operation). Conversely, the declaration of the \VAR{short source} array is asymmetric. Because the \FUNC{put} handles the references to the \VAR{source} array only on the active (local) side, the asymmetric source object is handled correctly.
 
-\begin{lstlisting}[language=Fortran]
-include 'shmem.fh'
-\end{lstlisting}
-
-and \Fortran{} \openshmem programs that use constants defined by \openshmem
-\emph{must}
-
-\begin{lstlisting}[language=Fortran]
-include 'shmem.fh'
-\end{lstlisting}
-
-\subsubsection*{\textbf{Important Compatibility Note}}
-
-Implementations \emph{must} also provide these header files so that
-they can be referenced in \Clang{} and \Cpp{} as
-
-\begin{lstlisting}[language=C++]
-#include <mpp/shmem.h>
-\end{lstlisting}
-
-and in \Fortran{} as
-
-\begin{lstlisting}[language=Fortran]
-include 'mpp/shmem.fh'
-\end{lstlisting}
-
-for backward compatibility with OpensHMEM 1.0 and SGI SHMEM.
-\\
-\\
-The following example illustrates the use of symmetric data objects. Note the declaration of the  \VAR{static short target} array and its use as the remote destination in \openshmem short \FUNC{put}. The use of the \VAR{static} keyword results in the \VAR{target} array being symmetric on \ac{PE} \CONST{0} and \ac{PE} \CONST{1}. Each \ac{PE} is able to transfer data to the target array by simply specifying the local address of the symmetric data object which is to receive the data. This aids programmability as the address of the target need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to the RMA (Remote memory operation). Conversely, the declaration of the \VAR{short source} array is asymmetric. Because the \FUNC{put} handles the references to the \VAR{source} array only on the active (local) side, the asymmetric source object is handled correctly.
-
- \exampleITEM{}{./EXAMPLES/writing_shmem_example.c}{} 
-
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+\numberedlisting{label=openshmem-hello,language=OSH+C}{EXAMPLES/writing_shmem_example.c}
+\outputlisting{language=bash,caption={Expected Output (4
+    processors)}}{EXAMPLES/hello-openshmem-c.output}
+\vspace{0.1in}
+\end{minipage}
