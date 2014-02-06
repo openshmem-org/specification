@@ -108,6 +108,7 @@
 
 \startchap
 \section{OpenSHMEM Library API}
+\label{sec:openshmem_library_api}
 \subsection{Library Setup and Query Operations}%SP: Merging two operations 
 \input{TEX_FILES/start_pes.tex} %Swaroop
 \input{TEX_FILES/NEW_shmem_my_pe.tex} %Tommy
@@ -133,10 +134,14 @@
 %\startchap
 \subsection{Collective Operations}
 \input{INTRODUCTION/collective_intro.tex}
+\label{subsec:shmem_barrier}
 \input{TEX_FILES/shmem_barrier_all.tex} %Pasha
 \input{TEX_FILES/shmem_barrier.tex} %Tommy
+\label{subsec:shmem_broadcast}
 \input{TEX_FILES/shmem_broadcast.tex} %Pasha
+%\label{subsec:shmem_collect} %label in shmem_collect.tex, label from this location references page 1
 \input{TEX_FILES/shmem_collect.tex} %Pasha
+\label{subsec:shmem_reductions}
 \input{TEX_FILES/shmem_reductions.tex} %Swaroop
 %\startchap
 \subsection{Memory Ordering Operations} %SP: Adding a chapter to include fence and quiet
