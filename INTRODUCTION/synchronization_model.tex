@@ -24,13 +24,13 @@ Collective synchronization over all \ac{PE}s & \FUNC{shmem\_barrier\_all} & {All
 \end{tabular}
 
 \begin{figure}
-        \centering
-        \begin{subfigure}{0.48\textwidth}
+%        \centering
+        \begin{subfigure}{0.5\textwidth}
                 \includegraphics[width=\textwidth]{diagrams/updated/wait}
                 \caption{\FUNC{shmem\_wait}}
                 \label{fig:wait}
         \end{subfigure}
-        \begin{subfigure}{0.48\textwidth}
+        \begin{subfigure}{0.49\textwidth}
                 \includegraphics[width=\textwidth]{diagrams/updated/fence}
                 \caption{\FUNC{shmem\_fence}}
                 \label{fig:fence}
@@ -40,15 +40,16 @@ Collective synchronization over all \ac{PE}s & \FUNC{shmem\_barrier\_all} & {All
                 \caption{\FUNC{shmem\_quiet}}
                 \label{fig:quiet}
         \end{subfigure}
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{diagrams/updated/barrier}
-		\caption{\FUNC{shmem\_barrier}}
+	    \begin{subfigure}{0.48\textwidth}
+		        \includegraphics[width=\textwidth]{diagrams/updated/barrier}
+		        \caption{\FUNC{shmem\_barrier}}
 		\label{fig:barrier}
-	\end{subfigure}
-	\begin{subfigure}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{diagrams/updated/barrierall}
-		\caption{\FUNC{shmem\_barrierall}}
+	    \end{subfigure}
+        \centering
+	    \begin{subfigure}{0.48\textwidth}
+		        \includegraphics[width=\textwidth]{diagrams/updated/barrierall}
+		        \caption{\FUNC{shmem\_barrierall}}
 		\label{fig:barrierall}
-	\end{subfigure}
+	    \end{subfigure}
         \caption{\openshmem{} synchronization operations}\label{fig:animals}
 \end{figure}
