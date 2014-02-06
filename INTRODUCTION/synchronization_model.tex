@@ -1,5 +1,6 @@
 \subsubsection{Synchronization and Communication Ordering in OpenSHMEM}
 
+\rcomment{Pasha: Since this section includes barrier, it is relevant for all the rest of the one sided operations. I would consider to move it to a standalone sectionn with all the relevant calls.}
 In the presence of the \openshmem's one-sided communication, synchronization becomes critical. The updates via shmem\_puts cannot be guaranteed untill some form of synchronization or ordering is introduced by the application programmer. The table below gives the different synchronization and ordering options and situations where they may be useful.\\
 
 \begin{tabular}{|p{0.3\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|}
@@ -17,7 +18,7 @@ Ordering puts issued by all \ac{PE} & shmem\_quiet & {All puts issued by all \ac
 \hline 
 Collective synchronization over an \activeset & shmem\_barrier & {All local and remote memory operations issued by all \ac{PE}s within the \activeset{} are guaranteed to be completed before any \ac{PE} in the \activeset{} returns from the call. Additionally no \ac{PE} my return from the barrier till all \ac{PE}s in the \activeset{} have called the same barrier call. This operation should be used when synchronization as well as completion of local stores and remote memory updates via OpenSHMEM is required over a sub-set of the executing \ac{PE}s. Figure (\ref{fig:barrier}).} \tabularnewline
 \hline 
-Collective synchronization over all \ac{PE}s & shmem\_barrier\_all & {All local and remote memory operations issued by all \ac{PE}s are guaranteed to be completed before any \ac{PE} returns from the call. Additionally no \ac{PE} my return from the barrier till all \ac{PE}s have called the same barrier call. This operation should be used when synchronization as well as completion of local stores and remote memory updates via OpenSHMEM is required over all \ac{PE}s. Figure (\ref{fig:barrier}).} \tabularnewline
+Collective synchronization over all \ac{PE}s & shmem\_barrier\_all & {All local and remote memory operations issued by all \ac{PE}s are guaranteed to be completed before any \ac{PE} returns from the call. Additionally no \ac{PE} my return from the barrier till all \ac{PE}s have called the same barrier call. This operation should be used when synchronization as well as completion of local stores and remote memory updates via OpenSHMEM is required over all \ac{PE}s. Figure (\ref{fig:barrierall}).} \tabularnewline
 \hline 
 \end{tabular}
 
@@ -42,6 +43,11 @@ Collective synchronization over all \ac{PE}s & shmem\_barrier\_all & {All local 
 		\includegraphics[width=\textwidth]{diagrams/updated/barrier}
 		\caption{\FUNC{shmem\_barrier}}
 		\label{fig:barrier}
+	\end{subfigure}
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{diagrams/updated/barrierall}
+		\caption{\FUNC{shmem\_barrierall}}
+		\label{fig:barrierall}
 	\end{subfigure}
         \caption{\OSH{} synchronization operations}\label{fig:animals}
 \end{figure}
