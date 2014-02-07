@@ -60,25 +60,25 @@ from a remote \ac{PE} and store it to an object on the local \ac{PE}.\end{enumer
 %\end{description}
 \item \textbf{Synchronization Mechanisms }
 \begin{enumerate}
-\item \FUNC{Fence}: Ensures ordering of PUT operations to a specific \ac{PE}. 
-\item \FUNC{Quiet}: Ensures ordering of PUT operations to all \ac{PE}s. 
+\item \FUNC{Fence}: Ensures ordering of PUT operations in respect to the target \ac{PE}. 
+\item \FUNC{Quiet}: Ensures ordering of PUT operations to respect to all \acp{PE}. 
 \item \FUNC{Barrier}: A collective synchronization routine in which no \ac{PE} may leave
 the barrier prior to all \ac{PE}s entering the barrier. 
 \end{enumerate}
 \item \textbf{Collective Communication}
 
 \begin{enumerate}
-\item \FUNC{Broadcast}: Copy a block of data from one \ac{PE} to one or more remote
-PEs. 
-\item \FUNC{Collection}: Concatenate elements from the source array to a target
-array over the specified \ac{PE}s. 
+\item \FUNC{Broadcast}: Copy a symmetric object from one \ac{PE} to one or more remote
+\acp{PE}. 
+\item \FUNC{Collection}: Concatenate symmetric objects from the source array to a target
+array over the specified \acp{PE}. 
 \item \FUNC{Reduction}: Perform an associative binary operation over the specified
 \ac{PE}s. 
 \end{enumerate}
 \item \textbf{Address Manipulation}
 
 \begin{enumerate}
-\item Allocating and deallocating memory blocks in the symmetric space.
+\item Allocating and deallocating symmetric objects in the symmetric space.
 \end{enumerate}
 \item \textbf{Locks}
 
