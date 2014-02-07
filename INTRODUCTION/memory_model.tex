@@ -45,7 +45,7 @@ In \openshmem{} the following kinds of data objects are symmetric:
 \begin{itemize}
   \item \Fortran{} data objects in common blocks or with the  SAVE  attribute. These data objects	must not be defined in a dynamic shared object (DSO).
   \item Non-stack \Clang{} and \Cpp{} variables.   These  data	objects must  not  be defined in a DSO.
-  \item Fortran arrays allocated with \textit{shpalloc} 
+  \item \Fortran{} arrays allocated with \textit{shpalloc} 
   \item \Clang{} and \Cpp{} data allocated by \textit{shmalloc}
 \end{itemize}       
 
