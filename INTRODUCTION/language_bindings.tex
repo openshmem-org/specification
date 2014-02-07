@@ -7,18 +7,29 @@
 %complete conformance.
 
 
-\openshmem provides bindings for ISO \Clang{} and \Fortran{} 90 languages. Any
-implementation that provide \Clang{} can claim conformance to the specification.
+\openshmem provides ISO \Clang{} and \Fortran{} 90 language
+bindings. Any implementation that provides both \Clang{} and \Fortran{} bindings 
+can claim conformance to the specification.
 
-All \openshmem{} functions are prefixed with \shmemprefix{}, except these
-functions are expections :
-\begin{itemize}
-\item start\_pes{}
-\item shfree{}
-\item shpalloc{}
-\item shpclmove{}
-\item shpdellc{}
-\end{itemize}
 
+The \openshmem{} constants and environment variables are in all capital letters. 
+All \openshmem{} functions are prefixed with \shmemprefix{}, besides these 
+expections : start\_pes{}, shfree{}, shpalloc{}, shpclmove{}, shpdellc{}. 
+%\begin{itemize}
+%\item start\_pes{}
+%\item shfree{}
+%\item shpalloc{}
+%\item shpclmove{}
+%\item shpdellc{}
+%\end{itemize}
 The \openshmem{} programs should avoid using function names, variables, or
-identifiers with the prefix \shmemprefix{} or above names. 
+identifiers with the prefix \shmemprefix{} or above names.
+ 
+An \openshmem{} implementation can implement the interfaces either 
+as functions or macros. However, implementing the interfaces using macros is
+strongly discouraged as this could severly limit the use of external profiling tools 
+and optimizing using compiler techniques.
+
+The \openshmem{}
+functions does not return any error code. 
+
