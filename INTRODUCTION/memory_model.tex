@@ -32,7 +32,7 @@
 
 The \openshmem specification defines how data is stored in the memory
 of each \ac{PE} and how data objects are made remotely accessible to all
-other \ac{PE}s. Data objects can be stored in a private local memory address or in
+other \ac{PE}s (Figure \ref{fig:mem_model}). Data objects can be stored in a private local memory address or in
 a remotely accessible memory address space. Objects in the private
 address space can only be accessed by the \ac{PE} itself; these data objects
 cannot be accessed by other \ac{PE}s via \openshmem routines. Private data objects in \openshmem 
@@ -61,6 +61,12 @@ data objects. These objects are created in a special memory region
 called the Symmetric Heap. The Symmetric Heap is created during the execution of a program at a location
 determined by the implementation. The Symmetric Heap may reside on
 different memory regions on the different \ac{PE}s. 
+
+\begin{figure}[h]
+\includegraphics[width=0.95\textwidth]{diagrams/updated/mem_model}      
+\caption{\OSH{} Memory Model}                                   
+\label{fig:mem_model}                                               
+\end{figure}           
 %\openshmem specification does not require a particular memory layout; it is up to the implementation
 %to decide how to implement the symmetric heap.  
 %Objects that reside in the private address space can only be accessed by the \ac{PE} itself; these data objects
