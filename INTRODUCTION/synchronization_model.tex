@@ -12,8 +12,9 @@ In the presence of the \openshmem's one-sided communication, synchronization bec
 \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until} 
 &
 \raisebox{-\totalheight}{\includegraphics[width=0.39\textwidth]{diagrams/updated/wait}}
-& [topsep=0pt]
-{Waits for a symmetric variable to be updated by a remote \ac{PE}. Should be used when computation at the local \ac{PE} cannot proceed without the value that the remote \ac{PE} is to update. Figure (\ref{fig:wait}).}\tabularnewline
+&
+{Waits for a symmetric variable to be updated by a remote \ac{PE}. Should be used when computation at the local \ac{PE} cannot proceed without the value that the remote \ac{PE} is to update.} \tabularnewline
+% Figure (\ref{fig:wait}).}\tabularnewline
 \hline 
 Ordering puts issued by a local \ac{PE} \\
 \FUNC{shmem\_fence} 
@@ -21,16 +22,16 @@ Ordering puts issued by a local \ac{PE} \\
 \raisebox{-\totalheight}{\includegraphics[width=0.39\textwidth]{diagrams/updated/fence}}
 & 
 All puts issued before the fence operation by the local \ac{PE} are guaranteed to be delivered before puts issued after the fence call to the same remote \ac{PE}. This operation should be used when all remote writes by a local \ac{PE} to a remote \ac{PE} need to be visible %(\rcomment{Swaroop: assuming visible == delivered}) 
-before any new remote write operation to the same \ac{PE}. Figure (\ref{fig:fence}).
-\tabularnewline
+before any new remote write operation to the same \ac{PE}. \tabularnewline
+%Figure (\ref{fig:fence}).\tabularnewline
 \hline 
 Ordering puts issued by all \ac{PE} \\
 \FUNC{shmem\_quiet}
 & 
 \raisebox{-\totalheight}{\includegraphics[width=0.39\textwidth]{diagrams/updated/quiet}} 
 & 
-{All puts issued by all \ac{PE}s are guaranteed to be delivered before the next local update or remote memory update via \openshmem (\rcomment{May change after SGI's input.}). This operation should be used when all remote writes by all \ac{PE}s need to be visible  to all other \ac{PE}s before any new local or remote memory update via \openshmem library operation. Figure (\ref{fig:quiet}).} 
-\tabularnewline
+{All puts issued by all \ac{PE}s are guaranteed to be delivered before the next local update or remote memory update via \openshmem (\rcomment{May change after SGI's input.}). This operation should be used when all remote writes by all \ac{PE}s need to be visible  to all other \ac{PE}s before any new local or remote memory update via \openshmem library operation. } \tabularnewline
+%Figure (\ref{fig:quiet}).} \tabularnewline
 \hline 
 \end{tabular}
 \clearpage
@@ -41,14 +42,14 @@ Collective synchronization over an \activeset \\
 &  
 \raisebox{-\totalheight}{\includegraphics[width=0.39\textwidth]{diagrams/updated/barrier}} 
 & 
-{All local and remote memory operations issued by all \ac{PE}s within the \activeset{} are guaranteed to be completed before any \ac{PE} in the \activeset{} returns from the call. Additionally no \ac{PE} my return from the barrier till all \ac{PE}s in the \activeset{} have called the same barrier call. This operation should be used when synchronization as well as completion of local stores and remote memory updates via \openshmem is required over a sub-set of the executing \ac{PE}s. Figure (\ref{fig:barrier}).} \tabularnewline
+{All local and remote memory operations issued by all \ac{PE}s within the \activeset{} are guaranteed to be completed before any \ac{PE} in the \activeset{} returns from the call. Additionally no \ac{PE} my return from the barrier till all \ac{PE}s in the \activeset{} have called the same barrier call. This operation should be used when synchronization as well as completion of local stores and remote memory updates via \openshmem is required over a sub-set of the executing \ac{PE}s.} \tabularnewline %Figure (\ref{fig:barrier}).
 \hline 
 Collective synchronization over all \ac{PE}s \\
  \FUNC{shmem\_barrier\_all}
 & 
 \raisebox{-\totalheight}{\includegraphics[width=0.39\textwidth]{diagrams/updated/barrierall}}
 & 
-{All local and remote memory operations issued by all \ac{PE}s are guaranteed to be completed before any \ac{PE} returns from the call. Additionally no \ac{PE} my return from the barrier until all \ac{PE}s have called the same barrier call. This operation should be used when synchronization as well as completion of local stores and remote memory updates via \openshmem is required over all \ac{PE}s. Figure (\ref{fig:barrierall}).} \tabularnewline
+{All local and remote memory operations issued by all \ac{PE}s are guaranteed to be completed before any \ac{PE} returns from the call. Additionally no \ac{PE} my return from the barrier until all \ac{PE}s have called the same barrier call. This operation should be used when synchronization as well as completion of local stores and remote memory updates via \openshmem is required over all \ac{PE}s. } \tabularnewline%Figure (\ref{fig:barrierall}).
 
 \hline 
 \end{tabular}
