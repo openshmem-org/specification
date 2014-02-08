@@ -13,7 +13,8 @@ can claim conformance to the specification.
 \openshmem{} \ac{API}s can be implemented as either 
 functions or macros. However, implementing the interfaces using macros is
 strongly discouraged as this could severely limit the use of external profiling tools 
-and high-level compiler optimizations. 
+and high-level compiler optimizations. An \openshmem{} program should avoid defining function names, variables, or
+identifiers with the prefix \shmemprefix{} or with \openshmem \ac{API} names.
 
 %The \openshmem{} constants and environment variables are in all capital letters. 
 %All \openshmem{} functions are prefixed with \shmemprefix{}, besides these 
@@ -25,8 +26,7 @@ and high-level compiler optimizations.
 %\item shpclmove{}
 %\item shpdellc{}
 %\end{itemize}
-An \openshmem{} program should avoid defining function names, variables, or
-identifiers with the prefix \shmemprefix{} or with \openshmem \ac{API} names.
+
  
 %
 %The \openshmem{}
