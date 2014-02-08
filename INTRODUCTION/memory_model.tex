@@ -29,18 +29,20 @@
 %on properties that are true of all of those executions.
 
 \section{Memory Model}
-
-The \openshmem specification defines how data is stored in the memory
-of each \ac{PE} and how data objects are made remotely accessible to all
-other \ac{PE}s (Figure \ref{fig:mem_model}). Data objects can be stored in a private local memory address or in
-a remotely accessible memory address space. Objects in the private
-address space can only be accessed by the \ac{PE} itself; these data objects
+\begin{figure}[h]
+\includegraphics[width=0.95\textwidth]{diagrams/updated/mem_model}      
+\caption{\OSH{} Memory Model}                                   
+\label{fig:mem_model}                                               
+\end{figure}      
+An \openshmem program consist data objects that are private to each \ac{PE} and data 
+objects that are remotely accessible by all \ac{PE}s. Private data objects are stored in a the local
+memory of each \ac{PE} and can only be accessed by the \ac{PE} itself; these data objects
 cannot be accessed by other \ac{PE}s via \openshmem routines. Private data objects in \openshmem 
 follow the memory model of \Clang{} or \Fortran{}. Remotely accessible
 objects, however, can be accessed by remote \ac{PE}s using \openshmem routines.
-Remotely accessible data objects are also known as Symmetric Objects.
+Remotely accessible data objects are called \emph{Symmetric Objects}.
 An object is symmetric if it has a corresponding object with the same
-type, size and offset on all other \ac{PE}s. 
+type, size and offset on all other \ac{PE}s and can be accessed by any \ac{PE}
 In \openshmem{} the following kinds of data objects are symmetric:
 \begin{itemize}
   \item \Fortran{} data objects in common blocks or with the  SAVE  attribute. These data objects	must not be defined in a dynamic shared object (DSO).
@@ -60,25 +62,12 @@ In \openshmem{} the following kinds of data objects are symmetric:
 data objects. These objects are created in a special memory region
 called the Symmetric Heap. The Symmetric Heap is created during the execution of a program at a location
 determined by the implementation. The Symmetric Heap may reside on
-different memory regions on the different \ac{PE}s. 
-
-\begin{figure}[h]
-\includegraphics[width=0.95\textwidth]{diagrams/updated/mem_model}      
-\caption{\OSH{} Memory Model}                                   
-\label{fig:mem_model}                                               
-\end{figure}           
+different memory regions on the different \ac{PE}s. Figure~\ref{fig:mem_model} shows how \openshmem implements a \ac{PGAS} model 
+using remotely accessible (symmetric objects) and private data objects. Symmetric data objects are stored in the symmetric heap or 
+or in the global / static memory section of each \ac{PE}. Symmetric data objects can be allocated dynamically in the symmetric heap of each \ac{PE} using
+a collective \FUNC{shmalloc} or \FUNC{shpalloc} memory allocation call.
+     
 %\openshmem specification does not require a particular memory layout; it is up to the implementation
 %to decide how to implement the symmetric heap.  
 %Objects that reside in the private address space can only be accessed by the \ac{PE} itself; these data objects
 %cannot be accessed by other PEs via \openshmem routines. 
-
-
-
-%\begin{figure}[H]
-%\noindent \begin{centering}
-%\includegraphics{media/symmetric_heap}
-%\par\end{centering}
-%
-%\caption{{\small Example of Symmetric Objects}\label{fig:SymmetricHeap1}}
-%\end{figure}
-
