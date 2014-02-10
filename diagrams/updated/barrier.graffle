@@ -56,6 +56,13 @@
 			<string>{{1019.19970703125, 439.24954986572266}, {10, 86.411979675292969}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>111</integer>
 			<key>Magnets</key>
@@ -77,6 +84,13 @@
 			<string>{{923.19970703125, 402.41136169433594}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>110</integer>
 			<key>Magnets</key>
@@ -104,7 +118,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_long_put(\'85)}</string>
+\f0\fs32 \cf0 shmem_long_put(\'85)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -112,6 +126,13 @@
 			<string>{{1019.19970703125, 175.4190788269043}, {10, 220.25688171386719}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>108</integer>
 			<key>Magnets</key>
@@ -133,6 +154,13 @@
 			<string>{{923.19970703125, 137.69076538085938}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>104</integer>
 			<key>Magnets</key>
@@ -160,7 +188,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_get (...)}</string>
+\f0\fs32 \cf0 shmem_int_get (...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -168,6 +196,13 @@
 			<string>{{989.19970962173875, 33}, {70, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>103</integer>
 			<key>Shape</key>
@@ -182,7 +217,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE K}</string>
+\f0\fs32 \cf0 PE K}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -192,6 +227,13 @@
 			<string>{{1019.19970703125, 84.500225067138672}, {10, 47.345275149512176}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>102</integer>
 			<key>Magnets</key>
@@ -213,6 +255,13 @@
 			<string>{{783.9970118678325, 503.57363891601562}, {10, 22.087890625}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>91</integer>
 			<key>Magnets</key>
@@ -249,6 +298,13 @@
 			<string>{{306.002993313145, 363.29468536376953}, {10, 16.499774932861328}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>90</integer>
 			<key>Magnets</key>
@@ -285,6 +341,13 @@
 			<string>{{782.099853515625, 175.4190788269043}, {10, 86.580917358398438}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>89</integer>
 			<key>Magnets</key>
@@ -306,6 +369,13 @@
 			<string>{{306.00299072265625, 227.29430389404297}, {10, 34.705696105957031}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>88</integer>
 			<key>Magnets</key>
@@ -327,6 +397,13 @@
 			<string>{{307.900146484375, 145.91264724731445}, {10, 34.705696105957031}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>87</integer>
 			<key>Magnets</key>
@@ -348,6 +425,13 @@
 			<string>{{687.99700927734375, 465}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>85</integer>
 			<key>Magnets</key>
@@ -387,14 +471,21 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (...)}</string>
+\f0\fs32 \cf0 shmem_int_p (...)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{216, 392}, {202, 27.67596435546875}}</string>
+			<string>{{211.900146484375, 392}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>84</integer>
 			<key>Magnets</key>
@@ -434,7 +525,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_get (...)}</string>
+\f0\fs32 \cf0 shmem_int_get (...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -442,6 +533,13 @@
 			<string>{{211.900146484375, 109.61833953857422}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>83</integer>
 			<key>Magnets</key>
@@ -469,7 +567,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_long_fadd(...)}</string>
+\f0\fs32 \cf0 shmem_long_fadd(...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -477,6 +575,13 @@
 			<string>{{211.900146484375, 191}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>82</integer>
 			<key>Magnets</key>
@@ -504,14 +609,21 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (...)}</string>
+\f0\fs32 \cf0 shmem_int_p (...)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{210.00298309326172, 272.38165855407715}, {202, 27.67596435546875}}</string>
+			<string>{{211.900146484375, 272.38165855407715}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>81</integer>
 			<key>Magnets</key>
@@ -539,7 +651,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_barriert(...)}</string>
+\f0\fs32 \cf0 shmem_barriert(...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -547,6 +659,13 @@
 			<string>{{686.99888515472412, 272.24234842703663}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>79</integer>
 			<key>Line</key>
@@ -583,14 +702,21 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_barriert(...)}</string>
+\f0\fs32 \cf0 shmem_barriert(...)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{216, 317.83816909790039}, {672.099853515625, 27.67596435546875}}</string>
+			<string>{{211.900146484375, 314.83816909790039}, {676.19970703125, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>78</integer>
 			<key>Shape</key>
@@ -631,12 +757,19 @@
 \deftab720
 \pard\pardeftab720\sa240\qc
 
-\f0\fs24 \cf0 All local and remote memory operations issued by PEs are guaranteed to be completed before any PE returns from the call.}</string>
+\f0\fs32 \cf0 All local and remote memory operations issued by PEs are guaranteed to be completed before any PE returns from the call.}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>77</integer>
 			<key>Points</key>
@@ -664,6 +797,13 @@
 			<string>{{306.00299072265625, 431.66152954101562}, {10, 94}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>76</integer>
 			<key>Magnets</key>
@@ -700,6 +840,13 @@
 			<string>{{277.90014907486375, 33}, {70, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>75</integer>
 			<key>Shape</key>
@@ -714,7 +861,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 2}</string>
+\f0\fs32 \cf0 PE 2}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -724,6 +871,13 @@
 			<string>{{307.900146484375, 84.500225067138672}, {10, 16.499774932861328}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>86</integer>
 			<key>Magnets</key>
@@ -743,6 +897,13 @@
 		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>56</integer>
 			<key>Points</key>
@@ -777,6 +938,13 @@
 			<string>{{782.099853515625, 368}, {10, 87}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>53</integer>
 			<key>Magnets</key>
@@ -813,6 +981,13 @@
 			<string>{{545.00000259048875, 497.98556518554688}, {10, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>52</integer>
 			<key>Magnets</key>
@@ -849,6 +1024,13 @@
 			<string>{{449, 454.54486083984375}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>51</integer>
 			<key>Magnets</key>
@@ -888,7 +1070,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_long_p (...)}</string>
+\f0\fs32 \cf0 shmem_long_p (...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -896,6 +1078,13 @@
 			<string>{{449, 411.10415649414062}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>50</integer>
 			<key>Magnets</key>
@@ -935,7 +1124,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (...)}</string>
+\f0\fs32 \cf0 shmem_int_p (...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -943,6 +1132,13 @@
 			<string>{{545.00000259048875, 368}, {10, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>49</integer>
 			<key>Magnets</key>
@@ -979,6 +1175,13 @@
 			<string>{{686.099853515625, 137.69076538085938}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>48</integer>
 			<key>Magnets</key>
@@ -1006,7 +1209,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_get (...)}</string>
+\f0\fs32 \cf0 shmem_int_get (...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1014,6 +1217,13 @@
 			<string>{{449, 158.35284042358398}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>47</integer>
 			<key>Magnets</key>
@@ -1041,7 +1251,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_long_put(\'85)}</string>
+\f0\fs32 \cf0 shmem_long_put(\'85)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1049,6 +1259,13 @@
 			<string>{{449, 272.38165283203125}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>45</integer>
 			<key>Magnets</key>
@@ -1076,7 +1293,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_barriert(...)}</string>
+\f0\fs32 \cf0 shmem_barriert(...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1084,6 +1301,13 @@
 			<string>{{449, 124.67642211914062}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>36</integer>
 			<key>Magnets</key>
@@ -1111,7 +1335,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (...)}</string>
+\f0\fs32 \cf0 shmem_int_p (...)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1119,6 +1343,13 @@
 			<string>{{545.00000259048875, 197}, {10, 65}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>35</integer>
 			<key>Magnets</key>
@@ -1140,6 +1371,13 @@
 			<string>{{545, 84.500228881835938}, {10, 34.705696105957031}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>33</integer>
 			<key>Magnets</key>
@@ -1161,6 +1399,13 @@
 			<string>{{752.09985610611375, 33}, {70, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>30</integer>
 			<key>Shape</key>
@@ -1175,7 +1420,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 1}</string>
+\f0\fs32 \cf0 PE 1}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -1185,6 +1430,13 @@
 			<string>{{515, 33}, {70, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>28</integer>
 			<key>Shape</key>
@@ -1199,7 +1451,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 0}</string>
+\f0\fs32 \cf0 PE 0}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -1209,6 +1461,13 @@
 			<string>{{782.099853515625, 84.500225067138672}, {10, 47.345275149512176}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>1</integer>
 			<key>Magnets</key>
@@ -1234,6 +1493,13 @@
 			<string>Clip</string>
 			<key>Flow</key>
 			<string>Clip</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>4</integer>
 			<key>Magnets</key>
@@ -1248,6 +1514,11 @@
 			<key>Style</key>
 			<dict>
 				<key>fill</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>shadow</key>
 				<dict>
 					<key>Draws</key>
 					<string>NO</string>
@@ -1268,7 +1539,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\b\fs24 \cf0 Active Set}</string>
+\f0\b\fs36 \cf0 Active Set}</string>
 			</dict>
 			<key>TextPlacement</key>
 			<integer>2</integer>
@@ -1321,9 +1592,9 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-02-05 23:40:21 +0000</string>
+	<string>2014-02-10 21:31:31 +0000</string>
 	<key>Modifier</key>
-	<string>Pavel Shamis</string>
+	<string>Shamis, Pavel</string>
 	<key>NotesVisible</key>
 	<string>NO</string>
 	<key>Orientation</key>
@@ -1402,7 +1673,7 @@
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{520, 276}, {1396, 925}}</string>
+		<string>{{128, 186}, {1396, 925}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>

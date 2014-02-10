@@ -46,14 +46,14 @@
 	<key>Creator</key>
 	<string>Pavel Shamis</string>
 	<key>DisplayScale</key>
-	<string>1 0/72 in = 1 0/72 in</string>
+	<string>1 0/72 in = 1.0000 in</string>
 	<key>GraphDocumentVersion</key>
 	<integer>8</integer>
 	<key>GraphicsList</key>
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{471, 233}, {156, 19}}</string>
+			<string>{{550, 231}, {201, 29}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -95,7 +95,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs22 \cf0 The 
+\f0\fs30 \cf0 The 
 \i addr
 \i0  is updated to 
 \i value}</string>
@@ -103,7 +103,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{493, 81.500228881835938}, {156, 44.499771118164062}}</string>
+			<string>{{576, 66}, {201, 58.824271203326333}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -145,14 +145,14 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs22 \cf0 shmem_wait is a blocking operation therefor it waits until value in 
+\f0\fs30 \cf0 shmem_wait is a blocking operation therefore it waits until value in 
 \i addr
-\i0  is updates}</string>
+\i0  is updated}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{291.0998561061138, 102}, {191, 39}}</string>
+			<string>{{306, 102}, {258.900146484375, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -194,15 +194,15 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_wait_until \
-(addr, 
-\f1\fs26 SHMEM_CMP_EQ
-\f0\fs24 , value)}</string>
+\f0\fs32 \cf0 shmem_int_wait_until \
+(addr, _
+\f1 SHMEM_CMP_EQ
+\f0 , value)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{56, 155.00045776367188}, {187, 27.67596435546875}}</string>
+			<string>{{25.5, 155.00045776367188}, {248, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -232,12 +232,12 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (addr, value, PE 1)}</string>
+\f0\fs32 \cf0 shmem_int_p (addr, value, PE 1)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{381.5998561061138, 282.82402801513672}, {10, 27.67596435546875}}</string>
+			<string>{{430.45007324218756, 288.82402801513672}, {10, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -258,7 +258,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{381.5998561061138, 150.41201782226562}, {10, 82.17596435546875}}</string>
+			<string>{{430.45007324218756, 150.41201782226562}, {10, 82.17596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -315,7 +315,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{314.0998561061138, 242}, {145, 29}}</string>
+			<string>{{332.50000000000006, 242}, {205.900146484375, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -357,14 +357,14 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_wait_until(...)\
+\f0\fs32 \cf0 shmem_int_wait_until(...)\
 is 
 \b completed}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{251.45874781096438, 193.26383623171594}, {88.682357788085938, 15}}</string>
+			<string>{{276.45874781096438, 184.00000413943079}, {88.682357788085938, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -438,7 +438,7 @@ is
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{351.5998561061138, 30}, {70, 39}}</string>
+			<string>{{400.45007324218756, 30}, {70, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -455,14 +455,14 @@ is
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 1}</string>
+\f0\fs32 \cf0 PE 1}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{381.5998561061138, 81.500228881835938}, {10, 12.351699829101562}}</string>
+			<string>{{430.45007324218756, 81.500228881835938}, {10, 12.351699829101562}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -500,14 +500,14 @@ is
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 0}</string>
+\f0\fs32 \cf0 PE 0}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{144.5, 191.49285888671875}, {10, 119.00713348388672}}</string>
+			<string>{{144.5, 191.49285888671875}, {10, 125.00713348388672}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -574,9 +574,9 @@ is
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-02-04 18:35:44 +0000</string>
+	<string>2014-02-10 21:26:55 +0000</string>
 	<key>Modifier</key>
-	<string>Pavel Shamis</string>
+	<string>Shamis, Pavel</string>
 	<key>NotesVisible</key>
 	<string>NO</string>
 	<key>Orientation</key>
@@ -655,7 +655,7 @@ is
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{157, 546}, {1002, 872}}</string>
+		<string>{{398, 136}, {1067, 872}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -669,7 +669,7 @@ is
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{0, 0}, {867, 733}}</string>
+		<string>{{0, 0}, {932, 733}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>

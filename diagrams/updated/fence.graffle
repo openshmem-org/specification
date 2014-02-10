@@ -46,11 +46,87 @@
 	<key>Creator</key>
 	<string>Pavel Shamis</string>
 	<key>DisplayScale</key>
-	<string>1 0/72 in = 1 0/72 in</string>
+	<string>1 0/72 in = 1.0000 in</string>
 	<key>GraphDocumentVersion</key>
 	<integer>8</integer>
 	<key>GraphicsList</key>
 	<array>
+		<dict>
+			<key>Bounds</key>
+			<string>{{692.08169311687629, 147.13285578463007}, {80.236351013183594, 15}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>72</integer>
+			<key>Rotation</key>
+			<real>23.090459823608398</real>
+			<key>Shape</key>
+			<string>AdjustableArrow</string>
+			<key>ShapeData</key>
+			<dict>
+				<key>ratio</key>
+				<real>0.32189163565635681</real>
+				<key>width</key>
+				<real>14.973806381225586</real>
+			</dict>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>a</key>
+						<string>0.1</string>
+						<key>b</key>
+						<string>0</string>
+						<key>g</key>
+						<string>0</string>
+						<key>r</key>
+						<string>0</string>
+					</dict>
+					<key>Draws</key>
+					<string>NO</string>
+					<key>MiddleFraction</key>
+					<real>0.70634919404983521</real>
+				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>a</key>
+						<string>0.4</string>
+						<key>b</key>
+						<string>0</string>
+						<key>g</key>
+						<string>0</string>
+						<key>r</key>
+						<string>0</string>
+					</dict>
+					<key>Fuzziness</key>
+					<real>0.0</real>
+					<key>ShadowVector</key>
+					<string>{0, 2}</string>
+				</dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>a</key>
+						<string>0.75</string>
+						<key>b</key>
+						<string>0</string>
+						<key>g</key>
+						<string>0</string>
+						<key>r</key>
+						<string>0</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>TextRelativeArea</key>
+			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
+			<key>isConnectedShape</key>
+			<true/>
+		</dict>
 		<dict>
 			<key>Bounds</key>
 			<string>{{126, 422.08683776855469}, {156, 33}}</string>
@@ -95,14 +171,14 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs22 \cf0 value5 is delivered 
+\f0\fs30 \cf0 value5 is delivered 
 \b after
 \b0  value2 }</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{816, 427.65571594238281}, {156, 33}}</string>
+			<string>{{816, 408.53243383911206}, {156, 52.123282103270782}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -144,14 +220,14 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs22 \cf0 value4 is delivered 
+\f0\fs30 \cf0 value4 is delivered 
 \b after
 \b0  value1 and value3}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{816, 234.38934326171875}, {156, 39}}</string>
+			<string>{{816, 221.22673429816666}, {156, 52.162608963552088}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -181,7 +257,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs22 \cf0 value1 and value3 are delivered to PE1, 
+\f0\fs30 \cf0 value1 and value3 are delivered to PE1, 
 \b before
 \b0  value4 }</string>
 			</dict>
@@ -218,20 +294,20 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs22 \cf0 value2 is delivered to PE2, 
+\f0\fs30 \cf0 value2 is delivered to PE2, 
 \b before
 \b0  value5}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{326.68053906113278, 428.82786659630938}, {108.73877716064453, 15}}</string>
+			<string>{{318.38364287880222, 428.35002387956683}, {94.032638549804688, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
 			<integer>65</integer>
 			<key>Rotation</key>
-			<real>161.54219055175781</real>
+			<real>150.97589111328125</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -322,7 +398,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{303.099853515625, 285.71961975097656}, {10, 184.49977111816406}}</string>
+			<string>{{307.90014171600342, 285.71961975097656}, {10, 184.49977111816406}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -358,7 +434,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{273.09985610611375, 33}, {70, 39}}</string>
+			<string>{{277.90014907486375, 33}, {70, 39}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -375,14 +451,14 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 2}</string>
+\f0\fs32 \cf0 PE 2}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{303.099853515625, 84.500225067138672}, {10, 202.21939086914062}}</string>
+			<string>{{307.90014171600342, 84.500225067138672}, {10, 202.21939086914062}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -403,13 +479,13 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{658.51044411139128, 385.67263787350214}, {112.92918395996094, 15}}</string>
+			<string>{{688.72929771064776, 378.17150587954552}, {87.757164001464844, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
 			<integer>57</integer>
 			<key>Rotation</key>
-			<real>16.990823745727539</real>
+			<real>26.135757446289062</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -482,7 +558,7 @@
 			<integer>56</integer>
 			<key>Points</key>
 			<array>
-				<string>{651, 286.21963500976562}</string>
+				<string>{648.599853515625, 286.21963500976562}</string>
 				<string>{865.5, 286.7196159362793}</string>
 			</array>
 			<key>Style</key>
@@ -509,89 +585,13 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{660.08535509673902, 213.82736169584985}, {112.92918395996094, 15}}</string>
-			<key>Class</key>
-			<string>ShapedGraphic</string>
-			<key>ID</key>
-			<integer>55</integer>
-			<key>Rotation</key>
-			<real>16.990823745727539</real>
-			<key>Shape</key>
-			<string>AdjustableArrow</string>
-			<key>ShapeData</key>
-			<dict>
-				<key>ratio</key>
-				<real>0.32189163565635681</real>
-				<key>width</key>
-				<real>14.973806381225586</real>
-			</dict>
-			<key>Style</key>
-			<dict>
-				<key>fill</key>
-				<dict>
-					<key>Color</key>
-					<dict>
-						<key>a</key>
-						<string>0.1</string>
-						<key>b</key>
-						<string>0</string>
-						<key>g</key>
-						<string>0</string>
-						<key>r</key>
-						<string>0</string>
-					</dict>
-					<key>Draws</key>
-					<string>NO</string>
-					<key>MiddleFraction</key>
-					<real>0.70634919404983521</real>
-				</dict>
-				<key>shadow</key>
-				<dict>
-					<key>Color</key>
-					<dict>
-						<key>a</key>
-						<string>0.4</string>
-						<key>b</key>
-						<string>0</string>
-						<key>g</key>
-						<string>0</string>
-						<key>r</key>
-						<string>0</string>
-					</dict>
-					<key>Fuzziness</key>
-					<real>0.0</real>
-					<key>ShadowVector</key>
-					<string>{0, 2}</string>
-				</dict>
-				<key>stroke</key>
-				<dict>
-					<key>Color</key>
-					<dict>
-						<key>a</key>
-						<string>0.75</string>
-						<key>b</key>
-						<string>0</string>
-						<key>g</key>
-						<string>0</string>
-						<key>r</key>
-						<string>0</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>TextRelativeArea</key>
-			<string>{{0.125, 0.25}, {0.75, 0.5}}</string>
-			<key>isConnectedShape</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>Bounds</key>
-			<string>{{326.68053906113278, 186.94933201293071}, {108.73877716064453, 15}}</string>
+			<string>{{321.78649287866045, 186.12392821924863}, {87.226936340332031, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
 			<integer>54</integer>
 			<key>Rotation</key>
-			<real>161.54219055175781</real>
+			<real>153.6458740234375</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -733,7 +733,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{449, 399.10272216796875}, {202, 27.67596435546875}}</string>
+			<string>{{417.7000732421875, 397.63874816894531}, {264.599853515625, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -775,12 +775,12 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (addr5, value5, PE 2)}</string>
+\f0\fs32 \cf0 shmem_int_p (addr5, value5, PE 2)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{449, 355.66201782226562}, {202, 27.67596435546875}}</string>
+			<string>{{417.7000732421875, 352.73406982421875}, {264.599853515625, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -822,7 +822,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (addr4, value4, PE 1)}</string>
+\f0\fs32 \cf0 shmem_int_p (addr4, value4, PE 1)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -863,7 +863,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{449, 194.49285888671875}, {202, 27.67596435546875}}</string>
+			<string>{{417.7000732421875, 192.02925872802734}, {264.599853515625, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -893,12 +893,12 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (addr3, value3, PE 1)}</string>
+\f0\fs32 \cf0 shmem_int_p (addr3, value3, PE 1)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{449, 158.35284042358398}, {202, 27.67596435546875}}</string>
+			<string>{{417.7000732421875, 158.35284042358398}, {264.599853515625, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -928,12 +928,12 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (addr2, value2, PE 2)}</string>
+\f0\fs32 \cf0 shmem_int_p (addr2, value2, PE 2)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{449, 272.38165283203125}, {202, 27.67596435546875}}</string>
+			<string>{{446.599853515625, 272.38165283203125}, {202, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -963,12 +963,12 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_fence()}</string>
+\f0\fs30 \cf0 shmem_fence()}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{449, 124.67642211914062}, {202, 27.67596435546875}}</string>
+			<string>{{417.7000732421875, 124.67642211914062}, {264.599853515625, 27.67596435546875}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -998,7 +998,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 shmem_int_p (addr1, value1, PE 1)}</string>
+\f0\fs32 \cf0 shmem_int_p (addr1, value1, PE 1)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1045,13 +1045,13 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{659.03540749029753, 146.99999993404899}, {112.92918395996094, 15}}</string>
+			<string>{{692.08170897171181, 216.16212434557292}, {80.236351013183594, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
 			<integer>27</integer>
 			<key>Rotation</key>
-			<real>16.990823745727539</real>
+			<real>23.090459823608398</real>
 			<key>Shape</key>
 			<string>AdjustableArrow</string>
 			<key>ShapeData</key>
@@ -1138,7 +1138,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 1}</string>
+\f0\fs32 \cf0 PE 1}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -1162,7 +1162,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 PE 0}</string>
+\f0\fs32 \cf0 PE 0}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -1236,9 +1236,9 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-02-04 18:36:27 +0000</string>
+	<string>2014-02-10 21:19:09 +0000</string>
 	<key>Modifier</key>
-	<string>Pavel Shamis</string>
+	<string>Shamis, Pavel</string>
 	<key>NotesVisible</key>
 	<string>NO</string>
 	<key>Orientation</key>
@@ -1317,7 +1317,7 @@
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{738, 205}, {1394, 1192}}</string>
+		<string>{{88, 76}, {1394, 1102}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -1331,7 +1331,7 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-54, -160}, {1259, 1053}}</string>
+		<string>{{-54, -115}, {1259, 963}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
