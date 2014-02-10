@@ -48,9 +48,9 @@ The \Cpp{} interface is currently the same as that for \Clang. An overview of th
 \item \textbf{One-sided Data Transfers }
 
 \begin{enumerate}
-\item \FUNC{Put}: the local \ac{PE} specifies the source
+\item \FUNC{Put}: The local \ac{PE} specifies the source
 data (local or symmetric) to be written to the symmetric object on the remote \ac{PE}. 
-\item \FUNC{Get}: an explicit fetch operation is used to copy a symmetric object
+\item \FUNC{Get}: An explicit fetch operation is used to copy a symmetric object
 from a remote \ac{PE} and store it to an object on the local \ac{PE}.
 \end{enumerate}
 
@@ -61,8 +61,8 @@ from a remote \ac{PE} and store it to an object on the local \ac{PE}.
 %\end{description}
 \item \textbf{Synchronization Mechanisms }
 \begin{enumerate}
-\item \FUNC{Fence}: Ensures ordering of \FUNC{Put} operations in respect to the target \ac{PE}. 
-\item \FUNC{Quiet}: Ensures ordering of \FUNC{Put} operations to respect to all \acp{PE}. 
+\item \FUNC{Fence}: Ensures ordering of \FUNC{Put} operations with respect to the target \ac{PE}. 
+\item \FUNC{Quiet}: Ensures ordering of \FUNC{Put} operations with respect to all \acp{PE}. 
 \item \FUNC{Barrier}: A collective synchronization routine in which no \ac{PE} may leave
 the barrier prior to all \ac{PE}s entering the barrier. 
 \end{enumerate}

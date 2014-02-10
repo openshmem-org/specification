@@ -35,7 +35,7 @@
 \label{fig:mem_model}                                               
 \end{figure}      
 An \openshmem program consist of data objects that are private to each \ac{PE} and data 
-objects that are remotely accessible by all \ac{PE}s. Private data objects are stored in a the local
+objects that are remotely accessible by all \ac{PE}s. Private data objects are stored in the local
 memory of each \ac{PE} and can only be accessed by the \ac{PE} itself; these data objects
 cannot be accessed by other \ac{PE}s via \openshmem routines. Private data objects
 follow the memory model of \Clang{} or \Fortran{}. Remotely accessible
@@ -65,7 +65,7 @@ determined by the implementation. The Symmetric Heap may reside on
 different memory regions on the different \ac{PE}s. Figure~\ref{fig:mem_model} shows how \openshmem implements a \ac{PGAS} model 
 using remotely accessible (\emph{Symmetric objects}) and private data objects. Symmetric data objects are stored in the symmetric heap or 
 or in the global / static memory section of each \ac{PE}. Symmetric data objects can be allocated dynamically in the symmetric heap of each \ac{PE} using
-a collective \FUNC{shmalloc} or \FUNC{shpalloc} memory allocation call.
+a collective \FUNC{shmalloc}or \FUNC{shpalloc} memory allocation call.
      
 %\openshmem specification does not require a particular memory layout; it is up to the implementation
 %to decide how to implement the symmetric heap.  
