@@ -48,10 +48,8 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe)
 {
 
        The \FUNC{iput} routines provide  a method  for  copying 
-       strided data elements of an array  from  the  local \ac{PE} to strided locations 
-       of a symmetric array on a different \ac{PE}.  The routines return when the data has been copied out of
-       the  source  array  on the local \ac{PE} but not necessarily before the data
-       has been delivered to the remote data object.
+       strided data elements (specified by sst) of an array from a source array on the local \ac{PE} to locations specified by stride tst on a target array on specified remote PE. Both strides, tst and sst must be greater than or equal to 1. The routines return when the data has been copied out of
+       the  source  array  on the local \ac{PE} but not necessarily before the data has been delivered to the remote data object.
 }{
     \desTB{
        The target and source data objects must conform to typing  constraints,
