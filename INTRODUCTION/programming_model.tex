@@ -9,11 +9,11 @@
 \openshmem implements a \ac{PGAS} model. In the \ac{PGAS} model, each process has a local and 
 globally shared memory where portions of the shared memory may have affinity to a particular process. 
 \openshmem implements \ac{PGAS} by defining symmetric data objects as a mechanism to share information among \openshmem processes or \acp{PE}. 
-The \openshmem library functions provide low-latency, high-bandwidth communication \ac{API} for  use  in  highly  parallelized 
-scalable programs. The \ac{API} allows communication and synchronization operations on both local and symmetric data objects. 
+The \openshmem library functions provide low-latency, high-bandwidth communication \ac{API} for  use in highly parallelized 
+scalable programs. The \ac{API} allows communication and synchronization operations on both private (local) and remotely accessible data objects. 
 \openshmem is a library and unlike UPC, CAF, Titanium, X10 and Chapel, which are all
-PGAS languages, it relies on the programmer to use the library calls correctly to implement the semantics of its programming model.
-The \openshmem data-transfer functions are one-sided in nature. This means that a local \ac{PE} executing a data-transfer does not require the participation of the remote \ac{PE} to complete the operation. This allows for overlap between communication and computation which hides data-transfer latencies, making \openshmem ideal for applications with unstructured communication patterns.
+PGAS languages, it relies on the programmer to use the library calls  to implement the correct semantics of its programming model.
+The \openshmem data-transfer functions are one-sided in nature. This means that a local \ac{PE} executing a data-transfer does not require the participation of the remote \ac{PE} to complete the operation. This allows for overlap between communication and computation to hide data-transfer latencies. This makes  \openshmem ideal for unstructured, small/medium size data communication patterns.
 %\rcomment{Manju: To do - Make sure the first paragraph does not say the same
 %things has first paragraph of Section 1}
 
