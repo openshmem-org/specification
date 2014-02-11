@@ -64,7 +64,7 @@ called the Symmetric Heap. The Symmetric Heap is created during the execution of
 determined by the implementation. The Symmetric Heap may reside on
 different memory regions on the different \ac{PE}s. Figure~\ref{fig:mem_model} shows how \openshmem implements a \ac{PGAS} model 
 using remotely accessible (\emph{Symmetric objects}) and private data objects. Symmetric data objects are stored in the symmetric heap or 
-or in the global / static memory section of each \ac{PE}. Symmetric data objects can be allocated dynamically in the symmetric heap of each \ac{PE} using
+in the global / static memory section of each \ac{PE}. Symmetric data objects can be allocated dynamically in the symmetric heap of each \ac{PE} using
 a collective \FUNC{shmalloc} or \FUNC{shpalloc} memory allocation call.
      
 %\openshmem specification does not require a particular memory layout; it is up to the implementation

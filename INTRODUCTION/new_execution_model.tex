@@ -19,7 +19,7 @@
     
 
 \section{Execution Model}
-An OpenSHMEM program consists of a set of processes, called \ac{PE}s, that execute in a \ac{SPMD}-like execution model. In \openshmem different \ac{PE}s can have different execution paths and will execute asynchronously 
+An \openshmem{} program consists of a set of processes, called \ac{PE}s, that execute in a \ac{SPMD}-like execution model. In \openshmem different \ac{PE}s can have different execution paths and will execute asynchronously 
 following \Fortran{} or \Clang{} program execution. The \ac{PE}s progress independently, and can communicate and synchronize using the \openshmem{} \ac{API}.
 The number of \ac{PE}s in the \openshmem{} program is specified at runtime by the user. %A \ac{PE} can be implemented as an OS process or OS thread~\footnote{As long as the memory model and execution model of \openshmem is followed.}. 
 The total number of \ac{PE}s, \VAR{N}, can be mapped to \VAR{M} hardware cores/threads where \VAR{M} can be less or equal than \VAR{N}. %As long as the memory model and execution model of \openshmem is followed.
@@ -46,13 +46,16 @@ the initialization function start\_pes before using any of the other \openshmem{
 library routines. A \ac{PE}{} calling start\_pes{} call more than once in the lifetime of program can result in an undefined behavior. The current specification does not define the finalization of \openshmem{}program. The implementations are allowed to provide their own interfaces for finalization as long as it is not required for the correct functioning of the \openshmem{} program.
  
 The \ac{PE}{}s of the \openshmem{} program are identified by unique integers.
-The identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other OpenSHMEM library calls (such as collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the lifecycle of the \openshmem{} program.
+The identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem{} library calls (such as collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the lifecycle of the \openshmem{} program.
 
 
 \subsection{Progress of \openshmem operations}
 The \openshmem model assumes that computation and communication are
-naturally overlapped.  High quality \openshmem implementations must insure that programs exhibit %SP: Changing MUST to may as per discussion on 01/31/2014
-progression of communication both with and without \openshmem calls.
+naturally overlapped.  
+%High quality \openshmem implementations must insure that programs exhibit %SP: Changing MUST to may as per discussion on 01/31/2014
+%progression of communication both with and without \openshmem calls.
+A high quality \openshmem{} implementation may ensure that communication will
+progress without requiring \openshmem{} calls. 
 Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls, other \ac{PE}s must be able to communicate (put/get,
 collective, atomic) with that computationally-bound \ac{PE} without that \ac{PE}
 issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} must progress
