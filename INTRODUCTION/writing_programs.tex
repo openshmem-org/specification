@@ -10,7 +10,7 @@ To write a ``Hello World" \openshmem program we need to
 \item Add the initialization call \FUNC{start\_pes}, (line 9) use
   single integer argument, 0, which is ignored~\footnote{The unused
     argument is for compatibility with older SHMEM implementations.}.
-\item Use \openshmem calls to query the \ac{PE} id (line 10) and the total number of \ac{PE}s (line 11).
+\item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE id (line 11).
 \item there is no explicit finalize call, either a return from
   \texttt{main()} (line 13) or an explicit \texttt{exit()} acts as an
   implicit \openshmem finalization.
