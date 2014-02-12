@@ -1,18 +1,17 @@
 \section{The \openshmem Effort}
 
-\openshmem is a SHMEM specification that aims to consolidate the different
-SHMEM implementations provided by vendors, laboratories and universities 
-into a single widely accepted specification. \openshmem aims at addressing
-current and future SHMEM community needs with a single specification. Vendors are starting to provide \openshmem implementations to help the users
-write portable \openshmem code that can run on multiple platforms to avoid dealing with
-subtle differences that come from vendor-specific implementations. For more details on the history of 
+%\openshmem is a SHMEM specification that aims to consolidate the different
+%SHMEM implementations provided by vendors, laboratories and universities 
+%into a single widely accepted specification. 
+\openshmem is a \ac{PGAS} library interface specification. \openshmem aims to provide a standard \ac{API} for SHMEM libraries to aid portability and facilitate uniform predictable results of \openshmem applications by explicitly stating the behavior and semantics of the \openshmem library calls. Through the different versions, \openshmem will continue to address the requirements of the \ac{PGAS} community. 
+As of this specification, existing vendors are moving towards \openshmem compliant implementations and new vendors are developing \openshmem library implementations to help the users write portable \openshmem code that can run on multiple platforms to avoid dealing with subtle vendor-specific implementation differences. For more details on the history of 
 \openshmem please refer to \hyperref[sec:openshmem_history]{The History of \openshmem} section.  
 
 The \openshmem effort is driven by the \ac{ESSC} at \ac{ORNL} and the \ac{UH} 
 with significant input from the \openshmem{} community. Besides the
 specification, the effort also includes providing a reference \openshmem implementation,
 validation and verification suites, tools, a mailing list and website infrastructure to support
-specification activities.  For more information please refer to: \url{http://www.openshmem.org}.
+specification activities. For more information please refer to: \url{http://www.openshmem.org}.
 %  specifications and the reference implementations are available at: 
 %\url{http://www.openshmem.org}. 
 
