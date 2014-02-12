@@ -170,19 +170,21 @@
 
 \clearpage
 
-\startchap
+%\startchap
 %  -> Compilation
 %  -> Writing OpenSHMEM Programs
 %  -> Application written in Fortran
+\appendix
+\chapter{Writing \openshmem Programs}
 \input{INTRODUCTION/writing_programs.tex}
+\chapter{Compiling and Running Applications}
 \input{INTRODUCTION/compile_exec_applications.tex}
+\chapter{Undefined Behavior in \openshmem}
 \input{INTRODUCTION/undefined_behavior}
-\section{Interoperability with other Programming Models}
+\chapter{Interoperability with other Programming Models}
 \input{INTRODUCTION/mpi_interoperability}
-
 \clearpage
-\startchap
-\section{History of \openshmem{}}
+\chapter{History of \openshmem{}}
 \input{INTRODUCTION/openshmem_history.tex}
 \label{sec:openshmem_history}
 
