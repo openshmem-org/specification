@@ -1,6 +1,14 @@
+%Comments for Manju:
+%Are Barrier_all, shmalloc, etc considered collectives? If yes, we need to state that all PEs belong to an implicit active set that contains all PES.
+%Also describe the case where collective operations may be invoked by the implicit active set (all PEs) or active sets PEs
+%State that collectives can be executed on statements that are not ordered .
+%State that from the beginning to the end of the program, the sequence of collectives should be the same on a given active set (or implicit active set).
+%Are arguments  the same for PEs that call the same collective? (i.e. target or source symmetric data?)
+%Which collectives imply synchronization (i.e. barrier, quiet, etc) which ones not (i.e. broadcast on root?)
+
 Collective operation is defined as communication or synchronization operation 
 on a group of \ac{PE}s called \activeset{}. The collective operations requires all
-\ac{PE}s in the \activeset{} to simulatenously call the operation. 
+\ac{PE}s in the \activeset{} to simultaneously call the operation. 
 A \ac{PE} that is not a part of \activeset{} calling the collective 
 operation results in an undefined behavior.
 
