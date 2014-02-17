@@ -19,18 +19,15 @@
     
 
 \section{Execution Model}
-An \openshmem{} program consists of a set of processes, called \ac{PE}s, that execute in a \ac{SPMD}-like execution model. In \openshmem different \ac{PE}s can have different execution paths and will execute asynchronously 
-following \Fortran{} or \Clang{} program execution. The \ac{PE}s progress independently, and can communicate and synchronize using the \openshmem{} \ac{API}.
-The number of \ac{PE}s in the \openshmem{} program is specified at runtime by the user. %A \ac{PE} can be implemented as an OS process or OS thread~\footnote{As long as the memory model and execution model of \openshmem is followed.}. 
-The total number of \ac{PE}s, \VAR{N}, can be mapped to \VAR{M} hardware cores/threads where \VAR{M} can be less or equal than \VAR{N}. %As long as the memory model and execution model of \openshmem is followed.
-An \openshmem program must start by calling the initialization function \FUNC{start\_pes}  before using any of the other \openshmem library routines. \ac{PE}s do not exist until after the call to \FUNC{start\_pes} returns. 
-During execution, each \ac{PE} is assigned a unique global identifier for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (e.g. to access symmetric objects from specific \ac{PE}s, collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of 
-\Clang{} or \Fortran.  As of now, an \openshmem program finishes execution by returning from the main function. It is up to the implementation on how to handle the finalization of the \openshmem library and any other 
-resources initialized by the library: there is currently no explicit finalization call defined in the \openshmem specification.
+%An \openshmem{} program consists of a set of processes, called \ac{PE}s, that execute in a \ac{SPMD}-like execution model. In \openshmem different \ac{PE}s can have different execution paths and will execute asynchronously 
+%following \Fortran{} or \Clang{} program execution. The \ac{PE}s progress independently, and can communicate and synchronize using the \openshmem{} \ac{API}.
+%The number of \ac{PE}s in the \openshmem{} program is specified at runtime by the user. %A \ac{PE} can be implemented as an OS process or OS thread~\footnote{As long as the memory model and execution model of \openshmem is followed.}. 
+%The total number of \ac{PE}s, \VAR{N}, can be mapped to \VAR{M} hardware cores/threads where \VAR{M} can be less or equal than \VAR{N}. %As long as the memory model and execution model of \openshmem is followed.
+%An \openshmem program must start by calling the initialization function \FUNC{start\_pes}  before using any of the other \openshmem library routines. \ac{PE}s do not exist until after the call to \FUNC{start\_pes} returns. 
+%During execution, each \ac{PE} is assigned a unique global identifier for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (e.g. to access symmetric objects from specific \ac{PE}s, collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of 
+%\Clang{} or \Fortran.  As of now, an \openshmem program finishes execution by returning from the main function. It is up to the implementation on how to handle the finalization of the \openshmem library and any other 
+%resources initialized by the library: there is currently no explicit finalization call defined in the \openshmem specification.
 
-\rcomment{Manju: Restructuring above content and adding more details}
-\newline
-\newline
 An \openshmem{} program is a set of \openshmem{} processes, called \ac{PE}s.
 %Each \ac{PE} can be implemented as an OS process or OS thread as long as the constraints imposed
 %by the memory model and execution model are respected. 
