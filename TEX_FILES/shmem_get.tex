@@ -1,5 +1,6 @@
 \bAPI{SHMEM\_GET}{Copies data from a specified \ac{PE}.}
 \synC   %Synopisis for C API
+
 void shmem_double_get(double *target, const double  *source, size_t nelems, int pe);
 void shmem_float_get(float *target, const float *source, size_t nelems, int pe);
 void shmem_get32(void *target, const void *source, size_t  nelems,  int pe);
@@ -14,6 +15,7 @@ void shmem_longlong_get(long long *target, const long long *source, size_t nelem
 void shmem_short_get(short *target, const short *source, size_t nelems, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
+
 INTEGER nelems, pe
 CALL SHMEM_CHARACTER_GET(target, source, nelems, pe)
 CALL SHMEM_COMPLEX_GET(target, source, nelems, pe)
