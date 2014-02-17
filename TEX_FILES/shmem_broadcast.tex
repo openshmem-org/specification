@@ -1,9 +1,11 @@
 \bAPI{SHMEM\_BROADCAST}{Broadcasts a block of data from one \ac{PE} to one or more target \ac{PE}s.}
 \synC   %Synopisis for C API
+
 void shmem_broadcast32(void *target, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void shmem_broadcast64(void *target, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
+
 INTEGER nlong, PE_root, PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
 CALL SHMEM_BROADCAST4(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, fIpSync)
