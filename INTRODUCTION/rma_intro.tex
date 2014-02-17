@@ -1,0 +1,33 @@
+\ac{RMO} operations described in this section are one-sided communication
+mechanisms of the \openshmem{} \ac{API}. While 
+using these mechanisms, the programmer is required to provide parameters
+only on the calling side. A characteristic of one-sided communication 
+is that it decouples communication from
+the synchronization. The one-sided communication mechanisms transfers 
+the data but does not synchronize the sender of the data with the receiver
+of the data. However, the two-sided communication mechanisms such as Send/Recv has two effects: 
+communication of data; synchronization of sender with the receiver.
+
+\openshmem{} \ac{RMO} operations are all performed on the symmetric objects. 
+The initiator \ac{PE} of the call is designated as \source{}, and the 
+\ac{PE} in which memory is accessed is designated as \target{}. In the case of remote
+update operation, \PUT{}, the origin is the \source{} \ac{PE} and the 
+destination \ac{PE} is the \target{} PE. In case of remote read operation, \GET{}, 
+the origin is the \target{} \ac{PE} and the destination is the \source{} \ac{PE}.
+
+\openshmem{} provides three different types of one-sided communication interfaces. 
+shmem\_put$<$bits$>$ interface transfers data in chunks 
+of bits. shmem\_put32, for example, copies data to a target \ac{PE} in chunks of 
+32 bits. shmem\_$<$datatype$>$\_put interface copies elements of type 
+\textit{datatype} from a \source{} \ac{PE} to a \target{} \ac{PE}. 
+shmem\_integer\_put, for example, copies elements
+of type integer from a \source{} \ac{PE} to a \target{} \ac{PE}. 
+shmem\_$<$datatype$>$\_p interface is similar to shmem\_$<$datatype$>$\_put 
+except that it only transfers one element of type \textit{datatype}.
+
+\openshmem{} provides interfaces for transfering both contiguous and 
+non-contiguous data. The non-contiguous data transfer interfaces are prefixed 
+with "i". shmem\_$<$datatype$>$\_iput interface, for example, copies strided
+data elements from the \source{} \ac{PE} to a \target{} \ac{PE}. 
+
+
