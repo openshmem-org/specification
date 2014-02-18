@@ -94,9 +94,9 @@ network hardware that offloads communication handling from processors.
 %be reinitialized after the first call.
 
 \subsection{Atomicity Guarantees}
-
+\label{sec:amo_guarantees}
 \openshmem contains a number of routines that operate on symmetric data
-atomically (\rcomment{Section TBD}).  These routines guarantee that accesses by \openshmem's
+atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by \openshmem's
 atomic operations will be exclusive, but do not guarantee exclusivity
 in combination with other routines, either inside \openshmem or
 outside.
