@@ -1,6 +1,25 @@
-\openshmem{} specification has various atomic operation interfaces. The atomic 
-operations are either synchronization or remote memory operations. The remote memory 
-operations are performed only symmetric arrays and global variables. 
-All atomic operations in \openshmem{} are blocking operations.
+\label{sec:amo}
+%\openshmem{} specification defines various \acp{AMO}.
+\ac{AMO} is a one-sided communicatino mechanism that compbines memory update operations with atomicity gurantees described in Section \ref{sec:amo_guarantees}. 
+The \ac{AMO} operations are performed only on the symmetric objects. 
+\openshmem{} defines the two types of \ac{AMO} operations:
+\begin{itemize}
+\item
+The \textit{fetch-and-operate} operations combine memory update and fetch 
+operations in a single atomic operation.
+Fetch-and-operate operations are blocking atomic operation and return as
+soon as the fetched is delivered to the initiator of the operation.
 
+The \textit{fetch-and-operate} operations include: \FUNC{SHMEM\_CSWAP}, \FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and \FUNC{SHMEM\_FADD}.
 
+\item
+The \textit{non-fetch} atomic operations update the remote memory 
+in a single atomic operations.
+The \textit{non-fetch} atomic operations are non-blocking and should return as
+soon as the atomic operation is issued.
+
+The \textit{fetch-and-operate} operating include: \FUNC{SHMEM\_INC} and \FUNC{SHMEM\_ADD}.
+\end{itemize}
+%Fetch-and-operate routines are described in Section \ref{sec:amo_fetch} and non-fetch routines 
+%described in Section  \ref{sec:amo_nonfetch}.
+%All atomic operations in \openshmem{} are blocking operations.
