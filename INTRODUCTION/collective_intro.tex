@@ -10,7 +10,10 @@ Collective operation is defined as communication or synchronization operation
 on a group of \ac{PE}s called \activeset{}. The collective operations requires all
 \ac{PE}s in the \activeset{} to simultaneously call the operation. 
 A \ac{PE} that is not a part of \activeset{} calling the collective 
-operation results in an undefined behavior.
+operation results in an undefined behavior. All
+collective operations has an \activeset{} as an input parameter expect
+\barrierall{}. The \barrierall{} is called by all \ac{PE}s of the \openshmem{}
+program. 
 
 The \activeset{} is defined by arguments PE\_start, logPE\_stride, 
 and PE\_size. The PE\_start is the starting \ac{PE} number, a log (base 2) of logPE\_stride 
