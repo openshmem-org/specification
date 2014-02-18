@@ -111,7 +111,8 @@
 \startchap
 \section{OpenSHMEM Library API}
 \label{sec:openshmem_library_api}
-\subsection{Library Setup and Query Operations}%SP: Merging two operations 
+\subsection{Library Setup and Query Operations}%SP: Merging two operations
+\input{INTRODUCTION/setup_query_intro}
 \input{TEX_FILES/start_pes.tex} %Swaroop
 \input{TEX_FILES/NEW_shmem_my_pe.tex} %Tommy
 \input{TEX_FILES/NEW_shmem_num_pe.tex}%Tommy
@@ -120,13 +121,14 @@
 \input{TEX_FILES/shmem_ptr.tex} %Oscar
 %\startchap
 \subsection{Memory Management Operations}
+\input{INTRODUCTION/memory_management_intro}
 \input{TEX_FILES/shfree.tex}%Tommy
 \input{TEX_FILES/shpalloc.tex} %Swaroop
 \input{TEX_FILES/shpclmove.tex} %Swaroop
 \input{TEX_FILES/shpdeallc.tex} %Swaroop
 %\startchap
 \subsection{Remote Memory Operations}
-\input{INTRODUCTION/synchronization_model.tex}
+\input{INTRODUCTION/rma_intro.tex}
 \input{TEX_FILES/shmem_put.tex} %Oscar
 \input{TEX_FILES/shmem_p.tex} %Oscar
 \input{TEX_FILES/shmem_iput.tex} %Oscar
@@ -147,10 +149,13 @@
 \input{TEX_FILES/shmem_reductions.tex} %Swaroop
 %\startchap
 \subsection{Memory Ordering Operations} %SP: Adding a chapter to include fence and quiet
+\input{INTRODUCTION/ordering_intro} %Swaroop
 \input{TEX_FILES/shmem_fence.tex} %Manju
 \input{TEX_FILES/shmem_quiet.tex} %Swaroop
+\input{INTRODUCTION/synchronization_model.tex}
 %\startchap
 \subsection{Point-to-point synchronization functions}%SP: Adding a chapter to include wait and wait until 
+\input{INTRODUCTION/synchronization_intro} %Swaroop
 \input{TEX_FILES/shmem_wait.tex} %Swaroop
 %\startchap
 \subsection{Atomic Operations}
@@ -163,26 +168,30 @@
 \input{TEX_FILES/shmem_fadd.tex}%Pasha
 %\startchap
 \subsection{Distributed Locking Operations}
+\input{INTRODUCTION/locks_intro} %Swaroop
 \input{TEX_FILES/shmem_lock.tex} %Oscar
 %\startchap
 \subsection{Deprecated API}
+\input{INTRODUCTION/deprication.tex} %Pasha
 \input{TEX_FILES/shmem_cache.tex} %Pasha
 
 \clearpage
 
-\startchap
+%\startchap
 %  -> Compilation
 %  -> Writing OpenSHMEM Programs
 %  -> Application written in Fortran
+\appendix
+\chapter{Writing \openshmem Programs}
 \input{INTRODUCTION/writing_programs.tex}
+\chapter{Compiling and Running Applications}
 \input{INTRODUCTION/compile_exec_applications.tex}
+\chapter{Undefined Behavior in \openshmem}
 \input{INTRODUCTION/undefined_behavior}
-\section{Interoperability with other Programming Models}
+\chapter{Interoperability with other Programming Models}
 \input{INTRODUCTION/mpi_interoperability}
-
 \clearpage
-\startchap
-\section{History of \openshmem{}}
+\chapter{History of \openshmem{}}
 \input{INTRODUCTION/openshmem_history.tex}
 \label{sec:openshmem_history}
 
@@ -194,6 +203,8 @@
 % Manju: Don't move the definitions to the front, it requires to be after content
 % Add acronyms here
 \begin{acronym}
+\acro{RMA}{\emph{Remote Memory Access}}
+\acro{RMO}{\emph{Remote Memory Operations}}
 \acro{PE}{\emph{Processing Element}}
 \acrodefplural{PE}[PEs]{\emph{Processing Elements}}
 \acro{PGAS}{\emph{Partitioned Global Address Space}}

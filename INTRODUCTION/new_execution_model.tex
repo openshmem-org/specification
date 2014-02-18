@@ -19,34 +19,40 @@
     
 
 \section{Execution Model}
-An \openshmem{} program consists of a set of processes, called \ac{PE}s, that execute in a \ac{SPMD}-like execution model. In \openshmem different \ac{PE}s can have different execution paths and will execute asynchronously 
-following \Fortran{} or \Clang{} program execution. The \ac{PE}s progress independently, and can communicate and synchronize using the \openshmem{} \ac{API}.
-The number of \ac{PE}s in the \openshmem{} program is specified at runtime by the user. %A \ac{PE} can be implemented as an OS process or OS thread~\footnote{As long as the memory model and execution model of \openshmem is followed.}. 
-The total number of \ac{PE}s, \VAR{N}, can be mapped to \VAR{M} hardware cores/threads where \VAR{M} can be less or equal than \VAR{N}. %As long as the memory model and execution model of \openshmem is followed.
-An \openshmem program must start by calling the initialization function \FUNC{start\_pes}  before using any of the other \openshmem library routines. \ac{PE}s do not exist until after the call to \FUNC{start\_pes} returns. 
-During execution, each \ac{PE} is assigned a unique global identifier for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (e.g. to access symmetric objects from specific \ac{PE}s, collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of 
-\Clang{} or \Fortran.  As of now, an \openshmem program finishes execution by returning from the main function. It is up to the implementation on how to handle the finalization of the \openshmem library and any other 
-resources initialized by the library: there is currently no explicit finalization call defined in the \openshmem specification.
+%An \openshmem{} program consists of a set of processes, called \ac{PE}s, that execute in a \ac{SPMD}-like execution model. In \openshmem different \ac{PE}s can have different execution paths and will execute asynchronously 
+%following \Fortran{} or \Clang{} program execution. The \ac{PE}s progress independently, and can communicate and synchronize using the \openshmem{} \ac{API}.
+%The number of \ac{PE}s in the \openshmem{} program is specified at runtime by the user. %A \ac{PE} can be implemented as an OS process or OS thread~\footnote{As long as the memory model and execution model of \openshmem is followed.}. 
+%The total number of \ac{PE}s, \VAR{N}, can be mapped to \VAR{M} hardware cores/threads where \VAR{M} can be less or equal than \VAR{N}. %As long as the memory model and execution model of \openshmem is followed.
+%An \openshmem program must start by calling the initialization function \FUNC{start\_pes}  before using any of the other \openshmem library routines. \ac{PE}s do not exist until after the call to \FUNC{start\_pes} returns. 
+%During execution, each \ac{PE} is assigned a unique global identifier for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem library calls (e.g. to access symmetric objects from specific \ac{PE}s, collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of 
+%\Clang{} or \Fortran.  As of now, an \openshmem program finishes execution by returning from the main function. It is up to the implementation on how to handle the finalization of the \openshmem library and any other 
+%resources initialized by the library: there is currently no explicit finalization call defined in the \openshmem specification.
 
-\rcomment{Manju: Restructuring above content and adding more details}
-\newline
-\newline
-An \openshmem{} program is a set of \openshmem{} processes, called \ac{PE}s.
+An \openshmem{} program consists of a set of \openshmem{} processes called \ac{PE}s that execute in a \ac{SPMD}-like model
+where each \ac{PE} can take a different execution path. The \ac{PE}s can progress asynchronously and communicate and synchronize 
+using the \openshmem{} interfaces. All \ac{PE}s in an \openshmem{} program should start by calling
+the initialization function \FUNC{start\_pes} before using any of the other \openshmem{}
+library routines. As of now, an \openshmem program finishes execution by returning from the main function. 
+It is up to the implementation on how to handle the finalization of the \openshmem library. 
+
+The \ac{PE}{}s of the \openshmem{} program are identified by unique integers. The identifiers are integers assigned in a monotonically increasing 
+manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for \openshmem{} calls (e.g. to specify \FUNC{Puts} or \FUNC{Gets} operations on symmetric data objects, collective synchronization calls, etc) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the lifecycle of the \openshmem{} program.
+
+  %following \Fortran{} or \Clang{} program execution.
 %Each \ac{PE} can be implemented as an OS process or OS thread as long as the constraints imposed
 %by the memory model and execution model are respected. 
 %The \ac{PE} in turn is mapped to either a processor core or a hardware thread. \rcomment{Manju: This sentence requires scrutiny}. 
-Though all \ac{PE}s are required to execute the same program, each \ac{PE} is allowed to take 
-a different control path. The \ac{PE}s progress independently, and can communicate and synchronize using the \openshmem{} interfaces.
+%Though all \ac{PE}s are required to execute the same program, each \ac{PE} is allowed to take 
+%a different control path. The \ac{PE}s progress independently, and can communicate and synchronize using the \openshmem{} interfaces.
 
 %The lifecycle of \openshmem{} program starts with each \ac{PE} calling a global
 %collective routine start\_pes{}, and ends with implementation dependent
 %finalization. 
-All \ac{PE}s in an \openshmem{} program should start by calling
-the initialization function start\_pes before using any of the other \openshmem{}
-library routines. A \ac{PE}{} calling start\_pes{} call more than once in the lifetime of program can result in an undefined behavior. The current specification does not define the finalization of \openshmem{}program. The implementations are allowed to provide their own interfaces for finalization as long as it is not required for the correct functioning of the \openshmem{} program.
- 
-The \ac{PE}{}s of the \openshmem{} program are identified by unique integers.
-The identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem{} library calls (such as collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the lifecycle of the \openshmem{} program.
+%All \ac{PE}s in an \openshmem{} program should start by calling
+%the initialization function start\_pes before using any of the other \openshmem{}
+%library routines. A \ac{PE}{} calling start\_pes{} call more than once in the lifetime of program can result in an undefined behavior. The current specification does not define the finalization of \openshmem{}program. The implementations are allowed to provide their own interfaces for finalization as long as it is not required for the correct functioning of the \openshmem{} program.  
+%The \ac{PE}{}s of the \openshmem{} program are identified by unique integers.
+%The identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for other \openshmem{} library calls (such as collective synchronization) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the lifecycle of the \openshmem{} program.
 
 
 \subsection{Progress of \openshmem operations}
