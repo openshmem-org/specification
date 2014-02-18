@@ -1,5 +1,6 @@
 \bAPI{SHMEM\_IGET}{Copies strided data from a specified \ac{PE}.}
 \synC   %Synopisis for C API
+
 void shmem_double_iget(double *target, const double *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
 void shmem_float_iget(float *target, const float *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
 void shmem_iget32(void *target, const void *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
@@ -12,6 +13,7 @@ void shmem_longlong_iget(long long *target, const long long *source, ptrdiff_t t
 void shmem_short_iget(short *target, const short *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
+
 INTEGER tst, sst, nelems, pe
 CALL SHMEM_COMPLEX_IGET(target, source, tst, sst, nelems, pe)
 CALL SHMEM_DOUBLE_IGET(target, source, tst, sst, nelems, pe)
