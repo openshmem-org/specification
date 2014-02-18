@@ -1,6 +1,7 @@
 \bAPI{SHMEM\_WAIT}{Wait for  a variable  on the local \ac{PE} to change.}
 
 \synC   %Synopisis for C API
+
 void shmem_int_wait(int *var, int value);
 void shmem_int_wait_until(int *var, int cond, int value);
 void shmem_long_wait(long *var, long value);
@@ -14,6 +15,7 @@ void shmem_wait_until(long *ivar, int cmp, long value);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
+
 CALL SHMEM_INT4_WAIT(ivar, cmp_value)
 CALL SHMEM_INT4_WAIT_UNTIL(ivar, cmp, cmp_value)
 CALL SHMEM_INT8_WAIT(ivar, cmp_value)
