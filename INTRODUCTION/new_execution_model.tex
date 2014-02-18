@@ -36,7 +36,7 @@ library routines. As of now, an \openshmem program finishes execution by returni
 It is up to the implementation on how to handle the finalization of the \openshmem library. 
 
 The \ac{PE}{}s of the \openshmem{} program are identified by unique integers. The identifiers are integers assigned in a monotonically increasing 
-manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for \openshmem{} calls (e.g. to specify \FUNC{Puts} or \FUNC{Gets} operations on symmetric data objects, collective synchronization calls, etc) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the lifecycle of the \openshmem{} program.
+manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for \openshmem{} calls (e.g. to specify \PUT{} or \GET{} operations on symmetric data objects, collective synchronization calls, etc) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the lifecycle of the \openshmem{} program.
 
   %following \Fortran{} or \Clang{} program execution.
 %Each \ac{PE} can be implemented as an OS process or OS thread as long as the constraints imposed
@@ -62,8 +62,8 @@ naturally overlapped.
 %progression of communication both with and without \openshmem calls.
 A high quality \openshmem{} implementation may ensure that communication will
 progress without requiring \openshmem{} calls. 
-Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls, other \ac{PE}s must be able to communicate (put/get,
-collective, atomic) with that computationally-bound \ac{PE} without that \ac{PE}
+Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls, other \ac{PE}s must be able to communicate (e.g. \PUT{}/\GET{},
+collective, atomic operations) with that computationally-bound \ac{PE} without that \ac{PE}
 issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} must progress
 regardless of when that \ac{PE} next engages in an \openshmem call.
 
