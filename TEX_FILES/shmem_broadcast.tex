@@ -8,7 +8,7 @@ void shmem_broadcast64(void *target, const void *source, size_t nlong, int PE_ro
 
 INTEGER nlong, PE_root, PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
-CALL SHMEM_BROADCAST4(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, fIpSync)
+CALL SHMEM_BROADCAST4(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, pSync)
 CALL SHMEM_BROADCAST8(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size, pSync)
 CALL SHMEM_BROADCAST32(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size,pSync)
 CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, PE_size,pSync)

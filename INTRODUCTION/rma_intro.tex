@@ -1,4 +1,6 @@
-\ac{RMO} operations described in this section are one-sided communication
+
+\subsection{Remote Memory Access Operations}
+\ac{RMA} operations described in this section are one-sided communication
 mechanisms of the \openshmem{} \ac{API}. While 
 using these mechanisms, the programmer is required to provide parameters
 only on the calling side. A characteristic of one-sided communication 
@@ -8,7 +10,7 @@ the data but does not synchronize the sender of the data with the receiver
 of the data. However, the two-sided communication mechanisms such as Send/Recv has two effects: 
 communication of data; synchronization of sender with the receiver.
 
-\openshmem{} \ac{RMO} operations are all performed on the symmetric objects. 
+\openshmem{} \ac{RMA} operations are all performed on the symmetric objects. 
 The initiator \ac{PE} of the call is designated as \source{}, and the 
 \ac{PE} in which memory is accessed is designated as \target{}. In the case of remote
 update operation, \PUT{}, the origin is the \source{} \ac{PE} and the 
