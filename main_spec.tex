@@ -80,7 +80,8 @@
 
 \mainmatter  % included for use of documenttype 'book' 
 \pagestyle{headings}  \withlinenumbers
-
+{
+\setlength{\parskip}{.25pt minus .25pt}
 \renewcommand{\thesection}{\arabic{section}} 
 \startchap
 \section*{Introduction}
@@ -193,12 +194,11 @@
 \chapter{History of \openshmem{}}
 \input{INTRODUCTION/openshmem_history.tex}
 \label{sec:openshmem_history}
-
 %\clearpage
 %\startchap
 %\section{\openshmem{} program examples}
 %\input{INTRODUCTION/examples}
-
+}
 % Manju: Don't move the definitions to the front, it requires to be after content
 % Add acronyms here
 \begin{acronym}

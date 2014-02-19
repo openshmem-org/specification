@@ -736,17 +736,18 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \newcommand{\bAPI}[2]{
 \subsubsection{\large #1}%\hfill
-#2\hfill
+#2
+\hfill %\\
 \begin{description}
-  \item[SYNOPSIS]
-  \hfill \\
+%\par\nobreak\vspace{-\parskip}
+  \item[SYNOPSIS] \hfill \\ \\
 }
 
 \newcommand{\eAPI}{
 \end{description}
 }
 
-\newcommand{\synC}{
+\newcommand{\synC}{%\hfill \\
   \textbf{C/C++:}
   \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}]  
 }
@@ -759,20 +760,20 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \end{lstlisting} 
 } 
 
-\newcommand{\synF}{      
+\newcommand{\synF}{%\hfill \\     
        \textbf{FORTRAN:}	 
-	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}]	    
+	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}]	   
 }
 \newcommand{\aC}[1] {\textit{#1}}
 \newcommand{\sC}[1] {\textbf{#1}}
 \newcommand{\aF}[1]{\textit{#1}}
 
  \newcommand{\desB}[3] {
-   \item[DESCRIPTION] \hfill
+   \item[DESCRIPTION] \hfill %\\
      \begin{description}
        \item[Arguments] \hfill \\
        #1
-      \hfill
+      \hfill  %\\
        \item[API description] \hfill \\
        #2 
        \hfill \\
@@ -791,7 +792,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
        \hline \tabularnewline
        \end{tabular}\\
         #2
-        \hfill
+        %\hfill
 }  
 
 \newcommand{\desTBC}[4] {#1 \\ \\
@@ -807,7 +808,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\desR}[1]
 {
   \item[Return Values] \hfill \\
-       #1 \\
+       #1 
+       \hfill %\\
 }
 
 \newcommand{\cRow}[2]{
