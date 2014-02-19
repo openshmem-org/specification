@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_QUIET}{Waits  for  completion of all outstanding remote writes issued by a \ac{PE}.}
+\bAPI{SHMEM\_QUIET}{Waits  for  completion of all outstanding \PUT{} (remote writes) and \acp{AMO} issued by a \ac{PE}.}
 \synC   %Synopisis for C API
 
 void shmem_quiet(void);
@@ -15,7 +15,10 @@ CALL SHMEM_QUIET
 	}
 %API description
  { 
- The \FUNC{shmem\_quiet} routine ensures ordering of put (remote write) operations.  All put operations  issued  to any \ac{PE} prior to the call to \FUNC{shmem\_quiet} are guaranteed to be visible to all other \ac{PE}s no later than any   subsequent memory load or  store,  remote  put  or  get,  or synchronization operations that follow the call to \FUNC{shmem\_quiet}.
+ The \FUNC{shmem\_quiet} routine ensures ordering of \PUT{} operations (remote write) and \ac{AMO}.  
+ All \PUT{} and \acp{AMO} issued  to any \ac{PE}, prior to the call to \FUNC{shmem\_quiet} are 
+ guaranteed to be visible to all other \ac{PE}s no later than any subsequent memory load or 
+ store, \PUT{}  or  \GET{}, \acp{AMO},  or synchronization operations that follow the call to \FUNC{shmem\_quiet}.
 }
  %API Description Table. 
 {
@@ -26,13 +29,13 @@ CALL SHMEM_QUIET
 % Notes. If there are no notes, this field can be left empty.
 \notesB{ 
        \FUNC{shmem\_quiet} is most useful as a way of ensuring ordering of delivery of
-       several put operations. For example,  you might use \FUNC{shmem\_quiet} to
-       await delivery of a block of data before issuing  another put, which
+       several \PUT{} and \ac{AMO} operations. For example,  you might use \FUNC{shmem\_quiet} to
+       await delivery of a block of data before issuing  another \PUT{}, which
        sets a completion flag on another \ac{PE}.
 
        \FUNC{shmem\_quiet} is not usually needed if \FUNC{shmem\_barrier\_all}  or
         \FUNC{shmem\_barrier} are called.  The barrier routines  all wait  for  the
-       completion of outstanding remote writes (puts).
+       completion of outstanding remote writes (\PUT{} and \ac{AMO}).
 }
 %Example
 \exampleB{
