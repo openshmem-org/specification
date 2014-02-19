@@ -31,7 +31,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{mathptmx}
 \usepackage{sectsty}
-
 \usepackage{mathptmx}
 \usepackage[scaled=.90]{helvet}
 \usepackage{courier}
@@ -81,8 +80,9 @@
 
 \mainmatter  % included for use of documenttype 'book' 
 \pagestyle{headings}  \withlinenumbers
-
 \renewcommand{\thesection}{\arabic{section}} 
+{
+\setlength{\parskip}{.25pt minus .25pt}
 \startchap
 \section*{Introduction}
 \label{sec:intro}
@@ -158,18 +158,14 @@
 \input{INTRODUCTION/synchronization_intro} %Swaroop
 \input{TEX_FILES/shmem_wait.tex} %Swaroop
 %\startchap
-\subsection{Atomic Memory Operations}
+\subsection{Atomic Operations}
 \input{INTRODUCTION/atomics_intro}
-%\subsubsection{Fetch-and-operate}
-%\input{INTRODUCTION/atomics_intro_fetch}
+\input{TEX_FILES/shmem_add.tex}%Tommy
 \input{TEX_FILES/shmem_cswap.tex} %Pasha
 \input{TEX_FILES/shmem_swap.tex} %Swaroop
 \input{TEX_FILES/shmem_finc.tex} %Manju
-\input{TEX_FILES/shmem_fadd.tex}%Pasha
-%\subsubsection{Non-fetch}
-%\input{INTRODUCTION/atomics_intro_nonfetch}
-\input{TEX_FILES/shmem_add.tex}%Tommy
 \input{TEX_FILES/shmem_inc.tex} %Manju
+\input{TEX_FILES/shmem_fadd.tex}%Pasha
 %\startchap
 \subsection{Distributed Locking Operations}
 \input{INTRODUCTION/locks_intro} %Swaroop
@@ -198,18 +194,16 @@
 \chapter{History of \openshmem{}}
 \input{INTRODUCTION/openshmem_history.tex}
 \label{sec:openshmem_history}
-
 %\clearpage
 %\startchap
 %\section{\openshmem{} program examples}
 %\input{INTRODUCTION/examples}
-
+}
 % Manju: Don't move the definitions to the front, it requires to be after content
 % Add acronyms here
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
 \acro{RMO}{\emph{Remote Memory Operations}}
-\acro{AMO}{\emph{Atomic Memory Operation}}
 \acro{PE}{\emph{Processing Element}}
 \acrodefplural{PE}[PEs]{\emph{Processing Elements}}
 \acro{PGAS}{\emph{Partitioned Global Address Space}}
