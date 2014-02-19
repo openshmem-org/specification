@@ -1,6 +1,5 @@
 \subsubsection{Synchronization and Communication Ordering in \openshmem}
 
-\rcomment{Pasha: Since this section includes barrier, it is relevant for all the rest of the one sided operations. I would consider to move it to a standalone section with all the relevant calls.}
 In the presence of the \openshmem's one-sided communication, synchronization and ordering becomes critical. The updates via \FUNC{shmem\_puts} cannot be guaranteed until some form of synchronization or ordering is introduced by the application programmer. The table below gives the different synchronization and ordering options and situations where they may be useful.\\
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
@@ -22,7 +21,7 @@ In the presence of the \openshmem's one-sided communication, synchronization and
 \end{tabular}
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-Ordering puts issued by a local \ac{PE} \\
+{Ordering puts issued by a local \ac{PE}} \\
 \FUNC{shmem\_fence} 
 & 
 \raisebox{-\totalheight}{\includegraphics[width=0.7\textwidth]{diagrams/updated/fence}}
@@ -37,7 +36,11 @@ before any new remote write operation to the same \ac{PE}. \tabularnewline
 \end{tabular}
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-Ordering puts issued by all \ac{PE} \\
+\hline 
+\textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
+\hline 
+\hline
+{Ordering puts issued by all \ac{PE} }\\
 \FUNC{shmem\_quiet}
 & 
 \raisebox{-\totalheight}{\includegraphics[width=0.7\textwidth]{diagrams/updated/quiet}} 
@@ -66,7 +69,11 @@ Collective synchronization over an \activeset \\
 \end{tabular}
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-Collective synchronization over all \ac{PE}s \\
+\hline 
+\textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
+\hline 
+\hline
+{Collective synchronization over all \ac{PE}s} \\
  \FUNC{shmem\_barrier\_all}
 & 
 \raisebox{-\totalheight}{\includegraphics[width=0.7\textwidth]{diagrams/updated/barrierall}}
