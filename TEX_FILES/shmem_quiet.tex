@@ -15,8 +15,8 @@ CALL SHMEM_QUIET
 	}
 %API description
  { 
- The \FUNC{shmem\_quiet} routine ensures completion of \PUT{} operations (remote write) and \ac{AMO}.  
- All \PUT{} and \acp{AMO} issued  to any \ac{PE}, prior to the call to \FUNC{shmem\_quiet} are 
+ The \FUNC{shmem\_quiet} routine ensures completion of \PUT{} operations (remote write) and \ac{AMO} issued by the local \ac{PE}.  
+ All \PUT{} and \acp{AMO} issued by the local \ac{PE} to any \ac{PE} prior to the call to \FUNC{shmem\_quiet} are 
  guaranteed to be visible to all other \ac{PE}s when \FUNC{shmem\_quiet} returns.
  %SP: Removing confusing parts as according to SGI they are complete at the end of quiet.
  %no later than any subsequent memory load or 
