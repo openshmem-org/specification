@@ -15,9 +15,11 @@ CALL SHMEM_QUIET
 	}
 %API description
  { 
- The \FUNC{shmem\_quiet} routine ensures completion of \PUT{} operations (remote write), \ac{AMO} and load/store operations on symmetric data issued by the calling \ac{PE}.  
+ The \FUNC{shmem\_quiet} routine ensures completion of \PUT{} operations (remote write) and \ac{AMO} and store operations on 
+ symmetric data issued by the calling \ac{PE}.  
  All \PUT{} and \acp{AMO} issued by the local \ac{PE} to any \ac{PE} prior to the call to \FUNC{shmem\_quiet} are 
- guaranteed to be visible to all other \ac{PE}s when \FUNC{shmem\_quiet} returns.
+ guaranteed to be visible to all other \ac{PE}s when \FUNC{shmem\_quiet} returns. In addition, when \FUNC{shmem\_quiet} returns, 
+ the local store operations are expected to be completed.  
  %SP: Removing confusing parts as according to SGI they are complete at the end of quiet.
  %no later than any subsequent memory load or 
  %store, \PUT{}  or  \GET{}, \acp{AMO},  or synchronization operations that follow the call to \FUNC{shmem\_quiet}.
@@ -38,6 +40,11 @@ CALL SHMEM_QUIET
        \FUNC{shmem\_quiet} is not usually needed if \FUNC{shmem\_barrier\_all}  or
         \FUNC{shmem\_barrier} are called.  The barrier routines  all wait  for  the
        completion of outstanding remote writes (\PUT{} and \ac{AMO}).
+       
+       In the case of cache-coherent systems, the local store operations are eventually
+       reflected in the memory without any explicit \openshmem{} calls. However, to ensure the store 
+       operations are completed when \FUNC{shmem\_quiet} returns, the implementations might have to issue an explicit memory 
+       barrier.
 }
 %Example
 \exampleB{
