@@ -21,12 +21,14 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
 {
        \FUNC{shmem\_addr\_accessible}  is  a  query  function  that indicates whether a
        local address is accessible via \openshmem operations  from the  specified
-       remote \ac{PE}.
+       remote \ac{PE}. 
        
        This function verifies that the data object is symmetric and accessible
        with respect to a remote \ac{PE} via \openshmem  data  transfer  functions.   The
-       specified address \VAR{addr} is a data object on the local \ac{PE}.
-
+       specified address \VAR{addr} is a data object on the local \ac{PE}. 
+       
+       This function may be used when running on \openshmem applications on non-homogenous systems or for hybrid programming
+       with other communication libraries (such as a \ac{MPI}) or \ac{PGAS} languages. 
        For example, in  SGI Altix series systems, for multiple executable MPI applications
        that use \openshmem functions, it is important to note that  static  memory,
        such  as a  \Fortran{}  common  block  or \Clang{} global variable, is symmetric
