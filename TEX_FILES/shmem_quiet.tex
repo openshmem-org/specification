@@ -33,18 +33,18 @@ CALL SHMEM_QUIET
 % Notes. If there are no notes, this field can be left empty.
 \notesB{ 
        \FUNC{shmem\_quiet} is most useful as a way of ensuring delivery of
-       several \PUT{} and \ac{AMO} operations. For example,  you might use \FUNC{shmem\_quiet} to
+       several \PUT{} and \ac{AMO} operations initiated by the calling \ac{PE}. For example,  you might use \FUNC{shmem\_quiet} to
        await delivery of a block of data before issuing  another \PUT{}, which
        sets a completion flag on another \ac{PE}.
 
        \FUNC{shmem\_quiet} is not usually needed if \FUNC{shmem\_barrier\_all}  or
         \FUNC{shmem\_barrier} are called.  The barrier routines  all wait  for  the
-       completion of outstanding remote writes (\PUT{} and \ac{AMO}).
+       completion of outstanding remote writes (\PUT{} and \ac{AMO}) to symmetric data objects on all \acp{PE}.
        
-       In the case of cache-coherent systems, the local store operations are eventually
-       reflected in the memory without any explicit \openshmem{} calls. However, to ensure the store 
-       operations are completed when \FUNC{shmem\_quiet} returns, the implementations might have to issue an explicit memory 
-       barrier.
+%       In the case of cache-coherent systems, the local store operations are eventually
+%       reflected in the memory without any explicit \openshmem{} calls. However, to ensure the store 
+%       operations are completed when \FUNC{shmem\_quiet} returns, the implementations might have to issue an explicit memory 
+%       barrier.
 }
 %Example
 \exampleB{
