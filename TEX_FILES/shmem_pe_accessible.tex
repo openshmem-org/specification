@@ -13,7 +13,10 @@ LOG = SHMEM_PE_ACCESSIBLE(pe)
 }
 {
        \FUNC{shmem\_pe\_accessible} is  a  query function  that indicates  whether  a
-       specified \ac{PE} is accessible via \openshmem from the local \ac{PE}. For example, on  SGI	Altix  series  systems, \openshmem is  supported  across multiple
+       specified \ac{PE} is accessible via \openshmem from the local \ac{PE}. This function
+       may be used when running on \openshmem applications on non-homogenous systems or for hybrid programming
+       with \openshmem and other communication libraries (such as a \ac{MPI}) or \ac{PGAS} languages. 
+       For example, on  SGI Altix  series  systems, \openshmem is  supported  across multiple
        partitioned hosts and InfiniBand connected hosts. When running multiple executable MPI applications using \openshmem on an Altix,
        full \openshmem support is available between processes running from the same
        executable file. However, \openshmem support between processes of different
