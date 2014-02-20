@@ -15,7 +15,7 @@ CALL SHMEM_QUIET
 }
 %API description
  { 
- The \FUNC{shmem\_quiet} routine ensures completion of \PUT{} operations (remote write), \acp{AMO} and store operations on symmetric data issued by the calling \ac{PE}. All \PUT{} and \acp{AMO} issued by the local \ac{PE} to any \ac{PE} prior to the call to \FUNC{shmem\_quiet} are guaranteed to be visible to all other \ac{PE}s when \FUNC{shmem\_quiet} returns. In addition, when \FUNC{shmem\_quiet} returns, all store operations issued by the calling \ac{PE } on symmetric data are expected to be completed.  
+ The \FUNC{shmem\_quiet} routine ensures completion of \PUT{} operations, \acp{AMO} and store operations on symmetric data issued by the calling \ac{PE}. All \PUT{} and \acp{AMO} issued by the calling \ac{PE} to any \ac{PE} prior to the call to \FUNC{shmem\_quiet} are guaranteed to be completed and visible to all \ac{PE}s when \FUNC{shmem\_quiet} returns. This also applies to all store operations to symmetric data issued by the calling \ac{PE}.  
  %SP: Removing confusing parts as according to SGI they are complete at the end of quiet.
  %no later than any subsequent memory load or 
  %store, \PUT{}  or  \GET{}, \acp{AMO},  or synchronization operations that follow the call to \FUNC{shmem\_quiet}.
@@ -31,8 +31,8 @@ CALL SHMEM_QUIET
        sets a completion flag on another \ac{PE}.
 
        \FUNC{shmem\_quiet} is not usually needed if \FUNC{shmem\_barrier\_all}  or
-        \FUNC{shmem\_barrier} are called.  The barrier routines  all wait  for  the
-       completion of outstanding remote writes (\PUT{} and \ac{AMO}) to symmetric data objects on all \acp{PE}.
+        \FUNC{shmem\_barrier} are called.  The barrier routines  wait for  the
+       completion of outstanding writes (\PUT{}, \ac{AMO}, stores) to symmetric data objects on all \acp{PE}.
 }
 }
 %Example
