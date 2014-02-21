@@ -24,8 +24,8 @@ To write a ``Hello World" \openshmem program we need to
 \vspace{0.1in}
 \end{minipage}
 
-\openshmem also has a \Fortran{} API, so for completeness we now give the
-same program written in \Fortran{} in listing~\ref{openshmem-hello-f90}:
+\openshmem also has a \Fortran{} API, so for completeness we will now give the
+same program written in \Fortran, in listing~\ref{openshmem-hello-f90}:
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
@@ -35,7 +35,7 @@ same program written in \Fortran{} in listing~\ref{openshmem-hello-f90}:
 \vspace{0.1in}
 \end{minipage}
 
-The following example shows a more complex \openshmem program that illustrates the use of symmetric data objects. Note the declaration of the  \VAR{static short target} array and its use as the remote destination in \openshmem short \FUNC{put}. The use of the \VAR{static} keyword results in the \VAR{target} array being symmetric on \ac{PE} \CONST{0} and \ac{PE} \CONST{1}. Each \ac{PE} is able to transfer data to the target array by simply specifying the local address of the symmetric data object which is to receive the data. This aids programmability as the address of the target need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to the RMA (Remote Memory Access) operation. Conversely, the declaration of the \VAR{short source} array is asymmetric. Because the \FUNC{put} handles the references to the \VAR{source} array only on the active (local) side, the asymmetric source object is handled correctly.
+The following example shows a more complex \openshmem program that illustrates the use of symmetric data objects. Note the declaration of the  \VAR{static short target} array and its use as the remote destination in \openshmem short \FUNC{put}. The use of the \VAR{static} keyword results in the \VAR{target} array being symmetric on \ac{PE} \CONST{0} and \ac{PE} \CONST{1}. Each \ac{PE} is able to transfer data to the target array by simply specifying the local address of the symmetric data object which is to receive the data. This aids programmability, as the address of the target need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to the RMA (Remote Memory Access) operation. Conversely, the declaration of the \VAR{short source} array is asymmetric. Because the \FUNC{put} handles the references to the \VAR{source} array only on the active (local) side, the asymmetric source object is handled correctly.
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
