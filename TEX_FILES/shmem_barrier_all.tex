@@ -22,8 +22,8 @@ CALL SHMEM_BARRIER_ALL
 
     Prior to synchronizing with other \ac{PE}s, \FUNC{shmem\_barrier\_all} ensures
     completion of all previously issued local memory stores and remote
-    memory updates issued via shared memory routine calls such as
-    \FUNC{shmem\_put32}.
+    memory updates issued via \openshmem{} \acp{AMO} and \ac{RMA} routine calls such as
+    \FUNC{shmem\_int\_add} and \FUNC{shmem\_put32}.
 }
 {
 %API Description Table. 
