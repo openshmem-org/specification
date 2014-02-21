@@ -11,8 +11,7 @@ on a group of \ac{PE}s called \activeset{}. The collective operations require al
 \ac{PE}s in the \activeset{} to simultaneously call the operation. 
 A \ac{PE} that is not part of the \activeset{} calling the collective 
 operations results in an undefined behavior. All
-collective operations have an \activeset{} as an input parameter expect %is this supposed to read "All collective operations that have an active set...expect" or "...except..."?
-\barrierall{}. The \barrierall{} is called by all \ac{PE}s of the \openshmem{}
+collective operations have an \activeset{} as an input parameter except \barrierall{}. The \barrierall{} is called by all \ac{PE}s of the \openshmem{}
 program. 
 
 The \activeset{} is defined by the arguments PE\_start, logPE\_stride, 
