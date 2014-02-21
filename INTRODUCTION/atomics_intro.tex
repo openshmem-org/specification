@@ -1,23 +1,26 @@
 \label{sec:amo}
 %\openshmem{} specification defines various \acp{AMO}.
 \ac{AMO} is a one-sided communication mechanism that compbines memory update operations with atomicity gurantees described in Section \ref{sec:amo_guarantees}. 
-Similar to the \ac{RMA} operations, described in Section \ref{sec:rma},
+Similar to the \ac{RMA} routines, described in Section \ref{sec:rma},
 the \acp{AMO} are performed only on the symmetric objects. 
-\openshmem{} defines the two types of \ac{AMO} operations:
+\openshmem{} defines the two types of \ac{AMO} routines:
 \begin{itemize}
-\item Blocking\\
-The \textit{fetch-and-operate} operations combine memory update and fetch 
+\item % Blocking\\
+The \textit{fetch-and-operate} routines combine memory update and fetch 
 operations in a single atomic operation.
-Fetch-and-operate operations are blocking atomic operation and return as
-soon as the fetched is delivered to the initiator of the operation.
+The routines return after the data has been fetched and delivered to the local PE.
+%Fetch-and-operate operations are blocking atomic operation and return as
+%soon as the fetched is delivered to the initiator of the operation.
 
-The \textit{fetch-and-operate} operations include: \FUNC{SHMEM\_CSWAP}, \FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and \FUNC{SHMEM\_FADD}.
+The \textit{fetch-and-operate} operations include: \FUNC{SHMEM\_CSWAP}, \FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and\\ \FUNC{SHMEM\_FADD}.
 
-\item Non-Blocking\\
-The \textit{non-fetch} atomic operations update the remote memory 
+\item % Non-Blocking\\
+The \textit{non-fetch} atomic routines update the remote memory 
 in a single atomic operations.
-The \textit{non-fetch} atomic operations are non-blocking and should return as
-soon as the atomic operation is issued.
+A \textit{non-fetch} atomic routine
+starts the atomic operation and may return before the operation execution
+on the remote PE.
+The \FUNC{shmem\_quiet} function is used to force completion of all \acp{AMO}.
 
 The \textit{non-fetch} operating include: \FUNC{SHMEM\_INC} and \FUNC{SHMEM\_ADD}.
 \end{itemize}
