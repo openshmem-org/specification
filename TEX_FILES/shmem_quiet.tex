@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_QUIET}{Waits  for  completion of all outstanding \PUT{} (remote writes) and \acp{AMO} issued by a \ac{PE}.}
+\bAPI{SHMEM\_QUIET}{Waits for completion of all outstanding \PUT{}, \acp{AMO} and store operations to symmetric data objects issued by a \ac{PE}.}
 \synC   %Synopisis for C API
 
 void shmem_quiet(void);
@@ -15,7 +15,8 @@ CALL SHMEM_QUIET
 }
 %API description
  { 
- The \FUNC{shmem\_quiet} routine ensures completion of \PUT{} operations, \acp{AMO} and store operations on symmetric data issued by the calling \ac{PE}. All \PUT{} and \acp{AMO} issued by the calling \ac{PE} to any \ac{PE} prior to the call to \FUNC{shmem\_quiet} are guaranteed to be completed and visible to all \ac{PE}s when \FUNC{shmem\_quiet} returns. This also applies to all store operations to symmetric data issued by the calling \ac{PE}.  
+ The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO}, and store operations on symmetric data issued by the calling \ac{PE}. All \PUT{}, \acp{AMO}, store operations to symmetric data objects are guaranteed to be completed and visible to all \ac{PE}s when \FUNC{shmem\_quiet} returns. 
+ %This also applies to all store operations to symmetric data issued by the calling \ac{PE}.  
  %SP: Removing confusing parts as according to SGI they are complete at the end of quiet.
  %no later than any subsequent memory load or 
  %store, \PUT{}  or  \GET{}, \acp{AMO},  or synchronization operations that follow the call to \FUNC{shmem\_quiet}.
@@ -26,9 +27,9 @@ CALL SHMEM_QUIET
 \desR{None.}
 % Notes. If there are no notes, this field can be left empty.
 \notesB{ 
-       \FUNC{shmem\_quiet} is most useful as a way of ensuring delivery of
-       several \PUT{} and \ac{AMO} operations initiated by the calling \ac{PE}. For example,  you might use \FUNC{shmem\_quiet} to await delivery of a block of data before issuing  another \PUT{}, which
-       sets a completion flag on another \ac{PE}.
+       \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
+       several \PUT{}, \acp{AMO}, and store operations to symmetric data objects initiated by the calling \ac{PE}. For example,  you might use \FUNC{shmem\_quiet} to await delivery of 
+       a block of data before issuing  another \PUT{}, which sets a completion flag on another \ac{PE}.
 
        \FUNC{shmem\_quiet} is not usually needed if \FUNC{shmem\_barrier\_all}  or
         \FUNC{shmem\_barrier} are called.  The barrier routines  wait for  the
