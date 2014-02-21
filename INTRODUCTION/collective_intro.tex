@@ -6,22 +6,21 @@
 %Are arguments  the same for PEs that call the same collective? (i.e. target or source symmetric data?)
 %Which collectives imply synchronization (i.e. barrier, quiet, etc) which ones not (i.e. broadcast on root?)
 
-Collective operation is defined as communication or synchronization operation 
-on a group of \ac{PE}s called \activeset{}. The collective operations requires all
+Collective operations are defined as communication or synchronization operations 
+on a group of \ac{PE}s called \activeset{}. The collective operations require all
 \ac{PE}s in the \activeset{} to simultaneously call the operation. 
-A \ac{PE} that is not a part of \activeset{} calling the collective 
-operation results in an undefined behavior. All
-collective operations has an \activeset{} as an input parameter expect
-\barrierall{}. The \barrierall{} is called by all \ac{PE}s of the \openshmem{}
+A \ac{PE} that is not part of the \activeset{} calling the collective 
+operations results in an undefined behavior. All
+collective operations have an \activeset{} as an input parameter except \barrierall{}. The \barrierall{} is called by all \ac{PE}s of the \openshmem{}
 program. 
 
-The \activeset{} is defined by arguments PE\_start, logPE\_stride, 
-and PE\_size. The PE\_start is the starting \ac{PE} number, a log (base 2) of logPE\_stride 
+The \activeset{} is defined by the arguments PE\_start, logPE\_stride, 
+and PE\_size. PE\_start is the starting \ac{PE} number, a log (base 2) of logPE\_stride 
 is the stride between \ac{PE}s, and PE\_size is the number of \ac{PE}s 
 participating in the \activeset{}. All \ac{PE}s participating in the 
-collective operations provides the same values for these arguments. 
+collective operations provide the same values for these arguments. 
  
-Another argument important to the collective operation is pSync, which is a symmetric work 
+Another argument important to collective operations is pSync, which is a symmetric work 
 array. All \ac{PE}s participating in a collective must pass the same
 pSync array. On completion of a collective call, the pSync is restored to its 
 original contents. The reuse of pSync array is allowed for a \ac{PE}, if all previous collective 
@@ -42,7 +41,7 @@ show the reuse of pSync array:
 
 
 All collective operations defined in the specification are blocking. The 
-collective operations return on completion. The collective operation 
+collective operations return on completion.
 The collective operations defined in the \openshmem{} specification 
 are :
 
@@ -51,5 +50,5 @@ are :
 \item[] \barrier{}
 \item[] \barrierall{}
 \item[] \collect{}
-\item[] \reduction{} 
+\item[] \reduction{}
 \end{itemize} 
