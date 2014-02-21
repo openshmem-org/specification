@@ -1,7 +1,6 @@
 \bAPI{SHMEM\_BARRIER\_ALL}{Registers the arrival of a \ac{PE} at a barrier and suspends \ac{PE} execution until all other \ac{PE}s arrive at the barrier and all local and remote memory updates are completed.}
 \synC   %Synopisis for C API
 
-void barrier(void);
 void shmem_barrier_all(void);
 %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
@@ -23,8 +22,8 @@ CALL SHMEM_BARRIER_ALL
 
     Prior to synchronizing with other \ac{PE}s, \FUNC{shmem\_barrier\_all} ensures
     completion of all previously issued local memory stores and remote
-    memory updates issued via shared memory routine calls such as
-    \FUNC{shmem\_put32}.
+    memory updates issued via \openshmem{} \acp{AMO} and \ac{RMA} routine calls such as
+    \FUNC{shmem\_int\_add} and \FUNC{shmem\_put32}.
 }
 {
 %API Description Table. 
