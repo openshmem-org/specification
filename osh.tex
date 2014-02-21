@@ -263,7 +263,6 @@
   showtabs=false,                  % show tabs within strings adding particular underscores
   %tabsize=2,                       % sets default tabsize to 2 spaces
   %title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
-  framexbottommargin=0pt,
 }\newcommand{\discuss}[1]{}
 
 % long discussion
@@ -741,7 +740,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \hfill %\\
 \begin{description}
 %\par\nobreak\vspace{-\parskip}
-  \item[SYNOPSIS] \hfill \\ \\
+  \item[SYNOPSIS] \hfill \\
 }
 
 \newcommand{\eAPI}{
@@ -749,6 +748,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 }
 
 \newcommand{\synC}{%\hfill \\
+  \vspace{-\parskip}
+  \par
   \textbf{C/C++:}
   \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=0pt]  
 }
@@ -762,14 +763,15 @@ minus .2ex}{-1em}{\normalsize\sf}}
 } 
 
 \newcommand{\synF}{%\hfill \\     
+  %\vspace{-\parskip}
        \textbf{FORTRAN:}	 
-	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt]	   
+	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt]
 }
 \newcommand{\aC}[1] {\textit{#1}}
 \newcommand{\sC}[1] {\textbf{#1}}
 \newcommand{\aF}[1]{\textit{#1}}
 
- \newcommand{\desB}[3] {
+ \newcommand{\desB}[3] {\hfill
    \item[DESCRIPTION] \hfill %\\
      \begin{description}
        \item[Arguments] \hfill \\
