@@ -30,8 +30,11 @@ In the presence of the \openshmem's one-sided communication, synchronization and
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-All puts issued to a specific remote \ac{PE} before the fence operation by the local \ac{PE} are guaranteed to be delivered before puts issued after the fence call. This operation should be used when all remote writes by a local \ac{PE} to a specific remote \ac{PE} need to be visible %(\rcomment{Swaroop: assuming visible == delivered}) 
-before any new remote write operation to the same \ac{PE}. \tabularnewline
+All Puts issued to same \ac{PE}  are guaranteed to be completed before Puts (to the same \ac{PE}) issued after the \FUNC{fence} call. \tabularnewline
+%Fence guaranteed order of puts before and after before \Put{}s 
+%before the fence operation by the local \ac{PE} are guaranteed to be completed and visible before puts issued after the fence call.
+% This operation should be used when all remote writes by a local \ac{PE} to a specific remote \ac{PE} need to be visible %(\rcomment{Swaroop: assuming visible == delivered}) 
+%before any new remote write operation to the same \ac{PE}. \tabularnewline
 \hline 
 \end{tabular}
 
