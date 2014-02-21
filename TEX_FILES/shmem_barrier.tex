@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_BARRIER}{Performs a barrier operation on a subset of \ac{PE}s}
+\bAPI{SHMEM\_BARRIER}{Performs all operations described in the \FUNC{shmem\_barrier\_all} interface but with respect to a subset of \acp{PE} defined by the \activeset{}.} %Eric: Wish list: Add a ~/ref{} to barrier_all API.
 %SYNOPSIS
 \synC
 void shmem_barrier(int PE_start, int logPE_stride, int PE_size, long *pSync);
@@ -33,7 +33,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 } 
 %API Description
 {
-       \FUNC{shmem\_barrier} is a collective synchronization routine.  Control returns
+       \FUNC{shmem\_barrier} is a collective synchronization routine over an \activeset.  Control returns
        from \FUNC{shmem\_barrier} after all  \ac{PE}s  in  the  \activeset{} (specified  by
        \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}) have called \FUNC{shmem\_barrier}.
 
@@ -46,13 +46,12 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
        equal on all \ac{PE}s in the \activeset.  The same work array must be passed
        in \VAR{pSync} to all \ac{PE}s in the \activeset.
 
-       \FUNC{shmem\_barrier}  ensures  that  all  previously  issued  local stores and
-       previously issued remote memory updates, including \acp{AMO} and \ac{RMA} operations, 
-       done by any of the \ac{PE}s  in  the
-       \activeset{}  (by using \openshmem  calls,  for  example  \FUNC{shmem\_put} and 
-       \FUNC{shmem\_int\_add}) are complete before returning.
+       \FUNC{shmem\_barrier}  ensures  that  all  previously  issued  stores and
+       remote memory updates, including \acp{AMO} and \ac{RMA} operations, 
+       done by any of the \ac{PE}s  in  the \activeset{} are complete before returning.
+%    For  example, \FUNC{shmem\_put} and \FUNC{shmem\_int\_add}  
 
-       The  same  \VAR{pSync} array may  be reused on consecutive calls   to
+       The  same  \VAR{pSync} array may be reused on consecutive calls   to
        \FUNC{shmem\_barrier} if the same active \ac{PE} set is used.
 }
 %API Description Table
