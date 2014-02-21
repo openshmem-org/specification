@@ -44,7 +44,22 @@ the programmer to use the library calls  to implement the correct semantics of i
 An overview of the important \openshmem operations is described below:
 
 \begin{enumerate}
-\item \textbf{One-sided Data Transfers }
+\item \textbf{Library Setup and Query Routines}
+
+\begin{enumerate}
+\item \FUNC{Initialization}: The \openshmem library environment it initialized. 
+\item \FUNC{Query}: The local \ac{PE} may get number of \acp{PE} running the same application and its unique integer identifier. 
+\item \FUNC{Accessibility}: The local \ac{PE} can find out if a PE is executing the same binary, or if a particular symmetric data object can be accessed by a remote \ac{PE}, or may obtain a pointer to a symmetric data object on the specified remote PE on shared memory systems.
+\end{enumerate}
+
+\item \textbf{Managing Symmetric Data Objects}
+\begin{enumerate}
+\item \FUNC{Allocation}: All executing \ac{PE}s must participate in the allocation of a symmetric data object with identical arguments.
+\item  \FUNC{Deallocation}: All executing \ac{PE}s must participate in the deallocation of the same symmetric data object with identical arguments.
+\item  \FUNC{Reallocation}: All executing \ac{PE}s must participate in the reallocation of the same symmetric data object with identical arguments.
+\end{enumerate}
+
+\item \textbf{Remote Memory Access}
 
 \begin{enumerate}
 \item \FUNC{Put}: The local \ac{PE} specifies the source
@@ -53,26 +68,30 @@ data (local or symmetric) that is copied to the symmetric data object on the rem
 that is copied to a data object (local or symmetric) on the local \ac{PE}. 
 \end{enumerate}
 
-\item \textbf{Synchronization Mechanisms }
+\item \textbf{Atomic Memory Operations}
 \begin{enumerate}
-\item \FUNC{Fence}: The \ac{PE} calling fence ensure ordering of \FUNC{Put} operations with respect to a specific target \ac{PE}. 
-\item \FUNC{Quiet}: The \ac{PE} calling quiet ensures ordering of \FUNC{Put} operations before the next local or remote update. 
-\item \FUNC{Barrier}: All or some \ac{PE}s collectively synchronize and ensure completion of remote and local updates prior to any \ac{PE} returning from the call.
+\item \FUNC{Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object it is copying a new value to on the remote \ac{PE}.
+\item \FUNC{Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE}.
+\item \FUNC{Add}: The \ac{PE} initiating the add specifics the value to be added to the symmetric data object on the remote \ac{PE}.
+\item \FUNC{Compare and Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object based on a value to be compared and copies a new value to the symmetric data object on the remote \ac{PE}.
+\item \FUNC{Fetch and Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE} and returns with the old value.
+\item \FUNC{Fetch and Add}: The \ac{PE} initiating the add specifics the value to be added to the symmetric data object on the remote \ac{PE} and returns with the old value.
 \end{enumerate}
-\item \textbf{Collective Communication}
 
+\item \textbf{Synchronization and Ordering Mechanisms }
+\begin{enumerate}
+\item \FUNC{Fence}: The \ac{PE} calling fence ensure ordering of remote access operations and stores to symmetric data objects with respect to a specific target \ac{PE}. 
+\item \FUNC{Quiet}: The \ac{PE} calling quiet ensures completion of remote access operations and stores to symmetric data objects. 
+\item \FUNC{Barrier}: All or some \ac{PE}s collectively synchronize and ensure completion of all remote and local updates prior to any \ac{PE} returning from the call.
+\end{enumerate}
+
+\item \textbf{Collective Communication}
 \begin{enumerate}
 \item \FUNC{Broadcast}: The \textit{root} \ac{PE} specifics a symmetric data object to be copied to a symmetric data object on one or more remote \ac{PE}s (not including itself). 
 \item \FUNC{Collection}: All \ac{PE}s participating in the operation get the result of concatenated symmetric objects contributed by each of the \ac{PE} in another symmetric data object.
 \item \FUNC{Reduction}: All \ac{PE}s participating in the operation get the result of associative binary operation over elements of the specified symmetric data object on another symmetric data object. 
 \end{enumerate}
 
-\item \textbf{Managing symmetric data objects}
-\begin{enumerate}
-\item \FUNC{Allocation}: All executing \ac{PE}s must participate in the allocation of a symmetric data object with identical arguments.
-\item  \FUNC{Deallocation}: All executing \ac{PE}s must participate in the deallocation of the same symmetric data object with identical arguments.
-\item  \FUNC{Reallocation}: All executing \ac{PE}s must participate in the reallocation of the same symmetric data object with identical arguments.
-\end{enumerate}
 
 \item \textbf{Mutual Exclusion}
 \begin{enumerate}
@@ -81,14 +100,9 @@ that is copied to a data object (local or symmetric) on the local \ac{PE}.
 \item \FUNC{Clear Lock}: The \ac{PE} which has previously acquired the \textit{lock} releases it.
 \end{enumerate}
 
-\item \textbf{Atomic Memory Operations}
-\begin{enumerate}
-\item \FUNC{Swaps}: The \ac{PE} initiating the swap gets the old value of the symmetric data object it is copying a new value to on the remote \ac{PE}.
-\item \FUNC{Increments}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE}.
-\item \FUNC{Add}: The \ac{PE} initiating the add specifics the value to be added to the symmetric data object on the remote \ac{PE}.
-\end{enumerate}
 
-\item \textbf{Data Cache control \textit{(deprecated)}}
+
+\item \textbf{Data Cache control \textit{(deprecated on cache coherent systems )}}
 \begin{enumerate}
 \item Implementation of mechanisms to exploit the capabilities of hardware
 cache if available.
