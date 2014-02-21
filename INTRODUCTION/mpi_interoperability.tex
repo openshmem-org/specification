@@ -12,7 +12,7 @@ example,  cannot  use  \openshmem functions to communicate with their parent
 \end{sloppypar}
 On SGI systems \ac{MPI} jobs that use TCP/sockets for inter-host communication, \openshmem functions can be used to communicate with processes running on the same
  host.  The \FUNC{shmem\_pe\_accessible} function can be used to determine if a remote \ac{PE}
- is accessible via \openshmem communication from the local \ac{PE}. When  running  an  \ac{MPI} application involving multiple executable files, \openshmem functions can be used to communicate with processes running  from the same or different executable files, provided that the communication is limited to symmetric data objects.  On these systems, static  memory, such as a Fortran common block or C global variable, is symmetric between processes running from the same executable file,  but
+ is accessible via \openshmem communication from the local \ac{PE}. When  running  an  \ac{MPI} application involving multiple executable files, \openshmem functions can be used to communicate with processes running  from the same or different executable files, provided that the communication is limited to symmetric data objects.  On these systems, static  memory, such as a \Fortran{} common block or \Clang{} global variable, is symmetric between processes running from the same executable file,  but
  is  not  symmetric  between processes running from different executable
  files.  Data allocated from the symmetric heap (\FUNC{shmalloc}  or  \FUNC{shpalloc})
  is  symmetric  across  the same or different executable files. The function 
