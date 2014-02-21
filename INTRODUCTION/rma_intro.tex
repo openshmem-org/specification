@@ -5,16 +5,16 @@ mechanisms of the \openshmem{} \ac{API}. While
 using these mechanisms, the programmer is required to provide parameters
 only on the calling side. A characteristic of one-sided communication 
 is that it decouples communication from
-the synchronization. The one-sided communication mechanisms transfers 
-the data but does not synchronize the sender of the data with the receiver
-of the data. However, the two-sided communication mechanisms such as Send/Recv has two effects: 
-communication of data; synchronization of sender with the receiver.
+the synchronization. One-sided communication mechanisms transfer 
+the data but do not synchronize the sender of the data with the receiver
+of the data. However, two-sided communication mechanisms such as Send/Recv have two effects: 
+communication of data, and synchronization of the sender with the receiver.
 
 \openshmem{} \ac{RMA} operations are all performed on the symmetric objects. 
 The initiator \ac{PE} of the call is designated as \source{}, and the 
-\ac{PE} in which memory is accessed is designated as \target{}. In the case of remote
+\ac{PE} in which memory is accessed is designated as \target{}. In the case of the remote
 update operation, \PUT{}, the origin is the \source{} \ac{PE} and the 
-destination \ac{PE} is the \target{} PE. In case of remote read operation, \GET{}, 
+destination \ac{PE} is the \target{} PE. In the case of the remote read operation, \GET{}, 
 the origin is the \target{} \ac{PE} and the destination is the \source{} \ac{PE}.
 
 \openshmem{} provides three different types of one-sided communication interfaces. 
