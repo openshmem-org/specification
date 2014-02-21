@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_FENCE}{Assures ordering of delivery of \PUT{} and \acp{AMO}.}
+\bAPI{SHMEM\_FENCE}{Assures ordering of delivery of \PUT{}, \acp{AMO}, and store operations to symmetric data objects.}
 \synC   %Synopisis for C API
 
 void shmem_fence(void);
@@ -15,11 +15,15 @@ CALL SHMEM_FENCE
  }
 %API description
 {
-    This  function ensures ordering of \PUT{} (remote write) and \acp{AMO}. All
-    \PUT{} and \acp{AMO} issued to a particular remote \ac{PE}
-    prior  to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before
-    any subsequent \PUT{} or \acp{AMO} to the same \ac{PE} which follow the  call  to
-    \FUNC{shmem\_fence}.
+
+This function assures ordering of delivery of \PUT{}, \acp{AMO}, and store operations to symmetric data objects.
+%This  function ensures ordering of \PUT{}, \acp{AMO} and store operations on symmetric data objects. 
+All \PUT{}, \acp{AMO}, and store operations to symmetric data objects issued to a particular remote \ac{PE}
+prior to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before
+any subsequent \PUT{}, \acp{AMO}, and store operations to symmetric data objects to the same \ac{PE}.
+ 
+% which follow the  call  to
+% \FUNC{shmem\_fence}.
 }
 {
 %API Description Table.
@@ -30,8 +34,8 @@ CALL SHMEM_FENCE
 
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
-    The  \FUNC{shmem\_quiet} function  should  be  called  if  ordering of \PUT{} or \acp{AMO} is
-    desired when multiple remote \ac{PE}s are involved.
+    The  \FUNC{shmem\_quiet} function  should  be  called  if completion of PUT{}, \acp{AMO}, and store operations 
+    to symmetric data objects is desired when multiple remote \ac{PE}s are involved.
  }
 } % end of DesB
 
