@@ -171,7 +171,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs30 \cf0 value5 is delivered 
+\f0\fs30 \cf0 value5 will be delivered 
 \b after
 \b0  value2 }</string>
 			</dict>
@@ -220,7 +220,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs30 \cf0 value4 is delivered 
+\f0\fs30 \cf0 value4 will be delivered 
 \b after
 \b0  value1 and value3}</string>
 			</dict>
@@ -1236,7 +1236,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-02-10 21:57:05 +0000</string>
+	<string>2014-02-21 22:11:34 +0000</string>
 	<key>Modifier</key>
 	<string>Shamis, Pavel</string>
 	<key>NotesVisible</key>
