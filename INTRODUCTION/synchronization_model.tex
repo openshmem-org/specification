@@ -1,6 +1,8 @@
 \subsubsection{Synchronization and Communication Ordering in \openshmem}
 
-In the presence of the \openshmem's one-sided communication, synchronization and ordering become critical. The updates via \PUT{} operations (remote write), \acp{AMO} and store operations on symmetric data cannot be guaranteed until some form of synchronization or ordering is introduced by the application programmer. The table below gives the different synchronization and ordering options, and situations where they may be useful.\\
+%In the presence of the \openshmem's one-sided communication, synchronization and ordering become critical.
+
+When using the \openshmem \ac{API}, synchronization, ordering, and completion of communication become critical. The updates via \PUT{} operations, \acp{AMO} and store operations on symmetric data cannot be guaranteed until some form of synchronization or ordering is introduced by the application programmer. The table below gives the different synchronization and ordering options, and situations where they may be useful.\\
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 \hline 
