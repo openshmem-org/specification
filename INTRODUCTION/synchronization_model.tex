@@ -69,7 +69,7 @@ Collective synchronization over an \activeset \\
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{All local and remote memory operations issued by all \ac{PE}s within the \activeset{} are guaranteed to be completed before any \ac{PE} in the \activeset{} returns from the call. Additionally, no \ac{PE} my return from the barrier till all \ac{PE}s in the \activeset{} have called the same barrier call. This operation should be used when synchronization as well as completion of all stores and remote memory updates via \openshmem is required over a sub-set of the executing \ac{PE}s.} \tabularnewline %Figure (\ref{fig:barrier}).
+{All local and remote memory operations issued by all \ac{PE}s within the \activeset{} are guaranteed to be completed before any \ac{PE} in the \activeset{} returns from the call. Additionally, no \ac{PE} my return from the barrier until all \ac{PE}s in the \activeset{} have called the same barrier call. This operation should be used when synchronization as well as completion of all stores and remote memory updates via \openshmem is required over a sub-set of the executing \ac{PE}s.} \tabularnewline %Figure (\ref{fig:barrier}).
 \hline 
 \end{tabular}
 
@@ -87,7 +87,7 @@ Collective synchronization over an \activeset \\
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{All local and remote memory operations issued by all \ac{PE}s are guaranteed to be completed before any \ac{PE} returns from the call. Additionally no \ac{PE} my return from the barrier until all \ac{PE}s have called the same \FUNC{shmem\_barrier\_all} call. This operation should be used when synchronization as well as completion of all stores and remote memory updates via \openshmem is required over all \ac{PE}s. } \tabularnewline
+{All local and remote memory operations issued by all \ac{PE}s are guaranteed to be completed before any \ac{PE} returns from the call. Additionally no \ac{PE} shall return from the barrier until all \ac{PE}s have called the same \FUNC{shmem\_barrier\_all} call. This operation should be used when synchronization as well as completion of all stores and remote memory updates via \openshmem is required over all \ac{PE}s. } \tabularnewline
 \hline 
 \end{tabular}
 \clearpage
