@@ -1,13 +1,11 @@
 \bAPI{SHMEM\_PTR}{Returns  a pointer to a data object on a specified
        \ac{PE}.}
 \synC
-void *shmem_ptr(void *target, int pe);
-%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+void *shmem_ptr(void *target, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF
 POINTER (PTR, POINTEE)
 INTEGER pe
-PTR = SHMEM_PTR(target, pe)
-%*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 \desB{
 \argRow{IN}{target}{The symmetric data object to be referenced.}

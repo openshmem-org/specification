@@ -1,14 +1,12 @@
 \bAPI{SHMEM\_ADDR\_ACCESSIBLE}{Determines whether an address is accessible via OpenSHMEM data transfers operations from the specified  remote \ac{PE}.}
 %SYNOPSIS
 \synC
-int shmem_addr_accessible(void *addr, int pe);
-%*\synCE
+int shmem_addr_accessible(void *addr, int pe); %*\synCE
 
 \synF
 LOGICAL LOG, SHMEM_ADDR_ACCESSIBLE
 INTEGER pe
-LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
-%*\synFE
+LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe) %*\synFE
 
 %DESCRIPTION
 

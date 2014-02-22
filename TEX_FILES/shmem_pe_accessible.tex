@@ -1,12 +1,10 @@
 \bAPI{SHMEM\_PE\_ACCESSIBLE}{Determines whether a \ac{PE} is accessible via \openshmem's data transfer operations.}
 \synC     
-int shmem_pe_accessible(int pe);
-%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+int shmem_pe_accessible(int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF
 LOGICAL LOG, SHMEM_PE_ACCESSIBLE
 INTEGER pe
-LOG = SHMEM_PE_ACCESSIBLE(pe)
-%*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+LOG = SHMEM_PE_ACCESSIBLE(pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \desB{
 \argRow{IN}{pe}{Specific pe that needs to be checked if accessible from the local \ac{PE}.}
