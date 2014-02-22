@@ -95,9 +95,7 @@
 \label{subsec:programming_model}
 \input{INTRODUCTION/memory_model}
 \label{subsec:memory_model}
-%\input{INTRODUCTION/execution_model}
 \input{INTRODUCTION/new_execution_model}
-\label{subsec:execution_model}
 %\input{INTRODUCTION/original_language_bindings}
 \input{INTRODUCTION/language_bindings} %SP: Reverting to original text for now as per discussion on 02/04/2014
 \input{INTRODUCTION/library_constants.tex}
@@ -117,7 +115,9 @@
 \input{TEX_FILES/start_pes.tex} %Swaroop
 \input{TEX_FILES/NEW_shmem_my_pe.tex} %Tommy
 \input{TEX_FILES/NEW_shmem_num_pe.tex}%Tommy
+\label{subsec:shmem_pe_accessible}
 \input{TEX_FILES/shmem_pe_accessible} %Oscar
+\label{subsec:shmem_addr_accessible}
 \input{TEX_FILES/shmem_addr_accessible}%Tommy
 \input{TEX_FILES/shmem_ptr.tex} %Oscar
 %\startchap
@@ -147,11 +147,12 @@
 %\startchap
 \subsection{Collective Operations}
 \input{INTRODUCTION/collective_intro.tex}
-\label{subsec:shmem_barrier}
 \input{TEX_FILES/shmem_barrier_all.tex} %Pasha
+\label{subsec:shmem_barrier_all}
 \input{TEX_FILES/shmem_barrier.tex} %Tommy
-\label{subsec:shmem_broadcast}
+\label{subsec:shmem_barrier}
 \input{TEX_FILES/shmem_broadcast.tex} %Pasha
+\label{subsec:shmem_broadcast}
 %\label{subsec:shmem_collect} %label in shmem_collect.tex, label from this location references page 1
 \input{TEX_FILES/shmem_collect.tex} %Pasha
 \label{subsec:shmem_reductions}
@@ -160,7 +161,9 @@
 \subsection{Memory Ordering Operations} %SP: Adding a chapter to include fence and quiet
 \label{subsec:memory_order}
 \input{INTRODUCTION/ordering_intro} %Swaroop
+\label{subsec:shmem_fence}
 \input{TEX_FILES/shmem_fence.tex} %Manju
+\label{subsec:shmem_quiet}
 \input{TEX_FILES/shmem_quiet.tex} %Swaroop
 \input{INTRODUCTION/synchronization_model.tex}
 %\startchap
@@ -190,6 +193,7 @@
 \chapter{Undefined Behavior in \openshmem}
 \input{INTRODUCTION/undefined_behavior}
 \chapter{Interoperability with other Programming Models}
+\label{sec:mpi}
 \input{INTRODUCTION/mpi_interoperability}
 \clearpage
 \chapter{History of \openshmem{}}

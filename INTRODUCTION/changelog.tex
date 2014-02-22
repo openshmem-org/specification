@@ -1,12 +1,20 @@
 \section{Version 1.1}
 \begin{itemize}
-\item Clarifications about completion semantics of memory synchronization 
-routines in Section \ref{subsec:memory_order}.
+\item Clarifications on the completion semantics of memory synchronization 
+interfaces.\\See Section \ref{subsec:memory_order}.
 \item Clarification about completion semantics of memory load and store 
 operations in context of \FUNC{shmem\_barrier} and \FUNC{shmem\_barrier\_all}
-routines. See Section \ref{subsec:shmem_barrier}.
+routines.\\See Section \ref{subsec:shmem_barrier_all} and \ref{subsec:shmem_barrier}.
+\item Clarification about the completion and ordering semantics of \FUNC{shmem\_quiet} and \FUNC{shmem\_fence}.
+\\See Section \ref{subsec:shmem_quiet} and \ref{subsec:shmem_fence}.
 \item Clarifications about completion semantics of \ac{RMA} and \ac{AMO} routines.
-See Sections \ref{sec:rma} and \ref{sec:amo}
-\item Added the following introduction sections: XXXX
-\item Removed functions XXX XXX
+\\See Sections \ref{sec:rma} and \ref{sec:amo}
+\item Clarifications on the memory model and the memory alignment requirements for symmetric data objects.
+\\See Section \ref{subsec:memory_model}.
+\item Clarification on the execution model and the definition of a \ac{PE}.
+\\See Section \ref{subsec:execution_model}
+\item Clarifications about the semantics of \FUNC{shmem\_pe\_accessible} and \FUNC{shmem\_addr\_accessible}.
+\\See Section \ref{subsec:shmem_pe_accessible} and \ref{subsec:shmem_addr_accessible}.
+\item Added an annex on interoperability with \ac{MPI}.\\See Annex \ref{sec:mpi}.
+\item Removed redundant interface \FUNC{shmem\_barrier(void)} from \FUNC{shmem\_barrier\_all}.\\See Section \ref{subsec:shmem_barrier_all}.
 \end{itemize}
