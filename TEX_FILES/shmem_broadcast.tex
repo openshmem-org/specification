@@ -16,7 +16,7 @@ CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, P
 \argRow{OUT}{target}{A symmetric data object.} 
 \argRow{IN}{source}{A symmetric data object that can be of any data type that is permissible for the target argument.}
 \argRow{IN}{nlong}{The number of elements in source. For \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of 32-bit
-		   halfwords. nlong must be of type integer. If you are using \Fortran, it must be a default integer value.}
+		   halfwords. nlong must be of type \VAR{size\_t} in \Clang. If you are using \Fortran, it must be a default integer value.}
 \argRow{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to the \activeset,	
                       from which the data is copied. Must be greater than
 		   or equal to 0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of

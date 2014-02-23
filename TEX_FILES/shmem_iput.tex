@@ -38,7 +38,7 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
 		 integer.  If you are using \Fortran,  it  must	be  a  default
 		 integer value.}
 \argRow{IN}{nelems}{Number of elements in the target and source arrays.  \VAR{nelems} must
-		 be of type integer.  If you are using \Fortran, it must be  a
+		 be of type \VAR{size\_t} for \Clang.  If you are using \Fortran, it must be  a
 		 constant, variable, or array element of default integer type.}
 \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer.   If
 		 you  are  using  \Fortran, it must be a constant, variable, or

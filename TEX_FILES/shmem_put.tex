@@ -33,7 +33,7 @@ CALL SHMEM_REAL_PUT(target, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LIN
 \desB{  
        \argRow{IN}{target}{Data object to be updated on the remote \ac{PE}. This data object must be remotely accessible.}
        \argRow{OUT}{source}{Data object containing the data to be copied.}
-       \argRow{IN}{len}{Number of elements in the \VAR{target} and \VAR{source} arrays. \VAR{len} must be of type integer. If you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
+       \argRow{IN}{len}{Number of elements in the \VAR{target} and \VAR{source} arrays. \VAR{len} must be of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
         \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be of type integer. If you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
  }
  %API description
