@@ -36,7 +36,7 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 \argRow{IN}{source}{A symmetric   data  object  that	can  be of  any  type
 	    permissible for the target argument.}
 \argRow{IN}{nelems}{The number of elements in the source array.	 nelems must be
-	    of	type  integer.	If you are using \Fortran, it must be a
+	    of	type \VAR{size\_t} for \Clang{}. If you are using \Fortran, it must be a
 	    default integer value.}
 \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the \activeset{} of \ac{PE}s.
 	    \VAR{PE\_start} must be of type integer. If you are using
