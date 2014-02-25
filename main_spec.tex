@@ -55,13 +55,13 @@
 \usepackage[usenames,dvipsnames]{color}
 \definecolor{ListingBG}{rgb}{0.91,0.91,0.91}
 
+
 \include{osh}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setcounter{secnumdepth}{3}
 
 \makeindex
-
 % Make content "clickable"
 \begin{document}
 \hypersetup{pageanchor=true,citecolor=blue}
@@ -72,9 +72,8 @@
 \fancyhead[LE,LO]{\insertDocVersion}
 \fancyhead[CO,CE]{--- DRAFT ---}
 \fancyfoot[CE,CO]{\thepage}
-
-\include{coverpage}
-
+%\include{coverpage}
+\date{\today}
 \setcounter{tocdepth}{3}
 \tableofcontents
 
