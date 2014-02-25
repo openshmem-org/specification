@@ -60,9 +60,10 @@ manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers ar
 
 \subsection{Progress of \openshmem operations}
 The \openshmem model assumes that computation and communication are
-naturally overlapped, and that all data transfers eventually complete.
+naturally overlapped, and that all data transfers eventually complete. 
 
-\textbf{Note to implementors:} while delivery can be deferred, for example until a synchronization point at which data is known to be available, high-quality implementations should attempt asynchronous delivery, whenever possible, for performance reasons.
+\textbf{Note to implementors:} while delivery can be deferred, for example until a synchronization point at which data is known to be available, high-quality implementations should attempt asynchronous delivery, whenever possible, for performance reasons. Progress will often be ensured through the use of a dedicated progress thread in software, or through
+network hardware that offloads communication handling from processors, for example.
 
 %High quality \openshmem implementations must insure that programs exhibit %SP: Changing MUST to may as per discussion on 01/31/2014
 %progression of communication both with and without \openshmem calls.
@@ -70,14 +71,14 @@ naturally overlapped, and that all data transfers eventually complete.
 % A high quality \openshmem{} implementation may ensure that communication will
 % progress without requiring \openshmem{} calls. 
 
-Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls: other \ac{PE}s must be able to communicate (e.g. \PUT{}/\GET{},
-collective, atomic operations) with that computationally-bound \ac{PE} without that \ac{PE}
-issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} must progress
-regardless of when that \ac{PE} next engages in an \openshmem call.
+%Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls: other \ac{PE}s must be able to communicate (e.g. \PUT{}/\GET{},
+%collective, atomic operations) with that computationally-bound \ac{PE} without that \ac{PE}
+%issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} must progress
+%regardless of when that \ac{PE} next engages in an \openshmem call.
 
-\textbf{Note to implementers:} progress will often be ensured through
-the use of a dedicated progress thread in software, or through
-network hardware that offloads communication handling from processors, for example.
+%\textbf{Note to implementers:} progress will often be ensured through
+%the use of a dedicated progress thread in software, or through
+%network hardware that offloads communication handling from processors, for example.
 %SP: Why only communication ? Shouldn't t be for all openshmem calls?
 % TC: separating out communication seemed to be the relevant comment here, as
 %     opposed to other offloads
@@ -118,7 +119,7 @@ increased its value by \CONST{1} on the \target{} \ac{PE}, at which point other
 atomic operations may then modify that \VAR{X}.
 However, access to the symmetric
 object \VAR{X} with non-atomic operations, such as one-sided \PUT{} or \GET{} operations,
- will \textit{invalidate} the atomicity guarantees.
+ will \OPR{invalidate} the atomicity guarantees.
 
 %  %Memory model
 %    *Each OpenSHMEM PEs may have symmetric memory that is accessible by other PEs. 
