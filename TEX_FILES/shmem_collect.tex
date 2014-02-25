@@ -22,8 +22,8 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
-\argRow{OUT}{target}{A symmetric array.	The  target  argument  must  be	 large
-	    enough to accept the concatenation of the source arrays on
+\argRow{OUT}{target}{A symmetric array.	The  \target{}  argument  must  be	 large
+	    enough to accept the concatenation of the \source{} arrays on
 	    all \ac{PE}s.  The data types are as follows:
 	    For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, and
 	    \FUNC{shmem\_fcollect64}, any data type with an element size of 64
@@ -34,8 +34,8 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 	    derived  types,  \Fortran{}   character   type,   and \CorCpp{}
 	    structures are not permitted.}
 \argRow{IN}{source}{A symmetric   data  object  that	can  be of  any  type
-	    permissible for the target argument.}
-\argRow{IN}{nelems}{The number of elements in the source array.	 nelems must be
+	    permissible for the \target{} argument.}
+\argRow{IN}{nelems}{The number of elements in the \source{} array.	 nelems must be
 	    of	type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a
 	    default integer value.}
 \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the \activeset{} of \ac{PE}s.
@@ -60,12 +60,12 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 %API description
 {   
 \OSH{} collect and fcollect routines concatenate
-\VAR{nelems} \CONST{64}-bit or \CONST{32}-bit data items from the source array into the target
+\VAR{nelems} \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the \target{}
 array, over the set of \ac{PE}s defined by \VAR{PE\_start}, \VAR{log2PE\_stride}, and
-\VAR{PE\_size}, in processor number order. The resultant target array
+\VAR{PE\_size}, in processor number order. The resultant \target{} array
 contains the contribution from \ac{PE} \VAR{PE\_start} first, then the contribution
 from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result
-is written to the target array for all \ac{PE}s in the \activeset.
+is written to the \target{} array for all \ac{PE}s in the \activeset.
 
 The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
 participating \ac{PE}s, while the collect routines allow \VAR{nelems} to vary from
@@ -77,11 +77,11 @@ that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
 results.
 
 The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be
-equal on all \ac{PE}s in the \activeset. The same target and source arrays
+equal on all \ac{PE}s in the \activeset. The same \target{} and \source{} arrays
 and the same \VAR{pSync} work array must be passed to all \ac{PE}s in the \activeset.
 
 Upon return from a collective routine, the following are true for the
-local \ac{PE}: The target array is updated. The values in the \VAR{pSync} array
+local \ac{PE}: The \target{} array is updated. The values in the \VAR{pSync} array
 are restored to the original values.
 }
 {

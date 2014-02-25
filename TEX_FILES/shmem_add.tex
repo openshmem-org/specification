@@ -13,20 +13,20 @@ CALL SHMEM_INT8_ADD(target, value, pe) %*\synFE
 %Arguments
 \desB{
        \argRow{OUT}{target}{The remotely accessible integer data object to be updated  on
-	        	 the  remote  \ac{PE}. If you are using \CorCpp, the type of target should match that implied in the SYNOPSIS  section.   If  you
+	        	 the  remote  \ac{PE}. If you are using \CorCpp, the type of \target{} should match that implied in the SYNOPSIS  section.   If  you
 		 are  using  the  \Fortran{} compiler, it must be of type integer with an element size of \CONST{4}  bytes  for	\FUNC{SHMEM\_INT4\_ADD}	and  \CONST{8}
 			 			 bytes for \FUNC{SHMEM\_INT8\_ADD}.}
-			 \argRow{IN}{value}{The value to be atomically added to target. If you are using
+			 \argRow{IN}{value}{The value to be atomically added to \target. If you are using
 			 				 \CorCpp, the type of value should match that  implied  in  the
 			 				 SYNOPSIS  section.  If  you are using \Fortran, it must be of
-			 				 type integer with an element size of target.}
-       \argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which target  is
+			 				 type integer with an element size of \target.}
+       \argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which \target{}  is
 			 					to  be updated. If you  are  using \Fortran, it must be a
 			 					default integer value.}
 }
 %API Description
 {The \FUNC{shmem\_add} routine performs an atomic add operation. It adds value
- to target on \ac{PE} \VAR{pe} and atomically increments the target without returning the value.
+ to \target{} on \ac{PE} \VAR{pe} and atomically increments the \target{} without returning the value.
  }
 {
   \desR{None.}

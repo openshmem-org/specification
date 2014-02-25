@@ -29,15 +29,15 @@ CALL SHMEM_REAL_IGET(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
 \desB{
     \argRow{OUT}{target}{Array to be updated on the local \ac{PE}. }
     \argRow{IN}{source}{Array containing the data to be copied on the remote \ac{PE}.}
-    \argRow{IN}{tst}{The stride between consecutive elements of the target
-    array. The stride is scaled by the element size of the target array.
+    \argRow{IN}{tst}{The stride between consecutive elements of the \target{}
+    array. The stride is scaled by the element size of the \target{} array.
 		 A  value of \CONST{1} indicates contiguous data. \VAR{tst} must be of type
 		 \textit{ptrdiff\_t}.  If you are calling  from  \Fortran,  it  must be a default integer value.}
-     \argRow{IN}{sst}{The stride between consecutive elements of the source array.
-		 The stride is scaled by the element size of the source array.
+     \argRow{IN}{sst}{The stride between consecutive elements of the \source{} array.
+		 The stride is scaled by the element size of the \source{} array.
 		 A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be of type
 		 \textit{ptrdiff\_t}.  If you are calling  from  \Fortran,  it  must be a default integer value.}
-     \argRow{IN}{nelems}{Number of elements in the target and source arrays.  \VAR{nelems} must
+     \argRow{IN}{nelems}{Number of elements in the \target{} and \source{} arrays.  \VAR{nelems} must
 		 be of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be  a
 		 constant, variable, or array element of default integer type.}
     \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer. If

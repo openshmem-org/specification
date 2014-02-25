@@ -28,16 +28,16 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
 \argRow{OUT}{target}{Array to be updated on the remote \ac{PE}. This data object  must
 		 be remotely accessible.}
 \argRow{IN}{source}{Array containing the data to be copied.}
-\argRow{IN}{tst}{The stride between consecutive elements of the target array.
-		 The stride is scaled by the element size of the target array.
+\argRow{IN}{tst}{The stride between consecutive elements of the \target{} array.
+		 The stride is scaled by the element size of the \target{} array.
 		 A  value of \CONST{1} indicates contiguous data.  \VAR{tst} must be of type
 		 \textit{ptrdiff\_t}.  If you are using \Fortran,  it must	be  a default integer value.}
-\argRow{IN}{sst}{The  stride between consecutive elements of the source array.
-		 The stride is scaled by the element size of the source array.
+\argRow{IN}{sst}{The  stride between consecutive elements of the \source{} array.
+		 The stride is scaled by the element size of the \source{} array.
 		 A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be of type
 		 \textit{ptrdiff\_t}.  If you are using \Fortran,  it  must	be  a  default
 		 integer value.}
-\argRow{IN}{nelems}{Number of elements in the target and source arrays.  \VAR{nelems} must
+\argRow{IN}{nelems}{Number of elements in the \target{} and \source{} arrays.  \VAR{nelems} must
 		 be of type \VAR{size\_t} for \Clang.  If you are using \Fortran, it must be  a
 		 constant, variable, or array element of default integer type.}
 \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer.   If
@@ -46,10 +46,10 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
 }
 {
 
-       The \FUNC{iput} routines provide a method  for  copying strided data elements (specified by \VAR{sst}) of an array from a source array on the local \ac{PE} to locations specified by stride \VAR{tst} on a target array on specified remote \ac{PE}. Both strides, \VAR{tst} and \VAR{sst} must be greater than or equal to \CONST{1}. The routines return when the data has been copied out of the \VAR{source} array on the local \ac{PE} but not necessarily before the data has been delivered to the remote data object.
+       The \FUNC{iput} routines provide a method  for  copying strided data elements (specified by \VAR{sst}) of an array from a \source{} array on the local \ac{PE} to locations specified by stride \VAR{tst} on a \target{} array on specified remote \ac{PE}. Both strides, \VAR{tst} and \VAR{sst} must be greater than or equal to \CONST{1}. The routines return when the data has been copied out of the \VAR{source} array on the local \ac{PE} but not necessarily before the data has been delivered to the remote data object.
 }{
     \desTB{
-       The target and source data objects must conform to typing  constraints,
+       The \target{} and \source{} data objects must conform to typing  constraints,
        which are as follows:}
       {
      \cRow{shmem\_iput32, shmem\_iput4}{Any  noncharacter type that has a storage
