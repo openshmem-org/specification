@@ -60,20 +60,27 @@ manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers ar
 
 \subsection{Progress of \openshmem operations}
 The \openshmem model assumes that computation and communication are
-naturally overlapped.  
+naturally overlapped, and that all data transfers eventually complete.
+
+\textbf{Note to implementors:} while delivery can be deferred, for example until a synchronization point at which data is known to be available, high-quality implementations should attempt asynchronous delivery, whenever possible, for performance reasons.
+
 %High quality \openshmem implementations must insure that programs exhibit %SP: Changing MUST to may as per discussion on 01/31/2014
 %progression of communication both with and without \openshmem calls.
-A high quality \openshmem{} implementation may ensure that communication will
-progress without requiring \openshmem{} calls. 
-Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls, other \ac{PE}s must be able to communicate (e.g. \PUT{}/\GET{},
+
+% A high quality \openshmem{} implementation may ensure that communication will
+% progress without requiring \openshmem{} calls. 
+
+Consider a \ac{PE} that is engaged in a long computation with no \openshmem calls: other \ac{PE}s must be able to communicate (e.g. \PUT{}/\GET{},
 collective, atomic operations) with that computationally-bound \ac{PE} without that \ac{PE}
 issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} must progress
 regardless of when that \ac{PE} next engages in an \openshmem call.
 
-\textbf{Note to implementers:} For example, progress will often be ensured through
+\textbf{Note to implementers:} progress will often be ensured through
 the use of a dedicated progress thread in software, or through
-network hardware that offloads communication handling from processors.
+network hardware that offloads communication handling from processors, for example.
 %SP: Why only communication ? Shouldn't t be for all openshmem calls?
+% TC: separating out communication seemed to be the relevant comment here, as
+%     opposed to other offloads
 %\subsection{Using the Symmetric \VAR{Work} and \VAR{pSync} Arrays}
 
 %Multiple \VAR{pSync} arrays are often needed if a particular \ac{PE} calls a \openshmem
