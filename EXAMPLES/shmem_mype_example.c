@@ -1,11 +1,16 @@
 #include <stdio.h>
 #include <shmem.h>
-int main(void)
+
+int
+main(void)
 {
-   start_pes(0);
-   int me = _my_pe();
+  int me;
 
-   printf("My PE id is:%d\n",me);
+  start_pes(0);
+  
+  me = _my_pe();
 
-   return 0;
+  printf("My PE id is: %d\n", me);
+
+  return 0;
 }

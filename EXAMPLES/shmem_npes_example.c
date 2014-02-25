@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <shmem.h>
+
+int
 main()
 {
-   start_pes(0);
-   int npes = shmem_n_pes();
+  int npes;
 
-   if(shmem_my_pe == 0)
-      printf("Number of PEs executing this application are:%d\n",npes);
+  start_pes(0);
+  
+  npes = _num_pes();
 
-   return 0;
+  if (_my_pe() == 0) {
+    printf("Number of PEs executing this application is: %d\n", npes);
+  }
+
+  return 0;
 }

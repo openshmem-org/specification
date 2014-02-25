@@ -13,15 +13,17 @@ CALL START_PES(npes) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 }
  %API description
  {   
-     The \FUNC{start\_pes} routine should be used to initialize the \openshmem execution environment.  parallel
-     An \openshmem application must call to \FUNC{start\_pes} before calling any other \openshmem routine.
+     The \FUNC{start\_pes} routine initializes the \openshmem execution environment.  An \openshmem application must call \FUNC{start\_pes} before calling any other \openshmem routine.
  }
  %API Description Table. 
 {
  %Return Values     
 \desR{ None. }
 
-\notesB{ If \FUNC{start\_pes}  is  not called before any other \openshmem call, unexpected behavior may occur.}
+\notesB{ If any other \openshmem call occurs before \FUNC{start\_pes}, unexpected behavior may occur.
+
+Although it is recommended to set \VAR{npes} to \CONST{0}, this is not mandated.  The value is ignored.
+}
 
 }%end of DesB
 % Notes. If there are no notes, this field can be left empty.
