@@ -79,7 +79,7 @@
 \mainmatter  % included for use of documenttype 'book' 
 \pagestyle{headings}  \withlinenumbers
 \renewcommand{\thesection}{\arabic{section}} 
-{
+{ %using setlength to force standardized spacing, if needed
 \setlength{\parskip}{.25pt plus .25pt minus .25pt}
 \startchap
 \section*{Introduction}
@@ -204,7 +204,7 @@
 %\startchap
 %\section{\openshmem{} program examples}
 %\input{INTRODUCTION/examples}
-}
+} %end of setlength command
 % Manju: Don't move the definitions to the front, it requires to be after content
 % Add acronyms here
 \begin{acronym}

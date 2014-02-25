@@ -25,10 +25,10 @@ itself. The \ac{API} allows communication and synchronization operations on both
 %and ends when a \ac{PE} can use the data. %SP: What about put? Not guaranteed till synchronization is hit.
 
 %SP: Addressing suggestions from discussion on 01/28/2014
-%\openshmem functions support remote data transfer through \FUNC{put} operations, which  transfer data to a 
+%\openshmem functions support remote data transfer through \PUT operations, which  transfer data to a 
 %different \ac{PE}, get operations, which transfer data from a different \ac{PE}, and remote pointers, which 
-%allow direct  references  to  data objects owned by another \ac{PE}. Other operations supported are \FUNC{collective} 
-%\FUNC{broadcast} and \FUNC{reduction}, \FUNC{barrier synchronization}, and \FUNC{atomic memory operations}. 
+%allow direct  references  to  data objects owned by another \ac{PE}. Other operations supported are \OPR{collective} 
+%\OPR{broadcast} and \OPR{reduction}, \OPR{barrier synchronization}, and \OPR{atomic memory operations}. 
 %An atomic memory operation  is an atomic read-and-update operation, such as a fetch-and-increment, on a remote
 %or local data object.
 
@@ -47,56 +47,56 @@ An overview of the \openshmem operations is described below:
 \item \textbf{Library Setup and Query}
 
 \begin{enumerate}
-\item \FUNC{Initialization}: The \openshmem library environment is initialized. 
-\item \FUNC{Query}: The local \ac{PE} may get number of \acp{PE} running the same application and its unique integer identifier. 
-\item \FUNC{Accessibility}: The local \ac{PE} can find out if a remote \ac{PE} is executing the same binary, or if a particular symmetric data object can be accessed by a remote \ac{PE}, or may obtain a pointer to a symmetric data object on the specified remote \ac{PE} on shared memory systems.
+\item \OPR{Initialization}: The \openshmem library environment is initialized. 
+\item \OPR{Query}: The local \ac{PE} may get number of \acp{PE} running the same application and its unique integer identifier. 
+\item \OPR{Accessibility}: The local \ac{PE} can find out if a remote \ac{PE} is executing the same binary, or if a particular symmetric data object can be accessed by a remote \ac{PE}, or may obtain a pointer to a symmetric data object on the specified remote \ac{PE} on shared memory systems.
 \end{enumerate}
 
 \item \textbf{Symmetric Data Object Management}
 \begin{enumerate}
-\item \FUNC{Allocation}: All executing \ac{PE}s must participate in the allocation of a symmetric data object with identical arguments.
-\item  \FUNC{Deallocation}: All executing \ac{PE}s must participate in the deallocation of the same symmetric data object with identical arguments.
-\item  \FUNC{Reallocation}: All executing \ac{PE}s must participate in the reallocation of the same symmetric data object with identical arguments.
+\item \OPR{Allocation}: All executing \ac{PE}s must participate in the allocation of a symmetric data object with identical arguments.
+\item  \OPR{Deallocation}: All executing \ac{PE}s must participate in the deallocation of the same symmetric data object with identical arguments.
+\item  \OPR{Reallocation}: All executing \ac{PE}s must participate in the reallocation of the same symmetric data object with identical arguments.
 \end{enumerate}
 
 \item \textbf{Remote Memory Access}
 
 \begin{enumerate}
-\item \FUNC{Put}: The local \ac{PE} specifies the source
+\item \PUT: The local \ac{PE} specifies the source
 data (local or symmetric) that is copied to the symmetric data object on the remote \ac{PE}. 
-\item \FUNC{Get}: The local \ac{PE} specifies the symmetric data object on the remote \ac{PE}
+\item \GET: The local \ac{PE} specifies the symmetric data object on the remote \ac{PE}
 that is copied to a data object (local or symmetric) on the local \ac{PE}. 
 \end{enumerate}
 
 \item \textbf{Atomics}
 \begin{enumerate}
-\item \FUNC{Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object it is copying a new value to on the remote \ac{PE}.
-\item \FUNC{Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE}.
-\item \FUNC{Add}: The \ac{PE} initiating the add specifics the value to be added to the symmetric data object on the remote \ac{PE}.
-\item \FUNC{Compare and Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object based on a value to be compared and copies a new value to the symmetric data object on the remote \ac{PE}.
-\item \FUNC{Fetch and Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE} and returns with the old value.
-\item \FUNC{Fetch and Add}: The \ac{PE} initiating the add specifics the value to be added to the symmetric data object on the remote \ac{PE} and returns with the old value.
+\item \OPR{Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object it is copying a new value to on the remote \ac{PE}.
+\item \OPR{Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE}.
+\item \OPR{Add}: The \ac{PE} initiating the add specifics the value to be added to the symmetric data object on the remote \ac{PE}.
+\item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object based on a value to be compared and copies a new value to the symmetric data object on the remote \ac{PE}.
+\item \OPR{Fetch and Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE} and returns with the old value.
+\item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifics the value to be added to the symmetric data object on the remote \ac{PE} and returns with the old value.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
 \begin{enumerate}
-\item \FUNC{Fence}: The \ac{PE} calling fence ensure ordering of remote access operations and stores to symmetric data objects with respect to a specific target \ac{PE}. 
-\item \FUNC{Quiet}: The \ac{PE} calling quiet ensures completion of remote access operations and stores to symmetric data objects. 
-\item \FUNC{Barrier}: All or some \ac{PE}s collectively synchronize and ensure completion of all remote and local updates prior to any \ac{PE} returning from the call.
+\item \OPR{Fence}: The \ac{PE} calling fence ensure ordering of remote access operations and stores to symmetric data objects with respect to a specific target \ac{PE}. 
+\item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access operations and stores to symmetric data objects. 
+\item \OPR{Barrier}: All or some \ac{PE}s collectively synchronize and ensure completion of all remote and local updates prior to any \ac{PE} returning from the call.
 \end{enumerate}
 
 \item \textbf{Collective Communication}
 \begin{enumerate}
-\item \FUNC{Broadcast}: The \textit{root} \ac{PE} specifics a symmetric data object to be copied to a symmetric data object on one or more remote \ac{PE}s (not including itself). 
-\item \FUNC{Collection}: All \ac{PE}s participating in the operation get the result of concatenated symmetric objects contributed by each of the \ac{PE} in another symmetric data object.
-\item \FUNC{Reduction}: All \ac{PE}s participating in the operation get the result of associative binary operation over elements of the specified symmetric data object on another symmetric data object. 
+\item \OPR{Broadcast}: The \textit{root} \ac{PE} specifics a symmetric data object to be copied to a symmetric data object on one or more remote \ac{PE}s (not including itself). 
+\item \OPR{Collection}: All \ac{PE}s participating in the operation get the result of concatenated symmetric objects contributed by each of the \ac{PE} in another symmetric data object.
+\item \OPR{Reduction}: All \ac{PE}s participating in the operation get the result of associative binary operation over elements of the specified symmetric data object on another symmetric data object. 
 \end{enumerate}
 
 \item \textbf{Mutual Exclusion}
 \begin{enumerate}
-\item \FUNC{Set Lock}: The \ac{PE} acquires exclusive access to the region bounded by the symmetric \textit{lock} variable.
-\item \FUNC{Test Lock}: The \ac{PE} tests the symmetric \textit{lock} variable for availability.
-\item \FUNC{Clear Lock}: The \ac{PE} which has previously acquired the \textit{lock} releases it.
+\item \OPR{Set Lock}: The \ac{PE} acquires exclusive access to the region bounded by the symmetric \textit{lock} variable.
+\item \OPR{Test Lock}: The \ac{PE} tests the symmetric \textit{lock} variable for availability.
+\item \OPR{Clear Lock}: The \ac{PE} which has previously acquired the \textit{lock} releases it.
 \end{enumerate}
 
 \item \textbf{Data Cache Control \textit{(deprecated on cache coherent systems )}}
