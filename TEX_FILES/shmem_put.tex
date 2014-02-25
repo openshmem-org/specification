@@ -37,7 +37,7 @@ CALL SHMEM_REAL_PUT(target, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LIN
         \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be of type integer. If you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
  }
  %API description
- {   The  routines  return  after the data has been copied out of the source
+ {   The  routines  return  after the data has been copied out of the \source{}
        array on the local \ac{PE}.
        The delivery of data words into the data object on the  destination \ac{PE}
        may  occur  in  any order.  Furthermore, two successive put operations
@@ -49,7 +49,7 @@ CALL SHMEM_REAL_PUT(target, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LIN
  % If there is no Description Table and return, this field can be 
  \hfill \\
   \desTB { 
-    The  target  and source data  objects must conform to certain typing
+    The  \target{}  and \source{} data  objects must conform to certain typing
     constraints, which are as follows: } 
     {
        \cRow{shmem\_putmem}{ \Fortran:  Any noncharacter type. \Clang:	 Any data  type.   len	is  scaled  in bytes.} 
@@ -60,7 +60,7 @@ CALL SHMEM_REAL_PUT(target, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LIN
        \cRow{shmem\_put128}{Any  noncharacter type that has a storage size equal to \CONST{128} bits. }
        \cRow{shmem\_double\_put}{Elements of type double.}
        \cRow{shmem\_longdouble\_put}{Elements of type long double.}
-       \cRow{SHMEM\_CHARACTER\_PUT}{Elements of type character.  \VAR{len} is  the number  of	 characters to transfer. The actual character lengths of the source and target variables are ignored. }
+       \cRow{SHMEM\_CHARACTER\_PUT}{Elements of type character.  \VAR{len} is  the number  of	 characters to transfer. The actual character lengths of the \source{} and \target{} variables are ignored. }
        \cRow{SHMEM\_COMPLEX\_PUT}{Elements of type complex of default size.}
        \cRow{SHMEM\_DOUBLE\_PUT}{Elements of type double precision. }
        \cRow{SHMEM\_INTEGER\_PUT}{Elements of type integer.}

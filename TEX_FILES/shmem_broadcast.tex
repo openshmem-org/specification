@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_BROADCAST}{Broadcasts a block of data from one \ac{PE} to one or more target \ac{PE}s.}
+\bAPI{SHMEM\_BROADCAST}{Broadcasts a block of data from one \ac{PE} to one or more \target{} \ac{PE}s.}
 \synC   %Synopisis for C API
 
 void shmem_broadcast32(void *target, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
@@ -14,8 +14,8 @@ CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, P
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
 \argRow{OUT}{target}{A symmetric data object.} 
-\argRow{IN}{source}{A symmetric data object that can be of any data type that is permissible for the target argument.}
-\argRow{IN}{nlong}{The number of elements in source. For \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of 32-bit
+\argRow{IN}{source}{A symmetric data object that can be of any data type that is permissible for the \target{} argument.}
+\argRow{IN}{nlong}{The number of elements in \source. For \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of 32-bit
 		   halfwords. nlong must be of type \VAR{size\_t} in \Clang. If you are using \Fortran, it must be a default integer value.}
 \argRow{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to the \activeset,	
                       from which the data is copied. Must be greater than
@@ -47,9 +47,9 @@ CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, P
 %API description
 {   
 \openshmem broadcast routines are collective routines.
-They copy data object source on the processor specified by \VAR{PE\_root} and
-store the values at target on the other \ac{PE}s specified by the triplet
-\VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size}. The data is not copied to the target
+They copy data object \source{} on the processor specified by \VAR{PE\_root} and
+store the values at \target{} on the other \ac{PE}s specified by the triplet
+\VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size}. The data is not copied to the \target{}
 area on the root \ac{PE}.
 
 As with all \openshmem collective routines, each of these routines assumes
@@ -58,7 +58,7 @@ that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
 results.
 
 The values of arguments \VAR{PE\_root}, \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
-must be equal on all \ac{PE}s in the \activeset. The same target and source
+must be equal on all \ac{PE}s in the \activeset. The same \target{} and \source{}
 data objects and the same pSync work array must be passed to all \ac{PE}s in
 the \activeset.
 
@@ -66,11 +66,11 @@ Before any \ac{PE} calls a broadcast	routine, you must ensure that the
 following conditions exist (synchronization via a barrier or some other
 method is often needed to ensure this): The \VAR{pSync} array on all \ac{PE}s in
 the \activeset{} is not still in use from a prior call to a broadcast
-routine. The target array on all \ac{PE}s in the \activeset{} is ready to
+routine. The \target{} array on all \ac{PE}s in the \activeset{} is ready to
 accept the broadcast data.
 
 Upon return from a broadcast routine, the following are true for the
-local \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the target data	object
+local \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the \target{} data	object
 is updated. The values in the pSync array are restored to the original
 values.
 }
@@ -78,7 +78,7 @@ values.
 {
 \desTB { 
 \hfill \\
-The  target  and source data  objects must conform to certain typing
+The  \target{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows: } 
 {
 \cRow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter type that has an
@@ -120,8 +120,8 @@ constraints, which are as follows: }
 \exampleB{
     %For each example, you can enter it as an item.
     \exampleITEM
-    {In the following examples, the call to \FUNC{shmem\_broadcast64} copies source
-    on \ac{PE} 4 to target on \ac{PE}s 5, 6, and 7. \CorCpp{} example:}
+    {In the following examples, the call to \FUNC{shmem\_broadcast64} copies \source{}
+    on \ac{PE} 4 to \target{} on \ac{PE}s 5, 6, and 7. \CorCpp{} example:}
     {./EXAMPLES/shmem_broadcast_example.c}
     {}
     \exampleITEMF

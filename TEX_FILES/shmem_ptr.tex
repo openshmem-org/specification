@@ -9,13 +9,13 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
 
 \desB{
 \argRow{IN}{target}{The symmetric data object to be referenced.}
-\argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which target is to
+\argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which \target{} is to
 		 be accessed.  If you are using \Fortran, it must be a  default
 		 integer value.}
 }
 {
        \FUNC{shmem\_ptr} returns an address that may be used  to  directly  reference
-       target on the specified \ac{PE}.  This address can be assigned to a pointer.
+       \target{} on the specified \ac{PE}.  This address can be assigned to a pointer.
        After that, ordinary loads and stores to this  remote  address  may  be
        performed.
 
@@ -27,7 +27,7 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
 }
 {
  \desR{\FUNC{shmem\_ptr} returns a pointer to the data object on the specified	 remote
-       \ac{PE}. If target is not remotely accessible, a \CONST{NULL} pointer is returned.
+       \ac{PE}. If \target{} is not remotely accessible, a \CONST{NULL} pointer is returned.
 }
 \notesB{The \FUNC{shmem\_ptr} function is available  only  on  systems  where  ordinary
        memory  loads  and  stores  are	used  to  implement \openshmem put and get

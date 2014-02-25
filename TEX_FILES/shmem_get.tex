@@ -31,7 +31,7 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe) %*\synFE   %DO NOT DELETE. THIS 
 	 \argRow{OUT}{target}{Local data object to be updated.}
      \argRow{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe} that contains the data to be copied. 
      This data object must be remotely accessible.}
-     \argRow{IN}{nelems}{Number of elements in the target and source arrays. \VAR{nelems} must
+     \argRow{IN}{nelems}{Number of elements in the \target{} and \source{} arrays. \VAR{nelems} must
 		 be of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a
 		 constant, variable, or array element of default integer type.}
        \argRow{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must be of type integer. If
@@ -42,11 +42,11 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe) %*\synFE   %DO NOT DELETE. THIS 
    The  get	 routines  provide  a  method for copying a
    contiguous symmetric data object from a different \ac{PE} to a contiguous data object
    on  a  the  local  \ac{PE}. The  routines return  after the data has been
-   delivered to the target array on the local \ac{PE}. 
+   delivered to the \target{} array on the local \ac{PE}. 
 }
 %API Description Table.
 {
-    \desTB{The  target and source data objects must conform to typing constraints,
+    \desTB{The  \target{} and \source{} data objects must conform to typing constraints,
        which are as follows:}
        {
      \cRow{shmem\_getmem}{\Fortran: Any noncharacter type. \Clang: Any  data  type.
@@ -66,8 +66,8 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe) %*\synFE   %DO NOT DELETE. THIS 
       \cRow{shmem\_longdouble\_get}{Elements of type long double.}
       \cRow{SHMEM\_CHARACTER\_GET}{Elements of type character. \VAR{nelems} is the
 				     number  of characters  to transfer. The
-				     actual character \VAR{nelemsgths} of the source
-				     and target variables are ignored.}
+				     actual character \VAR{nelemsgths} of the \source{}
+				     and \target{} variables are ignored.}
        \cRow{SHMEM\_COMPLEX\_GET}{Elements of type complex of default
        size.}
       \cRow{SHMEM\_DOUBLE\_GET}{\Fortran: Elements of type double precision.}
