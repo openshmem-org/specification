@@ -117,7 +117,7 @@ operation may access \VAR{X}.  After the increment, \VAR{X} will have
 increased its value by \CONST{1} on the target \ac{PE}, at which point other
 atomic operations may then modify that \VAR{X}.
 However, access to the symmetric
-object \VAR{X} with non-atomic operations, such as one-sided \FUNC{put} or \FUNC{get} operations,
+object \VAR{X} with non-atomic operations, such as one-sided \PUT{} or \GET{} operations,
  will \textit{invalidate} the atomicity guarantees.
 
 %  %Memory model
