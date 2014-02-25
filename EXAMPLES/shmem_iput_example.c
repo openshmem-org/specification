@@ -1,5 +1,5 @@
 #include <shmem.h>
-main()
+int main(void)
 {
    short source[10] = { 1, 2, 3, 4, 5,
                         6, 7, 8, 9, 10 };
@@ -16,4 +16,5 @@ main()
       (int)target[3], (int)target[4] );
    }
    shmem_barrier_all();   /* sync before exiting */
+   return 1;
 }

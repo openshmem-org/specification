@@ -1,5 +1,5 @@
 #include <shmem.h>
-main() 
+int main(void) 
 {
    static int bigd[100];
       int *ptr;
@@ -22,4 +22,5 @@ main()
          printf(" %d\n",bigd[i]);
       printf("\n");
    }
+  return 1;
 }

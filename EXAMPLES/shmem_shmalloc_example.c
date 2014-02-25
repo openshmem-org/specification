@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <shmem.h>
-main()
+int main(void)
 {
    int *target;
    int source;

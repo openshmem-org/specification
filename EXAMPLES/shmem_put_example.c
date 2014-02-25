@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <shmem.h>
-main()
+int main(void)
 {
    long source[10] = { 1, 2, 3, 4, 5,
    		                 6, 7, 8, 9, 10 };
@@ -12,5 +12,6 @@ main()
    }
    shmem_barrier_all();  /* sync sender and receiver */
    printf("target[0] on PE %d is %d\n", _my_pe(), target[0]);
+   return 1;
 }
 

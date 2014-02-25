@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <shmem.h>
 
-int
-main()
+int main(void)
 {
   int npes;
 
