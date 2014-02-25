@@ -37,11 +37,10 @@ CALL SHMEM_QUIET %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 %Example
 \exampleB{
 %For each example, you can enter it as an item.
-        \exampleITEMF
-	{The  following  simple  example uses  \FUNC{shmem\_quiet}  in a \Fortran{}
-       program:}	 
-       {./EXAMPLES/shmem_quiet_example.f90}
-       {}
+        \exampleITEM
+	{The  following  simple  example uses  \FUNC{shmem\_quiet}  in a \CorCpp{} program: }	 
+       {./EXAMPLES/shmem_quiet_example.c}
+       {\VAR{Put1} will be completed and visible before \VAR{put3} and \VAR{put2} will be completed and visible before \VAR{put4}.}
 }
 \eAPI
 
