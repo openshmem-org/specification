@@ -1,16 +1,16 @@
 \section{Version 1.1}
 The aim of this section is to summarize the changes done in 1.1 to the \openshmem specification. 
-The major changes consists of a more accurate descriptions of the \openshmem \acp{API} that 
-were part of the original SGI specification but were omitted in version 1.0e. This new version also provides new
-diagrams that explain their correct behavior of \openshmem synchronization interfaces in terms of ordering, synchronization, delivery and
+The major changes consist of more accurate descriptions of the \openshmem \acp{API} that 
+were part of the original SGI specification, but were omitted in version 1.0e. This new version also provides new
+diagrams that explain the correct behavior of \openshmem synchronization interfaces in terms of ordering, synchronization, delivery and
 completion of operations. Version 1.1 also does a better job at explaining the programming model, memory model and execution model  
-of \openshmem. The following list describes the specific changes in 1.1:
+of \openshmem. The following list describes the specific changes in 1.1:%\rcomment{\\Eric: "better" is a subjective/ambiguous term, might need need a term to definitively describe how it is better.  i.e. is it more descriptive, more detailed, more accurate, easier to understand? etc.\\}
 
 \begin{itemize}
 \item Clarifications on the completion semantics of memory synchronization 
 interfaces.\\See Section \ref{subsec:memory_order}.
 \item Clarification about completion semantics of memory load and store 
-operations in context of \FUNC{shmem\_barrier} and \FUNC{shmem\_barrier\_all}
+operations in context of \FUNC{shmem\_barrier\_all} and \FUNC{shmem\_barrier} 
 routines.\\See Section \ref{subsec:shmem_barrier_all} and \ref{subsec:shmem_barrier}.
 \item Clarification about the completion and ordering semantics of \FUNC{shmem\_quiet} and \FUNC{shmem\_fence}.
 \\See Section \ref{subsec:shmem_quiet} and \ref{subsec:shmem_fence}.
