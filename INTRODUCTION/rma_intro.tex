@@ -24,14 +24,14 @@ the origin is the \target{} \ac{PE} and the destination is the \source{} \ac{PE}
 of bits. \FUNC{shmem\_put32}, for example, copies data to a target \ac{PE} in chunks of 
 32 bits. \FUNC{shmem\_$<$datatype$>$\_put} interface copies elements of type 
 \textit{datatype} from a \source{} \ac{PE} to a \target{} \ac{PE}. 
-\FUNC{shmem\_integer\_put}, for example, copies elements
+For example, \FUNC{shmem\_integer\_put}, copies elements
 of type integer from a \source{} \ac{PE} to a \target{} \ac{PE}. 
 \FUNC{shmem\_$<$datatype$>$\_p} interface is similar to \FUNC{shmem\_$<$datatype$>$\_put} 
 except that it only transfers one element of type \VAR{datatype}.
 
 \openshmem{} provides interfaces for transferring both contiguous and 
 non-contiguous data. The non-contiguous data transfer interfaces are prefixed 
-with "i". \FUNC{shmem\_$<$datatype$>$\_iput} interface, for example, copies strided
+with "\VAR{i}". \FUNC{shmem\_$<$datatype$>$\_iput} interface, for example, copies strided
 data elements from the \source{} \ac{PE} to a \target{} \ac{PE}. 
 
 
