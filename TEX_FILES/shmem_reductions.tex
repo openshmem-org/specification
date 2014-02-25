@@ -100,30 +100,30 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
  values.	 
  
   The \VAR{nreduce} argument determines the number of separate reductions to
- perform.	 The source array on all \ac{PE}s in the \activeset{}	 provides one
- element	for each reduction. The results of the reductions are placed
+ perform. The source array on all \ac{PE}s in the \activeset{} provides one
+ element for each reduction. The results of the reductions are placed
  in the target array on all \ac{PE}s in the \activeset. The \activeset{} is
- defined by the PE\_start, logPE\_stride, PE\_size triplet.
+ defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
 
  The source and target arrays may be the same array, but they may not be
  overlapping arrays.
 
- As with all SHMEM collective routines, each of these routines assumes
+ As with all \openshmem{} collective routines, each of these routines assumes
  that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
- \activeset{} calls a SHMEM collective	 routine, undefined behavior
+ \activeset{} calls a \openshmem collective routine, undefined behavior
  results.
 
  The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
  must be equal on all \ac{PE}s in the \activeset. The same target and source
- arrays, and the same pWrk and pSync work arrays, must be passed to all
+ arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must be passed to all
  \ac{PE}s in the \activeset.
 
  Before any \ac{PE}	calls a reduction routine, you must ensure that the
- following conditions exist (synchronization via a barrier or some other
- method is often needed to ensure this): The pWrk and pSync arrays on
- all \ac{PE}s in the \activeset{} are not still in use from a prior call	 to a
- collective \openshmem routine. The target array on all \ac{PE}s in the \activeset{} 
- is ready to accept the results of the reduction.
+ following conditions exist (synchronization via a \OPR{barrier} or some other
+ method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays on
+ all \ac{PE}s in the \activeset{} are not still in use from a prior call to a
+ collective \openshmem{} routine. The \target{} array on all \ac{PE}s in the \activeset{} 
+ is ready to accept the results of the \OPR{reduction}.
 
  Upon return from a reduction routine, the following are true for the
  local \ac{PE}: The target array is updated. The values in the \VAR{pSync} array
@@ -173,22 +173,22 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 
 % Notes. If there are no notes, this field can be left empty.
 \notesB{  
- All \openshmem reduction routines reset the values in pSync before they
- return, so a particular pSync buffer need only be initialized the first
+ All \openshmem{} reduction routines reset the values in \VAR{pSync} before they
+ return, so a particular \VAR{pSync} buffer need only be initialized the first
  time it is used.
 
  You must ensure that the \VAR{pSync} array is not being updated on any \ac{PE} in
  the \activeset{} while any of the \ac{PE}s participate in processing of a
- SHMEM reduction routine. Be careful to avoid the following situations:
- If the pSync array is initialized at run	time, some type of synchronization is needed to
+ \openshmem{} reduction routine. Be careful to avoid the following situations:
+ If the \VAR{pSync} array is initialized at run time, some type of synchronization is needed to
  ensure that all \ac{PE}s in the working set have initialized \VAR{pSync} before any of 
  them enter an \openshmem routine called
  with the \VAR{pSync} synchronization array. A \VAR{pSync} or \VAR{pWrk} array can be
  reused in a subsequent reduction routine call only if none of the \ac{PE}s
  in the \activeset{} are still processing a prior reduction routine call
- that used the same \VAR{pSync} or \VAR{pWrk} arrays. In general,	 this can be
- assured	only by doing some type of synchronization. However, in the
- special case of reduction routines being called with the same	\activeset, 
+ that used the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be
+ assured only by doing some type of synchronization. However, in the
+ special case of reduction routines being called with the same \activeset, 
  you can allocate two \VAR{pSync} and \VAR{pWrk} arrays and alternate between
  them on successive calls.
 }
@@ -197,39 +197,39 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 \exampleB{
 %For each example, you can enter it as an item.
                   \exampleITEMF
-                  { This \Fortran{} example statically initializes the \VAR{pSync} array and finds the logical AND of the integer variable FOO across all even \ac{PE}s.}
+                  { This \Fortran{} example statically initializes the \VAR{pSync} array and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_and_example.f90}
                   {}
                    \exampleITEMF
 	          {This \Fortran{} example statically initializes the \VAR{pSync} array
- and finds the maximum value of real variable FOO across all even \ac{PE}s.}
+ and finds the \OPR{maximum} value of real variable \VAR{FOO} across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_max_example.f90}
                   {}
                   \exampleITEMF
                   { This \Fortran{} example statically initializes the \VAR{pSync} array
- and finds the minimum value of real variable FOO across all the even
+ and finds the \OPR{minimum} value of real variable \VAR{FOO} across all the even
  \ac{PE}s.}
                  {./EXAMPLES/shmem_min_example.f90}
                  {}
                  \exampleITEMF
                   {This \Fortran{} example statically initializes the \VAR{pSync} array
- and finds the sum of the real variable FOO across all even \ac{PE}s.}
+ and finds the \OPR{sum} of the real variable \VAR{FOO} across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_sum_example.f90}
                   {}
                  \exampleITEMF
                   {This \Fortran{} example statically initializes the \VAR{pSync} array
- and finds the product of the real variable FOO across all the even \ac{PE}s.}
+ and finds the \OPR{product} of the real variable \VAR{FOO} across all the even \ac{PE}s.}
                   {./EXAMPLES/shmem_prod_example.f90}
                   {}
                  \exampleITEMF
                   {This \Fortran{} example statically initializes the \VAR{pSync} array
- and finds the logical OR of the integer variable FOO across all even
+ and finds the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
  \ac{PE}s.}
                  {./EXAMPLES/shmem_or_example.f90}
                  {}
                  \exampleITEMF
                   {This \Fortran{} example statically initializes the \VAR{pSync} array
- and computes the exclusive XOR of variable FOO across all even \ac{PE}s.}
+ and computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_xor_example.f90}
                    {} 
                  }  	
