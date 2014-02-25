@@ -68,7 +68,16 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 \desTBC{ The following \VAR{cmp} values are supported:}{CMP Value}{Comparison}
  {
 %\cRow{cmp Value}{Comparison}
-\cRow{SHMEM\_CMP\_EQ	}{  Equal}
+\CorCpp:\\
+\cRow{\_SHMEM\_CMP\_EQ }{  Equal}
+\cRow{\_SHMEM\_CMP\_NE}{Not equal}
+\cRow{\_SHMEM\_CMP\_GT}{Greater than}
+\cRow{\_SHMEM\_CMP\_LE}{Less than or equal to}
+\cRow{\_SHMEM\_CMP\_LT}{Less than}
+\cRow{\_SHMEM\_CMP\_GE}{Greater than or equal to}
+\\
+\Fortran:\\
+\cRow{SHMEM\_CMP\_EQ }{  Equal}
 \cRow{SHMEM\_CMP\_NE}{Not equal}
 \cRow{SHMEM\_CMP\_GT}{Greater than}
 \cRow{SHMEM\_CMP\_LE}{Less than or equal to}
