@@ -875,15 +875,26 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \def\StandardListing {
   \lstset {
-    basicstyle=\scriptsize\ttfamily,
-    backgroundcolor=\color{ListingBG},
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    frame=tlBR,
-    frameround=tttt,
-    numbers=none,
-    caption=\lstname
+%%    basicstyle=\scriptsize\ttfamily,
+%%    backgroundcolor=\color{ListingBG},
+%%    showspaces=false,
+%%    showstringspaces=false,
+%%    showtabs=false,
+%%    frame=tlBR,
+%%    frameround=tttt,
+%%    numbers=none,
+%%    caption=\lstname
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,                 % sets automatic line breaking
+    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    backgroundcolor=\color{gray}, 
   }
 }
 
@@ -925,7 +936,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
     shmem_long_sum_to_all,
     shmem_complexd_sum_to_all,
   },
-  keywordstyle=\color{blue}\textbf,
+  keywordstyle=\color{black}\textbf,
   classoffset=0,
   sensitive=true
 }
@@ -939,7 +950,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
     shmem_my_pe,
     shmem_error,
   },
-  keywordstyle=\color{blue}\textbf,
+  keywordstyle=\color{black}\textbf,
   classoffset=0,
   sensitive=true
 }
@@ -964,7 +975,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
     shmem_set_lock, shmem_test_lock, shmem_clear_lock,
     shmem_long_sum_to_all,
   },
-  keywordstyle=\color{blue}\textbf,
+  keywordstyle=\color{black}\textbf,
   classoffset=0,
   sensitive=false
 }
