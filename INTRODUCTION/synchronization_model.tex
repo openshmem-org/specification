@@ -23,10 +23,7 @@ When using the \openshmem \ac{API}, synchronization, ordering, and completion of
 \end{tabular}
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-\hline 
-\textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
-\hline 
-\hline
+
 {Ordering puts issued by a local \ac{PE}} \\
 \FUNC{shmem\_fence} 
 & 
@@ -45,6 +42,10 @@ All \PUT{} operations, \acp{AMO} and store operations on symmetric data issued t
 \end{tabular}
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
+\hline 
+\textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
+\hline 
+\hline
 {Ordering puts issued by all \ac{PE} }\\
 \FUNC{shmem\_quiet}
 & 
@@ -60,10 +61,6 @@ All \PUT{} operations, \acp{AMO} and store operations on symmetric data issued t
 
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-\hline 
-\textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
-\hline 
-\hline
 Collective synchronization over an \activeset \\
 \FUNC{shmem\_barrier}
 &  
@@ -78,6 +75,10 @@ Collective synchronization over an \activeset \\
 \end{tabular}
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
+\hline 
+\textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
+\hline 
+\hline
 {Collective synchronization over all \ac{PE}s} \\
  \FUNC{shmem\_barrier\_all}
 & 

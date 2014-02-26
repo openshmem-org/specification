@@ -1,10 +1,19 @@
 \section{Version 1.1}
-This section summarizes the changes from the \openshmem specification version 1.0 to the version 1.1. 
-The major changes consist of more accurate descriptions of the \openshmem \acp{API} that 
-were part of the original SGI specification, but were omitted in version 1.0e. This new version also provides new
-diagrams that explain the correct behavior of \openshmem synchronization interfaces in terms of ordering, synchronization, delivery and
-completion of operations. Version 1.1 also does a better job at explaining the programming model, memory model and execution model  
-of \openshmem. The following list describes the specific changes in 1.1:%\rcomment{\\Eric: "better" is a subjective/ambiguous term, might need need a term to definitively describe how it is better.  i.e. is it more descriptive, more detailed, more accurate, easier to understand? etc.\\}
+This section summarizes the changes from the \openshmem specification Version 1.0 to the Version 1.1.  
+A major change in this version is that it provides an accurate description of \openshmem interfaces so that they
+are in agreement with the SGI specification. This version also explains \openshmem’s programming, 
+memory, and execution model. The document was throughly changed to improve the readability of specification 
+and usability of interfaces. The code examples were added to demonstrate the usability of API. Additionally, diagrams 
+were added to help understand the subtle semantic differences of various operations.
+
+%This section summarizes the changes from the \openshmem specification version 1.0 to the version 1.1. 
+%The major changes consist of more accurate descriptions of the \openshmem \acp{API} that 
+%were part of the original SGI specification, but were omitted in version 1.0e. This new version also provides new
+%diagrams that explain the correct behavior of \openshmem synchronization interfaces in terms of ordering, synchronization, delivery and
+%completion of operations. Version 1.1 also does a better job at explaining the programming model, memory model and execution model  
+%of \openshmem. 
+
+The following list describes the specific changes in 1.1:%\rcomment{\\Eric: "better" is a subjective/ambiguous term, might need need a term to definitively describe how it is better.  i.e. is it more descriptive, more detailed, more accurate, easier to understand? etc.\\}
 
 \begin{itemize}
 \item Clarifications on the completion semantics of memory synchronization 
