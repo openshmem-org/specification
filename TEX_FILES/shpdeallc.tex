@@ -22,7 +22,7 @@ CALL SHPDEALLC(addr, errcode, abort) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT
 %API Description Table. 
 {
  %Return Values     
-\desR{ }
+\desR{ 
 \cRow{Error Code} {Condition}
 \cRow{ \CONST{-1} } {Length is not an integer greater than 0}
 \cRow{\CONST{-2}} { No more memory is available from the system (checked if the  request  cannot  be	satisfied from the available blocks on the symmetric heap).}
@@ -30,5 +30,6 @@ CALL SHPDEALLC(addr, errcode, abort) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT
 \cRow{\CONST{-4}}{Block is already free.}
 \cRow{\CONST{-5}}{Address is not at the beginning of a block.}
 }%end of DesB
-\notesB{None.}   
+\notesB{None.}
+}   
 \eAPI 
