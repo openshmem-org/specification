@@ -17,7 +17,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync) %*\synFE
 			   	   \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of type
 		   		   integer.  If you are using \Fortran, it must	be  a  default
 		   		   integer value.}
-	\argRow{IN}{PE\_size}{The numberof  \ac{PE}s in the \activeset.  \VAR{PE\_size} must be of
+	\argRow{IN}{PE\_size}{The number of  \ac{PE}s in the \activeset.  \VAR{PE\_size} must be of
 				   type integer.  If you are  using  \Fortran, it must be a default integer value.}
 	\argRow{IN}{pSync}{	A  symmetric work  array.  In \CorCpp, pSync must be of type
 						long and size \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE}.  In  \Fortran, \VAR{pSync}
