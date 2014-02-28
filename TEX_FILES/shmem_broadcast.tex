@@ -36,7 +36,7 @@ CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, P
 		   default integer value.}
 
 \argRow{IN}{pSync}{
-		   A symmetric work array. In \CorCpp, pSync must be of type
+		   A symmetric work array. In \CorCpp, \VAR{pSync} must be of type
 		   long and size \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}. In \Fortran, \VAR{pSync}
 		   must be of type integer and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
 		   Every element of this array must be initialized with the
@@ -59,7 +59,7 @@ results.
 
 The values of arguments \VAR{PE\_root}, \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
 must be equal on all \ac{PE}s in the \activeset. The same \target{} and \source{}
-data objects and the same pSync work array must be passed to all \ac{PE}s in
+data objects and the same \VAR{pSync} work array must be passed to all \ac{PE}s in
 the \activeset.
 
 Before any \ac{PE} calls a broadcast	routine, you must ensure that the
@@ -71,7 +71,7 @@ accept the broadcast data.
 
 Upon return from a broadcast routine, the following are true for the
 local \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the \target{} data	object
-is updated. The values in the pSync array are restored to the original
+is updated. The values in the \VAR{pSync} array are restored to the original
 values.
 }
 %API Description Tabl
@@ -97,7 +97,7 @@ constraints, which are as follows: }
 
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
-       All \openshmem broadcast routines restore pSync to its original contents.
+       All \openshmem broadcast routines restore \VAR{pSync} to its original contents.
        Multiple calls to \openshmem routines that use the same \VAR{pSync} array do not
        require that \VAR{pSync} be reinitialized after the first call.
 
