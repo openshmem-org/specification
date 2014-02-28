@@ -6,16 +6,10 @@
 %the \Clang{} language, but not to \Fortran{} and should make this clear in its documentation.  An implementation that provides both \Clang{} and \Fortran{} bindings may claim
 %complete conformance.
 
-\openshmem provides ISO \Clang{} and \Fortran{} 90 language
-bindings. Any implementation that provides both \Clang{} and \Fortran{} bindings 
-can claim conformance to the specification. An implementation that provides e.g.\ only a \Clang{} interface may claim to conform to the \openshmem specification with respect to
-the \Clang{} language, but not to \Fortran{}, and should make this clear in its documentation. The \openshmem header files for \Clang{} and \Fortran{} must contain only the interfaces 
-and constant names defined in this specification.
+\openshmem provides ISO \Clang{} and \Fortran{} 90 language bindings. Any implementation that provides both \Clang{} and \Fortran{} bindings can claim conformance to the specification. An implementation that provides e.g.\ only a \Clang{} interface may claim to conform to the \openshmem specification with respect to
+the \Clang{} language, but not to \Fortran{}, and should make this clear in its documentation. The \openshmem header files for \Clang{} and \Fortran{} must contain only the interfaces and constant names defined in this specification.
 
-\openshmem{} \ac{API}s can be implemented as either 
-functions or macros. However, implementing the interfaces using macros is
-strongly discouraged as this could severely limit the use of external profiling tools 
-and high-level compiler optimizations. An \openshmem{} program should avoid defining function names, variables, or
+\openshmem{} \ac{API}s can be implemented as either functions or macros. However, implementing the interfaces using macros is strongly discouraged as this could severely limit the use of external profiling tools and high-level compiler optimizations. An \openshmem{} program should avoid defining function names, variables, or
 identifiers with the prefix \shmemprefix{} (for \Clang{} and \Fortran{}), \shmemprefixC{} (for \Clang{}) or with \openshmem \ac{API} names.
 
 %The \openshmem{} constants and environment variables are in all capital letters. 

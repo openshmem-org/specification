@@ -17,7 +17,7 @@ CALL SHPALLOC(addr, length, errcode, abort) %*\synFE   %DO NOT DELETE. THIS LINE
  {   
        \FUNC{SHPALLOC} allocates a block of memory from the program's symmetric heap
        that is greater than or equal  to  the  size  requested. To  maintain symmetric heap 
-       consistency,  all  \ac{PE}s in an program must call \FUNC{SHPALLOC} with the same value of length; if any  \ac{PE}s  are missing, the program will hang.
+       consistency, all \ac{PE}s in an program must call \FUNC{SHPALLOC} with the same value of length; if any  \ac{PE}s are missing, the program will hang.
        
        By using the \Fortran{} \CONST{POINTER} mechanism in the following manner, you can use array \VAR{A} to refer to the block allocated by \FUNC{SHPALLOC}: \CONST{POINTER} (\VAR{addr},
        \VAR{A}())
@@ -29,12 +29,12 @@ CALL SHPALLOC(addr, length, errcode, abort) %*\synFE   %DO NOT DELETE. THIS LINE
 \desR{ }
 \cRow{Error Code} {Condition}
 \cRow{ \CONST{-1} } {Length is not an integer greater than \CONST{0}}
-\cRow{\CONST{-2}} { No more memory is available from the system (checked  if the  request  cannot  be	satisfied from the available blocks on the symmetric heap).}
+\cRow{\CONST{-2}} { No more memory is available from the system (checked if the  request cannot be satisfied from the available blocks on the symmetric heap).}
 }%end of DesR
 \notesB{  
        The total size of the symmetric heap is determined at job startup.  One
-       may  adjust  the	 size  of  the heap  using the \CONST{SMA\_SYMMETRIC\_SIZE}
-       environment  variable (if available).	
+       may adjust the size of the heap using the \CONST{SMA\_SYMMETRIC\_SIZE}
+       environment variable (if available).	
 }
 }
 %Example
