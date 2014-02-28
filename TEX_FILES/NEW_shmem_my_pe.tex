@@ -1,5 +1,4 @@
 \bAPI{SHMEM\_MY\_PE}{Returns the number of the calling \ac{PE}.}
-
 %Synopsis C
 \synC
 int shmem_my_pe(void);
@@ -19,10 +18,8 @@ ME = MY_PE ()%*\synFE
 }
 %API Description
 {
-	This function returns the \ac{PE} number of the calling
-  \ac{PE}.   It accepts no arguments.	The result is an integer between \CONST{0} and
-  \VAR{npes} - \CONST{1}, where \VAR{npes} is the total number of \ac{PE}s executing  the  current
-  program.
+	This function returns the \ac{PE} number of the calling \ac{PE}.  It accepts no arguments.  The result is an integer between \CONST{0} and
+  \VAR{npes} - \CONST{1}, where \VAR{npes} is the total number of \ac{PE}s executing  the  current program.
 }
 %API Description Table.
 {
@@ -30,14 +27,11 @@ ME = MY_PE ()%*\synFE
 %	{
 %				\cRow{}{}
 %	}
-
 	%Return Value       
   \desR{Integer - Between \CONST{0} and \VAR{npes} - \CONST{1}}
-
 	%NOTES
 	\notesB{Each \ac{PE} has a unique number or identifier. }
 %For \openshmem Specification 1.1 the use of \FUNC{\_my\_pe} has been deprecated. Although \openshmem libraries are required to support the call, application developers are encouraged to use \FUNC{shmem\_my\_pe} instead.
-
 }
 %EXAMPLES
 \exampleB{

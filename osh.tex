@@ -739,11 +739,11 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\bAPI}[2]{
 \subsubsection{\bf #1}%\hfill
 #2
-\hfill \\
+\hfill %\\
 \begin{description}
 %\par\nobreak\vspace{-\parskip}
   \item[SYNOPSIS] \hfill \\ \\ 
-  \\ \\
+  %\\ \\
 }
 
 \newcommand{\eAPI}{
@@ -751,9 +751,9 @@ minus .2ex}{-1em}{\normalsize\sf}}
 }
 
 \newcommand{\synC}{%\hfill \\
-  \vspace{-\parskip} \par
+  %\vspace{-\parskip} \par
   \textbf{C/C++:}
-  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=1pt]  
+  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=0pt]  
 }
 
 \newcommand{\synCE}{
@@ -765,25 +765,25 @@ minus .2ex}{-1em}{\normalsize\sf}}
 } 
 
 \newcommand{\synF}{%\hfill \\     
-  \vspace{-\parskip} \par
+  %\vspace{-\parskip} \par
        \textbf{FORTRAN:}	 
-	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=1pt]
+	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt]
 }
 \newcommand{\aC}[1] {\textit{#1}}
 \newcommand{\sC}[1] {\textbf{#1}}
 \newcommand{\aF}[1]{\textit{#1}}
 
  \newcommand{\desB}[3] {\hfill
-   \item[DESCRIPTION] \hfill \\
+   \item[DESCRIPTION] \hfill %\\
      \begin{description}
        \item[Arguments] \hfill \\
        #1
-      \hfill \\ %\\
-       \item[API description] \hfill \\ \\
+      \hfill %\\ \\
+       \item[API description] \hfill \\ %\\
        #2 %\par
-       \hfill \\ \\
+       \hfill \\ %\\
        #3 
-       \hfill \\ \\
+       \hfill \\ %\\
        \end{description}
  }  
 \newcommand{\argRow}[3] {
@@ -812,10 +812,10 @@ minus .2ex}{-1em}{\normalsize\sf}}
 } 
 
 \newcommand{\desR}[1]
-{\hfill \\ \\
-  \item[Return Values] \hfill \\ \\
+{\hfill %\\ \\
+  \item[Return Values] \hfill \\ %\\
        #1 
-       \hfill \\
+       \\
 }
 
 \newcommand{\cRow}[2]{
@@ -824,10 +824,10 @@ minus .2ex}{-1em}{\normalsize\sf}}
   \end{tabular}\\
 }
 
-\newcommand{\notesB}[1]{\hfill \\ %\\
-\item[Notes] \hfill \\ \\
+\newcommand{\notesB}[1]{\hfill %\\ \\
+\item[Notes] \hfill \\ %\\
 #1
-\\
+%\\
 }
 
 \newcommand{\exampleB}[1] {

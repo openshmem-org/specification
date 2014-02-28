@@ -22,40 +22,34 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
-\argRow{OUT}{target}{A symmetric array.	The  \target{}  argument  must  be	 large
+\argRow{OUT}{target}{A symmetric array.	The \target{} argument must be large
 	    enough to accept the concatenation of the \source{} arrays on
 	    all \ac{PE}s.  The data types are as follows:
-	    For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, and
-	    \FUNC{shmem\_fcollect64}, any data type with an element size of 64
-	    bits.  \Fortran{} derived types, \Fortran{} character type,  and
+	    For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, and \FUNC{shmem\_fcollect64}, any data type with an element size of 64
+	    bits.  \Fortran{} derived types, \Fortran{} character type, and
 	    \CorCpp{}  structures  are not permitted.  For \FUNC{shmem\_collect4},
-	    \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32},
-	    any	 data  type  with an element size of \CONST{32} bits.  \Fortran{}
-	    derived  types,  \Fortran{}   character   type,   and \CorCpp{}
+	    \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32}, any data type with an element size of \CONST{32} bits.  \Fortran{}
+	    derived types, \Fortran{} character type, and \CorCpp{}
 	    structures are not permitted.}
-\argRow{IN}{source}{A symmetric   data  object  that	can  be of  any  type
+\argRow{IN}{source}{A symmetric data object that can be of any type
 	    permissible for the \target{} argument.}
-\argRow{IN}{nelems}{The number of elements in the \source{} array.	 nelems must be
-	    of	type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a
+\argRow{IN}{nelems}{The number of elements in the \source{} array. nelems must be
+	    of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a
 	    default integer value.}
 \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the \activeset{} of \ac{PE}s.
 	    \VAR{PE\_start} must be of type integer. If you are using
 	    \Fortran, it must be a default integer value.}
-\argRow{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between consecutive virtual
-	    \ac{PE}	numbers in the \activeset. \VAR{logPE\_stride} must be of
-	    type integer.  If you are using  \Fortran,  it  must be  a
-	    default integer value.}
-\argRow{IN}{PE\_size}{The number of \ac{PE}s in the \activeset. \VAR{PE\_size} must be of
-	    type integer.  If you are using  \Fortran, it must be a
+\argRow{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between consecutive virtual \ac{PE} numbers in the \activeset. \VAR{logPE\_stride} must be of
+	    type integer.  If you are using \Fortran, it must be a default integer value.}
+\argRow{IN}{PE\_size}{The number of \ac{PE}s in the \activeset. \VAR{PE\_size} must be of type integer.  If you are using  \Fortran, it must be a
 	    default integer value.}
 \argRow{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of type
 	    long and size \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE}.  In \Fortran, \VAR{pSync}
-	    must  be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
-	    If you are using \Fortran, it must  be  a  default  integer
-	    value. Every  element  of this array must be initialized
+	    must be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
+	    If you are using \Fortran, it must  be a default integer
+	    value. Every element of this array must be initialized
 	    with the value \CONST{\_SHMEM\_SYNC\_VALUE} in \CorCpp{} or
-	    \CONST{SHMEM\_SYNC\_VALUE} in \Fortran{} before any of the \ac{PE}s in the
-	    \activeset{} enter \FUNC{shmem\_barrier}.}
+	    \CONST{SHMEM\_SYNC\_VALUE} in \Fortran{} before any of the \ac{PE}s in the \activeset{} enter \FUNC{shmem\_barrier}.}
 }
 %API description
 {   
@@ -64,8 +58,7 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 array, over the set of \ac{PE}s defined by \VAR{PE\_start}, \VAR{log2PE\_stride}, and
 \VAR{PE\_size}, in processor number order. The resultant \target{} array
 contains the contribution from \ac{PE} \VAR{PE\_start} first, then the contribution
-from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result
-is written to the \target{} array for all \ac{PE}s in the \activeset.
+from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result is written to the \target{} array for all \ac{PE}s in the \activeset.
 
 The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
 participating \ac{PE}s, while the collect routines allow \VAR{nelems} to vary from
@@ -76,8 +69,7 @@ that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
 \activeset{} calls a \openshmem collective routine, undefined behavior
 results.
 
-The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be
-equal on all \ac{PE}s in the \activeset. The same \target{} and \source{} arrays
+The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset. The same \target{} and \source{} arrays
 and the same \VAR{pSync} work array must be passed to all \ac{PE}s in the \activeset.
 
 Upon return from a collective routine, the following are true for the
@@ -101,7 +93,7 @@ the \activeset{} while any of the \ac{PE}s participate in processing of a
 \VAR{pSync} array is initialized at run time, some type of synchronization is
 needed to ensure that all \ac{PE}s in the working set have initialized \VAR{pSync}
 before any of them  enter a \openshmem routine called with the \VAR{pSync}
-synchronization	array. A \VAR{pSync} array can be reused on a subsequent
+synchronization array. A \VAR{pSync} array can be reused on a subsequent
 \openshmem collective routine only if none of the \ac{PE}s in the \activeset{}  are
 still processing a  prior \openshmem collective routine call that used the
 same \VAR{pSync} array. In general, this may be ensured only by doing some

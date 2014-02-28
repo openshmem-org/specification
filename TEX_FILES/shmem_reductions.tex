@@ -1,5 +1,4 @@
 \bAPI{SHMEM\_REDUCTIONS}{Performs a logical operations across a set of \ac{PE}s.}
-
 \synC %Synopisis for C API
 
 void shmem_int_and_to_all(int *target, int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -130,6 +129,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
  are restored to the original values.
 }
 {
+{
 \hfill \\
  \desTBC{ When calling from \Fortran, the \target{} date types are as follows:}
                 {Routine}{Data Type}{
@@ -168,9 +168,9 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 		  \cRow{shmem\_real4\_xor\_to\_all}{Real, with an element size of 4 bytes.}
 		  }
 }%end of DesB
- %Return Values     
+{%Return Values     
 \desR{None.}
-
+}
 % Notes. If there are no notes, this field can be left empty.
 \notesB{  
  All \openshmem{} reduction routines reset the values in \VAR{pSync} before they
@@ -192,7 +192,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
  you can allocate two \VAR{pSync} and \VAR{pWrk} arrays and alternate between
  them on successive calls.
 }
-
+}
 %Example
 \exampleB{
 %For each example, you can enter it as an item.

@@ -18,7 +18,6 @@ This function assures ordering of delivery of \PUT{}, \acp{AMO}, and store opera
 All \PUT{}, \acp{AMO}, and store operations to symmetric data objects issued to a particular remote \ac{PE}
 prior to the call to \FUNC{shmem\_fence} are guaranteed to be ordered to be delivered before
 any subsequent \PUT{}, \acp{AMO}, and store operations to symmetric data objects to the same \ac{PE}.
- 
 % which follow the  call  to
 % \FUNC{shmem\_fence}.
 }
@@ -28,7 +27,6 @@ any subsequent \PUT{}, \acp{AMO}, and store operations to symmetric data objects
     %Return Values     
     None.
 }
-
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
  \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not guarantee completion of delivery. There is a subtle difference between  \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}, in that, that \FUNC{shmem\_quiet} guarantees completion of \PUT{}, \acp{AMO}, and store operations to symmetric data objects which makes the updates visible to all other \acp{PE}. 

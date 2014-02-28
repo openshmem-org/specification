@@ -9,6 +9,7 @@ INTEGER lock, SHMEM_TEST_LOCK
 CALL SHMEM_CLEAR_LOCK(lock)
 CALL SHMEM_SET_LOCK(lock)
 I = SHMEM_TEST_LOCK(lock) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+
 \desB{
    \argRow{IN}{lock}{	 A symmetric data object that is a scalar variable or an array
 		 of  length \CONST{1}. This data  object  must  be set to \CONST{0} on all
@@ -33,7 +34,6 @@ I = SHMEM_TEST_LOCK(lock) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
        cleared and  this  call was  able  to set the lock.  A value of \CONST{1} is
        returned if the lock had been set and the call returned without waiting
        to set the lock.}
-
 \notesB{
        The term symmetric data object is defined in Introduction. The lock variable should always be initialized to zero and accessed only by the  \openshmem locking \ac{API}.
        Changing the value of the lock variable by other means without using the \openshmem \ac{API}, can lead to undefined behavior.             
