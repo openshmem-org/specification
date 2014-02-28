@@ -751,7 +751,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\synC}{%\hfill \\
   \vspace{-\parskip} \par
   \textbf{C/C++:}
-  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=0pt]  
+  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=1pt]  
 }
 
 \newcommand{\synCE}{
@@ -765,7 +765,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\synF}{%\hfill \\     
   \vspace{-\parskip} \par
        \textbf{FORTRAN:}	 
-	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt]
+	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=1pt]
 }
 \newcommand{\aC}[1] {\textit{#1}}
 \newcommand{\sC}[1] {\textbf{#1}}
@@ -778,7 +778,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
        #1
       \hfill \\ %\\
        \item[API description] \hfill \\ \\
-       #2 
+       #2 %\par
        \hfill \\ \\
        #3 
        \hfill \\ \\
@@ -811,7 +811,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \newcommand{\desR}[1]
 {\hfill \\ \\
-  \item[Return Values] \hfill \\ %\\
+  \item[Return Values] \hfill \\ \\
        #1 
        \hfill \\
 }
@@ -829,7 +829,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 }
 
 \newcommand{\exampleB}[1] {
-\item[EXAMPLES] \hfill \\
+\item[EXAMPLES] \hfill \\ \\
       #1
 }
 
