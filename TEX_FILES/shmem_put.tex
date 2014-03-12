@@ -37,11 +37,11 @@ CALL SHMEM_REAL_PUT(target, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LIN
         \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be of type integer. If you are using \Fortran, it must be a constant, variable, or array element of default integer type.}
  }
  %API description
- {   The  routines  return  after the data has been copied out of the \source{}
+ {   The routines return after the data has been copied out of the \source{}
        array on the local \ac{PE}.
-       The delivery of data words into the data object on the  destination \ac{PE}
-       may  occur  in  any order.  Furthermore, two successive put operations
-       may deliver  data  out  of  order  unless  a  call  to \FUNC{shmem\_fence}  is
+       The delivery of data words into the data object on the destination \ac{PE}
+       may occur in any order.  Furthermore, two successive put operations
+       may deliver data out of order unless a call to \FUNC{shmem\_fence} is
        introduced between the two calls.   
  }
  %API Description Table. 
@@ -49,7 +49,7 @@ CALL SHMEM_REAL_PUT(target, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LIN
  % If there is no Description Table and return, this field can be 
  \hfill \\
   \desTB { 
-    The  \target{}  and \source{} data  objects must conform to certain typing
+    The \target{} and \source{} data objects must conform to certain typing
     constraints, which are as follows: } 
     {
        \cRow{shmem\_putmem}{ \Fortran:  Any noncharacter type. \Clang:	 Any data  type.   len	is  scaled  in bytes.} 
@@ -70,8 +70,8 @@ CALL SHMEM_REAL_PUT(target, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LIN
  %Return Values     
 \desR{None.}
 % Notes. If there are no notes, this field can be left empty.
-\notesB{    If you are using \Fortran, data types must  be  of  default  size.   For
-       example, a  real  variable  must  be  declared as  \CONST{REAL},  \CONST{REAL*4},  or
+\notesB{    If you are using \Fortran, data types must be of default size.  For
+       example, a real variable must be declared as \CONST{REAL},  \CONST{REAL*4},  or
        \CONST{REAL(KIND=4)}.       
 }
 }%end of DesB

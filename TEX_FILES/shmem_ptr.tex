@@ -14,9 +14,9 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
 		 integer value.}
 }
 {
-       \FUNC{shmem\_ptr} returns an address that may be used  to  directly  reference
+       \FUNC{shmem\_ptr} returns an address that may be used to directly reference
        \target{} on the specified \ac{PE}.  This address can be assigned to a pointer.
-       After that, ordinary loads and stores to this  remote  address  may  be performed.
+       After that, ordinary loads and stores to this remote address may be performed.
 
        When a sequence of loads (gets) and stores (puts) to a data object on a
        remote \ac{PE} does not match the access pattern provided in a \openshmem data
@@ -27,8 +27,8 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
 {
  \desR{\FUNC{shmem\_ptr} returns a pointer to the data object on the specified	 remote \ac{PE}. If \target{} is not remotely accessible, a \CONST{NULL} pointer is returned.
 }
-\notesB{The \FUNC{shmem\_ptr} function is available  only  on  systems  where  ordinary
-       memory  loads  and  stores  are	used  to  implement \openshmem put and get
+\notesB{The \FUNC{shmem\_ptr} function is available only on systems where ordinary
+       memory loads and stores are used to implement \openshmem put and get
        operations. When calling \FUNC{shmem\_ptr}, you pass the address on the calling \ac{PE}  for a symmetric array on the remote \ac{PE}.}
 }
 

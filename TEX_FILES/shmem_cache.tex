@@ -25,8 +25,7 @@ CALL SHMEM_UDCFLUSH_LINE(target) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A C
 {   
 \FUNC{shmem\_set\_cache\_inv} enables automatic cache coherency mode.
 
-\FUNC{shmem\_set\_cache\_line\_inv} enables automatic cache coherency mode for the
-cache line associated with the address of \VAR{target} only.
+\FUNC{shmem\_set\_cache\_line\_inv} enables automatic cache coherency mode for the cache line associated with the address of \VAR{target} only.
 
 %IF THIS LINE IS CHANGED, PLEASE MAKE SURE \FUNC{shmem\_set\_cache\ \_inv} DOES NOT SHOW A VISIBLE SPACE BETWEEN cache and _inv.
 \FUNC{shmem\_clear\_cache\_inv} disables automatic cache coherency mode
@@ -44,7 +43,7 @@ the address specified by \VAR{target}.
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
 These routines have been retained for improved backward compatibility
-with legacy architectures. They are not required to be supported by implementing them as \VAR{no-ops} and 
+with legacy architectures.  They are not required to be supported by implementing them as \VAR{no-ops} and 
 where used, they may have no effect on cache line states.
 }
 }

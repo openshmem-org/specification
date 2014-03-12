@@ -41,22 +41,20 @@ CALL SHMEM_REAL_IGET(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
      \argRow{IN}{nelems}{Number of elements in the \target{} and \source{} arrays.  \VAR{nelems} must
 		 be of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be  a
 		 constant, variable, or array element of default integer type.}
-    \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer. If
-		 you  are  using  \Fortran, it must be a constant, variable, or
+    \argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer. If you  are  using  \Fortran, it must be a constant, variable, or
 		 array element of default integer type.}
 }
 %API description
 {
-       The \FUNC{iget} routines provide  a method  for  copying strided data elements from a
-       symmetric array from a specified remote \ac{PE} to strided locations on a local  array.
+       The \FUNC{iget} routines provide a method for copying strided data elements from a
+       symmetric array from a specified remote \ac{PE} to strided locations on a local array.
        The routines return when the data has been copied into the local \VAR{target}
        array.}
 %This newline is required 
 %API Description Table.
 {
 \hfill \\
-     \desTB{The \VAR{target} and \VAR{source} data objects must conform to typing  constraints,
-       which are as follows:}
+     \desTB{The \VAR{target} and \VAR{source} data objects must conform to typing  constraints, which are as follows:}
        {
        \cRow{shmem\_iget32, shmem\_iget4}{Any  noncharacter type that has a storage
 				     size equal to \CONST{32} bits.}
@@ -80,12 +78,11 @@ CALL SHMEM_REAL_IGET(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
     %Return Values     
       \desR{None.}
       \notesB{If you are using \Fortran, data types must be of default size. For
-       example,	a real  variable  must be  declared as  \CONST{REAL}, \CONST{REAL*4},  or
-       \CONST{REAL(KIND=4)}.}
+       example, a real variable must be declared as \CONST{REAL}, \CONST{REAL*4}, or \CONST{REAL(KIND=4)}.}
 }
 \exampleB{
        \exampleITEMF
-     {The  following  simple  example	uses  \FUNC{shmem\_logical\_iget}  in a \Fortran{}
+     {The following simple example uses \FUNC{shmem\_logical\_iget}  in a \Fortran{}
        program.} 
 	{./EXAMPLES/shmem_iget_example.f90}
     {}

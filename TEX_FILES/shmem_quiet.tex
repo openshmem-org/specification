@@ -26,11 +26,10 @@ CALL SHMEM_QUIET %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 % Notes. If there are no notes, this field can be left empty.
 \notesB{ 
        \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
-       several \PUT{}, \acp{AMO}, and store operations to symmetric data objects initiated by the calling \ac{PE}. For example,  you might use \FUNC{shmem\_quiet} to await delivery of 
-       a block of data before issuing  another \PUT{}, which sets a completion flag on another \ac{PE}.
+       several \PUT{}, \acp{AMO}, and store operations to symmetric data objects initiated by the calling \ac{PE}.  For example, you might use \FUNC{shmem\_quiet} to await delivery of a block of data before issuing  another \PUT{}, which sets a completion flag on another \ac{PE}.
 
        \FUNC{shmem\_quiet} is not usually needed if \FUNC{shmem\_barrier\_all}  or
-        \FUNC{shmem\_barrier} are called.  The barrier routines  wait for  the
+        \FUNC{shmem\_barrier} are called.  The barrier routines  wait for the
        completion of outstanding writes (\PUT{}, \ac{AMO}, stores) to symmetric data objects on all \acp{PE}.
 }
 }

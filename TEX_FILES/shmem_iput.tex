@@ -32,17 +32,16 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
 \argRow{IN}{tst}{The stride between consecutive elements of the \target{} array.
 		 The stride is scaled by the element size of the \target{} array.
 		 A  value of \CONST{1} indicates contiguous data.  \VAR{tst} must be of type
-		 \textit{ptrdiff\_t}.  If you are using \Fortran,  it must	be  a default integer value.}
+		 \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a default integer value.}
 \argRow{IN}{sst}{The  stride between consecutive elements of the \source{} array.
 		 The stride is scaled by the element size of the \source{} array.
 		 A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be of type
-		 \textit{ptrdiff\_t}.  If you are using \Fortran,  it  must	be  a  default
+		 \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a default
 		 integer value.}
 \argRow{IN}{nelems}{Number of elements in the \target{} and \source{} arrays.  \VAR{nelems} must
 		 be of type \VAR{size\_t} for \Clang.  If you are using \Fortran, it must be  a
 		 constant, variable, or array element of default integer type.}
-\argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer.   If
-		 you  are  using  \Fortran, it must be a constant, variable, or
+\argRow{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be of type integer.   If you  are  using  \Fortran, it must be a constant, variable, or
 		 array element of default integer type.}
 }
 {
@@ -74,14 +73,14 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
         }
 \desR{None.}
 \notesB{
-       If  you	are  using  \Fortran,  data types must be of default size.  For
-       example, a  real  variable  must  be  declared as  \CONST{REAL}, \CONST{REAL*4}   or
-       \CONST{REAL(KIND=4)}. See Introduction for a definition of the term remotely accessible.
+       If you are using \Fortran, data types must be of default size.  For
+       example, a real variable must be declared as  \CONST{REAL}, \CONST{REAL*4} or
+       \CONST{REAL(KIND=4)}.  See Introduction for a definition of the term remotely accessible.
 }
 }
 \exampleB{
        \exampleITEM
-       {Consider the  following  simple  \FUNC{shmem\_long\_iput}  example  for \CorCpp{}
+       {Consider the following simple \FUNC{shmem\_long\_iput}  example  for \CorCpp{}
        programs.} {./EXAMPLES/shmem_iput_example.c}{}
 }
 \eAPI

@@ -1,8 +1,8 @@
 
 The specification provides guidelines to the expected behavior of
-various library routines. In cases where routines are improperly used
+various library routines.  In cases where routines are improperly used
 or the input is not in accordance with the specification, undefined
-behavior may be observed. Depending on the implementation there are
+behavior may be observed.  Depending on the implementation there are
 many interpretations of undefined behavior. 
 
 $\;$
@@ -13,26 +13,17 @@ $ $%
 \textbf{Inappropriate Usage} & \textbf{Undefined Behavior}\tabularnewline
 \hline 
 \hline 
-Uninitialized library & If \openshmem is not initialized through a call to \FUNC{start\_pes},
-subsequent accesses to \openshmem routines have undefined results. An implementation may choose, for example, to try to continue or abort
-immediately upon the first call to an uninitialized routine. Calling \FUNC{start\_pes} more than once
-has no subsequent effect.\tabularnewline
+Uninitialized library & If \openshmem is not initialized through a call to \FUNC{start\_pes}, subsequent accesses to \openshmem routines have undefined results.  An implementation may choose, for example, to try to continue or abort
+immediately upon the first call to an uninitialized routine.  Calling \FUNC{start\_pes} more than once has no subsequent effect.\tabularnewline
 \hline 
-Accessing non-existent \ac{PE}s & If a communications routine accesses a non-existent \ac{PE} then the \openshmem
-library can choose to handle this situation in an implementation-defined
-way. For example, the library may issue an error message saying that
-the \ac{PE} accessed is outside the range of accessible \ac{PE}s, or may exit
+Accessing non-existent \ac{PE}s & If a communications routine accesses a non-existent \ac{PE} then the \openshmem library can choose to handle this situation in an implementation-defined way.  For example, the library may issue an error message saying that the \ac{PE} accessed is outside the range of accessible \ac{PE}s, or may exit
 without a warning.\tabularnewline
 \hline 
-Use of non-symmetric variables & Some routines require remotely accessible variables to perform their
-function. A \PUT{} to a non-symmetric variable can be trapped
-where possible and the library can abort the program. Another implementation
+Use of non-symmetric variables & Some routines require remotely accessible variables to perform their function.  A \PUT{} to a non-symmetric variable can be trapped
+where possible and the library can abort the program.  Another implementation
 may choose to continue either with a warning or silently.\tabularnewline
 \hline 
-Non-symmetric variables & The symmetric memory management routines are collectives, which means
-that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with
-the same size request. \openshmem implementations should detect the
-size mismatch and return error information to the caller. Implementations
+Non-symmetric variables & The symmetric memory management routines are collectives, which means that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with the same size request. \openshmem implementations should detect the size mismatch and return error information to the caller. Implementations
 may also produce an error message. Program behavior after a mismatched
 \FUNC{shmalloc} call is undefined.\tabularnewline
 \hline 

@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_WAIT}{Wait for  a variable  on the local \ac{PE} to change.}
+\bAPI{SHMEM\_WAIT}{Wait for a variable on the local \ac{PE} to change.}
 \label{subsec:shmem_wait}
 \synC   %Synopisis for C API
 
@@ -25,38 +25,36 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
 \argRow{OUT}{ivar}{A remotely accessible integer variable that is being updated by
-	       another PE.  If you are using \CorCpp, the type  of  ivar	should
-	       match  that  implied in the SYNOPSIS section.} 
-\argRow{IN}{cmp}{The  compare  operator  that compares ivar with cmp\_value.  cmp
-	       must be of type integer. If you are using \Fortran, it must  be
-	       of  default  kind.  If you  are  using \CorCpp, the type of cmp
-	       should  match  that  implied  in	 the  SYNOPSIS	section.}        
-\argRow{IN}{cmp\_value}{cmp\_value must be of type integer.  If you are using \CorCpp, the
-	       type of cmp\_value should match that  implied  in	 the  SYNOPSIS
-	       section. If  you  are using  \Fortran,	 cmp\_value  must be an
+	       another PE.  If you are using \CorCpp, the type of ivar should
+	       match that implied in the SYNOPSIS section.} 
+\argRow{IN}{cmp}{The compare operator that compares ivar with cmp\_value.  cmp
+	       must be of type integer.  If you are using \Fortran, it must  be
+	       of  default kind.  If you are using \CorCpp, the type of cmp
+	       should match that implied in the SYNOPSIS section.}        
+\argRow{IN}{cmp\_value}{cmp\_value must be of type integer.  If you are using \CorCpp, the type of cmp\_value should match that implied in the SYNOPSIS
+	       section.  If  you are using \Fortran, cmp\_value must be an
 	       integer of the same size and kind as ivar.}
 }
 %API description
 { 
        shmem\_wait and shmem\_wait\_until wait for ivar to be changed by a remote
-       write or atomic swap issued by a different processor.   These  routines
-       can  be	used  for  point-to-point directed synchronization.  A call to
-       shmem\_wait does not return until some other processor writes  a	value,
-       not  equal to cmp\_value, into ivar on the waiting processor.  A call to
-       shmem\_wait\_until does not return until  some  other  processor  changes
-       ivar  to	 satisfy  the  condition  implied  by cmp and cmp\_value.  This
-       mechanism is useful when a processor needs to  tell  another  processor
+       write or atomic swap issued by a different processor.  These  routines
+       can be used for point-to-point directed synchronization.  A call to
+       shmem\_wait does not return until some other processor writes  a value,
+       not equal to cmp\_value, into ivar on the waiting processor.  A call to
+       shmem\_wait\_until does not return until some  other processor changes
+       ivar to satisfy the condition implied by cmp and cmp\_value.  This
+       mechanism is useful when a processor needs to tell another processor
        that it has completed some action.
        The shmem\_wait  routines	 return when  ivar  is	 no  longer  equal  to
-       cmp\_value. The  shmem\_wait\_until  routines	 return	when  the compare condition is
-       true.  The compare condition is defined by the ivar  argument  compared
+       cmp\_value. The shmem\_wait\_until routines return when the compare condition is true.  The compare condition is defined by the ivar  argument  compared
        with the cmp\_value using the comparison operator, cmp. 
   }
  %API Description Table. 
 {
 \hfill \\
  % If there is no Description Table and return, this field can be 
-  \desTBC{ If you are using \Fortran, ivar must be a specific sized integer  type  according to the function being called, as follows:}
+  \desTBC{ If you are using \Fortran, ivar must be a specific sized integer type according to the function being called, as follows:}
   {Function}{Type of \VAR{ivar}}
  {
  %\cRow{Function}{Type of ivar}

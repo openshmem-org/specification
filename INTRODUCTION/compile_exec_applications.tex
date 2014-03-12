@@ -1,12 +1,11 @@
 
-As of now the \openshmem{} specification is silent regarding how \openshmem{} programs
-are compiled, linked and run. This section shows some examples of
+As of now the \openshmem{} specification is silent regarding how \openshmem{} programs are compiled, linked and run. This section shows some examples of
 how wrapper programs are utilized in the \openshmem{} Reference Implementation to compile and launch applications.
 %The commands are styled after wrapper programs found in many MPI implementations.
 \section{Compilation}
 \subsection*{Applications written in \Clang}
 
-The  \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshcc}, to aid in the compilation of \Clang{} applications, the wrapper
+The \openshmem{} Reference Implementation provides a wrapper program named \textbf{oshcc}, to aid in the compilation of \Clang{} applications, the wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]

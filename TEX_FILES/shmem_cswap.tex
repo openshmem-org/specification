@@ -18,22 +18,19 @@ ires = SHMEM_INT8_CSWAP(target, cond, value, pe) %*\synFE   %DO NOT DELETE. THIS
 		 the remote \ac{PE}. }
                  % If you are using  C/C++, the data type of
 		 % target should match that implied in the SYNOPSIS section.} 
-\argRow{IN}{cond}{\VAR{cond} is compared to the remote \VAR{target} value. If \VAR{cond} and the
+\argRow{IN}{cond}{\VAR{cond} is compared to the remote \VAR{target} value. If 			\VAR{cond} and the
 		 remote \VAR{target} are equal, then \VAR{value} is swapped into the
 		 remote \VAR{target}. Otherwise, the remote \VAR{target} is unchanged.
 		 In either case, the old value of the remote \VAR{target} is
 		 returned as the function return value. \VAR{cond} must be of the
 		 same data type as \VAR{target}.}
-\argRow{IN}{value}{The \VAR{value} to be atomically written to the remote \ac{PE}. \VAR{value}
-	         must be the same data type as \VAR{target}.}
-\argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which \VAR{target} is
-	  to be updated. If you are using \Fortran, it must be a default integer value.}
+\argRow{IN}{value}{The \VAR{value} to be atomically written to the remote \ac{PE}. 			\VAR{value} must be the same data type as \VAR{target}.}
+\argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which \VAR{target} is to be updated. If you are using \Fortran, it must be a default integer value.}
 }
 %API description
 {  
 The conditional swap routines conditionally update a \VAR{target} data object
-on an arbitrary \ac{PE} and return the prior contents
-of the data object in one atomic operation.   
+on an arbitrary \ac{PE} and return the prior contents of the data object in one atomic operation.   
 }
 %API Description Tabl
 {

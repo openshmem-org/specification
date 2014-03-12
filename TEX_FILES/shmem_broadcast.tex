@@ -16,33 +16,31 @@ CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, P
 \desB{  
 \argRow{OUT}{target}{A symmetric data object.} 
 \argRow{IN}{source}{A symmetric data object that can be of any data type that is permissible for the \target{} argument.}
-\argRow{IN}{nlong}{The number of elements in \source. For \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of 32-bit
-		   halfwords. nlong must be of type \VAR{size\_t} in \Clang. If you are using \Fortran, it must be a default integer value.}
+\argRow{IN}{nlong}{The number of elements in \source.  For \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of 32-bit
+		   halfwords.  nlong must be of type \VAR{size\_t} in \Clang.  If you are using \Fortran, it must be a default integer value.}
 \argRow{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to the \activeset,	
                       from which the data is copied. Must be greater than
 		   or equal to 0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of
-		   type integer. If you are using \Fortran, it must be a default integer value.}
+		   type integer.  If you are using \Fortran, it must be a default integer value.}
 \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the \activeset{} of \ac{PE}s.
-		   \VAR{PE\_start} must be of type integer. If	you are using
+		   \VAR{PE\_start} must be of type integer.  If you are using
 		   \Fortran, it must be a default integer value.}
 \argRow{IN}{logPE\_stride}{
 		   The log (base 2) of the stride between consecutive virtual
 		   \ac{PE} numbers in the \activeset. \VAR{log\_PE\_stride} must be of
-		   type integer. If you are using \Fortran, it must be a
+		   type integer.  If you are using \Fortran, it must be a
 		   default integer value.}
 
 \argRow{IN}{PE\_size}{
 		   The number of \ac{PE}s in the \activeset. \VAR{PE\_size} must be of
-		   type integer. If you are using \Fortran, it must be a
+		   type integer.  If you are using \Fortran, it must be a
 		   default integer value.}
 
 \argRow{IN}{pSync}{
-		   A symmetric work array. In \CorCpp, \VAR{pSync} must be of type
-		   long and size \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}. In \Fortran, \VAR{pSync}
-		   must be of type integer and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
+		   A symmetric work array.  In \CorCpp, \VAR{pSync} must be of type
+		   long and size \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}. In \Fortran, \VAR{pSync} must be of type integer and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
 		   Every element of this array must be initialized with the
-		   value \CONST{\_SHMEM\_SYNC\_VALUE} (in \CorCpp) or \CONST{SHMEM\_SYNC\_VALUE} (in
-		   \Fortran) before any of the \ac{PE}s  in  the  \activeset{}	 enter
+		   value \CONST{\_SHMEM\_SYNC\_VALUE} (in \CorCpp) or \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \ac{PE}s  in  the  \activeset{} enter
 		   \FUNC{shmem\_barrier}.}
 }
 %API description
@@ -50,29 +48,25 @@ CALL SHMEM_BROADCAST64(target, source, nlong, PE_root, PE_start, logPE_stride, P
 \openshmem broadcast routines are collective routines.
 They copy data object \source{} on the processor specified by \VAR{PE\_root} and
 store the values at \target{} on the other \ac{PE}s specified by the triplet
-\VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size}. The data is not copied to the \target{}
-area on the root \ac{PE}.
+\VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size}.  The data is not copied to the \target{} area on the root \ac{PE}.
 
 As with all \openshmem collective routines, each of these routines assumes
-that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
+that only \ac{PE}s in the \activeset{} call the routine.  If a \ac{PE} not in the
 \activeset{} calls a \openshmem collective routine, undefined behavior
 results.
 
-The values of arguments \VAR{PE\_root}, \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
-must be equal on all \ac{PE}s in the \activeset. The same \target{} and \source{}
-data objects and the same \VAR{pSync} work array must be passed to all \ac{PE}s in
-the \activeset.
+The values of arguments \VAR{PE\_root}, \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset.  The same \target{} and \source{} data objects and the same \VAR{pSync} work array must be passed to all \ac{PE}s in the \activeset.
 
-Before any \ac{PE} calls a broadcast	routine, you must ensure that the
+Before any \ac{PE} calls a broadcast routine, you must ensure that the
 following conditions exist (synchronization via a barrier or some other
 method is often needed to ensure this): The \VAR{pSync} array on all \ac{PE}s in
 the \activeset{} is not still in use from a prior call to a broadcast
-routine. The \target{} array on all \ac{PE}s in the \activeset{} is ready to
+routine.  The \target{} array on all \ac{PE}s in the \activeset{} is ready to
 accept the broadcast data.
 
 Upon return from a broadcast routine, the following are true for the
-local \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the \target{} data	object
-is updated. The values in the \VAR{pSync} array are restored to the original
+local \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the \target{} data object
+is updated.  The values in the \VAR{pSync} array are restored to the original
 values.
 }
 %API Description Tabl
@@ -87,7 +81,7 @@ constraints, which are as follows: }
 		      derived types or \CorCpp{} structures are
 		      allowed.}
 \cRow{shmem\_broadcast32}{Any noncharacter type that has an
-		      element size of \CONST{32} bits. No \Fortran{}
+		      element size of \CONST{32} bits.  No \Fortran{}
 		      derived types or \CorCpp{} structures are
 		      allowed.}
 \cRow{shmem\_broadcast4}{Any noncharacter type that has an
@@ -107,11 +101,11 @@ constraints, which are as follows: }
        \VAR{pSync} array is initialized at run time, some type of synchronization is
        needed to ensure that all \ac{PE}s in the working set have initialized \VAR{pSync}
        before any of them enter a \openshmem routine called with the \VAR{pSync}
-       synchronization array. A \VAR{pSync} array may be reused on a subsequent
+       synchronization array.  A \VAR{pSync} array may be reused on a subsequent
        \openshmem broadcast routine only if none of the \ac{PE}s in the \activeset{} are
        still processing a prior \openshmem broadcast routine call that used the
-       same \VAR{pSync} array. In general, this can be ensured only by doing some
-       type of synchronization. However, in the special case of \openshmem
+       same \VAR{pSync} array.  In general, this can be ensured only by doing some
+       type of synchronization.  However, in the special case of \openshmem
        routines being called with the same \activeset, you can allocate two
        \VAR{pSync} arrays and alternate between them on successive calls.
 }
