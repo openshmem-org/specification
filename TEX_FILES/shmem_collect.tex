@@ -51,7 +51,7 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 }
 %API description
 {   
-\OSH{} collect and fcollect routines concatenate
+\OSH{} \FUNC{collect} and \FUNC{fcollect} routines concatenate
 \VAR{nelems} \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the \target{} array, over the set of \ac{PE}s defined by \VAR{PE\_start}, \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The resultant \target{} array
 contains the contribution from \ac{PE} \VAR{PE\_start} first, then the contribution
 from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result is written to the \target{} array for all \ac{PE}s in the \activeset.

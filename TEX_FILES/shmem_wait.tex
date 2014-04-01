@@ -25,30 +25,30 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
 \argRow{OUT}{ivar}{A remotely accessible integer variable that is being updated by
-	       another PE.  If you are using \CorCpp, the type of ivar should
+	       another \ac{PE}.  If you are using \CorCpp, the type of ivar should
 	       match that implied in the SYNOPSIS section.} 
-\argRow{IN}{cmp}{The compare operator that compares ivar with cmp\_value.  cmp
+\argRow{IN}{cmp}{The compare operator that compares \VAR{ivar} with \VAR{cmp\_value}.  \VAR{cmp}
 	       must be of type integer.  If you are using \Fortran, it must  be
-	       of  default kind.  If you are using \CorCpp, the type of cmp
+	       of  default kind.  If you are using \CorCpp, the type of cpm
 	       should match that implied in the SYNOPSIS section.}        
-\argRow{IN}{cmp\_value}{cmp\_value must be of type integer.  If you are using \CorCpp, the type of cmp\_value should match that implied in the SYNOPSIS
+\argRow{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  If you are using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the SYNOPSIS
 	       section.  If  you are using \Fortran, cmp\_value must be an
-	       integer of the same size and kind as ivar.}
+	       integer of the same size and kind as \VAR{ivar}.}
 }
 %API description
 { 
-       shmem\_wait and shmem\_wait\_until wait for ivar to be changed by a remote
+       \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be changed by a remote
        write or atomic swap issued by a different processor.  These  routines
        can be used for point-to-point directed synchronization.  A call to
-       shmem\_wait does not return until some other processor writes  a value,
-       not equal to cmp\_value, into ivar on the waiting processor.  A call to
-       shmem\_wait\_until does not return until some  other processor changes
-       ivar to satisfy the condition implied by cmp and cmp\_value.  This
+       \VAR{shmem\_wait} does not return until some other processor writes  a value,
+       not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting processor.  A call to
+       \FUNC{shmem\_wait\_until} does not return until some  other processor changes
+       \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.  This
        mechanism is useful when a processor needs to tell another processor
        that it has completed some action.
-       The shmem\_wait  routines	 return when  ivar  is	 no  longer  equal  to
-       cmp\_value. The shmem\_wait\_until routines return when the compare condition is true.  The compare condition is defined by the ivar  argument  compared
-       with the cmp\_value using the comparison operator, cmp. 
+       The \FUNC{shmem\_wait}  routines return when \VAR{ivar} is no  longer  equal  to
+       \VAR{cmp\_value}. The \FUNC{shmem\_wait\_until} routines return when the compare condition is true.  The compare condition is defined by the \VAR{ivar}  argument  compared
+       with the \VAR{cmp\_value} using the comparison operator, \VAR{cmp}. 
   }
  %API Description Table. 
 {
@@ -94,7 +94,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 {./EXAMPLES/shmem_wait1_example.f90}
  {}
  \exampleITEMF
- { The following call to SHMEM\_INT8\_WAIT\_UNTIL	is  equivalent to the call to SHMEM\_INT8\_WAIT in example 1:}
+ { The following call to \FUNC{SHMEM\_INT8\_WAIT\_UNTIL} is  equivalent to the call to \FUNC{SHMEM\_INT8\_WAIT} in example 1:}
 {./EXAMPLES/shmem_wait2_example.f90}
  {}
  \exampleITEMF
