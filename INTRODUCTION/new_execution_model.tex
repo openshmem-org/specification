@@ -105,7 +105,7 @@ naturally overlapped, and that all data transfers eventually complete.
 atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by \openshmem's atomic operations will be exclusive, but do not guarantee exclusivity
 in combination with other routines, either inside \openshmem or outside.
 
-For example: during the execution of a atomic remote integer increment
+For example: during the execution of an atomic remote integer increment
 operation on a symmetric variable \VAR{X}, no other \openshmem atomic
 operation may access \VAR{X}.  After the increment, \VAR{X} will have
 increased its value by \CONST{1} on the \target{} \ac{PE}, at which point other
