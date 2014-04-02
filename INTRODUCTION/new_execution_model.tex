@@ -35,7 +35,7 @@ via the \openshmem{} interfaces. All \ac{PE}s in an \openshmem{} program should 
 On program exit, \openshmem can release all the resources associated to the library. 
 %  It is up to the implementation on how to handle the finalization of the \openshmem library. 
 
-The \ac{PE}{}s of the \openshmem{} program are identified by unique integers. The identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for \openshmem{} calls (e.g. to specify \PUT{} or \GET{} operations on symmetric data objects, collective synchronization calls, etc) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the life cycle of the \openshmem{} program.
+The \ac{PE}{}s of the \openshmem{} program are identified by unique integers. The identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for \openshmem{} calls (e.g. to specify \PUT{} or \GET{} operations on symmetric data objects, collective synchronization calls, etc.) or to dictate a control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for the life cycle of the \openshmem{} program.
 %on exit implementation are expected to release resources associated to the library
   %following \Fortran{} or \Clang{} program execution.
 %Each \ac{PE} can be implemented as an OS process or OS thread as long as the constraints imposed
