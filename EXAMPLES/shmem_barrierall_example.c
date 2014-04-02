@@ -11,7 +11,7 @@ int main(void)
    npes = _num_pes();
 
    /*put to next  PE in a circular fashion*/
-   shmem_int_p(&x, 4, me+1%npes);
+   shmem_int_p(&x, 4, (me+1)%npes);
    /*synchronize all PEs*/
    shmem_barrier_all();
 
