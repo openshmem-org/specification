@@ -18,7 +18,7 @@ and \VAR{PE\_size}.  \VAR{PE\_start} is the starting \ac{PE} number, a log (base
 collective operations provide the same values for these arguments. 
  
 Another argument important to collective operations is \VAR{pSync}, which is a symmetric work array.  All \ac{PE}s participating in a collective must pass the same
-pSync array.  On completion of a collective call, the \VAR{pSync} is restored to its 
+\VAR{pSync} array.  On completion of a collective call, the \VAR{pSync} is restored to its 
 original contents.  The reuse of \VAR{pSync} array is allowed for a \ac{PE}, if all previous collective operations using the \VAR{pSync} array have been completed by all participating 
 \ac{PE}s.  One can use a synchronization collective operation such as \barrier{}
 to ensure completion of previous collective operations.  The two cases below
