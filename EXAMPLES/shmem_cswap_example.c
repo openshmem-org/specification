@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <shmem.h>
+
 int main(void)
 {
    static int  race_winner = -1;

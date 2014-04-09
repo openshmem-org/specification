@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <shmem.h>
+
 int main(void) 
 {
    static int bigd[100];

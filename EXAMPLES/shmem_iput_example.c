@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <shmem.h>
+
 int main(void)
 {
    short source[10] = { 1, 2, 3, 4, 5,

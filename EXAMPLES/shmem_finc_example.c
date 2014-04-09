@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <shmem.h>
+
 int dst;
 
 int main(void)

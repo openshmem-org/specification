@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <shmem.h>
+
 long x = 10101;
 
 int main(void)

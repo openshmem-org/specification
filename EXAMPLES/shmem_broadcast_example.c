@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <shmem.h>
+
 for (i=0; i < _SHMEM_BCAST_SYNC_SIZE; i++) {
          pSync[i] = _SHMEM_SYNC_VALUE;
 }
