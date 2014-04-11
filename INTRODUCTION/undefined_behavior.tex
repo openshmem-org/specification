@@ -23,8 +23,7 @@ Use of non-symmetric variables & Some routines require remotely accessible varia
 where possible and the library can abort the program.  Another implementation
 may choose to continue either with a warning or silently.\tabularnewline
 \hline 
-Non-symmetric variables & The symmetric memory management routines are collectives, which means that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with the same size request. \openshmem implementations should detect the size mismatch and return error information to the caller. Implementations
-may also produce an error message. Program behavior after a mismatched
-\FUNC{shmalloc} call is undefined.\tabularnewline
+Non-symmetric variables & The symmetric memory management routines are collectives, which means that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with the same size request. 
+Program behavior after a mismatched \FUNC{shmalloc} call is undefined.\tabularnewline
 \hline 
 \end{tabular}
