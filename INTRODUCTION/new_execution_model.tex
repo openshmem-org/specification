@@ -55,11 +55,24 @@ The \ac{PE}{}s of the \openshmem{} program are identified by unique integers. Th
 %on exit implementation are expected to release resources associated to the library
 
 \subsection{Progress of \openshmem operations}
-The \openshmem model assumes that computation and communication are
-naturally overlapped, and that all data transfers eventually complete. The OpenSHMEM execution model assumes that computation and communication are naturally overlapped. 
-OpenSHMEM programs are expected to exhibit progression of communication both with and without OpenSHMEM calls.
+The \openshmem model assumes that computation and communication are naturally overlapped. \openshmem programs are expected to exhibit progression of communication both with and without \openshmem calls. Consider a \ac{PE} that is engaged in a computation with no \openshmem calls. Other \ac{PE}s should be able to communicate (\OPR{put}, \OPR{get}, \OPR{collective}, \OPR{atomic}, etc) and complete communication operations with that computationally-bound \ac{PE} without that \ac{PE} issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} should progress regardless of when that \ac{PE} next engages in an \openshmem call.
 
-\textbf{Note to implementors:} while delivery can be deferred, for example until a synchronization point at which data is known to be available, high-quality implementations should attempt asynchronous delivery, whenever possible, for performance reasons. Progress can be ensured through the use of a dedicated progress thread in software, or through network hardware that offloads communication handling from processors, for example.
+\textbf{Note to implementors:}
+
+\begin{itemize}
+\item An \openshmem implementation for hardware that does not provide asynchronous communication capabilities may require a software progress thread in order to progress remotely-issued communication requests without explicit application calls to the \openshmem library.
+\item High performance implementations of \openshmem are expected to leverage hardware offload capabilities and
+    provide asynchronous one-sided communication without software assistance.
+\item Implementations should avoid deferring the execution of one-sided operations until a synchronization point where data is known to be available. High-quality implementations should attempt asynchronous delivery whenever possible, for performance reasons. Additionally, the \openshmem community discourages releasing \openshmem implementations that do not provide asynchronous one-sided operations, since those have very limited performance value for \openshmem applications.
+\end{itemize}
+
+%
+%ORIGINAL TEXT
+%The \openshmem model assumes that computation and communication are
+%naturally overlapped, and that all data transfers eventually complete. The OpenSHMEM execution model assumes that computation and communication are naturally overlapped. 
+%OpenSHMEM programs are expected to exhibit progression of communication both with and without OpenSHMEM calls.
+%
+%\textbf{Note to implementors:} while delivery can be deferred, for example until a synchronization point at which data is known to be available, high-quality implementations should attempt asynchronous delivery, whenever possible, for performance reasons. Progress can be ensured through the use of a dedicated progress thread in software, or through network hardware that offloads communication handling from processors, for example.
 
 %High quality \openshmem implementations must insure that programs exhibit %SP: Changing MUST to may as per discussion on 01/31/2014
 %progression of communication both with and without \openshmem calls.
