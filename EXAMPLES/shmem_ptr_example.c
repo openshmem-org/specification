@@ -12,8 +12,11 @@ int main(void)
    if (_my_pe() == 0) {
       /* initialize PE 1's bigd array */
       ptr = shmem_ptr(bigd, 1);
-      for (i=0; i<100; i++)
-         *ptr++ = i+1;
+      if (ptr == NULL)
+         printf("can't use pointer to directly access PE 1's array\n");
+      else
+         for (i=0; i<100; i++)
+            *ptr++ = i+1;
    }
 
    shmem_barrier_all();

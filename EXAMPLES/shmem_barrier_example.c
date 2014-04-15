@@ -6,9 +6,9 @@ int x = 10101;
 
 int main(void)
 {
-   int me, npes;
+   int i, me, npes;
 
-   for (int i = 0; i < _SHMEM_BARRIER_SYNC_SIZE; i += 1){
+   for (i = 0; i < _SHMEM_BARRIER_SYNC_SIZE; i += 1){
       pSync[i] = _SHMEM_SYNC_VALUE;
    }
 

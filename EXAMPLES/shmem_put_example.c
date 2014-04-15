@@ -12,7 +12,7 @@ int main(void)
       shmem_long_put(target, source, 10, 1);
    }
    shmem_barrier_all();  /* sync sender and receiver */
-   printf("target[0] on PE %d is %d\n", _my_pe(), target[0]);
+   printf("target[0] on PE %d is %ld\n", _my_pe(), target[0]);
    return 1;
 }
 
