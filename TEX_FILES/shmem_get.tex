@@ -75,7 +75,9 @@ CALL SHMEM_REAL_GET(target, source, nelems, pe) %*\synFE   %DO NOT DELETE. THIS 
     %Return Values    
       \desR{None.}
     \notesB{
-        See Introduction for a definition of the term remotely accessible.
+        See Introduction for a definition of the term remotely accessible. If you are using \Fortran, data types must be of default size.  For
+       example, a real variable must be declared as \CONST{REAL},  \CONST{REAL*4},  or
+       \CONST{REAL(KIND=KIND(1.0))}.
     }
 }
 \exampleB{
