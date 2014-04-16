@@ -64,9 +64,7 @@ res_r8 = SHMEM_REAL8_SWAP(target_r8, value_r8, pe) %*\synFE   %DO NOT DELETE. TH
 \exampleB{
     %For each example, you can enter it as an item.
     \exampleITEM
-    {The following call ensures that the first \ac{PE} to execute the
-     conditional swap will successfully write its \ac{PE} number to \VAR{race\_winner}
-     on \ac{PE} \CONST{0}.}
+    {The example below swap values between odd numbered \acp{PE} and their right (modulo) neighbor and outputs the result of swap.}
     {./EXAMPLES/shmem_swap_example.c}
 {}
 }  	
