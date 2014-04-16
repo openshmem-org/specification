@@ -7,10 +7,10 @@ long shmem_longlong_cswap(long long *target, long long cond, long long value, in
 \synF   %Synopsis for FORTRAN API
 
 INTEGER pe
-INTEGER*4 SHMEM_INT4_CSWAP
-ires = SHMEM_INT4_CSWAP(target, cond, value, pe)
-INTEGER*8 SHMEM_INT8_CSWAP
-ires = SHMEM_INT8_CSWAP(target, cond, value, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+INTEGER*4 SHMEM_INT4_CSWAP, target_i4, cond_i4, value_i4, ires_i4
+ires_i4 = SHMEM_INT4_CSWAP(target_i4, cond_i4, value_i4, pe)
+INTEGER*8 SHMEM_INT8_CSWAP, target_i8, cond_i8, value_i8, ires_i8
+ires_i8 = SHMEM_INT8_CSWAP(target_i8, cond_i8, value_i8, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
