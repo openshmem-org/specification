@@ -48,7 +48,7 @@ int main(int argc, char **argv)
   int i,j;
   long modj,oldj,oldxmodj;
   int my_pe,n_pes;
-  size_t max_elements,max_elements_bytes;
+  size_t max_elements_bytes;
   static long *x;
 
   start_pes(0);
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 /*  shmalloc x on all pes (only use the one on PE 0)  */
 
   max_elements_bytes = (size_t) (sizeof(long) * n_pes);
-  x = shmalloc( max_elements_bytes );
+  x = (long *)shmalloc( max_elements_bytes );
   for(i=0; i<n_pes; i++)
     x[i] = 0;
   count = 0;
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
   if (my_pe == 0) {         /* check x[j] array on PE 0 */
     for(j=1 ; j<n_pes; j++) {
       if (x[j-1] != ITER)
-        fprintf(stderr, "FAIL PE %d of %d: x[%d] = %ld expected = %ld\n",
+        fprintf(stderr, "FAIL PE %d of %d: x[%d] = %ld expected = %d\n",
                          my_pe, n_pes, j-1, x[j-1], ITER);
     }
   }

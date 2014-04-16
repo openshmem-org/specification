@@ -10,7 +10,7 @@
  *
  */
 #include <math.h>
-
+#include <sys/time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -30,11 +30,11 @@ double timerval()
 
 int main(int argc, char *argv[])
 {
-// 1. get random [0, 1] ==>
-// 2. get random [0, pi/2] ==>theta
-// 3. hit X < sin(theta)
-// 4. 2/pi = hit/tries.
-
+/* 1. get random [0, 1] ==>
+   2. get random [0, pi/2] ==>theta
+   3. hit X < sin(theta)
+   4. 2/pi = hit/tries.
+*/
    double X, Theta, My_pi;
    double Tstart, Tend;
    int i, total, hit=0;

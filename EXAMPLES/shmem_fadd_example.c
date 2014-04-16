@@ -4,6 +4,7 @@
 int main(void) 
 {
    int me, old;
+   static int dst;
 
    start_pes(0);
    me = _my_pe();

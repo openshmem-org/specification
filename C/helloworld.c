@@ -1,5 +1,4 @@
-#include <stdio..h>
-
+#include <stdio.h>
 #include <shmem.h>
 
 int main(int argc, char* argv[])

@@ -13,7 +13,7 @@ int main(void)
    }
    shmem_barrier_all();   /* sync sender and receiver */
    if (_my_pe() == 1) {
-      printf("target on PE %d is %d %d %d %d %d0, _my_pe(),
+      printf("target on PE %d is %d %d %d %d %d\n", _my_pe(),
       (int)target[0], (int)target[1], (int)target[2],
       (int)target[3], (int)target[4] );
    }
