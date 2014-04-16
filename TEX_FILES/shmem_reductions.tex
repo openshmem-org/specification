@@ -76,7 +76,6 @@ CALL SHMEM_REAL8_PROD_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE
 CALL SHMEM_REAL16_PROD_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT4_OR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT8_OR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)	
-CALL SHMEM_COMP4_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT4_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
@@ -149,7 +148,8 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
 		  \cRow{shmem\_real4\_sum\_to\_all}{REAL*4.}
 		  \cRow{shmem\_real8\_sum\_to\_all}{	 Real. If you are using \Fortran, it must be a default real value.}
 		  \cRow{shmem\_real16\_sum\_to\_all}{	 Real. If you are using \Fortran, it must be a default real value.}
-		  \cRow{shmem\_comp4\_prod\_to\_all	}{ Complex, with an element size	equal to two 4-byte real values. }		  \cRow{shmem\_comp8\_prod\_to\_all	}{ Complex, with an element size	equal to two 8-byte real values.}
+		  \cRow{shmem\_comp4\_prod\_to\_all	}{ Complex, with an element size	equal to two 4-byte real values. }		 
+		  \cRow{shmem\_comp8\_prod\_to\_all	}{ Complex, with an element size	equal to two 8-byte real values.}
 		  \cRow{shmem\_int4\_prod\_to\_all}{Integer, with an element size of 4 bytes.}
 		  \cRow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
 		  \cRow{shmem\_real4\_prod\_to\_all}{Real, with an element size of 4 bytes.}
@@ -158,11 +158,11 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
 		  \cRow{shmem\_int8\_or\_to\_all}{Integer, with an element size of 8 bytes.}
 		  \cRow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.}
 		  \cRow{shmem\_comp8\_xor\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-		  \cRow{shmem\_comp4\_xor\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
+%		  \cRow{shmem\_comp4\_xor\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
 		  \cRow{shmem\_int8\_xor\_to\_all}{Integer, with an element size of 8 bytes.}
 		  \cRow{shmem\_int4\_xor\_to\_all}{Integer, with an element size of 4 bytes.}
-		  \cRow{shmem\_real8\_xor\_to\_all}{Real, with an element size of 8 bytes.}
-		  \cRow{shmem\_real4\_xor\_to\_all}{Real, with an element size of 4 bytes.}
+%		  \cRow{shmem\_real8\_xor\_to\_all}{Real, with an element size of 8 bytes.}
+%		  \cRow{shmem\_real4\_xor\_to\_all}{Real, with an element size of 4 bytes.}
 		  }
 }%end of DesB
 {%Return Values     
