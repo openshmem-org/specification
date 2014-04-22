@@ -5,9 +5,9 @@ void shmem_long_add(long *target, long value, int pe);
 void shmem_longlong_add(long long *target, long long value, int pe); %*\synCE
 \synF
 INTEGER pe
-INTEGER*4 target_i4, value_i4
+INTEGER*4  value_i4
 CALL SHMEM_INT4_ADD(target_i4, value_i4, pe)
-INTEGER*8 target_i8, value_i8
+INTEGER*8 value_i8
 CALL SHMEM_INT8_ADD(target_i8, value_i8, pe) %*\synFE
 
 %DESCRIPTION

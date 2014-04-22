@@ -10,19 +10,19 @@ long shmem_swap(long *target, long value, int pe); %*\synCE    %DO NOT DELETE. T
 
 \synF   %Synopsis for FORTRAN API
 
-INTEGER target, value, pe
+INTEGER value, pe
 INTEGER SHMEM_SWAP
 ires = SHMEM_SWAP(target, value, pe) 
-INTEGER*4 target_i4, value_i4, ires_i4
+INTEGER*4 value_i4, ires_i4
 INTEGER*4 SHMEM_INT4_SWAP
 ires_i4 = SHMEM_INT4_SWAP(target_i4, value_i4, pe) 
-INTEGER*8 target_i8, value_i8, ires_i8
+INTEGER*8 value_i8, ires_i8
 INTEGER*8 SHMEM_INT8_SWAP
 ires_i8 = SHMEM_INT8_SWAP(target_i8, value_i8, pe)
-REAL*4 target_r4, value_r4, res_r4
+REAL*4 value_r4, res_r4
 REAL*4 SHMEM_REAL4_SWAP
 res_r4 = SHMEM_REAL4_SWAP(target_r4, value_r4, pe) 
-REAL*8 target_r8, value_r8, res_r8
+REAL*8 value_r8, res_r8
 REAL*8 SHMEM_REAL8_SWAP
 res_r8 = SHMEM_REAL8_SWAP(target_r8, value_r8, pe)%*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 %ORIGINAL

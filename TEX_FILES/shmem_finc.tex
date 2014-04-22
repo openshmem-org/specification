@@ -9,8 +9,8 @@ long long shmem_longlong_finc(long long *target, int pe); %*\synCE    %DO NOT DE
 \synF   %Synopsis for FORTRAN API
 
 INTEGER pe 
-INTEGER*4 SHMEM_INT4_FINC, target_i4, ires_i4
-INTEGER*8 SHMEM_INT8_FINC, target_i8, ires_i8
+INTEGER*4 SHMEM_INT4_FINC, ires_i4
+INTEGER*8 SHMEM_INT8_FINC, ires_i8
 ires_i4 = SHMEM_INT4_FINC(target_i4, pe)
 ires_i8 = SHMEM_INT8_FINC(target_i8, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 

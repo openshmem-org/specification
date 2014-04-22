@@ -8,8 +8,6 @@ void shmem_longlong_inc(long long *target, int pe); %*\synCE    %DO NOT DELETE. 
 \synF   %Synopsis for FORTRAN API
 
 INTEGER pe
-INTEGER*4 target_i4
-INTEGER*8 target_i8
 CALL SHMEM_INT4_INC(target_i4, pe)
 CALL SHMEM_INT8_INC(target_i8, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
@@ -17,9 +15,9 @@ CALL SHMEM_INT8_INC(target_i8, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A
 \desB{  
    	\argRow{IN}{target}{The remotely accessible integer data object to be updated on
 	 the remote \ac{PE}. The type of \target{} should match that implied
-	 in the SYNOPSIS section. }
+	 in the SYNOPSIS section. For Fortran it should be a 4-byte integer for \FUNC{SHMEM\_INT4\_INC} and a 8-byte integer for \FUNC{SHMEM\_INT8\_INC}. }
    \argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which \target{} is to
-	 be  updated. If you are using Fortran, it must be a default
+	 be  updated. 
 	 integer value.}
  }
 %API description
