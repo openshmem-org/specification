@@ -105,9 +105,10 @@ constraints, which are as follows: }
        \openshmem broadcast routine only if none of the \ac{PE}s in the \activeset{} are
        still processing a prior \openshmem broadcast routine call that used the
        same \VAR{pSync} array.  In general, this can be ensured only by doing some
-       type of synchronization.  However, in the special case of \openshmem
-       routines being called with the same \activeset, you can allocate two
-       \VAR{pSync} arrays and alternate between them on successive calls.
+       type of synchronization.        
+%       However, in the special case of \openshmem
+%       routines being called with the same \activeset, you can allocate two
+%       \VAR{pSync} arrays and alternate between them on successive calls.
 }
 }
 %Example
