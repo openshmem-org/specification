@@ -6,23 +6,29 @@ void shmem_longlong_add(long long *target, long long value, int pe); %*\synCE
 \synF
 INTEGER pe
 INTEGER*4  value_i4
-CALL SHMEM_INT4_ADD(target_i4, value_i4, pe)
+CALL SHMEM_INT4_ADD(target, value_i4, pe)
 INTEGER*8 value_i8
-CALL SHMEM_INT8_ADD(target_i8, value_i8, pe) %*\synFE
+CALL SHMEM_INT8_ADD(target, value_i8, pe) %*\synFE
 
 %DESCRIPTION
  
 %Arguments
 \desB{
- 	\argRow{OUT}{target}{The remotely accessible integer data object to be updated  on the remote \ac{PE}.  If you are using \CorCpp, the type of \target{} should match that implied in the SYNOPSIS section.  If you are using the \Fortran{} compiler, it must be of type integer with an element size of \CONST{4} bytes for \FUNC{SHMEM\_INT4\_ADD} and \CONST{8} bytes for \FUNC{SHMEM\_INT8\_ADD}.}
+ 	\argRow{OUT}{target}{The remotely accessible integer data object to be updated  on the remote \ac{PE}.  If you are using \CorCpp, the type of \target{} should match that implied in the SYNOPSIS section.}
 	\argRow{IN}{value}{The value to be atomically added to \target. If you are using \CorCpp, the type of value should match that  implied  in  the SYNOPSIS  section.  If you are using \Fortran, it must be of type integer with an element size of \target.}
 	\argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which \target{} is to be updated.  If you are using \Fortran, it must be a default integer value.}
 }
 %API Description
 {The \FUNC{shmem\_add} routine performs an atomic add operation. It adds value
  to \target{} on \ac{PE} \VAR{pe} and atomically increments the \target{} without returning the value.
- }
+ } 
 {
+ \hfill \\
+\desTB {If you are using \Fortran, \VAR{target} must be of the following type:}
+{
+\cRow{SHMEM\_INT4\_ADD}{\CONST{4}-byte integer}
+\cRow{SHMEM\_INT8\_ADD}{\CONST{8}-byte integer}
+}
   \desR{None.}
    \notesB{The term remotely accessible is defined in the Introduction.}
 }

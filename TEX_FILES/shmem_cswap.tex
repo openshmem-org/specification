@@ -8,9 +8,9 @@ long shmem_longlong_cswap(long long *target, long long cond, long long value, in
 
 INTEGER pe
 INTEGER*4 SHMEM_INT4_CSWAP,  cond_i4, value_i4, ires_i4
-ires_i4 = SHMEM_INT4_CSWAP(target_i4, cond_i4, value_i4, pe)
+ires_i4 = SHMEM_INT4_CSWAP(target, cond_i4, value_i4, pe)
 INTEGER*8 SHMEM_INT8_CSWAP,  cond_i8, value_i8, ires_i8
-ires_i8 = SHMEM_INT8_CSWAP(target_i8, cond_i8, value_i8, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+ires_i8 = SHMEM_INT8_CSWAP(target, cond_i8, value_i8, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
@@ -35,7 +35,7 @@ on an arbitrary \ac{PE} and return the prior contents of the data object in one 
 %API Description Tabl
 {
 \hfill \\
-\desTB {The  \VAR{target}  and source data  objects must conform to certain typing
+\desTB {The  \VAR{target}  and source data objects must conform to certain typing
 constraints, which are as follows: } 
 {
 \cRow{SHMEM\_INT4\_CSWAP}{\CONST{4}-byte integer.}
