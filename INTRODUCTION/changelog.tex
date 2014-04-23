@@ -28,17 +28,30 @@ routines.\\See Section \ref{subsec:shmem_barrier_all} and \ref{subsec:shmem_barr
 \item Clarifications of the semantics of \FUNC{shmem\_pe\_accessible} and \FUNC{shmem\_addr\_accessible}.
 \\See Section \ref{subsec:shmem_pe_accessible} and \ref{subsec:shmem_addr_accessible}.
 \item Added an annex on interoperability with \ac{MPI}.\\See Annex \ref{sec:mpi}.
-% Pasha: this was not part of 1.0 % \item Removed redundant interface \FUNC{shmem\_barrier(void)} from \FUNC{shmem\_barrier\_all}.\\See Section \ref{subsec:shmem_barrier_all}.
 \item Added examples to the different interfaces.
 \item Clarification on the naming conventions for constant in \Clang{} and \Fortran{}.
 \\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
-\item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}. 
+\item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.\\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}. 
 %These calls are part of the SGI specification.
-\item Removed \ac{API} calls: \FUNC{shmem\_char\_put}, \FUNC{shmem\_char\_get}. 
-
+\item Removed \ac{API} calls: \FUNC{shmem\_char\_put}, \FUNC{shmem\_char\_get}.\\ See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}. 
 \item The usage of \VAR{ptrdiff\_t}, \VAR{size\_t}, and \VAR{int} in the interface signature 
-      was made consistent with the description in Sections \ref{subsec:coll}
-      \ref{subsec:shmem_iput} \ref{subsec:shmem_iget}
-
+      was made consistent with the description in Sections \ref{subsec:coll}, \ref{subsec:shmem_iput}, and \ref{subsec:shmem_iget}.
+%Revisions from public comment      
+\item Revised\FUNC{shmem\_barrier} example.\\See Section \ref{subsec:shmem_barrier}. 
+\item Clarification on the initial value of \VAR{pSync} work arrays for \FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}. 
+\item Clarification on the expected behavior when multiple \FUNC{start\_pes} calls are encountered has been clarified.\\See Section \ref{subsec:start_pes}.
+\item Corrected the definition of atomic increment operation.\\See Section \ref{subsec:shmem_inc}. 
+%\item Removed malloc_error from shmalloc in Specification 1.1 under Section 8.2.1. 
+\item Clarification of the size of the symmetric heap and when it is set.\\See Section \ref{subsec:shfree}.
+\item Clarification on the integer and real sizes for \Fortran{} \ac{API}.\\See Sections \ref{subsec:shmem_add}, \ref{subsec:shmem_cswap}, \ref{subsec:shmem_swap}, \ref{subsec:shmem_finc}, \ref{subsec:shmem_inc}, and \ref{subsec:shmem_fadd}. 
+\item Clarification on expected behavior on program \OPR{exit}.\\ See Section \ref{subsec:execution_model}, Execution Model. 
+\item More detailed description for the progress of \openshmem operations provided.\\ See Section \ref{subsec:progress}. 
+\item Clarification of naming convention for non-standard interfaces and their inclusion in \FUNC{shmemx.h}.\\ See Section \ref{subsec:bindings}. 
+\item Various fixes to \openshmem code examples across the specification to include appropriate header files. 
+%\item Clarification of store operation as memory store in context of \FUNC{shmem\_fence} and {shmem\_quiet} under Sections 8.7.1 and 8.7.2. Duplicate
+\item Removing requirement that implementations should detect size mismatch and return error information for \FUNC{shmalloc} and ensuring consistent language.\\See Section \ref{subsec:shfree} and Annex \ref{sec:undefined}. 
+\item Fortran programming fixes for examples.\\ See Section \ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait}. 
+\item Name changes for UV and ICE for SGI systems.\\See Annex \ref{sec:openshmem_history}. 
+%\item Removed XOR reduction for REAL and COMPLEX data types under Section 8.5.5. (Issue #93)
 %These calls are not part of the SGI specification. 
 \end{itemize}

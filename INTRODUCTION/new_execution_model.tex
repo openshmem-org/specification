@@ -55,6 +55,7 @@ The \ac{PE}{}s of the \openshmem{} program are identified by unique integers. Th
 %on exit implementation are expected to release resources associated to the library
 
 \subsection{Progress of \openshmem operations}
+\label{subsec:progress}
 The \openshmem model assumes that computation and communication are naturally overlapped. \openshmem programs are expected to exhibit progression of communication both with and without \openshmem calls. Consider a \ac{PE} that is engaged in a computation with no \openshmem calls. Other \ac{PE}s should be able to communicate (\OPR{put}, \OPR{get}, \OPR{collective}, \OPR{atomic}, etc) and complete communication operations with that computationally-bound \ac{PE} without that \ac{PE} issuing any explicit \openshmem calls. \openshmem communication calls involving that \ac{PE} should progress regardless of when that \ac{PE} next engages in an \openshmem call.
 
 \textbf{Note to implementors:}
