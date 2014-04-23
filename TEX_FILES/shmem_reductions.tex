@@ -184,10 +184,11 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
  reused in a subsequent reduction routine call only if none of the \ac{PE}s
  in the \activeset{} are still processing a prior reduction routine call
  that used the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be
- assured only by doing some type of synchronization. However, in the
- special case of reduction routines being called with the same \activeset, 
- you can allocate two \VAR{pSync} and \VAR{pWrk} arrays and alternate between
- them on successive calls.
+ assured only by doing some type of synchronization. 
+% However, in the
+% special case of reduction routines being called with the same \activeset, 
+% you can allocate two \VAR{pSync} and \VAR{pWrk} arrays and alternate between
+% them on successive calls.
 }
 }
 %Example

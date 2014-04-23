@@ -21,16 +21,18 @@ Another argument important to collective operations is \VAR{pSync}, which is a s
 \VAR{pSync} array.  On completion of a collective call, the \VAR{pSync} is restored to its 
 original contents.  The reuse of \VAR{pSync} array is allowed for a \ac{PE}, if all previous collective operations using the \VAR{pSync} array have been completed by all participating 
 \ac{PE}s.  One can use a synchronization collective operation such as \barrier{}
-to ensure completion of previous collective operations.  The two cases below
-show the reuse of \VAR{pSync} array:
+to ensure completion of previous collective operations. The \FUNC{shmem\_barrier} function allows the same \VAR{pSync} array to be used on consecutive calls as long as the active \ac{PE} set does not change. 
 
-\begin{itemize}
-\item The \FUNC{shmem\_barrier} function allows the same \VAR{pSync} array to be 		used on consecutive calls as long as the active \ac{PE} set does not change.
-\item  If the same collective function is called multiple times with the
-          same \activeset, the calls may alternate between two \VAR{pSync} arrays.
-          The \openshmem functions guarantee that a first call is completely finished by 
-          all \ac{PE}s by the time processing of a third  call  begins  on any \ac{PE}.          
-\end{itemize}
+%The two cases below
+%show the reuse of \VAR{pSync} array:
+%
+%\begin{itemize}
+%\item The \FUNC{shmem\_barrier} function allows the same \VAR{pSync} array to be used on consecutive calls as long as the active \ac{PE} set does not change.
+%\item  If the same collective function is called multiple times with the
+%          same \activeset, the calls may alternate between two \VAR{pSync} arrays.
+%          The \openshmem functions guarantee that a first call is completely finished by 
+%          all \ac{PE}s by the time processing of a third  call  begins  on any \ac{PE}.          
+%\end{itemize}
 
 
 All collective operations defined in the specification are blocking.  The 

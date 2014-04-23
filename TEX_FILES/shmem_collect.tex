@@ -93,9 +93,10 @@ synchronization array.  A \VAR{pSync} array can be reused on a subsequent
 \openshmem collective routine only if none of the \ac{PE}s in the \activeset{}  are
 still processing a  prior \openshmem collective routine call that used the
 same \VAR{pSync} array.  In general, this may be ensured only by doing some
-type of synchronization.  However, in the special case of \openshmem
-routines being called with the same \activeset, you can allocate two
-\VAR{pSync} arrays and alternate between them on successive calls.
+type of synchronization.  
+%However, in the special case of \openshmem
+%routines being called with the same \activeset, you can allocate two
+%\VAR{pSync} arrays and alternate between them on successive calls.
 
 The collective routines operate on active \ac{PE} sets that have a
 non-power-of-two \VAR{PE\_size} with some performance degradation.  They
