@@ -29,7 +29,7 @@
 %\Clang{} or \Fortran.  As of now, an \openshmem program finishes execution by returning from the main function. It is up to the implementation on how to handle the finalization of the \openshmem library and any other 
 %resources initialized by the library: there is currently no explicit finalization call defined in the \openshmem specification.
 
-An \openshmem{} program consists of a set of \openshmem{} processes called \ac{PE}s that execute in a \ac{SPMD}-like model where each \ac{PE} can take a different execution path. A \ac{PE} can be implemented using an OS process or an OS thread\footnote{However, implementing a \ac{PE} using an OS thread requires compiler techniques to implement the \openshmem{} memory model.}.
+An \openshmem{} program consists of a set of \openshmem{} processes called \ac{PE}s that execute in a \ac{SPMD}-like model where each \ac{PE} can take a different execution path. A \ac{PE} can be implemented using an OS process or an OS thread\footnote{However, implementing \ac{PE}s using OS threads requires compiler techniques to implement the \openshmem{} memory model.}.
 The \ac{PE}s progress asynchronously, and can communicate/synchronize 
 via the \openshmem{} interfaces. All \ac{PE}s in an \openshmem{} program should start by calling the initialization function \FUNC{start\_pes} before using any of the other \openshmem{} library routines. As of now, an \openshmem program finishes execution by returning from the main function. On program exit, \openshmem must complete all pending communication and release all the resources associated to the library using an implicit collective synchronization across \ac{PE}s.
 %On program exit, \openshmem can release all the resources associated to the library. 
