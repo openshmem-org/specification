@@ -15,8 +15,8 @@ int main(void)
 
     shmem_quiet();
 
-    shmem_long_get(target, source, 3, 1);
-    shmem_int_get(&targ, &src, 1, 2);      
+    shmem_long_get(target, target, 3, 1);    /*gets updated value from target on PE 1*/
+    shmem_int_get(&targ, &targ, 1, 2);       /*gets updated value from targ on PE 2*/
     printf("target: {%ld,%ld,%ld}\n",target[0],target[1],target[2]); /*target: {1,2,3}*/
     printf("targ: %d\n", targ); /*targ: 90*/
 
