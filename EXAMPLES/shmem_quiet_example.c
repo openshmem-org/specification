@@ -11,7 +11,7 @@ int main(void)
   start_pes(0);
   if (_my_pe() == 0) {
     shmem_long_put(target, source, 3, 1);  /*put1*/
-    shmem_int_put(&targ, &src, 1, 2);  /*put4*/
+    shmem_int_put(&targ, &src, 1, 2);  /*put2*/
 
     shmem_quiet();
 
