@@ -2,16 +2,27 @@
 \label{subsec:shmem_wait}
 \synC   %Synopisis for C API
 
-void shmem_int_wait(int *var, int value);
-void shmem_int_wait_until(int *var, int cond, int value);
-void shmem_long_wait(long *var, long value);
-void shmem_long_wait_until(long *var, int cond, long value);
-void shmem_longlong_wait(long long *var, long long value);
-void shmem_longlong_wait_until(long long *var, int cond, long long value);
-void shmem_short_wait(short *var, short value);
-void shmem_short_wait_until(short *var, int cond, short value);
+void shmem_int_wait(int *ivar, int cmp_value);
+void shmem_int_wait_until(int *ivar, int cmp, int cmp_value);
+void shmem_long_wait(long *ivar, long cmp_value);
+void shmem_long_wait_until(long *ivar, int cmp, long cmp_value);
+void shmem_longlong_wait(long long *ivar, long long cmp_value);
+void shmem_longlong_wait_until(long long *ivar, int cmp, long long cmp_value);
+void shmem_short_wait(short *ivar, short cmp_value);
+void shmem_short_wait_until(short *ivar, int cmp, short cmp_value);
 void shmem_wait(long *ivar, long cmp_value);
-void shmem_wait_until(long *ivar, int cmp, long value); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+void shmem_wait_until(long *ivar, int cmp, long cmp_value);%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+%
+%void shmem_int_wait(int *var, int value);
+%void shmem_int_wait_until(int *var, int cond, int value);
+%void shmem_long_wait(long *var, long value);
+%void shmem_long_wait_until(long *var, int cond, long value);
+%void shmem_longlong_wait(long long *var, long long value);
+%void shmem_longlong_wait_until(long long *var, int cond, long long value);
+%void shmem_short_wait(short *var, short value);
+%void shmem_short_wait_until(short *var, int cond, short value);
+%void shmem_wait(long *ivar, long cmp_value);
+%void shmem_wait_until(long *ivar, int cmp, long value); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 \synF   %Synopsis for FORTRAN API
 
@@ -29,7 +40,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 	       match that implied in the SYNOPSIS section.} 
 \argRow{IN}{cmp}{The compare operator that compares \VAR{ivar} with \VAR{cmp\_value}.  \VAR{cmp}
 	       must be of type integer.  If you are using \Fortran, it must  be
-	       of  default kind.  If you are using \CorCpp, the type of cpm
+	       of  default kind.  If you are using \CorCpp, the type of \VAR{cmp}
 	       should match that implied in the SYNOPSIS section.}        
 \argRow{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  If you are using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the SYNOPSIS
 	       section.  If  you are using \Fortran, cmp\_value must be an
