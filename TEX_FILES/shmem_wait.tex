@@ -1,6 +1,6 @@
 \bAPI{SHMEM\_WAIT}{Wait for a variable on the local \ac{PE} to change.}
 \label{subsec:shmem_wait}
-\synC   %Synopisis for C API
+\cbstart \synC   %Synopisis for C API
 
 void shmem_int_wait(int *ivar, int cmp_value);
 void shmem_int_wait_until(int *ivar, int cmp, int cmp_value);
@@ -12,7 +12,7 @@ void shmem_short_wait(short *ivar, short cmp_value);
 void shmem_short_wait_until(short *ivar, int cmp, short cmp_value);
 void shmem_wait(long *ivar, long cmp_value);
 void shmem_wait_until(long *ivar, int cmp, long cmp_value);%*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
-%
+\cbend%
 %void shmem_int_wait(int *var, int value);
 %void shmem_int_wait_until(int *var, int cond, int value);
 %void shmem_long_wait(long *var, long value);
