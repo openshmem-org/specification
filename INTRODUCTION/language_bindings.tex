@@ -12,7 +12,7 @@ the \Clang{} language, but not to \Fortran{}, and should make this clear in its 
 \openshmem{} \ac{API}s can be implemented as either functions or macros. However, implementing the interfaces using macros is strongly discouraged as this could severely limit the use of external profiling tools and high-level compiler optimizations. An \openshmem{} program should avoid defining function names, variables, or
 identifiers with the prefix \shmemprefix{} (for \Clang{} and \Fortran{}), \shmemprefixC{} (for \Clang{}) or with \openshmem \ac{API} names.
 
-All \openshmem extension \ac{API}s that are not part of this specification must be defined in \FUNC{shmemx.h} include file. These extensions shall use \FUNC{shmemx\_} prefix for all function, variable, and constant names.
+\cbstart All \openshmem extension \ac{API}s that are not part of this specification must be defined in \FUNC{shmemx.h} include file. These extensions shall use \FUNC{shmemx\_} prefix for all function, variable, and constant names.\cbend
 
 %The \openshmem{} constants and environment variables are in all capital letters. 
 %All \openshmem{} functions are prefixed with \shmemprefix{}, besides these 

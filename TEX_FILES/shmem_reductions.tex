@@ -108,7 +108,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(target, source, nreduce, PE_start, logPE_stride, PE_s
 
  As with all \openshmem{} collective routines, each of these routines assumes
  that only \ac{PE}s in the \activeset{} call the routine.  If a \ac{PE} not in the
- \activeset{} calls an \openshmem collective routine, undefined behavior
+ \activeset{} calls \cbstart an \cbend \openshmem collective routine, undefined behavior
  results.
 
 The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset. The same \target{} and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must be passed to all \ac{PE}s in the \activeset.
@@ -141,11 +141,11 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
 		  \cRow{shmem\_real4\_min\_to\_all}{Real, with an element size of 4 bytes.}
 		  \cRow{shmem\_real8\_min\_to\_all}{Real, with an element size of 8 bytes.}
 		  \cRow{shmem\_real16\_min\_to\_all}{Real,with an element size of 16 bytes.}
-		  \cRow{shmem\_comp4\_sum\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
+		  \cRow{shmem\_comp4\_sum\_to\_all}{Complex,\cbstart with an element size equal to two 4-byte real values.}
 		  \cRow{shmem\_comp8\_sum\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
 		  \cRow{shmem\_int4\_sum\_to\_all}{INTEGER*4.}
 		  \cRow{shmem\_int8\_sum\_to\_all}{Integer. If you are using \Fortran, it must be a default integer value.}
-		  \cRow{shmem\_real4\_sum\_to\_all}{REAL*4.}
+		  \cRow{shmem\_real4\_sum\_to\_all}{REAL*4.\cbend}
 		  \cRow{shmem\_real8\_sum\_to\_all}{	 Real. If you are using \Fortran, it must be a default real value.}
 		  \cRow{shmem\_real16\_sum\_to\_all}{	 Real. If you are using \Fortran, it must be a default real value.}
 		  \cRow{shmem\_comp4\_prod\_to\_all	}{ Complex, with an element size	equal to two 4-byte real values. }		 
@@ -154,9 +154,9 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
 		  \cRow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
 		  \cRow{shmem\_real4\_prod\_to\_all}{Real, with an element size of 4 bytes.}
 		  \cRow{shmem\_real8\_prod\_to\_all}{Real, with an element size of 8 bytes.}
-		  \cRow{shmem\_real16\_prod\_to\_all}{Real, with an element size of 16 bytes.}
+		  \cRow{shmem\_real16\_prod\_to\_all}{Real, \cbstart with an element size of 16 bytes.}
 		  \cRow{shmem\_int8\_or\_to\_all}{Integer, with an element size of 8 bytes.}
-		  \cRow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.}
+		  \cRow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.\cbend}
 %		  \cRow{shmem\_comp8\_xor\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
 %		  \cRow{shmem\_comp4\_xor\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
 		  \cRow{shmem\_int8\_xor\_to\_all}{Integer, with an element size of 8 bytes.}
@@ -175,7 +175,7 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
  time it is used.
 
  You must ensure that the \VAR{pSync} array is not being updated on any \ac{PE} in
- the \activeset{} while any of the \ac{PE}s participate in processing of an
+ the \activeset{} while any of the \ac{PE}s participate in processing of \cbstart an \cbend
  \openshmem{} reduction routine. Be careful to avoid the following situations:
  If the \VAR{pSync} array is initialized at run time, some type of synchronization is needed to
  ensure that all \ac{PE}s in the working set have initialized \VAR{pSync} before any of 
@@ -184,7 +184,7 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
  reused in a subsequent reduction routine call only if none of the \ac{PE}s
  in the \activeset{} are still processing a prior reduction routine call
  that used the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be
- assured only by doing some type of synchronization. 
+ assured only by doing some type of synchronization\cbstart .\cbend 
 % However, in the
 % special case of reduction routines being called with the same \activeset, 
 % you can allocate two \VAR{pSync} and \VAR{pWrk} arrays and alternate between
@@ -192,13 +192,13 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
 }
 }
 %Example
-\exampleB{
+\cbstart \exampleB{
 %For each example, you can enter it as an item.
                   \exampleITEMF
                   { This \Fortran{} reduction example statically initializes the \VAR{pSync} array and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_and_example.f90}
                   {}
-                 }  	
+                 } \cbend 	
 \eAPI 
 
 

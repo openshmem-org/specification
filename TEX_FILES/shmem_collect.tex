@@ -51,7 +51,7 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 }
 %API description
 {   
-\OSH{} \FUNC{collect} and \FUNC{fcollect} routines concatenate
+\OSH{} \cbstart \FUNC{collect} and \FUNC{fcollect} \cbend routines concatenate
 \VAR{nelems} \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the \target{} array, over the set of \ac{PE}s defined by \VAR{PE\_start}, \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The resultant \target{} array
 contains the contribution from \ac{PE} \VAR{PE\_start} first, then the contribution
 from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result is written to the \target{} array for all \ac{PE}s in the \activeset.
@@ -62,7 +62,7 @@ participating \ac{PE}s, while the collect routines allow \VAR{nelems} to vary fr
 
 As with all \openshmem collective routines, each of these routines assumes
 that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
-\activeset{} calls an \openshmem collective routine, undefined behavior
+\activeset{} calls \cbstart an \cbend \openshmem collective routine, undefined behavior
 results.
 
 The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset. The same \target{} and \source{} arrays
@@ -84,16 +84,16 @@ return, so a particular \VAR{pSync} buffer need only be initialized the first
 time it is used.
 
 You  must ensure that the \VAR{pSync} array is not being updated on any \ac{PE} in
-the \activeset{} while any of the \ac{PE}s participate in processing of an
+the \activeset{} while any of the \ac{PE}s participate in processing of \cbstart an \cbend
 \openshmem collective routine.  Be careful to avoid these situations: If the
 \VAR{pSync} array is initialized at run time, some type of synchronization is
 needed to ensure that all \ac{PE}s in the working set have initialized \VAR{pSync}
-before any of them  enter an \openshmem routine called with the \VAR{pSync}
+before any of them  enter \cbstart an \cbend \openshmem routine called with the \VAR{pSync}
 synchronization array.  A \VAR{pSync} array can be reused on a subsequent
 \openshmem collective routine only if none of the \ac{PE}s in the \activeset{}  are
 still processing a  prior \openshmem collective routine call that used the
 same \VAR{pSync} array.  In general, this may be ensured only by doing some
-type of synchronization.  
+type of synchronization\cbstart .\cbend  
 %However, in the special case of \openshmem
 %routines being called with the same \activeset, you can allocate two
 %\VAR{pSync} arrays and alternate between them on successive calls.
@@ -105,10 +105,10 @@ non-power-of-two value.
 }
 }
 %Example
-\exampleB{
+\cbstart \exampleB{
     \exampleITEM{The following \FUNC{shmem\_collec}t example is for \CorCpp{} programs:}
     {./EXAMPLES/shmem_collect_example.c}
-    {}
+    {}\cbend
     %For each example, you can enter it as an item.
     \exampleITEMF{The following \FUNC{SHMEM\_COLLECT} example is for \Fortran{} programs:}
     {./EXAMPLES/shmem_collect_example.f90}

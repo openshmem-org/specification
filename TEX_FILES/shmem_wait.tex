@@ -27,17 +27,17 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 \argRow{OUT}{ivar}{A remotely accessible integer variable that is being updated by
 	       another \ac{PE}.  If you are using \CorCpp, the type of ivar should
 	       match that implied in the SYNOPSIS section.} 
-\argRow{IN}{cmp}{The compare operator that compares \VAR{ivar} with \VAR{cmp\_value}.  \VAR{cmp}
+\argRow{IN}{cmp}{The compare operator that compares \cbstart \VAR{ivar} with \VAR{cmp\_value}.  \VAR{cmp} \cbend
 	       must be of type integer.  If you are using \Fortran, it must  be
 	       of  default kind.  If you are using \CorCpp, the type of cpm
 	       should match that implied in the SYNOPSIS section.}        
-\argRow{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  If you are using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the SYNOPSIS
+\argRow{IN}{cmp\_value}{\VAR{cmp\_value} \cbstart must be of type integer. \cbend  If you are using \CorCpp, the type of \cbstart \VAR{cmp\_value} \cbend should match that implied in the SYNOPSIS
 	       section.  If  you are using \Fortran, cmp\_value must be an
-	       integer of the same size and kind as \VAR{ivar}.}
+	       integer of the same size and kind as \cbstart \VAR{ivar}.\cbend}
 }
 %API description
 { 
-       \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be changed by a remote
+       \cbstart \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be changed by a remote
        write or atomic swap issued by a different processor.  These  routines
        can be used for point-to-point directed synchronization.  A call to
        \VAR{shmem\_wait} does not return until some other processor writes  a value,
@@ -48,13 +48,13 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
        that it has completed some action.
        The \FUNC{shmem\_wait}  routines return when \VAR{ivar} is no  longer  equal  to
        \VAR{cmp\_value}. The \FUNC{shmem\_wait\_until} routines return when the compare condition is true.  The compare condition is defined by the \VAR{ivar}  argument  compared
-       with the \VAR{cmp\_value} using the comparison operator, \VAR{cmp}. 
+       with the \VAR{cmp\_value} using the comparison operator, \VAR{cmp}. \cbend
   }
  %API Description Table. 
 {
 \hfill \\
  % If there is no Description Table and return, this field can be 
-  \desTBC{ If you are using \Fortran, \VAR{ivar} must be a specific sized integer type according to the function being called, as follows:}
+  \desTBC{ If you are using \Fortran, \cbstart \VAR{ivar} \cbend must be a specific sized integer type according to the function being called, as follows:}
   {Function}{Type of \VAR{ivar}}
  {
  %\cRow{Function}{Type of ivar}
@@ -87,7 +87,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 %end Description Table.
 \notesB{None.}
 }
-\exampleB{
+\cbstart \exampleB{
 %For each example, you can enter it as an item.
  \exampleITEMF
  { The following call returns when variable ivar is not equal to 100:}
@@ -107,5 +107,5 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
        subroutine:}
 {./EXAMPLES/shmem_wait4_example.f90}
  {}
-}
+} \cbend
 \eAPI 

@@ -70,15 +70,15 @@ that is copied to a data object (local or symmetric) on the local \ac{PE}.
 \begin{enumerate}
 \item \OPR{Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object it is copying a new value to on the remote \ac{PE}.
 \item \OPR{Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE}.
-\item \OPR{Add}: The \ac{PE} initiating the add specifies the value to be added to the symmetric data object on the remote \ac{PE}.
+\item \OPR{Add}: The \ac{PE} initiating the add \cbstart specifies \cbend the value to be added to the symmetric data object on the remote \ac{PE}.
 \item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value of the symmetric data object based on a value to be compared and copies a new value to the symmetric data object on the remote \ac{PE}.
 \item \OPR{Fetch and Increment}: The \ac{PE} initiating the increment adds 1 to the symmetric data object on the remote \ac{PE} and returns with the old value.
-\item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifies the value to be added to the symmetric data object on the remote \ac{PE} and returns with the old value.
+\item \OPR{Fetch and Add}: The \ac{PE} initiating the add \cbstart specifies \cbend the value to be added to the symmetric data object on the remote \ac{PE} and returns with the old value.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
 \begin{enumerate}
-\item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of remote access operations and stores to symmetric data objects with respect to a specific \target{} \ac{PE}. 
+\item \OPR{Fence}: The \ac{PE} calling fence \cbstart ensures \cbend ordering of remote access operations and stores to symmetric data objects with respect to a specific \target{} \ac{PE}.
 \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access operations and stores to symmetric data objects. 
 \item \OPR{Barrier}: All or some \ac{PE}s collectively synchronize and ensure completion of all remote and local updates prior to any \ac{PE} returning from the call.
 \end{enumerate}

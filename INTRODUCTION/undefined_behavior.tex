@@ -14,7 +14,7 @@ $ $%
 \hline 
 \hline 
 Uninitialized library & If \openshmem is not initialized through a call to \FUNC{start\_pes}, subsequent accesses to \openshmem routines have undefined results.  An implementation may choose, for example, to try to continue or abort
-immediately upon the first call to an uninitialized routine.\tabularnewline
+immediately upon the first call to an uninitialized routine\cbstart .\cbend \tabularnewline
 \hline 
 Accessing non-existent \ac{PE}s & If a communications routine accesses a non-existent \ac{PE} then the \openshmem library can choose to handle this situation in an implementation-defined way.  For example, the library may issue an error message saying that the \ac{PE} accessed is outside the range of accessible \ac{PE}s, or may exit
 without a warning.\tabularnewline
@@ -23,7 +23,6 @@ Use of non-symmetric variables & Some routines require remotely accessible varia
 where possible and the library can abort the program.  Another implementation
 may choose to continue either with a warning or silently.\tabularnewline
 \hline 
-Non-symmetric variables & The symmetric memory management routines are collectives, which means that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with the same size request. 
-Program behavior after a mismatched \FUNC{shmalloc} call is undefined.\tabularnewline
+Non-symmetric variables & The symmetric memory management routines are collectives, which means that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with the same size request\cbstart . \cbend Program behavior after a mismatched \FUNC{shmalloc} call is undefined.\tabularnewline
 \hline 
 \end{tabular}

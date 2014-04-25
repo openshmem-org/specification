@@ -2,11 +2,11 @@
        \ac{PE}.}
 \synC
 void *shmem_ptr(void *target, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
-\synF
+\cbstart \synF
 POINTER PTR, POINTEE
 INTEGER pe
 PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
-
+\cbend
 \desB{
 \argRow{IN}{target}{The symmetric data object to be referenced.}
 \argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which \target{} is to
@@ -19,7 +19,7 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
        After that, ordinary loads and stores to this remote address may be performed.
 
        When a sequence of loads (gets) and stores (puts) to a data object on a
-       remote \ac{PE} does not match the access pattern provided in an \openshmem data
+       remote \ac{PE} does not match the access pattern provided in \cbstart an \cbend \openshmem data
        transfer routine like \FUNC{shmem\_put32} or \FUNC{shmem\_real\_iget}, the
        \FUNC{shmem\_ptr} function can provide an efficient means to accomplish the
        communication.
@@ -35,7 +35,7 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
 \exampleB{
        \exampleITEM{This  \Fortran{}  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to the \VAR{BIGD}
        array on \ac{PE} 1:}{./EXAMPLES/shmem_ptr_example.f90}{}
-       \exampleITEM{This is the equivalent program written in \Clang:}
-       {./EXAMPLES/shmem_ptr_example.c}}{}
+  \cbstart     \exampleITEM{This is the equivalent program written in \Clang:}
+       {./EXAMPLES/shmem_ptr_example.c}}{} \cbend
 
 \eAPI

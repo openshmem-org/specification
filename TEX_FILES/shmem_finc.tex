@@ -6,13 +6,14 @@ long shmem_long_finc(long *target, int pe);
 long long shmem_longlong_finc(long long *target, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 %\rcomment{Manju: Do we need the pe, ires4, ires8 ? }
 
-\synF   %Synopsis for FORTRAN API
+\cbstart \synF   %Synopsis for FORTRAN API
 
 INTEGER pe 
 INTEGER*4 SHMEM_INT4_FINC, ires_i4
 ires_i4 = SHMEM_INT4_FINC(target, pe)
 INTEGER*8 SHMEM_INT8_FINC, ires_i8
 ires_i8 = SHMEM_INT8_FINC(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+\cbend
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
@@ -30,12 +31,12 @@ ires_i8 = SHMEM_INT8_FINC(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NO
    the previous contents of \target{} as an atomic operation.
 }
 %API Description Table.
-{ \hfill \\
+{\cbstart \hfill \\
 \desTB {If you are using \Fortran, \VAR{target} must be of the following type:}
 {
 \cRow{SHMEM\_INT4\_FINC}{\CONST{4}-byte integer}
 \cRow{SHMEM\_INT8\_FINC}{\CONST{8}-byte integer}
-}
+\cbend}
     %Return Values     
 \desR{The contents that had been at the \target{} address on the remote \ac{PE} prior to the increment.  The data type of the return value is the same as the \target.} 
 % Notes. If there are no notes, this field can be left empty.

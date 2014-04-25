@@ -19,8 +19,8 @@ CALL START_PES(npes) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 {
  %Return Values     
 \desR{ None. }
-\notesB{ If any other \openshmem call occurs before \FUNC{start\_pes}, the behavior is undefined.
-Although it is recommended to set \VAR{npes} to \CONST{0}, this is not mandated.  The value is ignored.
+\notesB{ If any other \openshmem call occurs before \FUNC{start\_pes}, \cbstart the behavior is undefined.
+Although it is recommended to set \VAR{npes} to \CONST{0}, this is not mandated.  The value is ignored.\cbend
 Calling \FUNC{start\_pes} more than once has no subsequent effect.
 }
 }%end of DesB

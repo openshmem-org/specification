@@ -27,17 +27,17 @@ All \PUT{}, \acp{AMO}, and store operations to symmetric data objects issued to 
 }
 % Notes. If there are no notes, this field can be left empty.
 \notesB{
- \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not guarantee completion of delivery.  There is a subtle difference between  \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}, in that, \FUNC{shmem\_quiet} guarantees completion of \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects which makes the updates visible to all other \acp{PE}. 
+ \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not guarantee completion of delivery.  There is a subtle difference between  \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}, \cbstart in that, \FUNC{shmem\_quiet} guarantees completion of \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects which makes the updates visible to all other \acp{PE}. \cbend
  
  The \FUNC{shmem\_quiet} function should be called if completion of PUT{}, \acp{AMO}, and store operations to symmetric data objects is desired when multiple remote \ac{PE}s are involved.
 }
 } % end of DesB
 
-\exampleB{
+\cbstart \exampleB{
        \exampleITEM
        { The following \FUNC{shmem\_fence} example is for \CorCpp{} programs: }
        {./EXAMPLES/shmem_fence_example.c}
        {\VAR{Put1} will be ordered to be delivered before \VAR{put3} and \VAR{put2} will be ordered to be delivered before
        \VAR{put4}.}
-}
+}\cbend
 \eAPI

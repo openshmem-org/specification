@@ -4,13 +4,14 @@
 int shmem_int_cswap(int *target, int cond, int value, int pe);
 long shmem_long_cswap(long *target, long cond, long value, int pe);
 long shmem_longlong_cswap(long long *target, long long cond, long long value, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
-\synF   %Synopsis for FORTRAN API
+\cbstart \synF   %Synopsis for FORTRAN API
 
 INTEGER pe
 INTEGER*4 SHMEM_INT4_CSWAP,  cond_i4, value_i4, ires_i4
 ires_i4 = SHMEM_INT4_CSWAP(target, cond_i4, value_i4, pe)
 INTEGER*8 SHMEM_INT8_CSWAP,  cond_i8, value_i8, ires_i8
 ires_i8 = SHMEM_INT8_CSWAP(target, cond_i8, value_i8, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+\cbend
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
@@ -47,7 +48,7 @@ prior to the conditional swap. Data type is the same as the \VAR{target} data ty
 \notesB{None.}
 }
 %Example
-\exampleB{
+\cbstart \exampleB{
     %For each example, you can enter it as an item.
     \exampleITEM
     {The following call ensures that the first \ac{PE} to execute the
@@ -55,7 +56,7 @@ prior to the conditional swap. Data type is the same as the \VAR{target} data ty
      on \ac{PE} \CONST{0}.}
     {./EXAMPLES/shmem_cswap_example.c}
     {}
-}  	
+} \cbend 	
 \eAPI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Performs an atomic conditional swap to a	remote

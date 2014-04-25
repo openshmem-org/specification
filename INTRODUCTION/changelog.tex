@@ -31,11 +31,11 @@ routines.\\See Section \ref{subsec:shmem_barrier_all} and \ref{subsec:shmem_barr
 \item Added examples to the different interfaces.
 \item Clarification on the naming conventions for constant in \Clang{} and \Fortran{}.
 \\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
-\item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.\\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}. 
+\item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.\\See \cbstart Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}. \cbend
 %These calls are part of the SGI specification.
-\item Removed \ac{API} calls: \FUNC{shmem\_char\_put}, \FUNC{shmem\_char\_get}.\\ See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}. 
+\item Removed \ac{API} calls: \FUNC{shmem\_char\_put}, \FUNC{shmem\_char\_get}.\\ See \cbstart Sections \cbend \ref{subsec:shmem_put} and \ref{subsec:shmem_get}. 
 \item The usage of \VAR{ptrdiff\_t}, \VAR{size\_t}, and \VAR{int} in the interface signature 
-      was made consistent with the description in Sections \ref{subsec:coll}, \ref{subsec:shmem_iput}, and \ref{subsec:shmem_iget}.
+      was made consistent with the description in Sections \cbstart \ref{subsec:coll}, \ref{subsec:shmem_iput}, and \ref{subsec:shmem_iget}.
 %Revisions from public comment      
 \item Revised\FUNC{shmem\_barrier} example.\\See Section \ref{subsec:shmem_barrier}. 
 \item Clarification on the initial value of \VAR{pSync} work arrays for \FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}. 
@@ -52,7 +52,7 @@ routines.\\See Section \ref{subsec:shmem_barrier_all} and \ref{subsec:shmem_barr
 \item Removing requirement that implementations should detect size mismatch and return error information for \FUNC{shmalloc} and ensuring consistent language.\\See Section \ref{subsec:shfree} and Annex \ref{sec:undefined}. 
 \item Fortran programming fixes for examples.\\ See Section \ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait}. 
 \item Clarifications on the reuse \VAR{pSync} and \VAR{pWork} on across collectives.\\See Sections \ref{subsec:coll}, \ref{subsec:shmem_broadcast}, \ref{subsec:shmem_collect} and \ref{subsec:shmem_reductions}.
-\item Name changes for UV and ICE for SGI systems.\\See Annex \ref{sec:openshmem_history}. 
+\item Name changes for UV and ICE for SGI systems.\\See Annex \ref{sec:openshmem_history}. \cbend
 %\item Removed XOR reduction for REAL and COMPLEX data types under Section 8.5.5. (Issue #93)
 %These calls are not part of the SGI specification. 
 \end{itemize}

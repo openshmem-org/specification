@@ -75,12 +75,12 @@ CALL SHMEM_REAL_IPUT(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
 \notesB{
        If you are using \Fortran, data types must be of default size.  For
        example, a real variable must be declared as  \CONST{REAL}, \CONST{REAL*4} or
-       \CONST{REAL(KIND=KIND(1.0))}.  See Introduction for a definition of the term remotely accessible.
+       \CONST{REAL(KIND=\cbstart KIND(1.0))\cbend }.  See Introduction for a definition of the term remotely accessible.
 }
 }
-\exampleB{
+\cbstart \exampleB{
        \exampleITEM
        {Consider the following simple \FUNC{shmem\_long\_iput}  example  for \CorCpp{}
        programs.} {./EXAMPLES/shmem_iput_example.c}{}
-}
+} \cbend
 \eAPI

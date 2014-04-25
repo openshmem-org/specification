@@ -1,7 +1,7 @@
 \section*{Incorporating \openshmem{} into Programs}
 
 In this section we describe how to write a ``Hello World" \openshmem program.
-To write a ``Hello World" \openshmem program we need to: 
+To write a ``Hello World" \openshmem program we need to\cbstart : \cbend
 
 \begin{itemize}
 \item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran).
@@ -39,7 +39,7 @@ The following example shows a more complex \openshmem program that illustrates t
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
-\numberedlisting{label=openshmem-hello,language=OSH+C}{EXAMPLES/writing_shmem_example.c}
+\cbstart \numberedlisting{label=openshmem-hello,language=OSH+C}{EXAMPLES/writing_shmem_example.c} \cbend
 \outputlisting{language=bash,caption={Expected Output (4
     processors)}}{EXAMPLES/writing_shmem_example.output}
 \vspace{0.1in}
