@@ -22,7 +22,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync) %*\synFE
 
        As with all \openshmem collective routines, each of these routines assumes
        that only \ac{PE}s in the \activeset{} call the routine.  If a \ac{PE} not  in  the
-       \activeset{} calls an \openshmem collective routine, undefined behavior results.
+       \activeset{} calls \cbstart an \cbend \openshmem collective routine, undefined behavior results.
 
        The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset.  The same work array must be passed
        in \VAR{pSync} to all \ac{PE}s in the \activeset.

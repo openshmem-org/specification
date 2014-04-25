@@ -2,11 +2,11 @@
        \ac{PE}.}
 \synC
 void *shmem_ptr(void *target, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
-\cbstart \synF
+\synF
 POINTER (PTR, POINTEE)
 INTEGER pe
 PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
-\cbend
+
 \desB{
 \argRow{IN}{target}{The symmetric data object to be referenced.}
 \argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which \target{} is to
