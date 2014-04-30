@@ -73,29 +73,22 @@
 \fancyhead{}
 \fancyhead[LE,LO]{\insertDocVersion}
 \fancyhead[CO,CE]{--- DRAFT ---}
-%\fancyhead[LO,RE]{\thesection}%testing
 \fancyfoot[CE,CO]{\thepage}
 \include{coverpage}
 \setcounter{tocdepth}{3}
 \tableofcontents
 \mainmatter  % included for use of documenttype 'book' 
-\pagestyle{headings}  \withlinenumbers
-%\fancyhead{}%testing
-%\fancyhead[RE, LO]{\rightmark}%testing
-%\fancyhead[RO, LE]{\thepage}%testing
+%\pagestyle{headings}  \withlinenumbers
+\pagestyle{fancy} \withlinenumbers%replacing {headings} with {fancy} for customization
+\fancyhf{}
+\fancyhead[RE, LO]{\rightmark}
+\fancyhead[RO, LE]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
 \renewcommand{\thesection}{\arabic{section}}
-%\renewcommand{\chaptermark}[1]{\markleft{\MakeUppercase{\sectionname\ \thesection.\ #1}}{}}%testing
 { %using setlength to force standardized spacing, if needed
 %\setlength{\baselineskip}{3pt plus 3pt minus 3pt}
 \setlength{\parskip}{3pt} %plus 3pt minus 9pt}
-%\fancyhead[RE]{\thesection}%testing
-%\fancyhead[LO]{\thesection}%testing
-%\fancyhf{}%testing
-%\fancyhead[RE, LO]{\rightmark}%testing
-%\fancyhead[RO, LE]{\thepage}%testing
 \startchap
-%\chapter{testing}
-%\chaptermark{\rightmark}%testing
 \section*{Introduction}
 \label{sec:intro}
 %\input{INTRODUCTION/introduction}
@@ -213,7 +206,12 @@
 %  -> Writing OpenSHMEM Programs
 %  -> Application written in Fortran
 \appendix
-%\section{Appendix}%testing
+\pagestyle{fancy} \withlinenumbers
+\fancyhf{}
+\fancyhead[RE, LO]{\leftmark}
+\fancyhead[RO, LE]{\thepage}
+%\renewcommand{\headrulewidth}{0pt}
+%\fancyfoot[CE,CO]{\thepage}%cuts off numbering on non-title pages
 \chapter{Writing \openshmem Programs}
 \input{INTRODUCTION/writing_programs.tex}
 \chapter{Compiling and Running Applications}
