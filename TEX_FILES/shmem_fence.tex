@@ -15,7 +15,7 @@ CALL SHMEM_FENCE %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 {
 This function assures ordering of delivery of \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects.
 %This  function ensures ordering of \PUT{}, \acp{AMO} and store operations on symmetric data objects. 
-All \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects issued to a particular remote \ac{PE} prior to the call to \FUNC{shmem\_fence} are guaranteed to be \cbstart delivered before any subsequent \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery not completion. \cbend
+All \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects issued to a particular remote \ac{PE} prior to the call to \FUNC{shmem\_fence} are guaranteed to be \cbstart delivered before any subsequent \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery, not completion. \cbend
 % which follow the  call  to
 % \FUNC{shmem\_fence}.
 }

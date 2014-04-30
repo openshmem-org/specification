@@ -30,7 +30,7 @@ void *shmemalign(size_t alignment, size_t size);%*\synCE
               
        The  \FUNC{shrealloc} function changes the size of the block to which ptr
        points to the size (in bytes) specified by size.  The contents of the
-       block are unchanged up to the lesser of the new and old sizes.	 If the
+       block are unchanged up to the lesser of the new and old sizes. If the
        new size is larger, the value of the newly allocated portion of the
        block is indeterminate.  If \VAR{ptr} is a \CONST{NULL} pointer, the \FUNC{shrealloc} function behaves like the \FUNC{shmalloc} function for the specified size.  If size  is \CONST{0} and ptr is not a \CONST{NULL} pointer, the block to which it points is freed\cbstart . \cbend If the space cannot be allocated, the block to which ptr points is unchanged.
 
@@ -41,8 +41,9 @@ void *shmemalign(size_t alignment, size_t size);%*\synCE
        \ac{PE}s participate in the memory allocation, and that the memory on other
        \ac{PE}s can be used	as  soon as the local \ac{PE} returns.  The user is
        responsible for calling these functions with identical argument(s) on
-       all \ac{PE}s; if differing size arguments are used, subsequent calls may not
-       return the same symmetric heap address on all \ac{PE}s.
+       all \ac{PE}s; if differing size arguments are used, the behavior of the call and any subsequent \openshmem calls becomes undefined.
+       %subsequent calls may not
+       %return the same symmetric heap address on all \ac{PE}s.
 }
 %API Description Table
 {
