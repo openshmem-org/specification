@@ -7,9 +7,9 @@ int main(void)
       int *ptr;
       int i;
 
-   start_pes(0);
+   shmem_init();
 
-   if (_my_pe() == 0) {
+   if (shmem_my_pe() == 0) {
       /* initialize PE 1's bigd array */
       ptr = shmem_ptr(bigd, 1);
       if (ptr == NULL)
@@ -21,7 +21,7 @@ int main(void)
 
    shmem_barrier_all();
 
-   if (_my_pe() == 1) {
+   if (shmem_my_pe() == 1) {
       printf("bigd on PE 1 is:\n");
       for (i=0; i<100; i++)
          printf(" %d\n",bigd[i]);

@@ -5,10 +5,10 @@ int main(void)
    int *target;
    int source;
 
-   start_pes(0);
+   shmem_init();
 
    source = shmem_my_pe();
-   target = shmalloc(sizeof(int)); /*symmetric data object on heap*/
+   target = shmem_malloc(sizeof(int)); /*symmetric data object on heap*/
 
    shmem_int_put(target, &source, 1, (source + 1)% shmem_n_pes());
    shmem_barrier_all();
