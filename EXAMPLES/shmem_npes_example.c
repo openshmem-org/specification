@@ -5,11 +5,11 @@ int main(void)
 {
   int npes;
 
-  start_pes(0);
+  shmem_init();
   
-  npes = _num_pes();
+  npes = shmem_n_pes();
 
-  if (_my_pe() == 0) {
+  if (shmem_my_pe() == 0) {
     printf("Number of PEs executing this application is: %d\n", npes);
   }
 

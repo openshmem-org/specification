@@ -9,9 +9,9 @@ int main(void)
    double *f;
    int me;
 
-   start_pes(0);
-   me = _my_pe();
-   f = (double *) shmalloc(sizeof (*f));
+   shmem_init();
+   me = shmem_my_pe();
+   f = (double *) shmem_malloc(sizeof (*f));
 
    *f = 3.1415927;
    shmem_barrier_all();

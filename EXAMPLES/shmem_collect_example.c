@@ -10,13 +10,13 @@ int main(void)
    int i, me, npes;
    int *target;
 
-   start_pes(0);
-   me = _my_pe();
-   npes = _num_pes();
+   shmem_init();
+   me = shmem_my_pe();
+   npes = shmem_n_pes();
 
    source[0] = me * 2;
    source[1] = me * 2 + 1;
-   target = (int *)shmalloc(sizeof(int) * npes * 2);
+   target = (int *)shmem_malloc(sizeof(int) * npes * 2);
    for (i=0; i < _SHMEM_COLLECT_SYNC_SIZE; i++) {
       pSync[i] = _SHMEM_SYNC_VALUE;
    }

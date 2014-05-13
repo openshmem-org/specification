@@ -11,8 +11,8 @@ int main(void)
   long x[3] = {0};
   int y = 0;
   
-  start_pes(0);
-  if (_my_pe() == 0) {
+  shmem_init();
+  if (shmem_my_pe() == 0) {
     shmem_long_put(target, source, 3, 1);  /*put1*/
     shmem_int_put(&targ, &src, 1, 2);  /*put2*/
 

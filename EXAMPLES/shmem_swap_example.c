@@ -7,10 +7,10 @@ int main(void)
    int me, npes;
    long swapped_val, new_val;
 
-   start_pes(0);
-   me = _my_pe();
-   npes = _num_pes();
-   target = (long *) shmalloc(sizeof (*target));
+   shmem_init();
+   me = shmem_my_pe();
+   npes = shmem_n_pes();
+   target = (long *) shmem_malloc(sizeof (*target));
    *target = me;
    shmem_barrier_all();
    new_val = me;

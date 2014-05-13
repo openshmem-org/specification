@@ -6,8 +6,8 @@ long L = 0;
 int main(int argc, char **argv)
 {
    int me, slp;
-   start_pes(0);
-   me = _my_pe();
+   shmem_init();
+   me = shmem_my_pe();
    slp = 1;
    shmem_barrier_all();
    if (me == 1)
