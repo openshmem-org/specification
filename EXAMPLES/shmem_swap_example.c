@@ -18,6 +18,6 @@ int main(void)
       swapped_val = shmem_long_swap(target, new_val, (me + 1) % npes);
       printf("%d: target = %ld, swapped = %ld\n", me, *target, swapped_val);
    }
-   shfree(target);
+   shmem_free(target);
    return 0;
 }
