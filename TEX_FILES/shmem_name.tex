@@ -1,43 +1,33 @@
-\bAPI{\textcolor{red}{SHMEM\_NAME}}{Returns information about name.}
-%Synopsis C
-\synC
-#define SHMEM_MAX_NAME_LEN 128
-shmem_info_get_name(char *name);
-%*\synCE
+\bAPI{SHMEM\_INFO\_GET\_NAME}{This function returns the vendor name string}
+\synC   %Synopisis for C API
 
-%Synopsis F
-\synF
+void shmem_info_get_name(char *name); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
-%*\synFE
+\synF   %Synopsis for FORTRAN API
 
-%DESCRIPTION
+SHMEM_INFO_GET_NAME(NAME)   
+CHARACTER *(*)NAME %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT 
 
-%Arguments
-\desB{
-	\argRow{None}{}{}
-}
-%API Description
+% Arguments table. If no arguments you can use \argRow{None}{}{} 
+\desB{  
+    \argRow{OUT}{name}{The vendor defined string}
+ }
+%API description
 {
-	
+  The routine returns the vendor defined string of size defined by the 
+  constant SHMEM\_MAX\_NAME\_LEN. Multiple invocations of the routine in a 
+  \openshmem{} program always returns the same string.
 }
+%This newline is required 
+{
 %API Description Table.
-{
-%		\desTB{}
-%		{
-%				\cRow{}{}
-%		}
-		%Return Value
-		\desR{}
-		%NOTES      
-	\notesB{}
+\desR{
+    %Return Values    
+    None.
 }
-		
-		%EXAMPLES
-\exampleB{
-%	\exampleITEM
-%	{The following \FUNC{\_num\_pes} example is for \CorCpp{} programs:}
-%	{./EXAMPLES/shmem_npes_example.c}
-%	{}
+% Notes. If there are no notes, this field can be left empty.
+\notesB{ None.
+ }
 }
 \eAPI
 
