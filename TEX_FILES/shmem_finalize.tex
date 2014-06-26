@@ -1,0 +1,34 @@
+\bAPI{\textcolor{red}{SHMEM\_FINALIZE}}{Releases resources used by the OpenSHMEM library.} 
+\synC
+void shmem_finalize(void); %*\synCE
+\synF
+CALL SHMEM_FINALIZE %*\synFE
+
+%DESCRIPTION
+
+%Arguments
+\desB{
+ 	None.
+}
+%API Description
+{
+       \FUNC{shmem\_finalize} guarantees all pending communication is completed and  \openshmem library specific resources are released before the call returns. \FUNC{shmem\_finalize} is a collective operation which requires all \acp{PE} to participate in the call and it may be called only once before the program returns from main. All process/threads that represent the PEs will still exist but may not participate in any  \openshmem operation. If any  \openshmem library call is encountered after  \FUNC{shmem\_finalize}, its behavior is undefined.
+ }
+%API Description Table
+{
+		%Return Values
+		\desR{None.}
+		%NOTES
+		\notesB{
+					The calling of \FUNC{shmem\_finalize} is optional. \FUNC{shmem\_finalize} has an implicit \FUNC{shmem\_barrier\_all} for the completion of all outstanding \openshmem communication operations. \FUNC{shmem\_finalize} releases resources used by the OpenSHMEM library including the symmetric memory heap and pointers initiated by \FUNC{shmem\_ptr}.		
+    }
+}
+%EXAMPLES
+\exampleB{
+	\exampleITEM
+	{The following finalize example is for \CorCpp{} programs:}
+	{./EXAMPLES/shmem_finalize_example.c}
+	{}
+}
+
+\eAPI
