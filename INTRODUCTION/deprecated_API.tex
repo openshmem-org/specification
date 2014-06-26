@@ -1,0 +1,18 @@
+For the \openshmem Specification(s) deprecation is the process of identifying API that is supported but no longer recommended for use by application programmers. For \openshmem library developers said API \textbf{must} be supported till clearly indicated by the Specification. In this chapter we will record the API that has been deprecated, the \openshmem Specification that effected the deprecation and if the feature is supported in the current version of the specification.
+
+\begin{center}
+    \begin{tabular}{|l|c|c|}
+    \hline
+     \textbf{Deprecated API} & \textbf{Specification Release} & \textbf{Currently Supported(?)} \\ \hline %There may be better table headings...
+    \FUNC{shmem\_clear\_cache\_inv(void)} & 1.1 & Yes \\ \hline
+    \FUNC{shmem\_set\_cache\_inv(void)}  & 1.1 & Yes \\ \hline
+    \FUNC{shmem\_clear\_cache\_line\_inv(void *target)} & 1.1 & Yes \\ \hline
+    \FUNC{shmem\_set\_cache\_line\_inv(void *target)} & 1.1 & Yes \\ \hline
+    \FUNC{shmem\_udcflush(void)} & 1.1 & Yes \\ \hline
+    \FUNC{shmem\_udcflush\_line(void *target)} & 1.1 & Yes \\ \hline
+    \FUNC{\_my\_pe(void)} & 1.2 & Yes \\ \hline
+    \FUNC{\_num\_pes(void)} & 1.2 & Yes \\ \hline
+    
+    \hline
+    \end{tabular}
+\end{center}
