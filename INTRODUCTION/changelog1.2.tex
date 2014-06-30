@@ -1,0 +1,22 @@
+\section{Version 1.1}
+This section summarizes the changes from the \openshmem specification Version 1.1 to the Version 1.2.  
+A major change in this version is that it improves upon the execution model described in 1.1 by introducing an explicit \FUNC{shmem\_finalize} library call. This provides a collective mechanism of exiting an \openshmem application and releasing resources used by the library.  
+
+
+
+The following list describes the specific changes in 1.2:
+\begin{itemize}
+\item New Execution Model for exiting/finishing OpenSHMEM applications.\\See Section  \ref{subsec:execution_model}.
+%\item Clarification of the completion semantics of memory load and store 
+%operations in context of \FUNC{shmem\_barrier\_all} and \FUNC{shmem\_barrier} 
+%routines.\\See Section \ref{subsec:shmem_barrier_all} and \ref{subsec:shmem_barrier}.
+%\item Clarification of the completion and ordering semantics of \FUNC{shmem\_quiet} and \FUNC{shmem\_fence}.
+%\\See Section \ref{subsec:shmem_quiet} and \ref{subsec:shmem_fence}.
+%\item Clarifications of the completion semantics of \ac{RMA} and \ac{AMO} routines.
+%\\See Sections \ref{sec:rma} and \ref{sec:amo}
+%\item Clarifications of the memory model and the memory alignment requirements for symmetric data objects.
+%\\See Section \ref{subsec:memory_model}.
+%\item Clarification of the execution model and the definition of a \ac{PE}.
+%\\See Section \ref{subsec:execution_model}
+
+\end{itemize}
