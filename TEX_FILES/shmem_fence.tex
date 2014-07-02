@@ -33,11 +33,11 @@ All \PUT{}, \acp{AMO}, and memory store operations to symmetric data objects iss
 }
 } % end of DesB
 
-\exampleB{
+\exampleB{ \cbstart
        \exampleITEM
        { The following \FUNC{shmem\_fence} example is for \CorCpp{} programs: }
        {./EXAMPLES/shmem_fence_example.c}
        {\VAR{Put1} will be ordered to be delivered before \VAR{put3} and \VAR{put2} will be ordered to be delivered before
-       \VAR{put4}.}
+       \VAR{put4}.} \cbend
 }
 \eAPI

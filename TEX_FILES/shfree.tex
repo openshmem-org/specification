@@ -1,5 +1,5 @@
-\bAPI{SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}{Symmetric heap memory management functions.}
-%SYNOPSIS
+\cbstart \bAPI{ SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN }{Symmetric heap memory management functions.} \cbend
+\cbstart %SYNOPSIS
 \synC
 void *shmalloc(size_t size);
 void *shmem_malloc(size_t size);
@@ -11,32 +11,32 @@ void *shmemalign(size_t alignment, size_t size);
 void *shmem_align(size_t alignment, size_t size);%*\synCE
 
 %DESCRIPTION
-%Arguments
+\cbend%Arguments
 \desB{
        \argRow{IN}{size}{In bytes, to request a block to be allocated from the symmetric heap. This argument is of type \VAR{size\_t}}
-       \argRow{IN}{ptr}{Points to a block within the symmetric heap.}
+    \cbstart   \argRow{IN}{ptr}{Points to a block within the symmetric heap.} \cbend
        \argRow{IN}{alignment}{Byte alignment of the block allocated from the symmetric heap.}
 }
 %API Description
 {
-       The \FUNC{shmalloc} and \FUNC{shmem\_malloc}  functions return a pointer to a block of at least size
+       The \FUNC{shmalloc} \cbstart and \FUNC{shmem\_malloc}  functions return \cbend a pointer to a block of at least size
        bytes suitably aligned for any use.  This space is allocated from the
        symmetric heap (in contrast to \FUNC{malloc}, which allocates from the
        private heap).
 
-       The  \FUNC{shmemalign} and \FUNC{shmem\_align} functions allocate a block in the symmetric heap that
-       has a byte alignment specified by the alignment argument.
+       The  \FUNC{shmemalign} \cbstart and \FUNC{shmem\_align} functions allocate \cbend a block in the symmetric heap that
+       has a byte \cbstart alignment \cbend specified by the alignment argument.
 
-       The \FUNC{shfree} and \FUNC{shmem\_free} functions cause the block to which \VAR{ptr} points to be
+       The \FUNC{shfree} \cbstart and \FUNC{shmem\_free} functions cause \cbend the block to which \VAR{ptr} points to be
        deallocated, that is, made available for further allocation.  If ptr is
        a null pointer, no action occurs. 
               
-       The  \FUNC{shrealloc} and  \FUNC{shmem\_realloc} functions change the size of the block to which ptr
+       The  \FUNC{shrealloc} \cbstart and  \FUNC{shmem\_realloc} functions change \cbend the size of the block to which ptr
        points to the size (in bytes) specified by size.  The contents of the
        block are unchanged up to the lesser of the new and old sizes. If the
        new size is larger, the value of the newly allocated portion of the
        block is indeterminate.  
-       If \VAR{ptr} is a \CONST{NULL} pointer, the \FUNC{shrealloc}/\FUNC{shmem\_realloc} function behaves like the \FUNC{shmalloc}/\FUNC{shmem\_malloc} function for the specified size.  If size  is \CONST{0} and ptr is not a \CONST{NULL} pointer, the block to which it points is freed. If the space cannot be allocated, the block to which ptr points is unchanged.
+       If \VAR{ptr} is a \CONST{NULL} pointer, the \cbstart \FUNC{shrealloc}/\FUNC{shmem\_realloc} \cbend function behaves like the \cbstart \FUNC{shmalloc}/\FUNC{shmem\_malloc} \cbend function for the specified size.  If size  is \CONST{0} and ptr is not a \CONST{NULL} pointer, the block to which it points is freed. If the space cannot be allocated, the block to which ptr points is unchanged.
 
        The \FUNC{shmalloc}, \FUNC{shfree}, and \FUNC{shrealloc} functions are provided  so that multiple \ac{PE}s in an application can allocate symmetric, remotely
        accessible memory blocks.  These memory blocks can then be used with
@@ -60,11 +60,11 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 					 The \FUNC{shrealloc} function returns a pointer to the allocated space (which may have moved); otherwise, it returns a null pointer.
 		}
 		%NOTES
-		\notesB{ As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, application developers are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead.
+		\notesB{ \cbstart As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, application developers are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead. \cbend
 					 
 The total size of the symmetric heap is determined at job startup.  One can adjust the size of the heap using the \CONST{SMA\_SYMMETRIC\_SIZE} environment  variable (where available).	
 
-The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} functions differ from the private heap allocation functions in that all \ac{PE}s in an application must call them (a barrier is used to ensure this).
+The \cbstart \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} functions differ from the private heap allocation functions in that all \ac{PE}s in an application must call them (a barrier is used to ensure this). \cbend
 
 }		
 }

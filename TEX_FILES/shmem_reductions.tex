@@ -192,7 +192,7 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
 }
 }
 %Example
-\exampleB{
+\exampleB{ \cbstart
 %For each example, you can enter it as an item.
                   \exampleITEMF
                   { This \Fortran{} reduction example statically initializes the \VAR{pSync} array and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all even \ac{PE}s.}
@@ -229,7 +229,7 @@ The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
                   {This \Fortran{} example statically initializes the \VAR{pSync} array
  and computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even \ac{PE}s.}
                   {./EXAMPLES/shmem_xor_example.f90}
-                   {} 
+                   {} \cbend
                  }  	
 \eAPI 
 

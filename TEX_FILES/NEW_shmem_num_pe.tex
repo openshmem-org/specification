@@ -29,15 +29,15 @@ N_PES = NUM_PES() %*\synFE
 		%Return Value
 		\desR{Integer -  Number of \ac{PE}s running the \openshmem application.}
 		%NOTES      
-	\notesB{As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been deprecated. Although \openshmem libraries are required to support the call, application developers are encouraged to use \FUNC{shmem\_n\_pes} instead.
+	\notesB{ \cbstart As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been deprecated. Although \openshmem libraries are required to support the call, application developers are encouraged to use \FUNC{shmem\_n\_pes} instead. \cbend  
 }
 		}
 		%EXAMPLES
-\exampleB{
+\exampleB{ \cbstart
 	\exampleITEM
 	{The following \FUNC{\_num\_pes} example is for \CorCpp{} programs:}
 	{./EXAMPLES/shmem_npes_example.c}
 	{}
-}
+\cbend }
 \eAPI
 

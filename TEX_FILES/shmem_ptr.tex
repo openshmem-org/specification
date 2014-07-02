@@ -32,10 +32,10 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
        operations. When calling \FUNC{shmem\_ptr}, you pass the address on the calling \ac{PE}  for a symmetric array on the remote \ac{PE}.}
 }
 
-\exampleB{
+\exampleB{ \cbstart 
        \exampleITEM{This  \Fortran{}  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to the \VAR{BIGD}
        array on \ac{PE} 1:}{./EXAMPLES/shmem_ptr_example.f90}{}
        \exampleITEM{This is the equivalent program written in \Clang:}
-       {./EXAMPLES/shmem_ptr_example.c}}{}
+       {./EXAMPLES/shmem_ptr_example.c} \cbend }{}
 
 \eAPI

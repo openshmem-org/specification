@@ -57,6 +57,8 @@
 \usepackage[usenames,dvipsnames]{color}
 \definecolor{ListingBG}{rgb}{0.91,0.91,0.91}
 
+\usepackage[dvips]{changebar}
+%\nochangebars
 
 \include{osh}
 
@@ -115,7 +117,7 @@
 \startchap
 \section{OpenSHMEM Library API}
 \label{sec:openshmem_library_api}
-\subsection{Library Setup, Exit, and Query Operations}%SP: Merging two operations
+\cbstart \subsection{Library Setup, Exit, and Query Operations} \cbend %SP: Merging two operations
 \input{INTRODUCTION/setup_query_intro}
 \label{subsec:start_pes}
 \input{TEX_FILES/start_pes.tex} %Swaroop
@@ -124,7 +126,7 @@
 \input{TEX_FILES/NEW_shmem_num_pe.tex}%Tommy
 \label{subsec:shmem_num_pe}
 %\textcolor{red}{\input{TEX_FILES/shmem_finalize.tex} }%Swaroop %If all text has to be red.
-\input{TEX_FILES/shmem_finalize.tex} %Swaroop
+\cbstart \input{TEX_FILES/shmem_finalize.tex} \cbend %Swaroop
 \label{subsec:shmem_finalize}
 %\input{TEX_FILES/shmem_global_exit.tex} %Swaroop :placeholders
 %\label{subsec:shmem_global_exit}
@@ -133,9 +135,9 @@
 \input{TEX_FILES/shmem_addr_accessible}%Tommy
 \label{subsec:shmem_addr_accessible}
 \input{TEX_FILES/shmem_ptr.tex} %Oscar
-\input{TEX_FILES/shmem_version.tex} %Manju
+\cbstart \input{TEX_FILES/shmem_version.tex} %Manju
 \label{subsec:shmem_version}
-\input{TEX_FILES/shmem_name.tex} %Manju
+\input{TEX_FILES/shmem_name.tex} \cbend %Manju
 \label{subsec:shmem_name}
 %\startchap
 \subsection{Memory Management Operations}
@@ -205,7 +207,7 @@
 \input{INTRODUCTION/locks_intro} %Swaroop
 \input{TEX_FILES/shmem_lock.tex} %Oscar
 %\startchap
-\subsection{Cache Management}
+\cbstart \subsection{Cache Management} \cbend
 \input{INTRODUCTION/deprication.tex} %Pasha
 \input{TEX_FILES/shmem_cache.tex} %Pasha
 
@@ -246,11 +248,11 @@
 \chapter{History of \openshmem{}}
 \input{INTRODUCTION/openshmem_history.tex}
 \label{sec:openshmem_history}
-\chapter{\openshmem Specification and Deprecated API }
-\input{INTRODUCTION/deprecated_API.tex}
+\cbstart \chapter{\openshmem Specification and Deprecated API }
+\input{INTRODUCTION/deprecated_API.tex} \cbend
 \label{sec:dep_api}
-\chapter{Changes to this Document}
-\input{INTRODUCTION/changelog1.2}
+\cbstart \chapter{Changes to this Document}
+\input{INTRODUCTION/changelog1.2} \cbend
 %\clearpage
 %\startchap
 %\section{\openshmem{} program examples}

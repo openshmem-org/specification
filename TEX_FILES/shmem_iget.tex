@@ -80,11 +80,11 @@ CALL SHMEM_REAL_IGET(target, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DE
       \notesB{If you are using \Fortran, data types must be of default size. For
        example, a real variable must be declared as \CONST{REAL}, \CONST{REAL*4}, or \CONST{REAL(KIND=KIND(1.0))}.}
 }
-\exampleB{
+\exampleB{ \cbstart
        \exampleITEMF
      {The following example uses \FUNC{shmem\_logical\_iget}  in a \Fortran{}
        program.} 
 	{./EXAMPLES/shmem_iget_example.f90}
     {}
-}
+\cbend }
 \eAPI
