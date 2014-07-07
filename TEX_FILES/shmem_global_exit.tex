@@ -1,0 +1,47 @@
+\bAPI{SHMEM\_GLOBAL\_EXIT}{Terminates an \openshmem program and passes the exit status to the execution environment as the exit status of the application.}
+%SYNOPSIS
+\synC
+void shmem_global_exit(int status); %*\synCE
+
+\synF
+INTEGER STATUS
+CALL SHMEM_GLOBAL_EXIT(status) %*\synFE
+
+%DESCRIPTION
+
+%Arguments
+\desB{
+       \argRow{IN}{status}{The exit status from the main program.}
+}
+%API Description
+{
+       When called by any  \ac{PE}, the  \FUNC{shmem\_global\_exit} function terminates the 
+       \openshmem program, \color{red} flushes all I/O, releases all storage, \color{black}and passes the 
+       exit status to the execution (or host) environment as the exit status of the executing application. 
+       \FUNC{shmem\_global\_exit}  does not wait for completion of pending communication. 
+       If more than one \ac{PE} calls  \FUNC{shmem\_global\_exit} after a point of global 
+       synchronization, then the exit status returned to the environment is a race condition, 
+       and shall be one of the values passed to \FUNC{shmem\_global\_exit} as the status 
+       argument.
+}
+%API Description Table
+{
+%		\desTB{}
+%		{
+%				\cRow{}{}
+%		}
+		%Return Value
+		\desR{		
+				None		}
+		%NOTES	
+		\notesB{ \FUNC{shmem\_global\_exit} is an application-level function that an application uses to indicate the 
+		status of the application to the environment.}
+}
+%EXAMPLES
+\exampleB{
+	\exampleITEM
+	{}
+	{./EXAMPLES/shmem_global_exit_example.c}
+	{}
+}
+\eAPI

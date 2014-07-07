@@ -8,18 +8,18 @@ The following list describes the specific changes in 1.2:
 \begin{itemize}
 \item New Execution Model for exiting/finishing OpenSHMEM applications.
 \\See Section  \ref{subsec:execution_model}.
-\item New API to query the version and name information. 
-\\See Section \ref{subsec:shmem_version} and \ref{subsec:shmem_name}.
 \item New library constants to support API that query version and name information. 
 \\See Section \ref{subsec:library_constants}.
-\item \openshmem library API normalization. All C symmetric memory management API begins with  \FUNC{shmem\_}.
-\\See Section \ref{subsec:shfree}.
 \item Deprecation of \FUNC{\_my\_pe} and \FUNC{\_num\_pes} routines.
 \\See Sections \ref{subsec:shmem_my_pe} and \ref{subsec:shmem_num_pe}
-%\item New API \FUNC{shmem\_global\_exit} to provide mechanism to exit an \openshmem application.
-%\\See Section \ref{subsec:shmem_global_exit}.
 \item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly exit an \openshmem application and release resources.
 \\See Section \ref{subsec:shmem_finalize}
+\item New API \FUNC{shmem\_global\_exit} to provide mechanism to exit an \openshmem application.
+\\See Section \ref{subsec:shmem_global_exit}.
+\item New API to query the version and name information. 
+\\See Section \ref{subsec:shmem_version} and \ref{subsec:shmem_name}.
+\item \openshmem library API normalization. All C symmetric memory management API begins with  \FUNC{shmem\_}.
+\\See Section \ref{subsec:shfree}.
 \item Addition of new Annex for clearly specifying deprecated API and its support in the existing specification version.
 \\See Section \ref{sec:dep_api}
 
