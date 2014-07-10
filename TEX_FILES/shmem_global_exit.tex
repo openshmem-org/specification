@@ -20,9 +20,8 @@ CALL SHMEM_GLOBAL_EXIT(status) %*\synFE
        exit status to the execution (or host) environment as the exit status of the executing application. 
        \FUNC{shmem\_global\_exit}  does not wait for completion of pending communication. 
        If more than one \ac{PE} calls  \FUNC{shmem\_global\_exit} after a point of global 
-       synchronization, then the exit status returned to the environment is a race condition, 
-       and shall be one of the values passed to \FUNC{shmem\_global\_exit} as the status 
-       argument.
+       synchronization, then the exit status returned to the environment shall be one of the 
+       values passed to \FUNC{shmem\_global\_exit} as the status argument.
 }
 %API Description Table
 {
