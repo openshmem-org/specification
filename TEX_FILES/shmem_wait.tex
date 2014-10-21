@@ -49,7 +49,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 %API description
 { 
         \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be changed by a remote
-       write or an atomic operation issued by a different processor. These  routines can be used for point-to-point directed 
+       write or \cbstart an atomic operation \cbend issued by a different processor. These  routines can be used for point-to-point directed 
        synchronization.  A call to
        \VAR{shmem\_wait} does not return until some other processor writes  a value,
        not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting processor.  A call to
