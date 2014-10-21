@@ -73,7 +73,8 @@
 \fancyhead{}
 \fancyhead[LE,LO]{\insertDocVersion}
 %\fancyhead[CO,CE]{--- DRAFT ---}
-\fancyfoot[CE,CO]{\thepage}
+\fancyfoot[CE,CO]{\thepage}%affects page numbering for the first pages, except the first ToC page
+\pagenumbering{roman}%sets coverpage and toc page numbers to roman numerals
 \include{coverpage}
 \setcounter{tocdepth}{3}
 \tableofcontents
