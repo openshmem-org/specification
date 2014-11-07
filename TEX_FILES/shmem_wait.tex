@@ -49,13 +49,15 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 %API description
 { 
         \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be changed by a remote
-       write or an atomic operation issued by a different processor. These  routines can be used for point-to-point directed 
-       synchronization.  A call to
-       \VAR{shmem\_wait} does not return until some other processor writes  a value,
-       not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting processor.  A call to
-       \FUNC{shmem\_wait\_until} does not return until some  other processor changes
-       \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.  This
-       mechanism is useful when a processor needs to tell another processor
+       write or an atomic operation issued by a different \ac{PE}. 
+       These  routines can be used for point-to-point direct synchronization.  A call to
+       \VAR{shmem\_wait} does not return until some other \ac{PE} writes  a value,
+       not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting \ac{PE}.  A call to
+       \FUNC{shmem\_wait\_until} does not return until some  other \ac{PE} changes
+       \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.  
+       The operations assume that memory is updated in the units of datatype
+       specified by the \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} function signatures.
+       This mechanism is useful when a \ac{PE} needs to tell another \ac{PE}
        that it has completed some action.
        The \FUNC{shmem\_wait}  routines return when \VAR{ivar} is no  longer  equal  to
        \VAR{cmp\_value}. The \FUNC{shmem\_wait\_until} routines return when the compare condition is true.  The compare condition is defined by the \VAR{ivar}  argument  compared
