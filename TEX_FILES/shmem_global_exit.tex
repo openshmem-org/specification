@@ -1,8 +1,9 @@
-\bAPI{SHMEM\_GLOBAL\_EXIT}{Terminates an \openshmem program and passes the exit status to the execution environment as the exit status of the program.}
+\bAPI{SHMEM\_GLOBAL\_EXIT}{A non-collective routine that allows any \ac{PE} to force
+termination of an entire \openshmem program. This routine terminates the entire
+program, not just the \openshmem portion.}
 %SYNOPSIS
 \synC
 void shmem_global_exit(int status); %*\synCE
-
 \synF
 INTEGER STATUS
 CALL SHMEM_GLOBAL_EXIT(status) %*\synFE
@@ -11,35 +12,55 @@ CALL SHMEM_GLOBAL_EXIT(status) %*\synFE
 
 %Arguments
 \desB{
-       \argRow{IN}{status}{The exit status from the main program.}
+    \argRow{IN}{status}{The exit status from the main program.}
 }
 %API Description
 {
-       When called by any  \ac{PE}, the  \FUNC{shmem\_global\_exit} function terminates the 
-       \openshmem program, \color{red} flushes all I/O, releases all storage, \color{black}and passes the 
-       exit status to the execution (or host) environment. %as the exit status of the executing application. 
-       \FUNC{shmem\_global\_exit}  does not wait for completion of pending communication. 
-       If more than one \ac{PE} calls  \FUNC{shmem\_global\_exit}, then the exit status returned to the environment 
-       shall be one of the values passed to \FUNC{shmem\_global\_exit} as the status argument.
+    \FUNC{shmem\_global\_exit} is a non-collective routine that allows any one
+    \ac{PE} to force termination of an \openshmem program for all \acp{PE},
+    passing an exit status to the execution environment. This routine
+    terminates the entire program, not just the \openshmem portion. When any
+    \ac{PE} calls \FUNC{shmem\_global\_exit}, it results in the termination of
+    all \acp{PE} with no further code from the program being executed.
+    \FUNC{shmem\_global\_exit} flushes I/O and releases resources in accordance
+    with C/C++/Fortran language requirements for normal program termination. If
+    more than one \ac{PE} calls \FUNC{shmem\_global\_exit}, then the exit
+    status returned to the environment shall be one of the values passed to
+    \FUNC{shmem\_global\_exit} as the status argument.  There is no return to
+    the caller of \FUNC{shmem\_global\_exit}; control is returned from the
+    \openshmem library to the execution environment for all \acp{PE}.
 }
 %API Description Table
 {
-%		\desTB{}
-%		{
-%				\cRow{}{}
-%		}
-		%Return Value
-		\desR{		
-				None		}
-		%NOTES	
-		\notesB{ \FUNC{shmem\_global\_exit} is an application-level function that an application uses to indicate the 
-		status of the application to the environment.}
+%Return Value
+\desR{		
+None.}
+%NOTES	
+\notesB{ 
+    \FUNC{shmem\_global\_exit} may be used in situations where one or more
+    \acp{PE} have determined that the program has completed and/or should
+    terminate early.  Accordingly, the integer status argument can be used to
+    pass any information about the nature of the exit, e.g an encountered error
+    or a found solution.  Since \FUNC{shmem\_global\_exit} is a non-collective
+    routine, there is no implied synchronization, and all \acp{PE} must
+    terminate regardless of their current execution state. If
+    \FUNC{shmem\_global\_exit} is called by more than one \ac{PE}, then the
+    exit status that is returned to the execution environment is one of the
+    values passed to \FUNC{shmem\_global\_exit}. While I/O must be flushed for
+    standard language I/O calls from C/C++/Fortran, it is implementation
+    dependent as to how I/O done by other means (e.g. third party I/O
+    libraries) is handled. Similarly, resources are released according to
+    C/C++/Fortran standard language requirements, but this may not include all
+    resources allocated for the \openshmem program. However, a quality
+    implementation will make a best effort to flush all I/O and clean up all
+    resources.
+}
 }
 %EXAMPLES
 \exampleB{
-	\exampleITEM
-	{}
-	{./EXAMPLES/shmem_global_exit_example.c}
-	{}
+\exampleITEM
+    {}
+    {./EXAMPLES/shmem_global_exit_example.c}
+    {}
 }
 \eAPI
