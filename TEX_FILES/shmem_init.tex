@@ -1,0 +1,45 @@
+\bAPI{SHMEM\_INIT}{A collective operation that allocates and initializes the
+resources used by the \openshmem library.}
+\synC
+void shmem_init(void); %*\synCE    
+\synF
+CALL SHMEM_INIT() %*\synFE
+
+% Arguments table. If no arguments you can use \argRow{None}{}{} 
+\desB{  
+    \argRow{None.}{}{}
+}
+%API description
+{   
+    \FUNC{shmem\_init} allocates and initializes resources used by the
+    \openshmem library. It is a collective operation that all \acp{PE} must
+    call before any other \openshmem routine may be called. At the end of the
+    \openshmem program which it initialized, each call to \FUNC{shmem\_init}
+    must be matched with a call to \FUNC{shmem\_finalize}. If there are
+    multiple calls to \FUNC{shmem\_init} in an \openshmem program without
+    intervening calls to \FUNC{shmem\_finalize} between them, the additional
+    \FUNC{shmem\_init} calls have no effect.
+}
+%API Description Table. 
+{
+%Return Values     
+\desR{ None. }
+\notesB{ 
+    As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has been
+    deprecated and is replaced with \FUNC{shmem\_init}. While support for
+    \FUNC{start\_pes} is still required in \openshmem libraries, users are
+    encouraged to use \FUNC{shmem\_init}. Direct replacement of
+    \FUNC{start\_pes} with \FUNC{shmem\_init} in \openshmem programs with no
+    further changes is possible; there is an implicit \FUNC{shmem\_finalize} at
+    the end of main.
+}
+}%end of DesB
+%Example
+\exampleB{
+%For each example, you can enter it as an item.
+    \exampleITEMF
+    { This is a simple program that calls \FUNC{shmem\_init}:}
+    {./EXAMPLES/shmem_init_example.f90}
+    {} 
+}  	
+\eAPI 
