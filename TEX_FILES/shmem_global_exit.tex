@@ -1,6 +1,5 @@
-\bAPI{SHMEM\_GLOBAL\_EXIT}{A non-collective routine that allows any \ac{PE} to force
-termination of an entire \openshmem program. This routine terminates the entire
-program, not just the \openshmem portion.}
+\bAPI{SHMEM\_GLOBAL\_EXIT}{A routine that allows any \ac{PE} to force
+termination of an entire program.}
 %SYNOPSIS
 \synC
 void shmem_global_exit(int status); %*\synCE
@@ -28,7 +27,7 @@ CALL SHMEM_GLOBAL_EXIT(status) %*\synFE
     status returned to the environment shall be one of the values passed to
     \FUNC{shmem\_global\_exit} as the status argument.  There is no return to
     the caller of \FUNC{shmem\_global\_exit}; control is returned from the
-    \openshmem library to the execution environment for all \acp{PE}.
+    \openshmem program to the execution environment for all \acp{PE}.
 }
 %API Description Table
 {
@@ -43,17 +42,14 @@ None.}
     pass any information about the nature of the exit, e.g an encountered error
     or a found solution.  Since \FUNC{shmem\_global\_exit} is a non-collective
     routine, there is no implied synchronization, and all \acp{PE} must
-    terminate regardless of their current execution state. If
-    \FUNC{shmem\_global\_exit} is called by more than one \ac{PE}, then the
-    exit status that is returned to the execution environment is one of the
-    values passed to \FUNC{shmem\_global\_exit}. While I/O must be flushed for
-    standard language I/O calls from C/C++/Fortran, it is implementation
-    dependent as to how I/O done by other means (e.g. third party I/O
-    libraries) is handled. Similarly, resources are released according to
-    C/C++/Fortran standard language requirements, but this may not include all
-    resources allocated for the \openshmem program. However, a quality
-    implementation will make a best effort to flush all I/O and clean up all
-    resources.
+    terminate regardless of their current execution state. While I/O must be
+    flushed for standard language I/O calls from C/C++/Fortran, it is
+    implementation dependent as to how I/O done by other means (e.g. third
+    party I/O libraries) is handled. Similarly, resources are released
+    according to C/C++/Fortran standard language requirements, but this may not
+    include all resources allocated for the \openshmem program. However, a
+    quality implementation will make a best effort to flush all I/O and clean
+    up all resources.
 }
 }
 %EXAMPLES
