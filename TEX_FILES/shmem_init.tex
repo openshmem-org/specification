@@ -28,10 +28,9 @@ CALL SHMEM_INIT() %*\synFE
     As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has been
     deprecated and is replaced with \FUNC{shmem\_init}. While support for
     \FUNC{start\_pes} is still required in \openshmem libraries, users are
-    encouraged to use \FUNC{shmem\_init}. Direct replacement of
-    \FUNC{start\_pes} with \FUNC{shmem\_init} in \openshmem programs with no
-    further changes is possible; there is an implicit \FUNC{shmem\_finalize} at
-    the end of main.
+    encouraged to use \FUNC{shmem\_init}. Replacing \FUNC{start\_pes} with
+    \FUNC{shmem\_init} in \openshmem programs with no further changes is
+    possible; there is an implicit \FUNC{shmem\_finalize} at the end of main.
 }
 }%end of DesB
 %Example
