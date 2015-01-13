@@ -25,11 +25,23 @@ PTR = SHMEM_PTR(target, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMEN
        communication.
 }
 {
- \desR{\FUNC{shmem\_ptr} returns a pointer to the data object on the specified	 remote \ac{PE}. If \target{} is not remotely accessible, a \CONST{NULL} pointer is returned.
+ \desR{
+        \color{red}\sout{returns a pointer to the data object on the specified  remote \ac{PE}.
+        If \target{} is not remotely accessible, a \CONST{NULL} pointer is
+        returned.}
+        \color{blue}The return value is a non-NULL address of the \target{} data object when it is 
+        accessible using memory loads and stores in addition to \openshmem 
+        \color{red}\sout{put and get}\color{blue}~ operations.
+        Otherwise, a NULL address is returned.\color{black}
 }
-\notesB{The \FUNC{shmem\_ptr} function is available only on systems where ordinary
-       memory loads and stores are used to implement \openshmem put and get
-       operations. When calling \FUNC{shmem\_ptr}, you pass the address on the calling \ac{PE}  for a symmetric array on the remote \ac{PE}.}
+\notesB{
+        \color{red}\sout{The \FUNC{shmem\_ptr} function is available only on systems where
+        ordinary memory loads and stores are used to implement \openshmem
+        put and get operations.}\color{black}
+        When calling \FUNC{shmem\_ptr}, \color{red}\sout{you pass}
+        \color{blue}\target{} is \color{black} the address on the calling
+        \ac{PE}  for a symmetric \color{red}\sout{array} \color{blue}data
+        object \color{black} on the remote \ac{PE}.}
 }
 
 \exampleB{
