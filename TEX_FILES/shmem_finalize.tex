@@ -1,4 +1,6 @@
-\bAPI{SHMEM\_FINALIZE}{Releases resources used by the OpenSHMEM library.} 
+\bAPI{SHMEM\_FINALIZE}{A collective operation that releases resources used by
+the \openshmem library. This only terminates the \openshmem portion of a
+program, not the entire program.} 
 \synC
 void shmem_finalize(void); %*\synCE
 \synF
@@ -8,27 +10,49 @@ CALL SHMEM_FINALIZE %*\synFE
 
 %Arguments
 \desB{
- 	None.
+    \argRow{None.}{}{}
 }
 %API Description
 {
-       \FUNC{shmem\_finalize} guarantees all pending communication is completed and  \openshmem library specific resources are released before the call returns. \FUNC{shmem\_finalize} is a collective operation which requires all \acp{PE} to participate in the call and it may be called only once before the program returns from main. All process/threads that represent the PEs will still exist but may not participate in any  \openshmem operation. If any  \openshmem library call is encountered after  \FUNC{shmem\_finalize}, its behavior is undefined.
- }
+    \FUNC{shmem\_finalize} is a collective operation that ends the \openshmem
+    portion of a program previously initialized by \FUNC{shmem\_init} and
+    releases resources used by the \openshmem library. This collective
+    operation requires all \acp{PE} to participate in the call. There is an
+    implicit global barrier in \FUNC{shmem\_finalize} so that pending
+    communication is completed, and no resources can be released until all
+    \acp{PE} have entered \FUNC{shmem\_finalize}. \FUNC{shmem\_finalize} must
+    be the last \openshmem library call encountered in the \openshmem portion
+    of a program. A call to \FUNC{shmem\_finalize} will release any resources
+    initialized by the most recent call to \FUNC{shmem\_init} that has not
+    already been matched with a call to \FUNC{shmem\_finalize}. All processes
+    and threads that represent the \acp{PE} will still exist after the call to
+    \FUNC{shmem\_finalize} returns, but they will no longer have access to any
+    resources that have been released.
+}
 %API Description Table
 {
-		%Return Values
-		\desR{None.}
-		%NOTES
-		\notesB{
-					The calling of \FUNC{shmem\_finalize} is optional. \FUNC{shmem\_finalize} has an implicit \FUNC{shmem\_barrier\_all} for the completion of all outstanding \openshmem communication operations. \FUNC{shmem\_finalize} releases resources used by the OpenSHMEM library including the symmetric memory heap and pointers initiated by \FUNC{shmem\_ptr}.		
-    }
+%Return Values
+\desR{None.}
+%NOTES
+\notesB{
+    \FUNC{shmem\_finalize} releases resources used by the \openshmem library
+    including the symmetric memory heap and pointers initiated by
+    \FUNC{shmem\_ptr}. This collective operation requires all \acp{PE} to
+    participate in the call, not just a subset of the \acp{PE}. The
+    non-\openshmem portion of a program may continue after a call to
+    \FUNC{shmem\_finalize} by all \acp{PE}. There is is an implicit
+    \FUNC{shmem\_finalize} at the end of main, so that having an explicit call
+    to \FUNC{shmem\_finalize} is optional. However, an explicit
+    \FUNC{shmem\_finalize} may be required as an entry point for wrappers used
+    by profiling or other tools that need to perform their own finalization.
+}
 }
 %EXAMPLES
 \exampleB{
-	\exampleITEM
-	{The following finalize example is for \CorCpp{} programs:}
-	{./EXAMPLES/shmem_finalize_example.c}
-	{}
+    \exampleITEM
+    {The following finalize example is for \CorCpp{} programs:}
+    {./EXAMPLES/shmem_finalize_example.c}
+    {}
 }
 
 \eAPI
