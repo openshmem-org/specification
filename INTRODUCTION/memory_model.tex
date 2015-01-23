@@ -40,6 +40,7 @@ Remotely accessible data objects are called \emph{Symmetric Objects}.
 %SP: No, if there is a way to create such objects without them being global/static/common/save or shmalloced/shpalloced would they would be symmetric as per this definition...NOT the way OpenSHMEM defines.
 All symmetric data objects have a corresponding object with the same
 name, type, size, and offset (from an arbitrary memory address) on all \ac{PE}s. \emph{Symmetric objects } are accessible by all executing \ac{PE}s via the \openshmem \ac{API}. 
+Each symmetric data object has a corresponding object with the same name, type, size, and offset (from an arbitrary memory address) on all PEs where that object is accessible via the \openshmem \ac{API}. (For the definition of what is accessible, see the descriptions for \FUNC{shmem\_pe\_accessible} and \FUNC{shmem\_addr\_accessible} in sections \ref{subsec:shmem_pe_accessible} and \ref{subsec:shmem_addr_accessible}.)
 Symmetric data objects accessed via typed \openshmem interfaces are required to be natural aligned based on their type requirements and underlying architecture.
 In \openshmem{} the following kinds of data objects are symmetric:
 \begin{itemize}
