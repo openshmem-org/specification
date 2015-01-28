@@ -10,7 +10,7 @@ int main(void)
   npes = shmem_n_pes();
 
   if (shmem_my_pe() == 0) {
-    printf("Number of PEs executing this application is: %d\n", npes);
+    printf("Number of PEs executing this program is: %d\n", npes);
   }
 
   return 0;

@@ -38,7 +38,7 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
        block is indeterminate.  
        If \VAR{ptr} is a \CONST{NULL} pointer, the \FUNC{shrealloc}/\FUNC{shmem\_realloc} function behaves like the \FUNC{shmalloc}/\FUNC{shmem\_malloc} function for the specified size.  If size  is \CONST{0} and ptr is not a \CONST{NULL} pointer, the block to which it points is freed. If the space cannot be allocated, the block to which ptr points is unchanged.
 
-       The \FUNC{shmalloc}, \FUNC{shfree}, and \FUNC{shrealloc} functions are provided  so that multiple \ac{PE}s in an application can allocate symmetric, remotely
+       The \FUNC{shmalloc}, \FUNC{shfree}, and \FUNC{shrealloc} functions are provided  so that multiple \ac{PE}s in a program can allocate symmetric, remotely
        accessible memory blocks.  These memory blocks can then be used with
        \openshmem communication routines.  Each of these functions call the
        \FUNC{shmem\_barrier\_all} function before returning; this ensures that all
@@ -60,11 +60,11 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 					 The \FUNC{shrealloc} function returns a pointer to the allocated space (which may have moved); otherwise, it returns a null pointer.
 		}
 		%NOTES
-		\notesB{ As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, application developers are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead.
+		\notesB{ As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, program developers are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead.
 					 
 The total size of the symmetric heap is determined at job startup.  One can adjust the size of the heap using the \CONST{SMA\_SYMMETRIC\_SIZE} environment  variable (where available).	
 
-The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} functions differ from the private heap allocation functions in that all \ac{PE}s in an application must call them (a barrier is used to ensure this).
+The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} functions differ from the private heap allocation functions in that all \ac{PE}s in a program must call them (a barrier is used to ensure this).
 
 }		
 }

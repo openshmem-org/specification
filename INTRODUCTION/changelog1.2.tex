@@ -1,20 +1,20 @@
 \section{Version 1.2}
 This section summarizes the changes from the \openshmem specification Version 1.1 to the Version 1.2.  
-A major change in this version is that it improves upon the execution model described in 1.1 by introducing an explicit \FUNC{shmem\_finalize} library call. This provides a collective mechanism of exiting an \openshmem application and releasing resources used by the library.  
+A major change in this version is that it improves upon the execution model described in 1.1 by introducing an explicit \FUNC{shmem\_finalize} library call. This provides a collective mechanism of exiting an \openshmem program and releasing resources used by the library.  
 
 
 
 The following list describes the specific changes in 1.2:
 \begin{itemize}
-\item New Execution Model for exiting/finishing OpenSHMEM applications.
+\item New Execution Model for exiting/finishing OpenSHMEM programs.
 \\See Section  \ref{subsec:execution_model}.
 \item New library constants to support API that query version and name information. 
 \\See Section \ref{subsec:library_constants}.
 \item Deprecation of \FUNC{\_my\_pe} and \FUNC{\_num\_pes} routines.
 \\See Sections \ref{subsec:shmem_my_pe} and \ref{subsec:shmem_num_pe}
-\item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly exit an \openshmem application and release resources.
+\item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly exit an \openshmem program and release resources.
 \\See Section \ref{subsec:shmem_finalize}
-\item New API \FUNC{shmem\_global\_exit} to provide mechanism to exit an \openshmem application.
+\item New API \FUNC{shmem\_global\_exit} to provide mechanism to exit an \openshmem program.
 \\See Section \ref{subsec:shmem_global_exit}.
 \item New API to query the version and name information. 
 \\See Section \ref{subsec:shmem_version} and \ref{subsec:shmem_name}.

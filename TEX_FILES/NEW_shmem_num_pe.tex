@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_N\_PES}{Returns the number of \ac{PE}s running in an application.}
+\bAPI{SHMEM\_N\_PES}{Returns the number of \ac{PE}s running in a program.}
 %Synopsis C
 \synC
 int shmem_n_pes(void);
@@ -18,7 +18,7 @@ N_PES = NUM_PES() %*\synFE
 }
 %API Description
 {
-	The function returns the number of \ac{PE}s running the application.
+	The function returns the number of \ac{PE}s running the program.
 }
 %API Description Table.
 {
@@ -27,9 +27,9 @@ N_PES = NUM_PES() %*\synFE
 %				\cRow{}{}
 %		}
 		%Return Value
-		\desR{Integer -  Number of \ac{PE}s running the \openshmem application.}
+		\desR{Integer -  Number of \ac{PE}s running the \openshmem program.}
 		%NOTES      
-	\notesB{As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been deprecated. Although \openshmem libraries are required to support the call, application developers are encouraged to use \FUNC{shmem\_n\_pes} instead.
+	\notesB{As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been deprecated. Although \openshmem libraries are required to support the call, program developers are encouraged to use \FUNC{shmem\_n\_pes} instead.
 }
 		}
 		%EXAMPLES

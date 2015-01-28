@@ -15,7 +15,7 @@ CALL START_PES(npes) %*\synFE
  %API description
  {   
      The \FUNC{start\_pes} routine initializes the \openshmem execution
-     environment.  An \openshmem application must call
+     environment.  An \openshmem program must call
      \FUNC{start\_pes} before calling any other \openshmem routine.
  }
  %API Description Table. 
@@ -34,7 +34,7 @@ CALL START_PES(npes) %*\synFE
  \notesB{
     As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has
     been deprecated. Although \openshmem libraries are required to support the
-    call, application developers are encouraged to use \FUNC{shmem\_init} instead.
+    call, program developers are encouraged to use \FUNC{shmem\_init} instead.
 }
 %Example
 \exampleB{
