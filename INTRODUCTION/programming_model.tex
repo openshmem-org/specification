@@ -36,7 +36,7 @@
 The \openshmem{} interfaces can be used to implement \ac{SPMD} style programs. It provides interfaces to start the \openshmem{} \ac{PE}s in parallel, and communication and synchronization interfaces to access remotely accessible data objects across \ac{PE}s. These interfaces can be leveraged to divide a problem into multiple sub-problems that can solved independently or with coordination using the communication and synchronization interfaces.
 The \openshmem specification defines library calls, constants, variables, and language bindings for \Clang{} and \Fortran{}.
 The \Cpp{} interface is currently the same as that for \Clang. Unlike UPC, Fortran 2008, Titanium, X10 and Chapel, which are all PGAS languages, \openshmem relies on 
-the programmer to use the library calls  to implement the correct semantics of its programming model.
+the user to use the library calls  to implement the correct semantics of its programming model.
 
 An overview of the \openshmem operations is described below:
 
