@@ -26,4 +26,9 @@ may choose to continue either with a warning or silently.\tabularnewline
 Non-symmetric variables & The symmetric memory management routines are collectives, which means that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with the same size request. 
 Program behavior after a mismatched \FUNC{shmalloc} call is undefined.\tabularnewline
 \hline 
+Use of NULL pointers with non-zero \VAR{len} specified & In any \openshmem routine
+that takes a pointer and \VAR{len} describing the number of elements in that
+pointer, NULL may not be specified for the pointer unless the corresponding \VAR{len} is also
+specified as zero. Otherwise, the resulting behavior is undefined.\tabularnewline
+\hline 
 \end{tabular}

@@ -55,8 +55,9 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
        not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting \ac{PE}.  A call to
        \FUNC{shmem\_wait\_until} does not return until some  other \ac{PE} changes
        \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.  
-       The operations assume that memory is updated in the units of datatype
-       specified by the \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} function signatures.
+       Memory must be updated in units that are equal to or larger than
+       those of the datatype specified by the \FUNC{shmem\_wait} and
+       \FUNC{shmem\_wait\_until} function signatures.
        This mechanism is useful when a \ac{PE} needs to tell another \ac{PE}
        that it has completed some action.
        The \FUNC{shmem\_wait}  routines return when \VAR{ivar} is no  longer  equal  to

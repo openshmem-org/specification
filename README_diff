@@ -22,7 +22,7 @@ Combine the two versions
     latex (read the text of the complaints).  Some examples might be:
     8a) around line 46 - should be something like: \usepackage{framed,color}
     8b) around line 5542 - remove illegal character
-    8c) around line 1089 - should be something like: \usepackage[normalem]{ulem}
+    8c) around line 1089/1074 - should be something like: \usepackage[normalem]{ulem}
     8d) remove "uwave" and "sout" from DIFadd and DIFdel commands
 9) run "pdflatex diff.tex" without errors, and get your diff.pdf.
 
