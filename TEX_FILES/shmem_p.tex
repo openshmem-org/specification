@@ -18,7 +18,7 @@ void shmem_longdouble_p(long double *addr, long double value, int pe); %*\synCE 
 {     These routines provide a very low latency put capability for single
        elements of most basic types.
 
-       As with \FUNC{shmem\_put}, these functions start the remote transfer and may
+       As with \FUNC{shmem\_put}, these routines start the remote transfer and may
        return	before the   data  is delivered  to the  remote \ac{PE}.  Use
        \FUNC{shmem\_quiet} to force completion of all remote \PUT{} transfers.
 }

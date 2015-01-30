@@ -9,7 +9,7 @@
 %   *Each PE will have a unique global identifier and the execution of a program may depend on the PE id, if executed in SPMD.
 %   *PE id may be used for library calls synchronizations, control flow constructs language  in C/Fortran
 %   *PE may allocate symmetric data objects via a symmetric heap  during execution%SP: Does not cover global and static.
-%   *As of now, PEs may finish execution at any time by returning from the main function. (no call to shmem_finalize yet!)
+%   *As of now, PEs may finish execution at any time by returning from the main routine. (no call to shmem_finalize yet!)
 %   
 %This comes from the UPC spec:
 %The memory consistency model in a language defines the order in which the results of write operations may be observed through read operations.
@@ -27,7 +27,7 @@ Although \openshmem follows the SPMD execution model, different \ac{PE}s may hav
 
 \openshmem requires initialization before using any of the \openshmem library
 routines by calling \textbf{start\_pes()}.  %during the initialization phase of a program. %SP:repetitive.
-The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes} performs any required initialization steps, such as setting up the symmetric heap for every \ac{PE} and creating and assigning \ac{PE} numbers which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used on \openshmem library calls (i.e. to access symmetric objects from specific \ac{PE}s, collective synchronization, etc.) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. Some collective operations require the creation of an \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the \activeset{} calls an \openshmem collective routine, undefined  behavior results.
+The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes} performs any required initialization steps, such as setting up the symmetric heap for every \ac{PE} and creating and assigning \ac{PE} numbers which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used on \openshmem library calls (i.e. to access symmetric objects from specific \ac{PE}s, collective synchronization, etc.) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran. Some collective routines require the creation of an \activeset, which is  group of \ac{PE}s that is involved in the execution of a collective routine. These collective routines assume that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the \activeset{} calls an \openshmem collective routine, undefined  behavior results.
 An OpenSHMEM program consists of a set of processes, called \ac{PE}s where each process has its own 'local' (private) memory and symmetric memory regions that may be accessible by any \ac{PE}s.
 Although \openshmem follows the \ac{SPMD} execution model, different \ac{PE}s may have different execution paths and will execute asynchronously following \Fortran{} or program execution in \Clang{} or \Cpp.  Each PE may be mapped to many to one hardware cores/threads or less. In \openshmem the number of \ac{PE}s is specified at runtime.
 
@@ -35,8 +35,8 @@ Although \openshmem follows the \ac{SPMD} execution model, different \ac{PE}s ma
 routines by calling \FUNC{start\_pes}.%during the initialization phase of a program. %SP:repetitive.
 The \ac{PE}s do not exist till after \FUNC{start\_pes} returns. \FUNC{start\_pes} performs any required initialization steps, such as setting up the symmetric heap for every \ac{PE} and creating and assigning \ac{PE} numbers 
 which act like unique global identifiers for the duration of the program. These \ac{PE} identifiers are integers assigned in a monotonically increasing manner from zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers 
-are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran{}. Some collective operations require the creation of an 
-\activeset, which is  group of \ac{PE}s that is involved in the execution of a collective operation. These collective routines assume that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the \activeset{} calls a 
+are used for other \openshmem library calls (such as collective synchronization) or to dictate a definite control flow for \ac{PE}s using constructs of \Clang{} or \Fortran{}. Some collective routines require the creation of an 
+\activeset, which is  group of \ac{PE}s that is involved in the execution of a collective routine. These collective routines assume that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the \activeset{} calls a 
 \openshmem collective routine, undefined  behavior results.
 
 %The symmetric heap is one of the memory spaces
@@ -58,13 +58,13 @@ are used for other \openshmem library calls (such as collective synchronization)
 %Query routines are available to gather information about the execution.
 %\openshmem also provides synchronization routines to coordinate data
 %transfers and other operations. 
-As of now, an \openshmem program finishes execution by returning from the main function. 
+As of now, an \openshmem program finishes execution by returning from the main routine. 
 It is up to the implementation on how to handle the finalization of the
 \openshmem library and any other resources initialized by the library:
 there is currently no explicit call defined in the \openshmem specification.
 
 
-\subsection{Progress of \openshmem operations}
+\subsection{Progress of \openshmem Routines}
 
 The \openshmem model assumes that computation and communication are
 naturally overlapped.  High quality \openshmem implementations must insure that programs exhibit %SP: Changing MUST to may as per discussion on 01/31/2014
@@ -105,15 +105,15 @@ network hardware that offloads communication handling from processors.
 
 \openshmem contains a number of routines that operate on symmetric data
 atomically.  These routines guarantee that accesses by \openshmem's
-atomic operations will be exclusive, but do not guarantee exclusivity
+atomic routines will be exclusive, but do not guarantee exclusivity
 in combination with other routines, either inside \openshmem or
 outside.
 
 For example: during the execution of a remote integer increment
-operation on a symmetric variable \VAR{x}, no other \openshmem atomic
-operation may access \VAR{x}.  After the increment, \VAR{x} will have
+routine on a symmetric variable \VAR{x}, no other \openshmem atomic
+routine may access \VAR{x}.  After the increment, \VAR{x} will have
 increased its value by \CONST{1} on the target \ac{PE}, at which point other
-atomic operations may then modify that \VAR{x}.
+atomic routines may then modify that \VAR{x}.
 
 %  %Memory model
 %    *Each OpenSHMEM PEs may have symmetric memory that is accessible by other PEs. 

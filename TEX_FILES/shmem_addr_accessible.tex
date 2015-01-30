@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_ADDR\_ACCESSIBLE}{Determines whether an address is accessible via OpenSHMEM data transfers operations from the specified  remote \ac{PE}.}
+\bAPI{SHMEM\_ADDR\_ACCESSIBLE}{Determines whether an address is accessible via OpenSHMEM data transfers routines from the specified  remote \ac{PE}.}
 %SYNOPSIS
 \synC
 int shmem_addr_accessible(void *addr, int pe); %*\synCE
@@ -17,18 +17,18 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe) %*\synFE
 }
 %API Description
 {
-       \FUNC{shmem\_addr\_accessible} is a query function that indicates whether a
-       local address is accessible via \openshmem operations from the specified
+       \FUNC{shmem\_addr\_accessible} is a query routine that indicates whether a
+       local address is accessible via \openshmem routines from the specified
        remote \ac{PE}. 
        
-       This function verifies that the data object is symmetric and accessible
-       with respect to a remote \ac{PE} via \openshmem  data  transfer  functions.  The
+       This routine verifies that the data object is symmetric and accessible
+       with respect to a remote \ac{PE} via \openshmem  data  transfer  routines.  The
        specified address \VAR{addr} is a data object on the local \ac{PE}. 
        
-       This function may be particularly useful for hybrid programming with 
+       This routine may be particularly useful for hybrid programming with 
        other communication libraries (such as a \ac{MPI}) or parallel languages. 
        For example, in SGI Altix series systems, for multiple executable MPI programs
-       that use \openshmem functions, it is important to note that static memory,
+       that use \openshmem routines, it is important to note that static memory,
        such as a \Fortran{} common block or \Clang{} global variable, is symmetric
        between processes running from the same executable file, but is not
        symmetric between processes running from different executable files.
@@ -44,11 +44,11 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe) %*\synFE
 		%Return Value
 		\desR{		
 				\CorCpp: The  return value is \CONST{1} if \VAR{addr} is a symmetric data object and
-				 accessible via \openshmem operations from the specified remote \ac{PE};
+				 accessible via \openshmem routines from the specified remote \ac{PE};
 				 otherwise,it is \CONST{0}.
 
 				\Fortran: The return value is \CONST{.TRUE.} if \VAR{addr} is a symmetric data object
-				 and accessible via \openshmem operations from the specified remote
+				 and accessible via \openshmem routines from the specified remote
 				 \ac{PE}; otherwise, it is \CONST{.FALSE.}.
 		}
 		%NOTES	

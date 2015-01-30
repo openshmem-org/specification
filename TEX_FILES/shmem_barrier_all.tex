@@ -13,10 +13,10 @@ CALL SHMEM_BARRIER_ALL%*\synFE
 }
 %API description
 {   
-    The \FUNC{shmem\_barrier\_all} function registers the arrival of a \ac{PE} at a
+    The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at a
     barrier. Barriers are a fast mechanism for synchronizing all \ac{PE}s at
     once.  This routine causes a \ac{PE} to suspend execution until all \ac{PE}s have
-    called \FUNC{shmem\_barrier\_all}.  This function must be used with \ac{PE}s started
+    called \FUNC{shmem\_barrier\_all}.  This routine must be used with \ac{PE}s started
     by \FUNC{start\_pes}.
 
     Prior to synchronizing with other \ac{PE}s, \FUNC{shmem\_barrier\_all} ensures

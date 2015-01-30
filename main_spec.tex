@@ -109,14 +109,14 @@
 \input{INTRODUCTION/environment_variables.tex}
 \label{subsec:environment_variables}
 \label{subsec:language_bindings}
-%\input{INTRODUCTION/synchronization_model} %SP:Moving to remote memory operations section as per discussion on 1/21/14
+%\input{INTRODUCTION/synchronization_model} %SP:Moving to remote memory routines section as per discussion on 1/21/14
 
 \clearpage
 
 \startchap
 \section{OpenSHMEM Library API}
 \label{sec:openshmem_library_api}
-\subsection{Library Setup, Exit, and Query Operations}%SP: Merging two operations
+\subsection{Library Setup, Exit, and Query Routines}%SP: Merging two routines
 \input{INTRODUCTION/setup_query_intro}
 \label{subsec:start_init}
 \input{TEX_FILES/shmem_init.tex} %Swaroop, Graham
@@ -140,7 +140,7 @@
 \input{TEX_FILES/start_pes.tex} %Swaroop, Graham
 \label{subsec:start_pes}
 %\startchap
-\subsection{Memory Management Operations}
+\subsection{Memory Management Routines}
 \input{INTRODUCTION/memory_management_intro}
 \input{TEX_FILES/shfree.tex}%Tommy
 \label{subsec:shfree}
@@ -175,7 +175,7 @@
 \label{subsec:shmem_fadd}
 \input{TEX_FILES/shmem_fadd.tex}%Pasha
 %\startchap
-\subsection{Collective Operations}
+\subsection{Collective Routines}
 \label{subsec:coll}
 \input{INTRODUCTION/collective_intro.tex}
 \label{subsec:shmem_barrier_all}
@@ -189,12 +189,12 @@
 \label{subsec:shmem_reductions}
 \input{TEX_FILES/shmem_reductions.tex} %Swaroop
 %\startchap
-\subsection{Point-To-Point Synchronization Functions}%SP: Adding a chapter to include wait and wait until 
+\subsection{Point-To-Point Synchronization Routines}%SP: Adding a chapter to include wait and wait until 
 \input{INTRODUCTION/synchronization_intro} %Swaroop
 \input{TEX_FILES/shmem_wait.tex} %Swaroop
 \label{subsec:shmem_wait}
 %\startchap
-\subsection{Memory Ordering Operations} %SP: Adding a chapter to include fence and quiet
+\subsection{Memory Ordering Routines} %SP: Adding a chapter to include fence and quiet
 \label{subsec:memory_order}
 \input{INTRODUCTION/ordering_intro} %Swaroop
 \label{subsec:shmem_fence}
@@ -203,7 +203,7 @@
 \input{TEX_FILES/shmem_quiet.tex} %Swaroop
 \input{INTRODUCTION/synchronization_model.tex}
 %\startchap
-\subsection{Distributed Locking Operations}
+\subsection{Distributed Locking Routines}
 \input{INTRODUCTION/locks_intro} %Swaroop
 \input{TEX_FILES/shmem_lock.tex} %Oscar
 %\startchap
@@ -262,7 +262,7 @@
 % Add acronyms here
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
-\acro{RMO}{\emph{Remote Memory Operations}}
+\acro{RMO}{\emph{Remote Memory Routines}}
 \acro{AMO}{\emph{Atomic Memory Operation}}
 \acro{PE}{\emph{Processing Element}}
 \acrodefplural{PE}[PEs]{\emph{Processing Elements}}

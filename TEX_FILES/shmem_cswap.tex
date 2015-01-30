@@ -22,7 +22,7 @@ ires_i8 = SHMEM_INT8_CSWAP(target, cond_i8, value_i8, pe) %*\synFE   %DO NOT DEL
 		 remote \VAR{target} are equal, then \VAR{value} is swapped into the
 		 remote \VAR{target}. Otherwise, the remote \VAR{target} is unchanged.
 		 In either case, the old value of the remote \VAR{target} is
-		 returned as the function return value. \VAR{cond} must be of the
+		 returned as the routine return value. \VAR{cond} must be of the
 		 same data type as \VAR{target}.}
 \argRow{IN}{value}{The \VAR{value} to be atomically written to the remote \ac{PE}. 			\VAR{value} must be the same data type as \VAR{target}.}
 \argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which \VAR{target} is to be updated. If you are using \Fortran, it must be a default integer value.}

@@ -19,11 +19,11 @@ I = SHMEM_TEST_LOCK(lock) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
        The \FUNC{shmem\_set\_lock} routine sets a mutual exclusion lock after  waiting
        for  the lock  to be freed by any other \ac{PE} currently holding the lock.
        Waiting \ac{PE}s are assured of getting the lock in a first-come,
-       first-served manner.  The \FUNC{shmem\_clear\_lock} routine releases a lock  previously set by \FUNC{shmem\_set\_lock} after ensuring that all local and remote	 stores initiated in the critical region are complete.  The \FUNC{shmem\_test\_lock} function sets a mutual exclusion lock only if it is currently cleared.  By using this function, a \ac{PE} can avoid blocking on a set lock.  If the lock is currently set, the function returns without waiting.  These routines are appropriate for protecting a critical region from simultaneous update by multiple \ac{PE}s.	  
+       first-served manner.  The \FUNC{shmem\_clear\_lock} routine releases a lock  previously set by \FUNC{shmem\_set\_lock} after ensuring that all local and remote	 stores initiated in the critical region are complete.  The \FUNC{shmem\_test\_lock} routine sets a mutual exclusion lock only if it is currently cleared.  By using this routine, a \ac{PE} can avoid blocking on a set lock.  If the lock is currently set, the routine returns without waiting.  These routines are appropriate for protecting a critical region from simultaneous update by multiple \ac{PE}s.	  
 }
 {
 \desR{
-       The \FUNC{shmem\_test\_lock} function returns \CONST{0} if  the lock  was  originally cleared and  this  call was  able  to set the lock.  A value of \CONST{1} is
+       The \FUNC{shmem\_test\_lock} routine returns \CONST{0} if  the lock  was  originally cleared and  this  call was  able  to set the lock.  A value of \CONST{1} is
        returned if the lock had been set and the call returned without waiting
        to set the lock.}
 \notesB{

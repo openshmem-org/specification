@@ -17,10 +17,10 @@ CALL SHPCLMOVE (addr, length, status, abort) %*\synFE   %DO NOT DELETE. THIS LIN
 		      an error code.}
 }
 %API description
- {     The \FUNC{SHPCLMOVE} function either extends a symmetric heap block if the
+ {     The \FUNC{SHPCLMOVE} routine either extends a symmetric heap block if the
        block is followed by a large enough free block or copies the contents
        of the existing block to a larger block and returns a status code
-       indicating that the block was moved.  This function also can reduce the
+       indicating that the block was moved.  This routine also can reduce the
        size of a block if the new length is less than  the old length.  All
        \ac{PE}s  in a program must call \FUNC{SHPCLMOVE} with the
        same value of \VAR{addr} to maintain symmetric heap consistency; if any \ac{PE}s
