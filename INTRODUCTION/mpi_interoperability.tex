@@ -1,7 +1,7 @@
 \section{\ac{MPI} Interoperability}
 \begin{sloppypar} %SP: to prevent constants from running into margins.
 \openshmem routines can be used in conjunction with \ac{MPI}
-routines  in the same program.  For example, on SGI systems, programs that use both \ac{MPI} and \openshmem routines call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the call to the \FUNC{start\_pes} routine.  \openshmem \ac{PE} numbers are equal to the \ac{MPI} rank within the \CONST{MPI\_COMM\_WORLD} environment variable.  Note that this precludes use of \openshmem routines between processes in different \CONST{MPI\_COMM\_WORLD}s. 
+routines  in the same program.  For example, on SGI systems, programs that use both \ac{MPI} and \openshmem routines call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the call to the \FUNC{shmem\_init} routine.  \openshmem \ac{PE} numbers are equal to the \ac{MPI} rank within the \CONST{MPI\_COMM\_WORLD} environment variable.  Note that this precludes use of \openshmem routines between processes in different \CONST{MPI\_COMM\_WORLD}s. 
 \ac{MPI} processes started using the \FUNC{MPI\_Comm\_spawn} routine, for
 example, cannot use \openshmem routines to communicate with their parent
 \ac{MPI} processes.

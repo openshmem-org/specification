@@ -17,7 +17,7 @@ CALL SHMEM_BARRIER_ALL%*\synFE
     barrier. Barriers are a fast mechanism for synchronizing all \ac{PE}s at
     once.  This routine causes a \ac{PE} to suspend execution until all \ac{PE}s have
     called \FUNC{shmem\_barrier\_all}.  This routine must be used with \ac{PE}s started
-    by \FUNC{start\_pes}.
+    by \FUNC{shmem\_init}.
 
     Prior to synchronizing with other \ac{PE}s, \FUNC{shmem\_barrier\_all} ensures
     completion of all previously issued memory stores and remote
