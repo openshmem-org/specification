@@ -31,4 +31,8 @@ that takes a pointer and \VAR{len} describing the number of elements in that
 pointer, NULL may not be specified for the pointer unless the corresponding \VAR{len} is also
 specified as zero. Otherwise, the resulting behavior is undefined.\tabularnewline
 \hline 
+Multiple calls to \FUNC{shmem\_init} & In an OpenSHMEM program where
+\FUNC{shmem\_init} has already be called, any subsequent calls to
+\FUNC{shmem\_init} result in undefined behavior.\tabularnewline
+\hline 
 \end{tabular}
