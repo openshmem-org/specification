@@ -2,27 +2,27 @@
 \label{subsec:shmem_collect}
 \synC   %Synopisis for C API
 
-void shmem_collect32(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_collect64(void *target, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_fcollect32(void *target, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_fcollect64(void *target, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+void shmem_collect32(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void shmem_collect64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void shmem_fcollect32(void *dest, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void shmem_fcollect64(void *dest, const void *source,	size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
 
 INTEGER nelems
 INTEGER PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_COLLECT_SYNC_SIZE)
-CALL SHMEM_COLLECT4(target, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT8(target, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT32(target, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT4(target, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT8(target, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT32(target, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, pSync) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+CALL SHMEM_COLLECT4(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_COLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_COLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_COLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_FCOLLECT4(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_FCOLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_FCOLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
-\argRow{OUT}{target}{A symmetric array.	 The \target{} argument must be large
+\argRow{OUT}{dest}{A symmetric array.	 The \dest{} argument must be large
 	    enough to accept the concatenation of the \source{} arrays on
 	    all \ac{PE}s.  The data types are as follows:
 	    For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, and \FUNC{shmem\_fcollect64}, any data type with an element size of 64
@@ -31,7 +31,7 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 	    \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32}, any data type with an element size of \CONST{32} bits.  \Fortran{}
 	    derived types, \Fortran{} character type, and \CorCpp{} structures are not permitted.}
 \argRow{IN}{source}{A symmetric data object that can be of any type
-	    permissible for the \target{} argument.}
+	    permissible for the \dest{} argument.}
 \argRow{IN}{nelems}{The number of elements in the \source{} array. nelems must be
 	    of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a
 	    default integer value.}
@@ -52,9 +52,9 @@ CALL SHMEM_FCOLLECT64(target, source, nelems, PE_start, logPE_stride, PE_size, p
 %API description
 {   
 \OSH{} \FUNC{collect} and \FUNC{fcollect} routines concatenate
-\VAR{nelems} \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the \target{} array, over the set of \ac{PE}s defined by \VAR{PE\_start}, \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The resultant \target{} array
+\VAR{nelems} \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the \dest{} array, over the set of \ac{PE}s defined by \VAR{PE\_start}, \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The resultant \dest{} array
 contains the contribution from \ac{PE} \VAR{PE\_start} first, then the contribution
-from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result is written to the \target{} array for all \ac{PE}s in the \activeset.
+from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result is written to the \dest{} array for all \ac{PE}s in the \activeset.
 
 The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
 participating \ac{PE}s, while the collect routines allow \VAR{nelems} to vary from
@@ -64,11 +64,11 @@ As with all \openshmem collective routines, each of these routines assumes
 that only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
 \activeset{} and calls this collective routine, the behavior is undefined.
 
-The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset. The same \target{} and \source{} arrays
+The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset. The same \dest{} and \source{} arrays
 and the same \VAR{pSync} work array must be passed to all \ac{PE}s in the \activeset.
 
 Upon return from a collective routine, the following are true for the
-local \ac{PE}: The \target{} array is updated. The values in the \VAR{pSync} array
+local \ac{PE}: The \dest{} array is updated. The values in the \VAR{pSync} array
 are restored to the original values.
 }
 {

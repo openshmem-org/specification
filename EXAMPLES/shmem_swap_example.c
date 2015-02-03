@@ -3,21 +3,21 @@
 
 int main(void)
 {
-   long *target;
+   long *dest;
    int me, npes;
    long swapped_val, new_val;
 
    shmem_init();
    me = shmem_my_pe();
    npes = shmem_n_pes();
-   target = (long *) shmem_malloc(sizeof (*target));
-   *target = me;
+   dest = (long *) shmem_malloc(sizeof (*dest));
+   *dest = me;
    shmem_barrier_all();
    new_val = me;
    if (me & 1){
-      swapped_val = shmem_long_swap(target, new_val, (me + 1) % npes);
-      printf("%d: target = %ld, swapped = %ld\n", me, *target, swapped_val);
+      swapped_val = shmem_long_swap(dest, new_val, (me + 1) % npes);
+      printf("%d: dest = %ld, swapped = %ld\n", me, *dest, swapped_val);
    }
-   shmem_free(target);
+   shmem_free(dest);
    return 0;
 }

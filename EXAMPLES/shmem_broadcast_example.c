@@ -4,7 +4,7 @@
 
 #define NUM_ELEMS 4
 long pSync[_SHMEM_BCAST_SYNC_SIZE];
-long source[NUM_ELEMS], target[NUM_ELEMS];
+long source[NUM_ELEMS], dest[NUM_ELEMS];
 
 int main(void)
 {
@@ -22,10 +22,10 @@ int main(void)
    }
    shmem_barrier_all(); /* Wait for all PEs to initialize pSync */
 
-   shmem_broadcast64(target, source, NUM_ELEMS, 0, 0, 0, npes, pSync);
-   printf("%d: %ld", me, target[0]);
+   shmem_broadcast64(dest, source, NUM_ELEMS, 0, 0, 0, npes, pSync);
+   printf("%d: %ld", me, dest[0]);
    for (i = 1; i < NUM_ELEMS; i++)
-      printf(", %ld", target[i]);
+      printf(", %ld", dest[i]);
    printf("\n");
    return 0;
 }

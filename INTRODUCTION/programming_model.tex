@@ -77,7 +77,7 @@ that is copied to a data object (local or symmetric) on the local \ac{PE}.
 
 \item \textbf{Synchronization and Ordering}
 \begin{enumerate}
-\item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of remote access operations and stores to symmetric data objects with respect to a specific \target{} \ac{PE}. 
+\item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of remote access operations and stores to symmetric data objects with respect to a specific \dest{} \ac{PE}. 
 \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access operations and stores to symmetric data objects. 
 \item \OPR{Barrier}: All or some \ac{PE}s collectively synchronize and ensure completion of all remote and local updates prior to any \ac{PE} returning from the call.
 \end{enumerate}

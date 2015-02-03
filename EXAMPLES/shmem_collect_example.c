@@ -8,7 +8,7 @@ int source[2];
 int main(void)
 {
    int i, me, npes;
-   int *target;
+   int *dest;
 
    shmem_init();
    me = shmem_my_pe();
@@ -16,16 +16,16 @@ int main(void)
 
    source[0] = me * 2;
    source[1] = me * 2 + 1;
-   target = (int *)shmem_malloc(sizeof(int) * npes * 2);
+   dest = (int *)shmem_malloc(sizeof(int) * npes * 2);
    for (i=0; i < _SHMEM_COLLECT_SYNC_SIZE; i++) {
       pSync[i] = _SHMEM_SYNC_VALUE;
    }
    shmem_barrier_all(); /* Wait for all PEs to initialize pSync */
 
-   shmem_collect32(target, source, 2, 0, 0, npes, pSync);
-   printf("%d: %d", me, target[0]);
+   shmem_collect32(dest, source, 2, 0, 0, npes, pSync);
+   printf("%d: %d", me, dest[0]);
    for (i = 1; i < npes * 2; i++)
-      printf(", %d", target[i]);
+      printf(", %d", dest[i]);
    printf("\n");
    return 0;
 }
