@@ -15,19 +15,19 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 }
 %API Description
 {
-       The and \FUNC{shmem\_malloc}  routines return a pointer to a block of at least size
+       The \FUNC{shmem\_malloc} routine returns a pointer to a block of at least size
        bytes suitably aligned for any use.  This space is allocated from the
        symmetric heap (in contrast to \FUNC{malloc}, which allocates from the
        private heap).
 
-       The and \FUNC{shmem\_align} routines allocate a block in the symmetric heap that
+       The \FUNC{shmem\_align} routine allocates a block in the symmetric heap that
        has a byte alignment specified by the alignment argument.
 
-       The and \FUNC{shmem\_free} routines cause the block to which \VAR{ptr} points to be
+       The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
        deallocated, that is, made available for further allocation.  If ptr is
        a null pointer, no action occurs. 
               
-       The  and \FUNC{shmem\_realloc} routines change the size of the block to which ptr
+       The \FUNC{shmem\_realloc} routine changes the size of the block to which ptr
        points to the size (in bytes) specified by size.  The contents of the
        block are unchanged up to the lesser of the new and old sizes. If the
        new size is larger, the value of the newly allocated portion of the
@@ -49,11 +49,13 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 {
 		%Return Value
 		\desR{
-					 The \FUNC{shmem\_malloc} routine returns a pointer to the allocated space (which should be identical on all \ac{PE}s); otherwise, it returns a \CONST{NULL} pointer.
+					 The \FUNC{shmem\_malloc} routine returns a pointer to the allocated space; otherwise, it returns a \CONST{NULL} pointer.
 
 					 The \FUNC{shmem\_free} routine returns no value.
 
 					 The \FUNC{shmem\_realloc} routine returns a pointer to the allocated space (which may have moved); otherwise, it returns a null pointer.
+
+                     The \FUNC{shmem\_align} routine returns an aligned pointer to the allocated space; otherwise, it returns a \CONST{NULL} pointer.
 		}
 		%NOTES
 		\notesB{ As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, program users are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead.
@@ -61,8 +63,20 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 The total size of the symmetric heap is determined at job startup.  One can adjust the size of the heap using the \CONST{SMA\_SYMMETRIC\_SIZE} environment  variable (where available).	
 
 The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines differ from the private heap allocation routines in that all \ac{PE}s in a program must call them (a barrier is used to ensure this).
-
-}		
+        }		
+        \notesImp{
+        The symmetric heap allocation functions always return a pointer to
+        corresponding symmetric objects across all PEs. The \openshmem{} 
+        specification does not require that the virtual addresses are equal across
+        all \acp{PE}. Nevertheless, the implementation must avoid costly address
+        translation operations in the communication path, including order $N$ (where
+        $N$ is the number of \acp{PE}) memory translation tables. 
+        In order to avoid address translations, the implementation may
+        re-map the allocated block of memory based on agreed virtual address. 
+        Additionally, some operating systems provide an option to disable 
+        virtual address randomization, which enables predictable allocation
+        of virtual memory addresses.
+        }
 }
 
 %EXAMPLES
