@@ -8,10 +8,12 @@ The following list describes the specific changes in 1.2:
 \begin{itemize}
 \item New Execution Model for exiting/finishing OpenSHMEM programs.
 \\See Section  \ref{subsec:execution_model}.
-\item New library constants to support API that query version and name information. 
+\item New library constants to support API that query version and name information.
 \\See Section \ref{subsec:library_constants}.
 \item Deprecation of \FUNC{\_my\_pe} and \FUNC{\_num\_pes} routines.
 \\See Sections \ref{subsec:shmem_my_pe} and \ref{subsec:shmem_num_pe}.
+\item New API \FUNC{shmem\_init} to provide mechanism to start an \openshmem program and replace deprecated \FUNC{start\_pes}.
+\\See Section \ref{subsec:shmem_init}.
 \item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly exit an \openshmem program and release resources.
 \\See Section \ref{subsec:shmem_finalize}.
 \item New API \FUNC{shmem\_global\_exit} to provide mechanism to exit an \openshmem program.
@@ -22,9 +24,17 @@ The following list describes the specific changes in 1.2:
 \\See Section \ref{subsec:shfree}.
 \item Clarification related to \FUNC{shmem\_wait}.
 \\See Section \ref{subsec:shmem_wait}.
+\item Clarification related to the address of the referenced object in \FUNC{shmem\_ptr}.
+\\See Section \ref{subsec:shmem_ptr}.
+\item Notes and clarifications added to \FUNC{shmem\_malloc}.
+\\See Section \ref{subsec:shfree}.
+\item Undefined behavior for null pointers without zero counts added.
+\\See Section \ref{sec:undefined}
 \item Addition of new Annex for clearly specifying deprecated API and its support in the existing specification version.
 \\See Section \ref{sec:dep_api}.
 \item Deprecation of Fortran API routine \FUNC{SHMEM\_PUT}.
 \\See Section \ref{subsec:shmem_put}. 
+\item Added specification of \VAR{pSync} initialization for all routines that use it.
+\item Replaced all placeholder variable names \VAR{target} with \VAR{dest} to avoid confusion with Fortran `target' keyword.
 
 \end{itemize}
