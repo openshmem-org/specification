@@ -96,7 +96,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 %Return Values     
 \desR{None.}
 %end Description Table.
-\notesB{
+\notesImp{
     Implementations must ensure that \FUNC{shmem\_wait} and
     \FUNC{shmem\_wait\_until} do not return before the update of the memory
     indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
