@@ -13,18 +13,27 @@ $ $%
 \textbf{Inappropriate Usage} & \textbf{Undefined Behavior}\tabularnewline
 \hline 
 \hline 
-Uninitialized library & If \openshmem is not initialized through a call to \FUNC{shmem\_init}, subsequent accesses to \openshmem routines have undefined results.  An implementation may choose, for example, to try to continue or abort
+Uninitialized library & If \openshmem is not initialized through a call to
+\FUNC{shmem\_init}, subsequent accesses to \openshmem routines have undefined
+results.  An implementation may choose, for example, to try to continue or abort
 immediately upon the first call to an uninitialized routine.\tabularnewline
 \hline 
-Accessing non-existent \ac{PE}s & If a communications routine accesses a non-existent \ac{PE} then the \openshmem library can choose to handle this situation in an implementation-defined way.  For example, the library may issue an error message saying that the \ac{PE} accessed is outside the range of accessible \ac{PE}s, or may exit
-without a warning.\tabularnewline
+Accessing non-existent \ac{PE}s & If a communications routine accesses a
+non-existent \ac{PE} then the \openshmem library can choose to handle this
+situation in an implementation-defined way.  For example, the library may issue
+an error message saying that the \ac{PE} accessed is outside the range of
+accessible \ac{PE}s, or may exit without a warning.\tabularnewline
 \hline 
-Use of non-symmetric variables & Some routines require remotely accessible variables to perform their function.  A \PUT{} to a non-symmetric variable can be trapped
-where possible and the library can abort the program.  Another implementation
-may choose to continue either with a warning or silently.\tabularnewline
+Use of non-symmetric variables & Some routines require remotely accessible
+variables to perform their function.  A \PUT{} to a non-symmetric variable can
+be trapped where possible and the library can abort the program.  Another
+implementation may choose to continue either with a warning or
+silently.\tabularnewline
 \hline 
-Non-symmetric variables & The symmetric memory management routines are collectives, which means that all \ac{PE}s in the program must issue the same \FUNC{shmalloc} call with the same size request. 
-Program behavior after a mismatched \FUNC{shmalloc} call is undefined.\tabularnewline
+Non-symmetric variables & The symmetric memory management routines are
+collectives, which means that all \ac{PE}s in the program must issue the same
+\FUNC{shmem\_malloc} call with the same size request.  Program behavior after a
+mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
 \hline 
 Use of NULL pointers with non-zero \VAR{len} specified & In any \openshmem routine
 that takes a pointer and \VAR{len} describing the number of elements in that
