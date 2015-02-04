@@ -1,17 +1,17 @@
 For the \openshmem Specification(s) deprecation is the process of identifying API that is supported but no longer recommended for use by program users. For \openshmem library users said API \textbf{must} be supported till clearly indicated by the Specification. In this chapter we will record the API that has been deprecated, the \openshmem Specification that effected the deprecation and if the feature is supported in the current version of the specification.
 
 \begin{center}
-    \begin{tabular}{|l|c|c|}
+\begin{tabular}{|l|c|c|c|}
     \hline
-     \textbf{Deprecated API} & \textbf{Specification Release} & \textbf{Currently Supported(?)} \\ \hline %There may be better table headings...
-    \FUNC{\_my\_pe} & 1.2 & Yes \\ \hline
-    \FUNC{\_num\_pes} & 1.2 & Yes \\ \hline
-    \FUNC{shmalloc} & 1.2 & Yes \\ \hline
-    \FUNC{shfree} & 1.2 & Yes \\ \hline
-    \FUNC{shrealloc} & 1.2 & Yes \\ \hline
-    \FUNC{shmemalign} & 1.2 & Yes \\ \hline
-    \FUNC{start\_pes} & 1.2 & Yes \\ \hline
-    \FUNC{SHMEM\_PUT} & 1.2 & Yes \\ \hline
+     \textbf{Deprecated API} & \textbf{Deprecated Since} & \textbf{Currently Supported(?)} & \textbf{Replaced By}\\ \hline %There may be better table headings...
+    \FUNC{\_my\_pe} & 1.2 & Yes & \FUNC{shmem\_my\_pe} \\ \hline
+    \FUNC{\_num\_pes} & 1.2 & Yes & \FUNC{shmem\_n\_pes} \\ \hline
+    \FUNC{shmalloc} & 1.2 & Yes & \FUNC{shmem\_malloc} \\ \hline
+    \FUNC{shfree} & 1.2 & Yes & \FUNC{shmem\_free} \\ \hline
+    \FUNC{shrealloc} & 1.2 & Yes & \FUNC{shmem\_realloc} \\ \hline
+    \FUNC{shmemalign} & 1.2 & Yes & \FUNC{shmem\_align} \\ \hline
+    \FUNC{start\_pes} & 1.2 & Yes & \FUNC{shmem\_init} \\ \hline
+    \FUNC{SHMEM\_PUT} & 1.2 & Yes & (type-specific \FUNC{SHMEM\_PUT*}) \\ \hline
   
     
     

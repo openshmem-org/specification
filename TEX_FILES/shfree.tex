@@ -1,13 +1,9 @@
 \bAPI{SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}{Symmetric heap memory management routines.}
 %SYNOPSIS
 \synC
-void *shmalloc(size_t size);
 void *shmem_malloc(size_t size);
-void shfree(void *ptr);
 void shmem_free(void *ptr);
-void *shrealloc(void *ptr, size_t size);
 void *shmem_realloc(void *ptr, size_t size);
-void *shmemalign(size_t alignment, size_t size);
 void *shmem_align(size_t alignment, size_t size);%*\synCE
 
 %DESCRIPTION
@@ -19,26 +15,26 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 }
 %API Description
 {
-       The \FUNC{shmalloc} and \FUNC{shmem\_malloc}  routines return a pointer to a block of at least size
+       The and \FUNC{shmem\_malloc}  routines return a pointer to a block of at least size
        bytes suitably aligned for any use.  This space is allocated from the
        symmetric heap (in contrast to \FUNC{malloc}, which allocates from the
        private heap).
 
-       The  \FUNC{shmemalign} and \FUNC{shmem\_align} routines allocate a block in the symmetric heap that
+       The and \FUNC{shmem\_align} routines allocate a block in the symmetric heap that
        has a byte alignment specified by the alignment argument.
 
-       The \FUNC{shfree} and \FUNC{shmem\_free} routines cause the block to which \VAR{ptr} points to be
+       The and \FUNC{shmem\_free} routines cause the block to which \VAR{ptr} points to be
        deallocated, that is, made available for further allocation.  If ptr is
        a null pointer, no action occurs. 
               
-       The  \FUNC{shrealloc} and  \FUNC{shmem\_realloc} routines change the size of the block to which ptr
+       The  and \FUNC{shmem\_realloc} routines change the size of the block to which ptr
        points to the size (in bytes) specified by size.  The contents of the
        block are unchanged up to the lesser of the new and old sizes. If the
        new size is larger, the value of the newly allocated portion of the
        block is indeterminate.  
-       If \VAR{ptr} is a \CONST{NULL} pointer, the \FUNC{shrealloc}/\FUNC{shmem\_realloc} routine behaves like the \FUNC{shmalloc}/\FUNC{shmem\_malloc} routine for the specified size.  If size  is \CONST{0} and ptr is not a \CONST{NULL} pointer, the block to which it points is freed. If the space cannot be allocated, the block to which ptr points is unchanged.
+       If \VAR{ptr} is a \CONST{NULL} pointer, the \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc} routine for the specified size.  If size  is \CONST{0} and ptr is not a \CONST{NULL} pointer, the block to which it points is freed. If the space cannot be allocated, the block to which ptr points is unchanged.
 
-       The \FUNC{shmalloc}, \FUNC{shfree}, and \FUNC{shrealloc} routines are provided  so that multiple \ac{PE}s in a program can allocate symmetric, remotely
+       The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines are provided  so that multiple \ac{PE}s in a program can allocate symmetric, remotely
        accessible memory blocks.  These memory blocks can then be used with
        \openshmem communication routines.  Each of these routines call the
        \FUNC{shmem\_barrier\_all} routine before returning; this ensures that all
@@ -53,11 +49,11 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 {
 		%Return Value
 		\desR{
-					 The \FUNC{shmalloc} routine returns a pointer to the allocated space (which should be identical on all \ac{PE}s); otherwise, it returns a \CONST{NULL} pointer.
+					 The \FUNC{shmem\_malloc} routine returns a pointer to the allocated space (which should be identical on all \ac{PE}s); otherwise, it returns a \CONST{NULL} pointer.
 
-					 The \FUNC{shfree} routine returns no value.
+					 The \FUNC{shmem\_free} routine returns no value.
 
-					 The \FUNC{shrealloc} routine returns a pointer to the allocated space (which may have moved); otherwise, it returns a null pointer.
+					 The \FUNC{shmem\_realloc} routine returns a pointer to the allocated space (which may have moved); otherwise, it returns a null pointer.
 		}
 		%NOTES
 		\notesB{ As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, program users are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead.
