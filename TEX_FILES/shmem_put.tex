@@ -70,7 +70,7 @@ CALL SHMEM_REAL_PUT(dest, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LINE 
 \notesB{    If you are using \Fortran, data types must be of default size.  For
        example, a real variable must be declared as \CONST{REAL},  \CONST{REAL*4},  or
        \CONST{REAL(KIND=KIND(1.0))}. The Fortran API routine \FUNC{SHMEM\_PUT} has
-       been deprecated, and the appropriate type-specific routine should be used
+       been deprecated, and either \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} should be used
        in its place.
 }
 }%end of DesB
@@ -78,7 +78,7 @@ CALL SHMEM_REAL_PUT(dest, source, len, pe) %*\synFE   %DO NOT DELETE. THIS LINE 
 \exampleB{
 %For each example, you can enter it as an item.
                   \exampleITEM
-                  { The following \FUNC{shmem\_put} example is for  programs:}
+                  { The following \FUNC{shmem\_put} example is for \CorCpp{} programs:}
                  {./EXAMPLES/shmem_put_example.c}
                  {} 
                  }  	

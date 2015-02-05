@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_REDUCTIONS}{Performs a logical routines across a set of \ac{PE}s.}
+\bAPI{SHMEM\_REDUCTIONS}{Performs logical operations across a set of \ac{PE}s.}
 \synC %Synopisis for C API
 
 void shmem_int_and_to_all(int *dest, int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -85,9 +85,9 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 	\argRow{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that contains one element for each separate reduction routine.  The \source{} argument must have the same data type as \dest.}
         \argRow{IN}{\VAR{nreduce}}{The number of elements in the \dest{} and \source{} arrays.  \VAR{nreduce} must be of type integer.  If you are using \Fortran, it must be a default integer value.}
         \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the \activeset{} of \ac{PE}s.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran, it must be a default integer value.}
-        \argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive virtual \ac{PE} numbers in the \activeset. logPE\_stride must be of type integer.  If you are using \Fortran, it must be a default integer value.}
-        \argRow{IN}{PE\_size}{The number of \ac{PE}s in the \activeset. PE\_size must	be of type integer.  If you are using \Fortran, it must be a default integer value.}
-        \argRow{IN}{pWrk}{A symmetric work array. The pWrk argument must have the same data type as \dest. In \CorCpp, this contains max(\VAR{nreduce}/2 + 1, \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements. In \Fortran, this contains max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements.}
+        \argRow{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive virtual \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of type integer.  If you are using \Fortran, it must be a default integer value.}
+        \argRow{IN}{PE\_size}{The number of \ac{PE}s in the \activeset.  \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must be a default integer value.}
+        \argRow{IN}{pWrk}{A symmetric work array. The \VAR{pWrk} argument must have the same data type as \dest. In \CorCpp, this contains max(\VAR{nreduce}/2 + 1, \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements. In \Fortran, this contains max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements.}
         \argRow{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be of type long and size \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran, \VAR{pSync} must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  If you are using \Fortran, it must be a default integer value. Every element of this array must be initialized with the value \CONST{\_SHMEM\_SYNC\_VALUE} (in \CorCpp) or \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \ac{PE}s in the \activeset{} enter the reduction routine.}
  }
  %API description

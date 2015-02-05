@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_CSWAP}{Performs an atomic conditional swap to a remote data object.}
+\bAPI{SHMEM\_CSWAP}{Performs an atomic conditional swap on a remote data object.}
 \synC   %Synopisis for C API
 
 int shmem_int_cswap(int *dest, int cond, int value, int pe);
@@ -24,7 +24,7 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe) %*\synFE   %DO NOT DELET
 		 In either case, the old value of the remote \VAR{dest} is
 		 returned as the routine return value. \VAR{cond} must be of the
 		 same data type as \VAR{dest}.}
-\argRow{IN}{value}{The \VAR{value} to be atomically written to the remote \ac{PE}. 			\VAR{value} must be the same data type as \VAR{dest}.}
+\argRow{IN}{value}{The value to be atomically written to the remote \ac{PE}. \VAR{value} must be the same data type as \VAR{dest}.}
 \argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which \VAR{dest} is to be updated. If you are using \Fortran, it must be a default integer value.}
 }
 %API description

@@ -32,7 +32,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 	    derived types, \Fortran{} character type, and \CorCpp{} structures are not permitted.}
 \argRow{IN}{source}{A symmetric data object that can be of any type
 	    permissible for the \dest{} argument.}
-\argRow{IN}{nelems}{The number of elements in the \source{} array. nelems must be
+\argRow{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems} must be
 	    of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a
 	    default integer value.}
 \argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the \activeset{} of \ac{PE}s.
@@ -57,7 +57,7 @@ contains the contribution from \ac{PE} \VAR{PE\_start} first, then the contribut
 from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on. The collected result is written to the \dest{} array for all \ac{PE}s in the \activeset.
 
 The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
-participating \ac{PE}s, while the collect routines allow \VAR{nelems} to vary from
+participating \ac{PE}s, while the \FUNC{collect} routines allow \VAR{nelems} to vary from
 \ac{PE} to \ac{PE}.
 
 As with all \openshmem collective routines, each of these routines assumes

@@ -36,7 +36,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value) %*\synFE   %DO NOT DELETE. THIS LINE
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
 \argRow{OUT}{ivar}{A remotely accessible integer variable that is being updated by
-	       another \ac{PE}.  If you are using \CorCpp, the type of ivar should
+	       another \ac{PE}.  If you are using \CorCpp, the type of \VAR{ivar} should
 	       match that implied in the SYNOPSIS section.} 
 \argRow{IN}{cmp}{The compare operator that compares \VAR{ivar} with \VAR{cmp\_value}.  \VAR{cmp}
 	       must be of type integer.  If you are using \Fortran, it must  be

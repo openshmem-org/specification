@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_INFO\_GET\_VERSION}{Returns the major and minor version of the library implementation}
+\bAPI{SHMEM\_INFO\_GET\_VERSION}{Returns the major and minor version of the library implementation.}
 \synC   %Synopisis for C API
 
 void shmem_info_get_version(int *major, int *minor); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
@@ -10,16 +10,14 @@ INTEGER MAJOR, MINOR %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{  
-    \argRow{OUT}{major}{The major version of the \openshmem{} standard in use}
-    \argRow{OUT}{minor}{The minor version of the \openshmem{} standard in use}
+    \argRow{OUT}{major}{The major version of the \openshmem{} standard in use.}
+    \argRow{OUT}{minor}{The minor version of the \openshmem{} standard in use.}
  }
 %API description
 {
-\color{red}
-  The routine returns the major and minor version of the \openshmem{} standard in use.
+  This routine returns the major and minor version of the \openshmem{} standard in use.
   For a given library implementation, the major and minor version returned by these calls is consistent with the compile-time constants, SHMEM\_MAJOR\_VERSION and SHMEM\_MINOR\_VERSION, defined in its shmem.h.
   The valid major version value is  $1$, and the valid minor version value is $2$. 
-  \color{black}
 }
 %This newline is required 
 {

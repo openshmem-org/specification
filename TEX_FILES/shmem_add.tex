@@ -15,11 +15,11 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe) %*\synFE
 %Arguments
 \desB{
  	\argRow{OUT}{dest}{The remotely accessible integer data object to be updated  on the remote \ac{PE}.  If you are using \CorCpp, the type of \dest{} should match that implied in the SYNOPSIS section.}
-	\argRow{IN}{value}{The value to be atomically added to \dest. If you are using \CorCpp, the type of value should match that  implied  in  the SYNOPSIS  section.  If you are using \Fortran, it must be of type integer with an element size of \dest.}
+	\argRow{IN}{value}{The value to be atomically added to \dest. If you are using \CorCpp, the type of \VAR{value} should match that  implied  in  the SYNOPSIS  section.  If you are using \Fortran, it must be of type integer with an element size of \dest.}
 	\argRow{IN}{pe}{An integer that indicates the \ac{PE} number upon which \dest{} is to be updated.  If you are using \Fortran, it must be a default integer value.}
 }
 %API Description
-{The \FUNC{shmem\_add} routine performs an atomic add operation. It adds value
+{The \FUNC{shmem\_add} routine performs an atomic add operation. It adds \VAR{value}
  to \dest{} on \ac{PE} \VAR{pe} and atomically increments the \dest{} without returning the value.
  } 
 {

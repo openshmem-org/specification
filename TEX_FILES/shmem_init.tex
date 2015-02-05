@@ -32,8 +32,8 @@ CALL SHMEM_INIT() %*\synFE
     possible; there is an implicit \FUNC{shmem\_finalize} at the end of main.
     However, \FUNC{shmem\_init} differs slightly from \FUNC{start\_pes}:
     multiple calls to \FUNC{shmem\_init} within a program results in undefined
-    behavior, while in the case of \FUNC{start\_pes}, any subsequent calls after
-    the first one resulted in a no-op.
+    behavior, while in the case of \FUNC{start\_pes}, any subsequent calls to
+    \FUNC{start\_pes} after the first one resulted in a no-op.
 }
 }%end of DesB
 %Example

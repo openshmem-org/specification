@@ -6,7 +6,7 @@
 %Are arguments  the same for PEs that call the same collective? (i.e. target or source symmetric data?)
 %Which collectives imply synchronization (i.e. barrier, quiet, etc) which ones not (i.e. broadcast on root?)
 
-Collective routines are defined as communication or synchronization operations 
+\emph{Collective routines} are defined as communication or synchronization operations 
 on a group of \acp{PE} called an \activeset{}. The collective routines require all
 \acp{PE} in the \activeset{} to simultaneously call the routine. 
 A \ac{PE} that is not part of the \activeset{} calling the collective 
@@ -26,7 +26,7 @@ symmetric work array.  All \acp{PE} participating in a collective must pass the 
 original contents.  The reuse of \VAR{pSync} array is allowed for a \ac{PE}, if
 all previous collective routines using the \VAR{pSync} array have been completed by all participating 
 \acp{PE}.  One can use a synchronization collective routine such as \barrier{}
-to ensure completion of previous collective routines. The \FUNC{shmem\_barrier} routine allows the same \VAR{pSync} array to be used on consecutive calls as long as the active \ac{PE} set does not change. 
+to ensure completion of previous collective routines. The \FUNC{shmem\_barrier} routine allows the same \VAR{pSync} array to be used on consecutive calls as long as the \ac{PE} \activeset{} does not change. 
 
 %The two cases below
 %show the reuse of \VAR{pSync} array:

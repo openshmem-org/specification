@@ -1,4 +1,4 @@
-\bAPI{SHMEM\_BROADCAST}{Broadcasts a block of data from one \ac{PE} to one or more \dest{} \ac{PE}s.}
+\bAPI{SHMEM\_BROADCAST}{Broadcasts a block of data from one \ac{PE} to one or more destination \ac{PE}s.}
 \synC   %Synopisis for C API
 
 void shmem_broadcast32(void *dest, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
@@ -99,7 +99,7 @@ constraints, which are as follows: }
        in the \activeset{} while any of the \ac{PE}s participates in processing of an
        \openshmem broadcast routine. Be careful to avoid these situations: If the
        \VAR{pSync} array is initialized at run time, some type of synchronization is
-       needed to ensure that all \ac{PE}s in the working set have initialized \VAR{pSync}
+       needed to ensure that all \ac{PE}s in the \activeset{} have initialized \VAR{pSync}
        before any of them enter an \openshmem routine called with the \VAR{pSync}
        synchronization array.  A \VAR{pSync} array may be reused on a subsequent
        \openshmem broadcast routine only if none of the \ac{PE}s in the \activeset{} are

@@ -9,13 +9,13 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
 %DESCRIPTION
 %Arguments
 \desB{
-       \argRow{IN}{size}{In bytes, to request a block to be allocated from the symmetric heap. This argument is of type \VAR{size\_t}}
+       \argRow{IN}{size}{The size, in bytes, to request a block to be allocated from the symmetric heap. This argument is of type \VAR{size\_t}}
        \argRow{IN}{ptr}{Points to a block within the symmetric heap.}
        \argRow{IN}{alignment}{Byte alignment of the block allocated from the symmetric heap.}
 }
 %API Description
 {
-       The \FUNC{shmem\_malloc} routine returns a pointer to a block of at least size
+       The \FUNC{shmem\_malloc} routine returns a pointer to a block of at least \VAR{size}
        bytes suitably aligned for any use.  This space is allocated from the
        symmetric heap (in contrast to \FUNC{malloc}, which allocates from the
        private heap).
@@ -24,15 +24,15 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
        has a byte alignment specified by the alignment argument.
 
        The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
-       deallocated, that is, made available for further allocation.  If ptr is
+       deallocated, that is, made available for further allocation.  If \VAR{ptr} is
        a null pointer, no action occurs. 
               
-       The \FUNC{shmem\_realloc} routine changes the size of the block to which ptr
-       points to the size (in bytes) specified by size.  The contents of the
+       The \FUNC{shmem\_realloc} routine changes the size of the block to which \VAR{ptr}
+       points to the size (in bytes) specified by \VAR{size}.  The contents of the
        block are unchanged up to the lesser of the new and old sizes. If the
        new size is larger, the value of the newly allocated portion of the
        block is indeterminate.  
-       If \VAR{ptr} is a \CONST{NULL} pointer, the \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc} routine for the specified size.  If size  is \CONST{0} and ptr is not a \CONST{NULL} pointer, the block to which it points is freed. If the space cannot be allocated, the block to which ptr points is unchanged.
+       If \VAR{ptr} is a \CONST{NULL} pointer, the \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc} routine for the specified size.  If \VAR{size} is \CONST{0} and \VAR{ptr} is not a \CONST{NULL} pointer, the block to which it points is freed. If the space cannot be allocated, the block to which \VAR{ptr} points is unchanged.
 
        The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines are provided  so that multiple \ac{PE}s in a program can allocate symmetric, remotely
        accessible memory blocks.  These memory blocks can then be used with
@@ -41,7 +41,7 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
        \ac{PE}s participate in the memory allocation, and that the memory on other
        \ac{PE}s can be used	as  soon as the local \ac{PE} returns.  The user is
        responsible for calling these routines with identical argument(s) on
-       all \ac{PE}s; if differing size arguments are used, the behavior of the call and any subsequent \openshmem calls becomes undefined.
+       all \ac{PE}s; if differing \VAR{size} arguments are used, the behavior of the call and any subsequent \openshmem calls becomes undefined.
        %subsequent calls may not
        %return the same symmetric heap address on all \ac{PE}s.
 }

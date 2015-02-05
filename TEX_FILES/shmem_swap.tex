@@ -27,14 +27,14 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)%*\synFE   %DO NOT DELETE. THIS LIN
 \argRow{OUT}{dest}{The  remotely accessible integer data object to be updated on
 		 the remote \ac{PE}.	 If you are using \CorCpp, the type of \dest{}
 		 should match that  implied in the SYNOPSIS section.}
-\argRow{IN}{value}{Value to be atomically written to the remote  \ac{PE}. \VAR{value}  is
+\argRow{IN}{value}{The value to be atomically written to the remote  \ac{PE}. \VAR{value}  is
 		 the same type as \dest.}
 \argRow{IN}{pe}{ An integer that indicates the \ac{PE} number on which \dest{} is to
 		 be updated. If you are using \Fortran, it must be a default
 		 integer value.}
 }
 %API description
-{      \FUNC{shmem\_swap}  performs  an atomic swap operation. It writes value \VAR{value} into \dest{} on \ac{PE} and	returns the previous
+{      \FUNC{shmem\_swap}  performs  an atomic swap operation. It writes \VAR{value} into \dest{} on \ac{PE} and returns the previous
        contents of \dest{} as an atomic operation. 
 }
 %API Description Table
@@ -50,7 +50,7 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)%*\synFE   %DO NOT DELETE. THIS LIN
 }
  %Return Values     
 \desR{
-       The contents that had been at the \dest{} address on the remote \ac{PE} prior
+       The content that had been at the \dest{} address on the remote \ac{PE} prior
        to the swap is returned.
 }
 %end of DesB% Notes. If there are no notes, this field can be left empty.

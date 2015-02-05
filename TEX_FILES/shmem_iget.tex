@@ -2,37 +2,37 @@
 \label{subsec:shmem_iget}
 \synC   %Synopisis for C API
 
-void shmem_double_iget(double *dest, const double *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_float_iget(float *dest, const float *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_iget32(void *dest, const void *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_iget64(void *dest, const void *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_iget128(void *dest, const void *source, ptrdiff_t  tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_int_iget(int *dest, const int *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_long_iget(long *dest, const  long  *source,  ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_longdouble_iget(long double *dest, const long double *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_longlong_iget(long long *dest, const long long *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_short_iget(short *dest, const short *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+void shmem_double_iget(double *dest, const double *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_float_iget(float *dest, const float *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iget32(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iget64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iget128(void *dest, const void *source, ptrdiff_t  dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_int_iget(int *dest, const int *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_long_iget(long *dest, const  long  *source,  ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_longdouble_iget(long double *dest, const long double *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_longlong_iget(long long *dest, const long long *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_short_iget(short *dest, const short *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
 
-INTEGER tst, sst, nelems, pe
-CALL SHMEM_COMPLEX_IGET(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_DOUBLE_IGET(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IGET4(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IGET8(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IGET32(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IGET64(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IGET128(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_INTEGER_IGET(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_LOGICAL_IGET(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_REAL_IGET(dest, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+INTEGER dst, sst, nelems, pe
+CALL SHMEM_COMPLEX_IGET(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_DOUBLE_IGET(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IGET4(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IGET8(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IGET32(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IGET64(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IGET128(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_INTEGER_IGET(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_LOGICAL_IGET(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 % Arguments table. If no arguments you can use \argRow{None}{}{} 
 \desB{
     \argRow{OUT}{dest}{Array to be updated on the local \ac{PE}. }
     \argRow{IN}{source}{Array containing the data to be copied on the remote \ac{PE}.}
-    \argRow{IN}{tst}{The stride between consecutive elements of the \dest{}
+    \argRow{IN}{dst}{The stride between consecutive elements of the \dest{}
     array. The stride is scaled by the element size of the \dest{} array.
-		 A  value of \CONST{1} indicates contiguous data. \VAR{tst} must be of type
+		 A  value of \CONST{1} indicates contiguous data. \VAR{dst} must be of type
 		 \textit{ptrdiff\_t}.  If you are calling  from  \Fortran,  it  must be a default integer value.}
      \argRow{IN}{sst}{The stride between consecutive elements of the \source{} array.
 		 The stride is scaled by the element size of the \source{} array.

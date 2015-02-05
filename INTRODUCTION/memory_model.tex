@@ -38,8 +38,8 @@ An \openshmem program consists of data objects that are private to each \ac{PE} 
 Remotely accessible data objects are called \emph{Symmetric Objects}.
 %An object is symmetric if it has a corresponding object with the same   
 %SP: No, if there is a way to create such objects without them being global/static/common/save or shmalloced/shpalloced would they would be symmetric as per this definition...NOT the way OpenSHMEM defines.
-All symmetric data objects have a corresponding object with the same
-name, type, size, and offset (from an arbitrary memory address) on all \ac{PE}s. Symmetric objects are accessible by all executing \ac{PE}s via the \openshmem \ac{API}. 
+%All symmetric data objects have a corresponding object with the same
+%name, type, size, and offset (from an arbitrary memory address) on all \ac{PE}s. Symmetric objects are accessible by all executing \ac{PE}s via the \openshmem \ac{API}. 
 Each symmetric data object has a corresponding object with the same name, type, size, and offset (from an arbitrary memory address) on all PEs where that object is accessible via the \openshmem \ac{API}. (For the definition of what is accessible, see the descriptions for \FUNC{shmem\_pe\_accessible} and \FUNC{shmem\_addr\_accessible} in sections \ref{subsec:shmem_pe_accessible} and \ref{subsec:shmem_addr_accessible}.)
 Symmetric data objects accessed via typed \openshmem interfaces are required to be natural aligned based on their type requirements and underlying architecture.
 In \openshmem{} the following kinds of data objects are symmetric:
@@ -57,7 +57,7 @@ In \openshmem{} the following kinds of data objects are symmetric:
 %See Figure \ref{fig:SymmetricHeap1}
 %for an example of how Symmetric Memory Objects may be arranged in
 %memory.
-\openshmem dynamic memory allocation routines (\textit{shpalloc} and \textit{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data Objects} on a special memory region called the Symmetric Heap. The Symmetric Heap is created during the execution of a program at a memory location determined by the implementation. The Symmetric Heap may reside on different memory regions on different \ac{PE}s. Figure~\ref{fig:mem_model} shows how \openshmem implements a \ac{PGAS} model using remotely accessible (Symmetric objects) and private data objects when executing an \openshmem program. Symmetric data objects are stored on the symmetric heap or in the global/static memory section of each \ac{PE}. 
+\openshmem dynamic memory allocation routines (\textit{shpalloc} and \textit{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data Objects} on a special memory region called the \emph{Symmetric Heap}. The Symmetric Heap is created during the execution of a program at a memory location determined by the implementation. The Symmetric Heap may reside in different memory regions on different \ac{PE}s. Figure~\ref{fig:mem_model} shows how \openshmem implements a \ac{PGAS} model using remotely accessible (Symmetric objects) and private data objects when executing an \openshmem program. Symmetric data objects are stored on the symmetric heap or in the global/static memory section of each \ac{PE}. 
 
 %Symmetric data objects can be allocated dynamically in the symmetric heap of each \ac{PE} using
 %a collective \FUNC{shmalloc} or \FUNC{shpalloc} memory allocation call.

@@ -36,6 +36,19 @@ CALL SHPALLOC(addr, length, errcode, abort) %*\synFE   %DO NOT DELETE. THIS LINE
        may adjust the size of the heap using the \CONST{SMA\_SYMMETRIC\_SIZE}
        environment variable (if available).	
 }
+        \notesImp{
+        The symmetric heap allocation functions always return a pointer to
+        corresponding symmetric objects across all PEs. The \openshmem{} 
+        specification does not require that the virtual addresses are equal across
+        all \acp{PE}. Nevertheless, the implementation must avoid costly address
+        translation operations in the communication path, including order $N$ (where
+        $N$ is the number of \acp{PE}) memory translation tables. 
+        In order to avoid address translations, the implementation may
+        re-map the allocated block of memory based on agreed virtual address. 
+        Additionally, some operating systems provide an option to disable 
+        virtual address randomization, which enables predictable allocation
+        of virtual memory addresses.
+        }
 }
 %Example
 %\exampleB{}

@@ -1,37 +1,37 @@
 \bAPI{SHMEM\_IPUT}{Copies strided data to a specified \ac{PE}.}
 \label{subsec:shmem_iput}
 \synC
-void shmem_double_iput(double *dest, const double *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_float_iput(float *dest, const float *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_int_iput(int *dest, const int *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_iput32(void *dest, const void *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_iput64(void *dest, const void *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_iput128(void *dest, const void *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_long_iput(long *dest, const long *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_longdouble_iput(long double *dest, const long double *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_longlong_iput(long long *dest, const long long *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_short_iput(short *dest, const short *source, ptrdiff_t tst, ptrdiff_t sst, size_t nelems, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
+void shmem_double_iput(double *dest, const double *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_float_iput(float *dest, const float *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_int_iput(int *dest, const int *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iput32(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iput64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_iput128(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_long_iput(long *dest, const long *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_longdouble_iput(long double *dest, const long double *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_longlong_iput(long long *dest, const long long *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void shmem_short_iput(short *dest, const short *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe); %*\synCE    %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 \synF   %Synopsis for FORTRAN API
 
-INTEGER tst, sst, nelems, pe
-CALL SHMEM_COMPLEX_IPUT(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_DOUBLE_IPUT(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_INTEGER_IPUT(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IPUT4(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IPUT8(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IPUT32(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IPUT64(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_IPUT128(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_LOGICAL_IPUT(dest, source, tst, sst, nelems, pe)
-CALL SHMEM_REAL_IPUT(dest, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
+INTEGER dst, sst, nelems, pe
+CALL SHMEM_COMPLEX_IPUT(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_DOUBLE_IPUT(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_INTEGER_IPUT(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IPUT4(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IPUT8(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IPUT32(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IPUT64(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_IPUT128(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_LOGICAL_IPUT(dest, source, dst, sst, nelems, pe)
+CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe) %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT  
 
 \desB{
 \argRow{OUT}{dest}{Array to be updated on the remote \ac{PE}. This data object  must
 		 be remotely accessible.}
 \argRow{IN}{source}{Array containing the data to be copied.}
-\argRow{IN}{tst}{The stride between consecutive elements of the \dest{} array.
+\argRow{IN}{dst}{The stride between consecutive elements of the \dest{} array.
 		 The stride is scaled by the element size of the \dest{} array.
-		 A  value of \CONST{1} indicates contiguous data.  \VAR{tst} must be of type
+		 A  value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
 		 \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a default integer value.}
 \argRow{IN}{sst}{The  stride between consecutive elements of the \source{} array.
 		 The stride is scaled by the element size of the \source{} array.
@@ -46,7 +46,7 @@ CALL SHMEM_REAL_IPUT(dest, source, tst, sst, nelems, pe) %*\synFE   %DO NOT DELE
 }
 {
 
-       The \FUNC{iput} routines provide a method  for  copying strided data elements (specified by \VAR{sst}) of an array from a \source{} array on the local \ac{PE} to locations specified by stride \VAR{tst} on a \dest{} array on specified remote \ac{PE}. Both strides, \VAR{tst} and \VAR{sst} must be greater than or equal to \CONST{1}. The routines return when the data has been copied out of the \VAR{source} array on the local \ac{PE} but not necessarily before the data has been delivered to the remote data object.
+       The \FUNC{iput} routines provide a method  for  copying strided data elements (specified by \VAR{sst}) of an array from a \source{} array on the local \ac{PE} to locations specified by stride \VAR{dst} on a \dest{} array on specified remote \ac{PE}. Both strides, \VAR{dst} and \VAR{sst} must be greater than or equal to \CONST{1}. The routines return when the data has been copied out of the \VAR{source} array on the local \ac{PE} but not necessarily before the data has been delivered to the remote data object.
 }{
     \desTB{
        The \dest{} and \source{} data objects must conform to typing  constraints,

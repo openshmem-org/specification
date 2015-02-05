@@ -14,7 +14,7 @@ int main(void) {
      int status;
 
      fp = fopen(input.txt,"r"); 
-     if( fp == NULL ){                       /*Input file required by program is not available*/
+     if( fp == NULL ){          /*Input file required by program is not available*/
        status = EXIT_FAILURE;
        shmem_global_exit(status);
      }

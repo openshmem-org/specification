@@ -17,7 +17,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe) %*\synFE   %DO NOT DELETE. THIS LI
 \argRow{OUT}{dest}{The remotely accessible integer data object to be updated on
 	 the remote \ac{PE}.	 The type of \VAR{dest} should match that implied
 	 in the SYNOPSIS section.}
-\argRow{IN}{value}{The \VAR{value} to be atomically added to \VAR{dest}.  The type of \VAR{value} should match that implied in the SYNOPSIS section.}
+\argRow{IN}{value}{The value to be atomically added to \VAR{dest}.  The type of \VAR{value} should match that implied in the SYNOPSIS section.}
 \argRow{IN}{pe}{An integer that indicates the \ac{PE} number on which \VAR{dest} is to be updated.  If you are using \Fortran, it must be a default integer value.}
 }
 %API description
@@ -39,7 +39,7 @@ contents of \VAR{dest} as an atomic operation.
 }
 
 %Return Values     
-\desR{The contents that had been at the \VAR{dest} address on the remote \ac{PE} prior to the atomic addition operation.  The data type of return value is the same as the \VAR{dest}.}
+\desR{The contents that had been at the \VAR{dest} address on the remote \ac{PE} prior to the atomic addition operation.  The data type of the return value is the same as the \VAR{dest}.}
 % Notes. If there are no notes, this field can be left empty.
 \notesB{None.}
 }
