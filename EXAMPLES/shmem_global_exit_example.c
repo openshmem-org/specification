@@ -19,8 +19,9 @@ int main(void) {
        shmem_global_exit(status);
      }
    }
-  ...
-  ...
+
+   fclose(fp);
+
   return 0;
 }
 

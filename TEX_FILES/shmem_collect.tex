@@ -35,10 +35,10 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \argRow{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems} must be
 	    of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be a
 	    default integer value.}
-\argRow{IN}{PE\_start}{The lowest virtual \ac{PE} number of the \activeset{} of \ac{PE}s.
+\argRow{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of \ac{PE}s.
 	    \VAR{PE\_start} must be of type integer.  If you are using
 	    \Fortran, it must be a default integer value.}
-\argRow{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between consecutive virtual \ac{PE} numbers in the \activeset. \VAR{logPE\_stride} must be of
+\argRow{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between consecutive \ac{PE} numbers in the \activeset. \VAR{logPE\_stride} must be of
 	    type integer.  If you are using \Fortran, it must be a default integer value.}
 \argRow{IN}{PE\_size}{The number of \ac{PE}s in the \activeset. \VAR{PE\_size} must be of type integer.  If you are using  \Fortran, it must be a default integer value.}
 \argRow{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of type
@@ -187,11 +187,11 @@ non-power-of-two value.
 % 		    of	type  integer.	If you are using Fortran, it must be a
 % 		    default integer value.
 % 
-%        IN	PE_start	    The lowest virtual PE number of the	 active	 set  of  PEs.
+%        IN	PE_start	    The lowest PE number of the	 active	 set  of  PEs.
 % 		    PE_start  must  be	of  type  integer.   If	 you are using
 % 		    Fortran, it must be a default integer value.
 % 
-%        IN	logPE_stride The log (base 2) of the stride between consecutive virtual
+%        IN	logPE_stride The log (base 2) of the stride between consecutive 
 % 		    PE	numbers	 in  the  active set.  logPE_stride must be of
 % 		    type integer.  If you are using  Fortran,  it  must	 be  a
 % 		    default integer value.

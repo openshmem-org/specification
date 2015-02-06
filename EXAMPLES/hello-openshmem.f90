@@ -5,7 +5,7 @@ program hello
 
   integer :: npes, me
 
-  call shmem_init (0)
+  call shmem_init ()
   npes = shmem_n_pes ()
   me = shmem_my_pe ()
 
