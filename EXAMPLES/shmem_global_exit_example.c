@@ -7,7 +7,7 @@ int main(void) {
    shmem_init();
 
    me = shmem_my_pe();
-   npes = shmem_num_pes();
+   npes = shmem_n_pes();
    if (me == 0){
      char ch;
      FILE *fp;
