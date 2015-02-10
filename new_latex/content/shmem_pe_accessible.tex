@@ -1,0 +1,50 @@
+\apisummary{Determines whether a \ac{PE} is accessible via \openshmem's data transfer routines.}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int shmem_pe_accessible(int pe);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+LOGICAL LOG, SHMEM_PE_ACCESSIBLE
+INTEGER pe
+LOG = SHMEM_PE_ACCESSIBLE(pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{pe}{Specific pe that needs to be checked for accessibility from the local \ac{PE}.}
+\end{apiarguments}
+
+\apidescription
+{
+    \FUNC{shmem\_pe\_accessible} is  a  query routine  that indicates  whether  a
+    specified \ac{PE} is accessible via \openshmem from the local \ac{PE}. The
+    \FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if  the  remote
+    \ac{PE} is a process  running from the same executable  file as the local
+    \ac{PE}, indicating that full \openshmem support for symmetric data objects
+    (that reside in the static memory and symmetric heap) is available, otherwise it
+    returns \CONST{FALSE}.  This routine may be particularly useful for hybrid
+    programming with other communication libraries (such as a \ac{MPI}) or parallel
+    languages.  For example, on  SGI Altix  series  systems, \openshmem is
+    supported  across multiple partitioned hosts and InfiniBand connected hosts.
+    When running multiple executable MPI programs using \openshmem on an Altix, full
+    \openshmem support is available between processes running from the same
+    executable file. However, \openshmem support between processes of different
+    executable  files  is  supported only for data objects on the symmetric heap,
+    since static data objects are  not symmetric  between  different executable
+    files.        
+}
+
+\apireturnvalues 
+{
+    \Clang: The return value is 1 if the specified \ac{PE} is a valid remote \ac{PE}
+    for \openshmem routines; otherwise, it is 0. \\ \\
+
+    \Fortran: The return value is \CONST{.TRUE.} if the specified \ac{PE} is a valid
+    remote \ac{PE} for \openshmem routines; otherwise, it is \CONST{.FALSE.}.	 
+}
+
+\apinotes{ None. }
+
+\end{apidefinition}

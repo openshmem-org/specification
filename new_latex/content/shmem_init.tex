@@ -1,0 +1,55 @@
+\apisummary{A collective operation that allocates and initializes the resources
+used by the \openshmem library.}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_init(void);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+CALL SHMEM_INIT()
+\end{Fsynopsis}
+
+
+\begin{apiarguments}
+    \apiargument{None.}{}{}
+\end{apiarguments}
+
+\apidescription
+{
+    \FUNC{shmem\_init} allocates and initializes resources used by the \openshmem
+    library. It is a collective operation that all \acp{PE} must call before any
+    other \openshmem routine may be called. At the end of the \openshmem program
+    which it initialized, each call to \FUNC{shmem\_init} must be matched with a
+    call to \FUNC{shmem\_finalize}. After a single call to \FUNC{shmem\_init}, a
+    subsequent call to \FUNC{shmem\_init} in the same program results in undefined
+    behavior.
+}
+
+\apireturnvalues{None.}      
+
+\apinotes
+{
+    As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has been
+    deprecated and is replaced with \FUNC{shmem\_init}. While support for
+    \FUNC{start\_pes} is still required in \openshmem libraries, users are
+    encouraged to use \FUNC{shmem\_init}. Replacing \FUNC{start\_pes} with
+    \FUNC{shmem\_init} in \openshmem programs with no further changes is possible;
+    there is an implicit \FUNC{shmem\_finalize} at the end of main.  However,
+    \FUNC{shmem\_init} differs slightly from \FUNC{start\_pes}: multiple calls to
+    \FUNC{shmem\_init} within a program results in undefined behavior, while in the
+    case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the
+    first one resulted in a no-op.
+}
+
+\begin{apiexamples}
+
+\apifexample
+    { This is a simple program that calls \FUNC{shmem\_init}: } 
+    { example_code/shmem_init_example.f90 }
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}

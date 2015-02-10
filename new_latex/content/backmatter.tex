@@ -1,0 +1,535 @@
+\clearpage
+
+\appendix
+
+%defining pagestyle for annex
+%\pagestyle{plain} \withlinenumbers
+\pagestyle{fancy} \withlinenumbers
+\fancyhf{}
+\fancyhead[RE, LO]{\leftmark}
+\fancyhead[RO, LE]{\thepage}
+\fancyfoot[CE,CO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+
+
+
+\chapter{Writing \openshmem Programs}
+\section*{Incorporating \openshmem{} into Programs}\label{sec:writing_programs}
+
+In this section, we describe how to write a ``Hello World" \openshmem program.
+To write a ``Hello World" \openshmem program we need to: 
+
+\begin{itemize}
+\item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran).
+\item Add the initialization call \FUNC{shmem\_init}, (line 9).
+\item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
+    id (line 11).
+\item There is no explicit finalize call, either a return from \texttt{main()}
+    (line 13) or an explicit \texttt{exit()} acts as an implicit \openshmem
+    finalization.
+\item In \openshmem the order in which lines appear in the output is not fixed
+    as \ac{PE}s execute asynchronously in parallel.
+\end{itemize}
+
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+\numberedlisting{label=openshmem-hello,language=OSH+C}
+                {example_code/hello-openshmem.c}
+\outputlisting{language=bash,caption={Expected Output (4 processors)}}
+                {example_code/hello-openshmem-c.output}
+\vspace{0.1in}
+\end{minipage}
+
+\openshmem also has a \Fortran{} API, so for completeness we will now give the
+same program written in \Fortran, in listing~\ref{openshmem-hello-f90}:
+
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+\numberedlisting{label=openshmem-hello-f90,language=OSH+F}
+                {example_code/hello-openshmem.f90}
+\outputlisting{language=bash,caption={Expected Output (4 processors)}}
+                {example_code/hello-openshmem-f90.output}
+\vspace{0.1in}
+\end{minipage}
+
+The following example shows a more complex \openshmem program that illustrates
+the use of symmetric data objects.  Note the declaration of the  \VAR{static
+short dest} array and its use as the remote destination in \openshmem short
+\PUT.  The use of the \VAR{static} keyword results in the \VAR{dest} array being
+symmetric on \ac{PE} \CONST{0} and \ac{PE} \CONST{1}.  Each \ac{PE} is able to
+transfer data to the \dest{} array by simply specifying the local address of the
+symmetric data object which is to receive the data.  This aids programmability,
+as the address of the \dest{} need not be exchanged with the active side
+(\ac{PE} \CONST{0}) prior to the RMA (Remote Memory Access) routine.
+Conversely, the declaration of the \VAR{short source} array is asymmetric.
+Because the \PUT{} handles the references to the \VAR{source} array only on the
+active (local) side, the asymmetric \source{} object is handled correctly.
+
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+\numberedlisting{label=openshmem-hello,language=OSH+C}
+                {example_code/writing_shmem_example.c}
+\outputlisting{language=bash,caption={Expected Output (4 processors)}}
+                {example_code/writing_shmem_example.output}
+\vspace{0.1in}
+\end{minipage}
+
+
+
+
+\chapter{Compiling and Running Programs}\label{sec:compiling}
+As of this writing, the \openshmem{} specification is silent regarding how
+\openshmem{} programs are compiled, linked and run. This section shows some
+examples of how wrapper programs are utilized in the \openshmem{} Reference
+Implementation to compile and launch programs.
+
+\section{Compilation}
+\subsection*{Programs written in \Clang}
+
+The \openshmem{} Reference Implementation provides a wrapper program named
+\textbf{oshcc}, to aid in the compilation of \Clang{} programs, the wrapper
+could be called as follows:
+
+\begin{lstlisting}[language=bash]
+oshcc <compiler options> -o myprogram myprogram.c
+\end{lstlisting}
+Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
+underlying \Clang{} compiler.
+
+
+\subsection*{Programs written in \Cpp}
+
+The  \openshmem{} Reference Implementation provides a wrapper program named
+\textbf{oshCC}, to aid in the compilation of \Cpp{} programs, the wrapper could
+be called as follows:
+
+\begin{lstlisting}[language=bash]
+oshCC <compiler options> -o myprogram myprogram.cpp
+\end{lstlisting}
+Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
+underlying \Cpp{} compiler called by \textbf{oshCC}.
+
+
+\subsection*{Programs written in \Fortran}
+
+The  \openshmem{} Reference Implementation provides a wrapper program named
+\textbf{oshfort}, to aid in the compilation of \Fortran{} programs, the wrapper
+could be called as follows:
+
+\begin{lstlisting}[language=bash]
+oshfort <compiler options> -o myprogram myprogram.f
+\end{lstlisting}
+Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
+underlying \Fortran{} compiler called by \textbf{oshfort}.
+
+\section{Running Programs}
+
+The  \openshmem{} Reference Implementation provides a wrapper program named
+\textbf{oshrun}, to launch \openshmem programs, the wrapper could be called as
+follows:
+
+\begin{lstlisting}[language=bash]
+oshrun <additional options> -np <#> <program> <program arguments>
+\end{lstlisting}
+The program arguments for \textbf{oshrun} are:
+
+\begin{tabular}{p{0.3\textwidth}p{0.6\textwidth}}
+$\langle\mbox{additional options}\rangle$ & {Options passed to the underlying launcher.}\tabularnewline
+-np $\langle\mbox{\#}\rangle$ & {The number of \ac{PE}s to be used in the execution.}\tabularnewline
+$\langle\mbox{program}\rangle$ & {The program executable to be launched.}\tabularnewline
+$\langle\mbox{program arguments}\rangle$ & {Flags and other parameters to pass to the program.}\tabularnewline
+\end{tabular}
+
+
+
+
+
+\chapter{Undefined Behavior in \openshmem}\label{sec:undefined}
+
+The specification provides guidelines to the expected behavior of
+various library routines.  In cases where routines are improperly used
+or the input is not in accordance with the specification, undefined
+behavior may be observed.  Depending on the implementation there are
+many interpretations of undefined behavior. 
+
+$\;$
+
+$ $%
+\begin{tabular}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
+\hline 
+\textbf{Inappropriate Usage} & \textbf{Undefined Behavior}\tabularnewline
+\hline 
+\hline 
+Uninitialized library & If \openshmem is not initialized through a call to
+\FUNC{shmem\_init}, subsequent accesses to \openshmem routines have undefined
+results.  An implementation may choose, for example, to try to continue or abort
+immediately upon the first call to an uninitialized routine.\tabularnewline
+\hline 
+Accessing non-existent \ac{PE}s & If a communications routine accesses a
+non-existent \ac{PE} then the \openshmem library can choose to handle this
+situation in an implementation-defined way.  For example, the library may issue
+an error message saying that the \ac{PE} accessed is outside the range of
+accessible \ac{PE}s, or may exit without a warning.\tabularnewline
+\hline 
+Use of non-symmetric variables & Some routines require remotely accessible
+variables to perform their function.  A \PUT{} to a non-symmetric variable can
+be trapped where possible and the library can abort the program.  Another
+implementation may choose to continue either with a warning or
+silently.\tabularnewline
+\hline 
+Non-symmetric variables & The symmetric memory management routines are
+collectives, which means that all \ac{PE}s in the program must issue the same
+\FUNC{shmem\_malloc} call with the same size request.  Program behavior after a
+mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
+\hline 
+Use of NULL pointers with non-zero \VAR{len} specified & In any \openshmem routine
+that takes a pointer and \VAR{len} describing the number of elements in that
+pointer, NULL may not be specified for the pointer unless the corresponding \VAR{len} is also
+specified as zero. Otherwise, the resulting behavior is undefined.\tabularnewline
+\hline 
+Multiple calls to \FUNC{shmem\_init} & In an OpenSHMEM program where
+\FUNC{shmem\_init} has already be called, any subsequent calls to
+\FUNC{shmem\_init} result in undefined behavior.\tabularnewline
+\hline 
+\end{tabular}
+
+
+
+
+
+
+
+\chapter{Interoperability with other Programming Models}\label{sec:mpi}
+
+\section{\ac{MPI} Interoperability}
+
+\begin{sloppypar} % to prevent constants from running into margins.
+%
+\openshmem routines can be used in conjunction with \ac{MPI} routines  in the
+same program.  For example, on SGI systems, programs that use both \ac{MPI} and
+\openshmem routines call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the
+call to the \FUNC{shmem\_init} routine.  \openshmem \ac{PE} numbers are equal to
+the \ac{MPI} rank within the \CONST{MPI\_COMM\_WORLD} environment variable.
+Note that this precludes use of \openshmem routines between processes in
+different \CONST{MPI\_COMM\_WORLD}s.  \ac{MPI} processes started using the
+\FUNC{MPI\_Comm\_spawn} routine, for example, cannot use \openshmem routines to
+communicate with their parent \ac{MPI} processes.
+%
+\end{sloppypar}
+%
+On SGI systems \ac{MPI} jobs that use TCP/sockets for inter-host communication,
+\openshmem routines can be used to communicate with processes running on the
+same host.  The \FUNC{shmem\_pe\_accessible} routine can be used to determine if
+a remote \ac{PE} is accessible via \openshmem communication from the local
+\ac{PE}. When running an \ac{MPI} program involving multiple executable files,
+\openshmem routines can be used to communicate with processes running from the
+same or different executable files, provided that the communication is limited
+to symmetric data objects.  On these systems, static memory, such as a
+\Fortran{} common block or \Clang{} global variable, is symmetric between
+processes running from the same executable file, but is not symmetric between
+processes running from different executable files.  Data allocated from the
+symmetric heap (\FUNC{shmem\_malloc} or \FUNC{shpalloc}) is symmetric across the
+same or different executable files. The routine \FUNC{shmem\_addr\_accessible}
+can be used to determine if a local address is accessible via \openshmem
+communication from a remote \ac{PE}.
+
+Another important feature of these systems is that the
+\FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if the remote
+\ac{PE} is a process running from the same executable file as the local PE,
+indicating that full \openshmem support (static memory and symmetric heap) is
+available.  When using \openshmem routines within an \ac{MPI} program, the use
+of \ac{MPI} memory placement environment variables is required when using
+non-default memory placement options.
+
+\clearpage
+
+
+
+
+
+
+
+\chapter{History of \openshmem}\label{sec:openshmem_history}
+
+SHMEM has a long history as a parallel programming model, having been used
+extensively on a number of products since 1993, including Cray T3D, Cray X1E,
+the Cray XT3/4, SGI Origin, SGI Altix, clusters based on the Quadrics
+interconnect, and to a very limited extent, Infiniband based clusters.
+
+\begin{itemize}
+\item A SHMEM Timeline
+  \begin{itemize}
+  \item Cray SHMEM
+    \begin{itemize}
+    \item SHMEM first introduced by Cray Research Inc. in 1993 for Cray T3D
+    \item Cray is acquired by SGI in 1996
+    \item Cray is acquired by Tera in 2000 (MTA)
+    \item Platforms: Cray T3D, T3E, C90, J90, SV1, SV2, X1, X2, XE, XMT, XT
+    \end{itemize}
+  \item SGI SHMEM
+    \begin{itemize}
+    \item SGI purchases  Cray Research Inc. and SHMEM was integrated into
+      SGI's Message Passing Toolkit (MPT)
+    \item SGI currently owns the rights to SHMEM and \openshmem
+    \item Platforms: Origin, Altix 4700, Altix XE, ICE, UV
+    \item SGI was purchased by Rackable Systems in 2009
+    \item SGI and Open Source Software Solutions, Inc. (OSSS) signed a
+      SHMEM trademark licensing agreement, in 2010
+    \end{itemize}
+  \item Other Implementations
+    \begin{itemize}
+    \item Quadrics (Vega UK, Ltd.)
+    \item Hewlett Packard
+    \item GPSHMEM
+    \item IBM
+    \item QLogic
+    \item Mellanox
+    % \item University of Houston
+    \item University of Florida
+    \end{itemize}
+  \end{itemize}
+\item OpenSHMEM Implementations 
+ \begin{itemize}
+  \item SGI \openshmem
+  \item University of Houston - \openshmem Reference Implementation
+  \item Mellanox ScalableSHMEM
+  \item Portals-SHMEM
+  \item IBM OpenSHMEM
+  \end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+\chapter{\openshmem Specification and Deprecated API}\label{sec:dep_api}
+
+For the \openshmem Specification(s) deprecation is the process of identifying
+API that is supported but no longer recommended for use by program users. For
+\openshmem library users said API \textbf{must} be supported until clearly
+indicated as otherwise by the Specification. In this chapter we will record the
+API that has been deprecated, the \openshmem Specification that effected the
+deprecation, and if the feature is supported in the current version of the
+specification.  
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+    \hline
+     \textbf{Deprecated API} & \textbf{Deprecated Since} 
+     & \textbf{Currently Supported(?)} & \textbf{Replaced By}\\ 
+    \hline %There may be better table headings...
+    \FUNC{\_my\_pe} & 1.2 & Yes & \FUNC{shmem\_my\_pe} \\ \hline
+    \FUNC{\_num\_pes} & 1.2 & Yes & \FUNC{shmem\_n\_pes} \\ \hline
+    \FUNC{shmalloc} & 1.2 & Yes & \FUNC{shmem\_malloc} \\ \hline
+    \FUNC{shfree} & 1.2 & Yes & \FUNC{shmem\_free} \\ \hline
+    \FUNC{shrealloc} & 1.2 & Yes & \FUNC{shmem\_realloc} \\ \hline
+    \FUNC{shmemalign} & 1.2 & Yes & \FUNC{shmem\_align} \\ \hline
+    \FUNC{start\_pes} & 1.2 & Yes & \FUNC{shmem\_init} \\ \hline
+    \FUNC{SHMEM\_PUT} & 1.2 & Yes & \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} \\ \hline
+    \hline
+    \end{tabular}
+\end{center}
+
+
+
+
+
+
+\chapter{Changes to this Document}\label{sec:changelog}
+
+
+\section{Version 1.2}
+This section summarizes the changes from the \openshmem specification Version
+1.1 to Version 1.2.  A major change in this version is that it improves upon the
+execution model described in 1.1 by introducing an explicit
+\FUNC{shmem\_finalize} library call. This provides a collective mechanism of
+exiting an \openshmem program and releasing resources used by the library.  
+
+
+The following list describes the specific changes in 1.2:
+
+\begin{itemize}
+%
+\item Added specification of \VAR{pSync} initialization for all routines that use it.
+%
+\item Replaced all placeholder variable names \VAR{target} with \VAR{dest} to
+      avoid confusion with Fortran `target' keyword.
+%
+\item New Execution Model for exiting/finishing OpenSHMEM programs.
+\\See Section  \ref{subsec:execution_model}.
+%
+\item New library constants to support API that query version and name information.
+\\See Section \ref{subsec:library_constants}.
+%
+\item New API \FUNC{shmem\_init} to provide mechanism to start an \openshmem
+      program and replace deprecated \FUNC{start\_pes}.
+\\See Section \ref{subsec:shmem_init}.
+%
+\item Deprecation of \FUNC{\_my\_pe} and \FUNC{\_num\_pes} routines.
+\\See Sections \ref{subsec:shmem_my_pe} and \ref{subsec:shmem_num_pe}.
+%
+\item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly
+      exit an \openshmem program and release resources.
+\\See Section \ref{subsec:shmem_finalize}.
+%
+\item New API \FUNC{shmem\_global\_exit} to provide mechanism to exit an
+    \openshmem program.
+\\See Section \ref{subsec:shmem_global_exit}.
+%
+\item Clarification related to the address of the referenced object in
+    \FUNC{shmem\_ptr}.
+\\See Section \ref{subsec:shmem_ptr}.
+%
+\item New API to query the version and name information. 
+\\See Section \ref{subsec:shmem_version} and \ref{subsec:shmem_name}.
+%
+\item \openshmem library API normalization. All C symmetric memory management
+      API begins with  \FUNC{shmem\_}.
+\\See Section \ref{subsec:shfree}.
+%
+\item Notes and clarifications added to \FUNC{shmem\_malloc}.
+\\See Section \ref{subsec:shfree}.
+%
+\item Deprecation of Fortran API routine \FUNC{SHMEM\_PUT}.
+\\See Section \ref{subsec:shmem_put}. 
+%
+\item Clarification related to \FUNC{shmem\_wait}.
+\\See Section \ref{subsec:shmem_wait}.
+%
+\item Undefined behavior for null pointers without zero counts added.
+\\See Section \ref{sec:undefined}
+%
+\item Addition of new Annex for clearly specifying deprecated API and its
+      support in the existing specification version.
+\\See Section \ref{sec:dep_api}.
+%
+\end{itemize}
+
+
+
+
+\section{Version 1.1}
+This section summarizes the changes from the \openshmem specification Version
+1.0 to the Version 1.1.  A major change in this version is that it provides an
+accurate description of \openshmem interfaces so that they are in agreement with
+the SGI specification.  This version also explains \openshmem’s programming,
+memory, and execution model.  The document was throughly changed to improve the
+readability of specification and usability of interfaces.  The code examples
+were added to demonstrate the usability of API. Additionally, diagrams were
+added to help understand the subtle semantic differences of various operations.
+
+
+The following list describes the specific changes in 1.1:
+
+\begin{itemize}
+%
+\item Clarifications of the completion semantics of memory synchronization 
+      interfaces.
+\\See Section \ref{subsec:memory_order}.
+%
+\item Clarification of the completion semantics of memory load and store
+      operations in context of \FUNC{shmem\_barrier\_all} and \FUNC{shmem\_barrier}
+      routines.
+\\See Section \ref{subsec:shmem_barrier_all} and \ref{subsec:shmem_barrier}.
+%
+\item Clarification of the completion and ordering semantics of
+      \FUNC{shmem\_quiet} and \FUNC{shmem\_fence}.
+\\See Section \ref{subsec:shmem_quiet} and \ref{subsec:shmem_fence}.
+%
+\item Clarifications of the completion semantics of \ac{RMA} and \ac{AMO}
+      routines.
+\\See Sections \ref{sec:rma} and \ref{sec:amo}
+%
+\item Clarifications of the memory model and the memory alignment requirements
+      for symmetric data objects.
+\\See Section \ref{subsec:memory_model}.
+%
+\item Clarification of the execution model and the definition of a \ac{PE}.
+\\See Section \ref{subsec:execution_model}
+%
+\item Clarifications of the semantics of \FUNC{shmem\_pe\_accessible} and
+      \FUNC{shmem\_addr\_accessible}.
+\\See Section \ref{subsec:shmem_pe_accessible} and \ref{subsec:shmem_addr_accessible}.
+%
+\item Added an annex on interoperability with \ac{MPI}.
+\\See Annex \ref{sec:mpi}.
+%
+\item Added examples to the different interfaces.
+%
+\item Clarification of the naming conventions for constant in \Clang{} and
+      \Fortran{}.
+\\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
+%
+\item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.
+\\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}. 
+%
+\item Removed \ac{API} calls: \FUNC{shmem\_char\_put},
+      \FUNC{shmem\_char\_get}.
+\\See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}. 
+%
+\item The usage of \VAR{ptrdiff\_t}, \VAR{size\_t}, and \VAR{int} in the
+      interface signature was made consistent with the description.
+\\See Sections \ref{subsec:coll}, \ref{subsec:shmem_iput}, and \ref{subsec:shmem_iget}.
+%
+\item Revised \FUNC{shmem\_barrier} example.
+\\See Section \ref{subsec:shmem_barrier}. 
+%
+\item Clarification of the initial value of \VAR{pSync} work arrays for
+\FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}. 
+%
+\item Clarification of the expected behavior when multiple \FUNC{start\_pes}
+calls are encountered has been clarified.
+\\See Section \ref{subsec:start_pes}.
+%
+\item Corrected the definition of atomic increment operation.
+\\See Section \ref{subsec:shmem_inc}. 
+%
+\item Clarification of the size of the symmetric heap and when it is set.
+\\See Section \ref{subsec:shfree}.
+%
+\item Clarification of the integer and real sizes for \Fortran{} \ac{API}.
+\\See Sections \ref{subsec:shmem_add}, \ref{subsec:shmem_cswap},
+      \ref{subsec:shmem_swap}, \ref{subsec:shmem_finc}, \ref{subsec:shmem_inc}, and
+      \ref{subsec:shmem_fadd}. 
+%
+\item Clarification of the expected behavior on program \OPR{exit}.
+\\See Section \ref{subsec:execution_model}, Execution Model. 
+%
+\item More detailed description for the progress of \openshmem operations
+provided.
+\\See Section \ref{subsec:progress}. 
+%
+\item Clarification of naming convention for non-standard interfaces and their
+inclusion in \FUNC{shmemx.h}.
+\\See Section \ref{subsec:bindings}. 
+%
+\item Various fixes to \openshmem code examples across the specification to
+include appropriate header files. 
+%
+\item Removing requirement that implementations should detect size mismatch and
+return error information for \FUNC{shmalloc} and ensuring consistent
+language.
+\\See Sections \ref{subsec:shfree} and Annex \ref{sec:undefined}. 
+%
+\item Fortran programming fixes for examples.\\ See Sections
+\ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait}. 
+%
+\item Clarifications of the reuse \VAR{pSync} and \VAR{pWork} across
+collectives.
+\\See Sections \ref{subsec:coll}, \ref{subsec:shmem_broadcast},
+      \ref{subsec:shmem_collect} and \ref{subsec:shmem_reductions}.
+%
+\item Name changes for UV and ICE for SGI systems.
+\\See Annex \ref{sec:openshmem_history}. 
+%
+\end{itemize}
+
+
+
+
+
+} %end of setlength command that was started in frontmatter.tex

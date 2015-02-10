@@ -1,0 +1,27 @@
+The \openshmem specification provides a set of environment variables that allows
+users to configure the \openshmem implementation, and receive information about
+the implementation. The implementations of the specification are free to define
+additional variables. Currently, the specification defines four environment
+variables.
+
+\medskip{}
+
+\begin{tabular}{|l|l|l|}
+\hline 
+Variable & Value & Routine\tabularnewline
+\hline 
+\hline 
+\texttt{SMA\_VERSION} & any & print the library version at
+start-up\tabularnewline
+\hline 
+\texttt{SMA\_INFO} & any & print helpful text about all these environment
+variables\tabularnewline
+\hline 
+\texttt{SMA\_SYMMETRIC\_SIZE} & non-negative integer & number of bytes to
+allocate for symmetric heap\tabularnewline
+\hline 
+\texttt{SMA\_DEBUG} & any & enable debugging messages\tabularnewline
+\hline 
+\end{tabular}
+
+\medskip{}
