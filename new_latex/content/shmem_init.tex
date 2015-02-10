@@ -1,5 +1,7 @@
-\apisummary{A collective operation that allocates and initializes the resources
-used by the \openshmem library.}
+\apisummary{
+    A collective operation that allocates and initializes the resources used by
+    the \openshmem library.
+}
 
 \begin{apidefinition}
 
@@ -16,8 +18,7 @@ CALL SHMEM_INIT()
     \apiargument{None.}{}{}
 \end{apiarguments}
 
-\apidescription
-{
+\apidescription{
     \FUNC{shmem\_init} allocates and initializes resources used by the \openshmem
     library. It is a collective operation that all \acp{PE} must call before any
     other \openshmem routine may be called. At the end of the \openshmem program
@@ -27,10 +28,11 @@ CALL SHMEM_INIT()
     behavior.
 }
 
-\apireturnvalues{None.}      
+\apireturnvalues{
+    None.
+}      
 
-\apinotes
-{
+\apinotes{
     As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has been
     deprecated and is replaced with \FUNC{shmem\_init}. While support for
     \FUNC{start\_pes} is still required in \openshmem libraries, users are

@@ -1,5 +1,4 @@
-\apisummary
-{
+\apisummary{
     A collective operation that releases resources used by the \openshmem library.
     This only terminates the \openshmem portion of a program, not the entire
     program.
@@ -19,8 +18,7 @@ CALL SHMEM_FINALIZE
     \apiargument{None.}{}{}
 \end{apiarguments}
 
-\apidescription
-{
+\apidescription{
     \FUNC{shmem\_finalize} is a collective operation that ends the \openshmem
     portion of a program previously initialized by \FUNC{shmem\_init} and
     releases resources used by the \openshmem library. This collective
@@ -36,10 +34,11 @@ CALL SHMEM_FINALIZE
     resources that have been released.
 }
 
-\apireturnvalues{None.}
+\apireturnvalues{
+    None.
+}
 
-\apinotes
-{
+\apinotes{
     \FUNC{shmem\_finalize} releases all resources used by the \openshmem library
     including the symmetric memory heap and pointers initiated by
     \FUNC{shmem\_ptr}. This collective operation requires all \acp{PE} to

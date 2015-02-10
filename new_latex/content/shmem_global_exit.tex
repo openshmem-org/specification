@@ -1,4 +1,6 @@
-\apisummary{A routine that allows any \ac{PE} to force termination of an entire program.}
+\apisummary{
+    A routine that allows any \ac{PE} to force termination of an entire program.
+}
 
 \begin{apidefinition}
 
@@ -15,8 +17,7 @@ CALL SHMEM_GLOBAL_EXIT(status)
     \apiargument{IN}{status}{The exit status from the main program.}
 \end{apiarguments}
 
-\apidescription
-{
+\apidescription{
     \FUNC{shmem\_global\_exit} is a non-collective routine that allows any one
     \ac{PE} to force termination of an \openshmem program for all \acp{PE},
     passing an exit status to the execution environment. This routine
@@ -32,11 +33,12 @@ CALL SHMEM_GLOBAL_EXIT(status)
     \openshmem program to the execution environment for all \acp{PE}.
 }
 
-\apireturnvalues{None.}
+\apireturnvalues{
+    None.
+}
 
 
-\apinotes
-{ 
+\apinotes{ 
     \FUNC{shmem\_global\_exit} may be used in situations where one or more
     \acp{PE} have determined that the program has completed and/or should
     terminate early.  Accordingly, the integer status argument can be used to

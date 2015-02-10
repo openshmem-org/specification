@@ -1,4 +1,6 @@
-\apisummary{Returns  a pointer to a data object on a specified \ac{PE}.}
+\apisummary{
+    Returns  a pointer to a data object on a specified \ac{PE}.
+}
 
 \begin{apidefinition}
 
@@ -20,8 +22,7 @@ PTR = SHMEM_PTR(dest, pe)
 		 integer value.}
 \end{apiarguments}
 
-\apidescription
-{
+\apidescription{
     \FUNC{shmem\_ptr} returns an address that may be used to directly reference
     \dest{} on the specified \ac{PE}.  This address can be assigned to a pointer.
     After that, ordinary loads and stores to this remote address may be performed.
@@ -33,15 +34,13 @@ PTR = SHMEM_PTR(dest, pe)
     communication.
 }
 
-\apireturnvalues
-{
+\apireturnvalues{
     The return value is a non-NULL address of the \dest{} data object when it is 
     accessible using memory loads and stores in addition to \openshmem{} operations.
     Otherwise, a NULL address is returned.
 }
 
-\apinotes
-{
+\apinotes{
     When calling \FUNC{shmem\_ptr}, \dest{} is the address of the referenced
     symmetric data object on the calling \ac{PE}.
 }

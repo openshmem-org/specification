@@ -1,4 +1,6 @@
-\apisummary{Returns the number of \ac{PE}s running in a program.}
+\apisummary{
+    Returns the number of \ac{PE}s running in a program.
+}
 
 \begin{apidefinition}
 
@@ -16,14 +18,18 @@ N_PES = NUM_PES()
     \apiargument{None.}{}{}
 \end{apiarguments}
 
-\apidescription{The routine returns the number of \ac{PE}s running the program.}
+\apidescription{
+    The routine returns the number of \ac{PE}s running the program.
+}
 
-\apireturnvalues{Integer -  Number of \ac{PE}s running the \openshmem program.}
+\apireturnvalues{
+    Integer -  Number of \ac{PE}s running the \openshmem program.
+}
 
 \apinotes{
-As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been
-deprecated. Although \openshmem libraries are required to support the call,
-users are encouraged to use \FUNC{shmem\_n\_pes} instead.
+    As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been
+    deprecated. Although \openshmem libraries are required to support the call,
+    users are encouraged to use \FUNC{shmem\_n\_pes} instead.
 }
 
 \begin{apiexamples}

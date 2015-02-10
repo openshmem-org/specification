@@ -1,4 +1,6 @@
-\apisummary{Returns the number of the calling \ac{PE}.}
+\apisummary{
+    Returns the number of the calling \ac{PE}.
+}
 
 \begin{apidefinition}
 
@@ -16,18 +18,18 @@ ME = MY_PE ()
     \apiargument{None.}{}{}
 \end{apiarguments}
 
-\apidescription
-{
+\apidescription{
     This routine returns the \ac{PE} number of the calling \ac{PE}.  It accepts no
     arguments.  The result is an integer between \CONST{0} and \VAR{npes} -
     \CONST{1}, where \VAR{npes} is the total number of \ac{PE}s executing the
     current program.
 }
 
-\apireturnvalues{Integer - Between \CONST{0} and \VAR{npes} - \CONST{1}}
+\apireturnvalues{
+    Integer - Between \CONST{0} and \VAR{npes} - \CONST{1}
+}
 
-\apinotes
-{
+\apinotes{
     Each \ac{PE} has a unique number or identifier. As of \openshmem Specification
     1.2 the use of \FUNC{\_my\_pe} has been deprecated. Although \openshmem
     libraries are required to support the call, users are encouraged to use
