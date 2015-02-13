@@ -1,0 +1,44 @@
+\apisummary{
+    Transfers one data item from a remote \ac{PE}
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+char shmem_char_g(char *addr, int pe);
+short shmem_short_g(short *addr, int pe);
+int shmem_int_g(int *addr, int pe);
+long shmem_long_g(long *addr, int pe);
+long long  shmem_longlong_g(long long *addr, int pe);
+float shmem_float_g(float *addr, int pe);
+double shmem_double_g(double *addr, int pe);
+long double shmem_longdouble_g(long double *addr, int pe);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{addr}{The remotely accessible array element or scalar data object.}
+    \apiargument{IN}{pe}{The number of the remote \ac{PE} on which \VAR{addr} resides.}
+\end{apiarguments}
+
+\apidescription{
+  These routines provide a very low latency get capability for single elements
+  of most basic types. 
+}
+
+\apireturnvalues{
+    Returns a single element of type specified in the synopsis.
+}
+
+\apinotes{
+    None.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following \FUNC{shmem\_long\_g} example is for \CorCpp{} programs:}
+    {./example_code/shmem_g_example.c}
+    {}
+\end{apiexamples}
+
+\end{apidefinition}

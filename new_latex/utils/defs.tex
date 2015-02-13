@@ -249,22 +249,22 @@ minus .2ex}{-1em}{\normalsize\sf}}
 % Library API description template commands
 %
 
-\newenvironment{apidefinition}{
-\begin{description}
-\item[SYNOPSIS] \hfill \\ \\ 
-}
-{
-\end{description}
-}
-
 \newcommand{\apisummary}[1]{
     #1
 \hfill
 }
 
+\newenvironment{apidefinition}{
+\begin{description}
+\item[SYNOPSIS] \hfill \\ \\ 
+\vspace{-1.5em}
+}
+{
+\end{description}
+}
+
 \lstnewenvironment{Csynopsis}
 { 
-  \vspace{-2em}
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}{}
@@ -287,7 +287,6 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \end{tabular} 
 \hfill
 \end{description}
-\vspace{2pt}
 }
 
 \newcommand{\apidescription}[1]{
@@ -297,12 +296,27 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \hfill
 }
 
+\newcommand{\apidesctable}[2] {\hfill \\ #1 \\ \\
+    \begin{tabular}{p{5cm} p{9cm}}
+       \hline
+      Routine & Data Type of dest and source\\
+       \hline \tabularnewline
+       \end{tabular}\\
+        #2
+}  
+
 \newcommand{\apireturnvalues}[1]{
 \hfill 
 \item[Return Values] \hfill \\
     #1
 \\
 \hfill
+}
+
+\newcommand{\apitablerow}[2]{
+ \begin{tabular}{p{5cm} p{9cm}}
+ #1 & #2 \tabularnewline
+  \end{tabular}\\
 }
 
 \newcommand{\apinotes}[1]{

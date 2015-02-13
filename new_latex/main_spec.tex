@@ -80,27 +80,52 @@ environment of the \ac{PE}s.
 \input{content/shmem_info_get_name}
 
 
+
+
 \subsection{Memory Management Routines}
 \openshmem provides a set of \ac{API}s for managing the symmetric heap. The
 \ac{API}s allow one to dynamically allocate, deallocate, reallocate and align
 symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 
-\subsubsection{\bf SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}\label{subsec:shfree}
+\subsubsection{\textbf{SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}}\label{subsec:shfree}
+\input{content/shmem_malloc.tex}
 
-%\input{TEX_FILES/shpalloc.tex} %Swaroop
-%\input{TEX_FILES/shpclmove.tex} %Swaroop
-%\input{TEX_FILES/shpdeallc.tex} %Swaroop
-%\input{INTRODUCTION/rma_intro.tex}
-%\label{subsec:shmem_put}
-%\input{TEX_FILES/shmem_put.tex} %Oscar
-%\label{subsec:shmem_p}
-%\input{TEX_FILES/shmem_p.tex} %Oscar
-%\input{TEX_FILES/shmem_iput.tex} %Oscar
-%\label{subsec:shmem_get}
-%\input{TEX_FILES/shmem_get.tex} %Manju
-%\label{subsec:shmem_g}
-%\input{TEX_FILES/shmem_g.tex} %Manju
-%\input{TEX_FILES/shmem_iget.tex} %Manju
+\subsubsection{\textbf{SHPALLOC}}\label{subsec:shpalloc}
+\input{content/shpalloc.tex}
+
+\subsubsection{\textbf{SHPCLMOVE}}\label{subsec:shpclmove}
+\input{content/shpclmove.tex}
+
+\subsubsection{\textbf{SHPDEALLOC}}\label{subsec:shpdealloc}
+\input{content/shpdealloc.tex}
+
+
+
+
+\subsection{Remote Memory Access Routines}\label{sec:rma}
+\input{content/rma_intro.tex}
+
+\subsubsection{\textbf{SHMEM\_PUT}}\label{subsec:shmem_put}
+\input{content/shmem_put.tex}
+
+\subsubsection{\textbf{SHMEM\_P}}\label{subsec:shmem_p}
+\input{content/shmem_p.tex}
+
+\subsubsection{\textbf{SHMEM\_IPUT}}\label{subsec:shmem_iput}
+\input{content/shmem_iput.tex}
+
+\subsubsection{\textbf{SHMEM\_GET}}\label{subsec:shmem_get}
+\input{content/shmem_get.tex}
+
+\subsubsection{\textbf{SHMEM\_G}}\label{subsec:shmem_g}
+\input{content/shmem_g.tex}
+
+\subsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
+\input{content/shmem_iget.tex}
+
+
+
+
 
 \input{content/backmatter}
 
