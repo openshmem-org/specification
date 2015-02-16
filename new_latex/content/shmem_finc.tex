@@ -1,0 +1,66 @@
+\apisummary{
+    Performs an atomic fetch-and-increment  operation on a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int shmem_int_finc(int *dest, int pe);
+long shmem_long_finc(long *dest, int pe);
+long long shmem_longlong_finc(long long *dest, int pe);
+\end{Csynopsis}
+
+
+\begin{Fsynopsis}
+INTEGER pe 
+INTEGER*4 SHMEM_INT4_FINC, ires_i4
+ires_i4 = SHMEM_INT4_FINC(dest, pe)
+INTEGER*8 SHMEM_INT8_FINC, ires_i8
+ires_i8 = SHMEM_INT8_FINC(dest, pe)
+\end{Fsynopsis}
+
+
+\begin{apiarguments}
+
+\apiargument{IN}{dest}{The remotely accessible integer data object to be updated
+    on the remote \ac{PE}. The type of \dest{} should match that implied in the
+    SYNOPSIS section.}
+\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
+    \dest{} is to be updated.  If you are using \Fortran, it must be a default
+    integer value.}
+
+\end{apiarguments}
+
+
+\apidescription{
+   These routines perform a fetch-and-increment operation.  The \dest{} on
+   \ac{PE} \VAR{pe} is increased by one and the routine returns the previous
+   contents of \dest{} as an atomic operation.
+}
+
+\apidesctable{
+    If you are using \Fortran, \VAR{dest} must be of the following type:
+}
+
+\apitablerow{SHMEM\_INT4\_FINC}{\CONST{4}-byte integer}
+\apitablerow{SHMEM\_INT8\_FINC}{\CONST{8}-byte integer}
+
+\apireturnvalues{
+    The contents that had been at the \dest{} address on the remote \ac{PE} prior to
+    the increment.  The data type of the return value is the same as the \dest.
+}
+
+\apinotes{
+    None.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following \FUNC{shmem\_finc} example is for \CorCpp{} programs:}
+    {./example_code/shmem_finc_example.c}
+    {}
+
+\end{apiexamples}
+	
+\end{apidefinition}

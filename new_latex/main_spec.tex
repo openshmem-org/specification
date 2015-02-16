@@ -82,6 +82,7 @@ environment of the \ac{PE}s.
 
 
 
+
 \subsection{Memory Management Routines}
 \openshmem provides a set of \ac{API}s for managing the symmetric heap. The
 \ac{API}s allow one to dynamically allocate, deallocate, reallocate and align
@@ -98,6 +99,8 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 
 \subsubsection{\textbf{SHPDEALLOC}}\label{subsec:shpdealloc}
 \input{content/shpdealloc.tex}
+
+
 
 
 
@@ -124,6 +127,73 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 \input{content/shmem_iget.tex}
 
 
+
+
+
+\subsection{Atomic Memory Operations}\label{sec:amo}
+\input{content/atomics_intro}
+
+\subsubsection{\textbf{SHMEM\_ADD}}\label{subsec:shmem_add}
+\input{content/shmem_add.tex}
+
+\subsubsection{\textbf{SHMEM\_CSWAP}}\label{subsec:shmem_cswap}
+\input{content/shmem_cswap.tex} 
+
+\subsubsection{\textbf{SHMEM\_SWAP}}\label{subsec:shmem_swap}
+\input{content/shmem_swap.tex}
+
+\subsubsection{\textbf{SHMEM\_FINC}}\label{subsec:shmem_finc}
+\input{content/shmem_finc.tex}
+
+\subsubsection{\textbf{SHMEM\_INC}}\label{subsec:shmem_inc}
+\input{content/shmem_inc.tex}
+
+\subsubsection{\textbf{SHMEM\_FADD}}\label{subsec:shmem_fadd}
+\input{content/shmem_fadd.tex}
+
+
+
+
+
+\subsection{Collective Routines}\label{subsec:coll}
+\input{content/collective_intro.tex}
+
+\subsubsection{\textbf{SHMEM\_BARRIER\_ALL}}\label{subsec:shmem_barrier_all}
+\input{content/shmem_barrier_all.tex}
+
+\subsubsection{\textbf{SHMEM\_BARRIER}}\label{subsec:shmem_barrier}
+\input{content/shmem_barrier.tex}
+
+%\label{subsec:shmem_broadcast}
+%\input{TEX_FILES/shmem_broadcast.tex} %Pasha
+%\label{subsec:shmem_collect} %label in shmem_collect.tex, label from this location references page 1
+%\input{TEX_FILES/shmem_collect.tex} %Pasha
+%\label{subsec:shmem_reductions}
+%\input{TEX_FILES/shmem_reductions.tex} %Swaroop
+%%\startchap
+%\subsection{Point-To-Point Synchronization Routines}%SP: Adding a chapter to include wait and wait until 
+%\input{INTRODUCTION/synchronization_intro} %Swaroop
+%\input{TEX_FILES/shmem_wait.tex} %Swaroop
+%\label{subsec:shmem_wait}
+%%\startchap
+%\subsection{Memory Ordering Routines} %SP: Adding a chapter to include fence and quiet
+%\label{subsec:memory_order}
+%\input{INTRODUCTION/ordering_intro} %Swaroop
+%\label{subsec:shmem_fence}
+%\input{TEX_FILES/shmem_fence.tex} %Manju
+%\label{subsec:shmem_quiet}
+%\input{TEX_FILES/shmem_quiet.tex} %Swaroop
+%\input{INTRODUCTION/synchronization_model.tex}
+%%\startchap
+%\subsection{Distributed Locking Routines}
+%\input{INTRODUCTION/locks_intro} %Swaroop
+%\input{TEX_FILES/shmem_lock.tex} %Oscar
+%%\startchap
+%\subsection{Cache Management}
+%\input{INTRODUCTION/deprication.tex} %Pasha
+%\input{TEX_FILES/shmem_cache.tex} %Pasha
+
+\clearpage
 
 
 

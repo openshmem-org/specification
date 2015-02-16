@@ -1,0 +1,75 @@
+\apisummary{
+    Performs an atomic swap to a remote data object.
+}
+
+\begin{apidefinition}
+ 	  
+\begin{Csynopsis}
+double shmem_double_swap(double *dest, double value, int pe);
+float shmem_float_swap(float *dest, float value, int pe);
+int shmem_int_swap(int *dest, int value, int pe);
+long shmem_long_swap(long *dest, long value, int pe);
+long long shmem_longlong_swap(long long *dest, long long value, int pe);
+long shmem_swap(long *dest, long value, int pe);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+INTEGER SHMEM_SWAP, value, pe
+ires = SHMEM_SWAP(dest, value, pe) 
+INTEGER*4 SHMEM_INT4_SWAP, value_i4, ires_i4
+ires_i4 = SHMEM_INT4_SWAP(dest, value_i4, pe) 
+INTEGER*8 SHMEM_INT8_SWAP, value_i8, ires_i8
+ires_i8 = SHMEM_INT8_SWAP(dest, value_i8, pe)
+REAL*4 SHMEM_REAL4_SWAP, value_r4, res_r4
+res_r4 = SHMEM_REAL4_SWAP(dest, value_r4, pe) 
+REAL*8 SHMEM_REAL8_SWAP, value_r8, res_r8
+res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+    \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
+        updated on the remote \ac{PE}.	 If you are using \CorCpp, the type of
+        \dest{} should match that  implied in the SYNOPSIS section.}
+    \apiargument{IN}{value}{The value to be atomically written to the remote
+        \ac{PE}. \VAR{value}  is the same type as \dest.}
+    \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
+        \dest{} is to be updated. If you are using \Fortran, it must be a default
+        integer value.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_swap}  performs  an atomic swap operation. It writes \VAR{value}
+    into \dest{} on \ac{PE} and returns the previous contents of \dest{} as an
+    atomic operation. 
+}
+
+\apidesctable{
+    If you are using \Fortran, \VAR{dest} must be of the following type:
+}
+
+\apitablerow{SHMEM\_SWAP}{Integer of default kind}
+\apitablerow{SHMEM\_INT4\_SWAP}{\CONST{4}-byte integer}
+\apitablerow{SHMEM\_INT8\_SWAP}{\CONST{8}-byte integer}
+\apitablerow{SHMEM\_REAL4\_SWAP}{\CONST{4}-byte real}
+\apitablerow{SHMEM\_REAL8\_SWAP}{\CONST{8}-byte real}
+
+\apireturnvalues{
+       The content that had been at the \dest{} address on the remote \ac{PE}
+       prior to the swap is returned.
+}
+
+\apinotes{
+    None.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The example below swap values between odd numbered \acp{PE} and their right
+    (modulo) neighbor and outputs the result of swap.}
+    {./example_code/shmem_swap_example.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}
