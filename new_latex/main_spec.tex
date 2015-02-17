@@ -164,34 +164,74 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 \subsubsection{\textbf{SHMEM\_BARRIER}}\label{subsec:shmem_barrier}
 \input{content/shmem_barrier.tex}
 
-%\label{subsec:shmem_broadcast}
-%\input{TEX_FILES/shmem_broadcast.tex} %Pasha
-%\label{subsec:shmem_collect} %label in shmem_collect.tex, label from this location references page 1
-%\input{TEX_FILES/shmem_collect.tex} %Pasha
-%\label{subsec:shmem_reductions}
-%\input{TEX_FILES/shmem_reductions.tex} %Swaroop
-%%\startchap
-%\subsection{Point-To-Point Synchronization Routines}%SP: Adding a chapter to include wait and wait until 
-%\input{INTRODUCTION/synchronization_intro} %Swaroop
-%\input{TEX_FILES/shmem_wait.tex} %Swaroop
-%\label{subsec:shmem_wait}
-%%\startchap
-%\subsection{Memory Ordering Routines} %SP: Adding a chapter to include fence and quiet
-%\label{subsec:memory_order}
-%\input{INTRODUCTION/ordering_intro} %Swaroop
-%\label{subsec:shmem_fence}
-%\input{TEX_FILES/shmem_fence.tex} %Manju
-%\label{subsec:shmem_quiet}
-%\input{TEX_FILES/shmem_quiet.tex} %Swaroop
-%\input{INTRODUCTION/synchronization_model.tex}
-%%\startchap
-%\subsection{Distributed Locking Routines}
-%\input{INTRODUCTION/locks_intro} %Swaroop
-%\input{TEX_FILES/shmem_lock.tex} %Oscar
-%%\startchap
-%\subsection{Cache Management}
-%\input{INTRODUCTION/deprication.tex} %Pasha
-%\input{TEX_FILES/shmem_cache.tex} %Pasha
+\subsubsection{\textbf{SHMEM\_BROADCAST}}\label{subsec:shmem_broadcast}
+\input{content/shmem_broadcast.tex}
+
+\subsubsection{\textbf{SHMEM\_COLLECT, SHMEM\_FCOLLECT}}\label{subsec:shmem_collect}
+\input{content/shmem_collect.tex}
+
+\subsubsection{\textbf{SHMEM\_REDUCTIONS}}\label{subsec:shmem_reductions}
+\input{content/shmem_reductions.tex}
+
+
+
+
+
+\subsection{Point-To-Point Synchronization Routines}
+The following section discusses \openshmem \ac{API} that provides a mechanism
+for synchronization between two \ac{PE}s based on the value of a symmetric data
+object. 
+
+\subsubsection{\textbf{SHMEM\_WAIT}}\label{subsec:shmem_wait}
+\input{content/shmem_wait.tex}
+
+
+
+
+
+\subsection{Memory Ordering Routines}\label{subsec:memory_order}
+The following section discusses \openshmem \ac{API}s that provide mechanisms to
+ensure ordering and/or delivery of \OPR{Put}, \ac{AMO}, and memory store
+routines to symmetric data objects. 
+
+\subsubsection{\textbf{SHMEM\_FENCE}}\label{subsec:shmem_fence}
+\input{content/shmem_fence.tex}
+
+\subsubsection{\textbf{SHMEM\_QUIET}}\label{subsec:shmem_quiet}
+\input{content/shmem_quiet.tex}
+
+\subsubsection{Synchronization and Communication Ordering in \openshmem}
+\input{content/synchronization_model.tex}
+
+
+
+
+
+
+\subsection{Distributed Locking Routines}
+The following section discusses \openshmem locks as a mechanism to provide
+mutual exclusion. Three routines are available for distributed locking,
+\textit{set, test} and \textit{clear}.
+
+\subsubsection{\textbf{SHMEM\_LOCK}}\label{subsec:shmem_lock}
+\input{content/shmem_lock.tex}
+
+
+
+
+
+\subsection{Cache Management}
+All of these routines are deprecated and are provided for backwards
+compatibility.  Implementations must include all items in this section and the
+routines should function properly, while notifying the user about deprecation of
+the functionality.
+
+\subsubsection{\textbf{SHMEM\_CACHE}}\label{subsec:shmem_cache}
+\input{content/shmem_cache.tex}
+
+
+
+
 
 \clearpage
 

@@ -257,7 +257,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newenvironment{apidefinition}{
 \begin{description}
 \item[SYNOPSIS] \hfill \\ \\ 
-\vspace{-1.5em}
+\vspace{-2em}
 }
 {
 \end{description}
@@ -275,34 +275,37 @@ minus .2ex}{-1em}{\normalsize\sf}}
   deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt}}{}
 
 \newenvironment{apiarguments}{
-\newcommand{\apiargument}[3]{\textbf{##1} & \textit{##2} & {##3} \\ }
+\newcommand{\apiargument}[3]{
+\begin{tabular}{p{2cm} p{2cm} p{10cm}}
+\textbf{##1} & \textit{##2} & {##3} \\ 
+\end{tabular}
+}
 \hfill
 \item[DESCRIPTION] \hfill 
 
 \begin{description}
 \item[Arguments] \hfill \\
-\begin{tabular}{p{2cm} p{2cm} p{10cm}}
 }
 {
-\end{tabular} 
 \hfill
 \end{description}
 }
 
 \newcommand{\apidescription}[1]{
 \begin{description}
+\vspace{-1em}
 \item[API description] \hfill \\ 
     #1
 \hfill
 }
 
-\newcommand{\apidesctable}[2] {\hfill \\ #1 \\ \\
+\newcommand{\apidesctable}[4] {\hfill \\ #1 \\ \\
     \begin{tabular}{p{5cm} p{9cm}}
        \hline
-      Routine & Data Type of dest and source\\
+       #2 & #3 \\
        \hline \tabularnewline
        \end{tabular}\\
-        #2
+        #4
 }  
 
 \newcommand{\apireturnvalues}[1]{
