@@ -1,0 +1,54 @@
+\apisummary{ 
+    Called at the beginning of an \openshmem program to initialize the execution
+    environment. (This routine is deprecated and is provided for backwards
+    compatibility. Implementations must include it, and the routines should
+    function properly while notifying the user about deprecation of its use.)
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void start_pes(int npes);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+CALL START_PES(npes)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+       \apiargument{npes}{Unused}{ Should be set to \CONST{0}.}
+\end{apiarguments}
+
+\apidescription{   
+     The \FUNC{start\_pes} routine initializes the \openshmem execution
+     environment.  An \openshmem program must call \FUNC{start\_pes} before
+     calling any other \openshmem routine.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    If any other \openshmem call occurs before \FUNC{start\_pes}, the
+    behavior is undefined.  Although it is recommended to set \VAR{npes} to
+    \CONST{0} for \FUNC{start\_pes}, this is not mandated.  The value is ignored.
+    Calling \FUNC{start\_pes} more than once has no subsequent
+    effect.
+
+    As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has
+    been deprecated. Although \openshmem libraries are required to support the
+    call, program users are encouraged to use \FUNC{shmem\_init} instead.
+}
+
+
+\begin{apiexamples}
+
+\apicexample
+    { This is a simple program that calls \FUNC{start\_pes}:}
+    {./example_code/shmem_startpes_example.f90}
+    {} 
+
+\end{apiexamples}
+
+\end{apidefinition}
