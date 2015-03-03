@@ -1,0 +1,65 @@
+\apisummary{
+    Controls data cache utilities.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_clear_cache_inv(void);
+void shmem_set_cache_inv(void);
+void shmem_clear_cache_line_inv(void *dest);
+void shmem_set_cache_line_inv(void *dest);
+void shmem_udcflush(void);
+void shmem_udcflush_line(void *dest);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+CALL SHMEM_CLEAR_CACHE_INV
+CALL SHMEM_SET_CACHE_INV
+CALL SHMEM_SET_CACHE_LINE_INV(dest)
+CALL SHMEM_UDCFLUSH
+CALL SHMEM_UDCFLUSH_LINE(dest)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+
+\apiargument{IN}{dest}{A data object that is local to the \ac{PE}.  \VAR{dest}
+    can be of any noncharacter type. If you are using \Fortran, it can be of any
+    kind.}
+
+\end{apiarguments}
+
+\apidescription{   
+    \FUNC{shmem\_set\_cache\_inv} enables automatic cache coherency mode.
+    
+    \FUNC{shmem\_set\_cache\_line\_inv} enables automatic cache coherency mode for
+    the cache line associated with the address of \VAR{dest} only.
+    
+    \FUNC{shmem\_clear\_cache\_inv} disables automatic cache coherency mode
+    previously enabled by \FUNC{shmem\_set\_cache\ \_inv} or
+    \FUNC{shmem\_set\_cache\_line\_inv}.
+    
+    \FUNC{shmem\_udcflush} makes the entire user data cache coherent.
+    
+    \FUNC{shmem\_udcflush\_line} makes coherent the cache line that corresponds with
+    the address specified by \VAR{dest}.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    These routines have been retained for improved backward compatibility with
+    legacy architectures.  They are not required to be supported by implementing
+    them as \VAR{no-ops} and where used, they may have no effect on cache line
+    states.
+}
+
+\begin{apiexamples}
+
+None.
+
+\end{apiexamples}
+
+\end{apidefinition}

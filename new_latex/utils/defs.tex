@@ -1,0 +1,391 @@
+\definecolor{ListingBG}{rgb}{0.91,0.91,0.91}
+\definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
+
+\hyphenation{Open-SHMEM}
+
+\renewcommand{\chaptername}{Chapter} 
+\renewcommand{\appendixname}{Annex} 
+
+% Place some penalty for doing the break
+% The penalty for a ``\gb'' should be greater than a \hyphenpenalty.
+% \hyphenpenalty is 50 in plain.tex.
+\def\gb{\penalty10000\hskip 0pt plus 8em\penalty4800\hskip 0pt plus-8em%
+\penalty10000}
+
+
+\newcommand{\insertDocVersion}{1.2}
+\newcommand{\OSH}{\emph{OpenSHMEM}}
+\newcommand{\openshmem}{{Open\-SHMEM}\xspace}
+\newcommand{\FUNC}[1]{\textit{#1}}
+\newcommand{\VAR}[1]{\textit{#1}}
+\newcommand{\CONST}[1]{\textit{#1}}
+\newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}}
+\newcommand{\CorCpp}{\textit{C/C++}\xspace}
+\newcommand{\Fortran}{\textit{Fortran}}
+\newcommand{\Clang}{\textit{C}}
+\newcommand{\Cpp}{\textit{C++}}
+
+\newcommand{\source}{\textit{source}}
+\newcommand{\target}{\textit{target}}
+\newcommand{\PUT}{\textit{Put}}
+\newcommand{\GET}{\textit{Get}}
+\newcommand{\OPR}[1]{\textit{#1}}
+\newcommand{\dest}{\textit{dest}}
+\newcommand{\barrier}{\FUNC{SHMEM\_BARRIER}\xspace} % why here an not others?
+\newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
+\newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
+\newcommand{\collect}{\FUNC{SHMEM\_COLLECT}}
+\newcommand{\reduction}{\textit{Reduction Operations}}
+\newcommand{\activeset}{\textit{Active~set}\xspace} % why here and not others?
+\newcommand{\shmemprefix}{\textit{SHMEM\_}}
+\newcommand{\shmemprefixC}{\textit{\_SHMEM\_}}
+
+\begin{acronym}
+\acro{RMA}{\emph{Remote Memory Access}}
+\acro{RMO}{\emph{Remote Memory Operation}}
+\acro{AMO}{\emph{Atomic Memory Operation}}
+\acro{PE}{\emph{Processing Element}}
+\acrodefplural{PE}[PEs]{\emph{Processing Elements}}
+\acro{PGAS}{\emph{Partitioned Global Address Space}}
+\acro{API}{\emph{Application Programming Interface}}
+\acro{MPI}{\emph{Message Passing Interface}}
+\acro{SPMD}{\emph{Single Program Multiple Data}}
+\acro{UH}{University of Houston}
+\acro{UO}{University of Oregon}
+\acro{ORNL}{Oak Ridge National Laboratory}
+\acro{LANL}{Los Alamos National Laboratory}
+\acro{ESSC}{Extreme Scale Systems Center}
+\acro{OSSS}{Open Software System Solutions}
+\acro{DoD}{U.S. Department of Defense}
+\end{acronym}
+
+
+%
+% This is used to put line numbers on plain pages.  Used in draft.tex
+%
+\makeatletter
+
+\def\withlinenumbers{\relax
+  \def\@evenfoot{\hbox to 0pt{\hss\LineNumberRuler\hskip 1.5pc}\hfil}\relax
+  \def\@oddfoot{\hfil\hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}}
+
+\def\LineNumberRuler{\vbox to 0pt{\vss\normalsize \baselineskip13.6pt
+    \lineskip 1pt \normallineskip 1pt \def\baselinestretch{1}\relax
+    \LNR{1}\LNR{2}\LNR{3}\LNR{4}\LNR{5}\LNR{6}\LNR{7}\LNR{8}\LNR{9}
+    \LNR{10}\LNR{11}\LNR{12}\LNR{13}\LNR{14}
+        \LNR{15}\LNR{16}\LNR{17}\LNR{18}\LNR{19}
+    \LNR{20}\LNR{21}\LNR{22}\LNR{23}\LNR{24}
+        \LNR{25}\LNR{26}\LNR{27}\LNR{28}\LNR{29}
+    \LNR{30}\LNR{31}\LNR{32}\LNR{33}\LNR{34}\LNR{35}
+        \LNR{36}\LNR{37}\LNR{38}\LNR{39}
+    \LNR{40}\LNR{41}\LNR{42}\LNR{43}\LNR{44}
+        \LNR{45}\LNR{46}\LNR{47}\LNR{48}
+    \vskip 31pt}}
+\def\LNR#1{\hbox to 1pc{\hfil\tiny#1\hfil}}
+
+\def\ps@plainwithlinenumbers{\let\@mkboth\@gobbletwo
+     \def\@oddhead{}
+     \def\@oddfoot{\hfil\rm\thepage\hfil
+       \hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}
+     \def\@evenhead{}
+     \def\@evenfoot{\hbox to 0pt{\hss
+     \LineNumberRuler\hskip 1.5pc}\rm\hfil\thepage\hfil}}
+
+    % Contents is done with \chapter*{Contents}, so we need to turn off the
+    % line numbers in this case.  Easiest to look at def
+
+\newwrite\chappages
+\immediate\openout\chappages=chappage.txt
+\def\writespace{ }
+
+\def\incontents{0}
+\newif\ifcontents
+\contentsfalse
+\def\chapter{\clearpage \ifcontents\else\thispagestyle{plainwithlinenumbers}\fi
+        \write\chappages{Chapter \thechapter\writespace - \the\count0}
+        \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter}
+
+\makeatother
+
+%
+% End this is used to put line numbers on plain pages.  Used in draft.tex
+%
+
+%
+% Use Sans Serif font for sections, etc.
+%
+\makeatletter
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+-.2ex}{2.3ex plus .2ex}{\Large\sf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+-.2ex}{1.5ex plus .2ex}{\large\sf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
+-1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf\bf}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex 
+minus .2ex}{-1em}{\normalsize\sf}}
+\makeatother
+%
+% End use Sans Serif font for sections, etc.  S. Otto
+%
+
+
+%
+% This section is for example code listings
+%
+\definecolor{gray}{rgb}{0.92,0.92,0.92}
+
+\lstset{ % set defaults for languages not otherwise defined
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,                 % sets automatic line breaking
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
+                                   % encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code 
+                                   % (possibly needs columns=flexible)
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  showspaces=false,                % show spaces everywhere adding particular underscores; 
+                                   % it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+}
+
+\def\StandardListing {
+  \lstset {
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,                 % sets automatic line breaking
+    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
+                                     % encodings only, does not work with UTF-8
+    keepspaces=true,                 % keeps spaces in text, useful for keeping
+                                     % indentation of code (possibly needs columns=flexible)
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    showspaces=false,                % show spaces everywhere adding particular underscores; 
+                                     % it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    backgroundcolor=\color{gray}, 
+  }
+}
+
+\def\ProgramNumberedListing {
+  \StandardListing
+  \lstset {
+    numbers=left,
+    numberstyle=\footnotesize
+  }
+}
+
+\newcommand{\numberedlisting}[2] {
+  \ProgramNumberedListing
+  \lstinputlisting[#1]{#2}
+  \StandardListing
+}
+
+\newcommand{\outputlisting}[2] {
+\begin{minipage}{\linewidth}
+\vspace{0.1in}
+  \lstinputlisting[#1]{#2}
+  \StandardListing
+\vspace{0.1in}
+\end{minipage}
+}
+
+\lstdefinelanguage{OSH+C}[]{C}{
+  classoffset=1,
+  morekeywords={
+    _SHMEM_BCAST_SYNC_SIZE, _SHMEM_SYNC_VALUE,
+    start_pes,
+    my_pe, _my_pe, shmem_my_pe,
+    num_pes, _num_pes, shmem_n_pes,
+    shmem_int_p, shmem_short_p, shmem_long_p,
+    shmem_int_put, shmem_short_put, shmem_long_put,
+    shmem_barrier_all, shmem_barrier,
+    shmalloc,  shfree, shrealloc,
+    shmem_broadcast32, shmem_broadcast64,
+    shmem_short_inc, shmem_int_inc, shmem_long_inc,
+    shmem_short_add, shmem_int_add, shmem_long_add,
+    shmem_short_finc, shmem_int_finc, shmem_long_finc,
+    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
+    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
+    shmem_long_sum_to_all,
+    shmem_complexd_sum_to_all,
+  },
+  keywordstyle=\color{black}\textbf,
+  classoffset=0,
+  sensitive=true
+}
+
+\lstdefinelanguage{OSH2+C}[]{OSH+C}{
+  classoffset=1,
+  morekeywords={
+    shmem_init,
+    shmem_finalize,
+    shmem_malloc,
+    shmem_my_pe,
+    shmem_error,
+    shmem_global_exit,
+  },
+  keywordstyle=\color{black}\textbf,
+  classoffset=0,
+  sensitive=true
+}
+
+\lstdefinelanguage{OSH+F}[]{Fortran}{
+  classoffset=1,
+  morekeywords={
+    SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
+    start_pes,
+    my_pe, shmem_my_pe,
+    num_pes, shmem_n_pes,
+    shmem_int_p, shmem_short_p, shmem_long_p,
+    shmem_int_put, shmem_short_put, shmem_long_put,
+    shmem_barrier_all, shmem_barrier,
+    shpalloc,  shpdeallc, shpclmove,
+    shmem_broadcast32, shmem_broadcast64,
+    shmem_broadcast4, shmem_broadcast8,
+    shmem_short_inc, shmem_int_inc, shmem_long_inc,
+    shmem_short_add, shmem_int_add, shmem_long_add,
+    shmem_short_finc, shmem_int_finc, shmem_long_finc,
+    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
+    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
+    shmem_long_sum_to_all,
+  },
+  keywordstyle=\color{black}\textbf,
+  classoffset=0,
+  sensitive=false
+}
+
+\lstdefinelanguage{OSH2+F}[]{OSH+F}{
+  classoffset=1,
+  morekeywords={
+    shmem_init,
+    shmem_finalize,
+    shmem_malloc,
+    shmem_my_pe,
+    shmem_error,
+    shmem_global_exit,
+  },
+  keywordstyle=\color{black}\textbf,
+  classoffset=0,
+  sensitive=true
+}
+
+%
+% End this section is for example code listings
+%
+
+%
+% Library API description template commands
+%
+
+\newcommand{\apisummary}[1]{
+    #1
+\hfill
+}
+
+\newenvironment{apidefinition}{
+\begin{description}
+\item[SYNOPSIS] \hfill \\ \\ 
+\vspace{-2em}
+}
+{
+\end{description}
+}
+
+\lstnewenvironment{Csynopsis}
+{ 
+  \textbf{C/C++:} 
+  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}{}
+
+\lstnewenvironment{Fsynopsis}
+{ \textbf{FORTRAN:} 
+  \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
+  deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt}}{}
+
+\newenvironment{apiarguments}{
+\newcommand{\apiargument}[3]{
+\begin{tabular}{p{2cm} p{2cm} p{10cm}}
+\textbf{##1} & \textit{##2} & {##3} \\ 
+\end{tabular}
+}
+\hfill
+\item[DESCRIPTION] \hfill 
+
+\begin{description}
+\item[Arguments] \hfill \\
+}
+{
+\hfill
+\end{description}
+}
+
+\newcommand{\apidescription}[1]{
+\begin{description}
+\vspace{-1em}
+\item[API description] \hfill \\ 
+    #1
+\hfill
+}
+
+\newcommand{\apidesctable}[4] {\hfill \\ #1 \\ \\
+    \begin{tabular}{p{5cm} p{9cm}}
+       \hline
+       #2 & #3 \\
+       \hline \tabularnewline
+       \end{tabular}\\
+        #4
+}  
+
+\newcommand{\apireturnvalues}[1]{
+\hfill 
+\item[Return Values] \hfill \\
+    #1
+\\
+\hfill
+}
+
+\newcommand{\apitablerow}[2]{
+ \begin{tabular}{p{5cm} p{9cm}}
+ #1 & #2 \tabularnewline
+  \end{tabular}\\
+}
+
+\newcommand{\apinotes}[1]{
+\item[Notes] \hfill \\
+    #1
+\hfill \\
+\end{description}
+}
+
+\newcommand{\apiimpnotes}[1]{
+\begin{description}
+\item[Note to implementors] \hfill \\
+    #1
+\hfill \\
+\end{description}
+}
+
+\newenvironment{apiexamples}{
+\newcommand{\apicexample}[3]{
+    ##1
+    \lstinputlisting[language={C}, tabsize=2,
+    basicstyle=\ttfamily\footnotesize, morekeywords={size_t}]{##2}
+    ##3 }
+\newcommand{\apifexample}[3]{
+    ##1
+    \lstinputlisting[language={Fortran}, tabsize=2,
+    basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}]{##2}
+    ##3 }
+\vspace{-2pt}
+\item[EXAMPLES] \hfill \\
+\vspace{-2pt}
+}
+{
+}
+
+%
+% End library API description template commands
+%

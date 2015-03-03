@@ -1,0 +1,35 @@
+\hypersetup{pageanchor=true,citecolor=blue}
+
+% Set header/footer for opening content
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE,LO]{\insertDocVersion}
+\fancyfoot[CE,CO]{\thepage} %affects page numbering for the first pages, 
+                            %except the first ToC page
+
+\pagenumbering{roman} %sets coverpage and toc page numbers to roman numerals
+
+\input{content/coverpage}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{3}
+\tableofcontents
+
+\mainmatter  % included for use of documenttype 'book' 
+
+
+% Set header/footer for main content
+\pagestyle{fancy}   %replacing {headings} with {fancy} for customization 
+\withlinenumbers    %adds line numbers to edges of normal pages
+\fancyhf{}
+\fancyhead[RE, LO]{\rightmark}
+\fancyhead[RO, LE]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\thesection}{\arabic{section}}
+
+{ %using setlength to force standardized spacing, if needed
+% this command is ended in backmatter.tex
+%\setlength{\baselineskip}{3pt plus 3pt minus 3pt}
+
+\setlength{\parskip}{3pt}
+

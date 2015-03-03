@@ -1,0 +1,72 @@
+An \openshmem program consists of a set of \openshmem processes called \ac{PE}s
+that execute in a \ac{SPMD}-like model where each \ac{PE} can take a different
+execution path. A \ac{PE} can be implemented using an OS process or an OS
+thread\footnote{Implementing \ac{PE}s using OS threads requires compiler
+techniques to implement the \openshmem memory model.}.  The \ac{PE}s progress
+asynchronously, and can communicate/synchronize via the \openshmem interfaces.
+All \ac{PE}s in an \openshmem program should start by calling the initialization
+routine  \FUNC{shmem\_init} \footnote{\textbf{start\_pes} has been
+deprecated as of Specification 1.2} before using any of the other \openshmem
+library routines.  An \openshmem program finishes execution by returning from
+the main routine or when any PE calls \FUNC{shmem\_global\_exit}. When returning
+from main, \openshmem must complete all pending communication and release all
+the resources associated to the library using an implicit collective
+synchronization across PEs. The user has the option to call
+\FUNC{shmem\_finalize} (before returning from main) to complete all pending
+communication and release all the \openshmem library resources without
+terminating the program. Calling any \openshmem routine after
+\FUNC{shmem\_finalize} leads to undefined behavior.
+
+The \ac{PE}s of the \openshmem program are identified by unique integers.
+The identifiers are integers assigned in a monotonically increasing manner from
+zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for
+\openshmem calls (e.g. to specify \PUT or \GET routines on symmetric data
+objects, collective synchronization calls) or to dictate a control flow
+for \ac{PE}s using constructs of \Clang or \Fortran. The identifiers are fixed
+for the life cycle of the \openshmem program.
+
+\subsection{Progress of \openshmem Operations}\label{subsec:progress}
+
+The \openshmem model assumes that computation and communication are naturally
+overlapped. \openshmem programs are expected to exhibit progression of
+communication both with and without \openshmem calls. Consider a \ac{PE} that is
+engaged in a computation with no \openshmem calls. Other \ac{PE}s should be able
+to communicate (\OPR{put}, \OPR{get}, \OPR{collective}, \OPR{atomic}, etc) and
+complete communication operations with that computationally-bound \ac{PE}
+without that \ac{PE} issuing any explicit \openshmem calls. \openshmem
+communication calls involving that \ac{PE} should progress regardless of when
+that \ac{PE} next engages in an \openshmem call.
+
+\textbf{Note to implementors:}
+\begin{itemize}
+  \item An \openshmem implementation for hardware that does not provide
+      asynchronous communication capabilities may require a software progress
+      thread in order to process remotely-issued communication requests without
+      explicit program calls to the \openshmem library.  
+  \item High performance implementations of \openshmem are expected to leverage
+      hardware offload capabilities and provide asynchronous one-sided
+      communication without software assistance.
+  \item Implementations should avoid deferring the execution of one-sided
+      operations until a synchronization point where data is known to be
+      available. High-quality implementations should attempt asynchronous delivery
+      whenever possible, for performance reasons. Additionally, the \openshmem
+      community discourages releasing \openshmem implementations that do not
+      provide asynchronous one-sided operations, as these have very limited
+      performance value for \openshmem programs.
+\end{itemize}
+
+\subsection{Atomicity Guarantees}\label{sec:amo_guarantees}
+
+\openshmem contains a number of routines that operate on symmetric data
+atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by
+\openshmem's atomic operations will be exclusive, but do not guarantee
+exclusivity in combination with other routines, either inside \openshmem or
+outside.
+
+For example: during the execution of an atomic remote integer increment
+operation on a symmetric variable \VAR{X}, no other \openshmem atomic operation
+may access \VAR{X}.  After the increment, \VAR{X} will have increased its value
+by \CONST{1} on the destination \ac{PE}, at which point other atomic operations
+may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
+with non-atomic operations, such as one-sided \PUT or \GET operations, will
+\OPR{invalidate} the atomicity guarantees.

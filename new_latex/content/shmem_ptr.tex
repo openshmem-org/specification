@@ -1,0 +1,63 @@
+\apisummary{
+    Returns  a pointer to a data object on a specified \ac{PE}.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void *shmem_ptr(void *dest, int pe);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+POINTER (PTR, POINTEE)
+INTEGER pe
+PTR = SHMEM_PTR(dest, pe)
+\end{Fsynopsis}
+
+
+\begin{apiarguments}
+\apiargument{IN}{dest}{The symmetric data object to be referenced.}
+\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which \dest{} is to
+		 be accessed.  If you are using \Fortran, it must be a  default
+		 integer value.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_ptr} returns an address that may be used to directly reference
+    \dest{} on the specified \ac{PE}.  This address can be assigned to a pointer.
+    After that, ordinary loads and stores to this remote address may be performed.
+    
+    When a sequence of loads (gets) and stores (puts) to a data object on a
+    remote \ac{PE} does not match the access pattern provided in an \openshmem data
+    transfer routine like \FUNC{shmem\_put32} or \FUNC{shmem\_real\_iget}, the
+    \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish the
+    communication.
+}
+
+\apireturnvalues{
+    The return value is a non-NULL address of the \dest{} data object when it is 
+    accessible using memory loads and stores in addition to \openshmem{} operations.
+    Otherwise, a NULL address is returned.
+}
+
+\apinotes{
+    When calling \FUNC{shmem\_ptr}, \dest{} is the address of the referenced
+    symmetric data object on the calling \ac{PE}.
+}
+
+\begin{apiexamples}
+
+\apifexample
+    { This  \Fortran{}  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to
+    the \VAR{BIGD} array on \ac{PE} 1: }
+    {./example_code/shmem_ptr_example.f90 }
+    {}
+    
+\apicexample
+    {This is the equivalent program written in \Clang:}
+    {./example_code/shmem_ptr_example.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}

@@ -1,0 +1,56 @@
+\apisummary{
+    Determines whether an address is accessible via OpenSHMEM data transfers
+    routines from the specified  remote \ac{PE}.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int shmem_addr_accessible(void *addr, int pe);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+LOGICAL LOG, SHMEM_ADDR_ACCESSIBLE
+INTEGER pe
+LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{addr}{Data object on the local \ac{PE}.}
+    \apiargument{IN}{pe}{Integer id of a remote \ac{PE}.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_addr\_accessible} is a query routine that indicates whether a local
+    address is accessible via \openshmem routines from the specified remote \ac{PE}. 
+    
+    This routine verifies that the data object is symmetric and accessible with
+    respect to a remote \ac{PE} via \openshmem  data  transfer routines.  The
+    specified address \VAR{addr} is a data object on the local \ac{PE}. 
+    
+    This routine may be particularly useful for hybrid programming with other
+    communication libraries (such as a \ac{MPI}) or parallel languages.  For
+    example, in SGI Altix series systems, for multiple executable MPI programs that
+    use \openshmem routines, it is important to note that static memory, such as a
+    \Fortran{} common block or \Clang{} global variable, is symmetric between
+    processes running from the same executable file, but is not symmetric between
+    processes running from different executable files.  Data allocated from the
+    symmetric heap (\FUNC{shmem\_malloc} or \FUNC{shpalloc}) is symmetric across the
+    same or different executable files.
+}
+
+\apireturnvalues{		
+    \CorCpp: The  return value is \CONST{1} if \VAR{addr} is a symmetric data object
+    and accessible via \openshmem routines from the specified remote \ac{PE};
+    otherwise, it is \CONST{0}.
+    
+    \Fortran: The return value is \CONST{.TRUE.} if \VAR{addr} is a symmetric data
+    object and accessible via \openshmem routines from the specified remote \ac{PE};
+    otherwise, it is \CONST{.FALSE.}.
+}
+		
+\apinotes{
+    None.
+}
+
+\end{apidefinition}

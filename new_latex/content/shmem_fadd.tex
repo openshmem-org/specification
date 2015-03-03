@@ -1,0 +1,70 @@
+\apisummary{
+    Performs an atomic fetch-and-add operation on a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int shmem_int_fadd(int *dest, int value, int pe);
+long shmem_long_fadd(long *dest, long value, int pe);
+long long shmem_longlong_fadd(long long *dest, long long value, int pe);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+INTEGER pe
+INTEGER*4 SHMEM_INT4_FADD, ires_i4, value_i4
+ires_i4 = SHMEM_INT4_FADD(dest, value_i4, pe)
+INTEGER*8 SHMEM_INT8_FADD, ires_i8, value_i8
+ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+
+\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated on
+    the remote \ac{PE}. The type of \VAR{dest} should match that implied in the
+    SYNOPSIS section.}
+\apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.  The
+    type of \VAR{value} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
+    \VAR{dest} is to be updated.  If you are using \Fortran, it must be a default
+    integer value.}
+
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_fadd} routines perform an atomic fetch-and-add operation.  An
+    atomic fetch-and-add operation fetches the old \VAR{dest} and adds \VAR{value}
+    to \VAR{dest} without the possibility of another atomic operation on the
+    \VAR{dest} between the time of the fetch and the update.  These routines add
+    \VAR{value} to \VAR{dest} on \VAR{pe} and return the previous contents of
+    \VAR{dest} as an atomic operation.
+}
+
+\apidesctable{
+    If you are using \Fortran, \VAR{dest} must be of the following type:
+}{Routine}{Data type}
+
+\apitablerow{SHMEM\_INT4\_FADD}{\CONST{4}-byte integer}
+\apitablerow{SHMEM\_INT8\_FADD}{\CONST{8}-byte integer}
+
+
+\apireturnvalues{
+    The contents that had been at the \VAR{dest} address on the remote \ac{PE}
+    prior to the atomic addition operation.  The data type of the return value is
+    the same as the \VAR{dest}.
+}
+
+\apinotes{
+    None.
+}
+
+\begin{apiexamples}
+
+\apicexample
+	{The following \FUNC{shmem\_fadd} example is for \CorCpp{} programs:}
+        {./example_code/shmem_fadd_example.c}
+        {}
+
+\end{apiexamples}
+
+\end{apidefinition}
