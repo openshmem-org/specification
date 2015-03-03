@@ -34,7 +34,7 @@ To write a ``Hello World" \openshmem program we need to:
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
-\numberedlisting{label=openshmem-hello,language=OSH+C}
+\numberedlisting{label=openshmem-hello,language=OSH2+C}
                 {example_code/hello-openshmem.c}
 \outputlisting{language=bash,caption={Expected Output (4 processors)}}
                 {example_code/hello-openshmem-c.output}
@@ -46,7 +46,7 @@ same program written in \Fortran, in listing~\ref{openshmem-hello-f90}:
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
-\numberedlisting{label=openshmem-hello-f90,language=OSH+F}
+\numberedlisting{label=openshmem-hello-f90,language=OSH2+F}
                 {example_code/hello-openshmem.f90}
 \outputlisting{language=bash,caption={Expected Output (4 processors)}}
                 {example_code/hello-openshmem-f90.output}
@@ -68,7 +68,7 @@ active (local) side, the asymmetric \source{} object is handled correctly.
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
-\numberedlisting{label=openshmem-hello,language=OSH+C}
+\numberedlisting{label=openshmem-hello,language=OSH2+C}
                 {example_code/writing_shmem_example.c}
 \outputlisting{language=bash,caption={Expected Output (4 processors)}}
                 {example_code/writing_shmem_example.output}
@@ -225,7 +225,7 @@ a remote \ac{PE} is accessible via \openshmem communication from the local
 \ac{PE}. When running an \ac{MPI} program involving multiple executable files,
 \openshmem routines can be used to communicate with processes running from the
 same or different executable files, provided that the communication is limited
-to symmetric data objects.  On these systems, static memory, such as a
+to symmetric data objects.  On these systems, static memory such as a
 \Fortran{} common block or \Clang{} global variable, is symmetric between
 processes running from the same executable file, but is not symmetric between
 processes running from different executable files.  Data allocated from the

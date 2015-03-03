@@ -217,6 +217,21 @@ minus .2ex}{-1em}{\normalsize\sf}}
   sensitive=true
 }
 
+\lstdefinelanguage{OSH2+C}[]{OSH+C}{
+  classoffset=1,
+  morekeywords={
+    shmem_init,
+    shmem_finalize,
+    shmem_malloc,
+    shmem_my_pe,
+    shmem_error,
+    shmem_global_exit,
+  },
+  keywordstyle=\color{black}\textbf,
+  classoffset=0,
+  sensitive=true
+}
+
 \lstdefinelanguage{OSH+F}[]{Fortran}{
   classoffset=1,
   morekeywords={
@@ -241,6 +256,22 @@ minus .2ex}{-1em}{\normalsize\sf}}
   classoffset=0,
   sensitive=false
 }
+
+\lstdefinelanguage{OSH2+F}[]{OSH+F}{
+  classoffset=1,
+  morekeywords={
+    shmem_init,
+    shmem_finalize,
+    shmem_malloc,
+    shmem_my_pe,
+    shmem_error,
+    shmem_global_exit,
+  },
+  keywordstyle=\color{black}\textbf,
+  classoffset=0,
+  sensitive=true
+}
+
 %
 % End this section is for example code listings
 %

@@ -5,7 +5,7 @@ thread\footnote{Implementing \ac{PE}s using OS threads requires compiler
 techniques to implement the \openshmem memory model.}.  The \ac{PE}s progress
 asynchronously, and can communicate/synchronize via the \openshmem interfaces.
 All \ac{PE}s in an \openshmem program should start by calling the initialization
-routine  \FUNC{shmem\_init()} \footnote{\textbf{start\_pes()} has been
+routine  \FUNC{shmem\_init} \footnote{\textbf{start\_pes} has been
 deprecated as of Specification 1.2} before using any of the other \openshmem
 library routines.  An \openshmem program finishes execution by returning from
 the main routine or when any PE calls \FUNC{shmem\_global\_exit}. When returning
@@ -21,7 +21,7 @@ The \ac{PE}s of the \openshmem program are identified by unique integers.
 The identifiers are integers assigned in a monotonically increasing manner from
 zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for
 \openshmem calls (e.g. to specify \PUT or \GET routines on symmetric data
-objects, collective synchronization calls, etc.) or to dictate a control flow
+objects, collective synchronization calls) or to dictate a control flow
 for \ac{PE}s using constructs of \Clang or \Fortran. The identifiers are fixed
 for the life cycle of the \openshmem program.
 

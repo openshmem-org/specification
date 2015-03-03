@@ -26,7 +26,7 @@ main(int argc, char* argv[])
 			printf("%hd \t", dest[i]);
 		printf("\n");
 	}
-	shmem_barrier_all(); /* sync before exiting */
+        shmem_finalize();
 	return 0;
 }
 
