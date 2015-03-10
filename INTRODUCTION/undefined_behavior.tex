@@ -19,7 +19,7 @@ results.  An implementation may choose, for example, to try to continue or abort
 immediately upon the first call to an uninitialized routine.\tabularnewline
 \hline 
 Accessing non-existent \ac{PE}s & If a communications routine accesses a
-non-existent \ac{PE} then the \openshmem library can choose to handle this
+non-existent \ac{PE}, then the \openshmem library can choose to handle this
 situation in an implementation-defined way.  For example, the library may issue
 an error message saying that the \ac{PE} accessed is outside the range of
 accessible \ac{PE}s, or may exit without a warning.\tabularnewline

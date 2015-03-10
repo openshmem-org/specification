@@ -19,10 +19,10 @@ CALL SHMEM_QUIET
 
 \apidescription{ 
     The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO}, and
-    memory store routines on symmetric data issued by the calling \ac{PE}. All
-    \PUT{}, \acp{AMO}, memory store routines to symmetric data objects are
-    guaranteed to be completed and visible to all \ac{PE}s when \FUNC{shmem\_quiet}
-    returns. 
+    memory store routines on symmetric data objects issued by the calling
+    \ac{PE}. All \PUT{}, \acp{AMO}, memory store routines to symmetric data
+    objects are guaranteed to be completed and visible to all \ac{PE}s when
+    \FUNC{shmem\_quiet} returns. 
 }
 
 

@@ -22,7 +22,7 @@ int main(void)
    }
    shmem_barrier_all(); /* Wait for all PEs to initialize pSync */
 
-   shmem_broadcast64(dest, source, NUM_ELEMS, 0, 0, 0, npes, pSync);
+   shmem_broadcast64(dest, source, NUM_ELEMS, 4, 5, 0, 3, pSync);
    printf("%d: %ld", me, dest[0]);
    for (i = 1; i < NUM_ELEMS; i++)
       printf(", %ld", dest[i]);

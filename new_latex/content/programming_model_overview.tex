@@ -9,7 +9,7 @@ a data transfer routine does not require the participation of the remote \ac{PE}
 to complete the routine. This allows for overlap between communication and
 computation to hide data transfer latencies, which makes  \openshmem ideal for
 unstructured, small/medium size data communication patterns. The \openshmem
-library routines have the potential to provide low-latency, high-bandwidth
+library routines have the potential to provide a low-latency, high-bandwidth
 communication \ac{API} for use in highly parallelized scalable programs.  
 
 The \openshmem{} interfaces can be used to implement \ac{SPMD} style programs.
@@ -51,9 +51,9 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Remote Memory Access}
 \begin{enumerate}
-    \item \PUT: The local \ac{PE} specifies the \source{} data (private or
-      symmetric) that is copied to the symmetric data object on the remote
-      \ac{PE}. 
+    \item \PUT: The local \ac{PE} specifies the \source{} data object (private
+        or symmetric) that is copied to the symmetric data object on the remote
+        \ac{PE}. 
   \item \GET: The local \ac{PE} specifies the symmetric data object on the remote
       \ac{PE} that is copied to a data object (private or symmetric) on the local
       \ac{PE}. 
@@ -93,7 +93,7 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Collective Communication}
 \begin{enumerate}
-  \item \OPR{Broadcast}: The \textit{root} \ac{PE} specifics a symmetric data
+  \item \OPR{Broadcast}: The \textit{root} \ac{PE} specifies a symmetric data
       object to be copied to a symmetric data object on one or more remote
       \acp{PE} (not including itself). 
   \item \OPR{Collection}: All \acp{PE} participating in the routine get the result

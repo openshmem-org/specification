@@ -25,7 +25,7 @@ To write a ``Hello World" \openshmem program we need to:
 \item Add the initialization call \FUNC{shmem\_init}, (line 9).
 \item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
     id (line 11).
-\item There is no explicit finalize call, either a return from \texttt{main()}
+\item There is no explicit finalize call; either a return from \texttt{main()}
     (line 13) or an explicit \texttt{exit()} acts as an implicit \openshmem
     finalization.
 \item In \openshmem the order in which lines appear in the output is not fixed
@@ -167,7 +167,7 @@ results.  An implementation may choose, for example, to try to continue or abort
 immediately upon the first call to an uninitialized routine.\tabularnewline
 \hline 
 Accessing non-existent \ac{PE}s & If a communications routine accesses a
-non-existent \ac{PE} then the \openshmem library can choose to handle this
+non-existent \ac{PE}, then the \openshmem library can choose to handle this
 situation in an implementation-defined way.  For example, the library may issue
 an error message saying that the \ac{PE} accessed is outside the range of
 accessible \ac{PE}s, or may exit without a warning.\tabularnewline
@@ -218,7 +218,7 @@ communicate with their parent \ac{MPI} processes.
 %
 \end{sloppypar}
 %
-On SGI systems \ac{MPI} jobs that use TCP/sockets for inter-host communication,
+On SGI systems where \ac{MPI} jobs use TCP/sockets for inter-host communication,
 \openshmem routines can be used to communicate with processes running on the
 same host.  The \FUNC{shmem\_pe\_accessible} routine can be used to determine if
 a remote \ac{PE} is accessible via \openshmem communication from the local
@@ -308,9 +308,9 @@ interconnect, and to a very limited extent, Infiniband based clusters.
 
 \chapter{\openshmem Specification and Deprecated API}\label{sec:dep_api}
 
-For the \openshmem Specification(s) deprecation is the process of identifying
+For the \openshmem Specification(s), deprecation is the process of identifying
 API that is supported but no longer recommended for use by program users. For
-\openshmem library users said API \textbf{must} be supported until clearly
+\openshmem library users, said API \textbf{must} be supported until clearly
 indicated as otherwise by the Specification. In this chapter we will record the
 API that has been deprecated, the \openshmem Specification that effected the
 deprecation, and if the feature is supported in the current version of the

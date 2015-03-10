@@ -20,7 +20,7 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe) %*\synFE
 }
 %API Description
 {The \FUNC{shmem\_add} routine performs an atomic add operation. It adds \VAR{value}
- to \dest{} on \ac{PE} \VAR{pe} and atomically increments the \dest{} without returning the value.
+ to \dest{} on \ac{PE} \VAR{pe} and atomically updates the \dest{} without returning the value.
  } 
 {
  \hfill \\
@@ -36,7 +36,7 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe) %*\synFE
 \exampleB{
 		\exampleITEM
 		{}
-		{./EXAMPLES/shmem_fadd_example.c}
+		{./EXAMPLES/shmem_add_example.c}
 		{}
 }
 

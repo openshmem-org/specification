@@ -13,7 +13,7 @@ CALL SHMEM_QUIET %*\synFE   %DO NOT DELETE. THIS LINE IS NOT A COMMENT
 }
 %API description
  { 
- The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO}, and memory store routines on symmetric data issued by the calling \ac{PE}. All \PUT{}, \acp{AMO}, memory store routines to symmetric data objects are guaranteed to be completed and visible to all \ac{PE}s when \FUNC{shmem\_quiet} returns. 
+ The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO}, and memory store routines on symmetric data objects issued by the calling \ac{PE}. All \PUT{}, \acp{AMO}, memory store routines to symmetric data objects are guaranteed to be completed and visible to all \ac{PE}s when \FUNC{shmem\_quiet} returns. 
  %This also applies to all store operations to symmetric data issued by the calling \ac{PE}.  
  %SP: Removing confusing parts as according to SGI they are complete at the end of quiet.
  %no later than any subsequent memory load or 
