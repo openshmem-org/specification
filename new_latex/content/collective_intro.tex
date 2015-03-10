@@ -16,13 +16,12 @@ arguments.
 Another argument important to collective routines is \VAR{pSync}, which is a
 symmetric work array.  All \acp{PE} participating in a collective must pass the
 same \VAR{pSync} array.  On completion of a collective call, the \VAR{pSync} is
-restored to its original contents.  The reuse of \VAR{pSync} array is allowed
-for a \ac{PE}, if all previous collective routines using the \VAR{pSync} array
-have been completed by all participating \acp{PE}.  One can use a
-synchronization collective routine such as \barrier to ensure completion of
-previous collective routines. The \FUNC{shmem\_barrier} routine allows the same
-\VAR{pSync} array to be used on consecutive calls as long as the \ac{PE}
-\activeset does not change. 
+restored to its original contents.  The user is permitted to reuse a \VAR{pSync}
+array if all previous collective routines using the \VAR{pSync} array have been
+completed by all participating \acp{PE}.  One can use a synchronization
+collective routine such as \barrier to ensure completion of previous collective
+routines. The \FUNC{shmem\_barrier} routine allows the same \VAR{pSync} array to
+be used on consecutive calls as long as the \ac{PE} \activeset does not change. 
 
 All collective routines defined in the specification are blocking.  The
 collective routines return on completion.  The collective routines defined in
