@@ -20,17 +20,17 @@ CALL SHMEM_GLOBAL_EXIT(status)
 \apidescription{
     \FUNC{shmem\_global\_exit} is a non-collective routine that allows any one
     \ac{PE} to force termination of an \openshmem program for all \acp{PE},
-    passing an exit status to the execution environment. This routine
-    terminates the entire program, not just the \openshmem portion. When any
-    \ac{PE} calls \FUNC{shmem\_global\_exit}, it results in the termination of
-    all \acp{PE} with no further code from the program being executed.
-    \FUNC{shmem\_global\_exit} flushes I/O and releases resources in accordance
-    with C/C++/Fortran language requirements for normal program termination. If
-    more than one \ac{PE} calls \FUNC{shmem\_global\_exit}, then the exit
-    status returned to the environment shall be one of the values passed to
-    \FUNC{shmem\_global\_exit} as the status argument.  There is no return to
-    the caller of \FUNC{shmem\_global\_exit}; control is returned from the
-    \openshmem program to the execution environment for all \acp{PE}.
+    passing an exit status to the execution environment. This routine terminates
+    the entire program, not just the \openshmem portion.  When any \ac{PE} calls
+    \FUNC{shmem\_global\_exit}, it results in the immediate notification to all
+    \acp{PE} to terminate.  \FUNC{shmem\_global\_exit} flushes I/O and releases
+    resources in accordance with C/C++/Fortran language requirements for normal
+    program termination. If more than one \ac{PE} calls
+    \FUNC{shmem\_global\_exit}, then the exit status returned to the environment
+    shall be one of the values passed to \FUNC{shmem\_global\_exit} as the
+    status argument.  There is no return to the caller of
+    \FUNC{shmem\_global\_exit}; control is returned from the \openshmem program
+    to the execution environment for all \acp{PE}.
 }
 
 \apireturnvalues{
