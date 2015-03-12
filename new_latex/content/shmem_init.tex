@@ -22,7 +22,7 @@ CALL SHMEM_INIT()
     \FUNC{shmem\_init} allocates and initializes resources used by the \openshmem
     library. It is a collective operation that all \acp{PE} must call before any
     other \openshmem routine may be called. At the end of the \openshmem program
-    which it initialized, each call to \FUNC{shmem\_init} must be matched with a
+    which it initialized, the call to \FUNC{shmem\_init} must be matched with a
     call to \FUNC{shmem\_finalize}. After a single call to \FUNC{shmem\_init}, a
     subsequent call to \FUNC{shmem\_init} in the same program results in undefined
     behavior.
