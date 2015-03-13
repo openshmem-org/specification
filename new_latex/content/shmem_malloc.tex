@@ -73,8 +73,8 @@ void *shmem_align(size_t alignment, size_t size);
     \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM
     libraries are required to support the calls, program users are encouraged to use
     \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and
-    \FUNC{shmem\_realloc} instead.  The behavior of the routines remains
-    unchanged from the deprecated versions.
+    \FUNC{shmem\_realloc} instead.  The behavior and signature  of the routines
+    remains unchanged from the deprecated versions.
     					 
     The total size of the symmetric heap is determined at job startup.  One can
     adjust the size of the heap using the \CONST{SMA\_SYMMETRIC\_SIZE} environment
