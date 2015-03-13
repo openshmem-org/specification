@@ -11,7 +11,6 @@ int shmem_n_pes(void);
 \begin{Fsynopsis}
 INTEGER SHMEM_N_PES, N_PES
 N_PES = SHMEM_N_PES()
-N_PES = NUM_PES()
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -29,7 +28,9 @@ N_PES = NUM_PES()
 \apinotes{
     As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been
     deprecated. Although \openshmem libraries are required to support the call,
-    users are encouraged to use \FUNC{shmem\_n\_pes} instead.
+    users are encouraged to use \FUNC{shmem\_n\_pes} instead.  The
+    implementation of the routine \FUNC{shmem\_n\_pes} remains unchanged from
+    the deprecated \FUNC{\_num\_pes} version.
 }
 
 \begin{apiexamples}

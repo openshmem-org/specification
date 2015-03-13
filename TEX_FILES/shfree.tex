@@ -58,8 +58,8 @@ void *shmem_align(size_t alignment, size_t size);%*\synCE
                      The \FUNC{shmem\_align} routine returns an aligned pointer to the allocated space; otherwise, it returns a \CONST{NULL} pointer.
 		}
 		%NOTES
-		\notesB{ As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, program users are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead.
-					 
+		\notesB{ As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign}, \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM libraries are required to support the calls, program users are encouraged to use \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and  \FUNC{shmem\_realloc} instead.  The implementation of the routines remains unchanged from the deprecated versions.
+				 
 The total size of the symmetric heap is determined at job startup.  One can adjust the size of the heap using the \CONST{SMA\_SYMMETRIC\_SIZE} environment  variable (where available).	
 
 The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines differ from the private heap allocation routines in that all \ac{PE}s in a program must call them (a barrier is used to ensure this).

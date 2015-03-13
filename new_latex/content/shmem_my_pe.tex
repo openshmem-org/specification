@@ -33,7 +33,9 @@ ME = MY_PE ()
     Each \ac{PE} has a unique number or identifier. As of \openshmem Specification
     1.2 the use of \FUNC{\_my\_pe} has been deprecated. Although \openshmem
     libraries are required to support the call, users are encouraged to use
-    \FUNC{shmem\_my\_pe} instead.
+    \FUNC{shmem\_my\_pe} instead.  The implementation of the routine
+    \FUNC{shmem\_my\_pe} remains unchanged from the deprecated \FUNC{\_my\_pe}
+    version.
 }
 
 \begin{apiexamples}
