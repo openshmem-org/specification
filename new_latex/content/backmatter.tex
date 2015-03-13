@@ -186,7 +186,15 @@ mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
 Use of NULL pointers with non-zero \VAR{len} specified & In any \openshmem routine
 that takes a pointer and \VAR{len} describing the number of elements in that
 pointer, NULL may not be specified for the pointer unless the corresponding \VAR{len} is also
-specified as zero. Otherwise, the resulting behavior is undefined.\tabularnewline
+specified as zero. Otherwise, the resulting behavior is undefined.
+The following cases summarize this behavior:
+\begin{itemize}
+    \item \VAR{len} is 0, pointer is NULL: supported.
+    \item \VAR{len} is not 0, pointer is NULL: undefined behavior.
+    \item \VAR{len} is 0, pointer is not NULL: supported.
+    \item \VAR{len} is not 0, pointer is not NULL: supported.
+\end{itemize}
+\tabularnewline
 \hline 
 Multiple calls to \FUNC{shmem\_init} & In an OpenSHMEM program where
 \FUNC{shmem\_init} has already be called, any subsequent calls to
