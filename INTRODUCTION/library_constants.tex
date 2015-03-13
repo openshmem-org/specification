@@ -5,8 +5,7 @@
 %Ticket \#107
 %\color{black}
 The constants that start with SHMEM\_* are for \Fortran{}. For backwards
-compatability, the constants may start with either \_SHMEM\_*  or SHMEM\_* for
-\Clang.
+compatibility, the \CorCpp constants may start with either \_SHMEM\_*  or SHMEM\_*.
 \newline
 \newline
 \begin{tabular}{|p{0.4\textwidth}|p{0.5\textwidth}|}
@@ -16,8 +15,8 @@ compatability, the constants may start with either \_SHMEM\_*  or SHMEM\_* for
 \hline 
 \hline 
 \vtop{\hbox{\CorCpp:} 
-\hbox{\hspace*{12mm} \const{\_SHMEM\_BCAST\_SYNC\_SIZE}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{\_SHMEM\_BCAST\_SYNC\_SIZE}}
+\hbox{\hspace*{12mm} \const{SHMEM\_BCAST\_SYNC\_SIZE}} 
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_BCAST\_SYNC\_SIZE}}} 
 & Length of the \VAR{pSync} arrays needed for broadcast routines. The value
@@ -26,7 +25,7 @@ about the usage of this constant. \tabularnewline
 \hline 
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_SYNC\_VALUE}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_VALUE}} 
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_VALUE}}} 
 & Holds the value used to initialize the elements of \VAR{pSync} arrays. The
@@ -34,7 +33,7 @@ value of this constant is implementation specific.\tabularnewline
 \hline
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_REDUCE\_SYNC\_SIZE}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_SYNC\_SIZE}}
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_SYNC\_SIZE}}} 
 & Length of the work arrays needed for reduction routines. The value
@@ -43,7 +42,7 @@ about the usage of this constant.\tabularnewline
 \hline
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_BARRIER\_SYNC\_SIZE}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_BARRIER\_SYNC\_SIZE}} 
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_BARRIER\_SYNC\_SIZE}}} 
 & Length of the work array needed for barrier routines. The value
@@ -52,8 +51,9 @@ for more information about the usage of this constant.\tabularnewline
 \hline
 \vtop{\hbox{\CorCpp:}
 \hbox{\hspace*{12mm} \const{\_SHMEM\_COLLECT\_SYNC\_SIZE}}  
-\hbox{} 
-\hbox{\strut \Fortran:} \hbox{\hspace*{12mm} \const{SHMEM\_COLLECT\_SYNC\_SIZE}}} 
+\hbox{\hspace*{12mm} \const{SHMEM\_COLLECT\_SYNC\_SIZE}} 
+\hbox{\strut \Fortran:} 
+\hbox{\hspace*{12mm} \const{SHMEM\_COLLECT\_SYNC\_SIZE}}} 
 & Length of the work array needed for collect routines. The value
 of this constant is implementation specific. Refer to the \hyperref[subsec:shmem_collect]{Collect Routines} section under \hyperref[sec:openshmem_library_api]{Library Routines} for more information about the usage of this constant.\tabularnewline
 \hline
@@ -64,7 +64,7 @@ of this constant is implementation specific. Refer to the \hyperref[subsec:shmem
 \tabularnewline
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}} 
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}}} 
 & Minimum length of work arrays used in various collective routines.\tabularnewline
@@ -78,7 +78,7 @@ of this constant is implementation specific. Refer to the \hyperref[subsec:shmem
 %Ticket \#107 \tabularnewline
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_MAJOR\_VERSION}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_MAJOR\_VERSION}}
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_MAJOR\_VERSION}}}
 & 
@@ -86,7 +86,7 @@ Integer representing the major version of \openshmem{} standard in use. \tabular
 \hline
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_MINOR\_VERSION}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_MINOR\_VERSION}}
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_MINOR\_VERSION}}} 
 & 
@@ -94,7 +94,7 @@ Integer representing the minor version of \openshmem{} standard in use. \tabular
 \hline
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_MAX\_NAME\_LEN}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_MAX\_NAME\_LEN}}
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_MAX\_NAME\_LEN}}} 
 &
@@ -102,7 +102,7 @@ Integer representing the length of vendor string. \tabularnewline
 \hline
 \vtop{\hbox{\CorCpp:} 
 \hbox{\hspace*{12mm} \const{\_SHMEM\_VENDOR\_STRING}} 
-\hbox{} 
+\hbox{\hspace*{12mm} \const{SHMEM\_VENDOR\_STRING}} 
 \hbox{\strut \Fortran:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_VENDOR\_STRING}}} 
 &
