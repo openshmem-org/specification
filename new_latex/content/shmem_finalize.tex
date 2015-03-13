@@ -44,7 +44,7 @@ CALL SHMEM_FINALIZE
     \FUNC{shmem\_ptr}. This collective operation requires all \acp{PE} to
     participate in the call, not just a subset of the \acp{PE}. The
     non-\openshmem portion of a program may continue after a call to
-    \FUNC{shmem\_finalize} by all \acp{PE}. There is is an implicit
+    \FUNC{shmem\_finalize} by all \acp{PE}. There is an implicit
     \FUNC{shmem\_finalize} at the end of main, so that having an explicit call
     to \FUNC{shmem\_finalize} is optional. However, an explicit
     \FUNC{shmem\_finalize} may be required as an entry point for wrappers used
