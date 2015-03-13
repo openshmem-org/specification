@@ -17,13 +17,13 @@ communication and release all the \openshmem library resources without
 terminating the program. Calling any \openshmem routine after
 \FUNC{shmem\_finalize} leads to undefined behavior.
 
-The \ac{PE}s of the \openshmem program are identified by unique integers.
-The identifiers are integers assigned in a monotonically increasing manner from
-zero to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for
-\openshmem calls (e.g. to specify \PUT or \GET routines on symmetric data
-objects, collective synchronization calls) or to dictate a control flow
-for \ac{PE}s using constructs of \Clang or \Fortran. The identifiers are fixed
-for the life cycle of the \openshmem program.
+The \ac{PE}s of the \openshmem program are identified by unique integers.  The
+identifiers are integers assigned in a monotonically increasing manner from zero
+to the total number of \ac{PE}s minus 1. \ac{PE} identifiers are used for
+\openshmem calls (e.g. to specify \OPR{put} or \OPR{get} routines on symmetric
+data objects, collective synchronization calls) or to dictate a control flow for
+\ac{PE}s using constructs of \Clang{} or \Fortran. The identifiers are fixed for
+the life cycle of the \openshmem program.
 
 \subsection{Progress of \openshmem Operations}\label{subsec:progress}
 
@@ -68,5 +68,5 @@ operation on a symmetric variable \VAR{X}, no other \openshmem atomic operation
 may access \VAR{X}.  After the increment, \VAR{X} will have increased its value
 by \CONST{1} on the destination \ac{PE}, at which point other atomic operations
 may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
-with non-atomic operations, such as one-sided \PUT or \GET operations, will
-\OPR{invalidate} the atomicity guarantees.
+with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
+will \OPR{invalidate} the atomicity guarantees.

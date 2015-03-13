@@ -1,17 +1,17 @@
-\openshmem provides ISO \Clang and \Fortran \textit{90} language bindings.
-Any implementation that provides both \Clang and \Fortran bindings can claim
+\openshmem provides ISO \Clang{} and \Fortran{} \textit{90} language bindings.
+Any implementation that provides both \Clang{} and \Fortran{} bindings can claim
 conformance to the specification. An implementation that provides e.g.\ only a
-\Clang interface may claim to conform to the \openshmem specification with
-respect to the \Clang language, but not to \Fortran, and should make this
-clear in its documentation. The \openshmem header files for \Clang and
-\Fortran must contain only the interfaces and constant names defined in this
+\Clang{} interface may claim to conform to the \openshmem specification with
+respect to the \Clang{} language, but not to \Fortran, and should make this
+clear in its documentation. The \openshmem header files for \Clang{} and
+\Fortran{} must contain only the interfaces and constant names defined in this
 specification.
 
 \openshmem \ac{API}s can be implemented as either routines or macros. However,
 implementing the interfaces using macros is strongly discouraged as this could
 severely limit the use of external profiling tools and high-level compiler
 optimizations. An \openshmem program should avoid defining routine names,
-variables, or identifiers with the prefix \shmemprefix (for \Clang and
+variables, or identifiers with the prefix \shmemprefix (for \Clang{} and
 \Fortran), \shmemprefixC (for \Clang) or with \openshmem \ac{API} names.
 
 All \openshmem extension \ac{API}s that are not part of this specification must

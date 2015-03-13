@@ -67,7 +67,7 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 \apidesctable{
     The \dest{} and \source{} data objects must conform to typing constraints,
     which are as follows:
-}{Routine}{Data type}
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
     \apitablerow{shmem\_iput32, shmem\_iput4}{Any  noncharacter type that has a storage
         size equal to \CONST{32} bits.}
     \apitablerow{shmem\_iput64, shmem\_iput8}{Any noncharacter type that has a  storage

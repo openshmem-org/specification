@@ -9,7 +9,7 @@ and data  objects that are remotely accessible by all \ac{PE}s. Private data
 objects are stored in the local memory of each \ac{PE} and can only be accessed
 by the \ac{PE} itself; these data objects cannot be accessed by other \ac{PE}s
 via \openshmem routines. Private data objects follow the memory model of
-\Clang or \Fortran. Remotely accessible objects, however, can be accessed by
+\Clang{} or \Fortran. Remotely accessible objects, however, can be accessed by
 remote \ac{PE}s using \openshmem routines.  Remotely accessible data objects are
 called \emph{Symmetric Objects}.  Each symmetric data object has a corresponding
 object with the same name, type, size, and offset (from an arbitrary memory
@@ -22,12 +22,12 @@ be natural aligned based on their type requirements and underlying architecture.
 In \openshmem the following kinds of data objects are symmetric:
 %
 \begin{itemize}
-  \item \Fortran data objects in common blocks or with the  SAVE  attribute.
+  \item \Fortran{} data objects in common blocks or with the  SAVE  attribute.
       These data objects must not be defined in a dynamic shared object (DSO).
-  \item Global and static \Clang and \Cpp variables. These data objects must
+  \item Global and static \Clang{} and \Cpp variables. These data objects must
       not  be defined in a DSO.
-  \item \Fortran arrays allocated with \textit{shpalloc} 
-  \item \Clang and \Cpp data allocated by \textit{shmem\_malloc}
+  \item \Fortran{} arrays allocated with \textit{shpalloc} 
+  \item \Clang{} and \Cpp data allocated by \textit{shmem\_malloc}
 \end{itemize}       
 
 \openshmem dynamic memory allocation routines (\textit{shpalloc} and

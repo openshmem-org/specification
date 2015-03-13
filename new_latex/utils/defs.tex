@@ -12,6 +12,16 @@
 \def\gb{\penalty10000\hskip 0pt plus 8em\penalty4800\hskip 0pt plus-8em%
 \penalty10000}
 
+% This macro enables that all "_" (underscore) characters in the pfd
+% file are searchable, and that cut&paste will copy the "_" as underscore. 
+% Without the following macro, the \_ is treated in searches and cut&paste
+% as a " " (space character). 
+% This macro does not modify the behavior of _ in math or in verbatim 
+% environments. In verbatim environments, the "_" is always treated
+% as a searchable character.
+%
+\DeclareRobustCommand{\_}{\texttt{\char`\_}} 
+% 
 
 \newcommand{\insertDocVersion}{1.2}
 \newcommand{\OSH}{\emph{OpenSHMEM}}

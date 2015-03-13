@@ -83,7 +83,7 @@ CALL SHMEM_BROADCAST64(dest, source, nlong, PE_root, PE_start, logPE_stride, PE_
 \apidesctable{
 The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
-}{Routine}{Data type}
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
 \apitablerow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter type that has an
     element size of \CONST{64} bits. No \Fortran{} derived types or \CorCpp{}

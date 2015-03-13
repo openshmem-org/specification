@@ -58,7 +58,7 @@ CALL SHMEM_REAL_PUT(dest, source, len, pe)
 \apidesctable{
     The \dest{} and \source{} data objects must conform to certain typing
     constraints, which are as follows: 
-}{Routine}{Data type}
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
     \apitablerow{shmem\_putmem}{ \Fortran:  Any noncharacter type. \Clang:
     Any data type. len is scaled in bytes.} 
     \apitablerow{shmem\_put4, shmem\_put32}{Any  noncharacter type that has a
