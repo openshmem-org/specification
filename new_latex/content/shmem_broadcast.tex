@@ -6,17 +6,17 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_broadcast32(void *dest, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_broadcast64(void *dest, const void *source, size_t nlong, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void shmem_broadcast32(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void shmem_broadcast64(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-INTEGER nlong, PE_root, PE_start, logPE_stride, PE_size
+INTEGER nelems, PE_root, PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
-CALL SHMEM_BROADCAST4(dest, source, nlong, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_BROADCAST8(dest, source, nlong, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_BROADCAST32(dest, source, nlong, PE_root, PE_start, logPE_stride, PE_size,pSync)
-CALL SHMEM_BROADCAST64(dest, source, nlong, PE_root, PE_start, logPE_stride, PE_size,pSync)
+CALL SHMEM_BROADCAST4(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_BROADCAST8(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_BROADCAST32(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
+CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
 \end{Fsynopsis}
  
 \begin{apiarguments}
@@ -24,9 +24,9 @@ CALL SHMEM_BROADCAST64(dest, source, nlong, PE_root, PE_start, logPE_stride, PE_
 \apiargument{OUT}{dest}{A symmetric data object.} 
 \apiargument{IN}{source}{A symmetric data object that can be of any data type
     that is permissible for the \dest{} argument.}
-\apiargument{IN}{nlong}{The number of elements in \source.  For
+\apiargument{IN}{nelems}{The number of elements in \source.  For
     \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of
-    32-bit halfwords.  nlong must be of type \VAR{size\_t} in \Clang.  If you are
+    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Clang.  If you are
     using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the \activeset,	from which the data is copied. Must be greater than or equal to
