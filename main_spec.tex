@@ -1,286 +1,247 @@
 \documentclass[10pt]{book}
-\usepackage[letterpaper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
-\usepackage{makeidx}
-\usepackage{graphicx}
-\usepackage{multicol}
-\usepackage[normalem]{ulem}
-\usepackage{float}
-\usepackage{listings}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{amsmath}
-\usepackage{ifthen}
-\usepackage[table]{xcolor}
-\usepackage{textcomp}
-\usepackage{alltt}
-\usepackage{ifpdf}
-\usepackage[UKenglish]{isodate}
-\ifpdf
-\usepackage[pdftex,
-            pagebackref=true,
-            colorlinks=true,
-            linkcolor=blue,
-            unicode
-           ]{hyperref}
-\else
-\usepackage[ps2pdf,
-            pagebackref=true,chapter
-            colorlinks=true,
-            linkcolor=blue,
-            unicode
-           ]{hyperref}
-\usepackage{pspicture}
-\fi
-\usepackage[utf8]{inputenc}
-\usepackage{mathptmx}
-\usepackage{sectsty}
-\usepackage{mathptmx}
-\usepackage[scaled=.90]{helvet}
-\usepackage{courier}
-\usepackage{sectsty}
-\usepackage[titles]{tocloft}
-\usepackage{prettyref}
-\usepackage{mdwlist}
-\usepackage{enumitem}
-\usepackage{framed, color}  %SP
-\usepackage{pbox} %SP
-\definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
 
-\usepackage{draftcopy}
-\usepackage{fancyhdr}
-\usepackage{wrapfig}
+\input{utils/packages}
 
-\usepackage[nolist]{acronym}
-
-\usepackage{caption}
-\usepackage{subcaption}
-%\usepackage[latin]{babel} %causing page headings "CONTENTS" to show as "INDEX".
-%%%%%%%%%%%%%%%Borrowed from MPI Spec%%%%%%%%
-\usepackage[usenames,dvipsnames]{color}
-\definecolor{ListingBG}{rgb}{0.91,0.91,0.91}
-
-
-\include{osh}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setcounter{secnumdepth}{3}
+\input{utils/defs}
 
 \makeindex
-% Make content "clickable"
+
 \begin{document}
-\hypersetup{pageanchor=true,citecolor=blue}
 
-% Set Header
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[LE,LO]{\insertDocVersion}
-%\fancyhead[CO,CE]{--- DRAFT ---}
-\fancyfoot[CE,CO]{\thepage}%affects page numbering for the first pages, except the first ToC page
-\pagenumbering{roman}%sets coverpage and toc page numbers to roman numerals
-\include{coverpage}
-\setcounter{tocdepth}{3}
-\tableofcontents
-\mainmatter  % included for use of documenttype 'book' 
-%\pagestyle{headings}  \withlinenumbers
-\pagestyle{fancy} \withlinenumbers%replacing {headings} with {fancy} for customization
-\fancyhf{}
-\fancyhead[RE, LO]{\rightmark}
-\fancyhead[RO, LE]{\thepage}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\thesection}{\arabic{section}}
-{ %using setlength to force standardized spacing, if needed
-%\setlength{\baselineskip}{3pt plus 3pt minus 3pt}
-\setlength{\parskip}{3pt} %plus 3pt minus 9pt}
-\startchap
-\section*{Introduction}
-\label{sec:intro}
-%\input{INTRODUCTION/introduction}
-%\input{INTRODUCTION/overview}
-%\input{INTRODUCTION/introduction_pgas}
-\input{INTRODUCTION/osh_project}
-\label{subsec:osh_project}
-\input{INTRODUCTION/programming_model}
-\label{subsec:programming_model}
-\input{INTRODUCTION/memory_model}
-\label{subsec:memory_model}
-\input{INTRODUCTION/new_execution_model}
-%\input{INTRODUCTION/original_language_bindings}
-\input{INTRODUCTION/language_bindings} %SP: Reverting to original text for now as per discussion on 02/04/2014
-\input{INTRODUCTION/library_constants.tex}
-\label{subsec:library_constants}
-\input{INTRODUCTION/environment_variables.tex}
-\label{subsec:environment_variables}
-\label{subsec:language_bindings}
-%\input{INTRODUCTION/synchronization_model} %SP:Moving to remote memory routines section as per discussion on 1/21/14
+\input{content/frontmatter}
+
+
+
+
+\section*{Introduction}\label{sec:intro}
+
+\section{The \openshmem Effort}\label{subsec:openshmem_effort}
+\input{content/the_openshmem_effort}
+
+\section{Programming Model Overview}\label{subsec:programming_model}
+\input{content/programming_model_overview}
+
+\section{Memory Model}\label{subsec:memory_model}
+\input{content/memory_model}
+
+\section{Execution Model}\label{subsec:execution_model}
+\input{content/execution_model}
+
+\section{Language Bindings and Conformance}\label{subsec:bindings}
+\input{content/language_bindings_and_conformance}
+
+\section{Library Constants}\label{subsec:library_constants}
+\input{content/library_constants}
+
+\section{Environment Variables }\label{subsec:environment_variables}
+\input{content/environment_variables}
+
+
+
 
 \clearpage
 
-\startchap
-\section{OpenSHMEM Library API}
-\label{sec:openshmem_library_api}
-\subsection{Library Setup, Exit, and Query Routines}%SP: Merging two routines
-\input{INTRODUCTION/setup_query_intro}
-\label{subsec:shmem_init}
-\input{TEX_FILES/shmem_init.tex} %Swaroop, Graham
-\input{TEX_FILES/NEW_shmem_my_pe.tex} %Tommy
-\label{subsec:shmem_my_pe}
-\input{TEX_FILES/NEW_shmem_num_pe.tex}%Tommy
-\label{subsec:shmem_num_pe}
-\input{TEX_FILES/shmem_finalize.tex} %Swaroop, Graham
-\label{subsec:shmem_finalize}
-\input{TEX_FILES/shmem_global_exit.tex} %Swaroop, Graham
-\label{subsec:shmem_global_exit} %Still in review
-\input{TEX_FILES/shmem_pe_accessible} %Oscar
-\label{subsec:shmem_pe_accessible}
-\input{TEX_FILES/shmem_addr_accessible}%Tommy
-\label{subsec:shmem_addr_accessible}
-\input{TEX_FILES/shmem_ptr.tex} %Oscar
-\label{subsec:shmem_ptr}
-\input{TEX_FILES/shmem_version.tex} %Manju
-\label{subsec:shmem_version}
-\input{TEX_FILES/shmem_name.tex} %Manju
-\label{subsec:shmem_name}
-\input{TEX_FILES/start_pes.tex} %Swaroop, Graham
-\label{subsec:start_pes}
-%\startchap
+
+
+\section{OpenSHMEM Library API}\label{sec:openshmem_library_api}
+
+\subsection{Library Setup, Exit, and Query Routines}
+The library setup and query interfaces that initialize and monitor the parallel
+environment of the \ac{PE}s.
+
+\subsubsection{\textbf{SHMEM\_INIT}}\label{subsec:shmem_init}
+\input{content/shmem_init}
+
+\subsubsection{\textbf{SHMEM\_MY\_PE}}\label{subsec:shmem_my_pe}
+\input{content/shmem_my_pe}
+
+\subsubsection{\textbf{SHMEM\_N\_PES}}\label{subsec:shmem_n_pes}
+\input{content/shmem_n_pes}
+
+\subsubsection{\textbf{SHMEM\_FINALIZE}}\label{subsec:shmem_finalize}
+\input{content/shmem_finalize}
+
+\subsubsection{\textbf{SHMEM\_GLOBAL\_EXIT}}\label{subsec:shmem_global_exit}
+\input{content/shmem_global_exit}
+
+\subsubsection{\textbf{SHMEM\_PE\_ACCESSIBLE}}\label{subsec:shmem_pe_accessible}
+\input{content/shmem_pe_accessible}
+
+\subsubsection{\textbf{SHMEM\_ADDR\_ACCESSIBLE}}\label{subsec:shmem_addr_accessible}
+\input{content/shmem_addr_accessible}
+
+\subsubsection{\textbf{SHMEM\_PTR}}\label{subsec:shmem_ptr}
+\input{content/shmem_ptr}
+
+\subsubsection{\textbf{SHMEM\_INFO\_GET\_VERSION}}\label{subsec:shmem_info_get_version}
+\input{content/shmem_info_get_version}
+
+\subsubsection{\textbf{SHMEM\_INFO\_GET\_NAME}}\label{subsec:shmem_info_get_name}
+\input{content/shmem_info_get_name}
+
+\subsubsection{\textbf{START\_PES}}\label{subsec:start_pes}
+\input{content/start_pes}
+
+
+
+
+
 \subsection{Memory Management Routines}
-\input{INTRODUCTION/memory_management_intro}
-\input{TEX_FILES/shfree.tex}%Tommy
-\label{subsec:shfree}
-\input{TEX_FILES/shpalloc.tex} %Swaroop
-\input{TEX_FILES/shpclmove.tex} %Swaroop
-\input{TEX_FILES/shpdeallc.tex} %Swaroop
-%\startchap
-\input{INTRODUCTION/rma_intro.tex}
-\label{subsec:shmem_put}
-\input{TEX_FILES/shmem_put.tex} %Oscar
-\label{subsec:shmem_p}
-\input{TEX_FILES/shmem_p.tex} %Oscar
-\input{TEX_FILES/shmem_iput.tex} %Oscar
-\label{subsec:shmem_get}
-\input{TEX_FILES/shmem_get.tex} %Manju
-\label{subsec:shmem_g}
-\input{TEX_FILES/shmem_g.tex} %Manju
-\input{TEX_FILES/shmem_iget.tex} %Manju
-%\startchap
-\subsection{Atomic Memory Operations}
-\input{INTRODUCTION/atomics_intro}
-\label{subsec:shmem_add}
-\input{TEX_FILES/shmem_add.tex}%Tommy
-\label{subsec:shmem_cswap}
-\input{TEX_FILES/shmem_cswap.tex} %Pasha
-\label{subsec:shmem_swap}
-\input{TEX_FILES/shmem_swap.tex} %Swaroop
-\label{subsec:shmem_finc}
-\input{TEX_FILES/shmem_finc.tex} %Manju
-\label{subsec:shmem_inc}
-\input{TEX_FILES/shmem_inc.tex} %Manju
-\label{subsec:shmem_fadd}
-\input{TEX_FILES/shmem_fadd.tex}%Pasha
-%\startchap
-\subsection{Collective Routines}
-\label{subsec:coll}
-\input{INTRODUCTION/collective_intro.tex}
-\label{subsec:shmem_barrier_all}
-\input{TEX_FILES/shmem_barrier_all.tex} %Pasha
-\label{subsec:shmem_barrier}
-\input{TEX_FILES/shmem_barrier.tex} %Tommy
-\label{subsec:shmem_broadcast}
-\input{TEX_FILES/shmem_broadcast.tex} %Pasha
-\label{subsec:shmem_collect} %label in shmem_collect.tex, label from this location references page 1
-\input{TEX_FILES/shmem_collect.tex} %Pasha
-\label{subsec:shmem_reductions}
-\input{TEX_FILES/shmem_reductions.tex} %Swaroop
-%\startchap
-\subsection{Point-To-Point Synchronization Routines}%SP: Adding a chapter to include wait and wait until 
-\input{INTRODUCTION/synchronization_intro} %Swaroop
-\input{TEX_FILES/shmem_wait.tex} %Swaroop
-\label{subsec:shmem_wait}
-%\startchap
-\subsection{Memory Ordering Routines} %SP: Adding a chapter to include fence and quiet
-\label{subsec:memory_order}
-\input{INTRODUCTION/ordering_intro} %Swaroop
-\label{subsec:shmem_fence}
-\input{TEX_FILES/shmem_fence.tex} %Manju
-\label{subsec:shmem_quiet}
-\input{TEX_FILES/shmem_quiet.tex} %Swaroop
-\input{INTRODUCTION/synchronization_model.tex}
-%\startchap
+\openshmem provides a set of \ac{API}s for managing the symmetric heap. The
+\ac{API}s allow one to dynamically allocate, deallocate, reallocate and align
+symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
+
+\subsubsection{\textbf{SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}}\label{subsec:shfree}
+\input{content/shmem_malloc.tex}
+
+\subsubsection{\textbf{SHPALLOC}}\label{subsec:shpalloc}
+\input{content/shpalloc.tex}
+
+\subsubsection{\textbf{SHPCLMOVE}}\label{subsec:shpclmove}
+\input{content/shpclmove.tex}
+
+\subsubsection{\textbf{SHPDEALLOC}}\label{subsec:shpdealloc}
+\input{content/shpdealloc.tex}
+
+
+
+
+
+
+\subsection{Remote Memory Access Routines}\label{sec:rma}
+\input{content/rma_intro.tex}
+
+\subsubsection{\textbf{SHMEM\_PUT}}\label{subsec:shmem_put}
+\input{content/shmem_put.tex}
+
+\subsubsection{\textbf{SHMEM\_P}}\label{subsec:shmem_p}
+\input{content/shmem_p.tex}
+
+\subsubsection{\textbf{SHMEM\_IPUT}}\label{subsec:shmem_iput}
+\input{content/shmem_iput.tex}
+
+\subsubsection{\textbf{SHMEM\_GET}}\label{subsec:shmem_get}
+\input{content/shmem_get.tex}
+
+\subsubsection{\textbf{SHMEM\_G}}\label{subsec:shmem_g}
+\input{content/shmem_g.tex}
+
+\subsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
+\input{content/shmem_iget.tex}
+
+
+
+
+
+\subsection{Atomic Memory Operations}\label{sec:amo}
+\input{content/atomics_intro}
+
+\subsubsection{\textbf{SHMEM\_ADD}}\label{subsec:shmem_add}
+\input{content/shmem_add.tex}
+
+\subsubsection{\textbf{SHMEM\_CSWAP}}\label{subsec:shmem_cswap}
+\input{content/shmem_cswap.tex} 
+
+\subsubsection{\textbf{SHMEM\_SWAP}}\label{subsec:shmem_swap}
+\input{content/shmem_swap.tex}
+
+\subsubsection{\textbf{SHMEM\_FINC}}\label{subsec:shmem_finc}
+\input{content/shmem_finc.tex}
+
+\subsubsection{\textbf{SHMEM\_INC}}\label{subsec:shmem_inc}
+\input{content/shmem_inc.tex}
+
+\subsubsection{\textbf{SHMEM\_FADD}}\label{subsec:shmem_fadd}
+\input{content/shmem_fadd.tex}
+
+
+
+
+
+\subsection{Collective Routines}\label{subsec:coll}
+\input{content/collective_intro.tex}
+
+\subsubsection{\textbf{SHMEM\_BARRIER\_ALL}}\label{subsec:shmem_barrier_all}
+\input{content/shmem_barrier_all.tex}
+
+\subsubsection{\textbf{SHMEM\_BARRIER}}\label{subsec:shmem_barrier}
+\input{content/shmem_barrier.tex}
+
+\subsubsection{\textbf{SHMEM\_BROADCAST}}\label{subsec:shmem_broadcast}
+\input{content/shmem_broadcast.tex}
+
+\subsubsection{\textbf{SHMEM\_COLLECT, SHMEM\_FCOLLECT}}\label{subsec:shmem_collect}
+\input{content/shmem_collect.tex}
+
+\subsubsection{\textbf{SHMEM\_REDUCTIONS}}\label{subsec:shmem_reductions}
+\input{content/shmem_reductions.tex}
+
+
+
+
+
+\subsection{Point-To-Point Synchronization Routines}
+The following section discusses \openshmem \ac{API}s that provides a mechanism
+for synchronization between two \ac{PE}s based on the value of a symmetric data
+object. 
+
+\subsubsection{\textbf{SHMEM\_WAIT}}\label{subsec:shmem_wait}
+\input{content/shmem_wait.tex}
+
+
+
+
+
+\subsection{Memory Ordering Routines}\label{subsec:memory_order}
+The following section discusses \openshmem \ac{API}s that provide mechanisms to
+ensure ordering and/or delivery of \OPR{Put}, \ac{AMO}, and memory store
+routines to symmetric data objects. 
+
+\subsubsection{\textbf{SHMEM\_FENCE}}\label{subsec:shmem_fence}
+\input{content/shmem_fence.tex}
+
+\subsubsection{\textbf{SHMEM\_QUIET}}\label{subsec:shmem_quiet}
+\input{content/shmem_quiet.tex}
+
+\subsubsection{Synchronization and Communication Ordering in \openshmem}
+\input{content/synchronization_model.tex}
+
+
+
+
+
+
 \subsection{Distributed Locking Routines}
-\input{INTRODUCTION/locks_intro} %Swaroop
-\input{TEX_FILES/shmem_lock.tex} %Oscar
-%\startchap
+The following section discusses \openshmem locks as a mechanism to provide
+mutual exclusion. Three routines are available for distributed locking,
+\textit{set, test} and \textit{clear}.
+
+\subsubsection{\textbf{SHMEM\_LOCK}}\label{subsec:shmem_lock}
+\input{content/shmem_lock.tex}
+
+
+
+
+
 \subsection{Cache Management}
-\input{INTRODUCTION/deprication.tex} %Pasha
-\input{TEX_FILES/shmem_cache.tex} %Pasha
+All of these routines are deprecated and are provided for backwards
+compatibility.  Implementations must include all items in this section and the
+routines should function properly, while notifying the user about deprecation of
+the functionality.
+
+\subsubsection{\textbf{SHMEM\_CACHE}}\label{subsec:shmem_cache}
+\input{content/shmem_cache.tex}
+
+
+
+
 
 \clearpage
-%\startchap
-%\subsection{Extensions Version 1.2}
-%\color{red}
-%\emph{Ticket \#107}
-%\input{TEX_FILES/shmem_version.tex}
-%\input{TEX_FILES/shmem_name.tex}
-%\color{black}
 
-%\startchap
-%  -> Compilation
-%  -> Writing OpenSHMEM Programs
-%  -> Application written in Fortran
-\appendix
-%defining pagestyle for annex
-%\pagestyle{plain} \withlinenumbers
-\pagestyle{fancy} \withlinenumbers
-\fancyhf{}
-\fancyhead[RE, LO]{\leftmark}
-\fancyhead[RO, LE]{\thepage}
-\fancyfoot[CE,CO]{\thepage}
-\renewcommand{\headrulewidth}{0pt}
-%\fancyfoot[C]{\thepage}%no numbering appearing on non-title pages
-\chapter{Writing \openshmem Programs}
-\input{INTRODUCTION/writing_programs.tex}
-\chapter{Compiling and Running Programs}
-\input{INTRODUCTION/compile_exec_applications.tex}
-\chapter{Undefined Behavior in \openshmem}
-\label{sec:undefined}
-\input{INTRODUCTION/undefined_behavior}
-\chapter{Interoperability with other Programming Models}
-\label{sec:mpi}
-\input{INTRODUCTION/mpi_interoperability}
-\clearpage
-\chapter{History of \openshmem{}}
-\input{INTRODUCTION/openshmem_history.tex}
-\label{sec:openshmem_history}
-\chapter{\openshmem Specification and Deprecated API }
-\input{INTRODUCTION/deprecated_API.tex}
-\label{sec:dep_api}
-\chapter{Changes to this Document}
-\input{INTRODUCTION/changelog1.2}
-\input{INTRODUCTION/changelog}
-%\clearpage
-%\startchap
-%\section{\openshmem{} program examples}
-%\input{INTRODUCTION/examples}
-} %end of setlength command
-% Manju: Don't move the definitions to the front, it requires to be after content
-% Add acronyms here
-\begin{acronym}
-\acro{RMA}{\emph{Remote Memory Access}}
-\acro{RMO}{\emph{Remote Memory Operation}}
-\acro{AMO}{\emph{Atomic Memory Operation}}
-\acro{PE}{\emph{Processing Element}}
-\acrodefplural{PE}[PEs]{\emph{Processing Elements}}
-\acro{PGAS}{\emph{Partitioned Global Address Space}}
-\acro{API}{\emph{Application Programming Interface}}
-\acro{MPI}{\emph{Message Passing Interface}}
-\acro{SPMD}{\emph{Single Program Multiple Data}}
-\acro{UH}{University of Houston}
-\acro{UO}{University of Oregon}
-\acro{ORNL}{Oak Ridge National Laboratory}
-\acro{LANL}{Los Alamos National Laboratory}
-\acro{ESSC}{Extreme Scale Systems Center}
-\acro{OSSS}{Open Software System Solutions}
-\acro{DoD}{U.S. Department of Defense}
-\end{acronym}
+
+
+\input{content/backmatter}
 
 
 \end{document}
+
