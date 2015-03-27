@@ -28,7 +28,7 @@ ${TARGET}.ps: ${TARGET}.dvi
 	@dvips -t a4 ${TARGET}.dvi
 
 clean:
-	rm -f ${TARGET}.{log,aux,ps,dvi,bbl,blg,log}
+	rm -f ${TARGET}.{log,aux,ps,dvi,bbl,blg,log,idx,out,toc} chappage.txt
 
 veryclean: clean
 	rm -f ${TARGET}.{ps,pdf,out}
