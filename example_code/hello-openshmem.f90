@@ -1,6 +1,6 @@
 program hello
 
-  include 'shmem.fh'
+  include "shmem.fh"
   integer :: shmem_my_pe, shmem_n_pes
 
   integer :: npes, me

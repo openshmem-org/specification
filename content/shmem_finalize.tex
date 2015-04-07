@@ -11,7 +11,7 @@ void shmem_finalize(void);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_FINALIZE
+CALL SHMEM_FINALIZE()
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -24,7 +24,7 @@ CALL SHMEM_FINALIZE
     releases resources used by the \openshmem library. This collective
     operation requires all \acp{PE} to participate in the call. There is an
     implicit global barrier in \FUNC{shmem\_finalize} so that pending
-    communication is completed, and no resources can be released until all
+    communications are completed, and no resources can be released until all
     \acp{PE} have entered \FUNC{shmem\_finalize}. \FUNC{shmem\_finalize} must be
     the last \openshmem library call encountered in the \openshmem portion of a
     program. A call to \FUNC{shmem\_finalize} will release any resources
