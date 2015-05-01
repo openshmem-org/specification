@@ -737,38 +737,73 @@ minus .2ex}{-1em}{\normalsize\sf}}
     {{\color{red}\textsf{#1}}}
 
 \newcommand{\bAPI}[2]{
-\subsubsection{\bf #1}%\hfill
+\subsubsection{\bf #1}
 #2
-\hfill %\\
+\hfill 
 \begin{description}
-%\par\nobreak\vspace{-\parskip}
   \item[SYNOPSIS] \hfill \\ \\ 
-  %\\ \\
 }
 
 \newcommand{\eAPI}{
 \end{description}
 }
 
-\newcommand{\synC}{%\hfill \\
-  %\vspace{-\parskip} \par
-  \textbf{C/C++:}
-  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=0pt]  
+%%%testing
+\lstdefinestyle{styC}{
+language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=0pt
+}
+
+\lstdefinestyle{styF}{
+language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt
+}
+
+\lstnewenvironment{formF}[1][]
+ {\lstset{style=styF,#1}}
+ {}
+
+\lstnewenvironment{formC}[1][]
+ {\lstset{style=styC,#1}}
+ {}
+ 
+\newcommand{\synC}{
+ \textbf{C/C++:}
+ \begin{formC}
 }
 
 \newcommand{\synCE}{
-\end{lstlisting} 
+\end{formC} 
 } 
+
+\newcommand{\synF}{
+ \textbf{FORTRAN:}
+ \begin{formF}
+}
 
 \newcommand{\synFE}{
-\end{lstlisting} 
-} 
-
-\newcommand{\synF}{%\hfill \\     
-  %\vspace{-\parskip} \par
-       \textbf{FORTRAN:}	 
-	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt]
+\end{formF}
 }
+
+%%%testing
+
+%\newcommand{\synC}{%\hfill \\
+  %\vspace{-\parskip} \par
+%  \textbf{C/C++:}
+%  \begin{lstlisting} [language={C}, backgroundcolor=\color{gray}, lineskip=2pt, morekeywords={size_t}, aboveskip=0pt, belowskip=0pt]  
+%}
+
+%\newcommand{\synCE}{
+%\end{lstlisting} 
+%} 
+
+%\newcommand{\synFE}{
+%\end{lstlisting} 
+%} 
+
+%\newcommand{\synF}{%\hfill \\     
+  %\vspace{-\parskip} \par
+%       \textbf{FORTRAN:}	 
+%	    \begin{lstlisting} [language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt, deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt]
+%}
 \newcommand{\aC}[1] {\textit{#1}}
 \newcommand{\sC}[1] {\textbf{#1}}
 \newcommand{\aF}[1]{\textit{#1}}
