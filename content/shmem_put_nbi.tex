@@ -1,0 +1,93 @@
+\apisummary{
+    The  nonblocking put routines  provide  a method for copying data from a contiguous local
+    data object to a data object on a specified \ac{PE}. 
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_double_put_nbi(double *dest, const double *source, size_t nelems, int pe);
+void shmem_float_put_nbi(float *dest, const float *source, size_t nelems, int pe);
+void shmem_int_put_nbi(int *dest, const int *source, size_t nelems, int pe);
+void shmem_long_put_nbi(long *dest, const long *source, size_t nelems, int pe);
+void shmem_longdouble_put_nbi(long double *dest, const long double *source, size_t nelems, int pe);
+void shmem_longlong_put_nbi(long long *dest, const long long *source, size_t nelems, int pe);
+void shmem_put32_nbi(void *dest, const void *source, size_t nelems, int pe);
+void shmem_put64_nbi(void *dest, const void *source, size_t nelems, int pe);
+void shmem_put128_nbi(void *dest, const void *source, size_t nelems, int pe);
+void shmem_putmem_nbi(void *dest, const void *source, size_t nelems, int pe);
+void shmem_short_put_nbi(short*dest, const short*source, size_t nelems, int pe);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+CALL SHMEM_CHARACTER_PUT_NBI(dest, source, nelems, pe)
+CALL SHMEM_COMPLEX_PUT_NBI(dest, source, nelems, pe)
+CALL SHMEM_DOUBLE_PUT_NBI(dest, source, nelems, pe)
+CALL SHMEM_INTEGER_PUT_NBI(dest, source, nelems, pe)
+CALL SHMEM_LOGICAL_PUT_NBI(dest, source, nelems, pe)
+CALL SHMEM_PUT4_NBI(dest, source, nelems, pe)
+CALL SHMEM_PUT8_NBI(dest, source, nelems, pe)
+CALL SHMEM_PUT32_NBI(dest, source, nelems, pe)
+CALL SHMEM_PUT64_NBI(dest, source, nelems, pe)
+CALL SHMEM_PUT128_NBI(dest, source, nelems, pe)
+CALL SHMEM_PUTMEM_NBI(dest, source, nelems, pe)
+CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{dest}{Data object to be updated on the remote \ac{PE}. This
+    data object must be remotely accessible.}
+    \apiargument{OUT}{source}{Data object containing the data to be copied.}
+    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
+    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Clang. If you are using
+    \Fortran, it must be a constant, variable, or array element of default
+    integer type.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
+    of type integer. If you are using \Fortran, it must be a constant, variable,
+    or array element of default integer type.}
+\end{apiarguments}
+
+\apidescription{
+    The routines return after posting the operation.  The operation is considered 
+    complete after a subsequent call to shmem\_quiet(). Multiple call to these routines
+    before a shmem\_quiet() can deliver the data in any order.
+    Furthermore, two successive put
+    routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
+    introduced between the two calls.   
+ }
+
+\apidesctable{
+    The \dest{} and \source{} data objects must conform to certain typing
+    constraints, which are as follows: 
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+    \apitablerow{shmem\_putmem}{ \Fortran:  Any noncharacter type. \Clang:
+    Any data type. \VAR{nelems} is scaled in bytes.} 
+    \apitablerow{shmem\_put4, shmem\_put32}{Any  noncharacter type that has a
+    storage size equal to \CONST{32} bits. }
+    \apitablerow{shmem\_put8,  shmem\_put64}{Any noncharacter type that has a
+    storage size equal to \CONST{64} bits. }
+    \apitablerow{shmem\_put128}{Any  noncharacter type that has a storage size
+    equal to \CONST{128} bits. }
+    \apitablerow{shmem\_double\_put}{Elements of type double.}
+    \apitablerow{shmem\_longdouble\_put}{Elements of type long double.}
+    \apitablerow{SHMEM\_CHARACTER\_PUT}{Elements of type character.  \VAR{nelems}
+    is  the number  of	 characters to transfer. The actual character lengths of
+    the \source{} and \dest{} variables are ignored. }
+    \apitablerow{SHMEM\_COMPLEX\_PUT}{Elements of type complex of default size.}
+    \apitablerow{SHMEM\_DOUBLE\_PUT}{Elements of type double precision. }
+    \apitablerow{SHMEM\_INTEGER\_PUT}{Elements of type integer.}
+    \apitablerow{SHMEM\_LOGICAL\_PUT}{Elements of type logical.}
+    \apitablerow{SHMEM\_REAL\_PUT}{Elements of type real.}
+
+\apireturnvalues{
+    None.
+}
+\apinotes{
+    If you are using \Fortran, data types must be of default size.  For example,
+    a real variable must be declared as \CONST{REAL},  \CONST{REAL*4},  or
+    \CONST{REAL(KIND=KIND(1.0))}. The Fortran API routine \FUNC{SHMEM\_PUT} has
+    been deprecated, and either \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} should
+    be used in its place.
+}
+
+\end{apidefinition}
