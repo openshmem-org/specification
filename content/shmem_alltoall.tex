@@ -1,0 +1,108 @@
+\apisummary{
+    Each \ac{PE} exchanges a distinct fixed amount of data with all other
+    \acp{PE} in the defined set
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_alltoall(void *dest, const void *source, size_t length, int PE_start, int logPE_stride, int PE_size, long *pSync)
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
+INTEGER PE_start, logPE_stride, PE_size
+INTEGER (KIND=8) length
+CALL SHMEM_ALLTOALL(dest, source, length, PE_start, logPE_stride, PE_size, pSync)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+
+\apiargument{OUT}{dest}{A symmetric array large enough to receive \VAR{length}
+    bytes from each \ac{PE} in the \activeset.}
+\apiargument{IN}{source}{A symmetric array that contains \VAR{length} bytes of
+    data for each \ac{PE} in the \activeset{}, ordered according to destination
+    \ac{PE}.}
+\apiargument{IN}{length}{The number of bytes to exchange for each \ac{PE}.}
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
+    it must be a default integer value.}
+\apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
+    consecutive \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of
+    type integer.  If you are using \Fortran, it must be a default integer value.}
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset.
+    \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must
+    be a default integer value.}
+\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
+    of type long and size \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran,
+    \VAR{pSync} must be of type integer and size
+    \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  If you are using \Fortran, it must be a
+    default integer value. Every element of this array must be initialized with
+    the value \CONST{\_SHMEM\_SYNC\_VALUE} (in \CorCpp) or
+    \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
+    \activeset{} enter the reduction routine.}
+    
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_alltoall} routine is a collective routine; each \ac{PE} in
+    the defined set exchanges a distinct fixed amount of data with all other
+    \acp{PE} in the set. The data being sent and received is stored in
+    contiguous symmetric arrays. The jth block sent from \ac{PE} i to \ac{PE} j
+    is placed in the ith block of the \VAR{dest} buffer on \ac{PE} j.
+
+    As with all \openshmem collective routines, this routine assumes
+    that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not
+    in the \activeset{} calls an \openshmem collective routine, undefined
+    behavior results.
+
+    The values of arguments \VAR{length}, \VAR{PE\_start}, \VAR{logPE\_stride},
+    and \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same
+    \VAR{dest} and \VAR{source} arrays, and the same \VAR{pSync} work array must
+    be passed to all \acp{PE} in the \activeset.
+    
+    Before any \ac{PE} calls \FUNC{shmem\_alltoall}, the following conditions
+    must exist (synchronization via a barrier or some other method is often
+    needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
+    \activeset{} is not still in use from a prior call to a
+    \FUNC{shmem\_alltoall/v} routine.  The \VAR{dest} array on all \acp{PE} in
+    the \activeset{} is ready to accept the \FUNC{shmem\_alltoall} data.
+    
+    Upon return from \FUNC{shmem\_alltoall}, the following is true for the local
+    PE: The \VAR{dest} array is updated.
+} 
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    This routine restores \VAR{pSync} to its original contents.  Multiple calls
+    to \openshmem routines that use the same \VAR{pSync} array do not require
+    that \VAR{pSync} be reinitialized after the first call.
+    
+    You must ensure the that the \VAR{pSync} array is not being updated by any
+    \ac{PE} in the \activeset{} while any of the \acp{PE} participates in
+    processing of an \openshmem \FUNC{shmem\_alltoall} routine. Be careful to
+    avoid these situations: If the \VAR{pSync} array is initialized at run time,
+    some type of synchronization is needed to ensure that all \acp{PE} in the
+    \activeset{} have initialized \VAR{pSync} before any of them enter an
+    \openshmem routine called with the \VAR{pSync} synchronization array.  A
+    \VAR{pSync} array may be reused on a subsequent \openshmem
+    \FUNC{shmem\_alltoall} routine only if none of the \acp{PE} in the
+    \activeset{} are still processing a prior \openshmem \FUNC{shmem\_alltoall}
+    routine call that used the same \VAR{pSync} array.  In general, this can be
+    ensured only by doing some type of synchronization.        
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {This example shows a \FUNC{shmem\_alltoall} on two long elements among all
+    \acp{PE}.}
+    {./example_code/shmem_alltoall_example.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}
