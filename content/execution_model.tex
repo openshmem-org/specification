@@ -1,20 +1,20 @@
 An \openshmem program consists of a set of \openshmem processes called \ac{PE}s
 that execute in a \ac{SPMD}-like model where each \ac{PE} can take a different
-execution path. A \ac{PE} can be implemented using an OS process or an OS
-thread\footnote{Implementing \ac{PE}s using OS threads requires compiler
-techniques to implement the \openshmem memory model.}.  The \ac{PE}s progress
-asynchronously, and can communicate/synchronize via the \openshmem interfaces.
-All \ac{PE}s in an \openshmem program should start by calling the initialization
-routine  \FUNC{shmem\_init} \footnote{\textbf{start\_pes} has been
-deprecated as of Specification 1.2} before using any of the other \openshmem
-library routines.  An \openshmem program finishes execution by returning from
-the main routine or when any PE calls \FUNC{shmem\_global\_exit}. When returning
-from main, \openshmem must complete all pending communication and release all
-the resources associated to the library using an implicit collective
-synchronization across PEs. The user has the option to call
-\FUNC{shmem\_finalize} (before returning from main) to complete all pending
-communication and release all the \openshmem library resources without
-terminating the program. Calling any \openshmem routine after
+execution path. \newtext{For example,} a \ac{PE} can be implemented using an OS
+process \oldtext{or an OS thread} \footnote{\oldtext{Implementing \ac{PE}s using
+OS threads requires compiler techniques to implement the \openshmem memory
+model.}}.  The \ac{PE}s progress asynchronously, and can communicate/synchronize
+via the \openshmem interfaces.  All \ac{PE}s in an \openshmem program should
+start by calling the initialization routine  \FUNC{shmem\_init}
+\footnote{\textbf{start\_pes} has been deprecated as of Specification 1.2}
+before using any of the other \openshmem library routines.  An \openshmem
+program finishes execution by returning from the main routine or when any PE
+calls \FUNC{shmem\_global\_exit}. When returning from main, \openshmem must
+complete all pending communication and release all the resources associated to
+the library using an implicit collective synchronization across PEs. The user
+has the option to call \FUNC{shmem\_finalize} (before returning from main) to
+complete all pending communication and release all the \openshmem library
+resources without terminating the program. Calling any \openshmem routine after
 \FUNC{shmem\_finalize} leads to undefined behavior.
 
 The \ac{PE}s of the \openshmem program are identified by unique integers.  The
