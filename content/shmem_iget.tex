@@ -62,14 +62,17 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 
 \apidesctable{
     The \VAR{dest} and \VAR{source} data objects must conform to typing
-    constraints, which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_iget32, shmem\_iget4}{Any  noncharacter type that has a
-        storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_iget64, shmem\_iget8}{Any noncharacter type that has a
-        storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_iget128}{Any noncharacter type that has a storage size
-        equal to \CONST{128} bits.}
+    constraints, which are as follows:}
+    {Routine}{Data type of \VAR{dest} and \VAR{source}}
+    \apitablerow{shmem\_iget32, shmem\_iget4}{\oldtext{Any noncharacter type
+        that has a storage size equal to \CONST{32} bits.}\newtext{\VAR{dest}
+        and \VAR{source} are \CONST{32}-bit aligned.}}
+    \apitablerow{shmem\_iget64, shmem\_iget8}{\oldtext{Any noncharacter type
+        that has a storage size equal to \CONST{64} bits.}\newtext{\VAR{dest}
+        and \VAR{source} are \CONST{64}-bit aligned.}}
+    \apitablerow{shmem\_iget128}{\oldtext{Any noncharacter type that has a
+        storage size equal to \CONST{128} bits.}\newtext{\VAR{dest} and
+        \VAR{source} are \CONST{128}-bit aligned.}}
     \apitablerow{shmem\_short\_iget}{Elements of type short.}
     \apitablerow{ shmem\_int\_iget}{Elements of type int.}
     \apitablerow{shmem\_long\_iget}{Elements of type long.}
