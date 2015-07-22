@@ -94,15 +94,16 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 
 \apinotes{
     \newtext{
-    Visibility of updates on the target \ac{PE} of an \openshmem RMA operation
-    can be affected by reordering of loads on architectures with relaxed memory
-    ordering.  A memory barrier or load-acquire instruction is required between
-    loads at the target \ac{PE} in order to prevent reordering. For example,
-    such reordering could happen when the target \ac{PE} polls on a variable
-    (e.g., `flag') and then accesses another variable (e.g., `data').  For
-    writing portable code in such scenarios, \FUNC{shmem\_wait} or
-    \FUNC{shmem\_wait\_until} should be used for polling the `flag' to guarantee
-    order of visibility between updates to `flag' and `data.'}
+    Visibility of updates on the target \ac{PE} of an \openshmem{} RMA operation
+    can be affected by reordering of loads on architectures with a relaxed
+    memory model. A memory barrier or load-acquire instruction may be required
+    between loads at the target \ac{PE} in order to prevent reordering.  For
+    example, such reordering could happen when the target \ac{PE} polls for
+    update to a variable, e.g. 'flag,' then accesses another variable, e.g.
+    'data,' and expects to see the most recent update to 'data.' For writing
+    portable code in such scenarios, \FUNC{shmem\_wait} or
+    \FUNC{shmem\_wait\_until} should be used for polling the 'flag' to guarantee
+    order of visibility between updates to 'flag' and 'data.' }
 }
 
 \apiimpnotes{
@@ -112,11 +113,12 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
 
     \newtext{
-    OpenSHMEM implementations must ensure \FUNC{shmem\_wait} and
+    \openshmem implementations must ensure \FUNC{shmem\_wait} and
     \FUNC{shmem\_wait\_until} include the required memory barrier or
-    load-acquire instructions to guarantee the correct visibility ordering on
-    remote \acp{PE} when using \FUNC{shmem\_quiet}.}
+    load-acquire instructions to guarantee the correct visibility ordering
+    between updates to \VAR{ivar} and updates to the rest of the memory.}
 }
+
 
 \begin{apiexamples}
 
