@@ -3,7 +3,7 @@
 
 main()
 {
-    static long pSync[_SHMEM_ALLTOALL_SYNC_SIZE];
+    static long pSync[SHMEM_ALLTOALL_SYNC_SIZE];
     long *source, *dest;
     size_t *s_offsets, *s_sizes, *t_offsets, *t_sizes, offset;
     int  i, maxcount, pe, idx;
@@ -41,8 +41,8 @@ main()
        }
     }
     
-    for (i=0; i < _SHMEM_ALLTOALL_SYNC_SIZE; i++) {
-       pSync[i] = _SHMEM_SYNC_VALUE;
+    for (i=0; i < SHMEM_ALLTOALL_SYNC_SIZE; i++) {
+       pSync[i] = SHMEM_SYNC_VALUE;
     }
     
     /* wait for all PEs to initialize pSync */

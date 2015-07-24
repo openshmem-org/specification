@@ -2,7 +2,7 @@
 #include <stdio.h>
 main()
 {
-    static long pSync[_SHMEM_ALLTOALL_SYNC_SIZE];
+    static long pSync[SHMEM_ALLTOALL_SYNC_SIZE];
     long *source, *dest;
     int  i, count, pe;
     
@@ -20,8 +20,8 @@ main()
        }
     }
     
-    for (i=0; i<_SHMEM_ALLTOALL_SYNC_SIZE; i++) {
-       pSync[i] = _SHMEM_SYNC_VALUE;
+    for (i=0; i< SHMEM_ALLTOALL_SYNC_SIZE; i++) {
+       pSync[i] = SHMEM_SYNC_VALUE;
     }
     /* wait for all PEs to initialize pSync */
     shmem_barrier_all();

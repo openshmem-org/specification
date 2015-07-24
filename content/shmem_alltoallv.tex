@@ -44,9 +44,9 @@ CALL SHMEM_ALLTOALLV(dest, t_offsets, t_sizes, source, s_offsets, s_sizes, PE_st
     \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must
     be a default integer value.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
-    of type long and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran,
+    of type long and size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}. In \Fortran,
     \VAR{pSync} must be of type integer and size
-    \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  If you are using \Fortran, it must be a
+    \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.  If you are using \Fortran, it must be a
     default integer value. Every element of this array must be initialized with
     the value \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the
     \activeset{} enter the routine.}
