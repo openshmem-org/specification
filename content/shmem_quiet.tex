@@ -39,16 +39,27 @@ CALL SHMEM_QUIET
     \ac{PE}.  For example, you might use \FUNC{shmem\_quiet} to await delivery
     of a block of data before issuing another \PUT{} \newtext{or non-blocking
     \PUT{}} routine, which sets a completion flag on another \ac{PE}.
-    \newtext{The visibility ordering of updates to data and flag at a target
-    \ac{PE} can also be affected by memory load reordering at the target
-    \ac{PE}. A \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} should be
-    used to poll on the flag variable at the target \ac{PE} to portably
-    guarantee visibility ordering between updates to data and flag at the
-    target \ac{PE}.} \FUNC{shmem\_quiet} is not usually needed if
+     \FUNC{shmem\_quiet} is not usually needed if
     \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} are called.  The barrier
     routines wait for the completion of outstanding writes (\PUT{}, \ac{AMO},
     memory stores, \newtext{and nonblocking \PUT{} and \GET{} routines}) to
     symmetric data objects on all \acp{PE}.
+
+\newtext{
+    The visibility ordering of updates to data and flag at a target \ac{PE} can
+    also be affected by memory load reordering at the target \ac{PE} on
+    platforms with a relaxed memory model. For example, one might use
+    \FUNC{shmem\_quiet} to complete the update to a block of data on a target
+    \ac{PE} before issuing another \PUT{} routine, which sets a completion flag
+    on the same target \ac{PE}. In this case, the target \ac{PE} may still see
+    updates to data and flag out of order due to reordering of memory loads on
+    the target \ac{PE}. A memory barrier or load-acquire instruction may be
+    required between loads at the target \ac{PE} to prevent such reordering. It
+    is recommended that \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} is used
+    instead of memory loads to poll on a flag variable at the target \ac{PE} to
+    portably guarantee visibility ordering between updates to data and flag at
+    the target \ac{PE}.
+    }
 }
 
 \begin{apiexamples}

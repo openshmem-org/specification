@@ -1,6 +1,6 @@
 \apisummary{
-    Assures ordering of delivery of \PUT{}, \acp{AMO}, and memory store routines to
-    symmetric data objects.
+    Assures ordering of delivery of \PUT{}, \acp{AMO}, and memory store routines
+    to symmetric data objects.
 }
 
 \begin{apidefinition}
@@ -18,13 +18,13 @@ CALL SHMEM_FENCE
 \end{apiarguments}
 
 \apidescription{
-    This routine assures ordering of delivery of \PUT{}, \acp{AMO}, and memory store
-    routines to symmetric data objects.  All \PUT{}, \acp{AMO}, and memory store
-    routines to symmetric data objects issued to a particular remote \ac{PE} prior
-    to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before any
-    subsequent \PUT{}, \acp{AMO}, and memory store routines to symmetric data
-    objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery,
-    not completion.
+    This routine assures ordering of delivery of \PUT{}, \acp{AMO}, and memory
+    store routines to symmetric data objects.  All \PUT{}, \acp{AMO}, and memory
+    store routines to symmetric data objects issued to a particular remote
+    \ac{PE} prior to the call to \FUNC{shmem\_fence} are guaranteed to be
+    delivered before any subsequent \PUT{}, \acp{AMO}, and memory store routines
+    to symmetric data objects to the same \ac{PE}. \FUNC{shmem\_fence}
+    guarantees order of delivery, not completion.
 }
 
 \apireturnvalues{
@@ -32,15 +32,31 @@ CALL SHMEM_FENCE
 }
 
 \apinotes{
-    \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not
-    guarantee completion of delivery.  There is a subtle difference between
+    \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does
+    not guarantee completion of delivery.  There is a subtle difference between
     \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}, in that, \FUNC{shmem\_quiet}
     guarantees completion of \PUT{}, \acp{AMO}, and memory store routines to
-    symmetric data objects which makes the updates visible to all other \acp{PE}. 
+    symmetric data objects which makes the updates visible to all other
+    \acp{PE}. 
     
     The \FUNC{shmem\_quiet} routine should be called if completion of PUT{},
-    \acp{AMO}, and memory store routines to symmetric data objects is desired when
-    multiple remote \ac{PE}s are involved.
+    \acp{AMO}, and memory store routines to symmetric data objects is desired
+    when multiple remote \ac{PE}s are involved.
+
+    \newtext{
+    The visibility ordering of updates at a target PE can also be affected by
+    memory load reordering at the target \ac{PE} on platforms with a relaxed
+    memory model.  For example, one might use \FUNC{shmem\_fence} to order
+    delivery of a block of data to a target \ac{PE} before issuing another
+    \PUT{} routine, which sets a completion flag on the same target \ac{PE}. In
+    this case, the target \ac{PE} may still see updates to data and flag out of
+    order due to reordering of memory loads on the target \ac{PE}. A memory
+    barrier or load-acquire instruction may be required between loads at the
+    target \ac{PE} to prevent such reordering. It is recommended that
+    \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} is used instead of memory
+    loads to poll on a flag variable at the target \ac{PE} to portably guarantee
+    visibility ordering between updates to data and flag at the target \ac{PE}. 
+    }
 }
 
 \begin{apiexamples}
