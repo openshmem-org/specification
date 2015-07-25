@@ -1,28 +1,27 @@
 \apisummary{
     Each \ac{PE} exchanges distinct data with all other \acp{PE} in the
     \activeset.  Each \ac{PE} may send a different amount of data and provide
-    offsets for the \VAR{source} and \VAR{dest} data.
+    offsets for the \VAR{source} data.
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoallv(void *dest, size_t *t_offsets, size_t *t_sizes, const void *source, size_t *s_offsets, size_t *s_sizes, int PE_start, int logPE_stride, int PE_size, long *pSync)
+void shmem_alltoallv_max(void *dest, size_t max_offset, size_t *t_sizes, const void *source, size_t *s_offsets, size_t *s_sizes, int PE_start, int logPE_stride, int PE_size, long *pSync)
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
 INTEGER PE_start, logPE_stride, PE_size
 INTEGER (KIND=8) t_offsets(*), t_sizes(*), s_offsets(*), s_sizes(*)
-CALL SHMEM_ALLTOALLV(dest, t_offsets, t_sizes, source, s_offsets, s_sizes, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_ALLTOALLV(dest, max_offset, t_sizes, source, s_offsets, s_sizes, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}
 \apiargument{OUT}{dest}{A symmetric data object large enough to receive the
     combined total data being sent from each \ac{PE} in the \activeset.}
-\apiargument{IN}{t\_offsets}{A symmetric data object with \VAR{PE\_size}
-    entries. Entry i specifies the offset in bytes (relative to \VAR{dest}) at
-    which to place the incoming data from \ac{PE} i.}
+\apiargument{IN}{max\_offset}{The maximum amount of data in bytes that any
+    \ac{PE} in the \activeset\ will send during the exchange.}
 \apiargument{OUT}{t\_sizes}{A symmetric data object with \VAR{PE\_size} entries.
     On function return, entry i will contain the number of bytes received from
     \ac{PE} i.}
@@ -54,40 +53,43 @@ CALL SHMEM_ALLTOALLV(dest, t_offsets, t_sizes, source, s_offsets, s_sizes, PE_st
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_alltoallv} routine is a collective routine; each \ac{PE} in
-    the \activeset\ exchanges distinct data with all other \acp{PE} in the set.
-    Each \ac{PE} specifies an array of source offsets and source sizes (in
-    bytes) that describe what data to send to each of the other \acp{PE} in the
-    set.  The caller also specifies a \VAR{dest} buffer and a dest offset data
-    object that specifies where data received from each of the other \acp{PE} is
-    deposited. The \VAR{t\_sizes} data object is an output parameter. On return
-    from the collective, the \VAR{t\_sizes} data object contains the actual
-    amount of data in bytes the local \ac{PE} received from each \ac{PE}.
+    The \FUNC{shmem\_alltoallv\_max} routine is a collective routine; each
+    \ac{PE} in the \activeset\ exchanges distinct data with all other \acp{PE}
+    in the set.  Each \ac{PE} specifies an array of source offsets and source
+    sizes (in bytes) that describe what data to send to each of the other
+    \acp{PE} in the set.  The caller also specifies a \VAR{dest} buffer along
+    with a \VAR{max\_offset} in bytes that indicates the maximum amount of data
+    that will be sent by any \ac{PE} during the exchange.  Each sending \ac{PE}
+    will then deposit its data into its own \VAR{max\_offset} sized region of
+    the \VAR{dest} buffer on the local \ac{PE}.  The \VAR{t\_sizes} data object
+    is an output parameter. On return from the collective, the \VAR{t\_sizes}
+    data object contains the actual amount of data in bytes the local \ac{PE}
+    received from each \ac{PE}.
 
-    The \FUNC{shmem\_alltoallv} routine requires each PE to allocate its
-    \VAR{dest} array large enough to hold the incoming data. If the caller
-    calculates the \VAR{t\_offsets} entries using a smaller maximum size than is
-    being used by one or more of the senders, data may be overwritten.  
+    The \FUNC{shmem\_alltoallv\_max} routine requires each \ac{PE} to allocate
+    its \VAR{dest} array large enough to hold the incoming data. If the caller
+    calculates the size using a smaller maximum size than is being used by one
+    or more of the senders, data may be overwritten.  
 
     As with all \openshmem collective routines, this routine assumes
     that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not
     in the \activeset{} calls an \openshmem collective routine, undefined
     behavior results.
 
-    The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and
-    \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same
-    \VAR{dest} and \VAR{source} arrays, and the same \VAR{pSync} work array must
-    be passed to all \acp{PE} in the \activeset.
+    The values of arguments \VAR{max\_offset}, \VAR{PE\_start},
+    \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \acp{PE} in the
+    \activeset. The same \VAR{dest} and \VAR{source} arrays, and the same
+    \VAR{pSync} work array must be passed to all \acp{PE} in the \activeset.
     
-    Before any \ac{PE} calls \FUNC{shmem\_alltoallv}, the following conditions
-    must exist (synchronization via a barrier or some other method is often
-    needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
+    Before any \ac{PE} calls \FUNC{shmem\_alltoallv\_max}, the following
+    conditions must exist (synchronization via a barrier or some other method is
+    often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a
     \FUNC{shmem\_alltoall/v} routine.  The \VAR{dest} data object on all
-    \acp{PE} in the \activeset{} is ready to accept the \FUNC{shmem\_alltoallv}
-    data.
+    \acp{PE} in the \activeset{} is ready to accept the
+    \FUNC{shmem\_alltoallv\_max} data.
     
-    Upon return from \FUNC{shmem\_alltoallv}, the following is true for the
+    Upon return from \FUNC{shmem\_alltoallv\_max}, the following is true for the
     local PE: The \VAR{dest} and \VAR{t\_sizes} symmetric data objects are
     updated.
 }
@@ -103,24 +105,25 @@ CALL SHMEM_ALLTOALLV(dest, t_offsets, t_sizes, source, s_offsets, s_sizes, PE_st
     
     You must ensure the that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the \activeset{} while any of the \acp{PE} participates in
-    processing of an \openshmem\ \FUNC{shmem\_alltoallv} routine. Be careful to
-    avoid these situations: If the \VAR{pSync} array is initialized at run
-    time, some type of synchronization is needed to ensure that all \acp{PE} in
-    the \activeset{} have initialized \VAR{pSync} before any of them enter an
-    \openshmem\ routine called with the \VAR{pSync} synchronization array.  A
-    \VAR{pSync} array may be reused on a subsequent \openshmem\
-    \FUNC{shmem\_alltoallv} routine only if none of the \acp{PE} in the
+    processing of an \openshmem\ \FUNC{shmem\_alltoallv\_max} routine. Be
+    careful to avoid these situations: If the \VAR{pSync} array is initialized
+    at run time, some type of synchronization is needed to ensure that all
+    \acp{PE} in the \activeset{} have initialized \VAR{pSync} before any of them
+    enter an \openshmem\ routine called with the \VAR{pSync} synchronization
+    array.  A \VAR{pSync} array may be reused on a subsequent \openshmem\
+    \FUNC{shmem\_alltoallv\_max} routine only if none of the \acp{PE} in the
     \activeset{} are still processing a prior \openshmem\
-    \FUNC{shmem\_alltoallv} routine call that used the same \VAR{pSync} array.
-    In general, this can be ensured only by doing some type of synchronization.        
+    \FUNC{shmem\_alltoallv\_max} routine call that used the same \VAR{pSync}
+    array.  In general, this can be ensured only by doing some type of
+    synchronization.        
 }
 
 \begin{apiexamples}
 
 \apicexample
-    {This example shows \FUNC{shmem\_alltoallv} exchanging variable sized
+    {This example shows \FUNC{shmem\_alltoallv\_max} exchanging variable sized
     data amounts among all \acp{PE}.}
-    {./example_code/shmem_alltoallv_example.c}
+    {./example_code/shmem_alltoallv_max_example.c}
     {}
 
 \end{apiexamples}
