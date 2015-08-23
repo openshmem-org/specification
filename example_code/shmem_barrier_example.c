@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <shmem.h>
 
-long pSync[_SHMEM_BARRIER_SYNC_SIZE];
+long pSync[SHMEM_BARRIER_SYNC_SIZE];
 int x = 10101;
 
 int main(void)
 {
    int i, me, npes;
 
-   for (i = 0; i < _SHMEM_BARRIER_SYNC_SIZE; i += 1){
-      pSync[i] = _SHMEM_SYNC_VALUE;
+   for (i = 0; i < SHMEM_BARRIER_SYNC_SIZE; i += 1){
+      pSync[i] = SHMEM_SYNC_VALUE;
    }
 
    shmem_init();

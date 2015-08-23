@@ -26,8 +26,8 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 \apiargument{IN}{PE\_size}{The number of  \acp{PE} in the \activeset.  \VAR{PE\_size}
     must be of type integer.  If you are  using  \Fortran, it must be a default
     integer value.}
-\apiargument{IN}{pSync}{	A  symmetric work  array.  In \CorCpp, \VAR{pSync} must
-    be of type long and size \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE}.  In \Fortran,
+\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must
+    be of type long and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.  In \Fortran,
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.
     If you are using \Fortran, it must  be a default  integer type.  Every element
     of this array must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of
