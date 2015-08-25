@@ -96,14 +96,9 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     \newtext{
     Visibility of updates on the target \ac{PE} of an \openshmem{} RMA operation
     can be affected by reordering of loads on architectures with a relaxed
-    memory model. A memory barrier or load-acquire instruction may be required
-    between loads at the target \ac{PE} in order to prevent reordering.  For
-    example, such reordering could happen when the target \ac{PE} polls for
-    update to a variable, e.g. 'flag,' then accesses another variable, e.g.
-    'data,' and expects to see the most recent update to 'data.' For writing
-    portable code in such scenarios, \FUNC{shmem\_wait} or
-    \FUNC{shmem\_wait\_until} should be used for polling the 'flag' to guarantee
-    order of visibility between updates to 'flag' and 'data.' }
+    memory model.  For writing portable code in such scenarios,
+    \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} should be used to guarantee
+    visibility ordering. }
 }
 
 \apiimpnotes{
@@ -111,12 +106,6 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     \FUNC{shmem\_wait\_until} do not return before the update of the memory
     indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
     must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
-
-    \newtext{
-    \openshmem implementations must ensure \FUNC{shmem\_wait} and
-    \FUNC{shmem\_wait\_until} include the required memory barrier or
-    load-acquire instructions to guarantee the correct visibility ordering
-    between updates to \VAR{ivar} and updates to the rest of the memory.}
 }
 
 
