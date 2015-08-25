@@ -11,7 +11,7 @@ void shmem_alltoalls(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t ss
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
-INTEGER PE_start, logPE_stride, PE_size
+INTEGER dst, sst, PE_start, logPE_stride, PE_size
 INTEGER (KIND=8) length
 CALL SHMEM_ALLTOALL(dest, source, dst, sst, length, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
