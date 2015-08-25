@@ -83,9 +83,9 @@ CALL SHMEM_ALLTOALLV(dest, t_offsets, t_sizes, source, s_offsets, s_sizes, PE_st
     must exist (synchronization via a barrier or some other method is often
     needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a
-    \FUNC{shmem\_alltoall/v} routine.  The \VAR{dest} data object on all
-    \acp{PE} in the \activeset{} is ready to accept the \FUNC{shmem\_alltoallv}
-    data.
+    \FUNC{shmem\_alltoall/s/v/v\_max} routine.  The \VAR{dest} data object on
+    all \acp{PE} in the \activeset{} is ready to accept the
+    \FUNC{shmem\_alltoallv} data.
     
     Upon return from \FUNC{shmem\_alltoallv}, the following is true for the
     local PE: The \VAR{dest} and \VAR{t\_sizes} symmetric data objects are
