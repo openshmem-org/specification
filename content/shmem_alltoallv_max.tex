@@ -13,8 +13,8 @@ void shmem_alltoallv_max(void *dest, size_t max_offset, size_t *t_sizes, const v
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
 INTEGER PE_start, logPE_stride, PE_size
-INTEGER (KIND=8) t_offsets(*), t_sizes(*), s_offsets(*), s_sizes(*)
-CALL SHMEM_ALLTOALLV(dest, max_offset, t_sizes, source, s_offsets, s_sizes, PE_start, logPE_stride, PE_size, pSync)
+INTEGER (KIND=8) max_offset, t_sizes(*), s_offsets(*), s_sizes(*)
+CALL SHMEM_ALLTOALLV_MAX(dest, max_offset, t_sizes, source, s_offsets, s_sizes, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}
