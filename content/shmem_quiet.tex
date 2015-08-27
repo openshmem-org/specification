@@ -45,21 +45,12 @@ CALL SHMEM_QUIET
     memory stores, \newtext{and nonblocking \PUT{} and \GET{} routines}) to
     symmetric data objects on all \acp{PE}.
 
-\newtext{
-    The visibility ordering of updates to data and flag at a target \ac{PE} can
-    also be affected by memory load reordering at the target \ac{PE} on
-    platforms with a relaxed memory model. For example, one might use
-    \FUNC{shmem\_quiet} to complete the update to a block of data on a target
-    \ac{PE} before issuing another \PUT{} routine, which sets a completion flag
-    on the same target \ac{PE}. In this case, the target \ac{PE} may still see
-    updates to data and flag out of order due to reordering of memory loads on
-    the target \ac{PE}. A memory barrier or load-acquire instruction may be
-    required between loads at the target \ac{PE} to prevent such reordering. It
-    is recommended that \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} is used
-    instead of memory loads to poll on a flag variable at the target \ac{PE} to
-    portably guarantee visibility ordering between updates to data and flag at
-    the target \ac{PE}.
-    }
+    \newtext{
+    Visibility of updates on the target \ac{PE} of an \openshmem{} RMA operation
+    can be affected by reordering of loads on architectures with a relaxed
+    memory model.  For writing portable code in such scenarios,
+    \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} should be used to guarantee
+    visibility ordering. }
 }
 
 \begin{apiexamples}
