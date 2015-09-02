@@ -7,7 +7,7 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoallv_max(void *dest, size_t max_offset, size_t *t_sizes, const void *source, size_t *s_offsets, size_t *s_sizes, int PE_start, int logPE_stride, int PE_size, long *pSync)
+void shmem_alltoallv_max(void *dest, size_t max_offset, const size_t *t_sizes, const void *source, const size_t *s_offsets, const size_t *s_sizes, int PE_start, int logPE_stride, int PE_size, long *pSync)
 \end{Csynopsis}
 
 \begin{Fsynopsis}
