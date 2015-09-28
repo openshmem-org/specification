@@ -44,19 +44,13 @@ CALL SHMEM_FENCE
     when multiple remote \ac{PE}s are involved.
 
     \newtext{
-    The visibility ordering of updates at a target PE can also be affected by
-    memory load reordering at the target \ac{PE} on platforms with a relaxed
-    memory model.  For example, one might use \FUNC{shmem\_fence} to order
-    delivery of a block of data to a target \ac{PE} before issuing another
-    \PUT{} routine, which sets a completion flag on the same target \ac{PE}. In
-    this case, the target \ac{PE} may still see updates to data and flag out of
-    order due to reordering of memory loads on the target \ac{PE}. A memory
-    barrier or load-acquire instruction may be required between loads at the
-    target \ac{PE} to prevent such reordering. It is recommended that
-    \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} is used instead of memory
-    loads to poll on a flag variable at the target \ac{PE} to portably guarantee
-    visibility ordering between updates to data and flag at the target \ac{PE}. 
-    }
+    The order in which updates performed through the OpenSHMEM interface become
+    visible in local memory at the target \ac{PE} is not specified. This order
+    is affected by multiple factors, including the memory model of the
+    underlying architecture. The \FUNC{shmem\_wait} and
+    \FUNC{shmem\_wait\_until} operations can be used to portably ensure
+    visibility of updates that occurred and were ordered prior to the update
+    satisfying the wait operation.}
 }
 
 \begin{apiexamples}

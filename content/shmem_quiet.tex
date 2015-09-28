@@ -46,11 +46,14 @@ CALL SHMEM_QUIET
     symmetric data objects on all \acp{PE}.
 
     \newtext{
-    Visibility of updates on the target \ac{PE} of an \openshmem{} RMA operation
-    can be affected by reordering of loads on architectures with a relaxed
-    memory model.  For writing portable code in such scenarios,
-    \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} should be used to guarantee
-    visibility ordering. }
+    The order in which updates performed through the OpenSHMEM interface become
+    visible in local memory at the target \ac{PE} is not specified. This order
+    is affected by multiple factors, including the memory model of the
+    underlying architecture. The \FUNC{shmem\_wait} and
+    \FUNC{shmem\_wait\_until} operations can be used to portably ensure
+    visibility of updates that occurred and were ordered prior to the update
+    satisfying the wait operation.}
+
 }
 
 \begin{apiexamples}
