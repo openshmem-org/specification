@@ -6,25 +6,29 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoall(void *dest, const void *source, size_t length, int PE_start, int logPE_stride, int PE_size, long *pSync)
+void shmem_alltoall32(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync)
+void shmem_alltoall64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync)
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
 INTEGER PE_start, logPE_stride, PE_size
-INTEGER (KIND=8) length
-CALL SHMEM_ALLTOALL(dest, source, length, PE_start, logPE_stride, PE_size, pSync)
+INTEGER nelems
+CALL SHMEM_ALLTOALL32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}
 
 \apiargument{OUT}{dest}{A symmetric data object large enough to receive 
-    the combined total of \VAR{length} bytes from each \ac{PE} in the
+    the combined total of \VAR{nelems} elements from each \ac{PE} in the
     \activeset.}
-\apiargument{IN}{source}{A symmetric data object that contains \VAR{length} 
-    bytes of data for each \ac{PE} in the \activeset{}, ordered according to 
+\apiargument{IN}{source}{A symmetric data object that contains \VAR{nelems} 
+    elements of data for each \ac{PE} in the \activeset{}, ordered according to 
     destination \ac{PE}.}
-\apiargument{IN}{length}{The number of bytes to exchange for each \ac{PE}.}
+\apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
+    \VAR{nelems} must be of type size\_t for \CorCpp.  If you are using
+    \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
     it must be a default integer value.}
@@ -45,7 +49,7 @@ CALL SHMEM_ALLTOALL(dest, source, length, PE_start, logPE_stride, PE_size, pSync
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_alltoall} routine is a collective routine; each \ac{PE} in
+    The \FUNC{shmem\_alltoall} routines are collective routines; each \ac{PE} in
     the \activeset{} exchanges a fixed amount of data with all other \acp{PE} in
     the set. The data being sent and received is stored in contiguous symmetric
     data objects. The jth block sent from \ac{PE} i to \ac{PE} j is placed in
@@ -56,21 +60,21 @@ CALL SHMEM_ALLTOALL(dest, source, length, PE_start, logPE_stride, PE_size, pSync
     in the \activeset{} calls an \openshmem collective routine, undefined
     behavior results.
 
-    The values of arguments \VAR{length}, \VAR{PE\_start}, \VAR{logPE\_stride},
+    The values of arguments \VAR{nelems}, \VAR{PE\_start}, \VAR{logPE\_stride},
     and \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same
     \VAR{dest} and \VAR{source} data objects, and the same \VAR{pSync} work
     array must be passed to all \acp{PE} in the \activeset.
     
-    Before any \ac{PE} calls \FUNC{shmem\_alltoall}, the following conditions
-    must exist (synchronization via a barrier or some other method is often
-    needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
+    Before any \ac{PE} calls a \FUNC{shmem\_alltoall} routine, the following
+    conditions must exist (synchronization via a barrier or some other method is
+    often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a
     \FUNC{shmem\_alltoall/s/v/v\_max} routine.  The \VAR{dest} data object on
     all \acp{PE} in the \activeset{} is ready to accept the
     \FUNC{shmem\_alltoall} data.
     
-    Upon return from \FUNC{shmem\_alltoall}, the following is true for the local
-    PE: The \VAR{dest} symmetric data object is updated.
+    Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
+    the local PE: The \VAR{dest} symmetric data object is updated.
 } 
 
 \apireturnvalues{
@@ -99,7 +103,7 @@ CALL SHMEM_ALLTOALL(dest, source, length, PE_start, logPE_stride, PE_size, pSync
 \begin{apiexamples}
 
 \apicexample
-    {This example shows a \FUNC{shmem\_alltoall} on two long elements among all
+    {This example shows a \FUNC{shmem\_alltoall64} on two long elements among all
     \acp{PE}.}
     {./example_code/shmem_alltoall_example.c}
     {}

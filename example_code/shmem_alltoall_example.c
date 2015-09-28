@@ -27,8 +27,7 @@ main()
     shmem_barrier_all();
     
     /* alltoall on all PES */
-    shmem_alltoall(dest, source, count * sizeof(long), 0, 0,
-                    shmem_n_pes(), pSync);
+    shmem_alltoall64(dest, source, count, 0, 0, shmem_n_pes(), pSync);
     
     /* verify results */
     for (pe=0; pe<shmem_n_pes(); pe++) {
