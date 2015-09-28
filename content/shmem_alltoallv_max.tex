@@ -7,32 +7,33 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoallv_max(void *dest, size_t max_offset, const size_t *t_sizes, const void *source, const size_t *s_offsets, const size_t *s_sizes, int PE_start, int logPE_stride, int PE_size, long *pSync)
+void shmem_alltoallv_max32(void *dest, size_t max_offset, const size_t *t_nelems, const void *source, const size_t *s_offsets, const size_t *s_nelems, int PE_start, int logPE_stride, int PE_size, long *pSync)
+void shmem_alltoallv_max64(void *dest, size_t max_offset, const size_t *t_nelems, const void *source, const size_t *s_offsets, const size_t *s_nelems, int PE_start, int logPE_stride, int PE_size, long *pSync)
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
 INTEGER PE_start, logPE_stride, PE_size
-INTEGER (KIND=8) max_offset, t_sizes(*), s_offsets(*), s_sizes(*)
-CALL SHMEM_ALLTOALLV_MAX(dest, max_offset, t_sizes, source, s_offsets, s_sizes, PE_start, logPE_stride, PE_size, pSync)
+INTEGER max_offset, t_nelems(*), s_offsets(*), s_nelems(*)
+CALL SHMEM_ALLTOALLV_MAX(dest, max_offset, t_nelems, source, s_offsets, s_nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}
 \apiargument{OUT}{dest}{A symmetric data object large enough to receive the
     combined total data being sent from each \ac{PE} in the \activeset.}
-\apiargument{IN}{max\_offset}{The maximum amount of data in bytes that any
-    \ac{PE} in the \activeset\ will send during the exchange.}
-\apiargument{OUT}{t\_sizes}{A symmetric data object with \VAR{PE\_size} entries.
-    On function return, entry i will contain the number of bytes received from
+\apiargument{IN}{max\_offset}{The maximum amount of data in number of elements
+that any \ac{PE} in the \activeset\ will send during the exchange.}
+\apiargument{OUT}{t\_nelems}{A symmetric data object with \VAR{PE\_size} entries.
+    On function return, entry i will contain the number of elements received from
     \ac{PE} i.}
 \apiargument{IN}{source}{A symmetric data object that contains the data to be
     sent to each \ac{PE} in the \activeset.}
 \apiargument{IN}{s\_offsets}{A symmetric data object with \VAR{PE\_size}
-    entries. Entry i specifies the offset in bytes (relative to \VAR{source}) of
-    the starting address of the data to be sent to \ac{PE} i.}
-\apiargument{IN}{s\_sizes}{A symmetric data object with \VAR{PE\_size} entries.
-    Entry i specifies the amount of data (in bytes) that will be sent to \ac{PE}
-    i.}
+    entries. Entry i specifies the number of elements offset (relative to
+    \VAR{source}) of the starting address of the data to be sent to \ac{PE} i.}
+\apiargument{IN}{s\_nelems}{A symmetric data object with \VAR{PE\_size} entries.
+    Entry i specifies the amount of data (in number of elements) that will be
+    sent to \ac{PE} i.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using
     \Fortran, it must be a default integer value.}
@@ -53,20 +54,20 @@ CALL SHMEM_ALLTOALLV_MAX(dest, max_offset, t_sizes, source, s_offsets, s_sizes, 
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_alltoallv\_max} routine is a collective routine; each
+    The \FUNC{shmem\_alltoallv\_max} routines are collective routines; each
     \ac{PE} in the \activeset\ exchanges distinct data with all other \acp{PE}
     in the set.  Each \ac{PE} specifies an array of source offsets and source
-    sizes (in bytes) that describe what data to send to each of the other
-    \acp{PE} in the set.  The caller also specifies a \VAR{dest} buffer along
-    with a \VAR{max\_offset} in bytes that indicates the maximum amount of data
-    that will be sent by any \ac{PE} during the exchange.  Each sending \ac{PE}
-    will then deposit its data into its own \VAR{max\_offset} sized region of
-    the \VAR{dest} buffer on the local \ac{PE}.  The \VAR{t\_sizes} data object
-    is an output parameter. On return from the collective, the \VAR{t\_sizes}
-    data object contains the actual amount of data in bytes the local \ac{PE}
-    received from each \ac{PE}.
+    sizes (in number of elements) that describe what data to send to each of the
+    other \acp{PE} in the set.  The caller also specifies a \VAR{dest} buffer
+    along with a \VAR{max\_offset} in number elements that indicates the maximum
+    amount of data that will be sent by any \ac{PE} during the exchange.  Each
+    sending \ac{PE} will then deposit its data into its own \VAR{max\_offset}
+    sized region of the \VAR{dest} buffer on the local \ac{PE}.  The
+    \VAR{t\_nelems} data object is an output parameter. On return from the
+    collective, the \VAR{t\_nelems} data object contains the actual amount of
+    data in number of elements the local \ac{PE} received from each \ac{PE}.
 
-    The \FUNC{shmem\_alltoallv\_max} routine requires each \ac{PE} to allocate
+    The \FUNC{shmem\_alltoallv\_max} routines require each \ac{PE} to allocate
     its \VAR{dest} array large enough to hold the incoming data. If the caller
     calculates the size using a smaller maximum size than is being used by one
     or more of the senders, data may be overwritten.  
@@ -81,17 +82,17 @@ CALL SHMEM_ALLTOALLV_MAX(dest, max_offset, t_sizes, source, s_offsets, s_sizes, 
     \activeset. The same \VAR{dest} and \VAR{source} arrays, and the same
     \VAR{pSync} work array must be passed to all \acp{PE} in the \activeset.
     
-    Before any \ac{PE} calls \FUNC{shmem\_alltoallv\_max}, the following
-    conditions must exist (synchronization via a barrier or some other method is
-    often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
-    \activeset{} is not still in use from a prior call to a
-    \FUNC{shmem\_alltoall/s/v/v\_max} routine.  The \VAR{dest} data object on all
-    \acp{PE} in the \activeset{} is ready to accept the
+    Before any \ac{PE} calls to a \FUNC{shmem\_alltoallv\_max} routine, the
+    following conditions must exist (synchronization via a barrier or some other
+    method is often needed to ensure this): The \VAR{pSync} array on all
+    \acp{PE} in the \activeset{} is not still in use from a prior call to a
+    \FUNC{shmem\_alltoall/s/v/v\_max} routine.  The \VAR{dest} data object on
+    all \acp{PE} in the \activeset{} is ready to accept the
     \FUNC{shmem\_alltoallv\_max} data.
     
-    Upon return from \FUNC{shmem\_alltoallv\_max}, the following is true for the
-    local PE: The \VAR{dest} and \VAR{t\_sizes} symmetric data objects are
-    updated.
+    Upon return from a \FUNC{shmem\_alltoallv\_max} routine, the following is
+    true for the local PE: The \VAR{dest} and \VAR{t\_nelems} symmetric data
+    objects are updated.
 }
 
 \apireturnvalues{
@@ -121,7 +122,7 @@ CALL SHMEM_ALLTOALLV_MAX(dest, max_offset, t_sizes, source, s_offsets, s_sizes, 
 \begin{apiexamples}
 
 \apicexample
-    {This example shows \FUNC{shmem\_alltoallv\_max} exchanging variable sized
+    {This example shows \FUNC{shmem\_alltoallv\_max64} exchanging variable sized
     data amounts among all \acp{PE}.}
     {./example_code/shmem_alltoallv_max_example.c}
     {}

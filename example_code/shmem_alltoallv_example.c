@@ -5,7 +5,7 @@ main()
 {
     static long pSync[SHMEM_ALLTOALL_SYNC_SIZE];
     long *source, *dest;
-    size_t *s_offsets, *s_sizes, *t_offsets, *t_sizes, offset;
+    size_t *s_offsets, *s_nelems, *t_offsets, *t_nelems, offset;
     int  i, maxcount, pe, idx;
     
     start_pes(0);
@@ -14,29 +14,29 @@ main()
     dest = (long *) shmalloc(maxcount * shmem_n_pes() * sizeof(long));
     source = (long *) shmalloc(maxcount * shmem_n_pes() * sizeof(long));
     s_offsets = (size_t *) shmalloc(shmem_n_pes() * sizeof(size_t));
-    s_sizes   = (size_t *) shmalloc(shmem_n_pes() * sizeof(size_t));
+    s_nelems  = (size_t *) shmalloc(shmem_n_pes() * sizeof(size_t));
     t_offsets = (size_t *) shmalloc(shmem_n_pes() * sizeof(size_t));
-    t_sizes   = (size_t *) shmalloc(shmem_n_pes() * sizeof(size_t));
+    t_nelems  = (size_t *) shmalloc(shmem_n_pes() * sizeof(size_t));
     
     s_offsets[0] = 0;
     for (pe=0; pe <shmem_n_pes(); pe++) {
     
        /* set source sizes, no need to set dest sizes */
-       s_sizes[pe] = pe * sizeof(long);
-       t_sizes[pe] = 0;
+       s_nelems[pe] = pe;
+       t_nelems[pe] = 0;
     
        /* calculate source offsets */
        if (pe > 0) {
-          s_offsets[pe] = s_offsets[pe-1] + s_sizes[pe-1];
+          s_offsets[pe] = s_offsets[pe-1] + s_nelems[pe-1];
        }
     
        /* calculate dest offsets */
-       t_offsets[pe] = (shmem_my_pe() * sizeof(long)) * pe;
+       t_offsets[pe] = shmem_my_pe() * pe;
     }
     
     /* assign source values */
     for (idx=0,pe=0; pe<shmem_n_pes(); pe++) {
-       for (i=0; i<s_sizes[pe]/sizeof(long); i++) {
+       for (i=0; i<s_nelems[pe]; i++) {
           source[idx++] = shmem_my_pe();
        }
     }
@@ -49,13 +49,13 @@ main()
     shmem_barrier_all();
     
     /* alltoallv on all PES */
-    shmem_alltoallv(dest, t_offsets, t_sizes, source,
-                    s_offsets, s_sizes, 0, 0, shmem_n_pes(), pSync);
+    shmem_alltoallv64(dest, t_offsets, t_nelems, source,
+                    s_offsets, s_nelems, 0, 0, shmem_n_pes(), pSync);
     
      /* verify results */
     for (pe=0; pe<shmem_n_pes(); pe++) {
-    offset = t_offsets[pe] / sizeof(long);
-       for (i=0; i<t_sizes[pe]/sizeof(long); i++) {
+    offset = t_offsets[pe];
+       for (i=0; i<t_nelems[pe]; i++) {
           if (dest[offset] != pe) {
              printf("[%d] ERROR: dest[%d]=%ld, should be %d\n",
                        shmem_my_pe(), offset, dest[offset], pe);
@@ -66,9 +66,9 @@ main()
     
     shmem_barrier_all();
     shfree(s_offsets);
-    shfree(s_sizes);
+    shfree(s_nelems);
     shfree(t_offsets);
-    shfree(t_sizes);
+    shfree(t_nelems);
     shfree(dest);
     shfree(source);
     
