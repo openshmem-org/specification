@@ -11,15 +11,16 @@ by the \ac{PE} itself; these data objects cannot be accessed by other \ac{PE}s
 via \openshmem routines. Private data objects follow the memory model of
 \Clang{} or \Fortran. Remotely accessible objects, however, can be accessed by
 remote \ac{PE}s using \openshmem routines.  Remotely accessible data objects are
-called \emph{Symmetric Objects}.  Each symmetric data object has a corresponding
-object with the same name, type, \newtext{and} size, \oldtext{and offset (from
-an arbitrary memory address)} on all PEs where that object is accessible via the
-\openshmem \ac{API}\footnote{\newtext{For efficiency reasons, the same offset
-(from an arbitrary memory address) for symmetric data objects might be used on
-all \acp{PE}. Further discussion about symmetric heap layout and implementation
-efficiency can be found in section \ref{subsec:shfree}}}.  (For the definition
-of what is accessible, see the descriptions for \FUNC{shmem\_pe\_accessible} and
-\FUNC{shmem\_addr\_accessible} in sections \ref{subsec:shmem_pe_accessible} and
+called \emph{Symmetric Data Objects}.  Each symmetric data object has a
+corresponding object with the same name, type, \newtext{and} size, \oldtext{and
+offset (from an arbitrary memory address)} on all PEs where that object is
+accessible via the \openshmem \ac{API}\footnote{\newtext{For efficiency reasons,
+the same offset (from an arbitrary memory address) for symmetric data
+objects might be used on all \acp{PE}. Further discussion about symmetric heap
+layout and implementation efficiency can be found in section
+\ref{subsec:shfree}}}.  (For the definition of what is accessible, see the
+descriptions for \FUNC{shmem\_pe\_accessible} and \FUNC{shmem\_addr\_accessible}
+in sections \ref{subsec:shmem_pe_accessible} and
 \ref{subsec:shmem_addr_accessible}.) Symmetric data objects accessed via typed
 \openshmem interfaces are required to be natural aligned based on their type
 requirements and underlying architecture.  In \openshmem the following kinds of
