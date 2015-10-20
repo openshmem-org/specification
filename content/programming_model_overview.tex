@@ -81,8 +81,10 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Synchronization and Ordering}
 \begin{enumerate}
-  \item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of remote access
-      operations and stores to symmetric data objects with respect to a specific
+  \item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of   
+ \newtext{ \PUT, AMOs, and memory store routines}
+ \oldtext{ remote access operations and stores}
+  to symmetric data objects with respect to a specific
       destination \ac{PE}. 
   \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access
       operations and stores to symmetric data objects. 
