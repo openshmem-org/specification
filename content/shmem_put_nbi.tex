@@ -50,8 +50,11 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
 
 \apidescription{
     The routines return after posting the operation.  The operation is considered 
-    complete after a subsequent call to shmem\_quiet(). Multiple call to these routines
-    before a shmem\_quiet() can deliver the data in any order.
+    complete after a subsequent call to shmem\_quiet(). 
+    At the completion of shmem\_quiet(), the data has been copied into the \dest{} array
+    on the destination \ac{PE}.
+    The delivery of data words into the data object on the
+    destination \ac{PE} may occur in any order.
     Furthermore, two successive put
     routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
     introduced between the two calls.   
