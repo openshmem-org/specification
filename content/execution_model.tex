@@ -59,7 +59,7 @@ that \ac{PE} next engages in an \openshmem call.
 
 \openshmem contains a number of routines that operate on symmetric data
 atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by
-\openshmem's atomic operations will be exclusive, but do not guarantee
+\openshmem's atomic operations \newtext{with the same datatype} will be exclusive, but do not guarantee
 exclusivity in combination with other routines, either inside \openshmem or
 outside.
 
