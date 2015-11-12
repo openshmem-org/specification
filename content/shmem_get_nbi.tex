@@ -65,15 +65,14 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 
     \apitablerow{shmem\_getmem\_nbi}{\Fortran: Any noncharacter type. \Clang:
         Any  data  type.  nelems is scaled in bytes.}
-    \apitablerow{ shmem\_get4\_nbi, shmem\_get32\_nbi}{\oldtext{Any
+    \apitablerow{ shmem\_get4\_nbi, shmem\_get32\_nbi}{Any
         noncharacter type that has a storage size equal to \CONST{32}
-        bits.}\newtext{\VAR{dest} and \VAR{source} are \CONST{32}-bit aligned.}}
-    \apitablerow{shmem\_get8\_nbi, shmem\_get64\_nbi}{\oldtext{Any noncharacter 
+        bits.}
+    \apitablerow{shmem\_get8\_nbi, shmem\_get64\_nbi}{Any noncharacter 
         type that has a storage size equal to \CONST{64}
-        bits.}\newtext{\VAR{dest} and \VAR{source} are \CONST{64}-bit aligned.}}
-    \apitablerow{shmem\_get128\_nbi}{\oldtext{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}\newtext{\VAR{dest} and
-        \VAR{source} are \CONST{128}-bit aligned.}}
+        bits.}
+    \apitablerow{shmem\_get128\_nbi}{Any noncharacter type that has a
+        storage size equal to \CONST{128} bits.}
     \apitablerow{shmem\_short\_get\_nbi}{Elements of type short.}
     \apitablerow{shmem\_int\_get\_nbi}{Elements of type int.}
     \apitablerow{shmem\_long\_get\_nbi}{Elements of type long.}

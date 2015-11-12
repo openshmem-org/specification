@@ -68,15 +68,12 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
     The \dest{} and \source{} data objects must conform to typing constraints,
     which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_iput32, shmem\_iput4}{\oldtext{Any noncharacter type
-        that has a storage size equal to \CONST{32} bits.}\newtext{\VAR{dest}
-        and \VAR{source} are \CONST{32}-bit aligned.}}
-    \apitablerow{shmem\_iput64, shmem\_iput8}{\oldtext{Any noncharacter type
-        that has a storage size equal to \CONST{64} bits.}\newtext{\VAR{dest}
-        and \VAR{source} are \CONST{64}-bit aligned.}}
-    \apitablerow{shmem\_iput128}{\oldtext{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}\newtext{\VAR{dest} and
-        \VAR{source} are \CONST{128}-bit aligned.}}
+    \apitablerow{shmem\_iput32, shmem\_iput4}{Any noncharacter type
+        that has a storage size equal to \CONST{32} bits.}
+    \apitablerow{shmem\_iput64, shmem\_iput8}{Any noncharacter type
+        that has a storage size equal to \CONST{64} bits.}
+    \apitablerow{shmem\_iput128}{Any noncharacter type that has a
+        storage size equal to \CONST{128} bits.}
     \apitablerow{shmem\_short\_iput}{Elements of type short.}
     \apitablerow{shmem\_int\_iput}{Elements of type int.}
     \apitablerow{shmem\_long\_iput}{Elements of type long.}

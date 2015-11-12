@@ -66,15 +66,14 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
     {Routine}{Data type of \VAR{dest} and \VAR{source}}
     \apitablerow{shmem\_putmem\_nbi}{\Fortran: Any noncharacter type. \Clang:
         Any  data  type.  nelems is scaled in bytes.}
-    \apitablerow{ shmem\_put4\_nbi, shmem\_put32\_nbi}{\oldtext{Any
+    \apitablerow{ shmem\_put4\_nbi, shmem\_put32\_nbi}{Any
         noncharacter type that has a storage size equal to \CONST{32}
-        bits.}\newtext{\VAR{dest} and \VAR{source} are \CONST{32}-bit aligned.}}
-    \apitablerow{shmem\_put8\_nbi, shmem\_put64\_nbi}{\oldtext{Any noncharacter 
+        bits.}
+    \apitablerow{shmem\_put8\_nbi, shmem\_put64\_nbi}{Any noncharacter 
         type that has a storage size equal to \CONST{64}
-        bits.}\newtext{\VAR{dest} and \VAR{source} are \CONST{64}-bit aligned.}}
-    \apitablerow{shmem\_put128\_nbi}{\oldtext{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}\newtext{\VAR{dest} and
-        \VAR{source} are \CONST{128}-bit aligned.}}
+        bits.}
+    \apitablerow{shmem\_put128\_nbi}{Any noncharacter type that has a
+        storage size equal to \CONST{128} bits.}
     \apitablerow{shmem\_double\_put\_nbi}{Elements of type double.}
     \apitablerow{shmem\_longdouble\_put\_nbi}{Elements of type long double.}
     \apitablerow{SHMEM\_CHARACTER\_PUT\_NBI}{Elements of type character.  \VAR{nelems}
