@@ -17,25 +17,11 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
 \begin{CsynopsisCol}
 void shmem_get<SIZE>(void *dest, const void *source, size_t  nelems, int pe);
 \end{CsynopsisCol}
-where \SIZE{} is one of {8, 16, 32, 64, 128}.
+where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
 void shmem_getmem(void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
-
-%\begin{Csynopsis}
-%void shmem_double_get(double *dest, const double *source, size_t nelems, int pe);
-%void shmem_float_get(float *dest, const float *source, size_t nelems, int pe);
-%void shmem_get32(void *dest, const void *source, size_t  nelems, int pe);
-%void shmem_get64(void  *dest, const void *source, size_t nelems, int pe);
-%void shmem_get128(void *dest, const void *source, size_t nelems, int pe);
-%void shmem_getmem(void *dest, const void *source, size_t nelems, int pe);
-%void shmem_int_get(int *dest, const int *source, size_t  nelems, int pe);
-%void shmem_long_get(long *dest, const long *source, size_t nelems, int pe);
-%void shmem_longdouble_get(long double *dest, const long double *source, size_t nelems, int pe);
-%void shmem_longlong_get(long long *dest, const long long *source, size_t nelems, int pe);
-%void shmem_short_get(short *dest, const short *source, size_t nelems, int pe);
-%\end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER nelems, pe
@@ -86,13 +72,6 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
         has a storage size equal to \CONST{64} bits.}
     \apitablerow{shmem\_get128}{Any  noncharacter type that has a
         storage size equal to \CONST{128} bits.}
-    %\apitablerow{shmem\_short\_get}{Elements of type short.}
-    %\apitablerow{shmem\_int\_get}{Elements of type int.}
-    %\apitablerow{shmem\_long\_get}{Elements of type long.}
-    %\apitablerow{shmem\_longlong\_get}{Elements of type long long.}
-    %\apitablerow{shmem\_float\_get}{Elements of type float.}
-    %\apitablerow{shmem\_double\_get}{Elements of type double.}
-    %\apitablerow{shmem\_longdouble\_get}{Elements of type long double.}
     \apitablerow{SHMEM\_CHARACTER\_GET}{Elements of type character. \VAR{nelems} is
     the number  of characters  to transfer. The actual character
     lengths of the \source{} and \dest{} variables are ignored.}

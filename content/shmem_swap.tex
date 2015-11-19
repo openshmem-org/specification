@@ -14,16 +14,6 @@ TYPE shmem_<TYPENAME>_swap(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
- 	  
-%\begin{Csynopsis}
-%double shmem_double_swap(double *dest, double value, int pe);
-%float shmem_float_swap(float *dest, float value, int pe);
-%int shmem_int_swap(int *dest, int value, int pe);
-%long shmem_long_swap(long *dest, long value, int pe);
-%long long shmem_longlong_swap(long long *dest, long long value, int pe);
-%long shmem_swap(long *dest, long value, int pe);
-%\end{Csynopsis}
-
 \begin{Fsynopsis}
 INTEGER SHMEM_SWAP, value, pe
 ires = SHMEM_SWAP(dest, value, pe) 

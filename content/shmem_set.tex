@@ -5,12 +5,12 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_set(const TYPE *dest, TYPE value, int pe);
+void shmem_set(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_set(const TYPE *dest, TYPE value, int pe);
+void shmem_<TYPENAME>_set(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 

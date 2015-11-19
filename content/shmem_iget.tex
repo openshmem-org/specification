@@ -17,20 +17,7 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
 \begin{CsynopsisCol}
 void shmem_iget<SIZE>(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t  nelems, int pe);
 \end{CsynopsisCol}
-where \SIZE{} is one of {8, 16, 32, 64, 128}.
-
-%\begin{Csynopsis}
-%void shmem_double_iget(double *dest, const double *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_float_iget(float *dest, const float *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_iget32(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_iget64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_iget128(void *dest, const void *source, ptrdiff_t  dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_int_iget(int *dest, const int *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_long_iget(long *dest, const  long  *source,  ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_longdouble_iget(long double *dest, const long double *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_longlong_iget(long long *dest, const long long *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%void shmem_short_iget(short *dest, const short *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-%\end{Csynopsis}
+where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{Fsynopsis}
 INTEGER dst, sst, nelems, pe
@@ -85,13 +72,6 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
         that has a storage size equal to \CONST{64} bits.}
     \apitablerow{shmem\_iget128}{Any noncharacter type that has a
         storage size equal to \CONST{128} bits.}
-    %\apitablerow{shmem\_short\_iget}{Elements of type short.}
-    %\apitablerow{ shmem\_int\_iget}{Elements of type int.}
-    %\apitablerow{shmem\_long\_iget}{Elements of type long.}
-    %\apitablerow{shmem\_longlong\_iget}{Elements of type long long.}
-    %\apitablerow{shmem\_float\_iget}{Elements of type float.}
-    %\apitablerow{shmem\_double\_iget}{Elements of type double.}
-    %\apitablerow{shmem\_longdouble\_iget}{Elements of type long double.}
     \apitablerow{SHMEM\_COMPLEX\_IGET}{Elements of type complex of default size.}
     \apitablerow{SHMEM\_DOUBLE\_IGET}{\Fortran: Elements of type double precision.}
     \apitablerow{SHMEM\_INTEGER\_IGET}{Elements of type integer.}

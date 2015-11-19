@@ -1,4 +1,3 @@
-\color{ForestGreen}
 \apisummary{
     The  nonblocking get routines  provide  a method for copying data from a
     contiguous remote data object on the specified \ac{PE} to the local data object. 
@@ -6,19 +5,24 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+void shmem_get_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types.
+
 \begin{Csynopsis}
-void shmem_double_get_nbi(double *dest, const double *source, size_t nelems, int pe);
-void shmem_float_get_nbi(float *dest, const float *source, size_t nelems, int pe);
-void shmem_get32_nbi(void *dest, const void *source, size_t  nelems, int pe);
-void shmem_get64_nbi(void  *dest, const void *source, size_t nelems, int pe);
-void shmem_get128_nbi(void *dest, const void *source, size_t nelems, int pe);
-void shmem_getmem_nbi(void *dest, const void *source, size_t nelems, int pe);
-void shmem_int_get_nbi(int *dest, const int *source, size_t  nelems, int pe);
-void shmem_long_get_nbi(long *dest, const long *source, size_t nelems, int pe);
-void shmem_longdouble_get_nbi(long double *dest, const long double *source, size_t nelems, int pe);
-void shmem_longlong_get_nbi(long long *dest, const long long *source, size_t nelems, int pe);
-void shmem_short_get_nbi(short *dest, const short *source, size_t nelems, int pe);
+void shmem_<TYPENAME>_get_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{Csynopsis}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+void shmem_get<SIZE>_nbi(void *dest, const void *source, size_t  nelems, int pe);
+\end{CsynopsisCol}
+where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
+
+\begin{CsynopsisCol}
+void shmem_getmem_nbi(void *dest, const void *source, size_t nelems, int pe);
+\end{CsynopsisCol}
 
 \begin{Fsynopsis}
 INTEGER nelems, pe
@@ -65,21 +69,11 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 
     \apitablerow{shmem\_getmem\_nbi}{\Fortran: Any noncharacter type. \Clang:
         Any  data  type.  nelems is scaled in bytes.}
-    \apitablerow{ shmem\_get4\_nbi, shmem\_get32\_nbi}{Any
-        noncharacter type that has a storage size equal to \CONST{32}
-        bits.}
     \apitablerow{shmem\_get8\_nbi, shmem\_get64\_nbi}{Any noncharacter 
         type that has a storage size equal to \CONST{64}
         bits.}
     \apitablerow{shmem\_get128\_nbi}{Any noncharacter type that has a
         storage size equal to \CONST{128} bits.}
-    \apitablerow{shmem\_short\_get\_nbi}{Elements of type short.}
-    \apitablerow{shmem\_int\_get\_nbi}{Elements of type int.}
-    \apitablerow{shmem\_long\_get\_nbi}{Elements of type long.}
-    \apitablerow{shmem\_longlong\_get\_nbi}{Elements of type long long.}
-    \apitablerow{shmem\_float\_get\_nbi}{Elements of type float.}
-    \apitablerow{shmem\_double\_get\_nbi}{Elements of type double.}
-    \apitablerow{shmem\_longdouble\_get\_nbi}{Elements of type long double.}
     \apitablerow{SHMEM\_CHARACTER\_GET\_NBI}{Elements of type character. \VAR{nelems} is
     the number  of characters  to transfer. The actual character
     lengths of the \source{} and \dest{} variables are ignored.}

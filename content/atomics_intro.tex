@@ -1,4 +1,4 @@
-\ac{AMO} is a one-sided communication mechanism that combines memory update
+An \ac{AMO} is a one-sided communication mechanism that combines memory update
 operations with atomicity guarantees described in Section
 \ref{sec:amo_guarantees}.  Similar to the \ac{RMA} routines, described in
 Section \ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
@@ -9,7 +9,7 @@ The \textit{fetching} routines return the original value of, and optionally
 update, the remote data object in a single atomic operation.  The routines 
 return after the data has been fetched and delivered to the local \ac{PE}.
 
-The \textit{fetch-and-operate} operations include: \FUNC{SHMEM\_FETCH},
+The \textit{fetching} operations include: \FUNC{SHMEM\_FETCH},
 \FUNC{SHMEM\_CSWAP}, \FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and \FUNC{SHMEM\_FADD}.
 
 \item % Non-Blocking\\
