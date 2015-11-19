@@ -4,11 +4,21 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+TYPE shmem_fadd(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types.
+
 \begin{Csynopsis}
-int shmem_int_fadd(int *dest, int value, int pe);
-long shmem_long_fadd(long *dest, long value, int pe);
-long long shmem_longlong_fadd(long long *dest, long long value, int pe);
+TYPE shmem_<TYPENAME>_fadd(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
+
+%\begin{Csynopsis}
+%int shmem_int_fadd(int *dest, int value, int pe);
+%long shmem_long_fadd(long *dest, long value, int pe);
+%long long shmem_longlong_fadd(long long *dest, long long value, int pe);
+%\end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pe

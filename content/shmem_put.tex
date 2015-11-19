@@ -5,19 +5,24 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+void shmem_put(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types.
+
 \begin{Csynopsis}
-void shmem_double_put(double *dest, const double *source, size_t nelems, int pe);
-void shmem_float_put(float *dest, const float *source, size_t nelems, int pe);
-void shmem_int_put(int *dest, const int *source, size_t nelems, int pe);
-void shmem_long_put(long *dest, const long *source, size_t nelems, int pe);
-void shmem_longdouble_put(long double *dest, const long double *source, size_t nelems, int pe);
-void shmem_longlong_put(long long *dest, const long long *source, size_t nelems, int pe);
-void shmem_put32(void *dest, const void *source, size_t nelems, int pe);
-void shmem_put64(void *dest, const void *source, size_t nelems, int pe);
-void shmem_put128(void *dest, const void *source, size_t nelems, int pe);
-void shmem_putmem(void *dest, const void *source, size_t nelems, int pe);
-void shmem_short_put(short*dest, const short*source, size_t nelems, int pe);
+void shmem_<TYPENAME>_put(TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{Csynopsis}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+void shmem_put<SIZE>(void *dest, const void *source, size_t nelems, int pe);
+\end{CsynopsisCol}
+where \SIZE{} is one of {8, 16, 32, 64, 128}.
+
+\begin{CsynopsisCol}
+void shmem_putmem(void *dest, const void *source, size_t nelems, int pe);
+\end{CsynopsisCol}
 
 \begin{Fsynopsis}
 CALL SHMEM_CHARACTER_PUT(dest, source, nelems, pe)
@@ -61,14 +66,14 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
     {Routine}{Data type of \VAR{dest} and \VAR{source}}
     \apitablerow{shmem\_putmem}{\Fortran: Any noncharacter type. \Clang: Any
         data  type.  nelems is scaled in bytes.}
-    \apitablerow{shmem\_put4, shmem\_put32}{Any noncharacter type
+    \apitablerow{shmem\_put32}{Any noncharacter type
         that has a storage size equal to \CONST{32} bits.}
     \apitablerow{shmem\_put8, shmem\_put64}{Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
     \apitablerow{shmem\_put128}{Any noncharacter type that has a
         storage size equal to \CONST{128} bits.}
-    \apitablerow{shmem\_double\_put}{Elements of type double.}
-    \apitablerow{shmem\_longdouble\_put}{Elements of type long double.}
+%    \apitablerow{shmem\_double\_put}{Elements of type double.}
+%    \apitablerow{shmem\_longdouble\_put}{Elements of type long double.}
     \apitablerow{SHMEM\_CHARACTER\_PUT}{Elements of type character.  \VAR{nelems}
     is  the number  of	 characters to transfer. The actual character lengths of
     the \source{} and \dest{} variables are ignored. }

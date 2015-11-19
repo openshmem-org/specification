@@ -4,16 +4,27 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+TYPE shmem_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| TYPE *addr, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types.
+
 \begin{Csynopsis}
-char shmem_char_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| char *addr, int pe);
-short shmem_short_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| short *addr, int pe);
-int shmem_int_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| int *addr, int pe);
-long shmem_long_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| long *addr, int pe);
-long long  shmem_longlong_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| long long *addr, int pe);
-float shmem_float_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| float *addr, int pe);
-double shmem_double_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| double *addr, int pe);
-long double shmem_longdouble_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| long double *addr, int pe);
+TYPE shmem_<TYPENAME>_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| TYPE *addr, int pe);
 \end{Csynopsis}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+
+%\begin{Csynopsis}
+%char shmem_char_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| char *addr, int pe);
+%short shmem_short_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| short *addr, int pe);
+%int shmem_int_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| int *addr, int pe);
+%long shmem_long_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| long *addr, int pe);
+%long long  shmem_longlong_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| long long *addr, int pe);
+%float shmem_float_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| float *addr, int pe);
+%double shmem_double_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| double *addr, int pe);
+%long double shmem_longdouble_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| long double *addr, int pe);
+%\end{Csynopsis}
 
 \begin{apiarguments}
     \apiargument{IN}{addr}{The remotely accessible array element or scalar data object.}
@@ -36,7 +47,7 @@ long double shmem_longdouble_g(|\aftergroup\colorswapnt|const|\aftergroup\prevco
 \begin{apiexamples}
 
 \apicexample
-    {The following \FUNC{shmem\_long\_g} example is for \CorCpp{} programs:}
+    {The following \FUNC{shmem\_g} example is for \CorCpp{} programs:}
     {./example_code/shmem_g_example.c}
     {}
 \end{apiexamples}

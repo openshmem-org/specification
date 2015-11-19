@@ -9,7 +9,7 @@ int main(void)
    shmem_init();
    if (shmem_my_pe() == 0) {
       /* put 5 words into dest on PE 1 */
-      shmem_short_iput(dest, source, 1, 2, 5, 1);
+      shmem_iput(dest, source, 1, 2, 5, 1);
    }
    shmem_barrier_all();   /* sync sender and receiver */
    if (shmem_my_pe() == 1) {

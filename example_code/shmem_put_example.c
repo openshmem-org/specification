@@ -9,10 +9,10 @@ int main(void)
    shmem_init();
    if (shmem_my_pe() == 0) {
       /* put 10 words into dest on PE 1 */
-      shmem_long_put(dest, source, 10, 1);
+      shmem_put(dest, source, 10, 1);
    }
    shmem_barrier_all();  /* sync sender and receiver */
    printf("dest[0] on PE %d is %ld\n", shmem_my_pe(), dest[0]);
-   return 1;
+   return 0;
 }
 

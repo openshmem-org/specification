@@ -4,11 +4,21 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+TYPE shmem_cswap(TYPE *dest, TYPE cond, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types.
+
 \begin{Csynopsis}
-int shmem_int_cswap(int *dest, int cond, int value, int pe);
-long shmem_long_cswap(long *dest, long cond, long value, int pe);
-long long shmem_longlong_cswap(long long *dest, long long cond, long long value, int pe);
+TYPE shmem_<TYPENAME>_cswap(TYPE *dest, TYPE cond, TYPE value, int pe);
 \end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
+
+%\begin{Csynopsis}
+%int shmem_int_cswap(int *dest, int cond, int value, int pe);
+%long shmem_long_cswap(long *dest, long cond, long value, int pe);
+%long long shmem_longlong_cswap(long long *dest, long long cond, long long value, int pe);
+%\end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pe

@@ -13,7 +13,7 @@ int main(void)
    npes = shmem_n_pes();
 
    if (me == 0)
-      y = shmem_long_g(&x, npes-1);
+      y = shmem_g(&x, npes-1);
 
    printf("%d: y = %ld\n", me, y);
 

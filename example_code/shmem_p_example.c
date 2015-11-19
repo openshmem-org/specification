@@ -17,7 +17,7 @@ int main(void)
    shmem_barrier_all();
 
    if (me == 0)
-      shmem_double_p(f, e, 1);
+      shmem_p(f, e, 1);
 
    shmem_barrier_all();
    if (me == 1)

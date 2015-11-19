@@ -4,11 +4,21 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+TYPE shmem_finc(TYPE *dest, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types.
+
 \begin{Csynopsis}
-int shmem_int_finc(int *dest, int pe);
-long shmem_long_finc(long *dest, int pe);
-long long shmem_longlong_finc(long long *dest, int pe);
+TYPE shmem_<TYPENAME>_finc(TYPE *dest, int pe);
 \end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
+
+%\begin{Csynopsis}
+%int shmem_int_finc(int *dest, int pe);
+%long shmem_long_finc(long *dest, int pe);
+%long long shmem_longlong_finc(long long *dest, int pe);
+%\end{Csynopsis}
 
 
 \begin{Fsynopsis}

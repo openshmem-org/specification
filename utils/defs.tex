@@ -40,6 +40,10 @@
 \newcommand{\Fortran}{\textit{Fortran}}
 \newcommand{\Clang}{\textit{C}}
 \newcommand{\Cpp}{\textit{C++}}
+\newcommand{\Celev}{\textit{C11}}
+\newcommand{\TYPE}{\emph{TYPE}}
+\newcommand{\TYPENAME}{\emph{TYPENAME}}
+\newcommand{\SIZE}{\emph{SIZE}}
 
 \newcommand{\source}{\textit{source}}
 \newcommand{\target}{\textit{target}}
@@ -310,11 +314,23 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \end{description}
 }
 
+\lstnewenvironment{C11synopsis}
+{ 
+  \textbf{C11:} 
+  \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE}, aboveskip=0pt, belowskip=0pt}}{}
+
+\lstnewenvironment{CsynopsisCol}
+{ 
+  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
+
+
 \lstnewenvironment{Csynopsis}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
 { 
