@@ -54,8 +54,8 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
 
 \apidescription{
     The routines return after posting the operation.  The operation is considered 
-    complete after a subsequent call to shmem\_quiet(). 
-    At the completion of shmem\_quiet(), the data has been copied into the \dest{} array
+    complete after a subsequent call to \FUNC{shmem\_quiet}. 
+    At the completion of \FUNC{shmem\_quiet}, the data has been copied into the \dest{} array
     on the destination \ac{PE}.
     The delivery of data words into the data object on the
     destination \ac{PE} may occur in any order.
