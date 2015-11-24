@@ -5,12 +5,12 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| TYPE *addr, int pe);
+TYPE shmem_g(const TYPE *addr, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_g(|\aftergroup\colorswapnt|const|\aftergroup\prevcolor| TYPE *addr, int pe);
+TYPE shmem_<TYPENAME>_g(const TYPE *addr, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
