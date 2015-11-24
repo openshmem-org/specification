@@ -1,9 +1,7 @@
 An \openshmem program consists of a set of \openshmem processes called \ac{PE}s
 that execute in a \ac{SPMD}-like model where each \ac{PE} can take a different
-execution path. \newtext{For example,} a \ac{PE} can be implemented using an OS
-process \oldtext{or an OS thread} \footnote{\oldtext{Implementing \ac{PE}s using
-OS threads requires compiler techniques to implement the \openshmem memory
-model.}}.  The \ac{PE}s progress asynchronously, and can communicate/synchronize
+execution path. For example, a \ac{PE} can be implemented using an OS
+process.  The \ac{PE}s progress asynchronously, and can communicate/synchronize
 via the \openshmem interfaces.  All \ac{PE}s in an \openshmem program should
 start by calling the initialization routine  \FUNC{shmem\_init}
 \footnote{\textbf{start\_pes} has been deprecated as of Specification 1.2}

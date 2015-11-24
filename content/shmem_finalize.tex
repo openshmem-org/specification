@@ -29,7 +29,7 @@ CALL SHMEM_FINALIZE()
     the last \openshmem library call encountered in the \openshmem portion of a
     program. A call to \FUNC{shmem\_finalize} will release any resources
     initialized by a corresponding call to \FUNC{shmem\_init}. All processes
-    \oldtext{and threads} that represent the \acp{PE} will still exist after the
+    that represent the \acp{PE} will still exist after the
     call to \FUNC{shmem\_finalize} returns, but they will no longer have access
     to any resources that have been released.
 }
