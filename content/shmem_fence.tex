@@ -43,14 +43,13 @@ CALL SHMEM_FENCE
     \acp{AMO}, and memory store routines to symmetric data objects is desired
     when multiple remote \ac{PE}s are involved.
 
-    \newtext{
     The order in which updates performed through the OpenSHMEM interface become
     visible in local memory at the target \ac{PE} is not specified. This order
     is affected by multiple factors, including the memory model of the
     underlying architecture. The \FUNC{shmem\_wait} and
     \FUNC{shmem\_wait\_until} operations can be used to portably ensure
     visibility of updates that occurred and were ordered prior to the update
-    satisfying the wait operation.}
+    satisfying the wait operation.
 }
 
 \begin{apiexamples}
