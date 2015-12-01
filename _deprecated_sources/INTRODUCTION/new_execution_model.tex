@@ -117,7 +117,7 @@ The \openshmem model assumes that computation and communication are naturally ov
 %be reinitialized after the first call.
 
 \subsection{Atomicity Guarantees}
-\label{sec:amo_guarantees}
+\label{subsec:amo_guarantees}
 \openshmem contains a number of routines that operate on symmetric data
 atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by \openshmem's atomic operations will be exclusive, but do not guarantee exclusivity
 in combination with other routines, either inside \openshmem or outside.
