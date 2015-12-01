@@ -18,5 +18,5 @@ int main(void)
       (int)dest[3], (int)dest[4] );
    }
    shmem_barrier_all();   /* sync before exiting */
-   return 1;
+   return 0;
 }

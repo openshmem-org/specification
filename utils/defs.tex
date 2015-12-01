@@ -55,8 +55,10 @@
 \newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
 \newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
 \newcommand{\collect}{\FUNC{SHMEM\_COLLECT}}
+\newcommand{\fcollect}{\FUNC{SHMEM\_FCOLLECT}}
 \newcommand{\reduction}{\textit{Reduction Operations}}
 \newcommand{\alltoall}{\FUNC{SHMEM\_ALLTOALL}}
+\newcommand{\alltoalls}{\FUNC{SHMEM\_ALLTOALLS}}
 \newcommand{\activeset}{\textit{Active~set}\xspace} % why here and not others?
 \newcommand{\shmemprefix}{\textit{SHMEM\_}}
 \newcommand{\shmemprefixC}{\textit{\_SHMEM\_}}
@@ -319,7 +321,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C11:} 
   \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, TYPE}, aboveskip=0pt, belowskip=0pt,}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 

@@ -6,8 +6,8 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoalls32(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync)
-void shmem_alltoalls64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync)
+void shmem_alltoalls32(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void shmem_alltoalls64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
@@ -62,9 +62,9 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
     The \FUNC{shmem\_alltoalls} routines are collective routines; each \ac{PE} in
     the \activeset{} exchanges a fixed amount of strided data with all other
     \acp{PE} in the set.  Both strides, \VAR{dst} and \VAR{sst}, must be greater
-    than or equal to \CONST{1}. The \VAR{sst}*jth block sent from \ac{PE} i to
-    \ac{PE} j is placed in the \VAR{dst}*ith block of the \VAR{dest} buffer on
-    \ac{PE} j.
+    than or equal to \CONST{1}. The \VAR{sst}*\VAR{j}th block sent from \ac{PE} \VAR{i} to
+    \ac{PE} \VAR{j} is placed in the \VAR{dst}*\VAR{i}th block of the \VAR{dest} buffer on
+    \ac{PE} \VAR{j}.
 
     As with all \openshmem collective routines, these routines assume
     that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not
@@ -80,7 +80,7 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
     conditions must exist (synchronization via a barrier or some other method is
     often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a
-    \FUNC{shmem\_alltoall/s/v/v\_max} routine.  The \VAR{dest} data object on
+    \FUNC{shmem\_alltoall/s} routine.  The \VAR{dest} data object on
     all \acp{PE} in the \activeset{} is ready to accept the
     \FUNC{shmem\_alltoalls} data.
     

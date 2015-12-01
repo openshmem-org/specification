@@ -2,8 +2,6 @@ The constants that start with SHMEM\_* are for both \Fortran{}
 and \CorCpp, and they are compile-time constants. 
 All constants that start with
 \_SHMEM\_* are deprecated and provided for backwards compatibility.
-Implementations must include them, and notify the user about deprecation of
-their use.
 \newline
 \newline
 \begin{tabular}{|p{0.4\textwidth}|p{0.5\textwidth}|}
@@ -114,7 +112,9 @@ Integer representing the length of vendor string. \tabularnewline
 \hbox{\hspace*{12mm} \const{SHMEM\_VENDOR\_STRING}}} 
 &
 String representing the vendor name of length less than
-\const{SHMEM\_MAX\_NAME\_LEN} . \tabularnewline
+\const{SHMEM\_MAX\_NAME\_LEN}.  In Fortran the string must be \const{SHMEM\_MAX\_NAME\_LEN} 
+and whitespace padded.  It can also be equal in length to \const{SHMEM\_MAX\_NAME\_LEN} 
+since Fortran does not NULL terminate strings. \tabularnewline
 \hline
 
 \end{tabular}

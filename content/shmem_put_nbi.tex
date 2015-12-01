@@ -1,6 +1,5 @@
 \apisummary{
-    The  nonblocking put routines  provide  a method for copying data from a contiguous local
-    data object to a data object on a specified \ac{PE}. 
+    The  nonblocking put routines and provide a method for copying data from a contiguous local data object to a data object on a specified \ac{PE}. 
 }
 
 \begin{apidefinition}
@@ -40,9 +39,9 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{dest}{Data object to be updated on the remote \ac{PE}. This
+    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
-    \apiargument{OUT}{source}{Data object containing the data to be copied.}
+    \apiargument{IN}{source}{Data object containing the data to be copied.}
     \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
     arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Clang. If you are using
     \Fortran, it must be a constant, variable, or array element of default

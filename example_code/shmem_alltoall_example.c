@@ -1,21 +1,23 @@
 #include <shmem.h>
 #include <stdio.h>
-main()
+
+long pSync[SHMEM_ALLTOALL_SYNC_SIZE];
+
+int main(void)
 {
-    static long pSync[SHMEM_ALLTOALL_SYNC_SIZE];
     long *source, *dest;
     int  i, count, pe;
     
-    start_pes(0);
+    shmem_init();
     
     count = 2;
-    dest = (long*) shmalloc(count * shmem_n_pes() * sizeof(long));
-    source = (long*) shmalloc(count * shmem_n_pes() * sizeof(long));
+    dest = (long*) shmem_malloc(count * shmem_n_pes() * sizeof(long));
+    source = (long*) shmem_malloc(count * shmem_n_pes() * sizeof(long));
     
     /* assign source values */
     for (pe=0; pe <shmem_n_pes(); pe++){
        for (i=0; i<count; i++){
-          source[*pe*count)+i] = shmem_my_pe() + pe;
+          source[pe*count)+i] = shmem_my_pe() + pe;
           dest[(pe*count)+i] = 9999;
        }
     }
@@ -41,7 +43,8 @@ main()
     }
     
     shmem_barrier_all();
-    shfree(dest);
-    shfree(source);
+    shmem_free(dest);
+    shmem_free(source);
     shmem_finalize();
+    return 0;
 }
