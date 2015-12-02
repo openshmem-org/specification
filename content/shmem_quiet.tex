@@ -44,15 +44,6 @@ CALL SHMEM_QUIET
     routines wait for the completion of outstanding writes (\PUT{}, \ac{AMO},
     memory stores, and nonblocking \PUT{} and \GET{} routines) to
     symmetric data objects on all \acp{PE}.
-
-    The order in which updates performed through the OpenSHMEM interface become
-    visible in local memory at the target \ac{PE} is not specified. This order
-    is affected by multiple factors, including the memory model of the
-    underlying architecture. The \FUNC{shmem\_wait} and
-    \FUNC{shmem\_wait\_until} operations can be used to portably ensure
-    visibility of updates that occurred and were ordered prior to the update
-    satisfying the wait operation.
-
 }
 
 \begin{apiexamples}
