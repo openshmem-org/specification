@@ -354,19 +354,16 @@ specification.
 
 \section{Version 1.3}
 This section summarizes the changes from the \openshmem specification Version
-1.2 to Version 1.3.  A major change in this version is .  
+1.2 to Version 1.3.
 
 
 The following list describes the specific changes in 1.3:
 
 \begin{itemize}
 %
-\item New non-blocking variants of remote memory access, \FUNC{SHMEM\_PUT\_NBI}
-	and \FUNC{SHMEM\_GET\_NBI}.
-\\See Sections \ref{subsec:shmem_put_nbi} and \ref{subsec:shmem_get_nbi}.
+\item Clarified implementation of \ac{PE}s as threads.
 %
-\item Restricted atomic operation quarantees to other atomic operations with the same datatype.
-\\See Section \ref{subsec:amo_guarantees}.
+\item Added \textbf{const} to every read-only pointer argument.
 %
 \item Clarified definition of \OPR{Fence}.
 \\See Section \ref{subsec:programming_model}.
@@ -374,7 +371,27 @@ The following list describes the specific changes in 1.3:
 \item Clarified implementation of symmetric memory allocation.
 \\See Section \ref{subsec:memory_model}.
 %
-\item Added \textbf{const} to every read-only pointer argument.
+\item Restricted atomic operation guarantees to other atomic operations with the same datatype.
+\\See Section \ref{subsec:amo_guarantees}.
+%
+\item Deprecation of all constants that start with \CONST{\_SHMEM\_*}.
+\\See Section \ref{subsec:library_constants}.
+%
+\item Added a type-generic interface to \openshmem \ac{RMA} and \ac{AMO}
+	operations based on \Celev Generics.
+\\See Sections \ref{sec:rma}, \ref{sec:rma_nbi} and \ref{sec:amo}.
+%
+\item New non-blocking variants of remote memory access, \FUNC{SHMEM\_PUT\_NBI}
+	and \FUNC{SHMEM\_GET\_NBI}.
+\\See Sections \ref{subsec:shmem_put_nbi} and \ref{subsec:shmem_get_nbi}.
+%
+\item New atomic elemental read and write operations, \FUNC{SHMEM\_FETCH} and
+	\FUNC{SHMEM\_SET}.
+\\See Sections \ref{subsec:shmem_fetch} and \ref{subsec:shmem_set}
+%
+\item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL} 
+	and \FUNC{SHMEM\_ALLTOALLS}.
+\\See Sections \ref{subsec:shmem_alltoall} and \ref{subsec:shmem_alltoalls}.
 %
 \item Clarified visibility guarantees of memory updates at the target \ac{PE}.
 \\See Sections \ref{subsec:shmem_wait} and \ref{subsec:memory_order}.
@@ -385,19 +402,6 @@ The following list describes the specific changes in 1.3:
 %
 \item Deprecation of \FUNC{SHMEM\_CACHE}.
 \\See Section \ref{subsec:shmem_cache}.
-%
-\item Deprecation of all constants that start with \CONST{\_SHMEM\_*}.
-\\See Section \ref{subsec:library_constants}.
-%
-\item Clarified implementation of \ac{PE}s as threads.
-%
-\item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL} 
-	and \FUNC{SHMEM\_ALLTOALLS}.
-\\See Sections \ref{subsec:shmem_alltoall} and \ref{subsec:shmem_alltoalls}.
-%
-\item Added a type-generic interface to \openshmem \ac{RMA} and \ac{AMO}
-	operations based on \Celev Generics.
-\\See Sections \ref{sec:rma}, \ref{sec:rma_nbi} and \ref{sec:amo}.
 %
 \end{itemize}
 
