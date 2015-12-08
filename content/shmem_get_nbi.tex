@@ -94,8 +94,9 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 }
 
 \apinotes{
-    See Introduction for a definition of the term remotely accessible. If you are
-    using \Fortran, data types must be of default size.  For example, a real
+    See Section \ref{subsec:memory_model} for a definition of the term
+    remotely accessible.
+    If you are using \Fortran, data types must be of default size.  For example, a real
     variable must be declared as \CONST{REAL}, \CONST{REAL*4},  or
     \CONST{REAL(KIND=KIND(1.0))}.
 }
