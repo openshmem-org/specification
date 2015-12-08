@@ -216,7 +216,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     When calling from \Fortran, the \dest{} date types are as follows:
 }{Routine}{Data type}
     \apitablerow{shmem\_int8\_and\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_\_int4\_and\_to\_all}{Integer, with an element size of 4 bytes.}
+    \apitablerow{shmem\_int4\_and\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_comp8\_max\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
     \apitablerow{shmem\_int4\_max\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_int8\_max\_to\_all}{Integer, with an element size of 8 bytes.}
@@ -253,9 +253,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \apinotes{  
     All \openshmem{} reduction routines reset the values in \VAR{pSync} before they
     return, so a particular \VAR{pSync} buffer need only be initialized the first
-    time it is used.
-    
-    You must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
+    time it is used. You must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
     in the \activeset{} while any of the \ac{PE}s participate in processing of an
     \openshmem{} reduction routine. Be careful to avoid the following situations: If
     the \VAR{pSync} array is initialized at run time, some type of synchronization

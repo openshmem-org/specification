@@ -1,5 +1,5 @@
 \apisummary{
-    Each \ac{PE} exchanges a fixed amount of data with all other \acp{PE} in the
+    shmem\_alltoall is a collective routine where each \ac{PE} exchanges a fixed amount of data with all other \acp{PE} in the
     \activeset.
 }
 
@@ -74,7 +74,7 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     conditions must exist (synchronization via a barrier or some other method is
     often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a
-    \FUNC{shmem\_alltoall/s/v} routine.  The \VAR{dest} data object on
+    \FUNC{shmem\_alltoall/s} routine.  The \VAR{dest} data object on
     all \acp{PE} in the \activeset{} is ready to accept the
     \FUNC{shmem\_alltoall} data.
 
@@ -100,7 +100,6 @@ constraints, which are as follows:
     This routine restores \VAR{pSync} to its original contents.  Multiple calls
     to \openshmem\ routines that use the same \VAR{pSync} array do not require
     that \VAR{pSync} be reinitialized after the first call.
-
     You must ensure the that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the \activeset{} while any of the \acp{PE} participates in
     processing of an \openshmem\ \FUNC{shmem\_alltoall} routine. Be careful to
