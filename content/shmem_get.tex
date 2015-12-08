@@ -7,7 +7,7 @@
 \begin{C11synopsis}
 void shmem_get(TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{RMA} types.
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_get(TYPE *dest, const TYPE *source, size_t nelems, int pe);
@@ -70,7 +70,7 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
         that has a storage size equal to \CONST{32} bits.}
     \apitablerow{shmem\_get8}{C: Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
-    \apitablerow{shmem\_get8}{Fortran: Any noncharacter type that
+    \apitablerow{}{Fortran: Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
     \apitablerow{shmem\_get64}{Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
