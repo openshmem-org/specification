@@ -17,7 +17,7 @@ int main(void)
     /* assign source values */
     for (pe=0; pe <shmem_n_pes(); pe++){
        for (i=0; i<count; i++){
-          source[pe*count)+i] = shmem_my_pe() + pe;
+          source[(pe*count)+i] = shmem_my_pe() + pe;
           dest[(pe*count)+i] = 9999;
        }
     }
