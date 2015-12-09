@@ -1,5 +1,5 @@
 \apisummary{
-    shmem\_alltoall is a collective routine where each \ac{PE} exchanges a fixed amount of strided data with all other
+    shmem\_alltoalls is a collective routine where each \ac{PE} exchanges a fixed amount of strided data with all other
     \acp{PE} in the \activeset.
 }
 
@@ -59,9 +59,10 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_alltoalls} routines are collective routines; each \ac{PE} in
-    the \activeset{} exchanges a fixed amount of strided data with all other
-    \acp{PE} in the set.  Both strides, \VAR{dst} and \VAR{sst}, must be greater
+    The \FUNC{shmem\_alltoalls} routines are collective routines. Each \ac{PE}
+    in the \activeset{} exchanges \VAR{nelems} strided data elements of size
+    32 bits (for \FUNC{shmem\_alltoalls32}) or 64 bits (for \FUNC{shmem\_alltoalls64})
+    with all other \acp{PE} in the set. Both strides, \VAR{dst} and \VAR{sst}, must be greater
     than or equal to \CONST{1}. The \VAR{sst}*\VAR{j}th block sent from \ac{PE} \VAR{i} to
     \ac{PE} \VAR{j} is placed in the \VAR{dst}*\VAR{i}th block of the \VAR{dest} buffer on
     \ac{PE} \VAR{j}.
@@ -80,13 +81,23 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
     conditions must exist (synchronization via a barrier or some other method is
     often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a
-    \FUNC{shmem\_alltoall/s} routine.  The \VAR{dest} data object on
+    \FUNC{shmem\_alltoalls} routine.  The \VAR{dest} data object on
     all \acp{PE} in the \activeset{} is ready to accept the
     \FUNC{shmem\_alltoalls} data.
     
-    Upon return from a \FUNC{shmem\_alltoalls} routine, the following is true
-    for the local PE: The \VAR{dest} symmetric data object is updated.
+    Upon return from a \FUNC{shmem\_alltoalls} routine, the following is true for
+    the local PE: Its \VAR{dest} symmetric data object is completely updated and
+    the data has been copied out of the \VAR{source} array.
+    The values in the \VAR{pSync} array are restored to the original values.
 } 
+
+\apidesctable{
+The  \dest{}  and \source{} data  objects must conform to certain typing
+constraints, which are as follows:
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+
+\apitablerow{shmem\_alltoalls64}{\CONST{64} bits aligned.}
+\apitablerow{shmem\_alltoalls32}{\CONST{32} bits aligned.}
 
 \apireturnvalues{
     None.
