@@ -36,8 +36,8 @@ void *shmem_align(size_t alignment, size_t size);
     The \FUNC{shmem\_realloc} routine changes the size of the block to which
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
     of the block are unchanged up to the lesser of the new and old sizes. If the new
-    size is larger, the value of the newly allocated portion of the block is
-    indeterminate.  If \VAR{ptr} is a \CONST{NULL} pointer, the
+    size is larger, the newly allocated portion of the block is
+    uninitialized.  If \VAR{ptr} is a \CONST{NULL} pointer, the
     \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc} routine for
     the specified size.  If \VAR{size} is \CONST{0} and \VAR{ptr} is not a
     \CONST{NULL} pointer, the block to which it points is freed. If the space cannot
@@ -49,7 +49,7 @@ void *shmem_align(size_t alignment, size_t size);
     \openshmem communication routines.  Each of these routines call the
     \FUNC{shmem\_barrier\_all} routine before returning; this ensures that all
     \ac{PE}s participate in the memory allocation, and that the memory on other
-    \ac{PE}s can be used	as  soon as the local \ac{PE} returns.  The user is
+    \ac{PE}s can be used as  soon as the local \ac{PE} returns.  The user is
     responsible for calling these routines with identical argument(s) on all
     \ac{PE}s; if differing \VAR{size} arguments are used, the behavior of the call
     and any subsequent \openshmem calls becomes undefined.

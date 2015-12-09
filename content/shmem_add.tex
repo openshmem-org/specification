@@ -7,7 +7,7 @@
 \begin{C11synopsis}
 void shmem_add(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{AMO} types.
+where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_add(TYPE *dest, TYPE value, int pe);
@@ -53,7 +53,7 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 }
 
 \apinotes{
-    The term remotely accessible is defined in the Introduction.
+    The term remotely accessible is defined in Section \ref{subsec:memory_model}.
 }
 
 \begin{apiexamples}

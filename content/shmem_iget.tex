@@ -7,7 +7,7 @@
 \begin{C11synopsis}
 void shmem_iget(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{RMA} types.
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_iget(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
@@ -70,7 +70,7 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
         that has a storage size equal to \CONST{32} bits.}
     \apitablerow{shmem\_iget8}{C: Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
-    \apitablerow{shmem\_iget8}{Fortran: Any noncharacter type that
+    \apitablerow{}{Fortran: Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
     \apitablerow{shmem\_iget64}{Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
