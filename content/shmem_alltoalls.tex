@@ -107,7 +107,6 @@ constraints, which are as follows:
     This routine restores \VAR{pSync} to its original contents.  Multiple calls
     to \openshmem\ routines that use the same \VAR{pSync} array do not require
     that \VAR{pSync} be reinitialized after the first call.
-
     You must ensure the that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the \activeset{} while any of the \acp{PE} participates in
     processing of an \openshmem\ \FUNC{shmem\_alltoalls} routine. Be careful to
