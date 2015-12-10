@@ -55,10 +55,11 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     stored in a contiguous symmetric data object. The total size of each \acp{PE}
     \VAR{source} object and \VAR{dest} object is \VAR{nelems} times the size of
     an element (32 bits or 64 bits) times \VAR{PE\_size}.
-    The \VAR{source} object contains \VAR{PE\_size} blocks of data and each block of
-    data is sent to a different \ac{PE}. \ac{PE} \VAR{i} sends the \VAR{j}th
-    block of its \VAR{source} object to \ac{PE} \VAR{j} and that block of data
-    is placed in the \VAR{i}th block of the \VAR{dest} object of \ac{PE} \VAR{j}.
+    The \VAR{source} object contains \VAR{PE\_size} blocks of data (the size of each
+    block defined by \VAR{nelems}) and each block of data is sent to a different \ac{PE}. 
+    \ac{PE} \VAR{i} sends the \VAR{j}th block of its \VAR{source} object to
+    \ac{PE} \VAR{j} and that block of data is placed in the \VAR{i}th block of
+    the \VAR{dest} object of \ac{PE} \VAR{j}.
 
     As with all \openshmem collective routines, this routine assumes
     that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not
