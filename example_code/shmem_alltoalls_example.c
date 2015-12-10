@@ -1,7 +1,7 @@
 #include <shmem.h>
 #include <stdio.h>
 
-long pSync[SHMEM_ALLTOALL_SYNC_SIZE];
+long pSync[SHMEM_ALLTOALLS_SYNC_SIZE];
 
 int main(void)
 {
@@ -17,12 +17,12 @@ int main(void)
     /* assign source values */
     for (pe=0; pe <shmem_n_pes(); pe++){
        for (i=0; i<count; i++){
-          source[pe*count)+i] = shmem_my_pe() + pe;
+          source[(pe*count)+i] = shmem_my_pe() + pe;
           dest[(pe*count)+i] = 9999;
        }
     }
     
-    for (i=0; i< SHMEM_ALLTOALL_SYNC_SIZE; i++) {
+    for (i=0; i< SHMEM_ALLTOALLS_SYNC_SIZE; i++) {
        pSync[i] = SHMEM_SYNC_VALUE;
     }
     /* wait for all PEs to initialize pSync */

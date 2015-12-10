@@ -11,11 +11,11 @@ void shmem_alltoalls64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t 
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
+INTEGER pSync(SHMEM_ALLTOALLS_SYNC_SIZE)
 INTEGER dst, sst, PE_start, logPE_stride, PE_size
 INTEGER nelems 
-CALL SHMEM_ALLTOALL32(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_ALLTOALLS32(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -24,16 +24,16 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
     \activeset.}
 \apiargument{IN}{source}{A symmetric data object that contains \VAR{nelems} 
-    bytes of data for each \ac{PE} in the \activeset{}, ordered according to 
+    elements of data for each \ac{PE} in the \activeset{}, ordered according to 
     destination \ac{PE}.}
 \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
-    array.  The stride is scaled by the element size of the \dest{} array.  A
+    data object.  The stride is scaled by the element size.  A
     value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
     \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a default integer
     value.}
 \apiargument{IN}{sst}{The  stride between consecutive elements of the
-    \source{} array.  The stride is scaled by the element size of the \source{}
-    array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
+    \source{} data object.  The stride is scaled by the element size.
+    A value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
     of type \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
@@ -49,9 +49,9 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
     \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must
     be a default integer value.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
-    of type long and size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}. In \Fortran,
+    of type long and size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}. In \Fortran,
     \VAR{pSync} must be of type integer and size
-    \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.  If you are using \Fortran, it must be a
+    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.  If you are using \Fortran, it must be a
     default integer value. Every element of this array must be initialized with
     the value \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the
     \activeset{} enter the routine.}
@@ -64,7 +64,7 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
     32 bits (for \FUNC{shmem\_alltoalls32}) or 64 bits (for \FUNC{shmem\_alltoalls64})
     with all other \acp{PE} in the set. Both strides, \VAR{dst} and \VAR{sst}, must be greater
     than or equal to \CONST{1}. The \VAR{sst}*\VAR{j}th block sent from \ac{PE} \VAR{i} to
-    \ac{PE} \VAR{j} is placed in the \VAR{dst}*\VAR{i}th block of the \VAR{dest} buffer on
+    \ac{PE} \VAR{j} is placed in the \VAR{dst}*\VAR{i}th block of the \VAR{dest} data object on
     \ac{PE} \VAR{j}.
 
     As with all \openshmem collective routines, these routines assume
@@ -87,7 +87,7 @@ CALL SHMEM_ALLTOALL64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE
     
     Upon return from a \FUNC{shmem\_alltoalls} routine, the following is true for
     the local PE: Its \VAR{dest} symmetric data object is completely updated and
-    the data has been copied out of the \VAR{source} array.
+    the data has been copied out of the \VAR{source} data object.
     The values in the \VAR{pSync} array are restored to the original values.
 } 
 
