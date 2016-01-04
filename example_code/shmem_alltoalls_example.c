@@ -5,14 +5,14 @@ long pSync[SHMEM_ALLTOALLS_SYNC_SIZE];
 
 int main(void)
 {
-    long *source, *dest;
+    int64_t *source, *dest;
     int  i, count, pe;
     
     shmem_init();
     
     count = 2;
-    dest = (long*) shmem_malloc(count * shmem_n_pes() * sizeof(long));
-    source = (long*) shmem_malloc(count * shmem_n_pes() * sizeof(long));
+    dest = (int64_t*) shmem_malloc(count * shmem_n_pes() * sizeof(int64_t));
+    source = (int64_t*) shmem_malloc(count * shmem_n_pes() * sizeof(int64_t));
     
     /* assign source values */
     for (pe=0; pe <shmem_n_pes(); pe++){
