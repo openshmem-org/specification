@@ -4,11 +4,15 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+void shmem_inc(TYPE *dest, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
+
 \begin{Csynopsis}
-void shmem_int_inc(int *dest, int pe);
-void shmem_long_inc(long *dest, int pe);
-void shmem_longlong_inc(long long *dest, int pe);
+void shmem_<TYPENAME>_inc(TYPE *dest, int pe);
 \end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
 
 \begin{Fsynopsis}
 INTEGER pe
@@ -45,13 +49,13 @@ CALL SHMEM_INT8_INC(dest, pe)
 }
 
 \apinotes{
-     The term remotely accessible is defined in the Introduction.
+     The term remotely accessible is defined in Section \ref{subsec:memory_model}.
 }
 
 \begin{apiexamples}
 
 \apicexample
-    { The following \FUNC{shmem\_int\_inc} example is for \CorCpp{} programs: }
+    { The following \FUNC{shmem\_inc} example is for \CorCpp{} programs: }
     {./example_code/shmem_inc_example.c}
     {}
 

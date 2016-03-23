@@ -16,7 +16,7 @@ int main(void)
    shmem_barrier_all();
 
    if (me == 0)
-      old = shmem_int_finc(&dst, 1);
+      old = shmem_finc(&dst, 1);
 
    shmem_barrier_all();
    printf("%d: old = %d, dst = %d\n", me, old, dst);

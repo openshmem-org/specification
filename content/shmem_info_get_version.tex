@@ -9,8 +9,8 @@ void shmem_info_get_version(int *major, int *minor);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-SHMEM_INFO_GET_VERSION(MAJOR, MINOR)   
 INTEGER MAJOR, MINOR
+SHMEM_INFO_GET_VERSION(MAJOR, MINOR)   
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -22,8 +22,7 @@ INTEGER MAJOR, MINOR
     This routine returns the major and minor version of the \openshmem{} standard
     in use.  For a given library implementation, the major and minor version
     returned by these calls is consistent with the compile-time constants,
-    SHMEM\_MAJOR\_VERSION and SHMEM\_MINOR\_VERSION, defined in its shmem.h.  The
-    valid major version value is  $1$, and the valid minor version value is $2$. 
+    SHMEM\_MAJOR\_VERSION and SHMEM\_MINOR\_VERSION, defined in its shmem.h. 
 }
 
 \apireturnvalues{

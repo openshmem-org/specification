@@ -1,13 +1,12 @@
 \apisummary{
     Releases, locks, and tests a mutual exclusion memory lock.
 }
-
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_clear_lock(long *lock);
-void shmem_set_lock(long *lock);
-int shmem_test_lock(long *lock);
+void shmem_clear_lock(volatile long *lock);
+void shmem_set_lock(volatile long *lock);
+int shmem_test_lock(volatile long *lock);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
@@ -46,8 +45,8 @@ I = SHMEM_TEST_LOCK(lock)
 }
 
 \apinotes{
-    The term symmetric data object is defined in Introduction. The lock variable
-    should always be initialized to zero and accessed only by the \openshmem locking
+    The term symmetric data object is defined in Section \ref{subsec:memory_model}.
+    The lock variable should always be initialized to zero and accessed only by the \openshmem locking
     \ac{API}.  Changing the value of the lock variable by other means without using
     the \openshmem \ac{API}, can lead to undefined behavior.
 }

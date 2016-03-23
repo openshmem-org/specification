@@ -43,7 +43,7 @@ CALL SHPALLOC(addr, length, errcode, abort)
 }
 
 \apiimpnotes{
-    The symmetric heap allocation functions always return a pointer to corresponding
+    The symmetric heap allocation routines always return a pointer to corresponding
     symmetric objects across all PEs. The \openshmem{} specification does not
     require that the virtual addresses are equal across all \acp{PE}. Nevertheless,
     the implementation must avoid costly address translation operations in the

@@ -23,7 +23,13 @@
 \DeclareRobustCommand{\_}{\texttt{\char`\_}} 
 % 
 
-\newcommand{\insertDocVersion}{1.2}
+\def\colorswapnt{\colorlet{saved}{.}\color{ForestGreen}}
+\def\colorswapot{\colorlet{saved}{.}\color{red}}
+\def\prevcolor{\color{saved}}
+
+\newcommand{\newtext}[1]{\textcolor{ForestGreen}{#1}}
+\newcommand{\oldtext}[1]{\textcolor{magenta}{\sout{#1}}}
+\newcommand{\insertDocVersion}{1.3}
 \newcommand{\OSH}{\emph{OpenSHMEM}}
 \newcommand{\openshmem}{{Open\-SHMEM}\xspace}
 \newcommand{\FUNC}[1]{\textit{#1}}
@@ -31,9 +37,14 @@
 \newcommand{\CONST}[1]{\textit{#1}}
 \newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}}
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
+\newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
 \newcommand{\Fortran}{\textit{Fortran}}
 \newcommand{\Clang}{\textit{C}}
 \newcommand{\Cpp}{\textit{C++}}
+\newcommand{\Celev}{\textit{C11}}
+\newcommand{\TYPE}{\emph{TYPE}}
+\newcommand{\TYPENAME}{\emph{TYPENAME}}
+\newcommand{\SIZE}{\emph{SIZE}}
 
 \newcommand{\source}{\textit{source}}
 \newcommand{\target}{\textit{target}}
@@ -45,7 +56,10 @@
 \newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
 \newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
 \newcommand{\collect}{\FUNC{SHMEM\_COLLECT}}
+\newcommand{\fcollect}{\FUNC{SHMEM\_FCOLLECT}}
 \newcommand{\reduction}{\textit{Reduction Operations}}
+\newcommand{\alltoall}{\FUNC{SHMEM\_ALLTOALL}}
+\newcommand{\alltoalls}{\FUNC{SHMEM\_ALLTOALLS}}
 \newcommand{\activeset}{\textit{Active~set}\xspace} % why here and not others?
 \newcommand{\shmemprefix}{\textit{SHMEM\_}}
 \newcommand{\shmemprefixC}{\textit{\_SHMEM\_}}
@@ -148,7 +162,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,                 % sets automatic line breaking
-  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  escapeinside={|}{|},          % if you want to add LaTeX within your code
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
                                    % encodings only, does not work with UTF-8
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code 
@@ -205,7 +219,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \lstdefinelanguage{OSH+C}[]{C}{
   classoffset=1,
   morekeywords={
-    _SHMEM_BCAST_SYNC_SIZE, _SHMEM_SYNC_VALUE,
+    SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
     start_pes,
     my_pe, _my_pe, shmem_my_pe,
     num_pes, _num_pes, shmem_n_pes,
@@ -304,16 +318,39 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \end{description}
 }
 
+\lstnewenvironment{C11synopsis}
+{ 
+  \textbf{C11:} 
+  \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE}, aboveskip=0pt, belowskip=0pt,}}{}
+
+\lstnewenvironment{CsynopsisCol}
+{ 
+  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
+
+
 \lstnewenvironment{Csynopsis}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
 
+\lstnewenvironment{CsynopsisST}
+{ 
+  \textbf{C/C++:} 
+  \color{red}  
+  {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
+  }
+  {}
+  
 \lstnewenvironment{Fsynopsis}
 { \textbf{FORTRAN:} 
   \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
-  deletekeywords={TARGET,LEN}, aboveskip=0pt, belowskip=0pt}}{}
+  deletekeywords=[2]{STATUS},
+  deletekeywords=[3]{LOG}, aboveskip=0pt,
+  belowskip=0pt}}{}
 
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{

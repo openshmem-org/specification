@@ -12,9 +12,6 @@
 
 
 
-
-\section*{Introduction}\label{sec:intro}
-
 \section{The \openshmem Effort}\label{subsec:openshmem_effort}
 \input{content/the_openshmem_effort}
 
@@ -130,7 +127,13 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 \input{content/shmem_iget.tex}
 
 
+\subsection{Non-blocking Remote Memory Access Routines}\label{sec:rma_nbi}
 
+\subsubsection{\textbf{SHMEM\_PUT\_NBI}}\label{subsec:shmem_put_nbi}
+\input{content/shmem_put_nbi.tex}
+
+\subsubsection{\textbf{SHMEM\_GET\_NBI}}\label{subsec:shmem_get_nbi}
+\input{content/shmem_get_nbi.tex}
 
 
 \subsection{Atomic Memory Operations}\label{sec:amo}
@@ -154,6 +157,12 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 \subsubsection{\textbf{SHMEM\_FADD}}\label{subsec:shmem_fadd}
 \input{content/shmem_fadd.tex}
 
+\subsubsection{\textbf{SHMEM\_FETCH}}\label{subsec:shmem_fetch}
+\input{content/shmem_fetch.tex}
+
+\subsubsection{\textbf{SHMEM\_SET}}\label{subsec:shmem_set}
+\input{content/shmem_set.tex}
+
 
 
 
@@ -175,6 +184,12 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 
 \subsubsection{\textbf{SHMEM\_REDUCTIONS}}\label{subsec:shmem_reductions}
 \input{content/shmem_reductions.tex}
+
+\subsubsection{\textbf{SHMEM\_ALLTOALL}}\label{subsec:shmem_alltoall}
+\input{content/shmem_alltoall.tex}
+
+\subsubsection{\textbf{SHMEM\_ALLTOALLS}}\label{subsec:shmem_alltoalls}
+\input{content/shmem_alltoalls.tex}
 
 
 
@@ -225,9 +240,9 @@ mutual exclusion. Three routines are available for distributed locking,
 
 \subsection{Cache Management}
 All of these routines are deprecated and are provided for backwards
-compatibility.  Implementations must include all items in this section and the
-routines should function properly, while notifying the user about deprecation of
-the functionality.
+compatibility.  Implementations must include all items in this section, and the
+routines should function properly and may notify the user about deprecation of
+their use.
 
 \subsubsection{\textbf{SHMEM\_CACHE}}\label{subsec:shmem_cache}
 \input{content/shmem_cache.tex}

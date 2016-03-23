@@ -5,16 +5,16 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_int_wait(int *ivar, int cmp_value);
-void shmem_int_wait_until(int *ivar, int cmp, int cmp_value);
-void shmem_long_wait(long *ivar, long cmp_value);
-void shmem_long_wait_until(long *ivar, int cmp, long cmp_value);
-void shmem_longlong_wait(long long *ivar, long long cmp_value);
-void shmem_longlong_wait_until(long long *ivar, int cmp, long long cmp_value);
-void shmem_short_wait(short *ivar, short cmp_value);
-void shmem_short_wait_until(short *ivar, int cmp, short cmp_value);
-void shmem_wait(long *ivar, long cmp_value);
-void shmem_wait_until(long *ivar, int cmp, long cmp_value);
+void shmem_int_wait(volatile int *ivar, int cmp_value);
+void shmem_int_wait_until(volatile int *ivar, int cmp, int cmp_value);
+void shmem_long_wait(volatile long *ivar, long cmp_value);
+void shmem_long_wait_until(volatile long *ivar, int cmp, long cmp_value);
+void shmem_longlong_wait(volatile long long *ivar, long long cmp_value);
+void shmem_longlong_wait_until(volatile long long *ivar, int cmp, long long cmp_value);
+void shmem_short_wait(volatile short *ivar, short cmp_value);
+void shmem_short_wait_until(volatile short *ivar, int cmp, short cmp_value);
+void shmem_wait(volatile long *ivar, long cmp_value);
+void shmem_wait_until(volatile long *ivar, int cmp, long cmp_value);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
@@ -73,12 +73,12 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 }{CMP Value}{Comparison}
 
 \CorCpp:\\
-\apitablerow{\_SHMEM\_CMP\_EQ }{  Equal}
-\apitablerow{\_SHMEM\_CMP\_NE}{Not equal}
-\apitablerow{\_SHMEM\_CMP\_GT}{Greater than}
-\apitablerow{\_SHMEM\_CMP\_LE}{Less than or equal to}
-\apitablerow{\_SHMEM\_CMP\_LT}{Less than}
-\apitablerow{\_SHMEM\_CMP\_GE}{Greater than or equal to}
+\apitablerow{SHMEM\_CMP\_EQ }{  Equal}
+\apitablerow{SHMEM\_CMP\_NE}{Not equal}
+\apitablerow{SHMEM\_CMP\_GT}{Greater than}
+\apitablerow{SHMEM\_CMP\_LE}{Less than or equal to}
+\apitablerow{SHMEM\_CMP\_LT}{Less than}
+\apitablerow{SHMEM\_CMP\_GE}{Greater than or equal to}
 \\
 \Fortran:\\
 \apitablerow{SHMEM\_CMP\_EQ }{  Equal}
@@ -99,9 +99,10 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \apiimpnotes{
     Implementations must ensure that \FUNC{shmem\_wait} and
     \FUNC{shmem\_wait\_until} do not return before the update of the memory
-    indicated by \VAR{ivar} is fully complete.  Partial updates to the memory must
-    not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
+    indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
+    must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
 }
+
 
 \begin{apiexamples}
 

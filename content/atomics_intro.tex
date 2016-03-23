@@ -1,25 +1,71 @@
-\ac{AMO} is a one-sided communication mechanism that combines memory update
+An \ac{AMO} is a one-sided communication mechanism that combines memory update
 operations with atomicity guarantees described in Section
-\ref{sec:amo_guarantees}.  Similar to the \ac{RMA} routines, described in
+\ref{subsec:amo_guarantees}.  Similar to the \ac{RMA} routines, described in
 Section \ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
 \openshmem{} defines the two types of \ac{AMO} routines:
 \begin{itemize}
 \item % Blocking\\
-The \textit{fetch-and-operate} routines combine memory update and fetch
-operations in a single atomic operation.  The routines return after the data has
-been fetched and delivered to the local \ac{PE}.
+The \textit{fetching} routines return the original value of, and optionally
+update, the remote data object in a single atomic operation.  The routines 
+return after the data has been fetched and delivered to the local \ac{PE}.
 
-The \textit{fetch-and-operate} operations include: \FUNC{SHMEM\_CSWAP},
-\FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and\\ \FUNC{SHMEM\_FADD}.
+The \textit{fetching} operations include: \FUNC{SHMEM\_FETCH},
+\FUNC{SHMEM\_CSWAP}, \FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and \FUNC{SHMEM\_FADD}.
 
 \item % Non-Blocking\\
-The \textit{non-fetch} atomic routines update the remote memory in a single
-atomic operation.  A \textit{non-fetch} atomic routine starts the atomic
+The \textit{non-fetching} atomic routines update the remote memory in a single
+atomic operation.  A \textit{non-fetching} atomic routine starts the atomic
 operation and may return before the operation execution on the remote \ac{PE}.
-To force completion for these \textit{non-fetch} atomic routines,
+To force completion for these \textit{non-fetching} atomic routines,
 \FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all} can be
 used by an \openshmem{} program. 
 
-The \textit{non-fetch} operations include: \FUNC{SHMEM\_INC} and
+The \textit{non-fetching} operations include: \FUNC{SHMEM\_SET}, \FUNC{SHMEM\_INC} and
 \FUNC{SHMEM\_ADD}.
 \end{itemize}
+
+Where appropriate compiler support is available, \openshmem{} provides type-generic
+atomic memory operation interfaces via \Celev{} generic selection. The type-generic 
+\ac{AMO} routines each support the ``standard \ac{AMO} types’’ listed in Table \ref{stdamotypes}, 
+except for \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, and \FUNC{shmem\_swap}, which supports the ``extended \ac{AMO} types’’ listed 
+in Table \ref{extamotypes}.
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \TYPE & \TYPENAME\\
+      \hline
+      int & int\\
+      \hline
+      long & long\\
+      \hline
+      long long & longlong\\
+      \hline
+    \end{tabular}
+    \caption{Standard \ac{AMO} Types and Names}
+    \label{stdamotypes}
+  \end{center} 
+\end{table}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \TYPE & \TYPENAME\\
+      \hline
+      float & float\\
+      \hline
+      double & double\\
+      \hline
+      int & int\\
+      \hline
+      long & long\\
+      \hline
+      long long & longlong\\
+      \hline
+    \end{tabular}
+    \caption{Extended \ac{AMO} Types and Names}
+    \label{extamotypes}
+  \end{center} 
+\end{table}

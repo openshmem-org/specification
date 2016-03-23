@@ -15,7 +15,7 @@ int main(void)
    shmem_barrier_all();
    new_val = me;
    if (me & 1){
-      swapped_val = shmem_long_swap(dest, new_val, (me + 1) % npes);
+      swapped_val = shmem_swap(dest, new_val, (me + 1) % npes);
       printf("%d: dest = %ld, swapped = %ld\n", me, *dest, swapped_val);
    }
    shmem_free(dest);

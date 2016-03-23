@@ -31,8 +31,8 @@ An overview of the \openshmem routines is described below:
 \item \textbf{Library Setup and Query}
 \begin{enumerate}
   \item \OPR{Initialization}: The \openshmem library environment is initialized. 
-  \item \OPR{Query}: The local \ac{PE} may get number of \acp{PE} running the same
-      program and its unique integer identifier. 
+  \item \OPR{Query}: The local \ac{PE} may get the number of \acp{PE} running
+      the same program and its unique integer identifier. 
   \item \OPR{Accessibility}: The local \ac{PE} can find out if a remote \ac{PE} is
       executing the same binary, or if a particular symmetric data object can be
       accessed by a remote \ac{PE}, or may obtain a pointer to a symmetric data
@@ -81,8 +81,9 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Synchronization and Ordering}
 \begin{enumerate}
-  \item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of remote access
-      operations and stores to symmetric data objects with respect to a specific
+  \item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of   
+  \PUT, AMO, and memory store operations
+  to symmetric data objects with respect to a specific
       destination \ac{PE}. 
   \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access
       operations and stores to symmetric data objects. 
@@ -114,7 +115,7 @@ An overview of the \openshmem routines is described below:
       \textit{lock} releases it.
 \end{enumerate}
 
-\item \textbf{Data Cache Control \textit{(deprecated on cache coherent systems)}}
+\item \textbf{Data Cache Control \textit{(deprecated)}}
 \begin{enumerate}
   \item Implementation of mechanisms to exploit the capabilities of hardware cache
       if available.

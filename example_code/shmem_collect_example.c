@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <shmem.h>
 
-long pSync[_SHMEM_COLLECT_SYNC_SIZE];
+long pSync[SHMEM_COLLECT_SYNC_SIZE];
 int source[2];
 
 int main(void)
@@ -17,8 +17,8 @@ int main(void)
    source[0] = me * 2;
    source[1] = me * 2 + 1;
    dest = (int *)shmem_malloc(sizeof(int) * npes * 2);
-   for (i=0; i < _SHMEM_COLLECT_SYNC_SIZE; i++) {
-      pSync[i] = _SHMEM_SYNC_VALUE;
+   for (i=0; i < SHMEM_COLLECT_SYNC_SIZE; i++) {
+      pSync[i] = SHMEM_SYNC_VALUE;
    }
    shmem_barrier_all(); /* Wait for all PEs to initialize pSync */
 

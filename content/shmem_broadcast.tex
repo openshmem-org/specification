@@ -42,10 +42,10 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{pSync}{ A symmetric work array.  In \CorCpp, \VAR{pSync} must
-    be of type long and size \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}. In \Fortran,
+    be of type long and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}. In \Fortran,
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
     Every element of this array must be initialized with the value
-    \CONST{\_SHMEM\_SYNC\_VALUE} (in \CorCpp) or \CONST{SHMEM\_SYNC\_VALUE} (in
+    \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or \CONST{SHMEM\_SYNC\_VALUE} (in
     \Fortran) before any of the \ac{PE}s  in  the  \activeset{} enter
     \FUNC{shmem\_broadcast}.}
 
@@ -85,14 +85,12 @@ The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
-\apitablerow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter type that has an
-    element size of \CONST{64} bits. No \Fortran{} derived types or \CorCpp{}
-    structures are allowed.}
-\apitablerow{shmem\_broadcast32}{Any noncharacter type that has an element size of
-    \CONST{32} bits.  No \Fortran{} derived types or \CorCpp{} structures are
-    allowed.}
-\apitablerow{shmem\_broadcast4}{Any noncharacter type that has an element size of
-    \CONST{32} bits.}
+\apitablerow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter
+    type that has an element size of \CONST{64} bits. No \Fortran{} derived types or
+    \CorCpp{} structures are allowed.}
+\apitablerow{shmem\_broadcast4, shmem\_broadcast32}{Any noncharacter
+    type that has an element size of \CONST{32} bits. No \Fortran{}
+    derived types or \CorCpp{} structures are allowed.}
 
 \apireturnvalues{
     None.

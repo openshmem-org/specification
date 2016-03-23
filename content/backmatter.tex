@@ -338,6 +338,8 @@ specification.
     \FUNC{shmemalign} & 1.2 & Yes & \FUNC{shmem\_align} \\ \hline
     \FUNC{start\_pes} & 1.2 & Yes & \FUNC{shmem\_init} \\ \hline
     \FUNC{SHMEM\_PUT} & 1.2 & Yes & \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} \\ \hline
+    \FUNC{SHMEM\_CACHE} & 1.3 & Yes & (none) \\ \hline
+    \_SHMEM\_* constants & 1.3 & Yes & (none) \\ \hline
     \hline
     \end{tabular}
 \end{center}
@@ -348,6 +350,60 @@ specification.
 
 
 \chapter{Changes to this Document}\label{sec:changelog}
+
+
+\section{Version 1.3}
+This section summarizes the changes from the \openshmem specification Version
+1.2 to Version 1.3. Many major changes to the specification was introduced in Version 1.3. This includes non-blocking RMA operations, 
+generic interfaces for various OpenSHMEM interfaces, atomic \FUNC{Put} and \FUNC{Get} operations,  and Alltoall interfaces. 
+
+
+The following list describes the specific changes in 1.3:
+
+\begin{itemize}
+%
+\item Clarified implementation of \ac{PE}s as threads.
+%
+\item Added \textbf{const} to every read-only pointer argument.
+%
+\item Clarified definition of \OPR{Fence}.
+\\See Section \ref{subsec:programming_model}.
+%
+\item Clarified implementation of symmetric memory allocation.
+\\See Section \ref{subsec:memory_model}.
+%
+\item Restricted atomic operation guarantees to other atomic operations with the same datatype.
+\\See Section \ref{subsec:amo_guarantees}.
+%
+\item Deprecation of all constants that start with \CONST{\_SHMEM\_*}.
+\\See Section \ref{subsec:library_constants}.
+%
+\item Added a type-generic interface to \openshmem \ac{RMA} and \ac{AMO}
+	operations based on \Celev{} Generics.
+\\See Sections \ref{sec:rma}, \ref{sec:rma_nbi} and \ref{sec:amo}.
+%
+\item New non-blocking variants of remote memory access, \FUNC{SHMEM\_PUT\_NBI}
+	and \FUNC{SHMEM\_GET\_NBI}.
+\\See Sections \ref{subsec:shmem_put_nbi} and \ref{subsec:shmem_get_nbi}.
+%
+\item New atomic elemental read and write operations, \FUNC{SHMEM\_FETCH} and
+	\FUNC{SHMEM\_SET}.
+\\See Sections \ref{subsec:shmem_fetch} and \ref{subsec:shmem_set}
+%
+\item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL} 
+	and \FUNC{SHMEM\_ALLTOALLS}.
+\\See Sections \ref{subsec:shmem_alltoall} and \ref{subsec:shmem_alltoalls}.
+%
+\item Added \textbf{volatile} to remotely accessible pointer argument in 
+	\FUNC{SHMEM\_WAIT} and \FUNC{SHMEM\_LOCK}.
+\\See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
+%
+\item Deprecation of \FUNC{SHMEM\_CACHE}.
+\\See Section \ref{subsec:shmem_cache}.
+%
+\end{itemize}
+
+
 
 
 \section{Version 1.2}
@@ -409,11 +465,11 @@ The following list describes the specific changes in 1.2:
 \\See Section \ref{subsec:shmem_wait}.
 %
 \item Undefined behavior for null pointers without zero counts added.
-\\See Section \ref{sec:undefined}
+\\See Annex \ref{sec:undefined}
 %
 \item Addition of new Annex for clearly specifying deprecated API and its
       support in the existing specification version.
-\\See Section \ref{sec:dep_api}.
+\\See Annex \ref{sec:dep_api}.
 %
 \end{itemize}
 
@@ -425,7 +481,7 @@ This section summarizes the changes from the \openshmem specification Version
 1.0 to the Version 1.1.  A major change in this version is that it provides an
 accurate description of \openshmem interfaces so that they are in agreement with
 the SGI specification.  This version also explains \openshmem’s programming,
-memory, and execution model.  The document was throughly changed to improve the
+memory, and execution model.  The document was thoroughly changed to improve the
 readability of specification and usability of interfaces.  The code examples
 were added to demonstrate the usability of API. Additionally, diagrams were
 added to help understand the subtle semantic differences of various operations.
