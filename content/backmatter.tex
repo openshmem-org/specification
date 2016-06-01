@@ -351,6 +351,16 @@ specification.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
+\section{Version 1.4}
+
+\begin{itemize}
+
+\item Volatile qualifiers were added to several API routines in version 1.3 of
+the OpenSHMEM specification; however, they were later found to be unnecessary.
+Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
+\FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
+
+\end{itemize}
 
 \section{Version 1.3}
 This section summarizes the changes from the \openshmem specification Version
