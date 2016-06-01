@@ -5,16 +5,16 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_int_wait(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| int *ivar, int cmp_value);
-void shmem_int_wait_until(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| int *ivar, int cmp, int cmp_value);
-void shmem_long_wait(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| long *ivar, long cmp_value);
-void shmem_long_wait_until(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| long *ivar, int cmp, long cmp_value);
-void shmem_longlong_wait(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| long long *ivar, long long cmp_value);
-void shmem_longlong_wait_until(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| long long *ivar, int cmp, long long cmp_value);
-void shmem_short_wait(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| short *ivar, short cmp_value);
-void shmem_short_wait_until(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| short *ivar, int cmp, short cmp_value);
-void shmem_wait(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| long *ivar, long cmp_value);
-void shmem_wait_until(|\aftergroup\colorswapnt|volatile|\aftergroup\prevcolor| long *ivar, int cmp, long cmp_value);
+void shmem_int_wait(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| int *ivar, int cmp_value);
+void shmem_int_wait_until(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| int *ivar, int cmp, int cmp_value);
+void shmem_long_wait(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| long *ivar, long cmp_value);
+void shmem_long_wait_until(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| long *ivar, int cmp, long cmp_value);
+void shmem_longlong_wait(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| long long *ivar, long long cmp_value);
+void shmem_longlong_wait_until(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| long long *ivar, int cmp, long long cmp_value);
+void shmem_short_wait(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| short *ivar, short cmp_value);
+void shmem_short_wait_until(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| short *ivar, int cmp, short cmp_value);
+void shmem_wait(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| long *ivar, long cmp_value);
+void shmem_wait_until(|\aftergroup\colorswapnt|const volatile|\aftergroup\prevcolor| long *ivar, int cmp, long cmp_value);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
@@ -101,6 +101,13 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     \FUNC{shmem\_wait\_until} operations can be used to portably ensure
     visibility of updates that occurred and were ordered prior to the update
     satisfying the wait operation.}
+
+    \newtext{
+    The \VAR{ivar} argument is qualified as \VAR{const} because the
+    \FUNC{shmem\_wait} routine does not update the location pointed to by
+    \VAR{ivar}. It is further qualified as \VAR{volatile}, because the value
+    may change during the \FUNC{shmem\_wait} call as a result of updates made
+    by other PEs.}
 
 }
 

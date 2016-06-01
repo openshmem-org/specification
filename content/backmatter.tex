@@ -351,6 +351,17 @@ specification.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
+\section{Version 1.4}
+
+\begin{itemize}
+
+\item The type of the \VAR{ivar} argument to \FUNC{shmem\_wait} routines was
+updated from \VAR{volatile} to \VAR{const volatile}.
+
+\item The \VAR{volatile} qualifier was removed from the \VAR{lock} arguments in
+the lock API.
+
+\end{itemize}
 
 \section{Version 1.2}
 This section summarizes the changes from the \openshmem specification Version
