@@ -27,5 +27,6 @@ int main(void)
    for (i = 1; i < npes * 2; i++)
       printf(", %d", dest[i]);
    printf("\n");
+   shmem_finalize();
    return 0;
 }
