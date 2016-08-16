@@ -23,8 +23,11 @@ all: $(C_BINS) $(F_BINS)
 %.fx: %.f90
 	$(FC) $(FFLAGS) -o $@ $+
 
-run: $(C_BINS) $(F_BINS)
-	for bin in $+; do $(RUNCMD) $(RUNOPT) ./$$bin || exit $$?; done
+run: $(C_BINS)
+	@for bin in $+; do				\
+	    echo --$$bin------------------------------;	\
+	    $(RUNCMD) $(RUNOPT) ./$$bin || exit $$?;	\
+	done
 
 clean:
 	rm -f $(C_BINS) $(F_BINS)
