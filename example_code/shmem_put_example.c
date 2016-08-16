@@ -13,6 +13,7 @@ int main(void)
    }
    shmem_barrier_all();  /* sync sender and receiver */
    printf("dest[0] on PE %d is %ld\n", shmem_my_pe(), dest[0]);
+   shmem_finalize();
    return 0;
 }
 

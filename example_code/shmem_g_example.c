@@ -17,5 +17,6 @@ int main(void)
 
    printf("%d: y = %ld\n", me, y);
 
+   shmem_finalize();
    return 0;
 }
