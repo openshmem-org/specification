@@ -24,7 +24,7 @@ all: $(C_BINS) $(F_BINS)
 	$(FC) $(FFLAGS) -o $@ $+
 
 run: $(C_BINS) $(F_BINS)
-	for bin in $+; do $(RUNCMD) $(RUNOPT) ./$$bin; done
+	for bin in $+; do $(RUNCMD) $(RUNOPT) ./$$bin || exit $$?; done
 
 clean:
 	rm -f $(C_BINS) $(F_BINS)
