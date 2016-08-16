@@ -10,5 +10,6 @@ main (int argc, char *argv[])
   nprocs = shmem_n_pes ();
   me = shmem_my_pe ();
   printf ("Hello from %d of %d\n", me, nprocs);
+  shmem_finalize();
   return 0;
 }

@@ -24,5 +24,6 @@ main(void)
     fclose(fp);
   }
 
+  shmem_finalize();
   return 0;
 }

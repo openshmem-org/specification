@@ -23,5 +23,6 @@ int main(void)
    if (me == 1)
       printf("%s\n", (fabs (*f - e) < epsilon) ? "OK" : "FAIL");
 
+   shmem_finalize();
    return 0;
 }
