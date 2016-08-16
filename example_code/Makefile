@@ -5,7 +5,7 @@ FC       = oshfort
 FFLAGS   = -Wall -O3
 
 RUNCMD   = oshrun
-RUNOPT   = -np 2
+RUNOPT   = -np 4
 
 C_TESTS  = $(wildcard *.c)
 C_BINS   = $(C_TESTS:.c=.cx)
