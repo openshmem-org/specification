@@ -16,33 +16,53 @@ Where appropriate compiler support is available, \openshmem{} provides type-gene
 one-sided communication interfaces via \Celev{} generic selection 
 (\Celev{} \S6.5.1.1\footnote{Formally, the \Celev{} specification is ISO/IEC 9899:2011(E).})
 for block, scalar, and block-strided put and get communication. 
-Such type-generic routines are supported for the ``standard \ac{RMA} types’’
+Such type-generic routines are supported for the
+\newtext{%
+C11 ``standard integer types'' (C11 \S6.2.5.7),
+``real floating types'' (C11 \S6.2.5.10), and
+``exact-width integer types'' (C11 \S7.20.1.1).
+The C11 standard integer types, real floating types, and exact-width integer
+types are collectively called the} ``standard \ac{RMA} types’’
 identified in Table \ref{stdrmatypes}.
+\newtext{Implementations may optionally support additional types.}
 
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{|l|l|}
       \hline
-      \TYPE & \TYPENAME\\
-      \hline
-      float & float\\
-      \hline
-      double & double\\
-      \hline
-      long double & longdouble\\
-      \hline
-      char & char\\
-      \hline
-      short & short\\
-      \hline
-      int & int\\
-      \hline
-      long & long\\
-      \hline
-      long long & longlong\\
-      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      float              & float      \\ \hline
+      double             & double     \\ \hline
+      long double        & longdouble \\ \hline
+      char               & char       \\ \hline
+%\newtext {
+      signed char        & schar      \\ \hline
+%}
+      short              & short      \\ \hline
+      int                & int        \\ \hline
+      long               & long       \\ \hline
+      long long          & longlong   \\ \hline
+%\newtext {
+      bool \footnotemark & bool       \\ \hline
+      unsigned char      & uchar      \\ \hline
+      unsigned short     & ushort     \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int8\_t            & int8       \\ \hline
+      int16\_t           & int16      \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint8\_t           & uint8      \\ \hline
+      uint16\_t          & uint16     \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+%}
     \end{tabular}
     \caption{Standard \ac{RMA} Types and Names}
     \label{stdrmatypes}
   \end{center} 
 \end{table}
+
+\footnotetext{\newtext{In order to maintain compatibility between C and C++,
+the C interface requires the \VAR{bool} macro as defined in stdbool.h.}}
