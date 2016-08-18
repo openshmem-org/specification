@@ -8,4 +8,4 @@ The current version of the OpenSHMEM specification is maintained in the ```maste
 
 ## Proposing Changes to the Specification
 
-Changes should be proposed as pull requests against the ```osh_spec_next``` branch.  Text changes must be ratified through the OpenSHMEM specification committee.  All changes must pass CI testing and require two reviews before merging.
+Changes should be proposed as pull requests against the ```osh_spec_next``` branch.  Text changes must be ratified through the OpenSHMEM specification committee and the pull request must also reference the Redmine ticket being used to track the proposal.  All changes must pass CI testing and require two reviews before merging.
