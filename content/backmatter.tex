@@ -340,7 +340,9 @@ specification.
     \FUNC{SHMEM\_PUT} & 1.2 & Yes & \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} \\ \hline
     \FUNC{SHMEM\_CACHE} & 1.3 & Yes & (none) \\ \hline
     \_SHMEM\_* constants & 1.3 & Yes & SHMEM\_* \\ \hline
-    \hline
+%\newtext{
+    SMA\_* environment variables & 1.4 & Yes & SHMEM\_* \\ \hline
+%}
     \end{tabular}
 \end{center}
 
@@ -357,6 +359,10 @@ specification.
 
 \item The \VAR{SHMEM\_SYNC\_SIZE} constant was added.
 \\See Section \ref{subsec:library_constants}.
+%
+\item \newtext{The \texttt{SMA\_}* environment variables were deprecated
+and replaced with \texttt{SHMEM\_}* environment variables.
+\\ See Section \ref{subsec:environment_variables}.}
 
 \end{itemize}
 
