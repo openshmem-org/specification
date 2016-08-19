@@ -4,18 +4,19 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+void shmem_wait(volatile TYPE *ivar, TYPE cmp_value);
+void shmem_wait_until(volatile TYPE *ivar, int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
 \begin{Csynopsis}
-void shmem_short_wait(volatile short *ivar, short cmp_value);
-void shmem_short_wait_until(volatile short *ivar, int cmp, short cmp_value);
-void shmem_int_wait(volatile int *ivar, int cmp_value);
-void shmem_int_wait_until(volatile int *ivar, int cmp, int cmp_value);
-void shmem_long_wait(volatile long *ivar, long cmp_value);
-void shmem_long_wait_until(volatile long *ivar, int cmp, long cmp_value);
-void shmem_longlong_wait(volatile long long *ivar, long long cmp_value);
-void shmem_longlong_wait_until(volatile long long *ivar, int cmp, long long cmp_value);
-void shmem_wait(volatile long *ivar, long cmp_value);
-void shmem_wait_until(volatile long *ivar, int cmp, long cmp_value);
+void shmem_<TYPENAME>_wait(volatile TYPE *ivar, TYPE cmp_value);
+void shmem_<TYPENAME>_wait_until(volatile TYPE *ivar, int cmp, TYPE cmp_value);
 \end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{Fsynopsis}
 CALL SHMEM_INT4_WAIT(ivar, cmp_value)
