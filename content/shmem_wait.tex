@@ -108,7 +108,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \begin{apiexamples}
 
 \apifexample
-{ The following call returns when variable ivar is not equal to 100:}
+{ The following call returns when variable \VAR{ivar} is not equal to 100:}
 {./example_code/shmem_wait1_example.f90}
 {}
 
@@ -119,7 +119,8 @@ call to \FUNC{SHMEM\_INT8\_WAIT} in example 1:}
 {}
 
 \apicexample
-{The following \CorCpp{} call waits until the sign bit in ivar is set by a
+{The following \CorCpp{} call waits until the \oldtext{sign bit}
+\newtext{value} in \VAR{ivar} is set \newtext{to be less than zero} by a
 transfer from a remote PE:}
 {./example_code/shmem_wait3_example.f90}
 {}
