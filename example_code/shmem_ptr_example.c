@@ -27,5 +27,6 @@ int main(void)
          printf(" %d\n",bigd[i]);
       printf("\n");
    }
-  return 1;
+   shmem_finalize();
+   return 0;
 }

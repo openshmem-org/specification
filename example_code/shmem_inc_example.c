@@ -18,5 +18,6 @@ int main(void)
    shmem_barrier_all();
 
    printf("%d: dst = %d\n", me, dst);
+   shmem_finalize();
    return 0;
 }

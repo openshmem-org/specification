@@ -17,6 +17,6 @@ int main(int argc, char **argv)
    sleep(slp);
    printf("%d: sleeping...done\n", me);
    shmem_clear_lock(&L);
-   shmem_barrier_all();
+   shmem_finalize();
    return 0;
 }

@@ -13,5 +13,6 @@ int main(void)
     printf("Number of PEs executing this program is: %d\n", npes);
   }
 
+  shmem_finalize();
   return 0;
 }
