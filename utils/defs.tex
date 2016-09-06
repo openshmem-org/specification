@@ -318,6 +318,18 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \end{description}
 }
 
+\lstnewenvironment{C99synopsis}
+{ 
+  \textbf{C99:} 
+  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE}, aboveskip=0pt, belowskip=0pt,}}{}
+
+\lstnewenvironment{CXXsynopsis}
+{ 
+  \textbf{C++:} 
+  \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE}, aboveskip=0pt, belowskip=0pt,}}{}
+
 \lstnewenvironment{C11synopsis}
 { 
   \textbf{C11:} 
