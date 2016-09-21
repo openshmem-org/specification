@@ -44,6 +44,13 @@ CALL SHMEM_QUIET
     routines wait for the completion of outstanding writes (\PUT{}, \ac{AMO},
     memory stores, and nonblocking \PUT{} and \GET{} routines) to
     symmetric data objects on all \acp{PE}.
+
+    {\color{blue}
+    \FUNC{shmem\_quiet} does not have an effect on the ordering between memory 
+    accesses issued by the target PE.
+    \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until}, \FUNC{shmem\_barrier}, 
+    \FUNC{shmem\_barrier\_all} routines can be called by the target PE to guarantee 
+    ordering of its memory accesses.}
 }
 
 \begin{apiexamples}

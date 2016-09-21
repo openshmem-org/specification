@@ -32,8 +32,14 @@ CALL SHMEM_FENCE
 }
 
 \apinotes{
-    \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does
-    not guarantee completion of delivery.  There is a subtle difference between
+    \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not
+    guarantee completion of delivery.  
+    {\color{blue}
+    \FUNC{shmem\_fence} also does not have an effect on the ordering between memory 
+    accesses issued by the target PE. \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until},
+    \FUNC{shmem\_barrier}, \FUNC{shmem\_barrier\_all} routines can be called by the target PE to guarantee 
+    ordering of its memory accesses.}
+    There is a subtle difference between
     \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}, in that, \FUNC{shmem\_quiet}
     guarantees completion of \PUT{}, \acp{AMO}, and memory store routines to
     symmetric data objects which makes the updates visible to all other
