@@ -63,8 +63,11 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
     in the \activeset{} exchanges \VAR{nelems} strided data elements of size
     32 bits (for \FUNC{shmem\_alltoalls32}) or 64 bits (for \FUNC{shmem\_alltoalls64})
     with all other \acp{PE} in the set. Both strides, \VAR{dst} and \VAR{sst}, must be greater
-    than or equal to \CONST{1}. The \VAR{sst}*\jth block sent from \ac{PE} \VAR{i} to
-    \ac{PE} \VAR{j} is placed in the \VAR{dst}*\ith block of the \VAR{dest} data object on
+    than or equal to \CONST{1}.
+    Given a \ac{PE} \VAR{i} that is the \kth PE in the active set and a \ac{PE}
+    \VAR{j} that is the \lth \ac{PE} in the active set,
+    the \VAR{sst}*\lth block sent from \ac{PE} \VAR{i} to
+    \ac{PE} \VAR{j} is placed in the \VAR{dst}*\kth block of the \VAR{dest} data object on
     \ac{PE} \VAR{j}.
 
     As with all \openshmem collective routines, these routines assume
