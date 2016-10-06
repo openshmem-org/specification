@@ -316,6 +316,7 @@ interconnect, and to a very limited extent, Infiniband based clusters.
 
 \chapter{\openshmem Specification and Deprecated API}\label{sec:dep_api}
 
+\newtext{\section{Overview}}
 For the \openshmem Specification(s), deprecation is the process of identifying
 API that is supported but no longer recommended for use by program users. For
 \openshmem library users, said API \textbf{must} be supported until clearly
@@ -325,24 +326,102 @@ deprecation, and if the feature is supported in the current version of the
 specification.  
 
 \begin{center}
+\scriptsize
 \begin{tabular}{|l|c|c|c|}
     \hline
      \textbf{Deprecated API} & \textbf{Deprecated Since} 
-     & \textbf{Currently Supported(?)} & \textbf{Replaced By}\\ 
+     & \shortstack{\textbf{\oldtext{Currently Supported(?)}} \\ \textbf{\newtext{Last Version Supported}}}
+     & \textbf{Replaced By}\\
     \hline %There may be better table headings...
-    \FUNC{\_my\_pe} & 1.2 & Yes & \FUNC{shmem\_my\_pe} \\ \hline
-    \FUNC{\_num\_pes} & 1.2 & Yes & \FUNC{shmem\_n\_pes} \\ \hline
-    \FUNC{shmalloc} & 1.2 & Yes & \FUNC{shmem\_malloc} \\ \hline
-    \FUNC{shfree} & 1.2 & Yes & \FUNC{shmem\_free} \\ \hline
-    \FUNC{shrealloc} & 1.2 & Yes & \FUNC{shmem\_realloc} \\ \hline
-    \FUNC{shmemalign} & 1.2 & Yes & \FUNC{shmem\_align} \\ \hline
-    \FUNC{start\_pes} & 1.2 & Yes & \FUNC{shmem\_init} \\ \hline
-    \FUNC{SHMEM\_PUT} & 1.2 & Yes & \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} \\ \hline
-    \FUNC{SHMEM\_CACHE} & 1.3 & Yes & (none) \\ \hline
-    \_SHMEM\_* constants & 1.3 & Yes & SHMEM\_* \\ \hline
+    \FUNC{\_my\_pe} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
+    \FUNC{\_num\_pes} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
+    \FUNC{shmalloc} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
+    \FUNC{shfree} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
+    \FUNC{shrealloc} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
+    \FUNC{shmemalign} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
+    \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
+    \FUNC{SHMEM\_PUT} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
+    \oldtext{\FUNC{SHMEM\_CACHE}} & \oldtext{1.3} & \oldtext{Yes} & \oldtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_inv}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_CLEAR\_CACHE\_INV}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_line\_inv}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_inv}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_INV}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_line\_inv}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_LINE\_INV}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush\_line}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH\_LINE}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \oldtext{\_SHMEM\_* constants} & \oldtext{1.3} & \oldtext{Yes} & \oldtext{SHMEM\_*} \\ \hline
+    \newtext{\_SHMEM\_SYNC\_VALUE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_SYNC\_VALUE}} \\ \hline
+    \newtext{\_SHMEM\_BARRIER\_SYNC\_SIZE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_BARRIER\_SYNC\_SIZE}} \\ \hline
+    \newtext{\_SHMEM\_BCAST\_SYNC\_SIZE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_BCAST\_SYNC\_SIZE}} \\ \hline
+    \newtext{\_SHMEM\_COLLECT\_SYNC\_SIZE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_COLLECT\_SYNC\_SIZE}} \\ \hline
+    \newtext{\_SHMEM\_REDUCE\_SYNC\_SIZE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_REDUCE\_SYNC\_SIZE}} \\ \hline
+    \newtext{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}} \\ \hline
+    \newtext{\_SHMEM\_MAJOR\_VERSION} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_MAJOR\_VERSION}} \\ \hline
+    \newtext{\_SHMEM\_MINOR\_VERSION} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_MINOR\_VERSION}} \\ \hline
+    \newtext{\_SHMEM\_MAX\_NAME\_LEN} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_MAX\_NAME\_LEN}} \\ \hline
+    \newtext{\_SHMEM\_VENDOR\_STRING} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_VENDOR\_STRING}} \\ \hline
     \hline
     \end{tabular}
 \end{center}
+
+\color{ForestGreen} %% NEW TEXT :: START
+\section{Deprecation Rationale}
+
+\subsection{\_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign} The
+\CorCpp functions \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
+\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
+to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
+prefix for all functions.
+
+\subsection{start\_pes}
+The \CorCpp function \FUNC{start\_pes} includes an unnecessary initialization
+argument that is remnant of historical \emph{SHMEM} implementations and no
+longer reflects the requirements of modern \openshmem implementations.
+Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
+\shmemprefixLC{} naming prefix. This function has been deprecated and
+\openshmem users are encouraged to use
+\hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
+
+\subsection{SHMEM\_PUT (Fortran API)}
+The \Fortran{} function \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
+\ac{API} and is semantically identical to \Fortran{} functions
+\FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
+\FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
+\FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
+
+\subsection{SHMEM\_CACHE}
+The \FUNC{SHMEM\_CACHE} \ac{API}
+\begin{center}
+\begin{tabular}{ll}
+    \CorCpp: & \Fortran: \\
+    shmem\_clear\_cache\_inv & SHMEM\_CLEAR\_CACHE\_INV \\
+    shmem\_set\_cache\_inv & SHMEM\_SET\_CACHE\_INV \\
+    shmem\_set\_cache\_line\_inv & SHMEM\_SET\_CACHE\_LINE\_INV \\
+    shmem\_udcflush & SHMEM\_UDCFLUSH \\
+    shmem\_udcflush\_line & SHMEM\_UDCFLUSH\_LINE \\
+    shmem\_clear\_cache\_line\_inv \\
+\end{tabular}
+\end{center}
+was originally implemented for systems with cache management instructions.
+This API has largely gone unused as current system architectures are cache
+coherent and do not require cache management instructions.  Due to obsolete
+functionality, \FUNC{SHMEM\_CACHE} has been deprecated.
+
+\subsection{\_SHMEM\_* constants}
+The library constants
+\begin{center}
+\begin{tabular}{ll}
+    \_SHMEM\_SYNC\_VALUE & \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE \\
+    \_SHMEM\_BARRIER\_SYNC\_SIZE & \_SHMEM\_MAJOR\_VERSION \\
+    \_SHMEM\_BCAST\_SYNC\_SIZE & \_SHMEM\_MINOR\_VERSION \\
+    \_SHMEM\_COLLECT\_SYNC\_SIZE & \_SHMEM\_MAX\_NAME\_LEN \\
+    \_SHMEM\_REDUCE\_SYNC\_SIZE & \_SHMEM\_VENDOR\_STRING \\
+    \end{tabular}
+\end{center}
+do not adhere to the \Clang{} standard’s reserved identifiers and the \Cpp{}
+standard’s reserved names.  These constants have been deprecated and replaced
+with corresponding constants that adhere to a naming convention that is
+consistent for \CorCpp and \Fortran{} \openshmem library constants.
+\color{black} %% NEW TEXT :: STOP
 
 
 
