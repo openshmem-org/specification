@@ -1,8 +1,8 @@
 CC       = oshcc
-CFLAGS   = -Wall -O3
+CFLAGS  ?= -Wall -Wextra
 
 FC       = oshfort
-FFLAGS   = -Wall -O3
+FFLAGS  ?= -Wall -Wextra
 
 RUNCMD   = oshrun
 RUNOPT   = -np 4
