@@ -5,12 +5,11 @@
 int
 main(void)
 {
-  int me, npes; 
+  int me;
 
   shmem_init();
 
   me = shmem_my_pe();
-  npes = shmem_n_pes();
 
   if (me == 0) {
     FILE *fp = fopen("input.txt", "r"); 
