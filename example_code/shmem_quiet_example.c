@@ -26,7 +26,6 @@ int main(void)
     shmem_int_put(&targ, &src, 1, 1);  /*put3*/
     shmem_int_put(&targ, &src, 1, 2);  /*put4*/
   }
-  shmem_barrier_all();  /* sync sender and receiver */
   shmem_finalize();
   return 0;
 }
