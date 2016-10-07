@@ -329,25 +329,36 @@ specification.
 \scriptsize
 \begin{tabular}{|l|c|c|c|}
     \hline
-     \textbf{Deprecated API} & \textbf{Deprecated Since} 
-     & \shortstack{\textbf{\oldtext{Currently Supported(?)}} \\ \textbf{\newtext{Last Version Supported}}}
-     & \textbf{Replaced By}\\
-    \hline %There may be better table headings...
-    \FUNC{\_my\_pe} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
-    \FUNC{\_num\_pes} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
-    \FUNC{shmalloc} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
-    \FUNC{shfree} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
-    \FUNC{shrealloc} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
-    \FUNC{shmemalign} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
-    \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
-    \FUNC{SHMEM\_PUT} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
+    \textbf{Deprecated API}
+    & \textbf{Deprecated Since}
+    & \shortstack{\textbf{\oldtext{Currently Supported(?)}} \\ \textbf{\newtext{Last Version Supported}}}
+    & \textbf{Replaced By} \\
+    \hline
+    \newtext{\CorCpp:} \FUNC{\_my\_pe} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
+    \newtext{\CorCpp:} \FUNC{\_num\_pes} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
+    \newtext{\CorCpp:} \FUNC{shmalloc} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
+    \newtext{\CorCpp:} \FUNC{shfree} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
+    \newtext{\CorCpp:} \FUNC{shrealloc} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
+    \newtext{\CorCpp:} \FUNC{shmemalign} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
+    \newtext{\CorCpp:} \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
+    \newtext{\Fortran:} \FUNC{SHMEM\_PUT} & 1.2 & \oldtext{Yes}\newtext{Current} & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
     \oldtext{\FUNC{SHMEM\_CACHE}} & \oldtext{1.3} & \oldtext{Yes} & \oldtext{(none)} \\ \hline
-    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_inv}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_CLEAR\_CACHE\_INV}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_inv}}
+        \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_CLEAR\_CACHE\_INV}}}
+        & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
     \newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_line\_inv}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
-    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_inv}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_INV}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
-    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_line\_inv}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_LINE\_INV}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
-    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
-    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush\_line}} \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH\_LINE}}} & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_inv}}
+        \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_INV}}}
+        & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_line\_inv}}
+        \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_LINE\_INV}}}
+        & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush}}
+        \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH}}}
+        & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
+    \shortstack[l]{\newtext{\CorCpp:} \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush\_line}}
+        \\ \newtext{\Fortran:} \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH\_LINE}}}
+        & \newtext{1.3} & \newtext{Current} & \newtext{(none)} \\ \hline
     \oldtext{\_SHMEM\_* constants} & \oldtext{1.3} & \oldtext{Yes} & \oldtext{SHMEM\_*} \\ \hline
     \newtext{\_SHMEM\_SYNC\_VALUE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_SYNC\_VALUE}} \\ \hline
     \newtext{\_SHMEM\_BARRIER\_SYNC\_SIZE} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_BARRIER\_SYNC\_SIZE}} \\ \hline
@@ -359,7 +370,6 @@ specification.
     \newtext{\_SHMEM\_MINOR\_VERSION} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_MINOR\_VERSION}} \\ \hline
     \newtext{\_SHMEM\_MAX\_NAME\_LEN} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_MAX\_NAME\_LEN}} \\ \hline
     \newtext{\_SHMEM\_VENDOR\_STRING} & \newtext{1.3} & \newtext{Current} & \hyperref[subsec:library_constants]{\newtext{SHMEM\_VENDOR\_STRING}} \\ \hline
-    \hline
     \end{tabular}
 \end{center}
 
