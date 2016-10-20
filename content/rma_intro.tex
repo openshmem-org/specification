@@ -22,8 +22,9 @@ Such type-generic routines are supported for the
 ``real floating types'' (\Celev{} \S6.2.5.10),
 ``exact-width integer types'' (\Celev{} \S7.20.1.1),
 ``integer types capable of holding object pointers'' (\Celev{} \S7.20.1.4),
-and the integer types defined in stddef.h (\Celev{} \S7.19),
-which are collectively called the} ``standard \ac{RMA} types''
+and the integer types \textit{size\_t} and \textit{ptrdiff\_t} defined in
+stddef.h (\Celev{} \S7.19), which are collectively called the}
+``standard \ac{RMA} types''
 \newtext{and are listed} \oldtext{identified} in Table \ref{stdrmatypes}.
 \newtext{Implementations may optionally support additional types.}
 
@@ -58,11 +59,10 @@ which are collectively called the} ``standard \ac{RMA} types''
       uint16\_t          & uint16     \\ \hline
       uint32\_t          & uint32     \\ \hline
       uint64\_t          & uint64     \\ \hline
-      size\_t            & size       \\ \hline
-      ptrdiff\_t         & ptrdiff    \\ \hline
-      wchar\_t           & wchar      \\ \hline
       intptr\_t          & intptr     \\ \hline
       uintptr\_t         & uintptr    \\ \hline
+      size\_t            & size       \\ \hline
+      ptrdiff\_t         & ptrdiff    \\ \hline
 %}
     \end{tabular}
     \caption{Standard \ac{RMA} Types and Names}
