@@ -60,7 +60,7 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     Given a \ac{PE} \VAR{i} that is the \kth PE in the active set and a \ac{PE}
     \VAR{j} that is the \lth \ac{PE} in the active set,
     \ac{PE} \VAR{i} sends the \lth block of its \VAR{source} object to
-    \ac{PE} \VAR{j} and that block of data is placed in the \kth block of
+    the \kth block of
     the \VAR{dest} object of \ac{PE} \VAR{j}.
 
     As with all \openshmem collective routines, this routine assumes
