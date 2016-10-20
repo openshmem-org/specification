@@ -28,6 +28,17 @@ stddef.h (\Celev{} \S7.19), which are collectively called the}
 \newtext{and are listed} \oldtext{identified} in Table \ref{stdrmatypes}.
 \newtext{Implementations may optionally support additional types.}
 
+\textbf{\newtext{Note to implementors:}}
+\begin{itemize}
+\item \newtext{%
+  In order to provide compatibility between C and C++, implementors may elect
+  to include a dependence on stdbool.h, which provides the macro \textit{bool}.
+  Alternatively, implementors may elect to avoid this dependence and use the
+  C99\footnote{Formally, the C99 specification is ISO/IEC 9899:1999(E), including amendments and corrections.}
+  \textit{\_Bool} type explicitly.
+  }
+\end{itemize}
+
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{|l|l|}
@@ -45,7 +56,7 @@ stddef.h (\Celev{} \S7.19), which are collectively called the}
       long               & long       \\ \hline
       long long          & longlong   \\ \hline
 %\newtext {
-      bool \footnotemark & bool       \\ \hline
+      bool               & bool       \\ \hline
       unsigned char      & uchar      \\ \hline
       unsigned short     & ushort     \\ \hline
       unsigned int       & uint       \\ \hline
@@ -69,6 +80,3 @@ stddef.h (\Celev{} \S7.19), which are collectively called the}
     \label{stdrmatypes}
   \end{center} 
 \end{table}
-
-\footnotetext{\newtext{In order to maintain compatibility between C and C++,
-the C interface requires the \VAR{bool} macro as defined in stdbool.h.}}
