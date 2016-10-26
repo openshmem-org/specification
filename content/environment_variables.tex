@@ -2,9 +2,8 @@ The \openshmem specification provides a set of environment variables that allows
 users to configure the \openshmem implementation, and receive information about
 the implementation. The implementations of the specification are free to define
 additional variables. Currently, the specification defines four environment
-variables.
-\newtext{All environment variables that start with SMA\_* are deprecated, but
-currently supported for backwards compatibility.}
+variables. All environment variables that start with \VAR{SMA\_*} are
+deprecated, but currently supported for backwards compatibility.
 
 \medskip{}
 
@@ -13,16 +12,16 @@ currently supported for backwards compatibility.}
 Variable & Value & Purpose\tabularnewline
 \hline 
 \hline 
-\texttt{\oldtext{SMA}\newtext{SHMEM}\_VERSION} & any & print the library version at
+\texttt{SHMEM\_VERSION} & any & print the library version at
 start-up\tabularnewline
 \hline 
-\texttt{\oldtext{SMA}\newtext{SHMEM}\_INFO} & any & print helpful text about all these environment
+\texttt{SHMEM\_INFO} & any & print helpful text about all these environment
 variables\tabularnewline
 \hline 
-\texttt{\oldtext{SMA}\newtext{SHMEM}\_SYMMETRIC\_SIZE} & non-negative integer & number of bytes to
+\texttt{SHMEM\_SYMMETRIC\_SIZE} & non-negative integer & number of bytes to
 allocate for symmetric heap\tabularnewline
 \hline 
-\texttt{\oldtext{SMA}\newtext{SHMEM}\_DEBUG} & any & enable debugging messages\tabularnewline
+\texttt{SHMEM\_DEBUG} & any & enable debugging messages\tabularnewline
 \hline 
 \end{tabular}
 
