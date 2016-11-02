@@ -1,0 +1,44 @@
+\apisummary{
+Returns the level of thread support provided by the library.}
+
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_query_thread(int *provided);
+\end{Csynopsis}
+
+
+\begin{Fsynopsis} 
+INTEGER provided
+
+SHMEM_QUERY_THREAD(provided) 
+\end{Fsynopsis}  
+
+\begin{apiarguments}
+\apiargument{OUT}{provided}{The thread level support provided by the \openshmem{} implementation.}
+\end{apiarguments}
+
+
+\apidescription{
+The \FUNC{shmem\_query\_thread} call returns the level of thread support
+currently being provided. The value returned will be same as \textit{provided}
+returned in the SHMEM\_INIT\_THREAD(), if the \openshmem{} library was
+initialized by SHMEM\_INIT\_THREAD().
+}
+
+\apireturnvalues{    
+	NONE
+}
+
+\apinotes{ 
+}		
+
+\apiimpnotes{
+
+}
+
+\end{apidefinition}
+
+ 
+  
