@@ -19,9 +19,10 @@ where they may be useful.\\
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{ Waits for a symmetric variable to be updated by a remote \ac{PE}. Should be
-used when computation on the local \ac{PE} cannot proceed without the value that
-the remote \ac{PE} is to update.} \tabularnewline
+{ Waits for a symmetric variable to be updated by a remote \ac{PE} \newtext{or the same
+\ac{PE} in the case of multi-threaded \openshmem{}}. Should be
+used when computation on the \newtext{calling thread} \oldtext{local \ac{PE}} cannot proceed without the value that
+the remote \newtext{thread or} \ac{PE} is to update.} \tabularnewline
 \hline 
 \end{tabular}
 

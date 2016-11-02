@@ -30,7 +30,8 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \begin{apiarguments}
 
 \apiargument{OUT}{ivar}{A remotely accessible integer variable that is being updated
-    by another \ac{PE}.  If you are using \CorCpp, the type of \VAR{ivar} should
+    by another \ac{PE} \newtext{or the same \ac{PE} in the case of multi-threaded
+    \openshmem{}}.  If you are using \CorCpp, the type of \VAR{ivar} should
     match that implied in the SYNOPSIS section.} 
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.  \VAR{cmp} must be of type integer.  If you are using
@@ -45,14 +46,16 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 
 \apidescription{ 
     \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be
-    changed by a remote write or an atomic operation issued by a different \ac{PE}.
+    changed by a remote write or an atomic operation issued by a
+    \oldtext{different} \ac{PE}.
     These  routines can be used for point-to-point direct synchronization.  A call
-    to \VAR{shmem\_wait} does not return until some other \ac{PE} writes  a value,
+    to \VAR{shmem\_wait} does not return until a \ac{PE} writes  a value,
     not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting \ac{PE}.  A call
-    to \FUNC{shmem\_wait\_until} does not return until some  other \ac{PE} changes
+    to \FUNC{shmem\_wait\_until} does not return until \oldtext{some  other}
+    \newtext{a} \ac{PE} changes
     \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.
-    This mechanism is useful when a \ac{PE} needs to tell another \ac{PE} that it
-    has completed some action.  The \FUNC{shmem\_wait}  routines return when
+    \oldtext{This mechanism is useful when a \ac{PE} needs to tell another \ac{PE} that it
+    has completed some action.}  The \FUNC{shmem\_wait}  routines return when
     \VAR{ivar} is no  longer  equal  to \VAR{cmp\_value}. The
     \FUNC{shmem\_wait\_until} routines return when the compare condition is true.
     The compare condition is defined by the \VAR{ivar}  argument  compared with the
