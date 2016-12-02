@@ -6,17 +6,23 @@
 
 \begin{C11synopsis}
 TYPE shmem_g(const TYPE *addr, int pe);
+TYPE shmem_ctx_g(const TYPE *addr, int pe, shmem_ctx_t ctx);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
 TYPE shmem_<TYPENAME>_g(const TYPE *addr, int pe);
+TYPE shmem_ctx_<TYPENAME>_g(const TYPE *addr, int pe, shmem_ctx_t ctx);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{apiarguments}
     \apiargument{IN}{addr}{The remotely accessible array element or scalar data object.}
     \apiargument{IN}{pe}{The number of the remote \ac{PE} on which \VAR{addr} resides.}
+    \newtext{
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When none
+    is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    }
 \end{apiarguments}
 
 \apidescription{

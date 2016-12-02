@@ -6,11 +6,13 @@
 
 \begin{C11synopsis}
 void shmem_add(TYPE *dest, TYPE value, int pe);
+void shmem_ctx_add(TYPE *dest, TYPE value, int pe, shmem_ctx_t ctx);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_add(TYPE *dest, TYPE value, int pe);
+void shmem_ctx_<TYPENAME>_add(TYPE *dest, TYPE value, int pe, shmem_ctx_t ctx);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
 
@@ -33,6 +35,10 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
     \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
         \dest{} is to be updated.  If you are using \Fortran, it must be a default
         integer value.}
+    \newtext{
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When none
+        is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    }
 \end{apiarguments}
 
 \apidescription{

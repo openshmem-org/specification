@@ -7,6 +7,7 @@
 
 \begin{Csynopsis}
 void shmem_fence(void);
+void shmem_ctx_fence(void);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
@@ -14,13 +15,17 @@ CALL SHMEM_FENCE
 \end{Fsynopsis}
 
 \begin{apiarguments}
-\apiargument{None.}{}{}
+    \newtext{
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When none
+    is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    }
 \end{apiarguments}
 
 \apidescription{
     This routine assures ordering of delivery of \PUT{}, \acp{AMO}, and memory store
     routines to symmetric data objects.  All \PUT{}, \acp{AMO}, and memory store
-    routines to symmetric data objects issued to a particular remote \ac{PE} prior
+    routines to symmetric data objects issued to a particular remote \ac{PE}
+    \newtext{on the given context} prior
     to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before any
     subsequent \PUT{}, \acp{AMO}, and memory store routines to symmetric data
     objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery,

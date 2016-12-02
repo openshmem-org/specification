@@ -6,11 +6,13 @@
 
 \begin{C11synopsis}
 void shmem_set(TYPE *dest, TYPE value, int pe);
+void shmem_ctx_set(TYPE *dest, TYPE value, int pe, shmem_ctx_t ctx);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by Table \ref{extamotypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_set(TYPE *dest, TYPE value, int pe);
+void shmem_ctx_<TYPENAME>_set(TYPE *dest, TYPE value, int pe, shmem_ctx_t ctx);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
@@ -33,6 +35,10 @@ CALL SHMEM_REAL8_SET(dest, value_r8, pe)
 \apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \VAR{dest} is to be updated.}
+\newtext{
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When none
+    is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+}
 
 \end{apiarguments}
 

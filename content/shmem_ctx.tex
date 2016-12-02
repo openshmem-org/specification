@@ -1,0 +1,123 @@
+\color{ForestGreen}
+
+All \openshmem RMA, AMO, and point-to-point synchronization routines are
+performed on a communication context.  The communication context defines an
+independent ordering and completion environment, allowing users to manage the
+overlap of communication with computation and also to manage communication
+operations performed by separate threads within a multithreaded \ac{PE}.  For
+example, in single-threaded environments, contexts can be used to pipeline
+communication and computation.  In multithreaded environments, contexts can
+additionally provide thread isolation, eliminating overheads resulting from
+thread interference within the communication subsystem.
+
+Context handles are of type \CODE{shmem\_ctx\_t} and are valid for
+language-level assignment and comparison.  A handle to the desired context is
+passed as an argument in the \CODE{shmem\_ctx...} API routines.  API routines
+that do not accept a context argument operate on the default context.  The
+default context can be used explicitly through the \const{SHMEM\_CTX\_DEFAULT}
+handle.
+
+\subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
+\label{subsec:shmem_ctx_create}
+\apisummary{
+    Create a communication context.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int shmem_ctx_create(long options, shmem_ctx_t *ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{options}{The set of options requested for the given context.
+        Multiple options may be requested by combining them with a bitwise
+        \textit{OR} operation.  Otherwise, $0$ can be given if no options are
+        requested.}
+    \apiargument{OUT}{ctx}{A handle to the newly created context.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_ctx\_create} routine creates a new communication context
+    and returns its handle through the \VAR{ctx} argument.  If the context was
+    created successfully, a value of zero is returned.  An unsuccessful context
+    creation call is not treated as an error and the \openshmem library remains
+    in a correct state.  The creation call can be reattempted with different
+    options or after additional resources become available.
+
+    The following constants can be supplied as context options: \\
+
+        \apitablerow{\CONST{SHMEM\_CTX\_SHARED}}{
+            In a multithreaded environment, the given context will be used by
+            multiple threads concurrently.}
+        \apitablerow{\CONST{SHMEM\_CTX\_PRIVATE}}{
+            In a multithreaded environment, the given context will not be used
+            by multiple threads concurrently.}
+}
+
+\apireturnvalues{
+    Zero on success and nonzero on error.
+}
+
+\apinotes{
+    None.
+}
+
+%\begin{apiexamples}
+%
+%    \apicexample
+%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}	 
+%    {./example_code/shmem_p_example.c}
+%    {}
+%
+%\end{apiexamples}
+
+\end{apidefinition}
+
+\subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
+\label{subsec:shmem_ctx_create}
+\apisummary{
+    Destroy a communication context.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_ctx_destroy(shmem_ctx_t ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{Handle to the context that will be destroyed.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_ctx\_destroy} destroys a context that was created by a call to
+    \FUNC{shmem\_ctx\_create}.  This function performs an implicit quiet
+    operation on the given context before it is freed.
+
+    \textit{Rationale:} Destroying a context makes it impossible for the user to
+    complete communication operations that are pending on that context.  This
+    includes nonblocking communication operations, whose local buffers are only
+    returned to the user after the operations have been completed.  An implicit
+    quiet is performed when freeing a context to avoid this ambiguity.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    None.
+}
+
+%\begin{apiexamples}
+%
+%    \apicexample
+%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}	 
+%    {./example_code/shmem_p_example.c}
+%    {}
+%
+%\end{apiexamples}
+
+\end{apidefinition}
+\color{black}

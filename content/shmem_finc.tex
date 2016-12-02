@@ -6,11 +6,13 @@
 
 \begin{C11synopsis}
 TYPE shmem_finc(TYPE *dest, int pe);
+TYPE shmem_ctx_finc(TYPE *dest, int pe, shmem_ctx_t ctx);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 TYPE shmem_<TYPENAME>_finc(TYPE *dest, int pe);
+TYPE shmem_ctx_<TYPENAME>_finc(TYPE *dest, int pe, shmem_ctx_t ctx);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
 
@@ -31,6 +33,10 @@ ires_i8 = SHMEM_INT8_FINC(dest, pe)
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \dest{} is to be updated.  If you are using \Fortran, it must be a default
     integer value.}
+\newtext{
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When none
+    is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+}
 
 \end{apiarguments}
 

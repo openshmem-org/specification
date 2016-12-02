@@ -1,7 +1,7 @@
 \apisummary{
     Registers the arrival of a \ac{PE} at a barrier and suspends \ac{PE} execution
     until all other \ac{PE}s arrive at the barrier and all local and remote memory
-    updates are completed.
+    updates \newtext{on all contexts} are completed.
 }
 
 \begin{apidefinition}
@@ -29,7 +29,8 @@ CALL SHMEM_BARRIER_ALL
 
     Prior to synchronizing with other \ac{PE}s, \FUNC{shmem\_barrier\_all}
     ensures completion of all previously issued memory stores and remote memory
-    updates issued via \openshmem{} \acp{AMO} and \ac{RMA} routine calls  such
+    updates issued \newtext{on all contexts} via \openshmem{} \acp{AMO} and
+    \ac{RMA} routine calls such
     as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32}, 
     \FUNC{shmem\_put\_nbi}, and \FUNC{shmem\_get\_nbi}.
 }

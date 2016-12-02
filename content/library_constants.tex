@@ -10,7 +10,17 @@ All constants that start with
 \tabularnewline
 \hline 
 \hline
+\vspace{3mm}
+\vtop{\hbox{\CorCppFor:}
+\hbox{\hspace*{12mm} \newtext{\const{SHMEM\_CTX\_DEFAULT}}}}
+& \newtext{Handle of type \CODE{shmem\_ctx\_t} that references the
+default communication context.  All point-to-point communication operations
+and synchronizations that do not specify a context are performed on the
+default context.  Refer to \hyperref[sec:ctx]{Communication Management
+Routines} for more information about the usage of this
+constant.}\tabularnewline
 %new
+\hline
 \vspace{3mm}
 \vtop{\hbox{\CorCppFor:}
 \hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_SIZE}}}
