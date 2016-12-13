@@ -16,28 +16,8 @@ Where appropriate compiler support is available, \openshmem{} provides type-gene
 one-sided communication interfaces via \Celev{} generic selection 
 (\Celev{} \S6.5.1.1\footnote{Formally, the \Celev{} specification is ISO/IEC 9899:2011(E).})
 for block, scalar, and block-strided put and get communication. 
-Such type-generic routines are supported for the
-\newtext{\Celev{}
-``standard integer types'' (\Celev{} \S6.2.5.7),
-``real floating types'' (\Celev{} \S6.2.5.10),
-``exact-width integer types'' (\Celev{} \S7.20.1.1),
-``integer types capable of holding object pointers'' (\Celev{} \S7.20.1.4),
-and the integer types \textit{size\_t} and \textit{ptrdiff\_t} defined in
-stddef.h (\Celev{} \S7.19), which are collectively called the}
-``standard \ac{RMA} types''
-\newtext{and are listed} \oldtext{identified} in Table \ref{stdrmatypes}.
-\newtext{Implementations may optionally support additional types.}
-
-\textbf{\newtext{Note to implementors:}}
-\begin{itemize}
-\item \newtext{%
-  In order to provide compatibility between C and C++, implementors may elect
-  to include a dependence on stdbool.h, which provides the macro \textit{bool}.
-  Alternatively, implementors may elect to avoid this dependence and use the
-  C99\footnote{Formally, the C99 specification is ISO/IEC 9899:1999(E), including amendments and corrections.}
-  \textit{\_Bool} type explicitly.
-  }
-\end{itemize}
+Such type-generic routines are supported for the ``standard \ac{RMA} types''
+listed in Table \ref{stdrmatypes}.
 
 \begin{table}[h]
   \begin{center}
@@ -48,15 +28,11 @@ stddef.h (\Celev{} \S7.19), which are collectively called the}
       double             & double     \\ \hline
       long double        & longdouble \\ \hline
       char               & char       \\ \hline
-%\newtext {
       signed char        & schar      \\ \hline
-%}
       short              & short      \\ \hline
       int                & int        \\ \hline
       long               & long       \\ \hline
       long long          & longlong   \\ \hline
-%\newtext {
-      bool               & bool       \\ \hline
       unsigned char      & uchar      \\ \hline
       unsigned short     & ushort     \\ \hline
       unsigned int       & uint       \\ \hline
@@ -74,7 +50,6 @@ stddef.h (\Celev{} \S7.19), which are collectively called the}
       uintptr\_t         & uintptr    \\ \hline
       size\_t            & size       \\ \hline
       ptrdiff\_t         & ptrdiff    \\ \hline
-%}
     \end{tabular}
     \caption{Standard \ac{RMA} Types and Names}
     \label{stdrmatypes}

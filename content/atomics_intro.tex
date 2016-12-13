@@ -29,7 +29,6 @@ atomic memory operation interfaces via \Celev{} generic selection. The type-gene
 \ac{AMO} routines each support the ``standard \ac{AMO} types’’ listed in Table \ref{stdamotypes}, 
 except for \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, and \FUNC{shmem\_swap}, which supports the ``extended \ac{AMO} types’’ listed 
 in Table \ref{extamotypes}.
-\newtext{Implementations may optionally support additional types.}
 
 \begin{table}[h]
   \begin{center}
@@ -39,6 +38,17 @@ in Table \ref{extamotypes}.
       int                & int        \\ \hline
       long               & long       \\ \hline
       long long          & longlong   \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+      intptr\_t          & intptr     \\ \hline
+      uintptr\_t         & uintptr    \\ \hline
+      size\_t            & size       \\ \hline
+      ptrdiff\_t         & ptrdiff    \\ \hline
     \end{tabular}
     \caption{Standard \ac{AMO} Types and Names}
     \label{stdamotypes}
@@ -55,7 +65,6 @@ in Table \ref{extamotypes}.
       int                & int        \\ \hline
       long               & long       \\ \hline
       long long          & longlong   \\ \hline
-%\newtext {
       unsigned int       & uint       \\ \hline
       unsigned long      & ulong      \\ \hline
       unsigned long long & ulonglong  \\ \hline
@@ -67,7 +76,6 @@ in Table \ref{extamotypes}.
       uintptr\_t         & uintptr    \\ \hline
       size\_t            & size       \\ \hline
       ptrdiff\_t         & ptrdiff    \\ \hline
-%}
     \end{tabular}
     \caption{Extended \ac{AMO} Types and Names}
     \label{extamotypes}
