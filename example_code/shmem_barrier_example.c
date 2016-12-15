@@ -17,7 +17,6 @@ int main(void)
    npes = shmem_n_pes();
 
    if(me % 2 == 0){
-      x = 1000 + me;
       /*put to next even PE in a circular fashion*/
       shmem_int_p(&x, 4, (me+2)%npes);
       /*synchronize all even pes*/
