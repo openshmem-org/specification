@@ -4,18 +4,19 @@
 
 \begin{apidefinition}
 
+\begin{C11synopsis}
+void shmem_wait(TYPE *ivar, TYPE cmp_value);
+void shmem_wait_until(TYPE *ivar, int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
 \begin{Csynopsis}
-void shmem_short_wait(volatile short *ivar, short cmp_value);
-void shmem_short_wait_until(volatile short *ivar, int cmp, short cmp_value);
-void shmem_int_wait(volatile int *ivar, int cmp_value);
-void shmem_int_wait_until(volatile int *ivar, int cmp, int cmp_value);
-void shmem_long_wait(volatile long *ivar, long cmp_value);
-void shmem_long_wait_until(volatile long *ivar, int cmp, long cmp_value);
-void shmem_longlong_wait(volatile long long *ivar, long long cmp_value);
-void shmem_longlong_wait_until(volatile long long *ivar, int cmp, long long cmp_value);
-void shmem_wait(volatile long *ivar, long cmp_value);
-void shmem_wait_until(volatile long *ivar, int cmp, long cmp_value);
+void shmem_<TYPENAME>_wait(TYPE *ivar, TYPE cmp_value);
+void shmem_<TYPENAME>_wait_until(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{Fsynopsis}
 CALL SHMEM_INT4_WAIT(ivar, cmp_value)
@@ -72,15 +73,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     The following \VAR{cmp} values are supported:
 }{CMP Value}{Comparison}
 
-\CorCpp:\\
-\apitablerow{SHMEM\_CMP\_EQ }{  Equal}
-\apitablerow{SHMEM\_CMP\_NE}{Not equal}
-\apitablerow{SHMEM\_CMP\_GT}{Greater than}
-\apitablerow{SHMEM\_CMP\_LE}{Less than or equal to}
-\apitablerow{SHMEM\_CMP\_LT}{Less than}
-\apitablerow{SHMEM\_CMP\_GE}{Greater than or equal to}
-\\
-\Fortran:\\
+\CorCppFor:\\
 \apitablerow{SHMEM\_CMP\_EQ }{  Equal}
 \apitablerow{SHMEM\_CMP\_NE}{Not equal}
 \apitablerow{SHMEM\_CMP\_GT}{Greater than}
@@ -107,7 +100,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \begin{apiexamples}
 
 \apifexample
-{ The following call returns when variable ivar is not equal to 100:}
+{ The following call returns when variable \VAR{ivar} is not equal to 100:}
 {./example_code/shmem_wait1_example.f90}
 {}
 
@@ -118,8 +111,8 @@ call to \FUNC{SHMEM\_INT8\_WAIT} in example 1:}
 {}
 
 \apicexample
-{The following \CorCpp{} call waits until the sign bit in ivar is set by a
-transfer from a remote PE:}
+{The following \CorCpp{} call waits until the value in \VAR{ivar} is set to
+be less than zero by a transfer from a remote PE:}
 {./example_code/shmem_wait3_example.f90}
 {}
 

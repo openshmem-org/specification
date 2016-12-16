@@ -368,6 +368,7 @@ specification.
     \_SHMEM\_MINOR\_VERSION & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MINOR\_VERSION} \\ \hline
     \_SHMEM\_MAX\_NAME\_LEN & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAX\_NAME\_LEN} \\ \hline
     \_SHMEM\_VENDOR\_STRING & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_VENDOR\_STRING} \\ \hline
+    SMA\_* environment variables & 1.4 & Current & SHMEM\_* \\ \hline
     \end{tabular}
 \end{center}
 
@@ -438,9 +439,25 @@ and \Fortran{} naming conventions.
 \section{Version 1.5}
 
 \begin{itemize}
-
+%
 \item The \VAR{SHMEM\_SYNC\_SIZE} constant was added.
 \\See Section \ref{subsec:library_constants}.
+%
+\item Added type-generic interfaces for \FUNC{SHMEM\_WAIT}.
+\\ See Section \ref{subsec:shmem_wait}.
+%
+\item Volatile qualifiers were added to several API routines in version 1.3 of
+the OpenSHMEM specification; however, they were later found to be unnecessary.
+Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
+\FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
+%
+\item The \VAR{SMA\_}* environment variables were deprecated and replaced
+      with \VAR{SHMEM\_}* environment variables.
+\\ See Section \ref{subsec:environment_variables}.
+%
+\item The C11 \textbf{\_Noreturn} function specifier was added to
+      \FUNC{shmem\_global\_exit}.
+\\ See Section \ref{subsec:shmem_global_exit}.
 %
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
 \\See Section \ref{sec:dep_api}.
