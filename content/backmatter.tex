@@ -340,7 +340,7 @@ specification.
     \FUNC{SHMEM\_PUT} & 1.2 & Yes & \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} \\ \hline
     \FUNC{SHMEM\_CACHE} & 1.3 & Yes & (none) \\ \hline
     \_SHMEM\_* constants & 1.3 & Yes & SHMEM\_* \\ \hline
-    \hline
+    SMA\_* environment variables & 1.4 & Yes & SHMEM\_* \\ \hline
     \end{tabular}
 \end{center}
 
@@ -354,9 +354,25 @@ specification.
 \section{Version 1.5}
 
 \begin{itemize}
-
+%
 \item The \VAR{SHMEM\_SYNC\_SIZE} constant was added.
 \\See Section \ref{subsec:library_constants}.
+%
+\item Added type-generic interfaces for \FUNC{SHMEM\_WAIT}.
+\\ See Section \ref{subsec:shmem_wait}.
+%
+\item Volatile qualifiers were added to several API routines in version 1.3 of
+the OpenSHMEM specification; however, they were later found to be unnecessary.
+Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
+\FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
+%
+\item The \VAR{SMA\_}* environment variables were deprecated and replaced
+      with \VAR{SHMEM\_}* environment variables.
+\\ See Section \ref{subsec:environment_variables}.
+%
+\item The C11 \textbf{\_Noreturn} function specifier was added to
+      \FUNC{shmem\_global\_exit}.
+\\ See Section \ref{subsec:shmem_global_exit}.
 
 \end{itemize}
 

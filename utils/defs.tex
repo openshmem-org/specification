@@ -320,11 +320,17 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \end{description}
 }
 
+\lstnewenvironment{Cpp11synopsis}
+{
+  \textbf{C++11:}
+  \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE, noreturn}, aboveskip=0pt, belowskip=0pt}}{}
+
 \lstnewenvironment{C11synopsis}
 { 
   \textbf{C11:} 
-  \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE}, aboveskip=0pt, belowskip=0pt,}}{}
+  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={size_t, TYPE, _Noreturn}, aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
