@@ -6,26 +6,13 @@ All \openshmem{} calls are thread-safe, i.e., two concurrently running threads
 may make \openshmem{} calls and the outcome will be as if the calls executed in
 some order, even if their execution is interleaved.
 
-
-\openshmem{} programmer is responsible for ensuring the order of access and race
-conditions, when multiple threads are making \openshmem{} calls in the
-\openshmem{} program. For example, if one thread of a process is issuing
-SHMEM\_PUT() and another thread of the same process calls SHMEM\_QUIET (), it is
-the programmer's responsibility to ensure the correct ordering of those
-operations.
-
-
 Blocking \openshmem{} calls will block the calling thread only, allowing another
 thread to execute, if available. The calling thread will be blocked until the
 event on which it is waiting occurs. Once the blocked communication is enabled
 and can proceed, then the call will complete and the thread will be marked
 runnable, within a finite time. A blocked thread will not prevent progress of
 other runnable threads on the same process, and will not prevent them from
-executing other \openshmem{} calls. One exception, however, is during the usage
-of SHMEM\_QUIET(). For example, if one thread calls SHMEM\_GET() and another
-thread of the same process calls SHMEM\_QUIET(), SHMEM\_QUIET() may block until
-the completion of SHMEM\_GET(). It is the programmer's responsibility to ensure
-such calls does not result in a deadlock. 
+executing other \openshmem{} calls. 
 
 {\bf Semantics:}
 
