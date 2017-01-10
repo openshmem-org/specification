@@ -2,8 +2,20 @@ This section specifies the interaction between \openshmem{} interfaces and the
 user threads. 
 
 \begin{itemize}
-                                     	
-\item All \openshmem{} calls are thread-safe, i.e., two concurrently running threads
+
+\item
+In a thread-compliant implementation, an \openshmem{} PE is an OS process that
+is multithreaded. Each thread can issue \openshmem{} calls; however the threads
+are not separately addressable. The symmetric heap and symmetric variables scope
+or completion semantics are not impacted by multiple threads invoking the
+\openshmem{} interfaces, i.e., the symmetric heap is a per-process resource. A
+thread making a SHMEM\_MALLOC(), SHMEM\_REALLOC(), or SHMEM\_FREE() call affects
+the entire process. The requirement that the same symmetric heap operations must
+be executed by all processes in the same order also applies in a threaded
+environment.
+                                    	
+\item In a thread-compliant implementation, 
+all \openshmem{} calls are thread-safe, i.e., two concurrently running threads
 may make \openshmem{} calls and the outcome will be as if the calls executed in
 some order, even if their execution is interleaved.
 
@@ -13,19 +25,8 @@ event on which it is waiting occurs. Once the blocked communication is enabled
 and can proceed, then the call will complete and the thread will be marked
 runnable, within a finite time. A blocked thread will not prevent progress of
 other runnable threads on the same \ac{PE}, and will not prevent them from
-executing other \openshmem{} calls. Also, a blocked thread wil not prevent the
+executing other \openshmem{} calls. Also, a blocked thread will not prevent the
 progress of other \openshmem{} calls on other \acp{PE}. 
-
-\item
-In a thread-compliant implementation, an \openshmem{} PE is an OS process that
-is multithreaded. Each thread can issue \openshmem{} calls; however the threads
-are not separately addressable. The symmetric heap and symmetric variables scope
-or completion semantics are not impacted by multiple threads invoking the
-\openshmem{} interfaces i.e., the symmetric heap is a per-process resource. A
-thread making a SHMEM\_MALLOC(), SHMEM\_REALLOC(), or SHMEM\_FREE() call affects
-the entire process. The requirement that the same symmetric heap operations must
-be executed by all processes in the same order also applies in a threaded
-environment.
  
 \item
 In a thread-compliant implementation, if multiple threads call the collective
