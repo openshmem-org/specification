@@ -1,0 +1,45 @@
+\apisummary{
+  Atomically perform a fetch-and-bitwise-and operation on a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+TYPE shmem_fand(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
+
+\begin{Csynopsis}
+TYPE shmem_<TYPENAME>_fand(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table \ref{stdamotypes}.
+
+\begin{apiarguments}
+
+  \apiargument{OUT}{dest}{A pointer to the remotely-accessible data object to
+    be updated.}
+  \apiargument{IN}{value}{The operand to be bitwise anded with the object
+    pointed to by \VAR{dest}.}
+  \apiargument{IN}{pe}{An integer value for the \ac{PE} on which \VAR{dest}
+    is to be updated.}
+
+\end{apiarguments}
+
+\apidescription{
+  \FUNC{shmem\_fand} atomically performs a fetch-and-bitwise-and on the
+  remotely-accessible data object pointed to by \VAR{dest} at PE \VAR{pe}
+  with the operand \VAR{value}.
+}
+
+\apireturnvalues{
+  The value pointed to by \VAR{dest} on PE \VAR{pe} immediately before the
+  operation is performed.
+}
+
+\apinotes{
+    None.
+}
+
+\end{apidefinition}

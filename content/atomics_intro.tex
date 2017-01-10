@@ -9,8 +9,11 @@ The \textit{fetching} routines return the original value of, and optionally
 update, the remote data object in a single atomic operation.  The routines 
 return after the data has been fetched and delivered to the local \ac{PE}.
 
-The \textit{fetching} operations include: \FUNC{SHMEM\_FETCH},
-\FUNC{SHMEM\_CSWAP}, \FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and \FUNC{SHMEM\_FADD}.
+The \textit{fetching} operations include: \FUNC{shmem\_fetch},
+\FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc},
+\FUNC{shmem\_fadd}, \\
+\FUNC{shmem\_fand}, \FUNC{shmem\_for}, and \FUNC{shmem\_fxor}.
+
 
 \item % Non-Blocking\\
 The \textit{non-fetching} atomic routines update the remote memory in a single
@@ -20,8 +23,9 @@ To force completion for these \textit{non-fetching} atomic routines,
 \FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all} can be
 used by an \openshmem{} program. 
 
-The \textit{non-fetching} operations include: \FUNC{SHMEM\_SET}, \FUNC{SHMEM\_INC} and
-\FUNC{SHMEM\_ADD}.
+The \textit{non-fetching} operations include: \FUNC{shmem\_set},
+\FUNC{shmem\_inc}, \FUNC{shmem\_add}, \FUNC{shmem\_and}, \FUNC{shmem\_or},
+and \FUNC{shmem\_xor}.
 \end{itemize}
 
 Where appropriate compiler support is available, \openshmem{} provides type-generic
