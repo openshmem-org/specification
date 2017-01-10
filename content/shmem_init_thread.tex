@@ -35,7 +35,7 @@ and all \openshmem{} interfaces are invoked by a single thread.
 
 \item SHMEM\_THREAD\_FUNNELED: 
 The \openshmem{} program may be multithreaded, however, the 
-program must ensure that only the main thread invokes the \openshmem{}
+program must ensure that only one thread invokes the \openshmem{}
 interfaces.
 
 \item SHMEM\_THREAD\_MULTIPLE: 
@@ -61,9 +61,6 @@ Activating  thread-safety causes additional overhead even if no additional
 threads are created or used.
 }		
 
-\apiimpnotes{
-
-}
 
 \end{apidefinition}
 

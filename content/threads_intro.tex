@@ -1,5 +1,7 @@
 This section specifies the interaction between \openshmem{} interfaces and the
-user threads. 
+user threads, and also describes the routines that can be used for initializing and 
+querying the thread environment.
+ 
 
 \begin{itemize}
 
@@ -53,9 +55,10 @@ Regardless of whether \openshmem{} is thread complaint or not, SHMEM\_INIT(),
 SHMEM\_FINALIZE(), SHMEM\_GLOBALEXIT(), SHMEM\_INFO\_GET\_NAME(), and
 SHMEM\_INFO\_GET\_VERSION() should be thread safe.
  
-\item[]
-Interaction with signals: The outcome is undefined if a thread that executes an
-\openshmem{} call catches a signal. However, a thread of an \openshmem{} process
-may terminate, and may catch signals or be cancelled by another thread when not
-executing \openshmem{} calls.
+%\item[]
+%Interaction with signals: The outcome is undefined if a thread that executes an
+%\openshmem{} call catches a signal. However, a thread of an \openshmem{} process
+%may terminate, and may catch signals or be canceled by another thread when not
+%executing \openshmem{} calls.
+
 \end{itemize}
