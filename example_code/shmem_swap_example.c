@@ -19,5 +19,6 @@ int main(void)
       printf("%d: dest = %ld, swapped = %ld\n", me, *dest, swapped_val);
    }
    shmem_free(dest);
+   shmem_finalize();
    return 0;
 }

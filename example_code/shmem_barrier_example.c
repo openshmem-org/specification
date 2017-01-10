@@ -24,5 +24,6 @@ int main(void)
       shmem_barrier(0, 1, (npes/2 + npes%2), pSync);
    }
    printf("%d: x = %d\n", me, x);
+   shmem_finalize();
    return 0;
 }
