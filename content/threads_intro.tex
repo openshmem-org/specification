@@ -1,28 +1,21 @@
 This section specifies the interaction between \openshmem{} interfaces and the
-user threads. An \openshmem{} implementation is considered thread complaint, if
-it satisfies the requirements specified below:
-                                      	
-All \openshmem{} calls are thread-safe, i.e., two concurrently running threads
+user threads. 
+
+\begin{itemize}
+                                     	
+\item All \openshmem{} calls are thread-safe, i.e., two concurrently running threads
 may make \openshmem{} calls and the outcome will be as if the calls executed in
 some order, even if their execution is interleaved.
 
-Blocking \openshmem{} calls will block the calling thread only, allowing another
+\item Blocking \openshmem{} calls will block the calling thread only, allowing another
 thread to execute, if available. The calling thread will be blocked until the
 event on which it is waiting occurs. Once the blocked communication is enabled
 and can proceed, then the call will complete and the thread will be marked
 runnable, within a finite time. A blocked thread will not prevent progress of
-other runnable threads on the same process, and will not prevent them from
-executing other \openshmem{} calls. 
+other runnable threads on the same \ac{PE}, and will not prevent them from
+executing other \openshmem{} calls. Also, a blocked thread wil not prevent the
+progress of other \openshmem{} calls on other \acp{PE}. 
 
-{\bf Semantics:}
-
-\begin{itemize}
-
-\item
-\openshmem{} thread calling SHMEM\_INIT() is designated as the main thread.
-Multiple threads may not call SHMEM\_INIT(). Similarly, \openshmem{} finalize
-may only be called on the main thread.
- 
 \item
 In a thread-compliant implementation, an \openshmem{} PE is an OS process that
 is multithreaded. Each thread can issue \openshmem{} calls; however the threads
@@ -41,6 +34,11 @@ collective calls.  The symmetric heap management functions SHMEM\_MALLOC(),
 SHMEM\_REALLOC(), and SHMEM\_FREE() are all defined to call
 SHMEM\_BARRIER\_ALL() before they return and thus must be treated as collective
 operations.
+
+\item
+\openshmem{} thread calling SHMEM\_INIT() is designated as the main thread.
+Multiple threads may not call SHMEM\_INIT(). Similarly, \openshmem{} finalize
+may only be called on the main thread.
 
 \end{itemize} 
  
