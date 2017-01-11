@@ -1,0 +1,64 @@
+The following section discusses \openshmem \ac{API}s that provides a mechanism
+for synchronization between two \ac{PE}s based on the value of a symmetric data
+object. 
+
+Where appropriate compiler support is available, \openshmem provides
+type-generic point-to-point synchronization interfaces via \Celev{} generic
+selection. Such type-generic routines are supported for the
+``point-to-point synchronization types'' identified in
+Table~\ref{p2psynctypes}. Implementations may optionally support additional
+types.
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      float              & float      \\ \hline
+      double             & double     \\ \hline
+      short              & short      \\ \hline
+      int                & int        \\ \hline
+      long               & long       \\ \hline
+      long long          & longlong   \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+      intptr\_t          & intptr     \\ \hline
+      uintptr\_t         & uintptr    \\ \hline
+      size\_t            & size       \\ \hline
+      ptrdiff\_t         & ptrdiff    \\ \hline
+    \end{tabular}
+    \caption{Point-to-Point Synchronization Types and Names}
+    \label{p2psynctypes}
+  \end{center}
+\end{table}
+
+The point-to-point synchronization routines can be used to portably ensure
+that memory access operations observe remote updates in the order enforced by
+the initiator PE using the \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}
+routines.
+
+Some point-to-point synchronization make use of the enumeration constants in
+Table~\ref{p2p-consts}, which have the effect to specify the comparison
+operation to be performed by the associated routine.
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{ll}
+      \hline
+      Constant Name    & Comparison               \\ \hline
+      SHMEM\_CMP\_EQ   & Equal                    \\
+      SHMEM\_CMP\_NE   & Not equal                \\
+      SHMEM\_CMP\_GT   & Greater than             \\
+      SHMEM\_CMP\_GE   & Greater than or equal to \\
+      SHMEM\_CMP\_LT   & Less than                \\
+      SHMEM\_CMP\_LE   & Less than or equal to
+    \end{tabular}
+    \caption{Point-to-Point Comparison Enumeration Constants}
+    \label{p2p-consts}
+  \end{center}
+\end{table}
