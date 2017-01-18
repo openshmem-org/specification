@@ -1,5 +1,5 @@
 \apisummary{
-  Atomically perform a fetch-and-bitwise-and operation on a remote data object.
+  Atomically perform a fetching bitwise and operation on a remote data object.
 }
 
 \begin{apidefinition}
@@ -18,18 +18,17 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 
 \begin{apiarguments}
 
-  \apiargument{OUT}{dest}{A pointer to the remotely-accessible data object to
+  \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
     be updated.}
-  \apiargument{IN}{value}{The operand to be bitwise anded with the object
-    pointed to by \VAR{dest}.}
+  \apiargument{IN}{value}{The operand to the bitwise atomic operation.}
   \apiargument{IN}{pe}{An integer value for the \ac{PE} on which \VAR{dest}
     is to be updated.}
 
 \end{apiarguments}
 
 \apidescription{
-  \FUNC{shmem\_fand} atomically performs a fetch-and-bitwise-and on the
-  remotely-accessible data object pointed to by \VAR{dest} at PE \VAR{pe}
+  \FUNC{shmem\_fand} atomically performs a fetching bitwise and on
+  the remotely accessible data object pointed to by \VAR{dest} at PE \VAR{pe}
   with the operand \VAR{value}.
 }
 
