@@ -377,24 +377,29 @@ specification.
 
 \section{Deprecation Rationale}\label{subsec:dep_rationale}
 
-\subsection{\_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign} The
-\CorCpp functions \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
-\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
-to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
-prefix for all functions.
-
-\subsection{start\_pes}
-The \CorCpp function \FUNC{start\_pes} includes an unnecessary initialization
+\subsection{\CorCpp: start\_pes}
+The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
 argument that is remnant of historical \emph{SHMEM} implementations and no
 longer reflects the requirements of modern \openshmem implementations.
 Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
-\shmemprefixLC{} naming prefix. This function has been deprecated and
+\shmemprefixLC{} naming prefix. This routine has been deprecated and
 \openshmem users are encouraged to use
 \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
 
-\subsection{SHMEM\_PUT (Fortran API)}
-The \Fortran{} function \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
-\ac{API} and is semantically identical to \Fortran{} functions
+\subsection{\CorCpp: \_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign}
+The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
+\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
+to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
+prefix for all routines.
+
+\subsection{\Fortran: START\_PES, MY\_PE, NUM\_PES}
+The \Fortran{} routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
+were deprecated in order to minimize the API differences from the deprecation
+of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
+
+\subsection{\Fortran: SHMEM\_PUT}
+The \Fortran{} routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
+\ac{API} and is semantically identical to \Fortran{} routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
 \FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
