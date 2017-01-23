@@ -47,7 +47,11 @@ void *shmem_align(size_t alignment, size_t size);
     are provided  so that multiple \ac{PE}s in a program can allocate symmetric,
     remotely accessible memory blocks.  These memory blocks can then be used with
     \openshmem communication routines.  Each of these routines call the
-    \FUNC{shmem\_barrier\_all} routine before returning; this ensures that all
+    \FUNC{shmem\_barrier\_all} routine before returning: \FUNC{shmem\_malloc} calls a
+    barrier on exit; \FUNC{shmem\_free} calls a barrier on entry; and
+    \FUNC{shmem\_realloc} may call barriers on both entry and exit, depending on
+    whether an existing allocation is modified and whether new memory is allocated.
+    This ensures that all
     \ac{PE}s participate in the memory allocation, and that the memory on other
     \ac{PE}s can be used as  soon as the local \ac{PE} returns.  The user is
     responsible for calling these routines with identical argument(s) on all
