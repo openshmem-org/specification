@@ -20,7 +20,10 @@
 
 \section{Memory Model}\label{subsec:memory_model}
 \input{content/memory_model}
-
+\newtext{
+\subsection{Symmetric Memory Partitions}\label{subsubsec:memory_partitions}
+\input{content/memory_partitions}
+}
 \section{Execution Model}\label{subsec:execution_model}
 \input{content/execution_model}
 
@@ -32,9 +35,10 @@
 
 \section{Environment Variables }\label{subsec:environment_variables}
 \input{content/environment_variables}
-
-
-
+\color{Green}
+\subsection{User-defined Environment Variables}\label{subsubsec:usr_defn_env}
+\input{content/mem_partition_env}
+\color{Black}
 
 \clearpage
 
@@ -143,7 +147,7 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 \input{content/shmem_add.tex}
 
 \subsubsection{\textbf{SHMEM\_CSWAP}}\label{subsec:shmem_cswap}
-\input{content/shmem_cswap.tex} 
+\input{content/shmem_cswap.tex}
 
 \subsubsection{\textbf{SHMEM\_SWAP}}\label{subsec:shmem_swap}
 \input{content/shmem_swap.tex}
@@ -198,7 +202,7 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 \subsection{Point-To-Point Synchronization Routines}
 The following section discusses \openshmem \ac{API}s that provides a mechanism
 for synchronization between two \ac{PE}s based on the value of a symmetric data
-object. 
+object.
 
 Where appropriate compiler support is available, \openshmem provides
 type-generic point-to-point synchronization interfaces via \Celev{} generic
@@ -233,7 +237,7 @@ types.
 \subsection{Memory Ordering Routines}\label{subsec:memory_order}
 The following section discusses \openshmem \ac{API}s that provide mechanisms to
 ensure ordering and/or delivery of \OPR{Put}, \ac{AMO}, and memory store
-routines to symmetric data objects. 
+routines to symmetric data objects.
 
 \subsubsection{\textbf{SHMEM\_FENCE}}\label{subsec:shmem_fence}
 \input{content/shmem_fence.tex}

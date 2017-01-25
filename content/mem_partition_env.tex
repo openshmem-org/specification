@@ -1,0 +1,52 @@
+All OpenSHMEM implementations supporting the use of multiple Symmetric Memory
+Partitions provide support for special environment variable called
+SHMEM\_SYMMETRIC\_PARTITION to create and define the properties of the user-
+defined Symmetric Memory Partitions. The properties of the memory partition
+including the symmetric heap size are passed as specifiers to the environment
+variable. 
+
+\begin{envvardefinition}
+\begin{envvarname}
+SHMEM_SYMMETRIC_PARTITION<ID>=SIZE=<size>[:PGSIZE=<pgsize>][:KIND=<kind>:POLICY=<policy>]
+\end{envvarname}
+
+\begin{envvararguments}
+    \envvarargument{REQ}{ID}{Integer to represent the partition number}
+    \envvarargument{REQ}{SIZE}{Number of bytes to allocate for symmetric heap}
+    \envvarargument{OPT}{PGSIZE}{Number of bytes to specify the memory page size}
+    \envvarargument{OPT}{KIND}{String constants to specify the memory kind if
+    multiple memory kinds are supported by the system supporting heterogeneous
+    symmetric heap}
+    \envvarargument{OPT}{POLICY}{String constants to specify the memory
+    allocation policy}
+\end{envvararguments}
+
+One, two, or more partitions can be specified using this environment variable.
+Each partition is represented using a number called \emph{Partition ID}.
+\textless ID\textgreater is the user-specified part of the environment variable
+to represent the Partition ID. A maximum of SHMEM\_MAX\_PARTITIONS can be
+specified and the Partition ID may be any non-zero positive integers between 1
+and SHMEM\_MAX\_PARTITION\_ID.
+
+Each partition can take a maximum of four property specifiers as input. The
+\emph{SIZE} specifier is the only required value. It is used to specify the
+required symmetric heap size on the partition. The \emph{PGSIZE} specifier is
+used to specify the page size of the memory kind.
+
+On systems supporting heterogenous memory, each available memory kind should be
+documented and made available as string constants to the users. The \emph{KIND}
+specifier can be used to set the memory kind to specify the location of the
+memory partition.
+
+
+
+\envvarnotes{
+    SHMEM\_SYMMETRIC\_SIZE is supported with its current syntax and meaning.
+    But, it is an error to use both SHMEM\_SYMMETRIC\_SIZE and any form of
+    SHMEM\_SYMMETRIC\_PARTITION environment variables together.
+
+    All supported page sizes, memory kinds and memory policies should be
+    documented by the implementation. }
+
+\end{envvardefinition}
+
