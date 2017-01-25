@@ -1,6 +1,6 @@
 \color{ForestGreen}
 
-All \openshmem RMA, AMO, and point-to-point synchronization routines are
+All \openshmem RMA, AMO, and memory ordering routines are
 performed on a communication context.  The communication context defines an
 independent ordering and completion environment, allowing users to manage the
 overlap of communication with computation and also to manage communication
@@ -12,7 +12,7 @@ thread interference within the communication subsystem.
 
 Context handles are of type \CODE{shmem\_ctx\_t} and are valid for
 language-level assignment and comparison.  A handle to the desired context is
-passed as an argument in the \CODE{shmem\_ctx...} API routines.  API routines
+passed as an argument in the \CODE{shmem\_ctx\_*} API routines.  API routines
 that do not accept a context argument operate on the default context.  The
 default context can be used explicitly through the \const{SHMEM\_CTX\_DEFAULT}
 handle.
@@ -40,7 +40,8 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
 \apidescription{
     The \FUNC{shmem\_ctx\_create} routine creates a new communication context
     and returns its handle through the \VAR{ctx} argument.  If the context was
-    created successfully, a value of zero is returned.  An unsuccessful context
+    created successfully, a value of zero is returned; otherwise a nonzero
+    value is returned.  An unsuccessful context
     creation call is not treated as an error and the \openshmem library remains
     in a correct state.  The creation call can be reattempted with different
     options or after additional resources become available.
@@ -56,7 +57,7 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
 }
 
 \apireturnvalues{
-    Zero on success and nonzero on error.
+    Zero on success and nonzero otherwise.
 }
 
 \apinotes{
