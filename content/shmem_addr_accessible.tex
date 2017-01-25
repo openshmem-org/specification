@@ -35,8 +35,8 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
     \Fortran{} common block or \Clang{} global variable, is symmetric between
     processes running from the same executable file, but is not symmetric between
     processes running from different executable files.  Data allocated from the
-    symmetric heap (\FUNC{shmem\_malloc} or \FUNC{shpalloc}) is symmetric across the
-    same or different executable files.
+    symmetric heap (\FUNC{shmem\_malloc}, \newtext{\FUNC{shmem\_kind\_malloc}} or 
+    \FUNC{shpalloc}) is symmetric across the same or different executable files.
 }
 
 \apireturnvalues{		

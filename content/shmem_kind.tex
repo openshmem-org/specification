@@ -1,0 +1,53 @@
+\apisummary{ Symmetric heap memory management routines identified using
+    symmetric memory partition ID. }
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void *shmem_kind_malloc(size_t size, int partition_id); 
+void *shmem_kind_align(size_t alignment, size_t size, int partition_id);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{size}{The size, in bytes, of a block to be
+        allocated from the symmetric heap. This argument is of type
+        \VAR{size\_t}}
+    \apiargument{IN}{alignment}{Byte alignment of the block allocated from the
+        symmetric heap.}
+    \apiargument{IN}{partition\_id}{Integer to identify the user-defined memory
+        partition on which the symemtric heap is created}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_kind\_malloc} routine returns a pointer to a block of at
+    least \VAR{size} bytes suitably aligned for any use.  This space is
+    allocated from the symmetric heap created on the user-defined memory
+    partition with characteristics associated with the partition\_id(in
+    contrast to \FUNC{malloc}, which allocates from the private heap).
+    
+    The \FUNC{shmem\_kind\_align} routine allocates a block in the symmetric
+    heap heap created on the user-defined memory partition with characteristics
+    associated with the partition\_id that has a byte alignment specified by the
+    alignment argument. }
+
+\apireturnvalues{
+    The \FUNC{shmem\_kind\_malloc} routine returns a pointer to the allocated
+    space; otherwise, it returns a \CONST{NULL} pointer.
+    
+    The \FUNC{shmem\_kind\_align} routine returns an aligned pointer to the
+    allocated space; otherwise, it returns a \CONST{NULL} pointer. }
+
+\apinotes{ Requirements for all PEs to use \FUNC{shmem\_malloc} and
+    \FUNC{shmem\_align} memory management routines are the same for
+    \FUNC{shmem\_kind\_malloc} and \FUNC{shmem\_kind\_align} routines. 
+}
+
+\apiimpnotes{
+    In a quality implementation \FUNC{shmem\_realloc} and \FUNC{shmem\_free}
+    should also handle the symmetric memory partitions correctly. It is
+    assumed that the new memory address returned on \FUNC{shmem\_realloc} will
+    be in the same symmetric memory partition associated with the input
+    address. }
+
+
+\end{apidefinition}

@@ -1,0 +1,14 @@
+\emph{Symmetric Heaps} can be created on a single memory location determined by
+the implementation or on multiple memory locations determined by the users. The
+user-determined memory locations are called as the \emph{Symmetric Memory
+Partitions}. Only a single symmetric heap can be created on each symmetric
+memory partition. Each symmetric memory partitions is identified using its
+\emph{Partition ID}, which is used on dynamic OpenSHMEM memory allocation 
+(\textit{shmem\_kind\_malloc} and \textit{shmem\_kind\_align}) routines. Apart
+from the Partition ID, each symmetric memory partition have their own memory
+properties. Refer to Section \ref{subsec:environment_variables} for the
+complete list of properties which are available to characterize a memory
+partition. Multiple symmetric heaps can be created by defining multiple
+separate memory partitions. Apart from name, type and size attributes,
+symmetric data objects stored on symmetric heaps created over a memory
+partition have Partition ID as an extra attribute.

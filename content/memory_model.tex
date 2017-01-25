@@ -38,9 +38,10 @@ data objects are symmetric:
 \textit{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data
 Objects} on a special memory region called the \emph{Symmetric Heap}. The
 Symmetric Heap is created during the execution of a program at a memory location
-determined by the implementation. The Symmetric Heap may reside in different
-memory regions on different \acp{PE}. Figure~\ref{fig:mem_model} shows how
-\openshmem implements a \ac{PGAS} model using remotely accessible symmetric
-objects and private data objects when executing an \openshmem program.
-Symmetric data objects are stored on the symmetric heap or in the global/static
-memory section of each \ac{PE}. 
+determined by the implementation \newtext{or on multiple user determined memory 
+locations called as the \emph{Symmetric Memory Partitions}}. The Symmetric 
+Heap may reside in different memory regions on different \acp{PE}. 
+Figure~\ref{fig:mem_model} shows  how \openshmem implements a \ac{PGAS} model 
+using remotely accessible symmetric objects and private data objects when executing 
+an \openshmem program. Symmetric data objects are stored on the symmetric heap or 
+in the global/static memory section of each \ac{PE}. 

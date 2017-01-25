@@ -76,9 +76,13 @@ void *shmem_align(size_t alignment, size_t size);
     \FUNC{shmem\_realloc} instead.  The behavior and signature  of the routines
     remains unchanged from the deprecated versions.
     					 
+    \newtext{Usage of \FUNC{shmem\_malloc} and \FUNC{shmem\_align} along with
+    Symmetric Memory Partitions would result in the memory space to be
+    allocated on the symmetric heap created on partition with ID as 1.}
+
     The total size of the symmetric heap is determined at job startup.  One can
-    adjust the size of the heap using the \CONST{SHMEM\_SYMMETRIC\_SIZE} environment
-    variable (where available).	
+    adjust the size of the heap using the \CONST{SHMEM\_SYMMETRIC\_SIZE} or
+    \CONST{SHMEM\_SYMMETRIC\_PARTITION} environment variable (where available).	
     
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     differ from the private heap allocation routines in that all \ac{PE}s in a

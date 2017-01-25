@@ -1,7 +1,7 @@
 The \openshmem specification provides a set of environment variables that allows
 users to configure the \openshmem implementation, and receive information about
 the implementation. The implementations of the specification are free to define
-additional variables. Currently, the specification defines four environment
+additional variables. Currently, the specification defines five environment
 variables. All environment variables that start with \VAR{SMA\_*} are
 deprecated, but currently supported for backwards compatibility.
 
@@ -20,6 +20,10 @@ variables\tabularnewline
 \hline 
 \texttt{SHMEM\_SYMMETRIC\_SIZE} & non-negative integer & number of bytes to
 allocate for symmetric heap\tabularnewline
+\hline 
+\texttt{\newtext{SHMEM\_SYMMETRIC\_PARTITION}} 
+& \newtext{Refer Section \ref{subsubsec:usr_defn_env}} 
+& \newtext{Refer Section \ref{subsubsec:usr_defn_env}}\tabularnewline
 \hline 
 \texttt{SHMEM\_DEBUG} & any & enable debugging messages\tabularnewline
 \hline 

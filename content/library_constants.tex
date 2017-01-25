@@ -131,6 +131,22 @@ String representing the vendor name of length less than
 and whitespace padded.  It can also be equal in length to \const{SHMEM\_MAX\_NAME\_LEN} 
 since Fortran does not NULL terminate strings. \tabularnewline
 \hline
-
+\vspace{3mm}
+\vtop{\hbox{\newtext{\CorCpp:}} 
+\hbox{\hspace*{12mm} \newtext{\const{SHMEM\_MAX\_PARTITIONS}}}}
+&\newtext{
+Integer representing the implementations maximum for the number of partitions
+that can be defined by the users.} %Implementations value must be at least 7 so
+%that a portable program can assume at least that possible partitions}
+\tabularnewline
+\hline
+\vspace{3mm}
+\vtop{\hbox{\newtext{\CorCpp:}}
+\hbox{\hspace*{12mm} \newtext{\const{SHMEM\_MAX\_PARTITION\_ID}}}}
+&\newtext{
+Integer representing the implementations maximum number that can be used to
+represent the partition ID.} %The value should be at least 127} 
+\tabularnewline
+\hline
 \end{tabular}
 \color{black}
