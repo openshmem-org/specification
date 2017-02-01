@@ -1,0 +1,69 @@
+\apisummary{
+    Releases, locks, and tests a mutual exclusion memory lock on a specific \ac{PE}.
+}
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_clear_lock_pe(volatile long *lock, int pe);
+void shmem_set_lock_pe(volatile long *lock, int pe);
+int shmem_test_lock_pe(volatile long *lock, int pe);
+\end{Csynopsis}
+
+\begin{Fsynopsis}
+INTEGER pe, lock, SHMEM_TEST_LOCK
+CALL SHMEM_CLEAR_LOCK_PE(lock, pe)
+CALL SHMEM_SET_LOCK_PE(lock, pe)
+I = SHMEM_TEST_LOCK_PE(lock, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{lock}{A symmetric data object that is a scalar variable or an array
+    of  length \CONST{1}.  This data  object  must  be set to \CONST{0} on all
+    \ac{PE}s prior to the first use.  \VAR{lock}  must  be  of type \CONST{long}.
+    If you are using \Fortran, it must be of default kind.}
+\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which lock is
+    to be updated. If you are using Fortran, it must be a default integer value.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_set\_lock\_pe} routine sets a mutual exclusion lock on a
+    specific \ac{PE} after waiting for the lock to be freed by any other \ac{PE}
+    currently holding the lock.  Waiting \ac{PE}s are assured of getting the lock in
+    a first-come, first-served manner. The \FUNC{shmem\_clear\_lock\_pe} routine
+    releases a lock on a specific \ac{PE} previously set by
+    \FUNC{shmem\_set\_lock\_pe} after ensuring that all local and remote stores
+    initiated in the critical region are complete.  The \FUNC{shmem\_test\_lock\_pe}
+    routine sets a mutual exclusion lock on a specific \ac{PE} only if it is
+    currently cleared.  By using this routine, a \ac{PE} can avoid blocking on a set
+    lock. If the lock is currently set, the routine returns without waiting. These
+    routines are appropriate for protecting a critical region from simultaneous
+    update by multiple \ac{PE}s at a fine-grain level.
+}
+
+\apireturnvalues{
+    The \FUNC{shmem\_test\_lock} routine returns \CONST{0} if  the lock  was
+    originally cleared and  this  call was  able  to set the lock.  A value of
+    \CONST{1} is returned if the lock had been set and the call returned without
+    waiting to set the lock.
+}
+
+\apinotes{
+    The term symmetric data object is defined in Section \ref{subsec:memory_model}.
+    The lock variable should always be initialized to zero and accessed only by the
+    \openshmem locking \ac{API}.  Changing the value of the lock variable by other
+    means without using the \openshmem \ac{API}, can lead to undefined behavior.
+    Mixing the \FUNC{shmem\_lock} and \FUNC{shmem\_lock\_pe} routines with the same
+    lock can lead to undefined behavior.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following example uses \FUNC{shmem\_set\_lock\_pe} and
+    \FUNC{shmem\_clear\_lock\_pe} in a \Clang{} program.}
+    {./example_code/shmem_lock_pe_example.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}
