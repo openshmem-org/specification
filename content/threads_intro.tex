@@ -9,8 +9,9 @@ querying the thread environment.
 In a thread-compliant implementation, an \openshmem{} PE is an OS process that
 is multithreaded. Each thread can issue \openshmem{} calls; however the threads
 are not separately addressable. The symmetric heap and symmetric variables scope
-or completion semantics are not impacted by multiple threads invoking the
-\openshmem{} interfaces, i.e., the symmetric heap is a per-process resource. A
+are not impacted by multiple threads invoking the
+\openshmem{} interfaces, i.e., the symmetric heap is a per-process resource.
+Similarly, the completion semantics are not impacted by multiple threads. A
 thread making a SHMEM\_MALLOC(), SHMEM\_REALLOC(), or SHMEM\_FREE() call affects
 the entire process. The requirement that the same symmetric heap operations must
 be executed by all processes in the same order also applies in a threaded
@@ -61,4 +62,10 @@ SHMEM\_INFO\_GET\_VERSION() should be thread safe.
 %may terminate, and may catch signals or be canceled by another thread when not
 %executing \openshmem{} calls.
 
+\item[]
+The completion semantics are not impacted by the multiple threads. 
+For example, the shmem\_barrier\_all() is completed when all \acp{PE} enter and
+exit the shmem\_barrier\_all() call. 
+
+ 
 \end{itemize}
