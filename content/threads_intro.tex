@@ -11,11 +11,10 @@ is multithreaded. Each thread can issue \openshmem{} calls; however the threads
 are not separately addressable. The symmetric heap and symmetric variables scope
 are not impacted by multiple threads invoking the
 \openshmem{} interfaces, i.e., the symmetric heap is a per-process resource.
-Similarly, the completion semantics are not impacted by multiple threads. A
-thread making a SHMEM\_MALLOC(), SHMEM\_REALLOC(), or SHMEM\_FREE() call affects
-the entire process. The requirement that the same symmetric heap operations must
+For example, a thread invoking a memory allocation routine such as SHMEM\_MALLOC() 
+affects the entire process. The requirement that the same symmetric heap operations must
 be executed by all processes in the same order also applies in a threaded
-environment.
+environment. 
                                     	
 \item In a thread-compliant implementation, 
 all \openshmem{} calls are thread-safe, i.e., two concurrently running threads
@@ -34,10 +33,9 @@ progress of other \openshmem{} calls on other \acp{PE}.
 \item
 In a thread-compliant implementation, if multiple threads call the collective
 calls, it is the programmer's responsibility to ensure the correct ordering of
-collective calls.  The symmetric heap management functions SHMEM\_MALLOC(),
-SHMEM\_REALLOC(), and SHMEM\_FREE() are all defined to call
-SHMEM\_BARRIER\_ALL() before they return and thus must be treated as collective
-operations.
+collective calls.  The symmetric heap management functions, which are defined to call
+SHMEM\_BARRIER\_ALL()(\ref{sec:mem_routines}) before they return 
+must be treated as collective operations.
 
 \item
 \openshmem{} thread calling SHMEM\_INIT() is designated as the main thread.
@@ -65,7 +63,8 @@ SHMEM\_INFO\_GET\_VERSION() should be thread safe.
 \item[]
 The completion semantics are not impacted by the multiple threads. 
 For example, the shmem\_barrier\_all() is completed when all \acp{PE} enter and
-exit the shmem\_barrier\_all() call. 
+exit the shmem\_barrier\_all() call, even though only one thread in the \ac{PE} is
+participating in the collective call. 
 
  
 \end{itemize}
