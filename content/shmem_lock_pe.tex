@@ -28,8 +28,8 @@ I = SHMEM_TEST_LOCK_PE(lock, pe)
 \apidescription{
     The \FUNC{shmem\_set\_lock\_pe} routine sets a mutual exclusion lock on a
     specific \ac{PE} after waiting for the lock to be freed by any other \ac{PE}
-    currently holding the lock.  Waiting \ac{PE}s are assured of getting the lock in
-    a first-come, first-served manner. The \FUNC{shmem\_clear\_lock\_pe} routine
+    currently holding the lock.  Waiting \ac{PE}s spin-wait on the lock resource
+    until it is released.  The \FUNC{shmem\_clear\_lock\_pe} routine
     releases a lock on a specific \ac{PE} previously set by
     \FUNC{shmem\_set\_lock\_pe} after ensuring that all local and remote stores
     initiated in the critical region are complete.  The \FUNC{shmem\_test\_lock\_pe}
