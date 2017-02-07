@@ -4,37 +4,39 @@ operations with atomicity guarantees described in Section
 Section \ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
 \openshmem{} defines the two types of \ac{AMO} routines:
 \begin{itemize}
-\item % Blocking\\
+\item
 The \textit{fetching} routines return the original value of, and optionally
-update, the remote data object in a single atomic operation.  The routines 
+update, the remote data object in a single atomic operation.  The routines
 return after the data has been fetched and delivered to the local \ac{PE}.
 
-The \textit{fetching} operations include: \FUNC{shmem\_fetch},
-\FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc},
-\FUNC{shmem\_fadd}, \\
-\FUNC{shmem\_fand}, \FUNC{shmem\_for}, and \FUNC{shmem\_fxor}.
+The fetching operations include:
+\FUNC{shmem\_atomic\_\{fetch, compare\_swap, swap\}} and
+\FUNC{shmem\_atomic\_fetch\_\{inc, add, and, or, xor\}}.
 
-
-\item % Non-Blocking\\
+\item
 The \textit{non-fetching} atomic routines update the remote memory in a single
-atomic operation.  A \textit{non-fetching} atomic routine starts the atomic
-operation and may return before the operation execution on the remote \ac{PE}.
-To force completion for these \textit{non-fetching} atomic routines,
-\FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all} can be
-used by an \openshmem{} program. 
+atomic operation.  A call to a non-fetching atomic routine issues the atomic
+operation and may return before the operation executes on the remote \ac{PE}.
+To force completion for these non-fetching atomic routines,
+\FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all} can
+be used by an \openshmem{} program.
 
-The \textit{non-fetching} operations include: \FUNC{shmem\_set},
-\FUNC{shmem\_inc}, \FUNC{shmem\_add}, \FUNC{shmem\_and}, \FUNC{shmem\_or},
-and \FUNC{shmem\_xor}.
+The non-fetching operations include:
+\FUNC{shmem\_atomic\_\{set, inc, add, and, or, xor\}}.
 \end{itemize}
 
 Where appropriate compiler support is available, \openshmem{} provides
-type-generic atomic memory operation interfaces via \Celev{} generic selection.
-The type-generic \ac{AMO} routines each support the ``standard \ac{AMO} types''
-listed in Table~\ref{stdamotypes}, except for \FUNC{shmem\_fadd},
-\FUNC{shmem\_add}, \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, and
-\FUNC{shmem\_swap}, which support the ``extended \ac{AMO} types'' listed in
-Table~\ref{extamotypes}.
+type-generic \ac{AMO} interfaces via \Celev{} generic selection.
+The type-generic support for the \ac{AMO} routines is as follows:
+
+\begin{itemize}
+\item \FUNC{shmem\_atomic\_\{compare\_swap, fetch\_inc, inc\}} support
+      the ``standard \ac{AMO} types'' listed in Table~\ref{stdamotypes},
+\item \FUNC{shmem\_atomic\_\{fetch, set, swap, fetch\_add, add\}} support
+      the ``extended \ac{AMO} types'' listed in Table~\ref{extamotypes}, and
+\item \FUNC{shmem\_atomic\_\{fetch\_and, and, fetch\_or, or, fetch\_xor, xor\}}
+      support the ``bitwise \ac{AMO} types'' listed in Table~\ref{bitamotypes}.
+\end{itemize}
 
 \begin{table}[h]
   \begin{center}
@@ -56,7 +58,7 @@ Table~\ref{extamotypes}.
     \end{tabular}
     \caption{Standard \ac{AMO} Types and Names}
     \label{stdamotypes}
-  \end{center} 
+  \end{center}
 \end{table}
 
 \begin{table}[h]
@@ -81,5 +83,23 @@ Table~\ref{extamotypes}.
     \end{tabular}
     \caption{Extended \ac{AMO} Types and Names}
     \label{extamotypes}
-  \end{center} 
+  \end{center}
+\end{table}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+    \end{tabular}
+    \caption{Bitwise \ac{AMO} Types and Names}
+    \label{bitamotypes}
+  \end{center}
 \end{table}

@@ -378,8 +378,12 @@ Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
       for atomic add and fetch-and-add on floating-point types.
 \\ See Sections \ref{sec:rma} and \ref{sec:amo}.
 %
-\item Added fetching and non-fetching bitwise and, inclusive or, and
-      exclusive or atomic operations.
+\item Renamed AMO operations to use \FUNC{shmem\_atomic\_*} prefix and
+      deprecated old AMO routines.
+\\ See Section \ref{sec:amo}.
+%
+\item Added fetching and non-fetching bitwise AND, OR, and XOR atomic
+      operations.
 \\ See Section \ref{sec:amo}.
 
 \end{itemize}

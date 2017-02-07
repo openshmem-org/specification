@@ -5,13 +5,13 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_add(TYPE *dest, TYPE value, int pe);
+void shmem_atomic_add(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by
 Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_add(TYPE *dest, TYPE value, int pe);
+void shmem_<TYPENAME>_atomic_add(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
@@ -38,10 +38,10 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_add} routine performs an atomic add operation. It adds
+    The \FUNC{shmem\_atomic\_add} routine performs an atomic add operation. It adds
     \VAR{value} to \dest{} on \ac{PE} \VAR{pe} and atomically updates the \dest{}
     without returning the value.
- } 
+ }
 
 \apidesctable{
     If you are using \Fortran, \VAR{dest} must be of the following type:
@@ -55,14 +55,17 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 }
 
 \apinotes{
-    The term remotely accessible is defined in Section \ref{subsec:memory_model}.
+    As of OpenSHMEM~1.4, the use of \FUNC{shmem\_add} has been deprecated
+    and should be expected to be removed in a future specification.
+    Its behavior and call signature is identical to the replacement
+    interface, \FUNC{shmem\_atomic\_add}.
 }
 
 \begin{apiexamples}
 
 \apicexample
     {}
-    {./example_code/shmem_add_example.c}
+    {./example_code/shmem_atomic_add_example.c}
     {}
 
 \end{apiexamples}

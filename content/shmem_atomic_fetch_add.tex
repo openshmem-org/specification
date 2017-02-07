@@ -5,13 +5,13 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_fadd(TYPE *dest, TYPE value, int pe);
+TYPE shmem_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by
 Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_fadd(TYPE *dest, TYPE value, int pe);
+TYPE shmem_<TYPENAME>_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
@@ -38,7 +38,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_fadd} routines perform an atomic fetch-and-add operation.  An
+    \FUNC{shmem\_atomic\_fetch\_add} routines perform an atomic fetch-and-add operation.  An
     atomic fetch-and-add operation fetches the old \VAR{dest} and adds \VAR{value}
     to \VAR{dest} without the possibility of another atomic operation on the
     \VAR{dest} between the time of the fetch and the update.  These routines add
@@ -61,14 +61,18 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apinotes{
-    None.
+    As of OpenSHMEM~1.4, the use of \FUNC{shmem\_fadd} has been deprecated
+    and should be expected to be removed in a future specification.
+    Its behavior and call signature is identical to the replacement
+    interface, \FUNC{shmem\_atomic\_fetch\_add}.
 }
 
 \begin{apiexamples}
 
 \apicexample
-	{The following \FUNC{shmem\_fadd} example is for \CorCpp{} programs:}
-        {./example_code/shmem_fadd_example.c}
+	{The following \FUNC{shmem\_atomic\_fetch\_add} example is for
+        \CorCpp{} programs:}
+        {./example_code/shmem_atomic_fetch_add_example.c}
         {}
 
 \end{apiexamples}

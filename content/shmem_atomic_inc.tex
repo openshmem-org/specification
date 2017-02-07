@@ -5,14 +5,16 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_inc(TYPE *dest, int pe);
+void shmem_atomic_inc(TYPE *dest, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_inc(TYPE *dest, int pe);
+void shmem_<TYPENAME>_atomic_inc(TYPE *dest, int pe);
 \end{Csynopsis}
-where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{Fsynopsis}
 INTEGER pe
@@ -33,7 +35,7 @@ CALL SHMEM_INT8_INC(dest, pe)
 
 \apidescription{
     These  routines perform  an atomic increment operation on the \VAR{dest} data
-    object on \ac{PE}.  
+    object on \ac{PE}.
 }
 
 
@@ -49,14 +51,18 @@ CALL SHMEM_INT8_INC(dest, pe)
 }
 
 \apinotes{
-     The term remotely accessible is defined in Section \ref{subsec:memory_model}.
+    As of OpenSHMEM~1.4, the use of \FUNC{shmem\_inc} has been deprecated
+    and should be expected to be removed in a future specification.
+    Its behavior and call signature is identical to the replacement
+    interface, \FUNC{shmem\_atomic\_inc}.
 }
 
 \begin{apiexamples}
 
 \apicexample
-    { The following \FUNC{shmem\_inc} example is for \CorCpp{} programs: }
-    {./example_code/shmem_inc_example.c}
+    { The following \FUNC{shmem\_atomic\_inc} example is for
+    \CorCpp{} programs: }
+    {./example_code/shmem_atomic_inc_example.c}
     {}
 
 \end{apiexamples}

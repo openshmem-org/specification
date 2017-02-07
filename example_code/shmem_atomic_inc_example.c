@@ -14,7 +14,7 @@ int main(void)
    shmem_barrier_all();
 
    if (me == 0)
-      shmem_inc(&dst, 1);
+      shmem_atomic_inc(&dst, 1);
    shmem_barrier_all();
 
    printf("%d: dst = %d\n", me, dst);
