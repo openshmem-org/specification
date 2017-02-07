@@ -1,0 +1,40 @@
+\apisummary{
+  Allocate a zeroed block of symmetric memory.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void *shmem_calloc(size_t nmemb, size_t size);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{nmemb}{The number of elements to allocate.}
+  \apiargument{IN}{size}{The size in bytes of each element to allocate.}
+\end{apiarguments}
+
+
+\apidescription{
+  The \FUNC{shmem\_calloc} routine allocates a region of remotely-accessible
+  memory for an array of \VAR{nmemb} objects of \VAR{size} bytes each and
+  returns a pointer to the lowest byte address of the allocated symmetric
+  memory. The space is initialized to all bits zero.
+
+  The values for \VAR{nmemb} and \VAR{size} shall each be equal across
+  all \ac{PE}s calling \FUNC{shmem\_calloc}; otherwise, the behavior is
+  undefined.
+
+  The \FUNC{shmem\_calloc} routine calls \FUNC{shmem\_barrier\_all} on exit
+  prior to returning.
+}
+
+\apireturnvalues{
+  The \FUNC{shmem\_calloc} routine returns a pointer to the lowest byte
+  address of the allocated space; otherwise, it returns a null pointer.
+}
+
+\apinotes{
+  None.
+}
+
+\end{apidefinition}
