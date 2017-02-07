@@ -1,13 +1,16 @@
 The following section discusses \openshmem \ac{API}s that provides a mechanism
 for synchronization between two \ac{PE}s based on the value of a symmetric data
-object. 
+object.
+The point-to-point synchronization routines can be used to portably ensure
+that memory access operations observe remote updates in the order enforced by
+the initiator PE using the \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}
+routines.
 
 Where appropriate compiler support is available, \openshmem provides
 type-generic point-to-point synchronization interfaces via \Celev{} generic
 selection. Such type-generic routines are supported for the
 ``point-to-point synchronization types'' identified in
-Table~\ref{p2psynctypes}. Implementations may optionally support additional
-types.
+Table~\ref{p2psynctypes}.
 
 \begin{table}[h]
   \begin{center}
@@ -27,8 +30,6 @@ types.
       int64\_t           & int64      \\ \hline
       uint32\_t          & uint32     \\ \hline
       uint64\_t          & uint64     \\ \hline
-      intptr\_t          & intptr     \\ \hline
-      uintptr\_t         & uintptr    \\ \hline
       size\_t            & size       \\ \hline
       ptrdiff\_t         & ptrdiff    \\ \hline
     \end{tabular}
@@ -37,14 +38,11 @@ types.
   \end{center}
 \end{table}
 
-The point-to-point synchronization routines can be used to portably ensure
-that memory access operations observe remote updates in the order enforced by
-the initiator PE using the \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}
-routines.
-
-Some point-to-point synchronization make use of the enumeration constants in
-Table~\ref{p2p-consts}, which have the effect to specify the comparison
-operation to be performed by the associated routine.
+The point-to-point synchronization interface provides the enumerated type
+\CTYPE{shmem\_cmp}, whose enumerators specify the comparison operators used by
+synchronization routines that take a \CTYPE{shmem\_cmp} argument. The
+enumerators of \CTYPE{shmem\_cmp} and their associated operations are presented
+in Table~\ref{p2p-consts}.
 
 \begin{table}[h]
   \begin{center}
@@ -56,7 +54,7 @@ operation to be performed by the associated routine.
       SHMEM\_CMP\_GT   & Greater than             \\
       SHMEM\_CMP\_GE   & Greater than or equal to \\
       SHMEM\_CMP\_LT   & Less than                \\
-      SHMEM\_CMP\_LE   & Less than or equal to
+      SHMEM\_CMP\_LE   & Less than or equal to    \\ \hline
     \end{tabular}
     \caption{Point-to-Point Comparison Enumeration Constants}
     \label{p2p-consts}

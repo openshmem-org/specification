@@ -5,15 +5,13 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-int shmem_test(TYPE *ivar, TYPE value);
-int shmem_test_cmp(TYPE *ivar, int cmp, TYPE value);
+int shmem_test(TYPE *ivar, shmem_cmp cmp, TYPE value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-int shmem_<TYPENAME>_test(TYPE *ivar, TYPE value);
-int shmem_<TYPENAME>_test_cmp(TYPE *ivar, int cmp, TYPE value);
+int shmem_<TYPENAME>_test(TYPE *ivar, shmem_cmp cmp, TYPE value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
@@ -29,33 +27,25 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \end{apiarguments}
 
 \apidescription{
-  \FUNC{shmem\_test} tests whether the symmetric object pointed to by
-  \VAR{ivar} is equal to \VAR{value}.
-
-  \FUNC{shmem\_test\_cmp} tests the numeric comparison of the symmetric object
+  \FUNC{shmem\_test} tests the numeric comparison of the symmetric object
   pointed to by \VAR{ivar} with the value \VAR{value} according to the
   comparison operator \VAR{cmp}.
 }
 
 \apireturnvalues{
-  \FUNC{shmem\_test} returns 1 if the symmetric object pointed to by \VAR{ivar}
-  is equal to \VAR{value}; otherwise, it returns 0.
-
-  \FUNC{shmem\_test\_cmp} returns 1 if the comparison of the symmetric object
+  \FUNC{shmem\_test} returns 1 if the comparison of the symmetric object
   pointed to by \VAR{ivar} with the value \VAR{value} according to the
   comparison operator \VAR{cmp} evalutes to true; otherwise, it returns 0.
 }
 
 \apinotes{
-  \FUNC{shmem\_test} tests the equality of the symmetric object pointed to by
-  \VAR{ivar} and \VAR{value}, while \FUNC{shmem\_wait} blocks until the two
-  are not equal.
+  None.
 }
 
 \begin{apiexamples}
   \apicexample
       {The following example demonstrates the use of \FUNC{shmem\_test} to
-       perform the equivalent functionality of \FUNC{shmem\_wait}.}
+       perform the equivalent functionality of \FUNC{shmem\_wait\_until}.}
       {./example_code/shmem_test_example1.c}
       {}
 \end{apiexamples}

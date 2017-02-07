@@ -33,6 +33,7 @@
 \newcommand{\OSH}{\emph{OpenSHMEM}}
 \newcommand{\openshmem}{{Open\-SHMEM}\xspace}
 \newcommand{\FUNC}[1]{\textit{#1}}
+\newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
 \newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}}
@@ -333,19 +334,25 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, _Noreturn}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, TYPE, _Noreturn, shmem_cmp},
+  morecomment=[s][\color{red}\textbf]{[[}{]]},
+  aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morecomment=[s][\color{red}\textbf]{[[}{]]},
+  aboveskip=0pt, belowskip=0pt}}{}
 
 
 \lstnewenvironment{Csynopsis}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morecomment=[s][\color{red}\textbf]{[[}{]]},
+  aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
 { 

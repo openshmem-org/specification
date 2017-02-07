@@ -5,15 +5,15 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_wait(TYPE *ivar, TYPE cmp_value);
-void shmem_wait_until(TYPE *ivar, int cmp, TYPE cmp_value);
+[[deprecated]] void shmem_wait(TYPE *ivar, TYPE cmp_value);
+void shmem_wait_until(TYPE *ivar, shmem_cmp cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_wait(TYPE *ivar, TYPE cmp_value);
-void shmem_<TYPENAME>_wait_until(TYPE *ivar, int cmp, TYPE cmp_value);
+[[deprecated]] void shmem_<TYPENAME>_wait(TYPE *ivar, TYPE cmp_value);
+void shmem_<TYPENAME>_wait_until(TYPE *ivar, shmem_cmp cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
@@ -33,7 +33,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     by another \ac{PE}.  If you are using \CorCpp, the type of \VAR{ivar} should
     match that implied in the SYNOPSIS section.} 
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
-    \VAR{cmp\_value}.  \VAR{cmp} must be of type integer.  If you are using
+    \VAR{cmp\_value}.  \VAR{cmp} must be of type \CTYPE{shmem\_cmp}.  If you are using
     \Fortran, it must  be of  default kind.  If you are using \CorCpp, the type of
     \VAR{cmp} should match that implied in the SYNOPSIS section.}        
 \apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  If you are
@@ -69,23 +69,14 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \apitablerow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
 \apitablerow{shmem\_int8\_wait, shmem\_int8\_wait\_until}{INTEGER*8}
 
-\apidesctable{
-    The following \VAR{cmp} values are supported:
-}{CMP Value}{Comparison}
-
-\CorCppFor:\\
-\apitablerow{SHMEM\_CMP\_EQ }{  Equal}
-\apitablerow{SHMEM\_CMP\_NE}{Not equal}
-\apitablerow{SHMEM\_CMP\_GT}{Greater than}
-\apitablerow{SHMEM\_CMP\_LE}{Less than or equal to}
-\apitablerow{SHMEM\_CMP\_LT}{Less than}
-\apitablerow{SHMEM\_CMP\_GE}{Greater than or equal to}
-
 \apireturnvalues{
     None.
 }
 
 \apinotes{
+  As of OpenSHMEM~1.4, the \FUNC{shmem\_wait} routine has been deprecated
+  and should be expected to be removed in a future specification.
+
   \FUNC{shmem\_wait} is functionally equivalent to \FUNC{shmem\_wait\_until}
   where \VAR{cmp} is SHMEM\_CMP\_NE.
 }
