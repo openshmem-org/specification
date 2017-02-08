@@ -6,13 +6,13 @@
 
 \begin{C11synopsis}
 TYPE shmem_fadd(TYPE *dest, TYPE value, int pe);
-TYPE shmem_ctx_fadd(TYPE *dest, TYPE value, int pe, shmem_ctx_t ctx);
+TYPE shmem_fadd(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 TYPE shmem_<TYPENAME>_fadd(TYPE *dest, TYPE value, int pe);
-TYPE shmem_ctx_<TYPENAME>_fadd(TYPE *dest, TYPE value, int pe, shmem_ctx_t ctx);
+TYPE shmem_ctx_<TYPENAME>_fadd(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
 

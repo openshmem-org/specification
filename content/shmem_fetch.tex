@@ -6,13 +6,13 @@
 
 \begin{C11synopsis}
 TYPE shmem_fetch(const TYPE *dest, int pe);
-TYPE shmem_ctx_fetch(const TYPE *dest, int pe, shmem_ctx_t ctx);
+TYPE shmem_fetch(shmem_ctx_t ctx, const TYPE *dest, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by Table \ref{extamotypes}.
 
 \begin{Csynopsis}
 TYPE shmem_<TYPENAME>_fetch(const TYPE *dest, int pe);
-TYPE shmem_ctx_<TYPENAME>_fetch(const TYPE *dest, int pe, shmem_ctx_t ctx);
+TYPE shmem_ctx_<TYPENAME>_fetch(shmem_ctx_t ctx, const TYPE *dest, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
