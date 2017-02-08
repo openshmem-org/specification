@@ -49,7 +49,11 @@ void *shmem_align(size_t alignment, size_t size);
     \openshmem communication routines.  Each of these routines call the
     \FUNC{shmem\_barrier\_all} routine before returning; this ensures that all
     \ac{PE}s participate in the memory allocation, and that the memory on other
-    \ac{PE}s can be used as  soon as the local \ac{PE} returns.  The user is
+    \ac{PE}s can be used as  soon as the local \ac{PE} returns.
+    \newtext{The user is responsible for ensuring that no communication
+    operations are pending on private contexts prior to calling
+    \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.}
+    The user is \newtext{also}
     responsible for calling these routines with identical argument(s) on all
     \ac{PE}s; if differing \VAR{size} arguments are used, the behavior of the call
     and any subsequent \openshmem calls becomes undefined.

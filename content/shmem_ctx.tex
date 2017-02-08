@@ -46,14 +46,31 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
     in a correct state.  The creation call can be reattempted with different
     options or after additional resources become available.
 
-    The following constants can be supplied as context options: \\
+    By default and when it is allowed by the threading model set during
+    initialization, contexts are {\em shareable} and can be used concurrently
+    by multiple threads within the PE where they were created.
+    %
+    The following options can be supplied during context creation to restrict
+    this usage model and enable performance optimizations.  When one or more
+    options are provided on a context, the application must comply with the
+    requirements of all provided options when using that context.  Otherwise
+    the behavior is undefined.
 
-        \apitablerow{\CONST{SHMEM\_CTX\_SHARED}}{
-            In a multithreaded environment, the given context will be used by
-            multiple threads concurrently.}
+        \apitablerow{\CONST{SHMEM\_CTX\_SERIALIZED}}{
+            The given context will not be used by multiple threads
+            concurrently.  This option is only valid in the
+            \const{SHMEM\_THREAD\_MULTIPLE} threading model.  When the
+            \CONST{SHMEM\_CTX\_SERIALIZED} option is set, the user must ensure
+            that operation involving the given context are serialized by the
+            application, including operations that perform an explicit or
+            implicit barrier.}
+
         \apitablerow{\CONST{SHMEM\_CTX\_PRIVATE}}{
-            In a multithreaded environment, the given context will not be used
-            by multiple threads concurrently.}
+            The given context will only be used by the thread that created it.
+            This option is only valid in the \const{SHMEM\_THREAD\_MULTIPLE}
+            and \const{SHMEM\_THREAD\_SERIALIZED} models. Contexts with the
+            \CONST{SHMEM\_CTX\_PRIVATE} option set are excluded from the quiet
+            operation performed during explicit and implicit barrier operations.}
 }
 
 \apireturnvalues{
@@ -93,14 +110,9 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
 
 \apidescription{
     \FUNC{shmem\_ctx\_destroy} destroys a context that was created by a call to
-    \FUNC{shmem\_ctx\_create}.  This function performs an implicit quiet
-    operation on the given context before it is freed.
-
-    \textit{Rationale:} Destroying a context makes it impossible for the user to
-    complete communication operations that are pending on that context.  This
-    includes nonblocking communication operations, whose local buffers are only
-    returned to the user after the operations have been completed.  An implicit
-    quiet is performed when freeing a context to avoid this ambiguity.
+    \FUNC{shmem\_ctx\_create}.  It is the user's responsibility to ensure that
+    the context is no longer in use before calling this routine.  This function
+    performs an implicit quiet operation on the given context before it is freed.
 }
 
 \apireturnvalues{
@@ -108,7 +120,14 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
 }
 
 \apinotes{
-    None.
+    Destroying a context makes it impossible for the user to complete
+    communication operations that are pending on that context.  This includes
+    nonblocking communication operations, whose local buffers are only returned
+    to the user after the operations have been completed.  An implicit quiet is
+    performed when freeing a context to avoid this ambiguity.
+
+    A context with the \CONST{SHMEM\_CTX\_PRIVATE} option enabled must be
+    destroyed by the thread that created it.
 }
 
 %\begin{apiexamples}

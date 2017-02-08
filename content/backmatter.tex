@@ -440,6 +440,11 @@ and \Fortran{} naming conventions.
 
 \begin{itemize}
 %
+\item \newtext{New communication management API, including \FUNC{shmem\_ctx\_create};
+    \FUNC{shmem\_ctx\_destroy}; and additional RMA, AMO, and memory ordering
+    routines that accept \CODE{shmem\_ctx\_t} arguments.
+\\See Section \ref{sec:ctx}.}
+%
 \item The \VAR{SHMEM\_SYNC\_SIZE} constant was added.
 \\See Section \ref{subsec:library_constants}.
 %
