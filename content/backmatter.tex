@@ -113,6 +113,7 @@ underlying \Cpp{} compiler called by \textbf{oshCC}.
 
 \subsection*{Programs written in \Fortran}
 
+\begin{deprecate}
 The  \openshmem{} Reference Implementation provides a wrapper program named
 \textbf{oshfort}, to aid in the compilation of \Fortran{} programs, the wrapper
 could be called as follows:
@@ -122,6 +123,7 @@ oshfort <compiler options> -o myprogram myprogram.f
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
 underlying \Fortran{} compiler called by \textbf{oshfort}.
+\end{deprecate}
 
 \section{Running Programs}
 
@@ -369,6 +371,7 @@ specification.
     \_SHMEM\_MAX\_NAME\_LEN & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAX\_NAME\_LEN} \\ \hline
     \_SHMEM\_VENDOR\_STRING & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_VENDOR\_STRING} \\ \hline
     SMA\_* environment variables & 1.4 & Current & SHMEM\_* \\ \hline
+    Entire \Fortran{} API & 1.4 & Current & (none) \\ \hline
     \end{tabular}
 \end{center}
 
@@ -429,6 +432,15 @@ standard's reserved names.  These constants have been deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran{} naming conventions.
 
+\subsection{Fortran API}\label{subsec:deprecate-fortran}
+The entire \openshmem{} \Fortran{} API was deprecated due to a general lack of
+use and a lack of conformance with legacy \Fortran{} standards. In lieu of an
+extensive update of the \Fortran{} API, \Fortran{} users are encouraged to
+leverage current and future \openshmem{} specifications of the \Clang{} API
+through the \Fortran{}-\Clang{} interoperability initially standardized by
+\Fortran{}~2003%
+\footnote{Formally, \Fortran{}~2003 is known as ISO/IEC~1539-1:2004(E).}.
+
 
 
 
@@ -464,6 +476,8 @@ synchronization routines.
 %
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
 \\See Section \ref{sec:dep_api}.
+%
+\item Deprecated the entire \Fortran{} API.
 %
 \end{itemize}
 

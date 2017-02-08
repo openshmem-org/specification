@@ -26,12 +26,18 @@ requirements and underlying architecture.  In \openshmem the following kinds of
 data objects are symmetric:
 %
 \begin{itemize}
-  \item \Fortran{} data objects in common blocks or with the  SAVE  attribute.
-      These data objects must not be defined in a dynamic shared object (DSO).
-  \item Global and static \Clang{} and \Cpp variables. These data objects must
-      not  be defined in a DSO.
-  \item \Fortran{} arrays allocated with \textit{shpalloc} 
-  \item \Clang{} and \Cpp data allocated by \textit{shmem\_malloc}
+\item
+  \begin{deprecate}
+    \Fortran{} data objects in common blocks or with the  SAVE  attribute.
+    These data objects must not be defined in a dynamic shared object (DSO).
+  \end{deprecate}
+\item Global and static \Clang{} and \Cpp variables. These data objects must
+  not  be defined in a DSO.
+\item
+  \begin{deprecate}
+    \Fortran{} arrays allocated with \textit{shpalloc}
+  \end{deprecate}
+\item \Clang{} and \Cpp data allocated by \textit{shmem\_malloc}
 \end{itemize}       
 
 \openshmem dynamic memory allocation routines (\textit{shpalloc} and

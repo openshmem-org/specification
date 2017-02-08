@@ -69,6 +69,7 @@
 \newcommand{\kth}{${\textit{k}^{\text{\tiny th}}}$}
 \newcommand{\lth}{${\textit{l}^{\text{\tiny th}}}$}
 
+
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
 \acro{RMO}{\emph{Remote Memory Operation}}
@@ -309,6 +310,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
 % Library API description template commands
 %
 
+\newcommand{\deprecationstart}{\color{red} \raisebox{.5ex}{\rule{1em}{.4pt}}
+  deprecation start \xrfill[.5ex]{.4pt}[red] \mbox{}}
+\newcommand{\deprecationend}{\mbox{}\xrfill[.5ex]{.4pt}[red]\mbox{} \color{red}
+  deprecation end \raisebox{.5ex}{\rule{1em}{.4pt}}}
+
+\newenvironment{deprecate}{\deprecationstart \\}{\\ \deprecationend}
+
 \newcommand{\apisummary}[1]{
     #1
 \hfill
@@ -357,11 +365,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
   {}
   
 \lstnewenvironment{Fsynopsis}
-{ \textbf{FORTRAN:} 
+{ \deprecationstart \\
+  \textbf{FORTRAN:}
   \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
   deletekeywords=[2]{STATUS},
   deletekeywords=[3]{LOG}, aboveskip=0pt,
-  belowskip=0pt}}{}
+  belowskip=0pt}}
+{ \deprecationend }
 
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{
