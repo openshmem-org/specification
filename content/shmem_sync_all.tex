@@ -1,0 +1,51 @@
+\apisummary{
+    Registers the arrival of a \ac{PE} at a barrier and suspends \ac{PE} execution
+    until all other \ac{PE}s arrive at the barrier.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_sync_all(void);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+    \apiargument{None.}{}{} 
+
+\end{apiarguments}
+
+\apidescription{   
+    The \FUNC{shmem\_sync\_all} routine registers the arrival of a \ac{PE} at
+    a barrier. Barriers are a fast mechanism for synchronizing all \ac{PE}s at
+    once.  This routine causes a \ac{PE} to suspend execution until all \ac{PE}s
+    have called \FUNC{shmem\_sync\_all}.
+
+    In contrast with the \FUNC{shmem\_barrier\_all} routine,
+    \FUNC{shmem\_sync\_all} only ensures completion of previously issued memory
+    stores and does not ensure completion of remote memory updates issued via
+    \openshmem routines.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    The \FUNC{shmem\_sync\_all} routine can be used to portably ensure that
+    memory access operations observe remote updates in the order enforced by
+    initiator PEs, provided that the initiator PE ensures completion of remote
+    updates with a call to \FUNC{shmem\_quiet} prior to the call to
+    \FUNC{shmem\_sync\_all} routine.
+}
+
+%\begin{apiexamples}
+%
+%\apicexample
+%    { The following \FUNC{shmem\_barrier\_all} example is for \CorCpp programs:}
+%    {./example_code/shmem_barrierall_example.c}
+%    {} 
+%
+%\end{apiexamples}
+
+\end{apidefinition}

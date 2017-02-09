@@ -1,0 +1,80 @@
+\apisummary{
+    Performs all operations described in the \FUNC{shmem\_sync\_all} interface
+    but with respect to a subset of \acp{PE} defined by the \activeset.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset of
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
+\apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
+    consecutive \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be
+    of type integer.}
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset.
+    \VAR{PE\_size} must be of type integer.}
+\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
+    of type long and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.  Every element of
+    this array must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of the
+    \acp{PE} in the \activeset enter \FUNC{shmem\_sync} the first time.}
+
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_sync} is a collective synchronization routine over an
+    \activeset.  Control returns from \FUNC{shmem\_sync} after all \acp{PE} in
+    the \activeset (specified by \VAR{PE\_start}, \VAR{logPE\_stride}, and
+    \VAR{PE\_size}) have called \FUNC{shmem\_sync}.
+    
+    As with all \openshmem collective routines, each of these routines assumes
+    that only \acp{PE} in the \activeset call the routine.  If a \ac{PE} not in
+    the \activeset calls an \openshmem collective routine, undefined behavior
+    results.
+    
+    The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and
+    \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset.  The same
+    work array must be passed in \VAR{pSync} to all \acp{PE} in the \activeset.
+    
+    In contrast with the \FUNC{shmem\_barrier} routine, \FUNC{shmem\_sync} only
+    ensures completion of previously issued memory stores and does not ensure
+    completion of remote memory updates issued via \openshmem routines.
+    
+    The same \VAR{pSync} array may be reused on consecutive calls to
+    \FUNC{shmem\_barrier} if the same active \ac{PE} set is used.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    If the \VAR{pSync} array is initialized at run time, be sure to use some type of
+    synchronization, for example, a call to \FUNC{shmem\_sync\_all}, before
+    calling \FUNC{shmem\_sync} for the first time.
+    
+    If the \activeset does not change, \FUNC{shmem\_sync} can be called
+    repeatedly with the same \VAR{pSync} array.  No additional synchronization
+    beyond that implied by \FUNC{shmem\_sync} itself is necessary in this case.
+
+    The \FUNC{shmem\_sync\_all} routine can be used to portably ensure that
+    memory access operations observe remote updates in the order enforced by
+    initiator PEs, provided that the initiator PE ensures completion of remote
+    updates with a call to \FUNC{shmem\_quiet} prior to the call to
+    \FUNC{shmem\_sync\_all} routine.
+}
+
+%\begin{apiexamples}
+%
+%\apicexample
+%	{The following barrier example is for \CorCpp programs:}
+%	{./example_code/shmem_barrier_example.c}
+%	{}
+%
+%\end{apiexamples}
+
+\end{apidefinition}
