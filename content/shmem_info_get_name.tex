@@ -19,18 +19,18 @@ SHMEM_INFO_GET_NAME(NAME)
 
 \apidescription{
     This routine returns the vendor defined character string of size defined by
-    the library constant \const{SHMEM\_MAX\_NAME\_LEN}. The program calling this function
-    prepares the \VAR{name} memory buffer of at least size \const{SHMEM\_MAX\_NAME\_LEN}.
+    the library constant \CONST{SHMEM\_MAX\_NAME\_LEN}. The program calling this function
+    prepares the \VAR{name} memory buffer of at least size \CONST{SHMEM\_MAX\_NAME\_LEN}.
     The implementation
-    copies the vendor defined string of size at most \const{SHMEM\_MAX\_NAME\_LEN} to \VAR{name}.
+    copies the vendor defined string of size at most \CONST{SHMEM\_MAX\_NAME\_LEN} to \VAR{name}.
     In \CorCpp{}, the string is
     terminated by a null character.  In \Fortran{}, the string of size less than
-    \const{SHMEM\_MAX\_NAME\_LEN} is padded with blank characters up to size
-    \const{SHMEM\_MAX\_NAME\_LEN}.
+    \CONST{SHMEM\_MAX\_NAME\_LEN} is padded with blank characters up to size
+    \CONST{SHMEM\_MAX\_NAME\_LEN}.
     If the \VAR{name} memory buffer is provided with size less than
-    \const{SHMEM\_MAX\_NAME\_LEN}, behavior is undefined.
+    \CONST{SHMEM\_MAX\_NAME\_LEN}, behavior is undefined.
     For a given library implementation, the vendor string
-    returned is consistent with the library constant \const{SHMEM\_VENDOR\_STRING}.
+    returned is consistent with the library constant \CONST{SHMEM\_VENDOR\_STRING}.
 }
 
 \apireturnvalues{ 
