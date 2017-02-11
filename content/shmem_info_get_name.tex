@@ -19,16 +19,16 @@ SHMEM_INFO_GET_NAME(NAME)
 
 \apidescription{
     This routine returns the vendor defined character string of size defined by
-    the constant SHMEM\_MAX\_NAME\_LEN. The program calling this function
-    prepares the memory of size SHMEM\_MAX\_NAME\_LEN, and the implementation
-    copies the string of size at most SHMEM\_MAX\_NAME\_LEN. In \Clang{}, the string is
+    the library constant \const{SHMEM\_MAX\_NAME\_LEN}. The program calling this function
+    prepares the memory of size \const{SHMEM\_MAX\_NAME\_LEN}, and the implementation
+    copies the string of size at most \const{SHMEM\_MAX\_NAME\_LEN}. In \Clang{}, the string is
     terminated by a null character.  In \Fortran{}, the string of size less than
-    SHMEM\_MAX\_NAME\_LEN is padded with blank characters up to size
-    SHMEM\_MAX\_NAME\_LEN. The implementation copying a string of size greater
-    than SHMEM\_MAX\_NAME\_LEN results in an undefined behavior.  Multiple
+    \const{SHMEM\_MAX\_NAME\_LEN} is padded with blank characters up to size
+    \const{SHMEM\_MAX\_NAME\_LEN}. The implementation copying a string of size greater
+    than \const{SHMEM\_MAX\_NAME\_LEN} results in an undefined behavior.  Multiple
     invocations of the routine in an \openshmem{} program always return the
     same string.  For a given library implementation, the vendor string
-    returned is consistent with the library constant SHMEM\_VENDOR\_STRING.
+    returned is consistent with the library constant \const{SHMEM\_VENDOR\_STRING}.
 }
 
 \apireturnvalues{ 
