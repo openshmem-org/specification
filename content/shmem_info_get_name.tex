@@ -23,7 +23,7 @@ SHMEM_INFO_GET_NAME(NAME)
     prepares the \VAR{name} memory buffer of at least size \const{SHMEM\_MAX\_NAME\_LEN}.
     The implementation
     copies the vendor defined string of size at most \const{SHMEM\_MAX\_NAME\_LEN} to \VAR{name}.
-    In \Clang{}, the string is
+    In \CorCpp{}, the string is
     terminated by a null character.  In \Fortran{}, the string of size less than
     \const{SHMEM\_MAX\_NAME\_LEN} is padded with blank characters up to size
     \const{SHMEM\_MAX\_NAME\_LEN}.
