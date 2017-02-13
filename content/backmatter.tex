@@ -21,7 +21,7 @@ In this section, we describe how to write a ``Hello World" \openshmem program.
 To write a ``Hello World" \openshmem program we need to: 
 
 \begin{itemize}
-\item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran).
+\item Add the include file \HEADER{shmem.h} (for \Clang) or \HEADER{shmem.fh} (for \Fortran).
 \item Add the initialization call \FUNC{shmem\_init}, (line 9).
 \item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
     id (line 11).
@@ -683,7 +683,7 @@ provided.
 \\See Section \ref{subsec:progress}. 
 %
 \item Clarification of naming convention for non-standard interfaces and their
-inclusion in \FUNC{shmemx.h}.
+inclusion in \HEADER{shmemx.h}.
 \\See Section \ref{subsec:bindings}. 
 %
 \item Various fixes to \openshmem code examples across the specification to
