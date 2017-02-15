@@ -1,5 +1,5 @@
 \apisummary{
-    Registers the arrival of a \ac{PE} at a barrier and suspends \ac{PE} execution
+    Registers the arrival of a \ac{PE} at a barrier and blocks the \ac{PE}
     until all other \ac{PE}s arrive at the barrier and all local and remote memory
     updates are completed.
 }
@@ -23,7 +23,7 @@ CALL SHMEM_BARRIER_ALL
 \apidescription{   
     The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at
     a barrier. Barriers are a fast mechanism for synchronizing all \ac{PE}s at
-    once.  This routine causes a \ac{PE} to suspend execution until all \ac{PE}s
+    once.  This routine causes a \ac{PE} to block until all \ac{PE}s
     have called \FUNC{shmem\_barrier\_all}.
     \oldtext{This routine must be used with \ac{PE}s started by \FUNC{shmem\_init}.}
 
