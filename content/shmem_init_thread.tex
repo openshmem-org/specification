@@ -1,5 +1,5 @@
 \apisummary{
-Initializes the \openshmem{} library, similar to SHMEM\_INIT(), and in addition
+Initializes the \openshmem{} library, similar to \FUNC{shmem\_init}, and in addition
 perform the initialization required for thread-safe invocation of \openshmem{} functions.}
 
 \begin{apidefinition}
@@ -49,7 +49,8 @@ models.
 \end{itemize}
 
 The function may be used to initialize \openshmem{}, and to initialize the
-\openshmem{} with thread safety, instead of SHMEM\_INIT. The SHMEM\_INIT\_THREAD
+\openshmem{} with thread safety, instead of \FUNC{shmem\_init}. The
+\FUNC{shmem\_init\_thread}
 may not be called multiple times in an \openshmem{} program.
 }
 
