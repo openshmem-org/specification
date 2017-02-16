@@ -8,12 +8,6 @@ perform the initialization required for thread-safe invocation of \openshmem{} f
 int shmem_init_thread(int requested, int *provided);
 \end{Csynopsis}
 
-\begin{Fsynopsis}  
-INTEGER requested, provided
-     
-SHMEM_INIT_THREAD(requested, provided)
-\end{Fsynopsis}  
-
 \begin{apiarguments}
 \apiargument{IN}{requested}  {The thread level support requested by the user.
 The correct values are SHMEM\_THREAD\_SINGLE, SHMEM\_THREAD\_FUNNELED, or SHMEM\_THREAD\_MULTIPLE}
