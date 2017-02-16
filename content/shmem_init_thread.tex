@@ -10,7 +10,8 @@ int shmem_init_thread(int requested, int *provided);
 
 \begin{apiarguments}
 \apiargument{IN}{requested}  {The thread level support requested by the user.
-The correct values are SHMEM\_THREAD\_SINGLE, SHMEM\_THREAD\_FUNNELED, or SHMEM\_THREAD\_MULTIPLE}
+The correct values are SHMEM\_THREAD\_SINGLE, SHMEM\_THREAD\_FUNNELED,
+SHMEM\_THREAD\_SERIALIZED, or SHMEM\_THREAD\_MULTIPLE}
 \apiargument{OUT}{provided}{The thread level support provided by the \openshmem{} implementation.}
 \end{apiarguments}
 
@@ -20,7 +21,7 @@ The correct values are SHMEM\_THREAD\_SINGLE, SHMEM\_THREAD\_FUNNELED, or SHMEM\
     \FUNC{shmem\_init}, and in addition perform the initialization required for
     thread-safe invocation of \openshmem{} functions. The argument
     \textit{requested} is used to specify the desired level of thread support.
-    The function returns the support provided by the library. There are four 
+    The function returns the support level provided by the library. There are four 
     levels of threading support.
  
  \begin{itemize}
