@@ -6,8 +6,8 @@ querying the thread environment.
 \begin{itemize}
 
 \item
-In a thread-compliant implementation, an \openshmem{} \ac{PE} is multithreaded. 
-Each thread can issue \openshmem{} calls; however the threads
+A multithreaded \openshmem{} \ac{PE} using thread-compliant implementation can issue
+\openshmem{} calls from  any of its threads. However, the threads
 are not separately addressable. The symmetric heap and symmetric variables scope
 are not impacted by multiple threads invoking the
 \openshmem{} interfaces, i.e., 
