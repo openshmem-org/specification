@@ -29,9 +29,8 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 
 \begin{apiarguments}
 
-\apiargument{OUT}{ivar}{A remotely accessible integer variable that is being updated
-    by another \ac{PE} \newtext{or the same \ac{PE} in the case of multi-threaded
-    \openshmem{}}.  If you are using \CorCpp, the type of \VAR{ivar} should
+\apiargument{OUT}{ivar}{A remotely accessible integer variable \oldtext{that is being updated
+    by another \ac{PE}}.  If you are using \CorCpp, the type of \VAR{ivar} should
     match that implied in the SYNOPSIS section.} 
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.  \VAR{cmp} must be of type integer.  If you are using
