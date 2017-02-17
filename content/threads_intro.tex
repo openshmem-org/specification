@@ -16,7 +16,7 @@ all threads within that \ac{PE}.  For example, a thread invoking a memory alloca
 routine such as \FUNC{shmem\_malloc()} 
 allocates memory that is accesible by all threads of the \ac{PE}. 
 The requirement that the same symmetric heap operations must
-be executed by all processes in the same order also applies in a threaded
+be executed by all \acp{PE} in the same order also applies in a threaded
 environment. 
                                     	
 \item In a thread-compliant implementation, 
@@ -24,14 +24,14 @@ all \openshmem{} calls are thread-safe, i.e., two concurrently running threads
 may make \openshmem{} calls and the outcome will be as if the calls executed in
 some order, even if their execution is interleaved.
 
-\item Blocking \openshmem{} calls will block the calling thread only, allowing another
-thread to execute, if available. The calling thread will be blocked until the
+\item Blocking \openshmem{} calls will block the calling thread only, allowing
+other threads to execute, if available. The calling thread will be blocked until the
 event on which it is waiting occurs. Once the blocked communication is enabled
 and can proceed, then the call will complete and the thread will be marked
 runnable, within a finite time. A blocked thread will not prevent progress of
 other runnable threads on the same \ac{PE}, and will not prevent them from
 executing other \openshmem{} calls. Also, a blocked thread will not prevent the
-progress of other \openshmem{} calls on other \acp{PE}. 
+progress of \openshmem{} calls on other \acp{PE}. 
  
 \item
 In a thread-compliant implementation, if multiple threads call the collective
