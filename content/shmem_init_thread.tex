@@ -20,7 +20,7 @@ SHMEM\_THREAD\_SERIALIZED, or SHMEM\_THREAD\_MULTIPLE}
     \FUNC{shmem\_init\_thread}  initializes the \openshmem{} library similar to
     \FUNC{shmem\_init}, and in addition perform the initialization required for
     thread-safe invocation of \openshmem{} functions. The argument
-    \textit{requested} is used to specify the desired level of thread support.
+    \VAR{requested} is used to specify the desired level of thread support.
     The function returns the support level provided by the library. There are four 
     levels of threading support.
  
@@ -50,7 +50,7 @@ models.
 \end{itemize}
 
 The function may be used to initialize \openshmem{}, and to initialize the
-\openshmem{} with thread safety, instead of \FUNC{shmem\_init}. The
+\openshmem{} library with thread safety, instead of \FUNC{shmem\_init}. The
 \FUNC{shmem\_init\_thread}
 may not be called multiple times in an \openshmem{} program.
 }

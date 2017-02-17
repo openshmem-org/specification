@@ -41,9 +41,9 @@ collective calls.  The symmetric heap management functions, which are defined to
 must be treated as collective operations.
 
 \item
-\openshmem{} thread calling \FUNC{shmem\_init()} is designated as the main thread.
-Multiple threads may not call \FUNC{shmem\_init()}. Similarly, \openshmem{} finalize
-may only be called on the main thread.
+\openshmem{} thread calling \FUNC{shmem\_init()} is designated as the main
+thread. Multiple threads may not call \FUNC{shmem\_init()}. Similarly,
+\FUNC{shmem\_finalize()} may only be called on the main thread.
 
 \end{itemize} 
  
