@@ -515,7 +515,7 @@ The following list describes the specific changes in 1.3:
 %
 \item New atomic elemental read and write operations, \FUNC{SHMEM\_FETCH} and
 	\FUNC{SHMEM\_SET}.
-\\See Sections \ref{subsec:shmem_fetch} and \ref{subsec:shmem_set}
+\\See Sections \ref{subsec:shmem_atomic_fetch} and \ref{subsec:shmem_atomic_set}
 %
 \item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL} 
 	and \FUNC{SHMEM\_ALLTOALLS}.
@@ -677,15 +677,18 @@ calls are encountered has been clarified.
 \\See Section \ref{subsec:start_pes}.
 %
 \item Corrected the definition of atomic increment operation.
-\\See Section \ref{subsec:shmem_inc}. 
+\\See Section \ref{subsec:shmem_atomic_inc}.
 %
 \item Clarification of the size of the symmetric heap and when it is set.
 \\See Section \ref{subsec:shfree}.
 %
 \item Clarification of the integer and real sizes for \Fortran{} \ac{API}.
-\\See Sections \ref{subsec:shmem_add}, \ref{subsec:shmem_cswap},
-      \ref{subsec:shmem_swap}, \ref{subsec:shmem_finc}, \ref{subsec:shmem_inc}, and
-      \ref{subsec:shmem_fadd}. 
+\\See Sections \ref{subsec:shmem_atomic_add},
+      \ref{subsec:shmem_atomic_compare_swap},
+      \ref{subsec:shmem_atomic_swap},
+      \ref{subsec:shmem_atomic_fetch_inc},
+      \ref{subsec:shmem_atomic_inc}, and
+      \ref{subsec:shmem_atomic_fetch_add}.
 %
 \item Clarification of the expected behavior on program \OPR{exit}.
 \\See Section \ref{subsec:execution_model}, Execution Model. 
