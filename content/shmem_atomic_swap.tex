@@ -16,13 +16,13 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYP
 
 \begin{Fsynopsis}
 INTEGER SHMEM_SWAP, value, pe
-ires = SHMEM_SWAP(dest, value, pe) 
+ires = SHMEM_SWAP(dest, value, pe)
 INTEGER*4 SHMEM_INT4_SWAP, value_i4, ires_i4
-ires_i4 = SHMEM_INT4_SWAP(dest, value_i4, pe) 
+ires_i4 = SHMEM_INT4_SWAP(dest, value_i4, pe)
 INTEGER*8 SHMEM_INT8_SWAP, value_i8, ires_i8
 ires_i8 = SHMEM_INT8_SWAP(dest, value_i8, pe)
 REAL*4 SHMEM_REAL4_SWAP, value_r4, res_r4
-res_r4 = SHMEM_REAL4_SWAP(dest, value_r4, pe) 
+res_r4 = SHMEM_REAL4_SWAP(dest, value_r4, pe)
 REAL*8 SHMEM_REAL8_SWAP, value_r8, res_r8
 res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 \end{Fsynopsis}
@@ -41,7 +41,7 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 \apidescription{
     \FUNC{shmem\_atomic\_swap} performs an atomic swap operation.
     It writes \VAR{value} into \dest{} on \ac{PE} and returns the previous
-    contents of \dest{} as an atomic operation. 
+    contents of \dest{} as an atomic operation.
 }
 
 \apidesctable{

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <shmem.h>
 
-int main(void) 
+int main(void)
 {
    int me;
    static int dst;
