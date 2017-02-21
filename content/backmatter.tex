@@ -34,9 +34,9 @@ To write a ``Hello World" \openshmem program we need to:
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
-\numberedlisting{label=openshmem-hello,language=OSH2+C}
+\numberedlisting{caption={``Hello World'' example program (C)},label=openshmem-hello,language=OSH2+C}
                 {example_code/hello-openshmem.c}
-\outputlisting{language=bash,caption={Expected Output (4 processors)}}
+\outputlisting{language=bash,caption={Expected output from the program in Listing~\ref{openshmem-hello} (4 processors)}}
                 {example_code/hello-openshmem-c.output}
 \vspace{0.1in}
 \end{minipage}
@@ -46,14 +46,14 @@ same program written in \Fortran, in listing~\ref{openshmem-hello-f90}:
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
-\numberedlisting{label=openshmem-hello-f90,language=OSH2+F}
+\numberedlisting{caption={``Hello World'' example program (Fortran)},label=openshmem-hello-f90,language=OSH2+F}
                 {example_code/hello-openshmem.f90}
-\outputlisting{language=bash,caption={Expected Output (4 processors)}}
+\outputlisting{language=bash,caption={Expected output from the program in Listing~\ref{openshmem-hello-f90} (4 processors)}}
                 {example_code/hello-openshmem-f90.output}
 \vspace{0.1in}
 \end{minipage}
 
-The following example shows a more complex \openshmem program that illustrates
+The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex \openshmem program that illustrates
 the use of symmetric data objects.  Note the declaration of the  \VAR{static
 short dest} array and its use as the remote destination in \openshmem short
 \PUT.  The use of the \VAR{static} keyword results in the \VAR{dest} array being
@@ -68,9 +68,9 @@ active (local) side, the asymmetric \source{} object is handled correctly.
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
-\numberedlisting{label=openshmem-hello,language=OSH2+C}
+\numberedlisting{caption={Symmetric data objects example program},label=openshmem-hello-symmetric,language=OSH2+C}
                 {example_code/writing_shmem_example.c}
-\outputlisting{language=bash,caption={Expected Output (4 processors)}}
+\outputlisting{language=bash,caption={Expected output from the program in Listing~\ref{openshmem-hello-symmetric} (4 processors)}}
                 {example_code/writing_shmem_example.output}
 \vspace{0.1in}
 \end{minipage}
@@ -316,6 +316,7 @@ interconnect, and to a very limited extent, Infiniband based clusters.
 
 \chapter{\openshmem Specification and Deprecated API}\label{sec:dep_api}
 
+\section{Overview}\label{subsec:dep_overview}
 For the \openshmem Specification(s), deprecation is the process of identifying
 API that is supported but no longer recommended for use by program users. For
 \openshmem library users, said API \textbf{must} be supported until clearly
@@ -325,24 +326,108 @@ deprecation, and if the feature is supported in the current version of the
 specification.  
 
 \begin{center}
+\scriptsize
 \begin{tabular}{|l|c|c|c|}
     \hline
-     \textbf{Deprecated API} & \textbf{Deprecated Since} 
-     & \textbf{Currently Supported(?)} & \textbf{Replaced By}\\ 
-    \hline %There may be better table headings...
-    \FUNC{\_my\_pe} & 1.2 & Yes & \FUNC{shmem\_my\_pe} \\ \hline
-    \FUNC{\_num\_pes} & 1.2 & Yes & \FUNC{shmem\_n\_pes} \\ \hline
-    \FUNC{shmalloc} & 1.2 & Yes & \FUNC{shmem\_malloc} \\ \hline
-    \FUNC{shfree} & 1.2 & Yes & \FUNC{shmem\_free} \\ \hline
-    \FUNC{shrealloc} & 1.2 & Yes & \FUNC{shmem\_realloc} \\ \hline
-    \FUNC{shmemalign} & 1.2 & Yes & \FUNC{shmem\_align} \\ \hline
-    \FUNC{start\_pes} & 1.2 & Yes & \FUNC{shmem\_init} \\ \hline
-    \FUNC{SHMEM\_PUT} & 1.2 & Yes & \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} \\ \hline
-    \FUNC{SHMEM\_CACHE} & 1.3 & Yes & (none) \\ \hline
-    \_SHMEM\_* constants & 1.3 & Yes & SHMEM\_* \\ \hline
-    SMA\_* environment variables & 1.4 & Yes & SHMEM\_* \\ \hline
+    \textbf{Deprecated API}
+    & \textbf{Deprecated Since}
+    & \shortstack{\textbf{Last Version Supported}}
+    & \textbf{Replaced By} \\
+    \hline
+    \CorCpp: \FUNC{\_my\_pe} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
+    \CorCpp: \FUNC{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
+    \CorCpp: \FUNC{shmalloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
+    \CorCpp: \FUNC{shfree} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
+    \CorCpp: \FUNC{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
+    \CorCpp: \FUNC{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
+    \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
+    \Fortran: \FUNC{SHMEM\_PUT} & 1.2 & Current & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
+    \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_inv}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_CLEAR\_CACHE\_INV}}}
+        & 1.3 & Current & (none) \\ \hline
+    \CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_line\_inv}} & 1.3 & Current & (none) \\ \hline
+    \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_inv}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_INV}}}
+        & 1.3 & Current & (none) \\ \hline
+    \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_set\_cache\_line\_inv}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_SET\_CACHE\_LINE\_INV}}}
+        & 1.3 & Current & (none) \\ \hline
+    \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH}}}
+        & 1.3 & Current & (none) \\ \hline
+    \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush\_line}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH\_LINE}}}
+        & 1.3 & Current & (none) \\ \hline
+    \_SHMEM\_SYNC\_VALUE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_SYNC\_VALUE} \\ \hline
+    \_SHMEM\_BARRIER\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_BARRIER\_SYNC\_SIZE} \\ \hline
+    \_SHMEM\_BCAST\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_BCAST\_SYNC\_SIZE} \\ \hline
+    \_SHMEM\_COLLECT\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_COLLECT\_SYNC\_SIZE} \\ \hline
+    \_SHMEM\_REDUCE\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_REDUCE\_SYNC\_SIZE} \\ \hline
+    \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} \\ \hline
+    \_SHMEM\_MAJOR\_VERSION & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAJOR\_VERSION} \\ \hline
+    \_SHMEM\_MINOR\_VERSION & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MINOR\_VERSION} \\ \hline
+    \_SHMEM\_MAX\_NAME\_LEN & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAX\_NAME\_LEN} \\ \hline
+    \_SHMEM\_VENDOR\_STRING & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_VENDOR\_STRING} \\ \hline
+    SMA\_* environment variables & 1.4 & Current & SHMEM\_* \\ \hline
     \end{tabular}
 \end{center}
+
+\section{Deprecation Rationale}\label{subsec:dep_rationale}
+
+\subsection{\_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign} The
+\CorCpp functions \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
+\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
+to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
+prefix for all functions.
+
+\subsection{start\_pes}
+The \CorCpp function \FUNC{start\_pes} includes an unnecessary initialization
+argument that is remnant of historical \emph{SHMEM} implementations and no
+longer reflects the requirements of modern \openshmem implementations.
+Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
+\shmemprefixLC{} naming prefix. This function has been deprecated and
+\openshmem users are encouraged to use
+\hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
+
+\subsection{SHMEM\_PUT (Fortran API)}
+The \Fortran{} function \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
+\ac{API} and is semantically identical to \Fortran{} functions
+\FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
+\FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
+\FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
+
+\subsection{SHMEM\_CACHE}
+The \FUNC{SHMEM\_CACHE} \ac{API}
+\begin{center}
+\begin{tabular}{ll}
+    \CorCpp: & \Fortran: \\
+    shmem\_clear\_cache\_inv & SHMEM\_CLEAR\_CACHE\_INV \\
+    shmem\_set\_cache\_inv & SHMEM\_SET\_CACHE\_INV \\
+    shmem\_set\_cache\_line\_inv & SHMEM\_SET\_CACHE\_LINE\_INV \\
+    shmem\_udcflush & SHMEM\_UDCFLUSH \\
+    shmem\_udcflush\_line & SHMEM\_UDCFLUSH\_LINE \\
+    shmem\_clear\_cache\_line\_inv \\
+\end{tabular}
+\end{center}
+was originally implemented for systems with cache management instructions.
+This API has largely gone unused on cache-coherent system architectures.
+\FUNC{SHMEM\_CACHE} has been deprecated.
+
+\subsection{\_SHMEM\_* constants}
+The library constants
+\begin{center}
+\begin{tabular}{ll}
+    \_SHMEM\_SYNC\_VALUE & \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE \\
+    \_SHMEM\_BARRIER\_SYNC\_SIZE & \_SHMEM\_MAJOR\_VERSION \\
+    \_SHMEM\_BCAST\_SYNC\_SIZE & \_SHMEM\_MINOR\_VERSION \\
+    \_SHMEM\_COLLECT\_SYNC\_SIZE & \_SHMEM\_MAX\_NAME\_LEN \\
+    \_SHMEM\_REDUCE\_SYNC\_SIZE & \_SHMEM\_VENDOR\_STRING \\
+    \end{tabular}
+\end{center}
+do not adhere to the \Clang{} standard's reserved identifiers and the \Cpp{}
+standard's reserved names.  These constants have been deprecated and replaced
+with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
+and \Fortran{} naming conventions.
 
 
 
@@ -373,6 +458,12 @@ Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
 \item The C11 \textbf{\_Noreturn} function specifier was added to
       \FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
+%
+\item Clarified ordering semantics of memory ordering, point-to-point synchronization and collective 
+synchronization routines.
+%
+\item Clarified deprecation overview and added deprecation rationale in Annex F.
+\\See Section \ref{sec:dep_api}.
 %
 \item Expanded the type support for RMA and AMO operations, including support
       for atomic add and fetch-and-add on floating-point types.
@@ -516,7 +607,7 @@ The following list describes the specific changes in 1.2:
 This section summarizes the changes from the \openshmem specification Version
 1.0 to the Version 1.1.  A major change in this version is that it provides an
 accurate description of \openshmem interfaces so that they are in agreement with
-the SGI specification.  This version also explains \openshmem’s programming,
+the SGI specification.  This version also explains \openshmem's programming,
 memory, and execution model.  The document was thoroughly changed to improve the
 readability of specification and usability of interfaces.  The code examples
 were added to demonstrate the usability of API. Additionally, diagrams were

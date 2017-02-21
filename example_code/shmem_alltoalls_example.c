@@ -1,5 +1,6 @@
-#include <shmem.h>
 #include <stdio.h>
+#include <inttypes.h>
+#include <shmem.h>
 
 long pSync[SHMEM_ALLTOALLS_SYNC_SIZE];
 
@@ -35,7 +36,7 @@ int main(void)
     for (pe=0; pe<shmem_n_pes(); pe++) {
        for (i=0; i<count; i++){
           if (dest[(pe*count)+i] != shmem_my_pe() + pe) {
-          printf("[%d] ERROR: dest[%d]=%ld, should be %d\n",
+          printf("[%d] ERROR: dest[%d]=%" PRId64 ", should be %d\n",
                   shmem_my_pe(),(pe*count)+i,dest[(pe*count)+i],
                   shmem_n_pes() + pe);
             }
