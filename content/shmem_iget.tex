@@ -47,7 +47,7 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
         of type \textit{ptrdiff\_t}.  If you are calling  from  \Fortran,  it  must
         be a default integer value.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Clang. If you are
+        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. If you are
         using \Fortran, it must be  a constant, variable, or array element of
         default integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
@@ -68,7 +68,7 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
     {Routine}{Data type of \VAR{dest} and \VAR{source}}
     \apitablerow{shmem\_iget4, shmem\_iget32}{Any noncharacter type
         that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_iget8}{\Clang: Any noncharacter type that
+    \apitablerow{shmem\_iget8}{\Cstd: Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
     \apitablerow{}{\Fortran: Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
