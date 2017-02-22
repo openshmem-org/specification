@@ -26,7 +26,7 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     that is permissible for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in \source.  For
     \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of
-    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Clang.  If you are
+    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.  If you are
     using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the \activeset,	from which the data is copied. Must be greater than or equal to

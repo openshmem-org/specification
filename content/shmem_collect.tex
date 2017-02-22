@@ -40,7 +40,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
-    must be of type \VAR{size\_t} for \Clang. If you are using \Fortran, it must be
+    must be of type \VAR{size\_t} for \Cstd. If you are using \Fortran, it must be
     a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
     \ac{PE}s.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,

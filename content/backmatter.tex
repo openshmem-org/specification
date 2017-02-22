@@ -21,7 +21,7 @@ In this section, we describe how to write a ``Hello World" \openshmem program.
 To write a ``Hello World" \openshmem program we need to: 
 
 \begin{itemize}
-\item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran).
+\item Add the include file \HEADER{shmem.h} (for \Cstd) or \HEADER{shmem.fh} (for \Fortran).
 \item Add the initialization call \FUNC{shmem\_init}, (line 9).
 \item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
     id (line 11).
@@ -85,17 +85,17 @@ examples of how wrapper programs are utilized in the \openshmem{} Reference
 Implementation to compile and launch programs.
 
 \section{Compilation}
-\subsection*{Programs written in \Clang}
+\subsection*{Programs written in \Cstd}
 
 The \openshmem{} Reference Implementation provides a wrapper program named
-\textbf{oshcc}, to aid in the compilation of \Clang{} programs, the wrapper
+\textbf{oshcc}, to aid in the compilation of \Cstd programs, the wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshcc <compiler options> -o myprogram myprogram.c
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Clang{} compiler.
+underlying \Cstd compiler.
 
 
 \subsection*{Programs written in \Cpp}
@@ -234,7 +234,7 @@ a remote \ac{PE} is accessible via \openshmem communication from the local
 \openshmem routines can be used to communicate with processes running from the
 same or different executable files, provided that the communication is limited
 to symmetric data objects.  On these systems, static memory such as a
-\Fortran{} common block or \Clang{} global variable, is symmetric between
+\Fortran{} common block or \Cstd global variable, is symmetric between
 processes running from the same executable file, but is not symmetric between
 processes running from different executable files.  Data allocated from the
 symmetric heap (\FUNC{shmem\_malloc} or \FUNC{shpalloc}) is symmetric across the
@@ -432,7 +432,7 @@ The library constants
     \_SHMEM\_REDUCE\_SYNC\_SIZE & \_SHMEM\_VENDOR\_STRING \\
     \end{tabular}
 \end{center}
-do not adhere to the \Clang{} standard's reserved identifiers and the \Cpp{}
+do not adhere to the \Cstd standard's reserved identifiers and the \Cpp{}
 standard's reserved names.  These constants have been deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran{} naming conventions.
@@ -456,7 +456,7 @@ expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
-\section{Version 1.5}
+\section{Version 1.4}
 
 \begin{itemize}
 %
@@ -475,7 +475,7 @@ Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
       with \VAR{SHMEM\_}* environment variables.
 \\ See Section \ref{subsec:environment_variables}.
 %
-\item The C11 \textbf{\_Noreturn} function specifier was added to
+\item The \Cstd[11] \textbf{\_Noreturn} function specifier was added to
       \FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
@@ -526,7 +526,7 @@ The following list describes the specific changes in 1.3:
 \\See Section \ref{subsec:library_constants}.
 %
 \item Added a type-generic interface to \openshmem \ac{RMA} and \ac{AMO}
-	operations based on \Celev{} Generics.
+	operations based on \Cstd[11] Generics.
 \\See Sections \ref{sec:rma}, \ref{sec:rma_nbi} and \ref{sec:amo}.
 %
 \item New non-blocking variants of remote memory access, \FUNC{SHMEM\_PUT\_NBI}
@@ -598,7 +598,7 @@ The following list describes the specific changes in 1.2:
 \item New API to query the version and name information. 
 \\See Section \ref{subsec:shmem_info_get_version} and \ref{subsec:shmem_info_get_name}.
 %
-\item \openshmem library API normalization. All C symmetric memory management
+\item \openshmem library API normalization. All \Cstd symmetric memory management
       API begins with  \FUNC{shmem\_}.
 \\See Section \ref{subsec:shfree}.
 %
@@ -671,7 +671,7 @@ The following list describes the specific changes in 1.1:
 %
 \item Added examples to the different interfaces.
 %
-\item Clarification of the naming conventions for constant in \Clang{} and
+\item Clarification of the naming conventions for constant in \Cstd and
       \Fortran{}.
 \\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
 %
@@ -718,7 +718,7 @@ provided.
 \\See Section \ref{subsec:progress}. 
 %
 \item Clarification of naming convention for non-standard interfaces and their
-inclusion in \FUNC{shmemx.h}.
+inclusion in \HEADER{shmemx.h}.
 \\See Section \ref{subsec:bindings}. 
 %
 \item Various fixes to \openshmem code examples across the specification to
