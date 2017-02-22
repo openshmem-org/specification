@@ -1,7 +1,9 @@
-#include <stdlib.h>
 #include <shmem.h>
 
-void user_wait_until(long *ivar, int cmp, long value)
+int user_wait_any(long *ivar, int count, shmem_cmp cmp, long value)
 {
-  while (!shmem_test(ivar, cmp, value));
+  int idx = 0;
+  while (!shmem_test(&ivar[idx], cmp, value))
+    idx = (idx + 1) % count;
+  return idx;
 }
