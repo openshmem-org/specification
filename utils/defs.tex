@@ -307,6 +307,29 @@ minus .2ex}{-1em}{\normalsize\sf}}
 %
 
 %
+% Deprecation Helpers
+%
+
+\newcommand{\strikeline}[1][red]{{\color{#1}\raisebox{.5ex}{\rule{1em}{.4pt}}}}
+\newcommand{\stretchline}[1][red]{\xrfill[.5ex]{.4pt}[#1]}
+\newcommand{\DeprecationStart}[1][red]{{\color{#1} deprecation start} \mbox{}}
+\newcommand{\DeprecationEnd}[1][red]{{\color{#1} deprecation end} \mbox{}}
+
+\newcommand{\StartDeprecateBlock}{
+  {\strikeline\mbox{} \DeprecationStart \stretchline\mbox{}}}
+\newcommand{\EndDeprecateBlock}{%
+  \mbox{}\stretchline\mbox{} \DeprecationEnd \strikeline}
+
+\newenvironment{DeprecateBlock}{%
+  \par \StartDeprecateBlock \par}{\par \EndDeprecateBlock \par}
+
+\newcommand{\StartInlineDeprecate}{%
+  \strikeline\mbox{} \DeprecationStart \strikeline \mbox{}}
+\newcommand{\EndInlineDeprecate}{%
+  \strikeline\mbox{} \DeprecationEnd \strikeline}
+\newenvironment{DeprecateInline}{\StartInlineDeprecate}{\EndInlineDeprecate}
+
+%
 % Library API description template commands
 %
 
