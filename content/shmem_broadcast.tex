@@ -72,14 +72,11 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     needed to ensure this): The \VAR{pSync} array on all \ac{PE}s in the
     \activeset{} is not still in use from a prior call to a broadcast routine.  The
     \dest{} array on all \ac{PE}s in the \activeset{} is ready to accept the
-    broadcast data. \newtext{The data in the \source{} array on the root \ac{PE} is ready to be broadcasted.}
-    
-    \newtext{The \source{} and \dest{} arrays may be the same array, but they may not be overlapping arrays. If they 
-    are different, the source array on the non-root \acp{PE} and \dest{} array on the root \ac{PE} is not used by the broadcast routine.}
-    
+    broadcast data. 
+       
     Upon return from a broadcast routine, the following are true for the local
     \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the \dest{} data object
-    is updated. \newtext{If the current PE is the root PE, the \source{} data object may be safely reused.}  
+    is updated. \newtext{The \source{} data object may be safely reused.}  
     The values in the \VAR{pSync} array are restored to the original values.
 }
 
