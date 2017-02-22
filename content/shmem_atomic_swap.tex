@@ -60,8 +60,7 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of OpenSHMEM~1.4, the use of \FUNC{shmem\_swap} has been deprecated
-    and should be expected to be removed in a future specification.
+    As of \openshmem[1.4], the use of \FUNC{shmem\_swap} has been deprecated.
     Its behavior and call signature is identical to the replacement
     interface, \FUNC{shmem\_atomic\_swap}.
 }
@@ -69,7 +68,7 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 \begin{apiexamples}
 
 \apicexample
-    {The example below swap values between odd numbered \acp{PE} and
+    {The example below swaps values between odd numbered \ac{PE}s and
     their right (modulo) neighbor and outputs the result of swap.}
     {./example_code/shmem_atomic_swap_example.c}
     {}

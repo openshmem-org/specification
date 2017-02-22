@@ -56,8 +56,7 @@ ires_i8 = SHMEM_INT8_FINC(dest, pe)
 }
 
 \apinotes{
-    As of OpenSHMEM~1.4, the use of \FUNC{shmem\_finc} has been deprecated
-    and should be expected to be removed in a future specification.
+    As of \openshmem[1.4], the use of \FUNC{shmem\_finc} has been deprecated.
     Its behavior and call signature is identical to the replacement
     interface, \FUNC{shmem\_atomic\_fetch\_inc}.
 }
@@ -66,7 +65,7 @@ ires_i8 = SHMEM_INT8_FINC(dest, pe)
 
 \apicexample
     {The following \FUNC{shmem\_atomic\_fetch\_inc} example is for
-    \CorCpp{} programs:}
+    \Cstd[11] programs:}
     {./example_code/shmem_atomic_fetch_inc_example.c}
     {}
 
