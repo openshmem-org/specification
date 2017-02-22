@@ -1,5 +1,5 @@
 \apisummary{
-  Atomically perform a non-fetching bitwise exclusive or (XOR) operation on a
+  Atomically perform a non-fetching bitwise exclusive OR (XOR) operation on a
   remote data object.
 }
 
@@ -8,13 +8,13 @@
 \begin{C11synopsis}
 void shmem_atomic_xor(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{AMO} types specified by
+where \TYPE{} is one of the bitwise \ac{AMO} types specified by
 Table~\ref{bitamotypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_atomic_xor(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
-where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{bitamotypes}.
 
 \begin{apiarguments}
