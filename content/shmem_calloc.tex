@@ -29,8 +29,7 @@ void *shmem_calloc(size_t count, size_t size);
   all \ac{PE}s calling \FUNC{shmem\_calloc}; otherwise, the behavior is
   undefined.
 
-  The \FUNC{shmem\_calloc} routine calls \FUNC{shmem\_barrier\_all} on exit
-  prior to returning.
+  The \FUNC{shmem\_calloc} routine calls \FUNC{shmem\_barrier\_all} on exit.
 }
 
 \apireturnvalues{
