@@ -45,7 +45,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 
 \apidescription{ 
     \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be
-    changed by a remote write or an atomic operation issued by a
+    changed by a write or an atomic operation issued by a
     \oldtext{different} \ac{PE}.
     These  routines can be used for point-to-point direct synchronization.  A call
     to \VAR{shmem\_wait} does not return until a \ac{PE} writes  a value,
