@@ -17,18 +17,17 @@ SHMEM\_THREAD\_SERIALIZED, or SHMEM\_THREAD\_MULTIPLE}
 
 
 \apidescription{
-    \FUNC{shmem\_init\_thread}  initializes the \openshmem{} library similar to
-    \FUNC{shmem\_init}, and in addition perform the initialization required for
-    thread-safe invocation of \openshmem{} functions. The argument
-    \VAR{requested} is used to specify the desired level of thread support.
-    The function returns the support level provided by the library.
+\FUNC{shmem\_init\_thread}  initializes the \openshmem{} library similar to
+\FUNC{shmem\_init}, and in addition perform the initialization required for
+thread-safe invocation of \openshmem{} functions. The argument
+\VAR{requested} is used to specify the desired level of thread support.
+The function returns the support level provided by the library.
      
-The function may be used to initialize \openshmem{}, and to initialize the
-\openshmem{} library with thread safety, instead of \FUNC{shmem\_init}. 
-If \FUNC{shmem\_init\_thread} is used for initialization, then
-\FUNC{shmem\_init} should not be called. Similar to \FUNC{shmem\_init}, the
-\FUNC{shmem\_init\_thread}
-may not be called multiple times in an \openshmem{} program.
+Any \openshmem{} program is initialized either by \FUNC{shmem\_init} or
+\FUNC{shmem\_init\_thread}. If thread-safe invocation of \openshmem{} functions
+is desired, then the \openshmem{} program should be initialized by
+\FUNC{shmem\_thread\_init}. Similar to \FUNC{shmem\_init}, the
+\FUNC{shmem\_init\_thread} may not be called multiple times in an \openshmem{} program.
 }
 
 \apireturnvalues{    
@@ -36,9 +35,7 @@ may not be called multiple times in an \openshmem{} program.
     }
 
 \apinotes{
-The \openshmem{} programming model does not recognize individual threads.  Any
-\openshmem{} operation initiated by a thread is considered an action of the
-\ac{PE} as a whole. Thread-safety should not be activated unless needed.
+Thread-safety should not be activated unless needed.
 Activating  thread-safety causes additional overhead even if no additional
 threads are created or used.
 }		
