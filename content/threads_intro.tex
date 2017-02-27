@@ -1,14 +1,34 @@
 This section specifies the interaction between \openshmem{} interfaces and the
 user threads, and also describes the routines that can be used for initializing and 
-querying the thread environment.
+querying the thread environment. There are four levels of threading supported by
+the \openshmem{} implementation.
  
-
 \begin{itemize}
+\item SHMEM\_THREAD\_SINGLE: The \openshmem{} program may not be multithreaded, 
+and all \openshmem{} interfaces are invoked by a single thread. 
+
+\item SHMEM\_THREAD\_FUNNELED: 
+The \openshmem{} program may be multithreaded, however, the 
+program must ensure that only the main thread invokes the \openshmem{}
+interfaces.
+
+\item SHMEM\_THREAD\_SERIALIZED: 
+The \openshmem{} program may be multithreaded, however, the 
+program must ensure that only one thread invokes the \openshmem{}
+interfaces at any given instance i.e., the \openshmem{} interfaces 
+are not invoked concurrently by multiple threads.
+
+\item SHMEM\_THREAD\_MULTIPLE: 
+The \openshmem{} program may be multithreaded, and any 
+thread may invoke the \openshmem{} interfaces.
+\end{itemize}
+
+
+\begin{itemize}[leftmargin=*]
 
 \item
-A multithreaded \openshmem{} \ac{PE} using thread-compliant implementation can issue
-\openshmem{} calls from  any of its threads. However, the threads
-are not separately addressable. The symmetric heap and symmetric variables scope
+In a multithreaded \openshmem{} program multiple threads may issue \openshmem{}
+calls. However, the threads are not separately addressable. The symmetric heap and symmetric variables scope
 are not impacted by multiple threads invoking the
 \openshmem{} interfaces, i.e., 
 each \ac{PE} has a single symmetric data segment and symmetric heap that is shared by
@@ -19,7 +39,7 @@ The requirement that the same symmetric heap operations must
 be executed by all \acp{PE} in the same order also applies in a threaded
 environment. 
                                     	
-\item In a thread-compliant implementation, 
+\item In an \openshmem{} implementation supporting SHMEM\_THREAD\_MULTIPLE, 
 all \openshmem{} calls are thread-safe, i.e., two concurrently running threads
 may make \openshmem{} calls and the outcome will be as if the calls executed in
 some order, even if their execution is interleaved.
@@ -34,7 +54,7 @@ executing other \openshmem{} calls. Also, a blocked thread will not prevent the
 progress of \openshmem{} calls on other \acp{PE}. 
  
 \item
-In a thread-compliant implementation, if multiple threads call the collective
+In a multithreaded \openshmem{} program, if multiple threads call the collective
 calls, it is the programmer's responsibility to ensure the correct ordering of
 collective calls.  The symmetric heap management functions, which are defined to call
 \FUNC{shmem\_barrier\_all}(\ref{sec:mem_routines}) before they return 
