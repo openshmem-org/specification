@@ -17,8 +17,5 @@ variables, or identifiers with the prefix \shmemprefix (for \Clang{} and
 All \openshmem extension \ac{API}s that are not part of this specification must
 be defined in the \FUNC{shmemx.h} and \FUNC{shmemx.fh} include files for
 \Clang{} and \Fortran{} language bindings, respectively.  These header files
-must exist, even if they are empty.  Any extensions shall use the
+must exist, even if no extensions are provided.  Any extensions shall use the
 \FUNC{shmemx\_} prefix for all routine, variable, and constant names.
-\openshmem implementations are encouraged to define macros of the form
-\CONST{SHMEMX\_HAVE\_extension} that can be used to check for the presence of
-a particular extension.
