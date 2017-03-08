@@ -1,19 +1,18 @@
 #include <stdio.h>
-#include <unistd.h>
 #include <shmem.h>
 
 int main(void)
 {
    static long lock = 0;
-   int slp = 1;
+   static int count = 0;
    shmem_init();
    int me = shmem_my_pe();
-   if (me == 1)
-      sleep(3);
    shmem_set_lock(&lock);
-   printf("%d: sleeping %d second(s)...\n", me, slp);
-   sleep(slp);
-   printf("%d: sleeping...done\n", me);
+   int val = shmem_g(&count, 0); /* get count value on PE 0 */
+   printf("%d: count is %d\n", me, val);
+   val++; /* incrementing and updating count on PE 0 */
+   shmem_p(&count, val, 0);
+   shmem_quiet();
    shmem_clear_lock(&lock);
    shmem_finalize();
    return 0;
