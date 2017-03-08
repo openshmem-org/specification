@@ -21,7 +21,7 @@ In this section, we describe how to write a ``Hello World" \openshmem program.
 To write a ``Hello World" \openshmem program we need to: 
 
 \begin{itemize}
-\item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran).
+\item Add the include file \HEADER{shmem.h} (for \Clang) or \HEADER{shmem.fh} (for \Fortran).
 \item Add the initialization call \FUNC{shmem\_init}, (line 9).
 \item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
     id (line 11).
@@ -436,30 +436,32 @@ and \Fortran{} naming conventions.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
-\section{Version 1.5}
+\section{Version 1.4}
 
 \begin{itemize}
-%
+
 \item Clarified that the \openshmem extensions header files are required, even when empty.
 \\See Section~\ref{subsec:bindings}.
 %
-\item The \VAR{SHMEM\_SYNC\_SIZE} constant was added.
+\item Added the \VAR{SHMEM\_SYNC\_SIZE} constant.
 \\See Section \ref{subsec:library_constants}.
 %
 \item Added type-generic interfaces for \FUNC{SHMEM\_WAIT}.
 \\ See Section \ref{subsec:shmem_wait}.
 %
-\item Volatile qualifiers were added to several API routines in version 1.3 of
-the OpenSHMEM specification; however, they were later found to be unnecessary.
-Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
+\item Removed the \VAR{volatile} qualifiers from the \VAR{ivar} arguments to
 \FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
+\emph{Rationale: Volatile qualifiers were added to several API routines in
+version 1.3 of the OpenSHMEM specification; however, they were later found
+to be unnecessary.}
+\\ See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
 %
-\item The \VAR{SMA\_}* environment variables were deprecated and replaced
-      with \VAR{SHMEM\_}* environment variables.
+\item Deprecated the \VAR{SMA\_}* environment variables and added equivalent
+\VAR{SHMEM\_}* environment variables.
 \\ See Section \ref{subsec:environment_variables}.
 %
-\item The C11 \textbf{\_Noreturn} function specifier was added to
-      \FUNC{shmem\_global\_exit}.
+\item Added the C11 \textbf{\_Noreturn} function specifier to
+\FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
 \item Clarified ordering semantics of memory ordering, point-to-point synchronization and collective 
@@ -686,7 +688,7 @@ provided.
 \\See Section \ref{subsec:progress}. 
 %
 \item Clarification of naming convention for non-standard interfaces and their
-inclusion in \FUNC{shmemx.h}.
+inclusion in \HEADER{shmemx.h}.
 \\See Section \ref{subsec:bindings}. 
 %
 \item Various fixes to \openshmem code examples across the specification to
