@@ -27,7 +27,7 @@ int main(void)
 
    shmem_collect32(dest, source, my_nelem, 0, 0, npes, pSync);
 
-   shmem_set_lock(&lock);
+   shmem_set_lock(&lock); /* Lock prevents interleaving printfs */
    printf("%d: %d", me, dest[0]);
    for (int i = 1; i < total_nelem; i++)
       printf(", %d", dest[i]);
