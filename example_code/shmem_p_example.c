@@ -4,8 +4,8 @@
 
 int main(void)
 {
-   static const double e = 2.71828182;
-   static const double epsilon = 0.00000001;
+   const double e = 2.71828182;
+   const double epsilon = 0.00000001;
    static double f = 3.1415927;
    shmem_init();
    int me = shmem_my_pe();
