@@ -269,46 +269,46 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \begin{apiexamples}
 
 \apifexample
-    {This \Fortran{} reduction example statically initializes the \VAR{pSync} array
+    {This \Fortran reduction example statically initializes the \VAR{pSync} array
     and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all
     even \ac{PE}s.}
     {./example_code/shmem_and_example.f90}
     {}
     
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
     the \OPR{maximum} value of real variable \VAR{FOO} across all even \ac{PE}s.}
     {./example_code/shmem_max_example.f90}
     {}
 
 \apifexample
-    { This \Fortran{} example statically initializes the \VAR{pSync} array and finds
+    { This \Fortran example statically initializes the \VAR{pSync} array and finds
     the \OPR{minimum} value of real variable \VAR{FOO} across all the even
     \ac{PE}s.}
     {./example_code/shmem_min_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
     the \OPR{sum} of the real variable \VAR{FOO} across all even \ac{PE}s.}
     {./example_code/shmem_sum_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
     the \OPR{product} of the real variable \VAR{FOO} across all the even \ac{PE}s.}
     {./example_code/shmem_prod_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
     the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
     \ac{PE}s.}
     {./example_code/shmem_or_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and
+    {This \Fortran example statically initializes the \VAR{pSync} array and
     computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
     \ac{PE}s.}
     {./example_code/shmem_xor_example.f90}

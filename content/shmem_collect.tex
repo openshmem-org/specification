@@ -32,11 +32,11 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     to accept the concatenation of the \source{} arrays on all \ac{PE}s.  The data
     types are as follows: For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64},
     \FUNC{shmem\_fcollect8}, and \FUNC{shmem\_fcollect64}, any data type with an
-    element size of 64 bits.  \Fortran{} derived types, \Fortran{} character type,
+    element size of 64 bits.  \Fortran derived types, \Fortran character type,
     and \CorCpp{}  structures  are not permitted.  For \FUNC{shmem\_collect4},
     \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32},
-    any data type with an element size of \CONST{32} bits.  \Fortran{} derived
-    types, \Fortran{} character type, and \CorCpp{} structures are not permitted.}
+    any data type with an element size of \CONST{32} bits.  \Fortran derived
+    types, \Fortran character type, and \CorCpp{} structures are not permitted.}
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
@@ -56,7 +56,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
     If you are using \Fortran, it must be a default integer value.  Every element of
     this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
-    \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran{} before any of the \ac{PE}s
+    \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \ac{PE}s
     in the \activeset{} enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
 
 \end{apiarguments}
@@ -123,7 +123,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     {}
 
 \apifexample
-    {The following \FUNC{SHMEM\_COLLECT} example is for \Fortran{} programs:}
+    {The following \FUNC{SHMEM\_COLLECT} example is for \Fortran programs:}
     {./example_code/shmem_collect_example.f90}
     {}
 

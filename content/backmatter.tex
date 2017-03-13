@@ -41,7 +41,7 @@ To write a ``Hello World" \openshmem program we need to:
 \vspace{0.1in}
 \end{minipage}
 
-\openshmem also has a \Fortran{} API, so for completeness we will now give the
+\openshmem also has a \Fortran API, so for completeness we will now give the
 same program written in \Fortran, in listing~\ref{openshmem-hello-f90}:
 
 \begin{minipage}{\linewidth}
@@ -114,14 +114,14 @@ underlying \Cpp{} compiler called by \textbf{oshCC}.
 \subsection*{Programs written in \Fortran}
 
 The  \openshmem{} Reference Implementation provides a wrapper program named
-\textbf{oshfort}, to aid in the compilation of \Fortran{} programs, the wrapper
+\textbf{oshfort}, to aid in the compilation of \Fortran programs, the wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshfort <compiler options> -o myprogram myprogram.f
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Fortran{} compiler called by \textbf{oshfort}.
+underlying \Fortran compiler called by \textbf{oshfort}.
 
 \section{Running Programs}
 
@@ -234,7 +234,7 @@ a remote \ac{PE} is accessible via \openshmem communication from the local
 \openshmem routines can be used to communicate with processes running from the
 same or different executable files, provided that the communication is limited
 to symmetric data objects.  On these systems, static memory such as a
-\Fortran{} common block or \Cstd global variable, is symmetric between
+\Fortran common block or \Cstd global variable, is symmetric between
 processes running from the same executable file, but is not symmetric between
 processes running from different executable files.  Data allocated from the
 symmetric heap (\FUNC{shmem\_malloc} or \FUNC{shpalloc}) is symmetric across the
@@ -390,8 +390,8 @@ Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
 \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
 
 \subsection{SHMEM\_PUT (Fortran API)}
-The \Fortran{} function \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
-\ac{API} and is semantically identical to \Fortran{} functions
+The \Fortran function \FUNC{SHMEM\_PUT} is defined only for the \Fortran
+\ac{API} and is semantically identical to \Fortran functions
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
 \FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
@@ -427,7 +427,7 @@ The library constants
 do not adhere to the \Cstd standard's reserved identifiers and the \Cpp{}
 standard's reserved names.  These constants have been deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
-and \Fortran{} naming conventions.
+and \Fortran naming conventions.
 
 
 
@@ -642,7 +642,7 @@ The following list describes the specific changes in 1.1:
 \item Added examples to the different interfaces.
 %
 \item Clarification of the naming conventions for constant in \Cstd and
-      \Fortran{}.
+      \Fortran.
 \\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
 %
 \item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.
@@ -672,7 +672,7 @@ calls are encountered has been clarified.
 \item Clarification of the size of the symmetric heap and when it is set.
 \\See Section \ref{subsec:shfree}.
 %
-\item Clarification of the integer and real sizes for \Fortran{} \ac{API}.
+\item Clarification of the integer and real sizes for \Fortran \ac{API}.
 \\See Sections \ref{subsec:shmem_add}, \ref{subsec:shmem_cswap},
       \ref{subsec:shmem_swap}, \ref{subsec:shmem_finc}, \ref{subsec:shmem_inc}, and
       \ref{subsec:shmem_fadd}. 
