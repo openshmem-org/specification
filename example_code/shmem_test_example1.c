@@ -1,6 +1,6 @@
 #include <shmem.h>
 
-int user_wait_any(long *ivar, int count, shmem_cmp cmp, long value)
+int user_wait_any(long *ivar, int count, shmem_cmp_t cmp, long value)
 {
   int idx = 0;
   while (!shmem_test(&ivar[idx], cmp, value))
