@@ -30,7 +30,6 @@
 \newcommand{\newtext}[1]{\textcolor{ForestGreen}{#1}}
 \newcommand{\oldtext}[1]{\textcolor{magenta}{\sout{#1}}}
 \newcommand{\insertDocVersion}{1.4}
-\newcommand{\OSH}{\emph{OpenSHMEM}}
 \newcommand{\openshmem}[1][]{%
   {Open\-SHMEM\ifthenelse{\equal{#1}{}}{}{~#1}}\xspace}
 \newcommand{\HEADER}[1]{\textit{#1}}
@@ -50,11 +49,10 @@
 \newcommand{\SIZE}{\emph{SIZE}}
 
 \newcommand{\source}{\textit{source}}
-\newcommand{\target}{\textit{target}}
+\newcommand{\dest}{\textit{dest}}
 \newcommand{\PUT}{\textit{Put}}
 \newcommand{\GET}{\textit{Get}}
 \newcommand{\OPR}[1]{\textit{#1}}
-\newcommand{\dest}{\textit{dest}}
 \newcommand{\barrier}{\FUNC{SHMEM\_BARRIER}\xspace} % why here an not others?
 \newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
 \newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
