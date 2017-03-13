@@ -12,6 +12,14 @@ selection. Such type-generic routines are supported for the
 ``point-to-point synchronization types'' identified in
 Table~\ref{p2psynctypes}.
 
+% Fix the C99 styling here with the macros from PRs #55 and #31, and
+% osh_spec_next for \HEADER{}
+The point-to-point synchronization types include some of the exact-width
+integer types defined in \textit{stdint.h} by \textit{C99}~\S7.18.1.1 and
+\Celev{}~\S7.20.1.1. When the \Clang{} translation environment
+does not provide exact-width integer types with \textit{stdint.h}, an
+\openshmem implemementation is not required to provide support for these types.
+
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{|l|l|}
