@@ -27,5 +27,6 @@ int main(void)
    for (i = 1; i < NUM_ELEMS; i++)
       printf(", %ld", dest[i]);
    printf("\n");
+   shmem_finalize();
    return 0;
 }
