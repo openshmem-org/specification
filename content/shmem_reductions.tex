@@ -210,6 +210,14 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     Upon return from a reduction routine, the following are true for the local
     \ac{PE}: The \dest{} array is updated.  The values in the \VAR{pSync} array are
     restored to the original values.
+
+    % Update the \Clang and \Celev macros here
+    The sum and product reduction routines include complex-typed interfaces.
+    When the \Clang{} translation environment does not support complex types%
+    \footnote{That is, under \Clang{} language standards prior to \textit{C99}
+      or under \Celev{} when \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1},
+    an \openshmem implemementation is not required to provide support for
+    these complex-typed interfaces.
 }
 
 \apidesctable{ 
