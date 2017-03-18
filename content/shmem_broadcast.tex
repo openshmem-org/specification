@@ -72,8 +72,8 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     needed to ensure this): The \VAR{pSync} array on all \ac{PE}s in the
     \activeset{} is not still in use from a prior call to a broadcast routine.  The
     \dest{} array on all \ac{PE}s in the \activeset{} is ready to accept the
-    broadcast data. 
-       
+    broadcast data.
+    
     Upon return from a broadcast routine, the following are true for the local
     \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the \dest{} data object
     is updated. The \source{} data object may be safely reused.  
