@@ -21,7 +21,7 @@ In this section, we describe how to write a ``Hello World" \openshmem program.
 To write a ``Hello World" \openshmem program we need to: 
 
 \begin{itemize}
-\item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran).
+\item Add the include file \HEADER{shmem.h} (for \Clang) or \HEADER{shmem.fh} (for \Fortran).
 \item Add the initialization call \FUNC{shmem\_init}, (line 9).
 \item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
     id (line 11).
@@ -334,13 +334,16 @@ specification.
     & \shortstack{\textbf{Last Version Supported}}
     & \textbf{Replaced By} \\
     \hline
+    \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
+    \Fortran: \hyperref[subsec:start_pes]{\FUNC{START\_PES}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
     \CorCpp: \FUNC{\_my\_pe} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
     \CorCpp: \FUNC{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
+    \Fortran: \FUNC{MY\_PE} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
+    \Fortran: \FUNC{NUM\_PES} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{SHMEM\_N\_PES}} \\ \hline
     \CorCpp: \FUNC{shmalloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
     \CorCpp: \FUNC{shfree} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
     \CorCpp: \FUNC{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
     \CorCpp: \FUNC{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
-    \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \FUNC{SHMEM\_PUT} & 1.2 & Current & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
     \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_inv}}
         \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_CLEAR\_CACHE\_INV}}}
@@ -368,30 +371,38 @@ specification.
     \_SHMEM\_MINOR\_VERSION & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MINOR\_VERSION} \\ \hline
     \_SHMEM\_MAX\_NAME\_LEN & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAX\_NAME\_LEN} \\ \hline
     \_SHMEM\_VENDOR\_STRING & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_VENDOR\_STRING} \\ \hline
-    SMA\_* environment variables & 1.4 & Current & SHMEM\_* \\ \hline
+    SMA\_VERSION         & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_VERSION} \\ \hline
+    SMA\_INFO            & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_INFO} \\ \hline
+    SMA\_SYMMETRIC\_SIZE & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_SYMMETRIC\_SIZE} \\ \hline
+    SMA\_DEBUG           & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_DEBUG} \\ \hline
     \end{tabular}
 \end{center}
 
 \section{Deprecation Rationale}\label{subsec:dep_rationale}
 
-\subsection{\_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign} The
-\CorCpp functions \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
-\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
-to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
-prefix for all functions.
-
-\subsection{start\_pes}
-The \CorCpp function \FUNC{start\_pes} includes an unnecessary initialization
+\subsection{\CorCpp: start\_pes}
+The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
 argument that is remnant of historical \emph{SHMEM} implementations and no
 longer reflects the requirements of modern \openshmem implementations.
 Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
-\shmemprefixLC{} naming prefix. This function has been deprecated and
+\shmemprefixLC{} naming prefix. This routine has been deprecated and
 \openshmem users are encouraged to use
 \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
 
-\subsection{SHMEM\_PUT (Fortran API)}
-The \Fortran{} function \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
-\ac{API} and is semantically identical to \Fortran{} functions
+\subsection{\CorCpp: \_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign}
+The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
+\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
+to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
+prefix for all routines.
+
+\subsection{\Fortran: START\_PES, MY\_PE, NUM\_PES}
+The \Fortran{} routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
+were deprecated in order to minimize the API differences from the deprecation
+of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
+
+\subsection{\Fortran: SHMEM\_PUT}
+The \Fortran{} routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
+\ac{API} and is semantically identical to \Fortran{} routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
 \FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
@@ -413,7 +424,7 @@ was originally implemented for systems with cache management instructions.
 This API has largely gone unused on cache-coherent system architectures.
 \FUNC{SHMEM\_CACHE} has been deprecated.
 
-\subsection{\_SHMEM\_* constants}
+\subsection{\_SHMEM\_* Library Constants}
 The library constants
 \begin{center}
 \begin{tabular}{ll}
@@ -422,12 +433,25 @@ The library constants
     \_SHMEM\_BCAST\_SYNC\_SIZE & \_SHMEM\_MINOR\_VERSION \\
     \_SHMEM\_COLLECT\_SYNC\_SIZE & \_SHMEM\_MAX\_NAME\_LEN \\
     \_SHMEM\_REDUCE\_SYNC\_SIZE & \_SHMEM\_VENDOR\_STRING \\
-    \end{tabular}
+\end{tabular}
 \end{center}
 do not adhere to the \Clang{} standard's reserved identifiers and the \Cpp{}
 standard's reserved names.  These constants have been deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran{} naming conventions.
+
+\subsection{SMA\_* Environment Variables}
+The environment variables
+\begin{center}
+\begin{tabular}{ll}
+    SMA\_VERSION \\
+    SMA\_INFO \\
+    SMA\_SYMMETRIC\_SIZE \\
+    SMA\_DEBUG \\
+\end{tabular}
+\end{center}
+were deprecated in order to normalize the \openshmem \ac{API} to use
+\shmemprefix{} as the standard prefix for all environment variables.
 
 
 
@@ -436,7 +460,7 @@ and \Fortran{} naming conventions.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
-\section{Version 1.5}
+\section{Version 1.4}
 
 \begin{itemize}
 %
@@ -444,23 +468,25 @@ and \Fortran{} naming conventions.
     routines are included in the Fortran language bindings.\\
     See Sections \ref{subsec:shmem_get} and \ref{subsec:shmem_get_nbi}.
 %
-\item The \VAR{SHMEM\_SYNC\_SIZE} constant was added.
+\item Added the \VAR{SHMEM\_SYNC\_SIZE} constant.
 \\See Section \ref{subsec:library_constants}.
 %
 \item Added type-generic interfaces for \FUNC{SHMEM\_WAIT}.
 \\ See Section \ref{subsec:shmem_wait}.
 %
-\item Volatile qualifiers were added to several API routines in version 1.3 of
-the OpenSHMEM specification; however, they were later found to be unnecessary.
-Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
+\item Removed the \VAR{volatile} qualifiers from the \VAR{ivar} arguments to
 \FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
+\emph{Rationale: Volatile qualifiers were added to several API routines in
+version 1.3 of the OpenSHMEM specification; however, they were later found
+to be unnecessary.}
+\\ See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
 %
-\item The \VAR{SMA\_}* environment variables were deprecated and replaced
-      with \VAR{SHMEM\_}* environment variables.
+\item Deprecated the \VAR{SMA\_}* environment variables and added equivalent
+\VAR{SHMEM\_}* environment variables.
 \\ See Section \ref{subsec:environment_variables}.
 %
-\item The C11 \textbf{\_Noreturn} function specifier was added to
-      \FUNC{shmem\_global\_exit}.
+\item Added the C11 \textbf{\_Noreturn} function specifier to
+\FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
 \item Clarified ordering semantics of memory ordering, point-to-point synchronization and collective 
@@ -687,7 +713,7 @@ provided.
 \\See Section \ref{subsec:progress}. 
 %
 \item Clarification of naming convention for non-standard interfaces and their
-inclusion in \FUNC{shmemx.h}.
+inclusion in \HEADER{shmemx.h}.
 \\See Section \ref{subsec:bindings}. 
 %
 \item Various fixes to \openshmem code examples across the specification to
