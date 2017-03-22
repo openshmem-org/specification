@@ -362,6 +362,42 @@ minus .2ex}{-1em}{\normalsize\sf}}
   deletekeywords=[3]{LOG}, aboveskip=0pt,
   belowskip=0pt}}{}
 
+
+\newenvironment{envvardefinition}{
+\begin{description}
+\item[SYNOPSIS] \hfill \\ \\ 
+}
+{
+\end{description}
+}
+
+\lstnewenvironment{envvarname}
+{ \textbf{Variable Name:}
+  \lstset{backgroundcolor=\color{gray}, lineskip=2pt,
+  morekeywords={ID, SIZE, KIND, POLICY, PGSIZE}, aboveskip=0pt, belowskip=0pt}}{}
+
+\newenvironment{envvararguments}{
+\newcommand{\envvarargument}[3]{
+\begin{tabular}{p{2cm} p{2cm} p{10cm}}
+\textbf{##1} & \textit{##2} & {##3} \\ 
+\end{tabular}
+}
+\hfill
+
+\begin{description}
+\item[Specifiers] \hfill \\
+}
+{
+\hfill
+\end{description}
+}
+
+\newcommand{\envvarnotes}[1]{
+\item[Notes] \hfill \\
+    #1
+\hfill \\
+}
+
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{
 \begin{tabular}{p{2cm} p{2cm} p{10cm}}
