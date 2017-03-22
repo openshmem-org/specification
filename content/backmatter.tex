@@ -334,13 +334,16 @@ specification.
     & \shortstack{\textbf{Last Version Supported}}
     & \textbf{Replaced By} \\
     \hline
+    \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
+    \Fortran: \hyperref[subsec:start_pes]{\FUNC{START\_PES}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
     \CorCpp: \FUNC{\_my\_pe} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
     \CorCpp: \FUNC{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
+    \Fortran: \FUNC{MY\_PE} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
+    \Fortran: \FUNC{NUM\_PES} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{SHMEM\_N\_PES}} \\ \hline
     \CorCpp: \FUNC{shmalloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
     \CorCpp: \FUNC{shfree} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
     \CorCpp: \FUNC{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
     \CorCpp: \FUNC{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
-    \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \FUNC{SHMEM\_PUT} & 1.2 & Current & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
     \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_inv}}
         \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_CLEAR\_CACHE\_INV}}}
@@ -377,24 +380,29 @@ specification.
 
 \section{Deprecation Rationale}\label{subsec:dep_rationale}
 
-\subsection{\_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign} The
-\CorCpp functions \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
-\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
-to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
-prefix for all functions.
-
-\subsection{start\_pes}
-The \CorCpp function \FUNC{start\_pes} includes an unnecessary initialization
+\subsection{\CorCpp: start\_pes}
+The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
 argument that is remnant of historical \emph{SHMEM} implementations and no
 longer reflects the requirements of modern \openshmem implementations.
 Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
-\shmemprefixLC{} naming prefix. This function has been deprecated and
+\shmemprefixLC{} naming prefix. This routine has been deprecated and
 \openshmem users are encouraged to use
 \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
 
-\subsection{SHMEM\_PUT (Fortran API)}
-The \Fortran{} function \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
-\ac{API} and is semantically identical to \Fortran{} functions
+\subsection{\CorCpp: \_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign}
+The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
+\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
+to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
+prefix for all routines.
+
+\subsection{\Fortran: START\_PES, MY\_PE, NUM\_PES}
+The \Fortran{} routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
+were deprecated in order to minimize the API differences from the deprecation
+of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
+
+\subsection{\Fortran: SHMEM\_PUT}
+The \Fortran{} routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
+\ac{API} and is semantically identical to \Fortran{} routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
 \FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
