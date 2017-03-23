@@ -3,18 +3,11 @@
 
 int main(void) 
 {
-   int me;
-   static int dst;
-
+   static int dst = 22;
    shmem_init();
-   me = shmem_my_pe();
-
-   dst = 22;
-   shmem_barrier_all();
-
-   if (me == 1){
+   int me = shmem_my_pe();
+   if (me == 1)
       shmem_add(&dst, 44, 0);
-   }
    shmem_barrier_all();
    printf("%d: dst = %d\n", me, dst);
    shmem_finalize();

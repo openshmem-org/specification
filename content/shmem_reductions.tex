@@ -208,7 +208,8 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \activeset{} is ready to accept the results of the \OPR{reduction}.
     
     Upon return from a reduction routine, the following are true for the local
-    \ac{PE}: The \dest{} array is updated.  The values in the \VAR{pSync} array are
+    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.  
+    The values in the \VAR{pSync} array are
     restored to the original values.
 }
 

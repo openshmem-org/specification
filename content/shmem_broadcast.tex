@@ -76,8 +76,8 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     
     Upon return from a broadcast routine, the following are true for the local
     \ac{PE}: If the current \ac{PE} is not the root \ac{PE}, the \dest{} data object
-    is updated.  The values in the \VAR{pSync} array are restored to the original
-    values.
+    is updated. The \source{} data object may be safely reused.  
+    The values in the \VAR{pSync} array are restored to the original values.
 }
 
 \apidesctable{
