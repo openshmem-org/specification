@@ -26,7 +26,7 @@ void *shmem_calloc(size_t count, size_t size);
   \CONST{0}, the return value is a null pointer.
 
   The values for \VAR{count} and \VAR{size} shall each be equal across
-  all \ac{PE}s calling \FUNC{shmem\_calloc}; otherwise, the behavior is
+  all \acp{PE} calling \FUNC{shmem\_calloc}; otherwise, the behavior is
   undefined.
 
   The \FUNC{shmem\_calloc} routine calls \FUNC{shmem\_barrier\_all} on exit.
