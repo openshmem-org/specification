@@ -29,7 +29,7 @@ To write a ``Hello World" \openshmem program we need to:
     (line 13) or an explicit \texttt{exit()} acts as an implicit \openshmem
     finalization.
 \item In \openshmem the order in which lines appear in the output is not fixed
-    as \ac{PE}s execute asynchronously in parallel.
+    as \acp{PE} execute asynchronously in parallel.
 \end{itemize}
 
 \begin{minipage}{\linewidth}
@@ -136,7 +136,7 @@ The program arguments for \textbf{oshrun} are:
 
 \begin{tabular}{p{0.3\textwidth}p{0.6\textwidth}}
 $\langle\mbox{additional options}\rangle$ & {Options passed to the underlying launcher.}\tabularnewline
--np $\langle\mbox{\#}\rangle$ & {The number of \ac{PE}s to be used in the execution.}\tabularnewline
+-np $\langle\mbox{\#}\rangle$ & {The number of \acp{PE} to be used in the execution.}\tabularnewline
 $\langle\mbox{program}\rangle$ & {The program executable to be launched.}\tabularnewline
 $\langle\mbox{program arguments}\rangle$ & {Flags and other parameters to pass to the program.}\tabularnewline
 \end{tabular}
@@ -166,11 +166,11 @@ Uninitialized library & If \openshmem is not initialized through a call to
 results.  An implementation may choose, for example, to try to continue or abort
 immediately upon the first call to an uninitialized routine.\tabularnewline
 \hline 
-Accessing non-existent \ac{PE}s & If a communications routine accesses a
+Accessing non-existent \acp{PE} & If a communications routine accesses a
 non-existent \ac{PE}, then the \openshmem library can choose to handle this
 situation in an implementation-defined way.  For example, the library may issue
 an error message saying that the \ac{PE} accessed is outside the range of
-accessible \ac{PE}s, or may exit without a warning.\tabularnewline
+accessible \acp{PE}, or may exit without a warning.\tabularnewline
 \hline 
 Use of non-symmetric variables & Some routines require remotely accessible
 variables to perform their function.  A \PUT{} to a non-symmetric variable can
@@ -179,7 +179,7 @@ implementation may choose to continue either with a warning or
 silently.\tabularnewline
 \hline 
 Non-symmetric variables & The symmetric memory management routines are
-collectives, which means that all \ac{PE}s in the program must issue the same
+collectives, which means that all \acp{PE} in the program must issue the same
 \FUNC{shmem\_malloc} call with the same size request.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
 \hline 
@@ -514,7 +514,7 @@ The following list describes the specific changes in 1.3:
 
 \begin{itemize}
 %
-\item Clarified implementation of \ac{PE}s as threads.
+\item Clarified implementation of \acp{PE} as threads.
 %
 \item Added \textbf{const} to every read-only pointer argument.
 %

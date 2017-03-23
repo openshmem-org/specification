@@ -5,12 +5,12 @@
 \end{figure}      
 %
 An \openshmem program consists of data objects that are private to each \ac{PE}
-and data  objects that are remotely accessible by all \ac{PE}s. Private data
+and data  objects that are remotely accessible by all \acp{PE}. Private data
 objects are stored in the local memory of each \ac{PE} and can only be accessed
-by the \ac{PE} itself; these data objects cannot be accessed by other \ac{PE}s
+by the \ac{PE} itself; these data objects cannot be accessed by other \acp{PE}
 via \openshmem routines. Private data objects follow the memory model of
 \Cstd or \Fortran. Remotely accessible objects, however, can be accessed by
-remote \ac{PE}s using \openshmem routines.  Remotely accessible data objects are
+remote \acp{PE} using \openshmem routines.  Remotely accessible data objects are
 called \emph{Symmetric Data Objects}.  Each symmetric data object has a
 corresponding object with the same name, type, and size on all PEs where that object is
 accessible via the \openshmem \ac{API}\footnote{For efficiency reasons,

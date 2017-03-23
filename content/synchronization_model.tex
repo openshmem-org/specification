@@ -57,9 +57,9 @@ issued after the \FUNC{fence} call. \tabularnewline
 {}
 &
 {All \PUT{} routines, \acp{AMO} and store routines on symmetric data issued by a
-local \ac{PE} to all  remote \ac{PE}s are guaranteed to be completed and visible
+local \ac{PE} to all  remote \acp{PE} are guaranteed to be completed and visible
 once quiet returns. This routine should be used when all remote writes issued by
-a local \ac{PE} need to be visible  to all other \ac{PE}s before the local
+a local \ac{PE} need to be visible  to all other \acp{PE} before the local
 \ac{PE} proceeds. } \tabularnewline
 \hline 
 \end{tabular}
@@ -75,13 +75,13 @@ Collective synchronization over an \activeset \\
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{All local and remote memory operations issued by all \ac{PE}s within the
+{All local and remote memory operations issued by all \acp{PE} within the
 \activeset{} are guaranteed to be completed before any \ac{PE} in the
 \activeset{} returns from the call. Additionally, no \ac{PE} my return from the
-barrier until all \ac{PE}s in the \activeset{} have entered the same barrier
+barrier until all \acp{PE} in the \activeset{} have entered the same barrier
 call. This routine should be used when synchronization as well as completion of
 all stores and remote memory updates via \openshmem is required over a sub set
-of the executing \ac{PE}s.} \tabularnewline
+of the executing \acp{PE}.} \tabularnewline
 \hline 
 \end{tabular}
 
@@ -90,7 +90,7 @@ of the executing \ac{PE}s.} \tabularnewline
 \textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
 \hline 
 \hline
-{Collective synchronization over all \ac{PE}s} \\
+{Collective synchronization over all \acp{PE}} \\
  \FUNC{shmem\_barrier\_all}
 & 
 \raisebox{-\totalheight}{\includegraphics[width=0.7\textwidth]{figures/barrierall}}
@@ -99,12 +99,12 @@ of the executing \ac{PE}s.} \tabularnewline
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{All local and remote memory operations issued by all \ac{PE}s are guaranteed to
+{All local and remote memory operations issued by all \acp{PE} are guaranteed to
 be completed before any \ac{PE} returns from the call. Additionally no \ac{PE}
-shall return from the barrier until all \ac{PE}s have entered the same
+shall return from the barrier until all \acp{PE} have entered the same
 \FUNC{shmem\_barrier\_all} call. This routine should be used when
 synchronization as well as completion of all stores and remote memory updates
-via \openshmem is required over all \ac{PE}s. } \tabularnewline
+via \openshmem is required over all \acp{PE}. } \tabularnewline
 \hline 
 \end{tabular}
 \clearpage

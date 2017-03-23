@@ -1,6 +1,6 @@
 \apisummary{
     Broadcasts a block of data from one \ac{PE} to one or more destination
-    \ac{PE}s.
+    \acp{PE}.
 }
 
 \begin{apidefinition}
@@ -33,12 +33,12 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of type integer.  If you
     are using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
-    \ac{PE}s.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{ The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the \activeset. \VAR{log\_PE\_stride} must be of
     type integer.  If you are using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{ The number of \ac{PE}s in the \activeset.
+\apiargument{IN}{PE\_size}{ The number of \acp{PE} in the \activeset.
     \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{pSync}{ A symmetric work array.  In \CorCpp, \VAR{pSync} must
@@ -46,7 +46,7 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or \CONST{SHMEM\_SYNC\_VALUE} (in
-    \Fortran) before any of the \ac{PE}s  in  the  \activeset{} enter
+    \Fortran) before any of the \acp{PE}  in  the  \activeset{} enter
     \FUNC{shmem\_broadcast}.}
 
 \end{apiarguments}
@@ -54,24 +54,24 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
 \apidescription{   
     \openshmem broadcast routines are collective routines.  They copy data object
     \source{} on the processor specified by \VAR{PE\_root} and store the values at
-    \dest{} on the other \ac{PE}s specified by the triplet \VAR{PE\_start},
+    \dest{} on the other \acp{PE} specified by the triplet \VAR{PE\_start},
     \VAR{logPE\_stride}, \VAR{PE\_size}.  The data is not copied to the \dest{} area
     on the root \ac{PE}.
     
     As with all \openshmem collective routines, each of these routines assumes that
-    only \ac{PE}s in the \activeset{} call the routine.  If a \ac{PE} not in the
+    only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not in the
     \activeset{} calls an \openshmem collective routine, undefined behavior results.
     
     The values of arguments \VAR{PE\_root}, \VAR{PE\_start}, \VAR{logPE\_stride},
-    and \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset.  The same
+    and \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset.  The same
     \dest{} and \source{} data objects and the same \VAR{pSync} work array must be
-    passed to all \ac{PE}s in the \activeset.
+    passed to all \acp{PE} in the \activeset.
     
     Before any \ac{PE} calls a broadcast routine, you must ensure that the following
     conditions exist (synchronization via a barrier or some other method is often
-    needed to ensure this): The \VAR{pSync} array on all \ac{PE}s in the
+    needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a broadcast routine.  The
-    \dest{} array on all \ac{PE}s in the \activeset{} is ready to accept the
+    \dest{} array on all \acp{PE} in the \activeset{} is ready to accept the
     broadcast data.
     
     Upon return from a broadcast routine, the following are true for the local
@@ -102,13 +102,13 @@ constraints, which are as follows:
     require that \VAR{pSync} be reinitialized after the first call.
     
     You must ensure the that the \VAR{pSync} array is not being updated by any
-    \ac{PE} in the \activeset{} while any of the \ac{PE}s participates in processing
+    \ac{PE} in the \activeset{} while any of the \acp{PE} participates in processing
     of an \openshmem broadcast routine. Be careful to avoid these situations: If the
     \VAR{pSync} array is initialized at run time, some type of synchronization is
-    needed to ensure that all \ac{PE}s in the \activeset{} have initialized
+    needed to ensure that all \acp{PE} in the \activeset{} have initialized
     \VAR{pSync} before any of them enter an \openshmem routine called with the
     \VAR{pSync} synchronization array.  A \VAR{pSync} array may be reused on a
-    subsequent \openshmem broadcast routine only if none of the \ac{PE}s in the
+    subsequent \openshmem broadcast routine only if none of the \acp{PE} in the
     \activeset{} are still processing a prior \openshmem broadcast routine call that
     used the same \VAR{pSync} array.  In general, this can be ensured only by doing
     some type of synchronization.        
@@ -118,7 +118,7 @@ constraints, which are as follows:
 
 \apicexample
     {In the following examples, the call to \FUNC{shmem\_broadcast64} copies \source{}
-    on \ac{PE} 4 to \dest{} on \ac{PE}s 5, 6, and 7. 
+    on \ac{PE} 4 to \dest{} on \acp{PE} 5, 6, and 7. 
     
     \CorCpp{} example:}
     {./example_code/shmem_broadcast_example.c}
