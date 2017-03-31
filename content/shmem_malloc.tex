@@ -43,13 +43,18 @@ void *shmem_align(size_t alignment, size_t size);
     \CONST{NULL} pointer, the block to which it points is freed. If the space cannot
     be allocated, the block to which \VAR{ptr} points is unchanged.
     
-    The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
-    are provided  so that multiple \acp{PE} in a program can allocate symmetric,
+    The \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
+    are provided  so that multiple \ac{PE}s in a program can allocate symmetric,
     remotely accessible memory blocks.  These memory blocks can then be used with
-    \openshmem communication routines.  Each of these routines call the
-    \FUNC{shmem\_barrier\_all} routine before returning; this ensures that all
-    \acp{PE} participate in the memory allocation, and that the memory on other
-    \acp{PE} can be used as  soon as the local \ac{PE} returns.  The user is
+    \openshmem communication routines.  Each of these routines include at least one
+    call to a procedure that is semantically equivalent to \FUNC{shmem\_barrier\_all}:
+    \FUNC{shmem\_malloc} and \FUNC{shmem\_align} call a
+    barrier on exit; \FUNC{shmem\_free} calls a barrier on entry; and
+    \FUNC{shmem\_realloc} may call barriers on both entry and exit, depending on
+    whether an existing allocation is modified and whether new memory is allocated.
+    This ensures that all
+    \ac{PE}s participate in the memory allocation, and that the memory on other
+    \ac{PE}s can be used as  soon as the local \ac{PE} returns.  The user is
     responsible for calling these routines with identical argument(s) on all
     \acp{PE}; if differing \VAR{size} arguments are used, the behavior of the call
     and any subsequent \openshmem calls becomes undefined.
