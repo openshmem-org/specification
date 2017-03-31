@@ -1,0 +1,19 @@
+sudo: required
+dist: trusty
+
+addons:
+    apt:
+        packages:
+            - texlive-latex-base
+            - texlive-latex-recommended
+            - texlive-latex-extra
+            - texlive-generic-recommended
+            - latex-xcolor
+            - texlive-fonts-recommended
+            - texlive-fonts-extra
+
+before_install:
+install:
+script:
+    - make LATEXOPT=-halt-on-error
+    - make clean

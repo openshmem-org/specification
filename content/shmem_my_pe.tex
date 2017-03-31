@@ -20,7 +20,7 @@ ME = SHMEM_MY_PE()
 \apidescription{
     This routine returns the \ac{PE} number of the calling \ac{PE}.  It accepts no
     arguments.  The result is an integer between \CONST{0} and \VAR{npes} -
-    \CONST{1}, where \VAR{npes} is the total number of \ac{PE}s executing the
+    \CONST{1}, where \VAR{npes} is the total number of \acp{PE} executing the
     current program.
 }
 
@@ -36,14 +36,5 @@ ME = SHMEM_MY_PE()
     \FUNC{shmem\_my\_pe} remains unchanged from the deprecated \FUNC{\_my\_pe}
     version.
 }
-
-\begin{apiexamples}
-
-\apicexample
-    {The following \FUNC{shmem\_my\_pe} example is for \CorCpp{} programs:}
-    {./example_code/shmem_mype_example.c}
-    {}
-
-\end{apiexamples}
 
 \end{apidefinition}

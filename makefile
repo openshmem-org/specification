@@ -5,21 +5,21 @@ all: ${TARGET}.pdf
 
 # it doesn't really need the .dvi, but this way all the refs are right
 %.pdf : %.dvi
-	pdflatex $*
+	pdflatex $(LATEXOPT) $*
 
 ${TARGET}.bbl: ${TARGET}.bib
 # in case we don't already have a .aux file listing citations
 # this should probably be a separate makefile target/dependency instead
 # of doing it every time... but *shrug*
-	pdflatex ${TARGET}.tex
+	pdflatex $(LATEXOPT) ${TARGET}.tex
 # get the citations out of the bibliography
-	bibtex ${TARGET}
+	bibtex $(TARGET)
 # do it again in case there are out-of-order cross-references
-	@pdflatex ${TARGET}.tex
+	@pdflatex $(LATEXOPT) ${TARGET}.tex
 
 #${TARGET}.dvi: ${TARGET}.bbl ${TARGET}.tex
 ${TARGET}.dvi: ${TARGET}.tex
-	@pdflatex ${TARGET}.tex
+	@pdflatex $(LATEXOPT) ${TARGET}.tex
 
 # shortcut, so we can say "make ps"
 ps: ${TARGET}.ps

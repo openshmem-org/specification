@@ -69,12 +69,16 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     If  the \activeset  does not change, \FUNC{shmem\_barrier} can  be called
     repeatedly with the same \VAR{pSync} array.  No additional synchronization
     beyond that implied by \FUNC{shmem\_barrier} itself is necessary in this case.
+
+    The \FUNC{shmem\_barrier} routine can be used to
+    portably ensure that memory access operations observe remote updates in the order
+    enforced by initiator PEs.
 }
 
 \begin{apiexamples}
 
 \apicexample
-	{The following barrier example is for \CorCpp programs:}
+	{The following barrier example is for C11 programs:}
 	{./example_code/shmem_barrier_example.c}
 	{}
 

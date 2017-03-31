@@ -32,8 +32,13 @@ CALL SHMEM_FENCE
 }
 
 \apinotes{
-    \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does
-    not guarantee completion of delivery.  There is a subtle difference between
+    \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not
+    guarantee completion of delivery.  
+    \FUNC{shmem\_fence} also does not have an effect on the ordering between memory 
+    accesses issued by the target PE. \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until},
+    \FUNC{shmem\_barrier}, \FUNC{shmem\_barrier\_all} routines can be called by the target PE to guarantee 
+    ordering of its memory accesses.
+    There is a subtle difference between
     \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}, in that, \FUNC{shmem\_quiet}
     guarantees completion of \PUT{}, \acp{AMO}, and memory store routines to
     symmetric data objects which makes the updates visible to all other
@@ -41,13 +46,13 @@ CALL SHMEM_FENCE
     
     The \FUNC{shmem\_quiet} routine should be called if completion of PUT{},
     \acp{AMO}, and memory store routines to symmetric data objects is desired
-    when multiple remote \ac{PE}s are involved.
+    when multiple remote \acp{PE} are involved.
 }
 
 \begin{apiexamples}
 
 \apicexample
-    {The following \FUNC{shmem\_fence} example is for \CorCpp{} programs: }
+    {The following \FUNC{shmem\_fence} example is for C11 programs: }
     {./example_code/shmem_fence_example.c}
     {\VAR{Put1} will be ordered to be delivered before \VAR{put3} and \VAR{put2}
     will be ordered to be delivered before \VAR{put4}.}

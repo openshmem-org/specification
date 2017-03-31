@@ -44,7 +44,7 @@
 
 \subsection{Library Setup, Exit, and Query Routines}
 The library setup and query interfaces that initialize and monitor the parallel
-environment of the \ac{PE}s.
+environment of the \acp{PE}.
 
 \subsubsection{\textbf{SHMEM\_INIT}}\label{subsec:shmem_init}
 \input{content/shmem_init}
@@ -86,10 +86,13 @@ environment of the \ac{PE}s.
 \subsection{Memory Management Routines}
 \openshmem provides a set of \ac{API}s for managing the symmetric heap. The
 \ac{API}s allow one to dynamically allocate, deallocate, reallocate and align
-symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
+symmetric data objects in the symmetric heap, in \Cstd and \Fortran.
 
 \subsubsection{\textbf{SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}}\label{subsec:shfree}
 \input{content/shmem_malloc.tex}
+
+\subsubsection{\textbf{SHMEM\_CALLOC}}\label{subsec:shmem_calloc}
+\input{content/shmem_calloc.tex}
 
 \subsubsection{\textbf{SHPALLOC}}\label{subsec:shpalloc}
 \input{content/shpalloc.tex}
@@ -197,8 +200,31 @@ symmetric data objects in the symmetric heap, in \Clang{} and \Fortran.
 
 \subsection{Point-To-Point Synchronization Routines}
 The following section discusses \openshmem \ac{API}s that provides a mechanism
-for synchronization between two \ac{PE}s based on the value of a symmetric data
+for synchronization between two \acp{PE} based on the value of a symmetric data
 object. 
+
+Where appropriate compiler support is available, \openshmem provides
+type-generic point-to-point synchronization interfaces via \Cstd[11] generic
+selection. Such type-generic routines are supported for the
+``point-to-point synchronization types'' identified in
+Table~\ref{p2psynctypes}. Implementations may optionally support additional
+types.
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \TYPE     & \TYPENAME \\ \hline
+      short     & short     \\ \hline
+      int       & int       \\ \hline
+      long      & long      \\ \hline
+      long long & longlong  \\ \hline
+    \end{tabular}
+    \caption{Point-to-Point Synchronization Types and Names}
+    \label{p2psynctypes}
+  \end{center}
+\end{table}
+
 
 \subsubsection{\textbf{SHMEM\_WAIT}}\label{subsec:shmem_wait}
 \input{content/shmem_wait.tex}

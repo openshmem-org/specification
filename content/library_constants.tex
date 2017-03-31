@@ -1,4 +1,4 @@
-The constants that start with SHMEM\_* are for both \Fortran{}
+The constants that start with SHMEM\_* are for both \Fortran
 and \CorCpp, and they are compile-time constants. 
 All constants that start with
 \_SHMEM\_* are deprecated and provided for backwards compatibility.
@@ -9,6 +9,17 @@ All constants that start with
 \textbf{Constant} & \textbf{Description}
 \tabularnewline
 \hline 
+\hline
+%new
+\vspace{3mm}
+\vtop{\hbox{\CorCppFor:}
+\hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_SIZE}}}
+& Length of a work array that can be used with any SHMEM collective
+communication operation. The value of this constant is implementation
+specific. Refer to the individual \hyperref[subsec:coll]{Collective Routines} for more information
+about the usage of this constant. Work arrays sized for specific operations may
+consume less memory.\tabularnewline
+%new
 \hline 
 \vspace{3mm}
 \vtop{\hbox{\CorCppFor:} 

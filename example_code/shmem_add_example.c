@@ -3,20 +3,13 @@
 
 int main(void) 
 {
-   int me, old;
-   static int dst;
-
+   static int dst = 22;
    shmem_init();
-   me = shmem_my_pe();
-
-   old = -1;
-   dst = 22;
+   int me = shmem_my_pe();
+   if (me == 1)
+      shmem_add(&dst, 44, 0);
    shmem_barrier_all();
-
-   if (me == 1){
-      old = shmem_add(&dst, 44, 0);
-   }
-   shmem_barrier_all();
-   printf("%d: old = %d, dst = %d\n", me, old, dst);
+   printf("%d: dst = %d\n", me, dst);
+   shmem_finalize();
    return 0;
 }
