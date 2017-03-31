@@ -64,8 +64,6 @@ CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 \textbf{SUM} \newline
 Performs a sum reduction across a set of processing elements (\ac{PE}s).\newline
 \begin{Csynopsis}
-void shmem_complexd_sum_to_all(double complex *dest, const double complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double complex *pWrk, long |\mbox{*pSync);}|
-void shmem_complexf_sum_to_all(float complex *dest, const float complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float complex *pWrk, long *pSync);
 void shmem_double_sum_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
 void shmem_float_sum_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
 void shmem_int_sum_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -74,6 +72,17 @@ void shmem_longdouble_sum_to_all(long double *dest, const long double *source, i
 void shmem_longlong_sum_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 void shmem_short_sum_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{Csynopsis}
+
+\begin{C99synopsis}
+void shmem_complexd_sum_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
+void shmem_complexf_sum_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long |\mbox{*pSync);}|
+\end{C99synopsis}
+
+\begin{CXXsynopsis}
+#include <complex>
+void shmem_complexd_sum_to_all(std::complex<double> *dest, const std::complex<double> *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
+void shmem_complexf_sum_to_all(std::complex<float> *dest, const std::complex<float> *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long |\mbox{*pSync);}|
+\end{CXXsynopsis}
 
 \begin{Fsynopsis}
 CALL SHMEM_COMP4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
@@ -89,8 +98,6 @@ CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 \textbf{PROD} \newline
 Performs a product reduction across a set of processing elements (\ac{PE}s).\newline
 \begin{Csynopsis}
-void shmem_complexd_prod_to_all(double complex *dest, const double complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double complex *pWrk, long |\mbox{*pSync);}|
-void shmem_complexf_prod_to_all(float complex *dest, const float complex *source, int |\mbox{nreduce,}| int PE_start, int logPE_stride, int PE_size, float complex *pWrk, long *pSync);
 void shmem_double_prod_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
 void shmem_float_prod_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
 void shmem_int_prod_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -99,6 +106,17 @@ void shmem_longdouble_prod_to_all(long double *dest, const long double *source, 
 void shmem_longlong_prod_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 void shmem_short_prod_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{Csynopsis}
+
+\begin{C99synopsis}
+void shmem_complexd_prod_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
+void shmem_complexf_prod_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long |\mbox{*pSync);}|
+\end{C99synopsis}
+
+\begin{CXXsynopsis}
+#include <complex>
+void shmem_complexd_prod_to_all(std::complex<double> *dest, const std::complex<double> *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
+void shmem_complexf_prod_to_all(std::complex<float> *dest, const std::complex<float> *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long |\mbox{*pSync);}|
+\end{CXXsynopsis}
 
 \begin{Fsynopsis}
 CALL SHMEM_COMP4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
