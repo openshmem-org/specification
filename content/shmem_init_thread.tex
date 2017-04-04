@@ -5,13 +5,12 @@ perform the initialization required for thread-safe invocation of \openshmem{} f
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int shmem_init_thread(int requested, int *provided);
+void shmem_init_thread(int requested, int *provided);
 \end{Csynopsis}
 
 \begin{apiarguments}
 \apiargument{IN}{requested}  {The thread level support requested by the user.
-The correct values are SHMEM\_THREAD\_SINGLE, SHMEM\_THREAD\_FUNNELED,
-SHMEM\_THREAD\_SERIALIZED, or SHMEM\_THREAD\_MULTIPLE}
+}
 \apiargument{OUT}{provided}{The thread level support provided by the \openshmem{} implementation.}
 \end{apiarguments}
 
@@ -22,6 +21,10 @@ SHMEM\_THREAD\_SERIALIZED, or SHMEM\_THREAD\_MULTIPLE}
 thread-safe invocation of \openshmem{} functions. The argument
 \VAR{requested} is used to specify the desired level of thread support.
 The function returns the support level provided by the library.
+The correct values for \VAR{provided} and \VAR{requested} are 
+SHMEM\_THREAD\_SINGLE, \newline 
+SHMEM\_THREAD\_FUNNELED, SHMEM\_THREAD\_SERIALIZED, or 
+SHMEM\_THREAD\_MULTIPLE.
      
 Any \openshmem{} program is initialized either by \FUNC{shmem\_init} or
 \FUNC{shmem\_init\_thread}. If thread-safe invocation of \openshmem{} functions
@@ -35,9 +38,7 @@ is desired, then the \openshmem{} program should be initialized by
     }
 
 \apinotes{
-Thread-safety should not be activated unless needed.
-Activating  thread-safety causes additional overhead even if no additional
-threads are created or used.
+    None
 }		
 
 

@@ -4,78 +4,71 @@ querying the thread environment. There are four levels of threading supported by
 the \openshmem{} implementation.
  
 \begin{itemize}
-\item SHMEM\_THREAD\_SINGLE: The \openshmem{} program may not be multithreaded, 
+\item {\bf SHMEM\_THREAD\_SINGLE} The \openshmem{} program may not be multithreaded, 
 and all \openshmem{} interfaces are invoked by a single thread. 
 
-\item SHMEM\_THREAD\_FUNNELED: 
+\item {\bf SHMEM\_THREAD\_FUNNELED}
 The \openshmem{} program may be multithreaded, however, the 
 program must ensure that only the main thread invokes the \openshmem{}
 interfaces.
 
-\item SHMEM\_THREAD\_SERIALIZED: 
+\item {\bf SHMEM\_THREAD\_SERIALIZED} 
 The \openshmem{} program may be multithreaded, however, the 
 program must ensure that only one thread invokes the \openshmem{}
 interfaces at any given instance i.e., the \openshmem{} interfaces 
 are not invoked concurrently by multiple threads.
 
-\item SHMEM\_THREAD\_MULTIPLE: 
+\item {\bf SHMEM\_THREAD\_MULTIPLE}
 The \openshmem{} program may be multithreaded, and any 
 thread may invoke the \openshmem{} interfaces.
 \end{itemize}
 
+\hspace{-15pt}
+{\bf Semantics}
 
 \begin{itemize}[leftmargin=*]
 
 \item
-In a multithreaded \openshmem{} program multiple threads may issue \openshmem{}
-calls. However, the threads are not separately addressable. 
-Any \openshmem{} operation initiated by a thread is considered an action of the
-\ac{PE} as a whole.
+In the \openshmem{} program, a thread calling \FUNC{shmem\_init} is designated as the main
+thread. Multiple threads may not call \FUNC{shmem\_init}. Similarly,
+\FUNC{shmem\_finalize} may only be called on the main thread.
 
-    \begin{itemize}
-    \item
-    The symmetric heap and symmetric variables scope
-    are not impacted by multiple threads invoking the
-    \openshmem{} interfaces, i.e., 
-    each \ac{PE} has a single symmetric data segment and symmetric heap that is shared by
-    all threads within that \ac{PE}.  For example, a thread invoking a memory allocation
-    routine such as \FUNC{shmem\_malloc} 
-    allocates memory that is accesible by all threads of the \ac{PE}. 
-    The requirement that the same symmetric heap operations must
-    be executed by all \acp{PE} in the same order also applies in a threaded
-    environment. 
-
-    \item
-    The completion of collective operations are not impacted by multiple threads. 
-    For example, the \FUNC{shmem\_barrier\_all} is completed when all \acp{PE} enter and
-    exit the \FUNC{shmem\_barrier\_all} call, even though only one thread in the \ac{PE} is
-    participating in the collective call. 
-    \end{itemize}                	
-
-\item In an \openshmem{} implementation supporting SHMEM\_THREAD\_MULTIPLE, 
-all \openshmem{} calls are thread-safe, i.e., two concurrently running threads
-may make \openshmem{} calls and the outcome will be as if the calls executed in
-some order, even if their execution is interleaved.
+\item
+Any \openshmem{} operation initiated by a thread is considered an action of the \ac{PE} as a whole.
+The symmetric heap and symmetric variables scope
+are not impacted by multiple threads invoking the
+\openshmem{} interfaces, i.e., 
+each \ac{PE} has a single symmetric data segment and symmetric heap that is shared by
+all threads within that \ac{PE}.  For example, a thread invoking a memory allocation
+routine such as \FUNC{shmem\_malloc} 
+allocates memory that is accessible by all threads of the \ac{PE}. 
+The requirement that the same symmetric heap operations must
+be executed by all \acp{PE} in the same order also applies in a threaded
+environment. Similarly, the completion of collective operations is not impacted by multiple threads. 
+For example, the \FUNC{shmem\_barrier\_all} is completed when all \acp{PE} enter and
+exit the \FUNC{shmem\_barrier\_all} call, even though only one thread in the \ac{PE} is
+participating in the collective call. 
 
 \item Blocking \openshmem{} calls will block the calling thread only, allowing
-other threads to execute, if available. The calling thread will be blocked until the
+other threads, if available, to continue the execution. The calling thread will be blocked until the
 event on which it is waiting occurs. Once the blocked communication is enabled
 and can proceed, then the call will complete and the thread will be marked
 runnable, within a finite time. A blocked thread will not prevent progress of
 other runnable threads on the same \ac{PE}, and will not prevent them from
 executing other \openshmem{} calls. Also, a blocked thread will not prevent the
 progress of \openshmem{} calls on other \acp{PE}. 
- 
+
+\item In SHMEM\_THREAD\_MULTIPLE thread level, all \openshmem{} calls are thread-safe, 
+i.e., two concurrently running threads may make \openshmem{} calls and the outcome will be as if the calls executed in
+some order, even if their execution is interleaved.
+
+
 \item
-In a multithreaded \openshmem{} program, if multiple threads call the collective
-calls, it is the programmer's responsibility to ensure the correct ordering of
+In SHMEM\_THREAD\_SERIALIZED and SHMEM\_THREAD\_MULTIPLE thread level, 
+if multiple threads call the collective calls, it is the programmer's responsibility to ensure the correct ordering of
 collective calls.  The symmetric heap management functions, which are defined to call
 \FUNC{shmem\_barrier\_all}(\ref{sec:mem_routines}) before they return 
 must be treated as collective operations.
 
-\item
-\openshmem{} thread calling \FUNC{shmem\_init} is designated as the main
-thread. Multiple threads may not call \FUNC{shmem\_init}. Similarly,
-\FUNC{shmem\_finalize} may only be called on the main thread.
 
 \end{itemize} 
