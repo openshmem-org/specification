@@ -212,11 +212,12 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     The values in the \VAR{pSync} array are
     restored to the original values.
 
-    The sum and product reduction routines include complex-typed interfaces.
+    The sum and product reduction routines include complex-typed interfaces
+    for the \Cstd API only.
     When the \Cstd translation environment does not support complex types%
     \footnote{That is, under \Cstd language standards prior to \Cstd[99] or
       under \Cstd[11] when \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1},
-    an \openshmem implemementation is not required to provide support for
+    an \openshmem implementation is not required to provide support for
     these complex-typed interfaces.
 }
 
