@@ -21,7 +21,7 @@ In this section, we describe how to write a ``Hello World" \openshmem program.
 To write a ``Hello World" \openshmem program we need to: 
 
 \begin{itemize}
-\item Add the include file \HEADER{shmem.h} (for \Clang) or \HEADER{shmem.fh} (for \Fortran).
+\item Add the include file \HEADER{shmem.h} (for \Cstd) or \HEADER{shmem.fh} (for \Fortran).
 \item Add the initialization call \FUNC{shmem\_init}, (line 9).
 \item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
     id (line 11).
@@ -29,7 +29,7 @@ To write a ``Hello World" \openshmem program we need to:
     (line 13) or an explicit \texttt{exit()} acts as an implicit \openshmem
     finalization.
 \item In \openshmem the order in which lines appear in the output is not fixed
-    as \ac{PE}s execute asynchronously in parallel.
+    as \acp{PE} execute asynchronously in parallel.
 \end{itemize}
 
 \begin{minipage}{\linewidth}
@@ -41,7 +41,7 @@ To write a ``Hello World" \openshmem program we need to:
 \vspace{0.1in}
 \end{minipage}
 
-\openshmem also has a \Fortran{} API, so for completeness we will now give the
+\openshmem also has a \Fortran API, so for completeness we will now give the
 same program written in \Fortran, in listing~\ref{openshmem-hello-f90}:
 
 \begin{minipage}{\linewidth}
@@ -85,43 +85,43 @@ examples of how wrapper programs are utilized in the \openshmem{} Reference
 Implementation to compile and launch programs.
 
 \section{Compilation}
-\subsection*{Programs written in \Clang}
+\subsection*{Programs written in \Cstd}
 
 The \openshmem{} Reference Implementation provides a wrapper program named
-\textbf{oshcc}, to aid in the compilation of \Clang{} programs, the wrapper
+\textbf{oshcc}, to aid in the compilation of \Cstd programs, the wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshcc <compiler options> -o myprogram myprogram.c
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Clang{} compiler.
+underlying \Cstd compiler.
 
 
 \subsection*{Programs written in \Cpp}
 
 The  \openshmem{} Reference Implementation provides a wrapper program named
-\textbf{oshCC}, to aid in the compilation of \Cpp{} programs, the wrapper could
+\textbf{oshCC}, to aid in the compilation of \Cpp programs, the wrapper could
 be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshCC <compiler options> -o myprogram myprogram.cpp
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Cpp{} compiler called by \textbf{oshCC}.
+underlying \Cpp compiler called by \textbf{oshCC}.
 
 
 \subsection*{Programs written in \Fortran}
 
 The  \openshmem{} Reference Implementation provides a wrapper program named
-\textbf{oshfort}, to aid in the compilation of \Fortran{} programs, the wrapper
+\textbf{oshfort}, to aid in the compilation of \Fortran programs, the wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshfort <compiler options> -o myprogram myprogram.f
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Fortran{} compiler called by \textbf{oshfort}.
+underlying \Fortran compiler called by \textbf{oshfort}.
 
 \section{Running Programs}
 
@@ -136,7 +136,7 @@ The program arguments for \textbf{oshrun} are:
 
 \begin{tabular}{p{0.3\textwidth}p{0.6\textwidth}}
 $\langle\mbox{additional options}\rangle$ & {Options passed to the underlying launcher.}\tabularnewline
--np $\langle\mbox{\#}\rangle$ & {The number of \ac{PE}s to be used in the execution.}\tabularnewline
+-np $\langle\mbox{\#}\rangle$ & {The number of \acp{PE} to be used in the execution.}\tabularnewline
 $\langle\mbox{program}\rangle$ & {The program executable to be launched.}\tabularnewline
 $\langle\mbox{program arguments}\rangle$ & {Flags and other parameters to pass to the program.}\tabularnewline
 \end{tabular}
@@ -166,11 +166,11 @@ Uninitialized library & If \openshmem is not initialized through a call to
 results.  An implementation may choose, for example, to try to continue or abort
 immediately upon the first call to an uninitialized routine.\tabularnewline
 \hline 
-Accessing non-existent \ac{PE}s & If a communications routine accesses a
+Accessing non-existent \acp{PE} & If a communications routine accesses a
 non-existent \ac{PE}, then the \openshmem library can choose to handle this
 situation in an implementation-defined way.  For example, the library may issue
 an error message saying that the \ac{PE} accessed is outside the range of
-accessible \ac{PE}s, or may exit without a warning.\tabularnewline
+accessible \acp{PE}, or may exit without a warning.\tabularnewline
 \hline 
 Use of non-symmetric variables & Some routines require remotely accessible
 variables to perform their function.  A \PUT{} to a non-symmetric variable can
@@ -179,7 +179,7 @@ implementation may choose to continue either with a warning or
 silently.\tabularnewline
 \hline 
 Non-symmetric variables & The symmetric memory management routines are
-collectives, which means that all \ac{PE}s in the program must issue the same
+collectives, which means that all \acp{PE} in the program must issue the same
 \FUNC{shmem\_malloc} call with the same size request.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
 \hline 
@@ -234,7 +234,7 @@ a remote \ac{PE} is accessible via \openshmem communication from the local
 \openshmem routines can be used to communicate with processes running from the
 same or different executable files, provided that the communication is limited
 to symmetric data objects.  On these systems, static memory such as a
-\Fortran{} common block or \Clang{} global variable, is symmetric between
+\Fortran common block or \Cstd global variable, is symmetric between
 processes running from the same executable file, but is not symmetric between
 processes running from different executable files.  Data allocated from the
 symmetric heap (\FUNC{shmem\_malloc} or \FUNC{shpalloc}) is symmetric across the
@@ -334,13 +334,16 @@ specification.
     & \shortstack{\textbf{Last Version Supported}}
     & \textbf{Replaced By} \\
     \hline
+    \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
+    \Fortran: \hyperref[subsec:start_pes]{\FUNC{START\_PES}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
     \CorCpp: \FUNC{\_my\_pe} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
     \CorCpp: \FUNC{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
+    \Fortran: \FUNC{MY\_PE} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
+    \Fortran: \FUNC{NUM\_PES} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{SHMEM\_N\_PES}} \\ \hline
     \CorCpp: \FUNC{shmalloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
     \CorCpp: \FUNC{shfree} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
     \CorCpp: \FUNC{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
     \CorCpp: \FUNC{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
-    \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \FUNC{SHMEM\_PUT} & 1.2 & Current & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
     \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_clear\_cache\_inv}}
         \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_CLEAR\_CACHE\_INV}}}
@@ -368,30 +371,38 @@ specification.
     \_SHMEM\_MINOR\_VERSION & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MINOR\_VERSION} \\ \hline
     \_SHMEM\_MAX\_NAME\_LEN & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAX\_NAME\_LEN} \\ \hline
     \_SHMEM\_VENDOR\_STRING & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_VENDOR\_STRING} \\ \hline
-    SMA\_* environment variables & 1.4 & Current & SHMEM\_* \\ \hline
+    SMA\_VERSION         & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_VERSION} \\ \hline
+    SMA\_INFO            & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_INFO} \\ \hline
+    SMA\_SYMMETRIC\_SIZE & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_SYMMETRIC\_SIZE} \\ \hline
+    SMA\_DEBUG           & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_DEBUG} \\ \hline
     \end{tabular}
 \end{center}
 
 \section{Deprecation Rationale}\label{subsec:dep_rationale}
 
-\subsection{\_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign} The
-\CorCpp functions \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
-\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
-to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
-prefix for all functions.
-
-\subsection{start\_pes}
-The \CorCpp function \FUNC{start\_pes} includes an unnecessary initialization
+\subsection{\CorCpp: start\_pes}
+The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
 argument that is remnant of historical \emph{SHMEM} implementations and no
 longer reflects the requirements of modern \openshmem implementations.
 Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
-\shmemprefixLC{} naming prefix. This function has been deprecated and
+\shmemprefixLC{} naming prefix. This routine has been deprecated and
 \openshmem users are encouraged to use
 \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
 
-\subsection{SHMEM\_PUT (Fortran API)}
-The \Fortran{} function \FUNC{SHMEM\_PUT} is defined only for the \Fortran{}
-\ac{API} and is semantically identical to \Fortran{} functions
+\subsection{\CorCpp: \_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign}
+The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
+\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
+to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
+prefix for all routines.
+
+\subsection{\Fortran: START\_PES, MY\_PE, NUM\_PES}
+The \Fortran routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
+were deprecated in order to minimize the API differences from the deprecation
+of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
+
+\subsection{\Fortran: SHMEM\_PUT}
+The \Fortran function \FUNC{SHMEM\_PUT} is defined only for the \Fortran
+\ac{API} and is semantically identical to \Fortran functions
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
 \FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
@@ -413,7 +424,7 @@ was originally implemented for systems with cache management instructions.
 This API has largely gone unused on cache-coherent system architectures.
 \FUNC{SHMEM\_CACHE} has been deprecated.
 
-\subsection{\_SHMEM\_* constants}
+\subsection{\_SHMEM\_* Library Constants}
 The library constants
 \begin{center}
 \begin{tabular}{ll}
@@ -422,12 +433,25 @@ The library constants
     \_SHMEM\_BCAST\_SYNC\_SIZE & \_SHMEM\_MINOR\_VERSION \\
     \_SHMEM\_COLLECT\_SYNC\_SIZE & \_SHMEM\_MAX\_NAME\_LEN \\
     \_SHMEM\_REDUCE\_SYNC\_SIZE & \_SHMEM\_VENDOR\_STRING \\
-    \end{tabular}
+\end{tabular}
 \end{center}
-do not adhere to the \Clang{} standard's reserved identifiers and the \Cpp{}
+do not adhere to the \Cstd standard's reserved identifiers and the \Cpp
 standard's reserved names.  These constants have been deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
-and \Fortran{} naming conventions.
+and \Fortran naming conventions.
+
+\subsection{SMA\_* Environment Variables}
+The environment variables
+\begin{center}
+\begin{tabular}{ll}
+    SMA\_VERSION \\
+    SMA\_INFO \\
+    SMA\_SYMMETRIC\_SIZE \\
+    SMA\_DEBUG \\
+\end{tabular}
+\end{center}
+were deprecated in order to normalize the \openshmem \ac{API} to use
+\shmemprefix{} as the standard prefix for all environment variables.
 
 
 
@@ -439,6 +463,13 @@ and \Fortran{} naming conventions.
 \section{Version 1.4}
 
 \begin{itemize}
+
+\item Clarified that the \openshmem extensions header files are required, even when empty.
+\\See Section~\ref{subsec:bindings}.
+%
+\item Clarified that the \FUNC{SHMEM\_GET64} and \FUNC{SHMEM\_GET64\_NBI}
+    routines are included in the Fortran language bindings.\\
+    See Sections \ref{subsec:shmem_get} and \ref{subsec:shmem_get_nbi}.
 %
 \item Added the \VAR{SHMEM\_SYNC\_SIZE} constant.
 \\See Section \ref{subsec:library_constants}.
@@ -457,7 +488,7 @@ to be unnecessary.}
 \VAR{SHMEM\_}* environment variables.
 \\ See Section \ref{subsec:environment_variables}.
 %
-\item Added the C11 \textbf{\_Noreturn} function specifier to
+\item Added the \Cstd[11] \textbf{\_Noreturn} function specifier to
 \FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
@@ -467,14 +498,17 @@ synchronization routines.
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
 \\See Section \ref{sec:dep_api}.
 %
+\item Added the \FUNC{shmem\_calloc} function.
+\\ See Section \ref{subsec:shmem_calloc}.
+%
 \item Replaced the \textbf{complex} macro in complex-typed reductions with the
-      C99 (and later) type specifier \textbf{\_Complex} to remove an implicit
-      dependence on \HEADER{complex.h}.
+      \Cstd[99] (and later) type specifier \textbf{\_Complex} to remove an
+      implicit dependence on \HEADER{complex.h}.
 \\ See Section \ref{subsec:shmem_reductions}.
 %
 \item Clarified that complex-typed reductions in C are optionally supported.
 \\ See Section \ref{subsec:shmem_reductions}.
-
+%
 \end{itemize}
 
 \section{Version 1.3}
@@ -487,7 +521,7 @@ The following list describes the specific changes in 1.3:
 
 \begin{itemize}
 %
-\item Clarified implementation of \ac{PE}s as threads.
+\item Clarified implementation of \acp{PE} as threads.
 %
 \item Added \textbf{const} to every read-only pointer argument.
 %
@@ -504,7 +538,7 @@ The following list describes the specific changes in 1.3:
 \\See Section \ref{subsec:library_constants}.
 %
 \item Added a type-generic interface to \openshmem \ac{RMA} and \ac{AMO}
-	operations based on \Celev{} Generics.
+	operations based on \Cstd[11] Generics.
 \\See Sections \ref{sec:rma}, \ref{sec:rma_nbi} and \ref{sec:amo}.
 %
 \item New non-blocking variants of remote memory access, \FUNC{SHMEM\_PUT\_NBI}
@@ -576,7 +610,7 @@ The following list describes the specific changes in 1.2:
 \item New API to query the version and name information. 
 \\See Section \ref{subsec:shmem_info_get_version} and \ref{subsec:shmem_info_get_name}.
 %
-\item \openshmem library API normalization. All C symmetric memory management
+\item \openshmem library API normalization. All \Cstd symmetric memory management
       API begins with  \FUNC{shmem\_}.
 \\See Section \ref{subsec:shfree}.
 %
@@ -649,8 +683,8 @@ The following list describes the specific changes in 1.1:
 %
 \item Added examples to the different interfaces.
 %
-\item Clarification of the naming conventions for constant in \Clang{} and
-      \Fortran{}.
+\item Clarification of the naming conventions for constant in \Cstd and
+      \Fortran.
 \\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
 %
 \item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.
@@ -680,7 +714,7 @@ calls are encountered has been clarified.
 \item Clarification of the size of the symmetric heap and when it is set.
 \\See Section \ref{subsec:shfree}.
 %
-\item Clarification of the integer and real sizes for \Fortran{} \ac{API}.
+\item Clarification of the integer and real sizes for \Fortran \ac{API}.
 \\See Sections \ref{subsec:shmem_add}, \ref{subsec:shmem_cswap},
       \ref{subsec:shmem_swap}, \ref{subsec:shmem_finc}, \ref{subsec:shmem_inc}, and
       \ref{subsec:shmem_fadd}. 
