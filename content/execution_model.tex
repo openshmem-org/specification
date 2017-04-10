@@ -6,14 +6,10 @@ via the \openshmem interfaces.  All \acp{PE} in an \openshmem program should
 start by calling the initialization routine  \FUNC{shmem\_init}
 \footnote{\textbf{start\_pes} has been deprecated as of Specification 1.2}
 before using any of the other \openshmem library routines.  An \openshmem
-program finishes execution by returning from the main routine or when any PE
-calls \FUNC{shmem\_global\_exit}. When returning from main, \openshmem must
-complete all pending communication and release all the resources associated to
-the library using an implicit collective synchronization across PEs. The user
-has the option to call \FUNC{shmem\_finalize} (before returning from main) to
-complete all pending communication and release all the \openshmem library
-resources without terminating the program. Calling any \openshmem routine after
-\FUNC{shmem\_finalize} leads to undefined behavior.
+program concludes its use of the \openshmem library when all \acp{PE} call
+\FUNC{shmem\_finalize} or when any \ac{PE} calls \FUNC{shmem\_global\_exit}.
+Calling any \openshmem routine after \FUNC{shmem\_finalize} leads to undefined
+behavior.
 
 The \acp{PE} of the \openshmem program are identified by unique integers.  The
 identifiers are integers assigned in a monotonically increasing manner from zero
