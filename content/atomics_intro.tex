@@ -25,7 +25,7 @@ The \textit{non-fetching} operations include: \FUNC{SHMEM\_SET}, \FUNC{SHMEM\_IN
 \end{itemize}
 
 Where appropriate compiler support is available, \openshmem{} provides type-generic
-atomic memory operation interfaces via \Celev{} generic selection. The type-generic 
+atomic memory operation interfaces via \Cstd[11] generic selection. The type-generic
 \ac{AMO} routines each support the ``standard \ac{AMO} types’’ listed in Table \ref{stdamotypes}, 
 except for \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, and \FUNC{shmem\_swap}, which supports the ``extended \ac{AMO} types’’ listed 
 in Table \ref{extamotypes}.
