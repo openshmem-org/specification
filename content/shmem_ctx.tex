@@ -12,10 +12,10 @@ thread interference within the communication subsystem.
 
 Context handles are of type \CTYPE{shmem\_ctx\_t} and are valid for
 language-level assignment and comparison.  A handle to the desired context is
-passed as an argument in the \CTYPE{shmem\_ctx\_*} API routines.  API routines
-that do not accept a context argument operate on the default context.  The
-default context can be used explicitly through the \const{SHMEM\_CTX\_DEFAULT}
-handle.
+passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic API
+routines.  API routines that do not accept a context argument operate on the
+default context.  The default context can be used explicitly through the
+\const{SHMEM\_CTX\_DEFAULT} handle.
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
@@ -51,10 +51,9 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
     multiple threads within the PE where they were created.
     %
     The following options can be supplied during context creation to restrict
-    this usage model and enable performance optimizations.  When one or more
-    options are provided on a context, the application must comply with the
-    requirements of all provided options when using that context.  Otherwise
-    the behavior is undefined.
+    this usage model and enable performance optimizations.  When using a given
+    context, the application must comply with the requirements of all options
+    set on that context.  Otherwise the behavior is undefined.
 
         \apitablerow{\CONST{SHMEM\_CTX\_SERIALIZED}}{
             The given context will not be used by multiple threads
@@ -77,15 +76,6 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
 \apinotes{
     None.
 }
-
-%\begin{apiexamples}
-%
-%    \apicexample
-%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}
-%    {./example_code/shmem_p_example.c}
-%    {}
-%
-%\end{apiexamples}
 
 \end{apidefinition}
 
@@ -127,14 +117,14 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
     destroyed by the thread that created it.
 }
 
-%\begin{apiexamples}
-%
-%    \apicexample
-%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}
-%    {./example_code/shmem_p_example.c}
-%    {}
-%
-%\end{apiexamples}
+\begin{apiexamples}
+
+    \apicexample
+    {The following example demonstrates the use of contexts in a \Cstd program.}
+    {./example_code/shmem_ctx.c}
+    {}
+
+\end{apiexamples}
 
 \end{apidefinition}
 \color{black}
