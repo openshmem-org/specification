@@ -1,6 +1,6 @@
 \apisummary{
     Registers the arrival of a \ac{PE} at a barrier and suspends \ac{PE} execution
-    until all other \ac{PE}s arrive at the barrier and all local
+    until all other \acp{PE} arrive at the barrier and all local
     \newtext{updates} and remote memory updates \newtext{on all shareable
     contexts} are completed.
 }
@@ -23,12 +23,12 @@ CALL SHMEM_BARRIER_ALL
 
 \apidescription{   
     The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at
-    a barrier. Barriers are a fast mechanism for synchronizing all \ac{PE}s at
-    once.  This routine causes a \ac{PE} to suspend execution until all \ac{PE}s
+    a barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
+    once.  This routine causes a \ac{PE} to suspend execution until all \acp{PE}
     have called \FUNC{shmem\_barrier\_all}.  This routine must be used with
-    \ac{PE}s started by \FUNC{shmem\_init}.
+    \acp{PE} started by \FUNC{shmem\_init}.
 
-    Prior to synchronizing with other \ac{PE}s, \FUNC{shmem\_barrier\_all}
+    Prior to synchronizing with other \acp{PE}, \FUNC{shmem\_barrier\_all}
     ensures completion of all previously issued memory stores and remote memory
     updates issued \newtext{on all shareable contexts} via \openshmem{} \acp{AMO} and
     \ac{RMA} routine calls such
@@ -55,7 +55,7 @@ CALL SHMEM_BARRIER_ALL
 \begin{apiexamples}
 
 \apicexample
-    { The following \FUNC{shmem\_barrier\_all} example is for \CorCpp programs:}
+    { The following \FUNC{shmem\_barrier\_all} example is for C11 programs:}
     {./example_code/shmem_barrierall_example.c}
     {} 
 

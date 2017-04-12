@@ -29,30 +29,32 @@
 
 \newcommand{\newtext}[1]{\textcolor{ForestGreen}{#1}}
 \newcommand{\oldtext}[1]{\textcolor{magenta}{\sout{#1}}}
-\newcommand{\insertDocVersion}{1.5}
-\newcommand{\OSH}{\emph{OpenSHMEM}}
-\newcommand{\openshmem}{{Open\-SHMEM}\xspace}
+\newcommand{\insertDocVersion}{1.4}
+\newcommand{\openshmem}[1][]{%
+  {Open\-SHMEM\ifthenelse{\equal{#1}{}}{}{~#1}}\xspace}
+\newcommand{\HEADER}[1]{\textit{#1}}
 \newcommand{\FUNC}[1]{\textit{#1}}
+\newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
-\newcommand{\CODE}[1]{\textit{#1}}
-\newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}}
+\newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}} % Only library_constants.tex table.
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
 \newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
-\newcommand{\Fortran}{\textit{Fortran}}
-\newcommand{\Clang}{\textit{C}}
-\newcommand{\Cpp}{\textit{C++}}
-\newcommand{\Celev}{\textit{C11}}
+\newcommand{\Fortran}[1][]{%
+  \textit{Fortran\ifthenelse{\equal{#1}{}}{}{~#1}}\xspace}
+\newcommand{\Cstd}[1][]{%
+  \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
+\newcommand{\Cpp}[1][]{%
+  \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
 \newcommand{\SIZE}{\emph{SIZE}}
 
 \newcommand{\source}{\textit{source}}
-\newcommand{\target}{\textit{target}}
+\newcommand{\dest}{\textit{dest}}
 \newcommand{\PUT}{\textit{Put}}
 \newcommand{\GET}{\textit{Get}}
 \newcommand{\OPR}[1]{\textit{#1}}
-\newcommand{\dest}{\textit{dest}}
 \newcommand{\barrier}{\FUNC{SHMEM\_BARRIER}\xspace} % why here an not others?
 \newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
 \newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
@@ -305,6 +307,29 @@ minus .2ex}{-1em}{\normalsize\sf}}
 %
 % End this section is for example code listings
 %
+
+%
+% Deprecation Helpers
+%
+
+\newcommand{\strikeline}[1][red]{{\color{#1}\raisebox{.5ex}{\rule{1em}{.4pt}}}}
+\newcommand{\stretchline}[1][red]{\xrfill[.5ex]{.4pt}[#1]}
+\newcommand{\DeprecationStart}[1][red]{{\color{#1} deprecation start} \mbox{}}
+\newcommand{\DeprecationEnd}[1][red]{{\color{#1} deprecation end} \mbox{}}
+
+\newcommand{\StartDeprecateBlock}{
+  {\strikeline\mbox{} \DeprecationStart \stretchline\mbox{}}}
+\newcommand{\EndDeprecateBlock}{%
+  \mbox{}\stretchline\mbox{} \DeprecationEnd \strikeline}
+
+\newenvironment{DeprecateBlock}{%
+  \par \StartDeprecateBlock \par}{\par \EndDeprecateBlock \par}
+
+\newcommand{\StartInlineDeprecate}{%
+  \strikeline\mbox{} \DeprecationStart \strikeline \mbox{}}
+\newcommand{\EndInlineDeprecate}{%
+  \strikeline\mbox{} \DeprecationEnd \strikeline}
+\newenvironment{DeprecateInline}{\StartInlineDeprecate}{\EndInlineDeprecate}
 
 %
 % Library API description template commands

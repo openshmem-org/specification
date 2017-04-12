@@ -10,9 +10,9 @@ communication and computation.  In multithreaded environments, contexts can
 additionally provide thread isolation, eliminating overheads resulting from
 thread interference within the communication subsystem.
 
-Context handles are of type \CODE{shmem\_ctx\_t} and are valid for
+Context handles are of type \CTYPE{shmem\_ctx\_t} and are valid for
 language-level assignment and comparison.  A handle to the desired context is
-passed as an argument in the \CODE{shmem\_ctx\_*} API routines.  API routines
+passed as an argument in the \CTYPE{shmem\_ctx\_*} API routines.  API routines
 that do not accept a context argument operate on the default context.  The
 default context can be used explicitly through the \const{SHMEM\_CTX\_DEFAULT}
 handle.
@@ -81,7 +81,7 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
 %\begin{apiexamples}
 %
 %    \apicexample
-%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}	 
+%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}
 %    {./example_code/shmem_p_example.c}
 %    {}
 %
@@ -130,7 +130,7 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
 %\begin{apiexamples}
 %
 %    \apicexample
-%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}	 
+%    {The following example uses \FUNC{shmem\_p}  in a \Clang{} program.}
 %    {./example_code/shmem_p_example.c}
 %    {}
 %

@@ -48,7 +48,7 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
     data object must be remotely accessible.}
     \apiargument{IN}{source}{Data object containing the data to be copied.}
     \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
-    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Clang. If you are using
+    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. If you are using
     \Fortran, it must be a constant, variable, or array element of default
     integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
@@ -76,11 +76,11 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
     The \dest{} and \source{} data objects must conform to certain typing
     constraints, which are as follows:}
     {Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_putmem\_nbi}{\Fortran: Any noncharacter type. \Clang:
+    \apitablerow{shmem\_putmem\_nbi}{\Fortran: Any noncharacter type. \Cstd:
         Any  data  type.  nelems is scaled in bytes.}
     \apitablerow{shmem\_put4\_nbi, shmem\_put32\_nbi}{Any noncharacter type
         that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_put8\_nbi}{\Clang: Any noncharacter type that
+    \apitablerow{shmem\_put8\_nbi}{\Cstd: Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
     \apitablerow{}{\Fortran: Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}

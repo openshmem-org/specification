@@ -35,6 +35,7 @@ CALL SHMEM_DOUBLE_GET(dest, source, nelems, pe)
 CALL SHMEM_GET4(dest, source, nelems, pe)
 CALL SHMEM_GET8(dest, source, nelems, pe)
 CALL SHMEM_GET32(dest, source, nelems, pe)
+CALL SHMEM_GET64(dest, source, nelems, pe)
 CALL SHMEM_GET128(dest, source, nelems, pe)
 CALL SHMEM_GETMEM(dest, source, nelems, pe)
 CALL SHMEM_INTEGER_GET(dest, source, nelems, pe)
@@ -48,7 +49,7 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
         that contains the data to be copied.  This data object must be remotely
         accessible.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Clang. If you are
+        arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. If you are
         using \Fortran, it must be a constant, variable, or array element of default
         integer type.}
     \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must
@@ -72,11 +73,11 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
     which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
-    \apitablerow{shmem\_getmem}{\Fortran: Any noncharacter type. \Clang: Any
+    \apitablerow{shmem\_getmem}{\Fortran: Any noncharacter type. \Cstd: Any
         data  type.  nelems is scaled in bytes.}
     \apitablerow{shmem\_get4, shmem\_get32}{Any noncharacter type
         that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_get8}{\Clang: Any noncharacter type that
+    \apitablerow{shmem\_get8}{\Cstd: Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
     \apitablerow{}{\Fortran: Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}

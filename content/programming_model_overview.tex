@@ -13,14 +13,14 @@ library routines have the potential to provide a low-latency, high-bandwidth
 communication \ac{API} for use in highly parallelized scalable programs.  
 
 The \openshmem{} interfaces can be used to implement \ac{SPMD} style programs.
-It provides interfaces to start the \openshmem{} \ac{PE}s in parallel, and
+It provides interfaces to start the \openshmem{} \acp{PE} in parallel, and
 communication and synchronization interfaces to access remotely accessible data
-objects across \ac{PE}s. These interfaces can be leveraged to divide a problem
+objects across \acp{PE}. These interfaces can be leveraged to divide a problem
 into multiple sub-problems that can be solved independently or with coordination
 using the communication and synchronization interfaces.  The \openshmem
 specification defines library calls, constants, variables, and language bindings
-for \Clang{} and \Fortran{}.  The \Cpp{} interface is currently the same as that
-for \Clang. Unlike UPC, Fortran 2008, Titanium, X10 and Chapel, which are all
+for \Cstd and \Fortran.  The \Cpp interface is currently the same as that
+for \Cstd. Unlike UPC, Fortran 2008, Titanium, X10 and Chapel, which are all
 PGAS languages, \openshmem relies on the user to use the library calls  to
 implement the correct semantics of its programming model.
 
@@ -41,11 +41,11 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Symmetric Data Object Management}
 \begin{enumerate}
-  \item \OPR{Allocation}: All executing \ac{PE}s must participate in the
+  \item \OPR{Allocation}: All executing \acp{PE} must participate in the
       allocation of a symmetric data object with identical arguments.
-  \item  \OPR{Deallocation}: All executing \ac{PE}s must participate in the
+  \item  \OPR{Deallocation}: All executing \acp{PE} must participate in the
       deallocation of the same symmetric data object with identical arguments.
-  \item  \OPR{Reallocation}: All executing \ac{PE}s must participate in the
+  \item  \OPR{Reallocation}: All executing \acp{PE} must participate in the
       reallocation of the same symmetric data object with identical arguments.
 \end{enumerate}
 
@@ -87,7 +87,7 @@ An overview of the \openshmem routines is described below:
       destination \ac{PE}. 
   \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access
       operations and stores to symmetric data objects. 
-  \item \OPR{Barrier}: All or some \ac{PE}s collectively synchronize and ensure
+  \item \OPR{Barrier}: All or some \acp{PE} collectively synchronize and ensure
       completion of all remote and local updates prior to any \ac{PE} returning
       from the call.
 \end{enumerate}

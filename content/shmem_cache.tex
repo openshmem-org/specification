@@ -4,6 +4,7 @@
 
 \begin{apidefinition}
 
+\begin{DeprecateBlock}
 \begin{Csynopsis}
 void shmem_clear_cache_inv(void);
 void shmem_set_cache_inv(void);
@@ -12,7 +13,9 @@ void shmem_set_cache_line_inv(void *dest);
 void shmem_udcflush(void);
 void shmem_udcflush_line(void *dest);
 \end{Csynopsis}
+\end{DeprecateBlock}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_CLEAR_CACHE_INV
 CALL SHMEM_SET_CACHE_INV
@@ -20,6 +23,7 @@ CALL SHMEM_SET_CACHE_LINE_INV(dest)
 CALL SHMEM_UDCFLUSH
 CALL SHMEM_UDCFLUSH_LINE(dest)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 
