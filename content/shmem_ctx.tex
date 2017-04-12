@@ -46,9 +46,9 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
     in a correct state.  The creation call can be reattempted with different
     options or after additional resources become available.
 
-    By default and when it is allowed by the threading model set during
-    initialization, contexts are {\em shareable} and can be used concurrently
-    by multiple threads within the PE where they were created.
+    By default contexts are {\em shareable} and, when it is allowed by the
+    threading model set during initialization, they can be used concurrently by
+    multiple threads within the PE where they were created.
     %
     The following options can be supplied during context creation to restrict
     this usage model and enable performance optimizations.  When one or more
@@ -58,19 +58,16 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
 
         \apitablerow{\CONST{SHMEM\_CTX\_SERIALIZED}}{
             The given context will not be used by multiple threads
-            concurrently.  This option is only valid in the
-            \const{SHMEM\_THREAD\_MULTIPLE} threading model.  When the
-            \CONST{SHMEM\_CTX\_SERIALIZED} option is set, the user must ensure
-            that operation involving the given context are serialized by the
-            application, including operations that perform an explicit or
-            implicit barrier.}
+            concurrently.  When the \CONST{SHMEM\_CTX\_SERIALIZED} option is
+            set, the user must ensure that operations involving the given
+            context are serialized by the application, including operations
+            that perform an explicit or implicit barrier.}
 
         \apitablerow{\CONST{SHMEM\_CTX\_PRIVATE}}{
-            The given context will only be used by the thread that created it.
-            This option is only valid in the \const{SHMEM\_THREAD\_MULTIPLE}
-            and \const{SHMEM\_THREAD\_SERIALIZED} models. Contexts with the
-            \CONST{SHMEM\_CTX\_PRIVATE} option set are excluded from the quiet
-            operation performed during explicit and implicit barrier operations.}
+            The given context will be used only by the thread that created it.
+            Contexts with the \CONST{SHMEM\_CTX\_PRIVATE} option set are
+            excluded from the quiet operation performed during explicit and
+            implicit barrier operations.}
 }
 
 \apireturnvalues{
