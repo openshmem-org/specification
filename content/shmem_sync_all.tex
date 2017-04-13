@@ -11,11 +11,11 @@ void shmem_sync_all(void);
 
 \begin{apiarguments}
 
-    \apiargument{None.}{}{} 
+    \apiargument{None.}{}{}
 
 \end{apiarguments}
 
-\apidescription{   
+\apidescription{
     The \FUNC{shmem\_sync\_all} routine registers the arrival of a \ac{PE} at a
     barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
     once.  This routine causes a \ac{PE} to suspend execution until all
@@ -44,7 +44,7 @@ void shmem_sync_all(void);
 %\apicexample
 %    { The following \FUNC{shmem\_barrier\_all} example is for \CorCpp programs:}
 %    {./example_code/shmem_barrierall_example.c}
-%    {} 
+%    {}
 %
 %\end{apiexamples}
 
