@@ -32,7 +32,7 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
     communication libraries (such as \ac{MPI}) or parallel languages.  For
     example, in SGI Altix series systems, for multiple executable MPI programs that
     use \openshmem routines, it is important to note that static memory, such as a
-    \Fortran{} common block or \Clang{} global variable, is symmetric between
+    \Fortran common block or \Cstd global variable, is symmetric between
     processes running from the same executable file, but is not symmetric between
     processes running from different executable files.  Data allocated from the
     symmetric heap (\FUNC{shmem\_malloc} or \FUNC{shpalloc}) is symmetric across the

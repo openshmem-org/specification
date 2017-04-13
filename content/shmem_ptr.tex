@@ -48,13 +48,13 @@ PTR = SHMEM_PTR(dest, pe)
 \begin{apiexamples}
 
 \apifexample
-    { This  \Fortran{}  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to
+    { This  \Fortran  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to
     the \VAR{BIGD} array on \ac{PE} 1: }
     {./example_code/shmem_ptr_example.f90 }
     {}
     
 \apicexample
-    {This is the equivalent program written in \Clang:}
+    {This is the equivalent program written in \Cstd[11]:}
     {./example_code/shmem_ptr_example.c}
     {}
 
