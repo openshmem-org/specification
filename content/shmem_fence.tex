@@ -46,13 +46,13 @@ CALL SHMEM_FENCE
     
     The \FUNC{shmem\_quiet} routine should be called if completion of PUT{},
     \acp{AMO}, and memory store routines to symmetric data objects is desired
-    when multiple remote \ac{PE}s are involved.
+    when multiple remote \acp{PE} are involved.
 }
 
 \begin{apiexamples}
 
 \apicexample
-    {The following \FUNC{shmem\_fence} example is for \CorCpp{} programs: }
+    {The following \FUNC{shmem\_fence} example is for C11 programs: }
     {./example_code/shmem_fence_example.c}
     {\VAR{Put1} will be ordered to be delivered before \VAR{put3} and \VAR{put2}
     will be ordered to be delivered before \VAR{put4}.}
