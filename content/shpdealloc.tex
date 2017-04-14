@@ -21,8 +21,8 @@ CALL SHPDEALLC(addr, errcode, abort)
 \apidescription{
     SHPDEALLC returns a block of memory (allocated using \FUNC{SHPALLOC}) to the
     list of available space in the symmetric heap.  To maintain symmetric heap
-    consistency, all \ac{PE}s in a program must call \FUNC{SHPDEALLC} with the same
-    value of \VAR{addr}; if any \ac{PE}s  are missing, the program hangs.
+    consistency, all \acp{PE} in a program must call \FUNC{SHPDEALLC} with the same
+    value of \VAR{addr}; if any \acp{PE}  are missing, the program hangs.
 }
 
 \apireturnvalues{}

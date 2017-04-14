@@ -1,16 +1,16 @@
 \begin{figure}[h]
 \includegraphics[width=0.95\textwidth]{figures/mem_model}      
-\caption{\OSH Memory Model}                                   
+\caption{\openshmem Memory Model}
 \label{fig:mem_model}                                               
 \end{figure}      
 %
 An \openshmem program consists of data objects that are private to each \ac{PE}
-and data  objects that are remotely accessible by all \ac{PE}s. Private data
+and data  objects that are remotely accessible by all \acp{PE}. Private data
 objects are stored in the local memory of each \ac{PE} and can only be accessed
-by the \ac{PE} itself; these data objects cannot be accessed by other \ac{PE}s
+by the \ac{PE} itself; these data objects cannot be accessed by other \acp{PE}
 via \openshmem routines. Private data objects follow the memory model of
-\Clang{} or \Fortran. Remotely accessible objects, however, can be accessed by
-remote \ac{PE}s using \openshmem routines.  Remotely accessible data objects are
+\Cstd or \Fortran. Remotely accessible objects, however, can be accessed by
+remote \acp{PE} using \openshmem routines.  Remotely accessible data objects are
 called \emph{Symmetric Data Objects}.  Each symmetric data object has a
 corresponding object with the same name, type, and size on all PEs where that object is
 accessible via the \openshmem \ac{API}\footnote{For efficiency reasons,
@@ -26,12 +26,12 @@ requirements and underlying architecture.  In \openshmem the following kinds of
 data objects are symmetric:
 %
 \begin{itemize}
-  \item \Fortran{} data objects in common blocks or with the  SAVE  attribute.
+  \item \Fortran data objects in common blocks or with the  SAVE  attribute.
       These data objects must not be defined in a dynamic shared object (DSO).
-  \item Global and static \Clang{} and \Cpp variables. These data objects must
+  \item Global and static \Cstd and \Cpp variables. These data objects must
       not  be defined in a DSO.
-  \item \Fortran{} arrays allocated with \textit{shpalloc} 
-  \item \Clang{} and \Cpp data allocated by \textit{shmem\_malloc}
+  \item \Fortran arrays allocated with \textit{shpalloc} 
+  \item \Cstd and \Cpp data allocated by \textit{shmem\_malloc}
 \end{itemize}       
 
 \openshmem dynamic memory allocation routines (\textit{shpalloc} and
