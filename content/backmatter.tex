@@ -334,6 +334,7 @@ specification.
     & \shortstack{\textbf{Last Version Supported}}
     & \textbf{Replaced By} \\
     \hline
+    Header Directory: \hyperref[subsec:dep_rationale:mpp]{\HEADER{mpp}} & 1.1 & Current & (none) \\ \hline
     \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \hyperref[subsec:start_pes]{\FUNC{START\_PES}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
     \CorCpp: \FUNC{\_my\_pe} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
@@ -379,6 +380,19 @@ specification.
 \end{center}
 
 \section{Deprecation Rationale}\label{subsec:dep_rationale}
+
+\subsection{Header Directory: \HEADER{mpp}}
+\label{subsec:dep_rationale:mpp}
+\openshmem implementations must also provide header files from the \HEADER{mpp}
+header directory such that headers can be referenced in \CorCpp as
+\begin{lstlisting}[language=]
+#include <mpp/shmem.h>
+\end{lstlisting}
+and in \Fortran as
+\begin{lstlisting}[language=]
+include 'mpp/shmem.fh'
+\end{lstlisting}
+for backwards compatibility with SGI SHMEM.
 
 \subsection{\CorCpp: start\_pes}
 The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
@@ -496,6 +510,9 @@ to be unnecessary.}
 synchronization routines.
 %
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
+\\See Section \ref{sec:dep_api}.
+%
+\item Deprecated header directory \HEADER{mpp}.
 \\See Section \ref{sec:dep_api}.
 %
 \item Added the \FUNC{shmem\_calloc} function.
