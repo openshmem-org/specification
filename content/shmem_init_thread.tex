@@ -1,8 +1,8 @@
 \apisummary{
-Initializes the OpenSHMEM library, similar to \FUNC{SHMEM\_INIT}, and performs any
+Initializes the OpenSHMEM library, similar to \FUNC{shmem\_init}, and performs any
 initialization required for supporting the four thread levels.}
 
-%Initializes the \openshmem{} library, similar to \FUNC{SHMEM\_INIT}, and in addition performs the initialization required for thread-safe invocation of \openshmem{} functions.}
+%Initializes the \openshmem{} library, similar to \FUNC{shmem\_init}, and in addition performs the initialization required for thread-safe invocation of \openshmem{} functions.}
 
 \begin{apidefinition}
 
@@ -18,8 +18,8 @@ void shmem_init_thread(int requested, int *provided);
 
 
 \apidescription{
-\FUNC{SHMEM\_INIT\_THREAD}  initializes the \openshmem{} library similar to
-\FUNC{SHMEM\_INIT}, and in addition perform the initialization required for
+\FUNC{shmem\_init\_thread}  initializes the \openshmem{} library similar to
+\FUNC{shmem\_init}, and in addition perform the initialization required for
 supporting the four thread levels. The argument
 \VAR{requested} is used to specify the desired level of thread support.
 The function returns the support level provided by the library.
@@ -28,11 +28,11 @@ The correct values for \VAR{provided} and \VAR{requested} are
 \CONST{SHMEM\_THREAD\_FUNNELED}, \CONST{SHMEM\_THREAD\_SERIALIZED}, or 
 \CONST{SHMEM\_THREAD\_MULTIPLE}.
      
-An \openshmem{} program is initialized either by \FUNC{SHMEM\_INIT} or
-\FUNC{SHMEM\_INIT\_THREAD}. If thread-safe invocation of \openshmem{} functions
+An \openshmem{} program is initialized either by \FUNC{shmem\_init} or
+\FUNC{shmem\_init\_thread}. If thread-safe invocation of \openshmem{} functions
 is desired, then the \openshmem{} program should be initialized by
-\FUNC{SHMEM\_INIT\_THREAD}. Similar to \FUNC{SHMEM\_INIT}, the
-\FUNC{SHMEM\_INIT\_THREAD} may not be called multiple times in an \openshmem{} program.
+\FUNC{shmem\_init\_thread}. Similar to \FUNC{shmem\_init}, the
+\FUNC{shmem\_init\_thread} may not be called multiple times in an \openshmem{} program.
 }
 
 \apireturnvalues{    
