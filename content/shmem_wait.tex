@@ -48,7 +48,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     changed by a write or an atomic operation issued by a
     \oldtext{different} \ac{PE}.
     These  routines can be used for point-to-point direct synchronization.  A call
-    to \VAR{shmem\_wait} does not return until a \ac{PE} writes  a value,
+    to \FUNC{shmem\_wait} does not return until a \ac{PE} writes  a value,
     not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting \ac{PE}.  A call
     to \FUNC{shmem\_wait\_until} does not return until \oldtext{some  other}
     \newtext{a} \ac{PE} changes

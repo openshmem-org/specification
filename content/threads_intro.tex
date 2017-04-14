@@ -15,7 +15,7 @@ interfaces.
 \item {\bf \CONST{SHMEM\_THREAD\_SERIALIZED}} 
 The \openshmem{} program may be multithreaded, however, the 
 program must ensure that only one thread invokes the \openshmem{}
-interfaces at any given instance i.e., the \openshmem{} interfaces 
+interfaces at any given instance, i.e., the \openshmem{} interfaces 
 are not invoked concurrently by multiple threads.
 
 \item {\bf \CONST{SHMEM\_THREAD\_MULTIPLE}}
@@ -26,8 +26,7 @@ thread may invoke the \openshmem{} interfaces.
 \hspace{-15pt}
 {\bf Semantics}
 
-\begin{itemize}[leftmargin=*]
-
+\begin{itemize}
 \item
 In the \openshmem{} program, a thread calling \FUNC{SHMEM\_INIT} is designated as the main
 thread. Multiple threads may not call \FUNC{SHMEM\_INIT}. Similarly,
