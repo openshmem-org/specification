@@ -48,12 +48,12 @@ For example, the \FUNC{shmem\_barrier\_all} is completed when all \acp{PE} enter
 exit the \FUNC{shmem\_barrier\_all} call, even though only one thread in the \ac{PE} is
 participating in the collective call. 
 
-\item Blocking \openshmem{} calls will block the calling thread only, allowing
+\item Blocking \openshmem{} calls will only block the calling thread, allowing
 other threads, if available, to continue the execution. The calling thread will be blocked until the
 event on which it is waiting occurs. Once the blocked communication is enabled
-and can proceed, then the call will complete and the thread will be marked
-runnable, within a finite time. A blocked thread will not prevent progress of
-other runnable threads on the same \ac{PE}, and will not prevent them from
+and can proceed, the call will complete and the thread is ready for
+continuing the execution. A blocked thread will not prevent progress of
+other threads on the same \ac{PE}, and will not prevent them from
 executing other \openshmem{} calls. Also, a blocked thread will not prevent the
 progress of \openshmem{} calls on other \acp{PE}. 
 
