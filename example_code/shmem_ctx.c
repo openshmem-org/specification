@@ -9,12 +9,15 @@ long tasks_done = 0; /* Tasks done by this PE */
 long total_done = 0; /* Total tasks done by all PEs */
 
 int main(void) {
-    long i, ntasks = 1024;  /* Total tasks per PE */
+    int tl, i;
+    long ntasks = 1024;  /* Total tasks per PE */
 
     for (i = 0; i < SHMEM_REDUCE_SYNC_SIZE; i++)
         psync[i] = SHMEM_SYNC_VALUE;
 
-    shmem_init_thread(SHMEM_THREAD_MULTIPLE);
+    shmem_init_thread(SHMEM_THREAD_MULTIPLE, &tl);
+    if (tl != SHMEM_THREAD_MULTIPLE) shmem_global_exit(1);
+
     int me = shmem_my_pe();
     int npes = shmem_n_pes();
 
@@ -22,13 +25,15 @@ int main(void) {
     {
         shmem_ctx_t ctx;
         int task_pe = me, pes_done = 0;
-        int err = shmem_ctx_create(SHMEM_CTX_PRIVATE, &ctx);
+        int ret = shmem_ctx_create(SHMEM_CTX_PRIVATE, &ctx);
 
-        if (err) {
-            printf("%d: Error creating context (%d)\n", me, err);
-            shmem_global_exit(1);
+        if (ret != 0) {
+            printf("%d: Error creating context (%d)\n", me, ret);
+            shmem_global_exit(2);
         }
 
+        /* Process tasks on all PEs, starting with the local PE.  After
+         * all tasks on a PE are completed, help the next PE. */
         while (pes_done < npes) {
             long task = shmem_ctx_long_finc(ctx, &task_cntr, task_pe);
             while (task < ntasks) {
