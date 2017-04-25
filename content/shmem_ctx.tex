@@ -15,7 +15,7 @@ language-level assignment and comparison.  A handle to the desired context is
 passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic API
 routines.  API routines that do not accept a context argument operate on the
 default context.  The default context can be used explicitly through the
-\const{SHMEM\_CTX\_DEFAULT} handle.
+\CONST{SHMEM\_CTX\_DEFAULT} handle.
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
@@ -32,7 +32,7 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
 \begin{apiarguments}
     \apiargument{IN}{options}{The set of options requested for the given context.
         Multiple options may be requested by combining them with a bitwise
-        \textit{OR} operation.  Otherwise, $0$ can be given if no options are
+        OR operation.  Otherwise, \CONST{0} can be given if no options are
         requested.}
     \apiargument{OUT}{ctx}{A handle to the newly created context.}
 \end{apiarguments}
@@ -98,7 +98,8 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
 \apidescription{
     \FUNC{shmem\_ctx\_destroy} destroys a context that was created by a call to
     \FUNC{shmem\_ctx\_create}.  It is the user's responsibility to ensure that
-    the context is no longer in use before calling this routine.  This function
+    the context is not used after it has been destroyed, for example when the
+    destroyed context is used by multiple threads.  This function
     performs an implicit quiet operation on the given context before it is freed.
 }
 
