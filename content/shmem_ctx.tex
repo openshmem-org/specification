@@ -127,6 +127,17 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
     {./example_code/shmem_ctx.c}
     {}
 
+    \apicexample
+    {The following example demonstrates the use of contexts in a
+    single-threaded \Cstd program that performs a summation reduction where
+    the data contained in the \VAR{in\_buf} arrays on all PEs is reduced into
+    the \VAR{out\_buf} arrays on all PEs.  The buffers are divided into
+    segments and processing of the segments is pipelined.  Contexts are used
+    to overlap an all-to-all exchange of data for segment \VAR{p} with the
+    local reduction of segment \VAR{p-1}.}
+    {./example_code/shmem_ctx_pipelined_reduce.c}
+    {}
+
 \end{apiexamples}
 
 \end{apidefinition}
