@@ -64,7 +64,7 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
 
     The \FUNC{shmem\_sync\_all} routine can be used to portably ensure that
     memory access operations observe remote updates in the order enforced by
-    initiator PEs, provided that the initiator PE ensures completion of remote
+    initiator \acp{PE}, provided that the initiator PE ensures completion of remote
     updates with a call to \FUNC{shmem\_quiet} prior to the call to
     \FUNC{shmem\_sync\_all} routine.
 }
