@@ -23,7 +23,7 @@ void shmem_sync_all(void);
     \acp{PE} have called \FUNC{shmem\_sync\_all}.
 
     In contrast with the \FUNC{shmem\_barrier\_all} routine,
-    \FUNC{shmem\_sync\_all} only ensures completion of previously issued memory
+    \FUNC{shmem\_sync\_all} only ensures completion and visibility of previously issued memory
     stores and does not ensure completion of remote memory updates issued via
     \openshmem routines.
 }
@@ -34,7 +34,7 @@ void shmem_sync_all(void);
 
 \apinotes{
     The \FUNC{shmem\_sync\_all} routine can be used to portably ensure that
-    memory access operations observe remote updates in the order enforced by
+    memory access operations observe remote updates in the order enforced by the
     initiator \acp{PE}, provided that the initiator PE ensures completion of remote
     updates with a call to \FUNC{shmem\_quiet} prior to the call to
     \FUNC{shmem\_sync\_all} routine.

@@ -42,11 +42,11 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
     work array must be passed in \VAR{pSync} to all \acp{PE} in the \activeset.
 
     In contrast with the \FUNC{shmem\_barrier} routine, \FUNC{shmem\_sync} only
-    ensures completion of previously issued memory stores and does not ensure
+    ensures completion and visibility of previously issued memory stores and does not ensure
     completion of remote memory updates issued via \openshmem routines.
 
     The same \VAR{pSync} array may be reused on consecutive calls to
-    \FUNC{shmem\_barrier} if the same active \ac{PE} set is used.
+    \FUNC{shmem\_sync} if the same active \ac{PE} set is used.
 }
 
 \apireturnvalues{
@@ -63,7 +63,7 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
     beyond that implied by \FUNC{shmem\_sync} itself is necessary in this case.
 
     The \FUNC{shmem\_sync\_all} routine can be used to portably ensure that
-    memory access operations observe remote updates in the order enforced by
+    memory access operations observe remote updates in the order enforced by the
     initiator \acp{PE}, provided that the initiator PE ensures completion of remote
     updates with a call to \FUNC{shmem\_quiet} prior to the call to
     \FUNC{shmem\_sync\_all} routine.
