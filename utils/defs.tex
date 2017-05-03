@@ -3,8 +3,8 @@
 
 \hyphenation{Open-SHMEM}
 
-\renewcommand{\chaptername}{Chapter} 
-\renewcommand{\appendixname}{Annex} 
+\renewcommand{\chaptername}{Chapter}
+\renewcommand{\appendixname}{Annex}
 
 % Place some penalty for doing the break
 % The penalty for a ``\gb'' should be greater than a \hyphenpenalty.
@@ -13,15 +13,15 @@
 \penalty10000}
 
 % This macro enables that all "_" (underscore) characters in the pfd
-% file are searchable, and that cut&paste will copy the "_" as underscore. 
+% file are searchable, and that cut&paste will copy the "_" as underscore.
 % Without the following macro, the \_ is treated in searches and cut&paste
-% as a " " (space character). 
-% This macro does not modify the behavior of _ in math or in verbatim 
+% as a " " (space character).
+% This macro does not modify the behavior of _ in math or in verbatim
 % environments. In verbatim environments, the "_" is always treated
 % as a searchable character.
 %
-\DeclareRobustCommand{\_}{\texttt{\char`\_}} 
-% 
+\DeclareRobustCommand{\_}{\texttt{\char`\_}}
+%
 
 \def\colorswapnt{\colorlet{saved}{.}\color{ForestGreen}}
 \def\colorswapot{\colorlet{saved}{.}\color{red}}
@@ -144,13 +144,13 @@
 % Use Sans Serif font for sections, etc.
 %
 \makeatletter
-\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
 -.2ex}{2.3ex plus .2ex}{\Large\sf}}
-\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus
 -.2ex}{1.5ex plus .2ex}{\large\sf}}
-\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus
 -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf\bf}}
-\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex 
+\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex
 minus .2ex}{-1em}{\normalsize\sf}}
 \makeatother
 %
@@ -168,12 +168,12 @@ minus .2ex}{-1em}{\normalsize\sf}}
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,                 % sets automatic line breaking
   escapeinside={|}{|},          % if you want to add LaTeX within your code
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
                                    % encodings only, does not work with UTF-8
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code 
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code
                                    % (possibly needs columns=flexible)
   morekeywords={*,...},            % if you want to add more keywords to the set
-  showspaces=false,                % show spaces everywhere adding particular underscores; 
+  showspaces=false,                % show spaces everywhere adding particular underscores;
                                    % it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
@@ -185,16 +185,16 @@ minus .2ex}{-1em}{\normalsize\sf}}
     basicstyle=\ttfamily\footnotesize,
     breaklines=true,                 % sets automatic line breaking
     escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
                                      % encodings only, does not work with UTF-8
     keepspaces=true,                 % keeps spaces in text, useful for keeping
                                      % indentation of code (possibly needs columns=flexible)
     morekeywords={*,...},            % if you want to add more keywords to the set
-    showspaces=false,                % show spaces everywhere adding particular underscores; 
+    showspaces=false,                % show spaces everywhere adding particular underscores;
                                      % it overrides 'showstringspaces'
     showstringspaces=false,          % underline spaces within strings only
     showtabs=false,                  % show tabs within strings adding particular underscores
-    backgroundcolor=\color{gray}, 
+    backgroundcolor=\color{gray},
   }
 }
 
@@ -316,7 +316,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \newenvironment{apidefinition}{
 \begin{description}
-\item[SYNOPSIS] \hfill \\ \\ 
+\item[SYNOPSIS] \hfill \\ \\
 \vspace{-2em}
 }
 {
@@ -330,34 +330,34 @@ minus .2ex}{-1em}{\normalsize\sf}}
   morekeywords={size_t, TYPE, noreturn}, aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{C11synopsis}
-{ 
-  \textbf{C11:} 
+{
+  \textbf{C11:}
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t, TYPE, _Noreturn}, aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
-{ 
+{
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
 
 
 \lstnewenvironment{Csynopsis}
-{ 
-  \textbf{C/C++:} 
+{
+  \textbf{C/C++:}
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t, TYPE, TYPENAME, SIZE}, aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
-{ 
-  \textbf{C/C++:} 
-  \color{red}  
+{
+  \textbf{C/C++:}
+  \color{red}
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
   }
   {}
-  
+
 \lstnewenvironment{Fsynopsis}
-{ \textbf{FORTRAN:} 
+{ \textbf{FORTRAN:}
   \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
   deletekeywords=[2]{STATUS},
   deletekeywords=[3]{LOG}, aboveskip=0pt,
@@ -366,7 +366,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \newenvironment{envvardefinition}{
 \begin{description}
-\item[SYNOPSIS] \hfill \\ \\ 
+\item[SYNOPSIS] \hfill \\ \\
 }
 {
 \end{description}
@@ -380,13 +380,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newenvironment{envvararguments}{
 \newcommand{\envvarargument}[3]{
 \begin{tabular}{p{2cm} p{2cm} p{10cm}}
-\textbf{##1} & \textit{##2} & {##3} \\ 
+\textbf{##1} & \textit{##2} & {##3} \\
 \end{tabular}
 }
 \hfill
 
 \begin{description}
-\item[Specifiers] \hfill \\
+\item[Memory Traits] \hfill \\
 }
 {
 \hfill
@@ -402,11 +402,11 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{
 \begin{tabular}{p{2cm} p{2cm} p{10cm}}
-\textbf{##1} & \textit{##2} & {##3} \\ 
+\textbf{##1} & \textit{##2} & {##3} \\
 \end{tabular}
 }
 \hfill
-\item[DESCRIPTION] \hfill 
+\item[DESCRIPTION] \hfill
 
 \begin{description}
 \item[Arguments] \hfill \\
@@ -419,7 +419,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\apidescription}[1]{
 \begin{description}
 \vspace{-1em}
-\item[API description] \hfill \\ 
+\item[API description] \hfill \\
     #1
 \hfill
 }
@@ -431,10 +431,10 @@ minus .2ex}{-1em}{\normalsize\sf}}
        \hline \tabularnewline
        \end{tabular}\\
         #4
-}  
+}
 
 \newcommand{\apireturnvalues}[1]{
-\hfill 
+\hfill
 \item[Return Values] \hfill \\
     #1
 \\

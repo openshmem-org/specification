@@ -18,7 +18,7 @@
 \section*{Incorporating \openshmem{} into Programs}\label{sec:writing_programs}
 
 In this section, we describe how to write a ``Hello World" \openshmem program.
-To write a ``Hello World" \openshmem program we need to: 
+To write a ``Hello World" \openshmem program we need to:
 
 \begin{itemize}
 \item Add the include file shmem.h (for \Clang) or shmem.fh (for \Fortran).
@@ -151,38 +151,38 @@ The specification provides guidelines to the expected behavior of
 various library routines.  In cases where routines are improperly used
 or the input is not in accordance with the specification, undefined
 behavior may be observed.  Depending on the implementation there are
-many interpretations of undefined behavior. 
+many interpretations of undefined behavior.
 
 $\;$
 
 $ $%
 \begin{tabular}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
-\hline 
+\hline
 \textbf{Inappropriate Usage} & \textbf{Undefined Behavior}\tabularnewline
-\hline 
-\hline 
+\hline
+\hline
 Uninitialized library & If \openshmem is not initialized through a call to
 \FUNC{shmem\_init}, subsequent accesses to \openshmem routines have undefined
 results.  An implementation may choose, for example, to try to continue or abort
 immediately upon the first call to an uninitialized routine.\tabularnewline
-\hline 
+\hline
 Accessing non-existent \ac{PE}s & If a communications routine accesses a
 non-existent \ac{PE}, then the \openshmem library can choose to handle this
 situation in an implementation-defined way.  For example, the library may issue
 an error message saying that the \ac{PE} accessed is outside the range of
 accessible \ac{PE}s, or may exit without a warning.\tabularnewline
-\hline 
+\hline
 Use of non-symmetric variables & Some routines require remotely accessible
 variables to perform their function.  A \PUT{} to a non-symmetric variable can
 be trapped where possible and the library can abort the program.  Another
 implementation may choose to continue either with a warning or
 silently.\tabularnewline
-\hline 
+\hline
 Non-symmetric variables & The symmetric memory management routines are
 collectives, which means that all \ac{PE}s in the program must issue the same
 \FUNC{shmem\_malloc} call with the same size request.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
-\hline 
+\hline
 Use of NULL pointers with non-zero \VAR{len} specified & In any \openshmem routine
 that takes a pointer and \VAR{len} describing the number of elements in that
 pointer, NULL may not be specified for the pointer unless the corresponding \VAR{len} is also
@@ -195,11 +195,11 @@ The following cases summarize this behavior:
     \item \VAR{len} is not 0, pointer is not NULL: supported.
 \end{itemize}
 \tabularnewline
-\hline 
+\hline
 Multiple calls to \FUNC{shmem\_init} & In an OpenSHMEM program where
 \FUNC{shmem\_init} has already be called, any subsequent calls to
 \FUNC{shmem\_init} result in undefined behavior.\tabularnewline
-\hline 
+\hline
 \end{tabular}
 
 
@@ -237,9 +237,9 @@ to symmetric data objects.  On these systems, static memory such as a
 \Fortran{} common block or \Clang{} global variable, is symmetric between
 processes running from the same executable file, but is not symmetric between
 processes running from different executable files.  Data allocated from the
-symmetric heap (\FUNC{shmem\_malloc}, \newtext{\FUNC{shmem\_kind\_malloc}}, or
-\FUNC{shpalloc}) is symmetric across the same or different executable files. The 
-routine \FUNC{shmem\_addr\_accessible} can be used to determine if a local 
+symmetric heap (\FUNC{shmem\_malloc}, \newtext{\FUNC{shmem\_partition\_malloc}},
+or \FUNC{shpalloc}) is symmetric across the same or different executable files.
+The routine \FUNC{shmem\_addr\_accessible} can be used to determine if a local
 address is accessible via \openshmem communication from a remote \ac{PE}.
 
 Another important feature of these systems is that the
@@ -297,7 +297,7 @@ interconnect, and to a very limited extent, Infiniband based clusters.
     \item University of Florida
     \end{itemize}
   \end{itemize}
-\item OpenSHMEM Implementations 
+\item OpenSHMEM Implementations
  \begin{itemize}
   \item SGI \openshmem
   \item University of Houston - \openshmem Reference Implementation
@@ -323,7 +323,7 @@ API that is supported but no longer recommended for use by program users. For
 indicated as otherwise by the Specification. In this chapter we will record the
 API that has been deprecated, the \openshmem Specification that effected the
 deprecation, and if the feature is supported in the current version of the
-specification.  
+specification.
 
 \begin{center}
 \scriptsize
@@ -459,7 +459,7 @@ Thus, the \VAR{volatile} qualifier was removed from the \VAR{ivar} arguments to
       \FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
-\item Clarified ordering semantics of memory ordering, point-to-point synchronization and collective 
+\item Clarified ordering semantics of memory ordering, point-to-point synchronization and collective
 synchronization routines.
 %
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
@@ -469,8 +469,8 @@ synchronization routines.
 
 \section{Version 1.3}
 This section summarizes the changes from the \openshmem specification Version
-1.2 to Version 1.3. Many major changes to the specification were introduced in Version 1.3. This includes non-blocking RMA operations, 
-generic interfaces for various OpenSHMEM interfaces, atomic \FUNC{Put} and \FUNC{Get} operations,  and Alltoall interfaces. 
+1.2 to Version 1.3. Many major changes to the specification were introduced in Version 1.3. This includes non-blocking RMA operations,
+generic interfaces for various OpenSHMEM interfaces, atomic \FUNC{Put} and \FUNC{Get} operations,  and Alltoall interfaces.
 
 
 The following list describes the specific changes in 1.3:
@@ -505,11 +505,11 @@ The following list describes the specific changes in 1.3:
 	\FUNC{SHMEM\_SET}.
 \\See Sections \ref{subsec:shmem_fetch} and \ref{subsec:shmem_set}
 %
-\item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL} 
+\item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL}
 	and \FUNC{SHMEM\_ALLTOALLS}.
 \\See Sections \ref{subsec:shmem_alltoall} and \ref{subsec:shmem_alltoalls}.
 %
-\item Added \textbf{volatile} to remotely accessible pointer argument in 
+\item Added \textbf{volatile} to remotely accessible pointer argument in
 	\FUNC{SHMEM\_WAIT} and \FUNC{SHMEM\_LOCK}.
 \\See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
 %
@@ -526,7 +526,7 @@ This section summarizes the changes from the \openshmem specification Version
 1.1 to Version 1.2.  A major change in this version is that it improves upon the
 execution model described in 1.1 by introducing an explicit
 \FUNC{shmem\_finalize} library call. This provides a collective mechanism of
-exiting an \openshmem program and releasing resources used by the library.  
+exiting an \openshmem program and releasing resources used by the library.
 
 
 The following list describes the specific changes in 1.2:
@@ -563,7 +563,7 @@ The following list describes the specific changes in 1.2:
     \FUNC{shmem\_ptr}.
 \\See Section \ref{subsec:shmem_ptr}.
 %
-\item New API to query the version and name information. 
+\item New API to query the version and name information.
 \\See Section \ref{subsec:shmem_info_get_version} and \ref{subsec:shmem_info_get_name}.
 %
 \item \openshmem library API normalization. All C symmetric memory management
@@ -574,7 +574,7 @@ The following list describes the specific changes in 1.2:
 \\See Section \ref{subsec:shfree}.
 %
 \item Deprecation of Fortran API routine \FUNC{SHMEM\_PUT}.
-\\See Section \ref{subsec:shmem_put}. 
+\\See Section \ref{subsec:shmem_put}.
 %
 \item Clarification related to \FUNC{shmem\_wait}.
 \\See Section \ref{subsec:shmem_wait}.
@@ -606,7 +606,7 @@ The following list describes the specific changes in 1.1:
 
 \begin{itemize}
 %
-\item Clarifications of the completion semantics of memory synchronization 
+\item Clarifications of the completion semantics of memory synchronization
       interfaces.
 \\See Section \ref{subsec:memory_order}.
 %
@@ -644,28 +644,28 @@ The following list describes the specific changes in 1.1:
 \\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
 %
 \item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.
-\\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}. 
+\\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}.
 %
 \item Removed \ac{API} calls: \FUNC{shmem\_char\_put},
       \FUNC{shmem\_char\_get}.
-\\See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}. 
+\\See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}.
 %
 \item The usage of \VAR{ptrdiff\_t}, \VAR{size\_t}, and \VAR{int} in the
       interface signature was made consistent with the description.
 \\See Sections \ref{subsec:coll}, \ref{subsec:shmem_iput}, and \ref{subsec:shmem_iget}.
 %
 \item Revised \FUNC{shmem\_barrier} example.
-\\See Section \ref{subsec:shmem_barrier}. 
+\\See Section \ref{subsec:shmem_barrier}.
 %
 \item Clarification of the initial value of \VAR{pSync} work arrays for
-\FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}. 
+\FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}.
 %
 \item Clarification of the expected behavior when multiple \FUNC{start\_pes}
 calls are encountered has been clarified.
 \\See Section \ref{subsec:start_pes}.
 %
 \item Corrected the definition of atomic increment operation.
-\\See Section \ref{subsec:shmem_inc}. 
+\\See Section \ref{subsec:shmem_inc}.
 %
 \item Clarification of the size of the symmetric heap and when it is set.
 \\See Section \ref{subsec:shfree}.
@@ -673,29 +673,29 @@ calls are encountered has been clarified.
 \item Clarification of the integer and real sizes for \Fortran{} \ac{API}.
 \\See Sections \ref{subsec:shmem_add}, \ref{subsec:shmem_cswap},
       \ref{subsec:shmem_swap}, \ref{subsec:shmem_finc}, \ref{subsec:shmem_inc}, and
-      \ref{subsec:shmem_fadd}. 
+      \ref{subsec:shmem_fadd}.
 %
 \item Clarification of the expected behavior on program \OPR{exit}.
-\\See Section \ref{subsec:execution_model}, Execution Model. 
+\\See Section \ref{subsec:execution_model}, Execution Model.
 %
 \item More detailed description for the progress of \openshmem operations
 provided.
-\\See Section \ref{subsec:progress}. 
+\\See Section \ref{subsec:progress}.
 %
 \item Clarification of naming convention for non-standard interfaces and their
 inclusion in \FUNC{shmemx.h}.
-\\See Section \ref{subsec:bindings}. 
+\\See Section \ref{subsec:bindings}.
 %
 \item Various fixes to \openshmem code examples across the specification to
-include appropriate header files. 
+include appropriate header files.
 %
 \item Removing requirement that implementations should detect size mismatch and
 return error information for \FUNC{shmalloc} and ensuring consistent
 language.
-\\See Sections \ref{subsec:shfree} and Annex \ref{sec:undefined}. 
+\\See Sections \ref{subsec:shfree} and Annex \ref{sec:undefined}.
 %
 \item Fortran programming fixes for examples.\\ See Sections
-\ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait}. 
+\ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait}.
 %
 \item Clarifications of the reuse \VAR{pSync} and \VAR{pWork} across
 collectives.
@@ -703,7 +703,7 @@ collectives.
       \ref{subsec:shmem_collect} and \ref{subsec:shmem_reductions}.
 %
 \item Name changes for UV and ICE for SGI systems.
-\\See Annex \ref{sec:openshmem_history}. 
+\\See Annex \ref{sec:openshmem_history}.
 %
 \end{itemize}
 

@@ -1,9 +1,8 @@
 All OpenSHMEM implementations supporting the use of multiple Symmetric Memory
 Partitions provide support for a special environment variable called
-SHMEM\_SYMMETRIC\_PARTITION to define the properties of the user-defined memory
-locations which can be used to create symmetric heaps. The properties of the
-memory partitions including the size of the symmetric heap to be created are
-passed as specifiers to the environment variable.
+SHMEM\_SYMMETRIC\_PARTITION. It defines the traits to establish the
+characteristics of a memory partition. %These traits including the size of
+%the symmetric heap are defined specifiers to the environment variable.
 
 \begin{envvardefinition}
 \begin{envvarname}
@@ -11,67 +10,73 @@ SHMEM_SYMMETRIC_PARTITION<ID>=SIZE=<size>[:PGSIZE=<pgsize>][:KIND=<kind>:POLICY=
 \end{envvarname}
 
 \begin{envvararguments}
-    \envvarargument{REQ}{ID}{Integer to represent the partition number}
+    \envvarargument{REQ}{ID}{Integer used to identify the partition}
     \envvarargument{REQ}{SIZE}{Number of bytes to allocate for symmetric heap}
-    \envvarargument{OPT}{PGSIZE}{Number of bytes to specify the memory page size}
-    \envvarargument{OPT}{KIND}{String constants to specify the memory kind if
-    multiple memory kinds are supported by the system and identified by the
+    \envvarargument{OPT}{PGSIZE}{Number of bytes to specify the size of the
+    page used by the partition}
+    \envvarargument{OPT}{KIND}{String constants to specify the kind of memory
+    if multiple memory kinds are supported by the system and identified by the
     implementation}
     \envvarargument{OPT}{POLICY}{String constants to specify the memory
-    allocation policy}
+    allocation policy used by the partition}
 \end{envvararguments}
 
 One, two, or more partitions can be specified using this environment variable.
 Each partition is represented using a number called \emph{Partition ID}.
 \textless ID\textgreater is the user-specified part of the environment variable
 to represent the Partition ID. A maximum of SHMEM\_MAX\_PARTITIONS can be
-defined and the Partition ID may be any non-zero positive integer between 1 and
-SHMEM\_MAX\_PARTITION\_ID.
+defined. These defined partitions can have any non-zero positive integer
+between 1 and SHMEM\_MAX\_PARTITION\_ID as Partition ID.
 
-Each partition can take a maximum of four property specifiers as input. The
-\emph{SIZE} specifier is the only required value. It is used to specify the
-required symmetric heap size on the partition. The \emph{PGSIZE} specifier is
-used to specify the page size of the memory kind.
+Each partition takes a maximum of four traits as input. The \emph{SIZE} is the
+only required trait. It is used to specify the required symmetric heap size on
+the partition. The \emph{PGSIZE} trait is used to specify the size of page used
+by the partition.
 
-On systems supporting multiple memory kinds, each memory kinds which are
+The \emph{KIND} trait is used to specify the memory kind used by the partition.
+On systems supporting multiple different kinds of memory, each memory kind
 identified by the implementation should be documented and made available as
-string constants to the users. The \emph{KIND} specifier is used to specify the
-memory kind to determine location of the memory partition.
+case-sensitive string constants to the users. Along with other identified
+memory kinds, every implementation should define the following two kinds.
+\begin{itemize}
+\item \emph{NORMALMEM} The primary memory kind of a node
+\item \emph{SYSDEFAULT} System defined memory kind is used
+\end{itemize}
 
-The \emph{POLICY} is used to specify on how strictly the request optional 
-specifiers \emph{PGSIZE} and \emph{KIND} are to be honored. The following are 
-the accepted values for \emph{POLICY} specifier. 
+The \emph{POLICY} is used to specify on how strictly the user requested
+optional traits (\emph{PGSIZE} and \emph{KIND}) are to be honored. The
+following are the accepted values.
 \begin{itemize}
 \item \emph{MANDATORY} Any unavailability of the user requested optional
-specifier would result in program termination with an informative error during
-symmetric heap creation on the defined partition.
-\item \emph{PREFERRED} Any unavailability of the user requested optional 
-specifier would allow the library to try to allocate the requested \emph{SIZE}
-on the implementation defined location.
-\item \emph{INTERLEAVED} Page allocations are interleaved across numa domains 
-associated with the memory kind.
-\item \emph{SYSDEFAULT} System defined memory policy is used.
+trait would result in program termination with an informative error message
+during symmetric heap creation on the defined partition.
+\item \emph{PREFERRED} Any unavailability of the user requested optional trait
+would allow the library to try and allocate the requested \emph{SIZE} on an
+implementation determined location.
+\item \emph{INTERLEAVED} Page allocations are interleaved across NUMA domains
+associated with the defined \emph{KIND}.
+\item \emph{SYSDEFAULT} System defined default memory policy is used.
 \end{itemize}
 
 \envvarnotes{
+    There are two types of memory allocations - generic (Refer
+    \ref{subsec:shfree}) and partition-specific allocations
+    (Refer \ref{subsec:shmem_kind}). Partition with ID 1 has a special usage.
+    When multiple partitions are created, any generic allocations of symmetric
+    data objects will use the symmetric heap created at partition with ID as 1.
+
     SHMEM\_SYMMETRIC\_SIZE is supported with its current syntax and meaning.
-    But, it is an error to use both SHMEM\_SYMMETRIC\_SIZE and any form of
-    SHMEM\_SYMMETRIC\_PARTITION environment variables together.
+    But, it is an error to use both SHMEM\_SYMMETRIC\_SIZE and
+    SHMEM\_SYMMETRIC\_PARTITION1 environment variables together.
 
-    The total size of the symmetric heap is determined as the sum of sizes 
-    of all \emph{SIZE} specifier in the defined memory partitions.
+    The total size of the symmetric heap is determined as the sum of all
+    \emph{SIZE} traits in the defined memory partitions.
 
-    All available page sizes and supported memory kinds be documented by the
-    implementation along with the \emph{SYSDEFAULT} values for the optional
-    properties.
+    All available page sizes and supported memory kinds should be documented
+    by the implementation along with the \emph{SYSDEFAULT} values for the
+    optional traits.
+}
 
-    Partition ID 1 has a special usage. Symmetric data object allocations
-    identified using the partition ID (with \textit{shmem\_kind\_malloc} and
-    \textit{shmem\_kind\_align} routines) are allocated on the symmetric heap
-    created over the partition with requested ID. Any generic allocations
-    without the partition ID (using \textit{shmem\_malloc} and
-    \textit{shmem\_align}) would result in using the symmetric heap created over
-    partition with ID 1.}
 
 \end{envvardefinition}
 
