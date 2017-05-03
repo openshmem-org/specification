@@ -3,30 +3,21 @@
 
 int main(void) 
 {
-   static int bigd[100];
-      int *ptr;
-      int i;
-
+   static int dest[4];
    shmem_init();
-
-   if (shmem_my_pe() == 0) {
-      /* initialize PE 1's bigd array */
-      ptr = shmem_ptr(bigd, 1);
+   int me = shmem_my_pe();
+   if (me == 0) { /* initialize PE 1's dest array */
+      int* ptr = shmem_ptr(dest, 1);
       if (ptr == NULL)
-         printf("can't use pointer to directly access PE 1's array\n");
+         printf("can't use pointer to directly access PE 1's dest array\n");
       else
-         for (i=0; i<100; i++)
-            *ptr++ = i+1;
+         for (int i = 0; i < 4; i++)
+            *ptr++ = i + 1;
    }
-
    shmem_barrier_all();
-
-   if (shmem_my_pe() == 1) {
-      printf("bigd on PE 1 is:\n");
-      for (i=0; i<100; i++)
-         printf(" %d\n",bigd[i]);
-      printf("\n");
-   }
+   if (me == 1)
+      printf("PE 1 dest: %d, %d, %d, %d\n",
+         dest[0], dest[1], dest[2], dest[3]);
    shmem_finalize();
    return 0;
 }
