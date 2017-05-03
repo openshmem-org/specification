@@ -375,6 +375,7 @@ specification.
     SMA\_INFO            & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_INFO} \\ \hline
     SMA\_SYMMETRIC\_SIZE & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_SYMMETRIC\_SIZE} \\ \hline
     SMA\_DEBUG           & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_DEBUG} \\ \hline
+    \CorCpp: \FUNC{shmem\_wait}  & 1.4 & Current & See ``Notes'' for \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}} \\ \hline
     \end{tabular}
 \end{center}
 
@@ -453,6 +454,13 @@ The environment variables
 were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
+\subsection{\FUNC{shmem\_wait}}
+The \FUNC{shmem\_wait} interface was identified as unintuitive with respect to
+the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
+replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
+\CONST{SHMEM\_CMP\_NE}, the \FUNC{shmem\_wait} interface was deprecated in
+favor of \FUNC{shmem\_wait\_until}, which makes the comparison operation
+explicit and better communicates the developer's intent.
 
 
 
@@ -497,6 +505,10 @@ synchronization routines.
 %
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
 \\See Section \ref{sec:dep_api}.
+%
+\item Deprecated the \VAR{shmem\_wait} functions and added \VAR{shmem\_test}
+      functions.
+\\ See Section \ref{subsec:p2p_intro}.
 %
 \item Added the \FUNC{shmem\_calloc} function.
 \\ See Section \ref{subsec:shmem_calloc}.
