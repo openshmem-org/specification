@@ -1,23 +1,14 @@
 #include <stdio.h>
 #include <shmem.h>
 
-int dst;
-
 int main(void)
 {
-   int me;
-   int old;
-
+   int old = -1;
+   static int dst = 22;
    shmem_init();
-   me = shmem_my_pe();
-
-   old = -1;
-   dst = 22;
-   shmem_barrier_all();
-
+   int me = shmem_my_pe();
    if (me == 0)
       old = shmem_atomic_fetch_inc(&dst, 1);
-
    shmem_barrier_all();
    printf("%d: old = %d, dst = %d\n", me, old, dst);
    shmem_finalize();

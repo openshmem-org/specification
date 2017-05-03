@@ -4,10 +4,10 @@
 int main(void)
 {
    static int race_winner = -1;
-   int oldval;
    shmem_init();
-   oldval = shmem_atomic_compare_swap(&race_winner, -1, shmem_my_pe(), 0);
-   if(oldval == -1) printf("pe %d was first\n",shmem_my_pe());
+   int me = shmem_my_pe();
+   int oldval = shmem_atomic_compare_swap(&race_winner, -1, me, 0);
+   if (oldval == -1) printf("PE %d was first\n", me);
    shmem_finalize();
    return 0;
 }

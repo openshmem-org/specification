@@ -1,0 +1,71 @@
+The following section discusses \openshmem \ac{API}s that provides a mechanism
+for synchronization between two \ac{PE}s based on the value of a symmetric data
+object.
+The point-to-point synchronization routines can be used to portably ensure
+that memory access operations observe remote updates in the order enforced by
+the initiator \ac{PE} using the \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}
+routines.
+
+Where appropriate compiler support is available, \openshmem provides
+type-generic point-to-point synchronization interfaces via \Cstd[11] generic
+selection. Such type-generic routines are supported for the
+``point-to-point synchronization types'' identified in
+Table~\ref{p2psynctypes}.
+
+% Fix the C99 styling here with the macros from PRs #55 and #31, and
+% osh_spec_next for \HEADER{}
+The point-to-point synchronization types include some of the exact-width
+integer types defined in \textit{stdint.h} by \Cstd[99]~\S7.18.1.1 and
+\Cstd[11]~\S7.20.1.1. When the \Cstd translation environment
+does not provide exact-width integer types with \textit{stdint.h}, an
+\openshmem implemementation is not required to provide support for these types.
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      short              & short      \\ \hline
+      int                & int        \\ \hline
+      long               & long       \\ \hline
+      long long          & longlong   \\ \hline
+      unsigned short     & ushort     \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+      size\_t            & size       \\ \hline
+      ptrdiff\_t         & ptrdiff    \\ \hline
+    \end{tabular}
+    \caption{Point-to-Point Synchronization Types and Names}
+    \label{p2psynctypes}
+  \end{center}
+\end{table}
+
+The point-to-point synchronization interface provides the enumerated type
+\CTYPE{shmem\_cmp\_t}, whose enumerators specify the comparison operators used
+by synchronization routines that take a \CTYPE{shmem\_cmp\_t} argument. The
+enumerators of \CTYPE{shmem\_cmp\_t} and their associated operations are
+presented in Table~\ref{p2p-consts}.  For Fortran, the constant names of
+Table~\ref{p2p-consts} shall be identifiers for integer parameters of
+default kind corresponding to the associated comparison operation.
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{ll}
+      \hline
+      Constant Name    & Comparison               \\ \hline
+      SHMEM\_CMP\_EQ   & Equal                    \\
+      SHMEM\_CMP\_NE   & Not equal                \\
+      SHMEM\_CMP\_GT   & Greater than             \\
+      SHMEM\_CMP\_GE   & Greater than or equal to \\
+      SHMEM\_CMP\_LT   & Less than                \\
+      SHMEM\_CMP\_LE   & Less than or equal to    \\ \hline
+    \end{tabular}
+    \caption{Point-to-Point Comparison Enumeration Constants}
+    \label{p2p-consts}
+  \end{center}
+\end{table}

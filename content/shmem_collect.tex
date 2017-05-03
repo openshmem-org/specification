@@ -1,5 +1,5 @@
 \apisummary{
-    Concatenates blocks of data from multiple \ac{PE}s to an array in every
+    Concatenates blocks of data from multiple \acp{PE} to an array in every
     \ac{PE}.
 }
 
@@ -29,26 +29,26 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \begin{apiarguments}
 
 \apiargument{OUT}{dest}{A symmetric array. The \dest{} argument must be large enough
-    to accept the concatenation of the \source{} arrays on all \ac{PE}s.  The data
+    to accept the concatenation of the \source{} arrays on all \acp{PE}.  The data
     types are as follows: For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64},
     \FUNC{shmem\_fcollect8}, and \FUNC{shmem\_fcollect64}, any data type with an
-    element size of 64 bits.  \Fortran{} derived types, \Fortran{} character type,
+    element size of 64 bits.  \Fortran derived types, \Fortran character type,
     and \CorCpp{}  structures  are not permitted.  For \FUNC{shmem\_collect4},
     \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32},
-    any data type with an element size of \CONST{32} bits.  \Fortran{} derived
-    types, \Fortran{} character type, and \CorCpp{} structures are not permitted.}
+    any data type with an element size of \CONST{32} bits.  \Fortran derived
+    types, \Fortran character type, and \CorCpp{} structures are not permitted.}
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
     must be of type \VAR{size\_t} for \Cstd. If you are using \Fortran, it must be
     a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
-    \ac{PE}s.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between
     consecutive \ac{PE} numbers in the \activeset. \VAR{logPE\_stride} must be of
     type integer.  If you are using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{The number of \ac{PE}s in the \activeset. \VAR{PE\_size}
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset. \VAR{PE\_size}
     must be of type integer.  If you are using  \Fortran, it must be a default
     integer value.}
 \apiargument{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of
@@ -56,7 +56,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
     If you are using \Fortran, it must be a default integer value.  Every element of
     this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
-    \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran{} before any of the \ac{PE}s
+    \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \acp{PE}
     in the \activeset{} enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
 
 \end{apiarguments}
@@ -64,28 +64,29 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apidescription{   
     \openshmem{} \FUNC{collect} and \FUNC{fcollect} routines concatenate \VAR{nelems}
     \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the
-    \dest{} array, over the set of \ac{PE}s defined by \VAR{PE\_start},
+    \dest{} array, over the set of \acp{PE} defined by \VAR{PE\_start},
     \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The
     resultant \dest{} array contains the contribution from \ac{PE} \VAR{PE\_start}
     first, then the contribution from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride}
     second, and so on. The collected result is written to the \dest{} array for all
-    \ac{PE}s in the \activeset.
+    \acp{PE} in the \activeset.
     
     The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
-    participating \ac{PE}s, while the \FUNC{collect} routines allow \VAR{nelems} to
+    participating \acp{PE}, while the \FUNC{collect} routines allow \VAR{nelems} to
     vary from \ac{PE} to \ac{PE}.
     
     As with all \openshmem collective routines, each of these routines assumes that
-    only \ac{PE}s in the \activeset{} call the routine. If a \ac{PE} not in the
+    only \acp{PE} in the \activeset{} call the routine. If a \ac{PE} not in the
     \activeset{} and calls this collective routine, the behavior is undefined.
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
-    must be equal on all \ac{PE}s in the \activeset. The same \dest{} and \source{}
-    arrays and the same \VAR{pSync} work array must be passed to all \ac{PE}s in the
+    must be equal on all \acp{PE} in the \activeset. The same \dest{} and \source{}
+    arrays and the same \VAR{pSync} work array must be passed to all \acp{PE} in the
     \activeset.
     
     Upon return from a collective routine, the following are true for the local
-    \ac{PE}: The \dest{} array is updated. The values in the \VAR{pSync} array are
+    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused. 
+    The values in the \VAR{pSync} array are
     restored to the original values.
 }
 
@@ -99,13 +100,13 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     time it is used.
     
     You  must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
-    in the \activeset{} while any of the \ac{PE}s participate in processing of an
+    in the \activeset{} while any of the \acp{PE} participate in processing of an
     \openshmem collective routine.  Be careful to avoid these situations: If the
     \VAR{pSync} array is initialized at run time, some type of synchronization is
-    needed to ensure that all \ac{PE}s in the working set have initialized
+    needed to ensure that all \acp{PE} in the working set have initialized
     \VAR{pSync} before any of them  enter an \openshmem routine called with the
     \VAR{pSync} synchronization array.  A \VAR{pSync} array can be reused on a
-    subsequent \openshmem collective routine only if none of the \ac{PE}s in the
+    subsequent \openshmem collective routine only if none of the \acp{PE} in the
     \activeset{}  are still processing a  prior \openshmem collective routine call
     that used the same \VAR{pSync} array.  In general, this may be ensured only by
     doing some type of synchronization.  
@@ -123,7 +124,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     {}
 
 \apifexample
-    {The following \FUNC{SHMEM\_COLLECT} example is for \Fortran{} programs:}
+    {The following \FUNC{SHMEM\_COLLECT} example is for \Fortran programs:}
     {./example_code/shmem_collect_example.f90}
     {}
 
