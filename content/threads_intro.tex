@@ -10,7 +10,8 @@ and all \openshmem{} interfaces are invoked by a single thread.
 \item {\bf \CONST{SHMEM\_THREAD\_FUNNELED}}
 The \openshmem{} program may be multithreaded, however, the 
 program must ensure that only the main thread invokes the \openshmem{}
-interfaces.
+interfaces, i.e, the thread that invokes either \FUNC{shmem\_init} or
+\FUNC{shmem\_init\_thread}.
 
 \item {\bf \CONST{SHMEM\_THREAD\_SERIALIZED}} 
 The \openshmem{} program may be multithreaded, however, the 
@@ -66,8 +67,7 @@ some order, even if their execution is interleaved.
 In \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, 
 if multiple threads call the collective calls, it is the programmer's responsibility to ensure the correct ordering of
 collective calls.  The symmetric heap management functions, which are defined to call
-\FUNC{shmem\_barrier\_all}(\ref{sec:mem_routines}) before they return 
-must be treated as collective operations.
+\FUNC{shmem\_barrier\_all}(\ref{sec:mem_routines}) must be treated as collective operations.
 
 
 \end{itemize} 
