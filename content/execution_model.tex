@@ -8,6 +8,9 @@ start by calling the initialization routine  \FUNC{shmem\_init}
 before using any of the other \openshmem library routines.  An \openshmem
 program concludes its use of the \openshmem library when all \acp{PE} call
 \FUNC{shmem\_finalize} or when any \ac{PE} calls \FUNC{shmem\_global\_exit}.
+During finalization, \openshmem must
+complete all pending communication and release all the resources associated to
+the library using an implicit collective synchronization across PEs.
 Calling any \openshmem routine after \FUNC{shmem\_finalize} leads to undefined
 behavior.
 
