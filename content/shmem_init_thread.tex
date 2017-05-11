@@ -31,7 +31,6 @@ The correct values for \VAR{provided} and \VAR{requested} are
 An \openshmem{} program is initialized either by \FUNC{shmem\_init} or
 \FUNC{shmem\_init\_thread}. Similar to \FUNC{shmem\_init}, the
 \FUNC{shmem\_init\_thread} may not be called multiple times in an \openshmem{} program.
-\FUNC{shmem\_init\_thread} returns 0 upon success; otherwise, it returns a non-zero value.
  If the call to \FUNC{shmem\_init\_thread}  is unsuccessful either in allocating and initializing
  resources for the \openshmem{} library or initialization required for supporting
  the provided thread level, then the behavior of any subsequent call
