@@ -26,20 +26,19 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     that is permissible for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in \source.  For
     \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of
-    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.  If you are
+    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.  When
     using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the \activeset,	from which the data is copied. Must be greater than or equal to
-    0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of type integer.  If you
-    are using \Fortran, it must be a default integer value.}
+    0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of type integer.  When using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{ The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the \activeset. \VAR{log\_PE\_stride} must be of
-    type integer.  If you are using \Fortran, it must be a default integer value.}
+    type integer.  When using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_size}{ The number of \acp{PE} in the \activeset.
-    \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must be a
+    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{pSync}{ A symmetric work array.  In \CorCpp, \VAR{pSync} must
     be of type long and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}. In \Fortran,
@@ -67,8 +66,8 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
     \dest{} and \source{} data objects and the same \VAR{pSync} work array must be
     passed to all \acp{PE} in the \activeset.
     
-    Before any \ac{PE} calls a broadcast routine, you must ensure that the following
-    conditions exist (synchronization via a barrier or some other method is often
+    Before any \ac{PE} calls a broadcast routine, the following
+    conditions must be met: (synchronization via a barrier or some other method is often
     needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
     \activeset{} is not still in use from a prior call to a broadcast routine.  The
     \dest{} array on all \acp{PE} in the \activeset{} is ready to accept the
@@ -101,7 +100,7 @@ constraints, which are as follows:
     Multiple calls to \openshmem routines that use the same \VAR{pSync} array do not
     require that \VAR{pSync} be reinitialized after the first call.
     
-    You must ensure the that the \VAR{pSync} array is not being updated by any
+    Ensure that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the \activeset{} while any of the \acp{PE} participates in processing
     of an \openshmem broadcast routine. Be careful to avoid these situations: If the
     \VAR{pSync} array is initialized at run time, some type of synchronization is

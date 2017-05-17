@@ -40,21 +40,21 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
-    must be of type \VAR{size\_t} for \Cstd. If you are using \Fortran, it must be
+    must be of type \VAR{size\_t} for \Cstd. When using \Fortran, it must be
     a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between
     consecutive \ac{PE} numbers in the \activeset. \VAR{logPE\_stride} must be of
-    type integer.  If you are using \Fortran, it must be a default integer value.}
+    type integer.  When using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset. \VAR{PE\_size}
-    must be of type integer.  If you are using  \Fortran, it must be a default
+    must be of type integer.  When using  \Fortran, it must be a default
     integer value.}
 \apiargument{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of
     type long and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.  In \Fortran,
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
-    If you are using \Fortran, it must be a default integer value.  Every element of
+    When using \Fortran, it must be a default integer value.  Every element of
     this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
     \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \acp{PE}
     in the \activeset{} enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
@@ -99,7 +99,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     return, so a particular \VAR{pSync} buffer need only be initialized the first
     time it is used.
     
-    You  must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
+    Ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
     in the \activeset{} while any of the \acp{PE} participate in processing of an
     \openshmem collective routine.  Be careful to avoid these situations: If the
     \VAR{pSync} array is initialized at run time, some type of synchronization is

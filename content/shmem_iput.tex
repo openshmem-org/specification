@@ -40,18 +40,18 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.  A
         value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
-        \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a default integer value.}
+        \textit{ptrdiff\_t}.  When using \Fortran, it must be a default integer value.}
     \apiargument{IN}{sst}{The  stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
         array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a
+        of type \textit{ptrdiff\_t}.  When using \Fortran, it must be a
         default integer value.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.  If you are
+        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.  When
         using \Fortran, it must be  a constant, variable, or array element of
         default integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
-        of type integer.   If you  are  using  \Fortran, it must be a constant,
+        of type integer.   When  \Fortran, it must be a constant,
         variable, or array element of default integer type.}
 \end{apiarguments}
 
@@ -91,7 +91,7 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 }
 
 \apinotes{
-    If you are using \Fortran, data types must be of default size.  For example, a
+    When using \Fortran, data types must be of default size.  For example, a
     real variable must be declared as  \CONST{REAL}, \CONST{REAL*4} or
     \CONST{REAL(KIND=KIND(1.0))}.
     See Section \ref{subsec:memory_model} for a definition of the term
