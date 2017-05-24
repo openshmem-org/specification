@@ -45,17 +45,24 @@ CALL SHMEM_QUIET
     memory stores, and nonblocking \PUT{} and \GET{} routines) to
     symmetric data objects on all \acp{PE}.
 
-    \newtext{In a multithreaded \openshmem{} program, the user is responsible to
-    ensure the order in which writes (\PUT{}, \ac{AMO}, memory stores, and
-    nonblocking \PUT{} and \GET{} routines) are issued by all the threads. If
-    the user intends to complete operations issued by a \ac{PE} with a
-    \FUNC{shmem\_quiet} call, the user may have to call thread package specific
-    synchronizing operation among the threads, i.e., when using pthreads, the
-    user may call \FUNC{pthread\_thread\_init} and
-    \FUNC{pthread\_barrier\_wait}, before having one thread call
-    \FUNC{shmem\_quiet}. A memory store is considered issued, if the value
-    updated by memory store  is visible to the thread calling
-    \FUNC{shmem\_quiet}.}
+    \newtext{In an \openshmem{} program with multithreaded \acp{PE}, it is the
+    user's responsibility to ensure ordering between operations issued by the threads
+    in a \ac{PE} that target symmetric memory (e.g. \PUT{}, \ac{AMO}, memory stores,
+    and nonblocking routines) and calls by threads in that \ac{PE} to
+    \FUNC{shmem\_quiet}. The \FUNC{shmem\_quiet} routine can enforce memory store ordering only for the
+    calling thread. Thus, to ensure ordering for memory stores performed by a thread that is
+    not the thread calling \FUNC{shmem\_quiet}, the update must be made visible to the
+    calling thread according to the rules of the memory model associated with
+    the threading environment.} 
+ 
+     \newtext{A call to \FUNC{shmem\_quiet} by a thread completes the operations issued by 
+     the calling thread. If the user intends to complete operations issued by a
+     thread that is not the thread calling \FUNC{shmem\_quiet}, the user must ensure that the operations
+     are performed prior to the call to \FUNC{shmem\_quiet}. This may require the use
+     of a synchronization operation provided by the threading package. For
+     example, when using POSIX Threads, the user may call the
+     \FUNC{pthread\_barrier\_wait} routine to ensure that all threads have issued
+     operations before a thread calls \FUNC{shmem\_quiet}.}
 
     \FUNC{shmem\_quiet} does not have an effect on the ordering between memory 
     accesses issued by the target PE. \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until}, \FUNC{shmem\_barrier}, 
