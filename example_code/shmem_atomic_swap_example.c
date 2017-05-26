@@ -11,7 +11,7 @@ int main(void)
    shmem_barrier_all();
    long new_val = me;
    if (me & 1) {
-      long swapped_val = shmem_swap(&dest, new_val, (me + 1) % npes);
+      long swapped_val = shmem_atomic_swap(&dest, new_val, (me + 1) % npes);
       printf("%d: dest = %ld, swapped = %ld\n", me, dest, swapped_val);
    }
    shmem_finalize();
