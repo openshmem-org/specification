@@ -3,14 +3,13 @@
 
 int main(void)
 {
-   int old = -1;
    static int dst = 22;
    shmem_init();
    int me = shmem_my_pe();
-   if (me == 0)
-      old = shmem_finc(&dst, 1);
+   if (me == 1)
+      shmem_atomic_add(&dst, 44, 0);
    shmem_barrier_all();
-   printf("%d: old = %d, dst = %d\n", me, old, dst);
+   printf("%d: dst = %d\n", me, dst);
    shmem_finalize();
    return 0;
 }

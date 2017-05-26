@@ -142,29 +142,61 @@ symmetric data objects in the symmetric heap, in \Cstd and \Fortran.
 \subsection{Atomic Memory Operations}\label{sec:amo}
 \input{content/atomics_intro}
 
-\subsubsection{\textbf{SHMEM\_ADD}}\label{subsec:shmem_add}
-\input{content/shmem_add.tex}
+\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH}}
+\label{subsec:shmem_atomic_fetch}
+\input{content/shmem_atomic_fetch.tex}
 
-\subsubsection{\textbf{SHMEM\_CSWAP}}\label{subsec:shmem_cswap}
-\input{content/shmem_cswap.tex} 
+\subsubsection{\textbf{SHMEM\_ATOMIC\_SET}}
+\label{subsec:shmem_atomic_set}
+\input{content/shmem_atomic_set.tex}
 
-\subsubsection{\textbf{SHMEM\_SWAP}}\label{subsec:shmem_swap}
-\input{content/shmem_swap.tex}
+\subsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP}}
+\label{subsec:shmem_atomic_compare_swap}
+\input{content/shmem_atomic_compare_swap.tex}
 
-\subsubsection{\textbf{SHMEM\_FINC}}\label{subsec:shmem_finc}
-\input{content/shmem_finc.tex}
+\subsubsection{\textbf{SHMEM\_ATOMIC\_SWAP}}
+\label{subsec:shmem_atomic_swap}
+\input{content/shmem_atomic_swap.tex}
 
-\subsubsection{\textbf{SHMEM\_INC}}\label{subsec:shmem_inc}
-\input{content/shmem_inc.tex}
+\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC}}
+\label{subsec:shmem_atomic_fetch_inc}
+\input{content/shmem_atomic_fetch_inc.tex}
 
-\subsubsection{\textbf{SHMEM\_FADD}}\label{subsec:shmem_fadd}
-\input{content/shmem_fadd.tex}
+\subsubsection{\textbf{SHMEM\_ATOMIC\_INC}}
+\label{subsec:shmem_atomic_inc}
+\input{content/shmem_atomic_inc.tex}
 
-\subsubsection{\textbf{SHMEM\_FETCH}}\label{subsec:shmem_fetch}
-\input{content/shmem_fetch.tex}
+\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD}}
+\label{subsec:shmem_atomic_fetch_add}
+\input{content/shmem_atomic_fetch_add.tex}
 
-\subsubsection{\textbf{SHMEM\_SET}}\label{subsec:shmem_set}
-\input{content/shmem_set.tex}
+\subsubsection{\textbf{SHMEM\_ATOMIC\_ADD}}
+\label{subsec:shmem_atomic_add}
+\input{content/shmem_atomic_add.tex}
+
+\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND}}
+\label{subsec:shmem_atomic_fetch_and}
+\input{content/shmem_atomic_fetch_and.tex}
+
+\subsubsection{\textbf{SHMEM\_ATOMIC\_AND}}
+\label{subsec:shmem_atomic_and}
+\input{content/shmem_atomic_and.tex}
+
+\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR}}
+\label{subsec:shmem_atomic_fetch_or}
+\input{content/shmem_atomic_fetch_or.tex}
+
+\subsubsection{\textbf{SHMEM\_ATOMIC\_OR}}
+\label{subsec:shmem_atomic_or}
+\input{content/shmem_atomic_or.tex}
+
+\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR}}
+\label{subsec:shmem_atomic_fetch_xor}
+\input{content/shmem_atomic_fetch_xor.tex}
+
+\subsubsection{\textbf{SHMEM\_ATOMIC\_XOR}}
+\label{subsec:shmem_atomic_xor}
+\input{content/shmem_atomic_xor.tex}
 
 
 
@@ -198,36 +230,14 @@ symmetric data objects in the symmetric heap, in \Cstd and \Fortran.
 
 
 
-\subsection{Point-To-Point Synchronization Routines}
-The following section discusses \openshmem \ac{API}s that provides a mechanism
-for synchronization between two \acp{PE} based on the value of a symmetric data
-object. 
-
-Where appropriate compiler support is available, \openshmem provides
-type-generic point-to-point synchronization interfaces via \Cstd[11] generic
-selection. Such type-generic routines are supported for the
-``point-to-point synchronization types'' identified in
-Table~\ref{p2psynctypes}. Implementations may optionally support additional
-types.
-
-\begin{table}[h]
-  \begin{center}
-    \begin{tabular}{|l|l|}
-      \hline
-      \TYPE     & \TYPENAME \\ \hline
-      short     & short     \\ \hline
-      int       & int       \\ \hline
-      long      & long      \\ \hline
-      long long & longlong  \\ \hline
-    \end{tabular}
-    \caption{Point-to-Point Synchronization Types and Names}
-    \label{p2psynctypes}
-  \end{center}
-\end{table}
-
+\subsection{Point-To-Point Synchronization Routines}\label{subsec:p2p_intro}
+\input{content/p2p_sync_intro.tex}
 
 \subsubsection{\textbf{SHMEM\_WAIT}}\label{subsec:shmem_wait}
 \input{content/shmem_wait.tex}
+
+\subsubsection{\textbf{SHMEM\_TEST}}\label{subsec:shmem_test}
+\input{content/shmem_test.tex}
 
 
 

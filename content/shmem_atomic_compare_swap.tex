@@ -5,14 +5,16 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_cswap(TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE shmem_atomic_compare_swap(TYPE *dest, TYPE cond, TYPE value, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_cswap(TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE shmem_<TYPENAME>_atomic_compare_swap(TYPE *dest, TYPE cond, TYPE value, int pe);
 \end{Csynopsis}
-where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{Fsynopsis}
 INTEGER pe
@@ -38,10 +40,10 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
         integer value.}
 \end{apiarguments}
 
-\apidescription{  
+\apidescription{
     The conditional swap routines conditionally update a \VAR{dest} data object on
     the specified \ac{PE} and return the prior contents of the data object in one
-    atomic operation.   
+    atomic operation.
 }
 \apidesctable{
     The  \VAR{dest} and \VAR{value} data objects must conform to certain typing
@@ -59,7 +61,9 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
 }
 
 \apinotes{
-    None.
+    As of \openshmem[1.4], \FUNC{shmem\_cswap} has been deprecated.
+    Its behavior and call signature are identical to the replacement
+    interface, \FUNC{shmem\_atomic\_compare\_swap}.
 }
 
 \begin{apiexamples}
@@ -68,7 +72,7 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
     {The following call ensures that the first \ac{PE} to execute the
     conditional swap will successfully write its \ac{PE} number to
     \VAR{race\_winner} on \ac{PE} \CONST{0}.}
-    {./example_code/shmem_cswap_example.c}
+    {./example_code/shmem_atomic_compare_swap_example.c}
     {}
 
 \end{apiexamples}
