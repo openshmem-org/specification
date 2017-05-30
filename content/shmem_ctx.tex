@@ -56,7 +56,7 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
     set on that context.  Otherwise the behavior is undefined.
 
         \apitablerow{\CONST{SHMEM\_CTX\_SERIALIZED}}{
-            The given context will not be used by multiple threads
+            The given context is shareable; however, it will not be used by multiple threads
             concurrently.  When the \CONST{SHMEM\_CTX\_SERIALIZED} option is
             set, the user must ensure that operations involving the given
             context are serialized by the application, including operations
