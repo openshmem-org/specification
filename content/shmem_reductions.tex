@@ -201,7 +201,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     be passed to all \acp{PE} in the \activeset.
     
     Before any \ac{PE} calls a reduction routine, the
-    following conditions must be met FIXME (synchronization via a \OPR{barrier} or some other
+    following conditions must be met (synchronization via a \OPR{barrier} or some other
     method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
     on all \acp{PE} in the \activeset{} are not still in use from a prior call to a
     collective \openshmem{} routine.  The \dest{} array on all \acp{PE} in the
