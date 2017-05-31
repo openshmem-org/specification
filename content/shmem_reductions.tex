@@ -199,7 +199,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same \dest{}
     and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
     be passed to all \acp{PE} in the \activeset.
-    
+    %FIXME: Reword 'the following conditions must be met.'
     Before any \ac{PE} calls a reduction routine, the
     following conditions must be met (synchronization via a \OPR{barrier} or some other
     method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
