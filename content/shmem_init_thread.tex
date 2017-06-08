@@ -42,7 +42,10 @@ An \openshmem{} program is initialized either by \FUNC{shmem\_init} or
     }
 
 \apinotes{
-    None
+    The OpenSHMEM program can be initialized either by \FUNC{shmem\_init} or
+    \FUNC{shmem\_init\_thread}. If the implementation is initialized by
+    \FUNC{shmem\_init}, the implementation can choose to support one of the four
+    defined thread levels.
 }		
 
 
