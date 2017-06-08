@@ -17,8 +17,8 @@
 \chapter{Writing \openshmem Programs}
 \section*{Incorporating \openshmem{} into Programs}\label{sec:writing_programs}
 
-In this section, we describe how to write a ``Hello World" \openshmem program.
-To write a ``Hello World" \openshmem program we need to: 
+The following section describes how to write a ``Hello World" \openshmem program.
+To write a ``Hello World" \openshmem program, the user must: 
 
 \begin{itemize}
 \item Add the include file \HEADER{shmem.h} (for \Cstd) or \HEADER{shmem.fh} (for \Fortran).
@@ -41,8 +41,7 @@ To write a ``Hello World" \openshmem program we need to:
 \vspace{0.1in}
 \end{minipage}
 
-\openshmem also has a \Fortran API, so for completeness we will now give the
-same program written in \Fortran, in listing~\ref{openshmem-hello-f90}:
+\openshmem also has a \Fortran API, therefore listing~\ref{openshmem-hello-f90} provides the same program written in \Fortran:
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
@@ -320,7 +319,7 @@ interconnect, and to a very limited extent, Infiniband based clusters.
 For the \openshmem Specification(s), deprecation is the process of identifying
 API that is supported but no longer recommended for use by program users. For
 \openshmem library users, said API \textbf{must} be supported until clearly
-indicated as otherwise by the Specification. In this chapter we will record the
+indicated as otherwise by the Specification. This chapter records the
 API that has been deprecated, the \openshmem Specification that effected the
 deprecation, and if the feature is supported in the current version of the
 specification.  
