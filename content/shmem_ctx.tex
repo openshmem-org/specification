@@ -59,14 +59,10 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
             The given context is shareable; however, it will not be used by multiple threads
             concurrently.  When the \CONST{SHMEM\_CTX\_SERIALIZED} option is
             set, the user must ensure that operations involving the given
-            context are serialized by the application, including operations
-            that perform an explicit or implicit barrier.}
+            context are serialized by the application.}
 
         \apitablerow{\CONST{SHMEM\_CTX\_PRIVATE}}{
-            The given context will be used only by the thread that created it.
-            Contexts with the \CONST{SHMEM\_CTX\_PRIVATE} option set are
-            excluded from the quiet operation performed during explicit and
-            implicit barrier operations.}
+            The given context will be used only by the thread that created it.}
 }
 
 \apireturnvalues{
