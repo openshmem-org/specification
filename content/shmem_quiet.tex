@@ -55,9 +55,10 @@ CALL SHMEM_QUIET
     calling thread according to the rules of the memory model associated with
     the threading environment.} 
  
-     \newtext{A call to \FUNC{shmem\_quiet} by a thread completes the operations issued by 
-     the calling thread. If the user intends to complete operations issued by a
-     thread that is not the thread calling \FUNC{shmem\_quiet}, the user must ensure that the operations
+     \newtext{
+     A call to \FUNC{shmem\_quiet} by a thread completes the operations posted prior
+     to calling \FUNC{shmem\_quiet}. If the user intends to also complete operations 
+     issued by a thread that is not the thread calling \FUNC{shmem\_quiet}, the user must ensure that the operations
      are performed prior to the call to \FUNC{shmem\_quiet}. This may require the use
      of a synchronization operation provided by the threading package. For
      example, when using POSIX Threads, the user may call the
