@@ -3,10 +3,10 @@ mechanisms to share information among \openshmem processes or \acp{PE} and
 private data objects that are accessible by the \ac{PE} itself. The \ac{API}
 allows communication and synchronization operations on both private (local to
 the PE initiating the operation) and remotely accessible data objects. The key
-feature of \openshmem is that data transfer operations are
-\textit{\textbf{one-sided}} in nature. This means that a local \ac{PE} executing
+feature of \openshmem is that data transfer operations are intrinsically
+\textit{\textbf{one-sided}}, meaning that a local \ac{PE} executing
 a data transfer routine does not require the participation of the remote \ac{PE}
-to complete the routine. This allows for overlap between communication and
+to complete the routine. This feature allows for overlap between communication and
 computation to hide data transfer latencies, which makes  \openshmem ideal for
 unstructured, small/medium size data communication patterns. The \openshmem
 library routines have the potential to provide a low-latency, high-bandwidth
@@ -31,9 +31,9 @@ An overview of the \openshmem routines is described below:
 \item \textbf{Library Setup and Query}
 \begin{enumerate}
   \item \OPR{Initialization}: The \openshmem library environment is initialized. 
-  \item \OPR{Query}: The local \ac{PE} may get the number of \acp{PE} running
+  \item \OPR{Query}: The local \ac{PE} requests the number of \acp{PE} running
       the same program and its unique integer identifier. 
-  \item \OPR{Accessibility}: The local \ac{PE} can find out if a remote \ac{PE} is
+  \item \OPR{Accessibility}: The local \ac{PE} may request if a remote \ac{PE} is
       executing the same binary, or if a particular symmetric data object can be
       accessed by a remote \ac{PE}, or may obtain a pointer to a symmetric data
       object on the specified remote \ac{PE} on shared memory systems.
@@ -52,10 +52,10 @@ An overview of the \openshmem routines is described below:
 \item \textbf{Remote Memory Access}
 \begin{enumerate}
     \item \PUT: The local \ac{PE} specifies the \source{} data object (private
-        or symmetric) that is copied to the symmetric data object on the remote
+        or symmetric) copied to the symmetric data object on the remote
         \ac{PE}. 
   \item \GET: The local \ac{PE} specifies the symmetric data object on the remote
-      \ac{PE} that is copied to a data object (private or symmetric) on the local
+      \ac{PE} copied to a data object (private or symmetric) on the local
       \ac{PE}. 
 \end{enumerate}
 
