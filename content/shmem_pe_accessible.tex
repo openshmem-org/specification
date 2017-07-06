@@ -26,9 +26,9 @@ LOG = SHMEM_PE_ACCESSIBLE(pe)
     \FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if  the  remote
     \ac{PE} is a process  running from the same executable  file as the local
     \ac{PE}, indicating that full \openshmem support for symmetric data objects
-    (that reside in the static memory and symmetric heap) is available, otherwise it
+    that reside in the static memory and symmetric heap is available; otherwise, it
     returns \CONST{FALSE}.  This routine may be particularly useful for hybrid
-    programming with other communication libraries (such as a \ac{MPI}) or parallel
+    programming with other communication libraries, such as a \ac{MPI}, or parallel
     languages.  For example, on  SGI Altix  series  systems, \openshmem is
     supported  across multiple partitioned hosts and InfiniBand connected hosts.
     When running multiple executable MPI programs using \openshmem on an Altix, full

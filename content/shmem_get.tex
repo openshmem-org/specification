@@ -41,7 +41,7 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{Local data object to be updated.}
-    \apiargument{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe}
+    \apiargument{IN}{source}{Data object on the \ac{PE}, identified by \VAR{pe},
         that contains the data to be copied.  This data object must be remotely
         accessible.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}

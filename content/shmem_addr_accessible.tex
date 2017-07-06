@@ -29,7 +29,7 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
     specified address \VAR{addr} is a data object on the local \ac{PE}. 
     
     This routine may be particularly useful for hybrid programming with other
-    communication libraries (such as \ac{MPI}) or parallel languages.  For
+    communication libraries, such as \ac{MPI}, or parallel languages.  For
     example, in SGI Altix series systems, for multiple executable MPI programs that
     use \openshmem routines, it is important to note that static memory, such as a
     \Fortran common block or \Cstd global variable, is symmetric between

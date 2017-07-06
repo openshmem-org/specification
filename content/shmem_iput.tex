@@ -58,11 +58,11 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 
 \apidescription{
     The \FUNC{iput} routines provide a method  for  copying strided data
-    elements (specified by \VAR{sst}) of an array from a \source{} array on the
+    elements, specified by \VAR{sst}, of an array from a \source{} array on the
     local \ac{PE} to locations specified by stride \VAR{dst} on a \dest{} array
     on specified remote \ac{PE}. Both strides, \VAR{dst} and \VAR{sst}, must be
     greater than or equal to \CONST{1}. The routines return when the data has
-    been copied out of the \VAR{source} array on the local \ac{PE} but not
+    been copied out of the \VAR{source} array on the local \ac{PE}, but not
     necessarily before the data has been delivered to the remote data object.
 }
 
