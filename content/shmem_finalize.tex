@@ -1,5 +1,5 @@
 \apisummary{
-    A collective operation that releases resources used by the \openshmem
+    \FUNC{shmem\_finalize} is a collective operation that releases resources used by the \openshmem
     library.  This only terminates the \openshmem portion of a program, not the
     entire program.
 }
@@ -19,10 +19,10 @@ CALL SHMEM_FINALIZE()
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_finalize} is a collective operation that ends the \openshmem
-    portion of a program previously initialized by \FUNC{shmem\_init} and
-    releases resources used by the \openshmem library. This collective
-    operation requires all \acp{PE} to participate in the call. There is an
+     \FUNC{shmem\_finalize} ends the \openshmem portion of a program
+     previously initialized by \FUNC{shmem\_init} and
+    releases resources used by the \openshmem library. \FUNC{shmem\_finalize} 
+    requires all \acp{PE} to participate in the call. There is an
     implicit global barrier in \FUNC{shmem\_finalize} so that pending
     communications are completed, and no resources can be released until all
     \acp{PE} have entered \FUNC{shmem\_finalize}. \FUNC{shmem\_finalize} must be
@@ -50,7 +50,7 @@ CALL SHMEM_FINALIZE()
 \begin{apiexamples}
 
 \apicexample
-    {The following finalize example is for C11 programs:}
+    {The following \FUNC{shmem\_finalize} example is for C11 programs:}
     {./example_code/shmem_finalize_example.c}
     {}
 

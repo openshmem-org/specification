@@ -1,5 +1,5 @@
 \apisummary{
-    Copies one data item to a remote \ac{PE}.
+    \FUNC{shmem\_p} copies one data item to a remote \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -23,7 +23,7 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
 \end{apiarguments}
 
 \apidescription{
-    These routines provide a very low latency put capability for single elements of
+    \FUNC{shmem\_p} routines provide a very low latency put capability for single elements of
     most basic types.
     
     As with \FUNC{shmem\_put}, these routines start the remote transfer and may
@@ -42,7 +42,7 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
 \begin{apiexamples}
 
     \apicexample
-    {The following example uses \FUNC{shmem\_p} in a \Cstd[11] program.}
+    {The following \FUNC{shmem\_p} example is for \Cstd[11] programs:}
     {./example_code/shmem_p_example.c}
     {}
 

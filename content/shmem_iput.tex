@@ -1,5 +1,5 @@
 \apisummary{
-    Copies strided data to a specified \ac{PE}.
+   \FUNC{shmem\_iput} copies strided data to a specified \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -40,24 +40,24 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.  A
         value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
-        \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a default integer value.}
+        \CTYPE{ptrdiff\_t}.  When using \Fortran, \VAR{dst} must be a default integer value.}
     \apiargument{IN}{sst}{The  stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
         array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a
+        of type \CTYPE{ptrdiff\_t}.  When using \Fortran, \VAR{sst} must be a
         default integer value.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.  When
-        using \Fortran, it must be  a constant, variable, or array element of
+        using \Fortran, \VAR{nelems} must be  a constant, variable, or array element of
         default integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
-        of type integer.   When using  \Fortran, it must be a constant,
+        of type integer.   When using  \Fortran, \VAR{pe} must be a constant,
         variable, or array element of default integer type.}
 \end{apiarguments}
 
 
 \apidescription{
-    The \FUNC{iput} routines provide a method  for  copying strided data
+     \FUNC{shmem\_iput} routines provide a method  for  copying strided data
     elements (specified by \VAR{sst}) of an array from a \source{} array on the
     local \ac{PE} to locations specified by stride \VAR{dst} on a \dest{} array
     on specified remote \ac{PE}. Both strides, \VAR{dst} and \VAR{sst}, must be
@@ -101,7 +101,7 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 \begin{apiexamples}
 
 \apicexample
-    {Consider the following \FUNC{shmem\_iput}  example  for C11 programs.}
+    {The following \FUNC{shmem\_iput}  example is  for C11 programs:}
     {./example_code/shmem_iput_example.c}
     {}
 \end{apiexamples}

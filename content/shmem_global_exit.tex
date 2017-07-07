@@ -1,5 +1,5 @@
 \apisummary{
-    A routine that allows any \ac{PE} to force termination of an entire program.
+    \FUNC{shmem\_global\_exit} is a non-collective routine that allows any \ac{PE} to force termination of an entire program.
 }
 
 \begin{apidefinition}
@@ -22,10 +22,10 @@ CALL SHMEM_GLOBAL_EXIT(status)
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_global\_exit} is a non-collective routine that allows any one
+    \FUNC{shmem\_global\_exit} allows any one
     \ac{PE} to force termination of an \openshmem program for all \acp{PE},
-    passing an exit status to the execution environment. This routine terminates
-    the entire program, not just the \openshmem portion.  When any \ac{PE} calls
+    passing an exit status to the execution environment. \FUNC{shmem\_global\_exit} 
+    terminates the entire program, not just the \openshmem portion.  When any \ac{PE} calls
     \FUNC{shmem\_global\_exit}, it results in the immediate notification to all
     \acp{PE} to terminate.  \FUNC{shmem\_global\_exit} flushes I/O and releases
     resources in accordance with C/C++/Fortran language requirements for normal

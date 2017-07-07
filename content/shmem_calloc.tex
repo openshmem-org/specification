@@ -1,5 +1,5 @@
 \apisummary{
-  Allocate a zeroed block of symmetric memory.
+  \FUNC{shmem\_calloc} allocates a zeroed block of symmetric memory.
 }
 
 \begin{apidefinition}
@@ -15,7 +15,7 @@ void *shmem_calloc(size_t count, size_t size);
 
 
 \apidescription{
-  The \FUNC{shmem\_calloc} routine allocates a region of remotely-accessible
+  \FUNC{shmem\_calloc} allocates a region of remotely-accessible
   memory for an array of \VAR{count} objects of \VAR{size} bytes each and
   returns a pointer to the lowest byte address of the allocated symmetric
   memory. The space is initialized to all bits zero.

@@ -1,5 +1,5 @@
 \apisummary{
-    Returns a pointer to a data object on a specified \ac{PE}.
+    \FUNC{shmem\_ptr} returns a pointer to a data object on a specified \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -18,7 +18,7 @@ PTR = SHMEM_PTR(dest, pe)
 \begin{apiarguments}
 \apiargument{IN}{dest}{The symmetric data object to be referenced.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which \dest{} is to
-		 be accessed.  When using \Fortran, it must be a  default
+		 be accessed.  When using \Fortran, \VAR{pe} must be a  default
 		 integer value.}
 \end{apiarguments}
 
@@ -48,8 +48,7 @@ PTR = SHMEM_PTR(dest, pe)
 \begin{apiexamples}
 
 \apifexample
-    { This  \Fortran  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to
-    the \VAR{BIGD} array on \ac{PE} 1: }
+    { The following \FUNC{shmem\_ptr} example is for \Fortran  programs. This program calls \FUNC{shmem\_ptr}, and then \ac{PE} 0 writes to the \VAR{BIGD} array on \ac{PE} 1: }
     {./example_code/shmem_ptr_example.f90 }
     {}
     

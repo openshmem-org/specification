@@ -1,5 +1,5 @@
 \apisummary{
-    Determines whether a \ac{PE} is accessible via \openshmem's data transfer
+     \FUNC{shmem\_pe\_accessible} is  a  query routine that determines whether a \ac{PE} is accessible via \openshmem's data transfer
     routines.
 }
 
@@ -21,10 +21,9 @@ LOG = SHMEM_PE_ACCESSIBLE(pe)
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_pe\_accessible} is  a  query routine  that indicates  whether  a
-    specified \ac{PE} is accessible via \openshmem from the local \ac{PE}. The
-    \FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if  the  remote
-    \ac{PE} is a process  running from the same executable  file as the local
+    \FUNC{shmem\_pe\_accessible} indicates whether  a specified \ac{PE} is accessible via \openshmem 
+    from the local \ac{PE}. \FUNC{shmem\_pe\_accessible} returns \CONST{TRUE} only if  
+    the  remote \ac{PE} is a process  running from the same executable  file as the local
     \ac{PE}, indicating that full \openshmem support for symmetric data objects
     (that reside in the static memory and symmetric heap) is available, otherwise it
     returns \CONST{FALSE}.  This routine may be particularly useful for hybrid

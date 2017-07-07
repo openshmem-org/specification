@@ -1,6 +1,6 @@
 \apisummary{
-    Determines whether an address is accessible via OpenSHMEM data transfer
-    routines from the specified  remote \ac{PE}.
+    \FUNC{shmem\_addr\_accessible} is a query routine that determines whether an address 
+    is accessible via OpenSHMEM data transfer routines from the specified  remote \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -21,11 +21,11 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_addr\_accessible} is a query routine that indicates whether a local
-    address is accessible via \openshmem routines from the specified remote \ac{PE}. 
+    \FUNC{shmem\_addr\_accessible} indicates whether a local address is accessible via 
+    \openshmem routines from the specified remote \ac{PE}. 
     
-    This routine verifies that the data object is symmetric and accessible with
-    respect to a remote \ac{PE} via \openshmem  data  transfer routines.  The
+    \FUNC{shmem\_addr\_accessible}  verifies that the data object is symmetric and 
+    accessible with respect to a remote \ac{PE} via \openshmem  data  transfer routines.  The
     specified address \VAR{addr} is a data object on the local \ac{PE}. 
     
     This routine may be particularly useful for hybrid programming with other

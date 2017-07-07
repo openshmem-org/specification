@@ -1,5 +1,5 @@
 \apisummary{
-    A collective operation that allocates and initializes the resources used by
+     \FUNC{shmem\_init} is a collective operation that allocates and initializes the resources used by
     the \openshmem library.
 }
 
@@ -20,7 +20,7 @@ CALL SHMEM_INIT()
 
 \apidescription{
     \FUNC{shmem\_init} allocates and initializes resources used by the \openshmem
-    library. It is a collective operation that all \acp{PE} must call before any
+    library. All \acp{PE} must call \FUNC{shmem\_init} before any
     other \openshmem routine may be called. At the end of the \openshmem program
     which it initialized, the call to \FUNC{shmem\_init} must be matched with a
     call to \FUNC{shmem\_finalize}. After the first call to \FUNC{shmem\_init}, a
@@ -46,7 +46,7 @@ CALL SHMEM_INIT()
 \begin{apiexamples}
 
 \apifexample
-    { This is a simple program that calls \FUNC{shmem\_init}: } 
+    { The following example is a simple program that calls \FUNC{shmem\_init}: } 
     { example_code/shmem_init_example.f90 }
     {}
 

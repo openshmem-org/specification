@@ -1,5 +1,5 @@
 \apisummary{
-    Returns the number of the calling \ac{PE}.
+    \FUNC{shmem\_my\_pe} returns the number of the calling \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -18,7 +18,7 @@ ME = SHMEM_MY_PE()
 \end{apiarguments}
 
 \apidescription{
-    This routine returns the \ac{PE} number of the calling \ac{PE}.  It accepts no
+     \FUNC{shmem\_my\_pe} returns the \ac{PE} number of the calling \ac{PE}.  It accepts no
     arguments.  The result is an integer between \CONST{0} and \VAR{npes} -
     \CONST{1}, where \VAR{npes} is the total number of \acp{PE} executing the
     current program.

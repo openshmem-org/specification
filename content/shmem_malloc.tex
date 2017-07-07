@@ -1,5 +1,5 @@
 \apisummary{
-    Symmetric heap memory management routines.
+    \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, \FUNC{shmem\_realloc}, and \FUNC{shmem\_align} are a set of symmetric heap memory management routines.
 }
 
 \begin{apidefinition}
@@ -21,19 +21,19 @@ void *shmem_align(size_t alignment, size_t size);
 
 
 \apidescription{
-    The \FUNC{shmem\_malloc} routine returns a pointer to a block of at least
+    \FUNC{shmem\_malloc} returns a pointer to a block of at least
     \VAR{size} bytes suitably aligned for any use.  This space is allocated from the
     symmetric heap (in contrast to \FUNC{malloc}, which allocates from the private
     heap).
     
-    The \FUNC{shmem\_align} routine allocates a block in the symmetric heap that has
+    \FUNC{shmem\_align} allocates a block in the symmetric heap that has
     a byte alignment specified by the alignment argument.
     
-    The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
+    \FUNC{shmem\_free} causes the block to which \VAR{ptr} points to be
     deallocated, that is, made available for further allocation.  If \VAR{ptr} is a
     null pointer, no action occurs. 
            
-    The \FUNC{shmem\_realloc} routine changes the size of the block to which
+    \FUNC{shmem\_realloc} changes the size of the block to which
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
     of the block are unchanged up to the lesser of the new and old sizes. If the new
     size is larger, the newly allocated portion of the block is

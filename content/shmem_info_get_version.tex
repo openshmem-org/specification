@@ -1,5 +1,6 @@
 \apisummary{
-    Returns the major and minor version of the library implementation.
+    \FUNC{shmem\_info\_get\_version} returns the major and minor 
+    version of the library implementation.
 }
 
 \begin{apidefinition}
@@ -19,8 +20,8 @@ SHMEM_INFO_GET_VERSION(MAJOR, MINOR)
 \end{apiarguments}
 
 \apidescription{
-    This routine returns the major and minor version of the \openshmem standard
-    in use.  For a given library implementation, the major and minor version
+    \FUNC{shmem\_info\_get\_version} returns the major and minor version of the \openshmem{}
+    standard in use.  For a given library implementation, the major and minor version
     returned by these calls are consistent with the library constants
     \CONST{SHMEM\_MAJOR\_VERSION} and \CONST{SHMEM\_MINOR\_VERSION}.
 }
