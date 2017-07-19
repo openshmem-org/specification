@@ -1,6 +1,7 @@
 \apisummary{
-    The nonblocking put routines provide a method for copying data
-    from a contiguous local data object to a data object on a specified \ac{PE}. 
+    \FUNC{shmem\_put\_nbi} nonblocking put routines 
+    provide a method for copying data from a contiguous local data object 
+    to a data object on a specified \ac{PE}. 
 }
 
 \begin{apidefinition}
@@ -45,16 +46,16 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
     \apiargument{IN}{source}{Data object containing the data to be copied.}
     \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
     arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
-    \Fortran, it must be a constant, variable, or array element of default
+    \Fortran, \VAR{nelems} must be a constant, variable, or array element of default
     integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
-    of type integer. When using \Fortran, it must be a constant, variable,
+    of type integer. When using \Fortran, \VAR{pe} must be a constant, variable,
     or array element of default integer type.}
 \end{apiarguments}
 
 \apidescription{
-    The routines return after posting the operation.  The operation is considered 
-    complete after a subsequent call to \FUNC{shmem\_quiet}. 
+    \FUNC{shmem\_put\_nbi} routines return after posting the operation.  
+    The operation is considered complete after a subsequent call to \FUNC{shmem\_quiet}. 
     At the completion of \FUNC{shmem\_quiet}, the data has been copied into the \dest{} array
     on the destination \ac{PE}.
     The delivery of data words into the data object on the

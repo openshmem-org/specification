@@ -1,5 +1,5 @@
 \apisummary{
-    Performs an atomic increment operation on a remote data object.
+    \FUNC{shmem\_atomic\_inc} performs an atomic increment operation on a remote data object.
 }
 
 \begin{apidefinition}
@@ -28,13 +28,13 @@ CALL SHMEM_INT8_INC(dest, pe)
     on the remote \ac{PE}. The type of \dest{} should match that implied in the
     SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
-    \dest{} is to be  updated. When using \Fortran, it must be a default
+    \dest{} is to be  updated. When using \Fortran, \VAR{pe} must be a default
     integer value.}
 
 \end{apiarguments}
 
 \apidescription{
-    These  routines perform  an atomic increment operation on the \VAR{dest} data
+    \FUNC{shmem\_atomic\_inc} routines perform  an atomic increment operation on the \VAR{dest} data
     object on \ac{PE}.
 }
 

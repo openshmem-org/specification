@@ -1,5 +1,5 @@
 \apisummary{
-    Broadcasts a block of data from one \ac{PE} to one or more destination
+    \FUNC{shmem\_broadcast} broadcasts a block of data from one \ac{PE} to one or more destination
     \acp{PE}.
 }
 
@@ -27,18 +27,18 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
 \apiargument{IN}{nelems}{The number of elements in \source.  For
     \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of
     32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.  When
-    using \Fortran, it must be a default integer value.}
+    using \Fortran, \VAR{nelems} must be a default integer value.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the active set,	from which the data is copied. Must be greater than or equal to
-    0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of type integer.  When using \Fortran, it must be a default integer value.}
+    0 and less than \VAR{PE\_root}. \VAR{PE\_root} must be of type integer.  When using \Fortran, \VAR{PE\_size} must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \VAR{PE\_start} must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{ The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the active set. \VAR{log\_PE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.  When using \Fortran, \VAR{logPE\_stride} must be a default integer value.}
 \apiargument{IN}{PE\_size}{ The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
+    \VAR{PE\_size} must be of type integer.  When using \Fortran, \VAR{PE\_size} must be a
     default integer value.}
 \apiargument{IN}{pSync}{ A symmetric work array.  In \CorCpp, \VAR{pSync} must
     be of type long and size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}. In \Fortran,
@@ -51,7 +51,7 @@ CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE
 \end{apiarguments}
 
 \apidescription{   
-    \openshmem broadcast routines are collective routines.  They copy data object
+    \FUNC{shmem\_broadcast} routines are collective routines.  They copy data object
     \source{} on the processor specified by \VAR{PE\_root} and store the values at
     \dest{} on the other \acp{PE} specified by the triplet \VAR{PE\_start},
     \VAR{logPE\_stride}, \VAR{PE\_size}.  The data is not copied to the \dest{} area
@@ -116,8 +116,8 @@ constraints, which are as follows:
 \begin{apiexamples}
 
 \apicexample
-    {In the following examples, the call to \FUNC{shmem\_broadcast64} copies \source{}
-    on \ac{PE} 4 to \dest{} on \acp{PE} 5, 6, and 7. 
+    {The following \FUNC{shmem\_broadcast64} examples copy \source{}
+    on \ac{PE} 4 to \dest{} on \acp{PE} 5, 6, and 7: 
     
     \CorCpp{} example:}
     {./example_code/shmem_broadcast_example.c}

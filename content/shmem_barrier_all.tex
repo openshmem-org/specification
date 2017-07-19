@@ -1,7 +1,7 @@
 \apisummary{
-    Registers the arrival of a \ac{PE} at a barrier and blocks the \ac{PE}
-    until all other \acp{PE} arrive at the barrier and all local and remote
-    memory updates are completed.
+    \FUNC{shmem\_barrier\_all} registers the arrival of a \ac{PE} at a barrier and suspends \ac{PE} execution
+    until all other \acp{PE} arrive at the barrier and all local and remote memory
+    updates are completed.
 }
 
 \begin{apidefinition}
@@ -21,7 +21,7 @@ CALL SHMEM_BARRIER_ALL
 \end{apiarguments}
 
 \apidescription{   
-    The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at
+    \FUNC{shmem\_barrier\_all} registers the arrival of a \ac{PE} at
     a barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
     once.  This routine blocks the \ac{PE} until all \acp{PE} have called
     \FUNC{shmem\_barrier\_all}. In a multithreaded \openshmem

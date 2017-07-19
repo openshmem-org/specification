@@ -1,6 +1,7 @@
 \apisummary{
-    The nonblocking get routines provide a method for copying data from a
-    contiguous remote data object on the specified \ac{PE} to the local data object. 
+    \FUNC{shmem\_get\_nbi} nonblocking get routines 
+    provide a method for copying data from a contiguous remote data object on the 
+    specified \ac{PE} to the local data object. 
 }
 
 \begin{apidefinition}
@@ -47,15 +48,15 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
         accessible.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
-        using \Fortran, it must be a constant, variable, or array element of default
+        using \Fortran, \VAR{nelems} must be a constant, variable, or array element of default
         integer type.}
     \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must
-        be of type integer. When using \Fortran, it must be a constant,
+        be of type integer. When using \Fortran, \VAR{pe} must be a constant,
         variable, or array element of default integer type.}
 \end{apiarguments}
 
 \apidescription{
-    The get routines provide a method for copying a contiguous symmetric data
+     \FUNC{shmem\_get\_nbi} routines provide a method for copying a contiguous symmetric data
    object from a different \ac{PE} to a contiguous data object on the local
    \ac{PE}.   The routines return after posting the operation.  The operation is considered 
     complete after a subsequent call to \FUNC{shmem\_quiet}. 

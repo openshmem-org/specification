@@ -1,5 +1,5 @@
 \apisummary{
-    Copies strided data from a specified \ac{PE}.
+    \FUNC{shmem\_iget} copies strided data from a specified \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -39,24 +39,24 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.
         A  value of \CONST{1} indicates contiguous data. \VAR{dst} must be of
-        type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
+        type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  \VAR{dst}  must
         be a default integer value.}
     \apiargument{IN}{sst}{The stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
         array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
+        of type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  \VAR{sst}  must
         be a default integer value.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
-        using \Fortran, it must be  a constant, variable, or array element of
+        using \Fortran, \VAR{nelems} must be  a constant, variable, or array element of
         default integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
-        of type integer. When using  \Fortran, it must be a constant,
+        of type integer. When using  \Fortran, \VAR{pe} must be a constant,
         variable, or array element of default integer type.}
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{iget} routines provide a method for copying strided data elements from
+    \FUNC{shmem\_iget} routines provide a method for copying strided data elements from
     a symmetric array from a specified remote \ac{PE} to strided locations on a
     local array.  The routines return when the data has been copied into the local
     \VAR{dest} array.
@@ -95,8 +95,8 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 \begin{apiexamples}
 
 \apifexample
-    {The following example uses \FUNC{shmem\_logical\_iget}  in a \Fortran
-    program.} 
+    {The following \FUNC{shmem\_logical\_iget} example is for \Fortran
+    programs:} 
     {./example_code/shmem_iget_example.f90}
     {}
 

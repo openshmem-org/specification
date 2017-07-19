@@ -1,5 +1,5 @@
 \apisummary{
-    Concatenates blocks of data from multiple \acp{PE} to an array in every
+    \FUNC{shmem\_collect} and \FUNC{shmem\_fcollect} concatenate blocks of data from multiple \acp{PE} to an array in every
     \ac{PE}.
 }
 
@@ -40,21 +40,21 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
-    must be of type \VAR{size\_t} for \Cstd. When using \Fortran, it must be
+    must be of type \VAR{size\_t} for \Cstd. When using \Fortran, \VAR{nelems} must be
     a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \VAR{PE\_start} must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between
     consecutive \ac{PE} numbers in the active set. \VAR{logPE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.  When using \Fortran, \VAR{logPE\_stride} must be a default integer value.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set. \VAR{PE\_size}
-    must be of type integer.  When using  \Fortran, it must be a default
+    must be of type integer.  When using  \Fortran, \VAR{PE\_size} must be a default
     integer value.}
 \apiargument{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of
     type long and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.  In \Fortran,
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
-    When using \Fortran, it must be a default integer value.  Every element of
+    When using \Fortran, \VAR{pSync} must be a default integer value.  Every element of
     this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
     \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \acp{PE}
     in the active set enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
@@ -62,7 +62,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \end{apiarguments}
 
 \apidescription{   
-    \openshmem \FUNC{collect} and \FUNC{fcollect} routines concatenate \VAR{nelems}
+    \FUNC{shmem\_collect} and \FUNC{shmem\_fcollect} routines concatenate \VAR{nelems}
     \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the
     \dest{} array, over the set of \acp{PE} defined by \VAR{PE\_start},
     \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The

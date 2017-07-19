@@ -1,5 +1,5 @@
 \apisummary{
-    Performs an atomic fetch-and-add operation on a remote data object.
+    \FUNC{shmem\_atomic\_fetch\_add} performs an atomic fetch-and-add operation on a remote data object.
 }
 
 \begin{apidefinition}
@@ -32,7 +32,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 \apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.  The
     type of \VAR{value} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
-    \VAR{dest} is to be updated.  When using \Fortran, it must be a default
+    \VAR{dest} is to be updated.  When using \Fortran, \VAR{pe} must be a default
     integer value.}
 
 \end{apiarguments}
