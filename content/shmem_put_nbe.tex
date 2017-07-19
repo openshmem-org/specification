@@ -1,0 +1,71 @@
+\apisummary{
+    The explicit non-blocking put routines provide a method for copying data
+    from a contiguous local data object to a data object on a specified \ac{PE}.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void shmem_put_nbe(TYPE *dest, const TYPE *source, size_t nelems, int pe, shmem_request_t *req);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table~\ref{stdrmatypes}.
+
+\begin{Csynopsis}
+void shmem_<TYPENAME>_put_nbe(TYPE *dest, const TYPE *source, size_t nelems, int pe, shmem_request_t *req);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{RMA} types and has a
+corresponding \TYPENAME{} specified by Table~\ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+void shmem_put<SIZE>_nbe(void *dest, const void *source, size_t nelems, int pe, shmem_request_t *req);
+\end{CsynopsisCol}
+where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
+
+\begin{CsynopsisCol}
+void shmem_putmem_nbe(void *dest, const void *source, size_t nelems, int pe, shmem_request_t *req);
+\end{CsynopsisCol}
+
+\begin{apiarguments}
+    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
+    data object must be remotely accessible.}
+    \apiargument{IN}{source}{Data object containing the data to be copied.}
+    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
+    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
+    \Fortran, it must be a constant, variable, or array element of default
+    integer type.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
+    of type integer. When using \Fortran, it must be a constant, variable,
+    or array element of default integer type.}
+    \apiargument{IN/OUT}{req}{Either NULL, or a valid request object}
+\end{apiarguments}
+
+\apidescription{
+    The routines return after posting the operation.
+    The delivery of data words into the data object on the destination
+    \ac{PE} may occur in any order.
+    Furthermore, two successive put routines may deliver data out of
+    order.
+ }
+
+\apidesctable{
+    The \dest{} and \source{} data objects must conform to certain typing
+    constraints, which are as follows:}
+    {Routine}{Data type of \VAR{dest} and \VAR{source}}{
+    \apitablerow{shmem\_putmem\_nbe}{\Cstd: Any  data  type.  nelems is
+                                     scaled in bytes.}
+    \apitablerow{shmem\_put4\_nbe, shmem\_put32\_nbe}{Any noncharacter type
+        that has a storage size equal to \CONST{32} bits.}
+    \apitablerow{shmem\_put8\_nbe}{\Cstd: Any noncharacter type that
+        has a storage size equal to \CONST{8} bits.}
+    \apitablerow{shmem\_put64\_nbe}{Any noncharacter type that
+        has a storage size equal to \CONST{64} bits.}
+    \apitablerow{shmem\_put128\_nbe}{Any noncharacter type that has a
+        storage size equal to \CONST{128} bits.}
+}
+\apireturnvalues{
+    None.
+}
+
+\apinotes{ None }
+
+\end{apidefinition}
