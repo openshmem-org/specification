@@ -44,11 +44,11 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
     data object must be remotely accessible.}
     \apiargument{IN}{source}{Data object containing the data to be copied.}
     \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
-    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. If you are using
+    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
     \Fortran, it must be a constant, variable, or array element of default
     integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
-    of type integer. If you are using \Fortran, it must be a constant, variable,
+    of type integer. When using \Fortran, it must be a constant, variable,
     or array element of default integer type.}
 \end{apiarguments}
 
@@ -67,7 +67,7 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
 \apidesctable{
     The \dest{} and \source{} data objects must conform to certain typing
     constraints, which are as follows:}
-    {Routine}{Data type of \VAR{dest} and \VAR{source}}
+    {Routine}{Data type of \VAR{dest} and \VAR{source}}{
     \apitablerow{shmem\_putmem\_nbi}{\Fortran: Any noncharacter type. \Cstd:
         Any  data  type.  nelems is scaled in bytes.}
     \apitablerow{shmem\_put4\_nbi, shmem\_put32\_nbi}{Any noncharacter type
@@ -81,17 +81,16 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
     \apitablerow{shmem\_put128\_nbi}{Any noncharacter type that has a
         storage size equal to \CONST{128} bits.}
     \apitablerow{SHMEM\_CHARACTER\_PUT\_NBI}{Elements of type character.  \VAR{nelems}
-    is  the number  of	 characters to transfer. The actual character lengths of
+    is  the number  of characters to transfer. The actual character lengths of
     the \source{} and \dest{} variables are ignored. }
     \apitablerow{SHMEM\_COMPLEX\_PUT\_NBI}{Elements of type complex of default size.}
     \apitablerow{SHMEM\_DOUBLE\_PUT\_NBI}{Elements of type double precision. }
     \apitablerow{SHMEM\_INTEGER\_PUT\_NBI}{Elements of type integer.}
     \apitablerow{SHMEM\_LOGICAL\_PUT\_NBI}{Elements of type logical.}
     \apitablerow{SHMEM\_REAL\_PUT\_NBI}{Elements of type real.}
-
+}
 \apireturnvalues{
     None.
 }
-\apinotes{ None.}
 
 \end{apidefinition}

@@ -340,12 +340,11 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \hfill
 }
 
-\newenvironment{apidefinition}{
+\newenvironment{apidefinition}{%
 \begin{description}
-\item[SYNOPSIS] \hfill \\ \\ 
-\vspace{-2em}
+\item[SYNOPSIS] \hfill \vspace{.5em}
 }
-{
+{%
 \end{description}
 }
 
@@ -356,94 +355,96 @@ minus .2ex}{-1em}{\normalsize\sf}}
   morekeywords={size_t, TYPE, noreturn}, aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{C11synopsis}
-{ 
-  \textbf{C11:} 
+{
+  \textbf{C11:}
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t, TYPE, _Noreturn, shmem_cmp},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
-{ 
+{
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
 \lstnewenvironment{Csynopsis}
-{ 
-  \textbf{C/C++:} 
+{
+  \textbf{C/C++:}
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
-{ 
-  \textbf{C/C++:} 
-  \color{red}  
+{
+  \textbf{C/C++:}
+  \color{red}
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
   morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
   }
   {}
-  
+
 \lstnewenvironment{Fsynopsis}
-{ \textbf{FORTRAN:} 
+{ \textbf{FORTRAN:}%
   \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
   deletekeywords=[2]{STATUS},
   deletekeywords=[3]{LOG}, aboveskip=0pt,
   belowskip=0pt}}{}
 
-\newenvironment{apiarguments}{
+\newenvironment{apiarguments}{%
 \newcommand{\apiargument}[3]{
 \begin{tabular}{p{2cm} p{2cm} p{10cm}}
-\textbf{##1} & \textit{##2} & {##3} \\ 
+\textbf{##1} & \textit{##2} & {##3}
 \end{tabular}
 }
-\hfill
-\item[DESCRIPTION] \hfill 
-
+\vspace{1em}
+\item[DESCRIPTION] \hfill
 \begin{description}
-\item[Arguments] \hfill \\
+\item[Arguments] \hfill \vspace{.2em}
 }
-{
-\hfill
+{%
+%\hfill
 \end{description}
 }
 
 \newcommand{\apidescription}[1]{
 \begin{description}
-\vspace{-1em}
-\item[API description] \hfill \\ 
+\item[API description] \hfill \\
     #1
 \hfill
+\end{description}
 }
 
-\newcommand{\apidesctable}[4] {\hfill \\ #1 \\ \\
+\newcommand{\apidesctable}[4] {
+\begin{quote}
+    #1 \vspace{.3em} \\
     \begin{tabular}{p{5cm} p{9cm}}
        \hline
        #2 & #3 \\
        \hline \tabularnewline
-       \end{tabular}\\
-        #4
-}  
+    \end{tabular} \\ \vspace{.3em}
+    #4
+\end{quote}
+}
 
 \newcommand{\apireturnvalues}[1]{
-\hfill 
+\begin{description}
 \item[Return Values] \hfill \\
     #1
-\\
-\hfill
+\end{description}
 }
 
 \newcommand{\apitablerow}[2]{
  \begin{tabular}{p{5cm} p{9cm}}
  #1 & #2 \tabularnewline
-  \end{tabular}\\
+  \end{tabular} \\ \vspace{.2em}
 }
 
 \newcommand{\apinotes}[1]{
+\begin{description}
 \item[Notes] \hfill \\
     #1
-\hfill \\
+\hfill \vspace{1em}
 \end{description}
 }
 
@@ -451,11 +452,11 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \begin{description}
 \item[Note to implementors] \hfill \\
     #1
-\hfill \\
+\hfill \vspace{1em}
 \end{description}
 }
 
-\newenvironment{apiexamples}{
+\newenvironment{apiexamples}{%
 \newcommand{\apicexample}[3]{
     ##1
     \lstinputlisting[language={C}, tabsize=2,
@@ -467,10 +468,10 @@ minus .2ex}{-1em}{\normalsize\sf}}
     basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}]{##2}
     ##3 }
 \vspace{-2pt}
-\item[EXAMPLES] \hfill \\
+\item[EXAMPLES] \hfill \vspace{1em}
 \vspace{-2pt}
 }
-{
+{%
 }
 
 %

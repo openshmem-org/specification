@@ -22,12 +22,12 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
 
 \apidescription{
     \FUNC{shmem\_addr\_accessible} is a query routine that indicates whether a local
-    address is accessible via \openshmem routines from the specified remote \ac{PE}. 
-    
+    address is accessible via \openshmem routines from the specified remote \ac{PE}.
+
     This routine verifies that the data object is symmetric and accessible with
     respect to a remote \ac{PE} via \openshmem  data  transfer routines.  The
     specified address \VAR{addr} is a data object on the local \ac{PE}. 
-    
+
     This routine may be particularly useful for hybrid programming with other
     communication libraries (such as \ac{MPI}) or parallel languages.  For
     example, in SGI Altix series systems, for multiple executable MPI programs that
@@ -39,18 +39,14 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
     same or different executable files.
 }
 
-\apireturnvalues{		
+\apireturnvalues{
     \CorCpp: The  return value is \CONST{1} if \VAR{addr} is a symmetric data object
     and accessible via \openshmem routines from the specified remote \ac{PE};
     otherwise, it is \CONST{0}.
-    
+
     \Fortran: The return value is \CONST{.TRUE.} if \VAR{addr} is a symmetric data
     object and accessible via \openshmem routines from the specified remote \ac{PE};
     otherwise, it is \CONST{.FALSE.}.
-}
-		
-\apinotes{
-    None.
 }
 
 \end{apidefinition}

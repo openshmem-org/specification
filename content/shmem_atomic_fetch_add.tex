@@ -32,7 +32,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 \apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.  The
     type of \VAR{value} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
-    \VAR{dest} is to be updated.  If you are using \Fortran, it must be a default
+    \VAR{dest} is to be updated.  When using \Fortran, it must be a default
     integer value.}
 
 \end{apiarguments}
@@ -47,11 +47,11 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apidesctable{
-    If you are using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
-
+    When using \Fortran, \VAR{dest} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}{
 \apitablerow{SHMEM\_INT4\_FADD}{\CONST{4}-byte integer}
 \apitablerow{SHMEM\_INT8\_FADD}{\CONST{8}-byte integer}
+}
 
 
 \apireturnvalues{

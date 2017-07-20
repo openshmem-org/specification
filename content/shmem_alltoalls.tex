@@ -29,33 +29,33 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
 \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
     data object.  The stride is scaled by the element size.  A
     value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
-    \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a default integer
+    \textit{ptrdiff\_t}.  When using \Fortran, it must be a default integer
     value.}
 \apiargument{IN}{sst}{The  stride between consecutive elements of the
     \source{} data object.  The stride is scaled by the element size.
     A value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-    of type \textit{ptrdiff\_t}.  If you are using \Fortran, it must be a
+    of type \textit{ptrdiff\_t}.  When using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
-    \VAR{nelems} must be of type size\_t for \CorCpp.  If you are using
+    \VAR{nelems} must be of type size\_t for \CorCpp.  When using
     \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of
-    type integer.  If you are using \Fortran, it must be a default integer value.}
+    type integer.  When using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset.
-    \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must
+    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must
     be a default integer value.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
     of type long and size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}. In \Fortran,
     \VAR{pSync} must be of type integer and size
-    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.  If you are using \Fortran, it must be a
+    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.  When using \Fortran, it must be a
     default integer value. Every element of this array must be initialized with
     the value \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the
     \activeset{} enter the routine.}
-    
+
 \end{apiarguments}
 
 \apidescription{
@@ -79,7 +79,7 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
     \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \acp{PE} in the
     \activeset. The same \VAR{dest} and \VAR{source} data objects, and the same
     \VAR{pSync} work array must be passed to all \acp{PE} in the \activeset.
-    
+
     Before any \ac{PE} calls to a \FUNC{shmem\_alltoalls} routine, the following
     conditions must exist (synchronization via a barrier or some other method is
     often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
@@ -87,20 +87,20 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
     \FUNC{shmem\_alltoalls} routine.  The \VAR{dest} data object on
     all \acp{PE} in the \activeset{} is ready to accept the
     \FUNC{shmem\_alltoalls} data.
-    
+
     Upon return from a \FUNC{shmem\_alltoalls} routine, the following is true for
     the local PE: Its \VAR{dest} symmetric data object is completely updated and
     the data has been copied out of the \VAR{source} data object.
     The values in the \VAR{pSync} array are restored to the original values.
-} 
+}
 
 \apidesctable{
 The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}{
 
 \apitablerow{shmem\_alltoalls64}{\CONST{64} bits aligned.}
-\apitablerow{shmem\_alltoalls32}{\CONST{32} bits aligned.}
+\apitablerow{shmem\_alltoalls32}{\CONST{32} bits aligned.}}
 
 \apireturnvalues{
     None.
@@ -110,7 +110,7 @@ constraints, which are as follows:
     This routine restores \VAR{pSync} to its original contents.  Multiple calls
     to \openshmem\ routines that use the same \VAR{pSync} array do not require
     that \VAR{pSync} be reinitialized after the first call.
-    You must ensure the that the \VAR{pSync} array is not being updated by any
+    The user must ensure that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the \activeset{} while any of the \acp{PE} participates in
     processing of an \openshmem\ \FUNC{shmem\_alltoalls} routine. Be careful to
     avoid these situations: If the \VAR{pSync} array is initialized at run time,
