@@ -1,0 +1,29 @@
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_request_merge(shmem_request_t *req, int count, shmem_request_t[] reqs);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{OUT}{req}{The request object that the requests will be
+    merged into.}
+    \apiargument{IN}{count}{Number of requests to be merged}
+    \apiargument{IN}{reqs}{Array of request objects to be merged}
+\end{apiarguments}
+
+\apidescription{
+    The routine will merge multiple request objects into a single
+    request object. The new request object can be used to track all
+    operations previously associated with independent request objects.
+
+    The request objects used as input for the merge operation will be
+    freed.
+ }
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{ None }
+
+\end{apidefinition}
