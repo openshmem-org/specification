@@ -1,0 +1,29 @@
+\apisummary{
+    The request wait routine provides a method for completing
+    outstanding operations on a request.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_request_wait(shmem_request_t *req);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{req}{The request handle to wait for.}
+\end{apiarguments}
+
+\apidescription{
+    The routine blocks until all outstanding operations on the request
+    are finished. After the routine returns, the request is set to NULL.
+    There are no guarantees on the ordering of the outstanding
+    operations.
+ }
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{ None }
+
+\end{apidefinition}
