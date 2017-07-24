@@ -43,7 +43,7 @@ void shmem_getmem_nbe(void *dest, const void *source, size_t nelems, int pe, shm
 \apidescription{
     The explicit non-blocking get routines provide a method for copying
     a contiguous symmetric data object from a different \ac{PE} to a
-    contiguous data object on the local ac{PE}. The routines return
+    contiguous data object on the local \ac{PE}. The routines return
     after posting the operation.  The operation is considered complete
     after a subsequent call to \FUNC{shmem\_wait\_request}. After the
     completion of \FUNC{shmem\_wait\_request}, the data has been delivered

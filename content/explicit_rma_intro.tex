@@ -5,6 +5,10 @@ routines are the same as for regular \ac{RMA} routines.
 
 All explicit non-blocking \ac{RMA} routines take a request object as a
 parameter. The request object is used to track the status of the \ac{RMA}
-operation. This section describes the explicit non-blocking \ac{RMA}
+operation. A request object can be used for multiple operations. If a
+request object is used for multiple communication operations, the
+resources assigned to the request can be shared.
+
+This section describes the explicit non-blocking \ac{RMA}
 routines and the routines used to track the \ac{RMA} routines.
 Additionally, management routines are specified.
