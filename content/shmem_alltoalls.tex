@@ -29,29 +29,29 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
 \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
     data object.  The stride is scaled by the element size.  A
     value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
-    \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a default integer
+    \CTYPE{ptrdiff\_t}.  When using \Fortran, \VAR{dst} must be a default integer
     value.}
 \apiargument{IN}{sst}{The  stride between consecutive elements of the
     \source{} data object.  The stride is scaled by the element size.
     A value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-    of type \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a
+    of type \CTYPE{ptrdiff\_t}.  When using \Fortran, \VAR{sst} must be a
     default integer value.}
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
     \VAR{nelems} must be of type size\_t for \CorCpp.  When using
     \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \VAR{PE\_start} must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.  When using \Fortran, \VAR{logPE\_stride} must be a default integer value.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must
+    \VAR{PE\_size} must be of type integer.  When using \Fortran, \VAR{PE\_size} must
     be a default integer value.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
     of type long and size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}. In \Fortran,
     \VAR{pSync} must be of type integer and size
-    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.  When using \Fortran, it must be a
+    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.  When using \Fortran, \VAR{pSync} must be a
     default integer value. Every element of this array must be initialized with
     the value \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the
     active set enter the routine.}
@@ -59,7 +59,7 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_alltoalls} routines are collective routines. Each \ac{PE}
+    \FUNC{shmem\_alltoalls} routines are collective routines. Each \ac{PE}
     in the active set exchanges \VAR{nelems} strided data elements of size
     32 bits (for \FUNC{shmem\_alltoalls32}) or 64 bits (for \FUNC{shmem\_alltoalls64})
     with all other \acp{PE} in the set. Both strides, \VAR{dst} and \VAR{sst}, must be greater
@@ -127,7 +127,7 @@ constraints, which are as follows:
 \begin{apiexamples}
 
 \apicexample
-    {This example shows a \FUNC{shmem\_alltoalls64} on two long elements among
+    {The following example shows a \FUNC{shmem\_alltoalls64} on two long elements among
     all \acp{PE}.}
     {./example_code/shmem_alltoalls_example.c}
     {}

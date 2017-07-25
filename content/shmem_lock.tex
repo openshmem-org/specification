@@ -1,5 +1,5 @@
 \apisummary{
-    Releases, locks, and tests a mutual exclusion memory lock.
+    \FUNC{shmem\_lock} releases, locks, and tests a mutual exclusion memory lock.
 }
 \begin{apidefinition}
 
@@ -20,17 +20,17 @@ I = SHMEM_TEST_LOCK(lock)
 \apiargument{IN}{lock}{A symmetric data object that is a scalar variable or an array
     of  length \CONST{1}.  This data  object  must  be set to \CONST{0} on all
     \acp{PE} prior to the first use.  \VAR{lock}  must  be  of type \CONST{long}.
-    When using \Fortran, it must be of default kind.}
+    When using \Fortran, \VAR{lock} must be of default kind.}
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_set\_lock} routine sets a mutual exclusion lock after  waiting
+    \FUNC{shmem\_set\_lock} sets a mutual exclusion lock after  waiting
     for  the lock  to be freed by any other \ac{PE} currently holding the lock.
     Waiting \acp{PE} are assured of getting the lock in a first-come, first-served
-    manner.  The \FUNC{shmem\_clear\_lock} routine releases a lock  previously set
+    manner.  \FUNC{shmem\_clear\_lock} releases a lock  previously set
     by \FUNC{shmem\_set\_lock} after ensuring that all local and remote	 stores
-    initiated in the critical region are complete.  The \FUNC{shmem\_test\_lock}
-    routine sets a mutual exclusion lock only if it is currently cleared.  By using
+    initiated in the critical region are complete.  \FUNC{shmem\_test\_lock}
+    sets a mutual exclusion lock only if it is currently cleared.  By using
     this routine, a \ac{PE} can avoid blocking on a set lock.  If the lock is
     currently set, the routine returns without waiting.  These routines are
     appropriate for protecting a critical region from simultaneous update by
@@ -38,7 +38,7 @@ I = SHMEM_TEST_LOCK(lock)
 }
 
 \apireturnvalues{
-    The \FUNC{shmem\_test\_lock} routine returns \CONST{0} if  the lock  was
+    \FUNC{shmem\_test\_lock} returns \CONST{0} if  the lock  was
     originally cleared and  this  call was  able  to set the lock.  A value of
     \CONST{1} is returned if the lock had been set and the call returned without
     waiting to set the lock.
@@ -54,7 +54,7 @@ I = SHMEM_TEST_LOCK(lock)
 \begin{apiexamples}
 
 \apicexample
-    {The following example uses \FUNC{shmem\_lock} in a \Cstd[11] program.}
+    {The following \FUNC{shmem\_lock} example is for \Cstd[11] programs:}
     {./example_code/shmem_lock_example.c}
     {}
 

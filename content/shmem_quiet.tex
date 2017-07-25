@@ -1,5 +1,5 @@
 \apisummary{
-    Waits for completion of all outstanding \PUT{}, \acp{AMO}, memory store,
+    \FUNC{shmem\_quiet} waits for completion of all outstanding \PUT{}, \acp{AMO}, memory store,
     and non-blocking \PUT{} and \GET{} routines to symmetric data
     objects issued by a \ac{PE}.
 }
@@ -19,7 +19,7 @@ CALL SHMEM_QUIET
 \end{apiarguments}
 
 \apidescription{ 
-    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO},
+    \FUNC{shmem\_quiet} ensures completion of \PUT{}, \acp{AMO},
     memory store, and non-blocking \PUT{} and \GET{} routines on
     symmetric data objects issued by the calling \ac{PE}. All \PUT{}, \acp{AMO},
     memory store, and non-blocking \PUT{} and \GET{} routines to
@@ -74,7 +74,7 @@ CALL SHMEM_QUIET
 \begin{apiexamples}
 
 \apicexample
-    {The following example uses  \FUNC{shmem\_quiet}  in a C11 program: }
+    {The following \FUNC{shmem\_quiet}  example is for C11 programs: }
     {./example_code/shmem_quiet_example.c}
     {\VAR{Put1} and \VAR{put2} will be completed and visible before \VAR{put3}
     and \VAR{put4}.}

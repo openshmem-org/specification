@@ -149,17 +149,17 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \apiargument{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
-\apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
+\apiargument{IN}{\VAR{nreduce}}{The number of elements in the \dest{} and \source{}
+    arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, \VAR{nreduce}
     must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \VAR{PE\_start} must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
     \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.
-    When using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
+    When using \Fortran, \VAR{logPE\_stride} must be a default integer value.}
+    \VAR{PE\_size} must be of type integer.  When using \Fortran, \VAR{PE\_size} must be a
     default integer value.}
 \apiargument{IN}{pWrk}{A symmetric work array. The \VAR{pWrk} argument must have the
     same data type as \dest. In \CorCpp, this contains max(\VAR{nreduce}/2 + 1,
@@ -169,7 +169,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be of
     type long and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran, \VAR{pSync}
     must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  When
-    using \Fortran, it must be a default integer value. Every element of this array
+    using \Fortran, \VAR{pSync} must be a default integer value. Every element of this array
     must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or
     \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
     active set enter the reduction routine.}
@@ -177,7 +177,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \end{apiarguments}
 
 \apidescription{
-    \openshmem reduction routines compute one or more reductions across symmetric
+    \FUNC{shmem\_reduction} routines compute one or more reductions across symmetric
     arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
     across a set of values.	 
     
@@ -278,48 +278,48 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \begin{apiexamples}
 
 \apifexample
-    {This \Fortran reduction example statically initializes the \VAR{pSync} array
+    {The following \FUNC{shmem\_reduction} example is for \Fortran programs. This example statically initializes the \VAR{pSync} array
     and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all
-    even \acp{PE}.}
+    even \acp{PE}:}
     {./example_code/shmem_and_example.f90}
     {}
     
 \apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}.}
+    {The following \FUNC{shmem\_reduction} example is for \Fortran programs. This example statically initializes the \VAR{pSync} array and finds
+    the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}:}
     {./example_code/shmem_max_example.f90}
     {}
 
 \apifexample
-    { This \Fortran example statically initializes the \VAR{pSync} array and finds
+    { The following \FUNC{shmem\_reduction} example is for \Fortran programs. This example statically initializes the \VAR{pSync} array and finds
     the \OPR{minimum} value of real variable \VAR{FOO} across all the even
-    \acp{PE}.}
+    \acp{PE}:}
     {./example_code/shmem_min_example.f90}
     {}
 
 \apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{sum} of the real variable \VAR{FOO} across all even \acp{PE}.}
+    {The following \FUNC{shmem\_reduction} examples is for \Fortran programs. This example statically initializes the \VAR{pSync} array and finds
+    the \OPR{sum} of the real variable \VAR{FOO} across all even \acp{PE}:}
     {./example_code/shmem_sum_example.f90}
     {}
 
 \apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{product} of the real variable \VAR{FOO} across all the even \acp{PE}.}
+    {The following \FUNC{shmem\_reduction} example is for \Fortran programs. This example statically initializes the \VAR{pSync} array and finds
+    the \OPR{product} of the real variable \VAR{FOO} across all the even \acp{PE}:}
     {./example_code/shmem_prod_example.f90}
     {}
 
 \apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
+    {The following \FUNC{shmem\_reduction} example is for \Fortran programs. This example statically initializes the \VAR{pSync} array and finds
     the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
-    \acp{PE}.}
+    \acp{PE}:}
     {./example_code/shmem_or_example.f90}
     {}
 
 \apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and
+    {The following \FUNC{shmem\_reduction} example is for \Fortran programs. This example statically initializes the \VAR{pSync} array and
     computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
-    \acp{PE}.}
+    \acp{PE}:}
     {./example_code/shmem_xor_example.f90}
     {} 
 

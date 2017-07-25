@@ -1,5 +1,5 @@
 \apisummary{
-    Wait for a variable on the local \ac{PE} to change.
+    \FUNC{shmem\_wait} waits for a variable on the local \ac{PE} to change.
 }
 
 \begin{apidefinition}
@@ -40,11 +40,11 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \apiargument{OUT}{ivar}{A remotely accessible integer variable. When using \CorCpp,
     the type of \VAR{ivar} should match that implied in the SYNOPSIS section.} 
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
-  \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
-  When using \CorCpp, it must be of type \CTYPE{shmem\_cmp\_t}.}
+  \VAR{cmp\_value}.  When using \Fortran, \VAR{cmp} must  be of default kind.
+  When using \CorCpp, \VAR{cmp} must be of type \CTYPE{shmem\_cmp\_t}.}
 \apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
     using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
-    SYNOPSIS section.  When using \Fortran, cmp\_value must be an integer of
+    SYNOPSIS section.  When using \Fortran, \VAR{cmp\_value} must be an integer of
     the same size and kind as \VAR{ivar}.}
 
 \end{apiarguments}
@@ -94,24 +94,24 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \begin{apiexamples}
 
 \apifexample
-{ The following call returns when variable \VAR{ivar} is not equal to 100:}
+{ The following \FUNC{SHMEM\_INT8\_WAIT\_UNTIL} example returns when variable \VAR{ivar} is not equal to 100:}
 {./example_code/shmem_wait1_example.f90}
 {}
 
 \apifexample
-{ The following call to \FUNC{SHMEM\_INT8\_WAIT\_UNTIL} is  equivalent to the
+{ The following \FUNC{SHMEM\_INT8\_WAIT\_UNTIL} example is  equivalent to the
 call to \FUNC{SHMEM\_INT8\_WAIT} in example 1:}
 {./example_code/shmem_wait2_example.f90}
 {}
 
 \apicexample
-{The following \CorCpp{} call waits until the value in \VAR{ivar} is set to
+{The following \FUNC{shmem\_int\_wait\_until} example is for \CorCpp{} program. The call in this example waits until the value in \VAR{ivar} is set to
 be less than zero by a transfer from a remote PE:}
 {./example_code/shmem_wait3_example.f90}
 {}
 
 \apifexample
-{The following \Fortran example is in the context of a subroutine:}
+{The following \FUNC{shmem\_wait} example is a subroutine for  \Fortran programs:}
 {./example_code/shmem_wait4_example.f90}
 {}
 
