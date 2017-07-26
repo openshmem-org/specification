@@ -5,14 +5,16 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_add(TYPE *dest, TYPE value, int pe);
+void shmem_atomic_add(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_add(TYPE *dest, TYPE value, int pe);
+void shmem_<TYPENAME>_atomic_add(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
-where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{Fsynopsis}
 INTEGER pe
@@ -24,25 +26,24 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be
-        updated  on the remote \ac{PE}.  If you are using \CorCpp, the type of
+        updated  on the remote \ac{PE}.  When using \CorCpp, the type of
         \dest{} should match that implied in the SYNOPSIS section.}
-    \apiargument{IN}{value}{The value to be atomically added to \dest. If you
-        are using \CorCpp, the type of \VAR{value} should match that  implied  in
-        the SYNOPSIS  section.  If you are using \Fortran, it must be of type
+    \apiargument{IN}{value}{The value to be atomically added to \dest. When using \CorCpp, the type of \VAR{value} should match that  implied  in
+        the SYNOPSIS  section.  When using \Fortran, it must be of type
         integer with an element size of \dest.}
     \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
-        \dest{} is to be updated.  If you are using \Fortran, it must be a default
+        \dest{} is to be updated.  When using \Fortran, it must be a default
         integer value.}
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_add} routine performs an atomic add operation. It adds
+    The \FUNC{shmem\_atomic\_add} routine performs an atomic add operation. It adds
     \VAR{value} to \dest{} on \ac{PE} \VAR{pe} and atomically updates the \dest{}
     without returning the value.
- } 
+ }
 
 \apidesctable{
-    If you are using \Fortran, \VAR{dest} must be of the following type:
+    When using \Fortran, \VAR{dest} must be of the following type:
 }{Routine}{Data type of \VAR{dest}}
 
 \apitablerow{SHMEM\_INT4\_ADD}{\CONST{4}-byte integer}
@@ -53,14 +54,16 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 }
 
 \apinotes{
-    The term remotely accessible is defined in Section \ref{subsec:memory_model}.
+    As of \openshmem[1.4], \FUNC{shmem\_add} has been deprecated.
+    Its behavior and call signature are identical to the replacement
+    interface, \FUNC{shmem\_atomic\_add}.
 }
 
 \begin{apiexamples}
 
 \apicexample
     {}
-    {./example_code/shmem_add_example.c}
+    {./example_code/shmem_atomic_add_example.c}
     {}
 
 \end{apiexamples}
