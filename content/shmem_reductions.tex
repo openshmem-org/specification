@@ -1,11 +1,11 @@
 \apisummary{
-    Performs arithmetic and logical operations across a set of \ac{PE}s.
+    Performs arithmetic and logical operations across a set of \acp{PE}.
 }
 
 \begin{apidefinition}
 
 \textbf{AND} \newline
-Performs a bitwise AND function across a set of processing elements (\ac{PE}s).\newline
+Performs a bitwise AND function across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_and_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_and_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -20,7 +20,7 @@ CALL SHMEM_INT8_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 
 \bigskip
 \textbf{MAX} \newline
-Performs a maximum function reduction across a set of processing elements (\ac{PE}s).\newline
+Performs a maximum function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_max_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_max_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -41,7 +41,7 @@ CALL SHMEM_REAL16_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 
 \bigskip
 \textbf{MIN} \newline
-Performs a minimum function reduction across a set of processing elements (\ac{PE}s).\newline
+Performs a minimum function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_min_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_min_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -62,7 +62,7 @@ CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 
 \bigskip
 \textbf{SUM} \newline
-Performs a sum reduction across a set of processing elements (\ac{PE}s).\newline
+Performs a sum reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_complexd_sum_to_all(double complex *dest, const double complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double complex *pWrk, long |\mbox{*pSync);}|
 void shmem_complexf_sum_to_all(float complex *dest, const float complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float complex *pWrk, long *pSync);
@@ -87,7 +87,7 @@ CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 
 \bigskip
 \textbf{PROD} \newline
-Performs a product reduction across a set of processing elements (\ac{PE}s).\newline
+Performs a product reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_complexd_prod_to_all(double complex *dest, const double complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double complex *pWrk, long |\mbox{*pSync);}|
 void shmem_complexf_prod_to_all(float complex *dest, const float complex *source, int |\mbox{nreduce,}| int PE_start, int logPE_stride, int PE_size, float complex *pWrk, long *pSync);
@@ -112,7 +112,7 @@ CALL SHMEM_REAL16_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_
 
 \bigskip
 \textbf{OR} \newline
-Performs  a  bitwise  OR  function reduction across a set of processing elements (\ac{PE}s).\newline
+Performs  a  bitwise  OR  function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_or_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_or_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -127,7 +127,7 @@ CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size
 
 \bigskip
 \textbf{XOR}\newline
-Performs  a  bitwise  EXCLUSIVE OR reduction across a set of processing elements (\ac{PE}s).\newline
+Performs  a  bitwise  EXCLUSIVE OR reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_xor_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_xor_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -150,16 +150,16 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
 \apiargument{IN}{\VAR{nreduce}}{The number of elements in the \dest{} and \source{}
-    arrays.  \VAR{nreduce} must be of type integer.  If you are using \Fortran, it
+    arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
     must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
-    \ac{PE}s.  \VAR{PE\_start} must be of type integer.  If you are using \Fortran,
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
     \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of type integer.
-    If you are using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{The number of \ac{PE}s in the \activeset.
-    \VAR{PE\_size} must be of type integer.  If you are using \Fortran, it must be a
+    When using \Fortran, it must be a default integer value.}
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset.
+    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{pWrk}{A symmetric work array. The \VAR{pWrk} argument must have the
     same data type as \dest. In \CorCpp, this contains max(\VAR{nreduce}/2 + 1,
@@ -168,10 +168,10 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     elements.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be of
     type long and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran, \VAR{pSync}
-    must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  If you are
+    must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  When
     using \Fortran, it must be a default integer value. Every element of this array
     must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or
-    \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \ac{PE}s in the
+    \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
     \activeset{} enter the reduction routine.}
     
 \end{apiarguments}
@@ -182,33 +182,34 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     across a set of values.	 
     
     The \VAR{nreduce} argument determines the number of separate reductions to
-    perform.  The \source{} array on all \ac{PE}s in the \activeset{} provides one
+    perform.  The \source{} array on all \acp{PE} in the \activeset{} provides one
     element for each reduction.  The results of the reductions are placed in the
-    \dest{} array on all \ac{PE}s in the \activeset.  The \activeset{} is defined
+    \dest{} array on all \acp{PE} in the \activeset.  The \activeset{} is defined
     by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
     
     The \source{} and \dest{} arrays may be the same array, but they may not be
     overlapping arrays.
     
     As with all \openshmem{} collective routines, each of these routines assumes
-    that only \ac{PE}s in the \activeset{} call the routine.  If a \ac{PE} not in
+    that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not in
     the \activeset{} calls an \openshmem collective routine, undefined behavior
     results.
     
     The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
-    \VAR{PE\_size} must be equal on all \ac{PE}s in the \activeset. The same \dest{}
+    \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same \dest{}
     and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
-    be passed to all \ac{PE}s in the \activeset.
-    
-    Before any \ac{PE} calls a reduction routine, you must ensure that the
-    following conditions exist (synchronization via a \OPR{barrier} or some other
+    be passed to all \acp{PE} in the \activeset.
+    %FIXME: Reword 'the following conditions must be met.'
+    Before any \ac{PE} calls a reduction routine, the
+    following conditions must be met (synchronization via a \OPR{barrier} or some other
     method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
-    on all \ac{PE}s in the \activeset{} are not still in use from a prior call to a
-    collective \openshmem{} routine.  The \dest{} array on all \ac{PE}s in the
+    on all \acp{PE} in the \activeset{} are not still in use from a prior call to a
+    collective \openshmem{} routine.  The \dest{} array on all \acp{PE} in the
     \activeset{} is ready to accept the results of the \OPR{reduction}.
     
     Upon return from a reduction routine, the following are true for the local
-    \ac{PE}: The \dest{} array is updated.  The values in the \VAR{pSync} array are
+    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.  
+    The values in the \VAR{pSync} array are
     restored to the original values.
 }
 
@@ -253,14 +254,14 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \apinotes{  
     All \openshmem{} reduction routines reset the values in \VAR{pSync} before they
     return, so a particular \VAR{pSync} buffer need only be initialized the first
-    time it is used. You must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
-    in the \activeset{} while any of the \ac{PE}s participate in processing of an
+    time it is used. The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
+    in the \activeset{} while any of the \acp{PE} participate in processing of an
     \openshmem{} reduction routine. Be careful to avoid the following situations: If
     the \VAR{pSync} array is initialized at run time, some type of synchronization
-    is needed to ensure that all \ac{PE}s in the working set have initialized
+    is needed to ensure that all \acp{PE} in the working set have initialized
     \VAR{pSync} before any of them enter an \openshmem routine called with the
     \VAR{pSync} synchronization array. A \VAR{pSync} or \VAR{pWrk} array can be
-    reused in a subsequent reduction routine call only if none of the \ac{PE}s in
+    reused in a subsequent reduction routine call only if none of the \acp{PE} in
     the \activeset{} are still processing a prior reduction routine call that used
     the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be assured only
     by doing some type of synchronization. 
@@ -269,48 +270,48 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \begin{apiexamples}
 
 \apifexample
-    {This \Fortran{} reduction example statically initializes the \VAR{pSync} array
+    {This \Fortran reduction example statically initializes the \VAR{pSync} array
     and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all
-    even \ac{PE}s.}
+    even \acp{PE}.}
     {./example_code/shmem_and_example.f90}
     {}
     
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
-    the \OPR{maximum} value of real variable \VAR{FOO} across all even \ac{PE}s.}
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
+    the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}.}
     {./example_code/shmem_max_example.f90}
     {}
 
 \apifexample
-    { This \Fortran{} example statically initializes the \VAR{pSync} array and finds
+    { This \Fortran example statically initializes the \VAR{pSync} array and finds
     the \OPR{minimum} value of real variable \VAR{FOO} across all the even
-    \ac{PE}s.}
+    \acp{PE}.}
     {./example_code/shmem_min_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
-    the \OPR{sum} of the real variable \VAR{FOO} across all even \ac{PE}s.}
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
+    the \OPR{sum} of the real variable \VAR{FOO} across all even \acp{PE}.}
     {./example_code/shmem_sum_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
-    the \OPR{product} of the real variable \VAR{FOO} across all the even \ac{PE}s.}
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
+    the \OPR{product} of the real variable \VAR{FOO} across all the even \acp{PE}.}
     {./example_code/shmem_prod_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and finds
+    {This \Fortran example statically initializes the \VAR{pSync} array and finds
     the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
-    \ac{PE}s.}
+    \acp{PE}.}
     {./example_code/shmem_or_example.f90}
     {}
 
 \apifexample
-    {This \Fortran{} example statically initializes the \VAR{pSync} array and
+    {This \Fortran example statically initializes the \VAR{pSync} array and
     computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
-    \ac{PE}s.}
+    \acp{PE}.}
     {./example_code/shmem_xor_example.f90}
     {} 
 

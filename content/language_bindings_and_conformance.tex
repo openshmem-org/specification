@@ -1,23 +1,26 @@
-\openshmem provides ISO \Clang{} and \Fortran{} \textit{90} language bindings.
-As of OpenSHMEM~1.4, the \Fortran{} API is deprecated and should be expected
+\openshmem provides ISO \Cstd and \Fortran[90] language bindings.
+As of \openshmem[1.4], the \Fortran API is deprecated and should be expected
 to be removed in a future specification. For rationale and considerations of
-future \Fortran{} use of \openshmem, see Section~\ref{subsec:deprecate-fortran}.
+future \Fortran use of \openshmem, see Section~\ref{subsec:deprecate-fortran}.
 
-Any implementation that provides both \Clang{} and \Fortran{} bindings can claim
+Any implementation that provides both \Cstd and \Fortran bindings can claim
 conformance to the specification. An implementation that provides e.g.\ only a
-\Clang{} interface may claim to conform to the \openshmem specification with
-respect to the \Clang{} language, but not to \Fortran, and should make this
-clear in its documentation. The \openshmem header files for \Clang{} and
-\Fortran{} must contain only the interfaces and constant names defined in this
+\Cstd interface may claim to conform to the \openshmem specification with
+respect to the \Cstd language, but not to \Fortran, and should make this
+clear in its documentation. The \openshmem header files \HEADER{shmem.h} for
+\Cstd and \HEADER{shmem.fh} for
+\Fortran must contain only the interfaces and constant names defined in this
 specification.
 
-\openshmem \ac{API}s can be implemented as either routines or macros. However,
+\openshmem \acp{API} can be implemented as either routines or macros. However,
 implementing the interfaces using macros is strongly discouraged as this could
 severely limit the use of external profiling tools and high-level compiler
 optimizations. An \openshmem program should avoid defining routine names,
-variables, or identifiers with the prefix \shmemprefix (for \Clang{} and
-\Fortran), \shmemprefixC (for \Clang) or with \openshmem \ac{API} names.
+variables, or identifiers with the prefix \shmemprefix (for \Cstd and
+\Fortran), \shmemprefixC (for \Cstd) or with \openshmem \ac{API} names.
 
-All \openshmem extension \ac{API}s that are not part of this specification must
-be defined in the \FUNC{shmemx.h} include file. These extensions shall use the
+All \openshmem extension \acp{API} that are not part of this specification must
+be defined in the \HEADER{shmemx.h} and \HEADER{shmemx.fh} include files for
+\Cstd and \Fortran language bindings, respectively.  These header files
+must exist, even if no extensions are provided.  Any extensions shall use the
 \FUNC{shmemx\_} prefix for all routine, variable, and constant names.

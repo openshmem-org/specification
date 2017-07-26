@@ -1,0 +1,69 @@
+\apisummary{
+    Performs an atomic increment operation on a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void shmem_atomic_inc(TYPE *dest, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
+
+\begin{Csynopsis}
+void shmem_<TYPENAME>_atomic_inc(TYPE *dest, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{stdamotypes}.
+
+\begin{Fsynopsis}
+INTEGER pe
+CALL SHMEM_INT4_INC(dest, pe)
+CALL SHMEM_INT8_INC(dest, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+
+\apiargument{IN}{dest}{The remotely accessible integer data object to be updated
+    on the remote \ac{PE}. The type of \dest{} should match that implied in the
+    SYNOPSIS section.}
+\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
+    \dest{} is to be  updated. When using \Fortran, it must be a default
+    integer value.}
+
+\end{apiarguments}
+
+\apidescription{
+    These  routines perform  an atomic increment operation on the \VAR{dest} data
+    object on \ac{PE}.
+}
+
+
+\apidesctable{
+    When using \Fortran, \VAR{dest} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+
+\apitablerow{SHMEM\_INT4\_INC}{\CONST{4}-byte integer}
+\apitablerow{SHMEM\_INT8\_INC}{\CONST{8}-byte integer}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    As of \openshmem[1.4], \FUNC{shmem\_inc} has been deprecated.
+    Its behavior and call signature are identical to the replacement
+    interface, \FUNC{shmem\_atomic\_inc}.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    { The following \FUNC{shmem\_atomic\_inc} example is for
+    \Cstd[11] programs: }
+    {./example_code/shmem_atomic_inc_example.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}

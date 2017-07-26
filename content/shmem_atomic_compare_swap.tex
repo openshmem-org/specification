@@ -1,0 +1,80 @@
+\apisummary{
+    Performs an atomic conditional swap on a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+TYPE shmem_atomic_compare_swap(TYPE *dest, TYPE cond, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
+
+\begin{Csynopsis}
+TYPE shmem_<TYPENAME>_atomic_compare_swap(TYPE *dest, TYPE cond, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{stdamotypes}.
+
+\begin{Fsynopsis}
+INTEGER pe
+INTEGER*4 SHMEM_INT4_CSWAP,  cond_i4, value_i4, ires_i4
+ires_i4 = SHMEM_INT4_CSWAP(dest, cond_i4, value_i4, pe)
+INTEGER*8 SHMEM_INT8_CSWAP,  cond_i8, value_i8, ires_i8
+ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+    \apiargument{OUT}{dest}{The remotely accessible integer data object to be
+        updated on the remote \ac{PE}. }
+    \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
+        value. If \VAR{cond} and the remote \VAR{dest} are equal, then \VAR{value}
+        is swapped into the remote \VAR{dest}. Otherwise, the remote \VAR{dest} is
+        unchanged.  In either case, the old value of the remote \VAR{dest} is
+        returned as the routine return value. \VAR{cond} must be of the same data
+        type as \VAR{dest}.}
+    \apiargument{IN}{value}{The value to be atomically written to the remote
+        \ac{PE}. \VAR{value} must be the same data type as \VAR{dest}.}
+    \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
+        \VAR{dest} is to be updated. When using \Fortran, it must be a default
+        integer value.}
+\end{apiarguments}
+
+\apidescription{
+    The conditional swap routines conditionally update a \VAR{dest} data object on
+    the specified \ac{PE} and return the prior contents of the data object in one
+    atomic operation.
+}
+\apidesctable{
+    The  \VAR{dest} and \VAR{value} data objects must conform to certain typing
+    constraints, which are as follows:
+}{Routine}{Data type of \VAR{dest} and \VAR{value}}
+
+\apitablerow{SHMEM\_INT4\_CSWAP}{\CONST{4}-byte integer.}
+\apitablerow{SHMEM\_INT8\_CSWAP}{\CONST{8}-byte integer.}
+
+
+\apireturnvalues{
+    The contents that had been in the \VAR{dest} data object on the remote
+    \ac{PE} prior to the conditional swap. Data type is the same as the
+    \VAR{dest} data type.
+}
+
+\apinotes{
+    As of \openshmem[1.4], \FUNC{shmem\_cswap} has been deprecated.
+    Its behavior and call signature are identical to the replacement
+    interface, \FUNC{shmem\_atomic\_compare\_swap}.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following call ensures that the first \ac{PE} to execute the
+    conditional swap will successfully write its \ac{PE} number to
+    \VAR{race\_winner} on \ac{PE} \CONST{0}.}
+    {./example_code/shmem_atomic_compare_swap_example.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}

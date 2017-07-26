@@ -1,0 +1,56 @@
+\apisummary{
+    Atomically sets the value of a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void shmem_atomic_set(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the extended \ac{AMO} types specified by
+Table~\ref{extamotypes}.
+
+\begin{Csynopsis}
+void shmem_<TYPENAME>_atomic_set(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+
+\begin{Fsynopsis}
+INTEGER pe
+INTEGER*4 SHMEM_INT4_SET, value_i4
+CALL SHMEM_INT4_SET(dest, value_i4, pe)
+INTEGER*8 SHMEM_INT8_SET, value_i8
+CALL SHMEM_INT8_SET(dest, value_i8, pe)
+REAL*4 SHMEM_REAL4_SET, value_r4
+CALL SHMEM_REAL4_SET(dest, value_r4, pe)
+REAL*8 SHMEM_REAL8_SET, value_r8
+CALL SHMEM_REAL8_SET(dest, value_r8, pe)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+
+\apiargument{IN}{dest}{The remotely accessible data object to be set on
+    the remote \ac{PE}.}
+\apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.}
+\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
+    \VAR{dest} is to be updated.}
+
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_atomic\_set} performs an atomic set operation. It writes the
+    \VAR{value} into \VAR{dest} on \VAR{pe} as an atomic operation.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    As of \openshmem[1.4], \FUNC{shmem\_set} has been deprecated.
+    Its behavior and call signature are identical to the replacement
+    interface, \FUNC{shmem\_atomic\_set}.
+}
+
+\end{apidefinition}
