@@ -45,11 +45,9 @@ CALL SHMEM_BARRIER_ALL
     portably ensure that memory access operations observe remote updates in the order
     enforced by initiator PEs.
 
-    \newtext{The \FUNC{shmem\_barrier\_all} routine does not ensure completion
-    of operations performed on contexts with the \CONST{SHMEM\_CTX\_PRIVATE}
-    option enabled.  Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
+    \newtext{Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
     to calling the barrier routine to ensure completion of operations issued on
-    private contexts.}
+    additional contexts.}
 }
 
 \begin{apiexamples}
