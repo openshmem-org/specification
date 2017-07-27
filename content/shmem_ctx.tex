@@ -104,6 +104,8 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
 }
 
 \apinotes{
+    It is invalid to pass \CONST{SHMEM\_CTX\_DEFAULT} to this routine.
+
     Destroying a context makes it impossible for the user to complete
     communication operations that are pending on that context.  This includes
     nonblocking communication operations, whose local buffers are only returned
