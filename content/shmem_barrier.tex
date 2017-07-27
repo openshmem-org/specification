@@ -74,7 +74,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     portably ensure that memory access operations observe remote updates in the order
     enforced by initiator PEs.
 
-    Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
+    \newtext{Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
     to calling the barrier routine to ensure completion of operations issued on
     additional contexts.}
 }
