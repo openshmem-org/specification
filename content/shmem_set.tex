@@ -36,8 +36,8 @@ CALL SHMEM_REAL8_SET(dest, value_r8, pe)
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \VAR{dest} is to be updated.}
 \newtext{
-\apiargument{IN}{ctx}{Context on which to perform the operation.  When none
-    is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
 }
 
 \end{apiarguments}

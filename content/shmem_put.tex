@@ -55,8 +55,8 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
     of type integer. If you are using \Fortran, it must be a constant, variable,
     or array element of default integer type.}
     \newtext{
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When none
-    is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
     }
 \end{apiarguments}
 

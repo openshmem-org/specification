@@ -20,8 +20,8 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
     \apiargument{IN}{addr}{The remotely accessible array element or scalar data object.}
     \apiargument{IN}{pe}{The number of the remote \ac{PE} on which \VAR{addr} resides.}
     \newtext{
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When none
-    is provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
     }
 \end{apiarguments}
 
