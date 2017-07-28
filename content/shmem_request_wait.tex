@@ -15,8 +15,9 @@ void shmem_request_wait(shmem_request_t *req);
 
 \apidescription{
     The routine blocks until all outstanding operations on the request
-    are finished. After the routine returns, the request is set to NULL.
-    There are no guarantees on the ordering of the outstanding
+    are finished. Outstanding operations are operations posted before
+    wait was called. After the routine returns, the request is set to
+    NULL. There are no guarantees on the ordering of the outstanding
     operations.
  }
 
@@ -24,6 +25,9 @@ void shmem_request_wait(shmem_request_t *req);
     None.
 }
 
-\apinotes{ None }
+\apinotes{ In a threaded environment, calling shmem\_request\_wait from
+a thread other than the thread, posting the operation is permitted.
+However, care must be taken that no operations are posted while the
+request is being waited on. }
 
 \end{apidefinition}
