@@ -78,7 +78,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 }
 
 \apinotes{
-  As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated,
+  As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated;
   however, \FUNC{shmem\_wait} is equivalent to \FUNC{shmem\_wait\_until}
   where \VAR{cmp} is SHMEM\_CMP\_NE.
 }

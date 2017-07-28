@@ -47,7 +47,7 @@ I = SHMEM_TEST_LOCK(lock)
 \apinotes{
     The term symmetric data object is defined in Section \ref{subsec:memory_model}.
     The lock variable should always be initialized to zero and accessed only by the \openshmem locking
-    \ac{API}.  Changing the value of the lock variable by other means without using
+    \ac{API}.  Changing the value of the lock variable by other means, without using
     the \openshmem \ac{API}, can lead to undefined behavior.
 }
 

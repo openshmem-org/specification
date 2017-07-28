@@ -49,14 +49,14 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 
 \apidescription{
     The \FUNC{shmem\_alltoall} routines are collective routines. Each \ac{PE}
-    in the active set exchanges \VAR{nelems} data elements of size
-    32 bits (for \FUNC{shmem\_alltoall32}) or 64 bits (for \FUNC{shmem\_alltoall64})
+    in the \activeset{} exchanges \VAR{nelems} data elements of size
+    32 bits, for \FUNC{shmem\_alltoall32}, or 64 bits, for \FUNC{shmem\_alltoall64},
     with all other \acp{PE} in the set. The data being sent and received are
     stored in a contiguous symmetric data object. The total size of each \acp{PE}
     \VAR{source} object and \VAR{dest} object is \VAR{nelems} times the size of
-    an element (32 bits or 64 bits) times \VAR{PE\_size}.
-    The \VAR{source} object contains \VAR{PE\_size} blocks of data (the size of each
-    block defined by \VAR{nelems}) and each block of data is sent to a different \ac{PE}. 
+    an element, 32 bits or 64 bits, times \VAR{PE\_size}.
+    The \VAR{source} object contains \VAR{PE\_size} blocks of data, the size of each
+    block defined by \VAR{nelems}, and each block of data is sent to a different \ac{PE}. 
     Given a \ac{PE} \VAR{i} that is the \kth PE in the active set and a \ac{PE}
     \VAR{j} that is the \lth \ac{PE} in the active set,
     \ac{PE} \VAR{i} sends the \lth block of its \VAR{source} object to

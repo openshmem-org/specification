@@ -1,9 +1,9 @@
 When using the \openshmem \ac{API}, synchronization, ordering, and completion of
-communication become critical. The updates via \PUT{} routines, \acp{AMO} and
+communication become critical. The updates via \PUT{} routines, \acp{AMO}, and
 store routines on symmetric data cannot be guaranteed until some form of
 synchronization or ordering is introduced by the program user. The table below
 gives the different synchronization and ordering choices, and the situations
-where they may be useful.\\
+where they may be useful:\\
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 \hline 
@@ -36,7 +36,7 @@ the remote \ac{PE} is to update. \tabularnewline
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-All \PUT{} routines, \acp{AMO} and store routines on symmetric data issued to
+All \PUT{} routines, \acp{AMO}, and store routines on symmetric data issued to
 same \ac{PE}  are guaranteed to be delivered  before Puts (to the same \ac{PE})
 issued after the \FUNC{fence} call. \tabularnewline
 \hline 
@@ -56,7 +56,7 @@ issued after the \FUNC{fence} call. \tabularnewline
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{All \PUT{} routines, \acp{AMO} and store routines on symmetric data issued by a
+{All \PUT{} routines, \acp{AMO}, and store routines on symmetric data issued by a
 local \ac{PE} to all  remote \acp{PE} are guaranteed to be completed and visible
 once quiet returns. This routine should be used when all remote writes issued by
 a local \ac{PE} need to be visible  to all other \acp{PE} before the local
