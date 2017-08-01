@@ -23,11 +23,9 @@ To write a ``Hello World" \openshmem program, the user must:
 \begin{itemize}
 \item Add the include file \HEADER{shmem.h} (for \Cstd) or \HEADER{shmem.fh} (for \Fortran).
 \item Add the initialization call \FUNC{shmem\_init}, (line 9).
-\item Use OpenSHMEM calls to query the the total number of PEs (line 10) and PE
+\item Use OpenSHMEM calls to query the total number of \acp{PE} (line 10) and \ac{PE}
     id (line 11).
-\item There is no explicit finalize call; either a return from \texttt{main()}
-    (line 13) or an explicit \texttt{exit()} acts as an implicit \openshmem
-    finalization.
+\item Add the finalization call \FUNC{shmem\_finalize}, (line 13).
 \item In \openshmem the order in which lines appear in the output is not fixed
     as \acp{PE} execute asynchronously in parallel.
 \end{itemize}
@@ -243,7 +241,7 @@ communication from a remote \ac{PE}.
 
 Another important feature of these systems is that the
 \FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if the remote
-\ac{PE} is a process running from the same executable file as the local PE,
+\ac{PE} is a process running from the same executable file as the local \ac{PE},
 indicating that full \openshmem support (static memory and symmetric heap) is
 available.  When using \openshmem routines within an \ac{MPI} program, the use
 of \ac{MPI} memory placement environment variables is required when using
@@ -336,6 +334,7 @@ specification.
     Header Directory: \hyperref[subsec:dep_rationale:mpp]{\HEADER{mpp}} & 1.1 & Current & (none) \\ \hline
     \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \hyperref[subsec:start_pes]{\FUNC{START\_PES}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
+    \hyperref[subsec:start_pes]{Implicit finalization} & 1.2 & Current & \hyperref[subsec:shmem_finalize]{\FUNC{shmem\_finalize}} \\ \hline
     \CorCpp: \FUNC{\_my\_pe} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
     \CorCpp: \FUNC{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
     \Fortran: \FUNC{MY\_PE} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
@@ -419,6 +418,11 @@ The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
 \FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
 to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
 prefix for all routines.
+
+\subsection{Implicit Finalization}
+Implicit finalization has been replaced with explicit finalization using the
+\FUNC{shmem\_finalize} routine.  Explicit finalization improves portability and
+also improves interoperability with profiling and debugging tools.
 
 \subsection{\Fortran: START\_PES, MY\_PE, NUM\_PES}
 The \Fortran routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
@@ -514,6 +518,10 @@ explicit and better communicates the developer's intent.
 \item Clarified that the \FUNC{SHMEM\_GET64} and \FUNC{SHMEM\_GET64\_NBI}
     routines are included in the Fortran language bindings.\\
     See Sections \ref{subsec:shmem_get} and \ref{subsec:shmem_get_nbi}.
+%
+\item Clarified that \FUNC{shmem\_init} must be matched with a call to
+    \FUNC{shmem\_finalize}.
+\\See Sections \ref{subsec:shmem_init} and \ref{subsec:shmem_finalize}.
 %
 \item Added the \VAR{SHMEM\_SYNC\_SIZE} constant.
 \\See Section \ref{subsec:library_constants}.

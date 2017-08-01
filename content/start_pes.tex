@@ -25,8 +25,13 @@ CALL START_PES(npes)
 
 \apidescription{   
      The \FUNC{start\_pes} routine initializes the \openshmem execution
-     environment.  An \openshmem program must call \FUNC{start\_pes} before
-     calling any other \openshmem routine.
+     environment.  An \openshmem program must call either \FUNC{start\_pes} or
+     \FUNC{shmem\_init} before calling any other \openshmem routine.  Unlike
+     \FUNC{shmem\_init}, \FUNC{start\_pes} does not require a call to
+     \FUNC{shmem\_finalize}.  Instead, the \openshmem library is implicitly
+     finalized when the program exits.  Implicit finalization is collective and
+     includes a global synchronization to ensure that all pending communication
+     is completed before resources are released.
 }
 
 \apireturnvalues{
