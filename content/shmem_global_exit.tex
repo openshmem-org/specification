@@ -43,8 +43,8 @@ CALL SHMEM_GLOBAL_EXIT(status)
 
 
 \apinotes{ 
-    \FUNC{shmem\_global\_exit} may be used in situations where one, or more,
-    \acp{PE} have determined that the program has completed, and/or should
+    \FUNC{shmem\_global\_exit} may be used in situations where one or more
+    \acp{PE} have determined that the program has completed and/or should
     terminate early.  Accordingly, the integer status argument can be used to
     pass any information about the nature of the exit, e.g an encountered error
     or a found solution.  Since \FUNC{shmem\_global\_exit} is a non-collective

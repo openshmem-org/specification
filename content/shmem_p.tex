@@ -15,7 +15,7 @@ void shmem_<TYPENAME>_p(TYPE *dest, TYPE value, int pe);
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{apiarguments}
-    \apiargument{IN}{addr}{The remotely accessible array element, or scalar data object,
+    \apiargument{IN}{addr}{The remotely accessible array element or scalar data object
     which will receive the data on the remote \ac{PE}.}
     \apiargument{IN}{value}{The value to be transferred to \VAR{addr} on the
     remote \ac{PE}.}
@@ -26,7 +26,7 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
     These routines provide a very low latency put capability for single elements of
     most basic types.
     
-    As with \FUNC{shmem\_put}, these routines start the remote transfer, and may
+    As with \FUNC{shmem\_put}, these routines start the remote transfer and may
     return before the data is delivered to the remote \ac{PE}.  Use
     \FUNC{shmem\_quiet} to force completion of all remote \PUT{} transfers.
 }

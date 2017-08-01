@@ -56,8 +56,8 @@ void *shmem_align(size_t alignment, size_t size);
     \acp{PE} participate in the memory allocation, and that the memory on other
     \acp{PE} can be used as  soon as the local \ac{PE} returns.  The user is
     responsible for calling these routines with identical argument(s) on all
-    \acp{PE}. If differing \VAR{size} arguments are used, the behavior of the call,
-    and any subsequent \openshmem calls, becomes undefined.
+    \acp{PE}. If differing \VAR{size} arguments are used, the behavior of the call
+    and any subsequent \openshmem calls becomes undefined.
 }
 
 \apireturnvalues{

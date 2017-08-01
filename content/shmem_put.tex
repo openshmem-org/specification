@@ -56,7 +56,7 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
     The routines return after the data has been copied out of the \source{} array
     on the local \ac{PE}.  The delivery of data words into the data object on the
     destination \ac{PE} may occur in any order.  Furthermore, two successive put
-    routines may deliver data out of order, unless a call to \FUNC{shmem\_fence} is
+    routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
     introduced between the two calls.   
  }
 

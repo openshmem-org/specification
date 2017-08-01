@@ -20,7 +20,7 @@ CALL SHMEM_FINALIZE()
 
 \apidescription{
     \FUNC{shmem\_finalize} is a collective operation that ends the \openshmem
-    portion of a program previously initialized by \FUNC{shmem\_init}, and
+    portion of a program previously initialized by \FUNC{shmem\_init} and
     releases resources used by the \openshmem library. This collective
     operation requires all \acp{PE} to participate in the call. There is an
     implicit global barrier in \FUNC{shmem\_finalize} so that pending
