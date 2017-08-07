@@ -214,8 +214,6 @@ The following cases summarize this behavior:
 \end{longtable}
 
 
-
-
 \chapter{Interoperability with other Programming Models}\label{sec:mpi}
 
 \section{\ac{MPI} Interoperability}
@@ -629,13 +627,10 @@ synchronization routines.
 %
 \end{itemize}
 
-
-
-
 \section{Version 1.3}
-Major changes in \openshmem[1.3] include the addition of
-non-blocking RMA operations,
-atomic \PUT{} and \GET{} operations,
+This section summarizes the changes from the \openshmem specification Version
+1.2 to Version 1.3. Many major changes to the specification were introduced in Version 1.3. These changes include non-blocking RMA operations, 
+generic interfaces for various OpenSHMEM interfaces, atomic \FUNC{Put} and \FUNC{Get} operations,
 all-to-all collectives,
 and \Cstd[11] type-generic interfaces for \ac{RMA} and \ac{AMO} operations.
 
