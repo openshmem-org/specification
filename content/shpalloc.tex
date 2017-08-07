@@ -30,11 +30,13 @@ CALL SHPALLOC(addr, length, errcode, abort)
     \CONST{POINTER} (\VAR{addr}, \VAR{A}())
 }
 
-\apireturnvalues{}
-    \apitablerow{Error Code}{Condition}
-    \apitablerow{ \CONST{-1} }{Length is not an integer greater than \CONST{0}}
-    \apitablerow{\CONST{-2}}{ No more memory is available from the system (checked if the
-    request cannot be satisfied from the available blocks on the symmetric heap).}
+\apireturnvalues{
+    \retvaldesctable{
+    \retvaltablerow{\CONST{0}}{Length is not an integer greater than \CONST{0}}
+    \retvaltablerow{\CONST{-2}}{ No more memory is available from the system (checked if the
+    request cannot be satisfied from the available blocks on the symmetric heap).}}
+
+}
 
 \apinotes{  
     The total size of the symmetric heap is determined at job startup.  One may

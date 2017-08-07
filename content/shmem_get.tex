@@ -64,7 +64,7 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
     The  \dest{} and \source{} data objects must conform to typing constraints,
     which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
-
+{
     \apitablerow{shmem\_getmem}{\Fortran: Any noncharacter type. \Cstd: Any
         data  type.  nelems is scaled in bytes.}
     \apitablerow{shmem\_get4, shmem\_get32}{Any noncharacter type
@@ -86,6 +86,7 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
     \apitablerow{SHMEM\_INTEGER\_GET}{Elements of type integer.}
     \apitablerow{SHMEM\_LOGICAL\_GET}{Elements of type logical.}
     \apitablerow{SHMEM\_REAL\_GET}{Elements of type real.}
+}
 
 \apireturnvalues{
     None.

@@ -415,6 +415,21 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \end{description}
 }
 
+\newcommand{\retvaltablerow}[2]{
+#1 & #2 \tabularnewline
+}
+
+\newcommand{\retvaldesctable}[1] {
+    \vspace{.3em} \\
+    \begin{tabular}{p{3cm} p{11cm}}
+       %\hline
+       Error Code & Condition \\
+       %\hline % \tabularnewline
+       #1
+       %\hline % \tabularnewline
+    \end{tabular}
+}
+
 \newcommand{\apidesctable}[4] {
 \begin{quote}
     #1 \vspace{.3em} \\
@@ -422,8 +437,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
        \hline
        #2 & #3 \\
        \hline \tabularnewline
-    \end{tabular} \\ \vspace{.3em}
     #4
+    \end{tabular} \\ \vspace{.3em}
 \end{quote}
 }
 
@@ -435,9 +450,9 @@ minus .2ex}{-1em}{\normalsize\sf}}
 }
 
 \newcommand{\apitablerow}[2]{
- \begin{tabular}{p{5cm} p{9cm}}
+% \begin{tabular}{p{5cm} p{9cm}}
  #1 & #2 \tabularnewline
-  \end{tabular} \\ \vspace{.2em}
+%  \end{tabular} \\ \vspace{.2em}
 }
 
 \newcommand{\apinotes}[1]{
