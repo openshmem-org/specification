@@ -65,8 +65,8 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 
     As with all \openshmem collective routines, this routine assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not
-    in the active set calls an \openshmem collective routine, undefined
-    behavior results.
+    in the active set calls an \openshmem collective routine, the
+    behavior is undefined.
 
     The values of arguments \VAR{nelems}, \VAR{PE\_start}, \VAR{logPE\_stride},
     and \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same
@@ -105,15 +105,15 @@ constraints, which are as follows:
     that \VAR{pSync} be reinitialized after the first call.
     The user must ensure that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the active set while any of the \acp{PE} participates in
-    processing of an \openshmem\ \FUNC{shmem\_alltoall} routine. Be careful to
-    avoid these situations: If the \VAR{pSync} array is initialized at run time,
+    processing of an \openshmem\ \FUNC{shmem\_alltoall} routine. Users should avoid 
+    these situations: If the \VAR{pSync} array is initialized at run time,
     some type of synchronization is needed to ensure that all \acp{PE} in the
     active set have initialized \VAR{pSync} before any of them enter an
     \openshmem\ routine called with the \VAR{pSync} synchronization array.  A
     \VAR{pSync} array may be reused on a subsequent \openshmem\
     \FUNC{shmem\_alltoall} routine only if none of the \acp{PE} in the
     active set are still processing a prior \openshmem\ \FUNC{shmem\_alltoall}
-    routine call that used the same \VAR{pSync} array.  In general, this can be
+    routine call that used the same \VAR{pSync} array.  In general, this reuse can be
     ensured only by doing some type of synchronization.
 }
 

@@ -40,7 +40,7 @@ CALL SHMEM_QUIET
     of a block of data before issuing another \PUT{} or non-blocking
     \PUT{} routine, which sets a completion flag on another \ac{PE}.
      \FUNC{shmem\_quiet} is not usually needed if
-    \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} are called.  The barrier
+    \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} is called.  The barrier
     routines wait for the completion of outstanding writes (\PUT{}, \ac{AMO},
     memory stores, and nonblocking \PUT{} and \GET{} routines) to
     symmetric data objects on all \acp{PE}.
