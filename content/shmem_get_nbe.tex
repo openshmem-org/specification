@@ -54,15 +54,14 @@ void shmem_getmem_nbe(void *dest, const void *source, size_t nelems, int pe, shm
     The  \dest{} and \source{} data objects must conform to typing constraints,
     which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}{
-    \apitablerow{shmem\_getmem\_nbi}{\Fortran: Any noncharacter type. \Cstd:
-        Any  data  type.  nelems is scaled in bytes.}
-    \apitablerow{shmem\_get4\_nbi, shmem\_get32\_nbi}{Any noncharacter type
+    \apitablerow{shmem\_getmem\_nbe}{Any  data  type.  nelems is scaled in bytes.}
+    \apitablerow{shmem\_get4\_nbe, shmem\_get32\_nbe}{Any noncharacter type
         that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_get8\_nbi}{\Cstd: Any noncharacter type that
+    \apitablerow{shmem\_get8\_nbe}{Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
-    \apitablerow{shmem\_get64\_nbi}{Any noncharacter type that
+    \apitablerow{shmem\_get64\_nbe}{Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_get128\_nbi}{Any noncharacter type that has a
+    \apitablerow{shmem\_get128\_nbe}{Any noncharacter type that has a
         storage size equal to \CONST{128} bits.}
 }
 \apireturnvalues{
