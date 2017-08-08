@@ -437,7 +437,9 @@ The \Fortran function \FUNC{SHMEM\_PUT} is defined only for the \Fortran
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
 
 \subsection{SHMEM\_CACHE}
-The \FUNC{SHMEM\_CACHE} \ac{API}
+The \FUNC{SHMEM\_CACHE} \ac{API}, listed below, was originally implemented for systems with cache management instructions.
+This API has largely gone unused on cache-coherent system architectures.
+\FUNC{SHMEM\_CACHE} has been deprecated.
 \begin{center}
 \begin{tabular}{ll}
     \CorCpp: & \Fortran: \\
@@ -449,12 +451,12 @@ The \FUNC{SHMEM\_CACHE} \ac{API}
     shmem\_clear\_cache\_line\_inv \\
 \end{tabular}
 \end{center}
-was originally implemented for systems with cache management instructions.
-This API has largely gone unused on cache-coherent system architectures.
-\FUNC{SHMEM\_CACHE} has been deprecated.
 
 \subsection{\_SHMEM\_* Library Constants}
-The library constants
+The library constants, listed below, do not adhere to the \Cstd standard's reserved identifiers and the \Cpp
+standard's reserved names.  These constants have been deprecated and replaced
+with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
+and \Fortran naming conventions.
 \begin{center}
 \begin{tabular}{ll}
     \_SHMEM\_SYNC\_VALUE & \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE \\
@@ -464,10 +466,6 @@ The library constants
     \_SHMEM\_REDUCE\_SYNC\_SIZE & \_SHMEM\_VENDOR\_STRING \\
 \end{tabular}
 \end{center}
-do not adhere to the \Cstd standard's reserved identifiers and the \Cpp
-standard's reserved names.  These constants have been deprecated and replaced
-with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
-and \Fortran naming conventions.
 
 \subsection{\FUNC{shmem\_fetch}, \FUNC{shmem\_set}, \FUNC{shmem\_cswap},
   \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc}, \\
@@ -482,7 +480,8 @@ In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
 \subsection{SMA\_* Environment Variables}
-The environment variables
+The environment variables, listed below, were deprecated in order to normalize the \openshmem \ac{API} to use
+\shmemprefix{} as the standard prefix for all environment variables.
 \begin{center}
 \begin{tabular}{ll}
     SMA\_VERSION \\
@@ -491,8 +490,6 @@ The environment variables
     SMA\_DEBUG \\
 \end{tabular}
 \end{center}
-were deprecated in order to normalize the \openshmem \ac{API} to use
-\shmemprefix{} as the standard prefix for all environment variables.
 
 \subsection{\FUNC{shmem\_wait}}
 The \FUNC{shmem\_wait} interface was identified as unintuitive with respect to
@@ -640,7 +637,7 @@ The following list describes the specific changes in 1.3:
 This section summarizes the changes from the \openshmem specification Version
 1.1 to Version 1.2.  A major change in this version is that it improves upon the
 execution model described in 1.1 by introducing an explicit
-\FUNC{shmem\_finalize} library call. This provides a collective mechanism of
+\FUNC{shmem\_finalize} library call. \FUNC{shmem\_finalize} provides a collective mechanism of
 exiting an \openshmem program and releasing resources used by the library.  
 
 
