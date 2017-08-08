@@ -31,9 +31,9 @@ The type-generic support for the \ac{AMO} routines is as follows:
 
 \begin{itemize}
 \item \FUNC{shmem\_atomic\_\{compare\_swap, fetch\_inc, inc, fetch\_add, add\}} support
-      the ``standard \ac{AMO} types'' listed in Table~\ref{stdamotypes},
+      the ``standard \ac{AMO} types'' listed in Table~\ref{stdamotypes}.
 \item \FUNC{shmem\_atomic\_\{fetch, set, swap\}} support
-      the ``extended \ac{AMO} types'' listed in Table~\ref{extamotypes}, and
+      the ``extended \ac{AMO} types'' listed in Table~\ref{extamotypes}.
 \item \FUNC{shmem\_atomic\_\{fetch\_and, and, fetch\_or, or, fetch\_xor, xor\}}
       support the ``bitwise \ac{AMO} types'' listed in Table~\ref{bitamotypes}.
 \end{itemize}
@@ -42,7 +42,7 @@ The standard and extended \ac{AMO} types include some of the exact-width
 integer types defined in \HEADER{stdint.h} by \Cstd[99]~\S7.18.1.1 and
 \Cstd[11]~\S7.20.1.1. When the \Cstd translation environment
 does not provide exact-width integer types with \HEADER{stdint.h}, an
-\openshmem implemementation is not required to provide support for these types.
+\openshmem implementation is not required to provide support for these types.
 
 \begin{table}[h]
   \begin{center}

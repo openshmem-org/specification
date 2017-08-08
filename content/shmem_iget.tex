@@ -56,7 +56,7 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{iget} routines provide a method for copying strided data elements from
+    The \FUNC{iget} routines copy strided data elements on
     a symmetric array from a specified remote \ac{PE} to strided locations on a
     local array.  The routines return when the data has been copied into the local
     \VAR{dest} array.

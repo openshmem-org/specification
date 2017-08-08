@@ -1,5 +1,5 @@
 \apisummary{
-    The nonblocking get routines provide a method for copying data from a
+    The nonblocking get routines copy data from a
     contiguous remote data object on the specified \ac{PE} to the local data object. 
 }
 
@@ -96,7 +96,7 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 
 \apinotes{
     See Section \ref{subsec:memory_model} for a definition of the term
-    remotely accessible.
+    remotely accessible data object.
     When using \Fortran, data types must be of default size.  For example, a real
     variable must be declared as \CONST{REAL}, \CONST{REAL*4},  or
     \CONST{REAL(KIND=KIND(1.0))}.
