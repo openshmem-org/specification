@@ -6,11 +6,12 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_request_test(shmem_request_t *req);
+void shmem_request_test(shmem_request_t *req, int *status);
 \end{Csynopsis}
 
 \begin{apiarguments}
     \apiargument{IN}{req}{The request handle to test the status.}
+    \apiargument{OUT}{status}{The status of the request.}
 \end{apiarguments}
 
 \apidescription{
