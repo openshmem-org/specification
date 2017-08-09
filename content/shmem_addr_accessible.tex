@@ -24,9 +24,8 @@ LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
     \FUNC{shmem\_addr\_accessible} is a query routine that indicates whether a local
     address is accessible via \openshmem routines from the specified remote \ac{PE}. 
     
-    This routine verifies that the data object is symmetric and accessible with
-    respect to a remote \ac{PE} via \openshmem  data  transfer routines.  The
-    specified address \VAR{addr} is a data object on the local \ac{PE}. 
+    This routine verifies that the data object on the local PE is symmetric and accessible with
+    respect to a remote \ac{PE} via \openshmem  data  transfer routines.
     
     This routine may be particularly useful for hybrid programming with other
     communication libraries (such as \ac{MPI}) or parallel languages.  For

@@ -5,7 +5,7 @@ one-sided communication is that it decouples communication from the
 synchronization. One-sided communication mechanisms transfer the data but do not
 synchronize the sender of the data with the receiver of the data. 
 
-\openshmem \ac{RMA} routines are all performed on the symmetric objects.  The
+\openshmem \ac{RMA} routines are all performed on the symmetric data objects.  The
 initiator \ac{PE} of the call is designated as \source{}, and the \ac{PE} in
 which memory is accessed is designated as \dest{}. In the case of the remote
 update routine, \PUT{}, the origin is the \source{} \ac{PE} and the destination

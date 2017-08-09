@@ -21,10 +21,10 @@ CALL SHMEM_INIT()
 \apidescription{
     \FUNC{shmem\_init} allocates and initializes resources used by the \openshmem
     library. It is a collective operation that all \acp{PE} must call before any
-    other \openshmem routine may be called. At the end of the \openshmem program
-    which it initialized, the call to \FUNC{shmem\_init} must be matched with a
-    call to \FUNC{shmem\_finalize}. After the first call to \FUNC{shmem\_init}, a
-    subsequent call to \FUNC{shmem\_init} in the same program results in undefined
+    other \openshmem routine may be called. Upon termination of initialization,
+     the call to \FUNC{shmem\_init} must be matched with a
+    call to \FUNC{shmem\_finalize}. After the first call to \FUNC{shmem\_init}, any
+    subsequent calls to \FUNC{shmem\_init} in the same program results in undefined
     behavior.
 }
 
@@ -38,9 +38,9 @@ CALL SHMEM_INIT()
     \FUNC{start\_pes} is still required in \openshmem libraries, users are
     encouraged to use \FUNC{shmem\_init}. An important difference between
     \FUNC{shmem\_init} and \FUNC{start\_pes} is that multiple calls to
-    \FUNC{shmem\_init} within a program results in undefined behavior, while in the
-    case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the
-    first one resulted in a no-op.
+    \FUNC{shmem\_init} within a program results in undefined behavior, while 
+    any subsequent calls to \FUNC{start\_pes} after the
+    first one result in a no-op.
 }
 
 \begin{apiexamples}

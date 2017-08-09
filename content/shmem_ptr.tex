@@ -25,7 +25,7 @@ PTR = SHMEM_PTR(dest, pe)
 \apidescription{
     \FUNC{shmem\_ptr} returns an address that may be used to directly reference
     \dest{} on the specified \ac{PE}.  This address can be assigned to a pointer.
-    After that, ordinary loads and stores to this remote address may be performed.
+    After \FUNC{shmem\_ptr} returns, ordinary loads and stores to this remote address may be performed.
     
     When a sequence of loads (gets) and stores (puts) to a data object on a
     remote \ac{PE} does not match the access pattern provided in an \openshmem data
