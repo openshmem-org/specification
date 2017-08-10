@@ -110,6 +110,7 @@ underlying \Cpp compiler called by \textbf{oshCC}.
 
 \subsection*{Programs written in \Fortran}
 
+\begin{deprecate}
 The  \openshmem{} Reference Implementation provides a wrapper program named
 \textbf{oshfort}, to aid in the compilation of \Fortran programs, the wrapper
 could be called as follows:
@@ -119,6 +120,7 @@ oshfort <compiler options> -o myprogram myprogram.f
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
 underlying \Fortran compiler called by \textbf{oshfort}.
+\end{deprecate}
 
 \section{Running Programs}
 
@@ -383,6 +385,7 @@ specification.
     \CorCpp: \FUNC{shmem\_inc}   & 1.4 & Current & \hyperref[subsec:shmem_atomic_inc]{\FUNC{shmem\_atomic\_inc}} \\ \hline
     \CorCpp: \FUNC{shmem\_fadd}  & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch_add]{\FUNC{shmem\_atomic\_fetch\_add}} \\ \hline
     \CorCpp: \FUNC{shmem\_add}   & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
+    Entire \Fortran API & 1.4 & Current & (none) \\ \hline
     \end{tabular}
 \end{center}
 
@@ -494,6 +497,15 @@ The environment variables
 were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
+\subsection{Fortran API}\label{subsec:deprecate-fortran}
+The entire \openshmem \Fortran API was deprecated because of a general lack of
+use and a lack of conformance with legacy \Fortran standards. In lieu of an
+extensive update of the \Fortran API, \Fortran users are encouraged to
+leverage current and future \openshmem specifications of the \Cstd API
+through the \Fortran-\Cstd interoperability initially standardized by
+\Fortran[2003]%
+\footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
+
 \subsection{\FUNC{shmem\_wait}}
 The \FUNC{shmem\_wait} interface was identified as unintuitive with respect to
 the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
@@ -579,6 +591,8 @@ synchronization routines.
 \item Added fetching and non-fetching bitwise AND, OR, and XOR atomic
       operations.
 \\ See Section \ref{sec:amo}.
+%
+\item Deprecated the entire \Fortran API.
 %
 \end{itemize}
 
