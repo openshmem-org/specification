@@ -4,13 +4,13 @@ described in Section~\ref{sec:rma}. Most of the semantics for these
 routines are the same as for regular \ac{RMA} routines.
 
 All explicit non-blocking \ac{RMA} routines take a handle to a request
-object as parameter. Request objects are of the type \CTYPE{shmem\_request\_t}.
+object as parameter. Request objects are of the type
+\CTYPE{shmem\_request\_t}. The request object is used to track the
+status of \ac{RMA} operations. A request object can be used to track one
+or more operations. If a request object is used for multiple
+communication operations, the resources assigned to the request object
+can be shared.
 
-Request object is of used to track the status of the \ac{RMA}
-operation. A request object can be used for multiple operations. If a
-request object is used for multiple communication operations, the
-resources assigned to the request can be shared.
-
-This section describes the explicit non-blocking \ac{RMA}
-routines and the routines used to track the \ac{RMA} routines.
-Additionally, management routines are specified.
+This section describes the routines for: explicit non-blocking \ac{RMA},
+the routines used to track the \ac{RMA} routines, and the
+allocation, deallocation and merging of request objects.

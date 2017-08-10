@@ -10,14 +10,14 @@ void shmem_request_test(shmem_request_t *req, int *status);
 \end{Csynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{req}{The request handle to test the status.}
+    \apiargument{IN}{req}{Handle to the request object.}
     \apiargument{OUT}{status}{The status of the request.}
 \end{apiarguments}
 
 \apidescription{
-    The routine returns zero if the request is finished, otherwise a non
-    zero value is returned. If the return value is 0, it is safe to free
-    the request object.
+    The routine returns zero via the status argument if the request is
+    finished, otherwise a non zero value is returned.
+    It is safe to free the request object, if the return value is zero.
  }
 
 \apireturnvalues{

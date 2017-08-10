@@ -5,22 +5,24 @@ void shmem_request_allocate(shmem_request_t *req, int flags);
 \end{Csynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN/OUT}{req}{Handle to the request object}
+    \apiargument{IN/OUT}{req}{Handle to the request object.}
     \apiargument{IN}{flags}{Options for the request creation.}
 \end{apiarguments}
 
 \apidescription{
     This routine can be used to explicitly pre-allocate a request
-    object. The flags parameter can be used to pass hints to the
+    object. On failure the handle will be set to SHMEM\_REQUEST\_INVALID.
+    The flags parameter can be used to pass hints to the
     runtime.\\
 
     Options:\\
-    OPTNAME: Allocate the request with a dedicated set of resources.
-    Fail if the requirement can not be satisfied.\\
-    OPTNAME: Allocate the request with a dedicated set of resources.
+    OPTNAME\_EXCLUSIVE: Allocate the request with a dedicated set of resources.
+    Fail if exclusive resources can not be provided.\\
+    OPTNAME\_EXCLUSIVE\_TRY: Allocate the request with a dedicated set of resources.
     Return a request with shared resources, if dedicated resources can
     not be allocated.\\
-    OPTNAME: Allocate the request with shared resources.\\
+    OPTNAME\_SHAREABLE: Allocate the request with shareable resources.\\
+
  }
 
 \apireturnvalues{

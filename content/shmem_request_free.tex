@@ -11,6 +11,7 @@ void shmem_request_free(shmem_request_t *req);
 \apidescription{
     The routine frees the request object and returns all allocated
     resources back to the library.
+    Calling \FUNC{shmem\_request\_free} with an invalid object is undefined.
  }
 
 \apireturnvalues{

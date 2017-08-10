@@ -5,8 +5,7 @@ void shmem_request_merge(shmem_request_t *req, int count, shmem_request_t[] *req
 \end{Csynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{req}{The request object that the requests will be
-    merged into.}
+    \apiargument{OUT}{req}{}
     \apiargument{IN}{count}{Number of requests to be merged}
     \apiargument{IN}{reqs}{Array of request objects to be merged}
 \end{apiarguments}
@@ -16,8 +15,9 @@ void shmem_request_merge(shmem_request_t *req, int count, shmem_request_t[] *req
     request object. The new request object can be used to track all
     operations previously associated with independent request objects.
 
-    The request objects used as input for the merge operation will be
-    freed.
+    The request objects passed in the input array for the merge operation will be
+    automatically freed. After the function returns the handles are
+    invalid. The user does not need to free the input requests.
  }
 
 \apireturnvalues{

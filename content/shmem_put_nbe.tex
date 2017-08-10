@@ -47,11 +47,11 @@ void shmem_putmem_nbe(void *dest, const void *source, size_t nelems, int pe, shm
     parameter is initialized to NULL, a new request will be created. If
     the parameter is a valid request object, the operation will be
     merged into the request object.
-    The delivery of data words into the data object on the destination
+    The delivery of data elements into the data object on the destination
     \ac{PE} may occur in any order.
     Furthermore, two successive put routines may deliver data out of
     order. The operation is considered complete after a subsequent call
-    to \FUNC{shmem\_wait\_request}.
+    to \FUNC{shmem\_wait\_request} returns.
  }
 
 \apidesctable{

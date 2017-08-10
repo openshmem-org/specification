@@ -10,11 +10,11 @@ void shmem_request_wait(shmem_request_t *req);
 \end{Csynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{req}{The request handle to wait for.}
+    \apiargument{IN}{req}{Handle to the request object.}
 \end{apiarguments}
 
 \apidescription{
-    The routine blocks until all outstanding operations on the request
+    The \FUNC{shmem\_request\_wait} routine blocks until all outstanding operations on the request
     are finished. Outstanding operations are operations posted before
     wait was called. After the routine returns, the request is set to
     NULL. There are no guarantees on the ordering of the outstanding
@@ -25,9 +25,12 @@ void shmem_request_wait(shmem_request_t *req);
     None.
 }
 
-\apinotes{ In a threaded environment, calling shmem\_request\_wait from
+\apinotes{ In a threaded environment \FUNC{shmem\_request\_wait} from
 a thread other than the thread, posting the operation is permitted.
+
+!!! clarify
 However, care must be taken that no operations are posted while the
-request is being waited on. }
+request is being waited on.
+}
 
 \end{apidefinition}
