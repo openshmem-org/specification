@@ -18,7 +18,7 @@ program must ensure that the \openshmem{} interfaces
 are not invoked concurrently by multiple threads.
 
 \item {\bf \CONST{SHMEM\_THREAD\_MULTIPLE}}
-The \openshmem{} program may be multithreaded, and any 
+The \openshmem{} program may be multithreaded and any 
 thread may invoke the \openshmem{} interfaces.
 \end{itemize}
 
@@ -42,7 +42,7 @@ allocates memory that is accessible by all threads of the \ac{PE}.
 The requirement that the same symmetric heap operations must
 be executed by all \acp{PE} in the same order also applies in a threaded
 environment. Similarly, the completion of collective operations is not impacted by multiple threads. 
-For example, the \FUNC{shmem\_barrier\_all} is completed when all \acp{PE} enter and
+For example, \FUNC{shmem\_barrier\_all} is completed when all \acp{PE} enter and
 exit the \FUNC{shmem\_barrier\_all} call, even though only one thread in the \ac{PE} is
 participating in the collective call. 
 
@@ -59,7 +59,7 @@ will not prevent the progress of \openshmem{} calls on other \acp{PE}.
 i.e., two concurrently running threads may make \openshmem{} calls and the outcome will be as if the calls executed in
 some order, even if their execution is interleaved.
 
-\item In \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, 
+\item In \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels, 
 if multiple threads call the collective calls, it is the programmer's responsibility to ensure the correct ordering of
 collective calls, including the symmetric heap management functions.
 %, which are defined to call \FUNC{shmem\_barrier\_all}(\ref{sec:mem_routines}) must be treated as collective operations.
