@@ -552,7 +552,7 @@ to be unnecessary.}
 \VAR{SHMEM\_}* environment variables.
 \\ See Section \ref{subsec:environment_variables}.
 %
-\item Added the \Cstd[11] \textbf{\_Noreturn} function specifier to
+\item Added the \Cstd[11] \CTYPE{\_Noreturn} function specifier to
 \FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
@@ -594,6 +594,14 @@ synchronization routines.
 %
 \item Deprecated the entire \Fortran API.
 %
+\item Replaced the \CTYPE{complex} macro in complex-typed reductions with the
+      \Cstd[99] (and later) type specifier \CTYPE{\_Complex} to remove an
+      implicit dependence on \HEADER{complex.h}.
+\\ See Section \ref{subsec:shmem_reductions}.
+%
+\item Clarified that complex-typed reductions in C are optionally supported.
+\\ See Section \ref{subsec:shmem_reductions}.
+%
 \end{itemize}
 
 \section{Version 1.3}
@@ -608,7 +616,7 @@ The following list describes the specific changes in 1.3:
 %
 \item Clarified implementation of \acp{PE} as threads.
 %
-\item Added \textbf{const} to every read-only pointer argument.
+\item Added \CTYPE{const} to every read-only pointer argument.
 %
 \item Clarified definition of \OPR{Fence}.
 \\See Section \ref{subsec:programming_model}.
@@ -638,7 +646,7 @@ The following list describes the specific changes in 1.3:
 	and \FUNC{SHMEM\_ALLTOALLS}.
 \\See Sections \ref{subsec:shmem_alltoall} and \ref{subsec:shmem_alltoalls}.
 %
-\item Added \textbf{volatile} to remotely accessible pointer argument in 
+\item Added \CTYPE{volatile} to remotely accessible pointer argument in
 	\FUNC{SHMEM\_WAIT} and \FUNC{SHMEM\_LOCK}.
 \\See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
 %

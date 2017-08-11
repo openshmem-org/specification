@@ -64,8 +64,8 @@ CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 \textbf{SUM} \newline
 Performs a sum reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
-void shmem_complexd_sum_to_all(double complex *dest, const double complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double complex *pWrk, long |\mbox{*pSync);}|
-void shmem_complexf_sum_to_all(float complex *dest, const float complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float complex *pWrk, long *pSync);
+void shmem_complexd_sum_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
+void shmem_complexf_sum_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
 void shmem_short_sum_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_sum_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
 void shmem_double_sum_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
@@ -89,8 +89,8 @@ CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 \textbf{PROD} \newline
 Performs a product reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
-void shmem_complexd_prod_to_all(double complex *dest, const double complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double complex *pWrk, long |\mbox{*pSync);}|
-void shmem_complexf_prod_to_all(float complex *dest, const float complex *source, int |\mbox{nreduce,}| int PE_start, int logPE_stride, int PE_size, float complex *pWrk, long *pSync);
+void shmem_complexd_prod_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
+void shmem_complexf_prod_to_all(float _Complex *dest, const float _Complex *source, int |\mbox{nreduce,}| int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
 void shmem_short_prod_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_prod_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
 void shmem_double_prod_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
@@ -211,6 +211,14 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.  
     The values in the \VAR{pSync} array are
     restored to the original values.
+
+    The sum and product reduction routines include complex-typed interfaces
+    for the \Cstd API only.
+    When the \Cstd translation environment does not support complex types%
+    \footnote{That is, under \Cstd language standards prior to \Cstd[99] or
+      under \Cstd[11] when \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1},
+    an \openshmem implementation is not required to provide support for
+    these complex-typed interfaces.
 }
 
 \apidesctable{ 
