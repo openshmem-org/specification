@@ -5,13 +5,13 @@ performed on a communication context.  The communication context defines an
 independent ordering and completion environment, allowing users to manage the
 overlap of communication with computation and also to manage communication
 operations performed by separate threads within a multithreaded \ac{PE}.  For
-example, in single-threaded environments, contexts can be used to pipeline
-communication and computation.  In multithreaded environments, contexts can
+example, in single-threaded environments, contexts may be used to pipeline
+communication and computation.  In multithreaded environments, contexts may
 additionally provide thread isolation, eliminating overheads resulting from
-thread interference within the communication subsystem.
+thread interference.
 
 Context handles are of type \CTYPE{shmem\_ctx\_t} and are valid for
-language-level assignment and comparison.  A handle to the desired context is
+language-level assignment and equality comparison.  A handle to the desired context is
 passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic API
 routines.  API routines that do not accept a context argument operate on the
 default context.  The default context can be used explicitly through the
@@ -46,8 +46,8 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
     in a correct state.  The creation call can be reattempted with different
     options or after additional resources become available.
 
-    By default contexts are {\em shareable} and, when it is allowed by the
-    threading model set during initialization, they can be used concurrently by
+    By default, contexts are {\em shareable} and, when it is allowed by the
+    threading model provided by the \openshmem library, they can be used concurrently by
     multiple threads within the PE where they were created.
     %
     The following options can be supplied during context creation to restrict
