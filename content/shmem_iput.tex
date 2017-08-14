@@ -37,6 +37,10 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
+    \newtext{
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    }
     \apiargument{OUT}{dest}{Array to be updated on the remote \ac{PE}. This data
         object  must be remotely accessible.}
     \apiargument{IN}{source}{Array containing the data to be copied.}
@@ -56,10 +60,6 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
         of type integer.   If you  are  using  \Fortran, it must be a constant,
         variable, or array element of default integer type.}
-    \newtext{
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    }
 \end{apiarguments}
 
 

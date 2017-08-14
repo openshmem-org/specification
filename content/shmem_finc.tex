@@ -27,16 +27,16 @@ ires_i8 = SHMEM_INT8_FINC(dest, pe)
 
 \begin{apiarguments}
 
+\newtext{
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+}
 \apiargument{IN}{dest}{The remotely accessible integer data object to be updated
     on the remote \ac{PE}. The type of \dest{} should match that implied in the
     SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \dest{} is to be updated.  If you are using \Fortran, it must be a default
     integer value.}
-\newtext{
-\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-}
 
 \end{apiarguments}
 

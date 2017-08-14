@@ -25,6 +25,10 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
+    \newtext{
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    }
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be
         updated  on the remote \ac{PE}.  If you are using \CorCpp, the type of
         \dest{} should match that implied in the SYNOPSIS section.}
@@ -35,10 +39,6 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
     \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
         \dest{} is to be updated.  If you are using \Fortran, it must be a default
         integer value.}
-    \newtext{
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    }
 \end{apiarguments}
 
 \apidescription{

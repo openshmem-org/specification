@@ -45,6 +45,10 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
+    \newtext{
+    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    }
     \apiargument{OUT}{dest}{Local data object to be updated.}
     \apiargument{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe}
         that contains the data to be copied.  This data object must be remotely
@@ -56,10 +60,6 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
     \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must
         be of type integer. If you are using \Fortran, it must be a constant,
         variable, or array element of default integer type.}
-    \newtext{
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    }
 \end{apiarguments}
 
 \apidescription{
