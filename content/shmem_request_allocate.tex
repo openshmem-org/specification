@@ -16,13 +16,11 @@ void shmem_request_allocate(shmem_request_t *req, int options);
     runtime.\\
 
     Options:\\
-    OPTNAME\_EXCLUSIVE: Allocate the request with a dedicated set of resources.
-    Fail if exclusive resources can not be provided.\\
-    OPTNAME\_EXCLUSIVE\_TRY: Allocate the request with a dedicated set of resources.
-    Return a request with shared resources, if dedicated resources can
-    not be allocated.\\
-    OPTNAME\_SHAREABLE: Allocate the request with shareable resources.\\
-
+    SHMEM_REQUEST\_PRIVATE: Allocate a private request.
+    The request can not be used from multiple threads if allocated with
+    this option. \\
+    SHMEM\_REQUEST\_SHARED: Allocate a shareble request. Sharable
+    requests can safely be used from multiple threads. \\
  }
 
 \apireturnvalues{
