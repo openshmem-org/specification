@@ -1,5 +1,6 @@
 \apisummary{
-    This routine returns the vendor defined character string.
+    This routine returns the vendor defined name string that is consistent
+    with the library constant \CONST{SHMEM\_VENDOR\_STRING}.
 }
 
 \begin{apidefinition}
@@ -18,9 +19,9 @@ SHMEM_INFO_GET_NAME(NAME)
 \end{apiarguments}
 
 \apidescription{
-    This routine returns the vendor defined character string of size defined by
+    This routine returns the vendor defined name string of size defined by
     the library constant \CONST{SHMEM\_MAX\_NAME\_LEN}. The program calling
-    this function prepares the \VAR{name} memory buffer of at least size
+    this function provides the \VAR{name} memory buffer of at least size
     \CONST{SHMEM\_MAX\_NAME\_LEN}. The implementation copies the vendor defined
     string of size at most \CONST{SHMEM\_MAX\_NAME\_LEN} to \VAR{name}. In
     \CorCpp{}, the string is terminated by a null character.  In \Fortran{},
