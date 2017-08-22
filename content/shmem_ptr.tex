@@ -1,5 +1,5 @@
 \apisummary{
-    Returns a pointer to a data object on a specified \ac{PE}.
+    Returns a local pointer to a symmetric data object on the specified \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -29,7 +29,7 @@ PTR = SHMEM_PTR(dest, pe)
     
     When a sequence of loads (gets) and stores (puts) to a data object on a
     remote \ac{PE} does not match the access pattern provided in an \openshmem data
-    transfer routine like \FUNC{shmem\_put32} or \FUNC{shmem\_real\_iget}, the
+    transfer routine like \FUNC{shmem\_put} or \FUNC{shmem\_iget}, the
     \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish the
     communication.
 }
