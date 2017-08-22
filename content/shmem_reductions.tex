@@ -149,7 +149,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \apiargument{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
-\apiargument{IN}{\VAR{nreduce}}{The number of elements in the \dest{} and \source{}
+\apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
     arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
     must be a default integer value.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
