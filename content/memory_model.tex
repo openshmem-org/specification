@@ -26,16 +26,22 @@ requirements and underlying architecture.  In \openshmem the following kinds of
 data objects are symmetric:
 %
 \begin{itemize}
-  \item \Fortran data objects in common blocks or with the  SAVE  attribute.
-      These data objects must not be defined in a dynamic shared object (DSO).
-  \item Global and static \Cstd and \Cpp variables. These data objects must
-      not  be defined in a DSO.
-  \item \Fortran arrays allocated with \textit{shpalloc} 
-  \item \Cstd and \Cpp data allocated by \textit{shmem\_malloc}
+\item
+  \begin{deprecate}
+    \Fortran data objects in common blocks or with the \CTYPE{SAVE} attribute.
+    These data objects must not be defined in a dynamic shared object (DSO).
+  \end{deprecate}
+\item Global and static \Cstd and \Cpp variables. These data objects must
+  not  be defined in a DSO.
+\item
+  \begin{deprecate}
+    \Fortran arrays allocated with \FUNC{shpalloc}
+  \end{deprecate}
+\item \Cstd and \Cpp data allocated by \FUNC{shmem\_malloc}
 \end{itemize}       
 
-\openshmem dynamic memory allocation routines (\textit{shpalloc} and
-\textit{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data
+\openshmem dynamic memory allocation routines (\FUNC{shpalloc} and
+\FUNC{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data
 Objects} on a special memory region called the \emph{Symmetric Heap}. The
 Symmetric Heap is created during the execution of a program at a memory location
 determined by the implementation. The Symmetric Heap may reside in different
