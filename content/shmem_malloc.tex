@@ -37,10 +37,10 @@ void *shmem_align(size_t alignment, size_t size);
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
     of the block are unchanged up to the lesser of the new and old sizes. If the new
     size is larger, the newly allocated portion of the block is
-    uninitialized.  If \VAR{ptr} is a \CONST{NULL} pointer, the
+    uninitialized.  If \VAR{ptr} is a null pointer, the
     \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc} routine for
     the specified size.  If \VAR{size} is \CONST{0} and \VAR{ptr} is not a
-    \CONST{NULL} pointer, the block to which it points is freed. If the space cannot
+    null pointer, the block to which it points is freed. If the space cannot
     be allocated, the block to which \VAR{ptr} points is unchanged.
     
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
@@ -62,7 +62,7 @@ void *shmem_align(size_t alignment, size_t size);
 
 \apireturnvalues{
     The \FUNC{shmem\_malloc} routine returns a pointer to the allocated space;
-    otherwise, it returns a \CONST{NULL} pointer.
+    otherwise, it returns a null pointer.
     
     The \FUNC{shmem\_free} routine returns no value.
     
@@ -70,7 +70,7 @@ void *shmem_align(size_t alignment, size_t size);
     (which may have moved); otherwise, it returns a \const{NULL} pointer.
     
     The \FUNC{shmem\_align} routine returns an aligned pointer to the allocated
-    space; otherwise, it returns a \CONST{NULL} pointer.
+    space; otherwise, it returns a null pointer.
 }
 
 \apinotes{ 

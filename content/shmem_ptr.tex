@@ -35,9 +35,8 @@ PTR = SHMEM_PTR(dest, pe)
 }
 
 \apireturnvalues{
-    The return value is a non-NULL address of the \dest{} data object when it is 
-    accessible using memory loads and stores in addition to \openshmem{} operations.
-    Otherwise, a NULL address is returned.
+    The address of the \dest{} data object is returned when it is accessible
+    using memory loads and stores.  Otherwise, a null pointer is returned.
 }
 
 \apinotes{
