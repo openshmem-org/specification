@@ -182,16 +182,16 @@ collectives, which means that all \acp{PE} in the program must issue the same
 \FUNC{shmem\_malloc} call with the same size request.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
 \hline 
-Use of NULL pointers with non-zero \VAR{len} specified & In any \openshmem routine
+Use of null pointers with non-zero \VAR{len} specified & In any \openshmem routine
 that takes a pointer and \VAR{len} describing the number of elements in that
-pointer, NULL may not be specified for the pointer unless the corresponding \VAR{len} is also
+pointer, a null pointer may not be given unless the corresponding \VAR{len} is also
 specified as zero. Otherwise, the resulting behavior is undefined.
 The following cases summarize this behavior:
 \begin{itemize}
-    \item \VAR{len} is 0, pointer is NULL: supported.
-    \item \VAR{len} is not 0, pointer is NULL: undefined behavior.
-    \item \VAR{len} is 0, pointer is not NULL: supported.
-    \item \VAR{len} is not 0, pointer is not NULL: supported.
+    \item \VAR{len} is 0, pointer is null: supported.
+    \item \VAR{len} is not 0, pointer is null: undefined behavior.
+    \item \VAR{len} is 0, pointer is non-null: supported.
+    \item \VAR{len} is not 0, pointer is non-null: supported.
 \end{itemize}
 \tabularnewline
 \hline 
