@@ -57,7 +57,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     When using \Fortran, it must be a default integer value.  Every element of
     this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
     \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \acp{PE}
-    in the \activeset{} enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
+    in the active set enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
 
 \end{apiarguments}
 
