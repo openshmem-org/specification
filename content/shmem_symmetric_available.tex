@@ -1,0 +1,33 @@
+\apisummary{
+Returns the memory available on the symmetric heap in bytes.}
+
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_symmetric_available(size_t *available_size);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{OUT}{available\_size}{The symmetric heap memory available in bytes.}
+\end{apiarguments}
+
+
+\apidescription{
+The \FUNC{shmem\_symmetric\_available} call returns the memory available on the symmetric heap in bytes.
+The available memory is the unallocated memory on the symmetric heap, which could be allocated by using memory allocation routines such as \FUNC{shmem\_malloc} or \FUNC{shmem\_calloc}. 
+This call is a non-collective call and does not require more than one \ac{PE} to call the routine. 
+}
+
+\apireturnvalues{    
+	None
+}
+
+\apinotes{
+    None
+}
+
+\end{apidefinition}
+
+ 
+  
