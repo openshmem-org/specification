@@ -46,8 +46,7 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
     atomic operation.
 }
 \apidesctable{
-    The  \VAR{dest} and \VAR{value} data objects must conform to certain typing
-    constraints, which are as follows:
+    When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
 }{Routine}{Data type of \VAR{dest} and \VAR{value}}
 
 \apitablerow{SHMEM\_INT4\_CSWAP}{\CONST{4}-byte integer.}
