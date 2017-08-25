@@ -190,7 +190,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     The \source{} and \dest{} arrays may be the same array, but they may not be
     overlapping arrays.
     
-    As with all \openshmem{} collective routines, each of these routines assumes
+    As with all \openshmem collective routines, each of these routines assumes
     that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not in
     the \activeset{} calls an \openshmem collective routine, undefined behavior
     results.
@@ -204,7 +204,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     following conditions must be met (synchronization via a \OPR{barrier} or some other
     method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
     on all \acp{PE} in the \activeset{} are not still in use from a prior call to a
-    collective \openshmem{} routine.  The \dest{} array on all \acp{PE} in the
+    collective \openshmem routine.  The \dest{} array on all \acp{PE} in the
     \activeset{} is ready to accept the results of the \OPR{reduction}.
     
     Upon return from a reduction routine, the following are true for the local
@@ -260,11 +260,11 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 }
 
 \apinotes{  
-    All \openshmem{} reduction routines reset the values in \VAR{pSync} before they
+    All \openshmem reduction routines reset the values in \VAR{pSync} before they
     return, so a particular \VAR{pSync} buffer need only be initialized the first
     time it is used. The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
     in the \activeset{} while any of the \acp{PE} participate in processing of an
-    \openshmem{} reduction routine. Be careful to avoid the following situations: If
+    \openshmem reduction routine. Be careful to avoid the following situations: If
     the \VAR{pSync} array is initialized at run time, some type of synchronization
     is needed to ensure that all \acp{PE} in the working set have initialized
     \VAR{pSync} before any of them enter an \openshmem routine called with the
