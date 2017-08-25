@@ -18,7 +18,7 @@ PTR = SHMEM_PTR(dest, pe)
 \begin{apiarguments}
 \apiargument{IN}{dest}{The symmetric data object to be referenced.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which \dest{} is to
-		 be accessed.  If you are using \Fortran, it must be a  default
+		 be accessed.  When using \Fortran, it must be a  default
 		 integer value.}
 \end{apiarguments}
 
@@ -36,7 +36,7 @@ PTR = SHMEM_PTR(dest, pe)
 
 \apireturnvalues{
     The return value is a non-NULL address of the \dest{} data object when it is 
-    accessible using memory loads and stores in addition to \openshmem{} operations.
+    accessible using memory loads and stores in addition to \openshmem operations.
     Otherwise, a NULL address is returned.
 }
 

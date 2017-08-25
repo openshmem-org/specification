@@ -5,14 +5,16 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_fetch(const TYPE *dest, int pe);
+TYPE shmem_atomic_fetch(const TYPE *dest, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the extended \ac{AMO} types specified by Table \ref{extamotypes}.
+where \TYPE{} is one of the extended \ac{AMO} types specified by
+Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_fetch(const TYPE *dest, int pe);
+TYPE shmem_<TYPENAME>_atomic_fetch(const TYPE *dest, int pe);
 \end{Csynopsis}
-where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
+where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
 
 \begin{Fsynopsis}
 INTEGER pe
@@ -36,18 +38,20 @@ res_r8 = SHMEM_REAL8_FETCH(dest, pe)
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_fetch} performs an atomic fetch operation. It returns the 
-    contents of the \VAR{dest} as an atomic operation.
+    \FUNC{shmem\_atomic\_fetch} performs an atomic fetch operation.
+    It returns the contents of the \VAR{dest} as an atomic operation.
 }
 
 \apireturnvalues{
-    The contents at the \VAR{dest} address on the remote \ac{PE}.  
-    The data type of the return value is the same as the the type of
+    The contents at the \VAR{dest} address on the remote \ac{PE}.
+    The data type of the return value is the same as the type of
     the remote data object.
 }
 
 \apinotes{
-    None.
+    As of \openshmem[1.4], \FUNC{shmem\_fetch} has been deprecated.
+    Its behavior and call signature are identical to the replacement
+    interface, \FUNC{shmem\_atomic\_fetch}.
 }
 
 \end{apidefinition}
