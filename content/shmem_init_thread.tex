@@ -16,22 +16,11 @@ int shmem_init_thread(int requested, int *provided);
 
 
 \apidescription{
-\FUNC{shmem\_init\_thread}  initializes the \openshmem library similar to
-\FUNC{shmem\_init}, and in addition performs the initialization required for
-supporting the provided thread level. The argument
-\VAR{requested} is used to specify the desired level of thread support.
-The argument \VAR{provided} returns the support level provided by the library.
-The allowed values for \VAR{provided} and \VAR{requested} are 
-\CONST{SHMEM\_THREAD\_SINGLE}, \newline 
-\CONST{SHMEM\_THREAD\_FUNNELED}, \CONST{SHMEM\_THREAD\_SERIALIZED}, or 
-\CONST{SHMEM\_THREAD\_MULTIPLE}.
+\FUNC{shmem\_init\_thread} initializes the \openshmem library in the same way as \FUNC{shmem\_init}. In addition, \FUNC{shmem\_init\_thread} also performs the initialization required for supporting the provided thread level. The argument \VAR{requested} is used to
+specify the desired level of thread support. The argument \VAR{provided} returns the support level provided by the library. The allowed values for \VAR{provided} and \VAR{requested} are \CONST{SHMEM\_THREAD\_SINGLE}, \CONST{SHMEM\_THREAD\_FUNNELED},
+\CONST{SHMEM\_THREAD\_SERIALIZED}, or \CONST{SHMEM\_THREAD\_MULTIPLE}.
      
-An \openshmem program is initialized either by \FUNC{shmem\_init} or
-\FUNC{shmem\_init\_thread}. Similar to \FUNC{shmem\_init}, the
-\FUNC{shmem\_init\_thread} routine may not be called multiple times in an \openshmem program.
- If the call to \FUNC{shmem\_init\_thread} is unsuccessful in allocating and initializing
- resources for the \openshmem library, then the behavior of any subsequent call
- to the \openshmem library is undefined.
+An \openshmem program is initialized either by \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}. Similar to \FUNC{shmem\_init}, the \FUNC{shmem\_init\_thread} routine may not be called multiple times in an \openshmem program. If the call to \FUNC{shmem\_init\_thread} is unsuccessful in allocating and initializing resources for the \openshmem library, then the behavior of any subsequent call to the \openshmem library is undefined.
 }
 
 \apireturnvalues{    
@@ -40,14 +29,8 @@ An \openshmem program is initialized either by \FUNC{shmem\_init} or
     }
 
 \apinotes{
-    The \openshmem library can be initialized either by \FUNC{shmem\_init} or
-    \FUNC{shmem\_init\_thread}. If the \openshmem library  is initialized by
-    \FUNC{shmem\_init}, the library implementation can choose to support one of the 
-    defined thread levels.
+ The \openshmem library can be initialized either by \FUNC{shmem\_init} of \FUNC{shmem\_init\_thread}. If the \openshmem library  is initialized by \FUNC{shmem\_init}, the library implementation can choose to support one of the defined thread levels.
 }		
 
 
 \end{apidefinition}
-
- 
-  
