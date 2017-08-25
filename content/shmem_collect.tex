@@ -62,7 +62,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \end{apiarguments}
 
 \apidescription{   
-    \openshmem{} \FUNC{collect} and \FUNC{fcollect} routines concatenate \VAR{nelems}
+    \openshmem \FUNC{collect} and \FUNC{fcollect} routines concatenate \VAR{nelems}
     \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the
     \dest{} array, over the set of \acp{PE} defined by \VAR{PE\_start},
     \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The
@@ -119,7 +119,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \begin{apiexamples}
 
 \apicexample
-    {The following \FUNC{shmem\_collec}t example is for \CorCpp{} programs:}
+    {The following \FUNC{shmem\_collect} example is for \CorCpp{} programs:}
     {./example_code/shmem_collect_example.c}
     {}
 
