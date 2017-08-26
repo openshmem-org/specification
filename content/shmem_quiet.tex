@@ -45,7 +45,7 @@ CALL SHMEM_QUIET
     memory stores, and nonblocking \PUT{} and \GET{} routines) to
     symmetric data objects on all \acp{PE}.
 
-    In an \openshmem{} program with multithreaded \acp{PE}, it is the
+    In an \openshmem program with multithreaded \acp{PE}, it is the
     user's responsibility to ensure ordering between operations issued by the threads
     in a \ac{PE} that target symmetric memory (e.g. \PUT{}, \ac{AMO}, memory stores,
     and nonblocking routines) and calls by threads in that \ac{PE} to
