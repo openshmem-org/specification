@@ -52,11 +52,11 @@ will not prevent progress of other threads on the same \ac{PE}, and will not
 prevent them from executing other \openshmem calls when the thread level permits. 
 Also, a blocked thread will not prevent the progress of \openshmem calls on other \acp{PE}. 
 
-\item In \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, all \openshmem calls are thread-safe, 
+\item In the \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, all \openshmem calls are thread-safe, 
 i.e., two concurrently running threads may make \openshmem calls and the outcome 
 will be as if the calls executed in some order, even if their execution is interleaved.
 
-\item In \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels, 
+\item In the \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels, 
 if multiple threads call the collective calls, it is the programmer's responsibility 
 to ensure the correct ordering of collective calls, including the symmetric 
 heap management functions.

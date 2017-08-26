@@ -37,8 +37,8 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 
 \begin{apiarguments}
 
-\apiargument{OUT}{ivar}{A remotely accessible integer variable. If you are using \CorCpp, the type of \VAR{ivar} should
- match that implied in the SYNOPSIS section.} 
+\apiargument{OUT}{ivar}{A remotely accessible integer variable. If you are using \CorCpp, 
+    the type of \VAR{ivar} should match that implied in the SYNOPSIS section.} 
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
   \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
   When using \CorCpp, it must be of type \CTYPE{shmem\_cmp\_t}.}
