@@ -19,6 +19,7 @@ void shmem_iget<SIZE>(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t s
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER dst, sst, nelems, pe
 CALL SHMEM_COMPLEX_IGET(dest, source, dst, sst, nelems, pe)
@@ -32,6 +33,7 @@ CALL SHMEM_INTEGER_IGET(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_LOGICAL_IGET(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{Array to be updated on the local \ac{PE}. }
@@ -39,12 +41,12 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.
         A  value of \CONST{1} indicates contiguous data. \VAR{dst} must be of
-        type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
+        type \textit{ptrdiff\_t}.  When using  \Fortran,  it  must
         be a default integer value.}
     \apiargument{IN}{sst}{The stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
         array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
+        of type \textit{ptrdiff\_t}.  When using  \Fortran,  it  must
         be a default integer value.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When

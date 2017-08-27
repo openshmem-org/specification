@@ -24,6 +24,7 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 void shmem_getmem_nbi(void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER nelems, pe
 CALL SHMEM_CHARACTER_GET_NBI(dest, source, nelems, pe)
@@ -39,6 +40,7 @@ CALL SHMEM_INTEGER_GET_NBI(dest, source, nelems, pe)
 CALL SHMEM_LOGICAL_GET_NBI(dest, source, nelems, pe)
 CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{Local data object to be updated.}

@@ -16,6 +16,7 @@ void shmem_<TYPENAME>_atomic_add(TYPE *dest, TYPE value, int pe);
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4  value_i4
@@ -23,6 +24,7 @@ CALL SHMEM_INT4_ADD(dest, value_i4, pe)
 INTEGER*8 value_i8
 CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be

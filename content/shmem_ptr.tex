@@ -8,11 +8,13 @@
 void *shmem_ptr(const void *dest, int pe);
 \end{Csynopsis}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 POINTER (PTR, POINTEE)
 INTEGER pe
 PTR = SHMEM_PTR(dest, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 
 \begin{apiarguments}
@@ -36,7 +38,7 @@ PTR = SHMEM_PTR(dest, pe)
 
 \apireturnvalues{
     The return value is a non-NULL address of the \dest{} data object when it is 
-    accessible using memory loads and stores in addition to \openshmem operations.
+    accessible using memory loads and stores in addition to \openshmem{} operations.
     Otherwise, a NULL address is returned.
 }
 

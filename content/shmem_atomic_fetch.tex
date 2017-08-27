@@ -16,6 +16,7 @@ TYPE shmem_<TYPENAME>_atomic_fetch(const TYPE *dest, int pe);
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FETCH, ires_i4
@@ -27,6 +28,7 @@ res_r4 = SHMEM_REAL4_FETCH(dest, pe)
 REAL*8 SHMEM_REAL8_FETCH, res_r8
 res_r8 = SHMEM_REAL8_FETCH(dest, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 

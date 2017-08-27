@@ -10,9 +10,11 @@
 void shmem_barrier_all(void);
 \end{Csynopsis}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_BARRIER_ALL
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 
@@ -29,7 +31,7 @@ CALL SHMEM_BARRIER_ALL
 
     Prior to synchronizing with other \acp{PE}, \FUNC{shmem\_barrier\_all}
     ensures completion of all previously issued memory stores and remote memory
-    updates issued via \openshmem \acp{AMO} and \ac{RMA} routine calls  such
+    updates issued via \openshmem{} \acp{AMO} and \ac{RMA} routine calls  such
     as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32}, 
     \FUNC{shmem\_put\_nbi}, and \FUNC{shmem\_get\_nbi}.
 }

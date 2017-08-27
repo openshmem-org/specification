@@ -16,11 +16,13 @@ void shmem_<TYPENAME>_atomic_inc(TYPE *dest, int pe);
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER pe
 CALL SHMEM_INT4_INC(dest, pe)
 CALL SHMEM_INT8_INC(dest, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 

@@ -26,6 +26,7 @@ void shmem_<TYPENAME>_wait(TYPE *ivar, TYPE cmp_value);
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_INT4_WAIT(ivar, cmp_value)
 CALL SHMEM_INT4_WAIT_UNTIL(ivar, cmp, cmp_value)
@@ -34,6 +35,7 @@ CALL SHMEM_INT8_WAIT_UNTIL(ivar, cmp, cmp_value)
 CALL SHMEM_WAIT(ivar, cmp_value)
 CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 

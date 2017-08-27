@@ -16,6 +16,7 @@ TYPE shmem_<TYPENAME>_atomic_compare_swap(TYPE *dest, TYPE cond, TYPE value, int
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_CSWAP,  cond_i4, value_i4, ires_i4
@@ -23,6 +24,7 @@ ires_i4 = SHMEM_INT4_CSWAP(dest, cond_i4, value_i4, pe)
 INTEGER*8 SHMEM_INT8_CSWAP,  cond_i8, value_i8, ires_i8
 ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be

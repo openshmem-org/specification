@@ -9,9 +9,11 @@
 void shmem_fence(void);
 \end{Csynopsis}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_FENCE
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 \apiargument{None.}{}{}
@@ -44,7 +46,7 @@ CALL SHMEM_FENCE
     symmetric data objects which makes the updates visible to all other
     \acp{PE}. 
     
-    The \FUNC{shmem\_quiet} routine should be called if completion of \PUT{},
+    The \FUNC{shmem\_quiet} routine should be called if completion of PUT{},
     \acp{AMO}, and memory store routines to symmetric data objects is desired
     when multiple remote \acp{PE} are involved.
 }

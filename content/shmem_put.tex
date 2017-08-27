@@ -24,6 +24,7 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 void shmem_putmem(void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_CHARACTER_PUT(dest, source, nelems, pe)
 CALL SHMEM_COMPLEX_PUT(dest, source, nelems, pe)
@@ -38,6 +39,7 @@ CALL SHMEM_PUT128(dest, source, nelems, pe)
 CALL SHMEM_PUTMEM(dest, source, nelems, pe)
 CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{IN}{dest}{Data object to be updated on the remote \ac{PE}. This

@@ -12,6 +12,7 @@ void shmem_fcollect32(void *dest, const void *source, size_t nelems, int PE_star
 void shmem_fcollect64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER nelems
 INTEGER PE_start, logPE_stride, PE_size
@@ -25,6 +26,7 @@ CALL SHMEM_FCOLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSyn
 CALL SHMEM_FCOLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 
@@ -62,7 +64,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \end{apiarguments}
 
 \apidescription{   
-    \openshmem \FUNC{collect} and \FUNC{fcollect} routines concatenate \VAR{nelems}
+    \openshmem{} \FUNC{collect} and \FUNC{fcollect} routines concatenate \VAR{nelems}
     \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the
     \dest{} array, over the set of \acp{PE} defined by \VAR{PE\_start},
     \VAR{log2PE\_stride}, and \VAR{PE\_size}, in processor number order. The
@@ -119,7 +121,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \begin{apiexamples}
 
 \apicexample
-    {The following \FUNC{shmem\_collect} example is for \CorCpp{} programs:}
+    {The following \FUNC{shmem\_collec}t example is for \CorCpp{} programs:}
     {./example_code/shmem_collect_example.c}
     {}
 

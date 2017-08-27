@@ -12,10 +12,12 @@ _Noreturn void shmem_global_exit(int status);
 void shmem_global_exit(int status);
 \end{Csynopsis}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER STATUS
 CALL SHMEM_GLOBAL_EXIT(status)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{IN}{status}{The exit status from the main program.}

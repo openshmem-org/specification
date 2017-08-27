@@ -9,11 +9,13 @@
 int shmem_addr_accessible(const void *addr, int pe);
 \end{Csynopsis}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 LOGICAL LOG, SHMEM_ADDR_ACCESSIBLE
 INTEGER pe
 LOG = SHMEM_ADDR_ACCESSIBLE(addr, pe)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{IN}{addr}{Data object on the local \ac{PE}.}

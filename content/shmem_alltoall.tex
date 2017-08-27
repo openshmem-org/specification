@@ -10,12 +10,14 @@ void shmem_alltoall32(void *dest, const void *source, size_t nelems, int PE_star
 void shmem_alltoall64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
+\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
 INTEGER PE_start, logPE_stride, PE_size, nelems
 CALL SHMEM_ALLTOALL32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 
