@@ -31,12 +31,12 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
 \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
     data object.  The stride is scaled by the element size.  A
     value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
-    \textit{ptrdiff\_t}.  When using \Fortran, it must be a default integer
+    \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a default integer
     value.}
 \apiargument{IN}{sst}{The  stride between consecutive elements of the
     \source{} data object.  The stride is scaled by the element size.
     A value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-    of type \textit{ptrdiff\_t}.  When using \Fortran, it must be a
+    of type \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
     \VAR{nelems} must be of type size\_t for \CorCpp.  When using

@@ -41,12 +41,12 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.
         A  value of \CONST{1} indicates contiguous data. \VAR{dst} must be of
-        type \textit{ptrdiff\_t}.  When using  \Fortran,  it  must
+        type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
         be a default integer value.}
     \apiargument{IN}{sst}{The stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
         array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \textit{ptrdiff\_t}.  When using  \Fortran,  it  must
+        of type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
         be a default integer value.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
