@@ -57,7 +57,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting \ac{PE}.  A call
     to \FUNC{shmem\_wait\_until} does not return until a \ac{PE} changes
     \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.
-    The \FUNC{shmem\_wait}  routines return when \VAR{ivar} is no  longer  equal  to \VAR{cmp\_value}. The
+    The \FUNC{shmem\_wait} routines return when \VAR{ivar} is no longer equal to \VAR{cmp\_value}. The
     \FUNC{shmem\_wait\_until} routines return when the compare condition is true.
     The compare condition is defined by the \VAR{ivar}  argument  compared with the
     \VAR{cmp\_value} using the comparison operator, \VAR{cmp}. 

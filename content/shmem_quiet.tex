@@ -53,10 +53,10 @@ CALL SHMEM_QUIET
     calling thread. Thus, to ensure ordering for memory stores performed by a thread that is
     not the thread calling \FUNC{shmem\_quiet}, the update must be made visible to the
     calling thread according to the rules of the memory model associated with
-    the threading environment. 
- 
+    the threading environment.
+
      A call to \FUNC{shmem\_quiet} by a thread completes the operations posted prior
-     to calling \FUNC{shmem\_quiet}. If the user intends to also complete operations 
+     to calling \FUNC{shmem\_quiet}. If the user intends to also complete operations
      issued by a thread that is not the thread calling \FUNC{shmem\_quiet}, the
      user must ensure that the operations are performed prior to the call to
      \FUNC{shmem\_quiet}. This may require the use of a synchronization
@@ -65,9 +65,9 @@ CALL SHMEM_QUIET
      ensure that all threads have issued operations before a thread calls
      \FUNC{shmem\_quiet}.
 
-    \FUNC{shmem\_quiet} does not have an effect on the ordering between memory 
-    accesses issued by the target PE. \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until}, 
-    \FUNC{shmem\_test}, \FUNC{shmem\_barrier}, \FUNC{shmem\_barrier\_all} routines 
+    \FUNC{shmem\_quiet} does not have an effect on the ordering between memory
+    accesses issued by the target PE. \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until},
+    \FUNC{shmem\_test}, \FUNC{shmem\_barrier}, \FUNC{shmem\_barrier\_all} routines
     can be called by the target PE to guarantee ordering of its memory accesses.
 }
 
