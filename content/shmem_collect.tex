@@ -12,7 +12,6 @@ void shmem_fcollect32(void *dest, const void *source, size_t nelems, int PE_star
 void shmem_fcollect64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER nelems
 INTEGER PE_start, logPE_stride, PE_size
@@ -26,7 +25,6 @@ CALL SHMEM_FCOLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSyn
 CALL SHMEM_FCOLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \begin{apiarguments}
 

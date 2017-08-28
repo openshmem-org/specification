@@ -13,12 +13,10 @@ void shmem_long_and_to_all(long *dest, const long *source, int nreduce, int PE_s
 void shmem_longlong_and_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_INT4_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT8_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \bigskip
 \textbf{MAX} \newline
@@ -33,7 +31,6 @@ void shmem_longdouble_max_to_all(long double *dest, const long double *source, i
 void shmem_longlong_max_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_INT4_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT8_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
@@ -41,7 +38,6 @@ CALL SHMEM_REAL4_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_si
 CALL SHMEM_REAL8_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_REAL16_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \bigskip
 \textbf{MIN} \newline
@@ -56,7 +52,6 @@ void shmem_longdouble_min_to_all(long double *dest, const long double *source, i
 void shmem_longlong_min_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_INT4_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT8_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
@@ -64,7 +59,6 @@ CALL SHMEM_REAL4_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_si
 CALL SHMEM_REAL8_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \bigskip
 \textbf{SUM} \newline
@@ -81,7 +75,6 @@ void shmem_longdouble_sum_to_all(long double *dest, const long double *source, i
 void shmem_longlong_sum_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_COMP4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_COMP8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
@@ -91,7 +84,6 @@ CALL SHMEM_REAL4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_si
 CALL SHMEM_REAL8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \bigskip
 \textbf{PROD} \newline
@@ -108,7 +100,6 @@ void shmem_longdouble_prod_to_all(long double *dest, const long double *source, 
 void shmem_longlong_prod_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_COMP4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_COMP8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
@@ -118,7 +109,6 @@ CALL SHMEM_REAL4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 CALL SHMEM_REAL8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_REAL16_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \bigskip
 \textbf{OR} \newline
@@ -130,12 +120,10 @@ void shmem_long_or_to_all(long *dest, const long *source, int nreduce, int PE_st
 void shmem_longlong_or_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_INT4_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|
 CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|	
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \bigskip
 \textbf{XOR}\newline
@@ -147,12 +135,10 @@ void shmem_long_xor_to_all(long *dest, const long *source, int nreduce, int PE_s
 void shmem_longlong_xor_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 CALL SHMEM_INT4_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \begin{apiarguments}
 

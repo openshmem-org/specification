@@ -19,7 +19,6 @@ void shmem_iget<SIZE>(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t s
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER dst, sst, nelems, pe
 CALL SHMEM_COMPLEX_IGET(dest, source, dst, sst, nelems, pe)
@@ -33,7 +32,6 @@ CALL SHMEM_INTEGER_IGET(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_LOGICAL_IGET(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{Array to be updated on the local \ac{PE}. }

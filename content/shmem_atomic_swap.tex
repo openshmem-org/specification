@@ -14,7 +14,6 @@ TYPE shmem_<TYPENAME>_atomic_swap(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER SHMEM_SWAP, value, pe
 ires = SHMEM_SWAP(dest, value, pe)
@@ -27,7 +26,6 @@ res_r4 = SHMEM_REAL4_SWAP(dest, value_r4, pe)
 REAL*8 SHMEM_REAL8_SWAP, value_r8, res_r8
 res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{The  remotely accessible integer data object to be

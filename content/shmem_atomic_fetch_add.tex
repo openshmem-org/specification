@@ -16,7 +16,6 @@ TYPE shmem_<TYPENAME>_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FADD, ires_i4, value_i4
@@ -24,7 +23,6 @@ ires_i4 = SHMEM_INT4_FADD(dest, value_i4, pe)
 INTEGER*8 SHMEM_INT8_FADD, ires_i8, value_i8
 ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \begin{apiarguments}
 

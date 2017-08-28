@@ -10,7 +10,6 @@ void shmem_broadcast32(void *dest, const void *source, size_t nelems, int PE_roo
 void shmem_broadcast64(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER nelems, PE_root, PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
@@ -19,7 +18,6 @@ CALL SHMEM_BROADCAST8(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_
 CALL SHMEM_BROADCAST32(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
 CALL SHMEM_BROADCAST64(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
 \end{Fsynopsis}
-\end{DeprecateBlock}
  
 \begin{apiarguments}
 

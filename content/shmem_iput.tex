@@ -19,7 +19,6 @@ void shmem_iput<SIZE>(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t s
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
-\begin{DeprecateBlock}
 \begin{Fsynopsis}
 INTEGER dst, sst, nelems, pe
 CALL SHMEM_COMPLEX_IPUT(dest, source, dst, sst, nelems, pe)
@@ -33,7 +32,6 @@ CALL SHMEM_IPUT128(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_LOGICAL_IPUT(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \begin{apiarguments}
     \apiargument{OUT}{dest}{Array to be updated on the remote \ac{PE}. This data
