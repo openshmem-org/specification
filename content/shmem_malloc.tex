@@ -92,7 +92,7 @@ void *shmem_align(size_t alignment, size_t size);
 
 \apiimpnotes{
     The symmetric heap allocation routines always return a pointer to corresponding
-    symmetric objects across all PEs. The \openshmem specification does not
+    symmetric objects across all \acp{PE}. The \openshmem specification does not
     require that the virtual addresses are equal across all \acp{PE}. Nevertheless,
     the implementation must avoid costly address translation operations in the
     communication path, including order $N$ (where $N$ is the number of \acp{PE})
