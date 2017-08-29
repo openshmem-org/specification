@@ -149,16 +149,16 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \apiargument{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
-\apiargument{IN}{\VAR{nreduce}}{The number of elements in the \dest{} and \source{}
+\apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
     arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
     must be a default integer value.}
-\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
-    \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of type integer.
+    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.
     When using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset.
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
     \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
     default integer value.}
 \apiargument{IN}{pWrk}{A symmetric work array. The \VAR{pWrk} argument must have the
@@ -172,7 +172,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     using \Fortran, it must be a default integer value. Every element of this array
     must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or
     \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
-    \activeset{} enter the reduction routine.}
+    active set enter the reduction routine.}
     
 \end{apiarguments}
 
@@ -182,30 +182,30 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     across a set of values.	 
     
     The \VAR{nreduce} argument determines the number of separate reductions to
-    perform.  The \source{} array on all \acp{PE} in the \activeset{} provides one
+    perform.  The \source{} array on all \acp{PE} in the active set provides one
     element for each reduction.  The results of the reductions are placed in the
-    \dest{} array on all \acp{PE} in the \activeset.  The \activeset{} is defined
+    \dest{} array on all \acp{PE} in the active set.  The active set is defined
     by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
     
     The \source{} and \dest{} arrays may be the same array, but they may not be
     overlapping arrays.
     
-    As with all \openshmem{} collective routines, each of these routines assumes
-    that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not in
-    the \activeset{} calls an \openshmem collective routine, undefined behavior
+    As with all \openshmem collective routines, each of these routines assumes
+    that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
+    the active set calls an \openshmem collective routine, undefined behavior
     results.
     
     The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
-    \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same \dest{}
+    \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same \dest{}
     and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
-    be passed to all \acp{PE} in the \activeset.
+    be passed to all \acp{PE} in the active set.
     %FIXME: Reword 'the following conditions must be met.'
     Before any \ac{PE} calls a reduction routine, the
     following conditions must be met (synchronization via a \OPR{barrier} or some other
     method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
-    on all \acp{PE} in the \activeset{} are not still in use from a prior call to a
-    collective \openshmem{} routine.  The \dest{} array on all \acp{PE} in the
-    \activeset{} is ready to accept the results of the \OPR{reduction}.
+    on all \acp{PE} in the active set are not still in use from a prior call to a
+    collective \openshmem routine.  The \dest{} array on all \acp{PE} in the
+    active set is ready to accept the results of the \OPR{reduction}.
     
     Upon return from a reduction routine, the following are true for the local
     \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.  
@@ -260,17 +260,17 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 }
 
 \apinotes{  
-    All \openshmem{} reduction routines reset the values in \VAR{pSync} before they
+    All \openshmem reduction routines reset the values in \VAR{pSync} before they
     return, so a particular \VAR{pSync} buffer need only be initialized the first
     time it is used. The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
-    in the \activeset{} while any of the \acp{PE} participate in processing of an
-    \openshmem{} reduction routine. Be careful to avoid the following situations: If
+    in the active set while any of the \acp{PE} participate in processing of an
+    \openshmem reduction routine. Be careful to avoid the following situations: If
     the \VAR{pSync} array is initialized at run time, some type of synchronization
     is needed to ensure that all \acp{PE} in the working set have initialized
     \VAR{pSync} before any of them enter an \openshmem routine called with the
     \VAR{pSync} synchronization array. A \VAR{pSync} or \VAR{pWrk} array can be
     reused in a subsequent reduction routine call only if none of the \acp{PE} in
-    the \activeset{} are still processing a prior reduction routine call that used
+    the active set are still processing a prior reduction routine call that used
     the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be assured only
     by doing some type of synchronization. 
 }
