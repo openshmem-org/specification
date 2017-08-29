@@ -63,7 +63,6 @@
 \newcommand{\reduction}{\textit{Reduction Operations}}
 \newcommand{\alltoall}{\FUNC{SHMEM\_ALLTOALL}}
 \newcommand{\alltoalls}{\FUNC{SHMEM\_ALLTOALLS}}
-\newcommand{\activeset}{\textit{Active~set}\xspace} % why here and not others?
 \newcommand{\shmemprefix}{\textit{SHMEM\_}}
 \newcommand{\shmemprefixLC}{\textit{shmem\_}}
 \newcommand{\shmemprefixC}{\textit{\_SHMEM\_}}
@@ -228,6 +227,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \lstdefinelanguage{OSH+C}[]{C}{
   classoffset=1,
   morekeywords={
+    size_t, ptrdiff_t,
     SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
     start_pes,
     my_pe, _my_pe, shmem_my_pe,
@@ -244,6 +244,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
     shmem_set_lock, shmem_test_lock, shmem_clear_lock,
     shmem_long_sum_to_all,
     shmem_complexd_sum_to_all,
+    shmem_cmp_t
   },
   keywordstyle=\color{black}\textbf,
   classoffset=0,
@@ -367,13 +368,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, _Noreturn, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
@@ -381,7 +382,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
@@ -469,7 +470,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\apicexample}[3]{
     ##1
     \lstinputlisting[language={C}, tabsize=2,
-    basicstyle=\ttfamily\footnotesize, morekeywords={size_t}]{##2}
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_cmp_t}]{##2}
     ##3 }
 \newcommand{\apifexample}[3]{
     ##1

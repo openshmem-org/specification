@@ -2,7 +2,7 @@ An \ac{AMO} is a one-sided communication mechanism that combines memory update
 operations with atomicity guarantees described in Section
 \ref{subsec:amo_guarantees}.  Similar to the \ac{RMA} routines, described in
 Section \ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
-\openshmem{} defines the two types of \ac{AMO} routines:
+\openshmem defines the two types of \ac{AMO} routines:
 \begin{itemize}
 \item
 The \textit{fetching} routines return the original value of, and optionally
@@ -19,13 +19,13 @@ atomic operation.  A call to a non-fetching atomic routine issues the atomic
 operation and may return before the operation executes on the remote \ac{PE}.
 To force completion for these non-fetching atomic routines,
 \FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all} can
-be used by an \openshmem{} program.
+be used by an \openshmem program.
 
 The non-fetching operations include:
 \FUNC{shmem\_atomic\_\{set, inc, add, and, or, xor\}}.
 \end{itemize}
 
-Where appropriate compiler support is available, \openshmem{} provides
+Where appropriate compiler support is available, \openshmem provides
 type-generic \ac{AMO} interfaces via \Cstd[11] generic selection.
 The type-generic support for the \ac{AMO} routines is as follows:
 

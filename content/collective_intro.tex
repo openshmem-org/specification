@@ -1,16 +1,16 @@
-\emph{Collective routines} are defined as communication or synchronization
-operations on a group of \acp{PE} called an \activeset. The collective
-routines require all \acp{PE} in the \activeset to simultaneously call the
-routine.  A \ac{PE} that is not a part of the \activeset calling the collective
+\emph{Collective Routines} are defined as communication or synchronization
+operations on a group of \acp{PE} called an active set. The collective
+routines require all \acp{PE} in the active set to simultaneously call the
+routine.  A \ac{PE} that is not a part of the active set calling the collective
 routines results in an undefined behavior.  All collective routines have an
-\activeset as an input parameter except \FUNC{shmem\_barrier\_all}. 
+active set as an input parameter except \FUNC{shmem\_barrier\_all}. 
 The \FUNC{shmem\_barrier\_all} has to be called by all \acp{PE} of the 
 \openshmem program. 
 
-The \activeset is defined by the arguments \VAR{PE\_start}, \VAR{logPE\_stride},
+The active set is defined by the arguments \VAR{PE\_start}, \VAR{logPE\_stride},
 and \VAR{PE\_size}.  \VAR{PE\_start} is the starting \ac{PE} number, a log (base
 2) of \VAR{logPE\_stride} is the stride between \acp{PE}, and \VAR{PE\_size} is
-the number of \acp{PE} participating in the \activeset.  All \acp{PE}
+the number of \acp{PE} participating in the active set.  All \acp{PE}
 participating in the collective routine must provide the same values for these
 arguments. 
  
@@ -22,7 +22,7 @@ array if all previous collective routines using the \VAR{pSync} array have been
 completed by all participating \acp{PE}.  One can use a synchronization
 collective routine such as \barrier to ensure completion of previous collective
 routines. The \FUNC{shmem\_barrier} routine allows the same \VAR{pSync} array to
-be used on consecutive calls as long as the \acp{PE} in the \activeset does not change. 
+be used on consecutive calls as long as the \acp{PE} in the active set does not change. 
 
 All collective routines defined in the specification are blocking.  The
 collective routines return on completion.  The collective routines defined in
