@@ -12,7 +12,7 @@ via \openshmem routines. Private data objects follow the memory model of
 \Cstd or \Fortran. Remotely accessible objects, however, can be accessed by
 remote \acp{PE} using \openshmem routines.  Remotely accessible data objects are
 called \emph{Symmetric Data Objects}.  Each symmetric data object has a
-corresponding object with the same name, type, and size on all PEs where that object is
+corresponding object with the same name, type, and size on all \acp{PE} where that object is
 accessible via the \openshmem \ac{API}\footnote{For efficiency reasons,
 the same offset (from an arbitrary memory address) for symmetric data
 objects might be used on all \acp{PE}. Further discussion about symmetric heap
