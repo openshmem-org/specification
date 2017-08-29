@@ -1,5 +1,5 @@
 An \openshmem program consists of a set of \openshmem processes called \acp{PE}
-that execute in a \ac{SPMD}-like model where each \ac{PE} can take a different
+that execute in an \ac{SPMD}-like model where each \ac{PE} can take a different
 execution path. For example, a \ac{PE} can be implemented using an OS
 process.  The \acp{PE} progress asynchronously, and can communicate/synchronize
 via the \openshmem interfaces.  All \acp{PE} in an \openshmem program should
@@ -17,7 +17,7 @@ behavior.
 
 The \acp{PE} of the \openshmem program are identified by unique integers.  The
 identifiers are integers assigned in a monotonically increasing manner from zero
-to the total number of \acp{PE} minus 1. \ac{PE} identifiers are used for
+to one less than the total number of \acp{PE}. \ac{PE} identifiers are used for
 \openshmem calls (e.g. to specify \OPR{put} or \OPR{get} routines on symmetric
 data objects, collective synchronization calls) or to dictate a control flow for
 \acp{PE} using constructs of \Cstd or \Fortran. The identifiers are fixed for
