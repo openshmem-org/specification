@@ -4,7 +4,7 @@ execution path. For example, a \ac{PE} can be implemented using an OS
 process.  The \acp{PE} progress asynchronously, and can communicate/synchronize
 via the \openshmem interfaces.  All \acp{PE} in an \openshmem program should
 start by calling the initialization routine  \FUNC{shmem\_init}
-\footnote{\textbf{start\_pes} has been deprecated as of Specification 1.2}
+\footnote{\FUNC{start\_pes} has been deprecated as of \openshmem[1.2]}
 before using any of the other \openshmem library routines.  An \openshmem
 program concludes its use of the \openshmem library when all \acp{PE} call
 \FUNC{shmem\_finalize}. An \openshmem program can also be terminated
