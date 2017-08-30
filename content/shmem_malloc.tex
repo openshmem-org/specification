@@ -31,7 +31,7 @@ void *shmem_align(size_t alignment, size_t size);
     
     The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
     deallocated, that is, made available for further allocation.  If \VAR{ptr} is a
-    \const{NULL} pointer, no action occurs.
+    null pointer, no action occurs.
            
     The \FUNC{shmem\_realloc} routine changes the size of the block to which
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
@@ -74,7 +74,7 @@ void *shmem_align(size_t alignment, size_t size);
 }
 
 \apinotes{ 
-    As of Specification 1.2 the use of \FUNC{shmalloc}, \FUNC{shmemalign},
+    As of \openshmem[1.2] the use of \FUNC{shmalloc}, \FUNC{shmemalign},
     \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM
     libraries are required to support the calls, users are encouraged to use
     \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and

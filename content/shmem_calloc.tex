@@ -23,7 +23,7 @@ void *shmem_calloc(size_t count, size_t size);
   If the allocation succeeds, the pointer returned shall be suitably
   aligned so that it may be assigned to a pointer to any type of object.
   If the allocation does not succeed, or either \VAR{count} or \VAR{size} is
-  \CONST{0}, the return value is a \const{NULL} pointer.
+  \CONST{0}, the return value is a null pointer.
 
   The values for \VAR{count} and \VAR{size} shall each be equal across
   all \acp{PE} calling \FUNC{shmem\_calloc}; otherwise, the behavior is
@@ -35,7 +35,7 @@ void *shmem_calloc(size_t count, size_t size);
 
 \apireturnvalues{
   The \FUNC{shmem\_calloc} routine returns a pointer to the lowest byte
-  address of the allocated space; otherwise, it returns a \const{NULL} pointer.
+  address of the allocated space; otherwise, it returns a null pointer.
 }
 
 \apinotes{
