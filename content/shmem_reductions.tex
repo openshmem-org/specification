@@ -1,5 +1,7 @@
 \apisummary{
-    Performs arithmetic and logical operations across a set of \acp{PE}.
+    %Performs arithmetic and logical operations across a set of \acp{PE}.
+    The following functions perform reduction operations across all
+    \acp{PE} in a set of \acp{PE}. 
 }
 
 \begin{apidefinition}
@@ -173,57 +175,61 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or
     \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
     \activeset{} enter the reduction routine.}
-    
 \end{apiarguments}
 
 \apidescription{
     \openshmem reduction routines compute one or more reductions across symmetric
     arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
-    across a set of values.	 
-    
+    across a set of values.
+
     The \VAR{nreduce} argument determines the number of separate reductions to
     perform.  The \source{} array on all \acp{PE} in the \activeset{} provides one
     element for each reduction.  The results of the reductions are placed in the
     \dest{} array on all \acp{PE} in the \activeset.  The \activeset{} is defined
     by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
-    
+
     The \source{} and \dest{} arrays may be the same array, but they may not be
     overlapping arrays.
-    
+
     As with all \openshmem collective routines, each of these routines assumes
-    that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not in
-    the \activeset{} calls an \openshmem collective routine, undefined behavior
-    results.
-    
+    that only \acp{PE} in the \activeset{} call the routine.
+    %If a \ac{PE} not in the \activeset{} calls an \openshmem collective routine, undefined behavior results.
+    A call to an \openshmem collective routine by a \ac{PE} not in the
+    active set results in undefined behavior.
+
     The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
     \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same \dest{}
-    and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
+    and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} arrays, must
     be passed to all \acp{PE} in the \activeset.
     %FIXME: Reword 'the following conditions must be met.'
     Before any \ac{PE} calls a reduction routine, the
     following conditions must be met (synchronization via a \OPR{barrier} or some other
     method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
     on all \acp{PE} in the \activeset{} are not still in use from a prior call to a
-    collective \openshmem routine.  The \dest{} array on all \acp{PE} in the
-    \activeset{} is ready to accept the results of the \OPR{reduction}.
-    
+    collective \openshmem routine.  Additionally, the \dest{} array on
+    all \acp{PE} in the \activeset{} is ready to accept the results of
+    the \OPR{reduction}.
+
     Upon return from a reduction routine, the following are true for the local
-    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.  
+    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.
     The values in the \VAR{pSync} array are
     restored to the original values.
 
-    The sum and product reduction routines include complex-typed interfaces
-    for the \Cstd API only.
-    When the \Cstd translation environment does not support complex types%
-    \footnote{That is, under \Cstd language standards prior to \Cstd[99] or
-      under \Cstd[11] when \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1},
-    an \openshmem implementation is not required to provide support for
-    these complex-typed interfaces.
+    The sum and product reduction routines include complex-typed
+    interfaces. When the \Cstd translation environment does not support
+    complex types\footnote{That is, under \Cstd language standards prior
+    to \Cstd[99] or under \Cstd[11] when
+    \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1}, an \openshmem
+    implementation is not required to provide support for these
+    complex-typed interfaces.
 }
 
+
+{
+\deprecationstart
 \apidesctable{ 
     When calling from \Fortran, the \dest{} date types are as follows:
-}{Routine}{Data type}
+}{Routine}{Data type}{
     \apitablerow{shmem\_int8\_and\_to\_all}{Integer, with an element size of 8 bytes.}
     \apitablerow{shmem\_int4\_and\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_comp8\_max\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
@@ -243,8 +249,8 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \apitablerow{shmem\_real4\_sum\_to\_all}{Real, with an element size of 4 bytes.}
     \apitablerow{shmem\_real8\_sum\_to\_all}{Real, with an element size of 8 bytes.}
     \apitablerow{shmem\_real16\_sum\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_prod\_to\_all}{ Complex, with an element size equal to two 4-byte real values. }		 
-    \apitablerow{shmem\_comp8\_prod\_to\_all}{ Complex, with an element size equal to two 8-byte real values.}
+    \apitablerow{shmem\_comp4\_prod\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
+    \apitablerow{shmem\_comp8\_prod\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
     \apitablerow{shmem\_int4\_prod\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
     \apitablerow{shmem\_real4\_prod\_to\_all}{Real, with an element size of 4 bytes.}
@@ -254,6 +260,9 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \apitablerow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_int8\_xor\_to\_all}{Integer, with an element size of 8 bytes.}
     \apitablerow{shmem\_int4\_xor\_to\_all}{Integer, with an element size of 4 bytes.}
+}
+\deprecationend
+}
 
 \apireturnvalues{
     None.
