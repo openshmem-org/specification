@@ -423,16 +423,16 @@ Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
 \openshmem users are encouraged to use
 \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
 
+\subsection{Implicit Finalization}
+Implicit finalization has been replaced with explicit finalization using the
+\FUNC{shmem\_finalize} routine.  Explicit finalization improves portability and
+also improves interoperability with profiling and debugging tools.
+
 \subsection{\CorCpp: \_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign}
 The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
 \FUNC{shfree}, \FUNC{shrealloc}, and \FUNC{shmemalign} were deprecated in order
 to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
 prefix for all routines.
-
-\subsection{Implicit Finalization}
-Implicit finalization has been replaced with explicit finalization using the
-\FUNC{shmem\_finalize} routine.  Explicit finalization improves portability and
-also improves interoperability with profiling and debugging tools.
 
 \subsection{Fortran: START\_PES, MY\_PE, NUM\_PES}
 The \Fortran routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
@@ -479,18 +479,6 @@ standard's reserved names.  These constants have been deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran naming conventions.
 
-\subsection{\FUNC{shmem\_fetch}, \FUNC{shmem\_set}, \FUNC{shmem\_cswap},
-  \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
-  \FUNC{shmem\_fadd}, \FUNC{shmem\_add}}
-
-The \CorCpp interfaces for \FUNC{shmem\_fetch}, \FUNC{shmem\_set},
-\FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
-\FUNC{shmem\_fadd}, and \FUNC{shmem\_add} were deprecated and replaced with
-similarly-named interfaces within the \FUNC{shmem\_atomic\_*} namespace
-in order to more clearly identify these calls as performing atomic operations.
-In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
-expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
-
 \subsection{SMA\_* Environment Variables}
 The environment variables
 \begin{center}
@@ -504,6 +492,26 @@ The environment variables
 were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
+\subsection{\FUNC{shmem\_wait}}
+The \FUNC{shmem\_wait} interface was identified as unintuitive with respect to
+the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
+replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
+\CONST{SHMEM\_CMP\_NE}, the \FUNC{shmem\_wait} interface was deprecated in
+favor of \FUNC{shmem\_wait\_until}, which makes the comparison operation
+explicit and better communicates the developer's intent.
+
+\subsection{\FUNC{shmem\_fetch}, \FUNC{shmem\_set}, \FUNC{shmem\_cswap},
+  \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
+  \FUNC{shmem\_fadd}, \FUNC{shmem\_add}}
+
+The \CorCpp interfaces for \FUNC{shmem\_fetch}, \FUNC{shmem\_set},
+\FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
+\FUNC{shmem\_fadd}, and \FUNC{shmem\_add} were deprecated and replaced with
+similarly-named interfaces within the \FUNC{shmem\_atomic\_*} namespace
+in order to more clearly identify these calls as performing atomic operations.
+In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
+expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
+
 \subsection{Fortran API}\label{subsec:deprecate-fortran}
 The entire \openshmem \Fortran API was deprecated because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
@@ -512,14 +520,6 @@ leverage current and future \openshmem specifications of the \Cstd API
 through the \Fortran-\Cstd interoperability initially standardized by
 \Fortran[2003]%
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
-
-\subsection{\FUNC{shmem\_wait}}
-The \FUNC{shmem\_wait} interface was identified as unintuitive with respect to
-the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
-replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
-\CONST{SHMEM\_CMP\_NE}, the \FUNC{shmem\_wait} interface was deprecated in
-favor of \FUNC{shmem\_wait\_until}, which makes the comparison operation
-explicit and better communicates the developer's intent.
 
 
 
