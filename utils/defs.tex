@@ -138,6 +138,10 @@
 %
 % Use Sans Serif font for sections, etc.
 %
+% FIXME? `\bf` should be `\textbf` if you want to preserve the sans-serif font
+% at subsubsection and paragraph. In my opinion, the serif font looks better
+% anyway. -- Bryant Lam
+%
 \makeatletter
 \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
 -.2ex}{2.3ex plus .2ex}{\Large\sf}}
@@ -145,8 +149,9 @@
 -.2ex}{1.5ex plus .2ex}{\large\sf}}
 \def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
 -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf\bf}}
-\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex 
-minus .2ex}{-1em}{\normalsize\sf}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}
+{-1em}{\normalsize\sf\bf}} % Indent after \paragraph
+%{.1pt}{\normalsize\sf\bf}} % Newline after \paragraph
 \makeatother
 %
 % End use Sans Serif font for sections, etc.  S. Otto

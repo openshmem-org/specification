@@ -4,7 +4,7 @@
 
 \begin{apidefinition}
 
-\textbf{AND} \newline
+\paragraph{AND}
 Performs a bitwise AND function across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_and_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
@@ -18,8 +18,7 @@ CALL SHMEM_INT4_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 CALL SHMEM_INT8_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
-\bigskip
-\textbf{MAX} \newline
+\paragraph{MAX}
 Performs a maximum function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_max_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
@@ -39,8 +38,7 @@ CALL SHMEM_REAL8_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_si
 CALL SHMEM_REAL16_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
-\bigskip
-\textbf{MIN} \newline
+\paragraph{MIN}
 Performs a minimum function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_min_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
@@ -60,8 +58,7 @@ CALL SHMEM_REAL8_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_si
 CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
-\bigskip
-\textbf{SUM} \newline
+\paragraph{SUM}
 Performs a sum reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_complexd_sum_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
@@ -85,8 +82,7 @@ CALL SHMEM_REAL8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_si
 CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
-\bigskip
-\textbf{PROD} \newline
+\paragraph{PROD}
 Performs a product reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_complexd_prod_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
@@ -110,8 +106,7 @@ CALL SHMEM_REAL8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 CALL SHMEM_REAL16_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
-\bigskip
-\textbf{OR} \newline
+\paragraph{OR}
 Performs  a  bitwise  OR  function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_or_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
@@ -125,8 +120,7 @@ CALL SHMEM_INT4_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size
 CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|	
 \end{Fsynopsis}
 
-\bigskip
-\textbf{XOR}\newline
+\paragraph{XOR}
 Performs  a  bitwise  EXCLUSIVE OR reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_xor_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
