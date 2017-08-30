@@ -572,6 +572,30 @@ synchronization routines.
 \item Added the \FUNC{shmem\_calloc} function.
 \\ See Section \ref{subsec:shmem_calloc}.
 %
+\item Introduced the thread safe semantics that define the interaction between
+    \openshmem routines and user threads.
+\\See Section \ref{subsec:thread_support}.
+%
+\item Added the new routine \FUNC{shmem\_init\_thread} to initialize the
+    \openshmem library with one of the defined thread levels.
+\\See Section \ref{subsec:shmem_init_thread}.
+%
+\item Added the new routine \FUNC{shmem\_query\_thread} to query the thread
+    level provided by the \openshmem implementation.
+\\See Section \ref{subsec:shmem_query_thread}.
+%
+\item Clarified the semantics of \FUNC{shmem\_quiet} for a multithreaded
+    \openshmem \ac{PE}.
+\\See Section \ref{subsec:shmem_quiet}
+%
+\item Revised the description of \FUNC{shmem\_barrier\_all} for a multithreaded
+    \openshmem \ac{PE}.
+\\See Section \ref{subsec:shmem_barrier_all}
+%
+\item Revised the description of \FUNC{shmem\_wait} for a multithreaded
+    \openshmem \ac{PE}.
+\\See Section \ref{subsec:shmem_wait}
+%
 \item Clarified description for \CONST{SHMEM\_VENDOR\_STRING}.
 \\See Section \ref{subsec:library_constants}.
 %
