@@ -22,9 +22,9 @@ CALL SHMEM_BARRIER_ALL
 
 \apidescription{   
     The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at
-    a barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
+    a barrier. Barriers are a mechanism for synchronizing all \acp{PE} at
     once.  This routine causes a \ac{PE} to suspend execution until all \acp{PE}
-    have called \FUNC{shmem\_barrier\_all}.  This routine must be used with
+    have called \FUNC{shmem\_barrier\_all}.  This routine must be called by all 
     \acp{PE} started by \FUNC{shmem\_init}.
 
     Prior to synchronizing with other \acp{PE}, \FUNC{shmem\_barrier\_all}
