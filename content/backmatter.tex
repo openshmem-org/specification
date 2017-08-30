@@ -89,7 +89,7 @@ references to the \VAR{source} array only on the active (local) side.
 
 
 \chapter{Compiling and Running Programs}\label{sec:compiling}
-As of this writing, the \openshmem specification is silent regarding how
+The specification does not specify how
 \openshmem programs are compiled, linked, and run. This section shows some
 examples of how wrapper programs are utilized in the \openshmem Reference
 Implementation to compile and launch programs.
@@ -98,21 +98,21 @@ Implementation to compile and launch programs.
 \subsection*{Programs written in \Cstd}
 
 The \openshmem Reference Implementation provides a wrapper program, named
-\textbf{oshcc}, to aid in the compilation of \Cstd programs. The wrapper
-could be called as follows:
+\textbf{oshcc}, to aid in the compilation of \Cstd programs.
+The wrapper may be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshcc <compiler options> -o myprogram myprogram.c
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Cstd compiler.
+underlying \Cstd compiler called by \textbf{oshcc}.
 
 
 \subsection*{Programs written in \Cpp}
 
-The  \openshmem Reference Implementation provides a wrapper program, named
-\textbf{oshCC}, to aid in the compilation of \Cpp programs. The wrapper could
-be called as follows:
+The \openshmem Reference Implementation provides a wrapper program, named
+\textbf{oshCC}, to aid in the compilation of \Cpp programs.
+The wrapper may be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshCC <compiler options> -o myprogram myprogram.cpp
@@ -121,12 +121,12 @@ Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
 underlying \Cpp compiler called by \textbf{oshCC}.
 
 
-\subsection*{Programs written in Fortran}
+\subsection*{Programs written in \Fortran}
 
 \begin{deprecate}
 The \openshmem Reference Implementation provides a wrapper program, named
-\textbf{oshfort}, to aid in the compilation of \Fortran programs. The wrapper
-could be called as follows:
+\textbf{oshfort}, to aid in the compilation of \Fortran programs.
+The wrapper may be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshfort <compiler options> -o myprogram myprogram.f
@@ -138,8 +138,8 @@ underlying \Fortran compiler called by \textbf{oshfort}.
 \section{Running Programs}
 
 The \openshmem Reference Implementation provides a wrapper program, named
-\textbf{oshrun}, to launch \openshmem programs. The wrapper could be called as
-follows:
+\textbf{oshrun}, to launch \openshmem programs.
+The wrapper may be called as follows:
 
 \begin{lstlisting}[language=bash]
 oshrun <additional options> -np <#> <program> <program arguments>
