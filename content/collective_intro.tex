@@ -1,10 +1,10 @@
 \emph{Collective routines} are defined as communication or synchronization
 operations on a group of \acp{PE} called an active set. The collective
 routines require all \acp{PE} in the active set to simultaneously call the
-routine.  A \ac{PE} that is not a part of the active set calling the collective
-routines results in an undefined behavior.  All collective routines have an
-active set as an input parameter except \FUNC{shmem\_barrier\_all}. 
-The \FUNC{shmem\_barrier\_all} has to be called by all \acp{PE} of the 
+routine.  A \ac{PE} that is not in the active set calling the collective
+routine results in undefined behavior.  All collective routines have an
+active set as an input parameter except \FUNC{shmem\_barrier\_all};
+\FUNC{shmem\_barrier\_all} has to be called by all \acp{PE} of the
 \openshmem program. 
 
 The active set is defined by the arguments \VAR{PE\_start}, \VAR{logPE\_stride},
