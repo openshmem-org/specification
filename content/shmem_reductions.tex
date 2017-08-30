@@ -5,7 +5,7 @@
 \begin{apidefinition}
 
 \paragraph{AND}
-Performs a bitwise AND function across a set of processing elements (\acp{PE}).\newline
+Performs a bitwise AND reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_and_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_and_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -19,7 +19,7 @@ CALL SHMEM_INT8_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \end{Fsynopsis}
 
 \paragraph{MAX}
-Performs a maximum function reduction across a set of processing elements (\acp{PE}).\newline
+Performs a maximum-function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_max_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_max_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -39,7 +39,7 @@ CALL SHMEM_REAL16_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 \end{Fsynopsis}
 
 \paragraph{MIN}
-Performs a minimum function reduction across a set of processing elements (\acp{PE}).\newline
+Performs a minimum-function reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_min_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_min_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -107,7 +107,7 @@ CALL SHMEM_REAL16_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_
 \end{Fsynopsis}
 
 \paragraph{OR}
-Performs  a  bitwise  OR  function reduction across a set of processing elements (\acp{PE}).\newline
+Performs a bitwise OR reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_or_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_or_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -121,7 +121,7 @@ CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size
 \end{Fsynopsis}
 
 \paragraph{XOR}
-Performs  a  bitwise  EXCLUSIVE OR reduction across a set of processing elements (\acp{PE}).\newline
+Performs a bitwise EXCLUSIVE OR reduction across a set of processing elements (\acp{PE}).\newline
 \begin{Csynopsis}
 void shmem_short_xor_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_xor_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
