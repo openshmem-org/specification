@@ -177,7 +177,12 @@ Uninitialized library & If \openshmem is not initialized through a call to
 \FUNC{shmem\_init}, subsequent calls to \openshmem routines have undefined
 behavior.  For example, an implementation may try to continue or may abort
 immediately upon the first call to an uninitialized routine.\tabularnewline
-\hline 
+\hline
+%% FIXME: shmem_init or another appropriate init routine (shmem_init_thread).
+Multiple calls to \FUNC{shmem\_init} & In an OpenSHMEM program where
+\FUNC{shmem\_init} has already been called, any subsequent calls to
+\FUNC{shmem\_init} result in undefined behavior.\tabularnewline
+\hline
 Accessing non-existent \acp{PE} & If a communications routine accesses a
 non-existent \ac{PE}, then the \openshmem library can choose to handle this
 situation in an implementation-defined way.  For example, the library may report
@@ -207,11 +212,6 @@ The following cases summarize this behavior:
     \item \VAR{len} is not 0, pointer is non-null: supported.
 \end{itemize}
 \tabularnewline
-\hline 
-%% FIXME: shmem_init or another appropriate init routine (shmem_init_thread).
-Multiple calls to \FUNC{shmem\_init} & In an OpenSHMEM program where
-\FUNC{shmem\_init} has already been called, any subsequent calls to
-\FUNC{shmem\_init} result in undefined behavior.\tabularnewline
 \hline 
 \end{tabular}
 
