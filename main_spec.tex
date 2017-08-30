@@ -79,11 +79,21 @@ environment of the \acp{PE}.
 \subsubsection{\textbf{START\_PES}}\label{subsec:start_pes}
 \input{content/start_pes}
 
+\subsection{Thread Support}
+\label{subsec:thread_support}
+\input{content/threads_intro.tex}
 
+\subsubsection{\textbf{SHMEM\_INIT\_THREAD}}
+\label{subsec:shmem_init_thread}
+\input{content/shmem_init_thread}
 
+\subsubsection{\textbf{SHMEM\_QUERY\_THREAD}}
+\label{subsec:shmem_query_thread}
+\input{content/shmem_query_thread}
 
 
 \subsection{Memory Management Routines}
+\label{sec:mem_routines}
 \openshmem provides a set of \acp{API} for managing the symmetric heap. The
 \acp{API} allow one to dynamically allocate, deallocate, reallocate and align
 symmetric data objects in the symmetric heap.
@@ -102,11 +112,6 @@ symmetric data objects in the symmetric heap.
 
 \subsubsection{\textbf{SHPDEALLOC}}\label{subsec:shpdealloc}
 \input{content/shpdealloc.tex}
-
-
-
-
-
 
 \subsection{Remote Memory Access Routines}\label{sec:rma}
 \input{content/rma_intro.tex}
