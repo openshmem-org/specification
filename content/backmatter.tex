@@ -18,16 +18,19 @@
 \section*{Incorporating OpenSHMEM into Programs}\label{sec:writing_programs}
 
 The following section describes how to write a ``Hello World" \openshmem program.
-To write a ``Hello World" \openshmem program, the user must: 
+To write a ``Hello World" \openshmem program, the user must:
 
 \begin{itemize}
-\item Add the include file \HEADER{shmem.h} for \Cstd or \HEADER{shmem.fh} for \Fortran.
-\item Add the initialization call \FUNC{shmem\_init}.
-\item Use OpenSHMEM calls to query the total number of \acp{PE} and \ac{PE} id.
-\item Add the finalization call \FUNC{shmem\_finalize}.
-\item In \openshmem the order in which lines appear in the output is not fixed
-    as \acp{PE} execute asynchronously in parallel.
+\item Include the header file \HEADER{shmem.h} for \Cstd or \HEADER{shmem.fh} for \Fortran.
+\item Add the initialization call \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}}.
+\item Use OpenSHMEM calls to query the local PE number
+    (\hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}}) and the total number
+    of PEs (\hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}}).
+\item Add the finalization call \hyperref[subsec:shmem_finalize]{\FUNC{shmem\_finalize}}.
 \end{itemize}
+
+In \openshmem, the order in which lines appear in the output is not
+deterministic because \acp{PE} execute asynchronously in parallel.
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
@@ -41,7 +44,7 @@ To write a ``Hello World" \openshmem program, the user must:
 \newpage %% NEW PAGE %% NEW PAGE %% NEW PAGE %% NEW PAGE %% NEW PAGE %%
 
 \begin{deprecate}
-\openshmem also has a \Fortran API, therefore listing~\ref{openshmem-hello-f90} provides the same program written in \Fortran:
+\openshmem also provides a \Fortran API. Listing~\ref{openshmem-hello-f90} shows a similar program written in \Fortran.
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
@@ -55,18 +58,23 @@ To write a ``Hello World" \openshmem program, the user must:
 
 \newpage %% NEW PAGE %% NEW PAGE %% NEW PAGE %% NEW PAGE %% NEW PAGE %%
 
-The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex \openshmem program that illustrates
-the use of symmetric data objects.  Note the declaration of the  \VAR{static
-short dest} array and its use as the remote destination in \openshmem short
-\PUT.  The use of the \VAR{static} keyword results in the \VAR{dest} array being
-symmetric on \ac{PE} \CONST{0} and \ac{PE} \CONST{1}.  Each \ac{PE} is able to
-transfer data to the \dest{} array by simply specifying the local address of the
-symmetric data object which is to receive the data.  This aids programmability,
-as the address of the \dest{} need not be exchanged with the active side
-(\ac{PE} \CONST{0}) prior to the RMA (Remote Memory Access) routine.
-Conversely, the declaration of the \VAR{short source} array is asymmetric.
-Because the \PUT{} handles the references to the \VAR{source} array only on the
-active (local) side, the asymmetric \source{} object is handled correctly.
+The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex
+\openshmem program that illustrates the use of symmetric data objects.
+Note the declaration of the \VAR{static short dest} array and its use as the
+remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
+
+The \VAR{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
+%% FIXME: The following sentence is not *technically* correct.
+Each \ac{PE} is able to transfer data to the \dest{} array by simply specifying
+the local address of the symmetric data object that will receive the data.
+This local address resolution aids programmability because the address of the
+\dest{} need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to
+the RMA (Remote Memory Access) routine.
+
+Conversely, the declaration of the \VAR{short source} array is asymmetric
+(local only).
+The \source{} object does not need to be symmetric because \PUT{} handles the
+references to the \VAR{source} array only on the active (local) side.
 
 \begin{minipage}{\linewidth}
 \vspace{0.1in}
