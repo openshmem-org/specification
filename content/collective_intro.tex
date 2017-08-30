@@ -20,7 +20,7 @@ same \VAR{pSync} array.  On completion of a collective call, the \VAR{pSync} is
 restored to its original contents.  The user is permitted to reuse a \VAR{pSync}
 array if all previous collective routines using the \VAR{pSync} array have been
 completed by all participating \acp{PE}.  One can use a synchronization
-collective routine such as \barrier to ensure completion of previous collective
+collective routine such as \FUNC{shmem\_barrier} to ensure completion of previous collective
 routines. The \FUNC{shmem\_barrier} routine allows the same \VAR{pSync} array to
 be used on consecutive calls as long as the \acp{PE} in the active set does not change. 
 
@@ -29,12 +29,12 @@ collective routines return on completion.  The collective routines defined in
 the \openshmem specification are:
 
 \begin{itemize}
-\item[] \broadcast 
-\item[] \barrier
-\item[] \barrierall
-\item[] \collect
-\item[] \fcollect
-\item[] \reduction
-\item[] \alltoall
-\item[] \alltoalls
-\end{itemize} 
+\item \FUNC{shmem\_barrier\_all}
+\item \FUNC{shmem\_barrier}
+\item \FUNC{shmem\_broadcast\{32, 64\}}
+\item \FUNC{shmem\_collect\{32, 64\}}
+\item \FUNC{shmem\_fcollect\{32, 64\}}
+\item Reductions for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
+\item \FUNC{shmem\_alltoall\{32, 64\}}
+\item \FUNC{shmem\_alltoalls\{32, 64\}}
+\end{itemize}
