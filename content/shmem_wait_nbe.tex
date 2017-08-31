@@ -1,0 +1,38 @@
+\apisummary{
+    The request wait routine provides a method for completing
+    outstanding operations on a request.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_wait_nbe(shmem_request_t *req);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{req}{Handle to the request object.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_wait\_nbe} routine blocks until all outstanding operations on the request
+    are finished. Outstanding operations are operations posted before
+    wait was called.
+    There are no guarantees on the ordering of the outstanding
+    operations.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{ In a threaded environment calling \FUNC{shmem\_wait\_nbe} from
+a thread other than the thread, posting the operation is permitted.
+However, only one thread must call \FUNC{shmem\_wait\_nbe} for a
+particular request. The \FUNC{shmem\_wait\_nbe} will return after all
+operation posted prior to the call are finished. It is the users
+responsibility that no new operations are posted to the request while it
+is waited on. This may require the use of a synchronization
+operation provided by the threading package.
+}
+
+\end{apidefinition}

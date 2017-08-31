@@ -42,8 +42,8 @@ void shmem_getmem_nbe(void *dest, const void *source, size_t nelems, int pe, shm
     a contiguous symmetric data object from a different \ac{PE} to a
     contiguous data object on the local \ac{PE}. The routines return
     after posting the operation.  The operation is considered complete
-    after a subsequent call to \FUNC{shmem\_wait\_request}. After the
-    completion of \FUNC{shmem\_wait\_request}, the data has been delivered
+    after a subsequent call to \FUNC{shmem\_wait\_nbe}. After the
+    completion of \FUNC{shmem\_wait\_nbe}, the data has been delivered
     to the \dest{} array on the local \ac{PE}.
 }
 

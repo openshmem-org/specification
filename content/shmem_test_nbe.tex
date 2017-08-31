@@ -1,0 +1,38 @@
+\apisummary{
+    The request test routine provides a method for querying the status
+    of the request.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_test_nbe(shmem_request_t *req, int *status);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{req}{Handle to the request object.}
+    \apiargument{OUT}{status}{The status of the request.}
+\end{apiarguments}
+
+\apidescription{
+    The routine returns one via the status argument if the request is
+    finished, otherwise zero is returned.
+    It is safe to free the request object, if the return value is not
+    zero.
+ }
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+In a threaded environment calling \FUNC{shmem\_test\_nbe} from
+a thread other than the thread, posting the operation is permitted.
+The \FUNC{shmem\_wait\_nbe} will return the status of the operations
+posted prior to the call. It is the users responsibility that no new
+operations are posted to the request while its status is tested. This
+may require the use of a synchronization operation provided by the
+threading package.
+}
+
+\end{apidefinition}
