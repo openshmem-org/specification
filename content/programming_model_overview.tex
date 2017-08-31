@@ -13,13 +13,13 @@ library routines have the potential to provide a low-latency, high-bandwidth
 communication \ac{API} for use in highly parallelized scalable programs.  
 
 The \openshmem interfaces can be used to implement \ac{SPMD} style programs.
-It provides interfaces to start the \openshmem \acp{PE} in parallel, and
+It provides interfaces to start the \openshmem \acp{PE} in parallel and
 communication and synchronization interfaces to access remotely accessible data
 objects across \acp{PE}. These interfaces can be leveraged to divide a problem
 into multiple sub-problems that can be solved independently or with coordination
 using the communication and synchronization interfaces.  The \openshmem
 specification defines library calls, constants, variables, and language bindings
-for \Cstd and \Fortran.%
+for \Cstd and \Fortran%
 \footnote{As of \openshmem[1.4], the \Fortran interface has been deprecated.}.
 The \Cpp interface is currently the same as that
 for \Cstd. Unlike Unified Parallel C, \Fortran[2008], Titanium, X10, and Chapel, which are all
