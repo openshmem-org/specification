@@ -40,7 +40,7 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
+    \apiargument{IN}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
     \apiargument{IN}{source}{Data object containing the data to be copied.}
     \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}

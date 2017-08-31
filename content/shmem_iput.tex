@@ -34,7 +34,7 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{dest}{Array to be updated on the remote \ac{PE}. This data
+    \apiargument{IN}{dest}{Array to be updated on the remote \ac{PE}. This data
         object  must be remotely accessible.}
     \apiargument{IN}{source}{Array containing the data to be copied.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}

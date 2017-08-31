@@ -25,7 +25,7 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{dest}{The remotely accessible integer data object to be
+    \apiargument{IN}{dest}{The remotely accessible integer data object to be
         updated on the remote \ac{PE}. }
     \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
         value. If \VAR{cond} and the remote \VAR{dest} are equal, then \VAR{value}
