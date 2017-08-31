@@ -1,5 +1,5 @@
 \apisummary{
-    Waits for completion of all outstanding \PUT{}, \acp{AMO}, memory store,
+    Waits for completion of all outstanding \PUT{}, \ac{AMO}, memory store,
     and non-blocking \PUT{} and \GET{} routines to symmetric data
     objects issued by a \ac{PE}.
 }
@@ -19,9 +19,9 @@ CALL SHMEM_QUIET
 \end{apiarguments}
 
 \apidescription{ 
-    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO},
+    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \ac{AMO},
     memory store, and non-blocking \PUT{} and \GET{} routines on
-    symmetric data objects issued by the calling \ac{PE}. All \PUT{}, \acp{AMO},
+    symmetric data objects issued by the calling \ac{PE}. All \PUT{}, \ac{AMO},
     memory store, and non-blocking \PUT{} and \GET{} routines to
     symmetric data objects are guaranteed to be completed and visible to all
     \acp{PE} when \FUNC{shmem\_quiet} returns. 
@@ -34,7 +34,7 @@ CALL SHMEM_QUIET
 
 \apinotes{ 
     \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
-    several \PUT{}, \acp{AMO}, memory store, and non-blocking \PUT{}
+    several \PUT{}, \ac{AMO}, memory store, and non-blocking \PUT{}
     and \GET{} routines to symmetric data objects initiated by the calling
     \ac{PE}.  For example, one might use \FUNC{shmem\_quiet} to await delivery
     of a block of data before issuing another \PUT{} or non-blocking
