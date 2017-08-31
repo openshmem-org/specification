@@ -530,14 +530,16 @@ through the \Fortran-\Cstd interoperability initially standardized by
 \chapter{Changes to this Document}\label{sec:changelog}
 
 \section{Version 1.4}
+%Major changes in \openshmem[1.4] include ...
 
+The following list describes the specific changes in \openshmem[1.4]:
 \begin{itemize}
 
 \item Clarified that the \openshmem extensions header files are required, even when empty.
 \\See Section~\ref{subsec:bindings}.
 %
 \item Clarified that the \FUNC{SHMEM\_GET64} and \FUNC{SHMEM\_GET64\_NBI}
-    routines are included in the Fortran language bindings.\\
+    routines are included in the \Fortran language bindings.\\
     See Sections \ref{subsec:shmem_get} and \ref{subsec:shmem_get_nbi}.
 %
 \item Clarified that \FUNC{shmem\_init} must be matched with a call to
@@ -637,14 +639,17 @@ synchronization routines.
 %
 \end{itemize}
 
+
+
+
 \section{Version 1.3}
-This section summarizes the changes from the \openshmem specification Version
-1.2 to Version 1.3. Many major changes to the specification were introduced in Version 1.3. This includes non-blocking RMA operations, 
-generic interfaces for various OpenSHMEM interfaces, atomic \FUNC{Put} and \FUNC{Get} operations,  and Alltoall interfaces. 
+Major changes in \openshmem[1.3] include the addition of
+\Cstd[11] type-generic interfaces for \ac{RMA} and \ac{AMO} operations,
+non-blocking RMA operations,
+atomic \PUT{} and \GET{} operations,
+and all-to-all collectives.
 
-
-The following list describes the specific changes in 1.3:
-
+The following list describes the specific changes in \openshmem[1.3]:
 \begin{itemize}
 %
 \item Clarified implementation of \acp{PE} as threads.
@@ -692,21 +697,21 @@ The following list describes the specific changes in 1.3:
 
 
 \section{Version 1.2}
-This section summarizes the changes from the \openshmem specification Version
-1.1 to Version 1.2.  A major change in this version is that it improves upon the
-execution model described in 1.1 by introducing an explicit
-\FUNC{shmem\_finalize} library call. This provides a collective mechanism of
-exiting an \openshmem program and releasing resources used by the library.  
+Major changes in \openshmem[1.2] include
+a new initialization routine (\FUNC{shmem\_init}),
+improvements to the execution model with the addition of an explicit
+library-finalization routine (\FUNC{shmem\_finalize}),
+an early-exit routine (\FUNC{shmem\_global\_exit}),
+namespace standardization,
+and clarifications to several API descriptions.
 
-
-The following list describes the specific changes in 1.2:
-
+The following list describes the specific changes in \openshmem[1.2]:
 \begin{itemize}
 %
 \item Added specification of \VAR{pSync} initialization for all routines that use it.
 %
 \item Replaced all placeholder variable names \VAR{target} with \VAR{dest} to
-      avoid confusion with Fortran `target' keyword.
+      avoid confusion with \Fortran `target' keyword.
 %
 \item New Execution Model for exiting/finishing OpenSHMEM programs.
 \\See Section  \ref{subsec:execution_model}.
@@ -743,7 +748,7 @@ The following list describes the specific changes in 1.2:
 \item Notes and clarifications added to \FUNC{shmem\_malloc}.
 \\See Section \ref{subsec:shfree}.
 %
-\item Deprecation of Fortran API routine \FUNC{SHMEM\_PUT}.
+\item Deprecation of \Fortran API routine \FUNC{SHMEM\_PUT}.
 \\See Section \ref{subsec:shmem_put}. 
 %
 \item Clarification related to \FUNC{shmem\_wait}.
@@ -762,18 +767,14 @@ The following list describes the specific changes in 1.2:
 
 
 \section{Version 1.1}
-This section summarizes the changes from the \openshmem specification Version
-1.0 to the Version 1.1.  A major change in this version is that it provides an
-accurate description of \openshmem interfaces so that they are in agreement with
-the SGI specification.  This version also explains \openshmem's programming,
-memory, and execution model.  The document was thoroughly changed to improve the
-readability of specification and usability of interfaces.  The code examples
-were added to demonstrate the usability of API. Additionally, diagrams were
-added to help understand the subtle semantic differences of various operations.
+Major changes from \openshmem[1.0] to \openshmem[1.1] include
+the introduction of the \HEADER{shmemx.h} header file for non-standard API
+extensions,
+clarifications to completion semantics and API descriptions in agreement with
+the SGI SHMEM specification,
+and general readabilty and usability improvements to the document structure.
 
-
-The following list describes the specific changes in 1.1:
-
+The following list describes the specific changes in \openshmem[1.1]:
 \begin{itemize}
 %
 \item Clarifications of the completion semantics of memory synchronization 
@@ -820,7 +821,7 @@ The following list describes the specific changes in 1.1:
       \FUNC{shmem\_char\_get}.
 \\See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}. 
 %
-\item The usage of \VAR{ptrdiff\_t}, \VAR{size\_t}, and \VAR{int} in the
+\item The usage of \CTYPE{ptrdiff\_t}, \CTYPE{size\_t}, and \CTYPE{int} in the
       interface signature was made consistent with the description.
 \\See Sections \ref{subsec:coll}, \ref{subsec:shmem_iput}, and \ref{subsec:shmem_iget}.
 %
@@ -831,7 +832,7 @@ The following list describes the specific changes in 1.1:
 \FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}. 
 %
 \item Clarification of the expected behavior when multiple \FUNC{start\_pes}
-calls are encountered has been clarified.
+calls are encountered.
 \\See Section \ref{subsec:start_pes}.
 %
 \item Corrected the definition of atomic increment operation.
@@ -867,7 +868,7 @@ return error information for \FUNC{shmalloc} and ensuring consistent
 language.
 \\See Sections \ref{subsec:shfree} and Annex \ref{sec:undefined}. 
 %
-\item Fortran programming fixes for examples.\\ See Sections
+\item \Fortran programming fixes for examples.\\ See Sections
 \ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait}. 
 %
 \item Clarifications of the reuse \VAR{pSync} and \VAR{pWork} across
@@ -879,7 +880,6 @@ collectives.
 \\See Annex \ref{sec:openshmem_history}. 
 %
 \end{itemize}
-
 
 
 
