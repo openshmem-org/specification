@@ -370,16 +370,16 @@ removal.
     \shortstack[l]{\CorCpp: \hyperref[subsec:shmem_cache]{\FUNC{shmem\_udcflush\_line}}
         \\ \Fortran: \hyperref[subsec:shmem_cache]{\FUNC{SHMEM\_UDCFLUSH\_LINE}}}
         & 1.3 & Current & (none) \\ \hline
-    \_SHMEM\_SYNC\_VALUE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_SYNC\_VALUE} \\ \hline
-    \_SHMEM\_BARRIER\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_BARRIER\_SYNC\_SIZE} \\ \hline
-    \_SHMEM\_BCAST\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_BCAST\_SYNC\_SIZE} \\ \hline
-    \_SHMEM\_COLLECT\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_COLLECT\_SYNC\_SIZE} \\ \hline
-    \_SHMEM\_REDUCE\_SYNC\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_REDUCE\_SYNC\_SIZE} \\ \hline
-    \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} \\ \hline
-    \_SHMEM\_MAJOR\_VERSION & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAJOR\_VERSION} \\ \hline
-    \_SHMEM\_MINOR\_VERSION & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MINOR\_VERSION} \\ \hline
-    \_SHMEM\_MAX\_NAME\_LEN & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_MAX\_NAME\_LEN} \\ \hline
-    \_SHMEM\_VENDOR\_STRING & 1.3 & Current & \hyperref[subsec:library_constants]{SHMEM\_VENDOR\_STRING} \\ \hline
+    \CONST{\_SHMEM\_SYNC\_VALUE}         & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_SYNC\_VALUE}} \\ \hline
+    \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_BARRIER\_SYNC\_SIZE}} \\ \hline
+    \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}   & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_BCAST\_SYNC\_SIZE}} \\ \hline
+    \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_COLLECT\_SYNC\_SIZE}} \\ \hline
+    \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}  & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_REDUCE\_SYNC\_SIZE}} \\ \hline
+    \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}} \\ \hline
+    \CONST{\_SHMEM\_MAJOR\_VERSION} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_MAJOR\_VERSION}} \\ \hline
+    \CONST{\_SHMEM\_MINOR\_VERSION} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_MINOR\_VERSION}} \\ \hline
+    \CONST{\_SHMEM\_MAX\_NAME\_LEN} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_MAX\_NAME\_LEN}} \\ \hline
+    \CONST{\_SHMEM\_VENDOR\_STRING} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_VENDOR\_STRING}} \\ \hline
     SMA\_VERSION         & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_VERSION} \\ \hline
     SMA\_INFO            & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_INFO} \\ \hline
     SMA\_SYMMETRIC\_SIZE & 1.4 & Current & \hyperref[subsec:environment_variables]{SHMEM\_SYMMETRIC\_SIZE} \\ \hline
@@ -415,7 +415,7 @@ include 'mpp/shmemx.fh'
 \end{lstlisting}
 for backwards compatibility with SGI SHMEM.
 
-\subsection{\CorCpp: start\_pes}
+\subsection{\CorCpp: \FUNC{start\_pes}}
 The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
 argument that is remnant of historical \emph{SHMEM} implementations and no
 longer reflects the requirements of modern \openshmem implementations.
@@ -428,18 +428,19 @@ Implicit finalization has been replaced with explicit finalization using the
 \FUNC{shmem\_finalize} routine.  Explicit finalization improves portability and
 also improves interoperability with profiling and debugging tools.
 
-\subsection{\CorCpp: \_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign}
+\subsection{\CorCpp: \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
+    \FUNC{shfree}, \FUNC{shrealloc}, \FUNC{shmemalign}}
 The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
 \FUNC{shfree}, \FUNC{shrealloc}, and \FUNC{shmemalign} were deprecated in order
 to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
 prefix for all routines.
 
-\subsection{Fortran: START\_PES, MY\_PE, NUM\_PES}
+\subsection{\Fortran: \FUNC{START\_PES}, \FUNC{MY\_PE}, \FUNC{NUM\_PES}}
 The \Fortran routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
 were deprecated in order to minimize the API differences from the deprecation
 of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
 
-\subsection{Fortran: SHMEM\_PUT}
+\subsection{\Fortran: \FUNC{SHMEM\_PUT}}
 The \Fortran routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran
 \ac{API} and is semantically identical to \Fortran routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
@@ -451,27 +452,27 @@ The \FUNC{SHMEM\_CACHE} \ac{API}
 \begin{center}
 \begin{tabular}{ll}
     \CorCpp: & \Fortran: \\
-    shmem\_clear\_cache\_inv & SHMEM\_CLEAR\_CACHE\_INV \\
-    shmem\_set\_cache\_inv & SHMEM\_SET\_CACHE\_INV \\
-    shmem\_set\_cache\_line\_inv & SHMEM\_SET\_CACHE\_LINE\_INV \\
-    shmem\_udcflush & SHMEM\_UDCFLUSH \\
-    shmem\_udcflush\_line & SHMEM\_UDCFLUSH\_LINE \\
-    shmem\_clear\_cache\_line\_inv \\
+    \FUNC{shmem\_clear\_cache\_inv}     & \FUNC{SHMEM\_CLEAR\_CACHE\_INV} \\
+    \FUNC{shmem\_set\_cache\_inv}       & \FUNC{SHMEM\_SET\_CACHE\_INV} \\
+    \FUNC{shmem\_set\_cache\_line\_inv} & \FUNC{SHMEM\_SET\_CACHE\_LINE\_INV} \\
+    \FUNC{shmem\_udcflush}              & \FUNC{SHMEM\_UDCFLUSH} \\
+    \FUNC{shmem\_udcflush\_line}        & \FUNC{SHMEM\_UDCFLUSH\_LINE} \\
+    \FUNC{shmem\_clear\_cache\_line\_inv} \\
 \end{tabular}
 \end{center}
 was originally implemented for systems with cache-management instructions.
 This API has largely gone unused on cache-coherent system architectures.
 \FUNC{SHMEM\_CACHE} has been deprecated.
 
-\subsection{\_SHMEM\_* Library Constants}
+\subsection{\CONST{\_SHMEM\_*} Library Constants}
 The library constants
 \begin{center}
 \begin{tabular}{ll}
-    \_SHMEM\_SYNC\_VALUE & \_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE \\
-    \_SHMEM\_BARRIER\_SYNC\_SIZE & \_SHMEM\_MAJOR\_VERSION \\
-    \_SHMEM\_BCAST\_SYNC\_SIZE & \_SHMEM\_MINOR\_VERSION \\
-    \_SHMEM\_COLLECT\_SYNC\_SIZE & \_SHMEM\_MAX\_NAME\_LEN \\
-    \_SHMEM\_REDUCE\_SYNC\_SIZE & \_SHMEM\_VENDOR\_STRING \\
+    \CONST{\_SHMEM\_SYNC\_VALUE}         & \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} \\
+    \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE} & \CONST{\_SHMEM\_MAJOR\_VERSION} \\
+    \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}   & \CONST{\_SHMEM\_MINOR\_VERSION} \\
+    \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE} & \CONST{\_SHMEM\_MAX\_NAME\_LEN} \\
+    \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}  & \CONST{\_SHMEM\_VENDOR\_STRING} \\
 \end{tabular}
 \end{center}
 do not adhere to the \Cstd standard's reserved identifiers and the \Cpp
@@ -483,6 +484,7 @@ and \Fortran naming conventions.
 The environment variables
 \begin{center}
 \begin{tabular}{ll}
+    %% TODO: Styling.
     SMA\_VERSION \\
     SMA\_INFO \\
     SMA\_SYMMETRIC\_SIZE \\
@@ -492,7 +494,7 @@ The environment variables
 were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
-\subsection{\FUNC{shmem\_wait}}
+\subsection{\CorCpp: \FUNC{shmem\_wait}}
 The \CorCpp interface for \FUNC{shmem\_wait} was identified as unintuitive with respect to
 the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
 replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
@@ -500,7 +502,7 @@ replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
 favor of \FUNC{shmem\_wait\_until}, which makes the comparison operation
 explicit and better communicates the developer's intent.
 
-\subsection{\FUNC{shmem\_fetch}, \FUNC{shmem\_set}, \FUNC{shmem\_cswap},
+\subsection{\CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, \FUNC{shmem\_cswap},
   \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
   \FUNC{shmem\_fadd}, \FUNC{shmem\_add}}
 
@@ -512,7 +514,7 @@ in order to more clearly identify these calls as performing atomic operations.
 In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
-\subsection{Fortran API}\label{subsec:deprecate-fortran}
+\subsection{\Fortran API}\label{subsec:deprecate-fortran}
 The entire \openshmem \Fortran API was deprecated because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
 extensive update of the \Fortran API, \Fortran users are encouraged to
