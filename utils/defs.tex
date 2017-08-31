@@ -361,19 +361,20 @@ minus .2ex}{-1em}{\normalsize\sf}}
 {
   \textbf{C++11:}
   \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, noreturn}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, ptrdiff_t, TYPE, noreturn},
+  aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{C11synopsis}
 { 
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, _Noreturn, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
@@ -381,7 +382,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
@@ -389,7 +390,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
   \textbf{C/C++:} 
   \color{red}  
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
+  morekeywords={size_t, ptrdiff_t},
+  aboveskip=0pt, belowskip=0pt}}
   }
   {}
   
@@ -469,7 +471,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\apicexample}[3]{
     ##1
     \lstinputlisting[language={C}, tabsize=2,
-    basicstyle=\ttfamily\footnotesize, morekeywords={size_t}]{##2}
+    basicstyle=\ttfamily\footnotesize,
+    morekeywords={size_t, shmem_cmp_t}]{##2}
     ##3 }
 \newcommand{\apifexample}[3]{
     ##1
