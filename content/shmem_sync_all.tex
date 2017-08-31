@@ -19,8 +19,9 @@ void shmem_sync_all(void);
 \apidescription{
     The \FUNC{shmem\_sync\_all} routine registers the arrival of a \ac{PE} at a
     barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
-    once.  This routine causes a \ac{PE} to suspend execution until all
-    \acp{PE} have called \FUNC{shmem\_sync\_all}.
+    once.  This routine blocks the \ac{PE} until all \acp{PE} have called
+    \FUNC{shmem\_sync\_all}. In a multithreaded \openshmem
+    program, only the calling thread is blocked.
 
     In contrast with the \FUNC{shmem\_barrier\_all} routine,
     \FUNC{shmem\_sync\_all} only ensures completion and visibility of previously issued memory
