@@ -444,8 +444,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 
 \newcommand{\apidesctable}[4] {
 \begin{quote}
-    #1 \vspace{.3em} \\
     \begin{tabular}{p{5cm} p{9cm}}
+       \multicolumn{2}{l}{#1} \\ \noalign{\vskip \the\parskip}
        \hline
        #2 & #3 \\
        \hline \tabularnewline
