@@ -226,7 +226,7 @@ The following cases summarize this behavior:
 \begin{sloppypar} % to prevent constants from running into margins.
 %
 \openshmem routines may be used in conjunction with \ac{MPI} routines in the
-same program.  For example, on SGI systems, programs that use both \ac{MPI} and
+same program.  For example, on \ac{SGI} systems, programs that use both \ac{MPI} and
 \openshmem routines call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the
 call to the \FUNC{shmem\_init} routine.  \openshmem \ac{PE} numbers are equal to
 the \ac{MPI} rank within the \CONST{MPI\_COMM\_WORLD} environment variable.
@@ -237,7 +237,7 @@ communicate with their parent \ac{MPI} processes.
 %
 \end{sloppypar}
 %
-On SGI systems where \ac{MPI} jobs use \ac{TCP}/sockets for inter-host communication,
+On \ac{SGI} systems where \ac{MPI} jobs use \ac{TCP}/sockets for inter-host communication,
 \openshmem routines may be used to communicate with processes running on the
 same host.  The \FUNC{shmem\_pe\_accessible} routine should be used to determine if
 a remote \ac{PE} is accessible via \openshmem communication from the local
@@ -268,7 +268,7 @@ non-default memory-placement options.
 
 SHMEM has a long history as a parallel programming model, having been used
 extensively on a number of products since 1993, including Cray T3D, Cray X1E,
-the Cray XT3/4, SGI Origin, SGI Altix, clusters based on the Quadrics
+the Cray XT3/4, \ac{SGI} Origin, \ac{SGI} Altix, clusters based on the Quadrics
 interconnect, and, to a very limited extent, Infiniband based clusters.
 
 \begin{itemize}
@@ -277,18 +277,18 @@ interconnect, and, to a very limited extent, Infiniband based clusters.
   \item Cray SHMEM
     \begin{itemize}
     \item SHMEM first introduced by Cray Research Inc. in 1993 for Cray T3D
-    \item Cray is acquired by SGI in 1996
+    \item Cray is acquired by \ac{SGI} in 1996
     \item Cray is acquired by Tera in 2000 (MTA)
     \item Platforms: Cray T3D, T3E, C90, J90, SV1, SV2, X1, X2, XE, XMT, XT
     \end{itemize}
-  \item SGI SHMEM
+  \item \ac{SGI} SHMEM
     \begin{itemize}
-    \item SGI purchases  Cray Research Inc. and SHMEM was integrated into
-      SGI's Message Passing Toolkit (MPT)
-    \item SGI currently owns the rights to SHMEM and \openshmem
+    \item \ac{SGI} purchases  Cray Research Inc. and SHMEM was integrated into
+      \ac{SGI}'s Message Passing Toolkit (MPT)
+    \item \ac{SGI} currently owns the rights to SHMEM and \openshmem
     \item Platforms: Origin, Altix 4700, Altix XE, ICE, UV
-    \item SGI was purchased by Rackable Systems in 2009
-    \item SGI and Open Source Software Solutions, Inc. (OSSS) signed a
+    \item \ac{SGI} was purchased by Rackable Systems in 2009
+    \item \ac{SGI} and Open Source Software Solutions, Inc. (OSSS) signed a
       SHMEM trademark licensing agreement, in 2010
     \end{itemize}
   \item Other Implementations
@@ -305,7 +305,7 @@ interconnect, and, to a very limited extent, Infiniband based clusters.
   \end{itemize}
 \item OpenSHMEM Implementations 
  \begin{itemize}
-  \item SGI \openshmem
+  \item \ac{SGI} \openshmem
   \item University of Houston - \openshmem Reference Implementation
   \item Mellanox ScalableSHMEM
   \item Portals-SHMEM
@@ -413,7 +413,7 @@ and in \Fortran as
 include 'mpp/shmem.fh'
 include 'mpp/shmemx.fh'
 \end{lstlisting}
-for backwards compatibility with SGI SHMEM.
+for backwards compatibility with \ac{SGI} SHMEM.
 
 \subsection{\CorCpp: \FUNC{start\_pes}}
 The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
@@ -771,7 +771,7 @@ Major changes from \openshmem[1.0] to \openshmem[1.1] include
 the introduction of the \HEADER{shmemx.h} header file for non-standard API
 extensions,
 clarifications to completion semantics and API descriptions in agreement with
-the SGI SHMEM specification,
+the \ac{SGI} SHMEM specification,
 and general readabilty and usability improvements to the document structure.
 
 The following list describes the specific changes in \openshmem[1.1]:
@@ -876,7 +876,7 @@ collectives.
 \\See Sections \ref{subsec:coll}, \ref{subsec:shmem_broadcast},
       \ref{subsec:shmem_collect} and \ref{subsec:shmem_reductions}.
 %
-\item Name changes for UV and ICE for SGI systems.
+\item Name changes for UV and ICE for \ac{SGI} systems.
 \\See Annex \ref{sec:openshmem_history}. 
 %
 \end{itemize}
