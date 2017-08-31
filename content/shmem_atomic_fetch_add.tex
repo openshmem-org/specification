@@ -26,7 +26,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 
 \begin{apiarguments}
 
-\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated on
+\apiargument{IN}{dest}{The remotely accessible integer data object to be updated on
     the remote \ac{PE}. The type of \VAR{dest} should match that implied in the
     SYNOPSIS section.}
 \apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.  The
@@ -47,8 +47,8 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+    When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{value}}
 
 \apitablerow{SHMEM\_INT4\_FADD}{\CONST{4}-byte integer}
 \apitablerow{SHMEM\_INT8\_FADD}{\CONST{8}-byte integer}

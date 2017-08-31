@@ -25,7 +25,7 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{dest}{The remotely accessible integer data object to be
+    \apiargument{IN}{dest}{The remotely accessible integer data object to be
         updated  on the remote \ac{PE}.  When using \CorCpp, the type of
         \dest{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{value}{The value to be atomically added to \dest. When using \CorCpp, the type of \VAR{value} should match that  implied  in
@@ -43,8 +43,8 @@ CALL SHMEM_INT8_ADD(dest, value_i8, pe)
  }
 
 \apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest}}
+    When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{value}}
 
 \apitablerow{SHMEM\_INT4\_ADD}{\CONST{4}-byte integer}
 \apitablerow{SHMEM\_INT8\_ADD}{\CONST{8}-byte integer}

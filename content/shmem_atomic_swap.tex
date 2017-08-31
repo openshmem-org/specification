@@ -28,7 +28,7 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
+    \apiargument{IN}{dest}{The  remotely accessible integer data object to be
         updated on the remote \ac{PE}.	 When using \CorCpp, the type of
         \dest{} should match that  implied in the SYNOPSIS section.}
     \apiargument{IN}{value}{The value to be atomically written to the remote
@@ -45,8 +45,8 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 }
 
 \apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+  When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{value}}
 
 \apitablerow{SHMEM\_SWAP}{Integer of default kind}
 \apitablerow{SHMEM\_INT4\_SWAP}{\CONST{4}-byte integer}
