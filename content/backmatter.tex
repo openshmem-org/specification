@@ -21,11 +21,10 @@ The following section describes how to write a ``Hello World" \openshmem program
 To write a ``Hello World" \openshmem program, the user must: 
 
 \begin{itemize}
-\item Add the include file \HEADER{shmem.h} (for \Cstd) or \HEADER{shmem.fh} (for \Fortran).
-\item Add the initialization call \FUNC{shmem\_init}, (line 9).
-\item Use OpenSHMEM calls to query the total number of \acp{PE} (line 10) and \ac{PE}
-    id (line 11).
-\item Add the finalization call \FUNC{shmem\_finalize}, (line 13).
+\item Add the include file \HEADER{shmem.h} for \Cstd or \HEADER{shmem.fh} for \Fortran.
+\item Add the initialization call \FUNC{shmem\_init}.
+\item Use OpenSHMEM calls to query the total number of \acp{PE} and \ac{PE} id.
+\item Add the finalization call \FUNC{shmem\_finalize}.
 \item In \openshmem the order in which lines appear in the output is not fixed
     as \acp{PE} execute asynchronously in parallel.
 \end{itemize}
@@ -77,15 +76,15 @@ active (local) side, the asymmetric \source{} object is handled correctly.
 
 \chapter{Compiling and Running Programs}\label{sec:compiling}
 As of this writing, the \openshmem specification is silent regarding how
-\openshmem programs are compiled, linked and run. This section shows some
+\openshmem programs are compiled, linked, and run. This section shows some
 examples of how wrapper programs are utilized in the \openshmem Reference
 Implementation to compile and launch programs.
 
 \section{Compilation}
 \subsection*{Programs written in \Cstd}
 
-The \openshmem Reference Implementation provides a wrapper program named
-\textbf{oshcc}, to aid in the compilation of \Cstd programs, the wrapper
+The \openshmem Reference Implementation provides a wrapper program, named
+\textbf{oshcc}, to aid in the compilation of \Cstd programs. The wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
@@ -97,8 +96,8 @@ underlying \Cstd compiler.
 
 \subsection*{Programs written in \Cpp}
 
-The  \openshmem Reference Implementation provides a wrapper program named
-\textbf{oshCC}, to aid in the compilation of \Cpp programs, the wrapper could
+The  \openshmem Reference Implementation provides a wrapper program, named
+\textbf{oshCC}, to aid in the compilation of \Cpp programs. The wrapper could
 be called as follows:
 
 \begin{lstlisting}[language=bash]
@@ -111,8 +110,8 @@ underlying \Cpp compiler called by \textbf{oshCC}.
 \subsection*{Programs written in Fortran}
 
 \begin{deprecate}
-The \openshmem Reference Implementation provides a wrapper program named
-\textbf{oshfort}, to aid in the compilation of \Fortran programs, the wrapper
+The \openshmem Reference Implementation provides a wrapper program, named
+\textbf{oshfort}, to aid in the compilation of \Fortran programs. The wrapper
 could be called as follows:
 
 \begin{lstlisting}[language=bash]
@@ -124,8 +123,8 @@ underlying \Fortran compiler called by \textbf{oshfort}.
 
 \section{Running Programs}
 
-The  \openshmem Reference Implementation provides a wrapper program named
-\textbf{oshrun}, to launch \openshmem programs, the wrapper could be called as
+The \openshmem Reference Implementation provides a wrapper program, named
+\textbf{oshrun}, to launch \openshmem programs. The wrapper could be called as
 follows:
 
 \begin{lstlisting}[language=bash]
@@ -262,7 +261,7 @@ non-default memory placement options.
 SHMEM has a long history as a parallel programming model, having been used
 extensively on a number of products since 1993, including Cray T3D, Cray X1E,
 the Cray XT3/4, SGI Origin, SGI Altix, clusters based on the Quadrics
-interconnect, and to a very limited extent, Infiniband based clusters.
+interconnect, and, to a very limited extent, Infiniband based clusters.
 
 \begin{itemize}
 \item A SHMEM Timeline
@@ -418,7 +417,7 @@ Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
 
 \subsection{\CorCpp: \_my\_pe, \_num\_pes, shmalloc, shfree, shrealloc, shmemalign}
 The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
-\FUNC{shfree}, \FUNC{shrealloc} and \FUNC{shmemalign} were deprecated in order
+\FUNC{shfree}, \FUNC{shrealloc}, and \FUNC{shmemalign} were deprecated in order
 to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
 prefix for all routines.
 
@@ -556,7 +555,7 @@ to be unnecessary.}
 \FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
-\item Clarified ordering semantics of memory ordering, point-to-point synchronization and collective 
+\item Clarified ordering semantics of memory ordering, point-to-point synchronization, and collective 
 synchronization routines.
 %
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
