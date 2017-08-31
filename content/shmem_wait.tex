@@ -42,7 +42,8 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
   \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
   When using \CorCpp, it must be of type \CTYPE{shmem\_cmp\_t}.}
-\apiargument{IN}{When using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
+\apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
+    using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
     SYNOPSIS section.  When using \Fortran, cmp\_value must be an integer of
     the same size and kind as \VAR{ivar}.}
 
