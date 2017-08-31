@@ -323,13 +323,14 @@ interconnect, and, to a very limited extent, Infiniband based clusters.
 \chapter{OpenSHMEM Specification and Deprecated API}\label{sec:dep_api}
 
 \section{Overview}\label{subsec:dep_overview}
-For the \openshmem Specification(s), deprecation is the process of identifying
+For the \openshmem specification, deprecation is the process of identifying
 API that is supported but no longer recommended for use by program users. For
 \openshmem library users, said API \textbf{must} be supported until clearly
-indicated as otherwise by the Specification. This chapter records the
-API that has been deprecated, the \openshmem Specification that effected the
-deprecation, and if the feature is supported in the current version of the
-specification.  
+indicated as otherwise by the specification.
+This chapter records the API or functionality that have been deprecated, the
+\openshmem specification version that effected the deprecation, and the
+\openshmem specification version that the feature was last supported before
+removal.
 
 \begin{center}
 \scriptsize
@@ -420,8 +421,7 @@ argument that is remnant of historical \emph{SHMEM} implementations and no
 longer reflects the requirements of modern \openshmem implementations.
 Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
 \shmemprefixLC{} naming prefix. This routine has been deprecated and
-\openshmem users are encouraged to use
-\hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} instead.
+\openshmem users are encouraged to use \FUNC{shmem\_init} instead.
 
 \subsection{Implicit Finalization}
 Implicit finalization has been replaced with explicit finalization using the
@@ -440,8 +440,8 @@ were deprecated in order to minimize the API differences from the deprecation
 of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
 
 \subsection{Fortran: SHMEM\_PUT}
-The \Fortran function \FUNC{SHMEM\_PUT} is defined only for the \Fortran
-\ac{API} and is semantically identical to \Fortran functions
+The \Fortran routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran
+\ac{API} and is semantically identical to \Fortran routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
 \FUNC{SHMEM\_PUT64} have defined equivalents in the \CorCpp interface,
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
@@ -459,7 +459,7 @@ The \FUNC{SHMEM\_CACHE} \ac{API}
     shmem\_clear\_cache\_line\_inv \\
 \end{tabular}
 \end{center}
-was originally implemented for systems with cache management instructions.
+was originally implemented for systems with cache-management instructions.
 This API has largely gone unused on cache-coherent system architectures.
 \FUNC{SHMEM\_CACHE} has been deprecated.
 
@@ -493,7 +493,7 @@ were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
 \subsection{\FUNC{shmem\_wait}}
-The \FUNC{shmem\_wait} interface was identified as unintuitive with respect to
+The \CorCpp interface for \FUNC{shmem\_wait} was identified as unintuitive with respect to
 the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
 replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
 \CONST{SHMEM\_CMP\_NE}, the \FUNC{shmem\_wait} interface was deprecated in
@@ -507,7 +507,7 @@ explicit and better communicates the developer's intent.
 The \CorCpp interfaces for \FUNC{shmem\_fetch}, \FUNC{shmem\_set},
 \FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
 \FUNC{shmem\_fadd}, and \FUNC{shmem\_add} were deprecated and replaced with
-similarly-named interfaces within the \FUNC{shmem\_atomic\_*} namespace
+similarly named interfaces within the \FUNC{shmem\_atomic\_*} namespace
 in order to more clearly identify these calls as performing atomic operations.
 In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
