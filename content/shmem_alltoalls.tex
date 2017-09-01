@@ -60,7 +60,7 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
 
 \apidescription{
     The \FUNC{shmem\_alltoalls} routines are collective routines. Each \ac{PE}
-    in the \activeset{} exchanges \VAR{nelems} strided data elements of size
+    in the active set exchanges \VAR{nelems} strided data elements of size
     32 bits, for \FUNC{shmem\_alltoalls32}, or 64 bits, for \FUNC{shmem\_alltoalls64},
     with all other \acp{PE} in the set. Both strides, \VAR{dst} and \VAR{sst}, must be greater
     than or equal to \CONST{1}.
