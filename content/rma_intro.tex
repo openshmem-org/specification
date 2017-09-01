@@ -1,46 +1,60 @@
 The \ac{RMA} routines described in this section are one-sided communication
-mechanisms of the \openshmem{} \ac{API}. While using these mechanisms, the user
+mechanisms of the \openshmem \ac{API}. While using these mechanisms, the user
 is required to provide parameters only on the calling side. A characteristic of
 one-sided communication is that it decouples communication from the
 synchronization. One-sided communication mechanisms transfer the data but do not
 synchronize the sender of the data with the receiver of the data. 
 
-\openshmem{} \ac{RMA} routines are all performed on the symmetric objects.  The
+\openshmem \ac{RMA} routines are all performed on the symmetric objects.  The
 initiator \ac{PE} of the call is designated as \source{}, and the \ac{PE} in
 which memory is accessed is designated as \dest{}. In the case of the remote
 update routine, \PUT{}, the origin is the \source{} \ac{PE} and the destination
 \ac{PE} is the \dest{} PE. In the case of the remote read routine, \GET{}, the
 origin is the \dest{} \ac{PE} and the destination is the \source{} \ac{PE}.
 
-Where appropriate compiler support is available, \openshmem{} provides type-generic 
+Where appropriate compiler support is available, \openshmem provides type-generic 
 one-sided communication interfaces via \Cstd[11] generic selection
-(\Cstd[11] \S6.5.1.1\footnote{Formally, the \Cstd[11] specification is ISO/IEC 9899:2011(E).})
+(\Cstd[11]~\S6.5.1.1\footnote{Formally, the \Cstd[11] specification is ISO/IEC 9899:2011(E).})
 for block, scalar, and block-strided put and get communication. 
-Such type-generic routines are supported for the ``standard \ac{RMA} types’’
-identified in Table \ref{stdrmatypes}.
+Such type-generic routines are supported for the ``standard \ac{RMA} types''
+listed in Table \ref{stdrmatypes}.
+
+The standard \ac{RMA} types include the exact-width integer types defined in
+\HEADER{stdint.h} by \Cstd[99]%
+\footnote{Formally, the \Cstd[99] specification is ISO/IEC~9899:1999(E).}%
+~\S7.18.1.1 and \Cstd[11]~\S7.20.1.1. When the \Cstd translation environment
+does not provide exact-width integer types with \HEADER{stdint.h}, an
+\openshmem implemementation is not required to provide support for these types.
 
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{|l|l|}
       \hline
-      \TYPE & \TYPENAME\\
-      \hline
-      float & float\\
-      \hline
-      double & double\\
-      \hline
-      long double & longdouble\\
-      \hline
-      char & char\\
-      \hline
-      short & short\\
-      \hline
-      int & int\\
-      \hline
-      long & long\\
-      \hline
-      long long & longlong\\
-      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      float              & float      \\ \hline
+      double             & double     \\ \hline
+      long double        & longdouble \\ \hline
+      char               & char       \\ \hline
+      signed char        & schar      \\ \hline
+      short              & short      \\ \hline
+      int                & int        \\ \hline
+      long               & long       \\ \hline
+      long long          & longlong   \\ \hline
+      unsigned char      & uchar      \\ \hline
+      unsigned short     & ushort     \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int8\_t            & int8       \\ \hline
+      int16\_t           & int16      \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint8\_t           & uint8      \\ \hline
+      uint16\_t          & uint16     \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+      size\_t            & size       \\ \hline
+      ptrdiff\_t         & ptrdiff    \\ \hline
     \end{tabular}
     \caption{Standard \ac{RMA} Types and Names}
     \label{stdrmatypes}

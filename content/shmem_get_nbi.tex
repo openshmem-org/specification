@@ -54,11 +54,11 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
         that contains the data to be copied.  This data object must be remotely
         accessible.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. If you are
+        arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
         using \Fortran, it must be a constant, variable, or array element of default
         integer type.}
     \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must
-        be of type integer. If you are using \Fortran, it must be a constant,
+        be of type integer. When using \Fortran, it must be a constant,
         variable, or array element of default integer type.}
 \end{apiarguments}
 
@@ -105,7 +105,7 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 \apinotes{
     See Section \ref{subsec:memory_model} for a definition of the term
     remotely accessible.
-    If you are using \Fortran, data types must be of default size.  For example, a real
+    When using \Fortran, data types must be of default size.  For example, a real
     variable must be declared as \CONST{REAL}, \CONST{REAL*4},  or
     \CONST{REAL(KIND=KIND(1.0))}.
 }

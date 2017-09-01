@@ -52,11 +52,11 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
     data object must be remotely accessible.}
     \apiargument{OUT}{source}{Data object containing the data to be copied.}
     \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
-    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. If you are using
+    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
     \Fortran, it must be a constant, variable, or array element of default
     integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
-    of type integer. If you are using \Fortran, it must be a constant, variable,
+    of type integer. When using \Fortran, it must be a constant, variable,
     or array element of default integer type.}
 \end{apiarguments}
 
@@ -97,7 +97,7 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
     None.
 }
 \apinotes{
-    If you are using \Fortran, data types must be of default size.  For example,
+    When using \Fortran, data types must be of default size.  For example,
     a real variable must be declared as \CONST{REAL},  \CONST{REAL*4},  or
     \CONST{REAL(KIND=KIND(1.0))}. The Fortran API routine \FUNC{SHMEM\_PUT} has
     been deprecated, and either \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} should

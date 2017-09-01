@@ -5,16 +5,18 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_fadd(TYPE *dest, TYPE value, int pe);
-TYPE shmem_fadd(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE shmem_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
+TYPE shmem_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the standard \ac{AMO} types specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_fadd(TYPE *dest, TYPE value, int pe);
-TYPE shmem_ctx_<TYPENAME>_fadd(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE shmem_<TYPENAME>_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
+TYPE shmem_ctx_<TYPENAME>_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
-where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{Fsynopsis}
 INTEGER pe
@@ -36,13 +38,13 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 \apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.  The
     type of \VAR{value} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
-    \VAR{dest} is to be updated.  If you are using \Fortran, it must be a default
+    \VAR{dest} is to be updated.  When using \Fortran, it must be a default
     integer value.}
 
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_fadd} routines perform an atomic fetch-and-add operation.  An
+    \FUNC{shmem\_atomic\_fetch\_add} routines perform an atomic fetch-and-add operation.  An
     atomic fetch-and-add operation fetches the old \VAR{dest} and adds \VAR{value}
     to \VAR{dest} without the possibility of another atomic operation on the
     \VAR{dest} between the time of the fetch and the update.  These routines add
@@ -51,7 +53,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apidesctable{
-    If you are using \Fortran, \VAR{dest} must be of the following type:
+    When using \Fortran, \VAR{dest} must be of the following type:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
 \apitablerow{SHMEM\_INT4\_FADD}{\CONST{4}-byte integer}
@@ -65,14 +67,17 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apinotes{
-    None.
+    As of \openshmem[1.4], \FUNC{shmem\_fadd} has been deprecated.
+    Its behavior and call signature are identical to the replacement
+    interface, \FUNC{shmem\_atomic\_fetch\_add}.
 }
 
 \begin{apiexamples}
 
 \apicexample
-	{The following \FUNC{shmem\_fadd} example is for C11 programs:}
-        {./example_code/shmem_fadd_example.c}
+        {The following \FUNC{shmem\_atomic\_fetch\_add} example is for
+        \Cstd[11] programs:}
+        {./example_code/shmem_atomic_fetch_add_example.c}
         {}
 
 \end{apiexamples}

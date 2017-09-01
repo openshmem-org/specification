@@ -118,28 +118,29 @@ for more information about the usage of this constant.\tabularnewline
 \vtop{\hbox{\CorCppFor:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_MAJOR\_VERSION}}}
 & 
-Integer representing the major version of \openshmem{} standard in use. \tabularnewline
+Integer representing the major version of \openshmem standard in use. \tabularnewline
 \hline
 \vspace{3mm}
 \vtop{\hbox{\CorCppFor:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_MINOR\_VERSION}}}
 & 
-Integer representing the minor version of \openshmem{} standard in use. \tabularnewline
+Integer representing the minor version of \openshmem standard in use. \tabularnewline
 \hline
 \vspace{3mm}
 \vtop{\hbox{\CorCppFor:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_MAX\_NAME\_LEN}}}
 &
-Integer representing the length of vendor string. \tabularnewline
+Integer representing the maximum length of \const{SHMEM\_VENDOR\_STRING}. \tabularnewline
 \hline
 \vspace{3mm}
 \vtop{\hbox{\CorCppFor:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_VENDOR\_STRING}}} 
 &
-String representing the vendor name of length less than
-\const{SHMEM\_MAX\_NAME\_LEN}.  In Fortran the string must be \const{SHMEM\_MAX\_NAME\_LEN} 
-and whitespace padded.  It can also be equal in length to \const{SHMEM\_MAX\_NAME\_LEN} 
-since Fortran does not NULL terminate strings. \tabularnewline
+String representing vendor defined information of size at most
+\const{SHMEM\_MAX\_NAME\_LEN}.
+In \CorCpp{}, the string is terminated by a null character.  In \Fortran, the
+string of size less than \const{SHMEM\_MAX\_NAME\_LEN} is padded with blank
+characters up to size \const{SHMEM\_MAX\_NAME\_LEN}. \tabularnewline
 \hline
 
 \end{tabular}
