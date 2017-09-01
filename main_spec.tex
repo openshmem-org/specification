@@ -116,7 +116,30 @@ symmetric data objects in the symmetric heap, in \Cstd and \Fortran.
 
 \subsection{Communication Management Routines}
 \label{sec:ctx}
-\input{content/shmem_ctx.tex}
+All \openshmem RMA, AMO, and memory ordering routines are
+performed on a communication context.  The communication context defines an
+independent ordering and completion environment, allowing users to manage the
+overlap of communication with computation and also to manage communication
+operations performed by separate threads within a multithreaded \ac{PE}.  For
+example, in single-threaded environments, contexts may be used to pipeline
+communication and computation.  In multithreaded environments, contexts may
+additionally provide thread isolation, eliminating overheads resulting from
+thread interference.
+
+Context handles are of type \CTYPE{shmem\_ctx\_t} and are valid for
+language-level assignment and equality comparison.  A handle to the desired context is
+passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic API
+routines.  API routines that do not accept a context argument operate on the
+default context.  The default context can be used explicitly through the
+\CONST{SHMEM\_CTX\_DEFAULT} handle.
+
+\subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
+\label{subsec:shmem_ctx_create}
+\input{content/shmem_ctx_create.tex}
+
+\subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
+\label{subsec:shmem_ctx_destroy}
+\input{content/shmem_ctx_destroy.tex}
 
 
 \subsection{Remote Memory Access Routines}\label{sec:rma}

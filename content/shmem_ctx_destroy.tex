@@ -1,0 +1,64 @@
+\apisummary{
+    Destroy a communication context.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void shmem_ctx_destroy(shmem_ctx_t ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{Handle to the context that will be destroyed.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_ctx\_destroy} destroys a context that was created by a call to
+    \FUNC{shmem\_ctx\_create}.  It is the user's responsibility to ensure that
+    the context is not used after it has been destroyed, for example when the
+    destroyed context is used by multiple threads.  This function
+    performs an implicit quiet operation on the given context before it is freed.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    It is invalid to pass \CONST{SHMEM\_CTX\_DEFAULT} to this routine.
+
+    Destroying a context makes it impossible for the user to complete
+    communication operations that are pending on that context.  This includes
+    nonblocking communication operations, whose local buffers are only returned
+    to the user after the operations have been completed.  An implicit quiet is
+    performed when freeing a context to avoid this ambiguity.
+
+    A context with the \CONST{SHMEM\_CTX\_PRIVATE} option enabled must be
+    destroyed by the thread that created it.
+}
+
+\begin{apiexamples}
+
+    \apicexample
+    {The following example demonstrates the use of contexts in a multithreaded
+    \Cstd[11] program that uses OpenMP for threading.  This example shows the
+    shared counter load balancing method and illustrates the use of contexts
+    for thread isolation.}
+    {./example_code/shmem_ctx.c}
+    {}
+
+    \apicexample
+    {The following example demonstrates the use of contexts in a
+    single-threaded \Cstd[11] program that performs a summation reduction where
+    the data contained in the \VAR{in\_buf} arrays on all PEs is reduced into
+    the \VAR{out\_buf} arrays on all PEs.  The buffers are divided into
+    segments and processing of the segments is pipelined.  Contexts are used
+    to overlap an all-to-all exchange of data for segment \VAR{p} with the
+    local reduction of segment \VAR{p-1}.}
+    {./example_code/shmem_ctx_pipelined_reduce.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}
+
