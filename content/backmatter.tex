@@ -433,12 +433,12 @@ The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
 to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
 prefix for all routines.
 
-\subsection{\Fortran: \FUNC{START\_PES}, \FUNC{MY\_PE}, \FUNC{NUM\_PES}}
+\subsection{Fortran: \FUNC{START\_PES}, \FUNC{MY\_PE}, \FUNC{NUM\_PES}}
 The \Fortran routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
 were deprecated in order to minimize the API differences from the deprecation
 of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
 
-\subsection{\Fortran: \FUNC{SHMEM\_PUT}}
+\subsection{Fortran: \FUNC{SHMEM\_PUT}}
 The \Fortran routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran
 \ac{API} and is semantically identical to \Fortran routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
@@ -504,7 +504,7 @@ in order to more clearly identify these calls as performing atomic operations.
 In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
-\subsection{\Fortran API}\label{subsec:deprecate-fortran}
+\subsection{Fortran API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
 The entire \openshmem \Fortran API was deprecated because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
 extensive update of the \Fortran API, \Fortran users are encouraged to
