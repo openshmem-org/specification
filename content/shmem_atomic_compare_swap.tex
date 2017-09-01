@@ -27,10 +27,8 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \newtext{
     \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
         argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    }
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be
         updated on the remote \ac{PE}. }
     \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}

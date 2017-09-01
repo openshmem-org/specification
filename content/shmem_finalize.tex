@@ -26,10 +26,10 @@ CALL SHMEM_FINALIZE()
     implicit global barrier in \FUNC{shmem\_finalize} so that pending
     communications are completed, and no resources can be released until all
     \acp{PE} have entered \FUNC{shmem\_finalize}.
-    \newtext{This routine destroys all shareable contexts.  The user is
+    This routine destroys all shareable contexts.  The user is
     responsible for destroying all contexts with the
     \CONST{SHMEM\_CTX\_PRIVATE} option enabled prior to calling this routine.
-    Otherwise, the behavior is undefined.}
+    Otherwise, the behavior is undefined.
     \FUNC{shmem\_finalize} must be
     the last \openshmem library call encountered in the \openshmem portion of a
     program. A call to \FUNC{shmem\_finalize} will release any resources

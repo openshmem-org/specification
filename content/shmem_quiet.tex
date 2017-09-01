@@ -16,18 +16,15 @@ CALL SHMEM_QUIET
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \newtext{
     \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
         argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    }
 \end{apiarguments}
 
 \apidescription{ 
     The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO},
     memory store, and non-blocking \PUT{} and \GET{} routines on
     symmetric data objects issued by the calling \ac{PE}
-    \newtext{on the given context}.
-    All \PUT{}, \acp{AMO},
+    on the given context.  All \PUT{}, \acp{AMO},
     memory store, and non-blocking \PUT{} and \GET{} routines to
     symmetric data objects are guaranteed to be completed and visible to all
     \acp{PE} when \FUNC{shmem\_quiet} returns. 

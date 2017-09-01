@@ -12,14 +12,13 @@ All constants that start with
 \hline
 \vspace{3mm}
 \vtop{\hbox{\CorCpp:}
-\hbox{\hspace*{12mm} \newtext{\const{SHMEM\_CTX\_DEFAULT}}}}
-& \newtext{Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
+\hbox{\hspace*{12mm} \const{SHMEM\_CTX\_DEFAULT}}}
+& Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
 default communication context.  All point-to-point communication operations
 and synchronizations that do not specify a context are performed on the
 default context.  Refer to \hyperref[sec:ctx]{Communication Management
 Routines} for more information about the usage of this
-constant.}\tabularnewline
-%new
+constant.\tabularnewline
 \hline
 \vspace{3mm}
 \vtop{\hbox{\CorCppFor:}
@@ -29,7 +28,6 @@ communication operation. The value of this constant is implementation
 specific. Refer to the individual \hyperref[subsec:coll]{Collective Routines} for more information
 about the usage of this constant. Work arrays sized for specific operations may
 consume less memory.\tabularnewline
-%new
 \hline 
 \vspace{3mm}
 \vtop{\hbox{\CorCppFor:} 
@@ -108,13 +106,6 @@ for more information about the usage of this constant.\tabularnewline
 & Minimum length of work arrays used in various collective routines.\tabularnewline
 \hline
 \vspace{3mm}
-%\color{red}
-%\vtop{\hbox{} 
-%\hbox{\hspace*{12mm} \const{}} 
-%\hbox{} 
-%\hbox{\hspace*{12mm} \const{}}} 
-%& \color{red}
-%Ticket \#107 \tabularnewline
 \vtop{\hbox{\CorCppFor:} 
 \hbox{\hspace*{12mm} \const{SHMEM\_MAJOR\_VERSION}}}
 & 
@@ -144,4 +135,3 @@ characters up to size \const{SHMEM\_MAX\_NAME\_LEN}. \tabularnewline
 \hline
 
 \end{tabular}
-\color{black}

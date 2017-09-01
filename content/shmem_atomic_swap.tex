@@ -30,10 +30,8 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \newtext{
     \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
         argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    }
     \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
         updated on the remote \ac{PE}.	 When using \CorCpp, the type of
         \dest{} should match that  implied in the SYNOPSIS section.}
