@@ -164,14 +164,11 @@ or the input is not in accordance with the specification, undefined
 behavior is observed.  Depending on the implementation, there are
 many interpretations of undefined behavior. 
 
-$\;$
-
-$ $%
-\begin{tabular}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
+\begin{longtable}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
 \hline 
 \textbf{Inappropriate Usage} & \textbf{Undefined Behavior}\tabularnewline
 \hline 
-\hline 
+\endhead
 Uninitialized library & If the \openshmem library is not initialized,
 calls to non-initializing \openshmem routines have undefined
 behavior.  For example, an implementation may try to continue or may abort
@@ -214,7 +211,7 @@ The following cases summarize this behavior:
 \end{itemize}
 \tabularnewline
 \hline 
-\end{tabular}
+\end{longtable}
 
 
 
@@ -334,13 +331,14 @@ removal.
 
 \begin{center}
 \scriptsize
-\begin{tabular}{|l|c|c|l|}
+\begin{longtable}{|l|c|c|l|}
     \hline
     \textbf{Deprecated API}
     & \textbf{Deprecated Since}
     & \shortstack{\textbf{Last Version Supported}}
     & \textbf{Replaced By} \\
     \hline
+    \endhead
     Header Directory: \hyperref[subsec:dep_rationale:mpp]{\HEADER{mpp}} & 1.1 & Current & (none) \\ \hline
     \CorCpp: \hyperref[subsec:start_pes]{\FUNC{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \hyperref[subsec:start_pes]{\FUNC{START\_PES}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
@@ -394,7 +392,7 @@ removal.
     \CorCpp: \FUNC{shmem\_fadd}  & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch_add]{\FUNC{shmem\_atomic\_fetch\_add}} \\ \hline
     \CorCpp: \FUNC{shmem\_add}   & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & Current & (none) \\ \hline
-    \end{tabular}
+    \end{longtable}
 \end{center}
 
 \section{Deprecation Rationale}\label{subsec:dep_rationale}
