@@ -877,6 +877,120 @@ collectives.
 
 
 
+\chapter{Glossary}\label{sec:Glossary}
+
+$\;$
+
+$ $%
+\begin{tabular}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
+\hline 
+\textbf{Terms} & \textbf{Definitions}\tabularnewline
+\hline 
+\hline 
+Processing element (PE) & An OpenSHMEM process.\tabularnewline
+\hline 
+Remotely accessible data objects & Objects in a PE address space that may 
+be accessed by other PEs using OpenSHMEM data transfer mechanisms.\tabularnewline
+\hline 
+Symmetric data objects & A synonym for remotely accessible data objects.\tabularnewline
+\hline 
+Private data objects & Objects in a PE?s address space that cannot be accessed 
+by other PE?s using OpenSHMEM data transfer mechanisms.\tabularnewline
+\hline 
+Atomic memory operation (AMO) & A one-sided communication mechanism that combines 
+memory update operations with atomicity guarantees. AMOs are performed on symmetric 
+data objects\tabularnewline
+\hline 
+Fetching routine & An AMO routine that the returns the original value of, and optionally 
+update, the remote data object in a single atomic operation.\tabularnewline
+\hline 
+Non-fetching routine & An AMO routine that updates the remote memory 
+in a single atomic operation.\tabularnewline
+\hline
+Accessible & A routine in which the local PE can find out if a remote PE is executing the 
+same binary, or if a particular symmetric data object can be accessed by a remote PE, 
+or may obtain a pointer to a symmetric data object on the specified remote PE on 
+shared memory systems.\tabularnewline
+\hline
+Remote memory access routine (RMA) & One-sided communication 
+methods of the OpenSHMEM API.\tabularnewline
+\hline
+Put & A generic term for OpenSHMEM RMA routines in which the local PE specifies the 
+data object (private or symmetric) that is copied to the symmetric data object on the remote 
+PE.\tabularnewline
+\hline
+Get & A generic term for OpenSHMEM RMA routines in which the local PE specifies the 
+symmetric data object that is copied to the data object (private or symmetric) on the 
+remote PE.\tabularnewline
+\hline
+Swap & A generic term for OpenSHMEM fetching AMO routines in which the PE initiating 
+the swap atomically gets the old value of a symmetric data object from a remote PE and 
+copies a new value to that symmetric data object on the remote PE.  \tabularnewline
+\hline
+Increment & A generic term for OpenSHMEM non-fetching AMO routines in which the PE 
+initiating the increment atomically adds 1 to the symmetric data object on the remote 
+PE.\tabularnewline
+\hline
+Add & A generic term for OpenSHMEM non-fetching AMO routines in which the PE 
+initiating the add specifies the value to be atomically added to the symmetric data object
+on the remote PE.\tabularnewline
+\hline
+Compare and Swap & A generic term for OpenSHMEM fetching AMO routines in which 
+the PE initiating the swap atomically gets the old value of the symmetric data object based 
+on a value to be compared and copies a new value to the symmetric data object on the 
+remote PE.\tabularnewline
+\hline
+Fetch and Increment & A generic term for OpenSHMEM fetching AMO routines in which 
+the PE initiating the increment atomically adds 1 to the symmetric data object on the 
+remote PE and returns with the old value.\tabularnewline
+\hline
+Fetch and Add & A generic term for OpenSHMEM fetching AMO routines in which the 
+PE initiating the add specifies the value to be atomically added to the symmetric data 
+object on the remote PE and returns with the old value.\tabularnewline
+\hline
+Fence & A generic term for OpenSHMEM routines a PE can invoke to ensure ordering 
+of Puts and AMO to symmetric data objects with respect to a specific destination PE.  
+Put and AMO requests made prior to a fence will be visible to the remote PE before 
+Put and AMO requests made following  the fence operation.\tabularnewline
+\hline
+Quiet & A generic term for OpenSHMEM routines a PE can invoke to ensure completion 
+of remote memory access operations to symmetric data objects.\tabularnewline
+\hline
+Barrier & A generic term for OpenSHMEM routines in which all or some PEs collectively 
+synchronize and ensure completion of all remote memory access operations prior to any 
+PE returning from the call.\tabularnewline
+\hline
+Broadcast & A generic term for OpenSHMEM routines in which the root PE specifies a 
+symmetric data object to be copied to a symmetric data object on one or more remote 
+PEs.\tabularnewline
+\hline
+Collection & A generic term for OpenSHMEM routines in which all participating PEs 
+get the result of concatenated symmetric objects contributed by each of the other 
+PEs in another symmetric data object.\tabularnewline
+\hline
+Reduction & A generic term for OpenSHMEM routines in which all participating PEs 
+get the result of an associative binary routine over elements of the specified symmetric 
+data object on another symmetric data object.\tabularnewline
+\hline
+Lock & A generic term for OpenSHMEM routines which provide for setting, clearing, 
+and testing a mutual exclusion lock.  \tabularnewline
+\hline
+Symmetric Heap & The memory region on which Symmetric Data Objects may be 
+collectively allocated.\tabularnewline
+\hline
+Collective Routines & Communication or synchronization operations on an 
+active set\tabularnewline
+\hline
+Active Set & The group of PEs that call collective routines. PEs that are not a part of 
+the active set that call collective routines result in undefined behavior.\tabularnewline
+\hline
+Point-to-point synchronization routines & Mechanisms that provide synchronization 
+between two PEs based on the value of a symmetric data object.\tabularnewline
+\hline
+
+\end{tabular}
+
+
 
 
 } %end of setlength command that was started in frontmatter.tex
