@@ -42,13 +42,13 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
     must be of type \VAR{size\_t} for \Cstd. When using \Fortran, it must be
     a default integer value.}
-\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between
-    consecutive \ac{PE} numbers in the \activeset. \VAR{logPE\_stride} must be of
+    consecutive \ac{PE} numbers in the active set. \VAR{logPE\_stride} must be of
     type integer.  When using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset. \VAR{PE\_size}
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set. \VAR{PE\_size}
     must be of type integer.  When using  \Fortran, it must be a default
     integer value.}
 \apiargument{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of
@@ -57,7 +57,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     When using \Fortran, it must be a default integer value.  Every element of
     this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
     \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \acp{PE}
-    in the \activeset{} enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
+    in the active set enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
 
 \end{apiarguments}
 
@@ -69,20 +69,20 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     resultant \dest{} array contains the contribution from \ac{PE} \VAR{PE\_start}
     first, then the contribution from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride}
     second, and so on. The collected result is written to the \dest{} array for all
-    \acp{PE} in the \activeset.
+    \acp{PE} in the active set.
     
     The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
     participating \acp{PE}, while the \FUNC{collect} routines allow \VAR{nelems} to
     vary from \ac{PE} to \ac{PE}.
     
     As with all \openshmem collective routines, each of these routines assumes that
-    only \acp{PE} in the \activeset{} call the routine. If a \ac{PE} not in the
-    \activeset{} and calls this collective routine, the behavior is undefined.
+    only \acp{PE} in the active set call the routine. If a \ac{PE} not in the
+    active set and calls this collective routine, the behavior is undefined.
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
-    must be equal on all \acp{PE} in the \activeset. The same \dest{} and \source{}
+    must be equal on all \acp{PE} in the active set. The same \dest{} and \source{}
     arrays and the same \VAR{pSync} work array must be passed to all \acp{PE} in the
-    \activeset.
+    active set.
     
     Upon return from a collective routine, the following are true for the local
     \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused. 
@@ -100,14 +100,14 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     time it is used.
     
     The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
-    in the \activeset{} while any of the \acp{PE} participate in processing of an
+    in the active set while any of the \acp{PE} participate in processing of an
     \openshmem collective routine.  Be careful to avoid these situations: If the
     \VAR{pSync} array is initialized at run time, some type of synchronization is
     needed to ensure that all \acp{PE} in the working set have initialized
     \VAR{pSync} before any of them  enter an \openshmem routine called with the
     \VAR{pSync} synchronization array.  A \VAR{pSync} array can be reused on a
     subsequent \openshmem collective routine only if none of the \acp{PE} in the
-    \activeset{}  are still processing a  prior \openshmem collective routine call
+    active set  are still processing a  prior \openshmem collective routine call
     that used the same \VAR{pSync} array.  In general, this may be ensured only by
     doing some type of synchronization.  
     

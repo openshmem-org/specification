@@ -55,15 +55,6 @@
 \newcommand{\PUT}{\textit{Put}}
 \newcommand{\GET}{\textit{Get}}
 \newcommand{\OPR}[1]{\textit{#1}}
-\newcommand{\barrier}{\FUNC{SHMEM\_BARRIER}\xspace} % why here an not others?
-\newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
-\newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
-\newcommand{\collect}{\FUNC{SHMEM\_COLLECT}}
-\newcommand{\fcollect}{\FUNC{SHMEM\_FCOLLECT}}
-\newcommand{\reduction}{\textit{Reduction Operations}}
-\newcommand{\alltoall}{\FUNC{SHMEM\_ALLTOALL}}
-\newcommand{\alltoalls}{\FUNC{SHMEM\_ALLTOALLS}}
-\newcommand{\activeset}{\textit{Active~set}\xspace} % why here and not others?
 \newcommand{\shmemprefix}{\textit{SHMEM\_}}
 \newcommand{\shmemprefixLC}{\textit{shmem\_}}
 \newcommand{\shmemprefixC}{\textit{\_SHMEM\_}}
@@ -147,6 +138,10 @@
 %
 % Use Sans Serif font for sections, etc.
 %
+% FIXME? `\bf` should be `\textbf` if you want to preserve the sans-serif font
+% at subsubsection and paragraph. In my opinion, the serif font looks better
+% anyway. -- Bryant Lam
+%
 \makeatletter
 \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
 -.2ex}{2.3ex plus .2ex}{\Large\sf}}
@@ -154,8 +149,9 @@
 -.2ex}{1.5ex plus .2ex}{\large\sf}}
 \def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
 -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf\bf}}
-\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex 
-minus .2ex}{-1em}{\normalsize\sf}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}
+{-1em}{\normalsize\sf\bf}} % Indent after \paragraph
+%{.1pt}{\normalsize\sf\bf}} % Newline after \paragraph
 \makeatother
 %
 % End use Sans Serif font for sections, etc.  S. Otto
@@ -228,6 +224,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \lstdefinelanguage{OSH+C}[]{C}{
   classoffset=1,
   morekeywords={
+    size_t, ptrdiff_t,
     SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
     start_pes,
     my_pe, _my_pe, shmem_my_pe,
@@ -244,6 +241,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
     shmem_set_lock, shmem_test_lock, shmem_clear_lock,
     shmem_long_sum_to_all,
     shmem_complexd_sum_to_all,
+    shmem_cmp_t
   },
   keywordstyle=\color{black}\textbf,
   classoffset=0,
@@ -367,13 +365,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, _Noreturn, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
@@ -381,7 +379,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_cmp_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
@@ -469,7 +467,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\apicexample}[3]{
     ##1
     \lstinputlisting[language={C}, tabsize=2,
-    basicstyle=\ttfamily\footnotesize, morekeywords={size_t}]{##2}
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_cmp_t}]{##2}
     ##3 }
 \newcommand{\apifexample}[3]{
     ##1
