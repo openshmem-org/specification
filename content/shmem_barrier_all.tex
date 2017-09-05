@@ -25,8 +25,7 @@ CALL SHMEM_BARRIER_ALL
     a barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
     once.  This routine blocks the \ac{PE} until all \acp{PE} have called
     \FUNC{shmem\_barrier\_all}. In a multithreaded \openshmem
-    program, only the calling thread is blocked. This routine must be used with
-    \acp{PE} started by \FUNC{shmem\_init}.
+    program, only the calling thread is blocked.
 
     Prior to synchronizing with other \acp{PE}, \FUNC{shmem\_barrier\_all}
     ensures completion of all previously issued memory stores and remote memory
