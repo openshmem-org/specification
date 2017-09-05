@@ -36,7 +36,7 @@ void shmem_putmem_nbe(void *dest, const void *source, size_t nelems, int pe, shm
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
     of type integer. When using \Fortran, it must be a constant, variable,
     or array element of default integer type.}
-    \apiargument{IN/OUT}{req}{Either NULL, or a valid request object}
+    \apiargument{IN/OUT}{req}{Either SHMEM\_REQUEST\_UNINITIALIZED, or a valid request object}
 \end{apiarguments}
 
 \apidescription{

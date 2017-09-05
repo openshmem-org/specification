@@ -34,7 +34,7 @@ void shmem_getmem_nbe(void *dest, const void *source, size_t nelems, int pe, shm
         arrays. \VAR{nelems} must be of type \VAR{size\_t}.}
     \apiargument{IN}{pe}{Identifier of the remote \ac{PE}. \VAR{pe} must
         be of type integer.}
-    \apiargument{IN/OUT}{req}{Either NULL, or a valid request object}
+    \apiargument{IN/OUT}{req}{Either SHMEM\_REQUEST\_UNINITIALIZED, or a valid request object}
 \end{apiarguments}
 
 \apidescription{
