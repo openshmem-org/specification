@@ -24,8 +24,8 @@ CALL SHMEM_INIT()
     other \openshmem routine may be called. At the end of the \openshmem program
     which it initialized, the call to \FUNC{shmem\_init} must be matched with a
     call to \FUNC{shmem\_finalize}. After the first call to \FUNC{shmem\_init}, a
-    subsequent call to \FUNC{shmem\_init} in the same program results in undefined
-    behavior.
+    subsequent call to \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread} in the
+    same program results in undefined behavior.
 }
 
 \apireturnvalues{
