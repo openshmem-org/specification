@@ -52,6 +52,14 @@ An overview of the \openshmem routines is described below:
       reallocation of the same symmetric data object with identical arguments.
 \end{enumerate}
 
+\item \textbf{Communication Management}
+\begin{enumerate}
+    \item \OPR{Contexts}: Contexts are containers for communication operations.
+        Each context provides an environment where the operations performed on
+        that context are ordered and completed independently of other operations
+        performed by the application.
+\end{enumerate}
+
 \item \textbf{Remote Memory Access}
 \begin{enumerate}
     \item \PUT: The local \ac{PE} specifies the \source{} data object (private
