@@ -17,13 +17,14 @@ void shmem_ctx_<TYPENAME>_p(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    \apiargument{IN}{addr}{The remotely accessible array element or scalar data object
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{IN}{addr}{The remotely accessible array element or scalar data object
     which will receive the data on the remote \ac{PE}.}
-    \apiargument{IN}{value}{The value to be transferred to \VAR{addr} on the
+  \apiargument{IN}{value}{The value to be transferred to \VAR{addr} on the
     remote \ac{PE}.}
-    \apiargument{IN}{pe}{The number of the remote \ac{PE}.}
+  \apiargument{IN}{pe}{The number of the remote \ac{PE}.}
 \end{apiarguments}
 
 \apidescription{

@@ -24,7 +24,7 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{Fsynopsis}
 INTEGER dst, sst, nelems, pe
-CALL SHMEM_COMPLEX_IPUT(dest, source, dst, sst, nelems, pe)
+nCALL SHMEM_COMPLEX_IPUT(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_DOUBLE_IPUT(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_INTEGER_IPUT(dest, source, dst, sst, nelems, pe)
 CALL SHMEM_IPUT4(dest, source, dst, sst, nelems, pe)
@@ -37,8 +37,9 @@ CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
     \apiargument{OUT}{dest}{Array to be updated on the remote \ac{PE}. This data
         object  must be remotely accessible.}
     \apiargument{IN}{source}{Array containing the data to be copied.}
