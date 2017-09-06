@@ -1,6 +1,6 @@
 \openshmem implements \ac{PGAS} by defining remotely accessible data objects as
-mechanisms to share information among \openshmem processes or \acp{PE} and
-private data objects that are accessible by the \ac{PE} itself. The \ac{API}
+mechanisms to share information among \openshmem processes or \acp{PE}, and
+private data objects that are accessible by only the \ac{PE} itself. The \ac{API}
 allows communication and synchronization operations on both private (local to
 the PE initiating the operation) and remotely accessible data objects. The key
 feature of \openshmem is that data transfer operations are
@@ -13,17 +13,16 @@ library routines have the potential to provide a low-latency, high-bandwidth
 communication \ac{API} for use in highly parallelized scalable programs.  
 
 The \openshmem interfaces can be used to implement \ac{SPMD} style programs.
-It provides interfaces to start the \openshmem \acp{PE} in parallel, and
+It provides interfaces to start the \openshmem \acp{PE} in parallel and
 communication and synchronization interfaces to access remotely accessible data
 objects across \acp{PE}. These interfaces can be leveraged to divide a problem
 into multiple sub-problems that can be solved independently or with coordination
 using the communication and synchronization interfaces.  The \openshmem
 specification defines library calls, constants, variables, and language bindings
-for \Cstd and \Fortran.%
-\footnote{As of \openshmem[1.4], the \Fortran interface has been deprecated
-  and should be expected to be removed in a future release.}.
+for \Cstd and \Fortran%
+\footnote{As of \openshmem[1.4], the \Fortran interface has been deprecated.}.
 The \Cpp interface is currently the same as that
-for \Cstd. Unlike UPC, \Fortran[2008], Titanium, X10 and Chapel, which are all
+for \Cstd. Unlike Unified Parallel C, \Fortran[2008], Titanium, X10, and Chapel, which are all
 PGAS languages, \openshmem relies on the user to use the library calls  to
 implement the correct semantics of its programming model.
 
@@ -33,7 +32,8 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Library Setup and Query}
 \begin{enumerate}
-  \item \OPR{Initialization}: The \openshmem library environment is initialized. 
+  \item \OPR{Initialization}: The \openshmem library environment is initialized,
+   where the \acp{PE} are either single or multithreaded. 
   \item \OPR{Query}: The local \ac{PE} may get the number of \acp{PE} running
       the same program and its unique integer identifier. 
   \item \OPR{Accessibility}: The local \ac{PE} can find out if a remote \ac{PE} is
@@ -88,7 +88,7 @@ An overview of the \openshmem routines is described below:
   \PUT, AMO, and memory store operations
   to symmetric data objects with respect to a specific
       destination \ac{PE}. 
-  \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access
+  \item \OPR{Quiet}: The \ac{PE} calling quiet ensures remote completion of remote access
       operations and stores to symmetric data objects. 
   \item \OPR{Barrier}: All or some \acp{PE} collectively synchronize and ensure
       completion of all remote and local updates prior to any \ac{PE} returning
