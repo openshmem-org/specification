@@ -42,13 +42,13 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
     must be of type \VAR{size\_t} for \Cstd. When using \Fortran, it must be
     a default integer value.}
-\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between
-    consecutive \ac{PE} numbers in the \activeset. \VAR{logPE\_stride} must be of
+    consecutive \ac{PE} numbers in the active set. \VAR{logPE\_stride} must be of
     type integer.  When using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset. \VAR{PE\_size}
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set. \VAR{PE\_size}
     must be of type integer.  When using  \Fortran, it must be a default
     integer value.}
 \apiargument{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of
@@ -57,7 +57,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     When using \Fortran, it must be a default integer value.  Every element of
     this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
     \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \acp{PE}
-    in the \activeset{} enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
+    in the active set enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
 
 \end{apiarguments}
 
@@ -81,9 +81,8 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
     must be the same value on all \acp{PE} in the active set. The same \dest{} and \source{}
-
-    arrays and the same \VAR{pSync} work array must be passed to all \acp{PE} in the
-    \activeset.
+    arrays and the same \VAR{pSync} work array must be passed by all \acp{PE} in the
+    active set.
     
     Upon return from a collective routine, the following are true for the local
     \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused. 

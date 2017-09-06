@@ -17,13 +17,13 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 
 \begin{apiarguments}
 
-\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset of \acp{PE}.
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of \acp{PE}.
     \VAR{PE\_start} must be of type integer.  When using \Fortran, it must be
     a default integer value.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
-    \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of type integer.
+    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.
     When using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{The number of  \acp{PE} in the \activeset.  \VAR{PE\_size}
+\apiargument{IN}{PE\_size}{The number of  \acp{PE} in the active set.  \VAR{PE\_size}
     must be of type integer.  When using  \Fortran, it must be a default
     integer value.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must
@@ -31,7 +31,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     \VAR{pSync} must be of type integer and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.
     When using \Fortran, it must  be a default  integer type.  Every element
     of this array must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of
-    the \acp{PE} in the \activeset enter \FUNC{shmem\_barrier} the first time.}
+    the \acp{PE} in the active set enter \FUNC{shmem\_barrier} the first time.}
 
 \end{apiarguments}
 
@@ -52,7 +52,6 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     \FUNC{shmem\_barrier} ensures that all previously issued stores and remote
     memory updates, including \acp{AMO} and \ac{RMA} operations, issued by any of the
     \acp{PE} in the active set are complete before returning.
-
     
     The  same  \VAR{pSync} array may be reused on consecutive calls   to
     \FUNC{shmem\_barrier} if the same active \ac{PE} set is used.
