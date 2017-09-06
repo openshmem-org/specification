@@ -20,16 +20,16 @@ CALL SHMEM_FINALIZE()
 
 \apidescription{
     \FUNC{shmem\_finalize} is a collective operation that ends the \openshmem
-    portion of a program previously initialized by \FUNC{shmem\_init} and
-    releases resources used by the \openshmem library. This collective
-    operation requires all \acp{PE} to participate in the call. There is an
-    implicit global barrier in \FUNC{shmem\_finalize} so that pending
+    portion of a program previously initialized by \FUNC{shmem\_init} or
+    \FUNC{shmem\_init\_thread} and releases resources used by the \openshmem library.
+    This collective operation requires all \acp{PE} to participate in the call.
+    There is an implicit global barrier in \FUNC{shmem\_finalize} so that pending
     communications are completed, and no resources can be released until all
     \acp{PE} have entered \FUNC{shmem\_finalize}. \FUNC{shmem\_finalize} must be
     the last \openshmem library call encountered in the \openshmem portion of a
     program. A call to \FUNC{shmem\_finalize} will release any resources
-    initialized by a corresponding call to \FUNC{shmem\_init}. All processes
-    that represent the \acp{PE} will still exist after the
+    initialized by a corresponding call to \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}.
+    All processes that represent the \acp{PE} will still exist after the
     call to \FUNC{shmem\_finalize} returns, but they will no longer have access
     to any resources that have been released.
 }
