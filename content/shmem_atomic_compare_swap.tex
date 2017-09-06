@@ -34,7 +34,7 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
         updated on the remote \ac{PE}. }
     \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
         value. If \VAR{cond} and the remote \VAR{dest} are equal, then \VAR{value}
-        is swapped into the remote \VAR{dest}. Otherwise, the remote \VAR{dest} is
+        is swapped into the remote \VAR{dest}; otherwise, the remote \VAR{dest} is
         unchanged.  In either case, the old value of the remote \VAR{dest} is
         returned as the routine return value. \VAR{cond} must be of the same data
         type as \VAR{dest}.}
