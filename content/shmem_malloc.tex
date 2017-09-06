@@ -54,7 +54,13 @@ void *shmem_align(size_t alignment, size_t size);
     whether an existing allocation is modified and whether new memory is allocated.
     This ensures that all
     \acp{PE} participate in the memory allocation, and that the memory on other
-    \acp{PE} can be used as  soon as the local \ac{PE} returns.  The user is
+    \acp{PE} can be used as soon as the local \ac{PE} returns.
+    The implicit barriers performed by these routines quiet the
+    default context.  It is the user's responsibility to ensure that no
+    communication operations involving the given memory block are pending on
+    other contexts prior to calling
+    the \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.
+    The user is also
     responsible for calling these routines with identical argument(s) on all
     \acp{PE}; if differing \VAR{size} arguments are used, the behavior of the call
     and any subsequent \openshmem calls becomes undefined.
