@@ -33,7 +33,8 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Library Setup and Query}
 \begin{enumerate}
-  \item \OPR{Initialization}: The \openshmem library environment is initialized. 
+  \item \OPR{Initialization}: The \openshmem library environment is initialized,
+   where the \acp{PE} are either single or multithreaded. 
   \item \OPR{Query}: The local \ac{PE} may get the number of \acp{PE} running
       the same program and its unique integer identifier. 
   \item \OPR{Accessibility}: The local \ac{PE} can find out if a remote \ac{PE} is
