@@ -6,12 +6,14 @@
 
 \begin{C11synopsis}
 TYPE shmem_atomic_fetch(const TYPE *dest, int pe);
+TYPE shmem_atomic_fetch(shmem_ctx_t ctx, const TYPE *dest, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by
 Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
 TYPE shmem_<TYPENAME>_atomic_fetch(const TYPE *dest, int pe);
+TYPE shmem_ctx_<TYPENAME>_atomic_fetch(shmem_ctx_t ctx, const TYPE *dest, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
@@ -30,6 +32,8 @@ res_r8 = SHMEM_REAL8_FETCH(dest, pe)
 
 \begin{apiarguments}
 
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
 \apiargument{IN}{dest}{The remotely accessible data object to be fetched from
     the remote \ac{PE}.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
