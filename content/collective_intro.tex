@@ -22,7 +22,7 @@ array if all previous collective routines using the \VAR{pSync} array have been
 completed by all participating \acp{PE}.  One can use a synchronization
 collective routine such as \FUNC{shmem\_barrier} to ensure completion of previous collective
 routines. The \FUNC{shmem\_barrier} routine allows the same \VAR{pSync} array to
-be used on consecutive calls as long as the \acp{PE} in the active set does not change. 
+be used on consecutive calls as long as the \acp{PE} in the active set do not change. 
 
 All collective routines defined in the specification are blocking.  The
 collective routines return on completion.  The collective routines defined in
