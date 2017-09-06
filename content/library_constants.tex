@@ -1,137 +1,148 @@
-The constants that start with SHMEM\_* are for both \Fortran
-and \CorCpp, and they are compile-time constants. 
+The constants that start with \CONST{SHMEM\_*} are for both \Fortran
+and \CorCpp, and they are compile-time constants.
 All constants that start with
-\_SHMEM\_* are deprecated and provided for backwards compatibility.
-\newline
-\newline
-\begin{tabular}{|p{0.4\textwidth}|p{0.5\textwidth}|}
+\CONST{\_SHMEM\_*} are deprecated and provided for backwards compatibility.
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
 \hline
 \textbf{Constant} & \textbf{Description}
 \tabularnewline
-\hline 
 \hline
-%new
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_SIZE}}}
+\endhead
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_SYNC\_SIZE}
+\\~}
 & Length of a work array that can be used with any SHMEM collective
 communication operation. The value of this constant is implementation
 specific. Refer to the individual \hyperref[subsec:coll]{Collective Routines} for more information
 about the usage of this constant. Work arrays sized for specific operations may
 consume less memory.\tabularnewline
-%new
-\hline 
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_BCAST\_SYNC\_SIZE}}} 
-& 
+\hline
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_BCAST\_SYNC\_SIZE}
+\\~}
+&
 Length of the \VAR{pSync} arrays needed for broadcast routines. The value
 of this constant is implementation specific. Refer to the
 \hyperref[subsec:shmem_broadcast]{Broadcast Routines} section under
 \hyperref[sec:openshmem_library_api]{Library Routines} for more information
 about the usage of this constant. \tabularnewline
-\hline 
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_VALUE}}} 
-& 
+\hline
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_SYNC\_VALUE}
+\\~}
+&
 The value used to initialize the elements of \VAR{pSync} arrays. The
 value of this constant is implementation specific.\tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_SYNC\_SIZE}}}
-& 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}
+\\~}
+&
 Length of the work arrays needed for reduction routines. The value
 of this constant is implementation specific. Refer to the
 \hyperref[subsec:shmem_reductions]{Reduction Routines} section under
 \hyperref[sec:openshmem_library_api]{Library Routines} for more information
 about the usage of this constant.\tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_BARRIER\_SYNC\_SIZE}}} 
-& 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}
+\\~}
+&
 Length of the work array needed for barrier routines. The value
 of this constant is implementation specific. Refer to the
 \hyperref[subsec:shmem_barrier]{Barrier Synchronization Routines} section under
 \hyperref[sec:openshmem_library_api]{Library Routines}
 for more information about the usage of this constant.\tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_COLLECT\_SYNC\_SIZE}}} 
-& 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}
+\\~}
+&
 Length of the work array needed for collect routines. The value
 of this constant is implementation specific. Refer to the
 \hyperref[subsec:shmem_collect]{Collect Routines} section under
 \hyperref[sec:openshmem_library_api]{Library Routines} for more information
 about the usage of this constant.\tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_ALLTOALL\_SYNC\_SIZE}}} 
-& 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}
+\\~}
+&
 Length of the work array needed for \FUNC{shmem\_alltoall}
 routines. The value of this constant is implementation
 specific. Refer to the \hyperref[subsec:shmem_alltoall]{Alltoall
 routines} sections under \hyperref[sec:openshmem_library_api]{Library Routines}
 for more information about the usage of this constant.\tabularnewline
 \hline
-\end{tabular}
-
-\begin{tabular}{|p{0.4\textwidth}|p{0.5\textwidth}|}
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_ALLTOALLS\_SYNC\_SIZE}}} 
-& 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
+\\~}
+&
 Length of the work array needed for \FUNC{shmem\_alltoalls}
 routines. The value of this constant is implementation
 specific. Refer to the \hyperref[subsec:shmem_alltoalls]{Alltoalls
 routines} sections under \hyperref[sec:openshmem_library_api]{Library Routines}
 for more information about the usage of this constant.\tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}}} 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
+\\~}
 & Minimum length of work arrays used in various collective routines.\tabularnewline
 \hline
-\vspace{3mm}
-%\color{red}
-%\vtop{\hbox{} 
-%\hbox{\hspace*{12mm} \const{}} 
-%\hbox{} 
-%\hbox{\hspace*{12mm} \const{}}} 
-%& \color{red}
-%Ticket \#107 \tabularnewline
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_MAJOR\_VERSION}}}
-& 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_MAJOR\_VERSION}
+\\~}
+&
 Integer representing the major version of \openshmem standard in use. \tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_MINOR\_VERSION}}}
-& 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_MINOR\_VERSION}
+\\~}
+&
 Integer representing the minor version of \openshmem standard in use. \tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_MAX\_NAME\_LEN}}}
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_MAX\_NAME\_LEN}
+\\~}
 &
-Integer representing the maximum length of \const{SHMEM\_VENDOR\_STRING}. \tabularnewline
+Integer representing the maximum length of \CONST{SHMEM\_VENDOR\_STRING}. \tabularnewline
 \hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_VENDOR\_STRING}}} 
+%%
+\parbox[t]{0pt}{~\\[-4pt]
+    \CorCppFor: \\\hspace*{8mm}
+    \CONST{SHMEM\_VENDOR\_STRING}
+\\~}
 &
 String representing vendor defined information of size at most
-\const{SHMEM\_MAX\_NAME\_LEN}.
+\CONST{SHMEM\_MAX\_NAME\_LEN}.
 In \CorCpp{}, the string is terminated by a null character.  In \Fortran, the
-string of size less than \const{SHMEM\_MAX\_NAME\_LEN} is padded with blank
-characters up to size \const{SHMEM\_MAX\_NAME\_LEN}. \tabularnewline
+string of size less than \CONST{SHMEM\_MAX\_NAME\_LEN} is padded with blank
+characters up to size \CONST{SHMEM\_MAX\_NAME\_LEN}. \tabularnewline
 \hline
-
-\end{tabular}
-\color{black}
+%%
+\end{longtable}
