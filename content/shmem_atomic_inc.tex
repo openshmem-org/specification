@@ -6,12 +6,14 @@
 
 \begin{C11synopsis}
 void shmem_atomic_inc(TYPE *dest, int pe);
+void shmem_atomic_inc(shmem_ctx_t ctx, TYPE *dest, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_atomic_inc(TYPE *dest, int pe);
+void shmem_ctx_<TYPENAME>_atomic_inc(shmem_ctx_t ctx, TYPE *dest, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -24,6 +26,8 @@ CALL SHMEM_INT8_INC(dest, pe)
 
 \begin{apiarguments}
 
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
 \apiargument{IN}{dest}{The remotely accessible integer data object to be updated
     on the remote \ac{PE}. The type of \dest{} should match that implied in the
     SYNOPSIS section.}
