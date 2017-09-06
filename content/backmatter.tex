@@ -520,7 +520,16 @@ through the \Fortran-\Cstd interoperability initially standardized by
 \chapter{Changes to this Document}\label{sec:changelog}
 
 \section{Version 1.4}
-%Major changes in \openshmem[1.4] include ...
+Major changes in \openshmem[1.4] include
+multithreading support,
+\emph{contexts} for communication management,
+\FUNC{shmem\_sync},
+\FUNC{shmem\_calloc},
+expanded type support for \ac{RMA} and \ac{AMO} operations,
+a new namespace for atomic operations,
+atomic bitwise operations,
+\FUNC{shmem\_test} for non-blocking point-to-point synchronization,
+and \Cstd[11] type-generic interfaces for point-to-point synchronization.
 
 The following list describes the specific changes in \openshmem[1.4]:
 \begin{itemize}
