@@ -16,8 +16,9 @@ CALL SHMEM_QUIET
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
 \end{apiarguments}
 
 \apidescription{ 
