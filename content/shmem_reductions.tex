@@ -1,5 +1,7 @@
 \apisummary{
-    Performs arithmetic and logical operations across a set of \acp{PE}.
+    %Performs arithmetic and logical operations across a set of \acp{PE}.
+    The following functions perform reduction operations across all
+    \acp{PE} in a set of \acp{PE}.
 }
 
 \begin{apidefinition}
@@ -117,7 +119,7 @@ void shmem_longlong_or_to_all(long long *dest, const long long *source, int nred
 
 \begin{Fsynopsis}
 CALL SHMEM_INT4_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|
-CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|	
+CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|
 \end{Fsynopsis}
 
 \paragraph{XOR}
@@ -167,28 +169,28 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or
     \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
     active set enter the reduction routine.}
-    
+
 \end{apiarguments}
 
 \apidescription{
     \openshmem reduction routines compute one or more reductions across symmetric
     arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
-    across a set of values.	 
-    
+    across a set of values.
+
     The \VAR{nreduce} argument determines the number of separate reductions to
     perform.  The \source{} array on all \acp{PE} in the active set provides one
     element for each reduction.  The results of the reductions are placed in the
     \dest{} array on all \acp{PE} in the active set.  The active set is defined
     by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
-    
+
     The \source{} and \dest{} arrays may be the same array, but they may not be
     overlapping arrays.
-    
+
     As with all \openshmem collective routines, each of these routines assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
     the active set calls an \openshmem collective routine, undefined behavior
     results.
-    
+
     The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
     \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same \dest{}
     and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
@@ -200,24 +202,27 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     on all \acp{PE} in the active set are not still in use from a prior call to a
     collective \openshmem routine.  The \dest{} array on all \acp{PE} in the
     active set is ready to accept the results of the \OPR{reduction}.
-    
+
     Upon return from a reduction routine, the following are true for the local
-    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.  
+    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.
     The values in the \VAR{pSync} array are
     restored to the original values.
 
-    The sum and product reduction routines include complex-typed interfaces
-    for the \Cstd API only.
-    When the \Cstd translation environment does not support complex types%
-    \footnote{That is, under \Cstd language standards prior to \Cstd[99] or
-      under \Cstd[11] when \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1},
-    an \openshmem implementation is not required to provide support for
-    these complex-typed interfaces.
+    The sum and product reduction routines include complex-typed
+    interfaces for the \Cstd API only. When the \Cstd translation
+    environment does not support complex types\footnote{That is, under
+    \Cstd language standards prior to \Cstd[99] or under \Cstd[11] when
+    \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1}, an \openshmem
+    implementation is not required to provide support for these
+    complex-typed interfaces.
 }
 
-\apidesctable{ 
-    When calling from \Fortran, the \dest{} data types are as follows:
-}{Routine}{Data type}
+
+{
+\deprecationstart
+\apidesctable{
+    When calling from \Fortran, the \dest{} date types are as follows:
+}{Routine}{Data type}{
     \apitablerow{shmem\_int8\_and\_to\_all}{Integer, with an element size of 8 bytes.}
     \apitablerow{shmem\_int4\_and\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_comp8\_max\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
@@ -237,8 +242,8 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \apitablerow{shmem\_real4\_sum\_to\_all}{Real, with an element size of 4 bytes.}
     \apitablerow{shmem\_real8\_sum\_to\_all}{Real, with an element size of 8 bytes.}
     \apitablerow{shmem\_real16\_sum\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_prod\_to\_all}{ Complex, with an element size equal to two 4-byte real values. }		 
-    \apitablerow{shmem\_comp8\_prod\_to\_all}{ Complex, with an element size equal to two 8-byte real values.}
+    \apitablerow{shmem\_comp4\_prod\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
+    \apitablerow{shmem\_comp8\_prod\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
     \apitablerow{shmem\_int4\_prod\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
     \apitablerow{shmem\_real4\_prod\_to\_all}{Real, with an element size of 4 bytes.}
@@ -248,12 +253,15 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \apitablerow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.}
     \apitablerow{shmem\_int8\_xor\_to\_all}{Integer, with an element size of 8 bytes.}
     \apitablerow{shmem\_int4\_xor\_to\_all}{Integer, with an element size of 4 bytes.}
+}
+\deprecationend
+}
 
 \apireturnvalues{
     None.
 }
 
-\apinotes{  
+\apinotes{
     All \openshmem reduction routines reset the values in \VAR{pSync} before they
     return, so a particular \VAR{pSync} buffer need only be initialized the first
     time it is used. The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
@@ -266,7 +274,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     reused in a subsequent reduction routine call only if none of the \acp{PE} in
     the active set are still processing a prior reduction routine call that used
     the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be assured only
-    by doing some type of synchronization. 
+    by doing some type of synchronization.
 }
 
 \begin{apiexamples}
@@ -277,7 +285,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     even \acp{PE}.}
     {./example_code/shmem_and_example.f90}
     {}
-    
+
 \apifexample
     {This \Fortran example statically initializes the \VAR{pSync} array and finds
     the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}.}
@@ -315,7 +323,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
     \acp{PE}.}
     {./example_code/shmem_xor_example.f90}
-    {} 
+    {}
 
 \end{apiexamples}
 
