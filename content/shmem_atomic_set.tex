@@ -6,12 +6,14 @@
 
 \begin{C11synopsis}
 void shmem_atomic_set(TYPE *dest, TYPE value, int pe);
+void shmem_atomic_set(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by
 Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
 void shmem_<TYPENAME>_atomic_set(TYPE *dest, TYPE value, int pe);
+void shmem_ctx_<TYPENAME>_atomic_set(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
@@ -30,6 +32,8 @@ CALL SHMEM_REAL8_SET(dest, value_r8, pe)
 
 \begin{apiarguments}
 
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
 \apiargument{IN}{dest}{The remotely accessible data object to be set on
     the remote \ac{PE}.}
 \apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.}

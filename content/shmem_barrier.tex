@@ -51,7 +51,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     
     \FUNC{shmem\_barrier} ensures that all previously issued stores and remote
     memory updates, including \acp{AMO} and \ac{RMA} operations, done by any of the
-    \acp{PE} in the active set are complete before returning.
+    \acp{PE} in the active set on the default context are complete before returning.
     
     The  same  \VAR{pSync} array may be reused on consecutive calls   to
     \FUNC{shmem\_barrier} if the same active \ac{PE} set is used.
@@ -73,6 +73,10 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     The \FUNC{shmem\_barrier} routine can be used to
     portably ensure that memory access operations observe remote updates in the order
     enforced by initiator PEs.
+
+    Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
+    to calling the barrier routine to ensure completion of operations issued on
+    additional contexts.
 }
 
 \begin{apiexamples}

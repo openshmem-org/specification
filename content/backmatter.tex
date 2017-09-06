@@ -524,6 +524,15 @@ explicit and better communicates the developer's intent.
 
 \begin{itemize}
 
+\item New communication management API, including \FUNC{shmem\_ctx\_create};
+    \FUNC{shmem\_ctx\_destroy}; and additional RMA, AMO, and memory ordering
+    routines that accept \CTYPE{shmem\_ctx\_t} arguments.
+\\See Section \ref{sec:ctx}.
+%
+\item New API \FUNC{shmem\_sync\_all} and \FUNC{shmem\_sync} to provide PE
+    synchronization without completing pending communication operations.
+    \\See Sections \ref{subsec:shmem_sync_all} and \ref{subsec:shmem_sync}.
+%
 \item Clarified that the \openshmem extensions header files are required, even when empty.
 \\See Section~\ref{subsec:bindings}.
 %

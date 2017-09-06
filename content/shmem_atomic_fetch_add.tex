@@ -6,12 +6,14 @@
 
 \begin{C11synopsis}
 TYPE shmem_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
+TYPE shmem_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
 TYPE shmem_<TYPENAME>_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
+TYPE shmem_ctx_<TYPENAME>_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -26,6 +28,8 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 
 \begin{apiarguments}
 
+\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
 \apiargument{OUT}{dest}{The remotely accessible integer data object to be updated on
     the remote \ac{PE}. The type of \VAR{dest} should match that implied in the
     SYNOPSIS section.}
