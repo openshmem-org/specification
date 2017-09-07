@@ -27,7 +27,7 @@ CALL SHMEM_FENCE
     to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before any
     subsequent \PUT{}, \ac{AMO}, memory store, and non-blocking \PUT{} routines to symmetric data
     objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery,
-    not completion.
+    not completion. It does not guarantee order of delivery of non-blocking \GET{} routines.
 }
 
 \apireturnvalues{
