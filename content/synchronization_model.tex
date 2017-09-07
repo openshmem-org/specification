@@ -1,6 +1,6 @@
 When using the \openshmem \ac{API}, synchronization, ordering, and completion of
-communication become critical. The updates via \PUT{} routines, \acp{AMO} and
-store routines on symmetric data cannot be guaranteed until some form of
+communication become critical. The updates via \PUT{}, \ac{AMO}, store, and
+nonblocking \PUT{} and \GET{} routines on symmetric data cannot be guaranteed until some form of
 synchronization or ordering is introduced in the user's program. The table below
 gives the different synchronization and ordering choices, and the situations
 where they may be useful.\\
@@ -36,7 +36,7 @@ the remote \ac{PE} is to update. \tabularnewline
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-All \PUT{} routines, \acp{AMO} and store routines on symmetric data issued to
+All \PUT{}, \ac{AMO}, store, and non-blocking \PUT{} routines on symmetric data issued to
 same \ac{PE}  are guaranteed to be delivered  before Puts (to the same \ac{PE})
 issued after the \FUNC{fence} call. \tabularnewline
 \hline 
@@ -56,7 +56,7 @@ issued after the \FUNC{fence} call. \tabularnewline
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{All \PUT{} routines, \acp{AMO} and store routines on symmetric data issued by a
+{All \PUT{}, \ac{AMO}, store, and non-blocking \PUT{} and \GET{} routines on symmetric data issued by a
 local \ac{PE} to all  remote \acp{PE} are guaranteed to be completed and visible
 once quiet returns. This routine should be used when all remote writes issued by
 a local \ac{PE} need to be visible  to all other \acp{PE} before the local
@@ -77,7 +77,7 @@ Collective synchronization over an active set \\
 &
 {All local and remote memory operations issued by all \acp{PE} within the
 active set are guaranteed to be completed before any \ac{PE} in the
-active set returns from the call. Additionally, no \ac{PE} my return from the
+active set returns from the call. Additionally, no \ac{PE} shall return from the
 barrier until all \acp{PE} in the active set have entered the same barrier
 call. This routine should be used when synchronization as well as completion of
 all stores and remote memory updates via \openshmem is required over a sub set
