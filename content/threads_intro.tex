@@ -1,31 +1,31 @@
-This section specifies the interaction between \openshmem interfaces and the
-user threads, and also describes the routines that can be used for initializing and
-querying the thread environment. There are four levels of threading supported by
-the \openshmem implementation.
+This section specifies the interaction between the \openshmem interfaces and
+user threads.  It also describes the routines that can be used for initializing and
+querying the thread environment. There are four levels of threading defined by
+the \openshmem specification.
 
-\begin{itemize}
-\item {\bf \CONST{SHMEM\_THREAD\_SINGLE}} The \openshmem program may not be multithreaded.
+\begin{description}
+\item[\CONST{SHMEM\_THREAD\_SINGLE}] \hfill \\
+The \openshmem program may not be multithreaded.
 
-\item {\bf \CONST{SHMEM\_THREAD\_FUNNELED}}
+\item[\CONST{SHMEM\_THREAD\_FUNNELED}] \hfill \\
 The \openshmem program may be multithreaded. However, the program must ensure
 that only the main thread invokes the \openshmem interfaces. The main thread
 is the thread that invokes either \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}.
 
-\item {\bf \CONST{SHMEM\_THREAD\_SERIALIZED}}
+\item[\CONST{SHMEM\_THREAD\_SERIALIZED}] \hfill \\
 The \openshmem program may be multithreaded. However, the program must ensure
 that the \openshmem interfaces are not invoked concurrently by multiple threads.
 
-\item {\bf \CONST{SHMEM\_THREAD\_MULTIPLE}}
+\item[\CONST{SHMEM\_THREAD\_MULTIPLE}] \hfill \\
 The \openshmem program may be multithreaded and any thread may invoke the \openshmem
 interfaces.
-\end{itemize}
+\end{description}
 
-\hspace{-15pt}
-{\bf Semantics}
+\noindent The following semantics apply to the usage of these models:
 
-\begin{itemize}
+\begin{enumerate}
 \item
-In \CONST{SHMEM\_THREAD\_FUNNELED}, \CONST{SHMEM\_THREAD\_SERIALIZED}, and
+In the \CONST{SHMEM\_THREAD\_FUNNELED}, \CONST{SHMEM\_THREAD\_SERIALIZED}, and
 \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels, the \FUNC{shmem\_init} and
 \FUNC{shmem\_finalize} calls may only be invoked by the same thread.
 
@@ -44,20 +44,21 @@ all \acp{PE} enter and exit the \FUNC{shmem\_barrier\_all} call, even though
 only one thread in the \ac{PE} is participating in the collective call.
 
 \item Blocking \openshmem calls will only block the calling thread, allowing
-other threads, if available, to continue the execution. The calling thread will
-be blocked until the event on which it is waiting occurs. Once the blocked communication is
-completed, the thread is ready for continuing the execution. A blocked thread
-will not prevent progress of other threads on the same \ac{PE}, and will not
+other threads, if available, to continue executing. The calling thread will
+be blocked until the event on which it is waiting occurs. Once the blocking call is
+completed, the thread is ready to continue execution. A blocked thread
+will not prevent progress of other threads on the same \ac{PE} and will not
 prevent them from executing other \openshmem calls when the thread level permits.
-Also, a blocked thread will not prevent the progress of \openshmem calls on other \acp{PE}.
+In addition, a blocked thread will not prevent the progress of \openshmem calls
+performed on other \acp{PE}.
 
 \item In the \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, all \openshmem calls are thread-safe,
 i.e., two concurrently running threads may make \openshmem calls and the outcome
 will be as if the calls executed in some order, even if their execution is interleaved.
 
 \item In the \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels,
-if multiple threads call the collective calls, it is the programmer's responsibility
-to ensure the correct ordering of collective calls, including the symmetric
-heap management functions.
+if multiple threads call collective routines, including the symmetric heap
+management routines, it is the programmer's responsibility to ensure the
+correct ordering of collective calls.
 
-\end{itemize}
+\end{enumerate}
