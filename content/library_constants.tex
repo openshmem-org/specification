@@ -1,137 +1,241 @@
-The constants that start with SHMEM\_* are for both \Fortran
-and \CorCpp, and they are compile-time constants. 
-All constants that start with
-\_SHMEM\_* are deprecated and provided for backwards compatibility.
-\newline
-\newline
-\begin{tabular}{|p{0.4\textwidth}|p{0.5\textwidth}|}
+The \openshmem library provides a set of compile-time constants that may
+be used to specify options to API routines, provide implementation-specific
+parameters, or return information about the implementation.
+All constants that start with \CONST{\_SHMEM\_*} are deprecated,
+but provided for backwards compatibility.
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
 \hline
 \textbf{Constant} & \textbf{Description}
-\tabularnewline
-\hline 
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCpp:}
-\hbox{\hspace*{12mm} \const{SHMEM\_CTX\_DEFAULT}}}
-& Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
+\tabularnewline \hline
+\endhead
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_THREAD\_SINGLE} &
+The \openshmem thread support level which specifies that the program
+may not be multithreaded.
+See Section~\ref{subsec:thread_support} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_THREAD\_FUNNELED} &
+The \openshmem thread support level which specifies that the program
+may be multithreaded but must ensure that only the main thread invokes
+the \openshmem interfaces.
+See Section~\ref{subsec:thread_support} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_THREAD\_SERIALIZED} &
+The \openshmem thread support level which specifies that the program
+may be multithreaded but must ensure that the \openshmem interfaces
+are not invoked concurrently by multiple threads.
+See Section~\ref{subsec:thread_support} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_THREAD\_MULTIPLE} &
+The \openshmem thread support level which specifies that the program
+may be multithreaded and any thread may invoke the \openshmem interfaces.
+See Section~\ref{subsec:thread_support} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_CTX\_DEFAULT} &
+Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
 default communication context.  All point-to-point communication operations
 and synchronizations that do not specify a context are performed on the
-default context.  Refer to \hyperref[sec:ctx]{Communication Management
-Routines} for more information about the usage of this
-constant.\tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_SIZE}}}
-& Length of a work array that can be used with any SHMEM collective
-communication operation. The value of this constant is implementation
-specific. Refer to the individual \hyperref[subsec:coll]{Collective Routines} for more information
-about the usage of this constant. Work arrays sized for specific operations may
-consume less memory.\tabularnewline
-\hline 
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_BCAST\_SYNC\_SIZE}}} 
-& 
-Length of the \VAR{pSync} arrays needed for broadcast routines. The value
-of this constant is implementation specific. Refer to the
-\hyperref[subsec:shmem_broadcast]{Broadcast Routines} section under
-\hyperref[sec:openshmem_library_api]{Library Routines} for more information
-about the usage of this constant. \tabularnewline
-\hline 
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_SYNC\_VALUE}}} 
-& 
-The value used to initialize the elements of \VAR{pSync} arrays. The
-value of this constant is implementation specific.\tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_SYNC\_SIZE}}}
-& 
-Length of the work arrays needed for reduction routines. The value
-of this constant is implementation specific. Refer to the
-\hyperref[subsec:shmem_reductions]{Reduction Routines} section under
-\hyperref[sec:openshmem_library_api]{Library Routines} for more information
-about the usage of this constant.\tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_BARRIER\_SYNC\_SIZE}}} 
-& 
-Length of the work array needed for barrier routines. The value
-of this constant is implementation specific. Refer to the
-\hyperref[subsec:shmem_barrier]{Barrier Synchronization Routines} section under
-\hyperref[sec:openshmem_library_api]{Library Routines}
-for more information about the usage of this constant.\tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_COLLECT\_SYNC\_SIZE}}} 
-& 
-Length of the work array needed for collect routines. The value
-of this constant is implementation specific. Refer to the
-\hyperref[subsec:shmem_collect]{Collect Routines} section under
-\hyperref[sec:openshmem_library_api]{Library Routines} for more information
-about the usage of this constant.\tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_ALLTOALL\_SYNC\_SIZE}}} 
-& 
-Length of the work array needed for \FUNC{shmem\_alltoall}
-routines. The value of this constant is implementation
-specific. Refer to the \hyperref[subsec:shmem_alltoall]{Alltoall
-routines} sections under \hyperref[sec:openshmem_library_api]{Library Routines}
-for more information about the usage of this constant.\tabularnewline
-\hline
-\end{tabular}
-
-\begin{tabular}{|p{0.4\textwidth}|p{0.5\textwidth}|}
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:}
-\hbox{\hspace*{12mm} \const{SHMEM\_ALLTOALLS\_SYNC\_SIZE}}} 
-& 
-Length of the work array needed for \FUNC{shmem\_alltoalls}
-routines. The value of this constant is implementation
-specific. Refer to the \hyperref[subsec:shmem_alltoalls]{Alltoalls
-routines} sections under \hyperref[sec:openshmem_library_api]{Library Routines}
-for more information about the usage of this constant.\tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}}} 
-& Minimum length of work arrays used in various collective routines.\tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_MAJOR\_VERSION}}}
-& 
-Integer representing the major version of \openshmem standard in use. \tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_MINOR\_VERSION}}}
-& 
-Integer representing the minor version of \openshmem standard in use. \tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_MAX\_NAME\_LEN}}}
+default context.
+See Section~\ref{sec:ctx} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_CTX\_SERIALIZE} &
+The context creation option which specifies that the given context
+is shareable but will not be used by multiple threads concurrently.
+See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_CTX\_PRIVATE} &
+The context creation option which specifies that the given context
+will be used only by the thread that created it.
+See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl[\CorCpp]{SHMEM\_CTX\_NOSTORE} &
+The context creation option which specifies that quiet and fence operations
+performed on the given context are not required to enforce completion and
+ordering of memory store operations.
+See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_SYNC\_VALUE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_SYNC\_VALUE}
+\end{DeprecateBlock}
 &
-Integer representing the maximum length of \const{SHMEM\_VENDOR\_STRING}. \tabularnewline
-\hline
-\vspace{3mm}
-\vtop{\hbox{\CorCppFor:} 
-\hbox{\hspace*{12mm} \const{SHMEM\_VENDOR\_STRING}}} 
+The value used to initialize the elements of \VAR{pSync} arrays.
+The value of this constant is implementation specific.
+See Section~\ref{subsec:coll} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_SYNC\_SIZE} &
+Length of a work array that can be used with any SHMEM collective
+communication operation.
+Work arrays sized for specific operations may consume less memory.
+The value of this constant is implementation specific.
+See Section~\ref{subsec:coll} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_BCAST\_SYNC\_SIZE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_BCAST\_SYNC\_SIZE}
+\end{DeprecateBlock}
+&
+Length of the \VAR{pSync} arrays needed for broadcast routines. The value
+of this constant is implementation specific.
+See Section~\ref{subsec:shmem_broadcast} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_REDUCE\_SYNC\_SIZE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_REDUCE\_SYNC\_SIZE}
+\end{DeprecateBlock}
+&
+Length of the work arrays needed for reduction routines.
+The value of this constant is implementation specific.
+See Section~\ref{subsec:shmem_reductions} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_BARRIER\_SYNC\_SIZE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_BARRIER\_SYNC\_SIZE}
+\end{DeprecateBlock}
+&
+Length of the work array needed for barrier routines.
+The value of this constant is implementation specific.
+See Section~\ref{subsec:shmem_barrier} for more detail about its use.
+
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_COLLECT\_SYNC\_SIZE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_COLLECT\_SYNC\_SIZE}
+\end{DeprecateBlock}
+&
+Length of the work array needed for collect routines.
+The value of this constant is implementation specific.
+See Section~\ref{subsec:shmem_collect} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_ALLTOALL\_SYNC\_SIZE} &
+Length of the work array needed for \FUNC{shmem\_alltoall} routines.
+The value of this constant is implementation specific.
+See Section~\ref{subsec:shmem_alltoall} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_ALLTOALLS\_SYNC\_SIZE} &
+Length of the work array needed for \FUNC{shmem\_alltoalls} routines.
+The value of this constant is implementation specific.
+See Section~\ref{subsec:shmem_alltoalls} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
+\end{DeprecateBlock}
+&
+Minimum length of work arrays used in various collective routines.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_MAJOR\_VERSION}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_MAJOR\_VERSION}
+\end{DeprecateBlock}
+&
+Integer representing the major version of \openshmem standard in use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_MINOR\_VERSION}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_MINOR\_VERSION}
+\end{DeprecateBlock}
+&
+Integer representing the minor version of \openshmem standard in use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_MAX\_NAME\_LEN}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_MAX\_NAME\_LEN}
+\end{DeprecateBlock}
+&
+Integer representing the maximum length of \CONST{SHMEM\_VENDOR\_STRING}.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_VENDOR\_STRING}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_VENDOR\_STRING}
+\end{DeprecateBlock}
 &
 String representing vendor defined information of size at most
-\const{SHMEM\_MAX\_NAME\_LEN}.
+\CONST{SHMEM\_MAX\_NAME\_LEN}.
 In \CorCpp{}, the string is terminated by a null character.  In \Fortran, the
-string of size less than \const{SHMEM\_MAX\_NAME\_LEN} is padded with blank
-characters up to size \const{SHMEM\_MAX\_NAME\_LEN}. \tabularnewline
-\hline
-
-\end{tabular}
+string of size less than \CONST{SHMEM\_MAX\_NAME\_LEN} is padded with blank
+characters up to size \CONST{SHMEM\_MAX\_NAME\_LEN}.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CMP\_EQ}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_EQ}
+\end{DeprecateBlock}
+&
+An integer constant expression corresponding to the
+``equal to'' comparison operation.
+See Section~\ref{subsec:p2p_intro} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CMP\_NE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_NEEQ}
+\end{DeprecateBlock}
+&
+An integer constant expression corresponding to the
+``not equal to'' comparison operation.
+See Section~\ref{subsec:p2p_intro} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CMP\_LT}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_LT}
+\end{DeprecateBlock}
+&
+An integer constant expression corresponding to the
+``less than'' comparison operation.
+See Section~\ref{subsec:p2p_intro} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CMP\_LE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_LE}
+\end{DeprecateBlock}
+&
+An integer constant expression corresponding to the
+``less than or equal to'' comparison operation.
+See Section~\ref{subsec:p2p_intro} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CMP\_GT}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_GT}
+\end{DeprecateBlock}
+&
+An integer constant expression corresponding to the
+``greater than'' comparison operation.
+See Section~\ref{subsec:p2p_intro} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CMP\_GE}
+\begin{DeprecateBlock}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_GE}
+\end{DeprecateBlock}
+&
+An integer constant expression corresponding to the
+``greater than or equal to'' comparison operation.
+See Section~\ref{subsec:p2p_intro} for more detail about its use.
+\tabularnewline \hline
+%%
+\end{longtable}
