@@ -175,7 +175,6 @@ minus .2ex}{-1em}{\normalsize\sf}}
   breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,                 % sets automatic line breaking
-  escapeinside={|}{|},          % if you want to add LaTeX within your code
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
                                    % encodings only, does not work with UTF-8
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code 
@@ -367,7 +366,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 {
   \textbf{C++11:}
   \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, noreturn}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, ptrdiff_t, TYPE, noreturn},
+  aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{C11synopsis}
 { 
@@ -395,7 +395,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
   \textbf{C/C++:} 
   \color{red}  
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
+  morekeywords={size_t, ptrdiff_t},
+  aboveskip=0pt, belowskip=0pt}}
   }
   {}
   
