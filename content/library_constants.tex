@@ -44,7 +44,7 @@ default context.
 See Section~\ref{sec:ctx} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl[\CorCpp]{SHMEM\_CTX\_SERIALIZE} &
+\LibConstDecl[\CorCpp]{SHMEM\_CTX\_SERIALIZED} &
 The context creation option which specifies that the given context
 is shareable but will not be used by multiple threads concurrently.
 See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
@@ -190,7 +190,7 @@ See Section~\ref{subsec:p2p_intro} for more detail about its use.
 %%
 \LibConstDecl{SHMEM\_CMP\_NE}
 \begin{DeprecateBlock}
-  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_NEEQ}
+  \LibConstDecl[\CorCpp]{\_SHMEM\_CMP\_NE}
 \end{DeprecateBlock}
 &
 An integer constant expression corresponding to the
