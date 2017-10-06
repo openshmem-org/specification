@@ -65,8 +65,8 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 
     As with all \openshmem collective routines, this routine assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not
-    in the active set calls an \openshmem collective routine, undefined
-    behavior results.
+    in the active set calls an \openshmem collective routine,
+    the behavior is undefined.
 
     The values of arguments \VAR{nelems}, \VAR{PE\_start}, \VAR{logPE\_stride},
     and \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same
