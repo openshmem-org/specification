@@ -15,7 +15,8 @@ void shmem_udcflush_line(void *dest);
 \end{Csynopsis}
 \end{DeprecateBlock}
 
-\begin{DeprecateBlock}
+% N.B., The DeprecateBlock environment is not necessary here
+% because the entire Fortran API is deprecated.
 \begin{Fsynopsis}
 CALL SHMEM_CLEAR_CACHE_INV
 CALL SHMEM_SET_CACHE_INV
@@ -23,7 +24,6 @@ CALL SHMEM_SET_CACHE_LINE_INV(dest)
 CALL SHMEM_UDCFLUSH
 CALL SHMEM_UDCFLUSH_LINE(dest)
 \end{Fsynopsis}
-\end{DeprecateBlock}
 
 \begin{apiarguments}
 
