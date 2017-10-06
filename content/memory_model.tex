@@ -51,3 +51,19 @@ memory regions on different \acp{PE}. Figure~\ref{fig:mem_model} shows how
 objects and private data objects when executing an \openshmem program.
 Symmetric data objects are stored on the symmetric heap or in the global/static
 memory section of each \ac{PE}. 
+
+\subsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
+
+\openshmem contains a number of routines that operate on symmetric data
+atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by
+\openshmem's atomic operations with the same datatype will be exclusive, but do not guarantee
+exclusivity in combination with other routines, either inside \openshmem or
+outside.
+
+For example: during the execution of an atomic remote integer increment
+operation on a symmetric variable \VAR{X}, no other \openshmem atomic operation
+may access \VAR{X}.  After the increment, \VAR{X} will have increased its value
+by \CONST{1} on the destination \ac{PE}, at which point other atomic operations
+may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
+with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
+will \OPR{invalidate} the atomicity guarantees.
