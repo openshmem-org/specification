@@ -188,8 +188,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 
     As with all \openshmem collective routines, each of these routines assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
-    the active set calls an \openshmem collective routine, undefined behavior
-    results.
+    the active set calls an \openshmem collective routine, the behavior is undefined.
 
     The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
     \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same \dest{}
