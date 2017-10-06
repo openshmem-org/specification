@@ -123,7 +123,7 @@ CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size
 \end{Fsynopsis}
 
 \paragraph{XOR}
-Performs a bitwise EXCLUSIVE OR reduction across a set of \acp{PE}.\newline
+Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
 void shmem_short_xor_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_xor_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
