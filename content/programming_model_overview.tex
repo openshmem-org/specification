@@ -79,6 +79,9 @@ An overview of the \openshmem routines is described below:
       symmetric data object on the remote \ac{PE}.
   \item \OPR{Add}: The \ac{PE} initiating the add specifies the value to be added
       to the symmetric data object on the remote \ac{PE}.
+  \item \OPR{Bitwise Operations}: The \ac{PE} initiating the bitwise
+      operation specifies the operand value to the bitwise operation to be
+      performed on the symmetric data object on the remote \ac{PE}.
   \item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value
       of the symmetric data object based on a value to be compared and copies a
       new value to the symmetric data object on the remote \ac{PE}.
@@ -88,6 +91,10 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifies the value to
       be added to the symmetric data object on the remote \ac{PE} and returns with
       the old value.
+  \item \OPR{Fetch and Bitwise Operations}: The \ac{PE} initiating the bitwise
+      operation specifies the operand value to the bitwise operation to be
+      performed on the symmetric data object on the remote \ac{PE}
+      and returns the old value.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
@@ -113,7 +120,10 @@ An overview of the \openshmem routines is described below:
       another symmetric data object.
   \item \OPR{Reduction}: All \acp{PE} participating in the routine get the result
       of an associative binary routine over elements of the specified symmetric
-      data object on another symmetric data object. 
+      data object on another symmetric data object.
+  \item \OPR{All-to-All}: All \acp{PE} participating in the routine exchange
+      a fixed amount of contiguous or strided data with all other \acp{PE}
+      in the active set.
 \end{enumerate}
 
 \item \textbf{Mutual Exclusion}
