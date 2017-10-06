@@ -367,13 +367,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn},
+    morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE},
+    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
@@ -381,7 +381,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE},
+    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
@@ -389,9 +389,10 @@ minus .2ex}{-1em}{\normalsize\sf}}
   \textbf{C/C++:} 
   \color{red}  
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
-  }
-  {}
+      morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
+      aboveskip=0pt, belowskip=0pt}}
+}
+{}
   
 \lstnewenvironment{Fsynopsis}
 { \deprecationstart \\
