@@ -193,13 +193,17 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same \dest{}
     and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
     be passed to all \acp{PE} in the active set.
-    %FIXME: Reword 'the following conditions must be met.'
-    Before any \ac{PE} calls a reduction routine, the
-    following conditions must be met (synchronization via a \OPR{barrier} or some other
-    method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
-    on all \acp{PE} in the active set are not still in use from a prior call to a
-    collective \openshmem routine.  The \dest{} array on all \acp{PE} in the
-    active set is ready to accept the results of the \OPR{reduction}.
+
+    Before any \ac{PE} calls a reduction routine,
+    the following conditions must be ensured:
+    \begin{itemize}
+    \item The \VAR{pWrk} and \VAR{pSync} arrays on all \acp{PE} in the
+      active set are not still in use from a prior call to a collective
+      \openshmem routine.
+    \item The \dest{} array on all \acp{PE} in the active set is ready
+      to accept the results of the \OPR{reduction}.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
 
     Upon return from a reduction routine, the following are true for the local
     \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.
