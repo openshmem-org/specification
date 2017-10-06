@@ -46,12 +46,13 @@ CALL SHMEM_GLOBAL_EXIT(status)
     \FUNC{shmem\_global\_exit} may be used in situations where one or more
     \acp{PE} have determined that the program has completed and/or should
     terminate early.  Accordingly, the integer status argument can be used to
-    pass any information about the nature of the exit, e.g an encountered error
-    or a found solution.  Since \FUNC{shmem\_global\_exit} is a non-collective
+    pass any information about the nature of the exit; e.g., that the program
+    encountered an error or a found solution.
+    Since \FUNC{shmem\_global\_exit} is a non-collective
     routine, there is no implied synchronization, and all \acp{PE} must
     terminate regardless of their current execution state. While I/O must be
     flushed for standard language I/O calls from \CorCppFor, it is
-    implementation dependent as to how I/O done by other means (e.g. third
+    implementation dependent as to how I/O done by other means (e.g., third
     party I/O libraries) is handled. Similarly, resources are released
     according to \CorCppFor standard language requirements, but this may not
     include all resources allocated for the \openshmem program. However, a
