@@ -32,7 +32,7 @@ ires_i8 = SHMEM_INT8_FINC(dest, pe)
 \apiargument{IN}{ctx}{The context on which to perform the operation.
     When this argument is not provided, the operation is performed on
     \CONST{SHMEM\_CTX\_DEFAULT}.}
-\apiargument{IN}{dest}{The remotely accessible integer data object to be updated
+\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated
     on the remote \ac{PE}. The type of \dest{} should match that implied in the
     SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
