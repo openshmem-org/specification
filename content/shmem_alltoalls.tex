@@ -48,13 +48,13 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
     \VAR{PE\_size} must be of type integer.  When using \Fortran, it must
     be a default integer value.}
-\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
-    of type long and size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}. In \Fortran,
-    \VAR{pSync} must be of type integer and size
-    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.  When using \Fortran, it must be a
-    default integer value. Every element of this array must be initialized with
-    the value \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the
-    active set enter the routine.}
+\apiargument{IN}{pSync}{
+    A symmetric work array of size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.
+    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
+    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
+    Every element of this array must be initialized with the value
+    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
+    enter the routine.}
     
 \end{apiarguments}
 

@@ -19,7 +19,7 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
     \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
-    of type long and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.  Every element of
+    of type \CTYPE{long} and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.  Every element of
     this array must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of the
     \acp{PE} in the active set enter \FUNC{shmem\_sync} the first time.}
 
