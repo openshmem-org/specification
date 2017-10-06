@@ -62,8 +62,8 @@ void *shmem_align(size_t alignment, size_t size);
     the \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.
     The user is also
     responsible for calling these routines with identical argument(s) on all
-    \acp{PE}; if differing \VAR{size} arguments are used, the behavior of the call
-    and any subsequent \openshmem calls becomes undefined.
+    \acp{PE}; if differing \VAR{ptr}, \VAR{size}, or \VAR{alignment} arguments are used, the behavior of the call
+    and any subsequent \openshmem calls is undefined.
 }
 
 \apireturnvalues{
@@ -88,7 +88,7 @@ void *shmem_align(size_t alignment, size_t size);
     remains unchanged from the deprecated versions.
     					 
     The total size of the symmetric heap is determined at job startup.  One can
-    adjust the size of the heap using the \VAR{SHMEM\_SYMMETRIC\_SIZE} environment
+    specify the size of the heap using the \VAR{SHMEM\_SYMMETRIC\_SIZE} environment
     variable (where available).	
     
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
