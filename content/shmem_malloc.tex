@@ -27,7 +27,7 @@ void *shmem_align(size_t alignment, size_t size);
     heap).
     
     The \FUNC{shmem\_align} routine allocates a block in the symmetric heap that has
-    a byte alignment specified by the alignment argument.
+    a byte alignment specified by the \VAR{alignment} argument.
     
     The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
     deallocated, that is, made available for further allocation.  If \VAR{ptr} is a
@@ -81,7 +81,7 @@ void *shmem_align(size_t alignment, size_t size);
 
 \apinotes{ 
     As of \openshmem[1.2] the use of \FUNC{shmalloc}, \FUNC{shmemalign},
-    \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM
+    \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although \openshmem
     libraries are required to support the calls, users are encouraged to use
     \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and
     \FUNC{shmem\_realloc} instead.  The behavior and signature  of the routines
