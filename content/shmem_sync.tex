@@ -52,9 +52,9 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
 }
 
 \apinotes{
-    If the \VAR{pSync} array is initialized at run time, be sure to use some type of
-    synchronization, for example, a call to \FUNC{shmem\_sync\_all}, before
-    calling \FUNC{shmem\_sync} for the first time.
+    If the \VAR{pSync} array is initialized at run time, another method of
+    synchronization (e.g., \FUNC{shmem\_sync\_all}) must be used before
+    the initial use of that \VAR{pSync} array by \FUNC{shmem\_sync}.
 
     If the active set does not change, \FUNC{shmem\_sync} can be called
     repeatedly with the same \VAR{pSync} array.  No additional synchronization
