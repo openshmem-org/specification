@@ -7,7 +7,7 @@ Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
 \begin{itemize}
 
 \item
-  The \textit{fetching} routines return the original value of, and optionally
+  The \emph{fetching} routines return the original value of, and optionally
   update, the remote data object in a single atomic operation.  The routines
   return after the data has been fetched from the target \ac{PE} and delivered
   to the calling \ac{PE}.
@@ -19,7 +19,7 @@ Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
   \FUNC{shmem\_atomic\_fetch\_\{inc, add, and, or, xor\}}.
 
 \item
-  The \textit{non-fetching} routines update the remote data object in a single
+  The \emph{non-fetching} routines update the remote data object in a single
   atomic operation.  A call to a non-fetching atomic routine issues the atomic
   operation and may return before the operation executes on the target \ac{PE}.
   The \FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all}
