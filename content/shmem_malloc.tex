@@ -27,7 +27,7 @@ void *shmem_align(size_t alignment, size_t size);
     heap).
     
     The \FUNC{shmem\_align} routine allocates a block in the symmetric heap that has
-    a byte alignment specified by the alignment argument.
+    a byte alignment specified by the \VAR{alignment} argument.
     
     The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
     deallocated, that is, made available for further allocation.  If \VAR{ptr} is a
@@ -46,7 +46,7 @@ void *shmem_align(size_t alignment, size_t size);
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     are provided  so that multiple \acp{PE} in a program can allocate symmetric,
     remotely accessible memory blocks.  These memory blocks can then be used with
-    \openshmem communication routines.  Each of these routines include at least one
+    \openshmem communication routines.  Each of these routines includes at least one
     call to a procedure that is semantically equivalent to \FUNC{shmem\_barrier\_all}:
     \FUNC{shmem\_malloc} and \FUNC{shmem\_align} call a
     barrier on exit; \FUNC{shmem\_free} calls a barrier on entry; and
@@ -62,8 +62,8 @@ void *shmem_align(size_t alignment, size_t size);
     the \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.
     The user is also
     responsible for calling these routines with identical argument(s) on all
-    \acp{PE}; if differing \VAR{size} arguments are used, the behavior of the call
-    and any subsequent \openshmem calls becomes undefined.
+    \acp{PE}; if differing \VAR{ptr}, \VAR{size}, or \VAR{alignment} arguments are used, the behavior of the call
+    and any subsequent \openshmem calls is undefined.
 }
 
 \apireturnvalues{
@@ -81,14 +81,14 @@ void *shmem_align(size_t alignment, size_t size);
 
 \apinotes{ 
     As of \openshmem[1.2] the use of \FUNC{shmalloc}, \FUNC{shmemalign},
-    \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although OpenSHMEM
+    \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although \openshmem
     libraries are required to support the calls, users are encouraged to use
     \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and
     \FUNC{shmem\_realloc} instead.  The behavior and signature  of the routines
     remains unchanged from the deprecated versions.
     					 
     The total size of the symmetric heap is determined at job startup.  One can
-    adjust the size of the heap using the \VAR{SHMEM\_SYMMETRIC\_SIZE} environment
+    specify the size of the heap using the \VAR{SHMEM\_SYMMETRIC\_SIZE} environment
     variable (where available).	
     
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
@@ -101,8 +101,8 @@ void *shmem_align(size_t alignment, size_t size);
     symmetric objects across all \acp{PE}. The \openshmem specification does not
     require that the virtual addresses are equal across all \acp{PE}. Nevertheless,
     the implementation must avoid costly address translation operations in the
-    communication path, including order $N$ (where $N$ is the number of \acp{PE})
-    memory translation tables.  In order to avoid address translations, the
+    communication path, including $O(N)$ memory translation tables,
+    where $N$ is the number of \acp{PE}.  In order to avoid address translations, the
     implementation may re-map the allocated block of memory based on agreed virtual
     address.  Additionally, some operating systems provide an option to disable
     virtual address randomization, which enables predictable allocation of virtual

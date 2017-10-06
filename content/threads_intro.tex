@@ -32,8 +32,8 @@ In the \CONST{SHMEM\_THREAD\_FUNNELED}, \CONST{SHMEM\_THREAD\_SERIALIZED}, and
 \item
 Any \openshmem operation initiated by a thread is considered an action of the
 \ac{PE} as a whole. The symmetric heap and symmetric variables scope are not
-impacted by multiple threads invoking the \openshmem interfaces, i.e.,
-each \ac{PE} has a single symmetric data segment and symmetric heap that is shared by
+impacted by multiple threads invoking the \openshmem interfaces.
+Each \ac{PE} has a single symmetric data segment and symmetric heap that is shared by
 all threads within that \ac{PE}.  For example, a thread invoking a memory allocation
 routine such as \FUNC{shmem\_malloc} allocates memory that is accessible by
 all threads of the \ac{PE}. The requirement that the same symmetric heap operations
@@ -52,8 +52,8 @@ prevent them from executing other \openshmem calls when the thread level permits
 In addition, a blocked thread will not prevent the progress of \openshmem calls
 performed on other \acp{PE}.
 
-\item In the \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, all \openshmem calls are thread-safe,
-i.e., two concurrently running threads may make \openshmem calls and the outcome
+\item In the \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, all \openshmem calls are thread-safe.
+Any two concurrently running threads may make \openshmem calls and the outcome
 will be as if the calls executed in some order, even if their execution is interleaved.
 
 \item In the \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels,
