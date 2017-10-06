@@ -4,7 +4,7 @@ private data objects that are accessible by only the \ac{PE} itself. The \ac{API
 allows communication and synchronization operations on both private (local to
 the PE initiating the operation) and remotely accessible data objects. The key
 feature of \openshmem is that data transfer operations are
-\textit{\textbf{one-sided}} in nature. This means that a local \ac{PE} executing
+\emph{one-sided} in nature. This means that a local \ac{PE} executing
 a data transfer routine does not require the participation of the remote \ac{PE}
 to complete the routine. This allows for overlap between communication and
 computation to hide data transfer latencies, which makes  \openshmem ideal for
@@ -105,7 +105,7 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Collective Communication}
 \begin{enumerate}
-  \item \OPR{Broadcast}: The \textit{root} \ac{PE} specifies a symmetric data
+  \item \OPR{Broadcast}: The \VAR{root} \ac{PE} specifies a symmetric data
       object to be copied to a symmetric data object on one or more remote
       \acp{PE} (not including itself). 
   \item \OPR{Collection}: All \acp{PE} participating in the routine get the result
@@ -119,16 +119,19 @@ An overview of the \openshmem routines is described below:
 \item \textbf{Mutual Exclusion}
 \begin{enumerate}
   \item \OPR{Set Lock}: The \ac{PE} acquires exclusive access to the region
-      bounded by the symmetric \textit{lock} variable.
-  \item \OPR{Test Lock}: The \ac{PE} tests the symmetric \textit{lock} variable
+      bounded by the symmetric \VAR{lock} variable.
+  \item \OPR{Test Lock}: The \ac{PE} tests the symmetric \VAR{lock} variable
       for availability.
   \item \OPR{Clear Lock}: The \ac{PE} which has previously acquired the
-      \textit{lock} releases it.
+      \VAR{lock} releases it.
 \end{enumerate}
 
-\item \textbf{Data Cache Control \textit{(deprecated)}}
+\begin{DeprecateBlock}
+\item \textbf{Data Cache Control}
 \begin{enumerate}
   \item Implementation of mechanisms to exploit the capabilities of hardware cache
       if available.
 \end{enumerate}
+\end{DeprecateBlock}
+
 \end{enumerate}
