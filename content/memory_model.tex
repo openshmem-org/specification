@@ -66,4 +66,4 @@ may access \VAR{X}.  After the increment, \VAR{X} will have increased its value
 by \CONST{1} on the destination \ac{PE}, at which point other atomic operations
 may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
 with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
-will \OPR{invalidate} the atomicity guarantees.
+will invalidate the atomicity guarantees.
