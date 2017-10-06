@@ -46,7 +46,7 @@ void *shmem_align(size_t alignment, size_t size);
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     are provided  so that multiple \acp{PE} in a program can allocate symmetric,
     remotely accessible memory blocks.  These memory blocks can then be used with
-    \openshmem communication routines.  Each of these routines include at least one
+    \openshmem communication routines.  Each of these routines includes at least one
     call to a procedure that is semantically equivalent to \FUNC{shmem\_barrier\_all}:
     \FUNC{shmem\_malloc} and \FUNC{shmem\_align} call a
     barrier on exit; \FUNC{shmem\_free} calls a barrier on entry; and

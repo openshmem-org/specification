@@ -24,7 +24,7 @@ CALL SHMEM_FINALIZE()
     releases all resources used by the \openshmem library. This collective
     operation requires all \acp{PE} to participate in the call. There is an
     implicit global barrier in \FUNC{shmem\_finalize} to ensure that pending
-    communications are completed, and that no resources are released until all
+    communications are completed and that no resources are released until all
     \acp{PE} have entered \FUNC{shmem\_finalize}.
     This routine destroys all shareable contexts.  The user is
     responsible for destroying all contexts with the
