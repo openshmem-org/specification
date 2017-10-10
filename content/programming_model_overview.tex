@@ -4,7 +4,7 @@ private data objects that are accessible by only the \ac{PE} itself. The \ac{API
 allows communication and synchronization operations on both private (local to
 the PE initiating the operation) and remotely accessible data objects. The key
 feature of \openshmem is that data transfer operations are
-\textit{\textbf{one-sided}} in nature. This means that a local \ac{PE} executing
+\emph{one-sided} in nature. This means that a local \ac{PE} executing
 a data transfer routine does not require the participation of the remote \ac{PE}
 to complete the routine. This allows for overlap between communication and
 computation to hide data transfer latencies, which makes  \openshmem ideal for
@@ -79,6 +79,9 @@ An overview of the \openshmem routines is described below:
       symmetric data object on the remote \ac{PE}.
   \item \OPR{Add}: The \ac{PE} initiating the add specifies the value to be added
       to the symmetric data object on the remote \ac{PE}.
+  \item \OPR{Bitwise Operations}: The \ac{PE} initiating the bitwise
+      operation specifies the operand value to the bitwise operation to be
+      performed on the symmetric data object on the remote \ac{PE}.
   \item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value
       of the symmetric data object based on a value to be compared and copies a
       new value to the symmetric data object on the remote \ac{PE}.
@@ -88,6 +91,10 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifies the value to
       be added to the symmetric data object on the remote \ac{PE} and returns with
       the old value.
+  \item \OPR{Fetch and Bitwise Operations}: The \ac{PE} initiating the bitwise
+      operation specifies the operand value to the bitwise operation to be
+      performed on the symmetric data object on the remote \ac{PE}
+      and returns the old value.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
@@ -105,7 +112,7 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Collective Communication}
 \begin{enumerate}
-  \item \OPR{Broadcast}: The \textit{root} \ac{PE} specifies a symmetric data
+  \item \OPR{Broadcast}: The \VAR{root} \ac{PE} specifies a symmetric data
       object to be copied to a symmetric data object on one or more remote
       \acp{PE} (not including itself). 
   \item \OPR{Collection}: All \acp{PE} participating in the routine get the result
@@ -113,22 +120,28 @@ An overview of the \openshmem routines is described below:
       another symmetric data object.
   \item \OPR{Reduction}: All \acp{PE} participating in the routine get the result
       of an associative binary routine over elements of the specified symmetric
-      data object on another symmetric data object. 
+      data object on another symmetric data object.
+  \item \OPR{All-to-All}: All \acp{PE} participating in the routine exchange
+      a fixed amount of contiguous or strided data with all other \acp{PE}
+      in the active set.
 \end{enumerate}
 
 \item \textbf{Mutual Exclusion}
 \begin{enumerate}
   \item \OPR{Set Lock}: The \ac{PE} acquires exclusive access to the region
-      bounded by the symmetric \textit{lock} variable.
-  \item \OPR{Test Lock}: The \ac{PE} tests the symmetric \textit{lock} variable
+      bounded by the symmetric \VAR{lock} variable.
+  \item \OPR{Test Lock}: The \ac{PE} tests the symmetric \VAR{lock} variable
       for availability.
   \item \OPR{Clear Lock}: The \ac{PE} which has previously acquired the
-      \textit{lock} releases it.
+      \VAR{lock} releases it.
 \end{enumerate}
 
-\item \textbf{Data Cache Control \textit{(deprecated)}}
+\begin{DeprecateBlock}
+\item \textbf{Data Cache Control}
 \begin{enumerate}
   \item Implementation of mechanisms to exploit the capabilities of hardware cache
       if available.
 \end{enumerate}
+\end{DeprecateBlock}
+
 \end{enumerate}
