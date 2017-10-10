@@ -137,7 +137,7 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 
 \begin{apiarguments}
 
-\apiargument{IN}{dest}{A symmetric array, of length \VAR{nreduce} elements, to
+\apiargument{OUT}{dest}{A symmetric array, of length \VAR{nreduce} elements, to
     receive the result of the reduction routines.  The data type of \dest{} varies
     with the version of the reduction routine being called.  When calling from
     \CorCpp, refer to the SYNOPSIS section for data type information.}
