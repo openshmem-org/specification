@@ -5,7 +5,7 @@ the \openshmem specification.
 
 \begin{description}
 \item[\CONST{SHMEM\_THREAD\_SINGLE}] \hfill \\
-The \openshmem program may not be multithreaded.
+The \openshmem program must not be multithreaded.
 
 \item[\CONST{SHMEM\_THREAD\_FUNNELED}] \hfill \\
 The \openshmem program may be multithreaded. However, the program must ensure
@@ -27,7 +27,7 @@ interfaces.
 \item
 In the \CONST{SHMEM\_THREAD\_FUNNELED}, \CONST{SHMEM\_THREAD\_SERIALIZED}, and
 \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels, the \FUNC{shmem\_init} and
-\FUNC{shmem\_finalize} calls may only be invoked by the same thread.
+\FUNC{shmem\_finalize} calls must be invoked by the same thread.
 
 \item
 Any \openshmem operation initiated by a thread is considered an action of the
