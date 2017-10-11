@@ -122,7 +122,7 @@ CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size
 \end{Fsynopsis}
 
 \paragraph{XOR}
-Performs a bitwise EXCLUSIVE OR reduction across a set of \acp{PE}.\newline
+Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
 void shmem_short_xor_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_xor_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -156,18 +156,17 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
     \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
     default integer value.}
-\apiargument{IN}{pWrk}{A symmetric work array. The \VAR{pWrk} argument must have the
-    same data type as \dest. In \CorCpp, this contains max(\VAR{nreduce}/2 + 1,
-    \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements. In \Fortran, this
-    contains max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
+\apiargument{IN}{pWrk}{
+    A symmetric work array of size at least
+    max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
     elements.}
-\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be of
-    type long and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran, \VAR{pSync}
-    must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  When
-    using \Fortran, it must be a default integer value. Every element of this array
-    must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or
-    \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
-    active set enter the reduction routine.}
+\apiargument{IN}{pSync}{
+    A symmetric work array of size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.
+    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
+    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
+    Every element of this array must be initialized with the value
+    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
+    enter the reduction routine.}
 
 \end{apiarguments}
 
@@ -187,25 +186,29 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
 
     As with all \openshmem collective routines, each of these routines assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
-    the active set calls an \openshmem collective routine, undefined behavior
-    results.
+    the active set calls an \openshmem collective routine, the behavior is undefined.
 
     The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
     \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same \dest{}
     and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
     be passed to all \acp{PE} in the active set.
-    
-    Before any \ac{PE} calls a reduction routine, the
-    following conditions must be met (synchronization via a \OPR{barrier} or some other
-    method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
-    on all \acp{PE} in the active set are not still in use from a prior call to a
-    collective \openshmem routine.  The \dest{} array on all \acp{PE} in the
-    active set is ready to accept the results of the \OPR{reduction}.
+
+    Before any \ac{PE} calls a reduction routine,
+    the following conditions must be ensured:
+    \begin{itemize}
+    \item The \VAR{pWrk} and \VAR{pSync} arrays on all \acp{PE} in the
+      active set are not still in use from a prior call to a collective
+      \openshmem routine.
+    \item The \dest{} array on all \acp{PE} in the active set is ready
+      to accept the results of the \OPR{reduction}.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
 
     Upon return from a reduction routine, the following are true for the local
     \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.
     The values in the \VAR{pSync} array are
     restored to the original values.
+
 
     The complex-typed interfaces are only provided for sum and product reductions.
     When the \Cstd translation environment does not support complex types

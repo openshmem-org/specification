@@ -26,10 +26,11 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 \apiargument{IN}{PE\_size}{The number of  \acp{PE} in the active set.  \VAR{PE\_size}
     must be of type integer.  When using  \Fortran, it must be a default
     integer value.}
-\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must
-    be of type long and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.  In \Fortran,
-    \VAR{pSync} must be of type integer and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.
-    When using \Fortran, it must  be a default  integer type.  Every element
+\apiargument{IN}{pSync}{
+    A symmetric work array of size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.
+    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
+    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
+    Every element
     of this array must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of
     the \acp{PE} in the active set enter \FUNC{shmem\_barrier} the first time.}
 
@@ -43,7 +44,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     
     As with all \openshmem collective routines, each of these routines assumes that
     only \acp{PE} in the active set call the routine.  If a \ac{PE} not  in  the
-    active set calls an \openshmem collective routine, undefined behavior results.
+    active set calls an \openshmem collective routine, the behavior is undefined.
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
     must be the same value on all \acp{PE} in the active set.  The same work array must be
@@ -54,7 +55,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     \acp{PE} in the active set on the default context are complete before returning.
     
     The  same  \VAR{pSync} array may be reused on consecutive calls   to
-    \FUNC{shmem\_barrier} if the same active \ac{PE} set is used.
+    \FUNC{shmem\_barrier} if the same active set is used.
 }
 
 \apireturnvalues{
@@ -62,9 +63,10 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 }
 
 \apinotes{
-    If the \VAR{pSync} array is initialized at run time, be sure to use some type of
-    synchronization, for example, a call to \FUNC{shmem\_barrier\_all}, before
-    calling \FUNC{shmem\_barrier} for the first time.
+    If the \VAR{pSync} array is initialized at the run time, all
+    \acp{PE} must be synchronized before the first call to \FUNC{shmem\_barrier}
+    (e.g., by \FUNC{shmem\_barrier\_all}) to ensure the array has been initialized
+    by all \acp{PE} before it is used.
     
     If  the active set does not change, \FUNC{shmem\_barrier} can  be called
     repeatedly with the same \VAR{pSync} array.  No additional synchronization
@@ -82,7 +84,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 \begin{apiexamples}
 
 \apicexample
-	{The following barrier example is for C11 programs:}
+	{The following barrier example is for \Cstd[11] programs:}
 	{./example_code/shmem_barrier_example.c}
 	{}
 
