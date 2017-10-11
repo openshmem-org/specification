@@ -8,7 +8,7 @@
 \fancyhf{}
 \fancyhead[RE, LO]{\leftmark}
 \fancyhead[RO, LE]{\thepage}
-\fancyfoot[CE,CO]{\thepage}
+\fancyfoot[CE, CO]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 
 
@@ -23,9 +23,9 @@ To write a ``Hello World" \openshmem program, the user must:
 \begin{itemize}
 \item Include the header file \HEADER{shmem.h} for \Cstd or \HEADER{shmem.fh} for \Fortran.
 \item Add the initialization call \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}}.
-\item Use OpenSHMEM calls to query the local PE number
+\item Use \openshmem calls to query the local \ac{PE} number
     (\hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}}) and the total number
-    of PEs (\hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}}).
+    of \acp{PE} (\hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}}).
 \item Add the finalization call \hyperref[subsec:shmem_finalize]{\FUNC{shmem\_finalize}}.
 \end{itemize}
 
@@ -69,7 +69,7 @@ Each \ac{PE} is able to transfer data to the \dest{} array by simply specifying
 the local address of the symmetric data object that will receive the data.
 This local address resolution aids programmability because the address of the
 \dest{} need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to
-the RMA (Remote Memory Access) routine.
+the \acf{RMA} routine.
 
 Conversely, the declaration of the \VAR{short source} array is asymmetric
 (local only).
@@ -175,7 +175,7 @@ behavior.  For example, an implementation may try to continue or may abort
 immediately upon an \openshmem call into the uninitialized library.
 \tabularnewline
 \hline
-Multiple calls to initialization routines & In an OpenSHMEM program where
+Multiple calls to initialization routines & In an \openshmem program where
 an initialization routine (\FUNC{shmem\_init} or \FUNC{shmem\_init\_thread})
 has already been called, any subsequent calls to an initialization routine
 result in undefined behavior.
@@ -417,12 +417,12 @@ The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
 to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
 prefix for all routines.
 
-\subsection{Fortran: \FUNC{START\_PES}, \FUNC{MY\_PE}, \FUNC{NUM\_PES}}
+\subsection{\textit{Fortran}: \FUNC{START\_PES}, \FUNC{MY\_PE}, \FUNC{NUM\_PES}} %% WARNING: Issue #66.
 The \Fortran routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
 were deprecated in order to minimize the API differences from the deprecation
 of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
 
-\subsection{Fortran: \FUNC{SHMEM\_PUT}}
+\subsection{\textit{Fortran}: \FUNC{SHMEM\_PUT}} %% WARNING: Issue #66.
 The \Fortran routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran
 \ac{API} and is semantically identical to \Fortran routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
@@ -488,12 +488,12 @@ in order to more clearly identify these calls as performing atomic operations.
 In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
-\subsection{Fortran API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
+\subsection{\textit{Fortran} API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
 The entire \openshmem \Fortran API was deprecated because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
 extensive update of the \Fortran API, \Fortran users are encouraged to
 leverage current and future \openshmem specifications of the \Cstd API
-through the \Fortran-\Cstd interoperability initially standardized by
+through the \Fortran--\Cstd interoperability initially standardized by
 \Fortran[2003]%
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
@@ -523,7 +523,7 @@ The following list describes the specific changes in \openshmem[1.4]:
     routines that accept \CTYPE{shmem\_ctx\_t} arguments.
 \\See Section \ref{sec:ctx}.
 %
-\item New API \FUNC{shmem\_sync\_all} and \FUNC{shmem\_sync} to provide PE
+\item New API \FUNC{shmem\_sync\_all} and \FUNC{shmem\_sync} to provide \ac{PE}
     synchronization without completing pending communication operations.
     \\See Sections \ref{subsec:shmem_sync_all} and \ref{subsec:shmem_sync}.
 %
@@ -547,8 +547,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 \item Removed the \VAR{volatile} qualifiers from the \VAR{ivar} arguments to
 \FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
 \emph{Rationale: Volatile qualifiers were added to several API routines in
-version 1.3 of the OpenSHMEM specification; however, they were later found
-to be unnecessary.}
+\openshmem[1.3]; however, they were later found to be unnecessary.}
 \\ See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
 %
 \item Deprecated the \VAR{SMA\_}* environment variables and added equivalent
@@ -703,9 +702,9 @@ The following list describes the specific changes in \openshmem[1.2]:
 \item Added specification of \VAR{pSync} initialization for all routines that use it.
 %
 \item Replaced all placeholder variable names \VAR{target} with \VAR{dest} to
-      avoid confusion with \Fortran `target' keyword.
+      avoid confusion with \Fortran's \CONST{target} keyword. % FIXME: Change to \KEYWORD{target}
 %
-\item New Execution Model for exiting/finishing OpenSHMEM programs.
+\item New Execution Model for exiting/finishing \openshmem programs.
 \\See Section  \ref{subsec:execution_model}.
 %
 \item New library constants to support API that query version and name information.
