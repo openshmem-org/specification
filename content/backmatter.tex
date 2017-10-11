@@ -176,8 +176,8 @@ immediately upon an \openshmem call into the uninitialized library.
 \tabularnewline
 \hline
 Multiple calls to initialization routines & In an \openshmem program where
-an initialization routine (\FUNC{shmem\_init} or \FUNC{shmem\_init\_thread})
-has already been called, any subsequent calls to an initialization routine
+the initialization routines \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}
+have already been called, any subsequent calls to these initialization routines
 result in undefined behavior.
 \tabularnewline
 \hline
