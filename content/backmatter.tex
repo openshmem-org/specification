@@ -142,12 +142,12 @@ The \openshmem Reference Implementation provides a wrapper program, named
 The wrapper may be called as follows:
 
 \begin{lstlisting}[language=bash]
-oshrun <additional options> -np <#> <program> <program arguments>
+oshrun <runner options> -np <#> <program> <program arguments>
 \end{lstlisting}
-The program arguments for \textbf{oshrun} are:
+The arguments for \textbf{oshrun} are:
 
 \begin{tabular}{p{0.3\textwidth}p{0.6\textwidth}}
-$\langle\mbox{additional options}\rangle$ & {Options passed to the underlying launcher.}\tabularnewline
+$\langle\mbox{runner options}\rangle$ & {Options passed to the underlying launcher.}\tabularnewline
 -np $\langle\mbox{\#}\rangle$ & {The number of \acp{PE} to be used in the execution.}\tabularnewline
 $\langle\mbox{program}\rangle$ & {The program executable to be launched.}\tabularnewline
 $\langle\mbox{program arguments}\rangle$ & {Flags and other parameters to pass to the program.}\tabularnewline
@@ -193,7 +193,7 @@ be trapped where possible and the library may abort the program.  Another
 implementation may choose to continue execution with or without a warning.
 \tabularnewline
 \hline 
-Non-symmetric memory allocation & The symmetric memory management routines are
+Nonsymmetric allocation of symmetric memory & The symmetric memory management routines are
 collectives. For example, all \acp{PE} in the program must call
 \FUNC{shmem\_malloc} with the same \VAR{size} argument.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
@@ -305,8 +305,8 @@ A listing of \openshmem implementations can be found on
 
 \section{Overview}\label{subsec:dep_overview}
 For the \openshmem specification, deprecation is the process of identifying
-API that is supported but no longer recommended for use by program users. For
-\openshmem library users, said API \textbf{must} be supported until clearly
+API that is supported but no longer recommended for use by users.
+The deprecated API \textbf{must} be supported until clearly
 indicated as otherwise by the specification.
 This chapter records the API or functionality that have been deprecated, the
 \openshmem specification version that effected the deprecation, and the
@@ -406,7 +406,7 @@ Furthermore, the naming of \FUNC{start\_pes} does not include the standardized
 \openshmem users are encouraged to use \FUNC{shmem\_init} instead.
 
 \subsection{Implicit Finalization}
-Implicit finalization has been replaced with explicit finalization using the
+Implicit finalization was deprecated and replaced with explicit finalization using the
 \FUNC{shmem\_finalize} routine.  Explicit finalization improves portability and
 also improves interoperability with profiling and debugging tools.
 
@@ -458,7 +458,7 @@ The library constants
 \end{tabular}
 \end{center}
 do not adhere to the \Cstd standard's reserved identifiers and the \Cpp
-standard's reserved names.  These constants have been deprecated and replaced
+standard's reserved names.  These constants were deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran naming conventions.
 
@@ -479,7 +479,6 @@ explicit and better communicates the developer's intent.
 \subsection{\CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, \FUNC{shmem\_cswap},
   \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
   \FUNC{shmem\_fadd}, \FUNC{shmem\_add}}
-
 The \CorCpp interfaces for \FUNC{shmem\_fetch}, \FUNC{shmem\_set},
 \FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc}, \FUNC{shmem\_inc},
 \FUNC{shmem\_fadd}, and \FUNC{shmem\_add} were deprecated and replaced with
