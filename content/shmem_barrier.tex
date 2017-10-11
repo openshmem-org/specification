@@ -63,9 +63,10 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
 }
 
 \apinotes{
-    If the \VAR{pSync} array is initialized at run time, another method of
-    synchronization (e.g., \FUNC{shmem\_barrier\_all}) must be used before
-    the initial use of that \VAR{pSync} array by \FUNC{shmem\_barrier}.
+    If the \VAR{pSync} array is initialized at the run time, all
+    \acp{PE} must be synchronized before the first call to \FUNC{shmem\_barrier}
+    (e.g., by \FUNC{shmem\_barrier\_all}) to ensure the array has been initialized
+    by all \acp{PE} before it is used.
     
     If  the active set does not change, \FUNC{shmem\_barrier} can  be called
     repeatedly with the same \VAR{pSync} array.  No additional synchronization
