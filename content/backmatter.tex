@@ -193,7 +193,7 @@ be trapped where possible and the library may abort the program.  Another
 implementation may choose to continue execution with or without a warning.
 \tabularnewline
 \hline 
-Nonsymmetric allocation of symmetric memory & The symmetric memory management routines are
+Non-symmetric allocation of symmetric memory & The symmetric memory management routines are
 collectives. For example, all \acp{PE} in the program must call
 \FUNC{shmem\_malloc} with the same \VAR{size} argument.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
@@ -511,7 +511,7 @@ multithreading support,
 expanded type support for \ac{RMA} and \ac{AMO} operations,
 a new namespace for atomic operations,
 atomic bitwise operations,
-\FUNC{shmem\_test} for non-blocking point-to-point synchronization,
+\FUNC{shmem\_test} for nonblocking point-to-point synchronization,
 and \Cstd[11] type-generic interfaces for point-to-point synchronization.
 
 The following list describes the specific changes in \openshmem[1.4]:
@@ -634,7 +634,7 @@ synchronization routines.
 
 \section{Version 1.3}
 Major changes in \openshmem[1.3] include the addition of
-non-blocking RMA operations,
+nonblocking \ac{RMA} operations,
 atomic \PUT{} and \GET{} operations,
 all-to-all collectives,
 and \Cstd[11] type-generic interfaces for \ac{RMA} and \ac{AMO} operations.
@@ -662,7 +662,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 	operations based on \Cstd[11] Generics.
 \\See Sections \ref{sec:rma}, \ref{sec:rma_nbi} and \ref{sec:amo}.
 %
-\item New non-blocking variants of remote memory access, \FUNC{SHMEM\_PUT\_NBI}
+\item New nonblocking variants of remote memory access, \FUNC{SHMEM\_PUT\_NBI}
 	and \FUNC{SHMEM\_GET\_NBI}.
 \\See Sections \ref{subsec:shmem_put_nbi} and \ref{subsec:shmem_get_nbi}.
 %
