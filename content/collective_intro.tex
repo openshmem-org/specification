@@ -5,15 +5,15 @@ routine.  A \ac{PE} that is not in the active set calling the collective
 routine results in undefined behavior.  All collective routines have an
 active set as an input parameter except \FUNC{shmem\_barrier\_all} and \FUNC{shmem\_sync\_all}.
 Both \FUNC{shmem\_barrier\_all} and \FUNC{shmem\_sync\_all} must be called by all \acp{PE} of the
-\openshmem program. 
+\openshmem program.
 
 The active set is defined by the arguments \VAR{PE\_start}, \VAR{logPE\_stride},
 and \VAR{PE\_size}.  \VAR{PE\_start} is the starting \ac{PE} number, a log (base
 2) of \VAR{logPE\_stride} is the stride between \acp{PE}, and \VAR{PE\_size} is
 the number of \acp{PE} participating in the active set.  All \acp{PE}
 participating in the collective routine must provide the same values for these
-arguments. 
- 
+arguments.
+
 Another argument important to collective routines is \VAR{pSync}, which is a
 symmetric work array.  All \acp{PE} participating in a collective must pass the
 same \VAR{pSync} array.  On completion of a collective call, the \VAR{pSync} is
@@ -22,7 +22,7 @@ array if all previous collective routines using the \VAR{pSync} array have been
 completed by all participating \acp{PE}.  One can use a synchronization
 collective routine such as \FUNC{shmem\_barrier} to ensure completion of previous collective
 routines. The \FUNC{shmem\_barrier} and \FUNC{shmem\_sync} routines allow the same \VAR{pSync} array to
-be used on consecutive calls as long as the \acp{PE} in the active set do not change. 
+be used on consecutive calls as long as the \acp{PE} in the active set do not change.
 
 All collective routines defined in the Specification are blocking.  The
 collective routines return on completion.  The collective routines defined in
