@@ -89,7 +89,7 @@ references to the \VAR{source} array only on the active (local) side.
 
 
 \chapter{Compiling and Running Programs}\label{sec:compiling}
-The specification does not specify how
+The \openshmem Specification does not specify how
 \openshmem programs are compiled, linked, and run. This section shows some
 examples of how wrapper programs are utilized in the \openshmem Reference
 Implementation to compile and launch programs.
@@ -158,11 +158,10 @@ $\langle\mbox{program arguments}\rangle$ & {Flags and other parameters to pass t
 
 \chapter{Undefined Behavior in OpenSHMEM}\label{sec:undefined}
 
-The specification formalizes the expected behavior of
+The \openshmem Specification formalizes the expected behavior of
 its library routines.  In cases where routines are improperly used
-or the input is not in accordance with the specification, undefined
-behavior is observed.  Depending on the implementation, there are
-many interpretations of undefined behavior. 
+or the input is not in accordance with the Specification, the behavior
+is undefined.
 
 \begin{longtable}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
 \hline 
@@ -305,14 +304,14 @@ A listing of \openshmem implementations can be found on
 \chapter{OpenSHMEM Specification and Deprecated API}\label{sec:dep_api}
 
 \section{Overview}\label{subsec:dep_overview}
-For the \openshmem specification, deprecation is the process of identifying
+For the \openshmem Specification, deprecation is the process of identifying
 API that is supported but no longer recommended for use by users.
 The deprecated API \textbf{must} be supported until clearly
-indicated as otherwise by the specification.
+indicated as otherwise by the Specification.
 This chapter records the API or functionality that have been deprecated, the
-\openshmem specification version that effected the deprecation, and the
-\openshmem specification version that the feature was last supported before
-removal.
+version of the \openshmem Specification that effected the deprecation, and the
+most recent version of the \openshmem Specification in which the feature was
+supported before removal.
 
 \begin{center}
 \scriptsize
@@ -492,9 +491,8 @@ expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 The entire \openshmem \Fortran API was deprecated because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
 extensive update of the \Fortran API, \Fortran users are encouraged to
-leverage current and future \openshmem specifications of the \Cstd API
-through the \Fortran--\Cstd interoperability initially standardized by
-\Fortran[2003]%
+leverage the \openshmem Specification's \Cstd API through the
+\Fortran--\Cstd interoperability initially standardized by \Fortran[2003]%
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
 
@@ -749,7 +747,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \\See Annex \ref{sec:undefined}
 %
 \item Addition of new Annex for clearly specifying deprecated API and its
-      support in the existing specification version.
+      support across versions of the \openshmem Specification.
 \\See Annex \ref{sec:dep_api}.
 %
 \end{itemize}
@@ -851,7 +849,7 @@ provided.
 inclusion in \HEADER{shmemx.h}.
 \\See Section \ref{subsec:bindings}. 
 %
-\item Various fixes to \openshmem code examples across the specification to
+\item Various fixes to \openshmem code examples across the Specification to
 include appropriate header files. 
 %
 \item Removing requirement that implementations should detect size mismatch and
