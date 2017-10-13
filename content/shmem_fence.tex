@@ -38,7 +38,7 @@ CALL SHMEM_FENCE
     \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not
     guarantee completion of delivery.  
     \FUNC{shmem\_fence} also does not have an effect on the ordering between memory 
-    accesses issued by the target PE. \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until}, \FUNC{shmem\_test},
+    accesses issued by the target PE. \FUNC{shmem\_wait\_until}, \FUNC{shmem\_test},
     \FUNC{shmem\_barrier}, \FUNC{shmem\_barrier\_all} routines can be called by the target PE to guarantee 
     ordering of its memory accesses.
     There is a subtle difference between
