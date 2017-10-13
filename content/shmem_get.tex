@@ -44,8 +44,9 @@ CALL SHMEM_REAL_GET(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
     \apiargument{OUT}{dest}{Local data object to be updated.}
     \apiargument{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe}
         that contains the data to be copied.  This data object must be remotely

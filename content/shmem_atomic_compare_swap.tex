@@ -27,13 +27,14 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be
         updated on the remote \ac{PE}. }
     \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
         value. If \VAR{cond} and the remote \VAR{dest} are equal, then \VAR{value}
-        is swapped into the remote \VAR{dest}. Otherwise, the remote \VAR{dest} is
+        is swapped into the remote \VAR{dest}; otherwise, the remote \VAR{dest} is
         unchanged.  In either case, the old value of the remote \VAR{dest} is
         returned as the routine return value. \VAR{cond} must be of the same data
         type as \VAR{dest}.}
@@ -50,9 +51,8 @@ ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
     atomic operation.
 }
 \apidesctable{
-    The  \VAR{dest} and \VAR{value} data objects must conform to certain typing
-    constraints, which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{value}}
+    When using \Fortran, \VAR{dest}, \VAR{cond}, and \VAR{value} must be of the following type:
+}{Routine}{Data type of \VAR{dest}, \VAR{cond}, and \VAR{value}}
 
 \apitablerow{SHMEM\_INT4\_CSWAP}{\CONST{4}-byte integer.}
 \apitablerow{SHMEM\_INT8\_CSWAP}{\CONST{8}-byte integer.}
