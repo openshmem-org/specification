@@ -21,32 +21,31 @@ LOG = SHMEM_PE_ACCESSIBLE(pe)
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_pe\_accessible} is  a  query routine  that indicates  whether  a
+    \FUNC{shmem\_pe\_accessible} is a query routine that indicates whether a
     specified \ac{PE} is accessible via \openshmem from the local \ac{PE}. The
-    \FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if  the  remote
-    \ac{PE} is a process  running from the same executable  file as the local
-    \ac{PE}, indicating that full \openshmem support for symmetric data objects
-    (that reside in the static memory and symmetric heap) is available, otherwise it
-    returns \CONST{FALSE}.  This routine may be particularly useful for hybrid
-    programming with other communication libraries (such as a \ac{MPI}) or parallel
-    languages.  For example, on  SGI Altix  series  systems, \openshmem is
-    supported  across multiple partitioned hosts and InfiniBand connected hosts.
-    When running multiple executable MPI programs using \openshmem on an Altix, full
-    \openshmem support is available between processes running from the same
-    executable file. However, \openshmem support between processes of different
-    executable  files  is  supported only for data objects on the symmetric heap,
-    since static data objects are  not symmetric  between  different executable
-    files.        
+    \FUNC{shmem\_pe\_accessible} routine returns a value indicating whether the remote
+    \ac{PE} is a process running from the same executable file as the local
+    \ac{PE}, thereby indicating whether full support for symmetric data objects,
+    which may reside in either static memory or the symmetric heap, is available.
 }
 
 \apireturnvalues{
     \CorCpp: The return value is 1 if the specified \ac{PE} is a valid remote \ac{PE}
-    for \openshmem routines; otherwise, it is 0. \\ \\
+    for \openshmem routines; otherwise, it is 0.
 
     \Fortran: The return value is \CONST{.TRUE.} if the specified \ac{PE} is a valid
-    remote \ac{PE} for \openshmem routines; otherwise, it is \CONST{.FALSE.}.	 
+    remote \ac{PE} for \openshmem routines; otherwise, it is \CONST{.FALSE.}.
 }
 
-\apinotes{ None. }
+\apinotes{
+    This routine may be particularly useful for hybrid programming with other
+    communication libraries (such as \ac{MPI}) or parallel languages.  For
+    example, when an \ac{MPI} job uses \ac{MPMD} mode, multiple executable
+    \ac{MPI} programs are executed as part of the same MPI job.  In such cases,
+    \openshmem support may only be available between processes running from the
+    same executable file.  In addition, some environments may allow a hybrid
+    job may span multiple network partitions.  In such scenarios, \openshmem
+    support may only be available between \acp{PE} within the same partition.
+}
 
 \end{apidefinition}
