@@ -274,7 +274,7 @@ default context.  The default context can be used explicitly through the
 \subsection{Point-To-Point Synchronization Routines}\label{subsec:p2p_intro}
 \input{content/p2p_sync_intro.tex}
 
-\subsubsection{\textbf{SHMEM\_WAIT}}\label{subsec:shmem_wait}
+\subsubsection{\textbf{SHMEM\_WAIT\_UNTIL}}\label{subsec:shmem_wait}
 \input{content/shmem_wait.tex}
 
 \subsubsection{\textbf{SHMEM\_TEST}}\label{subsec:shmem_test}
@@ -286,8 +286,8 @@ default context.  The default context can be used explicitly through the
 
 \subsection{Memory Ordering Routines}\label{subsec:memory_order}
 The following section discusses \openshmem \acp{API} that provide mechanisms to
-ensure ordering and/or delivery of \OPR{Put}, \ac{AMO}, and memory store
-routines to symmetric data objects. 
+ensure ordering and/or delivery of \OPR{Put}, \ac{AMO}, memory store,
+and non-blocking \PUT{} and \GET{} routines to symmetric data objects.
 
 \subsubsection{\textbf{SHMEM\_FENCE}}\label{subsec:shmem_fence}
 \input{content/shmem_fence.tex}
