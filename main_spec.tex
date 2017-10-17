@@ -4,9 +4,6 @@
 
 \input{utils/defs}
 
-\usepackage{makeidx}
-\makeindex
-
 \begin{document}
 
 \input{content/frontmatter}
@@ -324,16 +321,13 @@ their use.
 \subsubsection{\textbf{SHMEM\_CACHE}}\label{subsec:shmem_cache}
 \input{content/shmem_cache.tex}
 
-
-
-
-
 \clearpage
-
-
-
 \input{content/backmatter}
 
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Index}
+\printindex
 
 \end{document}
 
