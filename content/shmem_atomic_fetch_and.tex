@@ -6,18 +6,22 @@
 
 \begin{C11synopsis}
 TYPE shmem_atomic_fetch_and(TYPE *dest, TYPE value, int pe);
+TYPE shmem_atomic_fetch_and(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the bitwise \ac{AMO} types specified by
 Table~\ref{bitamotypes}.
 
 \begin{Csynopsis}
 TYPE shmem_<TYPENAME>_atomic_fetch_and(TYPE *dest, TYPE value, int pe);
+TYPE shmem_ctx_<TYPENAME>_atomic_fetch_and(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{bitamotypes}.
 
 \begin{apiarguments}
 
+  \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
+    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
   \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
     be updated.}
   \apiargument{IN}{value}{The operand to the bitwise AND operation.}
