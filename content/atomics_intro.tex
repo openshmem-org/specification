@@ -1,12 +1,12 @@
-An \ac{AMO} is a one-sided communication mechanism that combines memory update
+An \ac{AMO} \index{Atomic Memory Operation} is a one-sided communication mechanism that combines memory update
 operations with atomicity guarantees described in Section
 \ref{subsec:amo_guarantees}.  Similar to the \ac{RMA} routines, described in
 Section \ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
 \openshmem defines the two types of \ac{AMO} routines:
 \begin{itemize}
 \item
-The \textit{fetching} routines return the original value of, and optionally
-update, the remote data object in a single atomic operation.  The routines
+The \textit{fetching} routines \index{Fetching Routine} return the original value of, 
+and optionally update, the remote data object in a single atomic operation.  The routines
 return after the data has been fetched and delivered to the local \ac{PE}.
 
 The fetching operations include:
@@ -14,8 +14,8 @@ The fetching operations include:
 \FUNC{shmem\_atomic\_fetch\_\{inc, add, and, or, xor\}}.
 
 \item
-The \textit{non-fetching} atomic routines update the remote memory in a single
-atomic operation.  A call to a non-fetching atomic routine issues the atomic
+The \textit{non-fetching} \index{Non-Fetching Routine} atomic routines update the remote 
+memory in a single atomic operation.  A call to a non-fetching atomic routine issues the atomic
 operation and may return before the operation executes on the remote \ac{PE}.
 To force completion for these non-fetching atomic routines,
 \FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all} can

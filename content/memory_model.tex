@@ -5,15 +5,16 @@
 \end{figure}      
 %
 An \openshmem program consists of data objects that are private to each \ac{PE}
-and data  objects that are remotely accessible by all \acp{PE}. Private data
-objects are stored in the local memory of each \ac{PE} and can only be accessed
+\index{PE} and data  objects that are remotely accessible by all
+\index{Remotely Accessible Data Objects} \acp{PE}. Private data objects \index{Private Data Object} 
+are stored in the local memory of each \ac{PE} and can only be accessed
 by the \ac{PE} itself; these data objects cannot be accessed by other \acp{PE}
 via \openshmem routines. Private data objects follow the memory model of
 \Cstd or \Fortran. Remotely accessible objects, however, can be accessed by
 remote \acp{PE} using \openshmem routines.  Remotely accessible data objects are
-called \emph{Symmetric Data Objects}.  Each symmetric data object has a
-corresponding object with the same name, type, and size on all PEs where that object is
-accessible via the \openshmem \ac{API}\footnote{For efficiency reasons,
+called \emph{Symmetric Data Objects}. \index{Symmetric Data Objects} Each symmetric data 
+object has a corresponding object with the same name, type, and size on all PEs where that 
+object is accessible via the \openshmem \ac{API}\footnote{For efficiency reasons,
 the same offset (from an arbitrary memory address) for symmetric data
 objects might be used on all \acp{PE}. Further discussion about symmetric heap
 layout and implementation efficiency can be found in section
@@ -43,9 +44,9 @@ data objects are symmetric:
 \openshmem dynamic memory allocation routines (\FUNC{shpalloc} and
 \FUNC{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data
 Objects} on a special memory region called the \emph{Symmetric Heap}. The
-Symmetric Heap is created during the execution of a program at a memory location
-determined by the implementation. The Symmetric Heap may reside in different
-memory regions on different \acp{PE}. Figure~\ref{fig:mem_model} shows how
+Symmetric Heap \index{Symmetric Heap} is created during the execution of a program at 
+a memory location determined by the implementation. The Symmetric Heap  \index{Symmetric Heap} 
+may reside in different memory regions on different \acp{PE}. Figure~\ref{fig:mem_model} shows how
 \openshmem implements a \ac{PGAS} model using remotely accessible symmetric
 objects and private data objects when executing an \openshmem program.
 Symmetric data objects are stored on the symmetric heap or in the global/static
