@@ -44,8 +44,9 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+      When this argument is not provided, the operation is performed on
+      \CONST{SHMEM\_CTX\_DEFAULT}.}
     \apiargument{IN}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
     \apiargument{OUT}{source}{Data object containing the data to be copied.}
@@ -105,7 +106,7 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
 \begin{apiexamples}
 
 \apicexample
-    { The following \FUNC{shmem\_put} example is for C11 programs:}
+    { The following \FUNC{shmem\_put} example is for \Cstd[11] programs:}
     {./example_code/shmem_put_example.c}
     {} 
 \end{apiexamples}

@@ -21,8 +21,9 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
   \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
     be updated.}
   \apiargument{IN}{value}{The operand to the bitwise XOR operation.}

@@ -22,8 +22,8 @@ CALL SHMEM_BARRIER_ALL
 
 \apidescription{   
     The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at
-    a barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
-    once.  This routine blocks the \ac{PE} until all \acp{PE} have called
+    a barrier. Barriers are a mechanism for synchronizing all \acp{PE} at
+    once. This routine blocks the \ac{PE} until all \acp{PE} have called
     \FUNC{shmem\_barrier\_all}. In a multithreaded \openshmem
     program, only the calling thread is blocked.
 
@@ -42,7 +42,7 @@ CALL SHMEM_BARRIER_ALL
 \apinotes{
     The \FUNC{shmem\_barrier\_all} routine can be used to
     portably ensure that memory access operations observe remote updates in the order
-    enforced by initiator PEs.
+    enforced by initiator \acp{PE}.
 
     Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
     to calling the barrier routine to ensure completion of operations issued on

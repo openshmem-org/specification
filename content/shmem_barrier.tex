@@ -46,7 +46,7 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     active set calls an \openshmem collective routine, undefined behavior results.
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
-    must be equal on all \acp{PE} in the active set.  The same work array must be
+    must be the same value on all \acp{PE} in the active set.  The same work array must be
     passed in \VAR{pSync} to all \acp{PE} in the active set.
     
     \FUNC{shmem\_barrier} ensures that all previously issued stores and remote
@@ -66,13 +66,13 @@ CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
     synchronization, for example, a call to \FUNC{shmem\_barrier\_all}, before
     calling \FUNC{shmem\_barrier} for the first time.
     
-    If  the active set  does not change, \FUNC{shmem\_barrier} can  be called
+    If  the active set does not change, \FUNC{shmem\_barrier} can  be called
     repeatedly with the same \VAR{pSync} array.  No additional synchronization
     beyond that implied by \FUNC{shmem\_barrier} itself is necessary in this case.
 
     The \FUNC{shmem\_barrier} routine can be used to
     portably ensure that memory access operations observe remote updates in the order
-    enforced by initiator PEs.
+    enforced by initiator \acp{PE}.
 
     Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
     to calling the barrier routine to ensure completion of operations issued on

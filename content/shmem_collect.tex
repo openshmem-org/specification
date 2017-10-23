@@ -29,7 +29,7 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \begin{apiarguments}
 
 \apiargument{OUT}{dest}{A symmetric array. The \dest{} argument must be large enough
-    to accept the concatenation of the \source{} arrays on all \acp{PE}.  The data
+    to accept the concatenation of the \source{} arrays on all participating \acp{PE}.  The data
     types are as follows: For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64},
     \FUNC{shmem\_fcollect8}, and \FUNC{shmem\_fcollect64}, any data type with an
     element size of 64 bits.  \Fortran derived types, \Fortran character type,
@@ -80,8 +80,8 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     active set and calls this collective routine, the behavior is undefined.
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
-    must be equal on all \acp{PE} in the active set. The same \dest{} and \source{}
-    arrays and the same \VAR{pSync} work array must be passed to all \acp{PE} in the
+    must be the same value on all \acp{PE} in the active set. The same \dest{} and \source{}
+    arrays and the same \VAR{pSync} work array must be passed by all \acp{PE} in the
     active set.
     
     Upon return from a collective routine, the following are true for the local

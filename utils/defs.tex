@@ -37,7 +37,6 @@
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
-\newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}} % Only library_constants.tex table.
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
 \newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
 \newcommand{\Fortran}[1][]{%
@@ -46,6 +45,8 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
+\newcommand{\LibConstDecl}[2][\CorCppFor]{%
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \CONST{#2} \\~}}
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
 \newcommand{\SIZE}{\emph{SIZE}}
@@ -55,14 +56,6 @@
 \newcommand{\PUT}{\textit{Put}}
 \newcommand{\GET}{\textit{Get}}
 \newcommand{\OPR}[1]{\textit{#1}}
-\newcommand{\barrier}{\FUNC{SHMEM\_BARRIER}\xspace} % why here an not others?
-\newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
-\newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
-\newcommand{\collect}{\FUNC{SHMEM\_COLLECT}}
-\newcommand{\fcollect}{\FUNC{SHMEM\_FCOLLECT}}
-\newcommand{\reduction}{\textit{Reduction Operations}}
-\newcommand{\alltoall}{\FUNC{SHMEM\_ALLTOALL}}
-\newcommand{\alltoalls}{\FUNC{SHMEM\_ALLTOALLS}}
 \newcommand{\shmemprefix}{\textit{SHMEM\_}}
 \newcommand{\shmemprefixLC}{\textit{shmem\_}}
 \newcommand{\shmemprefixC}{\textit{\_SHMEM\_}}
@@ -70,7 +63,6 @@
 \newcommand{\jth}{${\textit{j}^{\text{\tiny th}}}$}
 \newcommand{\kth}{${\textit{k}^{\text{\tiny th}}}$}
 \newcommand{\lth}{${\textit{l}^{\text{\tiny th}}}$}
-
 
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
@@ -82,13 +74,20 @@
 \acro{API}{\emph{Application Programming Interface}}
 \acro{MPI}{\emph{Message Passing Interface}}
 \acro{SPMD}{\emph{Single Program Multiple Data}}
+\acro{ARL}{Army Research Laboratory}
+\acro{AMD}{Advanced Micro Devices}
+\acro{TCP}{\emph{Transmission Control Protocol}}
 \acro{UH}{University of Houston}
 \acro{UO}{University of Oregon}
 \acro{ORNL}{Oak Ridge National Laboratory}
 \acro{LANL}{Los Alamos National Laboratory}
 \acro{ESSC}{Extreme Scale Systems Center}
+\acro{SGI}{Silicon Graphics International}
 \acro{OSSS}{Open Software System Solutions}
 \acro{DoD}{U.S. Department of Defense}
+\acro{SBU}{Stonybrook University}
+\acro{UTK}{University of Tenneesee at Knoxville}
+\acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
 
@@ -146,6 +145,10 @@
 %
 % Use Sans Serif font for sections, etc.
 %
+% FIXME? `\bf` should be `\textbf` if you want to preserve the sans-serif font
+% at subsubsection and paragraph. In my opinion, the serif font looks better
+% anyway. -- Bryant Lam
+%
 \makeatletter
 \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
 -.2ex}{2.3ex plus .2ex}{\Large\sf}}
@@ -153,8 +156,9 @@
 -.2ex}{1.5ex plus .2ex}{\large\sf}}
 \def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
 -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf\bf}}
-\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex 
-minus .2ex}{-1em}{\normalsize\sf}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}
+{-1em}{\normalsize\sf\bf}} % Indent after \paragraph
+%{.1pt}{\normalsize\sf\bf}} % Newline after \paragraph
 \makeatother
 %
 % End use Sans Serif font for sections, etc.  S. Otto
@@ -170,7 +174,6 @@ minus .2ex}{-1em}{\normalsize\sf}}
   breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,                 % sets automatic line breaking
-  escapeinside={|}{|},          % if you want to add LaTeX within your code
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
                                    % encodings only, does not work with UTF-8
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code 
@@ -362,7 +365,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 {
   \textbf{C++11:}
   \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, noreturn}, aboveskip=0pt, belowskip=0pt}}{}
+  morekeywords={size_t, ptrdiff_t, TYPE, noreturn},
+  aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{C11synopsis}
 { 
@@ -390,7 +394,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
   \textbf{C/C++:} 
   \color{red}  
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
+  morekeywords={size_t, ptrdiff_t},
+  aboveskip=0pt, belowskip=0pt}}
   }
   {}
   
@@ -424,7 +429,9 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \begin{description}
 \vspace{-1em}
 \item[API description] \hfill \\ 
+    \begin{sloppypar}
     #1
+    \end{sloppypar}
 \hfill
 }
 
