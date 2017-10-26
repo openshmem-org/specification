@@ -11,18 +11,21 @@
 
 
 \section{The OpenSHMEM Effort}\label{subsec:openshmem_effort}
+\index{The OpenSHMEM Effort}
 \input{content/the_openshmem_effort}
 
 \section{Programming Model Overview}\label{subsec:programming_model}
 \input{content/programming_model_overview}
 
 \section{Memory Model}\label{subsec:memory_model}
+\index{Memory Model}
 \input{content/memory_model}
 
 \section{Execution Model}\label{subsec:execution_model}
 \input{content/execution_model}
 
 \section{Language Bindings and Conformance}\label{subsec:bindings}
+\index{Language Bindings and Conformance}
 \input{content/language_bindings_and_conformance}
 
 \section{Library Constants}\label{subsec:library_constants}
@@ -41,6 +44,7 @@
 \section{OpenSHMEM Library API}\label{sec:openshmem_library_api}
 
 \subsection{Library Setup, Exit, and Query Routines}
+\index{Library Setup, Exit, and Query Routines}
 The library setup and query interfaces that initialize and monitor the parallel
 environment of the \acp{PE}.
 
@@ -82,15 +86,18 @@ environment of the \acp{PE}.
 \input{content/threads_intro.tex}
 
 \subsubsection{\textbf{SHMEM\_INIT\_THREAD}}
+\index{SHMEM\_INIT\_THREAD}
 \label{subsec:shmem_init_thread}
 \input{content/shmem_init_thread}
 
 \subsubsection{\textbf{SHMEM\_QUERY\_THREAD}}
+\index{SHMEM\_QUERY\_THREAD}
 \label{subsec:shmem_query_thread}
 \input{content/shmem_query_thread}
 
 
 \subsection{Memory Management Routines}
+\index{Memory Management Routines}
 \label{sec:mem_routines}
 \openshmem provides a set of \acp{API} for managing the symmetric heap. The
 \acp{API} allow one to dynamically allocate, deallocate, reallocate and align
@@ -113,6 +120,7 @@ symmetric data objects in the symmetric heap, in \Cstd and \Fortran.
 
 
 \subsection{Communication Management Routines}
+\index{Communication Management Routines}
 \label{sec:ctx}
 All \openshmem RMA, AMO, and memory ordering routines are
 performed on a communication context.  The communication context defines an
@@ -132,10 +140,12 @@ default context.  The default context can be used explicitly through the
 \CONST{SHMEM\_CTX\_DEFAULT} handle.
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
+\index{SHMEM\_CTX\_CREATE}
 \label{subsec:shmem_ctx_create}
 \input{content/shmem_ctx_create.tex}
 
 \subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
+\index{SHMEM\_CTX\_DESTROY}
 \label{subsec:shmem_ctx_destroy}
 \input{content/shmem_ctx_destroy.tex}
 
@@ -163,6 +173,7 @@ default context.  The default context can be used explicitly through the
 
 
 \subsection{Non-blocking Remote Memory Access Routines}\label{sec:rma_nbi}
+\index{Non-blocking Remote Memory Access Routines}
 
 \subsubsection{\textbf{SHMEM\_PUT\_NBI}}\label{subsec:shmem_put_nbi}
 \input{content/shmem_put_nbi.tex}
@@ -269,6 +280,7 @@ default context.  The default context can be used explicitly through the
 
 
 \subsection{Point-To-Point Synchronization Routines}\label{subsec:p2p_intro}
+\index{Ponit-To-Point Synchronization Routines}
 \input{content/p2p_sync_intro.tex}
 
 \subsubsection{\textbf{SHMEM\_WAIT}}\label{subsec:shmem_wait}
@@ -282,6 +294,7 @@ default context.  The default context can be used explicitly through the
 
 
 \subsection{Memory Ordering Routines}\label{subsec:memory_order}
+\index{Memory Ordering Routines}
 The following section discusses \openshmem \acp{API} that provide mechanisms to
 ensure ordering and/or delivery of \OPR{Put}, \ac{AMO}, and memory store
 routines to symmetric data objects. 
@@ -301,9 +314,10 @@ routines to symmetric data objects.
 
 
 \subsection{Distributed Locking Routines}
+\index{Distributed Locking Routines}
 The following section discusses \openshmem locks as a mechanism to provide
 mutual exclusion. Three routines are available for distributed locking,
-\textit{set, test} and \textit{clear}. \index{Lock}
+\textit{set, test} and \textit{clear}.
 
 \subsubsection{\textbf{SHMEM\_LOCK}}\label{subsec:shmem_lock}
 \input{content/shmem_lock.tex}
@@ -313,6 +327,8 @@ mutual exclusion. Three routines are available for distributed locking,
 
 
 \subsection{Cache Management}
+\index{Cache Management}
+\index{SHMEM\_CACHE}
 All of these routines are deprecated and are provided for backwards
 compatibility.  Implementations must include all items in this section, and the
 routines should function properly and may notify the user about deprecation of

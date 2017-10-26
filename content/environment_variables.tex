@@ -4,7 +4,6 @@ the implementation. The implementations of the specification are free to define
 additional variables. Currently, the specification defines four environment
 variables. All environment variables that start with \VAR{SMA\_*} are
 deprecated, but currently supported for backwards compatibility.
-
 \medskip{}
 
 \begin{tabular}{|l|l|l|}
@@ -13,15 +12,20 @@ Variable & Value & Purpose\tabularnewline
 \hline 
 \hline 
 \texttt{SHMEM\_VERSION} & any & print the library version at
+\index{Environment Variables!SHMEM\_VERSION}
 start-up\tabularnewline
 \hline 
 \texttt{SHMEM\_INFO} & any & print helpful text about all these environment
+\index{Environment Variables!SHMEM\_INFO}
 variables\tabularnewline
 \hline 
 \texttt{SHMEM\_SYMMETRIC\_SIZE} & non-negative integer & number of bytes to
+\index{Environment Variables!SHMEM\_SYMMETRIC\_SIZE}
 allocate for symmetric heap\tabularnewline
 \hline 
-\texttt{SHMEM\_DEBUG} & any & enable debugging messages\tabularnewline
+\texttt{SHMEM\_DEBUG} & any & enable debugging messages
+\index{Environment Variables!SHMEM\_DEBUG}
+\tabularnewline
 \hline 
 \end{tabular}
 

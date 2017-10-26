@@ -25,13 +25,16 @@ void *shmem_align(size_t alignment, size_t size);
     \VAR{size} bytes suitably aligned for any use.  This space is allocated from the
     symmetric heap (in contrast to \FUNC{malloc}, which allocates from the private
     heap).
+    \index{SHMEM\_MALLOC}
     
     The \FUNC{shmem\_align} routine allocates a block in the symmetric heap that has
     a byte alignment specified by the alignment argument.
+    \index{SHMEM\_ALIGN}
     
     The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
     deallocated, that is, made available for further allocation.  If \VAR{ptr} is a
     null pointer, no action occurs. 
+    \index{SHMEM\_FREE}
            
     The \FUNC{shmem\_realloc} routine changes the size of the block to which
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
@@ -42,6 +45,7 @@ void *shmem_align(size_t alignment, size_t size);
     the specified size.  If \VAR{size} is \CONST{0} and \VAR{ptr} is not a
     \CONST{NULL} pointer, the block to which it points is freed. If the space cannot
     be allocated, the block to which \VAR{ptr} points is unchanged.
+    \index{SHMEM\_REALLOC}
     
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     are provided  so that multiple \acp{PE} in a program can allocate symmetric,

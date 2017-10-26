@@ -24,6 +24,7 @@ data objects, collective synchronization calls) or to dictate a control flow for
 the life of the \openshmem program.
 
 \subsection{Progress of \openshmem Operations}\label{subsec:progress}
+\index{Execution Model!Progress of \openshmem Operations}
 
 The \openshmem model assumes that computation and communication are naturally
 overlapped. \openshmem programs are expected to exhibit progression of
@@ -54,6 +55,7 @@ that \ac{PE} next engages in an \openshmem call.
 \end{itemize}
 
 \subsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
+\index{Execution Model!Atomicity Guarantees}
 
 \openshmem contains a number of routines that operate on symmetric data
 atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by
