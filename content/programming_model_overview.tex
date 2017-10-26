@@ -1,7 +1,8 @@
-\openshmem implements \ac{PGAS} by defining remotely accessible data objects as
-mechanisms to share information among \openshmem processes or \acp{PE} and
-private data objects that are accessible by the \ac{PE} itself. The \ac{API}
-allows communication and synchronization operations on both private (local to
+\openshmem implements \ac{PGAS} by defining remotely accessible data objects 
+\index{Remotely Accessible Data Objects} as mechanisms to 
+share information among \openshmem processes or \acp{PE} \index{PE} 
+and private data objects \index{Private Data Object} that are accessible by the \ac{PE} itself. 
+The \ac{API} allows communication and synchronization operations on both private (local to
 the PE initiating the operation) and remotely accessible data objects. The key
 feature of \openshmem is that data transfer operations are
 \textit{\textbf{one-sided}} in nature. This means that a local \ac{PE} executing
@@ -33,90 +34,94 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Library Setup and Query}
 \begin{enumerate}
-  \item \OPR{Initialization}: The \openshmem library environment is initialized. 
-  \item \OPR{Query}: The local \ac{PE} may get the number of \acp{PE} running
+  \item \OPR{Initialization}: \index{OpenSHMEM Routines!Initialization}The \openshmem 
+  library environment is initialized. 
+  \item \OPR{Query}: \index{OpenSHMEM Routines!Query} The local \ac{PE} may get the 
+  number of \acp{PE} running
       the same program and its unique integer identifier. 
-  \item \OPR{Accessibility}: The local \ac{PE} can find out if a remote \ac{PE} is
-      executing the same binary, or if a particular symmetric data object can be
+  \item \OPR{Accessibility}: \index{OpenSHMEM Routines!Accessibility} The local \ac{PE} 
+  can find out if a remote 
+      \ac{PE} is executing the same binary, or if a particular symmetric data object can be
       accessed by a remote \ac{PE}, or may obtain a pointer to a symmetric data
       object on the specified remote \ac{PE} on shared memory systems.
 \end{enumerate}
 
 \item \textbf{Symmetric Data Object Management}
 \begin{enumerate}
-  \item \OPR{Allocation}: All executing \acp{PE} must participate in the
-      allocation of a symmetric data object with identical arguments.
-  \item  \OPR{Deallocation}: All executing \acp{PE} must participate in the
-      deallocation of the same symmetric data object with identical arguments.
-  \item  \OPR{Reallocation}: All executing \acp{PE} must participate in the
-      reallocation of the same symmetric data object with identical arguments.
+  \item \OPR{Allocation}: \index{OpenSHMEM Routines!Allocation} All executing \acp{PE} 
+  must participate in the allocation of a symmetric data object with identical arguments.
+  \item  \OPR{Deallocation}: \index{OpenSHMEM Routines!Deallocation} All executing 
+  \acp{PE} must participate in the deallocation of the same symmetric data object with identical arguments.
+  \item  \OPR{Reallocation}: \index{OpenSHMEM Routines!Reallocation} All executing \acp{PE} 
+  must participate in the reallocation of the same symmetric data object with identical arguments.
 \end{enumerate}
 
 \item \textbf{Communication Management}
 \begin{enumerate}
-    \item \OPR{Contexts}: Contexts are containers for communication operations.
-        Each context provides an environment where the operations performed on
-        that context are ordered and completed independently of other operations
-        performed by the application.
+    \item \OPR{Contexts}: \index{OpenSHMEM Routines!Contexts} Contexts are 
+    	containers for communication operations. Each context provides an environment 
+	where the operations performed on that context are ordered and completed 
+	independently of other operations performed by the application.
 \end{enumerate}
 
 \item \textbf{Remote Memory Access}
 \begin{enumerate}
-    \item \PUT: The local \ac{PE} specifies the \source{} data object (private
+    \item \PUT: \index{OpenSHMEM Routines!Put} The local \ac{PE} specifies the \source{} data object (private
         or symmetric) that is copied to the symmetric data object on the remote
         \ac{PE}. 
-  \item \GET: The local \ac{PE} specifies the symmetric data object on the remote
+  \item \GET: \index{OpenSHMEM Routines!Get} The local \ac{PE} specifies the symmetric data object on the remote
       \ac{PE} that is copied to a data object (private or symmetric) on the local
       \ac{PE}. 
 \end{enumerate}
 
 \item \textbf{Atomics}
 \begin{enumerate}
-    \item \OPR{Swap}: The \ac{PE} initiating the swap gets the old value of a
-        symmetric data object from a remote \ac{PE} and copies a new value to
+    \item \OPR{Swap}: \index{OpenSHMEM Routines!Swap} The \ac{PE} initiating the swap gets the old value 
+    of a symmetric data object from a remote \ac{PE} and copies a new value to
         that symmetric data object on the remote \ac{PE}.
-  \item \OPR{Increment}: The \ac{PE} initiating the increment adds 1 to the
+  \item \OPR{Increment}: \index{OpenSHMEM Routines!Increment} The \ac{PE} initiating the increment adds 1 to the
       symmetric data object on the remote \ac{PE}.
-  \item \OPR{Add}: The \ac{PE} initiating the add specifies the value to be added
+  \item \OPR{Add}: \index{OpenSHMEM Routines!Add} The \ac{PE} initiating the add specifies the value to be added
       to the symmetric data object on the remote \ac{PE}.
-  \item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value
-      of the symmetric data object based on a value to be compared and copies a
-      new value to the symmetric data object on the remote \ac{PE}.
-  \item \OPR{Fetch and Increment}: The \ac{PE} initiating the increment adds 1 to
-      the symmetric data object on the remote \ac{PE} and returns with the old
-      value.
-  \item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifies the value to
-      be added to the symmetric data object on the remote \ac{PE} and returns with
-      the old value.
+  \item \OPR{Compare and Swap}: \index{OpenSHMEM Routines!Compare and Swap} The \ac{PE} initiating the 
+  swap gets the old value of the symmetric data object based on a value to be compared and 
+  copies a new value to the symmetric data object on the remote \ac{PE}.
+  \item \OPR{Fetch and Increment}: \index{OpenSHMEM Routines!Fetch and Increment} The \ac{PE} initiating the 
+  increment adds 1 to the symmetric data object on the remote \ac{PE} and returns 
+  with the old value.
+  \item \OPR{Fetch and Add}: \index{OpenSHMEM Routines!Fetch and Add} The \ac{PE} initiating the add 
+  specifies the value to be added to the symmetric data object on the remote \ac{PE} 
+  and returns with the old value.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
 \begin{enumerate}
-  \item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of   
+  \item \OPR{Fence}: \index{OpenSHMEM Routines!Fence} The \ac{PE} calling fence ensures ordering of   
   \PUT, AMO, and memory store operations
   to symmetric data objects with respect to a specific
       destination \ac{PE}. 
-  \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access
+  \item \OPR{Quiet}: \index{OpenSHMEM Routines!Quiet} The \ac{PE} calling quiet ensures completion of remote access
       operations and stores to symmetric data objects. 
-  \item \OPR{Barrier}: All or some \acp{PE} collectively synchronize and ensure
+  \item \OPR{Barrier}: \index{OpenSHMEM Routines!Barrier} All or some \acp{PE} collectively synchronize and ensure
       completion of all remote and local updates prior to any \ac{PE} returning
       from the call.
 \end{enumerate}
 
 \item \textbf{Collective Communication}
 \begin{enumerate}
-  \item \OPR{Broadcast}: The \textit{root} \ac{PE} specifies a symmetric data
+  \item \OPR{Broadcast}: \index{OpenSHMEM Routines!Broadcast} The \textit{root} \ac{PE} specifies a symmetric data
       object to be copied to a symmetric data object on one or more remote
       \acp{PE} (not including itself). 
-  \item \OPR{Collection}: All \acp{PE} participating in the routine get the result
+  \item \OPR{Collection}: \index{OpenSHMEM Routines!Collection} All \acp{PE} participating in the routine get the result
       of concatenated symmetric objects contributed by each of the \acp{PE} in
       another symmetric data object.
-  \item \OPR{Reduction}: All \acp{PE} participating in the routine get the result
+  \item \OPR{Reduction}: \index{OpenSHMEM Routines!Reduction} All \acp{PE} participating in the routine get the result
       of an associative binary routine over elements of the specified symmetric
       data object on another symmetric data object. 
 \end{enumerate}
 
 \item \textbf{Mutual Exclusion}
+\index{OpenSHMEM Routines!Lock}
 \begin{enumerate}
   \item \OPR{Set Lock}: The \ac{PE} acquires exclusive access to the region
       bounded by the symmetric \textit{lock} variable.
