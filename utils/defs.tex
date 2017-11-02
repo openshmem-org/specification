@@ -39,6 +39,7 @@
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
+%%
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
 \newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
 \newcommand{\Fortran}[1][]{%
@@ -47,9 +48,14 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
+%%
+\newcommand{\EnvVarRef}[1]{\VAR{#1}\index{Environment Variables!#1}}
 \newcommand{\LibConstRef}[1]{\CONST{#1}\index{Constants!#1}}
+%%
+\newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
 \newcommand{\LibConstDecl}[2][\CorCppFor]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
+%%
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
 \newcommand{\SIZE}{\emph{SIZE}}
