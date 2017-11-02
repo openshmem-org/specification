@@ -47,8 +47,9 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
+\newcommand{\LibConstRef}[1]{\CONST{#1}\index{Constants!#1}}
 \newcommand{\LibConstDecl}[2][\CorCppFor]{%
-  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \CONST{#2} \\~}}
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
 \newcommand{\SIZE}{\emph{SIZE}}
