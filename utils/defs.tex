@@ -48,11 +48,15 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
-%%
-\newcommand{\EnvVarRef}[1]{\VAR{#1}\index{Environment Variables!#1}}
-\newcommand{\FuncRef}[1]{\FUNC{#1}\index{Routines!#1}}
-\newcommand{\LibConstRef}[1]{\CONST{#1}\index{Constants!#1}}
-%%
+%% Generate indexed reference.
+\newcommand{\EnvVarIndex}[1]{\index{Environment Variables!#1}}
+\newcommand{\FuncIndex}[1]{\index{Routines!#1}}
+\newcommand{\LibConstIndex}[1]{\index{Constants!#1}}
+%% Write text and generate reference.
+\newcommand{\EnvVarRef}[1]{\VAR{#1}\EnvVarIndex{#1}}
+\newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
+\newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
+%% Specialized declaration/creation and generate reference.
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
 \newcommand{\FuncDecl}[1]{\FuncRef{#1}}
 \newcommand{\LibConstDecl}[2][\CorCppFor]{%
