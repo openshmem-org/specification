@@ -35,16 +35,16 @@ int shmem_ctx_create(long options, shmem_ctx_t *ctx);
     set on that context; otherwise, the behavior is undefined.
     No options are enabled on the default context.
 
-        \apitablerow{\CONST{SHMEM\_CTX\_SERIALIZED}}{
+        \apitablerow{\LibConstRef{SHMEM\_CTX\_SERIALIZED}}{
             The given context is shareable; however, it will not be used by multiple threads
             concurrently.  When the \CONST{SHMEM\_CTX\_SERIALIZED} option is
             set, the user must ensure that operations involving the given
             context are serialized by the application.}
 
-        \apitablerow{\CONST{SHMEM\_CTX\_PRIVATE}}{
+        \apitablerow{\LibConstRef{SHMEM\_CTX\_PRIVATE}}{
             The given context will be used only by the thread that created it.}
 
-        \apitablerow{\CONST{SHMEM\_CTX\_NOSTORE}}{
+        \apitablerow{\LibConstRef{SHMEM\_CTX\_NOSTORE}}{
             Quiet and fence operations performed on the given context are not
             required to enforce completion and ordering of memory store
             operations.
