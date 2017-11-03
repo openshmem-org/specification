@@ -362,6 +362,12 @@ supported before removal.
     \LibConstRef{\_SHMEM\_MINOR\_VERSION} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_MINOR\_VERSION}} \\ \hline
     \LibConstRef{\_SHMEM\_MAX\_NAME\_LEN} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_MAX\_NAME\_LEN}} \\ \hline
     \LibConstRef{\_SHMEM\_VENDOR\_STRING} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_VENDOR\_STRING}} \\ \hline
+    \CONST{\_SHMEM\_CMP\_EQ} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_EQ}} \\ \hline
+    \CONST{\_SHMEM\_CMP\_NE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_NE}} \\ \hline
+    \CONST{\_SHMEM\_CMP\_LT} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_LT}} \\ \hline
+    \CONST{\_SHMEM\_CMP\_LE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_LE}} \\ \hline
+    \CONST{\_SHMEM\_CMP\_GT} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GT}} \\ \hline
+    \CONST{\_SHMEM\_CMP\_GE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GE}} \\ \hline
     \EnvVarRef{SMA\_VERSION}         & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_VERSION}} \\ \hline
     \EnvVarRef{SMA\_INFO}            & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_INFO}} \\ \hline
     \EnvVarRef{SMA\_SYMMETRIC\_SIZE} & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_SYMMETRIC\_SIZE}} \\ \hline
@@ -450,11 +456,14 @@ This API has largely gone unused on cache-coherent system architectures.
 The library constants
 \begin{center}
 \begin{tabular}{ll}
-    \CONST{\_SHMEM\_SYNC\_VALUE}         & \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} \\
-    \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE} & \CONST{\_SHMEM\_MAJOR\_VERSION} \\
-    \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}   & \CONST{\_SHMEM\_MINOR\_VERSION} \\
-    \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE} & \CONST{\_SHMEM\_MAX\_NAME\_LEN} \\
-    \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}  & \CONST{\_SHMEM\_VENDOR\_STRING} \\
+    \CONST{\_SHMEM\_SYNC\_VALUE}         & \CONST{\_SHMEM\_MAX\_NAME\_LEN} \\
+    \CONST{\_SHMEM\_BARRIER\_SYNC\_SIZE} & \CONST{\_SHMEM\_VENDOR\_STRING} \\
+    \CONST{\_SHMEM\_BCAST\_SYNC\_SIZE}   & \CONST{\_SHMEM\_CMP\_EQ} \\
+    \CONST{\_SHMEM\_COLLECT\_SYNC\_SIZE} & \CONST{\_SHMEM\_CMP\_NE} \\
+    \CONST{\_SHMEM\_REDUCE\_SYNC\_SIZE}  & \CONST{\_SHMEM\_CMP\_LT} \\
+    \CONST{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} & \CONST{\_SHMEM\_CMP\_LE} \\
+    \CONST{\_SHMEM\_MAJOR\_VERSION}      & \CONST{\_SHMEM\_CMP\_GT} \\
+    \CONST{\_SHMEM\_MINOR\_VERSION}      & \CONST{\_SHMEM\_CMP\_GE} \\
 \end{tabular}
 \end{center}
 do not adhere to the \Cstd standard's reserved identifiers and the \Cpp
