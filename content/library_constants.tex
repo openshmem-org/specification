@@ -38,14 +38,6 @@ may be multithreaded and any thread may invoke the \openshmem interfaces.
 See Section~\ref{subsec:thread_support} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl[\CorCpp]{SHMEM\_CTX\_DEFAULT} &
-Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
-default communication context.  All point-to-point communication operations
-and synchronizations that do not specify a context are performed on the
-default context.
-See Section~\ref{sec:ctx} for more detail about its use.
-\tabularnewline \hline
-%%
 \LibConstDecl[\CorCpp]{SHMEM\_CTX\_SERIALIZED} &
 The context creation option which specifies that the given context
 is shareable but will not be used by multiple threads concurrently.
