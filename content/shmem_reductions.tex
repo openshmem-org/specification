@@ -62,7 +62,7 @@ CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 \paragraph{SUM}
 Performs a sum reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_complexd_sum_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
+void shmem_complexd_sum_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long *pSync);
 void shmem_complexf_sum_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
 void shmem_short_sum_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_sum_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
@@ -86,8 +86,8 @@ CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_s
 \paragraph{PROD}
 Performs a product reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_complexd_prod_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
-void shmem_complexf_prod_to_all(float _Complex *dest, const float _Complex *source, int |\mbox{nreduce,}| int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
+void shmem_complexd_prod_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long *pSync);
+void shmem_complexf_prod_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
 void shmem_short_prod_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 void shmem_int_prod_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
 void shmem_double_prod_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
@@ -117,8 +117,8 @@ void shmem_longlong_or_to_all(long long *dest, const long long *source, int nred
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_INT4_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|
-CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|
+CALL SHMEM_INT4_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \paragraph{XOR}
