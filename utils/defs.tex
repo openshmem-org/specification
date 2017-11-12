@@ -62,7 +62,8 @@
 \newcommand{\TableCaptionRef}[1]{\caption{#1}\TableIndex{#1}}
 %% Specialized declaration/creation and generate reference.
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
-\newcommand{\FuncDecl}[1]{#1\FuncIndex{#1}}
+\newcommand{\FuncDecl}[1]{\ListingsCurrentStyle{#1}\FuncIndex{#1}}
+\newcommand{\FuncDeclParam}[1]{<{\ListingsKeywordStyle{#1}}>}
 \newcommand{\LibConstDecl}[2][\CorCppFor]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\LibHandleDecl}[2][\CorCppFor]{%
@@ -113,6 +114,17 @@
 \acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
+
+% Grab current listings style for use in environment escape to LaTeX.
+% https://tex.stackexchange.com/a/209644
+\makeatletter
+\newcommand\ListingsCurrentStyle{}
+\lst@AddToHook{Output}{\global\let\ListingsCurrentStyle\lst@thestyle}
+\lst@AddToHook{OutputOther}{\global\let\ListingsCurrentStyle\lst@thestyle}
+\newcommand\ListingsKeywordStyle{}
+\lst@AddToHook{Output}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
+\lst@AddToHook{OutputOther}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
+\makeatother
 
 %
 % This is used to put line numbers on plain pages.  Used in draft.tex
