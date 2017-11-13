@@ -53,9 +53,14 @@ CALL SHMEM_REAL8_SET(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_set} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_set}.
+    As of \openshmem[1.4], the \Cstd[11] and \CorCpp interfaces
+    \FUNC{shmem\_set} and \FUNC{shmem\_TYPENAME\_set} have been
+    deprecated. Their behavior and call signature are identical to the
+    respective replacement interfaces, \FUNC{shmem\_atomic\_set} and
+    \FUNC{shmem\_TYPENAME\_atomic\_set}, subject to the constraints
+    that the deprecated interfaces do not accept a context argument and
+    are only supported for \CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+    \CTYPE{long}, and \CTYPE{long~long} types.
 }
 
 \end{apidefinition}

@@ -56,9 +56,14 @@ CALL SHMEM_INT8_INC(dest, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_inc} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_inc}.
+    As of \openshmem[1.4], the \Cstd[11] and \CorCpp interfaces
+    \FUNC{shmem\_inc} and \FUNC{shmem\_TYPENAME\_inc} have been
+    deprecated. Their behavior and call signature are identical to the
+    respective replacement interfaces, \FUNC{shmem\_atomic\_inc} and
+    \FUNC{shmem\_TYPENAME\_atomic\_inc}, subject to the constraints
+    that the deprecated interfaces do not accept a context argument and
+    are only supported for \CTYPE{int}, \CTYPE{long}, and \CTYPE{long~long}
+    types.
 }
 
 \begin{apiexamples}

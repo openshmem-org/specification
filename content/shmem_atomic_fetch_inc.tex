@@ -61,9 +61,14 @@ ires_i8 = SHMEM_INT8_FINC(dest, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_finc} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_fetch\_inc}.
+    As of \openshmem[1.4], the \Cstd[11] and \CorCpp interfaces
+    \FUNC{shmem\_fetch\_inc} and \FUNC{shmem\_TYPENAME\_fetch\_inc} have been
+    deprecated. Their behavior and call signature are identical to the
+    respective replacement interfaces, \FUNC{shmem\_atomic\_fetch\_inc} and
+    \FUNC{shmem\_TYPENAME\_atomic\_fetch\_inc}, subject to the constraints
+    that the deprecated interfaces do not accept a context argument and
+    are only supported for \CTYPE{int}, \CTYPE{long}, and \CTYPE{long~long}
+    types.
 }
 
 \begin{apiexamples}

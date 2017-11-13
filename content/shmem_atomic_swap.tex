@@ -65,9 +65,14 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_swap} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_swap}.
+    As of \openshmem[1.4], the \Cstd[11] and \CorCpp interfaces
+    \FUNC{shmem\_swap} and \FUNC{shmem\_TYPENAME\_swap} have been
+    deprecated. Their behavior and call signature are identical to the
+    respective replacement interfaces, \FUNC{shmem\_atomic\_swap} and
+    \FUNC{shmem\_TYPENAME\_atomic\_swap}, subject to the constraints
+    that the deprecated interfaces do not accept a context argument and
+    are only supported for \CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+    \CTYPE{long}, and \CTYPE{long~long} types.
 }
 
 \begin{apiexamples}
