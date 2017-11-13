@@ -11,7 +11,7 @@ where they may be useful.\\
 \hline 
 \hline 
 {Point-to-point synchronization}\\
-\FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until} 
+\FUNC{shmem\_wait\_until} 
 &
 \raisebox{-\totalheight}{\includegraphics[width=0.7\textwidth]{figures/wait}}
 \end{tabular}
@@ -36,7 +36,7 @@ the remote \ac{PE} is to update. \tabularnewline
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-All \PUT{}, \ac{AMO}, store, and non-blocking \PUT{} routines on symmetric data issued to
+All \PUT{}, \ac{AMO}, store, and nonblocking \PUT{} routines on symmetric data issued to
 same \ac{PE}  are guaranteed to be delivered  before Puts (to the same \ac{PE})
 issued after the \FUNC{fence} call. \tabularnewline
 \hline 
@@ -56,7 +56,7 @@ issued after the \FUNC{fence} call. \tabularnewline
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 {}
 &
-{All \PUT{}, \ac{AMO}, store, and non-blocking \PUT{} and \GET{} routines on symmetric data issued by a
+{All \PUT{}, \ac{AMO}, store, and nonblocking \PUT{} and \GET{} routines on symmetric data issued by a
 local \ac{PE} to all  remote \acp{PE} are guaranteed to be completed and visible
 once quiet returns. This routine should be used when all remote writes issued by
 a local \ac{PE} need to be visible  to all other \acp{PE} before the local
