@@ -5,14 +5,14 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_g(const TYPE *source, int pe);
-TYPE shmem_g(shmem_ctx_t ctx, const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_g}@(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_g}@(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_g(const TYPE *source, int pe);
-TYPE shmem_ctx_<TYPENAME>_g(shmem_ctx_t ctx, const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_g}@(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_g}@(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 

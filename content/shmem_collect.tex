@@ -6,24 +6,24 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_collect32(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_collect64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_fcollect32(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_fcollect64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_collect32}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_collect64}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_fcollect32}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER nelems
 INTEGER PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_COLLECT_SYNC_SIZE)
-CALL SHMEM_COLLECT4(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT4(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT4}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT8}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT4}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT8}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}

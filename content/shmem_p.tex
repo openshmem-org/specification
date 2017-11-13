@@ -5,14 +5,14 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_p(TYPE *dest, TYPE value, int pe);
-void shmem_p(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_p}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_p}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_p(TYPE *dest, TYPE value, int pe);
-void shmem_ctx_<TYPENAME>_p(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_p}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_p}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 

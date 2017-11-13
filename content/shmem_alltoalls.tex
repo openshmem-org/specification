@@ -6,16 +6,16 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoalls32(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_alltoalls64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_alltoalls32}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALLS_SYNC_SIZE)
 INTEGER dst, sst, PE_start, logPE_stride, PE_size
 INTEGER nelems 
-CALL SHMEM_ALLTOALLS32(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_ALLTOALLS32}@(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}

@@ -5,13 +5,13 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-int shmem_test(TYPE *ivar, shmem_cmp_t cmp, TYPE cmp_value);
+int @\FuncDecl{shmem\_test}@(TYPE *ivar, shmem_cmp_t cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-int shmem_<TYPENAME>_test(TYPE *ivar, shmem_cmp_t cmp, TYPE cmp_value);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test}@(TYPE *ivar, shmem_cmp_t cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.

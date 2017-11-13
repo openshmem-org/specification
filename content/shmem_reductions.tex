@@ -8,131 +8,131 @@
 \paragraph{AND}
 Performs a bitwise AND reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_short_and_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_and_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_long_and_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longlong_and_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_short\_and\_to\_all}@(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void @\FuncDecl{shmem\_int\_and\_to\_all}@(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
+void @\FuncDecl{shmem\_long\_and\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longlong\_and\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_INT4_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT4\_AND\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT8\_AND\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \paragraph{MAX}
 Performs a maximum-value reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_short_max_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_max_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_max_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_max_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_max_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_max_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_max_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_short\_max\_to\_all}@(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void @\FuncDecl{shmem\_int\_max\_to\_all}@(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
+void @\FuncDecl{shmem\_double\_max\_to\_all}@(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_float\_max\_to\_all}@(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
+void @\FuncDecl{shmem\_long\_max\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longdouble\_max\_to\_all}@(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longlong\_max\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_INT4_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT4\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT8\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL4\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL8\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL16\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \paragraph{MIN}
 Performs a minimum-value reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_short_min_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_min_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_min_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_min_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_min_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_min_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_min_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_short\_min\_to\_all}@(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void @\FuncDecl{shmem\_int\_min\_to\_all}@(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
+void @\FuncDecl{shmem\_double\_min\_to\_all}@(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_float\_min\_to\_all}@(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
+void @\FuncDecl{shmem\_long\_min\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longdouble\_min\_to\_all}@(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longlong\_min\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_INT4_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT4\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT8\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL4\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL8\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL16\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \paragraph{SUM}
 Performs a sum reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_complexd_sum_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long *pSync);
-void shmem_complexf_sum_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
-void shmem_short_sum_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_sum_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_sum_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_sum_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_sum_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride,int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_sum_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_sum_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_complexd\_sum\_to\_all}@(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long *pSync);
+void @\FuncDecl{shmem\_complexf\_sum\_to\_all}@(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
+void @\FuncDecl{shmem\_short\_sum\_to\_all}@(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void @\FuncDecl{shmem\_int\_sum\_to\_all}@(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
+void @\FuncDecl{shmem\_double\_sum\_to\_all}@(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_float\_sum\_to\_all}@(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
+void @\FuncDecl{shmem\_long\_sum\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride,int PE_size, long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longdouble\_sum\_to\_all}@(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longlong\_sum\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_COMP4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_COMP8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_COMP4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_COMP8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL16\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \paragraph{PROD}
 Performs a product reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_complexd_prod_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long *pSync);
-void shmem_complexf_prod_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
-void shmem_short_prod_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_prod_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_prod_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_prod_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_prod_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_prod_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_prod_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_complexd\_prod\_to\_all}@(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long *pSync);
+void @\FuncDecl{shmem\_complexf\_prod\_to\_all}@(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
+void @\FuncDecl{shmem\_short\_prod\_to\_all}@(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void @\FuncDecl{shmem\_int\_prod\_to\_all}@(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
+void @\FuncDecl{shmem\_double\_prod\_to\_all}@(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_float\_prod\_to\_all}@(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
+void @\FuncDecl{shmem\_long\_prod\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longdouble\_prod\_to\_all}@(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longlong\_prod\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_COMP4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_COMP8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_COMP4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_COMP8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \paragraph{OR}
 Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_short_or_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_or_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_long_or_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longlong_or_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_short\_or\_to\_all}@(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void @\FuncDecl{shmem\_int\_or\_to\_all}@(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
+void @\FuncDecl{shmem\_long\_or\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longlong\_or\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_INT4_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT4\_OR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT8\_OR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \paragraph{XOR}
 Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
-void shmem_short_xor_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_xor_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_long_xor_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longlong_xor_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_short\_xor\_to\_all}@(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+void @\FuncDecl{shmem\_int\_xor\_to\_all}@(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
+void @\FuncDecl{shmem\_long\_xor\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
+void @\FuncDecl{shmem\_longlong\_xor\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_INT4_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT4\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
+CALL @\FuncDecl{SHMEM\_INT8\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}

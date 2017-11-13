@@ -6,15 +6,15 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_atomic_or(TYPE *dest, TYPE value, int pe);
-void shmem_atomic_or(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_or}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_or}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the bitwise \ac{AMO} types specified by
 Table~\ref{bitamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_atomic_or(TYPE *dest, TYPE value, int pe);
-void shmem_ctx_<TYPENAME>_atomic_or(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_or}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_or}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{bitamotypes}.

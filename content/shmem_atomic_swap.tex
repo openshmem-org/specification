@@ -5,28 +5,28 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_swap(TYPE *dest, TYPE value, int pe);
-TYPE shmem_atomic_swap(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_swap}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_swap}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by Table \ref{extamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_swap(TYPE *dest, TYPE value, int pe);
-TYPE shmem_ctx_<TYPENAME>_atomic_swap(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_swap}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_swap}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
 \begin{Fsynopsis}
 INTEGER SHMEM_SWAP, value, pe
-ires = SHMEM_SWAP(dest, value, pe)
+ires = @\FuncDecl{SHMEM\_SWAP}@(dest, value, pe)
 INTEGER*4 SHMEM_INT4_SWAP, value_i4, ires_i4
-ires_i4 = SHMEM_INT4_SWAP(dest, value_i4, pe)
+ires\_i4 = @\FuncDecl{SHMEM\_INT4\_SWAP}@(dest, value_i4, pe)
 INTEGER*8 SHMEM_INT8_SWAP, value_i8, ires_i8
-ires_i8 = SHMEM_INT8_SWAP(dest, value_i8, pe)
+ires\_i8 = @\FuncDecl{SHMEM\_INT8\_SWAP}@(dest, value_i8, pe)
 REAL*4 SHMEM_REAL4_SWAP, value_r4, res_r4
-res_r4 = SHMEM_REAL4_SWAP(dest, value_r4, pe)
+res\_r4 = @\FuncDecl{SHMEM\_REAL4\_SWAP}@(dest, value_r4, pe)
 REAL*8 SHMEM_REAL8_SWAP, value_r8, res_r8
-res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
+res\_r8 = @\FuncDecl{SHMEM\_REAL8\_SWAP}@(dest, value_r8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
