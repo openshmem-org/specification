@@ -5,15 +5,15 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{\Cstd[11]}{shmem\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
-void @\FuncDecl{\Cstd[11]}{shmem\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
-void @\FuncDecl{\CorCpp}{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -21,9 +21,9 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4  value_i4
-CALL @\FuncDecl{\Fortran}{SHMEM\_INT4\_ADD}@(dest, value_i4, pe)
+CALL @\FuncDecl{SHMEM\_INT4\_ADD}@(dest, value_i4, pe)
 INTEGER*8 value_i8
-CALL @\FuncDecl{\Fortran}{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
+CALL @\FuncDecl{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}

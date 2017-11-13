@@ -64,7 +64,8 @@
 \newcommand{\TableCaptionRef}[1]{\caption{#1}\TableIndex{#1}}
 %% Specialized declaration/creation and generate reference.
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
-\newcommand{\FuncDecl}[2]{\ListingsCurrentStyle{#2}\FuncIndex{#1}{#2}}
+\providecommand{\FuncDecl}{}
+\newcommand{\FuncDeclImpl}[2]{\ListingsCurrentStyle{#2}\FuncIndex{#1}{#2}}
 \newcommand{\LibConstDecl}[2][\CorCppFor]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\LibHandleDecl}[2][\CorCppFor]{%
@@ -397,6 +398,7 @@
 
 \lstnewenvironment{Cpp11synopsis}
 {
+  \renewcommand{\FuncDecl}[1]{\FuncDeclImpl{\Cpp[11]}{##1}}
   \textbf{C++11:}
   \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
@@ -405,6 +407,7 @@
 
 \lstnewenvironment{C11synopsis}
 { 
+  \renewcommand{\FuncDecl}[1]{\FuncDeclImpl{\Cstd[11]}{##1}}
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
@@ -414,6 +417,7 @@
 
 \lstnewenvironment{CsynopsisCol}
 { 
+  \renewcommand{\FuncDecl}[1]{\FuncDeclImpl{\CorCpp}{##1}}
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE,
@@ -423,6 +427,7 @@
 
 \lstnewenvironment{Csynopsis}
 { 
+  \renewcommand{\FuncDecl}[1]{\FuncDeclImpl{\CorCpp}{##1}}
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
@@ -432,6 +437,7 @@
 
 \lstnewenvironment{CsynopsisST}
 { 
+  \renewcommand{\FuncDecl}[1]{\FuncDeclImpl{\CorCpp}{##1}}
   \textbf{C/C++:} 
   \color{red}  
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
@@ -444,6 +450,7 @@
   
 \lstnewenvironment{Fsynopsis}
 { \deprecationstart \\
+  \renewcommand{\FuncDecl}[1]{\FuncDeclImpl{\Fortran}{##1}}
   \textbf{FORTRAN:}
   \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
     escapechar=@,

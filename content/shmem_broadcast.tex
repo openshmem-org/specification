@@ -6,17 +6,17 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{\CorCpp}{shmem\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void @\FuncDecl{\CorCpp}{shmem\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER nelems, PE_root, PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
-CALL @\FuncDecl{\Fortran}{SHMEM\_BROADCAST4}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{\Fortran}{SHMEM\_BROADCAST8}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{\Fortran}{SHMEM\_BROADCAST32}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
-CALL @\FuncDecl{\Fortran}{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
+CALL @\FuncDecl{SHMEM\_BROADCAST4}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_BROADCAST8}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_BROADCAST32}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
+CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
 \end{Fsynopsis}
  
 \begin{apiarguments}
