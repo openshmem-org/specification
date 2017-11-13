@@ -65,7 +65,7 @@
 %% Specialized declaration/creation and generate reference.
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
 \providecommand{\FuncDecl}{}
-\newcommand{\FuncDeclImpl}[2]{\ListingsCurrentStyle{#2}\FuncIndex{#1}{#2}}
+\newcommand{\FuncDeclImpl}[2]{{\ListingsCurrentStyle{#2}}\FuncIndex{#1}{#2}}
 \newcommand{\LibConstDecl}[2][\CorCppFor]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\LibHandleDecl}[2][\CorCppFor]{%
