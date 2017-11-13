@@ -374,31 +374,31 @@ supported before removal.
     \EnvVarRef{SMA\_SYMMETRIC\_SIZE} & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_SYMMETRIC\_SIZE}} \\ \hline
     \EnvVarRef{SMA\_DEBUG}           & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_DEBUG}} \\ \hline
     \minitab{\CorCpp: \FuncRef{\Cstd[11]}{shmem\_wait}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_wait}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_wait}}
         & 1.4 & Current & See \textbf{Notes} for \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_fetch}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_fetch}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_fetch}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch]{\FUNC{shmem\_atomic\_fetch}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_set}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_set}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_set}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_set]{\FUNC{shmem\_atomic\_set}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_cswap}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_cswap}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_cswap}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_compare_swap]{\FUNC{shmem\_atomic\_compare\_swap}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_swap}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_swap}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_swap}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_swap]{\FUNC{shmem\_atomic\_swap}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_finc}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_finc}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_finc}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch_inc]{\FUNC{shmem\_atomic\_fetch\_inc}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_inc}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_inc}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_inc}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_inc]{\FUNC{shmem\_atomic\_inc}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_fadd}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_fadd}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_fadd}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch_add]{\FUNC{shmem\_atomic\_fetch\_add}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_add}
-        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_<TYPENAME>\_add}}
+        \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & Current & (none) \\ \hline
     \end{longtable}
@@ -497,7 +497,7 @@ were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
 \subsection{\CorCpp: \FUNC{shmem\_wait}}
-The \CorCpp interface for \FUNC{shmem\_wait} and \FUNC{shmem\_<TYPENAME>\_wait}
+The \CorCpp interface for \FUNC{shmem\_wait} and \FUNC{shmem\_\FuncParam{TYPENAME}\_wait}
 was identified as unintuitive with respect to
 the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
 replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
@@ -512,14 +512,14 @@ The \Cstd[11] and \CorCpp interfaces for
 \begin{center}
 \begin{tabular}{ll}
     \Cstd[11]: & \CorCpp: \\
-    \FUNC{shmem\_fetch} & \FUNC{shmem\_<TYPENAME>\_fetch} \\
-    \FUNC{shmem\_set}   & \FUNC{shmem\_<TYPENAME>\_set}   \\
-    \FUNC{shmem\_cswap} & \FUNC{shmem\_<TYPENAME>\_cswap} \\
-    \FUNC{shmem\_swap}  & \FUNC{shmem\_<TYPENAME>\_swap}  \\
-    \FUNC{shmem\_finc}  & \FUNC{shmem\_<TYPENAME>\_finc}  \\
-    \FUNC{shmem\_inc}   & \FUNC{shmem\_<TYPENAME>\_inc}   \\
-    \FUNC{shmem\_fadd}  & \FUNC{shmem\_<TYPENAME>\_fadd}  \\
-    \FUNC{shmem\_add}   & \FUNC{shmem\_<TYPENAME>\_add}   \\
+    \FUNC{shmem\_fetch} & \FUNC{shmem\_\FuncParam{TYPENAME}\_fetch} \\
+    \FUNC{shmem\_set}   & \FUNC{shmem\_\FuncParam{TYPENAME}\_set}   \\
+    \FUNC{shmem\_cswap} & \FUNC{shmem\_\FuncParam{TYPENAME}\_cswap} \\
+    \FUNC{shmem\_swap}  & \FUNC{shmem\_\FuncParam{TYPENAME}\_swap}  \\
+    \FUNC{shmem\_finc}  & \FUNC{shmem\_\FuncParam{TYPENAME}\_finc}  \\
+    \FUNC{shmem\_inc}   & \FUNC{shmem\_\FuncParam{TYPENAME}\_inc}   \\
+    \FUNC{shmem\_fadd}  & \FUNC{shmem\_\FuncParam{TYPENAME}\_fadd}  \\
+    \FUNC{shmem\_add}   & \FUNC{shmem\_\FuncParam{TYPENAME}\_add}   \\
 \end{tabular}
 \end{center}
 were deprecated and replaced with

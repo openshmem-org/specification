@@ -12,8 +12,8 @@ where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{\CorCpp}{shmem\_<TYPENAME>\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
-void @\FuncDecl{\CorCpp}{shmem\_ctx\_<TYPENAME>\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{\CorCpp}{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
