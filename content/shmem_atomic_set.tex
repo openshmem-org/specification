@@ -53,7 +53,9 @@ CALL SHMEM_REAL8_SET(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_set} has been deprecated.
+    As of \openshmem[1.4],
+    \FuncRef{\Cstd[11]}{shmem\_set}\FuncIndex{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_set}
+    has been deprecated.
     Its behavior and call signature are identical to the replacement
     interface, \FUNC{shmem\_atomic\_set}.
 }

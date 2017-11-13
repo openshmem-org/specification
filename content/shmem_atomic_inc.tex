@@ -56,7 +56,10 @@ CALL SHMEM_INT8_INC(dest, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_inc} has been deprecated.
+    As of \openshmem[1.4],
+    \FUNC{shmem\_inc}
+    \FuncRef{\Cstd[11]}{shmem\_inc}\FuncIndex{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_inc}
+    has been deprecated.
     Its behavior and call signature are identical to the replacement
     interface, \FUNC{shmem\_atomic\_inc}.
 }

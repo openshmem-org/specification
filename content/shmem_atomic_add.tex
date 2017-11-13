@@ -59,7 +59,9 @@ CALL @\FuncDecl{\Fortran}{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_add} has been deprecated.
+    As of \openshmem[1.4],
+    \FuncRef{\Cstd[11]}{shmem\_add}\FuncIndex{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_add}
+    has been deprecated.
     Its behavior and call signature are identical to the replacement
     interface, \FUNC{shmem\_atomic\_add}.
 }
