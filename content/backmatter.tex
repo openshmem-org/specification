@@ -64,8 +64,8 @@ Note the declaration of the \VAR{static short dest} array and its use as the
 remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
 
 The \VAR{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
-%% FIXME: The following sentence is not *technically* correct.
-Each \ac{PE} is able to transfer data to the \dest{} array by simply specifying
+Each \ac{PE} is able to transfer data to a remote \dest{} array by simply
+specifying to an OpenSHMEM routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
 the local address of the symmetric data object that will receive the data.
 This local address resolution aids programmability because the address of the
 \dest{} need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to
