@@ -17,7 +17,8 @@ CALL SHMEM_QUIET
 
 \begin{apiarguments}
     \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+        argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
 \end{apiarguments}
 
 \apidescription{ 
@@ -76,7 +77,7 @@ CALL SHMEM_QUIET
 \begin{apiexamples}
 
 \apicexample
-    {The following example uses  \FUNC{shmem\_quiet}  in a \Cstd[11] program: }
+    {The following example uses \FUNC{shmem\_quiet} in a \Cstd[11] program: }
     {./example_code/shmem_quiet_example.c}
     {\VAR{Put1} and \VAR{put2} will be completed and visible before \VAR{put3}
     and \VAR{put4}.}

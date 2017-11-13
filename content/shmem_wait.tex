@@ -54,14 +54,14 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
     \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be
     changed by a write or an atomic operation issued by a \ac{PE}.
     These  routines can be used for point-to-point direct synchronization.  A call
-    to \FUNC{shmem\_wait} does not return until a \ac{PE} writes a value,
-    not equal to \VAR{cmp\_value}, into \VAR{ivar} on the waiting \ac{PE}.  A call
+    to \FUNC{shmem\_wait} does not return until a \ac{PE} writes a value
+    not equal to \VAR{cmp\_value} into \VAR{ivar} on the waiting \ac{PE}.  A call
     to \FUNC{shmem\_wait\_until} does not return until a \ac{PE} changes
     \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.
     The \FUNC{shmem\_wait} routines return when \VAR{ivar} is no longer equal to \VAR{cmp\_value}. The
     \FUNC{shmem\_wait\_until} routines return when the compare condition is true.
     The compare condition is defined by the \VAR{ivar}  argument  compared with the
-    \VAR{cmp\_value} using the comparison operator, \VAR{cmp}. 
+    \VAR{cmp\_value} using the comparison operator \VAR{cmp}.
 }
 
 
@@ -81,7 +81,7 @@ CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
 \apinotes{
   As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated,
   however, \FUNC{shmem\_wait} is equivalent to \FUNC{shmem\_wait\_until}
-  where \VAR{cmp} is SHMEM\_CMP\_NE.
+  where \VAR{cmp} is \CONST{SHMEM\_CMP\_NE}.
 }
 
 \apiimpnotes{
