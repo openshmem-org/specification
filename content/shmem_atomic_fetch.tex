@@ -18,6 +18,21 @@ TYPE shmem_ctx_<TYPENAME>_atomic_fetch(shmem_ctx_t ctx, const TYPE *dest, int pe
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+TYPE shmem_fetch(const TYPE *dest, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+TYPE shmem_<TYPENAME>_fetch(const TYPE *dest, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\} and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FETCH, ires_i4
@@ -54,14 +69,7 @@ res_r8 = SHMEM_REAL8_FETCH(dest, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], the \Cstd[11] and \CorCpp interfaces
-    \FUNC{shmem\_fetch} and \FUNC{shmem\_TYPENAME\_fetch} have been
-    deprecated. Their behavior and call signature are identical to the
-    respective replacement interfaces, \FUNC{shmem\_atomic\_fetch} and
-    \FUNC{shmem\_TYPENAME\_atomic\_fetch}, subject to the constraints
-    that the deprecated interfaces do not accept a context argument and
-    are only supported for \CTYPE{float}, \CTYPE{double}, \CTYPE{int},
-    \CTYPE{long}, and \CTYPE{long~long} types.
+    None.
 }
 
 \end{apidefinition}

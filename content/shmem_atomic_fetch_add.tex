@@ -18,6 +18,19 @@ TYPE shmem_ctx_<TYPENAME>_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE val
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+TYPE shmem_fadd(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+TYPE shmem_<TYPENAME>_fadd(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
+and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FADD, ires_i4, value_i4
@@ -66,14 +79,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], the \Cstd[11] and \CorCpp interfaces
-    \FUNC{shmem\_fetch\_add} and \FUNC{shmem\_TYPENAME\_fetch\_add} have been
-    deprecated. Their behavior and call signature are identical to the
-    respective replacement interfaces, \FUNC{shmem\_atomic\_fetch\_add} and
-    \FUNC{shmem\_TYPENAME\_atomic\_fetch\_add}, subject to the constraints
-    that the deprecated interfaces do not accept a context argument and
-    are only supported for \CTYPE{int}, \CTYPE{long}, and \CTYPE{long~long}
-    types.
+    None.
 }
 
 \begin{apiexamples}
