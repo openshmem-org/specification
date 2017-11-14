@@ -586,7 +586,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 \item Added the \CONST{SHMEM\_SYNC\_SIZE} constant.
 \\See Section \ref{subsec:library_constants}.
 %
-\item Added type-generic interfaces for \FUNC{SHMEM\_WAIT}.
+\item Added type-generic interfaces for \FUNC{shmem\_wait\_until}.
 \\ See Section \ref{subsec:shmem_wait}.
 %
 \item Removed the \VAR{volatile} qualifiers from the \VAR{ivar} arguments to
@@ -612,8 +612,10 @@ synchronization routines.
 \item Deprecated header directory \HEADER{mpp}.
 \\See Section \ref{sec:dep_api}.
 %
-\item Deprecated the \VAR{shmem\_wait} functions and added \VAR{shmem\_test}
-      functions.
+\item Deprecated the \FUNC{shmem\_wait} functions and the \CTYPE{long}-typed \CorCpp \FUNC{shmem\_wait\_until} function.
+\\ See Section \ref{subsec:p2p_intro}.
+%
+\item Added the \FUNC{shmem\_test} functions.
 \\ See Section \ref{subsec:p2p_intro}.
 %
 \item Added the \FUNC{shmem\_calloc} function.
