@@ -5,28 +5,28 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_fetch(const TYPE *dest, int pe);
-TYPE shmem_atomic_fetch(shmem_ctx_t ctx, const TYPE *dest, int pe);
+TYPE shmem_atomic_fetch(const TYPE *source, int pe);
+TYPE shmem_atomic_fetch(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by
 Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_fetch(const TYPE *dest, int pe);
-TYPE shmem_ctx_<TYPENAME>_atomic_fetch(shmem_ctx_t ctx, const TYPE *dest, int pe);
+TYPE shmem_<TYPENAME>_atomic_fetch(const TYPE *source, int pe);
+TYPE shmem_ctx_<TYPENAME>_atomic_fetch(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 
 \begin{DeprecateBlock}
 \begin{C11synopsis}
-TYPE shmem_fetch(const TYPE *dest, int pe);
+TYPE shmem_fetch(const TYPE *source, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \CTYPE{long}, \CTYPE{long long}\}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_fetch(const TYPE *dest, int pe);
+TYPE shmem_<TYPENAME>_fetch(const TYPE *source, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \CTYPE{long}, \CTYPE{long long}\} and has a corresponding
@@ -36,13 +36,13 @@ where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FETCH, ires_i4
-ires_i4 = SHMEM_INT4_FETCH(dest, pe)
+ires_i4 = SHMEM_INT4_FETCH(source, pe)
 INTEGER*8 SHMEM_INT8_FETCH, ires_i8
-ires_i8 = SHMEM_INT8_FETCH(dest, pe)
+ires_i8 = SHMEM_INT8_FETCH(source, pe)
 REAL*4 SHMEM_REAL4_FETCH, res_r4
-res_r4 = SHMEM_REAL4_FETCH(dest, pe)
+res_r4 = SHMEM_REAL4_FETCH(source, pe)
 REAL*8 SHMEM_REAL8_FETCH, res_r8
-res_r8 = SHMEM_REAL8_FETCH(dest, pe)
+res_r8 = SHMEM_REAL8_FETCH(source, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -50,20 +50,20 @@ res_r8 = SHMEM_REAL8_FETCH(dest, pe)
   \apiargument{IN}{ctx}{The context on which to perform the operation.
     When this argument is not provided, the operation is performed on
     \CONST{SHMEM\_CTX\_DEFAULT}.}
-  \apiargument{IN}{dest}{The remotely accessible data object to be fetched from
+  \apiargument{IN}{source}{The remotely accessible data object to be fetched from
     the remote \ac{PE}.}
   \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
-    \VAR{dest} is to be fetched.}
+    \VAR{source} is to be fetched.}
 
 \end{apiarguments}
 
 \apidescription{
     \FUNC{shmem\_atomic\_fetch} performs an atomic fetch operation.
-    It returns the contents of the \VAR{dest} as an atomic operation.
+    It returns the contents of the \VAR{source} as an atomic operation.
 }
 
 \apireturnvalues{
-    The contents at the \VAR{dest} address on the remote \ac{PE}.
+    The contents at the \VAR{source} address on the remote \ac{PE}.
     The data type of the return value is the same as the type of
     the remote data object.
 }
