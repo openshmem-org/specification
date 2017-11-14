@@ -11,7 +11,6 @@ where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-void shmem_wait_until(long *ivar, int cmp, long cmp_value);
 void shmem_<TYPENAME>_wait_until(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
@@ -19,6 +18,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
+void shmem_wait_until(long *ivar, int cmp, long cmp_value);
 void shmem_wait(long *ivar, long cmp_value);
 void shmem_<TYPENAME>_wait(TYPE *ivar, TYPE cmp_value);
 \end{CsynopsisCol}
