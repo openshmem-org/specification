@@ -375,6 +375,8 @@ supported before removal.
     \minitab{\CorCpp: \FUNC{shmem\_wait}
         \\ \CorCpp: \FUNC{shmem\_<TYPENAME>\_wait}}
         & 1.4 & Current & See \textbf{Notes} for \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}} \\ \hline
+    \CorCpp: \FUNC{shmem\_wait\_until} & 1.4 & Current
+        & \Cstd[11]: \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}}, \CorCpp: \hyperref[subsec:shmem_wait]{\FUNC{shmem\_long\_wait\_until}} \\ \hline
     \minitab{\Cstd[11]: \FUNC{shmem\_fetch}
         \\ \CorCpp: \FUNC{shmem\_<TYPENAME>\_fetch}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch]{\FUNC{shmem\_atomic\_fetch}} \\ \hline
@@ -503,6 +505,11 @@ replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
 \CONST{SHMEM\_CMP\_NE}, the \FUNC{shmem\_wait} interface was deprecated in
 favor of \FUNC{shmem\_wait\_until}, which makes the comparison operation
 explicit and better communicates the developer's intent.
+
+\subsection{\CorCpp: \FUNC{shmem\_wait\_until}}
+The \CTYPE{long}-typed \CorCpp routine \FUNC{shmem\_wait\_until} was deprecated
+in favor of the \Cstd[11] type-generic interface of the same name or the
+explicitly typed \CorCpp routine \FUNC{shmem\_long\_wait\_until}.
 
 \subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, %% Issue #66.
     \FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc},
