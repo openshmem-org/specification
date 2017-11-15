@@ -37,8 +37,9 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
     \apiargument{OUT}{dest}{Array to be updated on the local \ac{PE}. }
     \apiargument{IN}{source}{Array containing the data to be copied on the remote \ac{PE}.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}

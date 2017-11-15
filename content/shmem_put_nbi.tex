@@ -44,16 +44,17 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
-    \apiargument{IN}{source}{Data object containing the data to be copied.}
-    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
+  \apiargument{IN}{source}{Data object containing the data to be copied.}
+  \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
     arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
     \Fortran, it must be a constant, variable, or array element of default
     integer type.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
+  \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
     of type integer. When using \Fortran, it must be a constant, variable,
     or array element of default integer type.}
 \end{apiarguments}

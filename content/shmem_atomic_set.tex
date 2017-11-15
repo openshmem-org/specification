@@ -32,9 +32,10 @@ CALL SHMEM_REAL8_SET(dest, value_r8, pe)
 
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-\apiargument{IN}{dest}{The remotely accessible data object to be set on
+\apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+\apiargument{OUT}{dest}{The remotely accessible data object to be set on
     the remote \ac{PE}.}
 \apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
