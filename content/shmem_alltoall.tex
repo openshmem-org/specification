@@ -37,13 +37,13 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
     \VAR{PE\_size} must be of type integer.  When using \Fortran, it must
     be a default integer value.}
-\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
-    of type long and size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}. In \Fortran,
-    \VAR{pSync} must be of type integer and size
-    \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.  When using \Fortran, it must be a
-    default integer value. Every element of this array must be initialized with
-    the value \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the
-    active set enter the routine.}
+\apiargument{IN}{pSync}{
+    A symmetric work array of size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.
+    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
+    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
+    Every element of this array must be initialized with the value
+    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
+    enter the routine.}
 
 \end{apiarguments}
 
@@ -65,21 +65,23 @@ CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 
     As with all \openshmem collective routines, this routine assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not
-    in the active set calls an \openshmem collective routine, undefined
-    behavior results.
+    in the active set calls an \openshmem collective routine,
+    the behavior is undefined.
 
     The values of arguments \VAR{nelems}, \VAR{PE\_start}, \VAR{logPE\_stride},
     and \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same
     \VAR{dest} and \VAR{source} data objects, and the same \VAR{pSync} work
     array must be passed to all \acp{PE} in the active set.
 
-    Before any \ac{PE} calls a \FUNC{shmem\_alltoall} routine, the following
-    conditions must exist (synchronization via a barrier or some other method is
-    often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
-    active set is not still in use from a prior call to a
-    \FUNC{shmem\_alltoall/s} routine.  The \VAR{dest} data object on
-    all \acp{PE} in the active set is ready to accept the
-    \FUNC{shmem\_alltoall} data.
+    Before any \ac{PE} calls a \FUNC{shmem\_alltoall} routine,
+    the following conditions must be ensured:
+    \begin{itemize}
+    \item The \VAR{pSync} array on all \acp{PE} in the active set is not
+      still in use from a prior call to a \FUNC{shmem\_alltoall} routine.
+    \item The \VAR{dest} data object on all \acp{PE} in the active set is
+      ready to accept the \FUNC{shmem\_alltoall} data.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
 
     Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
     the local PE: Its \VAR{dest} symmetric data object is completely updated and
