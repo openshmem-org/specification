@@ -28,7 +28,7 @@ CALL SHMEM_GLOBAL_EXIT(status)
     the entire program, not just the \openshmem portion.  When any \ac{PE} calls
     \FUNC{shmem\_global\_exit}, it results in the immediate notification to all
     \acp{PE} to terminate.  \FUNC{shmem\_global\_exit} flushes I/O and releases
-    resources in accordance with C/C++/Fortran language requirements for normal
+    resources in accordance with \CorCppFor language requirements for normal
     program termination. If more than one \ac{PE} calls
     \FUNC{shmem\_global\_exit}, then the exit status returned to the environment
     shall be one of the values passed to \FUNC{shmem\_global\_exit} as the
@@ -46,14 +46,15 @@ CALL SHMEM_GLOBAL_EXIT(status)
     \FUNC{shmem\_global\_exit} may be used in situations where one or more
     \acp{PE} have determined that the program has completed and/or should
     terminate early.  Accordingly, the integer status argument can be used to
-    pass any information about the nature of the exit, e.g an encountered error
-    or a found solution.  Since \FUNC{shmem\_global\_exit} is a non-collective
+    pass any information about the nature of the exit; e.g., that the program
+    encountered an error or found a solution.
+    Since \FUNC{shmem\_global\_exit} is a non-collective
     routine, there is no implied synchronization, and all \acp{PE} must
     terminate regardless of their current execution state. While I/O must be
-    flushed for standard language I/O calls from C/C++/Fortran, it is
-    implementation dependent as to how I/O done by other means (e.g. third
+    flushed for standard language I/O calls from \CorCppFor, it is
+    implementation dependent as to how I/O done by other means (e.g., third
     party I/O libraries) is handled. Similarly, resources are released
-    according to C/C++/Fortran standard language requirements, but this may not
+    according to \CorCppFor standard language requirements, but this may not
     include all resources allocated for the \openshmem program. However, a
     quality implementation will make a best effort to flush all I/O and clean
     up all resources.
