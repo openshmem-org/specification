@@ -38,14 +38,14 @@ int main(void) {
             shmem_put_nbi(ctx[p_idx], &pbuf[p_idx][PLEN*me], &in_buf[PLEN*p],
                           PLEN, (me+i) % npes);
 
-        shmemx_ctx_quiet(ctx[p_idx^1]);
+        shmem_ctx_quiet(ctx[p_idx^1]);
         shmem_sync_all();
         for (i = 0; i < npes; i++)
             for (j = 0; j < PLEN; j++)
                 out_buf[PLEN*(p-1)+j] += pbuf[p_idx^1][PLEN*i+j];
     }
 
-    shmemx_ctx_quiet(ctx[p_idx]);
+    shmem_ctx_quiet(ctx[p_idx]);
     shmem_sync_all();
     for (i = 0; i < npes; i++)
         for (j = 0; j < PLEN; j++)

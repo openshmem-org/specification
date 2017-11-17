@@ -376,6 +376,8 @@ supported before removal.
     \minitab{\CorCpp: \FuncRef{\CorCpp}{shmem\_wait}
         \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_wait}}
         & 1.4 & Current & See \textbf{Notes} for \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}} \\ \hline
+    \CorCpp: \FuncRef{\CorCpp}{shmem\_wait\_until} & 1.4 & Current
+        & \Cstd[11]: \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}}, \CorCpp: \hyperref[subsec:shmem_wait]{\FUNC{shmem\_long\_wait\_until}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{\Cstd[11]}{shmem\_fetch}
         \\ \CorCpp: \FuncRef{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_fetch}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch]{\FUNC{shmem\_atomic\_fetch}} \\ \hline
@@ -505,7 +507,12 @@ replaced by \FUNC{shmem\_wait\_until} where \VAR{cmp} is
 favor of \FUNC{shmem\_wait\_until}, which makes the comparison operation
 explicit and better communicates the developer's intent.
 
-\subsection{\Cstd[11] and \CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set},
+\subsection{\CorCpp: \FUNC{shmem\_wait\_until}}
+The \CTYPE{long}-typed \CorCpp routine \FUNC{shmem\_wait\_until} was deprecated
+in favor of the \Cstd[11] type-generic interface of the same name or the
+explicitly typed \CorCpp routine \FUNC{shmem\_long\_wait\_until}.
+
+\subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, %% Issue #66.
     \FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc},
     \FUNC{shmem\_inc}, \FUNC{shmem\_fadd}, \FUNC{shmem\_add}}
 The \Cstd[11] and \CorCpp interfaces for
@@ -580,7 +587,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 \item Added the \CONST{SHMEM\_SYNC\_SIZE} constant.
 \\See Section \ref{subsec:library_constants}.
 %
-\item Added type-generic interfaces for \FUNC{SHMEM\_WAIT}.
+\item Added type-generic interfaces for \FUNC{shmem\_wait\_until}.
 \\ See Section \ref{subsec:shmem_wait}.
 %
 \item Removed the \VAR{volatile} qualifiers from the \VAR{ivar} arguments to
@@ -606,8 +613,10 @@ synchronization routines.
 \item Deprecated header directory \HEADER{mpp}.
 \\See Section \ref{sec:dep_api}.
 %
-\item Deprecated the \VAR{shmem\_wait} functions and added \VAR{shmem\_test}
-      functions.
+\item Deprecated the \FUNC{shmem\_wait} functions and the \CTYPE{long}-typed \CorCpp \FUNC{shmem\_wait\_until} function.
+\\ See Section \ref{subsec:p2p_intro}.
+%
+\item Added the \FUNC{shmem\_test} functions.
 \\ See Section \ref{subsec:p2p_intro}.
 %
 \item Added the \FUNC{shmem\_calloc} function.

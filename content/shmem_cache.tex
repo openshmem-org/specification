@@ -15,6 +15,8 @@ void @\FuncDecl{shmem\_udcflush\_line}@(void *dest);
 \end{Csynopsis}
 \end{DeprecateBlock}
 
+% N.B., The DeprecateBlock environment is not necessary here
+% because the entire Fortran API is deprecated.
 \begin{Fsynopsis}
 CALL @\FuncDecl{SHMEM\_CLEAR\_CACHE\_INV}@
 CALL @\FuncDecl{SHMEM\_SET\_CACHE\_INV}@

@@ -18,6 +18,19 @@ void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_add}@(shmem_ctx_t ctx,
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_add}@(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_add}@(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
+and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4  value_i4
@@ -59,11 +72,7 @@ CALL @\FuncDecl{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4],
-    \FuncRef{\Cstd[11]}{shmem\_add}\FuncIndex{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_add}
-    has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_add}.
+    None.
 }
 
 \begin{apiexamples}

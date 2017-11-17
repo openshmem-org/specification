@@ -15,9 +15,9 @@ CALL @\FuncDecl{SHMEM\_FENCE}@
 \end{Fsynopsis}
 
 \begin{apiarguments}
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
-    When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
 \end{apiarguments}
 
 \apidescription{
@@ -66,7 +66,7 @@ CALL @\FuncDecl{SHMEM\_FENCE}@
 \begin{apiexamples}
 
 \apicexample
-    {The following example uses  \FUNC{shmem\_fence}  in a \Cstd[11] program: }
+    {The following example uses \FUNC{shmem\_fence} in a \Cstd[11] program: }
     {./example_code/shmem_fence_example.c}
     {\VAR{Put1} will be ordered to be delivered before \VAR{put3} and \VAR{put2}
     will be ordered to be delivered before \VAR{put4}.}

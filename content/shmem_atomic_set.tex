@@ -18,6 +18,21 @@ void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_set}@(shmem_ctx_t ctx,
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_set}@(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_set}@(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\} and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_SET, value_i4
@@ -53,11 +68,7 @@ CALL @\FuncDecl{SHMEM\_REAL8\_SET}@(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4],
-    \FuncRef{\Cstd[11]}{shmem\_set}\FuncIndex{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_set}
-    has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_set}.
+    None.
 }
 
 \end{apidefinition}

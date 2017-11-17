@@ -47,7 +47,7 @@ CALL @\FuncDecl{SHMEM\_GLOBAL\_EXIT}@(status)
     \acp{PE} have determined that the program has completed and/or should
     terminate early.  Accordingly, the integer status argument can be used to
     pass any information about the nature of the exit; e.g., that the program
-    encountered an error or a found solution.
+    encountered an error or found a solution.
     Since \FUNC{shmem\_global\_exit} is a non-collective
     routine, there is no implied synchronization, and all \acp{PE} must
     terminate regardless of their current execution state. While I/O must be

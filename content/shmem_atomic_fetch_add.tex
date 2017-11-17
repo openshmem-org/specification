@@ -18,6 +18,19 @@ TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch\_add}@(shmem_ctx
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+TYPE @\FuncDecl{shmem\_fadd}@(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fadd}@(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
+and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FADD, ires_i4, value_i4
@@ -66,11 +79,7 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FADD}@(dest, value_i8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4],
-    \FuncRef{\Cstd[11]}{shmem\_fadd}\FuncIndex{\CorCpp}{shmem\_\FuncParam{TYPENAME}\_fadd}
-    has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_fetch\_add}.
+    None.
 }
 
 \begin{apiexamples}
