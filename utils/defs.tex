@@ -50,27 +50,6 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
-%% Generate indexed reference.
-\newcommand{\EnvVarIndex}[1]{\index{#1}}
-\newcommand{\FuncIndex}[1]{\index{#1}}
-\newcommand{\LibConstIndex}[1]{\index{#1}}
-\newcommand{\LibHandleIndex}[1]{\index{#1}}
-\newcommand{\TableIndex}[1]{\index{#1}\index{Tables!#1}}
-%% Write text and generate reference.
-\newcommand{\EnvVarRef}[1]{\VAR{#1}\EnvVarIndex{#1}}
-\newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
-\newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
-\newcommand{\LibHandleRef}[1]{\CONST{#1}\LibHandleIndex{#1}}
-\newcommand{\TableCaptionRef}[1]{\caption{#1}\TableIndex{#1}}
-%% Specialized declaration/creation and generate reference.
-\newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
-\newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
-\newcommand{\LibConstDecl}[2][\CorCppFor]{%
-  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
-\newcommand{\LibHandleDecl}[2][\CorCppFor]{%
-  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
-%%
-\newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
 %%
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
@@ -88,6 +67,27 @@
 \newcommand{\jth}{${\textit{j}^{\text{\tiny th}}}$}
 \newcommand{\kth}{${\textit{k}^{\text{\tiny th}}}$}
 \newcommand{\lth}{${\textit{l}^{\text{\tiny th}}}$}
+
+%% Generate indexed reference.
+\newcommand{\EnvVarIndex}[1]{\index{#1}}
+\newcommand{\FuncIndex}[1]{\index{#1}}
+\newcommand{\LibConstIndex}[1]{\index{#1}}
+\newcommand{\LibHandleIndex}[1]{\index{#1}}
+\newcommand{\TableIndex}[1]{\index{#1}\index{Tables!#1}}
+%% Write text and generate reference.
+\newcommand{\EnvVarRef}[1]{\VAR{#1}\EnvVarIndex{#1}}
+\newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
+\newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
+\newcommand{\LibHandleRef}[1]{\CONST{#1}\LibHandleIndex{#1}}
+\newcommand{\TableCaptionRef}[1]{\caption{#1}\TableIndex{#1}}
+%% Specialized declaration/creation and generate reference.
+\newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
+\newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
+\newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
+\newcommand{\LibConstDecl}[2][\CorCppFor]{%
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
+\newcommand{\LibHandleDecl}[2][\CorCppFor]{%
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
 
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
