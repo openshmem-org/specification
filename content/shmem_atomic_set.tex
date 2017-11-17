@@ -18,6 +18,21 @@ void shmem_ctx_<TYPENAME>_atomic_set(shmem_ctx_t ctx, TYPE *dest, TYPE value, in
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+void shmem_set(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+void shmem_<TYPENAME>_set(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\} and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_SET, value_i4
@@ -53,9 +68,7 @@ CALL SHMEM_REAL8_SET(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_set} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_set}.
+    None.
 }
 
 \end{apidefinition}

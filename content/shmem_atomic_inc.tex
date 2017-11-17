@@ -18,6 +18,19 @@ void shmem_ctx_<TYPENAME>_atomic_inc(shmem_ctx_t ctx, TYPE *dest, int pe);
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+void shmem_inc(TYPE *dest, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+void shmem_<TYPENAME>_inc(TYPE *dest, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
+and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 CALL SHMEM_INT4_INC(dest, pe)
@@ -56,9 +69,7 @@ CALL SHMEM_INT8_INC(dest, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_inc} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_inc}.
+    None.
 }
 
 \begin{apiexamples}
