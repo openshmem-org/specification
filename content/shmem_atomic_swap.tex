@@ -16,6 +16,21 @@ TYPE shmem_ctx_<TYPENAME>_atomic_swap(shmem_ctx_t ctx, TYPE *dest, TYPE value, i
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+TYPE shmem_swap(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+TYPE shmem_<TYPENAME>_swap(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\} and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER SHMEM_SWAP, value, pe
 ires = SHMEM_SWAP(dest, value, pe)
@@ -30,16 +45,17 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
-    \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
-        updated on the remote \ac{PE}.	 When using \CorCpp, the type of
-        \dest{} should match that  implied in the SYNOPSIS section.}
-    \apiargument{IN}{value}{The value to be atomically written to the remote
-        \ac{PE}. \VAR{value}  is the same type as \dest.}
-    \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
-        \dest{} is to be updated. When using \Fortran, it must be a default
-        integer value.}
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
+    updated on the remote \ac{PE}.	 When using \CorCpp, the type of
+    \dest{} should match that  implied in the SYNOPSIS section.}
+  \apiargument{IN}{value}{The value to be atomically written to the remote
+    \ac{PE}. \VAR{value}  is the same type as \dest.}
+  \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
+    \dest{} is to be updated. When using \Fortran, it must be a default
+    integer value.}
 \end{apiarguments}
 
 \apidescription{
@@ -49,8 +65,8 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 }
 
 \apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+  When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{value}}
 
 \apitablerow{SHMEM\_SWAP}{Integer of default kind}
 \apitablerow{SHMEM\_INT4\_SWAP}{\CONST{4}-byte integer}
@@ -64,9 +80,7 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_swap} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_swap}.
+    None.
 }
 
 \begin{apiexamples}
