@@ -5,27 +5,27 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_atomic_inc(TYPE *dest, int pe);
-void shmem_atomic_inc(shmem_ctx_t ctx, TYPE *dest, int pe);
+void @\FuncDecl{shmem\_atomic\_inc}@(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_atomic\_inc}@(shmem_ctx_t ctx, TYPE *dest, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_atomic_inc(TYPE *dest, int pe);
-void shmem_ctx_<TYPENAME>_atomic_inc(shmem_ctx_t ctx, TYPE *dest, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_inc}@(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_inc}@(shmem_ctx_t ctx, TYPE *dest, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{DeprecateBlock}
 \begin{C11synopsis}
-void shmem_inc(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_inc}@(TYPE *dest, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_inc(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_inc}@(TYPE *dest, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -33,8 +33,8 @@ and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{Fsynopsis}
 INTEGER pe
-CALL SHMEM_INT4_INC(dest, pe)
-CALL SHMEM_INT8_INC(dest, pe)
+CALL @\FuncDecl{SHMEM\_INT4\_INC}@(dest, pe)
+CALL @\FuncDecl{SHMEM\_INT8\_INC}@(dest, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}

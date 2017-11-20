@@ -1,3 +1,5 @@
+\makeindex
+
 \newcommand{\minitab}[2][l]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 
 \definecolor{ListingBG}{rgb}{0.91,0.91,0.91}
@@ -39,6 +41,7 @@
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
+%%
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
 \newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
 \newcommand{\Fortran}[1][]{%
@@ -47,8 +50,7 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
-\newcommand{\LibConstDecl}[2][\CorCppFor]{%
-  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \CONST{#2} \\~}}
+%%
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
 \newcommand{\SIZE}{\emph{SIZE}}
@@ -65,6 +67,27 @@
 \newcommand{\jth}{${\textit{j}^{\text{\tiny th}}}$}
 \newcommand{\kth}{${\textit{k}^{\text{\tiny th}}}$}
 \newcommand{\lth}{${\textit{l}^{\text{\tiny th}}}$}
+
+%% Generate indexed reference.
+\newcommand{\EnvVarIndex}[1]{\index{#1}}
+\newcommand{\FuncIndex}[1]{\index{#1}}
+\newcommand{\LibConstIndex}[1]{\index{#1}}
+\newcommand{\LibHandleIndex}[1]{\index{#1}}
+\newcommand{\TableIndex}[1]{\index{#1}\index{Tables!#1}}
+%% Write text and generate reference.
+\newcommand{\EnvVarRef}[1]{\VAR{#1}\EnvVarIndex{#1}}
+\newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
+\newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
+\newcommand{\LibHandleRef}[1]{\CONST{#1}\LibHandleIndex{#1}}
+\newcommand{\TableCaptionRef}[1]{\caption{#1}\TableIndex{#1}}
+%% Specialized declaration/creation and generate reference.
+\newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
+\newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
+\newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
+\newcommand{\LibConstDecl}[2][\CorCppFor]{%
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
+\newcommand{\LibHandleDecl}[2][\CorCppFor]{%
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
 
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
@@ -93,6 +116,17 @@
 \acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
+
+% Grab current listings style for use in environment escape to LaTeX.
+% https://tex.stackexchange.com/a/209644
+\makeatletter
+\newcommand\ListingsCurrentStyle{}
+\lst@AddToHook{Output}{\global\let\ListingsCurrentStyle\lst@thestyle}
+\lst@AddToHook{OutputOther}{\global\let\ListingsCurrentStyle\lst@thestyle}
+\newcommand\ListingsKeywordStyle{}
+\lst@AddToHook{Output}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
+\lst@AddToHook{OutputOther}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
+\makeatother
 
 %
 % This is used to put line numbers on plain pages.  Used in draft.tex
@@ -363,6 +397,7 @@
 {
   \textbf{C++11:}
   \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
+    escapechar=@,
   morekeywords={size_t, ptrdiff_t, TYPE, noreturn},
   aboveskip=0pt, belowskip=0pt}}{}
 
@@ -370,12 +405,14 @@
 { 
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+    escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+    escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
@@ -384,6 +421,7 @@
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
+    escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
@@ -392,15 +430,15 @@
   \textbf{C/C++:} 
   \color{red}  
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-      morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
-      aboveskip=0pt, belowskip=0pt}}
-}
-{}
-  
+    escapechar=@,
+    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
+    aboveskip=0pt, belowskip=0pt}}}{}
+
 \lstnewenvironment{Fsynopsis}
 { \deprecationstart \\
   \textbf{FORTRAN:}
   \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
+    escapechar=@,
   deletekeywords=[2]{STATUS},
   deletekeywords=[3]{LOG}, aboveskip=0pt,
   belowskip=0pt}}

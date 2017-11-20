@@ -6,42 +6,42 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_get_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
-void shmem_get_nbi(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_get\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_get\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_get_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
-void shmem_ctx_<TYPENAME>_get_nbi(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_get\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_get\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void shmem_get<SIZE>_nbi(void *dest, const void *source, size_t  nelems, int pe);
-void shmem_ctx_get<SIZE>_nbi(shmem_ctx_t ctx, void *dest, const void *source, size_t  nelems, int pe);
+void @\FuncDecl{shmem\_get\FuncParam{SIZE}\_nbi}@(void *dest, const void *source, size_t  nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_get\FuncParam{SIZE}\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t  nelems, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
-void shmem_getmem_nbi(void *dest, const void *source, size_t nelems, int pe);
-void shmem_ctx_getmem_nbi(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_getmem\_nbi}@(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_getmem\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 
 \begin{Fsynopsis}
 INTEGER nelems, pe
-CALL SHMEM_CHARACTER_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_COMPLEX_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_DOUBLE_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET4_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET8_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET32_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET64_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET128_NBI(dest, source, nelems, pe)
-CALL SHMEM_GETMEM_NBI(dest, source, nelems, pe)
-CALL SHMEM_INTEGER_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_LOGICAL_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_CHARACTER\_GET\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_COMPLEX\_GET\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_DOUBLE\_GET\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_GET4\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_GET8\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_GET32\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_GET64\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_GET128\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_GETMEM\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_INTEGER\_GET\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_LOGICAL\_GET\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_REAL\_GET\_NBI}@(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}

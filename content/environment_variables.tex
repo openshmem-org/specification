@@ -1,3 +1,5 @@
+\TableIndex{Environment Variables}
+
 The \openshmem specification provides a set of environment variables that allows
 users to configure the \openshmem implementation, and receive information about
 the implementation. The implementations of the specification are free to define
@@ -13,20 +15,29 @@ deprecation rationale for more details.
 \medskip{}
 
 \begin{tabular}{|l|l|l|}
-\hline 
-\textbf{Variable} & \textbf{Value} & \textbf{Description}\tabularnewline
-\hline 
-\VAR{SHMEM\_VERSION} & Any & Print the library version at
-start-up\tabularnewline
-\hline 
-\VAR{SHMEM\_INFO} & Any & Print helpful text about all these environment
-variables\tabularnewline
-\hline 
-\VAR{SHMEM\_SYMMETRIC\_SIZE} & Non-negative integer & Number of bytes to
-allocate for symmetric heap\tabularnewline
-\hline 
-\VAR{SHMEM\_DEBUG} & Any & Enable debugging messages\tabularnewline
-\hline 
+\hline
+\textbf{Variable} & \textbf{Value} & \textbf{Description}
+\tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_VERSION}
+    & Any
+    & Print the library version at start-up
+    \tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_INFO}
+    & Any
+    & Print helpful text about all these environment variables
+    \tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_SYMMETRIC\_SIZE}
+    & Non-negative integer
+    & Number of bytes to allocate for symmetric heap
+    \tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_DEBUG}
+    & Any
+    & Enable debugging messages
+    \tabularnewline\hline
 \end{tabular}
 
 \medskip{}

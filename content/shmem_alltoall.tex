@@ -6,15 +6,15 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoall32(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_alltoall64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_alltoall32}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
 INTEGER PE_start, logPE_stride, PE_size, nelems
-CALL SHMEM_ALLTOALL32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_ALLTOALL64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_ALLTOALL32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}

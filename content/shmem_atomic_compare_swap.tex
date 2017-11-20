@@ -5,27 +5,27 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_compare_swap(TYPE *dest, TYPE cond, TYPE value, int pe);
-TYPE shmem_atomic_compare_swap(shmem_ctx_t ctx, TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_compare\_swap}@(TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_compare\_swap}@(shmem_ctx_t ctx, TYPE *dest, TYPE cond, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_compare_swap(TYPE *dest, TYPE cond, TYPE value, int pe);
-TYPE shmem_ctx_<TYPENAME>_atomic_compare_swap(shmem_ctx_t ctx, TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_compare\_swap}@(TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_compare\_swap}@(shmem_ctx_t ctx, TYPE *dest, TYPE cond, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{DeprecateBlock}
 \begin{C11synopsis}
-TYPE shmem_cswap(TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_cswap}@(TYPE *dest, TYPE cond, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_cswap(TYPE *dest, TYPE cond, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_cswap}@(TYPE *dest, TYPE cond, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -34,9 +34,9 @@ and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_CSWAP,  cond_i4, value_i4, ires_i4
-ires_i4 = SHMEM_INT4_CSWAP(dest, cond_i4, value_i4, pe)
+ires\_i4 = @\FuncDecl{SHMEM\_INT4\_CSWAP}@(dest, cond_i4, value_i4, pe)
 INTEGER*8 SHMEM_INT8_CSWAP,  cond_i8, value_i8, ires_i8
-ires_i8 = SHMEM_INT8_CSWAP(dest, cond_i8, value_i8, pe)
+ires\_i8 = @\FuncDecl{SHMEM\_INT8\_CSWAP}@(dest, cond_i8, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}

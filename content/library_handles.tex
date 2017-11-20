@@ -1,3 +1,6 @@
+\TableIndex{Library Handles}
+\TableIndex{Handles}
+
 The \openshmem library provides a set of predefined named constant handles.
 All named constants can be used in initialization expressions or assignments,
 but not necessarily in array declarations or as labels in \Cstd switch statements.
@@ -10,7 +13,7 @@ constants.
 \tabularnewline \hline
 \endhead
 %%
-\LibConstDecl[\CorCpp]{SHMEM\_CTX\_DEFAULT} &
+\LibHandleDecl[\CorCpp]{SHMEM\_CTX\_DEFAULT} &
 Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
 default communication context.  All point-to-point communication operations
 and synchronizations that do not specify a context are performed on the

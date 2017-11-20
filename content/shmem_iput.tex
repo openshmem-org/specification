@@ -5,35 +5,35 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_iput(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_iput(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_iput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_iput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_iput(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_ctx_<TYPENAME>_iput(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_iput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_iput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void shmem_iput<SIZE>(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-void shmem_ctx_iput<SIZE>(shmem_ctx_t ctx, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_iput\FuncParam{SIZE}}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_iput\FuncParam{SIZE}}@(shmem_ctx_t ctx, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{Fsynopsis}
 INTEGER dst, sst, nelems, pe
-CALL SHMEM_COMPLEX_IPUT(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_DOUBLE_IPUT(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_INTEGER_IPUT(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IPUT4(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IPUT8(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IPUT32(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IPUT64(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IPUT128(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_LOGICAL_IPUT(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_REAL_IPUT(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_COMPLEX\_IPUT}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_DOUBLE\_IPUT}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_INTEGER\_IPUT}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IPUT4}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IPUT8}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IPUT32}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IPUT64}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IPUT128}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_LOGICAL\_IPUT}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_REAL\_IPUT}@(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}

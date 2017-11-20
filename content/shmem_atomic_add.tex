@@ -5,27 +5,27 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_atomic_add(TYPE *dest, TYPE value, int pe);
-void shmem_atomic_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_atomic_add(TYPE *dest, TYPE value, int pe);
-void shmem_ctx_<TYPENAME>_atomic_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_add}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{DeprecateBlock}
 \begin{C11synopsis}
-void shmem_add(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_add}@(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_add(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_add}@(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -34,9 +34,9 @@ and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4  value_i4
-CALL SHMEM_INT4_ADD(dest, value_i4, pe)
+CALL @\FuncDecl{SHMEM\_INT4\_ADD}@(dest, value_i4, pe)
 INTEGER*8 value_i8
-CALL SHMEM_INT8_ADD(dest, value_i8, pe)
+CALL @\FuncDecl{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}

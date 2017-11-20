@@ -5,27 +5,27 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
-TYPE shmem_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch\_add}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
-TYPE shmem_ctx_<TYPENAME>_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_fetch\_add}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{DeprecateBlock}
 \begin{C11synopsis}
-TYPE shmem_fadd(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_fadd}@(TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_fadd(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fadd}@(TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -34,9 +34,9 @@ and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FADD, ires_i4, value_i4
-ires_i4 = SHMEM_INT4_FADD(dest, value_i4, pe)
+ires\_i4 = @\FuncDecl{SHMEM\_INT4\_FADD}@(dest, value_i4, pe)
 INTEGER*8 SHMEM_INT8_FADD, ires_i8, value_i8
-ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
+ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FADD}@(dest, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}

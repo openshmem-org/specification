@@ -4,19 +4,19 @@ querying the thread environment. There are four levels of threading defined by
 the \openshmem specification.
 
 \begin{description}
-\item[\CONST{SHMEM\_THREAD\_SINGLE}] \hfill \\
+\item[\LibConstRef{SHMEM\_THREAD\_SINGLE}] \hfill \\
 The \openshmem program must not be multithreaded.
 
-\item[\CONST{SHMEM\_THREAD\_FUNNELED}] \hfill \\
+\item[\LibConstRef{SHMEM\_THREAD\_FUNNELED}] \hfill \\
 The \openshmem program may be multithreaded. However, the program must ensure
 that only the main thread invokes the \openshmem interfaces. The main thread
 is the thread that invokes either \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}.
 
-\item[\CONST{SHMEM\_THREAD\_SERIALIZED}] \hfill \\
+\item[\LibConstRef{SHMEM\_THREAD\_SERIALIZED}] \hfill \\
 The \openshmem program may be multithreaded. However, the program must ensure
 that the \openshmem interfaces are not invoked concurrently by multiple threads.
 
-\item[\CONST{SHMEM\_THREAD\_MULTIPLE}] \hfill \\
+\item[\LibConstRef{SHMEM\_THREAD\_MULTIPLE}] \hfill \\
 The \openshmem program may be multithreaded and any thread may invoke the \openshmem
 interfaces.
 \end{description}

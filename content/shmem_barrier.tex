@@ -6,13 +6,13 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_barrier(int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_barrier}@(int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_BARRIER_SYNC_SIZE)
-CALL SHMEM_BARRIER(PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}

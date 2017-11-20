@@ -5,22 +5,22 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_wait_until(TYPE *ivar, int cmp, TYPE cmp_value);
+void @\FuncDecl{shmem\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_wait_until(TYPE *ivar, int cmp, TYPE cmp_value);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
-void shmem_wait_until(long *ivar, int cmp, long cmp_value);
-void shmem_wait(long *ivar, long cmp_value);
-void shmem_<TYPENAME>_wait(TYPE *ivar, TYPE cmp_value);
+void @\FuncDecl{shmem\_wait\_until}@(long *ivar, int cmp, long cmp_value);
+void @\FuncDecl{shmem\_wait}@(long *ivar, long cmp_value);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait}@(TYPE *ivar, TYPE cmp_value);
 \end{CsynopsisCol}
 where \TYPE{} is one of \{\CTYPE{short}, \CTYPE{int}, \CTYPE{long},
 \CTYPE{long long}\} and has a corresponding \TYPENAME{} specified by
@@ -28,12 +28,12 @@ Table~\ref{p2psynctypes}.
 \end{DeprecateBlock}
 
 \begin{Fsynopsis}
-CALL SHMEM_INT4_WAIT(ivar, cmp_value)
-CALL SHMEM_INT4_WAIT_UNTIL(ivar, cmp, cmp_value)
-CALL SHMEM_INT8_WAIT(ivar, cmp_value)
-CALL SHMEM_INT8_WAIT_UNTIL(ivar, cmp, cmp_value)
-CALL SHMEM_WAIT(ivar, cmp_value)
-CALL SHMEM_WAIT_UNTIL(ivar, cmp, cmp_value)
+CALL @\FuncDecl{SHMEM\_INT4\_WAIT}@(ivar, cmp_value)
+CALL @\FuncDecl{SHMEM\_INT4\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
+CALL @\FuncDecl{SHMEM\_INT8\_WAIT}@(ivar, cmp_value)
+CALL @\FuncDecl{SHMEM\_INT8\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
+CALL @\FuncDecl{SHMEM\_WAIT}@(ivar, cmp_value)
+CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 \end{Fsynopsis}
 
 \begin{apiarguments}

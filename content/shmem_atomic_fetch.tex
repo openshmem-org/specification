@@ -5,28 +5,28 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_fetch(const TYPE *source, int pe);
-TYPE shmem_atomic_fetch(shmem_ctx_t ctx, const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch}@(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch}@(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by
 Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_fetch(const TYPE *source, int pe);
-TYPE shmem_ctx_<TYPENAME>_atomic_fetch(shmem_ctx_t ctx, const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_fetch}@(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch}@(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 
 \begin{DeprecateBlock}
 \begin{C11synopsis}
-TYPE shmem_fetch(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_fetch}@(const TYPE *source, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \CTYPE{long}, \CTYPE{long long}\}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_fetch(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fetch}@(const TYPE *source, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \CTYPE{long}, \CTYPE{long long}\} and has a corresponding
@@ -36,13 +36,13 @@ where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FETCH, ires_i4
-ires_i4 = SHMEM_INT4_FETCH(source, pe)
+ires\_i4 = @\FuncDecl{SHMEM\_INT4\_FETCH}@(source, pe)
 INTEGER*8 SHMEM_INT8_FETCH, ires_i8
-ires_i8 = SHMEM_INT8_FETCH(source, pe)
+ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FETCH}@(source, pe)
 REAL*4 SHMEM_REAL4_FETCH, res_r4
-res_r4 = SHMEM_REAL4_FETCH(source, pe)
+res\_r4 = @\FuncDecl{SHMEM\_REAL4\_FETCH}@(source, pe)
 REAL*8 SHMEM_REAL8_FETCH, res_r8
-res_r8 = SHMEM_REAL8_FETCH(source, pe)
+res\_r8 = @\FuncDecl{SHMEM\_REAL8\_FETCH}@(source, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
