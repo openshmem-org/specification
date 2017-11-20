@@ -37,7 +37,6 @@
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
-\newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}} % Only library_constants.tex table.
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
 \newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
 \newcommand{\Fortran}[1][]{%
@@ -46,6 +45,8 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
+\newcommand{\LibConstDecl}[2][\CorCppFor]{%
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \CONST{#2} \\~}}
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
 \newcommand{\SIZE}{\emph{SIZE}}
@@ -71,7 +72,6 @@
 \newcommand{\kth}{${\textit{k}^{\text{\tiny th}}}$}
 \newcommand{\lth}{${\textit{l}^{\text{\tiny th}}}$}
 
-
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
 \acro{RMO}{\emph{Remote Memory Operation}}
@@ -82,13 +82,18 @@
 \acro{API}{\emph{Application Programming Interface}}
 \acro{MPI}{\emph{Message Passing Interface}}
 \acro{SPMD}{\emph{Single Program Multiple Data}}
+\acro{ARL}{Army Research Laboratory}
+\acro{AMD}{Advanced Micro Devices}
 \acro{UH}{University of Houston}
 \acro{UO}{University of Oregon}
 \acro{ORNL}{Oak Ridge National Laboratory}
 \acro{LANL}{Los Alamos National Laboratory}
 \acro{ESSC}{Extreme Scale Systems Center}
-\acro{OSSS}{Open Software System Solutions}
+\acro{OSSS}{Open Source Software Solutions}
 \acro{DoD}{U.S. Department of Defense}
+\acro{SBU}{Stonybrook University}
+\acro{UTK}{University of Tenneesee at Knoxville}
+\acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
 
