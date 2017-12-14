@@ -375,9 +375,9 @@ supported before removal.
     \EnvVarRef{SMA\_DEBUG}           & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_DEBUG}} \\ \hline
     \minitab{\CorCpp: \FuncRef{shmem\_wait}
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_wait}}
-        & 1.4 & Current & See \textbf{Notes} for \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}} \\ \hline
+        & 1.4 & Current & See \textbf{Notes} for \hyperref[subsec:shmem_wait_until]{\FUNC{shmem\_wait\_until}} \\ \hline
     \CorCpp: \FuncRef{shmem\_wait\_until} & 1.4 & Current
-        & \Cstd[11]: \hyperref[subsec:shmem_wait]{\FUNC{shmem\_wait\_until}}, \CorCpp: \hyperref[subsec:shmem_wait]{\FUNC{shmem\_long\_wait\_until}} \\ \hline
+        & \Cstd[11]: \hyperref[subsec:shmem_wait_until]{\FUNC{shmem\_wait\_until}}, \CorCpp: \hyperref[subsec:shmem_wait_until]{\FUNC{shmem\_long\_wait\_until}} \\ \hline
     \minitab{\Cstd[11]: \FuncRef{shmem\_fetch}
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_fetch}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_fetch]{\FUNC{shmem\_atomic\_fetch}} \\ \hline
@@ -555,7 +555,7 @@ multithreading support,
 \emph{contexts} for communication management,
 \FUNC{shmem\_sync},
 \FUNC{shmem\_calloc},
-expanded type support for \ac{RMA} and \ac{AMO} operations,
+expanded type support,
 a new namespace for atomic operations,
 atomic bitwise operations,
 \FUNC{shmem\_test} for nonblocking point-to-point synchronization,
@@ -588,13 +588,13 @@ The following list describes the specific changes in \openshmem[1.4]:
 \\See Section \ref{subsec:library_constants}.
 %
 \item Added type-generic interfaces for \FUNC{shmem\_wait\_until}.
-\\ See Section \ref{subsec:shmem_wait}.
+\\ See Section \ref{subsec:shmem_wait_until}.
 %
 \item Removed the \VAR{volatile} qualifiers from the \VAR{ivar} arguments to
 \FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
 \emph{Rationale: Volatile qualifiers were added to several API routines in
 \openshmem[1.3]; however, they were later found to be unnecessary.}
-\\ See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
+\\ See Sections \ref{subsec:shmem_wait_until} and \ref{subsec:shmem_lock}.
 %
 \item Deprecated the \VAR{SMA\_}* environment variables and added equivalent
 \VAR{SHMEM\_}* environment variables.
@@ -644,7 +644,7 @@ synchronization routines.
 %
 \item Revised the description of \FUNC{shmem\_wait} for a multithreaded
     \openshmem \ac{PE}.
-\\See Section \ref{subsec:shmem_wait}
+\\See Section \ref{subsec:shmem_wait_until}
 %
 \item Clarified description for \CONST{SHMEM\_VENDOR\_STRING}.
 \\See Section \ref{subsec:library_constants}.
@@ -655,8 +655,10 @@ synchronization routines.
 \item Clarified API description for \FUNC{shmem\_info\_get\_name}.
 \\See Section \ref{subsec:shmem_info_get_name}.
 %
-\item Expanded the type support for RMA and AMO operations.
-\\ See Sections \ref{sec:rma} and \ref{sec:amo}.
+\item Expanded the type support for RMA, AMO, and point-to-point
+    synchronization operations.
+\\ See Tables \ref{stdrmatypes}, \ref{stdamotypes}, \ref{extamotypes}, and
+    \ref{p2psynctypes}
 %
 \item Renamed AMO operations to use \FUNC{shmem\_atomic\_*} prefix and
       deprecated old AMO routines.
@@ -725,7 +727,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 %
 \item Added \CTYPE{volatile} to remotely accessible pointer argument in
 	\FUNC{SHMEM\_WAIT} and \FUNC{SHMEM\_LOCK}.
-\\See Sections \ref{subsec:shmem_wait} and \ref{subsec:shmem_lock}.
+\\See Sections \ref{subsec:shmem_wait_until} and \ref{subsec:shmem_lock}.
 %
 \item Deprecation of \FUNC{SHMEM\_CACHE}.
 \\See Section \ref{subsec:shmem_cache}.
@@ -791,7 +793,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \\See Section \ref{subsec:shmem_put}. 
 %
 \item Clarification related to \FUNC{shmem\_wait}.
-\\See Section \ref{subsec:shmem_wait}.
+\\See Section \ref{subsec:shmem_wait_until}.
 %
 \item Undefined behavior for null pointers without zero counts added.
 \\See Annex \ref{sec:undefined}
@@ -851,7 +853,7 @@ The following list describes the specific changes in \openshmem[1.1]:
 %
 \item Clarification of the naming conventions for constant in \Cstd and
       \Fortran.
-\\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait}.
+\\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait_until}.
 %
 \item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.
 \\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}. 
@@ -908,7 +910,7 @@ language.
 \\See Sections \ref{subsec:shfree} and Annex \ref{sec:undefined}. 
 %
 \item \Fortran programming fixes for examples.\\ See Sections
-\ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait}. 
+\ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait_until}. 
 %
 \item Clarifications of the reuse \VAR{pSync} and \VAR{pWork} across
 collectives.
