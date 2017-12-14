@@ -1,71 +1,117 @@
-An \ac{AMO} is a one-sided communication mechanism that combines memory update
-operations with atomicity guarantees described in Section
+An \ac{AMO} is a one-sided communication mechanism that combines memory read,
+update, or write operations with atomicity guarantees described in Section~%
 \ref{subsec:amo_guarantees}.  Similar to the \ac{RMA} routines, described in
-Section \ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
-\openshmem{} defines the two types of \ac{AMO} routines:
+Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
+\openshmem defines two types of \ac{AMO} routines:
+
 \begin{itemize}
-\item % Blocking\\
-The \textit{fetching} routines return the original value of, and optionally
-update, the remote data object in a single atomic operation.  The routines 
-return after the data has been fetched and delivered to the local \ac{PE}.
 
-The \textit{fetching} operations include: \FUNC{SHMEM\_FETCH},
-\FUNC{SHMEM\_CSWAP}, \FUNC{SHMEM\_SWAP}, \FUNC{SHMEM\_FINC}, and \FUNC{SHMEM\_FADD}.
+\item
+  The \emph{fetching} routines return the original value of, and optionally
+  update, the remote data object in a single atomic operation.  The routines
+  return after the data has been fetched from the target \ac{PE} and delivered
+  to the calling \ac{PE}.
+  The data type of the returned value is the same as the type of
+  the remote data object.
 
-\item % Non-Blocking\\
-The \textit{non-fetching} atomic routines update the remote memory in a single
-atomic operation.  A \textit{non-fetching} atomic routine starts the atomic
-operation and may return before the operation execution on the remote \ac{PE}.
-To force completion for these \textit{non-fetching} atomic routines,
-\FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all} can be
-used by an \openshmem{} program. 
+  The fetching routines include:
+  \FUNC{shmem\_atomic\_\{fetch, compare\_swap, swap\}} and
+  \FUNC{shmem\_atomic\_fetch\_\{inc, add, and, or, xor\}}.
 
-The \textit{non-fetching} operations include: \FUNC{SHMEM\_SET}, \FUNC{SHMEM\_INC} and
-\FUNC{SHMEM\_ADD}.
+\item
+  The \emph{non-fetching} routines update the remote data object in a single
+  atomic operation.  A call to a non-fetching atomic routine issues the atomic
+  operation and may return before the operation executes on the target \ac{PE}.
+  The \FUNC{shmem\_quiet}, \FUNC{shmem\_barrier}, or \FUNC{shmem\_barrier\_all}
+  routines can be used to force completion for these non-fetching
+  atomic routines.
+
+  The non-fetching routines include:
+  \FUNC{shmem\_atomic\_\{set, inc, add, and, or, xor\}}.
+
 \end{itemize}
 
-Where appropriate compiler support is available, \openshmem{} provides type-generic
-atomic memory operation interfaces via \Celev{} generic selection. The type-generic 
-\ac{AMO} routines each support the ``standard \ac{AMO} types’’ listed in Table \ref{stdamotypes}, 
-except for \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, and \FUNC{shmem\_swap}, which supports the ``extended \ac{AMO} types’’ listed 
-in Table \ref{extamotypes}.
+Where appropriate compiler support is available, \openshmem provides
+type-generic \ac{AMO} interfaces via \Cstd[11] generic selection.
+The type-generic support for the \ac{AMO} routines is as follows:
+
+\begin{itemize}
+\item \FUNC{shmem\_atomic\_\{compare\_swap, fetch\_inc, inc, fetch\_add, add\}}
+  support the ``standard \ac{AMO} types'' listed in Table~\ref{stdamotypes},
+\item \FUNC{shmem\_atomic\_\{fetch, set, swap\}} support
+  the ``extended \ac{AMO} types'' listed in Table~\ref{extamotypes}, and
+\item \FUNC{shmem\_atomic\_\{fetch\_and, and, fetch\_or, or, fetch\_xor, xor\}}
+  support the ``bitwise \ac{AMO} types'' listed in Table~\ref{bitamotypes}.
+\end{itemize}
+
+The standard, extended, and bitwise \ac{AMO} types include some of the exact-width
+integer types defined in \HEADER{stdint.h} by \Cstd[99]~\S7.18.1.1 and
+\Cstd[11]~\S7.20.1.1. When the \Cstd translation environment
+does not provide exact-width integer types with \HEADER{stdint.h}, an
+\openshmem implemementation is not required to provide support for these types.
 
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{|l|l|}
       \hline
-      \TYPE & \TYPENAME\\
-      \hline
-      int & int\\
-      \hline
-      long & long\\
-      \hline
-      long long & longlong\\
-      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      int                & int        \\ \hline
+      long               & long       \\ \hline
+      long long          & longlong   \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+      size\_t            & size       \\ \hline
+      ptrdiff\_t         & ptrdiff    \\ \hline
     \end{tabular}
-    \caption{Standard \ac{AMO} Types and Names}
+    \TableCaptionRef{Standard \ac{AMO} Types and Names}
     \label{stdamotypes}
-  \end{center} 
+  \end{center}
 \end{table}
 
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{|l|l|}
       \hline
-      \TYPE & \TYPENAME\\
-      \hline
-      float & float\\
-      \hline
-      double & double\\
-      \hline
-      int & int\\
-      \hline
-      long & long\\
-      \hline
-      long long & longlong\\
-      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      float              & float      \\ \hline
+      double             & double     \\ \hline
+      int                & int        \\ \hline
+      long               & long       \\ \hline
+      long long          & longlong   \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+      size\_t            & size       \\ \hline
+      ptrdiff\_t         & ptrdiff    \\ \hline
     \end{tabular}
-    \caption{Extended \ac{AMO} Types and Names}
+    \TableCaptionRef{Extended \ac{AMO} Types and Names}
     \label{extamotypes}
-  \end{center} 
+  \end{center}
+\end{table}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \TYPE              & \TYPENAME  \\ \hline
+      unsigned int       & uint       \\ \hline
+      unsigned long      & ulong      \\ \hline
+      unsigned long long & ulonglong  \\ \hline
+      int32\_t           & int32      \\ \hline
+      int64\_t           & int64      \\ \hline
+      uint32\_t          & uint32     \\ \hline
+      uint64\_t          & uint64     \\ \hline
+    \end{tabular}
+    \TableCaptionRef{Bitwise \ac{AMO} Types and Names}
+    \label{bitamotypes}
+  \end{center}
 \end{table}

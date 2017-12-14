@@ -3,15 +3,10 @@
 
 int main(void)
 {
-  int npes;
-
-  shmem_init();
-  
-  npes = shmem_n_pes();
-
-  if (shmem_my_pe() == 0) {
-    printf("Number of PEs executing this program is: %d\n", npes);
-  }
-
-  return 0;
+   shmem_init();
+   int me = shmem_my_pe();
+   int npes = shmem_n_pes();
+   printf("I am #%d of %d PEs executing this program\n", me, npes);
+   shmem_finalize();
+   return 0;
 }

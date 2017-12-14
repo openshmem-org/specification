@@ -5,12 +5,12 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int shmem_my_pe(void);
+int @\FuncDecl{shmem\_my\_pe}@(void);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER SHMEM_MY_PE, ME
-ME = SHMEM_MY_PE()
+ME = @\FuncDecl{SHMEM\_MY\_PE}@()
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -20,7 +20,7 @@ ME = SHMEM_MY_PE()
 \apidescription{
     This routine returns the \ac{PE} number of the calling \ac{PE}.  It accepts no
     arguments.  The result is an integer between \CONST{0} and \VAR{npes} -
-    \CONST{1}, where \VAR{npes} is the total number of \ac{PE}s executing the
+    \CONST{1}, where \VAR{npes} is the total number of \acp{PE} executing the
     current program.
 }
 
@@ -29,21 +29,12 @@ ME = SHMEM_MY_PE()
 }
 
 \apinotes{
-    Each \ac{PE} has a unique number or identifier. As of \openshmem Specification
-    1.2 the use of \FUNC{\_my\_pe} has been deprecated. Although \openshmem
+    Each \ac{PE} has a unique number or identifier. As of \openshmem[1.2]
+    the use of \FUNC{\_my\_pe} has been deprecated. Although \openshmem
     libraries are required to support the call, users are encouraged to use
     \FUNC{shmem\_my\_pe} instead.  The behavior and signature  of the routine
     \FUNC{shmem\_my\_pe} remains unchanged from the deprecated \FUNC{\_my\_pe}
     version.
 }
-
-\begin{apiexamples}
-
-\apicexample
-    {The following \FUNC{shmem\_my\_pe} example is for \CorCpp{} programs:}
-    {./example_code/shmem_mype_example.c}
-    {}
-
-\end{apiexamples}
 
 \end{apidefinition}

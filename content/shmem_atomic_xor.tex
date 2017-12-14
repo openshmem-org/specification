@@ -1,0 +1,49 @@
+\apisummary{
+  Atomically perform a non-fetching bitwise exclusive OR (XOR) operation on a
+  remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_atomic\_xor}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_xor}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the bitwise \ac{AMO} types specified by
+Table~\ref{bitamotypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_xor}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_xor}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{bitamotypes}.
+
+\begin{apiarguments}
+
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
+    be updated.}
+  \apiargument{IN}{value}{The operand to the bitwise XOR operation.}
+  \apiargument{IN}{pe}{An integer value for the \ac{PE} on which \VAR{dest}
+    is to be updated.}
+
+\end{apiarguments}
+
+\apidescription{
+  \FUNC{shmem\_atomic\_xor} atomically performs a non-fetching bitwise XOR
+  on the remotely accessible data object pointed to by \VAR{dest} at PE
+  \VAR{pe} with the operand \VAR{value}.
+}
+
+\apireturnvalues{
+  None.
+}
+
+\apinotes{
+  None.
+}
+
+\end{apidefinition}

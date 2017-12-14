@@ -1,0 +1,54 @@
+\apisummary{
+  Test whether a variable on the local \ac{PE} has changed.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_test}@(TYPE *ivar, int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test}@(TYPE *ivar, int cmp, TYPE cmp_value);
+\end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
+
+\begin{apiarguments}
+
+  \apiargument{OUT}{ivar}{A pointer to a remotely accessible data object.}
+  \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
+    \VAR{cmp\_value}.}
+  \apiargument{IN}{cmp\_value}{The value against which the object pointed to
+    by \VAR{ivar} will be compared.}
+
+\end{apiarguments}
+
+\apidescription{
+  \FUNC{shmem\_test} tests the numeric comparison of the symmetric object
+  pointed to by \VAR{ivar} with the value \VAR{cmp\_value} according to the
+  comparison operator \VAR{cmp}.
+}
+
+\apireturnvalues{
+  \FUNC{shmem\_test} returns 1 if the comparison of the symmetric object
+  pointed to by \VAR{ivar} with the value \VAR{cmp\_value} according to the
+  comparison operator \VAR{cmp} evalutes to true; otherwise, it returns 0.
+}
+
+\apinotes{
+  None.
+}
+
+\begin{apiexamples}
+  \apicexample
+      {The following example demonstrates the use of \FUNC{shmem\_test} to
+        wait on an array of symmetric objects and return the index of an
+        element that satisfies the specified condition.}
+      {./example_code/shmem_test_example1.c}
+      {}
+\end{apiexamples}
+
+\end{apidefinition}

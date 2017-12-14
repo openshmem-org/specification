@@ -1,5 +1,5 @@
 \apisummary{
-    A collective operation that releases resources used by the \openshmem
+    A collective operation that releases all resources used by the \openshmem
     library.  This only terminates the \openshmem portion of a program, not the
     entire program.
 }
@@ -7,11 +7,11 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_finalize(void);
+void @\FuncDecl{shmem\_finalize}@(void);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_FINALIZE()
+CALL @\FuncDecl{SHMEM\_FINALIZE}@()
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -20,18 +20,23 @@ CALL SHMEM_FINALIZE()
 
 \apidescription{
     \FUNC{shmem\_finalize} is a collective operation that ends the \openshmem
-    portion of a program previously initialized by \FUNC{shmem\_init} and
-    releases resources used by the \openshmem library. This collective
+    portion of a program previously initialized by \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread} and
+    releases all resources used by the \openshmem library. This collective
     operation requires all \acp{PE} to participate in the call. There is an
-    implicit global barrier in \FUNC{shmem\_finalize} so that pending
-    communications are completed, and no resources can be released until all
-    \acp{PE} have entered \FUNC{shmem\_finalize}. \FUNC{shmem\_finalize} must be
+    implicit global barrier in \FUNC{shmem\_finalize} to ensure that pending
+    communications are completed and that no resources are released until all
+    \acp{PE} have entered \FUNC{shmem\_finalize}.
+    This routine destroys all shareable contexts.  The user is
+    responsible for destroying all contexts with the
+    \CONST{SHMEM\_CTX\_PRIVATE} option enabled prior to calling this routine;
+    otherwise, the behavior is undefined.
+    \FUNC{shmem\_finalize} must be
     the last \openshmem library call encountered in the \openshmem portion of a
-    program. A call to \FUNC{shmem\_finalize} will release any resources
-    initialized by a corresponding call to \FUNC{shmem\_init}. All processes
+    program. A call to \FUNC{shmem\_finalize} will release all resources
+    initialized by a corresponding call to \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}. All processes
     that represent the \acp{PE} will still exist after the
     call to \FUNC{shmem\_finalize} returns, but they will no longer have access
-    to any resources that have been released.
+    to resources that have been released.
 }
 
 \apireturnvalues{
@@ -44,17 +49,13 @@ CALL SHMEM_FINALIZE()
     \FUNC{shmem\_ptr}. This collective operation requires all \acp{PE} to
     participate in the call, not just a subset of the \acp{PE}. The
     non-\openshmem portion of a program may continue after a call to
-    \FUNC{shmem\_finalize} by all \acp{PE}. There is an implicit
-    \FUNC{shmem\_finalize} at the end of main, so that having an explicit call
-    to \FUNC{shmem\_finalize} is optional. However, an explicit
-    \FUNC{shmem\_finalize} may be required as an entry point for wrappers used
-    by profiling or other tools that need to perform their own finalization.
+    \FUNC{shmem\_finalize} by all \acp{PE}.
 }
 
 \begin{apiexamples}
 
 \apicexample
-    {The following finalize example is for \CorCpp{} programs:}
+    {The following finalize example is for \Cstd[11] programs:}
     {./example_code/shmem_finalize_example.c}
     {}
 

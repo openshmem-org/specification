@@ -4,27 +4,31 @@
 
 \begin{apidefinition}
 
+\begin{DeprecateBlock}
 \begin{Csynopsis}
-void shmem_clear_cache_inv(void);
-void shmem_set_cache_inv(void);
-void shmem_clear_cache_line_inv(void *dest);
-void shmem_set_cache_line_inv(void *dest);
-void shmem_udcflush(void);
-void shmem_udcflush_line(void *dest);
+void @\FuncDecl{shmem\_clear\_cache\_inv}@(void);
+void @\FuncDecl{shmem\_set\_cache\_inv}@(void);
+void @\FuncDecl{shmem\_clear\_cache\_line\_inv}@(void *dest);
+void @\FuncDecl{shmem\_set\_cache\_line\_inv}@(void *dest);
+void @\FuncDecl{shmem\_udcflush}@(void);
+void @\FuncDecl{shmem\_udcflush\_line}@(void *dest);
 \end{Csynopsis}
+\end{DeprecateBlock}
 
+% N.B., The DeprecateBlock environment is not necessary here
+% because the entire Fortran API is deprecated.
 \begin{Fsynopsis}
-CALL SHMEM_CLEAR_CACHE_INV
-CALL SHMEM_SET_CACHE_INV
-CALL SHMEM_SET_CACHE_LINE_INV(dest)
-CALL SHMEM_UDCFLUSH
-CALL SHMEM_UDCFLUSH_LINE(dest)
+CALL @\FuncDecl{SHMEM\_CLEAR\_CACHE\_INV}@
+CALL @\FuncDecl{SHMEM\_SET\_CACHE\_INV}@
+CALL @\FuncDecl{SHMEM\_SET\_CACHE\_LINE\_INV}@(dest)
+CALL @\FuncDecl{SHMEM\_UDCFLUSH}@
+CALL @\FuncDecl{SHMEM\_UDCFLUSH\_LINE}@(dest)
 \end{Fsynopsis}
 
 \begin{apiarguments}
 
 \apiargument{IN}{dest}{A data object that is local to the \ac{PE}.  \VAR{dest}
-    can be of any noncharacter type. If you are using \Fortran, it can be of any
+    can be of any noncharacter type. When using \Fortran, it can be of any
     kind.}
 
 \end{apiarguments}

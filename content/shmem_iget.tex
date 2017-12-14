@@ -5,53 +5,59 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_iget(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_iget}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_iget}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_iget(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_iget}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_iget}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void shmem_iget<SIZE>(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t  nelems, int pe);
+void @\FuncDecl{shmem\_iget\FuncParam{SIZE}}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t  nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_iget\FuncParam{SIZE}}@(shmem_ctx_t ctx, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{Fsynopsis}
 INTEGER dst, sst, nelems, pe
-CALL SHMEM_COMPLEX_IGET(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_DOUBLE_IGET(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IGET4(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IGET8(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IGET32(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IGET64(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_IGET128(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_INTEGER_IGET(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_LOGICAL_IGET(dest, source, dst, sst, nelems, pe)
-CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_COMPLEX\_IGET}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_DOUBLE\_IGET}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IGET4}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IGET8}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IGET32}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IGET64}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_IGET128}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_INTEGER\_IGET}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_LOGICAL\_IGET}@(dest, source, dst, sst, nelems, pe)
+CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
     \apiargument{OUT}{dest}{Array to be updated on the local \ac{PE}. }
     \apiargument{IN}{source}{Array containing the data to be copied on the remote \ac{PE}.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.
         A  value of \CONST{1} indicates contiguous data. \VAR{dst} must be of
-        type \textit{ptrdiff\_t}.  If you are calling  from  \Fortran,  it  must
+        type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
         be a default integer value.}
     \apiargument{IN}{sst}{The stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
         array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \textit{ptrdiff\_t}.  If you are calling  from  \Fortran,  it  must
+        of type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
         be a default integer value.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Clang. If you are
+        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
         using \Fortran, it must be  a constant, variable, or array element of
         default integer type.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
-        of type integer. If you  are  using  \Fortran, it must be a constant,
+        of type integer. When using  \Fortran, it must be a constant,
         variable, or array element of default integer type.}
 \end{apiarguments}
 
@@ -68,7 +74,7 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
     {Routine}{Data type of \VAR{dest} and \VAR{source}}
     \apitablerow{shmem\_iget4, shmem\_iget32}{Any noncharacter type
         that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_iget8}{\Clang: Any noncharacter type that
+    \apitablerow{shmem\_iget8}{\Cstd: Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
     \apitablerow{}{\Fortran: Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}
@@ -87,7 +93,7 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 }
 
 \apinotes{
-    If you are using \Fortran, data types must be of default size. For example, a
+    When using \Fortran, data types must be of default size. For example, a
     real variable must be declared as \CONST{REAL}, \CONST{REAL*4}, or
     \CONST{REAL(KIND=KIND(1.0))}. 
 }
@@ -95,7 +101,7 @@ CALL SHMEM_REAL_IGET(dest, source, dst, sst, nelems, pe)
 \begin{apiexamples}
 
 \apifexample
-    {The following example uses \FUNC{shmem\_logical\_iget}  in a \Fortran{}
+    {The following example uses \FUNC{shmem\_logical\_iget}  in a \Fortran
     program.} 
     {./example_code/shmem_iget_example.f90}
     {}

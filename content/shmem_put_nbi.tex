@@ -6,49 +6,56 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_put_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_put\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_put\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_put_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void shmem_put<SIZE>_nbi(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_nbi}@(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
-void shmem_putmem_nbi(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_putmem\_nbi}@(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_putmem\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 
 \begin{Fsynopsis}
-CALL SHMEM_CHARACTER_PUT_NBI(dest, source, nelems, pe)
-CALL SHMEM_COMPLEX_PUT_NBI(dest, source, nelems, pe)
-CALL SHMEM_DOUBLE_PUT_NBI(dest, source, nelems, pe)
-CALL SHMEM_INTEGER_PUT_NBI(dest, source, nelems, pe)
-CALL SHMEM_LOGICAL_PUT_NBI(dest, source, nelems, pe)
-CALL SHMEM_PUT4_NBI(dest, source, nelems, pe)
-CALL SHMEM_PUT8_NBI(dest, source, nelems, pe)
-CALL SHMEM_PUT32_NBI(dest, source, nelems, pe)
-CALL SHMEM_PUT64_NBI(dest, source, nelems, pe)
-CALL SHMEM_PUT128_NBI(dest, source, nelems, pe)
-CALL SHMEM_PUTMEM_NBI(dest, source, nelems, pe)
-CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_CHARACTER\_PUT\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_COMPLEX\_PUT\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_DOUBLE\_PUT\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_INTEGER\_PUT\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_LOGICAL\_PUT\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT4\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT8\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT32\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT64\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT128\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUTMEM\_NBI}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_REAL\_PUT\_NBI}@(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
-    \apiargument{IN}{source}{Data object containing the data to be copied.}
-    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
-    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Clang. If you are using
+  \apiargument{IN}{source}{Data object containing the data to be copied.}
+  \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
+    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
     \Fortran, it must be a constant, variable, or array element of default
     integer type.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
-    of type integer. If you are using \Fortran, it must be a constant, variable,
+  \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
+    of type integer. When using \Fortran, it must be a constant, variable,
     or array element of default integer type.}
 \end{apiarguments}
 
@@ -68,11 +75,11 @@ CALL SHMEM_REAL_PUT_NBI(dest, source, nelems, pe)
     The \dest{} and \source{} data objects must conform to certain typing
     constraints, which are as follows:}
     {Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_putmem\_nbi}{\Fortran: Any noncharacter type. \Clang:
+    \apitablerow{shmem\_putmem\_nbi}{\Fortran: Any noncharacter type. \Cstd:
         Any  data  type.  nelems is scaled in bytes.}
     \apitablerow{shmem\_put4\_nbi, shmem\_put32\_nbi}{Any noncharacter type
         that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_put8\_nbi}{\Clang: Any noncharacter type that
+    \apitablerow{shmem\_put8\_nbi}{\Cstd: Any noncharacter type that
         has a storage size equal to \CONST{8} bits.}
     \apitablerow{}{\Fortran: Any noncharacter type that
         has a storage size equal to \CONST{64} bits.}

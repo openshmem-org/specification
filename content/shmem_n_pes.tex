@@ -1,16 +1,16 @@
 \apisummary{
-    Returns the number of \ac{PE}s running in a program.
+    Returns the number of \acp{PE} running in a program.
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int shmem_n_pes(void);
+int @\FuncDecl{shmem\_n\_pes}@(void);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER SHMEM_N_PES, N_PES
-N_PES = SHMEM_N_PES()
+N_PES = @\FuncDecl{SHMEM\_N\_PES}@()
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -18,15 +18,15 @@ N_PES = SHMEM_N_PES()
 \end{apiarguments}
 
 \apidescription{
-    The routine returns the number of \ac{PE}s running in the program.
+    The routine returns the number of \acp{PE} running in the program.
 }
 
 \apireturnvalues{
-    Integer -  Number of \ac{PE}s running in the \openshmem program.
+    Integer -  Number of \acp{PE} running in the \openshmem program.
 }
 
 \apinotes{
-    As of \openshmem Specification 1.2 the use of \FUNC{\_num\_pes} has been
+    As of \openshmem[1.2] the use of \FUNC{\_num\_pes} has been
     deprecated. Although \openshmem libraries are required to support the call,
     users are encouraged to use \FUNC{shmem\_n\_pes} instead.  The behavior and
     signature  of the routine \FUNC{shmem\_n\_pes} remains unchanged from the
@@ -36,7 +36,8 @@ N_PES = SHMEM_N_PES()
 \begin{apiexamples}
 
 \apicexample
-    {The following \FUNC{shmem\_n\_pes} example is for \CorCpp{} programs:}
+	 {The following \FUNC{shmem\_my\_pe} and \FUNC{shmem\_n\_pes} example is for
+	  \CorCpp{} programs:}
     {./example_code/shmem_npes_example.c}
     {}
 
