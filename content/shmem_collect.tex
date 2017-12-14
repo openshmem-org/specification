@@ -6,30 +6,30 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_collect32(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_collect64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_fcollect32(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_fcollect64(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_collect32}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_collect64}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_fcollect32}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER nelems
 INTEGER PE_start, logPE_stride, PE_size
 INTEGER pSync(SHMEM_COLLECT_SYNC_SIZE)
-CALL SHMEM_COLLECT4(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_COLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT4(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT8(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT32(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT4}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT8}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_COLLECT64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT4}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT8}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}
 
 \apiargument{OUT}{dest}{A symmetric array. The \dest{} argument must be large enough
-    to accept the concatenation of the \source{} arrays on all \acp{PE}.  The data
+    to accept the concatenation of the \source{} arrays on all participating \acp{PE}.  The data
     types are as follows: For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64},
     \FUNC{shmem\_fcollect8}, and \FUNC{shmem\_fcollect64}, any data type with an
     element size of 64 bits.  \Fortran derived types, \Fortran character type,
@@ -51,13 +51,13 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set. \VAR{PE\_size}
     must be of type integer.  When using  \Fortran, it must be a default
     integer value.}
-\apiargument{IN}{pSync}{A symmetric  work array.  In \CorCpp, \VAR{pSync} must be of
-    type long and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.  In \Fortran,
-    \VAR{pSync} must be of type integer and size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
-    When using \Fortran, it must be a default integer value.  Every element of
-    this array must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} in
-    \CorCpp{} or \CONST{SHMEM\_SYNC\_VALUE} in \Fortran before any of the \acp{PE}
-    in the active set enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
+\apiargument{IN}{pSync}{
+    A symmetric work array of size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
+    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
+    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
+    Every element of this array must be initialized with the value
+    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
+    enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
 
 \end{apiarguments}
 
@@ -80,8 +80,8 @@ CALL SHMEM_FCOLLECT64(dest, source, nelems, PE_start, logPE_stride, PE_size, pSy
     active set and calls this collective routine, the behavior is undefined.
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
-    must be equal on all \acp{PE} in the active set. The same \dest{} and \source{}
-    arrays and the same \VAR{pSync} work array must be passed to all \acp{PE} in the
+    must be the same value on all \acp{PE} in the active set. The same \dest{} and \source{}
+    arrays and the same \VAR{pSync} work array must be passed by all \acp{PE} in the
     active set.
     
     Upon return from a collective routine, the following are true for the local

@@ -6,7 +6,7 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -19,7 +19,7 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
     \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
-    of type long and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.  Every element of
+    of type \CTYPE{long} and size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.  Every element of
     this array must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of the
     \acp{PE} in the active set enter \FUNC{shmem\_sync} the first time.}
 
@@ -33,8 +33,7 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
 
     As with all \openshmem collective routines, each of these routines assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
-    the active set calls an \openshmem collective routine, undefined behavior
-    results.
+    the active set calls an \openshmem collective routine, the behavior is undefined.
 
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and
     \VAR{PE\_size} must be equal on all \acp{PE} in the active set.  The same
@@ -45,7 +44,7 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
     completion of remote memory updates issued via \openshmem routines.
 
     The same \VAR{pSync} array may be reused on consecutive calls to
-    \FUNC{shmem\_sync} if the same active \ac{PE} set is used.
+    \FUNC{shmem\_sync} if the same active set is used.
 }
 
 \apireturnvalues{
@@ -53,9 +52,9 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
 }
 
 \apinotes{
-    If the \VAR{pSync} array is initialized at run time, be sure to use some type of
-    synchronization, for example, a call to \FUNC{shmem\_sync\_all}, before
-    calling \FUNC{shmem\_sync} for the first time.
+    If the \VAR{pSync} array is initialized at run time, another method of
+    synchronization (e.g., \FUNC{shmem\_sync\_all}) must be used before
+    the initial use of that \VAR{pSync} array by \FUNC{shmem\_sync}.
 
     If the active set does not change, \FUNC{shmem\_sync} can be called
     repeatedly with the same \VAR{pSync} array.  No additional synchronization
@@ -72,7 +71,7 @@ void shmem_sync(int PE_start, int logPE_stride, int PE_size, long *pSync);
 
 \apicexample
     {The following \FUNC{shmem\_sync\_all} and \FUNC{shmem\_sync} example is
-    for \CorCpp programs:}
+    for \Cstd[11] programs:}
     {./example_code/shmem_sync_example.c}
     {}
 

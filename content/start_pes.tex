@@ -9,12 +9,12 @@
 
 \begin{DeprecateBlock}
 \begin{Csynopsis}
-void start_pes(int npes);
+void @\FuncDecl{start\_pes}@(int npes);
 \end{Csynopsis}
 \end{DeprecateBlock}
 
 \begin{Fsynopsis}
-CALL START_PES(npes)
+CALL @\FuncDecl{START\_PES}@(npes)
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -23,9 +23,9 @@ CALL START_PES(npes)
 
 \apidescription{   
      The \FUNC{start\_pes} routine initializes the \openshmem execution
-     environment.  An \openshmem program must call either \FUNC{start\_pes} or
-     \FUNC{shmem\_init} before calling any other \openshmem routine.  Unlike
-     \FUNC{shmem\_init}, \FUNC{start\_pes} does not require a call to
+     environment.  An \openshmem program must call \FUNC{start\_pes},
+     \FUNC{shmem\_init}, or \FUNC{shmem\_init\_thread} before calling any other \openshmem routine.  Unlike
+     \FUNC{shmem\_init} and \FUNC{shmem\_init\_thread}, \FUNC{start\_pes} does not require a call to
      \FUNC{shmem\_finalize}.  Instead, the \openshmem library is implicitly
      finalized when the program exits.  Implicit finalization is collective and
      includes a global synchronization to ensure that all pending communication
@@ -43,9 +43,10 @@ CALL START_PES(npes)
     Calling \FUNC{start\_pes} more than once has no subsequent
     effect.
 
-    As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has
+    As of \openshmem[1.2] the use of \FUNC{start\_pes} has
     been deprecated. Although \openshmem libraries are required to support the
-    call, program users are encouraged to use \FUNC{shmem\_init} instead.
+    call, users are encouraged to use \FUNC{shmem\_init} or
+    \FUNC{shmem\_init\_thread} instead.
 }
 
 

@@ -6,16 +6,16 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_alltoalls32(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-void shmem_alltoalls64(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_alltoalls32}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
+void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALLS_SYNC_SIZE)
 INTEGER dst, sst, PE_start, logPE_stride, PE_size
 INTEGER nelems 
-CALL SHMEM_ALLTOALLS32(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_ALLTOALLS32}@(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
+CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
 \end{Fsynopsis}
 
 \begin{apiarguments}
@@ -48,13 +48,13 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
     \VAR{PE\_size} must be of type integer.  When using \Fortran, it must
     be a default integer value.}
-\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be
-    of type long and size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}. In \Fortran,
-    \VAR{pSync} must be of type integer and size
-    \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.  When using \Fortran, it must be a
-    default integer value. Every element of this array must be initialized with
-    the value \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the
-    active set enter the routine.}
+\apiargument{IN}{pSync}{
+    A symmetric work array of size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.
+    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
+    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
+    Every element of this array must be initialized with the value
+    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
+    enter the routine.}
     
 \end{apiarguments}
 
@@ -79,15 +79,17 @@ CALL SHMEM_ALLTOALLS64(dest, source, dst, sst, nelems, PE_start, logPE_stride, P
     \VAR{logPE\_stride}, and \VAR{PE\_size} must be equal on all \acp{PE} in the
     active set. The same \VAR{dest} and \VAR{source} data objects, and the same
     \VAR{pSync} work array must be passed to all \acp{PE} in the active set.
-    
-    Before any \ac{PE} calls to a \FUNC{shmem\_alltoalls} routine, the following
-    conditions must exist (synchronization via a barrier or some other method is
-    often needed to ensure this): The \VAR{pSync} array on all \acp{PE} in the
-    active set is not still in use from a prior call to a
-    \FUNC{shmem\_alltoalls} routine.  The \VAR{dest} data object on
-    all \acp{PE} in the active set is ready to accept the
-    \FUNC{shmem\_alltoalls} data.
-    
+
+    Before any \ac{PE} calls a \FUNC{shmem\_alltoalls} routine,
+    the following conditions must be ensured:
+    \begin{itemize}
+    \item The \VAR{pSync} array on all \acp{PE} in the active set is not
+      still in use from a prior call to a \FUNC{shmem\_alltoall} routine.
+    \item The \VAR{dest} data object on all \acp{PE} in the active set is
+      ready to accept the \FUNC{shmem\_alltoalls} data.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
+
     Upon return from a \FUNC{shmem\_alltoalls} routine, the following is true for
     the local PE: Its \VAR{dest} symmetric data object is completely updated and
     the data has been copied out of the \VAR{source} data object.

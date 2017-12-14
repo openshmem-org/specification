@@ -5,31 +5,45 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
-TYPE shmem_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch\_add}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_fetch_add(TYPE *dest, TYPE value, int pe);
-TYPE shmem_ctx_<TYPENAME>_atomic_fetch_add(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_fetch\_add}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch\_add}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+TYPE @\FuncDecl{shmem\_fadd}@(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fadd}@(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
+and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
 INTEGER*4 SHMEM_INT4_FADD, ires_i4, value_i4
-ires_i4 = SHMEM_INT4_FADD(dest, value_i4, pe)
+ires\_i4 = @\FuncDecl{SHMEM\_INT4\_FADD}@(dest, value_i4, pe)
 INTEGER*8 SHMEM_INT8_FADD, ires_i8, value_i8
-ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
+ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FADD}@(dest, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-    argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+\apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
 \apiargument{OUT}{dest}{The remotely accessible integer data object to be updated on
     the remote \ac{PE}. The type of \VAR{dest} should match that implied in the
     SYNOPSIS section.}
@@ -51,8 +65,8 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+    When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{value}}
 
 \apitablerow{SHMEM\_INT4\_FADD}{\CONST{4}-byte integer}
 \apitablerow{SHMEM\_INT8\_FADD}{\CONST{8}-byte integer}
@@ -65,9 +79,7 @@ ires_i8 = SHMEM_INT8_FADD(dest, value_i8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_fadd} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_fetch\_add}.
+    None.
 }
 
 \begin{apiexamples}

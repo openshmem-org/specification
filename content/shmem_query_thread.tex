@@ -5,7 +5,7 @@ Returns the level of thread support provided by the library.
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_query_thread(int *provided);
+void @\FuncDecl{shmem\_query\_thread}@(int *provided);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -14,10 +14,10 @@ void shmem_query_thread(int *provided);
 
 \apidescription{
 The \FUNC{shmem\_query\_thread} call returns the level of thread support
-currently being provided. The value returned will be same as \VAR{provided}
-returned in the \FUNC{shmem\_init\_thread}, if the \openshmem library was
+currently being provided. The value returned will be same as was returned in \VAR{provided}
+by a call to \FUNC{shmem\_init\_thread}, if the \openshmem library was
 initialized by \FUNC{shmem\_init\_thread}. If the library was initialized by
-\FUNC{shmem\_init}, the implementation can choose to provide one of the defined
+\FUNC{shmem\_init}, the implementation can choose to provide any one of the defined
 thread levels, and \FUNC{shmem\_query\_thread} returns this thread level.
 }
 

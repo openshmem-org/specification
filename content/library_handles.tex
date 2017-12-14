@@ -1,0 +1,24 @@
+\TableIndex{Library Handles}
+\TableIndex{Handles}
+
+The \openshmem library provides a set of predefined named constant handles.
+All named constants can be used in initialization expressions or assignments,
+but not necessarily in array declarations or as labels in \Cstd switch statements.
+This implies named constants to be link-time but not necessarily compile-time
+constants.
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{Handle} & \textbf{Description}
+\tabularnewline \hline
+\endhead
+%%
+\LibHandleDecl[\CorCpp]{SHMEM\_CTX\_DEFAULT} &
+Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
+default communication context.  All point-to-point communication operations
+and synchronizations that do not specify a context are performed on the
+default context.
+See Section~\ref{sec:ctx} for more detail about its use.
+\tabularnewline \hline
+%%
+\end{longtable}

@@ -5,7 +5,7 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_ctx_destroy(shmem_ctx_t ctx);
+void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -50,8 +50,8 @@ void shmem_ctx_destroy(shmem_ctx_t ctx);
     \apicexample
     {The following example demonstrates the use of contexts in a
     single-threaded \Cstd[11] program that performs a summation reduction where
-    the data contained in the \VAR{in\_buf} arrays on all PEs is reduced into
-    the \VAR{out\_buf} arrays on all PEs.  The buffers are divided into
+    the data contained in the \VAR{in\_buf} arrays on all \acp{PE} is reduced into
+    the \VAR{out\_buf} arrays on all \acp{PE}.  The buffers are divided into
     segments and processing of the segments is pipelined.  Contexts are used
     to overlap an all-to-all exchange of data for segment \VAR{p} with the
     local reduction of segment \VAR{p-1}.}

@@ -8,7 +8,9 @@ all: ${TARGET}.pdf
 
 ${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
 	pdflatex $(LATEXOPT) ${TARGET}
+	makeindex ${TARGET}
 	pdflatex $(LATEXOPT) ${TARGET}
+	makeindex ${TARGET}
 	pdflatex $(LATEXOPT) ${TARGET}
 
 .PHONY: clean

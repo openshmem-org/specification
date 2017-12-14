@@ -1,31 +1,31 @@
 \apisummary{
-    Waits for completion of all outstanding \PUT{}, \acp{AMO}, memory store,
-    and non-blocking \PUT{} and \GET{} routines to symmetric data
+    Waits for completion of all outstanding \PUT{}, \ac{AMO}, memory store,
+    and nonblocking \PUT{} and \GET{} routines to symmetric data
     objects issued by a \ac{PE}.
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_quiet(void);
-void shmem_ctx_quiet(shmem_ctx_t ctx);
+void @\FuncDecl{shmem\_quiet}@(void);
+void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_QUIET
+CALL @\FuncDecl{SHMEM\_QUIET}@
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{Context on which to perform the operation.  When this
-        argument is not provided, \CONST{SHMEM\_CTX\_DEFAULT} is used.}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        \CONST{SHMEM\_CTX\_DEFAULT}.}
 \end{apiarguments}
 
 \apidescription{ 
-    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \acp{AMO},
-    memory store, and non-blocking \PUT{} and \GET{} routines on
-    symmetric data objects issued by the calling \ac{PE}
-    on the given context.  All \PUT{}, \acp{AMO},
-    memory store, and non-blocking \PUT{} and \GET{} routines to
+    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \ac{AMO},
+    memory store, and nonblocking \PUT{} and \GET{} routines on
+    symmetric data objects issued by the calling \ac{PE} on the given context. All \PUT{}, \ac{AMO},
+    memory store, and nonblocking \PUT{} and \GET{} routines to
     symmetric data objects are guaranteed to be completed and visible to all
     \acp{PE} when \FUNC{shmem\_quiet} returns. 
 }
@@ -37,10 +37,10 @@ CALL SHMEM_QUIET
 
 \apinotes{ 
     \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
-    several \PUT{}, \acp{AMO}, memory store, and non-blocking \PUT{}
+    several \PUT{}, \ac{AMO}, memory store, and nonblocking \PUT{}
     and \GET{} routines to symmetric data objects initiated by the calling
     \ac{PE}.  For example, one might use \FUNC{shmem\_quiet} to await delivery
-    of a block of data before issuing another \PUT{} or non-blocking
+    of a block of data before issuing another \PUT{} or nonblocking
     \PUT{} routine, which sets a completion flag on another \ac{PE}.
      \FUNC{shmem\_quiet} is not usually needed if
     \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} are called.  The barrier
@@ -69,7 +69,7 @@ CALL SHMEM_QUIET
      \FUNC{shmem\_quiet}.
 
     \FUNC{shmem\_quiet} does not have an effect on the ordering between memory
-    accesses issued by the target PE. \FUNC{shmem\_wait}, \FUNC{shmem\_wait\_until},
+    accesses issued by the target PE. \FUNC{shmem\_wait\_until},
     \FUNC{shmem\_test}, \FUNC{shmem\_barrier}, \FUNC{shmem\_barrier\_all} routines
     can be called by the target PE to guarantee ordering of its memory accesses.
 }
@@ -77,7 +77,7 @@ CALL SHMEM_QUIET
 \begin{apiexamples}
 
 \apicexample
-    {The following example uses  \FUNC{shmem\_quiet}  in a C11 program: }
+    {The following example uses \FUNC{shmem\_quiet} in a \Cstd[11] program: }
     {./example_code/shmem_quiet_example.c}
     {\VAR{Put1} and \VAR{put2} will be completed and visible before \VAR{put3}
     and \VAR{put4}.}
