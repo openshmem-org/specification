@@ -31,7 +31,17 @@ deprecation rationale for more details.
 %%
 \EnvVarDecl{SHMEM\_SYMMETRIC\_SIZE}
     & Non-negative integer
-    & Number of bytes to allocate for symmetric heap
+    & Controls the size of the symmetric heap per PE. The value 
+      set in this environment variable is interpreted as number 
+      of bytes, unless the number is followed by a char that 
+      acts as a multiplier, where:
+        g or G multiplies by 2**30 (gigabytes)
+        k or K multiplies by 2**10 (kilobytes)
+        m or M multiplies by 2**20 (megabytes)
+      For example, the string 20m returns the integer value 20*2**20, 
+      or 20 megabytes. Only one multiplier is recognized, so 20kk 
+      will not produce the same value as 20m, nor will invalid 
+      strings such as 20MB produce the desired result.
     \tabularnewline\hline
 %%
 \EnvVarDecl{SHMEM\_DEBUG}
