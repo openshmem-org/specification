@@ -54,11 +54,15 @@ memory section of each \ac{PE}.
 
 \subsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
 
-\openshmem contains a number of routines that operate on symmetric data
-atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by
-\openshmem's atomic operations with the same datatype will be exclusive, but do not guarantee
-exclusivity in combination with other routines, either inside \openshmem or
-outside.
+\openshmem contains a number of routines that perform atomic operations on
+symmetric data objects (Section \ref{sec:amo}).  These routines guarantee that
+concurrent accesses to the same location by \openshmem atomic operations using
+the same datatype will be exclusive.  However, they do not guarantee
+exclusivity when concurrent accesses to the same location are performed using
+\openshmem atomic operations using different datatypes, when non-atomic
+\openshmem operations are used to access the given location, or when
+non-\openshmem operations are performed on the given location.  The result in
+such scenarios is undefined.
 
 For example: during the execution of an atomic remote integer increment
 operation on a symmetric variable \VAR{X}, no other \openshmem atomic operation
