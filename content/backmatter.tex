@@ -63,7 +63,7 @@ The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex
 Note the declaration of the \VAR{static short dest} array and its use as the
 remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
 
-The \VAR{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
+The \KEYWORD{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
 Each \ac{PE} is able to transfer data to a remote \dest{} array by simply
 specifying to an OpenSHMEM routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
 the local address of the symmetric data object that will receive the data.
@@ -752,7 +752,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \item Added specification of \VAR{pSync} initialization for all routines that use it.
 %
 \item Replaced all placeholder variable names \VAR{target} with \VAR{dest} to
-      avoid confusion with \Fortran's \CONST{target} keyword. % FIXME: Change to \KEYWORD{target}
+      avoid confusion with \Fortran's \KEYWORD{target} keyword.
 %
 \item New Execution Model for exiting/finishing \openshmem programs.
 \\See Section  \ref{subsec:execution_model}.
