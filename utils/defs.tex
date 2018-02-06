@@ -40,6 +40,7 @@
 \newcommand{\FUNC}[1]{\textit{#1}}
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
+\newcommand{\ENVVAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
 %%
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
@@ -75,7 +76,7 @@
 \newcommand{\LibHandleIndex}[1]{\index{#1}}
 \newcommand{\TableIndex}[1]{\index{#1}\index{Tables!#1}}
 %% Write text and generate reference.
-\newcommand{\EnvVarRef}[1]{\VAR{#1}\EnvVarIndex{#1}}
+\newcommand{\EnvVarRef}[1]{\ENVVAR{#1}\EnvVarIndex{#1}}
 \newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
 \newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
 \newcommand{\LibHandleRef}[1]{\CONST{#1}\LibHandleIndex{#1}}
