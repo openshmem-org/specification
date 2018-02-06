@@ -33,7 +33,7 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     
     The \FUNC{shmem\_align} routine allocates a block in the symmetric heap that has
     a byte alignment specified by the \VAR{alignment} argument.  The value of
-    \VAR{alignment} shall be a multiple of \CONST{sizeof(void *)}, that is also
+    \VAR{alignment} shall be a multiple of \CONST{sizeof(void *)} that is also
     a power of two.  Otherwise, the behavior is undefined.  When \VAR{size} is
     zero, the \FUNC{shmem\_align} routine performs no action and returns a null
     pointer.
