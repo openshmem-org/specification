@@ -63,7 +63,7 @@ The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex
 Note the declaration of the \VAR{static short dest} array and its use as the
 remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
 
-The \VAR{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
+The \KEYWORD{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
 Each \ac{PE} is able to transfer data to a remote \dest{} array by simply
 specifying to an OpenSHMEM routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
 the local address of the symmetric data object that will receive the data.
@@ -369,10 +369,10 @@ supported before removal.
     \LibConstRef{\_SHMEM\_CMP\_LE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_LE}} \\ \hline
     \LibConstRef{\_SHMEM\_CMP\_GT} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GT}} \\ \hline
     \LibConstRef{\_SHMEM\_CMP\_GE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GE}} \\ \hline
-    \EnvVarRef{SMA\_VERSION}         & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_VERSION}} \\ \hline
-    \EnvVarRef{SMA\_INFO}            & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_INFO}} \\ \hline
-    \EnvVarRef{SMA\_SYMMETRIC\_SIZE} & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_SYMMETRIC\_SIZE}} \\ \hline
-    \EnvVarRef{SMA\_DEBUG}           & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_DEBUG}} \\ \hline
+    \EnvVarRef{SMA\_VERSION}         & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_VERSION}} \\ \hline
+    \EnvVarRef{SMA\_INFO}            & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_INFO}} \\ \hline
+    \EnvVarRef{SMA\_SYMMETRIC\_SIZE} & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_SYMMETRIC\_SIZE}} \\ \hline
+    \EnvVarRef{SMA\_DEBUG}           & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_DEBUG}} \\ \hline
     \minitab{\CorCpp: \FuncRef{shmem\_wait}
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_wait}}
         & 1.4 & Current & See \textbf{Notes} for \hyperref[subsec:shmem_wait_until]{\FUNC{shmem\_wait\_until}} \\ \hline
@@ -492,9 +492,9 @@ standard's reserved names.  These constants were deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran naming conventions.
 
-\subsection{\VAR{SMA\_*} Environment Variables}\label{subsec:deprecate-sma-env}
-The environment variables \VAR{SMA\_VERSION}, \VAR{SMA\_INFO},
-\VAR{SMA\_SYMMETRIC\_SIZE}, and \VAR{SMA\_DEBUG}
+\subsection{\ENVVAR{SMA\_*} Environment Variables}\label{subsec:deprecate-sma-env}
+The environment variables \ENVVAR{SMA\_VERSION}, \ENVVAR{SMA\_INFO},
+\ENVVAR{SMA\_SYMMETRIC\_SIZE}, and \ENVVAR{SMA\_DEBUG}
 were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
@@ -752,7 +752,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \item Added specification of \VAR{pSync} initialization for all routines that use it.
 %
 \item Replaced all placeholder variable names \VAR{target} with \VAR{dest} to
-      avoid confusion with \Fortran's \CONST{target} keyword. % FIXME: Change to \KEYWORD{target}
+      avoid confusion with \Fortran's \KEYWORD{target} keyword.
 %
 \item New Execution Model for exiting/finishing \openshmem programs.
 \\See Section  \ref{subsec:execution_model}.
