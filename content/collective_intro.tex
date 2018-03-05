@@ -8,11 +8,17 @@ active set as an input parameter except \FUNC{shmem\_barrier\_all} and
 \FUNC{shmem\_sync\_all} must be called by all \acp{PE} of the \openshmem program.
 
 The active set is defined by the arguments \VAR{PE\_start}, \VAR{logPE\_stride},
-and \VAR{PE\_size}.  \VAR{PE\_start} is the starting \ac{PE} number, a log (base
-2) of \VAR{logPE\_stride} is the stride between \acp{PE}, and \VAR{PE\_size} is
-the number of \acp{PE} participating in the active set.  All \acp{PE}
-participating in the collective routine must provide the same values for these
-arguments.
+and \VAR{PE\_size}.  \VAR{PE\_start} specifies the starting \ac{PE} number and
+is the lowest numbered PE in the active set.  The stride between successive
+\acp{PE} in the active set is $2^{logPE\_stride}$ and \VAR{logPE\_stride} must
+be greater than or equal to zero.  \VAR{PE\_size} specifies the number of
+\acp{PE} in the active set and must be greater than zero.  The active set must
+satisfy the requirement that its last member corresponds to a valid \ac{PE}
+number,
+$0 \le PE\_start + (PE\_size - 1) * 2^{logPE\_stride} < npes$.
+All \acp{PE} participating in the collective routine must provide the same
+values for these arguments.  If any of these requirements are not met, the
+behavior is undefined.
 
 Another argument important to collective routines is \VAR{pSync}, which is a
 symmetric work array.  All \acp{PE} participating in a collective must pass the
