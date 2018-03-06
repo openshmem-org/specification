@@ -106,7 +106,12 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     differ from the private heap allocation routines in that all \acp{PE} in a
     program must call them (a barrier is used to ensure this).
-}		
+
+    When the \VAR{ptr} argument in a call to \FUNC{shmem\_realloc} corresponds
+    to a buffer allocated using \FUNC{shmem\_align}, the buffer returned by
+    \FUNC{shmem\_realloc} is not guaranteed to maintain the alignment requested
+    in the original call to \FUNC{shmem\_align}.
+}
 
 \apiimpnotes{
     The symmetric heap allocation routines always return a pointer to corresponding
