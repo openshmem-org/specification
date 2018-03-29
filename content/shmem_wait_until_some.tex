@@ -1,0 +1,83 @@
+\apisummary{
+    Wait for at least one variable on the local \ac{PE} to change to a
+    specified value.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+size_t @\FuncDecl{shmem\_wait\_until\_some}@(TYPE *ivars, size_t nelems, size_t *indices,
+    int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
+\begin{Csynopsis}
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some}@(TYPE *ivars, size_t nelems, size_t *indices,
+    int cmp, TYPE cmp_value);
+\end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
+
+\begin{apiarguments}
+
+  \apiargument{OUT}{ivars}{A pointer to an array of remotely accessible data
+    objects. The type of \VAR{ivars} should match that implied in the SYNOPSIS
+    section.} 
+  \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array to
+    be compared with \VAR{cmp\_value}.}
+  \apiargument{INOUT}{indices}{A mask array of indices into \VAR{ivars} that
+    satisfy the implied condition.  The length of this array is \VAR{nelems},
+    and each element to be checked is initialized to
+    \CONST{SHMEM\_CHECK\_VALUE}, or to \CONST{SHMEM\_SKIP\_VALUE} to be skipped.}
+  \apiargument{IN}{cmp}{The comparison operator that compares elements of
+    \VAR{ivars} with \VAR{cmp\_value}.}
+  \apiargument{IN}{cmp\_value}{The value to be compared with the objects
+    pointed to by \VAR{ivar}.  The type of \VAR{cmp\_value} should match that
+    implied in the SYNOPSIS section.}
+
+\end{apiarguments}
+
+\apidescription{ 
+    \FUNC{shmem\_wait\_until\_some} waits for at least one element in the
+    \VAR{ivars} array to be changed by a write or an atomic operation issued by
+    a \ac{PE}.  This routines can be used for point-to-point direct
+    synchronization involving multiple data objects, potentially avoiding the
+    overhead associated with multiple calls to \FUNC{shmem\_wait\_until}.  A
+    call to \FUNC{shmem\_wait\_until\_some} does not return until a \ac{PE}
+    changes at least one element within \VAR{ivars} to satisfy the condition
+    implied by \VAR{cmp} and \VAR{cmp\_value}.  The
+    \FUNC{shmem\_wait\_until\_some} routines return when the compare condition
+    is true.  The compare condition is defined by the \VAR{ivars}  argument
+    compared with the \VAR{cmp\_value} using the comparison operator \VAR{cmp}.
+}
+
+
+\apireturnvalues{
+  \FUNC{shmem\_wait\_until\_some} returns the number of elements in \VAR{ivars} that
+  satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.  
+}
+
+\apinotes{
+    None.
+}
+
+\apiimpnotes{
+    Implementations must ensure that \FUNC{shmem\_wait\_until\_some} does not
+    return before the update of the memory indicated by \VAR{ivars} is fully
+    complete.  Partial updates to the memory must not cause
+    \FUNC{shmem\_wait\_until\_some} to return.
+}
+
+
+\begin{apiexamples}
+
+\apicexample
+{The following \CorCpp{} call waits until the value in \VAR{ivar} is set to
+be less than zero by a transfer from a remote PE:}
+{./example_code/shmem_wait_until_some_example.c}
+{}
+
+\end{apiexamples}
+
+\end{apidefinition}
