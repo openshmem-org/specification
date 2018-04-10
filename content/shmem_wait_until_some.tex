@@ -28,12 +28,12 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     be compared with \VAR{cmp\_value}.}
   \apiargument{INOUT}{indices}{A mask array of indices into \VAR{ivars} that
     satisfy the implied condition.  The length of this array is \VAR{nelems},
-    and each element to be checked is initialized to
-    \CONST{SHMEM\_CHECK\_VALUE}, or to \CONST{SHMEM\_SKIP\_VALUE} to be skipped.}
+    and each element to be checked must be initialized to a value greater than
+    or equal to \VAR{nelems}.}
   \apiargument{IN}{cmp}{The comparison operator that compares elements of
     \VAR{ivars} with \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value to be compared with the objects
-    pointed to by \VAR{ivar}.  The type of \VAR{cmp\_value} should match that
+    pointed to by \VAR{ivars}.  The type of \VAR{cmp\_value} should match that
     implied in the SYNOPSIS section.}
 
 \end{apiarguments}
@@ -41,15 +41,19 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \apidescription{ 
     \FUNC{shmem\_wait\_until\_some} waits for at least one element in the
     \VAR{ivars} array to be changed by a write or an atomic operation issued by
-    a \ac{PE}.  This routines can be used for point-to-point direct
+    a \ac{PE}.  This routine can be used for point-to-point direct
     synchronization involving multiple data objects, potentially avoiding the
-    overhead associated with multiple calls to \FUNC{shmem\_wait\_until}.  A
+    overhead associated with individual calls to \FUNC{shmem\_wait\_until}.  A
     call to \FUNC{shmem\_wait\_until\_some} does not return until a \ac{PE}
     changes at least one element within \VAR{ivars} to satisfy the condition
-    implied by \VAR{cmp} and \VAR{cmp\_value}.  The
-    \FUNC{shmem\_wait\_until\_some} routines return when the compare condition
-    is true.  The compare condition is defined by the \VAR{ivars}  argument
-    compared with the \VAR{cmp\_value} using the comparison operator \VAR{cmp}.
+    implied by \VAR{cmp} and \VAR{cmp\_value}.  On entry, the \VAR{indices}
+    array indicates the indices of elements in \VAR{ivars} on which to wait.
+    On exit, the \VAR{indices} array indicates the indices of elements in
+    \VAR{ivars} that have satisfied the implied condition.  Specifically,
+    initializing an element in \VAR{indices} to a value greater than or equal
+    to \VAR{nelems} results in a wait operation on the corresponding element.
+    After returning, each element of \VAR{indices} that contains a value
+    strictly less than \VAR{nelems} has satisfied the implied condition.
 }
 
 
@@ -73,8 +77,9 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \begin{apiexamples}
 
 \apicexample
-{The following \CorCpp{} call waits until the value in \VAR{ivar} is set to
-be less than zero by a transfer from a remote PE:}
+{The following \CorCpp{} example demonstrates the use of
+\FUNC{shmem\_wait\_until\_some} to wait on an array of symmetric objects
+until \textit{all} elements satisfy the specified condition.}
 {./example_code/shmem_wait_until_some_example.c}
 {}
 

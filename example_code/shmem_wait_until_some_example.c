@@ -22,7 +22,7 @@ int main(void)
   size_t *indices = (size_t *)malloc(npes * sizeof(size_t));
 
   for (int i=0; i<npes; i++)
-    indices[i] = SHMEM_CHECK_VALUE;
+    indices[i] = nelems;
 
   if (mype == 0) {
     user_wait_all(ivars, npes, indices, SHMEM_CMP_NE, 0);
@@ -30,7 +30,7 @@ int main(void)
       assert(ivars[i] == i);
   }
   else
-    shmem_p(ivars[mype], mype, 0);
+    shmem_p(&ivars[mype], mype, 0);
 
   free(indices);
   shmem_free(ivars);

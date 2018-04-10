@@ -25,21 +25,26 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     section.} 
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array to be
     compared with \VAR{cmp\_value}.}
-  \apiargument{INOUT}{indices}{An array of indices into \VAR{ivars} that
-    satisfy the implied condition.  The length of this array is equal to return
-    value of \FUNC{shmem\_test\_some}.}
+  \apiargument{INOUT}{indices}{A mask array of indices into \VAR{ivars} that
+    satisfy the implied condition.  The length of this array is \VAR{nelems},
+    and each element to be tested must be initialized to a value greater than
+    or equal to \VAR{nelems}.}
   \apiargument{IN}{cmp}{The comparison operator that compares elements of
     \VAR{ivars} with \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value to be compared with the objects
-    pointed to by \VAR{ivar}.  The type of \VAR{cmp\_value} should match that
+    pointed to by \VAR{ivars}.  The type of \VAR{cmp\_value} should match that
     implied in the SYNOPSIS section.}
 
 \end{apiarguments}
 
 \apidescription{
-  \FUNC{shmem\_test\_some} tests the numeric comparison of the symmetric object
-  pointed to by \VAR{ivars} with the value \VAR{cmp\_value} according to the
-  comparison operator \VAR{cmp}.
+  \FUNC{shmem\_test\_some} tests the numeric comparison of each symmetric
+    object pointed to by \VAR{ivars} with the value \VAR{cmp\_value} according
+    to the comparison operator \VAR{cmp}.  The \VAR{indices} array has the same
+    intent as in \FUNC{shmem\_test\_some} in
+    Section~\ref{subsec:shmem_wait_until_some}: on entry, the \VAR{indices}
+    array indicates the elements to test; and on exit, the \VAR{indices} array
+    indicates the elements that have satisfied the implied condition.
 }
 
 \apireturnvalues{
@@ -58,7 +63,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
       {The following example demonstrates the use of \FUNC{shmem\_test\_some} to
         wait on an array of symmetric objects and return the index of an
         element that satisfies the specified condition.}
-      {./example_code/shmem_test_example1.c}
+      {./example_code/shmem_test_some_example.c}
       {}
 \end{apiexamples}
 
