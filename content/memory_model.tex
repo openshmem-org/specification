@@ -55,19 +55,58 @@ memory section of each \ac{PE}.
 \subsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
 
 \openshmem contains a number of routines that perform atomic operations on
-symmetric data objects (Section \ref{sec:amo}).  These routines guarantee that
-concurrent accesses to the same location by \openshmem atomic operations using
-the same datatype will be exclusive.  However, they do not guarantee
-exclusivity when concurrent accesses to the same location are performed using
-\openshmem atomic operations using different datatypes, when non-atomic
-\openshmem operations are used to access the given location, or when
-non-\openshmem operations are performed on the given location.  The result in
-such scenarios is undefined.
+symmetric data objects, which are defined in Section \ref{sec:amo}.  In
+addition, \openshmem defines routines that are atomic compatible, e.g. the
+point-to-point synchronization routines defined in
+Section~\ref{subsec:p2p_intro}.  The atomic and atomic compatible routines
+guarantee that concurrent accesses by any of these routines to the same
+location and using the same datatype (specified in Tables~\ref{stdamotypes} and
+\ref{extamotypes}) will be exclusive.  Two operations are concurrent when the
+first operation is not completed at the target PE (e.g. by a call to
+\FUNC{shmem\_quiet}) prior to the start of the second operation.
 
-For example: during the execution of an atomic remote integer increment
+\openshmem atomic operations do not guarantee exclusivity in the following
+scenarios, all of which result in undefined behavior.
+\begin{enumerate}
+    \item When concurrent accesses to the same location are performed using
+        \openshmem atomic or atomic compatible operations using different
+        datatypes.
+    \item When atomic and non-atomic \openshmem operations are used to access
+        the same location concurrently.
+    \item When \openshmem atomic operations and non-\openshmem operations (e.g.
+        load and store operations) are used to access the same location
+        concurrently.
+\end{enumerate}
+For example, during the execution of an atomic remote integer increment, i.e. \FUNC{shmem\_atomic\_inc},
 operation on a symmetric variable \VAR{X}, no other \openshmem atomic operation
 may access \VAR{X}.  After the increment, \VAR{X} will have increased its value
 by \CONST{1} on the destination \ac{PE}, at which point other atomic operations
 may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
 with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
 will invalidate the atomicity guarantees.
+
+\cexample
+    {The following \CorCpp example illustrates scenario 1.  In this example,
+    different datatypes are used to access the same location concurrently,
+    resulting in undefined behavior.  The undefined behavior can be resolved by
+    using the same datatype in all concurrent operations.  For example, the
+    32-bit value can be left-shifted and a 64-bit atomic OR operation can be
+    used.}
+    {./example_code/amo_scenario_1.c}
+
+\cexample
+    {The following \CorCpp example illustrates scenario 2.  In this example,
+    atomic increment operations are concurrent with a non-atomic reduction
+    operation, resulting in undefined behavior.  The undefined behavior can be
+    resolved by inserting a barrier operation before the reduction.  The
+    barrier ensures that all local and remote AMOs have completed before the
+    reduction operation accesses $x$.}
+    {./example_code/amo_scenario_2.c}
+
+\cexample
+    {The following \CorCpp example illustrates scenario 3.  In this example, an
+    \openshmem atomic increment operation is concurrent with a local increment
+    operation, resulting in undefined behavior.  The undefined behavior can be
+    resolved by replacing the local increment operation with an \openshmem
+    atomic increment.}
+    {./example_code/amo_scenario_3.c}

@@ -528,6 +528,11 @@
 {
 }
 
+\newcommand{\cexample}[2]{
+    #1
+    \lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{#2}}
 %
 % End library API description template commands
 %
