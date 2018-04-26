@@ -14,7 +14,7 @@ is the lowest numbered PE in the active set.  The stride between successive
 be greater than or equal to zero.  \VAR{PE\_size} specifies the number of
 \acp{PE} in the active set and must be greater than zero.  The active set must
 satisfy the requirement that its last member corresponds to a valid \ac{PE}
-number,
+number, that is
 $0 \le PE\_start + (PE\_size - 1) * 2^{logPE\_stride} < npes$.
 All \acp{PE} participating in the collective routine must provide the same
 values for these arguments.  If any of these requirements are not met, the
