@@ -1,12 +1,12 @@
 The \ac{RMA} routines described in this section can be used to perform
-asynchronous reads from  and writes to symmetric data objects. These operations
+reads from and writes to symmetric data objects. These operations
 are one-sided, meaning that the \ac{PE} invoking an operation provides all
 communication parameters and the targeted \ac{PE} is passive. A characteristic
 of one-sided communication is that it decouples communication from
 synchronization. One-sided communication mechanisms transfer data; however,
 they do not synchronize the sender of the data with the receiver of the data.
 
-\openshmem \ac{RMA} routines are performed on the symmetric data objects.  The
+\openshmem \ac{RMA} routines are performed on symmetric data objects.  The
 initiator \ac{PE} of a call is designated as the \emph{origin} \ac{PE} and the
 PE targeted by an operation is designated as the \emph{destination} PE.  The
 \source{} and \dest{} designators refer to the data objects that an operation
