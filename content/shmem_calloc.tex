@@ -31,7 +31,7 @@ void *@\FuncDecl{shmem\_calloc}@(size_t count, size_t size);
   undefined.
 
   When \VAR{count} or \VAR{size} is \CONST{0}, the \FUNC{shmem\_calloc} routine
-  is not collective and returns without performing a barrier.  Otherwise, this
+  returns without performing a barrier.  Otherwise, this
   routine calls a procedure that is semantically equivalent to
   \FUNC{shmem\_barrier\_all} on exit.
 }
