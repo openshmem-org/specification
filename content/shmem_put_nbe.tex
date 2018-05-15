@@ -44,9 +44,7 @@ void shmem_putmem_nbe(void *dest, const void *source, size_t nelems, int pe, shm
     contiguous symmetric data object from the local \ac{PE} to a contiguous data
     object on a remote \ac{PE}.
     The routines return after posting the operation. If the request
-    parameter is initialized to NULL, a new request will be created. If
-    the parameter is a valid request object, the operation will be
-    merged into the request object.
+    parameter is initialized to NULL, a new request will be created.
     The delivery of data elements into the data object on the destination
     \ac{PE} may occur in any order.
     Furthermore, two successive put routines may deliver data out of
