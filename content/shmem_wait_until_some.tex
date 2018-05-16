@@ -1,19 +1,19 @@
 \apisummary{
-    Wait for at least one variable on the local \ac{PE} to change to a
+    Wait on some number of variables on the local \ac{PE} to change to a
     specified value.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-size_t @\FuncDecl{shmem\_wait\_until\_some}@(TYPE *ivars, size_t nelems, size_t *indices,
+size_t @\FuncDecl{shmem\_wait\_until\_some}@(TYPE *ivars, size_t nelems, _Bool *status,
     int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some}@(TYPE *ivars, size_t nelems, size_t *indices,
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some}@(TYPE *ivars, size_t nelems, _Bool *status,
     int cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
@@ -26,12 +26,15 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     section.} 
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array to
     be compared with \VAR{cmp\_value}.}
-  \apiargument{INOUT}{indices}{A mask array of indices into \VAR{ivars} that
-    satisfy the implied condition.  The length of this array is \VAR{nelems},
-    and each element to be checked must be initialized to a value greater than
-    or equal to \VAR{nelems}.}
-  \apiargument{IN}{cmp}{The comparison operator that compares elements of
-    \VAR{ivars} with \VAR{cmp\_value}.}
+  \apiargument{INOUT}{status}{A mask array of length \VAR{nelems}, where each
+    element corresponds to the respective element in \VAR{ivars} and represents
+    the status of each implied condition.  On input, elements set to 0 will be
+    waited upon, and elements set to 1 will be ignored.  On output, each
+    element of \VAR{status} equal to 1 corresponds to a satisfied condition in
+    the respective element of \VAR{ivars} (or an ignored condition, if
+    initialized to 1 on input).}
+    \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}
+    that compares elements of \VAR{ivars} with \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value to be compared with the objects
     pointed to by \VAR{ivars}.  The type of \VAR{cmp\_value} should match that
     implied in the SYNOPSIS section.}
@@ -39,27 +42,35 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \end{apiarguments}
 
 \apidescription{ 
-    \FUNC{shmem\_wait\_until\_some} waits for at least one element in the
-    \VAR{ivars} array to be changed by a write or an atomic operation issued by
-    a \ac{PE}.  This routine can be used for point-to-point direct
-    synchronization involving multiple data objects, potentially avoiding the
-    overhead associated with individual calls to \FUNC{shmem\_wait\_until}.  A
-    call to \FUNC{shmem\_wait\_until\_some} does not return until a \ac{PE}
-    changes at least one element within \VAR{ivars} to satisfy the condition
-    implied by \VAR{cmp} and \VAR{cmp\_value}.  On entry, the \VAR{indices}
-    array indicates the indices of elements in \VAR{ivars} on which to wait.
-    On exit, the \VAR{indices} array indicates the indices of elements in
-    \VAR{ivars} that have satisfied the implied condition.  Specifically,
-    initializing an element in \VAR{indices} to a value greater than or equal
-    to \VAR{nelems} results in a wait operation on the corresponding element.
-    After returning, each element of \VAR{indices} that contains a value
-    strictly less than \VAR{nelems} has satisfied the implied condition.
+    The \FUNC{shmem\_wait\_until\_some} routine waits for some specified
+    element(s) in the \VAR{ivars} array to be changed by a write or an atomic
+    operation issued by a \ac{PE}.  This routine can be used for point-to-point
+    direct synchronization involving multiple data objects, potentially
+    avoiding the overhead associated with multiple individual calls to
+    \FUNC{shmem\_wait\_until}.  
+
+    On input, the \VAR{status} array indicates the respective elements of
+    \VAR{ivars} for which to wait until the condition implied by \VAR{cmp} and
+    \VAR{cmp\_value} is satisfied.  For each element of \VAR{status}
+    initialized to 0, \FUNC{shmem\_wait\_until\_some} sets that value to 1 if
+    the respective \VAR{ivars} element has changed to satisfy the implied
+    condition. Elements in \VAR{status} initialized to 1 are ignored and not
+    checked for the implied condition.  If one or more elements of
+    \VAR{status} are intialized to 0, \FUNC{shmem\_wait\_until\_some} does not
+    return until a \ac{PE} changes one of the corresponding elements in
+    \VAR{ivars} to satisfy the implied condition.  On output, the \VAR{status}
+    array indicates which respective elements in \VAR{ivars} have satisfied the
+    implied condition or have been ignored.  \FUNC{shmem\_wait\_until\_some}
+    returns the total number of the newly satisfied conditions excluding the
+    ignored elements.
 }
 
 
 \apireturnvalues{
-  \FUNC{shmem\_wait\_until\_some} returns the number of elements in \VAR{ivars} that
-  satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.  
+    \FUNC{shmem\_wait\_until\_some} returns the number of elements in
+    \VAR{ivars} that satisfied the condition implied by \VAR{cmp} and
+    \VAR{cmp\_value}, excluding the number of ignored elements indicated by the
+    initial values in \VAR{status}.
 }
 
 \apinotes{
@@ -77,10 +88,9 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \begin{apiexamples}
 
 \apicexample
-{The following \CorCpp{} example demonstrates the use of
-\FUNC{shmem\_wait\_until\_some} to wait on an array of symmetric objects
-until \textit{all} elements satisfy the specified condition.}
-{./example_code/shmem_wait_until_some_example.c}
+{The following \CorCpp{} example demonstrates the use of 
+\FUNC{shmem\_wait\_until\_some} to process a simple all-to-all transfer of N data elements in the form of a sum reduction.}
+{./example_code/shmem_wait_until_some_all2all_sum.c}
 {}
 
 \end{apiexamples}

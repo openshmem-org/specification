@@ -1,18 +1,18 @@
 \apisummary{
-  Test whether at least one variable on the local \ac{PE} has changed to a
+  Test whether some number of variables on the local \ac{PE} have changed to a
   specified value.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-size_t @\FuncDecl{shmem\_test\_some}@(TYPE *ivars, size_t nelems, size_t *indices, int cmp, TYPE cmp_value);
+size_t @\FuncDecl{shmem\_test\_some}@(TYPE *ivars, size_t nelems, _Bool *status, int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_some}@(TYPE *ivars, size_t nelems, size_t *indices, int cmp,
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_some}@(TYPE *ivars, size_t nelems, _Bool *status, int cmp,
     TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
@@ -25,12 +25,15 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     section.} 
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array to be
     compared with \VAR{cmp\_value}.}
-  \apiargument{INOUT}{indices}{A mask array of indices into \VAR{ivars} that
-    satisfy the implied condition.  The length of this array is \VAR{nelems},
-    and each element to be tested must be initialized to a value greater than
-    or equal to \VAR{nelems}.}
-  \apiargument{IN}{cmp}{The comparison operator that compares elements of
-    \VAR{ivars} with \VAR{cmp\_value}.}
+  \apiargument{INOUT}{status}{A mask array of length \VAR{nelems}, where each
+    element corresponds to the respective element in \VAR{ivars} and represents
+    the status of each implied condition.  On input, elements set to 0 will be
+    tested, and elements set to 1 will be ignored.  On output, each element of
+    \VAR{status} equal to 1 corresponds to a satisfied condition in the
+    respective element of \VAR{ivars} (or an ignored condition, if initialized
+    to 1 on input).}
+    \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}
+    that compares elements of \VAR{ivars} with \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value to be compared with the objects
     pointed to by \VAR{ivars}.  The type of \VAR{cmp\_value} should match that
     implied in the SYNOPSIS section.}
@@ -38,20 +41,23 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \end{apiarguments}
 
 \apidescription{
-  \FUNC{shmem\_test\_some} tests the numeric comparison of each symmetric
-    object pointed to by \VAR{ivars} with the value \VAR{cmp\_value} according
-    to the comparison operator \VAR{cmp}.  The \VAR{indices} array has the same
-    intent as in \FUNC{shmem\_test\_some} in
-    Section~\ref{subsec:shmem_wait_until_some}: on entry, the \VAR{indices}
-    array indicates the elements to test; and on exit, the \VAR{indices} array
-    indicates the elements that have satisfied the implied condition.
+    The \FUNC{shmem\_test\_some} routine tests the numeric comparison of each
+    symmetric object pointed to by \VAR{ivars} with the value \VAR{cmp\_value}
+    according to the comparison operator \VAR{cmp}.  The \VAR{status} array has
+    the same intent as in \FUNC{shmem\_wait\_until\_some} in
+    Section~\ref{subsec:shmem_wait_until_some}: on entry, the \VAR{status}
+    array indicates which elements to test; and on exit, the \VAR{status} array
+    indicates the elements that have satisfied the implied condition in
+    \VAR{ivars} or have been ignored (because elements in \VAR{status}
+    initialized to 1 are not tested).
 }
 
 \apireturnvalues{
-  \FUNC{shmem\_test\_some} returns the number of elements in \VAR{ivars} that
-  satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.  If no
-  elements in \VAR{ivars} satisfy the condition, \FUNC{shmem\_test\_some}
-  returns 0.
+    \FUNC{shmem\_test\_some} returns the number of elements in \VAR{ivars} that
+    satisfied the condition implied by \VAR{cmp} and \VAR{cmp\_value},
+    excluding the number of ignored elements indicated by the initial values in
+    \VAR{status}.  If no elements in \VAR{ivars} satisfy the condition,
+    \FUNC{shmem\_test\_some} returns 0.
 }
 
 \apinotes{
