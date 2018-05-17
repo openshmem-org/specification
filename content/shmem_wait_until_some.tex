@@ -28,11 +28,11 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     be compared with \VAR{cmp\_value}.}
   \apiargument{INOUT}{status}{A mask array of length \VAR{nelems}, where each
     element corresponds to the respective element in \VAR{ivars} and represents
-    the status of each implied condition.  On input, elements set to 0 will be
-    waited upon, and elements set to 1 will be ignored.  On output, each
-    element of \VAR{status} equal to 1 corresponds to a satisfied condition in
-    the respective element of \VAR{ivars} (or an ignored condition, if
-    initialized to 1 on input).}
+    the status of each implied condition.  On input, elements of \VAR{status}
+    set to 0 will be waited upon, and elements set to 1 will be ignored.  On
+    output, each element of \VAR{status} equal to 1 corresponds to a satisfied
+    condition in the respective element of \VAR{ivars} (or an ignored
+    condition, if initialized to 1 on input).}
     \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}
     that compares elements of \VAR{ivars} with \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value to be compared with the objects
@@ -43,11 +43,11 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \apidescription{ 
     The \FUNC{shmem\_wait\_until\_some} routine waits for some specified
-    element(s) in the \VAR{ivars} array to be changed by a write or an atomic
-    operation issued by a \ac{PE}.  This routine can be used for point-to-point
-    direct synchronization involving multiple data objects, potentially
-    avoiding the overhead associated with multiple individual calls to
-    \FUNC{shmem\_wait\_until}.  
+    symmetric object(s) in the \VAR{ivars} array to change to the value
+    \VAR{cmp\_value} according to the numeric comparison operator \VAR{cmp}.
+    This routine can be used for point-to-point direct synchronization
+    involving multiple data objects, potentially avoiding the overhead
+    associated with multiple individual calls to \FUNC{shmem\_wait\_until}.
 
     On input, the \VAR{status} array indicates the respective elements of
     \VAR{ivars} for which to wait until the condition implied by \VAR{cmp} and
@@ -89,7 +89,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \apicexample
 {The following \CorCpp{} example demonstrates the use of 
-\FUNC{shmem\_wait\_until\_some} to process a simple all-to-all transfer of N data elements in the form of a sum reduction.}
+\FUNC{shmem\_wait\_until\_some} to process a simple all-to-all transfer of N data elements via a sum reduction.}
 {./example_code/shmem_wait_until_some_all2all_sum.c}
 {}
 

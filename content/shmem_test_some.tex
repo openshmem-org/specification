@@ -27,11 +27,11 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     compared with \VAR{cmp\_value}.}
   \apiargument{INOUT}{status}{A mask array of length \VAR{nelems}, where each
     element corresponds to the respective element in \VAR{ivars} and represents
-    the status of each implied condition.  On input, elements set to 0 will be
-    tested, and elements set to 1 will be ignored.  On output, each element of
-    \VAR{status} equal to 1 corresponds to a satisfied condition in the
-    respective element of \VAR{ivars} (or an ignored condition, if initialized
-    to 1 on input).}
+    the status of each implied condition.  On input, elements of \VAR{status}
+    set to 0 will be tested, and elements set to 1 will be ignored.  On output,
+    each element of \VAR{status} equal to 1 corresponds to a satisfied
+    condition in the respective element of \VAR{ivars} (or an ignored
+    condition, if initialized to 1 on input).}
     \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}
     that compares elements of \VAR{ivars} with \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value to be compared with the objects
@@ -45,20 +45,21 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     symmetric object pointed to by \VAR{ivars} with the value \VAR{cmp\_value}
     according to the comparison operator \VAR{cmp}.  The \VAR{status} array has
     the same intent as in \FUNC{shmem\_wait\_until\_some} in
-    Section~\ref{subsec:shmem_wait_until_some}: on entry, the \VAR{status}
-    array indicates which elements to test; and on exit, the \VAR{status} array
+    Section~\ref{subsec:shmem_wait_until_some}.  On entry, the \VAR{status}
+    array indicates which elements to test.  On exit, the \VAR{status} array
     indicates the elements that have satisfied the implied condition in
     \VAR{ivars} or have been ignored (because elements in \VAR{status}
-    initialized to 1 are not tested).
+    initialized to 1 are not tested).  If one or more elements of \VAR{status}
+    are initialized to 0, a call \FUNC{shmem\_test\_some} may return without
+    waiting on the corresponding elements in \VAR{ivar} to satisfy the implied
+    condition.
 }
 
 \apireturnvalues{
     \FUNC{shmem\_test\_some} returns the number of elements in \VAR{ivars} that
     satisfied the condition implied by \VAR{cmp} and \VAR{cmp\_value},
     excluding the number of ignored elements indicated by the initial values in
-    \VAR{status}.  If no elements in \VAR{ivars} satisfy the condition,
-    \FUNC{shmem\_test\_some} returns 0.
-}
+    \VAR{status}.}
 
 \apinotes{
   None.
@@ -66,9 +67,9 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiexamples}
   \apicexample
-      {The following example demonstrates the use of \FUNC{shmem\_test\_some} to
-        wait on an array of symmetric objects and return the index of an
-        element that satisfies the specified condition.}
+      {The following example demonstrates the use of \FUNC{shmem\_test\_some}
+      to test whether elements within an array of symmetric objects have
+      satisfied a specified condition.}
       {./example_code/shmem_test_some_example.c}
       {}
 \end{apiexamples}

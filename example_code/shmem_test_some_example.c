@@ -12,7 +12,7 @@ int main(void)
 
   if (mype == 0)
   {
-    size_t count = shmem_test_some(ivars, nelems, status, SHMEM_CMP_NE, 0);
+    size_t count = shmem_test_some(ivars, npes, status, SHMEM_CMP_NE, 0);
     printf("PE 0 observed %zu puts\n", count);
   }
   else

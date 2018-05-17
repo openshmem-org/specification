@@ -4,11 +4,10 @@
 #include <string.h>
 
 
-void user_wait_all(int *ivars, size_t nelems, size_t *indices, int cmp, int value)
+void user_wait_all(int *ivars, size_t nelems, _Bool *status, int cmp, int value)
 {
   size_t count = 0;
-  while (count < nelems)
-    count = shmem_wait_until_some(ivars, nelems, indices, cmp, value);
+  while (count = shmem_wait_until_some(ivars, nelems, status, cmp, value));
   return;
 }
 
@@ -19,20 +18,20 @@ int main(void)
   int npes = shmem_n_pes();
 
   int *ivars = shmem_calloc(npes, sizeof(int));
-  size_t *indices = (size_t *)malloc(npes * sizeof(size_t));
+  _Bool *status = malloc(npes * sizeof(_Bool));
 
   for (int i=0; i<npes; i++)
-    indices[i] = nelems;
+    status[i] = 0;
 
   if (mype == 0) {
-    user_wait_all(ivars, npes, indices, SHMEM_CMP_NE, 0);
+    user_wait_all(ivars, npes, status, SHMEM_CMP_NE, 0);
     for (int i=0; i<npes; i++)
       assert(ivars[i] == i);
   }
   else
     shmem_p(&ivars[mype], mype, 0);
 
-  free(indices);
+  free(status);
   shmem_free(ivars);
   shmem_finalize();
   return 0;
