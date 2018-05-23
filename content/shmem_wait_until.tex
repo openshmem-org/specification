@@ -62,7 +62,8 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
     within another \ac{PE}.
 
     These routines can be used to implement point-to-point synchronization
-    between \acp{PE}.  A call to \FUNC{shmem\_wait} blocks until the value of
+    between \acp{PE} or between threads within the same \ac{PE}.  A call to
+    \FUNC{shmem\_wait} blocks until the value of
     \VAR{ivar} at the calling \ac{PE} is not equal to \VAR{cmp\_value}.  A call
     to \FUNC{shmem\_wait\_until} blocks until the value of \VAR{ivar} at the
     calling \ac{PE} satisfies the wait condition specified by the comparison
