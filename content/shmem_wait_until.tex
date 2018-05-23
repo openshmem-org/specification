@@ -55,9 +55,9 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
     the value contained in the symmetric data object, \VAR{ivar}, at the
     calling \ac{PE} satisfies the wait condition.  In an \openshmem program
     with single-threaded \acp{PE}, the \VAR{ivar} object at the calling \ac{PE}
-    may be updated by an RMA, AMO, or store operation performed by another
+    may be updated by an \ac{RMA}, \ac{AMO}, or store operation performed by another
     \ac{PE}.  In an \openshmem program with multithreaded \acp{PE}, the
-    \VAR{ivar} object at the calling \ac{PE} may be updated by an RMA, AMO, or
+    \VAR{ivar} object at the calling \ac{PE} may be updated by an \ac{RMA}, \ac{AMO}, or
     store operation performed by a thread located within the calling \ac{PE} or
     within another \ac{PE}.
 
