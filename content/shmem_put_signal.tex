@@ -1,0 +1,98 @@
+\color{Green}
+\apisummary{
+    The put with signal routines provide a method for copying data from a
+    contiguous local data object to a data object on a specified \ac{PE}
+    and set a remote flag to signal completion.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+\end{CsynopsisCol}
+where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
+
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_putmem\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+\end{CsynopsisCol}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+      When this argument is not provided, the operation is performed on
+      \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
+    data object must be remotely accessible.}
+    \apiargument{IN}{source}{Data object containing the data to be copied.}
+    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
+    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
+    \Fortran, it must be a constant, variable, or array element of default
+    integer type.}
+    \apiargument{OUT}{sig\_addr}{Signal data object to be updated on the remote
+    \ac{PE} to be updated as the signal. This signal data object must be
+    remotely accessible and it can be in the same or differnt memory segment
+    as the \VAR{dest} data object.}
+    \apiargument{IN}{signal}{Unsigned 64-bit value used to set the remote
+    \VAR{sig\_addr} signal data object.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
+    of type integer. When using \Fortran, it must be a constant, variable,
+    or array element of default integer type.}
+\end{apiarguments}
+
+\apidescription{
+    The routines return after the data has been copied out of the \source{}
+    array on the local \ac{PE}. The delivery of \signal flag on the remote
+    \ac{PE} guarantees the delivery of data words into the data object on the
+    remote \ac{PE}. Furthermore, two successive put with signal routines or
+    a successive put followed by a put with signal routine may deliver data
+    out of order unless a call to \FUNC{shmem\_fence} is introduced between
+    the two calls and the delivery of the \signal flag on the remote \ac{PE}
+    guarantees only the delivery of its corresponding data object on the
+    remote \ac{PE}.
+ }
+
+\apidesctable{
+    The \dest{} and \source{} data objects must conform to certain typing
+    constraints, which are as follows:}
+    {Routine}{Data type of \VAR{dest} and \VAR{source}}
+    \apitablerow{shmem\_putmem}{Any data type. nelems is scaled in bytes.}
+    \apitablerow{shmem\_put8}{Any noncharacter type that
+        has a storage size equal to \CONST{8} bits.}
+    \apitablerow{shmem\_put16}{Any noncharacter type that
+        has a storage size equal to \CONST{16} bits.}
+    \apitablerow{shmem\_put32}{Any noncharacter type
+        that has a storage size equal to \CONST{32} bits.}
+    \apitablerow{shmem\_put64}{Any noncharacter type that
+        has a storage size equal to \CONST{64} bits.}
+    \apitablerow{shmem\_put128}{Any noncharacter type that has a
+        storage size equal to \CONST{128} bits.}
+
+\apireturnvalues{
+    None.
+}
+\apinotes{
+}
+
+\begin{apiexamples}
+
+\apicexample
+    { The following \FUNC{shmem\_put\_signal} example is for \Cstd[11] programs:}
+    {./example_code/shmem_put_signal_example.c}
+    {}
+\end{apiexamples}
+
+\end{apidefinition}
+\color{Black}
