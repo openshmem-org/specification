@@ -1,60 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <shmem.h>
 
-#define ITERATIONS (100)
-#define MAX_SIZE   (2<<18)
+#define MAX_SIZE (2<<10)
+#define VAL_USED 10
 
 int
 main(int argc, char* argv[])
 {
+    int i, err_count  = 0;
+
     shmem_init();
 
+    size_t    size    = MAX_SIZE;
     int       me      = shmem_my_pe();
     int       n       = shmem_n_pes();
-    int       r       = ITERATIONS;
-    size_t    bloat   = MAX_SIZE;
-    size_t    size;
+    int       pe      = (me + 1)%n;
 
-    for (size = 1; size < bloat; size*=2) {
-        uint64_t* message = malloc(size * sizeof(uint64_t));
-        uint64_t* data    = shmem_malloc(r * size * sizeof(uint64_t));
-        uint64_t* signals = shmem_malloc(r * sizeof(uint64_t));
+    uint64_t* message = malloc(size * sizeof(uint64_t));
+    uint64_t* data    = shmem_malloc(size * sizeof(uint64_t));
+    uint64_t* signals = shmem_malloc(sizeof(uint64_t));
 
-        memset(message, 0, size * sizeof(uint64_t));
-        memset(data, 0, r * size * sizeof(uint64_t));
-        memset(signals, 0, r * sizeof(uint64_t));
-        shmem_barrier_all();
+    signals[0] = 0;
+    for (i = 0; i < size; i++) {
+        message[i] = VAL_USED;
+        data[i]    = 0;
+    }
+    shmem_barrier_all();
 
-        message[0] = 10;
-        int i;
-        for (i = 0; i < r; i++) {
-            int j = i - (me == 0);
-            if (j >= 0) {
-                shmem_long_wait_until((long *)&signals[j],
-                                      SHMEM_CMP_EQ, 1);
-                message[0] = data[j * size] + 10;
-            }
-            int pe = (me + 1) % n;
-            shmemx_putmem_signal(&data[i * size], message,
-                                size * sizeof(uint64_t),
-                                &signals[i], 1, pe);
-        }
-        if (me == 0) {
-            shmem_long_wait_until((long *)&signals[r-1],
-                                  SHMEM_CMP_EQ, 1);
-            printf("Final message = %lu for size %zu\n",
-                    data[(r-1) * size], size);
-        }
-
-        shmem_barrier_all();
-        shmem_free(signals);
-        shmem_free(data);
-        free(message);
-        shmem_barrier_all();
+    if (me != 0) {
+        shmem_long_wait_until((long *)&signals[0], SHMEM_CMP_EQ, 1);
     }
 
+    shmemx_putmem_signal(data, message, size*sizeof(uint64_t),
+            &signals[0], 1, pe);
+
+    if (me == 0) {
+        shmem_long_wait_until((long *)&signals[0], SHMEM_CMP_EQ, 1);
+        printf("BCAST with put with signal is complete\n");
+    }
+
+    free(message);
+    shmem_free(data);
+    shmem_free(signals);
+
     shmem_finalize();
-  return 0;
+    return 0;
 }
