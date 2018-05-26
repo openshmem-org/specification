@@ -59,15 +59,15 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 }
 
 \apinotes{
-    The \VAR{sig\_addr} data object can be in the same or different memory
-    segment as the \VAR{dest} data object.
+    The \VAR{sig\_addr} data object can be placed in the symmetric data segment
+    or the symmetric heap which can be same or different from the \VAR{dest}
+    data object.
 
     The delivery of \signal{} flag on the remote \ac{PE} guarantees only the
     delivery of its corresponding \dest{} data words into the data object on
     the remote \ac{PE}. For example, two successive put with signal routines
     or a successive put followed by a put with signal routine may deliver data
-    out of order unless a call to \FUNC{shmem\_fence} is introduced between
-    the two calls.
+    out of order.
 }
 
 \begin{apiexamples}
