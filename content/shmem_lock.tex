@@ -54,9 +54,15 @@ I = @\FuncDecl{SHMEM\_TEST\_LOCK}@(lock)
 
 \apinotes{
     The term symmetric data object is defined in Section \ref{subsec:memory_model}.
-    The lock variable should always be initialized to zero and accessed only by the \openshmem locking
-    \ac{API}.  Changing the value of the lock variable by other means without using
-    the \openshmem \ac{API}, can lead to undefined behavior.
+
+    The lock variable must be initialized to zero before any PE performs an
+    \openshmem lock operation on the given variable.  Accessing an in-use lock
+    variable using any method other than the \openshmem lock API, e.g. using
+    local load/store, RMA, or AMO operations, results in undefined behavior.
+
+    Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior to calling the
+    \FUNC{shmem\_clear\_lock} routine to ensure completion of operations issued
+    on additional contexts.
 }
 
 \begin{apiexamples}
