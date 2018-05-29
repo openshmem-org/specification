@@ -13,8 +13,8 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
 
 \begin{apiarguments}
     \apiargument{IN}{size}{The size, in bytes, of a block to be
-        allocated from the symmetric heap. This argument is of type \VAR{size\_t}}
-    \apiargument{IN}{ptr}{Points to a block within the symmetric heap.}
+        allocated from the symmetric heap. This argument is of type \CTYPE{size\_t}}
+    \apiargument{IN}{ptr}{Pointer to a block within the symmetric heap.}
     \apiargument{IN}{alignment}{Byte alignment of the block allocated from the
         symmetric heap.}
 \end{apiarguments}
@@ -26,16 +26,22 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     participation by all \acp{PE}.
 
     The \FUNC{shmem\_malloc} routine returns a pointer to a block of at least
-    \VAR{size} bytes suitably aligned for any use.  This space is allocated from the
-    symmetric heap (in contrast to \FUNC{malloc}, which allocates from the private
-    heap).
+    \VAR{size} bytes, which shall be suitably aligned so that it may be
+    assigned to a pointer to any type of object.  This space is allocated from
+    the symmetric heap (in contrast to \FUNC{malloc}, which allocates from the
+    private heap).  When \VAR{size} is zero, the \FUNC{shmem\_malloc} routine
+    performs no action and returns a null pointer.
     
     The \FUNC{shmem\_align} routine allocates a block in the symmetric heap that has
-    a byte alignment specified by the \VAR{alignment} argument.
+    a byte alignment specified by the \VAR{alignment} argument.  The value of
+    \VAR{alignment} shall be a multiple of \CONST{sizeof(void *)} that is also
+    a power of two.  Otherwise, the behavior is undefined.  When \VAR{size} is
+    zero, the \FUNC{shmem\_align} routine performs no action and returns a null
+    pointer.
     
     The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr} points to be
     deallocated, that is, made available for further allocation.  If \VAR{ptr} is a
-    null pointer, no action occurs.
+    null pointer, no action is performed.
            
     The \FUNC{shmem\_realloc} routine changes the size of the block to which
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
@@ -50,12 +56,14 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     are provided  so that multiple \acp{PE} in a program can allocate symmetric,
     remotely accessible memory blocks.  These memory blocks can then be used with
-    \openshmem communication routines.  Each of these routines includes at least one
+    \openshmem communication routines.  When no action is performed, these
+    routines return without performing a barrier.
+    Otherwise, each of these routines includes at least one
     call to a procedure that is semantically equivalent to \FUNC{shmem\_barrier\_all}:
     \FUNC{shmem\_malloc} and \FUNC{shmem\_align} call a
     barrier on exit; \FUNC{shmem\_free} calls a barrier on entry; and
     \FUNC{shmem\_realloc} may call barriers on both entry and exit, depending on
-    whether an existing allocation is modified and whether new memory is allocated.
+    whether an existing allocation is modified and whether new memory is allocated, respectively.
     This ensures that all
     \acp{PE} participate in the memory allocation, and that the memory on other
     \acp{PE} can be used as soon as the local \ac{PE} returns.
@@ -77,10 +85,10 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     The \FUNC{shmem\_free} routine returns no value.
     
     The \FUNC{shmem\_realloc} routine returns a pointer to the allocated space
-    (which may have moved); otherwise, it returns a null pointer.
+    (which may have moved); otherwise, all \acp{PE} return a null pointer.
     
-    The \FUNC{shmem\_align} routine returns an aligned pointer to the allocated
-    space; otherwise, it returns a null pointer.
+    The \FUNC{shmem\_align} routine returns an aligned pointer whose value is a
+    multiple of \VAR{alignment}; otherwise, it returns a null pointer.
 }
 
 \apinotes{ 
@@ -98,7 +106,12 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     differ from the private heap allocation routines in that all \acp{PE} in a
     program must call them (a barrier is used to ensure this).
-}		
+
+    When the \VAR{ptr} argument in a call to \FUNC{shmem\_realloc} corresponds
+    to a buffer allocated using \FUNC{shmem\_align}, the buffer returned by
+    \FUNC{shmem\_realloc} is not guaranteed to maintain the alignment requested
+    in the original call to \FUNC{shmem\_align}.
+}
 
 \apiimpnotes{
     The symmetric heap allocation routines always return a pointer to corresponding
