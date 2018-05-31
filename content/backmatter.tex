@@ -558,6 +558,14 @@ The following list describes the specific changes in \openshmem[1.5]:
 \item This item is a template for changelist entries and should be deleted
     before this document is published.
     \\See Annex~\ref{sec:changelog}.
+\item Clarified \ac{PE} active set requirements.
+    \\See Section~\ref{subsec:coll}.
+\item Clarified that when the \VAR{size} argument is zero, symmetric heap
+    allocation routines perform no action and return a null pointer; that
+    symmetric heap management routines that perform no action do not perform a
+    barrier; and that the \VAR{alignment} argument to \FUNC{shmem\_align} must
+    be power of two multiple of \CONST{sizeof(void*)}.
+    \\See Section~\ref{subsec:shfree}.
 \end{itemize}
 
 \section{Version 1.4}
