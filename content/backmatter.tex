@@ -558,6 +558,10 @@ The following list describes the specific changes in \openshmem[1.5]:
 \item This item is a template for changelist entries and should be deleted
     before this document is published.
     \\See Annex~\ref{sec:changelog}.
+\item Clarified that the \openshmem lock API provides a non-reentrant mutex and
+    that \FUNC{shmem\_clear\_lock} performs a quiet operation on the default
+    context.
+    \\See Section~\ref{subsec:shmem_lock}
 \end{itemize}
 
 \section{Version 1.4}
