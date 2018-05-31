@@ -40,7 +40,9 @@
 \newcommand{\FUNC}[1]{\textit{#1}}
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
+\newcommand{\ENVVAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
+\newcommand{\KEYWORD}[1]{\textit{#1}}
 %%
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
 \newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
@@ -75,7 +77,7 @@
 \newcommand{\LibHandleIndex}[1]{\index{#1}}
 \newcommand{\TableIndex}[1]{\index{#1}\index{Tables!#1}}
 %% Write text and generate reference.
-\newcommand{\EnvVarRef}[1]{\VAR{#1}\EnvVarIndex{#1}}
+\newcommand{\EnvVarRef}[1]{\ENVVAR{#1}\EnvVarIndex{#1}}
 \newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
 \newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
 \newcommand{\LibHandleRef}[1]{\CONST{#1}\LibHandleIndex{#1}}
@@ -84,9 +86,9 @@
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
 \newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
 \newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
-\newcommand{\LibConstDecl}[2][\CorCppFor]{%
-  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
-\newcommand{\LibHandleDecl}[2][\CorCppFor]{%
+\newcommand{\LibConstDecl}[2][\CorCpp]{%
+  \parbox[t]{5cm}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
+\newcommand{\LibHandleDecl}[2][\CorCpp]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
 
 \begin{acronym}
