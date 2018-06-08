@@ -143,8 +143,8 @@ the value \CONST{SHMEM\_CTX\_INVALID} to indicate or test whether the handle
 represents an invalid context.
 A valid context is either the default context or one created by a successful
 call to \FUNC{shmem\_ctx\_create} that has not yet been destroyed.
-Any other context is invalid and the behavior of its use in \ac{RMA}, \ac{AMO},
-and memory ordering routines is undefined.
+Any other context is invalid and the behavior resulting from its use in
+\ac{RMA} and \ac{AMO} routines is undefined.
 }
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
