@@ -65,6 +65,10 @@ CALL @\FuncDecl{SHMEM\_REAL\_GET}@(dest, source, nelems, pe)
    object from a different \ac{PE} to a contiguous data object on the local
    \ac{PE}.  The routines return after the data has been delivered to the
    \dest{} array on the local \ac{PE}. 
+   \newtext{
+   If the context handle \VAR{ctx} specifies an invalid context,
+   the behavior is undefined.
+   }
 }
 
 \apidesctable{

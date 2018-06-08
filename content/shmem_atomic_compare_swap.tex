@@ -62,6 +62,10 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_CSWAP}@(dest, cond_i8, value_i8, pe)
     The conditional swap routines conditionally update a \VAR{dest} data object on
     the specified \ac{PE} and return the prior contents of the data object in one
     atomic operation.
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 \apidesctable{
     When using \Fortran, \VAR{dest}, \VAR{cond}, and \VAR{value} must be of the following type:

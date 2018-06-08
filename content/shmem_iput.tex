@@ -70,6 +70,10 @@ CALL @\FuncDecl{SHMEM\_REAL\_IPUT}@(dest, source, dst, sst, nelems, pe)
     greater than or equal to \CONST{1}. The routines return when the data has
     been copied out of the \VAR{source} array on the local \ac{PE} but not
     necessarily before the data has been delivered to the remote data object.
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 
 \apidesctable{

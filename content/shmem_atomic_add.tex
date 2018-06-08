@@ -58,6 +58,10 @@ CALL @\FuncDecl{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
     The \FUNC{shmem\_atomic\_add} routine performs an atomic add operation. It adds
     \VAR{value} to \dest{} on \ac{PE} \VAR{pe} and atomically updates the \dest{}
     without returning the value.
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
  }
 
 \apidesctable{

@@ -69,6 +69,10 @@ CALL @\FuncDecl{SHMEM\_REAL\_PUT\_NBI}@(dest, source, nelems, pe)
     Furthermore, two successive put
     routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
     introduced between the two calls.   
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
  }
 
 \apidesctable{

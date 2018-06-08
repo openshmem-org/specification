@@ -36,6 +36,10 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
   \FUNC{shmem\_atomic\_xor} atomically performs a non-fetching bitwise XOR
   on the remotely accessible data object pointed to by \VAR{dest} at PE
   \VAR{pe} with the operand \VAR{value}.
+  \newtext{
+  If the context handle \VAR{ctx} specifies an invalid context,
+  the behavior is undefined.
+  }
 }
 
 \apireturnvalues{

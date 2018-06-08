@@ -59,6 +59,10 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FINC}@(dest, pe)
    These routines perform a fetch-and-increment operation.  The \dest{} on
    \ac{PE} \VAR{pe} is increased by one and the routine returns the previous
    contents of \dest{} as an atomic operation.
+   \newtext{
+   If the context handle \VAR{ctx} specifies an invalid context,
+   the behavior is undefined.
+   }
 }
 
 \apidesctable{

@@ -68,6 +68,10 @@ CALL @\FuncDecl{SHMEM\_REAL\_GET\_NBI}@(dest, source, nelems, pe)
     complete after a subsequent call to \FUNC{shmem\_quiet}. 
     At the completion of \FUNC{shmem\_quiet}, the 
     data has been delivered to the \dest{} array on the local \ac{PE}. 
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 
 \apidesctable{

@@ -61,6 +61,10 @@ CALL @\FuncDecl{SHMEM\_REAL8\_SET}@(dest, value_r8, pe)
 \apidescription{
     \FUNC{shmem\_atomic\_set} performs an atomic set operation. It writes the
     \VAR{value} into \VAR{dest} on \VAR{pe} as an atomic operation.
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 
 \apireturnvalues{

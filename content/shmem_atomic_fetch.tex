@@ -60,6 +60,10 @@ res\_r8 = @\FuncDecl{SHMEM\_REAL8\_FETCH}@(source, pe)
 \apidescription{
     \FUNC{shmem\_atomic\_fetch} performs an atomic fetch operation.
     It returns the contents of the \VAR{source} as an atomic operation.
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 
 \apireturnvalues{

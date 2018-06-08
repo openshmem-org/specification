@@ -28,6 +28,10 @@ CALL @\FuncDecl{SHMEM\_QUIET}@
     memory store, and nonblocking \PUT{} and \GET{} routines to
     symmetric data objects are guaranteed to be completed and visible to all
     \acp{PE} when \FUNC{shmem\_quiet} returns. 
+    \newtext{
+    If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
+    performed.
+    }
 }
 
 

@@ -66,6 +66,10 @@ CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
     a symmetric array from a specified remote \ac{PE} to strided locations on a
     local array.  The routines return when the data has been copied into the local
     \VAR{dest} array.
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 
 \apidesctable{

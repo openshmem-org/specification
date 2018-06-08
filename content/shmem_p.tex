@@ -34,6 +34,11 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
     As with \FUNC{shmem\_put}, these routines start the remote transfer and may
     return before the data is delivered to the remote \ac{PE}.  Use
     \FUNC{shmem\_quiet} to force completion of all remote \PUT{} transfers.
+
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 
 \apireturnvalues{

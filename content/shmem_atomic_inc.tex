@@ -54,6 +54,10 @@ CALL @\FuncDecl{SHMEM\_INT8\_INC}@(dest, pe)
 \apidescription{
     These  routines perform  an atomic increment operation on the \VAR{dest} data
     object on \ac{PE}.
+    \newtext{
+    If the context handle \VAR{ctx} specifies an invalid context,
+    the behavior is undefined.
+    }
 }
 
 
