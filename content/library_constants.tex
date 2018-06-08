@@ -39,6 +39,15 @@ may be multithreaded and any thread may invoke the \openshmem interfaces.
 See Section~\ref{subsec:thread_support} for more detail about its use.
 \tabularnewline \hline
 %%
+\LibConstDecl{\newtext{SHMEM\_CTX\_INVALID}} &
+\newtext{
+A value to which a context handle may be initialized, assigned, or
+equality-compared to indicate or test whether it is an invalid communication
+context.
+See Section~\ref{sec:ctx} for more detail about its use.
+}
+\tabularnewline \hline
+%%
 \LibConstDecl{SHMEM\_CTX\_SERIALIZED} &
 The context creation option which specifies that the given context
 is shareable but will not be used by multiple threads concurrently.
