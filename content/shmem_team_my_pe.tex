@@ -1,0 +1,39 @@
+\apisummary{
+    shmem\_team\_my\_pe returns the calling process's virtual rank in the
+    provided team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmemx\_team\_my\_pe}@(shmem_team_t newteam);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{newteam}{A valid SHMEM team handle.}
+\end{apiarguments}
+
+\apidescription{
+The shmemx\_team\_my\_pe function returns the calling process's virtual
+rank in the provided team. The rank will be a value between 0 and N-1,
+for a team of size N. Different members of a team cannot have the same
+rank. For the team SHMEM\_TEAM\_WORLD, this will return shmem\_my\_pe.
+
+Error checking will be done to ensure a valid team handle is provided.
+All errors are considered fatal, and will result in the job aborting
+with an informative error message.
+}
+
+\apireturnvalues{
+Calling process's virtual rank in the provided team.
+}
+
+\apinotes{
+By default, SHMEM creates two predefined teams that will be available
+for use once the routine start\_pes has been called. These teams can be
+referenced in the application by the constants SHMEM\_TEAM\_WORLD and
+SHMEM\_TEAM\_NODE. Every PE process is a member of the SHMEM\_TEAM\_WORLD
+team, and its rank in SHMEM\_TEAM\_WORLD corresponds to the value of its
+global PE rank. The SHMEM\_TEAM\_NODE team only contains the set of PEs
+that reside on the same node as the current PE.
+}
