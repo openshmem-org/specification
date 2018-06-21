@@ -1,0 +1,52 @@
+\apisummary{
+    shmemx\_team\_translate\_pe -- Translate a given virtual rank of one team
+    to its corresponding virtual rank in another team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmemx\_team\_translate\_pe}@(shmem_team_t team1, int team1_pe,
+    shmem_team_t team2);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{team1}{A valid SHMEM team handle.}
+\apiargument{IN}{team1\_pe}{A virtual team rank in team1.}
+\apiargument{IN}{team2}{A valid SHMEM team handle.}
+\end{apiarguments}
+
+\apidescription{
+The shmemx\_team\_translate\_pe function will translate a virtual rank of
+one team to its corresponding virtual rank in another team.
+Specifically, given the team1\_pe in team1, this function returns that
+\ac{PE}'s virtual rank in team2.
+
+If SHMEM\_TEAM\_WORLD is provided as the team2 parameter, this function
+acts as a global \ac{PE} rank translator and will return the corresponding
+SHMEM\_TEAM\_WORLD rank. This may be useful when performing point-to-
+point operations between \acp{PE} in a subset, as point-to-point operations
+require the global (SHMEM\_TEAM\_WORLD) rank. This function requires
+team1\_pe to be a member of team1. If team1\_pe is not a member of
+team2, a value of -1 is returned.
+
+Error checking will be done to ensure valid team handles are provided.
+All team handle errors are considered fatal and will result in the job
+aborting with an informative error message.
+}
+
+\apireturnvalues{
+Calling process's virtual rank in the provided team.
+}
+
+\apinotes{
+By default, SHMEM creates two predefined teams that will be available
+for use once the routine start\_pes has been called. These teams can be
+referenced in the application by the constants SHMEM\_TEAM\_WORLD and
+SHMEM\_TEAM\_NODE. Every \ac{PE} process is a member of the SHMEM\_TEAM\_WORLD
+team, and its rank in SHMEM\_TEAM\_WORLD corresponds to the value of its
+global \ac{PE} rank. The SHMEM\_TEAM\_NODE team only contains the set of PEs
+that reside on the same node as the current PE.
+}
+
+\end{apidefinition}

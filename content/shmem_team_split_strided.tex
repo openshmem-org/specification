@@ -1,0 +1,72 @@
+\apisummary{
+shmemx\_team\_split\_strided is a collective routine to partition the existing
+parent team into a new SHMEM team based on the \ac{PE}triplet (PE\_start,
+PE\_stride, and PE\_size) supplied to the function.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmemx\_team\_split\_strided}@(shmem_team_t parent_team,
+int PE_start, int PE_stride, int PE_size, shmem_team_t *newteam);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{parent\_team}{A valid SHMEM team. The predefined teams
+SHMEM\_TEAM\_WORLD or SHMEM\_TEAM\_NODE may be used, or any team created by the
+users.}
+
+\apiargument{IN}{PE\_start}{The lowest virtual \ac{PE} number of the
+parent\_team of \acp{PE}.}
+
+\apiargument{IN}{PE\_stride}{The stride between consecutive virtual \ac{PE}
+numbers in the parent\_team.}
+
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the defined set.}
+
+\apiargument{OUT}{newteam}{A new SHMEM team handle, representing a \ac{PE}
+subset of all the \acp{PE}, that is created from the \ac{PE} triplet provided.}
+\end{apiarguments}
+
+\apidescription{
+The shmemx\_team\_split\_strided function is a collective routine.
+It partitions the existing parent team into a new SHMEM team based on
+the \ac{PE} triplet (PE\_start, PE\_stride, and PE\_size) supplied to
+the function. It is important to note the use of the less restrictive
+PE\_stride argument instead of logPE\_stride. This method of
+creating a team with an arbitrary set of \acp{PE} is inherently restricted by
+its parameters, but allows for many additional use-cases over using a
+logPE\_stride parameter, and may provide an easier transition for
+existing SHMEM programs to create and use SHMEM teams. This function
+must be called by all processes contained in the SHMEM triplet
+specification. It may be called by additional \acp{PE} not included in the
+triplet specification, but for those processes a newteam value of
+SHMEM\_TEAM\_NULL is returned. All calling processes must provide the
+same values for the \ac{PE} triplet. This function will return a newteam
+containing the \ac{PE} subset specified by the triplet, and ordered by the
+existing global \ac{PE} rank value. None of the parameters need to reside in
+symmetric memory.
+
+Error checking will be done to ensure a valid \ac{PE} triplet is provided,
+and also to determine whether a valid team handle is provided for the
+parent\_team.
+
+All errors are considered fatal and will result in the job aborting with
+an informative error message.
+}
+
+\apireturnvalues{
+None.
+}
+
+\apinotes{
+Note that SHMEM team handles have local semantics only. That is, team
+handles should not be stored in shared variables and used across other
+processes. Doing so will result in unpredictable behavior.
+}
+
+\begin{apiexamples}
+
+\end{apiexamples}
+
+\end{apidefinition}

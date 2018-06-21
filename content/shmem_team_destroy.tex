@@ -1,0 +1,39 @@
+\apisummary{
+    shmem\_team\_destroy function destroys existing team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmemx\_team\_destroy}@(shmem_team_t newteam);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{newteam}{A valid SHMEM team handle.}
+\end{apiarguments}
+
+\apidescription{
+The shmemx\_team\_destroy function destroys an existing team. This is a
+collective call, in which every member of the team being destroyed needs
+to participate. This will free all internal memory structures associated
+with the team and invalidate the team handle. Upon return, the team
+handle is set to SHMEM\_TEAM\_NULL, after which it can no longer be
+used for team collective calls.
+
+It is considered erroneous to free SHMEM\_TEAM\_WORLD or
+SHMEM\_TEAM\_NODE. Error checking will be done to ensure a valid
+team handle is provided. All errors are considered fatal, and will
+result in the job aborting with an informative error message.
+}
+
+\apireturnvalues{
+None.
+}
+
+\apinotes{
+Note that SHMEM team handles have local semantics only. That is, team
+handles should not be stored in shared variables and used across other
+processes. Doing so will result in unpredictable behavior.
+}
+
+\end{apidefinition}

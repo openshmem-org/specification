@@ -1,0 +1,70 @@
+\apisummary{
+shmemx\_team\_split\_3d - partitions an existing parent team into three subgroups,
+based on the three-dimensional Cartesian space defined by the triplet (xrange,
+yrange, and zrange) describing the size of the Cartesian space in X, Y, and Z
+dimensions.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmemx\_team\_split\_3d}@(shmem_team_t parent_team, int xrange,
+int yrange, int zrange, shmem_team_t *xaxis_team, shmem_team_t *yaxis_team,
+shmem_team_t *zaxis_team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{parent\_team}{A valid SHMEM team. The predefined teams
+SHMEM\_TEAM\_WORLD or SHMEM\_TEAM\_NODE may be used, or any team created by the
+users.}
+
+\apiargument{IN}{xrange}{A non-negative integer representing the number of
+elements in the first dimension.}
+
+\apiargument{IN}{yrange}{A non-negative integer representing the number of
+elements in the second dimension.}
+
+\apiargument{IN}{zrange}{A non-negative integer representing the number of
+elements in the third dimension.}
+
+\apiargument{OUT}{xaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
+subset consisting of all the \acp{PE} that are in the same row in the X-axis.}
+
+\apiargument{OUT}{yaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
+subset consisting of all the \acp{PE} that are in the same column in the Y-axis.}
+
+\apiargument{OUT}{zaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
+subset consisting of all the \acp{PE} that are in the same position in in the
+Z-axis.}
+\end{apiarguments}
+
+\apidescription{
+The shmemx\_team\_split\_3d routine is a collective routine. It
+partitions an existing parent team into three subgroups, based on the
+three-dimensional Cartesian space defined by the triplet (xrange,
+yrange, and zrange) describing the size of the Cartesian space in X,
+Y, and Z dimensions. Each subgroup contains all \acp{PE} that are in the same
+dimension, along the X-axis, Y-axis and Z-axis. Within each subgroup,
+the \acp{PE} are ranked based on the position of the \ac{PE} with respect to its
+dimension in three-dimensional Cartesian space.
+
+Any valid \ac{PE} team can be used as the parent team. This routine must be
+called by all \acp{PE} in the parent team. The value of the triplets must be
+non-negative, and the size of the parent team should be greater than or
+equal to the size of the three-dimensional Cartesian space. None of the
+parameters need to reside in symmetric memory.
+
+Error checking will be done to ensure a valid team handle is provided.
+All errors are considered fatal and will result in the job aborting with
+an informative error message.
+}
+
+\apireturnvalues{
+None.
+}
+
+\begin{apiexamples}
+
+\end{apiexamples}
+
+\end{apidefinition}
