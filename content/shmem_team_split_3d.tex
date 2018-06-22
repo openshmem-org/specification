@@ -63,6 +63,12 @@ an informative error message.
 None.
 }
 
+\apinotes{
+Note that SHMEM team handles have local semantics only. That is, team
+handles should not be stored in shared variables and used across other
+processes. Doing so will result in unpredictable behavior.
+}
+
 \begin{apiexamples}
 
 \end{apiexamples}
