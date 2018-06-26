@@ -50,7 +50,7 @@ existing SHMEM programs to create and use SHMEM teams.
 This function must be called by all processes contained in the \ac{PE} triplet
 specification. It may be called by additional \acp{PE} not included in the
 triplet specification, but for those processes a new\_team value of
-SHMEM\_TEAM\_NULL is returned. All calling processes must provide the
+\CONST{SHMEM\_TEAM\_NULL} is returned. All calling processes must provide the
 same values for the \ac{PE} triplet. This function will return a new\_team
 containing the \ac{PE} subset specified by the triplet, and ordered by the
 existing global \ac{PE} rank value. None of the parameters need to reside in
