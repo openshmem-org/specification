@@ -1,22 +1,25 @@
 \apisummary{
-shmemx\_team\_split\_3d - partitions an existing parent team into three subgroups,
-based on the three-dimensional Cartesian space defined by the triplet (xrange,
-yrange, and zrange) describing the size of the Cartesian space in X, Y, and Z
-dimensions.
-}
+Create up to three new teams
+by splitting an existing parent team into up to three subsets based on a
+2D or 3D Cartesian space defined by the triplet (xrange, yrange, and zrange)
+describing the size of the Cartesian space in X, Y, and Z dimensions.}
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmemx\_team\_split\_3d}@(shmem_team_t parent_team, int xrange,
-int yrange, int zrange, shmem_team_t *xaxis_team, shmem_team_t *yaxis_team,
+void @\FuncDecl{shmem\_team\_split\_3d}@(shmem_team_t parent_team, long options,
+int xrange, int yrange, int zrange, shmem_team_t *xaxis_team, shmem_team_t *yaxis_team,
 shmem_team_t *zaxis_team);
 \end{Csynopsis}
 
 \begin{apiarguments}
 \apiargument{IN}{parent\_team}{A valid SHMEM team. The predefined teams
 SHMEM\_TEAM\_WORLD or SHMEM\_TEAM\_NODE may be used, or any team created by the
-users.}
+user.}
+
+\apiargument{IN}{options}{The set of options requested for the new teams.
+Multiple options may be requested by combining them with a bitwise OR operation;
+otherwise, \CONST{0} can be given if no options are requested.}
 
 \apiargument{IN}{xrange}{A non-negative integer representing the number of
 elements in the first dimension.}
@@ -25,7 +28,8 @@ elements in the first dimension.}
 elements in the second dimension.}
 
 \apiargument{IN}{zrange}{A non-negative integer representing the number of
-elements in the third dimension.}
+elements in the third dimension. \CONST{0} can be given if the defined space
+has no third dimension.}
 
 \apiargument{OUT}{xaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
 subset consisting of all the \acp{PE} that are in the same row in the X-axis.}
@@ -39,24 +43,49 @@ Z-axis.}
 \end{apiarguments}
 
 \apidescription{
-The shmemx\_team\_split\_3d routine is a collective routine. It
-partitions an existing parent team into three subgroups, based on the
-three-dimensional Cartesian space defined by the triplet (xrange,
-yrange, and zrange) describing the size of the Cartesian space in X,
-Y, and Z dimensions. Each subgroup contains all \acp{PE} that are in the same
-dimension, along the X-axis, Y-axis and Z-axis. Within each subgroup,
-the \acp{PE} are ranked based on the position of the \ac{PE} with respect to its
+The shmem\_team\_split\_3d routine is a collective routine. It creates up to three new teams
+by splitting an existing parent team into up to three subsets based on a
+1D, 2D or 3D Cartesian space defined by the triplet (xrange, yrange, and zrange)
+describing the size of the Cartesian space in X, Y, and Z dimensions.
+
+A 2D Cartesian space may be defined by passing \CONST{0} for the zrange
+parameter. In this case, the zaxis\_team argument may be passed a NULL
+pointer. If it is not passed as a NULL pointer, the zaxis\_team will be returned
+as \CONST{SHMEM\_TEAM\_NULL}.
+
+Each subset contains all \acp{PE} that are in the same
+dimension, along the X-axis, Y-axis and Z-axis. Within each subset,
+the \acp{PE} are numbered based on the position of the \ac{PE} with respect to its
 dimension in three-dimensional Cartesian space.
 
 Any valid \ac{PE} team can be used as the parent team. This routine must be
 called by all \acp{PE} in the parent team. The value of the triplets must be
 non-negative, and the size of the parent team should be greater than or
-equal to the size of the three-dimensional Cartesian space. None of the
-parameters need to reside in symmetric memory.
+equal to the number of discrete (x,y,z) points in the Cartesian space.
+None of the parameters need to reside in symmetric memory.
+
+In the event that the Cartesian space contains less points than exist \acp{PE}
+in the parent\_team, the first N \acp{PE} in the parent team will be used
+to form the new teams, where N is equal to the number of points in the
+Cartesian space.
 
 Error checking will be done to ensure a valid team handle is provided.
 All errors are considered fatal and will result in the job aborting with
 an informative error message.
+
+The following options can be supplied during team split to restrict
+team functions and enable performance optimizations.  When using a given
+team, the application must comply with the requirements of all options
+set on that team; otherwise, the behavior is undefined.
+No options are enabled on \CONST{SHMEM\_TEAM\_WORLD} or \CONST{SHMEM\_TEAM\_NODE}.
+
+    \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
+                 The new team will not be created with the necessary support
+                 structures to enable team based collectives.
+                 This will typically allow implementations to speed up team creation
+                 and reduce \openshmem library footprint for teams with this option.
+                 This option will not prevent the new team from using atomics or
+                 other non-collective team based operations.}
 }
 
 \apireturnvalues{
