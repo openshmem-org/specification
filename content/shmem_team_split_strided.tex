@@ -1,6 +1,6 @@
 \apisummary{
-shmem\_team\_split\_strided is a collective routine to create a new SHMEM team from
-a subset of the existing parent team \acp{PE}, where the subset is defined by the
+Create a new SHMEM team from a subset of the existing parent team \acp{PE},
+where the subset is defined by the
 \ac{PE} triplet (PE\_start, PE\_stride, and PE\_size) supplied to the function.}
 
 \begin{apidefinition}
@@ -35,7 +35,7 @@ the \ac{PE} triplet provided.}
 \end{apiarguments}
 
 \apidescription{
-The shmem\_team\_split\_strided function is a collective routine.
+The \FUNC{shmem\_team\_split\_strided} function is a collective routine.
 It creates a new SHMEM team from a subset of the existing parent team \acp{PE},
 where the subset is defined by the \ac{PE} triplet (PE\_start, PE\_stride, and PE\_size)
 supplied to the function.
@@ -45,7 +45,7 @@ PE\_stride argument instead of logPE\_stride. This method of
 creating a team with an arbitrary set of \acp{PE} is inherently restricted by
 its parameters, but allows for many additional use-cases over using a
 logPE\_stride parameter, and may provide an easier transition for
-existing SHMEM programs to create and use SHMEM teams.
+existing \openshmem programs to create and use \openshmem teams.
 
 This function must be called by all processes contained in the \ac{PE} triplet
 specification. It may be called by additional \acp{PE} not included in the
@@ -53,7 +53,7 @@ triplet specification, but for those processes a new\_team value of
 \CONST{SHMEM\_TEAM\_NULL} is returned. All calling processes must provide the
 same values for the \ac{PE} triplet. This function will return a new\_team
 containing the \ac{PE} subset specified by the triplet, and ordered by the
-existing global \ac{PE} rank value. None of the parameters need to reside in
+existing global \ac{PE} number. None of the parameters need to reside in
 symmetric memory.
 
 Error checking will be done to ensure a valid \ac{PE} triplet is provided,
