@@ -1,12 +1,11 @@
-The explicit nonblocking RMA routines provide interfaces for copying
+The explicit non-blocking RMA routines provide interfaces for copying
 data from a contiguous local data object to a data object on a specified
-PE. The implicit and explicit nonblocking operations are similar in
-their semantics on return from the call .i.e., on return, they are not
+PE. The implicit and explicit non-blocking operations are similar in
+their semantics on return from the call; .i.e., on return, they are not
 guaranteed to be completed either locally or remotely. However, they
 differ in their interfaces and how the operations are completed. The
-explicit nonblocking routines takes an extra argument called the request
-handle that allows to track the progress of the RMA operation, while the
-implicit routines do not take the argument.   For completing the
-operations remotely, the implicit routines require a call to
-\emph{shmem\_quiet} while the explicit routines require a call to
-\emph{shmem\_wait\_nbe}.
+explicit non-blocking routines take an extra argument called the request
+handle that allows to track the progress of the RMA operation.
+For remote completion of operations, the implicit routines require a call to
+\FUNC{shmem\_quiet} while the explicit routines require a call to
+\FUNC{shmem\_wait\_nbe} or \FUNC{shmem\_test\_nbe}.

@@ -27,7 +27,7 @@ void shmem_test_nbe(shmem_request_t *req, int *status);
 
 \apinotes{
 In a threaded environment calling \FUNC{shmem\_test\_nbe} from
-a thread other than the thread, posting the operation is permitted.
+a thread other than the thread posting the operation is permitted.
 The \FUNC{shmem\_wait\_nbe} will return the status of the operations
 posted prior to the call. It is the users responsibility that no new
 operations are posted to the request while its status is tested. This
