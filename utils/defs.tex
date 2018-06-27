@@ -360,7 +360,6 @@
   {\strikeline\mbox{} \DeprecationStart \stretchline\mbox{}}}
 \newcommand{\EndDeprecateBlock}{%
   \mbox{}\stretchline\mbox{} \DeprecationEnd \strikeline}
-
 \newenvironment{DeprecateBlock}{%
   \par \StartDeprecateBlock \par}{\par \EndDeprecateBlock \par}
 
@@ -370,16 +369,25 @@
   \strikeline\mbox{} \DeprecationEnd \strikeline}
 \newenvironment{DeprecateInline}{\StartInlineDeprecate}{\EndInlineDeprecate}
 
+\newcommand{\deprecationstart}{%
+  \color{red} \strikeline\mbox{} deprecation start \stretchline \mbox{}}
+\newcommand{\deprecationend}{%
+  \mbox{}\stretchline\mbox{} \color{red} deprecation end \strikeline}
+\newenvironment{deprecate}{\deprecationstart \\}{\\ \deprecationend}
+
+%
+% Design feedback request helpers
+%
+
+\newcommand{\feedbackstart}{\color{RoyalBlue} \strikeline[RoyalBlue]
+  design feedback requested \stretchline[RoyalBlue] \mbox{}}
+\newcommand{\feedbackend}{\mbox{}\stretchline[RoyalBlue]\mbox{}}
+
+\newenvironment{FeedbackRequest}{\feedbackstart \\}{\\ \feedbackend}
+
 %
 % Library API description template commands
 %
-
-\newcommand{\deprecationstart}{\color{red} \raisebox{.5ex}{\rule{1em}{.4pt}}
-  deprecation start \xrfill[.5ex]{.4pt}[red] \mbox{}}
-\newcommand{\deprecationend}{\mbox{}\xrfill[.5ex]{.4pt}[red]\mbox{} \color{red}
-  deprecation end \raisebox{.5ex}{\rule{1em}{.4pt}}}
-
-\newenvironment{deprecate}{\deprecationstart \\}{\\ \deprecationend}
 
 \newcommand{\apisummary}[1]{
     #1
