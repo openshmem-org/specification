@@ -13,9 +13,9 @@ shmem_team_t *zaxis_team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{parent\_team}{A valid SHMEM team. The predefined teams
-SHMEM\_TEAM\_WORLD or SHMEM\_TEAM\_NODE may be used, or any team created by the
-user.}
+\apiargument{IN}{parent\_team}{A valid \openshmem team. The predefined teams
+\LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE} may be
+used, or any team created by the user.}
 
 \apiargument{IN}{options}{The set of options requested for the new teams.
 Multiple options may be requested by combining them with a bitwise OR operation;
@@ -43,14 +43,14 @@ Z-axis.}
 \end{apiarguments}
 
 \apidescription{
-The shmem\_team\_split\_3d routine is a collective routine. It creates up to three new teams
+The \FUNC{shmem\_team\_split\_3d} routine is a collective routine. It creates up to three new teams
 by splitting an existing parent team into up to three subsets based on a
-1D, 2D or 3D Cartesian space defined by the triplet (xrange, yrange, and zrange)
-describing the size of the Cartesian space in X, Y, and Z dimensions.
+1D, 2D or 3D Cartesian space defined by the triplet (\VAR{xrange}, \VAR{yrange},
+and \VAR{zrange}) describing the size of the Cartesian space in X, Y, and Z dimensions.
 
-A 2D Cartesian space may be defined by passing \CONST{0} for the zrange
-parameter. In this case, the zaxis\_team argument may be passed a NULL
-pointer. If it is not passed as a NULL pointer, the zaxis\_team will be returned
+A 2D Cartesian space may be defined by passing \CONST{0} for the \VAR{zrange}
+parameter. In this case, the zaxis team argument may be passed a null
+pointer. If it is not passed as a null pointer, the zaxis team will be returned
 as \LibConstRef{SHMEM\_TEAM\_NULL}.
 
 Each subset contains all \acp{PE} that are in the same
@@ -64,12 +64,12 @@ non-negative, and the size of the parent team should be greater than or
 equal to the number of discrete (x,y,z) points in the Cartesian space.
 None of the parameters need to reside in symmetric memory.
 
-In the event that the Cartesian space contains less points than exist \acp{PE}
-in the parent\_team, the first N \acp{PE} in the parent team will be used
+In the event that the Cartesian space contains fewer points than exist \acp{PE}
+in the parent team, the first N \acp{PE} in the parent team will be used
 to form the new teams, where N is equal to the number of points in the
 Cartesian space.
 
-Error checking will be done to ensure a valid team handle is provided.
+Error checking will be done to ensure a valid parent team handle is provided.
 All errors are considered fatal and will result in the job aborting with
 an informative error message.
 
