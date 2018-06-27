@@ -16,7 +16,7 @@ int @\FuncDecl{shmem\_team\_my\_pe}@(shmem_team_t team);
 The \FUNC{shmem\_team\_my\_pe} function returns the number of calling \ac{PE} within the
 provided team. The number will be a value between 0 and N-1,
 for a team of size N. Each member of the team has a unique number.
-For the team \CONST{SHMEM\_TEAM\_WORLD}, this will return the same value
+For the team \LibHandleRef{SHMEM\_TEAM\_WORLD}, this will return the same value
 as \FUNC{shmem\_my\_pe}.
 
 Error checking will be done to ensure a valid team handle is provided.
@@ -31,10 +31,10 @@ The number of the calling \ac{PE} within the provided team.
 \apinotes{
 By default, \openshmem creates two predefined teams that will be available
 for use once the routine \FUNC{shmem\_init} has been called. These teams can be
-referenced in the application by the handles \CONST{SHMEM\_TEAM\_WORLD} and
-\CONST{SHMEM\_TEAM\_NODE}. Every PE process is a member of the \CONST{SHMEM\_TEAM\_WORLD}
-team, and its number in \CONST{SHMEM\_TEAM\_WORLD} corresponds to the value of its
-global \ac{PE} number. The \CONST{SHMEM\_TEAM\_NODE} team contains only the set of \acp{PE}
+referenced in the application by the handles \LibHandleRef{SHMEM\_TEAM\_WORLD} and
+\LibHandleRef{SHMEM\_TEAM\_NODE}. Every PE process is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD}
+team, and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the value of its
+global \ac{PE} number. The \LibHandleRef{SHMEM\_TEAM\_NODE} team contains only the set of \acp{PE}
 that reside on the same node as the current \ac{PE}.
 }
 

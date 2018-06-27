@@ -50,7 +50,7 @@ existing \openshmem programs to create and use \openshmem teams.
 This function must be called by all processes contained in the \ac{PE} triplet
 specification. It may be called by additional \acp{PE} not included in the
 triplet specification, but for those processes a new\_team value of
-\CONST{SHMEM\_TEAM\_NULL} is returned. All calling processes must provide the
+\LibConstRef{SHMEM\_TEAM\_NULL} is returned. All calling processes must provide the
 same values for the \ac{PE} triplet. This function will return a new\_team
 containing the \ac{PE} subset specified by the triplet, and ordered by the
 existing global \ac{PE} number. None of the parameters need to reside in
@@ -67,7 +67,7 @@ The following options can be supplied during team split to restrict
 team functions and enable performance optimizations.  When using a given
 team, the application must comply with the requirements of all options
 set on that team; otherwise, the behavior is undefined.
-No options are enabled on \CONST{SHMEM\_TEAM\_WORLD} or \CONST{SHMEM\_TEAM\_NODE}.
+No options are enabled on \LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE}.
 
     \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
                  The new team will not be created with the necessary support

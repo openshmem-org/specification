@@ -17,11 +17,11 @@ The shmem\_team\_destroy function destroys an existing team. This is a
 collective call, in which every member of the team being destroyed needs
 to participate. This will free all internal memory structures associated
 with the team and invalidate the team handle. Upon return, the team
-handle is set to \CONST{SHMEM\_TEAM\_NULL}, after which it can no longer be
+handle is set to \LibConstRef{SHMEM\_TEAM\_NULL}, after which it can no longer be
 used for team API calls.
 
-It is considered erroneous to free \CONST{SHMEM\_TEAM\_WORLD} or
-\CONST{SHMEM\_TEAM\_NODE}. Error checking will be done to ensure a valid
+It is considered erroneous to free \LibHandleRef{SHMEM\_TEAM\_WORLD} or
+\LibHandleRef{SHMEM\_TEAM\_NODE}. Error checking will be done to ensure a valid
 team handle is provided. All errors are considered fatal, and will
 result in the job aborting with an informative error message.
 }

@@ -51,7 +51,7 @@ describing the size of the Cartesian space in X, Y, and Z dimensions.
 A 2D Cartesian space may be defined by passing \CONST{0} for the zrange
 parameter. In this case, the zaxis\_team argument may be passed a NULL
 pointer. If it is not passed as a NULL pointer, the zaxis\_team will be returned
-as \CONST{SHMEM\_TEAM\_NULL}.
+as \LibConstRef{SHMEM\_TEAM\_NULL}.
 
 Each subset contains all \acp{PE} that are in the same
 dimension, along the X-axis, Y-axis and Z-axis. Within each subset,
@@ -77,7 +77,7 @@ The following options can be supplied during team split to restrict
 team functions and enable performance optimizations.  When using a given
 team, the application must comply with the requirements of all options
 set on that team; otherwise, the behavior is undefined.
-No options are enabled on \CONST{SHMEM\_TEAM\_WORLD} or \CONST{SHMEM\_TEAM\_NODE}.
+No options are enabled on \LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE}.
 
     \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
                  The new team will not be created with the necessary support
