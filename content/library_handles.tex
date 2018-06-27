@@ -15,25 +15,17 @@ constants.
 %%
 \LibHandleDecl{SHMEM\_TEAM\_WORLD} &
 Handle of type \CTYPE{shmem\_team\_t} that corresponds to the
-default team of all pes in the OpenSHMEM program.  All point-to-point
+default team of all \acp{PE} in the \openshmem program.  All point-to-point
 communication operations and synchronizations that do not specify a team
 are performed on the default team.
 See Section~\ref{subsec:team} for more detail about its use.
 \tabularnewline \hline
 %%
 \LibHandleDecl{SHMEM\_TEAM\_NODE} &
-Handle of type \CTYPE{shmem\_team\_t} that corresponds a team of pes
+Handle of type \CTYPE{shmem\_team\_t} that corresponds a team of \acp{PE}
 which share node level resources, such as shared memory, network
-interfaces, etc. When this handle is used by some pe, it will refer
-to the node level team containing that pe.
-See Section~\ref{subsec:team} for more detail about its use.
-\tabularnewline \hline
-%%
-\LibHandleDecl{SHMEM\_TEAM\_WORLD} &
-Handle of type \CTYPE{shmem\_team\_t} that corresponds to the
-default team of all pes in the OpenSHMEM program.  All point-to-point
-communication operations and synchronizations that do not specify a team
-are performed on the default team.
+interfaces, etc. When this handle is used by some \ac{PE}, it will refer
+to the node level team containing that \ac{PE}.
 See Section~\ref{subsec:team} for more detail about its use.
 \tabularnewline \hline
 %%
