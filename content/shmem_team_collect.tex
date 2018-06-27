@@ -1,0 +1,99 @@
+\apisummary{
+    Concatenates blocks of data from multiple \acp{PE} int a team to an array in every
+    \ac{PE} in the team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_team\_collect32}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
+void @\FuncDecl{shmem\_team\_collect64}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+\apiargument{IN}{team}{A valid \openshmem team handle to a team which has been
+    created without disabling support for collective operations.}
+\apiargument{OUT}{dest}{A symmetric array large enough
+    to accept the concatenation of the \source{} arrays on all \acp{PE} in the team.
+    See table below in this description for allowable data types.}
+\apiargument{IN}{source}{A symmetric data object that can be of any type permissible
+    for the \dest{} argument.}
+\apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
+    must be of type \VAR{size\_t}.}
+
+\end{apiarguments}
+
+\apidescription{   
+    \openshmem \FUNC{team\_collect} and \FUNC{team\_fcollect} are collective routines
+    over an existing team. These routines concatenate \VAR{nelems}
+    \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the
+    \dest{} array, over all \acp{PE} in the specified \VAR{team} in processor number order.
+    The resultant \dest{} array contains the contribution from \ac{PE} with \VAR{team} number 0
+    first, then the contribution from \ac{PE} with \VAR{team} number 1, and so on.
+    The collected result is written to the \dest{} array for all \acp{PE} in the team.
+    
+    The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
+    participating \acp{PE}, while the \FUNC{collect} routines allow \VAR{nelems} to
+    vary from \ac{PE} to \ac{PE}.
+
+    As with all \openshmem team collective routines, each of these routines assumes that
+    only \acp{PE} in the given team call the routine.  If a \ac{PE} not in the
+    team calls an \openshmem team collective routine, the behavior is undefined.
+
+    If the team has been created with the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE} option,
+    it will not have the required support structures to complete this routine. If
+    such a team is passed to this or any other team collective routine, the behavior
+    is undefined.
+
+    As with all \openshmem routines where the operation occurs for a given team -
+    either when the team is an argument to the routine, or when the team is an attribute
+    of the context argument to a routine - the \ac{PE} numbers are relative to the team,
+    and must be in the range of 0 to N-1, where N is the result of \FUNC{shmem\_team\_n\_pes(team)}.
+
+    The same \dest{} and \source{} data objects must be passed by all \acp{PE}
+    in the team.
+
+    Upon return from a collective routine, the following are true for the local
+    \ac{PE}:
+    \begin{itemize}
+    \item The \dest{} array is updated.
+    \item The \source{} array may be safely reused.
+    \end{itemize}
+
+    Error checking will be done to ensure a valid team handle is provided.
+    All errors are considered fatal and will result in the job aborting
+    with an informative error message.
+}
+
+\apidesctable{
+The  \dest{}  and \source{} data  objects must conform to certain typing
+constraints, which are as follows:
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+
+\apitablerow{shmem\_team\_collect64, shmem\_team\_fcollect64}{Any noncharacter
+    type that has an element size of \CONST{64} bits.
+    \CorCpp{} structures are NOT allowed.}
+\apitablerow{shmem\_team\_collect32, shmem\_team\_fcollect32}{Any noncharacter
+    type that has an element size of \CONST{32} bits.
+    \CorCpp{} structures are NOT allowed.}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    All \openshmem team collective routines use symmetric data structures associated
+    with the team to synchronize and share data. By default, new teams that result from
+    split operations will have these structures.
+
+    Multiple calls to the same collective routine for the same team by different threads
+    must avoid any simultaneous updates to these structures. In general, this will mean
+    that threads will need to serialize access to teams.
+}
+
+\begin{apiexamples}
+
+\end{apiexamples}
+
+\end{apidefinition}
