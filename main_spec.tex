@@ -135,6 +135,18 @@ routines.  API routines that do not accept a context argument operate on the
 default context.  The default context can be used explicitly through the
 \LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.
 
+\newtext{
+Every communication context has an associated \ac{PE} team.
+This \ac{PE} team specifies the set of \acp{PE} over which \ac{PE}-specific
+routines that operate on a communication context, explicitly or implicitly,
+(e.g., \ac{RMA} and \ac{AMO} routines) may be performed.
+The default context has a fixed association with the world team,
+\LibHandleRef{SHMEM\_TEAM\_WORLD}.
+Communication contexts created by \FUNC{shmem\_ctx\_create} have an initial
+association with the world team, which may be updated by the
+\FUNC{shmem\_ctx\_set\_team} routine.
+}
+
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
 \input{content/shmem_ctx_create.tex}
@@ -142,6 +154,18 @@ default context.  The default context can be used explicitly through the
 \subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
 \label{subsec:shmem_ctx_destroy}
 \input{content/shmem_ctx_destroy.tex}
+
+\newtext{
+\subsubsection{\textbf{SHMEM\_CTX\_SET\_TEAM}}
+\label{subsec:shmem_ctx_set_team}
+\input{content/shmem_ctx_set_team.tex}
+}
+
+\newtext{
+\subsubsection{\textbf{SHMEM\_CTX\_GET\_TEAM}}
+\label{subsec:shmem_ctx_get_team}
+\input{content/shmem_ctx_get_team.tex}
+}
 
 
 \subsection{Remote Memory Access Routines}\label{sec:rma}
