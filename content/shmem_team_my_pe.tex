@@ -1,5 +1,5 @@
 \apisummary{
-    Returns the number of calling \ac{PE} within the provided team.
+    Returns the number of the calling \ac{PE} within the provided team.
 }
 
 \begin{apidefinition}
@@ -9,7 +9,7 @@ int @\FuncDecl{shmem\_team\_my\_pe}@(shmem_team_t team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{team}{A valid SHMEM team handle.}
+\apiargument{IN}{team}{A valid \openshmem team handle.}
 \end{apiarguments}
 
 \apidescription{
@@ -20,22 +20,22 @@ For the team \LibHandleRef{SHMEM\_TEAM\_WORLD}, this will return the same value
 as \FUNC{shmem\_my\_pe}.
 
 Error checking will be done to ensure a valid team handle is provided.
-All errors are considered fatal, and will result in the job aborting
-with an informative error message.
+Errors will result in a return value less than \CONST{0}.
 }
 
 \apireturnvalues{
-The number of the calling \ac{PE} within the provided team.
+The number of the calling \ac{PE} within the provided team, or a value less than
+\CONST{0} if the team handle is invalid.
 }
 
 \apinotes{
 By default, \openshmem creates two predefined teams that will be available
 for use once the routine \FUNC{shmem\_init} has been called. These teams can be
 referenced in the application by the handles \LibHandleRef{SHMEM\_TEAM\_WORLD} and
-\LibHandleRef{SHMEM\_TEAM\_NODE}. Every PE process is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD}
+\LibHandleRef{SHMEM\_TEAM\_NODE}. Every \ac{PE} is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD}
 team, and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the value of its
-global \ac{PE} number. The \LibHandleRef{SHMEM\_TEAM\_NODE} team contains only the set of \acp{PE}
-that reside on the same node as the current \ac{PE}.
+global \ac{PE} number. The \LibHandleRef{SHMEM\_TEAM\_NODE} team contains the set of only those
+\acp{PE} that reside on the same node as the current \ac{PE}.
 }
 
 \end{apidefinition}
