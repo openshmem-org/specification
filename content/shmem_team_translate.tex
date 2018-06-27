@@ -33,10 +33,12 @@ Error checking will be done to ensure valid team handles are provided.
 Errors will result in a return value less than \CONST{0}.
 }
 
+\begin{FeedbackRequest}
 \apireturnvalues{
 The specified \ac{PE}'s number in the \VAR{dest\_team}, or a value less than \CONST{0} if any
 team handle arguments are invalid or the \VAR{src\_pe} is not in both the source and destination teams.
 }
+\end{FeedbackRequest}
 
 \apinotes{
 By default, \openshmem creates two predefined teams that will be available

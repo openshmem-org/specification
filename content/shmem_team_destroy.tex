@@ -25,10 +25,12 @@ It is considered erroneous to free \LibHandleRef{SHMEM\_TEAM\_WORLD} or
 team handle is provided. Errors will result in a return value less than \CONST{0}.
 }
 
+\begin{FeedbackRequest}
 \apireturnvalues{
 On success, the function will return 0. Otherwise a value less than
 \CONST{0} will be returned.
 }
+\end{FeedbackRequest}
 
 \apinotes{
 Note that \openshmem team handles have local semantics only. That is, team

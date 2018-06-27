@@ -12,7 +12,7 @@ int PE_start, int PE_stride, int PE_size, shmem_team_t *new_team);
 
 \begin{apiarguments}
 \apiargument{IN}{parent\_team}{A valid SHMEM team. The predefined teams
-\LibHandleRef{SHMEM\_TEAM\_WORLD} or \libHandleRef{SHMEM\_TEAM\_NODE} may
+\LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE} may
 be used, or any team created by the user.}
 
 \apiargument{IN}{options}{The set of options requested for the new team.
@@ -59,8 +59,12 @@ symmetric memory.
 
 Error checking will be done to ensure a valid \ac{PE} triplet is provided,
 and also to determine whether a valid team handle is provided for the
-parent team. All errors are considered fatal and will result in the job aborting with
+parent team.
+
+\begin{FeedbackRequest}
+All errors are considered fatal and will result in the job aborting with
 an informative error message.
+\end{FeedbackRequest}
 
 The following options can be supplied during team split to restrict
 team functions and enable performance optimizations.  When using a given

@@ -23,10 +23,12 @@ Error checking will be done to ensure a valid team handle is provided.
 Errors will result in a return value less than \CONST{0}.
 }
 
+\begin{FeedbackRequest}
 \apireturnvalues{
 The number of the calling \ac{PE} within the provided team, or a value less than
 \CONST{0} if the team handle is invalid.
 }
+\end{FeedbackRequest}
 
 \apinotes{
 By default, \openshmem creates two predefined teams that will be available
