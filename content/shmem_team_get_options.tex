@@ -1,5 +1,5 @@
 \apisummary{
-    shmem\_team\_get\_options returns the options flags describing a given team
+    Return the options flags describing the options applied to a given team
 }
 
 \begin{apidefinition}
@@ -9,31 +9,34 @@ long @\FuncDecl{shmem\_team\_get\_options}@(shmem_team_t team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{team}{A valid SHMEM team handle.}
+\apiargument{IN}{team}{A valid \openshmem team handle.}
 \end{apiarguments}
 
 \apidescription{
-\FUNC{shmem\_team\_get\_options} returns a long unsigned value containing
+\FUNC{shmem\_team\_get\_options} returns a \CTYPE{long} value containing
 all of the options which describe the given team. Options are requested when
 new teams are created in the various \FUNC{shmem\_team\_split\_*} functions.
-Whichever of the requested options are applied to the team by the library
+All of the requested options applied to the team by the library
 implementation will be returned by \FUNC{shmem\_team\_get\_options}.
 
-All processes in the team will get back the same value for the team options.
+A library implementation will not apply any non-default options to a team,
+other than those requested during team split functions.
+
+All \acp{PE} in the team will get back the same value for the team options.
 
 Error checking will be done to ensure a valid team handle is provided.
-All errors are considered fatal and will result in the job aborting
-with an informative error message.
+Errors will result in a return value less than \CONST{0}.
 }
 
 \apireturnvalues{
 The set of options applied to the given team. Multiple options are combined
 with a bitwise OR and can be extracted with a bitwise AND. A return value of
-\CONST{0} implies that the team uses all default options.
+\CONST{0} implies that the team uses only default options. A return value less than
+\CONST{0} implies that the team handle is invalid.
 }
 
 \apinotes{
-A use case for this function is to determine if a given team will
+A use case for this function is to determine whether a given team can
 support collective operations by testing for the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}
 option. When teams are created without support for collectives, they may still use
 point to point operations to communicate and synchronize. So programmers may wish
