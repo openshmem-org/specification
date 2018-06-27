@@ -22,11 +22,11 @@ Specifically, given the src\_pe in src\_team, this function returns that
 \ac{PE}'s number in dest\_team. If src\_pe is not a member of
 dest\_team, a value of -1 is returned.
 
-If \CONST{SHMEM\_TEAM\_WORLD} is provided as the dest\_team parameter, this function
+If \LibHandleRef{SHMEM\_TEAM\_WORLD} is provided as the dest\_team parameter, this function
 acts as a global \ac{PE} number translator and will return the corresponding
-\CONST{SHMEM\_TEAM\_WORLD} number. This may be useful when performing point-to-
+\LibHandleRef{SHMEM\_TEAM\_WORLD} number. This may be useful when performing point-to-
 point operations between \acp{PE} in a subset, as point-to-point operations
-that do not take a context argument require the global \CONST{SHMEM\_TEAM\_WORLD}
+that do not take a context argument require the global \LibHandleRef{SHMEM\_TEAM\_WORLD}
 \ac{PE} number.
 
 Error checking will be done to ensure valid team handles are provided.
@@ -41,10 +41,10 @@ The specified \ac{PE}'s number in the dest\_team.
 \apinotes{
 By default, \openshmem creates two predefined teams that will be available
 for use once the routine \FUNC{shmem\_init} has been called. These teams can be
-referenced in the application by the constants \CONST{SHMEM\_TEAM\_WORLD} and
-\CONST{SHMEM\_TEAM\_NODE}. Every \ac{PE}process is a member of the \CONST{SHMEM\_TEAM\_WORLD}
-team, and its number in \CONST{SHMEM\_TEAM\_WORLD} corresponds to the value of its
-global \ac{PE} number. The \CONST{SHMEM\_TEAM\_NODE} team contains only the set of \acp{PE}
+referenced in the application by the constants \LibHandleRef{SHMEM\_TEAM\_WORLD} and
+\LibHandleRef{SHMEM\_TEAM\_NODE}. Every \ac{PE}process is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD}
+team, and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the value of its
+global \ac{PE} number. The \LibHandleRef{SHMEM\_TEAM\_NODE} team contains only the set of \acp{PE}
 that reside on the same node as the current PE.
 }
 
