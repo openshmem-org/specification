@@ -22,6 +22,15 @@ implementation will be returned by \FUNC{shmem\_team\_get\_options}.
 A library implementation will not apply any non-default options to a team,
 other than those requested during team split functions.
 
+\begin{FeedbackRequest}
+A library implementation must apply all requested options to a team, even in
+the event that the library does not make optimizations based on these options.
+For example, suppose library implementation must always create teams with the same
+overhead, no matter if the program disables collective support during team creation.
+The library must still enable the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE} option
+when it is requested, so that the \openshmem program will be portable across implementations.
+\end{FeedbackRequest}
+
 All \acp{PE} in the team will get back the same value for the team options.
 
 Error checking will be done to ensure a valid team handle is provided.
