@@ -5,12 +5,28 @@
 
 \begin{apidefinition}
 
+{\color{ForestGreen}
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_sync}@(shmem_team_t team);
+\end{C11synopsis}
+}
+
+% These separate synopses should be merged when the color highlighting removed,
+% preferably with shmem_ctx_barrier listed first.
 \begin{Csynopsis}
 void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
+{\color{ForestGreen}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_team\_sync}@(shmem_team_t team);
+\end{CsynopsisCol}
+}
 
 \begin{apiarguments}
 
+\newtext{
+\apiargument{IN}{team}{The \ac{PE} team over which to perform the operation.}
+}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
@@ -26,20 +42,36 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_sync} is a collective synchronization routine over an
-    active set.  Control returns from \FUNC{shmem\_sync} after all \acp{PE} in
-    the active set (specified by \VAR{PE\_start}, \VAR{logPE\_stride}, and
-    \VAR{PE\_size}) have called \FUNC{shmem\_sync}.
+    \FUNC{shmem\_sync} is a collective synchronization routine over
+    \newtext {a \ac{PE} team or} an active set.
+    Control returns from \FUNC{shmem\_sync} after all \acp{PE} in
+    the \newtext{specified \ac{PE} team or} active set \oldtext{(specified by \VAR{PE\_start}, \VAR{logPE\_stride}, and
+    \VAR{PE\_size})} have called \FUNC{shmem\_sync}.
+    \newtext{
+    An active set is specified by the triple of values: \VAR{PE\_start},
+    \VAR{logPE\_stride}, and \VAR{PE\_size}.
+    }
 
     As with all \openshmem collective routines, each of these routines assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
     the active set calls an \openshmem collective routine, the behavior is undefined.
 
+    \begin{FeedbackRequest}
+      Do we need to say something like the above for team-based collectives?
+      We already say that teams are not portable across PEs, so only the PE
+      that created the team could invoke it in a collective without undefined
+      behavior.
+
+      Should we have a harder partition between the description text between
+      the team- and active set-based API (since the active set and pSync
+      requirements don't affect the team call)?
+    \end{FeedbackRequest}
+    
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and
     \VAR{PE\_size} must be equal on all \acp{PE} in the active set.  The same
     work array must be passed in \VAR{pSync} to all \acp{PE} in the active set.
 
-    In contrast with the \FUNC{shmem\_barrier} routine, \FUNC{shmem\_sync} only
+    In contrast with the \FUNC{shmem\_barrier} routine\newtext{s}, \FUNC{shmem\_sync} only
     ensures completion and visibility of previously issued memory stores and does not ensure
     completion of remote memory updates issued via \openshmem routines.
 
