@@ -140,10 +140,14 @@ Every communication context has an associated \ac{PE} team.
 This \ac{PE} team specifies the set of \acp{PE} over which \ac{PE}-specific
 routines that operate on a communication context, explicitly or implicitly,
 (e.g., \ac{RMA} and \ac{AMO} routines) may be performed.
-The default context has a fixed association with the world team,
-\LibHandleRef{SHMEM\_TEAM\_WORLD}.
+All \openshmem routines that operate on this context will do so with respect
+to the team-relative \ac{PE} numbering of the associated \ac{PE} team.
+}
+
+\newtext{
+The default context has a fixed association with the default team.
 Communication contexts created by \FUNC{shmem\_ctx\_create} have an initial
-association with the world team, which may be updated by the
+association with the default team, which may be updated by the
 \FUNC{shmem\_ctx\_set\_team} routine.
 }
 
