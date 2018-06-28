@@ -36,6 +36,13 @@ int @\FuncDecl{shmem\_ctx\_set\_team}@(shmem_ctx_t ctx, shmem_team_t team);
 
   \apireturnvalues{
     Zero on success; otherwise, \CONST{-1}.
+
+    \begin{FeedbackRequest}
+      Should this routine return nonzero, -1, or negative values
+      (e.g., to allow for implementation-defined error codes) on error?
+      Will slowing down the critical path of this routine by adding
+      input checking adversely affect its use?
+    \end{FeedbackRequest}
   }
 
   \apinotes{
