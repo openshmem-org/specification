@@ -1,8 +1,8 @@
 \color{Green}
 \apisummary{
-    The put with signal routines provide a method for copying data from a
+    The put-with-signal routines provide a method for copying data from a
     contiguous local data object to a data object on a specified \ac{PE}
-    and set a remote flag to signal completion.
+    and subsequently setting a remote flag to signal completion.
 }
 
 \begin{apidefinition}
@@ -59,21 +59,23 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 }
 
 \apinotes{
-    The \VAR{sig\_addr} data object can be placed in the symmetric data segment
-    or the symmetric heap which can be same or different from the \VAR{dest}
-    data object.
+    The \VAR{dest} and \VAR{sig\_addr} data object must both be remotely
+    accessible, but may each be allocated from the symmetric heap or global/
+    static memory.
 
-    The delivery of \signal{} flag on the remote \ac{PE} guarantees only the
+    The delivery of \signal{} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \dest{} data words into the data object on
-    the remote \ac{PE}. For example, two successive put with signal routines
-    or a successive put followed by a put with signal routine may deliver data
-    out of order.
+    the remote \ac{PE}. Without a memory-ordering operation, there is no implied
+    ordering between the delivery of the signal word of a put-with-signal
+    routine and another data transfer. For example, the delivery of the signal
+    word in a sequence consisting of a put routine followed by a put-with-signal
+    routine does not imply delivery of the put routine's data.
 }
 
 \begin{apiexamples}
 
 \apicexample
-    { The following example shows a simple ring-based broacast operation using
+    { The following example shows a simple ring-based broadcast operation using
     \FUNC{shmem\_put\_signal}:}
     {./example_code/shmem_put_signal_example.c}
     {}
