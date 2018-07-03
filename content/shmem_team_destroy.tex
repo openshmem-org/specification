@@ -1,39 +1,41 @@
 \apisummary{
-    shmem\_team\_destroy function destroys existing team.
+    Destroys existing team.
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmemx\_team\_destroy}@(shmem_team_t newteam);
+int @\FuncDecl{shmem\_team\_destroy}@(shmem_team_t team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{newteam}{A valid SHMEM team handle.}
+\apiargument{IN}{team}{A valid \openshmem team handle.}
 \end{apiarguments}
 
 \apidescription{
-The shmemx\_team\_destroy function destroys an existing team. This is a
+The \FUNC{shmem\_team\_destroy} function destroys an existing team. This is a
 collective call, in which every member of the team being destroyed needs
 to participate. This will free all internal memory structures associated
 with the team and invalidate the team handle. Upon return, the team
-handle is set to SHMEM\_TEAM\_NULL, after which it can no longer be
-used for team collective calls.
+handle can no longer be used for team API calls.
 
-It is considered erroneous to free SHMEM\_TEAM\_WORLD or
-SHMEM\_TEAM\_NODE. Error checking will be done to ensure a valid
-team handle is provided. All errors are considered fatal, and will
-result in the job aborting with an informative error message.
+It is considered erroneous to free \LibHandleRef{SHMEM\_TEAM\_WORLD} or
+\LibHandleRef{SHMEM\_TEAM\_NODE}. Error checking will be done to ensure a valid
+team handle is provided. Errors will result in a return value less than \CONST{0}.
 }
 
+\begin{FeedbackRequest}
 \apireturnvalues{
-None.
+On success, the function will return 0. Otherwise a value less than
+\CONST{0} will be returned.
 }
+\end{FeedbackRequest}
 
 \apinotes{
-Note that SHMEM team handles have local semantics only. That is, team
+Note that \openshmem team handles have local semantics only. That is, team
 handles should not be stored in shared variables and used across other
-processes. Doing so will result in unpredictable behavior.
+processes. If a team handle or its value is used by any \ac{PE} other than
+that which created it, the behavior is undefined.
 }
 
 \end{apidefinition}

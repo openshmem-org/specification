@@ -1,0 +1,52 @@
+\apisummary{
+  Retrieve the team associated with the communication context.
+}
+
+\begin{apidefinition}
+
+  \begin{Csynopsis}
+int @\FuncDecl{shmem\_ctx\_get\_team}@(shmem_ctx_t ctx, shmem_team_t *team);
+  \end{Csynopsis}
+
+  \begin{apiarguments}
+
+    \apiargument{IN}{ctx}{
+      A handle to a communication context.
+    }
+
+    \apiargument{OUT}{team}{
+      A pointer to a handle to the associated \ac{PE} team.
+    }
+
+  \end{apiarguments}
+
+  \apidescription{
+    The \FUNC{shmem\_ctx\_get\_team} routine returns a handle to the \ac{PE}
+    team associated with the specified communication context \VAR{ctx}.
+    The team handle is returned through the pointer argument \VAR{team}.
+
+    If \VAR{ctx} is the default context, the returned team is guaranteed
+    to be \CONST{SHMEM\_TEAM\_WORLD}.
+
+    If \VAR{ctx} is an invalid context, the argument \VAR{team} is not
+    modified and a value of \CONST{-1} is returned.
+
+    If \VAR{team} is a null pointer, a value of \CONST{-1} is returned.
+  }
+
+  \apireturnvalues{
+    Zero on success; otherwise, \CONST{-1}.
+
+    \begin{FeedbackRequest}
+      Should this routine return nonzero, -1, or negative values
+      (e.g., to allow for implementation-defined error codes) on error?
+      Will slowing down the critical path of this routine by adding
+      input checking adversely affect its use?
+    \end{FeedbackRequest}
+  }
+
+  \apinotes{
+    None.
+  }
+
+\end{apidefinition}

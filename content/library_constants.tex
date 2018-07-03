@@ -39,6 +39,22 @@ may be multithreaded and any thread may invoke the \openshmem interfaces.
 See Section~\ref{subsec:thread_support} for more detail about its use.
 \tabularnewline \hline
 %%
+\color{Green}
+\LibConstDecl{SHMEM\_TEAM\_NOCOLLECTIVE} &
+\color{Green}
+The team creation option which specifies that the new team will not
+be initialized with support for team collective operations.
+See Section~\ref{subsec:team} for more detail about its use.
+\tabularnewline \hline
+%%
+\color{Green}
+\LibConstDecl{SHMEM\_TEAM\_NULL} &
+\color{Green}
+Predefined constant that can be compared against handles of type
+\CTYPE{shmem\_team\_t} to determine if they refer to a valid team.
+See Section~\ref{subsec:team} for more detail about its use.
+\tabularnewline \hline
+%%
 \LibConstDecl{SHMEM\_CTX\_SERIALIZED} &
 The context creation option which specifies that the given context
 is shareable but will not be used by multiple threads concurrently.
