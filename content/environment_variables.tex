@@ -30,7 +30,7 @@ deprecation rationale for more details.
     \tabularnewline\hline
 %%
 \EnvVarDecl{SHMEM\_SYMMETRIC\_SIZE}
-    & Non-negative integer
+    & Non-negative integer with optional character suffix
     & Controls the size of the symmetric heap per \ac{PE}. The value
       set in this environment variable is interpreted as number
       of bytes, unless the number is followed by a single
@@ -39,11 +39,14 @@ deprecation rationale for more details.
         \item k or K multiplies by \(2^{10}\)  (kilobytes)
         \item m or M multiplies by \(2^{20}\)  (megabytes)
         \item g or G multiplies by \(2^{30}\)  (gigabytes)
+        \item t or T multiplies by \(2^{40}\)  (tebibytes)
       \end{itemize}
       For example, the string 20m is equivalent to the integer value 20971520,
       or 20 megabytes. Only one multiplier is recognized, so 20kk
       will not produce the same value as 20m, nor will invalid
-      strings such as 20MB produce the desired result.
+      strings such as 20MB produce the desired result. Any unrecognized
+      suffix is treated as an error and results in program termination with an
+      error report.
     \tabularnewline\hline
 %%
 \EnvVarDecl{SHMEM\_DEBUG}
