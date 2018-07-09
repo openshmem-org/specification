@@ -1,0 +1,98 @@
+\apisummary{
+Create a new \openshmem team from a subset of the existing parent team \acp{PE},
+where the subset is defined by the
+\ac{PE} triplet (\VAR{PE\_start}, \VAR{PE\_stride}, and \VAR{PE\_size}) supplied to the function.}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, long options,
+int PE_start, int PE_stride, int PE_size, shmem_team_t *new_team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{parent\_team}{A valid SHMEM team. The predefined teams
+\LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE} may
+be used, or any team created by the user.}
+
+\apiargument{IN}{options}{The set of options requested for the new team.
+Multiple options may be requested by combining them with a bitwise OR operation;
+otherwise, \CONST{0} can be given if no options are requested.}
+
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the subset of \acp{PE} from
+the parent team that will form the new team}
+
+\apiargument{IN}{PE\_stride}{The stride between team \ac{PE}
+numbers in the parent team that comprise the subset of \acp{PE} that will form
+the new team.}
+
+\apiargument{IN}{PE\_size}{The number of \acp{PE} from the parent team in the subset
+of \acp{PE} that will form the new team.}
+
+\apiargument{OUT}{new\_team}{A new \openshmem team handle, representing a \ac{PE}
+subset of all the \acp{PE} in the parent team that is created from
+the \ac{PE} triplet provided.}
+
+\end{apiarguments}
+
+\apidescription{
+The \FUNC{shmem\_team\_split\_strided} function is a collective routine.
+It creates a new \openshmem team from a subset of the existing parent team,
+where the subset is defined by the \ac{PE} triplet (\VAR{PE\_start},
+\VAR{PE\_stride}, and \VAR{PE\_size}) supplied to the function.
+
+It is important to note the use of the less restrictive
+\VAR{PE\_stride} argument instead of \VAR{logPE\_stride}. This method of
+creating a team with an arbitrary set of \acp{PE} is inherently restricted by
+its parameters, but allows for many additional use-cases over using a
+\VAR{logPE\_stride} parameter, and may provide an easier transition for
+existing \openshmem programs to create and use \openshmem teams.
+
+This function must be called by all processes contained in the \ac{PE} triplet
+specification. It may be called by additional \acp{PE} not included in the
+triplet specification, but for those processes a \VAR{new\_team} value of
+\LibConstRef{SHMEM\_TEAM\_NULL} is returned. All calling processes must provide the
+same values for the \ac{PE} triplet. This function will return a \VAR{new\_team}
+containing the \ac{PE} subset specified by the triplet, and ordered by the
+existing global \ac{PE} number. None of the parameters need to reside in
+symmetric memory.
+
+Error checking will be done to ensure a valid \ac{PE} triplet is provided,
+and also to determine whether a valid team handle is provided for the
+parent team.
+
+\begin{FeedbackRequest}
+All errors are considered fatal and will result in the job aborting with
+an informative error message.
+\end{FeedbackRequest}
+
+The following options can be supplied during team split to restrict
+team functions and enable performance optimizations.  When using a given
+team, the application must comply with the requirements of all options
+set on that team; otherwise, the behavior is undefined.
+No options are enabled on \LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE}.
+
+    \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
+                 The new team will not be created with the necessary support
+                 structures to enable team based collectives.
+                 This will typically allow implementations to speed up team creation
+                 and reduce \openshmem library footprint for teams with this option.
+                 This option will not prevent the new team from using atomics or
+                 other non-collective team based operations.}
+}
+
+\apireturnvalues{
+None.
+}
+
+\apinotes{
+Note that SHMEM team handles have local semantics only. That is, team
+handles should not be stored in shared variables and used across other
+processes. Doing so will result in unpredictable behavior.
+}
+
+\begin{apiexamples}
+
+\end{apiexamples}
+
+\end{apidefinition}

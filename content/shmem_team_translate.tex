@@ -1,0 +1,53 @@
+\apisummary{
+    Translates a given \ac{PE} number to the corresponding \ac{PE} number in another team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_team\_translate\_pe}@(shmem_team_t src_team, int src_pe,
+    shmem_team_t dest_team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{src\_team}{A valid SHMEM team handle.}
+\apiargument{IN}{src\_pe}{A \ac{PE} number in src\_team.}
+\apiargument{IN}{dest\_team}{A valid SHMEM team handle.}
+\end{apiarguments}
+
+\apidescription{
+The \FUNC{shmem\_team\_translate\_pe} function will translate a given \ac{PE} number
+to the corresponding \ac{PE} number in another team.
+Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this function returns that
+\ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both the
+\VAR{src\_team} and \VAR{dest\_team}, a value less than \CONST{0} is returned.
+
+If \LibHandleRef{SHMEM\_TEAM\_WORLD} is provided as the \VAR{dest\_team} parameter, this function
+acts as a global \ac{PE} number translator and will return the corresponding
+\LibHandleRef{SHMEM\_TEAM\_WORLD} number. This may be useful when performing point-to-
+point operations between \acp{PE} in a subset, as point-to-point operations
+that do not take a context argument require the global \LibHandleRef{SHMEM\_TEAM\_WORLD}
+\ac{PE} number.
+
+Error checking will be done to ensure valid team handles are provided.
+Errors will result in a return value less than \CONST{0}.
+}
+
+\begin{FeedbackRequest}
+\apireturnvalues{
+The specified \ac{PE}'s number in the \VAR{dest\_team}, or a value less than \CONST{0} if any
+team handle arguments are invalid or the \VAR{src\_pe} is not in both the source and destination teams.
+}
+\end{FeedbackRequest}
+
+\apinotes{
+By default, \openshmem creates two predefined teams that will be available
+for use once the routine \FUNC{shmem\_init} has been called. These teams can be
+referenced in the application by the constants \LibHandleRef{SHMEM\_TEAM\_WORLD} and
+\LibHandleRef{SHMEM\_TEAM\_NODE}. Every \ac{PE} is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD}
+team, and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the value of its
+global \ac{PE} number. The \LibHandleRef{SHMEM\_TEAM\_NODE} team contains the set of only those
+\acp{PE} that reside on the same node as the current \ac{PE}.
+}
+
+\end{apidefinition}
