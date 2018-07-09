@@ -35,13 +35,9 @@ void @\FuncDecl{shmem\_team\_fcollect64}@(shmem_team_t team, void *dest, const v
     , then the contribution from the second \ac{PE} in the \VAR{team}, and so on.
     The collected result is written to the \dest{} array for all \acp{PE} in the team.
     
-    The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
-    \acp{PE} in the team, while the \FUNC{collect} routines allow \VAR{nelems} to
+    The \FUNC{fcollect} routines require that all \acp{PE} in the team provide the same
+    value for \VAR{nelems}, while the \FUNC{collect} routines allow \VAR{nelems} to
     vary from \ac{PE} to \ac{PE}.
-
-    As with all \openshmem team collective routines, each of these routines assumes that
-    only \acp{PE} in the given team call the routine.  If a \ac{PE} not in the
-    team calls an \openshmem team collective routine, the behavior is undefined.
 
     If the team has been created with the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE} option,
     it will not have the required support structures to complete this routine. If
@@ -58,9 +54,10 @@ void @\FuncDecl{shmem\_team\_fcollect64}@(shmem_team_t team, void *dest, const v
     \item The \source{} array may be safely reused.
     \end{itemize}
 
-    Error checking will be done to ensure a valid team handle is provided.
-    All errors are considered fatal and will result in the job aborting
-    with an informative error message.
+    %Issue 25
+    %Error checking will be done to ensure a valid team handle is provided.
+    %All errors are considered fatal and will result in the job aborting
+    %with an informative error message.
 }
 
 \apidesctable{
@@ -83,10 +80,6 @@ constraints, which are as follows:
     All \openshmem team collective routines use symmetric data structures associated
     with the team to synchronize and share data. By default, new teams that result from
     split operations will have these structures.
-
-    Multiple calls to the same collective routine for the same team by different threads
-    must avoid any simultaneous updates to these structures. In general, this will mean
-    that threads will need to serialize access to teams.
 }
 
 \begin{apiexamples}
