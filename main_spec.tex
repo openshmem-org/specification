@@ -125,7 +125,7 @@ The \acp{PE} in an \openshmem program can communicate either using
 point-to-point routines that specify the \ac{PE} number of the target
 \ac{PE} or using collective routines which operate over some predefined
 set of \acp{PE}. Teams in \openshmem allow programs to group subsets
-of \acp{PE} for collective communications and provide a contiguous renumbering
+of \acp{PE} for collective communications and provide a contiguous reindexing
 of the \acp{PE} within that subset that can be used in point-to-point communication.
 
 An \openshmem team is a set of \acp{PE} defined by calling a specific team
@@ -165,7 +165,7 @@ more optimized performance. These options are described in section
 team split routines below. In particular, teams may be created with an option
 to disable support for collective communications, which allows implementations
 to reduce team creation overheads for those teams. In that case, the team is 
-just a local renumbering of some set of \acp{PE} that can be used for
+just a local reindexing of some set of \acp{PE} that can be used for
 point to point communications or as parent teams in subsequent split operations.
 
 \subsubsection{\textbf{SHMEM\_TEAM\_MY\_PE}}\label{subsec:shmem_team_my_pe}
