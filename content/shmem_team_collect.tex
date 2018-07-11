@@ -54,10 +54,10 @@ void @\FuncDecl{shmem\_team\_fcollect64}@(shmem_team_t team, void *dest, const v
     \item The \source{} array may be safely reused.
     \end{itemize}
 
-    %Issue 25
-    %Error checking will be done to ensure a valid team handle is provided.
-    %All errors are considered fatal and will result in the job aborting
-    %with an informative error message.
+    Error checking will be done to detect a value of \LibConstRef{SHMEM\_TEAM\_NULL} passed
+    for the team argument. In that case, the program will abort with an informative
+    error message. If an invalid team handle is passed to the routine,
+    the behavior is undefined.
 }
 
 \apidesctable{
