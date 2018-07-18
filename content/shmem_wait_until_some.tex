@@ -28,7 +28,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     be compared with \VAR{cmp\_value}.}
   \apiargument{INOUT}{status}{A mask array of length \VAR{nelems}, where each
     element corresponds to the respective element in \VAR{ivars} and represents
-    the status of each implied condition.  On input, elements of \VAR{status}
+    the status of each implied wait condition.  On input, elements of \VAR{status}
     set to 0 will be waited upon, and elements set to 1 will be ignored.  On
     output, each element of \VAR{status} equal to 1 corresponds to a satisfied
     condition in the respective element of \VAR{ivars} (or an ignored
@@ -42,27 +42,27 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \end{apiarguments}
 
 \apidescription{ 
-    The \FUNC{shmem\_wait\_until\_some} routine waits for some specified
-    symmetric object(s) in the \VAR{ivars} array to change to the value
-    \VAR{cmp\_value} according to the numeric comparison operator \VAR{cmp}.
-    This routine can be used for point-to-point direct synchronization
-    involving multiple data objects, potentially avoiding the overhead
-    associated with multiple individual calls to \FUNC{shmem\_wait\_until}.
+    The \FUNC{shmem\_wait\_until\_some} routine blocks until at least one
+    specified value contained in the array of symmetric object(s), \VAR{ivars},
+    satisfies the wait condition at the calling \ac{PE}.  This routine is
+    semantically similar to \FUNC{shmem\_wait\_until} in
+    Section~\ref{subsec:shmem_wait_until}, but adds support for point-to-point
+    synchronization involving multiple data objects.
 
     On input, the \VAR{status} array indicates the respective elements of
-    \VAR{ivars} for which to wait until the condition implied by \VAR{cmp} and
-    \VAR{cmp\_value} is satisfied.  For each element of \VAR{status}
-    initialized to 0, \FUNC{shmem\_wait\_until\_some} sets that value to 1 if
-    the respective \VAR{ivars} element has changed to satisfy the implied
-    condition. Elements in \VAR{status} initialized to 1 are ignored and not
-    checked for the implied condition.  If one or more elements of
+    \VAR{ivars} for which to wait until the calling \ac{PE} satisfies the wait
+    condition implied by \VAR{cmp} and \VAR{cmp\_value}.  For each element of
+    \VAR{status} initialized to 0, \FUNC{shmem\_wait\_until\_some} sets that
+    value to 1 if the respective \VAR{ivars} element has changed to satisfy the
+    wait condition. Elements in \VAR{status} initialized to 1 are ignored and
+    not checked for the wait condition.  If one or more elements of
     \VAR{status} are intialized to 0, \FUNC{shmem\_wait\_until\_some} does not
-    return until a \ac{PE} changes one of the corresponding elements in
-    \VAR{ivars} to satisfy the implied condition.  On output, the \VAR{status}
-    array indicates which respective elements in \VAR{ivars} have satisfied the
-    implied condition or have been ignored.  \FUNC{shmem\_wait\_until\_some}
-    returns the total number of the newly satisfied conditions excluding the
-    ignored elements.
+    return until a \ac{PE} updates at least one of the corresponding elements
+    in \VAR{ivars} to satisfy the implied condition.  On output, the
+    \VAR{status} array indicates which respective elements in \VAR{ivars} have
+    satisfied the wait condition or have been ignored.
+    \FUNC{shmem\_wait\_until\_some} returns the total number of the newly
+    satisfied conditions excluding the ignored elements.
 }
 
 
