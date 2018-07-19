@@ -1,0 +1,80 @@
+\apisummary{
+    Broadcasts a block of data from one \ac{PE} in a team to all other \acp{PE} in the team
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_team\_broadcast32}@(shmem_team_t team, void *dest, const void *source, size_t nelems, int PE_root);
+void @\FuncDecl{shmem\_team\_broadcast64}@(shmem_team_t team, void *dest, const void *source, size_t nelems, int PE_root);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+\apiargument{IN}{team}{A valid \openshmem team handle to a team which has been created without
+    disabling support for collective operations.}
+\apiargument{OUT}{dest}{A symmetric data object. See the table below in this description
+    for allowable types} 
+\apiargument{IN}{source}{A symmetric data object that can be of any data type
+    that is permissible for the \dest{} argument.}
+\apiargument{IN}{nelems}{The number of elements in \source{}.  For
+    \FUNC{shmem\_team\_broadcast32}, this is the number of
+    32-bit halfwords. nelems must be of type \CTYPE{size\_t}.}
+\apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
+    the team, from which the data is copied. \VAR{PE\_root} must be of type \CTYPE{int}.} 
+
+\end{apiarguments}
+
+\apidescription{   
+    \openshmem team broadcast routines are collective routines over an existing team.
+    They copy data object \source{} on the processor specified by \VAR{PE\_root}
+    and store the values at \dest{} on the other \acp{PE} that are members of the
+    team. The data is not copied to the \dest{} area on the root \ac{PE}.
+    
+    If the team has been created with the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE} option,
+    it will not have the required support structures to complete this routine. If
+    such a team is passed to this or any other team collective routine, the behavior
+    is undefined.
+
+    As with all \openshmem routines where the operation occurs over a given team, \ac{PE}
+    numbering is relative to the team. The specified root \ac{PE} must be a valid \ac{PE}
+    number for the team, between \CONST{0} and \VAR{N-1}, where \VAR{N} is
+    the size of the team.
+    
+    The values of the argument \VAR{PE\_root} must be the same value on all \acp{PE} in
+    the team. The same \dest{} and \source{} data objects must be passed by all \acp{PE}
+    in the team.
+
+    Upon return from a broadcast routine, the following are true for the local \ac{PE}:
+    \begin{itemize}
+    \item If the current \ac{PE} is not the root \ac{PE},
+      the \dest{} data object is updated.
+    \item The \source{} data object may be safely reused.
+    \end{itemize}
+
+    Error checking will be done to detect a value of \LibConstRef{SHMEM\_TEAM\_NULL} passed
+    for the team argument. In that case, the program will abort with an informative
+    error message. If an invalid team handle is passed to the routine,
+    the behavior is undefined.
+}
+
+\apidesctable{
+The  \dest{}  and \source{} data  objects must conform to certain typing
+constraints, which are as follows:
+}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+
+\apitablerow{shmem\_team\_broadcast64}{Any noncharacter
+    type that has an element size of \CONST{64} bits.
+    \CorCpp{} structures are NOT allowed.}
+\apitablerow{shmem\_team\_broadcast32}{Any noncharacter
+    type that has an element size of \CONST{32} bits.
+    \CorCpp{} structures are NOT allowed.}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+}
+
+\end{apidefinition}

@@ -31,13 +31,7 @@ The number of the calling \ac{PE} within the provided team, or a value less than
 \end{FeedbackRequest}
 
 \apinotes{
-By default, \openshmem creates two predefined teams that will be available
-for use once the routine \FUNC{shmem\_init} has been called. These teams can be
-referenced in the application by the handles \LibHandleRef{SHMEM\_TEAM\_WORLD} and
-\LibHandleRef{SHMEM\_TEAM\_NODE}. Every \ac{PE} is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD}
-team, and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the value of its
-global \ac{PE} number. The \LibHandleRef{SHMEM\_TEAM\_NODE} team contains the set of only those
-\acp{PE} that reside on the same node as the current \ac{PE}.
+None.
 }
 
 \end{apidefinition}

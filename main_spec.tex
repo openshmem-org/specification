@@ -116,6 +116,83 @@ symmetric data objects in the symmetric heap.
 \input{content/shpdeallc.tex}
 
 
+
+
+\color{Green}
+\subsection{Teams Management Routines}\label{subsec:team}
+
+The \acp{PE} in an \openshmem program can communicate either using
+point-to-point routines that specify the \ac{PE} number of the target
+\ac{PE} or using collective routines which operate over some predefined
+set of \acp{PE}. Teams in \openshmem allow programs to group subsets
+of \acp{PE} for collective communications and provide a contiguous reindexing
+of the \acp{PE} within that subset that can be used in point-to-point communication.
+
+An \openshmem team is a set of \acp{PE} defined by calling a specific team
+split routine with a parent team argument and other arguments to further
+specify how the parent team is to be split into one more new teams.
+A team created by a team split routine can be used as the parent team
+for a subsequent call to a team split routine.  A team persists and can
+be used for multiple collective routine calls until it is destroyed by
+\FUNC{shmem\_team\_destroy}.
+
+Every team must have a least one member. Any attempt to create a team over an empty set of \acp{PE} will result in no new team being created.
+
+A "team handle" is an opaque object with type \CTYPE{shmem\_team\_t} that is used
+to reference a defined team.  Team handles are created by one of the team split
+routines and destroyed by the team destroy routine. Team handles have local
+semantics only. That is, team handles should not be stored in shared variables
+and used across other \acp{PE}. Doing so will result in undefined behavior.
+
+By default, \openshmem creates predefined teams that will be available
+for use once the routine \FUNC{shmem\_init} has been called. See section
+\ref{subsec:library_handles} for a description of all predefined team handles
+provided by \openshmem. Predefined \CTYPE{shmem\_team\_t} handles can be used as
+the parent team when creating new \openshmem teams.
+
+Every \ac{PE} is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD} team,
+and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the
+value of its global \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
+
+A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, is used to
+indicate that a returned team handle is not valid. This value can be tested
+against to check for successful split operations and can be assigned to user
+declared team handles as a sentinel value.
+
+Teams may be created with options that change team behavior and may allow for
+more optimized performance. These options are described in section
+\ref{subsec:library_constants} and in the various descriptions of the
+team split routines below. In particular, teams may be created with an option
+to disable support for collective communications, which allows implementations
+to reduce team creation overheads for those teams. In that case, the team is 
+just a local reindexing of some set of \acp{PE} that can be used for
+point to point communications or as parent teams in subsequent split operations.
+
+\subsubsection{\textbf{SHMEM\_TEAM\_MY\_PE}}\label{subsec:shmem_team_my_pe}
+\input{content/shmem_team_my_pe.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_N\_PES}}\label{subsec:shmem_team_n_pes}
+\input{content/shmem_team_n_pes.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_GET\_OPTIONS}}\label{subsec:shmem_team_get_options}
+\input{content/shmem_team_get_options.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_TRANSLATE}}\label{subsec:shmem_team_translate}
+\input{content/shmem_team_translate.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_SPLIT\_STRIDED}}\label{subsec:shmem_team_split_strided}
+\input{content/shmem_team_split_strided.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_SPLIT\_2D}}\label{subsec:shmem_team_split_2d}
+\input{content/shmem_team_split_2d.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_DESTROY}}\label{subsec:shmem_team_destroy}
+\input{content/shmem_team_destroy.tex}
+\color{Black}
+
+
+
+
 \subsection{Communication Management Routines}
 \label{sec:ctx}
 All \openshmem RMA, AMO, and memory ordering routines are
@@ -281,11 +358,17 @@ association with the default team, which may be updated by the
 \subsubsection{\textbf{SHMEM\_SYNC}}\label{subsec:shmem_sync}
 \input{content/shmem_sync.tex}
 
+\subsubsection{\textbf{SHMEM\_TEAM\_BROADCAST}}\label{subsec:shmem_team_broadcast}
+\input{content/shmem_team_broadcast.tex}
+
 \subsubsection{\textbf{SHMEM\_BROADCAST}}\label{subsec:shmem_broadcast}
 \input{content/shmem_broadcast.tex}
 
 \subsubsection{\textbf{SHMEM\_COLLECT, SHMEM\_FCOLLECT}}\label{subsec:shmem_collect}
 \input{content/shmem_collect.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_COLLECT, SHMEM\_TEAM\_FCOLLECT}}\label{subsec:shmem_team_collect}
+\input{content/shmem_team_collect.tex}
 
 \subsubsection{\textbf{SHMEM\_REDUCTIONS}}\label{subsec:shmem_reductions}
 \input{content/shmem_reductions.tex}
@@ -295,36 +378,6 @@ association with the default team, which may be updated by the
 
 \subsubsection{\textbf{SHMEM\_ALLTOALLS}}\label{subsec:shmem_alltoalls}
 \input{content/shmem_alltoalls.tex}
-
-
-
-
-
-\color{Green}
-\subsection{Teams or PE Subsets}\label{subsec:team}
-
-\subsubsection{\textbf{SHMEM\_TEAM\_MY\_PE}}\label{subsec:shmem_team_my_pe}
-\input{content/shmem_team_my_pe.tex}
-
-\subsubsection{\textbf{SHMEM\_TEAM\_N\_PES}}\label{subsec:shmem_team_n_pes}
-\input{content/shmem_team_n_pes.tex}
-
-\subsubsection{\textbf{SHMEM\_TEAM\_GET\_OPTIONS}}\label{subsec:shmem_team_get_options}
-\input{content/shmem_team_get_options.tex}
-
-\subsubsection{\textbf{SHMEM\_TEAM\_TRANSLATE}}\label{subsec:shmem_team_translate}
-\input{content/shmem_team_translate.tex}
-
-\subsubsection{\textbf{SHMEM\_TEAM\_SPLIT\_STRIDED}}\label{subsec:shmem_team_split_strided}
-\input{content/shmem_team_split_strided.tex}
-
-\subsubsection{\textbf{SHMEM\_TEAM\_SPLIT\_2D}}\label{subsec:shmem_team_split_2d}
-\input{content/shmem_team_split_2d.tex}
-
-\subsubsection{\textbf{SHMEM\_TEAM\_DESTROY}}\label{subsec:shmem_team_destroy}
-\input{content/shmem_team_destroy.tex}
-\color{Black}
-
 
 
 
