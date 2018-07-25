@@ -47,9 +47,9 @@ res\_r8 = @\FuncDecl{SHMEM\_REAL8\_FETCH}@(source, pe)
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
+  \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
   \apiargument{IN}{source}{The remotely accessible data object to be fetched from
     the remote \ac{PE}.}
   \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which

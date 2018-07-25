@@ -41,9 +41,9 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FADD}@(dest, value_i8, pe)
 
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{The context on which to perform the operation.
+\apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
 \apiargument{OUT}{dest}{The remotely accessible integer data object to be updated on
     the remote \ac{PE}. The type of \VAR{dest} should match that implied in the
     SYNOPSIS section.}

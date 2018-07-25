@@ -37,9 +37,9 @@ CALL @\FuncDecl{SHMEM\_REAL\_IPUT}@(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{The context on which to perform the operation.
+    \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
         When this argument is not provided, the operation is performed on
-        \CONST{SHMEM\_CTX\_DEFAULT}.}
+        \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
     \apiargument{OUT}{dest}{Array to be updated on the remote \ac{PE}. This data
         object  must be remotely accessible.}
     \apiargument{IN}{source}{Array containing the data to be copied.}
