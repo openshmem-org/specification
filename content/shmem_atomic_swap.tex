@@ -63,7 +63,7 @@ res\_r8 = @\FuncDecl{SHMEM\_REAL8\_SWAP}@(dest, value_r8, pe)
     It writes \VAR{value} into \dest{} on \ac{PE} and returns the previous
     contents of \dest{} as an atomic operation.
     \newtext{
-    If the context handle \VAR{ctx} specifies an invalid context,
+    If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
     }
 }

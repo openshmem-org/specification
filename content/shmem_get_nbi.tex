@@ -69,7 +69,7 @@ CALL @\FuncDecl{SHMEM\_REAL\_GET\_NBI}@(dest, source, nelems, pe)
     At the completion of \FUNC{shmem\_quiet}, the 
     data has been delivered to the \dest{} array on the local \ac{PE}. 
     \newtext{
-    If the context handle \VAR{ctx} specifies an invalid context,
+    If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
     }
 }

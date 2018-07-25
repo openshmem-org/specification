@@ -36,10 +36,10 @@ int main() {
   int *src_bufs[n_pes];
   int *dst_bufs[n_pes];
   for (int i = 0; i < n_pes; i++) {
-    src_bufs[i] = shmem_malloc(count * sizeof(*src_bufs[i]));
+    src_bufs[i] = shmem_calloc(count, sizeof(*src_bufs[i]));
     if (src_bufs[i] == NULL)
       shmem_global_exit(3);
-    dst_bufs[i] = shmem_malloc(count * sizeof(*dst_bufs[i]));
+    dst_bufs[i] = shmem_calloc(count, sizeof(*dst_bufs[i]));
     if (dst_bufs[i] == NULL)
       shmem_global_exit(4);
   }

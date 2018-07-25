@@ -59,7 +59,7 @@ CALL @\FuncDecl{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
     \VAR{value} to \dest{} on \ac{PE} \VAR{pe} and atomically updates the \dest{}
     without returning the value.
     \newtext{
-    If the context handle \VAR{ctx} specifies an invalid context,
+    If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
     }
  }

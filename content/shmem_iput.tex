@@ -71,7 +71,7 @@ CALL @\FuncDecl{SHMEM\_REAL\_IPUT}@(dest, source, dst, sst, nelems, pe)
     been copied out of the \VAR{source} array on the local \ac{PE} but not
     necessarily before the data has been delivered to the remote data object.
     \newtext{
-    If the context handle \VAR{ctx} specifies an invalid context,
+    If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
     }
 }
