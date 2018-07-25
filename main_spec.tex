@@ -119,7 +119,7 @@ symmetric data objects in the symmetric heap.
 
 
 \color{Green}
-\subsection{Teams Management Routines}\label{subsec:team}
+\subsection{Team Management Routines}\label{subsec:team}
 
 The \acp{PE} in an \openshmem program can communicate either using
 point-to-point routines that specify the \ac{PE} number of the target
@@ -138,30 +138,31 @@ be used for multiple collective routine calls until it is destroyed by
 
 Every team must have a least one member. Any attempt to create a team over an empty set of \acp{PE} will result in no new team being created.
 
-A "team handle" is an opaque object with type \CTYPE{shmem\_team\_t} that is used
+A ``team handle'' is an opaque object with type \CTYPE{shmem\_team\_t} that is used
 to reference a defined team.  Team handles are created by one of the team split
 routines and destroyed by the team destroy routine. Team handles have local
 semantics only. That is, team handles should not be stored in shared variables
 and used across other \acp{PE}. Doing so will result in undefined behavior.
 
 By default, \openshmem creates predefined teams that will be available
-for use once the routine \FUNC{shmem\_init} has been called. See section
-\ref{subsec:library_handles} for a description of all predefined team handles
+for use once the routine \FUNC{shmem\_init} has been called. See
+Section~\ref{subsec:library_handles} for a description of all predefined team handles
 provided by \openshmem. Predefined \CTYPE{shmem\_team\_t} handles can be used as
 the parent team when creating new \openshmem teams.
 
-Every \ac{PE} is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD} team,
-and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the
-value of its global \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
+Every \ac{PE} is a member of the default team, which may be referenced
+through the team handle \LibHandleRef{SHMEM\_TEAM\_WORLD},
+and its number in the default team is equal to the
+value of its \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
 
-A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, is used to
+A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, may be used to
 indicate that a returned team handle is not valid. This value can be tested
 against to check for successful split operations and can be assigned to user
 declared team handles as a sentinel value.
 
 Teams may be created with options that change team behavior and may allow for
-more optimized performance. These options are described in section
-\ref{subsec:library_constants} and in the various descriptions of the
+more optimized performance. These options are described in
+Section~\ref{subsec:library_constants} and in the various descriptions of the
 team split routines below. In particular, teams may be created with an option
 to disable support for collective communications, which allows implementations
 to reduce team creation overheads for those teams. In that case, the team is 
@@ -213,19 +214,20 @@ default context.  The default context can be used explicitly through the
 \LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.
 
 \newtext{
-Every communication context has an associated \ac{PE} team.
-This \ac{PE} team specifies the set of \acp{PE} over which \ac{PE}-specific
-routines that operate on a communication context, explicitly or implicitly,
-(e.g., \ac{RMA} and \ac{AMO} routines) may be performed.
-All \openshmem routines that operate on this context will do so with respect
-to the team-relative \ac{PE} numbering of the associated \ac{PE} team.
-}
-
-\newtext{
-The default context has a fixed association with the default team.
-Communication contexts created by \FUNC{shmem\_ctx\_create} have an initial
-association with the default team, which may be updated by the
-\FUNC{shmem\_ctx\_set\_team} routine.
+Every communication context is associated with a team.
+This association is established at context creation.
+Communication contexts created by \FUNC{shmem\_ctx\_create} are
+associated with the default team, while contexts created by
+\FUNC{shmem\_team\_create\_ctx} are associated with a team specified at
+context creation.
+The default context is associated with the default team.
+A context's associated team specifies the set of \acp{PE} over which
+\ac{PE}-specific routines that operate on a communication context,
+explicitly or implicitly, are performed.
+All point-to-point routines that operate on this context will do so with
+respect to the team-relative \ac{PE} numbering of the associated team.
+All collective routines that operate on this context will do so across
+the associated team.
 }
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
@@ -237,15 +239,21 @@ association with the default team, which may be updated by the
 \input{content/shmem_ctx_destroy.tex}
 
 \newtext{
-\subsubsection{\textbf{SHMEM\_CTX\_SET\_TEAM}}
-\label{subsec:shmem_ctx_set_team}
-\input{content/shmem_ctx_set_team.tex}
-}
-
-\newtext{
 \subsubsection{\textbf{SHMEM\_CTX\_GET\_TEAM}}
 \label{subsec:shmem_ctx_get_team}
 \input{content/shmem_ctx_get_team.tex}
+}
+
+\newtext{
+\subsubsection{\textbf{SHMEM\_TEAM\_CREATE\_CTX}}
+\label{subsec:shmem_team_create_ctx}
+\input{content/shmem_team_create_ctx.tex}
+}
+
+\newtext{
+\subsubsection{\textbf{SHMEM\_TEAM\_DESTROY\_CTX}}
+\label{subsec:shmem_team_destroy_ctx}
+\input{content/shmem_team_destroy_ctx.tex}
 }
 
 
