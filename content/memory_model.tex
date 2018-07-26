@@ -58,10 +58,12 @@ memory section of each \ac{PE}.
 symmetric data objects, which are defined in Section \ref{sec:amo}.  In
 addition, \openshmem defines routines that are atomic compatible, e.g. the
 point-to-point synchronization routines defined in
-Section~\ref{subsec:p2p_intro}.  The atomic and atomic compatible routines
+Section~\ref{subsec:p2p_intro}.  The atomic routines
 guarantee that concurrent accesses by any of these routines to the same
 location and using the same datatype (specified in Tables~\ref{stdamotypes} and
-\ref{extamotypes}) will be exclusive.  In contrast to atomic operations, atomic
+\ref{extamotypes}) will be exclusive.  Similarly, concurrent accesses by atomic
+and atomic compatible routines to the same location and using the same datatype
+will also be exclusive.  In contrast to atomic operations, atomic
 compatible operations may not be limited by the restrictions specified in this
 section.  Two operations issued by different \acp{PE} to the same destination
 \acp{PE} are concurrent when the first operation is not completed at the
