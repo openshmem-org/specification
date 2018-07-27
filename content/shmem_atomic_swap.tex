@@ -5,37 +5,57 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_swap(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_swap}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_swap}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by Table \ref{extamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_swap(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_swap}@(TYPE *dest, TYPE value, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_swap}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+TYPE @\FuncDecl{shmem\_swap}@(TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_swap}@(TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\} and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER SHMEM_SWAP, value, pe
-ires = SHMEM_SWAP(dest, value, pe)
+ires = @\FuncDecl{SHMEM\_SWAP}@(dest, value, pe)
 INTEGER*4 SHMEM_INT4_SWAP, value_i4, ires_i4
-ires_i4 = SHMEM_INT4_SWAP(dest, value_i4, pe)
+ires\_i4 = @\FuncDecl{SHMEM\_INT4\_SWAP}@(dest, value_i4, pe)
 INTEGER*8 SHMEM_INT8_SWAP, value_i8, ires_i8
-ires_i8 = SHMEM_INT8_SWAP(dest, value_i8, pe)
+ires\_i8 = @\FuncDecl{SHMEM\_INT8\_SWAP}@(dest, value_i8, pe)
 REAL*4 SHMEM_REAL4_SWAP, value_r4, res_r4
-res_r4 = SHMEM_REAL4_SWAP(dest, value_r4, pe)
+res\_r4 = @\FuncDecl{SHMEM\_REAL4\_SWAP}@(dest, value_r4, pe)
 REAL*8 SHMEM_REAL8_SWAP, value_r8, res_r8
-res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
+res\_r8 = @\FuncDecl{SHMEM\_REAL8\_SWAP}@(dest, value_r8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
-        updated on the remote \ac{PE}.	 When using \CorCpp, the type of
-        \dest{} should match that  implied in the SYNOPSIS section.}
-    \apiargument{IN}{value}{The value to be atomically written to the remote
-        \ac{PE}. \VAR{value}  is the same type as \dest.}
-    \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
-        \dest{} is to be updated. When using \Fortran, it must be a default
-        integer value.}
+  \apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
+    updated on the remote \ac{PE}.	 When using \CorCpp, the type of
+    \dest{} should match that  implied in the SYNOPSIS section.}
+  \apiargument{IN}{value}{The value to be atomically written to the remote
+    \ac{PE}. \VAR{value}  is the same type as \dest.}
+  \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
+    \dest{} is to be updated. When using \Fortran, it must be a default
+    integer value.}
 \end{apiarguments}
 
 \apidescription{
@@ -45,8 +65,8 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 }
 
 \apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+  When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
+}{Routine}{Data type of \VAR{dest} and \VAR{value}}
 
 \apitablerow{SHMEM\_SWAP}{Integer of default kind}
 \apitablerow{SHMEM\_INT4\_SWAP}{\CONST{4}-byte integer}
@@ -60,9 +80,7 @@ res_r8 = SHMEM_REAL8_SWAP(dest, value_r8, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_swap} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_swap}.
+    None.
 }
 
 \begin{apiexamples}

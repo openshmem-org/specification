@@ -12,7 +12,7 @@ via \openshmem routines. Private data objects follow the memory model of
 \Cstd or \Fortran. Remotely accessible objects, however, can be accessed by
 remote \acp{PE} using \openshmem routines.  Remotely accessible data objects are
 called \emph{Symmetric Data Objects}.  Each symmetric data object has a
-corresponding object with the same name, type, and size on all PEs where that object is
+corresponding object with the same name, type, and size on all \acp{PE} where that object is
 accessible via the \openshmem \ac{API}\footnote{For efficiency reasons,
 the same offset (from an arbitrary memory address) for symmetric data
 objects might be used on all \acp{PE}. Further discussion about symmetric heap
@@ -20,22 +20,29 @@ layout and implementation efficiency can be found in section
 \ref{subsec:shfree}}.  (For the definition of what is accessible, see the
 descriptions for \FUNC{shmem\_pe\_accessible} and \FUNC{shmem\_addr\_accessible}
 in sections \ref{subsec:shmem_pe_accessible} and
-\ref{subsec:shmem_addr_accessible}.) Symmetric data objects accessed via typed
-\openshmem interfaces are required to be natural aligned based on their type
+\ref{subsec:shmem_addr_accessible}.) Symmetric data objects accessed via typed and
+type-generic \openshmem interfaces are required to be naturally aligned based on their type
 requirements and underlying architecture.  In \openshmem the following kinds of
 data objects are symmetric:
 %
 \begin{itemize}
-  \item \Fortran data objects in common blocks or with the  SAVE  attribute.
-      These data objects must not be defined in a dynamic shared object (DSO).
-  \item Global and static \Cstd and \Cpp variables. These data objects must
-      not  be defined in a DSO.
-  \item \Fortran arrays allocated with \textit{shpalloc} 
-  \item \Cstd and \Cpp data allocated by \textit{shmem\_malloc}
+\item
+  \begin{deprecate}
+    \Fortran data objects in common blocks or with the \CTYPE{SAVE} attribute.
+    These data objects must not be defined in a dynamic shared object (DSO).
+  \end{deprecate}
+\item Global and static \Cstd and \Cpp variables. These data objects must
+  not  be defined in a DSO.
+\item
+  \begin{deprecate}
+    \Fortran arrays allocated with \FUNC{shpalloc}
+  \end{deprecate}
+\item \Cstd and \Cpp data allocated by \openshmem memory management routines
+  (Section~\ref{sec:memory_management})
 \end{itemize}       
 
-\openshmem dynamic memory allocation routines (\textit{shpalloc} and
-\textit{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data
+\openshmem dynamic memory allocation routines (\FUNC{shpalloc} and
+\FUNC{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data
 Objects} on a special memory region called the \emph{Symmetric Heap}. The
 Symmetric Heap is created during the execution of a program at a memory location
 determined by the implementation. The Symmetric Heap may reside in different
@@ -44,3 +51,19 @@ memory regions on different \acp{PE}. Figure~\ref{fig:mem_model} shows how
 objects and private data objects when executing an \openshmem program.
 Symmetric data objects are stored on the symmetric heap or in the global/static
 memory section of each \ac{PE}. 
+
+\subsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
+
+\openshmem contains a number of routines that operate on symmetric data
+atomically (Section \ref{sec:amo}).  These routines guarantee that accesses by
+\openshmem's atomic operations with the same datatype will be exclusive, but do not guarantee
+exclusivity in combination with other routines, either inside \openshmem or
+outside.
+
+For example: during the execution of an atomic remote integer increment
+operation on a symmetric variable \VAR{X}, no other \openshmem atomic operation
+may access \VAR{X}.  After the increment, \VAR{X} will have increased its value
+by \CONST{1} on the destination \ac{PE}, at which point other atomic operations
+may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
+with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
+will invalidate the atomicity guarantees.

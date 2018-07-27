@@ -1,3 +1,7 @@
+\makeindex
+
+\newcommand{\minitab}[2][l]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
 \definecolor{ListingBG}{rgb}{0.91,0.91,0.91}
 \definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
 
@@ -29,15 +33,17 @@
 
 \newcommand{\newtext}[1]{\textcolor{ForestGreen}{#1}}
 \newcommand{\oldtext}[1]{\textcolor{magenta}{\sout{#1}}}
-\newcommand{\insertDocVersion}{1.4}
+\newcommand{\insertDocVersion}{1.5}
 \newcommand{\openshmem}[1][]{%
   {Open\-SHMEM\ifthenelse{\equal{#1}{}}{}{~#1}}\xspace}
 \newcommand{\HEADER}[1]{\textit{#1}}
 \newcommand{\FUNC}[1]{\textit{#1}}
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
+\newcommand{\ENVVAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
-\newcommand{\const}[1]{\protect\gb\protect{\textsf{\small #1}}\index{CONST:#1}} % Only library_constants.tex table.
+\newcommand{\KEYWORD}[1]{\textit{#1}}
+%%
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
 \newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
 \newcommand{\Fortran}[1][]{%
@@ -46,6 +52,7 @@
   \textit{C\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
 \newcommand{\Cpp}[1][]{%
   \textit{C++\ifthenelse{\equal{#1}{}}{}{#1}}\xspace}
+%%
 \newcommand{\TYPE}{\emph{TYPE}}
 \newcommand{\TYPENAME}{\emph{TYPENAME}}
 \newcommand{\SIZE}{\emph{SIZE}}
@@ -55,15 +62,6 @@
 \newcommand{\PUT}{\textit{Put}}
 \newcommand{\GET}{\textit{Get}}
 \newcommand{\OPR}[1]{\textit{#1}}
-\newcommand{\barrier}{\FUNC{SHMEM\_BARRIER}\xspace} % why here an not others?
-\newcommand{\barrierall}{\FUNC{SHMEM\_BARRIER\_ALL}\xspace} % why here an not others?
-\newcommand{\broadcast}{\FUNC{SHMEM\_BROADCAST}}
-\newcommand{\collect}{\FUNC{SHMEM\_COLLECT}}
-\newcommand{\fcollect}{\FUNC{SHMEM\_FCOLLECT}}
-\newcommand{\reduction}{\textit{Reduction Operations}}
-\newcommand{\alltoall}{\FUNC{SHMEM\_ALLTOALL}}
-\newcommand{\alltoalls}{\FUNC{SHMEM\_ALLTOALLS}}
-\newcommand{\activeset}{\textit{Active~set}\xspace} % why here and not others?
 \newcommand{\shmemprefix}{\textit{SHMEM\_}}
 \newcommand{\shmemprefixLC}{\textit{shmem\_}}
 \newcommand{\shmemprefixC}{\textit{\_SHMEM\_}}
@@ -71,6 +69,27 @@
 \newcommand{\jth}{${\textit{j}^{\text{\tiny th}}}$}
 \newcommand{\kth}{${\textit{k}^{\text{\tiny th}}}$}
 \newcommand{\lth}{${\textit{l}^{\text{\tiny th}}}$}
+
+%% Generate indexed reference.
+\newcommand{\EnvVarIndex}[1]{\index{#1}}
+\newcommand{\FuncIndex}[1]{\index{#1}}
+\newcommand{\LibConstIndex}[1]{\index{#1}}
+\newcommand{\LibHandleIndex}[1]{\index{#1}}
+\newcommand{\TableIndex}[1]{\index{#1}\index{Tables!#1}}
+%% Write text and generate reference.
+\newcommand{\EnvVarRef}[1]{\ENVVAR{#1}\EnvVarIndex{#1}}
+\newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
+\newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
+\newcommand{\LibHandleRef}[1]{\CONST{#1}\LibHandleIndex{#1}}
+\newcommand{\TableCaptionRef}[1]{\caption{#1}\TableIndex{#1}}
+%% Specialized declaration/creation and generate reference.
+\newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
+\newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
+\newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
+\newcommand{\LibConstDecl}[2][\CorCpp]{%
+  \parbox[t]{5cm}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
+\newcommand{\LibHandleDecl}[2][\CorCpp]{%
+  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
 
 \begin{acronym}
 \acro{RMA}{\emph{Remote Memory Access}}
@@ -82,15 +101,34 @@
 \acro{API}{\emph{Application Programming Interface}}
 \acro{MPI}{\emph{Message Passing Interface}}
 \acro{SPMD}{\emph{Single Program Multiple Data}}
+\acro{ARL}{Army Research Laboratory}
+\acro{AMD}{Advanced Micro Devices}
+\acro{MPMD}{\emph{Multiple Program Multiple Data}}
+\acro{TCP}{\emph{Transmission Control Protocol}}
 \acro{UH}{University of Houston}
 \acro{UO}{University of Oregon}
 \acro{ORNL}{Oak Ridge National Laboratory}
 \acro{LANL}{Los Alamos National Laboratory}
 \acro{ESSC}{Extreme Scale Systems Center}
-\acro{OSSS}{Open Software System Solutions}
+\acro{OSSS}{Open Source Software Solutions}
+\acro{SGI}{Silicon Graphics International}
 \acro{DoD}{U.S. Department of Defense}
+\acro{SBU}{Stonybrook University}
+\acro{UTK}{University of Tenneesee at Knoxville}
+\acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
+
+% Grab current listings style for use in environment escape to LaTeX.
+% https://tex.stackexchange.com/a/209644
+\makeatletter
+\newcommand\ListingsCurrentStyle{}
+\lst@AddToHook{Output}{\global\let\ListingsCurrentStyle\lst@thestyle}
+\lst@AddToHook{OutputOther}{\global\let\ListingsCurrentStyle\lst@thestyle}
+\newcommand\ListingsKeywordStyle{}
+\lst@AddToHook{Output}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
+\lst@AddToHook{OutputOther}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
+\makeatother
 
 %
 % This is used to put line numbers on plain pages.  Used in draft.tex
@@ -146,6 +184,7 @@
 %
 % Use Sans Serif font for sections, etc.
 %
+%
 \makeatletter
 \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
 -.2ex}{2.3ex plus .2ex}{\Large\sf}}
@@ -153,8 +192,8 @@
 -.2ex}{1.5ex plus .2ex}{\large\sf}}
 \def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
 -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf\bf}}
-\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex 
-minus .2ex}{-1em}{\normalsize\sf}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}
+{-1em}{\normalsize\sf\bf}} % Indent after \paragraph
 \makeatother
 %
 % End use Sans Serif font for sections, etc.  S. Otto
@@ -167,10 +206,9 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \definecolor{gray}{rgb}{0.92,0.92,0.92}
 
 \lstset{ % set defaults for languages not otherwise defined
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,                 % sets automatic line breaking
-  escapeinside={|}{|},          % if you want to add LaTeX within your code
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
                                    % encodings only, does not work with UTF-8
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code 
@@ -227,6 +265,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \lstdefinelanguage{OSH+C}[]{C}{
   classoffset=1,
   morekeywords={
+    size_t, ptrdiff_t,
     SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
     start_pes,
     my_pe, _my_pe, shmem_my_pe,
@@ -242,7 +281,7 @@ minus .2ex}{-1em}{\normalsize\sf}}
     shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
     shmem_set_lock, shmem_test_lock, shmem_clear_lock,
     shmem_long_sum_to_all,
-    shmem_complexd_sum_to_all,
+    shmem_complexd_sum_to_all
   },
   keywordstyle=\color{black}\textbf,
   classoffset=0,
@@ -335,6 +374,13 @@ minus .2ex}{-1em}{\normalsize\sf}}
 % Library API description template commands
 %
 
+\newcommand{\deprecationstart}{\color{red} \raisebox{.5ex}{\rule{1em}{.4pt}}
+  deprecation start \xrfill[.5ex]{.4pt}[red] \mbox{}}
+\newcommand{\deprecationend}{\mbox{}\xrfill[.5ex]{.4pt}[red]\mbox{} \color{red}
+  deprecation end \raisebox{.5ex}{\rule{1em}{.4pt}}}
+
+\newenvironment{deprecate}{\deprecationstart \\}{\\ \deprecationend}
+
 \newcommand{\apisummary}[1]{
     #1
 \hfill
@@ -353,19 +399,23 @@ minus .2ex}{-1em}{\normalsize\sf}}
 {
   \textbf{C++11:}
   \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, noreturn}, aboveskip=0pt, belowskip=0pt}}{}
+    escapechar=@,
+  morekeywords={size_t, ptrdiff_t, TYPE, noreturn},
+  aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{C11synopsis}
 { 
   \textbf{C11:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, _Noreturn, shmem_cmp},
+    escapechar=@,
+    morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
 { 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+    escapechar=@,
+    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
@@ -373,7 +423,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 { 
   \textbf{C/C++:} 
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t, TYPE, TYPENAME, SIZE, shmem_cmp},
+    escapechar=@,
+    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
@@ -381,16 +432,19 @@ minus .2ex}{-1em}{\normalsize\sf}}
   \textbf{C/C++:} 
   \color{red}  
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-  morekeywords={size_t}, aboveskip=0pt, belowskip=0pt}}
-  }
-  {}
-  
+    escapechar=@,
+    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
+    aboveskip=0pt, belowskip=0pt}}}{}
+
 \lstnewenvironment{Fsynopsis}
-{ \textbf{FORTRAN:} 
+{ \deprecationstart \\
+  \textbf{FORTRAN:}
   \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
+    escapechar=@,
   deletekeywords=[2]{STATUS},
   deletekeywords=[3]{LOG}, aboveskip=0pt,
-  belowskip=0pt}}{}
+  belowskip=0pt}}
+{ \deprecationend }
 
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{
@@ -413,7 +467,9 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \begin{description}
 \vspace{-1em}
 \item[API description] \hfill \\ 
+    \begin{sloppypar}
     #1
+    \end{sloppypar}
 \hfill
 }
 
@@ -459,7 +515,8 @@ minus .2ex}{-1em}{\normalsize\sf}}
 \newcommand{\apicexample}[3]{
     ##1
     \lstinputlisting[language={C}, tabsize=2,
-    basicstyle=\ttfamily\footnotesize, morekeywords={size_t}]{##2}
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{##2}
     ##3 }
 \newcommand{\apifexample}[3]{
     ##1

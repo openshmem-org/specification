@@ -6,43 +6,50 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_put(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_put}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_put}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_put(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void shmem_put<SIZE>(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_put\FuncParam{SIZE}}@(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
-void shmem_putmem(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_putmem}@(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_putmem}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 
 \begin{Fsynopsis}
-CALL SHMEM_CHARACTER_PUT(dest, source, nelems, pe)
-CALL SHMEM_COMPLEX_PUT(dest, source, nelems, pe)
-CALL SHMEM_DOUBLE_PUT(dest, source, nelems, pe)
-CALL SHMEM_INTEGER_PUT(dest, source, nelems, pe)
-CALL SHMEM_LOGICAL_PUT(dest, source, nelems, pe)
-CALL SHMEM_PUT4(dest, source, nelems, pe)
-CALL SHMEM_PUT8(dest, source, nelems, pe)
-CALL SHMEM_PUT32(dest, source, nelems, pe)
-CALL SHMEM_PUT64(dest, source, nelems, pe)
-CALL SHMEM_PUT128(dest, source, nelems, pe)
-CALL SHMEM_PUTMEM(dest, source, nelems, pe)
-CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_CHARACTER\_PUT}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_COMPLEX\_PUT}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_DOUBLE\_PUT}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_INTEGER\_PUT}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_LOGICAL\_PUT}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT4}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT8}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT32}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT64}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUT128}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_PUTMEM}@(dest, source, nelems, pe)
+CALL @\FuncDecl{SHMEM\_REAL\_PUT}@(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{dest}{Data object to be updated on the remote \ac{PE}. This
+    \apiargument{IN}{ctx}{The context on which to perform the operation.
+      When this argument is not provided, the operation is performed on
+      \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
-    \apiargument{OUT}{source}{Data object containing the data to be copied.}
+    \apiargument{IN}{source}{Data object containing the data to be copied.}
     \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
     arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
     \Fortran, it must be a constant, variable, or array element of default
@@ -91,7 +98,8 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
 \apinotes{
     When using \Fortran, data types must be of default size.  For example,
     a real variable must be declared as \CONST{REAL},  \CONST{REAL*4},  or
-    \CONST{REAL(KIND=KIND(1.0))}. The Fortran API routine \FUNC{SHMEM\_PUT} has
+    \CONST{REAL(KIND=KIND(1.0))}.
+    As of \openshmem[1.2], the \Fortran API routine \FUNC{SHMEM\_PUT} has
     been deprecated, and either \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} should
     be used in its place.
 }
@@ -99,7 +107,7 @@ CALL SHMEM_REAL_PUT(dest, source, nelems, pe)
 \begin{apiexamples}
 
 \apicexample
-    { The following \FUNC{shmem\_put} example is for C11 programs:}
+    { The following \FUNC{shmem\_put} example is for \Cstd[11] programs:}
     {./example_code/shmem_put_example.c}
     {} 
 \end{apiexamples}

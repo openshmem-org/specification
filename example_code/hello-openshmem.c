@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <shmem.h> /* The shmem header file */
+#include <shmem.h> /* The OpenSHMEM header file */
 
 int main (void)
 {
