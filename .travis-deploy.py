@@ -15,7 +15,8 @@ try:
     repo_slug = os.environ['TRAVIS_REPO_SLUG']
     DB_ACCESS_TOKEN = os.environ['DROPBOX_ACCESS_TOKEN']
     GH_ACCESS_TOKEN = os.environ['GITHUB_ACCESS_TOKEN']
-except KeyError:
+except KeyError as e:
+    raise e
     sys.stderr.write('Skipping PDF deployment...\n')
     exit(0)
 
