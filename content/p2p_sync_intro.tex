@@ -4,8 +4,7 @@ object.
 The point-to-point synchronization routines can be used to portably ensure
 that memory access operations observe remote updates in the order enforced by
 the initiator \ac{PE} using the \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}
-routines.  The point-to-point synchronization routines are atomic-compatible,
-as defined in Section~\ref{subsec:amo_guarantees}.
+routines.
 
 Where appropriate compiler support is available, \openshmem provides
 type-generic point-to-point synchronization interfaces via \Cstd[11] generic
