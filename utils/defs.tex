@@ -514,21 +514,23 @@
 \theoremstyle{definition}
 \newtheorem{example}{Example}
 \newenvironment{apiexamples}{
-  \newcommand{\apicexample}[3]{
+  \newcommand{\apicexample}[4][]{
     \begin{example}
-      ##1
+      \ifthenelse{\equal{##1}{}}{}{\label{##1}}
+      ##2
     \end{example}
     \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{##2}
-    ##3 }
-  \newcommand{\apifexample}[3]{
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{##3}
+    ##4}
+  \newcommand{\apifexample}[4][]{
     \begin{example}
-      ##1
+      \ifthenelse{\equal{##1}{}}{}{\label{##1}}
+      ##2
     \end{example}
     \lstinputlisting[language={Fortran}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}]{##2}
-    ##3 }
+      basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}]{##3}
+    ##4}
   \vspace{-2pt}
 \item[EXAMPLES] \hfill \\
   \vspace{-2pt}
