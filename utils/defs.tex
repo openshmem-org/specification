@@ -521,7 +521,32 @@
     \end{example}
     \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{##3}
+      % Preprocessor directives
+      classoffset=0,
+      keywords={\#include, \#pragma, \#if, \#ifdef, \#else, \#endif},
+      keywordstyle=\bfseries\color{CadetBlue},
+      % Language keywords
+      classoffset=1,
+      keywords={if, else, for, while, return, break, static, const, volatile,
+        sizeof},
+      keywordstyle=\bfseries\color{Orchid},
+      % Types
+      classoffset=2,
+      keywords={void, bool, _Bool, unsigned, char, short, int, long,
+        float, double, _Complex, complex, size_t, ptrdiff_t, shmem_ctx_t,
+        int8_t, int16_t, int32_t, int64_t,
+        uint8_t, uint16_t, uint32_t, uint64_t},
+      keywordstyle=\color{OliveGreen},
+      % Other elements
+      classoffset=3,
+      keywords={NULL},
+      keywordstyle=\color{Cyan},
+      % Other syntax elements
+      classoffset=0,
+      % morecomment=[s]{\<}{\>},
+      commentstyle=\itshape\color{BrickRed},
+      stringstyle=\color{DarkOrchid},
+    ]{##3}
     ##4}
   \newcommand{\apifexample}[4][]{
     \begin{example}
