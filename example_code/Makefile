@@ -1,5 +1,5 @@
 CC       = oshcc
-CFLAGS  ?= -Wall -Wextra
+CFLAGS  ?= -Wall -Wextra -pedantic -Werror
 
 FC       = oshfort
 FFLAGS  ?= -Wall -Wextra
@@ -13,6 +13,8 @@ C_BINS   = $(C_TESTS:.c=.cx)
 F_TESTS  = $(wildcard *.f90)
 F_BINS   = $(F_TESTS:.f90=.fx)
 
+shmem_ctx.cx:	CFLAGS += -fopenmp
+
 .PHONY: all run clean
 
 all: $(C_BINS) $(F_BINS)
@@ -24,9 +26,10 @@ all: $(C_BINS) $(F_BINS)
 	$(FC) $(FFLAGS) -o $@ $+
 
 run: $(C_BINS)
-	@for bin in $+; do				\
-	    echo --$$bin------------------------------;	\
-	    $(RUNCMD) $(RUNOPT) ./$$bin || exit $$?;	\
+	@for bin in $+; do					\
+	    echo -- $$bin ------------------------------;	\
+	    $(RUNCMD) $(RUNOPT) ./$$bin;			\
+	    echo -- exit status: $$?;				\
 	done
 
 clean:
