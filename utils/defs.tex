@@ -511,24 +511,28 @@
 \end{description}
 }
 
+\theoremstyle{definition}
+\newtheorem{example}{Example}
 \newenvironment{apiexamples}{
-\newcommand{\apicexample}[3]{
-    ##1
+  \newcommand{\apicexample}[3]{
+    \begin{example}
+      ##1
+    \end{example}
     \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize,
       morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{##2}
     ##3 }
-\newcommand{\apifexample}[3]{
-    ##1
+  \newcommand{\apifexample}[3]{
+    \begin{example}
+      ##1
+    \end{example}
     \lstinputlisting[language={Fortran}, tabsize=2,
-    basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}]{##2}
+      basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}]{##2}
     ##3 }
-\vspace{-2pt}
+  \vspace{-2pt}
 \item[EXAMPLES] \hfill \\
-\vspace{-2pt}
-}
-{
-}
+  \vspace{-2pt}
+}{}
 
 %
 % End library API description template commands
