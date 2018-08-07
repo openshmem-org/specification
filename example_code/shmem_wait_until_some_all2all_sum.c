@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <shmem.h>
-#include <string.h>
-#include <assert.h>
+#include <stdlib.h>
 
 #define N 100
 
@@ -14,40 +11,38 @@ int main(void)
   int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
-  int my_data = malloc(N * sizeof(int));
+  int *my_data = malloc(N * sizeof(int));
   int *all_data = shmem_malloc(N * npes * sizeof(int));
+
   int *flags = shmem_calloc(npes, sizeof(int));
-  _Bool *completed = calloc(npes, sizeof(_Bool));
-  _Bool *processed = calloc(npes, sizeof(_Bool));
+  size_t *indices = calloc(npes, sizeof(size_t));
+  int *status = calloc(npes, sizeof(int));
 
   for (int i = 0; i < N; i++)
-    my_data[i] = mype*N + i;
+      my_data[i] = mype*N + i;
 
   for (int i = 0; i < npes; i++)
-    shmem_put_nbi(&all_data[mype*N], my_data, N, i);
+      shmem_put_nbi(&all_data[mype*N], my_data, N, i);
 
   shmem_fence();
 
   for (int i = 0; i < npes; i++)
-    shmem_p(&flags[mype], 1, i);
+      shmem_p(&flags[mype], 1, i);
   
-  while (shmem_wait_until_some(flags, npes, completed, SHMEM_CMP_NE, 0)) {
-
-    for (int i = 0; i < npes; i++) {
-      if (completed[i] == 1 && !processed[i] == 1) {
-        for (int j = 0; j < N; j++)
-          total_sum += all_data[i*N+ j];
-        processed[i] = 1;
+  while (int ncompleted = shmem_wait_until_some(flags, npes, indices,
+                                                status, SHMEM_CMP_NE, 0)) {
+      for (int i = 0; i < ncompleted; i++) {
+          for (int j = 0; j < N; j++)
+              total_sum += all_data[indices[i]*N + j];
       }
-    }
   }
 
   int M = N * npes - 1;
-  assert(total_sum == M * (M + 1) / 2);
+  if (total_sum != M * (M + 1) / 2) shmem_global_exit(1);
 
   free(my_data);
-  free(completed);
-  free(processed);
+  free(indices);
+  free(status);
   shmem_free(all_data);
   shmem_free(flags);
   shmem_finalize();
