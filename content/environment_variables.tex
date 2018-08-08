@@ -14,7 +14,7 @@ deprecation rationale for more details.
 
 \medskip{}
 
-\begin{longtable}{|p{0.275\textwidth}|p{0.125\textwidth}|p{0.5\textwidth}|}
+\begin{longtable}{|p{0.275\textwidth}|p{0.130\textwidth}|p{0.50\textwidth}|}
 \hline
 \textbf{Variable} & \textbf{Value} & \textbf{Description}
 \tabularnewline\hline
@@ -30,8 +30,8 @@ deprecation rationale for more details.
     \tabularnewline\hline
 %%
 \EnvVarDecl{SHMEM\_SYMMETRIC\_SIZE}
-    & Non-negative decimal with character suffix or a whole number with optional
-    character suffix
+    & Positive decimal with a character suffix or a positive integer with
+    optional character suffix
     & Controls the size of the symmetric heap per \ac{PE}. The value
       set in this environment variable is interpreted as number
       of bytes, unless the number is followed by a single
@@ -44,8 +44,8 @@ deprecation rationale for more details.
       \end{itemize}
       For example, the string 20m is equivalent to the integer value 20971520,
       or 20 megabytes. Similarly the string 3.1g is equivalent to the integer
-      value 3250585. Only one multiplier is recognized and a decimal value is
-      always required to be followed by a character suffix, so 20kk
+      value 3250585. Only one multiplier is recognized and a positive decimal
+      value is always required to be followed by a character suffix, so 20kk
       will not produce the same value as 20m, nor will invalid
       strings such as 20MB or 20.1 produce the desired result. Any unrecognized
       suffix is treated as an error and results in program termination with an
