@@ -59,9 +59,10 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 }
 
 \apinotes{
-    The \VAR{dest} and \VAR{sig\_addr} data object must both be remotely
-    accessible, but may each be allocated from the symmetric heap or global/
-    static memory.
+    The \VAR{dest} and \VAR{sig\_addr} data objects must both be remotely
+    accessible. The \VAR{sig\_addr} and \VAR{dest} could be of different kinds,
+    for example, one could be a global/static \Cstd variable and the other could
+    be allocated on the symmetric heap.
 
     The delivery of \signal{} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \dest{} data words into the data object on
