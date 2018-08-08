@@ -25,8 +25,8 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     objects.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array to be
     compared with \VAR{cmp\_value}.}
-  \apiargument{OUT}{indices}{An array of indices into \VAR{ivars} that
-    satisfied the test condition.}
+  \apiargument{OUT}{indices}{An array of indices of length at least
+    \VAR{nelems} into \VAR{ivars} that satisfied the test condition.}
   \apiargument{INOUT}{status}{An optional mask array of length \VAR{nelems}
     that indicates which elements in \VAR{ivars} are excluded from the test set.}
   \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}

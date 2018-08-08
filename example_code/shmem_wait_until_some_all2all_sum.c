@@ -29,8 +29,9 @@ int main(void)
   for (int i = 0; i < npes; i++)
       shmem_p(&flags[mype], 1, i);
   
-  while (int ncompleted = shmem_wait_until_some(flags, npes, indices,
-                                                status, SHMEM_CMP_NE, 0)) {
+  int ncompleted;
+  while ((ncompleted = shmem_wait_until_some(flags, npes, indices,
+                                             status, SHMEM_CMP_NE, 0))) {
       for (int i = 0; i < ncompleted; i++) {
           for (int j = 0; j < N; j++)
               total_sum += all_data[indices[i]*N + j];
