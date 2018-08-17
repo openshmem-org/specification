@@ -1,0 +1,54 @@
+\apisummary{
+  A structure type representing team configuration arguments
+}
+
+\begin{apidefinition}
+
+  \begin{Csynopsis}
+typedef struct {
+  int disable_collectives;
+  int return_local_limit;
+  int num_threads;
+} shmem_team_config_t;
+\end{Csynopsis}
+
+  \vspace{1.0em}
+
+  \apidescription{
+    A team configuration argument acts as both input and output to the
+    \FUNC{shmem\_team\_split\_*} routines.
+    As an input, it specifies the requested capabilities of the team to be
+    created.
+    As an output, the configuration argument is conditionally updated on
+    whether team creation is successful.
+    If successful, the configuration argument is not modified;
+    if unsuccessful, it is updated to specify the limiting configuration
+    parameter(s).
+
+    The \VAR{disable\_collectives} member allows for teams to be created
+    without support for collective communications, which allows implementations
+    to reduce team creation overheads for those teams.
+    When its value is zero, it specifies that the team should have collectives
+    enabled.
+    When nonzero, the team will not support collective operations, which
+    allows implementations to reduce team creation overheads.
+
+    The \VAR{return\_local\_limit} member controls whether, after a failed
+    team creation, the team configuration argument is updated with the
+    locally restrictive parameter(s) or the most restrictive parameter(s)
+    across the \acp{PE} of the new team.
+    When its value is zero, the most restrictive parameters are returned;
+    otherwise, the locally restrictive parameters are returned.
+
+    The \VAR{num\_threads} member specifies the number of threads that will
+    create contexts from the new team.
+    It must have a nonnegative value.
+    See Section~\ref{sec:ctx} for more on communication contexts and
+    Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
+  }
+
+  \apinotes{
+    None.
+  }
+
+\end{apidefinition}
