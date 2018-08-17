@@ -1,5 +1,5 @@
 \apisummary{
-  Create a communication context collectively.
+  Create a communication context from a team.
 }
 
 \begin{apidefinition}
@@ -20,10 +20,12 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
 \apidescription{
   The \FUNC{shmem\_team\_create\_ctx} routine creates a new communication
   context and returns its handle through the \VAR{ctx} argument.
-  This context is created collectively by all \acp{PE} in the team
-  specified by the \VAR{team} argument.
-  The specified team may not have the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}
-  option enabled; otherwise, the behavior is undefined.
+  This context is created from the team specified by the \VAR{team} argument.
+
+  The \FUNC{shmem\_team\_create\_ctx} routine must be called by no more threads
+  than were specified by the \VAR{num\_threads} member of the
+  \CTYPE{shmem\_team\_config\_t} configuration parameters that were specified
+  when the team was created.
 
   %% All \openshmem routines that operate on this context will do so with
   %% respect to the associated \ac{PE} team.
@@ -33,12 +35,6 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
   In addition to the team, the \FUNC{shmem\_team\_create\_ctx} routine accepts
   the same arguments and provides all the same return conditions as the
   \FUNC{shmem\_ctx\_create} routine.
-  The call is either collectively successful or collectively fails across
-  all \acp{PE} in the team.
-
-  As \FUNC{shmem\_team\_create\_ctx} is collective, it includes a call to a
-  procedure semantically equivalent to \FUNC{shmem\_team\_sync} on both entry
-  and exit.
 }
 
 \apireturnvalues{
@@ -46,10 +42,7 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
 }
 
 \apinotes{
-  Depending on the \openshmem implementation, system configuration, and
-  application communication pattern, some applications may observe higher
-  performance with collectively created contexts than with locally created
-  contexts.
+  None.
 }
 
 \end{apidefinition}

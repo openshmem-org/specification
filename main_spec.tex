@@ -236,13 +236,17 @@ A context's associated team specifies the set of \acp{PE} over which
 explicitly or implicitly, are performed.
 All point-to-point routines that operate on this context will do so with
 respect to the team-relative \ac{PE} numbering of the associated team.
-All collective routines that operate on this context will do so across
-the associated team.
 }
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
 \input{content/shmem_ctx_create.tex}
+
+\newtext{
+\subsubsection{\textbf{SHMEM\_TEAM\_CREATE\_CTX}}
+\label{subsec:shmem_team_create_ctx}
+\input{content/shmem_team_create_ctx.tex}
+}
 
 \subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
 \label{subsec:shmem_ctx_destroy}
@@ -252,18 +256,6 @@ the associated team.
 \subsubsection{\textbf{SHMEM\_CTX\_GET\_TEAM}}
 \label{subsec:shmem_ctx_get_team}
 \input{content/shmem_ctx_get_team.tex}
-}
-
-\newtext{
-\subsubsection{\textbf{SHMEM\_TEAM\_CREATE\_CTX}}
-\label{subsec:shmem_team_create_ctx}
-\input{content/shmem_team_create_ctx.tex}
-}
-
-\newtext{
-\subsubsection{\textbf{SHMEM\_TEAM\_DESTROY\_CTX}}
-\label{subsec:shmem_team_destroy_ctx}
-\input{content/shmem_team_destroy_ctx.tex}
 }
 
 
