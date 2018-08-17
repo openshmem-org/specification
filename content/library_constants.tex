@@ -42,9 +42,31 @@ See Section~\ref{subsec:thread_support} for more detail about its use.
 \color{Green}
 \LibConstDecl{SHMEM\_TEAM\_NOCOLLECTIVE} &
 \color{Green}
-The team creation option which specifies that the new team will not
-be initialized with support for team collective operations.
-See Section~\ref{subsec:team} for more detail about its use.
+The bitwise flag which specifies that a team creation routine should use the
+\VAR{disable\_collectives} member of the provided
+\CTYPE{shmem\_team\_config\_t} configuration parameter.
+See Sections~\ref{subsec:shmem_team_config_t} and
+\ref{subsec:shmem_team_split_strided} for more detail about its use.
+\tabularnewline \hline
+%%
+\color{Green}
+\LibConstDecl{SHMEM\_TEAM\_LOCAL\_LIMIT} &
+\color{Green}
+The bitwise flag which specifies that a team creation routine should use the
+\VAR{return\_local\_limit} member of the provided
+\CTYPE{shmem\_team\_config\_t} configuration parameter.
+See Sections~\ref{subsec:shmem_team_config_t} and
+\ref{subsec:shmem_team_split_strided} for more detail about its use.
+\tabularnewline \hline
+%%
+\color{Green}
+\LibConstDecl{SHMEM\_TEAM\_NUM\_THREADS} &
+\color{Green}
+The bitwise flag which specifies that a team creation routine should use the
+\VAR{num\_threads} member of the provided
+\CTYPE{shmem\_team\_config\_t} configuration parameter.
+See Sections~\ref{subsec:shmem_team_config_t} and
+\ref{subsec:shmem_team_split_strided} for more detail about its use.
 \tabularnewline \hline
 %%
 \color{Green}

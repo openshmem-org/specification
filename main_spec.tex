@@ -228,8 +228,8 @@ Every communication context is associated with a team.
 This association is established at context creation.
 Communication contexts created by \FUNC{shmem\_ctx\_create} are
 associated with the default team, while contexts created by
-\FUNC{shmem\_team\_create\_ctx} are associated with a team specified at
-context creation.
+\FUNC{shmem\_team\_create\_ctx} are associated with and created from a team
+specified at context creation.
 The default context is associated with the default team.
 A context's associated team specifies the set of \acp{PE} over which
 \ac{PE}-specific routines that operate on a communication context,
