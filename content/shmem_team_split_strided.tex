@@ -33,7 +33,7 @@ of \acp{PE} that will form the new team.}
   A pointer to the configuration parameters for the new team.}
 
 \apiargument{IN}{config\_mask}{
-  The a bitwise mask representing the set of configuration parameters to use
+  The bitwise mask representing the set of configuration parameters to use
   from \VAR{config}.}
 
 \apiargument{OUT}{new\_team}{A new \openshmem team handle, representing a \ac{PE}
@@ -88,6 +88,10 @@ Error checking will be done to ensure a valid \ac{PE} triplet is provided,
 and also to determine whether a valid team handle is provided for the
 parent team.
 
+If \VAR{parent\_team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, then
+\VAR{new\_team} will be assigned the value \LibConstRef{SHMEM\_TEAM\_NULL}.
+Otherwise, if \VAR{parent\_team} is an invalid team handle,
+the behavior is undefined.
 If \VAR{new\_team} cannot be created, it will be assigned the value
 \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
