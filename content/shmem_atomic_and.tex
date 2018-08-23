@@ -21,9 +21,9 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
+  \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
   \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
     be updated.}
   \apiargument{IN}{value}{The operand to the bitwise AND operation.}
@@ -36,6 +36,10 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
   \FUNC{shmem\_atomic\_and} atomically performs a non-fetching bitwise AND
   on the remotely accessible data object pointed to by \VAR{dest} at PE
   \VAR{pe} with the operand \VAR{value}.
+  \newtext{
+  If the context handle \VAR{ctx} does not correspond to a valid context,
+  the behavior is undefined.
+  }
 }
 
 \apireturnvalues{

@@ -510,6 +510,11 @@ Major changes in \openshmem[1.5] include \dots
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
+\item Specified the validity of communication contexts, added the constant
+  \CONST{SHMEM\_CTX\_INVALID}, and clarified the behavior of
+  \FUNC{shmem\_ctx\_*} routines on invalid contexts.
+  \\ See Section~\ref{sec:ctx}.
+%
 \item Clarified \ac{PE} active set requirements.
     \\See Section~\ref{subsec:coll}.
 %
