@@ -124,16 +124,11 @@ constraints, which are as follows:
 \begin{apiexamples}
 
 \apicexample
-    {In the following examples, the call to \FUNC{shmem\_broadcast64} copies \source{}
-    on \ac{PE} 4 to \dest{} on \acp{PE} 5, 6, and 7. 
+    {In the following example, the call to \FUNC{shmem\_broadcast64} copies \source{}
+    on \ac{PE} $0$ to \dest{} on \acp{PE} $1\dots npes-1$.
     
     \CorCpp{} example:}
     {./example_code/shmem_broadcast_example.c}
-    {}
-
-\apifexample
-    {\Fortran example:}
-    {./example_code/shmem_broadcast_example.f90}
     {}
 
 \end{apiexamples}
