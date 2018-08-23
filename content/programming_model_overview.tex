@@ -1,5 +1,5 @@
 \openshmem implements \ac{PGAS} by defining remotely accessible data objects as
-mechanisms to share information among \openshmem processes or \acp{PE}, and
+mechanisms to share information among \openshmem processes, or \acp{PE}, and
 private data objects that are accessible by only the \ac{PE} itself. The \ac{API}
 allows communication and synchronization operations on both private (local to
 the PE initiating the operation) and remotely accessible data objects. The key
@@ -62,11 +62,11 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Remote Memory Access}
 \begin{enumerate}
-    \item \PUT: The local \ac{PE} specifies the \source{} data object (private
-        or symmetric) that is copied to the symmetric data object on the remote
+    \item \PUT: The local \ac{PE} specifies the \source{} data object, private
+        or symmetric, that is copied to the symmetric data object on the remote
         \ac{PE}. 
   \item \GET: The local \ac{PE} specifies the symmetric data object on the remote
-      \ac{PE} that is copied to a data object (private or symmetric) on the local
+      \ac{PE} that is copied to a data object, private or symmetric, on the local
       \ac{PE}. 
 \end{enumerate}
 
