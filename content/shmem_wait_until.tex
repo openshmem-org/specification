@@ -1,0 +1,127 @@
+\apisummary{
+    Wait for a variable on the local \ac{PE} to change.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+\end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
+
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_wait\_until}@(long *ivar, int cmp, long cmp_value);
+void @\FuncDecl{shmem\_wait}@(long *ivar, long cmp_value);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait}@(TYPE *ivar, TYPE cmp_value);
+\end{CsynopsisCol}
+where \TYPE{} is one of \{\CTYPE{short}, \CTYPE{int}, \CTYPE{long},
+\CTYPE{long long}\} and has a corresponding \TYPENAME{} specified by
+Table~\ref{p2psynctypes}.
+\end{DeprecateBlock}
+
+\begin{Fsynopsis}
+CALL @\FuncDecl{SHMEM\_INT4\_WAIT}@(ivar, cmp_value)
+CALL @\FuncDecl{SHMEM\_INT4\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
+CALL @\FuncDecl{SHMEM\_INT8\_WAIT}@(ivar, cmp_value)
+CALL @\FuncDecl{SHMEM\_INT8\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
+CALL @\FuncDecl{SHMEM\_WAIT}@(ivar, cmp_value)
+CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
+\end{Fsynopsis}
+
+\begin{apiarguments}
+
+\apiargument{OUT}{ivar}{A remotely accessible integer variable. When using \CorCpp,
+    the type of \VAR{ivar} should match that implied in the SYNOPSIS section.} 
+\apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
+  \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
+  When using \CorCpp, it must be of type \CTYPE{int}.}
+\apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
+    using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
+    SYNOPSIS section.  When using \Fortran, cmp\_value must be an integer of
+    the same size and kind as \VAR{ivar}.}
+
+\end{apiarguments}
+
+\apidescription{ 
+    The \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} operations block until
+    the value contained in the symmetric data object, \VAR{ivar}, at the
+    calling \ac{PE} satisfies the wait condition.  In an \openshmem program
+    with single-threaded \acp{PE}, the \VAR{ivar} object at the calling \ac{PE}
+    may be updated by an \ac{RMA}, \ac{AMO}, or store operation performed by another
+    \ac{PE}.  In an \openshmem program with multithreaded \acp{PE}, the
+    \VAR{ivar} object at the calling \ac{PE} may be updated by an \ac{RMA}, \ac{AMO}, or
+    store operation performed by a thread located within the calling \ac{PE} or
+    within another \ac{PE}.
+
+    These routines can be used to implement point-to-point synchronization
+    between \acp{PE} or between threads within the same \ac{PE}.  A call to
+    \FUNC{shmem\_wait} blocks until the value of
+    \VAR{ivar} at the calling \ac{PE} is not equal to \VAR{cmp\_value}.  A call
+    to \FUNC{shmem\_wait\_until} blocks until the value of \VAR{ivar} at the
+    calling \ac{PE} satisfies the wait condition specified by the comparison
+    operator, \VAR{cmp}, and comparison value, \VAR{cmp\_value}.
+}
+
+
+\apidesctable{
+    When using \Fortran, \VAR{ivar} must be a specific sized integer type
+    according to the routine being called, as follows:
+}{Routine}{Data type}
+
+\apitablerow{shmem\_wait, shmem\_wait\_until}{default INTEGER}
+\apitablerow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
+\apitablerow{shmem\_int8\_wait, shmem\_int8\_wait\_until}{INTEGER*8}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+  As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated;
+  however, \FUNC{shmem\_wait} is equivalent to \FUNC{shmem\_wait\_until}
+  where \VAR{cmp} is \CONST{SHMEM\_CMP\_NE}.
+}
+
+\apiimpnotes{
+    Implementations must ensure that \FUNC{shmem\_wait} and
+    \FUNC{shmem\_wait\_until} do not return before the update of the memory
+    indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
+    must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
+}
+
+
+\begin{apiexamples}
+
+\apifexample
+{ The following call returns when variable \VAR{ivar} is not equal to 100:}
+{./example_code/shmem_wait1_example.f90}
+{}
+
+\apifexample
+{ The following call to \FUNC{SHMEM\_INT8\_WAIT\_UNTIL} is  equivalent to the
+call to \FUNC{SHMEM\_INT8\_WAIT} in example 1:}
+{./example_code/shmem_wait2_example.f90}
+{}
+
+\apicexample
+{The following \CorCpp{} call waits until the value in \VAR{ivar} is set to
+be less than zero by a transfer from a remote PE:}
+{./example_code/shmem_wait3_example.f90}
+{}
+
+\apifexample
+{The following \Fortran example is in the context of a subroutine:}
+{./example_code/shmem_wait4_example.f90}
+{}
+
+\end{apiexamples}
+
+\end{apidefinition}

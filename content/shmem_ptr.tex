@@ -1,17 +1,17 @@
 \apisummary{
-    Returns a pointer to a data object on a specified \ac{PE}.
+    Returns a local pointer to a symmetric data object on the specified \ac{PE}.
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void *shmem_ptr(const void *dest, int pe);
+void *@\FuncDecl{shmem\_ptr}@(const void *dest, int pe);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
 POINTER (PTR, POINTEE)
 INTEGER pe
-PTR = SHMEM_PTR(dest, pe)
+PTR = @\FuncDecl{SHMEM\_PTR}@(dest, pe)
 \end{Fsynopsis}
 
 
@@ -27,17 +27,16 @@ PTR = SHMEM_PTR(dest, pe)
     \dest{} on the specified \ac{PE}.  This address can be assigned to a pointer.
     After that, ordinary loads and stores to this remote address may be performed.
     
-    When a sequence of loads (gets) and stores (puts) to a data object on a
-    remote \ac{PE} does not match the access pattern provided in an \openshmem data
-    transfer routine like \FUNC{shmem\_put32} or \FUNC{shmem\_real\_iget}, the
-    \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish the
-    communication.
+    The \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish
+    communication, for example when a sequence of reads and writes to a data
+    object on a remote \ac{PE} does not match the access pattern provided in an
+    \openshmem data transfer routine like \FUNC{shmem\_put} or
+    \FUNC{shmem\_iget}.
 }
 
 \apireturnvalues{
-    The return value is a non-NULL address of the \dest{} data object when it is 
-    accessible using memory loads and stores in addition to \openshmem{} operations.
-    Otherwise, a NULL address is returned.
+    The address of the \dest{} data object is returned when it is accessible
+    using memory loads and stores.  Otherwise, a null pointer is returned.
 }
 
 \apinotes{

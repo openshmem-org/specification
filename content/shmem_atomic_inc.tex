@@ -5,26 +5,44 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_atomic_inc(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_atomic\_inc}@(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_atomic\_inc}@(shmem_ctx_t ctx, TYPE *dest, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table~\ref{stdamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_atomic_inc(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_inc}@(TYPE *dest, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_inc}@(shmem_ctx_t ctx, TYPE *dest, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_inc}@(TYPE *dest, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_inc}@(TYPE *dest, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
+and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
+\end{DeprecateBlock}
+
 \begin{Fsynopsis}
 INTEGER pe
-CALL SHMEM_INT4_INC(dest, pe)
-CALL SHMEM_INT8_INC(dest, pe)
+CALL @\FuncDecl{SHMEM\_INT4\_INC}@(dest, pe)
+CALL @\FuncDecl{SHMEM\_INT8\_INC}@(dest, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
 
-\apiargument{IN}{dest}{The remotely accessible integer data object to be updated
+\apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
+    When this argument is not provided, the operation is performed on
+    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
+\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated
     on the remote \ac{PE}. The type of \dest{} should match that implied in the
     SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
@@ -36,12 +54,16 @@ CALL SHMEM_INT8_INC(dest, pe)
 \apidescription{
     These  routines perform  an atomic increment operation on the \VAR{dest} data
     object on \ac{PE}.
+    \newtext{
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
+    }
 }
 
 
 \apidesctable{
     When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
+}{Routine}{Data type of \VAR{dest}}
 
 \apitablerow{SHMEM\_INT4\_INC}{\CONST{4}-byte integer}
 \apitablerow{SHMEM\_INT8\_INC}{\CONST{8}-byte integer}
@@ -51,9 +73,7 @@ CALL SHMEM_INT8_INC(dest, pe)
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_inc} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_inc}.
+    None.
 }
 
 \begin{apiexamples}

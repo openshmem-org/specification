@@ -6,11 +6,11 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_init(void);
+void @\FuncDecl{shmem\_init}@(void);
 \end{Csynopsis}
 
 \begin{Fsynopsis}
-CALL SHMEM_INIT()
+CALL @\FuncDecl{SHMEM\_INIT}@()
 \end{Fsynopsis}
 
 
@@ -24,8 +24,8 @@ CALL SHMEM_INIT()
     other \openshmem routine may be called. At the end of the \openshmem program
     which it initialized, the call to \FUNC{shmem\_init} must be matched with a
     call to \FUNC{shmem\_finalize}. After the first call to \FUNC{shmem\_init}, a
-    subsequent call to \FUNC{shmem\_init} in the same program results in undefined
-    behavior.
+    subsequent call to \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread} in the
+    same program results in undefined behavior.
 }
 
 \apireturnvalues{
@@ -33,23 +33,21 @@ CALL SHMEM_INIT()
 }      
 
 \apinotes{
-    As of \openshmem Specification 1.2 the use of \FUNC{start\_pes} has been
-    deprecated and is replaced with \FUNC{shmem\_init}. While support for
+    As of \openshmem[1.2], the use of \FUNC{start\_pes} has been
+    deprecated and calls to it should be replaced with calls to \FUNC{shmem\_init}. While support for
     \FUNC{start\_pes} is still required in \openshmem libraries, users are
-    encouraged to use \FUNC{shmem\_init}. Replacing \FUNC{start\_pes} with
-    \FUNC{shmem\_init} in \openshmem programs with no further changes is possible;
-    there is an implicit \FUNC{shmem\_finalize} at the end of main.  However,
-    \FUNC{shmem\_init} differs slightly from \FUNC{start\_pes}: multiple calls to
+    encouraged to use \FUNC{shmem\_init}. An important difference between
+    \FUNC{shmem\_init} and \FUNC{start\_pes} is that multiple calls to
     \FUNC{shmem\_init} within a program results in undefined behavior, while in the
     case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the
-    first one resulted in a no-op.
+    first one results in a no-op.
 }
 
 \begin{apiexamples}
 
 \apifexample
-    { This is a simple program that calls \FUNC{shmem\_init}: } 
-    { example_code/shmem_init_example.f90 }
+{ The following \FUNC{shmem\_init} example is for \Cstd[11] programs: }
+    { example_code/shmem_init_example.c }
     {}
 
 \end{apiexamples}

@@ -1,28 +1,43 @@
+\TableIndex{Environment Variables}
+
 The \openshmem specification provides a set of environment variables that allows
 users to configure the \openshmem implementation, and receive information about
 the implementation. The implementations of the specification are free to define
 additional variables. Currently, the specification defines four environment
 variables. All environment variables that start with \VAR{SMA\_*} are
 deprecated, but currently supported for backwards compatibility.
+If both \VAR{SHMEM\_}- and \VAR{SMA\_}-prefixed environment variables
+are set, then the value in the \VAR{SHMEM\_}-prefixed environment variable
+establishes the controlling value. Refer to the
+\hyperref[subsec:deprecate-sma-env]{\VAR{SMA\_*} Environment Variables}
+deprecation rationale for more details.
 
 \medskip{}
 
 \begin{tabular}{|l|l|l|}
-\hline 
-Variable & Value & Purpose\tabularnewline
-\hline 
-\hline 
-\texttt{SHMEM\_VERSION} & any & print the library version at
-start-up\tabularnewline
-\hline 
-\texttt{SHMEM\_INFO} & any & print helpful text about all these environment
-variables\tabularnewline
-\hline 
-\texttt{SHMEM\_SYMMETRIC\_SIZE} & non-negative integer & number of bytes to
-allocate for symmetric heap\tabularnewline
-\hline 
-\texttt{SHMEM\_DEBUG} & any & enable debugging messages\tabularnewline
-\hline 
+\hline
+\textbf{Variable} & \textbf{Value} & \textbf{Description}
+\tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_VERSION}
+    & Any
+    & Print the library version at start-up
+    \tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_INFO}
+    & Any
+    & Print helpful text about all these environment variables
+    \tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_SYMMETRIC\_SIZE}
+    & Non-negative integer
+    & Number of bytes to allocate for symmetric heap
+    \tabularnewline\hline
+%%
+\EnvVarDecl{SHMEM\_DEBUG}
+    & Any
+    & Enable debugging messages
+    \tabularnewline\hline
 \end{tabular}
 
 \medskip{}

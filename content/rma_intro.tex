@@ -1,18 +1,22 @@
-The \ac{RMA} routines described in this section are one-sided communication
-mechanisms of the \openshmem{} \ac{API}. While using these mechanisms, the user
-is required to provide parameters only on the calling side. A characteristic of
-one-sided communication is that it decouples communication from the
-synchronization. One-sided communication mechanisms transfer the data but do not
-synchronize the sender of the data with the receiver of the data. 
+The \ac{RMA} routines described in this section can be used to perform
+reads from and writes to symmetric data objects. These operations
+are one-sided, meaning that the \ac{PE} invoking an operation provides all
+communication parameters and the targeted \ac{PE} is passive. A characteristic
+of one-sided communication is that it decouples communication from
+synchronization. One-sided communication mechanisms transfer data; however,
+they do not synchronize the sender of the data with the receiver of the data.
 
-\openshmem{} \ac{RMA} routines are all performed on the symmetric objects.  The
-initiator \ac{PE} of the call is designated as \source{}, and the \ac{PE} in
-which memory is accessed is designated as \dest{}. In the case of the remote
-update routine, \PUT{}, the origin is the \source{} \ac{PE} and the destination
-\ac{PE} is the \dest{} PE. In the case of the remote read routine, \GET{}, the
-origin is the \dest{} \ac{PE} and the destination is the \source{} \ac{PE}.
+\openshmem \ac{RMA} routines are performed on symmetric data objects.  The
+initiator \ac{PE} of a call is designated as the \emph{origin} \ac{PE} and the
+\ac{PE} targeted by an operation is designated as the \emph{destination} \ac{PE}.  The
+\source{} and \dest{} designators refer to the data objects that an operation
+reads from and writes to.  In the case of the remote update routine, \PUT{},
+the origin \ac{PE} provides the \source{} data object and the destination
+\ac{PE} provides the \dest{} data object. In the case of the remote read
+routine, \GET{}, the origin \ac{PE} provides the \dest{} data object and the
+destination \ac{PE} provides the \source{} data object.
 
-Where appropriate compiler support is available, \openshmem{} provides type-generic 
+Where appropriate compiler support is available, \openshmem provides type-generic 
 one-sided communication interfaces via \Cstd[11] generic selection
 (\Cstd[11]~\S6.5.1.1\footnote{Formally, the \Cstd[11] specification is ISO/IEC 9899:2011(E).})
 for block, scalar, and block-strided put and get communication. 
@@ -21,7 +25,7 @@ listed in Table \ref{stdrmatypes}.
 
 The standard \ac{RMA} types include the exact-width integer types defined in
 \HEADER{stdint.h} by \Cstd[99]%
-\footnote{Formally, the \textit{C99} specification is ISO/IEC~9899:1999(E).}%
+\footnote{Formally, the \Cstd[99] specification is ISO/IEC~9899:1999(E).}%
 ~\S7.18.1.1 and \Cstd[11]~\S7.20.1.1. When the \Cstd translation environment
 does not provide exact-width integer types with \HEADER{stdint.h}, an
 \openshmem implemementation is not required to provide support for these types.
@@ -56,7 +60,7 @@ does not provide exact-width integer types with \HEADER{stdint.h}, an
       size\_t            & size       \\ \hline
       ptrdiff\_t         & ptrdiff    \\ \hline
     \end{tabular}
-    \caption{Standard \ac{RMA} Types and Names}
+    \TableCaptionRef{Standard \ac{RMA} Types and Names}
     \label{stdrmatypes}
   \end{center} 
 \end{table}

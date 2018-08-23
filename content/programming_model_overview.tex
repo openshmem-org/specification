@@ -1,10 +1,10 @@
 \openshmem implements \ac{PGAS} by defining remotely accessible data objects as
-mechanisms to share information among \openshmem processes or \acp{PE} and
-private data objects that are accessible by the \ac{PE} itself. The \ac{API}
+mechanisms to share information among \openshmem processes, or \acp{PE}, and
+private data objects that are accessible by only the \ac{PE} itself. The \ac{API}
 allows communication and synchronization operations on both private (local to
 the PE initiating the operation) and remotely accessible data objects. The key
 feature of \openshmem is that data transfer operations are intrinsically
-\textit{\textbf{one-sided}}, meaning that a local \ac{PE} executing
+\emph{one-sided}. This means that a local \ac{PE} executing
 a data transfer routine does not require the participation of the remote \ac{PE}
 to complete the routine. This feature allows for overlap between communication and
 computation to hide data transfer latencies, which makes  \openshmem ideal for
@@ -12,15 +12,17 @@ unstructured, small/medium size data communication patterns. The \openshmem
 library routines have the potential to provide a low-latency, high-bandwidth
 communication \ac{API} for use in highly parallelized scalable programs.  
 
-The \openshmem{} interfaces can be used to implement \ac{SPMD} style programs.
-It provides interfaces to start the \openshmem{} \acp{PE} in parallel, and
+The \openshmem interfaces can be used to implement \ac{SPMD} style programs.
+It provides interfaces to start the \openshmem \acp{PE} in parallel and
 communication and synchronization interfaces to access remotely accessible data
 objects across \acp{PE}. These interfaces can be leveraged to divide a problem
 into multiple sub-problems that can be solved independently or with coordination
 using the communication and synchronization interfaces.  The \openshmem
 specification defines library calls, constants, variables, and language bindings
-for \Cstd and \Fortran.  The \Cpp interface is currently the same as that
-for \Cstd. Unlike UPC, Fortran 2008, Titanium, X10 and Chapel, which are all
+for \Cstd and \Fortran%
+\footnote{As of \openshmem[1.4], the \Fortran interface has been deprecated.}.
+The \Cpp interface is currently the same as that
+for \Cstd. Unlike Unified Parallel C, \Fortran[2008], Titanium, X10, and Chapel, which are all
 PGAS languages, \openshmem relies on the user to use the library calls  to
 implement the correct semantics of its programming model.
 
@@ -30,7 +32,8 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Library Setup and Query}
 \begin{enumerate}
-  \item \OPR{Initialization}: The \openshmem library environment is initialized. 
+  \item \OPR{Initialization}: The \openshmem library environment is initialized,
+      where the \acp{PE} are either single or multithreaded. 
   \item \OPR{Query}: The local \ac{PE} requests the number of \acp{PE} running
       the same program and its unique integer identifier. 
   \item \OPR{Accessibility}: The local \ac{PE} may request if a remote \ac{PE} is
@@ -49,13 +52,21 @@ An overview of the \openshmem routines is described below:
       reallocation of the same symmetric data object with identical arguments.
 \end{enumerate}
 
+\item \textbf{Communication Management}
+\begin{enumerate}
+    \item \OPR{Contexts}: Contexts are containers for communication operations.
+        Each context provides an environment where the operations performed on
+        that context are ordered and completed independently of other operations
+        performed by the application.
+\end{enumerate}
+
 \item \textbf{Remote Memory Access}
 \begin{enumerate}
     \item \PUT: The local \ac{PE} specifies the \source{} data object (private
-        or symmetric) copied to the symmetric data object on the remote
+        or symmetric) that is copied to the symmetric data object on the remote
         \ac{PE}. 
   \item \GET: The local \ac{PE} specifies the symmetric data object on the remote
-      \ac{PE} copied to a data object (private or symmetric) on the local
+      \ac{PE} that is copied to a data object (private or symmetric) on the local
       \ac{PE}. 
 \end{enumerate}
 
@@ -68,6 +79,9 @@ An overview of the \openshmem routines is described below:
       symmetric data object on the remote \ac{PE}.
   \item \OPR{Add}: The \ac{PE} initiating the add specifies the value to be added
       to the symmetric data object on the remote \ac{PE}.
+  \item \OPR{Bitwise Operations}: The \ac{PE} initiating the bitwise
+      operation specifies the operand value to the bitwise operation to be
+      performed on the symmetric data object on the remote \ac{PE}.
   \item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value
       of the symmetric data object based on a value to be compared and copies a
       new value to the symmetric data object on the remote \ac{PE}.
@@ -77,6 +91,10 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifies the value to
       be added to the symmetric data object on the remote \ac{PE} and returns with
       the old value.
+  \item \OPR{Fetch and Bitwise Operations}: The \ac{PE} initiating the bitwise
+      operation specifies the operand value to the bitwise operation to be
+      performed on the symmetric data object on the remote \ac{PE}
+      and returns the old value.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
@@ -85,7 +103,7 @@ An overview of the \openshmem routines is described below:
   \PUT, AMO, and memory store operations
   to symmetric data objects with respect to a specific
       destination \ac{PE}. 
-  \item \OPR{Quiet}: The \ac{PE} calling quiet ensures completion of remote access
+  \item \OPR{Quiet}: The \ac{PE} calling quiet ensures remote completion of remote access
       operations and stores to symmetric data objects. 
   \item \OPR{Barrier}: All or some \acp{PE} collectively synchronize and ensure
       completion of all remote and local updates prior to any \ac{PE} returning
@@ -94,7 +112,7 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Collective Communication}
 \begin{enumerate}
-  \item \OPR{Broadcast}: The \textit{root} \ac{PE} specifies a symmetric data
+  \item \OPR{Broadcast}: The \VAR{root} \ac{PE} specifies a symmetric data
       object to be copied to a symmetric data object on one or more remote
       \acp{PE} (not including itself). 
   \item \OPR{Collection}: All \acp{PE} participating in the routine get the result
@@ -102,22 +120,28 @@ An overview of the \openshmem routines is described below:
       another symmetric data object.
   \item \OPR{Reduction}: All \acp{PE} participating in the routine get the result
       of an associative binary routine over elements of the specified symmetric
-      data object on another symmetric data object. 
+      data object on another symmetric data object.
+  \item \OPR{All-to-All}: All \acp{PE} participating in the routine exchange
+      a fixed amount of contiguous or strided data with all other \acp{PE}
+      in the active set.
 \end{enumerate}
 
 \item \textbf{Mutual Exclusion}
 \begin{enumerate}
   \item \OPR{Set Lock}: The \ac{PE} acquires exclusive access to the region
-      bounded by the symmetric \textit{lock} variable.
-  \item \OPR{Test Lock}: The \ac{PE} tests the symmetric \textit{lock} variable
+      bounded by the symmetric \VAR{lock} variable.
+  \item \OPR{Test Lock}: The \ac{PE} tests the symmetric \VAR{lock} variable
       for availability.
   \item \OPR{Clear Lock}: The \ac{PE} which has previously acquired the
-      \textit{lock} releases it.
+      \VAR{lock} releases it.
 \end{enumerate}
 
-\item \textbf{Data Cache Control \textit{(deprecated)}}
+\begin{DeprecateBlock}
+\item \textbf{Data Cache Control}
 \begin{enumerate}
   \item Implementation of mechanisms to exploit the capabilities of hardware cache
       if available.
 \end{enumerate}
+\end{DeprecateBlock}
+
 \end{enumerate}
