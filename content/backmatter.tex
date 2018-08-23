@@ -510,6 +510,16 @@ Major changes in \openshmem[1.5] include \dots
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
+\item Clarified \ac{PE} active set requirements.
+    \\See Section~\ref{subsec:coll}.
+%
+\item Clarified that when the \VAR{size} argument is zero, symmetric heap
+    allocation routines perform no action and return a null pointer; that
+    symmetric heap management routines that perform no action do not perform a
+    barrier; and that the \VAR{alignment} argument to \FUNC{shmem\_align} must
+    be power of two multiple of \CONST{sizeof(void*)}.
+    \\See Section~\ref{subsec:shfree}.
+%
 \item Clarified that the \openshmem lock API provides a non-reentrant mutex and
     that \FUNC{shmem\_clear\_lock} performs a quiet operation on the default
     context.
