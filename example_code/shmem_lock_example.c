@@ -12,8 +12,7 @@ int main(void)
    printf("%d: count is %d\n", me, val);
    val++; /* incrementing and updating count on PE 0 */
    shmem_p(&count, val, 0);
-   shmem_quiet();
-   shmem_clear_lock(&lock);
+   shmem_clear_lock(&lock); /* ensures count update has completed before clearing the lock */
    shmem_finalize();
    return 0;
 }
