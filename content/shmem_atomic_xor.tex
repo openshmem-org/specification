@@ -6,19 +6,24 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_atomic_xor(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_xor}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_xor}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the bitwise \ac{AMO} types specified by
 Table~\ref{bitamotypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_atomic_xor(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_xor}@(TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_xor}@(shmem_ctx_t ctx, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{bitamotypes}.
 
 \begin{apiarguments}
 
+  \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
+    When this argument is not provided, the operation is performed on
+    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
   \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
     be updated.}
   \apiargument{IN}{value}{The operand to the bitwise XOR operation.}
@@ -31,6 +36,10 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
   \FUNC{shmem\_atomic\_xor} atomically performs a non-fetching bitwise XOR
   on the remotely accessible data object pointed to by \VAR{dest} at PE
   \VAR{pe} with the operand \VAR{value}.
+  \newtext{
+  If the context handle \VAR{ctx} does not correspond to a valid context,
+  the behavior is undefined.
+  }
 }
 
 \apireturnvalues{
