@@ -5,7 +5,8 @@
 \end{figure}      
 %
 An \openshmem program consists of data objects that are private to each \ac{PE}
-and data  objects that are remotely accessible by all \acp{PE}. Private data
+and data  objects that are remotely accessible by all \acp{PE}. Note that the latter 
+of these two data objects are symmetric data objects. Private data
 objects are stored in the local memory of each \ac{PE} and can only be accessed
 by the \ac{PE} itself; these data objects cannot be accessed by other \acp{PE}
 via \openshmem routines. Private data objects follow the memory model of
