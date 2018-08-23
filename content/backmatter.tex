@@ -215,51 +215,6 @@ The following cases summarize this behavior:
 
 
 
-\chapter{Interoperability with other Programming Models}\label{sec:mpi}
-
-\section{\ac{MPI} Interoperability}
-
-\begin{sloppypar} % to prevent constants from running into margins.
-%
-\openshmem routines may be used in conjunction with \ac{MPI} routines in the
-same program.  For example, on \ac{SGI} systems, programs that use both \ac{MPI} and
-\openshmem routines call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the
-call to the \FUNC{shmem\_init} routine.  \openshmem \ac{PE} numbers are equal to
-the \ac{MPI} rank within the \CONST{MPI\_COMM\_WORLD} environment variable.
-Note that this indexing precludes use of \openshmem routines between processes in
-different \CONST{MPI\_COMM\_WORLD}s.  For example, \ac{MPI} processes started using the
-\FUNC{MPI\_Comm\_spawn} routine cannot use \openshmem routines to
-communicate with their parent \ac{MPI} processes.
-%
-\end{sloppypar}
-%
-On \ac{SGI} systems where \ac{MPI} jobs use \ac{TCP}/sockets for inter-host communication,
-\openshmem routines may be used to communicate with processes running on the
-same host.  The \FUNC{shmem\_pe\_accessible} routine should be used to determine if
-a remote \ac{PE} is accessible via \openshmem communication from the local
-\ac{PE}. When running an \ac{MPI} program involving multiple executable files,
-\openshmem routines may be used to communicate with processes running from the
-same or different executable files, provided that the communication is limited
-to symmetric data objects.  On these systems, static memory---such as a
-\Fortran common block or \Cstd global variable---is symmetric between
-processes running from the same executable file, but is not symmetric between
-processes running from different executable files.  Data allocated from the
-symmetric heap (e.g., \FUNC{shmem\_malloc}, \FUNC{shpalloc}) is symmetric across the
-same or different executable files. The \FUNC{shmem\_addr\_accessible} routine
-should be used to determine if a local address is accessible via \openshmem
-communication from a remote \ac{PE}.
-
-Another important feature of these systems is that the
-\FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if the remote
-\ac{PE} is a process running from the same executable file as the local \ac{PE},
-indicating that full \openshmem support (static memory and symmetric heap) is
-available.  When using \openshmem routines within an \ac{MPI} program, the use
-of \ac{MPI} memory-placement environment variables is required when using
-non-default memory-placement options.
-
-
-
-
 \chapter{History of OpenSHMEM}\label{sec:openshmem_history}
 
 SHMEM has a long history as a parallel-programming model and has been
