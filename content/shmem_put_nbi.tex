@@ -44,9 +44,9 @@ CALL @\FuncDecl{SHMEM\_REAL\_PUT\_NBI}@(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
+  \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
   \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
   \apiargument{IN}{source}{Data object containing the data to be copied.}
@@ -69,6 +69,10 @@ CALL @\FuncDecl{SHMEM\_REAL\_PUT\_NBI}@(dest, source, nelems, pe)
     Furthermore, two successive put
     routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
     introduced between the two calls.   
+    \newtext{
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
+    }
  }
 
 \apidesctable{

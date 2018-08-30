@@ -21,7 +21,7 @@ void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
     performs an implicit quiet operation on the given context before it is freed.
 
     \newtext{
-    If \VAR{ctx} is a handle to the default context, the behavior is undefined.
+    If \VAR{ctx} is a handle to the default context, the behavior is undefined. If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is performed.
     }
 }
 
@@ -64,6 +64,16 @@ void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
     local reduction of segment \VAR{p-1}.}
     {./example_code/shmem_ctx_pipelined_reduce.c}
     {}
+
+    \newtext{
+    \apicexample
+    {The following example demonstrates the use of \CONST{SHMEM\_CTX\_INVALID}
+    in a \Cstd[11] program that uses thread-local storage to provide each
+    thread an implicit context handle via a ``library'' put routine without
+    explicit management of the context handle from ``user'' code.}
+    {./example_code/shmem_ctx_invalid.c}
+    {}
+    }
 
 \end{apiexamples}
 
