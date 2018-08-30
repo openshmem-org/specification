@@ -6,8 +6,8 @@ where the subset is defined by the
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, long options,
-int PE_start, int PE_stride, int PE_size, shmem_team_t *new_team);
+void @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int PE_start, int PE_stride,
+     int PE_size, shmem_team_config_t *config, long config_mask, shmem_team_t *new_team);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -15,9 +15,9 @@ int PE_start, int PE_stride, int PE_size, shmem_team_t *new_team);
 \LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE} may
 be used, or any team created by the user.}
 
-\apiargument{IN}{options}{The set of options requested for the new team.
-Multiple options may be requested by combining them with a bitwise OR operation;
-otherwise, \CONST{0} can be given if no options are requested.}
+%% \apiargument{IN}{options}{The set of options requested for the new team.
+%% Multiple options may be requested by combining them with a bitwise OR operation;
+%% otherwise, \CONST{0} can be given if no options are requested.}
 
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the subset of \acp{PE} from
 the parent team that will form the new team}
@@ -28,6 +28,13 @@ the new team.}
 
 \apiargument{IN}{PE\_size}{The number of \acp{PE} from the parent team in the subset
 of \acp{PE} that will form the new team.}
+
+\apiargument{INOUT}{config}{
+  A pointer to the configuration parameters for the new team.}
+
+\apiargument{IN}{config\_mask}{
+  The bitwise mask representing the set of configuration parameters to use
+  from \VAR{config}.}
 
 \apiargument{OUT}{new\_team}{A new \openshmem team handle, representing a \ac{PE}
 subset of all the \acp{PE} in the parent team that is created from
@@ -41,13 +48,6 @@ It creates a new \openshmem team from a subset of the existing parent team,
 where the subset is defined by the \ac{PE} triplet (\VAR{PE\_start},
 \VAR{PE\_stride}, and \VAR{PE\_size}) supplied to the function.
 
-It is important to note the use of the less restrictive
-\VAR{PE\_stride} argument instead of \VAR{logPE\_stride}. This method of
-creating a team with an arbitrary set of \acp{PE} is inherently restricted by
-its parameters, but allows for many additional use-cases over using a
-\VAR{logPE\_stride} parameter, and may provide an easier transition for
-existing \openshmem programs to create and use \openshmem teams.
-
 This function must be called by all processes contained in the \ac{PE} triplet
 specification. It may be called by additional \acp{PE} not included in the
 triplet specification, but for those processes a \VAR{new\_team} value of
@@ -57,36 +57,59 @@ containing the \ac{PE} subset specified by the triplet, and ordered by the
 existing global \ac{PE} number. None of the parameters need to reside in
 symmetric memory.
 
+The \VAR{config} argument specifies team configuration parameters, which are
+described in Section~\ref{subsec:shmem_team_config_t}.
+
+The \VAR{config\_mask} argument is a bitwise mask representing the set of
+configuration parameters to use from \VAR{config}.
+A \VAR{config\_mask} value of \CONST{0} indicates that all the field members
+of \VAR{config} should be used.
+Individual field masks can be combined through a bitwise OR operation
+of the following library constants:
+
+{
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
+    The team should be created using the value of the
+    \VAR{disable\_collectives} member of the configuration parameter
+    \VAR{config}.
+  }
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_LOCAL\_LIMIT}}{
+    The team should be created using the value of the
+    \VAR{return\_local\_limit} member of the configuration parameter
+    \VAR{config}.
+  }
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_THREADS}}{
+    The team should be created using the value of the
+    \VAR{num\_threads} member of the configuration parameter \VAR{config}.
+  }
+}
+
 Error checking will be done to ensure a valid \ac{PE} triplet is provided,
 and also to determine whether a valid team handle is provided for the
 parent team.
 
-\begin{FeedbackRequest}
-All errors are considered fatal and will result in the job aborting with
-an informative error message.
-\end{FeedbackRequest}
-
-The following options can be supplied during team split to restrict
-team functions and enable performance optimizations.  When using a given
-team, the application must comply with the requirements of all options
-set on that team; otherwise, the behavior is undefined.
-No options are enabled on \LibHandleRef{SHMEM\_TEAM\_WORLD} or \LibHandleRef{SHMEM\_TEAM\_NODE}.
-
-    \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
-                 The new team will not be created with the necessary support
-                 structures to enable team based collectives.
-                 This will typically allow implementations to speed up team creation
-                 and reduce \openshmem library footprint for teams with this option.
-                 This option will not prevent the new team from using atomics or
-                 other non-collective team based operations.}
+If \VAR{parent\_team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, then
+\VAR{new\_team} will be assigned the value \LibConstRef{SHMEM\_TEAM\_NULL}.
+Otherwise, if \VAR{parent\_team} is an invalid team handle,
+the behavior is undefined.
+If \VAR{new\_team} cannot be created, it will be assigned the value
+\LibConstRef{SHMEM\_TEAM\_NULL}.
 }
 
 \apireturnvalues{
-None.
+  None.
 }
 
 \apinotes{
-See the description of team handles and predefined teams at the top of section \ref{subsec:team} for more information about semantics and usage.
+  It is important to note the use of the less restrictive
+  \VAR{PE\_stride} argument instead of \VAR{logPE\_stride}. This method of
+  creating a team with an arbitrary set of \acp{PE} is inherently restricted
+  by its parameters, but allows for many additional use-cases over using a
+  \VAR{logPE\_stride} parameter, and may provide an easier transition for
+  existing \openshmem programs to create and use \openshmem teams.
+
+  See the description of team handles and predefined teams at the top of
+  Section~\ref{subsec:team} for more information about semantics and usage.
 }
 
 \begin{apiexamples}

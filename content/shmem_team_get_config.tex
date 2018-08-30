@@ -1,26 +1,23 @@
 \apisummary{
-    Return the options flags describing the options applied to a given team
+  Return the configuration parameters of a given team
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-long @\FuncDecl{shmem\_team\_get\_options}@(shmem_team_t team);
+void @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_t *team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{team}{A valid \openshmem team handle.}
+  \apiargument{IN}{team}{A valid \openshmem team handle.}
+  \apiargument{OUT}{config}{
+    A pointer to the configuration parameters for the new team.}
 \end{apiarguments}
 
 \apidescription{
-\FUNC{shmem\_team\_get\_options} returns a \CTYPE{long} value containing
-all of the options which describe the given team. Options are requested when
-new teams are created in the various \FUNC{shmem\_team\_split\_*} functions.
-All of the requested options applied to the team by the library
-implementation will be returned by \FUNC{shmem\_team\_get\_options}.
-
-A library implementation will not apply any non-default options to a team,
-other than those requested during team split functions.
+\FUNC{shmem\_team\_get\_config} returns through the \VAR{config} argument
+the configuration parameters of the given team, which were specified when the
+team was created.
 
 \begin{FeedbackRequest}
 A library implementation must apply all requested options to a team, even in
@@ -31,17 +28,14 @@ The library must still enable the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE} option
 when it is requested, so that the \openshmem program will be portable across implementations.
 \end{FeedbackRequest}
 
-All \acp{PE} in the team will get back the same value for the team options.
+All \acp{PE} in the team will get back the same parameter values for the team options.
 
-Error checking will be done to ensure a valid team handle is provided.
-Errors will result in a return value less than \CONST{0}.
+If the \VAR{team} argument does not specify a valid team, the behavior is
+undefined.
 }
 
 \apireturnvalues{
-The set of options applied to the given team. Multiple options are combined
-with a bitwise OR and can be extracted with a bitwise AND. A return value of
-\CONST{0} implies that the team uses only default options. A return value less than
-\CONST{0} implies that the team handle is invalid.
+  None.
 }
 
 \apinotes{

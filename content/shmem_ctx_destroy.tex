@@ -1,5 +1,5 @@
 \apisummary{
-    Destroy a communication context.
+    Destroy a \newtext{locally created} communication context.
 }
 
 \begin{apidefinition}
@@ -14,14 +14,14 @@ void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
 
 \apidescription{
     \FUNC{shmem\_ctx\_destroy} destroys a context that was created by a call to
-    \FUNC{shmem\_ctx\_create}.  It is the user's responsibility to ensure that
+    \FUNC{shmem\_ctx\_create} or \FUNC{shmem\_team\_create\_ctx}.
+    It is the user's responsibility to ensure that
     the context is not used after it has been destroyed, for example when the
     destroyed context is used by multiple threads.  This function
     performs an implicit quiet operation on the given context before it is freed.
 
     \newtext{
-    When a context is destroyed, the team associated with this context
-    is not affected.
+    If \VAR{ctx} is a handle to the default context, the behavior is undefined.
     }
 }
 
@@ -30,7 +30,9 @@ void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
 }
 
 \apinotes{
+    \oldtext{
     It is invalid to pass \CONST{SHMEM\_CTX\_DEFAULT} to this routine.
+    }
 
     Destroying a context makes it impossible for the user to complete
     communication operations that are pending on that context.  This includes

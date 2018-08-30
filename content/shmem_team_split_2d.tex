@@ -1,82 +1,108 @@
 \apisummary{
 Create two new teams by splitting an existing parent team into two subsets based on a
-2D Cartesian space defined by xrange argument and the yrange derived from xrange
-and the parent team size. These ranges describe the Cartesian space in X and Y
-dimensions.}
+2D Cartesian space defined by the \VAR{xrange} argument and a \VAR{y} dimension derived from \VAR{xrange}
+and the parent team size. These ranges describe the Cartesian space in \emph{x}-
+and \emph{y}-dimensions.}
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
 void @\FuncDecl{shmem\_team\_split\_2d}@(shmem_team_t parent_team, int xrange,
-long xaxis_options, shmem_team_t *xaxis_team, long yaxis_options, shmem_team_t *yaxis_team);
+     shmem_team_config_t *xaxis_config, long xaxis_mask, shmem_team_t *xaxis_team,
+     shmem_team_config_t *yaxis_config, long yaxis_mask, shmem_team_t *yaxis_team);
 \end{Csynopsis}
 
 \begin{apiarguments}
 \apiargument{IN}{parent\_team}{A valid \openshmem team. Any predefined teams, such as
 \LibHandleRef{SHMEM\_TEAM\_WORLD}, may be used, or any team created by the user.}
 
-\apiargument{IN}{xrange}{A non-negative integer representing the number of
+\apiargument{IN}{xrange}{A nonnegative integer representing the number of
 elements in the first dimension.}
 
-\apiargument{IN}{xaxis\_options}{The set of options requested for the new X-axis team.
-Multiple options may be requested by combining them with a bitwise OR operation;
-otherwise, \CONST{0} can be given if no options are requested.}
+\apiargument{INOUT}{xaxis\_config}{
+  A pointer to the configuration parameters for the new \VAR{x}-axis team.}
+
+\apiargument{IN}{xaxis\_mask}{
+  The bitwise mask representing the set of configuration parameters to use
+  from \VAR{xaxis\_config}.}
 
 \apiargument{OUT}{xaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
-subset consisting of all the \acp{PE} that have the same coordinate along the X-axis 
+subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{x}-axis
 as the calling \ac{PE}.}
 
-\apiargument{IN}{yaxis\_options}{The set of options requested for the new Y-axis team.
-These options do not have to be the same as the options for the new X-axis team.}
+\apiargument{INOUT}{yaxis\_config}{
+  A pointer to the configuration parameters for the new \VAR{y}-axis team.}
+
+\apiargument{IN}{yaxis\_mask}{
+  The bitwise mask representing the set of configuration parameters to use
+  from \VAR{yaxis\_config}.}
 
 \apiargument{OUT}{yaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
-subset consisting of all the \acp{PE} that have the same coordinate along the Y-axis 
+subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{y}-axis
 as the calling \ac{PE}.}
 \end{apiarguments}
 
 \apidescription{
 The \FUNC{shmem\_team\_split\_2d} routine is a collective routine. It creates two
 new teams by splitting an existing parent team into up to two subsets based on a
-2D Cartesian space. The user provides the size of the X dimension, which is then
-used to derive the size of the Y dimension based on the size of the parent team.
-The size of the Y dimension will be equal to $ceiling ( N \div xrange )$, where
+2D Cartesian space. The user provides the size of the \VAR{x} dimension, which is then
+used to derive the size of the \VAR{y} dimension based on the size of the parent team.
+The size of the \VAR{y} dimension will be equal to $ceiling ( N \div xrange )$, where
 \VAR{N} is the size of the parent team. In other words,
 $xrange \times yrange \geq N$, so that every \ac{PE} in the parent team has a
 unique \VAR{(x,y)} location the 2D Cartesian space.
 
 After the split operation, each of the new teams will contain all \acp{PE} that
-have the same coordinate along the X-axis and Y-axis, respectively, as the calling
+have the same coordinate along the \VAR{x}-axis and \VAR{y}-axis, respectively, as the calling
 \ac{PE}. The \acp{PE} are numbered in the new teams based on the position of the
 \ac{PE} along the given axis.
 
 Any valid \openshmem team can be used as the parent team. This routine must be
 called by all \acp{PE} in the parent team. The value of \VAR{xrange} must be
-non-negative and all \acp{PE} in the parent team must pass the same value for
+nonnegative and all \acp{PE} in the parent team must pass the same value for
 \VAR{xrange}. None of the parameters need to reside in symmetric memory.
 
-Error checking will be done to detect if the value \LibConstRef{SHMEM\_TEAM\_NULL}
-is passed as the parent team handle. In that case, the program will abort with
-an informative error message. If an invalid team handle is passed to the
-routine, the behavior is undefined.
+The \VAR{xaxis\_config} and \VAR{yaxis\_config} arguments specify team
+configuration parameters for the \VAR{x}- and \VAR{y}-axis teams, respectively.
+These parameters are described in Section~\ref{subsec:shmem_team_config_t}.
+All \acp{PE} that will be in the same resultant team must specify the same
+configuration parameters.
+The \acp{PE} in the parent team \emph{do not} have to all provide the same
+parameters for new teams.
 
-The options in the table below can be supplied during team split to restrict
-team functions and enable performance optimizations. All \acp{PE} that will
-be in the same resultant new team must specify the same options. The \acp{PE}
-in the parent team \emph{do not} have to all provide the same options for new
-teams.
+The \VAR{xaxis\_mask} and\VAR{xaxis\_mask} arguments are a bitwise masks
+representing the set of configuration parameters to use from
+\VAR{xaxis\_config} and \VAR{yaxis\_config}, respectively.
+A mask value of \CONST{0} indicates that all the field members of the
+configuration parameter argument should be used.
+Individual field masks can be combined through a bitwise OR operation
+of the following library constants:
 
-When using a given team, the application must comply with the requirements
-of all options set on that team; otherwise, the behavior is undefined.
-No options are enabled on \LibHandleRef{SHMEM\_TEAM\_WORLD} or on other
-predefined \openshmem teams.
+{
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
+    The team should be created using the value of the
+    \VAR{disable\_collectives} member of the respective
+    configuration parameter.
+  }
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_LOCAL\_LIMIT}}{
+    The team should be created using the value of the
+    \VAR{return\_local\_limit} member of the respective
+    configuration parameter.
+  }
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_THREADS}}{
+    The team should be created using the value of the
+    \VAR{num\_threads} member of the respective
+    configuration parameter.
+  }
+}
 
-    \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
-                 The new team will not be created with the necessary support
-                 structures to enable team based collectives.
-                 This will typically allow implementations to speed up team creation
-                 and reduce \openshmem library footprint for teams with this option.
-                 This option will not prevent the new team from using atomics or
-                 other non-collective team based operations.}
+If \VAR{parent\_team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, both
+\VAR{xaxis\_team} and \VAR{yaxis\_team} will be assigned the value
+\LibConstRef{SHMEM\_TEAM\_NULL}.
+Otherwise, if \VAR{parent\_team} is an invalid team handle,
+the behavior is undefined.
+If either team cannot be created, that team will be assigned the value
+\LibConstRef{SHMEM\_TEAM\_NULL}.
 }
 
 \apireturnvalues{
@@ -86,13 +112,13 @@ None.
 \apinotes{
 Since the split may result in a 2D space with more points than there are members of
 the parent team, there may be a final, incomplete row of the 2D mapping of the parent
-team. This means that the resultant X-axis teams may vary in size by up to 1 \ac{PE},
-and that there may be one resultant Y-axis team of smaller size than all of the other
-Y-axis teams.
+team. This means that the resultant \VAR{x}-axis teams may vary in size by up to 1 \ac{PE},
+and that there may be one resultant \VAR{y}-axis team of smaller size than all of the other
+\VAR{y}-axis teams.
 
 The following grid shows the 12 teams that would result from splitting a parent team
 of size 10 with \VAR{xrange} of 3. The numbers in the grid cells are the \ac{PE} numbers
-in the parent team. The rows are the Y-axis teams. The columns are the X-axis teams.
+in the parent team. The rows are the \VAR{y}-axis teams. The columns are the \VAR{x}-axis teams.
 
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
@@ -102,12 +128,12 @@ in the parent team. The rows are the Y-axis teams. The columns are the X-axis te
  y=1  & 3   & 4   & 5  \\ \hline
  y=2  & 6   & 7   & 8  \\ \hline
  y=3  & 9     \\
- \cline{0-1} 
+ \cline{0-1}
 \end{tabular}
 \end{center}
 
 It would be legal, for example, if \acp{PE} 0, 3, 6, 9 specified a different value
-for \VAR{xaxis\_options} than all of the other \acp{PE}, as long as options match
+for \VAR{xaxis\_config} than all of the other \acp{PE}, as long as the configuration parameters match
 for all \acp{PE} in each of the new teams.
 
 See the description of team handles and predefined teams at the top of section

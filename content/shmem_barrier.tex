@@ -79,6 +79,14 @@ CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
     Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
     to calling the barrier routine to ensure completion of operations issued on
     additional contexts.
+
+    \newtext{
+    No team-based barrier is provided by \openshmem, as a team may have any
+    number of communication contexts associated with the team.
+    Applications seeking such an idiom should call \FUNC{shmem\_ctx\_quiet}
+    on the desired context, followed by a call to \FUNC{shmem\_team\_sync}
+    on the desired team.
+    }
 }
 
 \begin{apiexamples}

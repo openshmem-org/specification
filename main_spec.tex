@@ -119,7 +119,7 @@ symmetric data objects in the symmetric heap.
 
 
 \color{Green}
-\subsection{Teams Management Routines}\label{subsec:team}
+\subsection{Team Management Routines}\label{subsec:team}
 
 The \acp{PE} in an \openshmem program can communicate either using
 point-to-point routines that specify the \ac{PE} number of the target
@@ -130,43 +130,50 @@ of the \acp{PE} within that subset that can be used in point-to-point communicat
 
 An \openshmem team is a set of \acp{PE} defined by calling a specific team
 split routine with a parent team argument and other arguments to further
-specify how the parent team is to be split into one more new teams.
-A team created by a team split routine can be used as the parent team
+specify how the parent team is to be split into one or more new teams.
+A team created by a \FUNC{shmem\_team\_split\_*} routine can be used as the parent team
 for a subsequent call to a team split routine.  A team persists and can
 be used for multiple collective routine calls until it is destroyed by
 \FUNC{shmem\_team\_destroy}.
 
 Every team must have a least one member. Any attempt to create a team over an empty set of \acp{PE} will result in no new team being created.
 
-A "team handle" is an opaque object with type \CTYPE{shmem\_team\_t} that is used
+A ``team handle'' is an opaque object with type \CTYPE{shmem\_team\_t} that is used
 to reference a defined team.  Team handles are created by one of the team split
 routines and destroyed by the team destroy routine. Team handles have local
 semantics only. That is, team handles should not be stored in shared variables
 and used across other \acp{PE}. Doing so will result in undefined behavior.
 
 By default, \openshmem creates predefined teams that will be available
-for use once the routine \FUNC{shmem\_init} has been called. See section
-\ref{subsec:library_handles} for a description of all predefined team handles
+for use once the routine \FUNC{shmem\_init} has been called. See
+Section~\ref{subsec:library_handles} for a description of all predefined team handles
 provided by \openshmem. Predefined \CTYPE{shmem\_team\_t} handles can be used as
 the parent team when creating new \openshmem teams.
 
-Every \ac{PE} is a member of the \LibHandleRef{SHMEM\_TEAM\_WORLD} team,
-and its number in \LibHandleRef{SHMEM\_TEAM\_WORLD} corresponds to the
-value of its global \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
+Every \ac{PE} is a member of the default team, which may be referenced
+through the team handle \LibHandleRef{SHMEM\_TEAM\_WORLD},
+and its number in the default team is equal to the
+value of its \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
 
-A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, is used to
+A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, may be used to
 indicate that a returned team handle is not valid. This value can be tested
 against to check for successful split operations and can be assigned to user
 declared team handles as a sentinel value.
 
-Teams may be created with options that change team behavior and may allow for
-more optimized performance. These options are described in section
-\ref{subsec:library_constants} and in the various descriptions of the
-team split routines below. In particular, teams may be created with an option
-to disable support for collective communications, which allows implementations
-to reduce team creation overheads for those teams. In that case, the team is 
-just a local reindexing of some set of \acp{PE} that can be used for
-point to point communications or as parent teams in subsequent split operations.
+Teams that are created by a \FUNC{shmem\_team\_split\_*} routine may be
+provided a configuration argument that specifies options that may affect
+a team's capabilities and may allow for optimized performance.
+This configuration argument is of type \CTYPE{shmem\_team\_config\_t}, which
+is detailed further in Section~\ref{subsec:shmem_team_config_t}.
+
+%% Teams may be created with options that change team behavior and may allow for
+%% more optimized performance. These options are described in
+%% Section~\ref{subsec:library_constants} and in the various descriptions of the
+%% team split routines below. In particular, teams may be created with an option
+%% to disable support for collective communications, which allows implementations
+%% to reduce team creation overheads for those teams. In that case, the team is
+%% just a local reindexing of some set of \acp{PE} that can be used for
+%% point to point communications or as parent teams in subsequent split operations.
 
 \subsubsection{\textbf{SHMEM\_TEAM\_MY\_PE}}\label{subsec:shmem_team_my_pe}
 \input{content/shmem_team_my_pe.tex}
@@ -174,8 +181,12 @@ point to point communications or as parent teams in subsequent split operations.
 \subsubsection{\textbf{SHMEM\_TEAM\_N\_PES}}\label{subsec:shmem_team_n_pes}
 \input{content/shmem_team_n_pes.tex}
 
-\subsubsection{\textbf{SHMEM\_TEAM\_GET\_OPTIONS}}\label{subsec:shmem_team_get_options}
-\input{content/shmem_team_get_options.tex}
+\subsubsection{\textbf{SHMEM\_TEAM\_CONFIG\_T}}
+\label{subsec:shmem_team_config_t}
+\input{content/shmem_team_config_t.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_GET\_CONFIG}}\label{subsec:shmem_team_get_config}
+\input{content/shmem_team_get_config.tex}
 
 \subsubsection{\textbf{SHMEM\_TEAM\_TRANSLATE}}\label{subsec:shmem_team_translate}
 \input{content/shmem_team_translate.tex}
@@ -213,34 +224,33 @@ default context.  The default context can be used explicitly through the
 \LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.
 
 \newtext{
-Every communication context has an associated \ac{PE} team.
-This \ac{PE} team specifies the set of \acp{PE} over which \ac{PE}-specific
-routines that operate on a communication context, explicitly or implicitly,
-(e.g., \ac{RMA} and \ac{AMO} routines) may be performed.
-All \openshmem routines that operate on this context will do so with respect
-to the team-relative \ac{PE} numbering of the associated \ac{PE} team.
-}
-
-\newtext{
-The default context has a fixed association with the default team.
-Communication contexts created by \FUNC{shmem\_ctx\_create} have an initial
-association with the default team, which may be updated by the
-\FUNC{shmem\_ctx\_set\_team} routine.
+Every communication context is associated with a team.
+This association is established at context creation.
+Communication contexts created by \FUNC{shmem\_ctx\_create} are
+associated with the default team, while contexts created by
+\FUNC{shmem\_team\_create\_ctx} are associated with and created from a team
+specified at context creation.
+The default context is associated with the default team.
+A context's associated team specifies the set of \acp{PE} over which
+\ac{PE}-specific routines that operate on a communication context,
+explicitly or implicitly, are performed.
+All point-to-point routines that operate on this context will do so with
+respect to the team-relative \ac{PE} numbering of the associated team.
 }
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
 \input{content/shmem_ctx_create.tex}
 
+\newtext{
+\subsubsection{\textbf{SHMEM\_TEAM\_CREATE\_CTX}}
+\label{subsec:shmem_team_create_ctx}
+\input{content/shmem_team_create_ctx.tex}
+}
+
 \subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
 \label{subsec:shmem_ctx_destroy}
 \input{content/shmem_ctx_destroy.tex}
-
-\newtext{
-\subsubsection{\textbf{SHMEM\_CTX\_SET\_TEAM}}
-\label{subsec:shmem_ctx_set_team}
-\input{content/shmem_ctx_set_team.tex}
-}
 
 \newtext{
 \subsubsection{\textbf{SHMEM\_CTX\_GET\_TEAM}}
