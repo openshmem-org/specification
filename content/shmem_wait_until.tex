@@ -51,17 +51,23 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 \end{apiarguments}
 
 \apidescription{ 
-    \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} wait for \VAR{ivar} to be
-    changed by a write or an atomic operation issued by a \ac{PE}.
-    These  routines can be used for point-to-point direct synchronization.  A call
-    to \FUNC{shmem\_wait} does not return until a \ac{PE} writes a value
-    not equal to \VAR{cmp\_value} into \VAR{ivar} on the waiting \ac{PE}.  A call
-    to \FUNC{shmem\_wait\_until} does not return until a \ac{PE} changes
-    \VAR{ivar} to satisfy the condition implied by \VAR{cmp} and \VAR{cmp\_value}.
-    The \FUNC{shmem\_wait} routines return when \VAR{ivar} is no longer equal to \VAR{cmp\_value}. The
-    \FUNC{shmem\_wait\_until} routines return when the compare condition is true.
-    The compare condition is defined by the \VAR{ivar}  argument  compared with the
-    \VAR{cmp\_value} using the comparison operator \VAR{cmp}.
+    The \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} operations block until
+    the value contained in the symmetric data object, \VAR{ivar}, at the
+    calling \ac{PE} satisfies the wait condition.  In an \openshmem program
+    with single-threaded \acp{PE}, the \VAR{ivar} object at the calling \ac{PE}
+    may be updated by an \ac{RMA}, \ac{AMO}, or store operation performed by another
+    \ac{PE}.  In an \openshmem program with multithreaded \acp{PE}, the
+    \VAR{ivar} object at the calling \ac{PE} may be updated by an \ac{RMA}, \ac{AMO}, or
+    store operation performed by a thread located within the calling \ac{PE} or
+    within another \ac{PE}.
+
+    These routines can be used to implement point-to-point synchronization
+    between \acp{PE} or between threads within the same \ac{PE}.  A call to
+    \FUNC{shmem\_wait} blocks until the value of
+    \VAR{ivar} at the calling \ac{PE} is not equal to \VAR{cmp\_value}.  A call
+    to \FUNC{shmem\_wait\_until} blocks until the value of \VAR{ivar} at the
+    calling \ac{PE} satisfies the wait condition specified by the comparison
+    operator, \VAR{cmp}, and comparison value, \VAR{cmp\_value}.
 }
 
 
@@ -79,7 +85,7 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 }
 
 \apinotes{
-  As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated,
+  As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated;
   however, \FUNC{shmem\_wait} is equivalent to \FUNC{shmem\_wait\_until}
   where \VAR{cmp} is \CONST{SHMEM\_CMP\_NE}.
 }
