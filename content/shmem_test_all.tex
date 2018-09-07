@@ -1,0 +1,58 @@
+\apisummary{
+  Test whether all variables within an array of variables on the local \ac{PE} meet a specified test condition.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_test\_all}@(TYPE * ivars, size_t nelems, int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_all}@(TYPE * ivars, size_t nelems, int cmp, TYPE cmp_value);
+\end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
+
+\begin{apiarguments}
+
+  \apiargument{OUT}{ivars}{A pointer to an array of remotely accessible data
+    objects.}
+  \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
+  \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}
+    that compares elements of \VAR{ivars} with \VAR{cmp\_value}.}
+  \apiargument{IN}{cmp\_value}{The value to be compared with the objects
+    pointed to by \VAR{ivars}.}
+
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_test\_all} routine behaves similarly to
+    \FUNC{shmem\_wait\_until\_all}, but it does not block and returns zero if
+    no conditions are satisfied.  This routine tests the numeric comparison of
+    each of the \VAR{nelems} elements in the \VAR{ivars} array with the value
+    \VAR{cmp\_value} according to the comparison operator \VAR{cmp} at the
+    calling PE.  The order in which these elements are tested is unspecified.
+}
+
+\apireturnvalues{
+    \FUNC{shmem\_test\_all} returns 1 if all variables in \VAR{ivars} satisfy the test condition, otherwise this routine returns 0.
+}
+
+\apinotes{
+  None.
+}
+
+%\begin{apiexamples}
+%  \apicexample
+%      {The following \CorCpp{} example demonstrates the use of
+%      \FUNC{shmem\_test\_all} to process a simple all-to-all transfer of N
+%      data elements via a sum reduction, while potentially overlapping
+%      communication with computation.}
+%      {./example_code/shmem_test_some_example.c}
+%      {}
+%\end{apiexamples}
+
+\end{apidefinition}

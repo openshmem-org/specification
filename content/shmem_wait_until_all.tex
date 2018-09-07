@@ -1,0 +1,67 @@
+\apisummary{
+    Wait on an array of variables on the local \ac{PE} until all variables meet the specified wait condition.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_wait\_until\_all}@(TYPE *ivars, size_t nelems, int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_all}@(TYPE *ivars, size_t nelems, int cmp, TYPE cmp_value);
+\end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
+
+\begin{apiarguments}
+
+  \apiargument{OUT}{ivars}{A pointer to an array of remotely accessible data
+    objects.}
+  \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
+  \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}
+    that compares elements of \VAR{ivars} with \VAR{cmp\_value}.}
+  \apiargument{IN}{cmp\_value}{The value to be compared with the objects
+    pointed to by \VAR{ivars}.}
+
+\end{apiarguments}
+
+\apidescription{ 
+    The \FUNC{shmem\_wait\_until\_all} routine waits until all entries in the
+    wait set specified by \VAR{ivars} have satisfied the wait condition at the
+    calling \ac{PE}.  This routine is semantically similar to
+    \FUNC{shmem\_wait\_until} in Section~\ref{subsec:shmem_wait_until}, but
+    adds support for point-to-point synchronization involving multiple data
+    objects.  The order in which these elements are waited upon is unspecified.
+}
+
+
+\apireturnvalues{
+    \FUNC{shmem\_wait\_until\_all} returns when all variables in \VAR{ivars} satisfy the wait condition.
+}
+
+\apinotes{
+    None.
+}
+
+\apiimpnotes{
+    Implementations must ensure that \FUNC{shmem\_wait\_until\_all} does not
+    return before the update of the memory indicated by \VAR{ivars} is fully
+    complete.  Partial updates to the memory must not cause
+    \FUNC{shmem\_wait\_until\_all} to return.
+}
+
+
+\begin{apiexamples}
+  \apicexample
+      {The following \CorCpp{} example demonstrates the use of 
+      \FUNC{shmem\_wait\_until\_all} to perform a simple all-to-all
+      exchange.}
+      {./example_code/shmem_wait_until_all.c}
+      {}
+
+\end{apiexamples}
+
+\end{apidefinition}
