@@ -1,5 +1,5 @@
 \apisummary{
-    Wait on an array of variables on the local \ac{PE} until one variable meets the specified wait condition.
+    Wait on an array of variables on the local \ac{PE} until any one variable meets the specified wait condition.
 }
 
 \begin{apidefinition}
@@ -33,7 +33,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \end{apiarguments}
 
 \apidescription{ 
-    The \FUNC{shmem\_wait\_until\_any} routine waits until one entry in the
+    The \FUNC{shmem\_wait\_until\_any} routine waits until any one entry in the
     wait set specified by \VAR{ivars} and \VAR{status} satisfies the wait
     condition at the calling \ac{PE}.  The order in which these elements are
     waited upon is unspecified.
@@ -43,9 +43,11 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     whether the element is excluded from the wait set.  On input, elements of
     \VAR{status} set to 0 will be included in the wait set, and elements set to
     1 will be ignored.  If all elements in \VAR{status} are set to 1 or
-    \VAR{nelems} is 0, the wait set is empty and this routine returns 0.  If
-    \VAR{status} is a null pointer, it is ignored and all elements in
-    \VAR{ivars} are included in the wait set.
+    \VAR{nelems} is 0, the wait set is empty and this routine returns 0.  On
+    output, the element of \VAR{status} with the index given by the return
+    value of \FUNC{shmem\_wait\_until\_any} is set to 1.  If \VAR{status} is a
+    null pointer, it is ignored and all elements in \VAR{ivars} are included in
+    the wait set.
 }
 
 \apireturnvalues{

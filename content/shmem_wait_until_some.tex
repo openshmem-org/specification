@@ -45,7 +45,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     element in the wait set that satisfied the wait condition during the call
     to \FUNC{shmem\_wait\_until\_some}.  The return value of
     \FUNC{shmem\_wait\_until\_some} is equal to the total number of these
-    satisfied elements.  If the return value is $N$, then the first $N$
+    satisfied elements.  For a given return value $N$, the first $N$
     elements of the \VAR{indices} array contain those unique indices that
     satisfied the wait condition.  The array pointed to by \VAR{indices} must
     be at least \VAR{nelems} long.

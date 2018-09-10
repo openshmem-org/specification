@@ -44,14 +44,6 @@ int main(void)
       }
   }
 
-  int M = N * npes - 1;
-  if (total_sum != M * (M + 1) / 2) shmem_global_exit(1);
-
-  free(my_data);
-  free(indices);
-  free(status);
-  shmem_free(all_data);
-  shmem_free(flags);
   shmem_finalize();
   return 0;
 }

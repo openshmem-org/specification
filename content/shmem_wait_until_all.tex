@@ -33,13 +33,13 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     wait set specified by \VAR{ivars} have satisfied the wait condition at the
     calling \ac{PE}.  This routine is semantically similar to
     \FUNC{shmem\_wait\_until} in Section~\ref{subsec:shmem_wait_until}, but
-    adds support for point-to-point synchronization involving multiple data
-    objects.  The order in which these elements are waited upon is unspecified.
+    adds support for point-to-point synchronization involving an array of
+    symmetric data objects.
 }
 
 
 \apireturnvalues{
-    \FUNC{shmem\_wait\_until\_all} returns when all variables in \VAR{ivars} satisfy the wait condition.
+    None.
 }
 
 \apinotes{
@@ -56,9 +56,9 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \begin{apiexamples}
   \apicexample
-      {The following \CorCpp{} example demonstrates the use of 
-      \FUNC{shmem\_wait\_until\_all} to perform a simple all-to-all
-      exchange.}
+      {The following \CorCpp{} example demonstrates the use of
+      \FUNC{shmem\_wait\_until\_all} to implement a simple linear barrier
+      synchronization.}
       {./example_code/shmem_wait_until_all.c}
       {}
 
