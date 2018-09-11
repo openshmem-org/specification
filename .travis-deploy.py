@@ -11,12 +11,15 @@ try:
     PR_number = os.environ['TRAVIS_PULL_REQUEST']
     if PR_number == 'false':
         # Skip PDF deployment on non-PR builds
-        raise KeyError()
+        raise RuntimeError('not a PR')
     repo_slug = os.environ['TRAVIS_REPO_SLUG']
     DB_ACCESS_TOKEN = os.environ['DROPBOX_ACCESS_TOKEN']
     GH_ACCESS_TOKEN = os.environ['GITHUB_ACCESS_TOKEN']
 except KeyError as e:
-    sys.stderr.write('Skipping PDF deployment...\n')
+    sys.stderr.write('Skipping PDF deployment; failed to find env-var {}\n'.format(e))
+    exit(0)
+except RuntimeError as e:
+    sys.stderr.write('Skipping PDF deployment; runtime error {}\n'.format(e))
     exit(0)
 
 with open('main_spec.pdf', mode='rb') as f:
