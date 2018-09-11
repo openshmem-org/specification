@@ -28,16 +28,19 @@ int main(void)
   for (int i = 0; i < npes; i++)
       shmem_p(&flags[mype], 1, i);
   
-  int ncompleted = 0;
+  int ncompleted = 0, zero_processed = 0;
 
   while (ncompleted < npes) {
       int completed_idx = shmem_test_any(flags, npes, status, SHMEM_CMP_NE, 0); 
-      if (completed_idx > 0) {
+      if (completed_idx == 0 && status[0] == 1 && !zero_processed) {
+          ncompleted++;
+          zero_processed = 1;
           for (int j = 0; j < N; j++)
               total_sum += all_data[completed_idx * N + j];
+      } else  {
           ncompleted++;
-      } else {
-          /* Overlap some computation here */
+          for (int j = 0; j < N; j++)
+              total_sum += all_data[completed_idx * N + j];
       }
   }
 
