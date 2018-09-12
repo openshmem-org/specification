@@ -1,0 +1,57 @@
+\color{Green}
+\apisummary{
+    This nonblocking routine performs an atomic fetch-and-increment operation
+    on a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_atomic\_fetch\_inc\_nbi}@(TYPE *fetch, TYPE *dest, int pe);
+void @\FuncDecl{shmem\_atomic\_fetch\_inc\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table~\ref{stdamotypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_fetch\_inc\_nbi}@(TYPE *fetch, TYPE *dest, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch\_inc\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{stdamotypes}.
+
+\begin{apiarguments}
+
+\apiargument{IN}{ctx}{The context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    \CONST{SHMEM\_CTX\_DEFAULT}.}
+\apiargument{OUT}{fetch}{Local data object to be updated.}
+\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated
+    on the remote \ac{PE}. The type of \dest{} should match that implied in the
+    SYNOPSIS section.}
+\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
+    \dest{} is to be updated.  When using \Fortran, it must be a default
+    integer value.}
+
+\end{apiarguments}
+
+
+\apidescription{
+   These nonblocking routines perform a atomic fetch-and-increment operation.
+   This routine returns after posting the operation. The operation is considered
+   complete after a subsequent call to \FUNC{shmem\_quiet}. At the completion of
+   \FUNC{shmem\_quiet}, the \dest{} on \ac{PE} \VAR{pe} is increased by one and
+   the routine fetches the previous contents of \dest{} as an atomic operation
+   into the \VAR{fetch} local data object.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    None.
+}
+
+\end{apidefinition}
+\color{Black}
