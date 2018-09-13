@@ -47,9 +47,9 @@ CALL @\FuncDecl{SHMEM\_REAL8\_SET}@(dest, value_r8, pe)
 
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
+\apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
+    the default context.}
 \apiargument{OUT}{dest}{The remotely accessible data object to be set on
     the remote \ac{PE}.}
 \apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.}
@@ -61,10 +61,8 @@ CALL @\FuncDecl{SHMEM\_REAL8\_SET}@(dest, value_r8, pe)
 \apidescription{
     \FUNC{shmem\_atomic\_set} performs an atomic set operation. It writes the
     \VAR{value} into \VAR{dest} on \VAR{pe} as an atomic operation.
-    \newtext{
     If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
-    }
 }
 
 \apireturnvalues{

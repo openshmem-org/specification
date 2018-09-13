@@ -39,15 +39,13 @@ may be multithreaded and any thread may invoke the \openshmem interfaces.
 See Section~\ref{subsec:thread_support} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{\newtext{SHMEM\_CTX\_INVALID}} &
-\newtext{
+\LibConstDecl{SHMEM\_CTX\_INVALID} &
 A value corresponding to an invalid communication context.
 This value can be used to initialize or update context handles to indicate
 that they do not reference a valid context.
 When managed in this way, applications can use an equality comparison
 to test whether a given context handle references a valid context.
 See Section~\ref{sec:ctx} for more detail about its use.
-}
 \tabularnewline \hline
 %%
 \LibConstDecl{SHMEM\_CTX\_SERIALIZED} &
