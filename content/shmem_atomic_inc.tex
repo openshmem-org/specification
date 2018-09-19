@@ -39,9 +39,9 @@ CALL @\FuncDecl{SHMEM\_INT8\_INC}@(dest, pe)
 
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
+\apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
+    the default context.}
 \apiargument{OUT}{dest}{The remotely accessible integer data object to be updated
     on the remote \ac{PE}. The type of \dest{} should match that implied in the
     SYNOPSIS section.}
@@ -54,10 +54,8 @@ CALL @\FuncDecl{SHMEM\_INT8\_INC}@(dest, pe)
 \apidescription{
     These  routines perform  an atomic increment operation on the \VAR{dest} data
     object on \ac{PE}.
-    \newtext{
     If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
-    }
 }
 
 

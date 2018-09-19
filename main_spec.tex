@@ -206,8 +206,8 @@ is detailed further in Section~\ref{subsec:shmem_team_config_t}.
 
 \subsection{Communication Management Routines}
 \label{sec:ctx}
-All \openshmem \ac{RMA}, \ac{AMO}, and memory ordering routines \oldtext{are} \newtext{must be}
-performed on a \newtext{valid} communication context.  The communication context defines an
+All \openshmem \ac{RMA}, \ac{AMO}, and memory ordering routines must be
+performed on a valid communication context.  The communication context defines an
 independent ordering and completion environment, allowing users to manage the
 overlap of communication with computation and also to manage communication
 operations performed by separate threads within a multithreaded \ac{PE}.  For
@@ -216,16 +216,14 @@ communication and computation.  In multithreaded environments, contexts may
 additionally provide thread isolation, eliminating overheads resulting from
 thread interference.
 
-\oldtext{A handle to the desired context}
-\newtext{A specific communication context is referenced through a context handle, which} is
+A specific communication context is referenced through a context handle, which is
 passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic \ac{API}
-routines.  \ac{API} routines that do not accept a context \newtext{handle} argument operate on the
+routines.  \ac{API} routines that do not accept a context handle argument operate on the
 default context.  The default context can be used explicitly through the
 \LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.
-Context handles are of type \CTYPE{shmem\_ctx\_t} and \newtext{may be used} \oldtext{are valid} for
+Context handles are of type \CTYPE{shmem\_ctx\_t} and may be used for
 language-level assignment and equality comparison.
 
-\newtext{
 The default context is valid for the duration of the \openshmem portion of
 an application.
 Contexts created by a successful call to \FUNC{shmem\_ctx\_create} remain
@@ -238,7 +236,6 @@ A context handle may be initialized to or assigned the value
 valid communication context.
 When managed in this way, applications can use an equality comparison
 to test whether a given context handle references a valid context.
-}
 
 \newtext{
 Every communication context is associated with a team.

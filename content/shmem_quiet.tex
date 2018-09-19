@@ -16,9 +16,9 @@ CALL @\FuncDecl{SHMEM\_QUIET}@
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
-        \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
+        the default context.}
 \end{apiarguments}
 
 \apidescription{ 
@@ -28,10 +28,8 @@ CALL @\FuncDecl{SHMEM\_QUIET}@
     memory store, and nonblocking \PUT{} and \GET{} routines to
     symmetric data objects are guaranteed to be completed and visible to all
     \acp{PE} when \FUNC{shmem\_quiet} returns. 
-    \newtext{
     If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
     performed.
-    }
 }
 
 

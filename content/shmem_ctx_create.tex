@@ -20,9 +20,9 @@ int @\FuncDecl{shmem\_ctx\_create}@(long options, shmem_ctx_t *ctx);
     The \FUNC{shmem\_ctx\_create} routine creates a new communication context
     and returns its handle through the \VAR{ctx} argument.  If the context was
     created successfully, a value of zero is returned
-    \newtext{and the context handle pointed to by \VAR{ctx} specifies a valid context};
+    and the context handle pointed to by \VAR{ctx} specifies a valid context;
     otherwise, a nonzero value is returned
-    \newtext{and the context handle pointed to by \VAR{ctx} is not modified}.
+    and the context handle pointed to by \VAR{ctx} is not modified.
     An unsuccessful context
     creation call is not treated as an error and the \openshmem library remains
     in a correct state.  The creation call can be reattempted with different

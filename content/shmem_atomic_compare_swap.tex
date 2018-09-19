@@ -40,9 +40,9 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_CSWAP}@(dest, cond_i8, value_i8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
-        \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
+        the default context.}
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be
         updated on the remote \ac{PE}. }
     \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
@@ -62,10 +62,8 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_CSWAP}@(dest, cond_i8, value_i8, pe)
     The conditional swap routines conditionally update a \VAR{dest} data object on
     the specified \ac{PE} and return the prior contents of the data object in one
     atomic operation.
-    \newtext{
     If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
-    }
 }
 \apidesctable{
     When using \Fortran, \VAR{dest}, \VAR{cond}, and \VAR{value} must be of the following type:
