@@ -5,11 +5,11 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_team\_destroy}@(shmem_team_t team);
+int @\FuncDecl{shmem\_team\_destroy}@(shmem_team_t *team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{team}{A valid \openshmem team handle.}
+\apiargument{INOUT}{team}{A pointer to a valid \openshmem team handle.}
 \end{apiarguments}
 
 \apidescription{
@@ -20,16 +20,20 @@ with the team and invalidate the team handle. Upon return, the team
 handle can no longer be used for team API calls.
 
 It is considered erroneous to free \LibHandleRef{SHMEM\_TEAM\_WORLD} or
-any other predefined team. Error checking will be done to ensure a valid
-team handle is provided. Errors will result in a return value less than \CONST{0}.
+any other predefined team.
+
+If a pointer to an invalid handle is provided, behavior is undefined.
+
+If the pointer to \VAR{team} is a null pointer, no team is destroyed,
+and a nonzero value is returned.
+
+After returning from the routine, if the team was successfully destroyed,
+the handle will be assigned the value \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
 
-\begin{FeedbackRequest}
 \apireturnvalues{
-On success, the function will return 0. Otherwise a value less than
-\CONST{0} will be returned.
+Zero upon successful destruction of the team, nonzero otherwise.
 }
-\end{FeedbackRequest}
 
 \apinotes{
 None.

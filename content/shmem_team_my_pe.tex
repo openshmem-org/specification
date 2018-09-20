@@ -19,16 +19,13 @@ for a team of size N. Each member of the team has a unique number.
 For the team \LibHandleRef{SHMEM\_TEAM\_WORLD}, this will return the same value
 as \FUNC{shmem\_my\_pe}.
 
-Error checking will be done to ensure a valid team handle is provided.
-Errors will result in a return value less than \CONST{0}.
+If the provided team handle is invalid, behavior is undefined.
 }
 
-\begin{FeedbackRequest}
 \apireturnvalues{
-The number of the calling \ac{PE} within the provided team, or a value less than
-\CONST{0} if the team handle is invalid.
+The number of the calling \ac{PE} within the provided team, or the value
+\CONST{-1} if the provided team is \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
-\end{FeedbackRequest}
 
 \apinotes{
 None.

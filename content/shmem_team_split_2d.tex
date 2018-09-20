@@ -7,7 +7,7 @@ and \emph{y}-dimensions.}
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_team\_split\_2d}@(shmem_team_t parent_team, int xrange,
+int @\FuncDecl{shmem\_team\_split\_2d}@(shmem_team_t parent_team, int xrange,
      shmem_team_config_t *xaxis_config, long xaxis_mask, shmem_team_t *xaxis_team,
      shmem_team_config_t *yaxis_config, long yaxis_mask, shmem_team_t *yaxis_team);
 \end{Csynopsis}
@@ -96,17 +96,19 @@ of the following library constants:
   }
 }
 
-If \VAR{parent\_team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, both
-\VAR{xaxis\_team} and \VAR{yaxis\_team} will be assigned the value
-\LibConstRef{SHMEM\_TEAM\_NULL}.
-Otherwise, if \VAR{parent\_team} is an invalid team handle,
-the behavior is undefined.
+If \VAR{parent\_team} is an invalid team handle, the behavior is undefined.
+
+If \VAR{parent\_team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, no new
+teams will be created, and both \VAR{xaxis\_team} and \VAR{yaxis\_team}
+will be assigned the value \LibConstRef{SHMEM\_TEAM\_NULL}.
+
 If either team cannot be created, that team will be assigned the value
 \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
 
 \apireturnvalues{
-None.
+  Zero on successful creation of both \VAR{xaxis\_team} and \VAR{yaxis\_team},
+  nonzero otherwise.
 }
 
 \apinotes{

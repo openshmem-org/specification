@@ -6,7 +6,7 @@ where the subset is defined by the
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int PE_start, int PE_stride,
+int @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int PE_start, int PE_stride,
      int PE_size, shmem_team_config_t *config, long config_mask, shmem_team_t *new_team);
 \end{Csynopsis}
 
@@ -84,20 +84,20 @@ of the following library constants:
   }
 }
 
-Error checking will be done to ensure a valid \ac{PE} triplet is provided,
-and also to determine whether a valid team handle is provided for the
-parent team.
+If \VAR{parent\_team} is an invalid team handle, the behavior is undefined.
 
-If \VAR{parent\_team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, then
-\VAR{new\_team} will be assigned the value \LibConstRef{SHMEM\_TEAM\_NULL}.
-Otherwise, if \VAR{parent\_team} is an invalid team handle,
-the behavior is undefined.
+If \VAR{parent\_team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, then no
+new team will be created, and  \VAR{new\_team} will be assigned the value
+\LibConstRef{SHMEM\_TEAM\_NULL}.
+
+If an invalid \ac{PE} triplet is provided, the \VAR{new\_team} will not be created.
+
 If \VAR{new\_team} cannot be created, it will be assigned the value
 \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
 
 \apireturnvalues{
-  None.
+  Zero on successful creation of \VAR{new\_team}, nonzero otherwise.
 }
 
 \apinotes{

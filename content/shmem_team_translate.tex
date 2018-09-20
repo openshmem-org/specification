@@ -20,25 +20,19 @@ The \FUNC{shmem\_team\_translate\_pe} function will translate a given \ac{PE} nu
 to the corresponding \ac{PE} number in another team.
 Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this function returns that
 \ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both the
-\VAR{src\_team} and \VAR{dest\_team}, a value less than \CONST{0} is returned.
+\VAR{src\_team} and \VAR{dest\_team}, a value of \CONST{-1} is returned.
 
-If \LibHandleRef{SHMEM\_TEAM\_WORLD} is provided as the \VAR{dest\_team} parameter, this function
-acts as a global \ac{PE} number translator and will return the corresponding
-\LibHandleRef{SHMEM\_TEAM\_WORLD} number. This may be useful when performing point-to-
-point operations between \acp{PE} in a subset, as point-to-point operations
-that do not take a context argument require the global \LibHandleRef{SHMEM\_TEAM\_WORLD}
-\ac{PE} number.
+If \LibHandleRef{SHMEM\_TEAM\_WORLD} is provided as the \VAR{dest\_team} parameter,
+this function acts as a global \ac{PE} number translator and will return the corresponding
+\LibHandleRef{SHMEM\_TEAM\_WORLD} number.
 
-Error checking will be done to ensure valid team handles are provided.
-Errors will result in a return value less than \CONST{0}.
+If either of the \VAR{src\_team} or \VAR{dest\_team} handle is invalid, behavior is undefined.
 }
 
-\begin{FeedbackRequest}
 \apireturnvalues{
-The specified \ac{PE}'s number in the \VAR{dest\_team}, or a value less than \CONST{0} if any
+The specified \ac{PE}'s number in the \VAR{dest\_team}, or a value of \CONST{-1} if any
 team handle arguments are invalid or the \VAR{src\_pe} is not in both the source and destination teams.
 }
-\end{FeedbackRequest}
 
 \apinotes{
 None.
