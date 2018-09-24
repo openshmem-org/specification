@@ -13,24 +13,21 @@ int @\FuncDecl{shmem\_team\_n\_pes}@(shmem_team_t team);
 \end{apiarguments}
 
 \apidescription{
-The \FUNC{shmem\_team\_n\_pes} function returns the number of \acp{PE} in the
+The \FUNC{shmem\_team\_n\_pes} routine returns the number of \acp{PE} in the
 team. This will always be a value between 1 and N, where N is the total number of
 \acp{PE} accessible to the \openshmem program. For the team
-\LibHandleRef{SHMEM\_TEAM\_WORLD}, this will return the same value as
+\LibHandleRef{SHMEM\_TEAM\_WORLD}, this routine will return the same value as
 \FUNC{shmem\_n\_pes}.
 
 All \acp{PE} in the team will get back the same value for the team size.
 
-Error checking will be done to ensure a valid team handle is provided.
-Errors will result in a return value less than \CONST{0}.
+If the provided team handle is invalid, the behavior is undefined.
 }
 
-\begin{FeedbackRequest}
 \apireturnvalues{
-Total number of \acp{PE} in the provided team, or a value less than
-\CONST{0} if the team handle is invalid.
+Total number of \acp{PE} in the provided team, or the value
+\CONST{-1} if the provided team compares equal to \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
-\end{FeedbackRequest}
 
 \apinotes{
 None.
