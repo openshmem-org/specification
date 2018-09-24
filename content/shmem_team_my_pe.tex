@@ -13,18 +13,18 @@ int @\FuncDecl{shmem\_team\_my\_pe}@(shmem_team_t team);
 \end{apiarguments}
 
 \apidescription{
-The \FUNC{shmem\_team\_my\_pe} function returns the number of calling \ac{PE} within the
+The \FUNC{shmem\_team\_my\_pe} routine returns the number of calling \ac{PE} within the
 provided team. The number will be a value between 0 and N-1,
 for a team of size N. Each member of the team has a unique number.
 For the team \LibHandleRef{SHMEM\_TEAM\_WORLD}, this will return the same value
 as \FUNC{shmem\_my\_pe}.
 
-If the provided team handle is invalid, behavior is undefined.
+If the provided team handle is invalid, the behavior is undefined.
 }
 
 \apireturnvalues{
 The number of the calling \ac{PE} within the provided team, or the value
-\CONST{-1} if the provided team is \LibConstRef{SHMEM\_TEAM\_NULL}.
+\CONST{-1} if the provided team compares equal to \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
 
 \apinotes{

@@ -13,7 +13,7 @@ int @\FuncDecl{shmem\_team\_destroy}@(shmem_team_t *team);
 \end{apiarguments}
 
 \apidescription{
-The \FUNC{shmem\_team\_destroy} function destroys an existing team. This is a
+The \FUNC{shmem\_team\_destroy} routine destroys an existing team. This is a
 collective call, in which every member of the team being destroyed needs
 to participate. This will free all internal memory structures associated
 with the team and invalidate the team handle. Upon return, the team
@@ -22,9 +22,9 @@ handle can no longer be used for team API calls.
 It is considered erroneous to free \LibHandleRef{SHMEM\_TEAM\_WORLD} or
 any other predefined team.
 
-If a pointer to an invalid handle is provided, behavior is undefined.
+If a pointer to an invalid handle is provided, the behavior is undefined.
 
-If the pointer to \VAR{team} is a null pointer, no team is destroyed,
+If the pointer to \VAR{team} is a null pointer, then no team is destroyed,
 and a nonzero value is returned.
 
 After returning from the routine, if the team was successfully destroyed,
