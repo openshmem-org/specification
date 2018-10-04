@@ -5,20 +5,20 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_test\_all}@(TYPE * ivars, size_t nelems, int cmp, TYPE cmp_value);
+int @\FuncDecl{shmem\_test\_all}@(TYPE *ivars, size_t nelems, int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_all}@(TYPE * ivars, size_t nelems, int cmp, TYPE cmp_value);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_all}@(TYPE *ivars, size_t nelems, int cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-  \apiargument{OUT}{ivars}{A pointer to an array of remotely accessible data
+  \apiargument{IN}{ivars}{A pointer to an array of remotely accessible data
     objects.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
   \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}

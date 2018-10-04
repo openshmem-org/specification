@@ -20,7 +20,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-  \apiargument{OUT}{ivars}{A pointer to an array of remotely accessible data
+  \apiargument{IN}{ivars}{A pointer to an array of remotely accessible data
     objects.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
   \apiargument{OUT}{indices}{An array of indices of length at least
@@ -49,6 +49,9 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     is $N$, then the first $N$ elements of the \VAR{indices} array contain
     those unique indices that satisfied the test condition.  The array pointed
     to by \VAR{indices} must be at least \VAR{nelems} long.
+    If an entry $i$ in \VAR{ivars} within the test set satisfies the test
+    condition, a series of calls to \FUNC{shmem\_test\_some} must eventually
+    include $i$ in the \VAR{indices} array.
 
     The optional \VAR{status} array passed to \FUNC{shmem\_test\_some} has the
     same behavior as in \FUNC{shmem\_wait\_until\_some} in
