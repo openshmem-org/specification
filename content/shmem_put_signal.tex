@@ -47,10 +47,13 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 \end{apiarguments}
 
 \apidescription{
-    The routines return after the data has been copied out of the \source{}
-    array on the local \ac{PE}. The delivery of \signal{} flag on the remote
-    \ac{PE} indicates the delivery of its corresponding \dest{} data words
-    into the data object on the remote \ac{PE}.
+    The put-with-signal routines provide a method for copying data from a
+    contiguous local data object to a data object on a specified \ac{PE}
+    and subsequently setting a remote flag to signal completion. The routines
+    return after the data has been copied out of the \source{} array on the
+    local \ac{PE}. The delivery of \signal{} flag on the remote \ac{PE}
+    indicates the delivery of its corresponding \dest{} data words into the
+    data object on the remote \ac{PE}.
 }
 
 \apireturnvalues{
