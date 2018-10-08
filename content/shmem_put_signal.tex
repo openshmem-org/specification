@@ -7,26 +7,26 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_putmem\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_putmem\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{CsynopsisCol}
 
 \begin{apiarguments}
@@ -62,9 +62,6 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     accessible. The \VAR{sig\_addr} and \VAR{dest} could be of different kinds,
     for example, one could be a global/static \Cstd variable and the other could
     be allocated on the symmetric heap.
-
-    The restrict qualifier in \VAR{sig\_addr} expects the data object to be
-    distinct from \VAR{dest} and \VAR{source} data objects.
 
     The delivery of \signal{} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \dest{} data words into the data object on
