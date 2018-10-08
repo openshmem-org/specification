@@ -8,32 +8,32 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_put\_signal\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_put\_signal\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\_signal\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\_signal\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal\_nbi}@(void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal\_nbi}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_putmem\_signal\_nbi}@(void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *restrict sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_putmem\_signal\_nbi}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{CsynopsisCol}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{The context on which to perform the operation.
-      When this argument is not provided, the operation is performed on
-      \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to
+    perform the operation. When this argument is not provided, the operation is
+    performed on the default context.}
     \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
     \apiargument{IN}{source}{Data object containing the data to be copied.}
@@ -48,9 +48,12 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
 \end{apiarguments}
 
 \apidescription{
-    The routines return after posting the operation. The operation is considered
-    complete after the subsequent call to \FUNC{shmem\_quiet}. At the completion
-    of \FUNC{shmem\_quiet}, the data has been copied out of the \VAR{source}
+    The nonblocking put-with-signal routines provide a method for copying data
+    from a contiguous local data object to a data object on a specified \ac{PE}
+    and subsequently setting a remote flag to signal completion. The routines
+    return after posting the operation. The operation is considered complete
+    after the subsequent call to \FUNC{shmem\_quiet}. At the completion of
+    \FUNC{shmem\_quiet}, the data has been copied out of the \VAR{source}
     array on the local \ac{PE} and delivered into the \VAR{dest} array on the
     destination \ac{PE}. The delivery of \VAR{signal} flag on the remote
     \ac{PE} indicates the delivery of its corresponding \VAR{dest} data words
@@ -66,9 +69,6 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
     accessible. The \VAR{sig\_addr} and \VAR{dest} could be of different kinds,
     for example, one could be a global/static \Cstd variable and the other could
     be allocated on the symmetric heap.
-
-    The restrict qualifier in \VAR{sig\_addr} expects the data object to be
-    distinct from \VAR{dest} and \VAR{source} data objects.
 
     The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \VAR{dest} data words into the data object on
