@@ -78,8 +78,10 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 \begin{apiexamples}
 
 \apicexample
-    { The following example shows a simple ring-based broadcast operation using
-    \FUNC{shmem\_put\_signal}:}
+    {The following example demonstrates the usage of \FUNC{shmem\_put\_signal}.
+    It shows the implementation of a broadcast operation from \ac{PE} 0 to
+    itself and all other \acp{PE} in the job as a simple ring-based algorithm
+    using \FUNC{shmem\_put\_signal}:}
     {./example_code/shmem_put_signal_example.c}
     {}
 \end{apiexamples}
