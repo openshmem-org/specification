@@ -1,4 +1,5 @@
 #include <shmem.h>
+#include <stdlib.h>
  
 int main(void)
 {
@@ -17,7 +18,7 @@ int main(void)
  
   while (ncompleted < npes) {
       completed_idx = shmem_test_any(flags, npes, status, SHMEM_CMP_EQ, 1);
-      if (!processed[completed_idx] && status[completed_idx]) {
+      if (completed_idx != SIZE_MAX && !processed[completed_idx]) {
           ncompleted++;
           processed[completed_idx] = 1;
       } else {
