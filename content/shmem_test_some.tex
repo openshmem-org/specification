@@ -37,10 +37,10 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \apidescription{
     The \FUNC{shmem\_test\_some} routine behaves similarly to
     \FUNC{shmem\_wait\_until\_some}, but it does not block and returns zero if
-    no conditions are satisfied.  This routine compares each of the
-    \VAR{nelems} elements in the \VAR{ivars} array with the value
-    \VAR{cmp\_value} according to the comparison operator \VAR{cmp} at the
-    calling PE.  The order in which these elements are tested is unspecified.
+    no conditions are satisfied.  This routine compares each element of the
+    \VAR{ivars} array in the test set with the value \VAR{cmp\_value} according
+    to the comparison operator \VAR{cmp} at the calling PE.  The order in which
+    these elements are tested is unspecified.
 
     Upon return, the \VAR{indices} array contains the indices of the elements
     in the test set that satisfied the test condition during the call to

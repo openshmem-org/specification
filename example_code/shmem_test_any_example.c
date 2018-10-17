@@ -14,7 +14,8 @@ int main(void)
   for (int i = 0; i < npes; i++)
       shmem_p(&flags[mype], 1, i);
  
-  int ncompleted = 0, completed_idx;
+  int ncompleted = 0;
+  size_t completed_idx;
  
   while (ncompleted < npes) {
       completed_idx = shmem_test_any(flags, npes, status, SHMEM_CMP_EQ, 1);

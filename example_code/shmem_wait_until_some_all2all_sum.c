@@ -15,7 +15,7 @@ int main(void)
   int *all_data = shmem_malloc(N * npes * sizeof(int));
 
   int *flags = shmem_calloc(npes, sizeof(int));
-  size_t *indices = malloc(npes, sizeof(size_t));
+  size_t *indices = malloc(npes * sizeof(size_t));
   int *status = calloc(npes, sizeof(int));
 
   for (int i = 0; i < N; i++)
@@ -29,11 +29,11 @@ int main(void)
   for (int i = 0; i < npes; i++)
       shmem_p(&flags[mype], 1, i);
   
-  int ncompleted;
+  size_t ncompleted;
   while ((ncompleted = shmem_wait_until_some(flags, npes, indices,
                                              status, SHMEM_CMP_NE, 0))) {
-      for (int i = 0; i < ncompleted; i++) {
-          for (int j = 0; j < N; j++)
+      for (size_t i = 0; i < ncompleted; i++) {
+          for (size_t j = 0; j < N; j++)
               total_sum += all_data[indices[i]*N + j];
       }
   }

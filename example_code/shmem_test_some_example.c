@@ -11,7 +11,7 @@ int main(void)
   int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
-  int my_data = malloc(N * sizeof(int));
+  int *my_data = malloc(N * sizeof(int));
   int *all_data = shmem_malloc(N * npes * sizeof(int));
 
   int *flags = shmem_calloc(npes, sizeof(int));
