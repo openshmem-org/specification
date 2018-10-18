@@ -70,6 +70,8 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
     for example, one could be a global/static \Cstd variable and the other could
     be allocated on the symmetric heap.
 
+    The \VAR{sig\_addr} and \VAR{dest} may not be overlapping in memory.
+
     The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \VAR{dest} data words into the data object on
     the remote \ac{PE}. Without a memory-ordering operation, there is no implied
