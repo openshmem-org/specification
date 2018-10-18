@@ -31,10 +31,10 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \apidescription{
     The \FUNC{shmem\_test\_all} routine behaves similarly to
     \FUNC{shmem\_wait\_until\_all}, but it does not block and returns zero if
-    not all the conditions are satisfied.  This routine compares each of the
-    \VAR{nelems} elements in the \VAR{ivars} array with the value
-    \VAR{cmp\_value} according to the comparison operator \VAR{cmp} at the
-    calling PE.
+    no entries in \VAR{ivars} satisfied the test condition.  This routine
+    compares each of the \VAR{nelems} elements in the \VAR{ivars} array with
+    the value \VAR{cmp\_value} according to the comparison operator \VAR{cmp}
+    at the calling PE.
 }
 
 \apireturnvalues{

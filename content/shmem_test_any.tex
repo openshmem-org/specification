@@ -35,13 +35,13 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \apidescription{
     The \FUNC{shmem\_test\_any} routine behaves similarly to
     \FUNC{shmem\_wait\_until\_any}, but it does not block and returns zero if
-    no conditions are satisfied.  This routine compares each of the
-    \VAR{nelems} elements in the \VAR{ivars} array with the value
-    \VAR{cmp\_value} according to the comparison operator \VAR{cmp} at the
-    calling PE.  The order in which these elements are tested is unspecified.
-    If an entry $i$ in \VAR{ivars} within the test set satisfies the test
-    condition, a series of calls to \FUNC{shmem\_test\_any} must eventually
-    return $i$.
+    no entries in \VAR{ivars} satisfied the test condition.  This routine
+    compares each of the \VAR{nelems} elements in the \VAR{ivars} array with
+    the value \VAR{cmp\_value} according to the comparison operator \VAR{cmp}
+    at the calling PE.  The order in which these elements are tested is
+    unspecified.  If an entry $i$ in \VAR{ivars} within the test set satisfies
+    the test condition, a series of calls to \FUNC{shmem\_test\_any} must
+    eventually return $i$.
 
     The optional \VAR{status} array passed to \FUNC{shmem\_test\_any} has the
     same behavior as in \FUNC{shmem\_wait\_until\_any} in
@@ -50,9 +50,9 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     the element is excluded from the test set.  On input, the \VAR{status}
     array indicates which elements are excluded from the test set.  If all
     elements in \VAR{status} are set to 1 or \VAR{nelems} is 0, the test set is
-    empty and this routine returns 0.  On output, the \VAR{status} array
-    indicates which elements satisfied the test condition in \VAR{ivars} or
-    were ignored.  If \VAR{status} is a null pointer, it is ignored and all
+    empty and this routine returns SIZE\_MAX.  On output, the \VAR{status}
+    array indicates which elements satisfied the test condition in \VAR{ivars}
+    or were ignored.  If \VAR{status} is a null pointer, it is ignored and all
     elements in \VAR{ivars} are included in the test set.
 }
 

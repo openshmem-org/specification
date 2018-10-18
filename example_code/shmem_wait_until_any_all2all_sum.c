@@ -28,9 +28,8 @@ int main(void)
   for (int i = 0; i < npes; i++)
       shmem_p(&flags[mype], 1, i);
   
-  size_t completed_idx;
   for (int i = 0; i < npes; i++) {
-      completed_idx = shmem_wait_until_any(flags, npes, status, SHMEM_CMP_NE, 0);
+      size_t completed_idx = shmem_wait_until_any(flags, npes, status, SHMEM_CMP_NE, 0);
       for (int j = 0; j < N; j++)
           total_sum += all_data[completed_idx * N + j];
 
