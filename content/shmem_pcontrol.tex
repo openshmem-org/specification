@@ -1,0 +1,54 @@
+\apisummary{
+  Allows the user to control profiling.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_pcontrol}@(const int level, ...);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+  \apiargument{IN}{level}{The profiling level.}
+
+\end{apiarguments}
+
+\apidescription{
+  \FUNC{shmem\_pcontrol} sets the profiling level and any other profile 
+  library defined effects through additional arguments. \openshmem libraries
+  make no use of this routine, and simply return immediately to the user code.
+}
+
+\apireturnvalues{
+  None.
+}
+
+\apinotes{
+  Since \openshmem has no control of the implementation of the profiling code, 
+  it is impossible to precisely specify the semantics that will be provided by 
+  calls to \FUNC{shmem\_pcontrol}. This vagueness extends to the number of 
+  arguments to the function and their datatypes. However, to provide some 
+  level of portability of user codes to different profiling libraries, the 
+  following \VAR{level} values are recommended.
+
+  \begin{itemize}
+  \item \texttt{level <= 0} Profiling is disabled.
+  \item \texttt{level == 1} Profiling is enabled at default level of detail.
+  \item \texttt{level == 2} Profiling is enabled and profile buffers are 
+  flushed if available.
+  \item \texttt{level >= 2} Profiling is enabled with profile library defined 
+  effects and additional arguments.
+  \end{itemize}
+
+  The default state after \FUNC{shmem\_init} is recommended to have profiling 
+  enabled at default level of detail (\texttt{level == 1}). This allows users
+  to link with a profiling library and to obtain profile output without 
+  having to modify the user-level source code. 
+%  The provision of 
+%  \FUNC{shmem\_pcontrol} as a no-op in the standard \openshmem library 
+%  supports more detailed profiling with a tool that can still link against 
+%  the standard \openshmem library.
+}
+
+\end{apidefinition}

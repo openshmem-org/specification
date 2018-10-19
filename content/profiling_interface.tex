@@ -1,0 +1,137 @@
+The objective of the \openshmem profiling interface is to ensure an 
+easy and flexible usage model for profiling (and other similar) 
+tool developers to interface their codes into \openshmem 
+implementations on different platforms. Since \openshmem is a 
+machine independent standard with different implementations, it is 
+unreasonable to expect that the authors and developers of profiling 
+tools for \openshmem will have access to the source code that 
+implements \openshmem on any particular machine. It is therefore 
+necessary to provide a mechanism by which the implementors of such 
+tools can collect whatever performance information they wish 
+\textit{without} access to the underlying implementation.
+
+The \openshmem profiling interface places the following requirements 
+on implementations. 
+
+\begin{enumerate}
+\item An \openshmem implementation must provide a mechanism through 
+which all of the \openshmem defined functions may be accessible 
+with a name shift. This requires, in C and Fortran, an alternate 
+entry point name, with the prefix \texttt{pshmem\_} for each 
+\openshmem function in each provided language binding and support 
+method. For \openshmem inlined functions (e.g. macros), it is also 
+required that the \texttt{pshmem\_} version be supplied although it 
+is not possible to replace the \texttt{pshmem\_} version with a 
+user-defined version at link time.
+\item It must be ensured that the \openshmem functions that are not 
+replaced as above, may still be linked into an executable image 
+without causing name clashes. 
+\item Documentation of the implementation of different language 
+bindings of the \openshmem interface must indicate if they 
+are layered on top of each other. Using this documentation,  
+developer can determine whether he/she needs to implement the 
+profile interface for each binding or not.
+\item In the case where the implementation of different language 
+bindings is done through a layered approach using ``wrapper'' 
+functions, the wrapper functions must be kept separate from the 
+rest of the library. This requirement allows the developers to 
+extract these functions from the original \openshmem library 
+without bringing along any other code.
+\item A no-op routine \FUNC{shmem\_pcontrol} must be provided 
+in the library.
+\end{enumerate}
+
+Provided that an \openshmem implementation meets the requirements 
+above, it is possible for the implementor of the profiling system 
+to intercept the \openshmem calls that are made by the user 
+program. The information required can be collected before and after 
+calling the underlying \openshmem implementation through the name 
+shifted entry points. 
+
+\subsection{Control of Profiling}
+\label{sec:pshmem_control_profile}
+Any user code must be able to control the profiler dynamically 
+during runtime. Generally, this capability is used for the 
+purposes of
+
+\begin{itemize}
+\item Enabling and disabling of profiling based on the current 
+state of the execution and calculation
+\item Flushing of the trace buffers at non-critical execution 
+regions
+\item Adding user events to a trace file
+\end{itemize}
+
+These functionalities can be achieved through the usage of 
+\FUNC{shmem\_pcontrol}.
+
+\subsubsection{\textbf{SHMEM\_PCONTROL}}\label{subsec:shmem_pcontrol}
+\input{content/shmem_pcontrol}
+
+
+
+\subsection{Example Implementations}
+\label{sec:pshmem_example_implementations}
+
+\subsubsection{Profiler}
+\label{sec:pshmem_example_profiler}
+
+The following example illustrates how a profiler can measure the
+total and average time spent by the \FUNC{shmem\_long\_put} 
+function in the profiling library that intercepts the \openshmem 
+function calls from the user application.
+
+\lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
+      {example_code/pshmem_example.c}
+
+\subsubsection{\openshmem Library}
+\label{sec:pshmem_example_library}
+To implement the name-shift versions of the \openshmem functions, 
+there are various options available. The following two examples 
+present two such options that can be implemented in C on a Unix 
+system. These two options are dependent on whether the linker 
+and compiler support weak symbols. 
+
+If the compiler and linker support weak external symbols, then 
+only a single library is required. The following two examples show 
+how the name-shifted requirement can be achieved on such platforms. 
+
+\noindent\textbf{Example 1}
+
+\lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
+      {example_code/pshmem_weak_symbol_1.c}
+
+The effect of the \texttt{\#pragma} directive is to define the 
+external symbol \texttt{shmem\_example} as a weak definition that 
+aliases the \FUNC{pshmem\_example} function. This 
+means that the linker will allow another definition 
+of the symbol (e.g. the profiling library may contain an alternate 
+definition). The weak definition is used in the case where no other 
+definition for the same function exists. 
+
+\noindent\textbf{Example 2}
+
+\lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
+      {example_code/pshmem_weak_symbol_2.c}
+
+In this example, the keyword \texttt{\_\_attribute\_\_} is used to 
+declare the function, \FUNC{pshmem\_example} as an alias for 
+the original function \FUNC{shmem\_example}.
+
+In the absence of weak symbols, one possible solution would be to 
+use the C macro preprocessor as shown in the following example. 
+
+\lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
+      {example_code/pshmem_no_weak_symbol.c}
+
+The same source file can then be compiled to produce both versions 
+of the library, depending on the state of the 
+\texttt{BUILD\_PSHMEM\_INTERFACES} macro symbol.
