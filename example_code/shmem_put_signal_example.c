@@ -22,11 +22,11 @@ int main(void)
 
     uint64_t *data = shmem_calloc(size, sizeof(uint64_t));
 
-    if (me != 0) {
+    if (me == 0) {
+        shmem_put_signal(data, message, size, &sig_addr, 1, pe);
+    } else {
         shmem_wait_until(&sig_addr, SHMEM_CMP_EQ, 1);
         shmem_put_signal(data, data, size, &sig_addr, 1, pe);
-    } else {
-        shmem_put_signal(data, message, size, &sig_addr, 1, pe);
     }
 
     free(message);
