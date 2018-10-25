@@ -91,7 +91,7 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
     passed by all \acp{PE} particpating in the collective operation.
 
     Team-based broadcast routines operate over all \acp{PE} in the provided team argument. All
-    \acp{PE} in the provided team must participate in the reduction. If a team created without
+    \acp{PE} in the provided team must participate in the operation. If a team created without
     support for collectives is passed to this or any other team collective routine, the
     behavior is undefined. If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_NULL}
     is passed to this routine, the behavior is undefined.
@@ -117,7 +117,7 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
 
     Before any \ac{PE} calls a broadcast routine, the following conditions must be ensured:
     \begin{itemize}
-    \item The \dest{} array on all \acp{PE} \newtext{participating in the reduction}
+    \item The \dest{} array on all \acp{PE} \newtext{participating in the broadcast}
       \oldtext{in the active set} %%
       is ready to accept the broadcast data.
     \item \newtext{If using active-set-based routines,} the
