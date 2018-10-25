@@ -8,8 +8,8 @@
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
-void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
+int @\FuncDecl{shmem\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
+int @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
 \end{C11synopsis}
 }
 
@@ -18,8 +18,8 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_team\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
-void @\FuncDecl{shmem\_team\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
+int @\FuncDecl{shmem\_team\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
+int @\FuncDecl{shmem\_team\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -82,31 +82,24 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
     \openshmem broadcast routines are collective routines \newtext{over an active set or
     existing \openshmem team}. They copy data object
     \source{} on the processor specified by \VAR{PE\_root} and store the values at
-    \dest{} on the other \acp{PE} \newtext{particpating in the collective.}
+    \dest{} on the other \acp{PE} \newtext{particpating in the collective operation.}
     \oldtext{specified by the triplet \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size}.} %%
     The data is not copied to the \dest{} area on the root \ac{PE}.
 
     {\color{Green}
     The same \dest{} and \source{} data objects and the same value of \VAR{PE\_root} must be
-    passed by all \acp{PE} particpating in the collective.
+    passed by all \acp{PE} particpating in the collective operation.
 
     Team-based broadcast routines operate over all \acp{PE} in the provided team argument. All
-    \acp{PE} in the provided team must participate in the reduction.
-
-    If the team has been created with the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE} option,
-    it will not have the required support structures to complete this routine. If
-    such a team is passed to this or any other team collective routine, the behavior
-    is undefined.
+    \acp{PE} in the provided team must participate in the reduction. If a team created without
+    support for collectives is passed to this or any other team collective routine, the
+    behavior is undefined. If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_NULL}
+    is passed to this routine, the behavior is undefined.
 
     As with all team-based \openshmem routines, \ac{PE}
     numbering is relative to the team. The specified root \ac{PE} must be a valid \ac{PE}
     number for the team, between \CONST{0} and \VAR{N-1}, where \VAR{N} is
     the size of the team.
-
-    Error checking will be done to detect a value of \LibConstRef{SHMEM\_TEAM\_NULL} passed
-    for the team argument. In that case, the program will abort with an informative
-    error message. If an invalid team handle is passed to the routine,
-    the behavior is undefined.
 
     Active-set-based broadcast routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
@@ -158,7 +151,7 @@ constraints, which are as follows:
     \CorCpp{} structures are allowed.}
 
 \apireturnvalues{
-    None.
+    Integer error code with currently undefined behavior.
 }
 
 \apinotes{
@@ -177,6 +170,11 @@ constraints, which are as follows:
     active set are still processing a prior \openshmem broadcast routine call that
     used the same \VAR{pSync} array. In general, this can be ensured only by doing
     some type of synchronization.        
+
+    Team handle error checking and integer return codes are currently undefined.
+    Implementations may define these behaviors as needed, but programs should
+    ensure portability by doing their own checks for invalid team handles and for
+    \LibConstRef{SHMEM\_TEAM\_NULL}.
 }
 
 \begin{apiexamples}
