@@ -16,13 +16,12 @@ on implementations.
 \begin{enumerate}
 \item An \openshmem implementation must provide a mechanism through 
 which all of the \openshmem defined functions may be accessible 
-with a name shift. This requires, in C and Fortran, an alternate 
-entry point name, with the prefix \texttt{pshmem\_} for each 
-\openshmem function in each provided language binding and support 
-method. For \openshmem inlined functions (e.g. macros), it is also 
-required that the \texttt{pshmem\_} version be supplied although it 
-is not possible to replace the \texttt{pshmem\_} version with a 
-user-defined version at link time.
+with a name shift. This requires, an alternate 
+entry point name, with the prefix \FUNC{pshmem\_} for each 
+\openshmem function. For \openshmem inlined functions (e.g. macros), 
+it is also required that the \FUNC{pshmem\_} version be supplied 
+although it is not possible to replace the \FUNC{pshmem\_} version 
+with a user-defined version at link time.
 \item It must be ensured that the \openshmem functions that are not 
 replaced as above, may still be linked into an executable image 
 without causing name clashes. 
@@ -30,12 +29,16 @@ without causing name clashes.
 bindings of the \openshmem interface must indicate if they 
 are layered on top of each other. Using this documentation,  
 developer can determine whether he/she needs to implement the 
-profile interface for each binding or not.
-\item In the case where the implementation of different language 
-bindings is done through a layered approach using ``wrapper'' 
-functions, the wrapper functions must be kept separate from the 
-rest of the library. This requirement allows the developers to 
-extract these functions from the original \openshmem library 
+profile interface for each binding or not. For example, it must 
+be noted that the \openshmem \Cstd[11] type-generic interfaces for 
+different RMA and AMO operations cannot have any equivalent 
+\FUNC{pshmem\_} interfaces because of the limitation from \Cstd 
+\FUNC{\_Generic} semantics. 
+\item In the case where the implementation of different API  
+feature sets is implemented through a layered approach using 
+``wrapper'' functions, the wrapper functions must be kept separate 
+from the rest of the library. This requirement allows the developers 
+to extract these functions from the original \openshmem library 
 without bringing along any other code.
 \item A no-op routine \FUNC{shmem\_pcontrol} must be provided 
 in the library.
@@ -105,8 +108,8 @@ how the name-shifted requirement can be achieved on such platforms.
       morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
       {example_code/pshmem_weak_symbol_1.c}
 
-The effect of the \texttt{\#pragma} directive is to define the 
-external symbol \texttt{shmem\_example} as a weak definition that 
+The effect of the \FUNC{\#pragma} directive is to define the 
+external symbol \FUNC{shmem\_example} as a weak definition that 
 aliases the \FUNC{pshmem\_example} function. This 
 means that the linker will allow another definition 
 of the symbol (e.g. the profiling library may contain an alternate 
@@ -120,9 +123,9 @@ definition for the same function exists.
       morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
       {example_code/pshmem_weak_symbol_2.c}
 
-In this example, the keyword \texttt{\_\_attribute\_\_} is used to 
-declare the function, \FUNC{pshmem\_example} as an alias for 
-the original function \FUNC{shmem\_example}.
+In this example, the keyword \FUNC{\_\_attribute\_\_} is used to 
+declare the \FUNC{pshmem\_example} function as an alias for 
+the original function, \FUNC{shmem\_example}.
 
 In the absence of weak symbols, one possible solution would be to 
 use the C macro preprocessor as shown in the following example. 
@@ -134,4 +137,60 @@ use the C macro preprocessor as shown in the following example.
 
 The same source file can then be compiled to produce both versions 
 of the library, depending on the state of the 
-\texttt{BUILD\_PSHMEM\_INTERFACES} macro symbol.
+\VAR{BUILD\_PSHMEM\_INTERFACES} macro symbol.
+
+\subsection{Limitations}
+\label{sec:pshmem_limitations}
+
+\subsubsection{Multiple Counting}
+\label{sec:pshmem_multiple_count}
+Since some functions in \openshmem library may itself be implemented 
+using more basic \openshmem functions, it is possible for these 
+profiling functions to be called from within a \openshmem function 
+that was originally called from a profiling routine. For example, 
+\openshmem collective operations can be implemented using basic 
+point-to-point operations. Thus, profiling such a collective 
+operation may lead to count a profiling function for 
+point-to-point operation more than once after being called from the 
+collective function. It is the developer's responsibility to protect 
+the profiling application not to count a function more than once if 
+that effect is not intended. For a single-threaded profiler, this 
+can be achieved through a static variable counting the number of 
+times a function has been profiled. In a multi-threaded environment, 
+additional synchronizations are needed to manage updates to this 
+counter and thus, becomes more complex to accurately profile the 
+\openshmem functions.
+
+\subsubsection{Separate Build and Link}
+\label{sec:pshmem_separate_build_link}
+To build the profiling tool with both the default \openshmem
+functions as well as the \openshmem functions to be intercepted, 
+the developers must build the multiple instances of the \openshmem
+functions separately and link them to provide all the definitions. 
+This is necessary so that the developer of the profiling library 
+needs only to define those \openshmem functions that he/she wishes 
+to intercept; references to any other functions will be fulfilled 
+by the default \openshmem library. The link step can be summarized 
+as following. \\
+
+\noindent\texttt{\% cc ... -lmyprof -lpsma -lsma} \\
+
+Here, \texttt{libmyprof.a} contains the profiler functions that 
+intercept the \openshmem functions to be profiled, 
+\texttt{libpsma.a} contains the name-shifted \openshmem function 
+definitions, and \texttt{libsma.a} contains the default \openshmem
+function definitions. 
+
+\subsubsection{\Cstd[11] Type-Generic Interfaces}
+\label{sec:pshmem_c11_type_generic_interfaces}
+\openshmem currently provides support for type-generic RMA, AMO, 
+and point-to-point synchronization routines through \Cstd[11] 
+generic selection. While these interfaces are defined as macros 
+and mapped to \Cstd interface bindings, they cannot be treated as 
+defined function symbols in the library. Thus, these interfaces 
+cannot have any name-shifted \FUNC{pshmem\_} routines in 
+the profiling library. Furthermore, because of the limitations in 
+\Cstd \FUNC{\_Generic} semantics, the \Cstd[11] fixed-width type 
+bindings may map to \Cstd basic types (e.g. \VAR{int\_32t} may map 
+to \VAR{int}), which also limits the profiling library to 
+have the name-shifted routines with such data types. 
