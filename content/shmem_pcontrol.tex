@@ -15,9 +15,9 @@ void @\FuncDecl{shmem\_pcontrol}@(const int level, ...);
 \end{apiarguments}
 
 \apidescription{
-  \FUNC{shmem\_pcontrol} sets the profiling level and any other profile 
+  \FUNC{shmem\_pcontrol} sets the profiling level and any other  
   library defined effects through additional arguments. \openshmem libraries
-  make no use of this routine, and simply return immediately to the user code.
+  make no use of this routine and simply return immediately to the user code.
 }
 
 \apireturnvalues{
@@ -34,7 +34,7 @@ void @\FuncDecl{shmem\_pcontrol}@(const int level, ...);
 
   \begin{itemize}
   \item \texttt{level <= 0} Profiling is disabled.
-  \item \texttt{level == 1} Profiling is enabled at default level of detail.
+  \item \texttt{level == 1} Profiling is enabled at the default level of detail.
   \item \texttt{level == 2} Profiling is enabled and profile buffers are 
   flushed if available.
   \item \texttt{level >= 2} Profiling is enabled with profile library defined 
@@ -42,7 +42,7 @@ void @\FuncDecl{shmem\_pcontrol}@(const int level, ...);
   \end{itemize}
 
   The default state after \FUNC{shmem\_init} is recommended to have profiling 
-  enabled at default level of detail (\texttt{level == 1}). This allows users
+  enabled at the default level of detail (\texttt{level == 1}). This allows users
   to link with a profiling library and to obtain profile output without 
   having to modify the user-level source code. 
 %  The provision of 

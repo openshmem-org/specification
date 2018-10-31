@@ -2,10 +2,10 @@ The objective of the \openshmem profiling interface is to ensure an
 easy and flexible usage model for profiling (and other similar) 
 tool developers to interface their codes into \openshmem 
 implementations on different platforms. Since \openshmem is a 
-machine independent standard with different implementations, it is 
+machine-independent standard with different implementations, it is 
 unreasonable to expect that the authors and developers of profiling 
 tools for \openshmem will have access to the source code that 
-implements \openshmem on any particular machine. It is therefore 
+implements \openshmem on any particular machine. It is, therefore,  
 necessary to provide a mechanism by which the implementors of such 
 tools can collect whatever performance information they wish 
 \textit{without} access to the underlying implementation.
@@ -16,10 +16,10 @@ on implementations.
 \begin{enumerate}
 \item An \openshmem implementation must provide a mechanism through 
 which all of the \openshmem defined functions may be accessible 
-with a name shift. This requires, an alternate 
+with a name shift. This requires an alternate 
 entry point name, with the prefix \FUNC{pshmem\_} for each 
 \openshmem function. For \openshmem inlined functions (e.g. macros), 
-it is also required that the \FUNC{pshmem\_} version be supplied 
+it is also required that the \FUNC{pshmem\_} version is supplied 
 although it is not possible to replace the \FUNC{pshmem\_} version 
 with a user-defined version at link time.
 \item It must be ensured that the \openshmem functions that are not 
@@ -27,7 +27,7 @@ replaced as above, may still be linked into an executable image
 without causing name clashes. 
 \item Documentation of the implementation of different language 
 bindings of the \openshmem interface must indicate if they 
-are layered on top of each other. Using this documentation,  
+are layered on top of each other. Using this documentation, a  
 developer can determine whether he/she needs to implement the 
 profile interface for each binding or not. For example, it must 
 be noted that the \openshmem \Cstd[11] type-generic interfaces for 
@@ -40,7 +40,7 @@ feature sets is implemented through a layered approach using
 from the rest of the library. This requirement allows the developers 
 to extract these functions from the original \openshmem library 
 without bringing along any other code.
-\item A no-op routine \FUNC{shmem\_pcontrol} must be provided 
+\item A no-op routine, \FUNC{shmem\_pcontrol}, must be provided 
 in the library.
 \end{enumerate}
 
@@ -59,10 +59,10 @@ purposes of
 
 \begin{itemize}
 \item Enabling and disabling of profiling based on the current 
-state of the execution and calculation
+state of the execution and calculation,
 \item Flushing of the trace buffers at non-critical execution 
-regions
-\item Adding user events to a trace file
+regions,
+\item Adding user events to a trace file.
 \end{itemize}
 
 These functionalities can be achieved through the usage of 
@@ -146,11 +146,11 @@ of the library, depending on the state of the
 \label{sec:pshmem_multiple_count}
 Since some functions in \openshmem library may itself be implemented 
 using more basic \openshmem functions, it is possible for these 
-profiling functions to be called from within a \openshmem function 
+profiling functions to be called from within an \openshmem function 
 that was originally called from a profiling routine. For example, 
 \openshmem collective operations can be implemented using basic 
 point-to-point operations. Thus, profiling such a collective 
-operation may lead to count a profiling function for 
+operation may lead to counting a profiling function for 
 point-to-point operation more than once after being called from the 
 collective function. It is the developer's responsibility to protect 
 the profiling application not to count a function more than once if 
@@ -171,7 +171,7 @@ This is necessary so that the developer of the profiling library
 needs only to define those \openshmem functions that he/she wishes 
 to intercept; references to any other functions will be fulfilled 
 by the default \openshmem library. The link step can be summarized 
-as following. \\
+as follows. \\
 
 \noindent\texttt{\% cc ... -lmyprof -lpsma -lsma} \\
 
