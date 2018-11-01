@@ -73,28 +73,10 @@ parameters for new teams.
 The \VAR{xaxis\_mask} and\VAR{xaxis\_mask} arguments are a bitwise masks
 representing the set of configuration parameters to use from
 \VAR{xaxis\_config} and \VAR{yaxis\_config}, respectively.
-A mask value of \CONST{0} indicates that all the field members of the
-configuration parameter argument should be used.
-Individual field masks can be combined through a bitwise OR operation
-of the following library constants:
-
-{
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
-    The team should be created using the value of the
-    \VAR{disable\_collectives} member of the respective
-    configuration parameter.
-  }
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_LOCAL\_LIMIT}}{
-    The team should be created using the value of the
-    \VAR{return\_local\_limit} member of the respective
-    configuration parameter.
-  }
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_THREADS}}{
-    The team should be created using the value of the
-    \VAR{num\_threads} member of the respective
-    configuration parameter.
-  }
-}
+A mask value of \CONST{0} indicates that the team
+should be created with the default values for all configuration parameters.
+See Section~\ref{subsec:shmem_team_config_t} for field mask names and
+default configuration parameters.
 
 If \VAR{parent\_team} is an invalid team handle, the behavior is undefined.
 

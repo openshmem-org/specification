@@ -8,7 +8,7 @@
 typedef struct {
   int disable_collectives;
   int return_local_limit;
-  int num_threads;
+  int num_contexts;
 } shmem_team_config_t;
 \end{Csynopsis}
 
@@ -40,11 +40,57 @@ typedef struct {
     When its value is zero, the most restrictive parameters are returned;
     otherwise, the locally restrictive parameters are returned.
 
-    The \VAR{num\_threads} member specifies the number of threads that will
-    create contexts from the new team.
-    It must have a nonnegative value.
+    The \VAR{num\_contexts} member specifies the total number of contexts
+    created from this team that can simultaneously exist. These contexts
+    may be created in any number of threads. A program
+    may destroy any number of contexts made from this team and make
+    any number of new ones so long as the total existing at any point
+    remains less than \VAR{num\_contexts}.
     See Section~\ref{sec:ctx} for more on communication contexts and
     Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
+
+    When using the configuration structure to create teams, a mask parameter
+    controls which fields to use and which to ignore. So, a program does
+    not have to set all fields in the config struct; only those for which
+    it does not want the default values.
+
+    A configuration mask value is created by combining individual field
+    masks with through a bitwise OR operation of the following library constants:
+    
+  {
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
+    The team should be created using the value of the
+    \VAR{disable\_collectives} member of the configuration parameter
+    \VAR{config}.
+  }
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_LOCAL\_LIMIT}}{
+    The team should be created using the value of the
+    \VAR{return\_local\_limit} member of the configuration parameter
+    \VAR{config}.
+  }
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_CONTEXTS}}{
+    The team should be created using the value of the
+    \VAR{num\_contexts} member of the configuration parameter \VAR{config}.
+  }
+  }
+
+   A configuration mask value of \CONST{0} indicates that the team
+   should be created with the default values for all configuration
+   parameters, as follows:
+
+  {
+  \apitablerow{disable\_collectives = \CONST{0}}{
+    By default, teams support collective operations
+    }
+  \apitablerow{return\_local\_limit = \CONST{0}}{
+    By default, when team creation fails, the configuration structure returns the most restrictive
+    parameter value across all \acp{PE} in the new team
+    }
+  \apitablerow{num\_contexts = \CONST{0}}{
+    By default, no contexts can be created on a new team
+    }
+  }
+
   }
 
   \apinotes{
