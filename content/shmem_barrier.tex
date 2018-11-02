@@ -1,3 +1,4 @@
+\begin{DeprecateBlock}
 \apisummary{
     Performs all operations described in the \FUNC{shmem\_barrier\_all} interface
     but with respect to a subset of \acp{PE} defined by the active set.
@@ -38,7 +39,7 @@ CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
 
 \apidescription{
     \FUNC{shmem\_barrier} is a collective synchronization routine over an
-    active set.  Control returns from \FUNC{shmem\_barrier} after all \acp{PE} in
+    active set. Control returns from \FUNC{shmem\_barrier} after all \acp{PE} in
     the active set (specified by \VAR{PE\_start}, \VAR{logPE\_stride}, and
     \VAR{PE\_size}) have called \FUNC{shmem\_barrier}.
     
@@ -56,6 +57,13 @@ CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
     
     The  same  \VAR{pSync} array may be reused on consecutive calls   to
     \FUNC{shmem\_barrier} if the same active set is used.
+
+{\color{Green}
+    \FUNC{shmem\_barrier} has been deprecated in favor of the equivalent
+    call to \FUNC{shmem\_quiet} followed by a call to
+    \FUNC{shmem\_sync} on a team or active set with the desired
+    set of \acp{PE}.
+}
 }
 
 \apireturnvalues{
@@ -99,3 +107,4 @@ CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
 \end{apiexamples}
 
 \end{apidefinition}
+\end{DeprecateBlock}
