@@ -32,8 +32,8 @@ developer can determine whether he/she needs to implement the
 profile interface for each binding or not. For example, it must 
 be noted that the \openshmem \Cstd[11] type-generic interfaces for 
 different RMA and AMO operations cannot have any equivalent 
-\FUNC{pshmem\_} interfaces because of the limitation from \Cstd 
-\FUNC{\_Generic} semantics. 
+\FUNC{pshmem\_} interfaces because the \Cstd[11] type-generic 
+interfaces are implemented as macros.
 \item In the case where the implementation of different API  
 feature sets is implemented through a layered approach using 
 ``wrapper'' functions, the wrapper functions must be kept separate 
@@ -183,14 +183,13 @@ function definitions.
 
 \subsubsection{\Cstd[11] Type-Generic Interfaces}
 \label{sec:pshmem_c11_type_generic_interfaces}
-\openshmem currently provides support for type-generic RMA, AMO, 
-and point-to-point synchronization routines through \Cstd[11] 
-generic selection. While these interfaces are defined as macros 
-and mapped to \Cstd interface bindings, they cannot be treated as 
-defined function symbols in the library. Thus, these interfaces 
-cannot have any name-shifted \FUNC{pshmem\_} routines in 
-the profiling library. Furthermore, because of the limitations in 
-\Cstd \FUNC{\_Generic} semantics, the \Cstd[11] fixed-width type 
-bindings may map to \Cstd basic types (e.g. \VAR{int32\_t} may map 
-to \VAR{int}), which also limits the profiling library to 
-have the name-shifted routines with such data types. 
+\openshmem provides type-generic interfaces through \Cstd[11] 
+generic selection. These interfaces are defined as macros 
+and are mapped to \Cstd interface bindings. As a result, the 
+\Cstd[11] type-generic interfaces cannot be intercepted and  
+name-shifted \FUNC{pshmem\_} routines are not provided for these  
+bindings. Furthermore, because no two associations in a \Cstd[11] 
+\FUNC{\_Generic} selection expression can contain compatible types, 
+the type name of the \Cstd operation that is invoked may not be 
+identical to the type name of the call's arguments (e.g. 
+\VAR{int32\_t} may map to \VAR{int}).
