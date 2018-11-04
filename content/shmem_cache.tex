@@ -15,36 +15,25 @@ void @\FuncDecl{shmem\_udcflush\_line}@(void *dest);
 \end{Csynopsis}
 \end{DeprecateBlock}
 
-% N.B., The DeprecateBlock environment is not necessary here
-% because the entire Fortran API is deprecated.
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_CLEAR\_CACHE\_INV}@
-CALL @\FuncDecl{SHMEM\_SET\_CACHE\_INV}@
-CALL @\FuncDecl{SHMEM\_SET\_CACHE\_LINE\_INV}@(dest)
-CALL @\FuncDecl{SHMEM\_UDCFLUSH}@
-CALL @\FuncDecl{SHMEM\_UDCFLUSH\_LINE}@(dest)
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
 \apiargument{IN}{dest}{A data object that is local to the \ac{PE}.  \VAR{dest}
-    can be of any noncharacter type. When using \Fortran, it can be of any
-    kind.}
+    can be of any noncharacter type.}
 
 \end{apiarguments}
 
-\apidescription{   
+\apidescription{
     \FUNC{shmem\_set\_cache\_inv} enables automatic cache coherency mode.
-    
+
     \FUNC{shmem\_set\_cache\_line\_inv} enables automatic cache coherency mode for
     the cache line associated with the address of \VAR{dest} only.
-    
+
     \FUNC{shmem\_clear\_cache\_inv} disables automatic cache coherency mode
     previously enabled by \FUNC{shmem\_set\_cache\ \_inv} or
     \FUNC{shmem\_set\_cache\_line\_inv}.
-    
+
     \FUNC{shmem\_udcflush} makes the entire user data cache coherent.
-    
+
     \FUNC{shmem\_udcflush\_line} makes coherent the cache line that corresponds with
     the address specified by \VAR{dest}.
 }

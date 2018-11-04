@@ -10,62 +10,49 @@ void @\FuncDecl{shmem\_broadcast32}@(void *dest, const void *source, size_t nele
 void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-INTEGER nelems, PE_root, PE_start, logPE_stride, PE_size
-INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
-CALL @\FuncDecl{SHMEM\_BROADCAST4}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_BROADCAST8}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_BROADCAST32}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
-CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
-\end{Fsynopsis}
- 
 \begin{apiarguments}
 
-\apiargument{OUT}{dest}{A symmetric data object.} 
+\apiargument{OUT}{dest}{A symmetric data object.}
 \apiargument{IN}{source}{A symmetric data object that can be of any data type
     that is permissible for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in \source.  For
     \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of
-    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.  When
-    using \Fortran, it must be a default integer value.}
+    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the active set,	from which the data is copied. Must be greater than or equal to
-    0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of type integer.  When using \Fortran, it must be a default integer value.}
+    0 and less than \VAR{PE\_size}. \VAR{PE\_root} must be of type integer.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{ The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the active set. \VAR{log\_PE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.}
 \apiargument{IN}{PE\_size}{ The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
-    default integer value.}
+    \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pSync}{
     A symmetric work array of size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
     In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enters \FUNC{shmem\_broadcast}.}
 
 \end{apiarguments}
 
-\apidescription{   
+\apidescription{
     \openshmem broadcast routines are collective routines.  They copy data object
     \source{} on the processor specified by \VAR{PE\_root} and store the values at
     \dest{} on the other \acp{PE} specified by the triplet \VAR{PE\_start},
     \VAR{logPE\_stride}, \VAR{PE\_size}.  The data is not copied to the \dest{} area
     on the root \ac{PE}.
-    
+
     As with all \openshmem collective routines, each of these routines assumes that
     only \acp{PE} in the active set call the routine.  If a \ac{PE} not in the
     active set calls an \openshmem collective routine, the behavior is undefined.
-    
+
     The values of arguments \VAR{PE\_root}, \VAR{PE\_start}, \VAR{logPE\_stride},
     and \VAR{PE\_size} must be the same value on all \acp{PE} in the active set.  The same
     \dest{} and \source{} data objects and the same \VAR{pSync} work array must be
     passed by all \acp{PE} in the active set.
-    
+
     Before any \ac{PE} calls a broadcast routine,
     the following conditions must be ensured:
     \begin{itemize}
@@ -75,7 +62,7 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
       to accept the broadcast data.
     \end{itemize}
     Otherwise, the behavior is undefined.
-    
+
     Upon return from a broadcast routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
@@ -92,12 +79,12 @@ The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
-\apitablerow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter
-    type that has an element size of \CONST{64} bits. No \Fortran derived types or
+\apitablerow{shmem\_broadcast64}{Any noncharacter
+    type that has an element size of \CONST{64} bits. No
     \CorCpp{} structures are allowed.}
-\apitablerow{shmem\_broadcast4, shmem\_broadcast32}{Any noncharacter
-    type that has an element size of \CONST{32} bits. No \Fortran
-    derived types or \CorCpp{} structures are allowed.}
+\apitablerow{shmem\_broadcast32}{Any noncharacter
+    type that has an element size of \CONST{32} bits. No
+    \CorCpp{} structures are allowed.}
 
 \apireturnvalues{
     None.
@@ -107,7 +94,7 @@ constraints, which are as follows:
     All \openshmem broadcast routines restore \VAR{pSync} to its original contents.
     Multiple calls to \openshmem routines that use the same \VAR{pSync} array do not
     require that \VAR{pSync} be reinitialized after the first call.
-    
+
     The user must ensure that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the active set while any of the \acp{PE} participates in processing
     of an \openshmem broadcast routine. Be careful to avoid these situations: If the
@@ -118,7 +105,7 @@ constraints, which are as follows:
     subsequent \openshmem broadcast routine only if none of the \acp{PE} in the
     active set are still processing a prior \openshmem broadcast routine call that
     used the same \VAR{pSync} array. In general, this can be ensured only by doing
-    some type of synchronization.        
+    some type of synchronization.
 }
 
 \begin{apiexamples}
@@ -126,7 +113,7 @@ constraints, which are as follows:
 \apicexample
     {In the following example, the call to \FUNC{shmem\_broadcast64} copies \source{}
     on \ac{PE} $0$ to \dest{} on \acp{PE} $1\dots npes-1$.
-    
+
     \CorCpp{} example:}
     {./example_code/shmem_broadcast_example.c}
     {}
