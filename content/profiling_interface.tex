@@ -20,7 +20,7 @@ with a name shift. This requires an alternate
 entry point name, with the prefix \FUNC{pshmem\_} for each 
 \openshmem function. For \openshmem inlined functions (e.g. macros), 
 it is also required that the \FUNC{pshmem\_} version is supplied 
-although it is not possible to replace the \FUNC{pshmem\_} version 
+although it is not possible to replace the \FUNC{shmem\_} version 
 with a user-defined version at link time.
 \item It must be ensured that the \openshmem functions that are not 
 replaced as above, may still be linked into an executable image 
@@ -39,13 +39,14 @@ feature sets is implemented through a layered approach using
 ``wrapper'' functions, the wrapper functions must be kept separate 
 from the rest of the library. This requirement allows the developers 
 to extract these functions from the original \openshmem library 
-without bringing along any other code.
+and add them into the profiling library without bringing along any 
+other code.
 \item A no-op routine, \FUNC{shmem\_pcontrol}, must be provided 
-in the library.
+in the \openshmem library.
 \end{enumerate}
 
-Provided that an \openshmem implementation meets the requirements 
-above, it is possible for the implementor of the profiling system 
+Provided that an \openshmem implementation meets these requirements, 
+it is possible for the implementor of the profiling system 
 to intercept the \openshmem calls that are made by the user 
 program. The information required can be collected before and after 
 calling the underlying \openshmem implementation through the name 
@@ -124,8 +125,8 @@ definition for the same function exists.
       {example_code/pshmem_weak_symbol_2.c}
 
 In this example, the keyword \FUNC{\_\_attribute\_\_} is used to 
-declare the \FUNC{pshmem\_example} function as an alias for 
-the original function, \FUNC{shmem\_example}.
+declare the \FUNC{shmem\_example} function as an alias for 
+the original function, \FUNC{pshmem\_example}.
 
 In the absence of weak symbols, one possible solution would be to 
 use the C macro preprocessor as shown in the following example. 
@@ -133,7 +134,15 @@ use the C macro preprocessor as shown in the following example.
 \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize,
       morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
-      {example_code/pshmem_no_weak_symbol.c}
+      {example_code/pshmem_no_weak_symbol_1.c}
+
+Each of the user-defined functions in the profiling library would 
+then be declared in the following manner. 
+
+\lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
+      {example_code/pshmem_no_weak_symbol_2.c}
 
 The same source file can then be compiled to produce both versions 
 of the library, depending on the state of the 
@@ -145,7 +154,7 @@ of the library, depending on the state of the
 \subsubsection{Multiple Counting}
 \label{sec:pshmem_multiple_count}
 Since some functions in \openshmem library may itself be implemented 
-using more basic \openshmem functions, it is possible for these 
+using more basic \openshmem functions, it is possible for these basic  
 profiling functions to be called from within an \openshmem function 
 that was originally called from a profiling routine. For example, 
 \openshmem collective operations can be implemented using basic 
@@ -191,5 +200,5 @@ name-shifted \FUNC{pshmem\_} routines are not provided for these
 bindings. Furthermore, because no two associations in a \Cstd[11] 
 \FUNC{\_Generic} selection expression can contain compatible types, 
 the type name of the \Cstd operation that is invoked may not be 
-identical to the type name of the call's arguments (e.g. 
+identical to the type name of the original call's arguments (e.g. 
 \VAR{int32\_t} may map to \VAR{int}).
