@@ -27,8 +27,8 @@ replaced as above, may still be linked into an executable image
 without causing name clashes. 
 \item Documentation of the implementation of different language 
 bindings of the \openshmem interface must indicate if they 
-are layered on top of each other. Using this documentation, a  
-developer can determine whether he/she needs to implement the 
+are layered on top of each other. Using this documentation,   
+developers can determine whether they need to implement the 
 profile interface for each binding or not. For example, it must 
 be noted that the \openshmem \Cstd[11] type-generic interfaces for 
 different RMA and AMO operations cannot have any equivalent 
@@ -176,8 +176,8 @@ To build the profiling tool with both the default \openshmem
 functions as well as the \openshmem functions to be intercepted, 
 the developers must build the multiple instances of the \openshmem
 functions separately and link them to provide all the definitions. 
-This is necessary so that the developer of the profiling library 
-needs only to define those \openshmem functions that he/she wishes 
+This is necessary so that the developers of the profiling library 
+need only to define those \openshmem functions that they wish 
 to intercept; references to any other functions will be fulfilled 
 by the default \openshmem library. The link step can be summarized 
 as follows. \\
