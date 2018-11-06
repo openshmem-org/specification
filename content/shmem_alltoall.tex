@@ -1,14 +1,32 @@
 \apisummary{
-    shmem\_alltoall is a collective routine where each \ac{PE} exchanges a fixed amount of data with all other \acp{PE} in the
-    active set.
+    shmem\_alltoall is a collective routine where each \ac{PE} exchanges a fixed amount of data with all other \acp{PE} \oldtext{in the active set} \newtext{participating in the collective}.
 }
 
 \begin{apidefinition}
 
+%% C11
+{\color{Green}
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_alltoall32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+\end{C11synopsis}
+}
+
 \begin{Csynopsis}
+\end{Csynopsis}
+{\color{Green}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_team\_alltoall32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_team\_alltoall64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+\end{CsynopsisCol}
+}
+
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
 void @\FuncDecl{shmem\_alltoall32}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
-\end{Csynopsis}
+\end{CsynopsisCol}
+\end{DeprecateBlock}
 
 \begin{Fsynopsis}
 INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
@@ -28,6 +46,13 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
     \VAR{nelems} must be of type size\_t for \CorCpp.  When using
     \Fortran, it must be a default integer value.}
+
+\newtext{%
+\apiargument{IN}{team}{A valid \openshmem team handle to a team which has been
+    created without disabling support for collective operations.}
+}
+
+\begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
@@ -44,49 +69,77 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter the routine.}
+\end{DeprecateBlock}
 
 \end{apiarguments}
 
 \apidescription{
     The \FUNC{shmem\_alltoall} routines are collective routines. Each \ac{PE}
-    in the active set exchanges \VAR{nelems} data elements of size
+    \oldtext{in the active set} \newtext{participating in the operation}
+    exchanges \VAR{nelems} data elements of size
     32 bits (for \FUNC{shmem\_alltoall32}) or 64 bits (for \FUNC{shmem\_alltoall64})
-    with all other \acp{PE} in the set. The data being sent and received are
+    with all other \acp{PE} \oldtext{in the set}
+    \newtext{participating in the operation}. The data being sent and received are
     stored in a contiguous symmetric data object. The total size of each \acp{PE}
     \VAR{source} object and \VAR{dest} object is \VAR{nelems} times the size of
-    an element (32 bits or 64 bits) times \VAR{PE\_size}.
-    The \VAR{source} object contains \VAR{PE\_size} blocks of data (the size of each
-    block defined by \VAR{nelems}) and each block of data is sent to a different \ac{PE}. 
-    Given a \ac{PE} \VAR{i} that is the \kth PE in the active set and a \ac{PE}
-    \VAR{j} that is the \lth \ac{PE} in the active set,
+    an element (32 bits or 64 bits) times \oldtext{\VAR{PE\_size}}
+    \newtext{\VAR{N}, where \VAR{N} equals the number of \acp{PE} participating
+    in the operation}.
+    The \VAR{source} object contains oldtext{\VAR{PE\_size}} \VAR{N} blocks of data
+    (where the size of each block is defined by \VAR{nelems}) and each block of data
+    is sent to a different \ac{PE}.
+
+    \newtext{The same \dest{} and \source{}
+    arrays, and same value for \newtext{nelems}
+    must be passed by all \acp{PE} that participate in the collective.}
+
+    Given a \ac{PE} \VAR{i} that is the \kth \ac{PE} \oldtext{in the active set}
+    \newtext{participating in the operation} and a \ac{PE}
+    \VAR{j} that is the \lth \ac{PE} \oldtext{in the active set}
+    \newtext{participating in the operation},
     \ac{PE} \VAR{i} sends the \lth block of its \VAR{source} object to
     the \kth block of
     the \VAR{dest} object of \ac{PE} \VAR{j}.
 
-    As with all \openshmem collective routines, this routine assumes
-    that only \acp{PE} in the active set call the routine.  If a \ac{PE} not
-    in the active set calls an \openshmem collective routine,
+{\color{Green}
+    Team-based collect routines operate over all \acp{PE} in the provided team
+    argument. All \acp{PE} in the provided team must participate in the collective.
+    If a team created without support for collectives is passed to this or any other
+    team collective routine, the behavior is undefined.
+
+    Active-set-based collective routines operate over all \acp{PE} in the active set
+    defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
+}
+    As with all \oldtext{\openshmem} \newtext{active-set-based} collective routines,
+    this routine assumes that only \acp{PE} in the active set call the routine.
+    If a \ac{PE} not in the active set calls an  \oldtext{\openshmem}
+    \newtext{active-set-based} collective routine,
     the behavior is undefined.
 
-    The values of arguments \VAR{nelems}, \VAR{PE\_start}, \VAR{logPE\_stride},
+    The values of arguments \oldtext{\VAR{nelems},} \VAR{PE\_start}, \VAR{logPE\_stride},
     and \VAR{PE\_size} must be equal on all \acp{PE} in the active set. The same
-    \VAR{dest} and \VAR{source} data objects, and the same \VAR{pSync} work
+    \oldtext{\VAR{dest} and \VAR{source} data objects, and the same} \VAR{pSync} work
     array must be passed to all \acp{PE} in the active set.
 
     Before any \ac{PE} calls a \FUNC{shmem\_alltoall} routine,
     the following conditions must be ensured:
     \begin{itemize}
-    \item The \VAR{pSync} array on all \acp{PE} in the active set is not
-      still in use from a prior call to a \FUNC{shmem\_alltoall} routine.
     \item The \VAR{dest} data object on all \acp{PE} in the active set is
       ready to accept the \FUNC{shmem\_alltoall} data.
+    \item \newtext{For active-set-based routines}, the \VAR{pSync} array
+    on all \acp{PE} in the active set is not still in use from a prior call
+    to a \FUNC{shmem\_alltoall} routine.
     \end{itemize}
     Otherwise, the behavior is undefined.
 
     Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
-    the local PE: Its \VAR{dest} symmetric data object is completely updated and
+    the local PE:
+    \begin{itemize}
+    \item Its \VAR{dest} symmetric data object is completely updated and
     the data has been copied out of the \VAR{source} data object.
-    The values in the \VAR{pSync} array are restored to the original values.
+    \item \newtext{For active-set-based routines, }
+    the values in the \VAR{pSync} array are restored to the original values.
+    \end{itemize}
 }
 
 \apidesctable{
@@ -98,10 +151,18 @@ constraints, which are as follows:
 \apitablerow{shmem\_alltoall32}{\CONST{32} bits aligned.}
 
 \apireturnvalues{
-    None.
+    \newtext{Zero on successful local completion. Nonzero otherwise.}
 }
 
 \apinotes{
+\newtext{%
+    There are no specifically defined error codes for these routines.
+    See section \ref{subsec:error_handling} for expected error checking and
+    return code behavior specific to implementations. For portable
+    error checking and debugging behavior, programs should do their own checks
+    for invalid team handles or \LibConstRef{SHMEM\_TEAM\_NULL}.
+}
+
     This routine restores \VAR{pSync} to its original contents.  Multiple calls
     to \openshmem\ routines that use the same \VAR{pSync} array do not require
     that \VAR{pSync} be reinitialized after the first call.
