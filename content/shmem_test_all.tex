@@ -35,6 +35,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     compares each of the \VAR{nelems} elements in the \VAR{ivars} array with
     the value \VAR{cmp\_value} according to the comparison operator \VAR{cmp}
     at the calling PE.
+    If \VAR{nelems} is 0, the wait set is empty and this routine returns 0.
 }
 
 \apireturnvalues{
@@ -44,15 +45,5 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \apinotes{
   None.
 }
-
-%\begin{apiexamples}
-%  \apicexample
-%      {The following \CorCpp{} example demonstrates the use of
-%      \FUNC{shmem\_test\_all} to process a simple all-to-all transfer of N
-%      data elements via a sum reduction, while potentially overlapping
-%      communication with computation.}
-%      {./example_code/shmem_test_some_example.c}
-%      {}
-%\end{apiexamples}
 
 \end{apidefinition}

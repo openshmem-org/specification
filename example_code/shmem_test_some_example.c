@@ -44,6 +44,12 @@ int main(void)
       }
   }
 
+  /* check the result */
+  int M = N * npes - 1;
+  if (total_sum != M * (M + 1) / 2) {
+      shmem_global_exit(1);
+  }
+
   shmem_finalize();
   return 0;
 }
