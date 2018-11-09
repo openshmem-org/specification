@@ -81,8 +81,8 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \apiimpnotes{
     Implementations must ensure that \FUNC{shmem\_wait\_until\_some} does not
-    return before the update of the memory indicated by \VAR{ivars} is fully
-    complete.  Partial updates to the memory must not cause
+    return before the update of the memory indicated by the completed indices of \VAR{ivars} is fully
+    executed.  Partial updates to the memory must not cause
     \FUNC{shmem\_wait\_until\_some} to return.
 }
 

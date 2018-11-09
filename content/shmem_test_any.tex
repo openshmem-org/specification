@@ -49,7 +49,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     the element is excluded from the test set.  On input, the \VAR{status}
     array indicates which elements are excluded from the test set.  If all
     elements in \VAR{status} are set to 1 or \VAR{nelems} is 0, the test set is
-    empty and this routine returns SIZE\_MAX.  On output, the \VAR{status}
+    empty and this routine returns \CONST{SIZE\_MAX}.  On output, the \VAR{status}
     array indicates which elements satisfied the test condition in \VAR{ivars}
     or were ignored.  If \VAR{status} is a null pointer, it is ignored and all
     elements in \VAR{ivars} are included in the test set.  The \VAR{ivars} and
@@ -59,7 +59,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \apireturnvalues{
     \FUNC{shmem\_test\_any} returns the index of an element in the \VAR{ivars}
     array that satisfies the test condition. If the test set is empty or no
-    conditions in the test set are satisfied, this routine returns SIZE\_MAX.
+    conditions in the test set are satisfied, this routine returns \CONST{SIZE\_MAX}.
 }
 
 \apinotes{

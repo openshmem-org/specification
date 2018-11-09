@@ -46,7 +46,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     \VAR{status} set to 0 will be included in the wait set, and elements set to
     1 will be ignored.  If all elements in \VAR{status} are set to 1 or
     \VAR{nelems} is 0, the wait set is empty and this routine returns
-    SIZE\_MAX.  On output, the element of \VAR{status} with the index given by
+    \CONST{SIZE\_MAX}.  On output, the element of \VAR{status} with the index given by
     the return value of \FUNC{shmem\_wait\_until\_any} is set to 1.  If
     \VAR{status} is a null pointer, it is ignored and all elements in
     \VAR{ivars} are included in the wait set.  The \VAR{ivars} and \VAR{status}
@@ -56,7 +56,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \apireturnvalues{
     \FUNC{shmem\_wait\_until\_any} returns the index of an element in the
     \VAR{ivars} array that satisfies the wait condition. If the wait set is
-    empty, this routine returns SIZE\_MAX.
+    empty, this routine returns \CONST{SIZE\_MAX}.
 }
 
 \apinotes{
@@ -65,8 +65,8 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \apiimpnotes{
     Implementations must ensure that \FUNC{shmem\_wait\_until\_any} does not
-    return before the update of the memory indicated by \VAR{ivars} is fully
-    complete.  Partial updates to the memory must not cause
+    return before the update of the memory indicated by the completed index of \VAR{ivars} is fully
+    executed.  Partial updates to the memory must not cause
     \FUNC{shmem\_wait\_until\_any} to return.
 }
 
