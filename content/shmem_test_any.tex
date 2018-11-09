@@ -5,15 +5,14 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-size_t @\FuncDecl{shmem\_test\_any}@(TYPE * restrict ivars, size_t nelems, int * restrict status,
-    int cmp, TYPE cmp_value);
+size_t @\FuncDecl{shmem\_test\_any}@(TYPE *ivars, size_t nelems, int *status, int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_any}@(TYPE * restrict ivars, size_t nelems,
-    int * restrict status, int cmp, TYPE cmp_value);
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_any}@(TYPE *ivars, size_t nelems, int *status, int cmp,
+    TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
@@ -53,7 +52,8 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     empty and this routine returns SIZE\_MAX.  On output, the \VAR{status}
     array indicates which elements satisfied the test condition in \VAR{ivars}
     or were ignored.  If \VAR{status} is a null pointer, it is ignored and all
-    elements in \VAR{ivars} are included in the test set.
+    elements in \VAR{ivars} are included in the test set.  The \VAR{ivars} and
+    \VAR{status} arrays must not overlap in memory.
 }
 
 \apireturnvalues{

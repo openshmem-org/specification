@@ -5,15 +5,15 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-size_t @\FuncDecl{shmem\_wait\_until\_some}@(TYPE * restrict ivars, size_t nelems,
-    size_t * restrict indices, int * restrict status, int cmp, TYPE cmp_value);
+size_t @\FuncDecl{shmem\_wait\_until\_some}@(TYPE *ivars, size_t nelems, size_t *indices, int *status,
+    int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some}@(TYPE * restrict ivars, size_t nelems,
-    size_t * restrict indices, int * restrict status, int cmp, TYPE cmp_value);
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some}@(TYPE *ivars, size_t nelems, size_t *indices,
+    int *status, int cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
@@ -61,7 +61,9 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     \VAR{nelems} is 0, the wait set is empty and this routine returns 0. On
     output, the elements in \VAR{status} with indices included in \VAR{indices}
     are set to 1.  If \VAR{status} is a null pointer, it is ignored
-    and all elements in \VAR{ivars} are included in the wait set.
+    and all elements in \VAR{ivars} are included in the wait set.  The
+    \VAR{ivars}, \VAR{indices}, and \VAR{status} arrays must not overlap in
+    memory.
 }
 
 
