@@ -1,8 +1,80 @@
 \subsubsection{Library Setup, Exit, and Query Routines}
 \label{subsubsec:ftn_setup}
 
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{\Fortran[bind(C)] Language Binding Interface} &
+\textbf{\Cstd Language Binding Interface}
+\tabularnewline \hline
+\endhead
+%%
+SUBROUTINE shmem\_init() &
+void shmem\_init(void);
+\tabularnewline \hline
+%%
+FUNCTION shmem\_my\_pe()
+
+\textit{Return}:
+
+INTEGER :: pe\_index
+&
+int shmem\_my\_pe(void);
+\tabularnewline \hline
+%%
+FUNCTION shmem\_n\_pes()
+
+\textit{Return}:
+
+INTEGER :: num\_pes
+&
+int shmem\_n\_pes(void);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_finalize() &
+void shmem\_finalize(void);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_global\_exit(status)
+
+INTEGER,INTENT(IN) :: status
+&
+void shmem\_global\_exit(int status);
+\tabularnewline \hline
+%%
+\end{longtable}
+
 \subsubsection{Thread Support}
 \label{subsubsec:ftn_thread}
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{\Fortran[bind(C)] Language Binding Interface} &
+\textbf{\Cstd Language Binding Interface}
+\tabularnewline \hline
+\endhead
+%%
+FUNCTION shmem\_init\_thread(requested, actual)
+
+INTEGER,INTENT(IN) :: requested
+
+TYPE(INTEGER),INTENT(OUT) :: actual
+
+\textit{Return}:
+
+INTEGER :: err
+&
+int shmem\_init\_thread(int requested, int *actual);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_query\_thread(provided)
+
+TYPE(INTEGER),INTENT(OUT) :: provided
+&
+void shmem\_query\_thread(int *provided);
+\tabularnewline \hline
+%%
+\end{longtable}
+
 
 \subsubsection{Memory Management Routines}
 \label{subsubsec:ftn_mem_manage}
@@ -10,11 +82,109 @@
 \subsubsection{Communication Management Routines}
 \label{subsubsec:ftn_comm_manage}
 
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{\Fortran[bind(C)] Language Binding Interface} &
+\textbf{\Cstd Language Binding Interface}
+\tabularnewline \hline
+\endhead
+%%
+FUNCTION shmem\_ctx\_create(options, ctx)
+
+INTEGER, INTENT(IN) :: options
+
+TYPE(shmem\_ctx\_t),INTENT(OUT) :: ctx
+
+\textit{Return}:
+
+INTEGER :: err
+&
+int shmem\_ctx\_create(long options, shmem\_ctx\_t *ctx);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_ctx\_destroy(ctx)
+
+TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+&
+void shmem\_ctx\_destroy(shmem\_ctx\_t ctx);
+\tabularnewline \hline
+%%
+\end{longtable}
+
+
 \subsubsection{Remote Memory Access Routines}
 \label{subsubsec:ftn_rma}
 
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{\Fortran[bind(C)] Language Binding Interface} &
+\textbf{\Cstd Language Binding Interface}
+\tabularnewline \hline
+\endhead
+%%
+SUBROUTINE shmem\_putmem(dest, src, nelems, pe, ctx)
+
+TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
+
+INTEGER, INTENT(IN) :: nelems, pe
+
+TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+
+&
+void shmem\_ctx\_putmem(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_getmem(dest, src, nelems, pe, ctx)
+
+TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
+
+INTEGER, INTENT(IN) :: nelems, pe
+
+TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+
+&
+void shmem\_ctx\_getmem(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
+\tabularnewline \hline
+%%
+\end{longtable}
+
+
 \subsubsection{Non-blocking Remote Memory Access Routines}
 \label{subsubsec:ftn_rma_nbi}
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{\Fortran[bind(C)] Language Binding Interface} &
+\textbf{\Cstd Language Binding Interface}
+\tabularnewline \hline
+\endhead
+%%
+SUBROUTINE shmem\_putmem\_nbi(dest, src, nelems, pe, ctx)
+
+TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
+
+INTEGER, INTENT(IN) :: nelems, pe
+
+TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+
+&
+void shmem\_ctx\_putmem\_nbi(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_getmem\_nbi(dest, src, nelems, pe, ctx)
+
+TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
+
+INTEGER, INTENT(IN) :: nelems, pe
+
+TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+
+&
+void shmem\_ctx\_getmem\_nbi(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
+\tabularnewline \hline
+%%
+\end{longtable}
+
 
 \subsubsection{Atomic Memory Operations}
 \label{subsubsec:ftn_amo}
