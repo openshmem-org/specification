@@ -27,10 +27,8 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
     is performed on the default context.}
 \apiargument{OUT}{fetch}{Local data object to be updated.}
 \apiargument{OUT}{dest}{The remotely accessible data object to be updated on
-    the remote \ac{PE}. The type of \VAR{dest} should match that implied in the
-    SYNOPSIS section.}
-\apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.
-    \VAR{value} is the same type as \dest.}
+    the remote \ac{PE}.}
+\apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \VAR{dest} is to be updated.}
 

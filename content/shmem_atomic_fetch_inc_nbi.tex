@@ -27,8 +27,7 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
     operation is performed on the default context.}
 \apiargument{OUT}{fetch}{Local data object to be updated.}
 \apiargument{OUT}{dest}{The remotely accessible data object to be updated
-    on the remote \ac{PE}. The type of \dest{} should match that implied in the
-    SYNOPSIS section.}
+    on the remote \ac{PE}.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \dest{} is to be updated.}
 
@@ -36,7 +35,7 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 
 
 \apidescription{
-   These nonblocking routines perform a atomic fetch-and-increment operation.
+   These nonblocking routines perform an atomic fetch-and-increment operation.
    This routine returns after posting the operation. The operation is considered
    complete after a subsequent call to \FUNC{shmem\_quiet}. At the completion of
    \FUNC{shmem\_quiet}, the \dest{} on \ac{PE} \VAR{pe} is increased by one and

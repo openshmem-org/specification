@@ -23,10 +23,9 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYP
       operation is performed on the default context.}
   \apiargument{OUT}{fetch}{Local data object to be updated.}
   \apiargument{OUT}{dest}{The remotely accessible data object to be
-    updated on the remote \ac{PE}. When using \CorCpp, the type of
-    \dest{} should match that  implied in the SYNOPSIS section.}
+    updated on the remote \ac{PE}.}
   \apiargument{IN}{value}{The value to be atomically written to the remote
-    \ac{PE}. \VAR{value} is the same type as \dest.}
+    \ac{PE}.}
   \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
     \dest{} is to be updated.}
 \end{apiarguments}
