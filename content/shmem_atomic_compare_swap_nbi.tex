@@ -21,27 +21,24 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{The context on which to perform the operation.
-        When this argument is not provided, the operation is performed on
-        \CONST{SHMEM\_CTX\_DEFAULT}.}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to
+        perform the operation. When this argument is not provided, the
+        operation is performed on the default context.}
     \apiargument{OUT}{fetch}{Local data object to be updated.}
-    \apiargument{OUT}{dest}{The remotely accessible integer data object to be
-        updated on the remote \ac{PE}. }
+    \apiargument{OUT}{dest}{The remotely accessible data object to be updated on
+        the remote \ac{PE}. }
     \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
         value. If \VAR{cond} and the remote \VAR{dest} are equal, then \VAR{value}
         is swapped into the remote \VAR{dest}; otherwise, the remote \VAR{dest} is
-        unchanged.  In either case, the old value of the remote \VAR{dest} is
-        returned as the routine return value. \VAR{cond} must be of the same data
-        type as \VAR{dest}.}
+        unchanged. \VAR{cond} must be of the same data type as \VAR{dest}.}
     \apiargument{IN}{value}{The value to be atomically written to the remote
         \ac{PE}. \VAR{value} must be the same data type as \VAR{dest}.}
     \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
-        \VAR{dest} is to be updated. When using \Fortran, it must be a default
-        integer value.}
+        \VAR{dest} is to be updated.}
 \end{apiarguments}
 
 \apidescription{
-    The nonblocking conditional swap routines conditionally update a \VAR{dest}
+    The nonblocking conditional swap routines conditionally update \VAR{dest}
     data object on the specified \ac{PE} and fetches the prior contents of the
     data object into the \VAR{fetch} local data object as a
     single atomic operation. This routine returns after posting the operation.

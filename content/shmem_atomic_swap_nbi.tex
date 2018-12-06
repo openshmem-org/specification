@@ -18,18 +18,17 @@ void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_swap\_nbi}@(shmem_ctx_
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
 
 \begin{apiarguments}
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
-    When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to
+      perform the operation. When this argument is not provided, the
+      operation is performed on the default context.}
   \apiargument{OUT}{fetch}{Local data object to be updated.}
-  \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
-    updated on the remote \ac{PE}.   When using \CorCpp, the type of
+  \apiargument{OUT}{dest}{The remotely accessible data object to be
+    updated on the remote \ac{PE}. When using \CorCpp, the type of
     \dest{} should match that  implied in the SYNOPSIS section.}
   \apiargument{IN}{value}{The value to be atomically written to the remote
-    \ac{PE}. \VAR{value}  is the same type as \dest.}
+    \ac{PE}. \VAR{value} is the same type as \dest.}
   \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
-    \dest{} is to be updated. When using \Fortran, it must be a default
-    integer value.}
+    \dest{} is to be updated.}
 \end{apiarguments}
 
 \apidescription{

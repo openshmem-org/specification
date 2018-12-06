@@ -22,9 +22,9 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
-    When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to
+      perform the operation. When this argument is not provided, the
+      operation is performed on the default context.}
   \apiargument{OUT}{fetch}{Local data object to be updated.}
   \apiargument{IN}{source}{The remotely accessible data object to be fetched from
     the remote \ac{PE}.}
@@ -38,7 +38,7 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
     operation. This routine returns after posting the operation. The operation
     is considered complete after a subsequent call to \FUNC{shmem\_quiet}. At
     the completion of \FUNC{shmem\_quiet}, contents of the \source{} data object
-    is from \ac{PE} is atomically fetched into \VAR{fetch} local data object.
+    from \ac{PE} is atomically fetched into \VAR{fetch} local data object.
 }
 
 \apireturnvalues{
