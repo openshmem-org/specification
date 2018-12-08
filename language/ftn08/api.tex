@@ -1,6 +1,12 @@
 \subsubsection{Library Setup, Exit, and Query Routines}
 \label{subsubsec:ftn_setup}
 
+As the \Fortran[bind(C)] language bindings are implemented over the \openshmem
+\Cstd language bindings, there are no semantic or functional differences in the
+\Fortran[bind(C)] language binding interfaces. Along with the argument and
+standard type definition for the \Fortran[bind(C)] language bindings, the
+corresponding \Cstd language bindings are provided for semantic reference.
+
 \begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
 \hline
 \textbf{\Fortran[bind(C)] Language Binding Interface} &
@@ -8,11 +14,21 @@
 \tabularnewline \hline
 \endhead
 %%
-SUBROUTINE shmem\_init() &
+SUBROUTINE shmem\_init()
+
+\textit{Arguments}:
+None.
+
+\textit{Return}:
+None.
+ &
 void shmem\_init(void);
 \tabularnewline \hline
 %%
 FUNCTION shmem\_my\_pe()
+
+\textit{Arguments}:
+None.
 
 \textit{Return}:
 
@@ -23,6 +39,9 @@ int shmem\_my\_pe(void);
 %%
 FUNCTION shmem\_n\_pes()
 
+\textit{Arguments}:
+None.
+
 \textit{Return}:
 
 INTEGER :: num\_pes
@@ -30,13 +49,25 @@ INTEGER :: num\_pes
 int shmem\_n\_pes(void);
 \tabularnewline \hline
 %%
-SUBROUTINE shmem\_finalize() &
+SUBROUTINE shmem\_finalize()
+
+\textit{Arguments}:
+None.
+
+\textit{Return}:
+None.
+&
 void shmem\_finalize(void);
 \tabularnewline \hline
 %%
 SUBROUTINE shmem\_global\_exit(status)
 
+\textit{Arguments}:
+
 INTEGER,INTENT(IN) :: status
+
+\textit{Return}:
+None.
 &
 void shmem\_global\_exit(int status);
 \tabularnewline \hline
@@ -55,6 +86,8 @@ void shmem\_global\_exit(int status);
 %%
 FUNCTION shmem\_init\_thread(requested, actual)
 
+\textit{Arguments}:
+
 INTEGER,INTENT(IN) :: requested
 
 TYPE(INTEGER),INTENT(OUT) :: actual
@@ -68,7 +101,12 @@ int shmem\_init\_thread(int requested, int *actual);
 %%
 SUBROUTINE shmem\_query\_thread(provided)
 
+\textit{Arguments}:
+
 TYPE(INTEGER),INTENT(OUT) :: provided
+
+\textit{Return}:
+None.
 &
 void shmem\_query\_thread(int *provided);
 \tabularnewline \hline
@@ -91,6 +129,8 @@ void shmem\_query\_thread(int *provided);
 %%
 FUNCTION shmem\_ctx\_create(options, ctx)
 
+\textit{Arguments}:
+
 INTEGER, INTENT(IN) :: options
 
 TYPE(shmem\_ctx\_t),INTENT(OUT) :: ctx
@@ -104,7 +144,12 @@ int shmem\_ctx\_create(long options, shmem\_ctx\_t *ctx);
 %%
 SUBROUTINE shmem\_ctx\_destroy(ctx)
 
+\textit{Arguments}:
+
 TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+
+\textit{Return}:
+None.
 &
 void shmem\_ctx\_destroy(shmem\_ctx\_t ctx);
 \tabularnewline \hline
@@ -124,24 +169,32 @@ void shmem\_ctx\_destroy(shmem\_ctx\_t ctx);
 %%
 SUBROUTINE shmem\_putmem(dest, src, nelems, pe, ctx)
 
+\textit{Arguments}:
+
 TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
 
 INTEGER, INTENT(IN) :: nelems, pe
 
 TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
 
+\textit{Return}:
+None.
 &
 void shmem\_ctx\_putmem(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
 \tabularnewline \hline
 %%
 SUBROUTINE shmem\_getmem(dest, src, nelems, pe, ctx)
 
+\textit{Arguments}:
+
 TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
 
 INTEGER, INTENT(IN) :: nelems, pe
 
 TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
 
+\textit{Return}:
+None.
 &
 void shmem\_ctx\_getmem(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
 \tabularnewline \hline
@@ -161,24 +214,32 @@ void shmem\_ctx\_getmem(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t
 %%
 SUBROUTINE shmem\_putmem\_nbi(dest, src, nelems, pe, ctx)
 
+\textit{Arguments}:
+
 TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
 
 INTEGER, INTENT(IN) :: nelems, pe
 
 TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
 
+\textit{Return}:
+None.
 &
 void shmem\_ctx\_putmem\_nbi(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
 \tabularnewline \hline
 %%
 SUBROUTINE shmem\_getmem\_nbi(dest, src, nelems, pe, ctx)
 
+\textit{Arguments}:
+
 TYPE(*),DIMENSION(*),INTENT(IN) :: dest, src
 
 INTEGER, INTENT(IN) :: nelems, pe
 
 TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
 
+\textit{Return}:
+None.
 &
 void shmem\_ctx\_getmem\_nbi(shmem\_ctx\_t *ctx, void *dest, const void *src, size\_t nelems, int pe);
 \tabularnewline \hline
@@ -198,6 +259,85 @@ void shmem\_ctx\_getmem\_nbi(shmem\_ctx\_t *ctx, void *dest, const void *src, si
 \subsubsection{Memory Ordering Routines}
 \label{subsubsec:ftn_mem_order}
 
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{\Fortran[bind(C)] Language Binding Interface} &
+\textbf{\Cstd Language Binding Interface}
+\tabularnewline \hline
+\endhead
+%%
+SUBROUTINE shmem\_quiet(ctx)
+
+\textit{Arguments}:
+
+TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+
+\textit{Return}:
+None.
+&
+void shmem\_ctx\_quiet(shmem\_ctx\_t *ctx);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_fence(ctx)
+
+\textit{Arguments}:
+
+TYPE(shmem\_ctx\_t),INTENT(IN) :: ctx
+
+\textit{Return}:
+None.
+&
+void shmem\_ctx\_fence(shmem\_ctx\_t *ctx);
+\tabularnewline \hline
+%%
+\end{longtable}
+
 \subsubsection{Distributed Locking Routines}
 \label{subsubsec:ftn_locks}
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{\Fortran[bind(C)] Language Binding Interface} &
+\textbf{\Cstd Language Binding Interface}
+\tabularnewline \hline
+\endhead
+%%
+SUBROUTINE shmem\_clear\_lock(lock)
+
+\textit{Arguments}:
+
+INTEGER,INTENT(IN) :: lock
+
+\textit{Return}:
+None.
+&
+void shmem\_clear\_lock(long *lock);
+\tabularnewline \hline
+%%
+SUBROUTINE shmem\_set\_lock(lock)
+
+\textit{Arguments}:
+
+INTEGER,INTENT(IN) :: lock
+
+\textit{Return}:
+None.
+&
+void shmem\_set\_lock(long *lock);
+\tabularnewline \hline
+%%
+PROCEDURE shmem\_test\_lock(lock)
+
+\textit{Arguments}:
+
+INTEGER,INTENT(IN) :: ctx
+
+\textit{Return}:
+
+INTEGER::status
+&
+int shmem\_test\_lock(long *lock);
+\tabularnewline \hline
+%%
+\end{longtable}
 
