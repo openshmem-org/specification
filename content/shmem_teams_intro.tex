@@ -55,8 +55,8 @@ In addition to ordering requirements on team creation, there may also be
 synchronization requirements.
 \begin{itemize}
 \item There is a special case where all new teams resulting from a split operation are
-created with the \LibHandleRef{SHMEM\_TEAM\_NOCOLLECTIVE} option and are configured
-to create \CONST{0} new contexts for the team. This means the team will \emph{not} be used
+created are configured without support for collective operations and indicating that \CONST{0} new contexts will be created from the team.
+This means the team will \emph{not} be used
 directly for point-to-point or collective communication routines, but only for
 \ac{PE} number translation and further split operations. When creating new teams
 of this type, no synchronization will be required around team creation operations.
@@ -73,7 +73,7 @@ of split operations by those \acp{PE} is prevented. \ac{PE} $p$ will be ensured 
 complete each split operation on $T_0$ before the next split operation on $T_0$ commences.
 \item In the case where the above conditions hold to require a barrier on $T_0$,
 but the parent team $T_0$ cannot be used for barriers due to having
-been created with the \LibHandleRef{SHMEM\_TEAM\_NOCOLLECTIVE} option, the program may use any
+been created with collective operations disabled, the program may use any
 ancestor team, e.g. \LibHandleRef{SHMEM\_TEAM\_WORLD}, for synchronization around new
 team creation. The program may alternatively use some other custom synchronization method
 as long as it ensures that each split collective completes for all \acp{PE}
