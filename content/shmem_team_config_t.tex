@@ -4,10 +4,9 @@
 
 \begin{apidefinition}
 
-  \begin{Csynopsis}
+\begin{Csynopsis}
 typedef struct {
-  int disable_collectives;
-  int return_local_limit;
+  int no_collectives;
   int num_contexts;
 } shmem_team_config_t;
 \end{Csynopsis}
@@ -18,27 +17,22 @@ typedef struct {
     A team configuration argument acts as both input and output to the
     \FUNC{shmem\_team\_split\_*} routines.
     As an input, it specifies the requested capabilities of the team to be
-    created.
-    As an output, the configuration argument is conditionally updated on
-    whether team creation is successful.
-    If successful, the configuration argument is not modified;
-    if unsuccessful, it is updated to specify the limiting configuration
-    parameter(s).
+    created. Capabilities can be requested as either hints or requirements.
 
-    The \VAR{disable\_collectives} member allows for teams to be created
+    If given configuration parameter input is a requirement, and the team creation
+    cannot provide this capability, then team creation fails.
+    If a given configuration parameter input is a hint, and the library
+    succeeds in creating the team, the parameter will be updated to
+    the actual configuration that the library was able to provide
+    during team creation.
+
+    The \VAR{no\_collectives} member allows for teams to be created
     without support for collective communications, which allows implementations
     to reduce team creation overheads for those teams.
-    When its value is zero, it specifies that the team should have collectives
-    enabled.
+    When its value is zero, it specifies that the team should have collective
+    operations enabled.
     When nonzero, the team will not support collective operations, which
     allows implementations to reduce team creation overheads.
-
-    The \VAR{return\_local\_limit} member controls whether, after a failed
-    team creation, the team configuration argument is updated with the
-    locally restrictive parameter(s) or the most restrictive parameter(s)
-    across the \acp{PE} of the new team.
-    When its value is zero, the most restrictive parameters are returned;
-    otherwise, the locally restrictive parameters are returned.
 
     The \VAR{num\_contexts} member specifies the total number of contexts
     created from this team that can simultaneously exist. These contexts
@@ -50,41 +44,48 @@ typedef struct {
     Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
 
     When using the configuration structure to create teams, a mask parameter
-    controls which fields to use and which to ignore. So, a program does
-    not have to set all fields in the config struct; only those for which
-    it does not want the default values.
+    controls which fields to use and whether they are hints or requirements.
+    Any configuration parameter that is not indicated in the mask will be
+    ignored.
+    So, a program does not have to set all fields in the config struct;
+    only those for which it does not want the default values.
 
     A configuration mask value is created by combining individual field
     masks with through a bitwise OR operation of the following library constants:
     
   {
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}}{
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NO\_COLLECTIVES}}{
     The team should be created using the value of the
-    \VAR{disable\_collectives} member of the configuration parameter
-    \VAR{config}.
+    \VAR{no\_collectives} member of the configuration parameter
+    \VAR{config} as a requirement.
   }
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_LOCAL\_LIMIT}}{
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NO\_COLLECTIVES\_HINT}}{
     The team should be created using the value of the
-    \VAR{return\_local\_limit} member of the configuration parameter
-    \VAR{config}.
+    \VAR{no\_collectives} member of the configuration parameter
+    \VAR{config} as a hint.
   }
   \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_CONTEXTS}}{
     The team should be created using the value of the
-    \VAR{num\_contexts} member of the configuration parameter \VAR{config}.
+    \VAR{num\_contexts} member of the configuration parameter
+    \VAR{config} as a requirement.
   }
+  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_CONTEXTS\_HINT}}{
+    The team should be created using the value of the
+    \VAR{num\_contexts} member of the configuration parameter
+    \VAR{config} as a hint.
+  }  
   }
+
+  If a program creates a mask using both the requirement and hint flag
+  for a given parameter, the behavior is undefined.
 
    A configuration mask value of \CONST{0} indicates that the team
    should be created with the default values for all configuration
    parameters, as follows:
 
   {
-  \apitablerow{disable\_collectives = \CONST{0}}{
+  \apitablerow{no\_collectives = \CONST{0}}{
     By default, teams support collective operations
-    }
-  \apitablerow{return\_local\_limit = \CONST{0}}{
-    By default, when team creation fails, the configuration structure returns the most restrictive
-    parameter value across all \acp{PE} in the new team
     }
   \apitablerow{num\_contexts = \CONST{0}}{
     By default, no contexts can be created on a new team
@@ -94,7 +95,11 @@ typedef struct {
   }
 
   \apinotes{
-    None.
+    The library can set a team configuration to indicate that collective operations are
+    disabled without providing some optimized version of teams without support for
+    collective operations. Disabling collectives is a portable way to
+    provide optimizations on some implementations, not a promise that teams with
+    this option will reduce overheads on all implementations.
   }
 
 \end{apidefinition}
