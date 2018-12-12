@@ -40,21 +40,21 @@ See Section~\ref{subsec:thread_support} for more detail about its use.
 \tabularnewline \hline
 %%
 \color{Green}
-\LibConstDecl{SHMEM\_TEAM\_NOCOLLECTIVE} &
+\LibConstDecl{SHMEM\_TEAM\_NO\_COLLECTIVES} &
 \color{Green}
 The bitwise flag which specifies that a team creation routine should use the
-\VAR{disable\_collectives} member of the provided
-\CTYPE{shmem\_team\_config\_t} configuration parameter.
+\VAR{no\_collectives} member of the provided
+\CTYPE{shmem\_team\_config\_t} configuration parameter as a requirement.
 See Sections~\ref{subsec:shmem_team_config_t} and
 \ref{subsec:shmem_team_split_strided} for more detail about its use.
 \tabularnewline \hline
 %%
 \color{Green}
-\LibConstDecl{SHMEM\_TEAM\_LOCAL\_LIMIT} &
+\LibConstDecl{SHMEM\_TEAM\_NO\_COLLECTIVES\_HINT} &
 \color{Green}
 The bitwise flag which specifies that a team creation routine should use the
-\VAR{return\_local\_limit} member of the provided
-\CTYPE{shmem\_team\_config\_t} configuration parameter.
+\VAR{no\_collectives} member of the provided
+\CTYPE{shmem\_team\_config\_t} configuration parameter as a hint.
 See Sections~\ref{subsec:shmem_team_config_t} and
 \ref{subsec:shmem_team_split_strided} for more detail about its use.
 \tabularnewline \hline
@@ -64,7 +64,17 @@ See Sections~\ref{subsec:shmem_team_config_t} and
 \color{Green}
 The bitwise flag which specifies that a team creation routine should use the
 \VAR{num\_contexts} member of the provided
-\CTYPE{shmem\_team\_config\_t} configuration parameter.
+\CTYPE{shmem\_team\_config\_t} configuration parameter as a requirement.
+See Sections~\ref{subsec:shmem_team_config_t} and
+\ref{subsec:shmem_team_split_strided} for more detail about its use.
+\tabularnewline \hline
+%%
+\color{Green}
+\LibConstDecl{SHMEM\_TEAM\_NUM\_CONTEXTS\_HINT} &
+\color{Green}
+The bitwise flag which specifies that a team creation routine should use the
+\VAR{num\_contexts} member of the provided
+\CTYPE{shmem\_team\_config\_t} configuration parameter as a hint.
 See Sections~\ref{subsec:shmem_team_config_t} and
 \ref{subsec:shmem_team_split_strided} for more detail about its use.
 \tabularnewline \hline
