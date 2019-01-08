@@ -77,6 +77,13 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     routine does not imply delivery of the put routine's data.
 }
 
+\apiimpnotes{
+    Implementations must ensure that put-with-signal routines are compatible
+    with all point-to-point synchronization interfaces. The delivery of
+    \signal{} flag on the remote \ac{PE} must not cause partial updates. This
+    requires the update on \signal{} flag to be an atomic memory operation.
+}
+
 \begin{apiexamples}
 
 \apicexample
