@@ -1,4 +1,3 @@
-\color{Green}
 \apisummary{
     The nonblocking put-with-signal routines provide a method for copying data
     from a contiguous local data object to a data object on a specified \ac{PE}
@@ -85,9 +84,8 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
 \apiimpnotes{
     Implementations must ensure that put-with-signal routines are compatible
     with all point-to-point synchronization interfaces. The delivery of
-    \signal{} flag on the remote \ac{PE} must not cause partial updates. This
-    requires the update on \signal{} flag to be an atomic memory operation.
+    \VAR{signal} flag on the remote \ac{PE} must not cause partial updates. This
+    requires the update on \VAR{signal} flag to be an atomic memory operation.
 }
 
 \end{apidefinition}
-\color{Black}
