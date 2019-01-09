@@ -27,7 +27,7 @@ int main(void)
 
   for (int i = 0; i < npes; i++)
       shmem_p(&flags[mype], 1, i);
-  
+
   for (int i = 0; i < npes; i++) {
       size_t completed_idx = shmem_wait_until_any(flags, npes, status, SHMEM_CMP_NE, 0);
       for (int j = 0; j < N; j++)

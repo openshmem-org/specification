@@ -28,7 +28,7 @@ int main(void)
 
   for (int i = 0; i < npes; i++)
       shmem_p(&flags[mype], 1, i);
-  
+
   int ncompleted = 0;
 
   while (ncompleted < npes) {
