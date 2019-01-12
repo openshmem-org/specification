@@ -36,7 +36,7 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
     data object must be remotely accessible.}
     \apiargument{IN}{source}{Data object containing the data to be copied.}
-    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
+    \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
     arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.}
     \apiargument{OUT}{sig\_addr}{Data object to be updated on the remote
     \ac{PE} as the signal. This signal data object must be
@@ -61,12 +61,12 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 }
 
 \apinotes{
-    The \VAR{dest} and \VAR{sig\_addr} data objects must both be remotely
-    accessible. The \VAR{sig\_addr} and \VAR{dest} could be of different kinds,
+    The \dest{} and \VAR{sig\_addr} data objects must both be remotely
+    accessible. The \VAR{sig\_addr} and \dest{} could be of different kinds,
     for example, one could be a global/static \Cstd variable and the other could
     be allocated on the symmetric heap.
 
-    The \VAR{sig\_addr} and \VAR{dest} may not be overlapping in memory.
+    The \VAR{sig\_addr} and \dest{} may not be overlapping in memory.
 
     The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \dest{} data words into the data object on
