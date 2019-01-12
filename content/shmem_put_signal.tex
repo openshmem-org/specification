@@ -51,7 +51,7 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     contiguous local data object to a data object on a specified \ac{PE}
     and subsequently setting a remote flag to signal completion. The routines
     return after the data has been copied out of the \source{} array on the
-    local \ac{PE}. The delivery of \signal{} flag on the remote \ac{PE}
+    local \ac{PE}. The delivery of \VAR{signal} flag on the remote \ac{PE}
     indicates the delivery of its corresponding \dest{} data words into the
     data object on the remote \ac{PE}.
 }
@@ -68,7 +68,7 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 
     The \VAR{sig\_addr} and \VAR{dest} may not be overlapping in memory.
 
-    The delivery of \signal{} flag on the remote \ac{PE} indicates only the
+    The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \dest{} data words into the data object on
     the remote \ac{PE}. Without a memory-ordering operation, there is no implied
     ordering between the delivery of the signal word of a put-with-signal
