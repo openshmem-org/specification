@@ -76,11 +76,11 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     word in a sequence consisting of a put routine followed by a put-with-signal
     routine does not imply delivery of the put routine's data.
 
-    The put-with-signal routines are compatible with all point-to-point
-    synchronization interfaces. The delivery of \VAR{signal} flag on the remote
-    \ac{PE} must not cause partial updates. This requires the update on
-    \VAR{signal} flag to be an atomic operation, with atomicity guarantees
-    described in Section~\ref{subsec:amo_guarantees}.
+    The signal set by the put-with-signal routines is compatible
+    with all point-to-point synchronization interfaces. The delivery of
+    \VAR{signal} flag on the remote \ac{PE} must not cause partial updates. This
+    requires the update on \VAR{signal} flag to be an atomic operation, with
+    atomicity guarantees described in Section~\ref{subsec:amo_guarantees}.
 }
 
 \begin{apiexamples}
