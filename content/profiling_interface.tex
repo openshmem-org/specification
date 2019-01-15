@@ -43,8 +43,8 @@ and add them into the profiling library without bringing along any
 other code.
 \item A no-op routine, \FUNC{shmem\_pcontrol}, must be provided 
 in the \openshmem library.
-\item It must be ensured that any types or constants that are 
-needed to be used in the \FUNC{pshmem\_} interfaces are defined.
+\item It must be ensured that any \openshmem types or constants that are 
+needed by the \FUNC{pshmem\_} interfaces are defined in \HEADER{pshmem.h}.
 \end{enumerate}
 
 Provided that an \openshmem implementation meets these requirements, 
