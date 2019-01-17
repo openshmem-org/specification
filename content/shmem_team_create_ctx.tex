@@ -22,19 +22,27 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
   context and returns its handle through the \VAR{ctx} argument.
   This context is created from the team specified by the \VAR{team} argument.
 
-  The \FUNC{shmem\_team\_create\_ctx} routine must be called by no more threads
-  than were specified by the \VAR{num\_threads} member of the
+  In addition to the team, the \FUNC{shmem\_team\_create\_ctx} routine accepts
+  the same arguments and provides all the same return conditions as the
+  \FUNC{shmem\_ctx\_create} routine.
+
+  The \FUNC{shmem\_team\_create\_ctx} routine may be called any number of times,
+  but the total number of simultaneously existing contexts created from a team
+  must be no more than were specified by the \VAR{num\_contexts} member of the
   \CTYPE{shmem\_team\_config\_t} configuration parameters that were specified
-  when the team was created.
+  when the team was created. Calling \FUNC{shmem\_team\_create\_ctx} on a
+  team for which the maximum number of contexts currently exists results in a
+  failure with nonzero return code.
+
+  All explicitly created resources associated with a team must be destroyed
+  before the \FUNC{shmem\_team\_destroy} routine is called. If a context
+  returned from \FUNC{shmem\_team\_create\_ctx} is not explicitly
+  destroyed before the team is destroyed, behavior is undefined.
 
   %% All \openshmem routines that operate on this context will do so with
   %% respect to the associated \ac{PE} team.
   %% That is, all point-to-point routines operating on this context will use
   %% team-relative \ac{PE} numbering.
-
-  In addition to the team, the \FUNC{shmem\_team\_create\_ctx} routine accepts
-  the same arguments and provides all the same return conditions as the
-  \FUNC{shmem\_ctx\_create} routine.
 }
 
 \apireturnvalues{

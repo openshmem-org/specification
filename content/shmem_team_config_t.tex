@@ -45,7 +45,9 @@ typedef struct {
     may be created in any number of threads. A program
     may destroy any number of contexts made from this team and make
     any number of new ones so long as the total existing at any point
-    remains less than \VAR{num\_contexts}.
+    remains less than \VAR{num\_contexts}. Any contexts created from this
+    team must be destroyed before the team is destroyed, or the
+    behavior is undefined.
     See Section~\ref{sec:ctx} for more on communication contexts and
     Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
 
