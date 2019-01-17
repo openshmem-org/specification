@@ -16,17 +16,8 @@ void @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_
 
 \apidescription{
 \FUNC{shmem\_team\_get\_config} returns through the \VAR{config} argument
-the configuration parameters of the given team, which were specified when the
-team was created.
-
-\begin{FeedbackRequest}
-A library implementation must apply all requested options to a team, even in
-the event that the library does not make optimizations based on these options.
-For example, suppose library implementation must always create teams with the same
-overhead, no matter if the program disables collective support during team creation.
-The library must still enable the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE} option
-when it is requested, so that the \openshmem program will be portable across implementations.
-\end{FeedbackRequest}
+the configuration parameters of the given team, which were assigned according
+to input configuration parameters when the team was created.
 
 All \acp{PE} in the team will get back the same parameter values for the team options.
 
@@ -40,8 +31,8 @@ undefined.
 
 \apinotes{
 A use case for this function is to determine whether a given team can
-support collective operations by testing for the \LibConstRef{SHMEM\_TEAM\_NOCOLLECTIVE}
-option. When teams are created without support for collectives, they may still use
+support collective operations.
+When teams are created without support for collective operations, they may still use
 point to point operations to communicate and synchronize. So programmers may wish
 to design frameworks with functions that provide alternative algorithms
 for teams based on whether they do or do not support collectives.
