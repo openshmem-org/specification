@@ -91,10 +91,9 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
     passed by all \acp{PE} particpating in the collective operation.
 
     Team-based broadcast routines operate over all \acp{PE} in the provided team argument. All
-    \acp{PE} in the provided team must participate in the operation. If a team created without
-    support for collectives is passed to this or any other team collective routine, the
-    behavior is undefined. If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_NULL}
-    is passed to this routine, the behavior is undefined.
+    \acp{PE} in the provided team must participate in the operation.
+    If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_NULL} is passed to this routine,
+    the behavior is undefined.
 
     As with all team-based \openshmem routines, \ac{PE}
     numbering is relative to the team. The specified root \ac{PE} must be a valid \ac{PE}
