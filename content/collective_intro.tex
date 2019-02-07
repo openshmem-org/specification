@@ -28,15 +28,20 @@ that disables support for collective operations. If such a team
 or \LibConstRef{SHMEM\_TEAM\_NULL} is passed to a team-based collective
 routine, the behavior is undefined.
 
-Team objects encapsulate the system resources required to complete team-based collective routines.
-On completion of a team-based collective call, the team resources on the calling
-\ac{PE} will be ready for the next collective call. However, other \acp{PE} in the
-team may still be participating in the collective call, and therefore team
-resources may still be in use on some \acp{PE} in the team after others have returned from
-the collective routine. Before a subsequent call to a collective routine by the team,
-the previous collective operation must be complete on all \acp{PE} in the team,
-which can be ensured by a call to a synchronization routine, like \FUNC{shmem\_sync},
-by the team.
+Team objects encapsulate the per \ac{PE} system resources required to complete
+team-based collective routines.
+All \openshmem teams-based collective calls are blocking routines which may use those
+system resources. On completion of a team-based collective call, the \ac{PE} may
+immediately call another collective on that same team without any other intervening
+synchronization across the team.
+
+While \openshmem routines provide thread safety as per the requesting threading model
+(see \ref{subsec:thread_support}), the teams object itself is not thread-safe. It is up
+to the program to ensure that on a given \ac{PE}, there are no simutanously calls to routines
+on a given team object, including all team based collective calls.
+
+Collective operations are matched across a given team based on ordering. So for a given team,
+collectives must occur in the same order across all PEs in a team.
 
 The team-based collective routines defined in the \openshmem Specification are:
 
@@ -49,6 +54,10 @@ The team-based collective routines defined in the \openshmem Specification are:
 \item \FUNC{shmem\_team\_alltoall\{32, 64\}}
 \item \FUNC{shmem\_team\_alltoalls\{32, 64\}}
 \end{itemize}
+
+In addition, all team creation functions are collective operations. In addition to the ordering
+and thread safety requirements described here, there are additional synchronization requirements
+on team creation operations. See section \ref{subsec:team} for more details.
 
 The deprecated function \FUNC{shmem\_sync\_all} is provided for backward compatibility to synchronize
 all \acp{PE} in the computation. This should be replaced in applications by the equivalent
