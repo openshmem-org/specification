@@ -29,8 +29,8 @@ provided by \openshmem. Predefined \CTYPE{shmem\_team\_t} handles can be used as
 the parent team when creating new \openshmem teams.
 
 Every \ac{PE} is a member of the default team, which may be referenced
-through the team handle \LibHandleRef{SHMEM\_TEAM\_WORLD},
-and its number in the default team is equal to the
+through the team handle \LibHandleRef{SHMEM\_TEAM\_WORLD}.
+The \ac{PE} number in the default team is equal to the
 value of its \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
 
 A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, may be used to
@@ -39,52 +39,27 @@ against to check for successful split operations and can be assigned to user
 declared team handles as a sentinel value.
 
 Teams that are created by a \FUNC{shmem\_team\_split\_*} routine may be
-provided a configuration argument that specifies options that may affect
-a team's capabilities and may allow for optimized performance.
+provided a configuration argument that specifies team creation options.
 This configuration argument is of type \CTYPE{shmem\_team\_config\_t}, which
 is detailed further in Section~\ref{subsec:shmem_team_config_t}.
 
 Team creation is a collective operation. As such, team creation in a
 multithreaded environment follows the same semantics as discussed in section
-\ref{subsec:thread_support}. Like other collectives, team creation is an action
-of the \ac{PE} as a whole, and it is up to the programmer to ensure that each
-\ac{PE} has consistent and predictable ordering of team creation calls over
-all of its threads.
+\ref{subsec:coll}. That is, while \openshmem routines are thread-safe as
+per threading model (see section \ref{subsec:thread_support}),\openshmem
+teams objects are not themselves thread-safe. For team creation, this means
+that the program must ensure that there are no simultaneous split operations
+occuring on the same parent team on a given \ac{PE}.
 
-In addition to ordering requirements on team creation, there may also be
-synchronization requirements.
-\begin{itemize}
-\item There is a special case where all new teams resulting from a split operation are
-created are configured without support for collective operations and indicating that \CONST{0} new contexts will be created from the team.
-This means the team will \emph{not} be used
-directly for point-to-point or collective communication routines, but only for
-\ac{PE} number translation and further split operations. When creating new teams
-of this type, no synchronization will be required around team creation operations.
-\item In the case where a parent team uses multiple team split calls to create
-multiple new teams which do not meet the above criteria for avoiding synchronization,
-\emph{and} there is an overlap in team membership in the resulting new teams, all \acp{PE}
-in the parent team must perform a barrier between team creation calls.
-In other words, undefined behavior will result from allowing simultaneous execution of team
-creation collective operations that split some team $T_0$ into multiple new
-teams, $T_1, T_2...$, where some \ac{PE} $p$ exists such that $p \in T_1, p \in T_2, ...$.
-By executing a barrier among the set of
-all \acp{PE} in team $T_0$ between team creation operations, simultaneous execution
-of split operations by those \acp{PE} is prevented. \ac{PE} $p$ will be ensured to
-complete each split operation on $T_0$ before the next split operation on $T_0$ commences.
-\item In the case where the above conditions hold to require a barrier on $T_0$,
-but the parent team $T_0$ cannot be used for barriers due to having
-been created with collective operations disabled, the program may use any
-ancestor team, e.g. \LibHandleRef{SHMEM\_TEAM\_WORLD}, for synchronization around new
-team creation. The program may alternatively use some other custom synchronization method
-as long as it ensures that each split collective completes for all \acp{PE}
-in team $T_0$ before the next split on $T_0$ commences.
-\end{itemize}
+Like other collectives, team creation is matched across PEs based
+on ordering. So, team creation events must occur in the same order on all \acp{PE}
+in the resulting child teams. Additionally, there must not be team creation
+operations from the same parent team simultaneously occuring that involve
+the same \acp{PE} in any resulting child teams. In practice, this means that when a parent team
+is split multiple times, and the resulting child teams have overlapping membership,
+the program must call the \FUNC{shmem\_team\_sync} routine on the parent team
+between subsequent calls to split routines.
 
-%% Teams may be created with options that change team behavior and may allow for
-%% more optimized performance. These options are described in
-%% Section~\ref{subsec:library_constants} and in the various descriptions of the
-%% team split routines below. In particular, teams may be created with an option
-%% to disable support for collective communications, which allows implementations
-%% to reduce team creation overheads for those teams. In that case, the team is
-%% just a local reindexing of some set of \acp{PE} that can be used for
-%% point to point communications or as parent teams in subsequent split operations.
+Upon completion of a team creation operation, the resulting child teams will be
+immediately usable for any team-based operations, including creating new child teams,
+without any intervening synchronization.

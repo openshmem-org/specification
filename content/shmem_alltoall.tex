@@ -48,8 +48,7 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
     \Fortran, it must be a default integer value.}
 
 \newtext{%
-\apiargument{IN}{team}{A valid \openshmem team handle to a team which has been
-    created without disabling support for collective operations.}
+\apiargument{IN}{team}{A valid \openshmem team handle to a team.}
 }
 
 \begin{DeprecateBlock}
@@ -104,8 +103,6 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
 {\color{Green}
     Team-based collect routines operate over all \acp{PE} in the provided team
     argument. All \acp{PE} in the provided team must participate in the collective.
-    If a team created without support for collectives is passed to this or any other
-    team collective routine, the behavior is undefined.
 
     Active-set-based collective routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.

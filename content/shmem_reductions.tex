@@ -336,10 +336,8 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
 
 {\color{Green}
     Team-based reduction routines operate over all \acp{PE} in the provided team argument. All
-    \acp{PE} in the provided team must participate in the reduction. If a team created without
-    support for collectives is passed to this or any other team collective routine, the
-    behavior is undefined. If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_NULL}
-    is passed to this routine, the behavior is undefined.
+    \acp{PE} in the provided team must participate in the reduction. If an invalid team handle
+    or \LibConstRef{SHMEM\_TEAM\_NULL} is passed to this routine, the behavior is undefined.
 
     Active-set-based sync routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.

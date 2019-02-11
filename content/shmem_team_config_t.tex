@@ -6,7 +6,6 @@
 
 \begin{Csynopsis}
 typedef struct {
-  int no_collectives;
   int num_contexts;
 } shmem_team_config_t;
 \end{Csynopsis}
@@ -25,14 +24,6 @@ typedef struct {
     succeeds in creating the team, the parameter will be updated to
     the actual configuration that the library was able to provide
     during team creation.
-
-    The \VAR{no\_collectives} member allows for teams to be created
-    without support for collective communications, which allows implementations
-    to reduce team creation overheads for those teams.
-    When its value is zero, it specifies that the team should have collective
-    operations enabled.
-    When nonzero, the team will not support collective operations, which
-    allows implementations to reduce team creation overheads.
 
     The \VAR{num\_contexts} member specifies the total number of contexts
     created from this team that can simultaneously exist. These contexts
@@ -56,16 +47,6 @@ typedef struct {
     masks with through a bitwise OR operation of the following library constants:
     
   {
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NO\_COLLECTIVES}}{
-    The team should be created using the value of the
-    \VAR{no\_collectives} member of the configuration parameter
-    \VAR{config} as a requirement.
-  }
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NO\_COLLECTIVES\_HINT}}{
-    The team should be created using the value of the
-    \VAR{no\_collectives} member of the configuration parameter
-    \VAR{config} as a hint.
-  }
   \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_CONTEXTS}}{
     The team should be created using the value of the
     \VAR{num\_contexts} member of the configuration parameter
@@ -86,9 +67,6 @@ typedef struct {
    parameters, as follows:
 
   {
-  \apitablerow{no\_collectives = \CONST{0}}{
-    By default, teams support collective operations
-    }
   \apitablerow{num\_contexts = \CONST{0}}{
     By default, no contexts can be created on a new team
     }
@@ -97,11 +75,7 @@ typedef struct {
   }
 
   \apinotes{
-    The library can set a team configuration to indicate that collective operations are
-    disabled without providing some optimized version of teams without support for
-    collective operations. Disabling collectives is a portable way to
-    provide optimizations on some implementations, not a promise that teams with
-    this option will reduce overheads on all implementations.
+     None.
   }
 
 \end{apidefinition}
