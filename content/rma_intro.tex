@@ -16,6 +16,15 @@ the origin \ac{PE} provides the \source{} data object and the destination
 routine, \GET{}, the origin \ac{PE} provides the \dest{} data object and the
 destination \ac{PE} provides the \source{} data object.
 
+\color{Green}
+The destination \ac{PE} is specified as an integer representing the \ac{PE} number.
+This \ac{PE} number is relative to the \openshmem team associated with the
+communication context being using for the operation. If no context is passed to the routine,
+then the \ac{PE} number is relative to the default team, and is the global \ac{PE}
+number. If the \ac{PE} number passed to the routine is invalid, being either negative
+or greater than the size of the \openshmem team, routine behavior is undefined.
+\color{Black}
+
 Where appropriate compiler support is available, \openshmem provides type-generic 
 one-sided communication interfaces via \Cstd[11] generic selection
 (\Cstd[11]~\S6.5.1.1\footnote{Formally, the \Cstd[11] specification is ISO/IEC 9899:2011(E).})
