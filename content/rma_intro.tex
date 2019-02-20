@@ -21,8 +21,8 @@ The destination \ac{PE} is specified as an integer representing the \ac{PE} numb
 This \ac{PE} number is relative to the \openshmem team associated with the
 communication context being using for the operation. If no context is passed to the routine,
 then the \ac{PE} number is relative to the default team, and is the global \ac{PE}
-number. If the \ac{PE} number passed to the routine is invalid, being either negative
-or greater than the size of the \openshmem team, routine behavior is undefined.
+number. If the \ac{PE} number passed to the routine is invalid, being negative
+or greater than or equal to the size of the \openshmem team, then routine behavior is undefined.
 \color{Black}
 
 Where appropriate compiler support is available, \openshmem provides type-generic 
