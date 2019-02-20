@@ -4,25 +4,48 @@
 int main(void)
 {
    static int x = 10101;
-   static long pSync[SHMEM_BARRIER_SYNC_SIZE];
+   shmem_team_config_t conf;
+   shmem_team_t twos_team, threes_team;
 
    shmem_init();
    int me = shmem_my_pe();
    int npes = shmem_n_pes();
 
-   for (int i = 0; i < SHMEM_BARRIER_SYNC_SIZE; i++)
-      pSync[i] = SHMEM_SYNC_VALUE;
+   int odd_npes = npes % 2;
 
-   shmem_sync_all();
+   shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, npes / 2, &conf, 0, &twos_team);
+   shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 3, npes / 3 + odd_npes, &conf, 0, &threes_team);
 
-   if (me % 2 == 0) {
-      /* put to next even PE in a circular fashion */
-      shmem_p(&x, 4, (me + 2) % npes);
-      /* synchronize all even pes */
+   /* The teams overlap, so synchronize on the parent team */
+   shmem_sync(SHMEM_TEAM_WORLD);
+
+   int my_pe_twos = shmem_team_my_pe(twos_team);
+   int my_pe_threes = shmem_team_my_pe(threes_team);
+
+   if (my_pe_twos != SHMEM_TEAM_NULL) {
+      /* put the value 2 to the next team member in a circular fashion */
+      shmem_p(&x, 2, (my_pe_twos + 2) % npes);
       shmem_quiet();
-      shmem_sync(0, 1, (npes / 2 + npes % 2), pSync);
+      shmem_sync(twos_team);
    }
-   printf("%d: x = %d\n", me, x);
+
+   if (my_pe_threes != SHMEM_TEAM_NULL) {
+      /* put the value 3 to the next team member in a circular fashion */
+      shmem_p(&x, 3, (my_pe_threes + 3) % npes);
+      shmem_quiet();
+      shmem_sync(threes_team);
+   }
+
+   if (me % 3 == 0 && x != 3) {
+      shmem_global_exit(3);
+   }
+   else if (me % 2 == 0 && x != 2) {
+      shmem_global_exit(2);
+   }
+   else if (x != 10101)  {
+      shmem_global_exit(1);
+   }
+
    shmem_finalize();
    return 0;
 }
