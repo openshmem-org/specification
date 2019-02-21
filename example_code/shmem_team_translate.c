@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
     int                  rank;
     int                  t_pe;
-    int 		 t_global;
+    int 		  t_global;
     shmem_team_t         new_team;
     shmem_team_config_t *config;
 
