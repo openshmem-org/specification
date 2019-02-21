@@ -9,8 +9,8 @@ int main(void)
    shmem_team_config_t *config;
 
    shmem_init();
-   config = NULL;
-   int me = shmem_my_pe();
+   config   = NULL;
+   int me   = shmem_my_pe();
    int npes = shmem_n_pes();
 
    int odd_npes = npes % 2;
@@ -18,7 +18,8 @@ int main(void)
    shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, npes / 2, config, 0,
                             &twos_team);
 
-   /* The teams overlap, so synchronize on the parent team */
+   /* The "threes" team below overlaps with the "twos" team, so
+    * synchronize on the parent team */
    shmem_sync(SHMEM_TEAM_WORLD);
 
    shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 3, npes / 3 + odd_npes,
