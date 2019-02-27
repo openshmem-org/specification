@@ -1,9 +1,9 @@
 \openshmem \Fortran[bind(C)] language bindings is based on \Fortran-\Cstd
-interoperability feature introduced in \Fortran[2003](ISO/IEC 1539-1:2004(E))
-language standard. Since \Fortran[2003] there is a standarized way to generate
-procedure, derived-type declarations and global variables which are interoperable
-with \Cstd(ISO/IEC 9899:1999). The bind(C) attribute is added in the \Fortran
-language to enable this interoperability with \Cstd. The \openshmem
+interoperability feature introduced in \Fortran[2018](ISO/IEC 1539-1:2018(E))
+language standard. \Fortran[2018] defines a standard way to generate procedure,
+derived-type declarations and global variables which are interoperable with
+\Cstd(ISO/IEC 9899:2011). The bind(C) attribute available in the \Fortran
+language enables the interoperability with \Cstd. The \openshmem
 \Fortran[bind(C)] language bindings use this standard way to generate \Fortran
 wrappers over the primary \Cstd language bindings provided by \openshmem.
 
@@ -13,8 +13,8 @@ wrappers over the primary \Cstd language bindings provided by \openshmem.
     bind(C) attribute over the \Cstd language bindings specified by \openshmem
     specification.
     \item All available language constants, library handles, and environment
-    variables from the \openshmem specification are supported by this language
-    bindings.
+    variables from the \openshmem specification are supported by \openshmem
+    \Fortran[bind(C)] language bindings.
     \item The \Fortran[bind(C)] language bindings is defined in a module named
     \textit{shmem}. The \textit{shmem} module must contain only the interfaces
     and constant names defined in this specification.
@@ -26,5 +26,6 @@ wrappers over the primary \Cstd language bindings provided by \openshmem.
     \item \openshmem APIs in this language bindings are available either as a
     subroutine or a function. \openshmem \Cstd APIs which returns a value are
     wrapped as functions, while those APIs that have some arguments and perform
-    a specific operation without returning any values are wrapped as subroutines.
+    a specific operation without returning any values are wrapped as
+    subroutines.
 \end{itemize}
