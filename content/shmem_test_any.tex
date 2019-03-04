@@ -47,7 +47,8 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     Section~\ref{subsec:shmem_wait_until_any}.   Each element of \VAR{status}
     corresponds to the respective element in \VAR{ivars} and indicates whether
     the element is excluded from the test set.  On input, the \VAR{status}
-    array indicates which elements are excluded from the test set.  If all
+    array indicates which elements are excluded from the test set, and whether
+    or not those elements are updated on output.  If all
     elements in \VAR{status} are set to 1 or \VAR{nelems} is 0, the test set is
     empty and this routine returns \CONST{SIZE\_MAX}.  On output, the \VAR{status}
     array indicates which elements satisfied the test condition in \VAR{ivars}
