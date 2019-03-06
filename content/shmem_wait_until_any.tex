@@ -23,7 +23,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
   \apiargument{IN}{ivars}{A pointer to an array of remotely accessible data
     objects.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
-  \apiargument{INOUT}{status}{An optional mask array of length \VAR{nelems}
+  \apiargument{IN}{status}{An optional mask array of length \VAR{nelems}
     that indicates which elements in \VAR{ivars} are excluded from the wait set.}
   \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts}
     that compares elements of \VAR{ivars} with \VAR{cmp\_value}.}
@@ -42,12 +42,11 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
     The optional \VAR{status} is a mask array of length \VAR{nelems} where each
     element corresponds to the respective element in \VAR{ivars} and indicates
-    whether the element is excluded from the wait set.  On input, elements of
+    whether the element is excluded from the wait set.  Elements of
     \VAR{status} set to 0 will be included in the wait set, and elements set to
     1 will be ignored.  If all elements in \VAR{status} are set to 1 or
     \VAR{nelems} is 0, the wait set is empty and this routine returns
-    \CONST{SIZE\_MAX}.  On output, the element of \VAR{status} with the index given by
-    the return value of \FUNC{shmem\_wait\_until\_any} is set to 1.  If
+    \CONST{SIZE\_MAX}.  If
     \VAR{status} is a null pointer, it is ignored and all elements in
     \VAR{ivars} are included in the wait set.  The \VAR{ivars} and \VAR{status}
     arrays must not overlap in memory.
