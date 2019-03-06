@@ -60,13 +60,10 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     element corresponds to the respective element in \VAR{ivars} and indicates
     whether the element is excluded from the wait set.  On input, elements of
     \VAR{status} set to 0 will be included in the wait set, and elements set to
-    1 will be ignored.  On input, elements of \VAR{status} set to -1 will be
-    included in the wait set, and will remain set to -1 on output.
-    If all elements in \VAR{status} are set to 1 or
+    1 will be ignored.  If all elements in \VAR{status} are set to 1 or
     \VAR{nelems} is 0, the wait set is empty and this routine returns 0. On
-    output, elements in \VAR{status} with indices included in \VAR{indices}
-    are set to 1, unless the element of \VAR{status} was set to -1 on input.
-    If \VAR{status} is a null pointer, it is ignored
+    output, the elements in \VAR{status} with indices included in \VAR{indices}
+    are set to 1.  If \VAR{status} is a null pointer, it is ignored
     and all elements in \VAR{ivars} are included in the wait set.  The
     \VAR{ivars}, \VAR{indices}, and \VAR{status} arrays must not overlap in
     memory.
