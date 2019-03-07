@@ -20,6 +20,7 @@ int main(void)
       completed_idx = shmem_test_any(flags, npes, status, SHMEM_CMP_EQ, 1);
       if (completed_idx != SIZE_MAX) {
           ncompleted++;
+          status[completed_idx] = 1;
       } else {
           /* Overlap some computation here */
       }

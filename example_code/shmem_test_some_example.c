@@ -35,8 +35,10 @@ int main(void)
       int ntested = shmem_test_some(flags, npes, indices, status, SHMEM_CMP_NE, 0); 
       if (ntested > 0) {
           for (int i = 0; i < ntested; i++) {
-              for (int j = 0; j < N; j++)
+              for (int j = 0; j < N; j++) {
                   total_sum += all_data[indices[i]*N + j];
+              }
+              status[indices[i]] = 1;
           }
           ncompleted += ntested;
       } else {

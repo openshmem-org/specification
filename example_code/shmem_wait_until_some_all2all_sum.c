@@ -33,8 +33,10 @@ int main(void)
   while ((ncompleted = shmem_wait_until_some(flags, npes, indices,
                                              status, SHMEM_CMP_NE, 0))) {
       for (size_t i = 0; i < ncompleted; i++) {
-          for (size_t j = 0; j < N; j++)
+          for (size_t j = 0; j < N; j++) {
               total_sum += all_data[indices[i]*N + j];
+          }
+          status[indices[i]] = 1;
       }
   }
 

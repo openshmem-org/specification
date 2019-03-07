@@ -30,9 +30,10 @@ int main(void)
 
   for (int i = 0; i < npes; i++) {
       size_t completed_idx = shmem_wait_until_any(flags, npes, status, SHMEM_CMP_NE, 0);
-      for (int j = 0; j < N; j++)
+      for (int j = 0; j < N; j++) {
           total_sum += all_data[completed_idx * N + j];
-
+      }
+      status[completed_idx] = 1;
   }
 
   /* check the result */
