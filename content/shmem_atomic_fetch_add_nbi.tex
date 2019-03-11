@@ -1,7 +1,7 @@
 \color{Green}
 \apisummary{
-    This nonblocking routine performs an atomic fetch-and-add operation on a
-    remote data object.
+    The nonblocking atomic routine performs a atomic fetch-and-add operation on
+    a remote data object.
 }
 
 \begin{apidefinition}
@@ -22,15 +22,15 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{A context handle specifying the context on which to
-    perform the operation. When this argument is not provided, the operation
-    is performed on the default context.}
-\apiargument{OUT}{fetch}{Local data object to be updated.}
-\apiargument{OUT}{dest}{The remotely accessible data object to be updated on
-    the remote \ac{PE}.}
-\apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.}
-\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
-    \VAR{dest} is to be updated.}
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to
+      perform the operation. When this argument is not provided, the operation
+      is performed on the default context.}
+  \apiargument{OUT}{fetch}{Local data object to be updated.}
+  \apiargument{OUT}{dest}{The remotely accessible data object to be updated on
+      the remote \ac{PE}.}
+  \apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.}
+  \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
+      \VAR{dest} is to be updated.}
 
 \end{apiarguments}
 
@@ -41,10 +41,9 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
     possibility of another atomic operation on the \VAR{dest} between the time
     of the fetch and the update. This routine returns after posting the
     operation. The operation is considered complete after a subsequent call to
-    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, these
-    routines add \VAR{value} to \VAR{dest} on \VAR{pe} and fetch the previous
-    contents of \VAR{dest} as an atomic operation into the \VAR{fetch} local
-    data object.
+    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, \VAR{value}
+    is added to \VAR{dest} on \VAR{pe} and the previous contents of \VAR{dest}
+    are fetched into the \VAR{fetch} local data object as one atomic operation.
 }
 
 \apireturnvalues{
