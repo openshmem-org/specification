@@ -42,7 +42,7 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
     of the fetch and the update. This routine returns after posting the
     operation. The operation is considered complete after a subsequent call to
     \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, \VAR{value}
-    is added to \VAR{dest} on \VAR{pe} and the previous contents of \VAR{dest}
+    is added to \VAR{dest} on \VAR{pe} and the prior contents of \VAR{dest}
     are fetched into the \VAR{fetch} local data object as one atomic operation.
 }
 
