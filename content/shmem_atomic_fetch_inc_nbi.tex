@@ -1,7 +1,7 @@
 \color{Green}
 \apisummary{
-    This nonblocking routine performs an atomic fetch-and-increment operation
-    on a remote data object.
+    This nonblocking atomic routine performs an atomic fetch-and-increment
+    operation on a remote data object.
 }
 
 \begin{apidefinition}
@@ -26,8 +26,8 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
     perform the operation. When this argument is not provided, the
     operation is performed on the default context.}
 \apiargument{OUT}{fetch}{Local data object to be updated.}
-\apiargument{OUT}{dest}{The remotely accessible data object to be updated
-    on the remote \ac{PE}.}
+\apiargument{OUT}{dest}{The remotely accessible data object to be updated on the
+    remote \ac{PE}.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \dest{} is to be updated.}
 
@@ -35,12 +35,12 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 
 
 \apidescription{
-   These nonblocking routines perform an atomic fetch-and-increment operation.
-   This routine returns after posting the operation. The operation is considered
-   complete after a subsequent call to \FUNC{shmem\_quiet}. At the completion of
-   \FUNC{shmem\_quiet}, the \dest{} on \ac{PE} \VAR{pe} is increased by one and
-   the routine fetches the previous contents of \dest{} as an atomic operation
-   into the \VAR{fetch} local data object.
+   These nonblocking \FUNC{shmem\_atomic\_fetch\_inc\_nbi} routines perform an
+   atomic fetch-and-increment operation. This routine returns after posting the
+   operation. The operation is considered complete after a subsequent call to
+   \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, the \dest{} on
+   \ac{PE} \VAR{pe} is increased by one and the previous contents of \dest{} are
+   fetched into the \VAR{fetch} local data object as one atomic operation.
 }
 
 \apireturnvalues{
