@@ -1,7 +1,7 @@
 \color{Green}
 \apisummary{
-    This nonblocking routine performs an atomic conditional swap on a remote
-    data object.
+    The nonblocking atomic routine provides a method for performing an atomic
+    conditional swap on a remote data object.
 }
 
 \begin{apidefinition}
@@ -21,32 +21,32 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{A context handle specifying the context on which to
-        perform the operation. When this argument is not provided, the
-        operation is performed on the default context.}
-    \apiargument{OUT}{fetch}{Local data object to be updated.}
-    \apiargument{OUT}{dest}{The remotely accessible data object to be updated on
-        the remote \ac{PE}. }
-    \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
-        value. If \VAR{cond} and the remote \VAR{dest} are equal, then \VAR{value}
-        is swapped into the remote \VAR{dest}; otherwise, the remote \VAR{dest} is
-        unchanged.}
-    \apiargument{IN}{value}{The value to be atomically written to the remote
-        \ac{PE}. }
-    \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
-        \VAR{dest} is to be updated.}
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to
+      perform the operation. When this argument is not provided, the operation
+      is performed on the default context.}
+  \apiargument{OUT}{fetch}{Local data object to be updated.}
+  \apiargument{OUT}{dest}{The remotely accessible data object to be updated on
+      the remote \ac{PE}. }
+  \apiargument{IN}{cond}{\VAR{cond} is compared to the remote \VAR{dest}
+      value. If \VAR{cond} and the remote \VAR{dest} are equal, then \VAR{value}
+      is swapped into the remote \VAR{dest}; otherwise, the remote \VAR{dest} is
+      unchanged.}
+  \apiargument{IN}{value}{The value to be atomically written to the remote
+      \ac{PE}. }
+  \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
+      \VAR{dest} is to be updated.}
 \end{apiarguments}
 
 \apidescription{
-    The nonblocking conditional swap routines conditionally update \VAR{dest}
+    The nonblocking conditional swap routines conditionally update a \VAR{dest}
     data object on the specified \ac{PE} and fetches the prior contents of the
-    data object into the \VAR{fetch} local data object as a
-    single atomic operation. This routine returns after posting the operation.
-    The operation is considered complete after a subsequent call to
-    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, prior
-    contents of the \VAR{dest} data object is atomically fetched into
-    \VAR{fetch} local data object and the contents of \VAR{value}
-    is conditionally updated into \VAR{dest} on to the remote \ac{PE}.
+    \VAR{dest} data object into the \VAR{fetch} local data object as one atomic
+    operation. This routine returns after posting the operation. The operation
+    is considered complete after a subsequent call to \FUNC{shmem\_quiet}. At the
+    completion of \FUNC{shmem\_quiet}, prior contents of the \VAR{dest} data
+    object is atomically fetched into \VAR{fetch} local data object and the
+    contents of \VAR{value} is conditionally updated into \VAR{dest} on the
+    remote \ac{PE}.
 }
 
 \apireturnvalues{
