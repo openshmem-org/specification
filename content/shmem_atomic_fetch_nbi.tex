@@ -1,6 +1,6 @@
 \color{Green}
 \apisummary{
-    The nonblocking atomic fetch routine provides an option for atomically
+    The nonblocking atomic fetch routine provides a method for atomically
     fetching the value of a remote data object.
 }
 
@@ -23,22 +23,23 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \begin{apiarguments}
 
   \apiargument{IN}{ctx}{A context handle specifying the context on which to
-      perform the operation. When this argument is not provided, the
-      operation is performed on the default context.}
+    perform the operation. When this argument is not provided, the operation is
+    performed on the default context.}
   \apiargument{OUT}{fetch}{Local data object to be updated.}
-  \apiargument{IN}{source}{The remotely accessible data object to be fetched from
-    the remote \ac{PE}.}
+  \apiargument{IN}{source}{The remotely accessible data object to be fetched
+    from the remote \ac{PE}.}
   \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
     \VAR{source} is to be fetched.}
 
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_atomic\_fetch\_nbi} performs a nonblocking atomic fetch
-    operation. This routine returns after posting the operation. The operation
-    is considered complete after a subsequent call to \FUNC{shmem\_quiet}. At
-    the completion of \FUNC{shmem\_quiet}, contents of the \source{} data object
-    from \ac{PE} is atomically fetched into \VAR{fetch} local data object.
+    \FUNC{shmem\_atomic\_fetch\_nbi} performs a nonblocking fetching of a value
+    atomically from a remote data object. This routine returns after posting the
+    operation. The operation is considered complete after a subsequent call to
+    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, contents of
+    the \source{} data object from \ac{PE} is atomically fetched into
+    \VAR{fetch} local data object.
 }
 
 \apireturnvalues{
