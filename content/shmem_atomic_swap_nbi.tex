@@ -1,6 +1,7 @@
 \color{Green}
 \apisummary{
-    This nonblocking operation performs an atomic swap to a remote data object.
+    This nonblocking atomic operation performs an atomic swap to a remote data
+    object.
 }
 
 \begin{apidefinition}
@@ -9,13 +10,15 @@
 void @\FuncDecl{shmem\_atomic\_swap\_nbi}@(TYPE *fetch, TYPE *dest, TYPE value, int pe);
 void @\FuncDecl{shmem\_atomic\_swap\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, TYPE value, int pe);
 \end{C11synopsis}
-where \TYPE{} is one of the extended \ac{AMO} types specified by Table \ref{extamotypes}.
+where \TYPE{} is one of the extended \ac{AMO} types specified by
+Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_swap\_nbi}@(TYPE *fetch, TYPE *dest, TYPE value, int pe);
 void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_swap\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, TYPE value, int pe);
 \end{Csynopsis}
-where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYPENAME{} specified by Table \ref{extamotypes}.
+where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
 
 \begin{apiarguments}
   \apiargument{IN}{ctx}{A context handle specifying the context on which to
@@ -26,17 +29,17 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding \TYP
     updated on the remote \ac{PE}.}
   \apiargument{IN}{value}{The value to be atomically written to the remote
     \ac{PE}.}
-  \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
+  \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \dest{} is to be updated.}
 \end{apiarguments}
 
 \apidescription{
-    The nonblocking \FUNC{shmem\_atomic\_swap\_nbi} performs an atomic swap
-    operation. This routine returns after posting the operation. The operation
-    is considered complete after a subsequent call to \FUNC{shmem\_quiet}.
-    At the completion of \FUNC{shmem\_quiet}, it writes \VAR{value} into
-    \dest{} on \ac{PE} and fetches the contents of \dest{} as an atomic
-    operation into \VAR{fetch} local data object.
+    The nonblocking \FUNC{shmem\_atomic\_swap\_nbi} routines perform an atomic
+    swap operation. This routine returns after posting the operation. The
+    operation is considered complete after a subsequent call to
+    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, it writes
+    \VAR{value} into \dest{} on \ac{PE} and fetches the prior contents of
+    \dest{} into \VAR{fetch} local data object as one atomic operation.
 }
 
 \apireturnvalues{
