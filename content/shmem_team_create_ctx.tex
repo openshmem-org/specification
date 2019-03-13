@@ -26,23 +26,26 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
   the same arguments and provides all the same return conditions as the
   \FUNC{shmem\_ctx\_create} routine.
 
-  The \FUNC{shmem\_team\_create\_ctx} routine may be called any number of times,
-  but the total number of simultaneously existing contexts created from a team
-  must be no more than were specified by the \VAR{num\_contexts} member of the
-  \CTYPE{shmem\_team\_config\_t} configuration parameters that were specified
-  when the team was created. Calling \FUNC{shmem\_team\_create\_ctx} on a
-  team for which the maximum number of contexts currently exists results in a
-  failure with nonzero return code.
+  The \FUNC{shmem\_team\_create\_ctx} routine may be called any number of times
+  to create multiple simultaneously existing contexts for the team. Programs
+  should request the total number of simultaneous contexts to be created from
+  the team during team creation. See Section~\ref{subsec:shmem_team_config_t}
+  for more information on how to request contexts during team creation.
+
+  A call to \FUNC{shmem\_team\_create\_ctx} on a team may fail, regardless
+  of the configuration request for contexts, if the implementation is unable
+  to create a context at the time when \FUNC{shmem\_team\_create\_ctx} is
+  called.
 
   All explicitly created resources associated with a team must be destroyed
   before the \FUNC{shmem\_team\_destroy} routine is called. If a context
   returned from \FUNC{shmem\_team\_create\_ctx} is not explicitly
   destroyed before the team is destroyed, behavior is undefined.
 
-  %% All \openshmem routines that operate on this context will do so with
-  %% respect to the associated \ac{PE} team.
-  %% That is, all point-to-point routines operating on this context will use
-  %% team-relative \ac{PE} numbering.
+  All \openshmem routines that operate on this context will do so with
+  respect to the associated \ac{PE} team.
+  That is, all point-to-point routines operating on this context will use
+  team-relative \ac{PE} numbering.
 }
 
 \apireturnvalues{
