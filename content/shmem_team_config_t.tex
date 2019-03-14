@@ -13,34 +13,27 @@ typedef struct {
   \vspace{1.0em}
 
   \apidescription{
-    A team configuration argument acts as both input and output to the
+    A team configuration argument acts as an input
     \FUNC{shmem\_team\_split\_*} routines.
-    As an input, it specifies the requested capabilities of the team to be
-    created. Capabilities can be requested as either hints or requirements.
+    It specifies the requested capabilities of the team to be
+    created. 
 
-    If given configuration parameter input is a requirement, and the team creation
-    cannot provide this capability, then team creation fails.
-    If a given configuration parameter input is a hint, and the library
-    succeeds in creating the team, the parameter will be updated to
-    the actual configuration that the library was able to provide
-    during team creation.
-
-    The \VAR{num\_contexts} member specifies the total number of contexts
-    created from this team that can simultaneously exist. These contexts
-    may be created in any number of threads. A program
-    may destroy any number of contexts made from this team and make
-    any number of new ones so long as the total existing at any point
-    remains less than \VAR{num\_contexts}. Any contexts created from this
-    team must be destroyed before the team is destroyed, or the
-    behavior is undefined.
+    The \VAR{num\_contexts} member specifies the total number of simultaneously
+    existing contexts that the program requests to create from this team.
+    These contexts may be created in any number of threads. Successful
+    creation of a team configured with \VAR{num\_contexts} of $N$ means
+    that the implementation will make a best effort to reserve enough
+    resources to allow the team to have $N$ contexts created from the team
+    in existance at any given time. It is not a guaruntee that $N$
+    calls to \FUNC{shmem\_team\_create\_ctx} will succeed.
     See Section~\ref{sec:ctx} for more on communication contexts and
     Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
 
     When using the configuration structure to create teams, a mask parameter
-    controls which fields to use and whether they are hints or requirements.
-    Any configuration parameter that is not indicated in the mask will be
-    ignored.
-    So, a program does not have to set all fields in the config struct;
+    controls which fields to use.
+    Any configuration parameter value that is not indicated in the mask will be
+    ignored, and the default value will be used instead.
+    Therefore, a program does not have to set all fields in the config struct;
     only those for which it does not want the default values.
 
     A configuration mask value is created by combining individual field
@@ -52,19 +45,13 @@ typedef struct {
     \VAR{num\_contexts} member of the configuration parameter
     \VAR{config} as a requirement.
   }
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_CONTEXTS\_HINT}}{
-    The team should be created using the value of the
-    \VAR{num\_contexts} member of the configuration parameter
-    \VAR{config} as a hint.
-  }  
   }
-
-  If a program creates a mask using both the requirement and hint flag
-  for a given parameter, the behavior is undefined.
 
    A configuration mask value of \CONST{0} indicates that the team
    should be created with the default values for all configuration
-   parameters, as follows:
+   parameters.
+
+   The default values for configuration parameters are:
 
   {
   \apitablerow{num\_contexts = \CONST{0}}{
