@@ -8,9 +8,9 @@
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
-int @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
+int @\FuncDecl{shmem\_broadcast}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems, int PE_root)
 \end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 }
 
 %% C/C++
@@ -18,8 +18,12 @@ int @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nelem
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_broadcast32}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
-int @\FuncDecl{shmem\_team\_broadcast64}@(void *dest, const void *source, size_t nelems, int PE_root, shmem_team_t team);
+nt @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_broadcast}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems, int PE_root);
+\end{CsynopsisCol}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_broadcastmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems, int PE_root);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -40,22 +44,21 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
  
 \begin{apiarguments}
 
+\newtext{%
+\apiargument{IN}{team}{The team over which to perform the operation.}%
+}
+
 \apiargument{OUT}{dest}{A symmetric data object. \newtext{See the table below in this description
     for allowable types.}} 
 \apiargument{IN}{source}{A symmetric data object that can be of any data type
     that is permissible for the \dest{} argument.}
-\apiargument{IN}{nelems}{The number of elements in \source.  For
-    \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of
-    32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.  When
+\apiargument{IN}{nelems}{The number of elements in \source.
+    nelems must be of type \VAR{size\_t} in \Cstd.  When
     using \Fortran, it must be a default integer value.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the \newtext{team or} active set, from which the data is copied.
     \VAR{PE\_root} must be of type \CTYPE{int}.
     When using \Fortran, it must be a default integer value.}
-
-\newtext{%
-\apiargument{IN}{team}{The team over which to perform the operation.}%
-}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
@@ -143,6 +146,7 @@ The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
+\apitablerow{shmem\_broadcastmem}{\Cstd: Any data  type.  nelems is scaled in bytes.}
 \apitablerow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter
     type that has an element size of \CONST{64} bits. No \Fortran derived types \newtext{nor} \oldtext{or} 
     \CorCpp{} structures are allowed.}
