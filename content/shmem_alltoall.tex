@@ -7,17 +7,21 @@
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_alltoall32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_alltoall}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 \end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 }
 
 \begin{Csynopsis}
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_alltoall32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_team\_alltoall64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_alltoall}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
+\end{CsynopsisCol}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_alltoallmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
 \end{CsynopsisCol}
 }
 
@@ -37,6 +41,10 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
 
 \begin{apiarguments}
 
+\newtext{%
+\apiargument{IN}{team}{A valid \openshmem team handle to a team.}
+}
+
 \apiargument{OUT}{dest}{A symmetric data object large enough to receive
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
     active set.}
@@ -46,10 +54,6 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
     \VAR{nelems} must be of type size\_t for \CorCpp.  When using
     \Fortran, it must be a default integer value.}
-
-\newtext{%
-\apiargument{IN}{team}{A valid \openshmem team handle to a team.}
-}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
@@ -73,16 +77,24 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
 \end{apiarguments}
 
 \apidescription{
+{\color{Green}
     The \FUNC{shmem\_alltoall} routines are collective routines. Each \ac{PE}
-    \oldtext{in the active set} \newtext{participating in the operation}
-    exchanges \VAR{nelems} data elements of size
-    32 bits (for \FUNC{shmem\_alltoall32}) or 64 bits (for \FUNC{shmem\_alltoall64})
-    with all other \acp{PE} \oldtext{in the set}
-    \newtext{participating in the operation}. The data being sent and received are
+    participating in the operation exchanges \VAR{nelems} data elements
+    with all other \acp{PE} participating in the operation.
+    The size of a data element is:
+    \begin{itemize}
+    \item 32 bits for \FUNC{shmem\_alltoall32}
+    \item 64 bits for \FUNC{shmem\_alltoall64}
+    \item 8 bits for \FUNC{shmem\_alltoallmem}
+    \item \FUNC{sizeof}(\TYPE{}) for alltoall routines taking typed \VAR{source} and \VAR{dest}
+    \end{itemize}
+}
+
+    The data being sent and received are
     stored in a contiguous symmetric data object. The total size of each \acp{PE}
     \VAR{source} object and \VAR{dest} object is \VAR{nelems} times the size of
-    an element (32 bits or 64 bits) times \oldtext{\VAR{PE\_size}}
-    \newtext{\VAR{N}, where \VAR{N} equals the number of \acp{PE} participating
+    an element \oldtext{(32 bits or 64 bits) times \VAR{PE\_size}}
+    \newtext{times \VAR{N}, where \VAR{N} equals the number of \acp{PE} participating
     in the operation}.
     The \VAR{source} object contains oldtext{\VAR{PE\_size}} \VAR{N} blocks of data
     (where the size of each block is defined by \VAR{nelems}) and each block of data
