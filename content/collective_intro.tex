@@ -11,7 +11,7 @@ to perform operations. See Section~\ref{subsec:team} for details on team managem
 These routines will be the standard for \openshmem moving forward.
 \item Collective routines that operate on active sets use a set of parameters to determine
 which \acp{PE} will participate and what resources are used to perform operations. These routines
-are the legacy API for collectives which will be deprecated and phased out of
+are the legacy API for collectives which are deprecated and will be phased out of
 implementations moving forward.
 \end{enumerate}
 
@@ -45,12 +45,12 @@ The team-based collective routines defined in the \openshmem Specification are:
 
 \begin{itemize}
 \item \FUNC{shmem\_team\_sync}
-\item \FUNC{shmem\_team\_broadcast\{32, 64\}}
-\item \FUNC{shmem\_team\_collect\{32, 64\}}
-\item \FUNC{shmem\_team\_fcollect\{32, 64\}}
-\item Reductions for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
-\item \FUNC{shmem\_team\_alltoall\{32, 64\}}
-\item \FUNC{shmem\_team\_alltoalls\{32, 64\}}
+\item \FUNC{shmem\_\{TYPE\_\}broadcast\{mem\}}
+\item \FUNC{shmem\_\{TYPE\_\}collect\{mem\}}
+\item \FUNC{shmem\_\{TYPE\_\}fcollect\{mem\}}
+\item Reduction routines for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
+\item \FUNC{shmem\_\{TYPE\_\}alltoall\{mem\}}
+\item \FUNC{shmem\_\{TYPE\_\}alltoalls\{mem\}}
 \end{itemize}
 
 In addition, all team creation functions are collective operations. In addition to the ordering
@@ -108,7 +108,7 @@ routines defined in the \openshmem Specification are:
 \item \FUNC{shmem\_broadcast\{32, 64\}}
 \item \FUNC{shmem\_collect\{32, 64\}}
 \item \FUNC{shmem\_fcollect\{32, 64\}}
-\item Reductions for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
+\item Reduction routines for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
 \item \FUNC{shmem\_alltoall\{32, 64\}}
 \item \FUNC{shmem\_alltoalls\{32, 64\}}
 \end{itemize}
