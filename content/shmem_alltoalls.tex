@@ -7,17 +7,21 @@
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_alltoall32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_alltoalls}@(shmem_team_t team, TYPE *dest, const TYPE *source, ,ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
 \end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 }
 
 \begin{Csynopsis}
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_alltoall32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_team\_alltoall64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_alltoalls}@(shmem_team_t team, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
+\end{CsynopsisCol}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_team\_alltoallsmem}@(shmem_team_t team, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
 \end{CsynopsisCol}
 }
 
@@ -38,6 +42,10 @@ CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, l
 
 \begin{apiarguments}
 
+\newtext{%
+\apiargument{IN}{team}{A valid \openshmem team handle.}
+}
+
 \apiargument{OUT}{dest}{A symmetric data object large enough to receive 
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
     active set.}
@@ -54,10 +62,6 @@ CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, l
     A value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
     of type \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a
     default integer value.}
-
-\newtext{%
-\apiargument{IN}{team}{A valid \openshmem team handle.}
-}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
@@ -91,8 +95,8 @@ CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, l
     access in \FUNC{shmem\_alltoall} is always with a stride of \CONST{1}.}
 
     Each \ac{PE} \oldtext{in the active set} \newtext{participating in the operation}
-    exchanges \VAR{nelems} strided data elements of size
-    32 bits (for \FUNC{shmem\_alltoalls32}) or 64 bits (for \FUNC{shmem\_alltoalls64})
+    exchanges \VAR{nelems} strided data elements \oldtext{of size
+    32 bits (for \FUNC{shmem\_alltoalls32}) or 64 bits (for \FUNC{shmem\_alltoalls64})}
     with all other \acp{PE} \oldtext{in the set} \newtext{participating in the operation}.
     Both strides, \VAR{dst} and \VAR{sst}, must be greater
     than or equal to \CONST{1}.
@@ -113,6 +117,7 @@ CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, l
     See the description of \FUNC{shmem\_alltoall} in section
     \ref{subsec:shmem_alltoall} for:
     \begin{itemize}
+    \item Data element sizes for the different sized and typed \FUNC{shmem\_alltoalls} variants.
     \item Rules for \ac{PE} participation in the collective routine.
     \item The pre- and post-conditions for symmetric objects.
     \item Typing constraints for \dest{} and \source{} data objects.
