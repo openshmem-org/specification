@@ -8,22 +8,26 @@
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_collect32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_collect64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_fcollect32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_collect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
+int @\FuncDecl{shmem\_fcollect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 \end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 }
 
 \begin{Csynopsis}
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_collect32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_team\_collect64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_team\_fcollect32}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
-int @\FuncDecl{shmem\_team\_fcollect64}@(void *dest, const void *source, size_t nelems, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_collect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fcollect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 \end{CsynopsisCol}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_team\_collectmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
+int @\FuncDecl{shmem\_team\_fcollectmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
+\end{CsynopsisCol}
+
 }
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
@@ -50,6 +54,10 @@ CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride
 
 \begin{apiarguments}
 
+\newtext{%
+\apiargument{IN}{team}{A valid \openshmem team handle.}
+}
+
 \apiargument{OUT}{dest}{A symmetric array large enough
     to accept the concatenation of the \source{} arrays on all participating \acp{PE}.
     \newtext{See table below in this description for allowable data types.}}
@@ -59,10 +67,7 @@ CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride
     must be of type \VAR{size\_t} for \Cstd. When using \Fortran, it must be
     a default integer value.}
 
-\newtext{%
-\apiargument{IN}{team}{A valid \openshmem team handle.}
-}
-
+\begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
     it must be a default integer value.}
@@ -79,6 +84,7 @@ CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
+\end{DeprecateBlock}
 
 \end{apiarguments}
 
@@ -86,7 +92,7 @@ CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride
 {\color{Green}
     \openshmem \FUNC{collect} and \FUNC{fcollect} routines perform a collective
     operation to concatenate \VAR{nelems}
-    \CONST{64}-bit or \CONST{32}-bit data items from the \source{} array into the
+    data items from the \source{} array into the
     \dest{} array, over an \openshmem team or active set
     in processor number order. The resultant \dest{} array contains the contribution from
     \acp{PE} as follows:
@@ -138,6 +144,7 @@ CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride
 The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
+\apitablerow{\FUNC{shmem\_collectmem}, \FUNC{shmem\_fcollectmem}}{\Cstd: Any data  type.  nelems is scaled in bytes.}%
 \apitablerow{\FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, \FUNC{shmem\_fcollect64}}%
     {Any noncharacter type that has an element size of \CONST{64} bits. No \Fortran derived types nor
     \CorCpp{} structures are allowed.}
