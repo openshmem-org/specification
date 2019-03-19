@@ -133,7 +133,7 @@ CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, l
 \begin{apiexamples}
 
 \apicexample
-    {This example shows a \FUNC{shmem\_alltoalls64} on two long elements among
+    {This \CorCpp{} example shows a \FUNC{shmem\_int64\_alltoalls} on two 64-bit integers among
     all \acp{PE}.}
     {./example_code/shmem_alltoalls_example.c}
     {}
