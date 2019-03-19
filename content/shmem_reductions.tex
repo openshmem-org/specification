@@ -106,7 +106,7 @@ Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newlin
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce;
+int @\FuncDecl{shmem\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the XOR operation as specified by Table \ref{reducetypes}.
 }
