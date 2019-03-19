@@ -24,8 +24,8 @@ int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fcollect}@(shmem_team_t team, TYPE *
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_collectmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
-int @\FuncDecl{shmem\_team\_fcollectmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
+int @\FuncDecl{shmem\_collectmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
+int @\FuncDecl{shmem\_fcollectmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
 \end{CsynopsisCol}
 
 }
