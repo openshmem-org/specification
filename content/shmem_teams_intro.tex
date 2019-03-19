@@ -1,26 +1,35 @@
-The \acp{PE} in an \openshmem program can communicate either using
+The \acp{PE} in an \openshmem program communicate using either
 point-to-point routines that specify the \ac{PE} number of the target
-\ac{PE} or using collective routines which operate over some predefined
+\ac{PE} or collective routines that operate over some predefined
 set of \acp{PE}. Teams in \openshmem allow programs to group subsets
-of \acp{PE} for collective communications and provide a contiguous reindexing
-of the \acp{PE} within that subset that can be used in point-to-point communication.
+of \acp{PE} for communications. Collective communications operate on
+teams objects across the \acp{PE} in the team. Point-to-point routines
+can make use of team based renumbering of \acp{PE} by utilizing team
+based contexts or \ac{PE} number translation.
 
 An \openshmem team is a set of \acp{PE} defined by calling a specific team
-split routine with a parent team argument and other arguments to further
+split routine with a parent team argument and other arguments to
 specify how the parent team is to be split into one or more new teams.
-A team created by a \FUNC{shmem\_team\_split\_*} routine can be used as the parent team
-for a subsequent call to a team split routine.  A team persists and can
-be used for multiple collective routine calls until it is destroyed by
-\FUNC{shmem\_team\_destroy}.
+Any team created by a \FUNC{shmem\_team\_split\_*} routine can subsequently
+be used as the parent team for further calls to team split routines.
+A team persists and can be used for team-based routine calls
+until it is destroyed by \FUNC{shmem\_team\_destroy}.
 
 Every team must have a least one member. Any attempt to create a team over an
 empty set of \acp{PE} will result in no new team being created.
+
+\subsubsection*{Team Handles and Predefined Teams}
 
 A ``team handle'' is an opaque object with type \CTYPE{shmem\_team\_t} that is used
 to reference a defined team.  Team handles are created by one of the team split
 routines and destroyed by the team destroy routine. Team handles have local
 semantics only. That is, team handles should not be stored in shared variables
 and used across other \acp{PE}. Doing so will result in undefined behavior.
+
+A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, may be used to
+indicate that a returned team handle is not valid. This value can be tested
+against to check for successful split operations and can be assigned to user
+declared team handles as a sentinel value.
 
 By default, \openshmem creates predefined teams that will be available
 for use once the routine \FUNC{shmem\_init} has been called. See
@@ -33,33 +42,60 @@ through the team handle \LibHandleRef{SHMEM\_TEAM\_WORLD}.
 The \ac{PE} number in the default team is equal to the
 value of its \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
 
-A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, may be used to
-indicate that a returned team handle is not valid. This value can be tested
-against to check for successful split operations and can be assigned to user
-declared team handles as a sentinel value.
+\subsubsection*{Team Objects and Multithreading Within a \ac{PE}}
 
-Teams that are created by a \FUNC{shmem\_team\_split\_*} routine may be
-provided a configuration argument that specifies team creation options.
+Team handles are passed as arguments to a variety of \openshmem routines,
+including collective routines (see Section~\ref{subsec:coll}), include team
+creation routines.  While \openshmem routines are thread-safe as
+per threading model (see section \ref{subsec:thread_support}),\openshmem
+teams objects are not themselves thread-safe. It is the responsibility
+of the application to ensure that there are no simultaneous collective
+routines operating on the same \openshmem team on a given \ac{PE}.
+
+\subsubsection*{Team Objects and Collective Ordering across \acp{PE}}
+
+In \openshmem, a team object encapsulates resources uses to communicate
+between \acp{PE} in collective operations. When calling multiple subsequent
+collective operations on a team, the collective operations -- along with any
+relevant team based resources -- are matched across the \acp{PE} in the team
+based on ordering of collective routine calls. It is the responsibility
+of the application to ensure a consistent ordering of collective routine calls
+across all \acp{PE} in a team.
+
+There is no need for explicit synchronization between subsequent calls
+to collective routines across the team, except in the special case discussed
+below for team creation of overlapping child teams from a common parent team.
+
+A full discussion of collective semantics follows in Section~\ref{subsec:coll}.
+
+\subsubsection*{Team Creation}
+
+Team creation is a collective operation on the parent team object. New teams
+result from a \FUNC{shmem\_team\_split\_*} routine, which takes a parent team
+and other arguments and produces new teams that are a subset of the parent
+team. Teams that are created by a \FUNC{shmem\_team\_split\_*} routine may be
+provided a configuration argument that specifies attributes of each new team.
 This configuration argument is of type \CTYPE{shmem\_team\_config\_t}, which
 is detailed further in Section~\ref{subsec:shmem_team_config_t}.
 
-Team creation is a collective operation. As such, team creation in a
-multithreaded environment follows the same semantics as discussed in section
-\ref{subsec:coll}. That is, while \openshmem routines are thread-safe as
-per threading model (see section \ref{subsec:thread_support}),\openshmem
-teams objects are not themselves thread-safe. For team creation, this means
-that the program must ensure that there are no simultaneous split operations
-occuring on the same parent team on a given \ac{PE}.
+As with any collective routine on a team, the program must ensure that there
+are no simultaneous split operations occurring on the same parent team on a
+given \ac{PE}, i.e. in separate threads.
 
-Like other collectives, team creation is matched across PEs based
+As with any collective routine on a team, team creation is matched across PEs based
 on ordering. So, team creation events must occur in the same order on all \acp{PE}
-in the resulting child teams. Additionally, there must not be team creation
-operations from the same parent team simultaneously occuring that involve
-the same \acp{PE} in any resulting child teams. In practice, this means that when a parent team
-is split multiple times, and the resulting child teams have overlapping membership,
-the program must call the \FUNC{shmem\_team\_sync} routine on the parent team
-between subsequent calls to split routines.
+in the parent team. Additionally, there must not be team creation
+operations from the same parent team simultaneously occurring that involve
+the same \acp{PE} in any resulting child teams.
 
-Upon completion of a team creation operation, the resulting child teams will be
+\begin{itemize}
+\item[] The following rule of practice will avoid any conflicts on team
+object resources during team creation:
+\item[] \emph{When a parent team is split multiple times, and the resulting child teams
+have overlapping membership, the program must call the \FUNC{shmem\_team\_sync}
+routine on the parent team between subsequent calls to split routines.}
+\end{itemize}
+
+Upon completion of a team creation operation, any resulting child teams will be
 immediately usable for any team-based operations, including creating new child teams,
 without any intervening synchronization.
