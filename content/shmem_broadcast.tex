@@ -8,7 +8,7 @@
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_broadcast}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems, int PE_root)
+int @\FuncDecl{shmem\_broadcast}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems, int PE_root);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 }
@@ -18,7 +18,7 @@ where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdr
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-nt @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_broadcast}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems, int PE_root);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_broadcast}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems, int PE_root);
 \end{CsynopsisCol}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
