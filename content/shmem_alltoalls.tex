@@ -7,7 +7,7 @@
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_alltoalls}@(shmem_team_t team, TYPE *dest, const TYPE *source, ,ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
+int @\FuncDecl{shmem\_alltoalls}@(shmem_team_t team, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 }
@@ -21,7 +21,7 @@ int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_alltoalls}@(shmem_team_t team, TYPE 
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_alltoallsmem}@(shmem_team_t team, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
+int @\FuncDecl{shmem\_alltoallsmem}@(shmem_team_t team, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
 \end{CsynopsisCol}
 }
 
