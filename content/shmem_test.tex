@@ -30,6 +30,10 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
   \FUNC{shmem\_test} tests the numeric comparison of the symmetric object
   pointed to by \VAR{ivar} with the value \VAR{cmp\_value} according to the
   comparison operator \VAR{cmp}.
+
+  Implementations must ensure that \FUNC{shmem\_test} does not return true before
+  the update of the memory indicated by \VAR{ivar} is fully complete.
+  Partial updates to the memory must not cause \FUNC{shmem\_test} to return true.
 }
 
 \apireturnvalues{

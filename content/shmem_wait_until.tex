@@ -68,6 +68,11 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
     to \FUNC{shmem\_wait\_until} blocks until the value of \VAR{ivar} at the
     calling \ac{PE} satisfies the wait condition specified by the comparison
     operator, \VAR{cmp}, and comparison value, \VAR{cmp\_value}.
+
+    Implementations must ensure that \FUNC{shmem\_wait} and
+    \FUNC{shmem\_wait\_until} do not return before the update of the memory
+    indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
+    must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
 }
 
 
@@ -88,13 +93,6 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
   As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated;
   however, \FUNC{shmem\_wait} is equivalent to \FUNC{shmem\_wait\_until}
   where \VAR{cmp} is \CONST{SHMEM\_CMP\_NE}.
-}
-
-\apiimpnotes{
-    Implementations must ensure that \FUNC{shmem\_wait} and
-    \FUNC{shmem\_wait\_until} do not return before the update of the memory
-    indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
-    must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
 }
 
 
