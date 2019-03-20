@@ -459,49 +459,11 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
 \begin{apiexamples}
 
 \apifexample
-    {This \Fortran reduction example statically initializes the \VAR{pSync} array
-    and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all
-    even \acp{PE}.}
-    {./example_code/shmem_and_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_max_example.f90}
-    {}
-
-\apifexample
-    { This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{minimum} value of real variable \VAR{FOO} across all the even
-    \acp{PE}.}
-    {./example_code/shmem_min_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{sum} of the real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_sum_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{product} of the real variable \VAR{FOO} across all the even \acp{PE}.}
-    {./example_code/shmem_prod_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_or_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and
-    computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_xor_example.f90}
+    {This \CorCpp reduction example gets integers from an external
+    source (random genererator in this example), tests to see if the \ac{PE} got a valid
+    value, and outputs the sum of values for which all \acp{PE} got a valid
+    value.}
+    {./example_code/shmem_reduce_example.c}
     {}
 
 \end{apiexamples}
