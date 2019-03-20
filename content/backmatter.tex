@@ -358,11 +358,16 @@ supported before removal.
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & Current & (none) \\ \hline
+
+     \color{Green}
     All active-set-based collective routines & 1.5 & Current & Teams-based collective routines \\ \hline
+    \color{Green}
     \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
         \FUNC{shmem\_quiet}; \FUNC{shmem\_team\_sync} \\ \hline
+    \color{Green}
     \CorCpp: \FuncRef{shmem\_barrier\_all} & 1.5 & Current &
         \FUNC{shmem\_quiet}; \FUNC{shmem\_team\_sync}(\LibConstRef{SHMEM\_TEAM\_WORLD}) \\ \hline
+    \color{Green}
     \CorCpp: \FuncRef{shmem\_sync\_all} & 1.5 & Current &
         \FUNC{shmem\_team\_sync}(\LibConstRef{SHMEM\_TEAM\_WORLD}) \\ \hline
 
@@ -507,6 +512,7 @@ leverage the \openshmem Specification's \Cstd API through the
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
 
+{\color{Green}
 \subsection{Active-set-based collective routines}
 With the addition of \openshmem teams, the previous methods for performing collective
 operations has been superseded by a more readable, flexible method for
@@ -536,6 +542,7 @@ active set parameters to determine that the routine involved all \acp{PE}.
 With teams, becomes readable in a program to simply call a barrier or sync
 on \LibConstRef{SHMEM\_TEAM\_WORLD}. Implementations need only test one constant
 to determine that the operation involves all \acp{PE}.
+}
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
