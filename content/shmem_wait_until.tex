@@ -53,13 +53,9 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 \apidescription{ 
     The \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} operations block until
     the value contained in the symmetric data object, \VAR{ivar}, at the
-    calling \ac{PE} satisfies the wait condition.  In an \openshmem program
-    with single-threaded \acp{PE}, the \VAR{ivar} object at the calling \ac{PE}
-    may be updated by an \ac{RMA}, \ac{AMO}, or store operation performed by another
-    \ac{PE}.  In an \openshmem program with multithreaded \acp{PE}, the
-    \VAR{ivar} object at the calling \ac{PE} may be updated by an \ac{RMA}, \ac{AMO}, or
-    store operation performed by a thread located within the calling \ac{PE} or
-    within another \ac{PE}.
+    calling \ac{PE} satisfies the wait condition.  The \VAR{ivar} object at the
+    calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
+    within the calling \ac{PE} or within another \ac{PE}.
 
     These routines can be used to implement point-to-point synchronization
     between \acp{PE} or between threads within the same \ac{PE}.  A call to
