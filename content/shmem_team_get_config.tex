@@ -11,7 +11,7 @@ void @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_
 \begin{apiarguments}
   \apiargument{IN}{team}{A valid \openshmem team handle.}
   \apiargument{OUT}{config}{
-    A pointer to the configuration parameters for the new team.}
+    A pointer to the configuration parameters for the given team.}
 \end{apiarguments}
 
 \apidescription{
@@ -19,10 +19,8 @@ void @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_
 the configuration parameters of the given team, which were assigned according
 to input configuration parameters when the team was created.
 
-All \acp{PE} in the team will get back the same parameter values for the team options.
-
 If the \VAR{team} argument does not specify a valid team, the behavior is
-undefined.
+undefined. If \VAR{team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, then config will be set to the null pointer.
 }
 
 \apireturnvalues{
