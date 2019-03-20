@@ -52,8 +52,8 @@ The size of the \VAR{y} dimension will be equal to $\lceil N \div xrange \rceil$
 $xrange \times yrange \geq N$, so that every \ac{PE} in the parent team has a
 unique \VAR{(x,y)} location the 2D Cartesian space.
 
-The mapping of \ac{PE} number to coordinates is $(x, y) = ( pe \mod xrange, \lfloor pe \div xdim \rfloor )$,
-where $pe$ is the \ac{PE} number in the parent team. So, if $xdim = 3$,
+The mapping of \ac{PE} number to coordinates is $(x, y) = ( pe \mod xrange, \lfloor pe \div xrange \rfloor )$,
+where $pe$ is the \ac{PE} number in the parent team. So, if $xrange = 3$,
 then the first 3 \acp{PE} in the parent team will form the first
 \VAR{xteam}, the second three \acp{PE} in the parent team form the second \VAR{xteam},
 and so on.
