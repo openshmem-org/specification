@@ -26,6 +26,8 @@ PTR = @\FuncDecl{SHMEM\_PTR}@(dest, pe)
     \FUNC{shmem\_ptr} returns an address that may be used to directly reference
     \dest{} on the specified \ac{PE}.  This address can be assigned to a pointer.
     After that, ordinary loads and stores to this remote address may be performed.
+    The address returned by \FUNC{shmem\_ptr} is considered to be locally
+    accessible and is not valid where a remotely accessible address is required.
     
     The \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish
     communication, for example when a sequence of reads and writes to a data
