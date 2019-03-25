@@ -40,7 +40,7 @@ Performs a bitwise AND reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the AND operation as specified by Table \ref{reducetypes}.
 }
@@ -50,7 +50,7 @@ where \TYPE{} is one of the integer types supported for the AND operation as spe
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -73,7 +73,7 @@ Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the OR operation as specified by Table \ref{reducetypes}.
 }
@@ -83,7 +83,7 @@ where \TYPE{} is one of the integer types supported for the OR operation as spec
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -106,7 +106,7 @@ Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newlin
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the XOR operation as specified by Table \ref{reducetypes}.
 }
@@ -116,7 +116,7 @@ where \TYPE{} is one of the integer types supported for the XOR operation as spe
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -139,7 +139,7 @@ Performs a maximum-value reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer or real types supported for the MAX operation as specified by Table \ref{reducetypes}.
 }
@@ -149,7 +149,7 @@ where \TYPE{} is one of the integer or real types supported for the MAX operatio
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -174,7 +174,7 @@ Performs a minimum-value reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer or real types supported for the MIN operation as specified by Table \ref{reducetypes}.
 }
@@ -184,7 +184,7 @@ where \TYPE{} is one of the integer or real types supported for the MIN operatio
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -209,7 +209,7 @@ Performs a sum reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation as specified by Table \ref{reducetypes}.
 }
@@ -219,7 +219,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the SU
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -246,7 +246,7 @@ Performs a product reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation as specified by Table \ref{reducetypes}.
 }
@@ -256,7 +256,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, int nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -293,7 +293,9 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
+    arrays. \newtext{In teams based API calls, \VAR{nreduce} must be of type size\_t.
+    In deprecated active-set based API calls,}
+    \VAR{nreduce} must be of type int. When using \Fortran, it
     must be a default integer value.}
 
 
