@@ -12,10 +12,15 @@
     \begin{tabular}{|l|l|l|l|l|}
       \hline
       \TYPE              & \TYPENAME  & \multicolumn{3}{c|}{Operations Supporting \TYPE}\\ \hline
+      unsigned char      & uchar      & AND, OR, XOR & & \\ \hline
       short              & short      & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned short     & ushort     & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
       int                & int        & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned int       & uint       & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
       long               & long       & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned long      & ulong      & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline  
       long long          & longlong   & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned long long & ulonglong  & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
       float              & float      & & MAX, MIN & SUM, PROD \\ \hline
       double             & double     & & MAX, MIN & SUM, PROD \\ \hline
       long double        & longdouble & & MAX, MIN & SUM, PROD \\ \hline
@@ -35,7 +40,7 @@ Performs a bitwise AND reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_and\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the AND operation as specified by Table \ref{reducetypes}.
 }
@@ -45,7 +50,7 @@ where \TYPE{} is one of the integer types supported for the AND operation as spe
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_\FuncParam{TYPENAME}\_and\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -68,7 +73,7 @@ Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_or\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the OR operation as specified by Table \ref{reducetypes}.
 }
@@ -78,7 +83,7 @@ where \TYPE{} is one of the integer types supported for the OR operation as spec
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_\FuncParam{TYPENAME}\_or\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -101,7 +106,7 @@ Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newlin
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_xor\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the XOR operation as specified by Table \ref{reducetypes}.
 }
@@ -111,7 +116,7 @@ where \TYPE{} is one of the integer types supported for the XOR operation as spe
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_\FuncParam{TYPENAME}\_xor\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -134,7 +139,7 @@ Performs a maximum-value reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_max\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer or real types supported for the MAX operation as specified by Table \ref{reducetypes}.
 }
@@ -144,7 +149,7 @@ where \TYPE{} is one of the integer or real types supported for the MAX operatio
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_\FuncParam{TYPENAME}\_max\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -169,7 +174,7 @@ Performs a minimum-value reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_min\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer or real types supported for the MIN operation as specified by Table \ref{reducetypes}.
 }
@@ -179,7 +184,7 @@ where \TYPE{} is one of the integer or real types supported for the MIN operatio
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_\FuncParam{TYPENAME}\_min\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -204,7 +209,7 @@ Performs a sum reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_sum\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation as specified by Table \ref{reducetypes}.
 }
@@ -214,7 +219,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the SU
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_\FuncParam{TYPENAME}\_sum\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -241,7 +246,7 @@ Performs a product reduction across a set of \acp{PE}.\newline
 %% C11
 {\color{Green}
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_prod\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation as specified by Table \ref{reducetypes}.
 }
@@ -251,7 +256,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 \end{Csynopsis}
 {\color{Green}
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_team\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, shmem_team_t team);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
 }
 \begin{DeprecateBlock}
@@ -276,6 +281,10 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
 
 \begin{apiarguments}
 
+\newtext{%
+\apiargument{IN}{team}{The team over which to perform the operation.}%
+}
+
 \apiargument{OUT}{dest}{A symmetric array, of length \VAR{nreduce} elements, to
     receive the result of the reduction routines.  The data type of \dest{} varies
     with the version of the reduction routine being called.  When calling from
@@ -284,12 +293,11 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
+    arrays. \newtext{In teams based API calls, \VAR{nreduce} must be of type size\_t.
+    In deprecated active-set based API calls,}
+    \VAR{nreduce} must be of type int. When using \Fortran, it
     must be a default integer value.}
 
-\newtext{%
-\apiargument{IN}{team}{The team over which to perform the operation.}%
-}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
@@ -453,49 +461,11 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
 \begin{apiexamples}
 
 \apifexample
-    {This \Fortran reduction example statically initializes the \VAR{pSync} array
-    and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all
-    even \acp{PE}.}
-    {./example_code/shmem_and_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_max_example.f90}
-    {}
-
-\apifexample
-    { This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{minimum} value of real variable \VAR{FOO} across all the even
-    \acp{PE}.}
-    {./example_code/shmem_min_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{sum} of the real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_sum_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{product} of the real variable \VAR{FOO} across all the even \acp{PE}.}
-    {./example_code/shmem_prod_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_or_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and
-    computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_xor_example.f90}
+    {This \CorCpp reduction example gets integers from an external
+    source (random genererator in this example), tests to see if the \ac{PE} got a valid
+    value, and outputs the sum of values for which all \acp{PE} got a valid
+    value.}
+    {./example_code/shmem_reduce_example.c}
     {}
 
 \end{apiexamples}
