@@ -519,7 +519,13 @@ operations has been superseded by a more readable, flexible method for
 organizing and communicating between groups of \acp{PE}. All collective routines
 which previously indicated subgroups of \acp{PE} with a list of
 parameters to describe the subgroup composition should be phased
-out in favor of using collective operations with a team parameter
+out in favor of using collective operations with a team parameter.
+
+When moving from active set routines to teams based routines, the fixed-size
+versions of the routines, e.g. \FUNC{shmem\_broadcast32}, were not
+carried forward. Instead, all teams based collective routines use standard
+\Cstd types with the option to use generic \textit{C11} functions for more portable
+and maintainable implementations.
 
 \subsection{\CorCpp: \FUNC{shmem\_barrier}}
 Each \openshmem team might
