@@ -92,6 +92,14 @@ If \VAR{new\_team} cannot be created, then it will be assigned the value
 
 \begin{apiexamples}
 
+    \apicexample
+    {The following example demonstrates the use of strided split in a
+    \Cstd[11] program. The program creates a new team of all even number
+    \acp{PE} from the default team, then retrieves the \ac{PE} number and
+    team size on all \acp{PE} that are members of the new team.}
+    {./example_code/shmem_team_split_strided.c}
+    {}
+
 \end{apiexamples}
 
 \end{apidefinition}
