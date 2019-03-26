@@ -155,28 +155,28 @@ of the library, depending on the state of the
 
 \subsubsection{Multiple Counting}
 \label{sec:pshmem_multiple_count}
-Since some functions in \openshmem library may itself be implemented 
+Since some functions in \openshmem library may be implemented 
 using more basic \openshmem functions, it is possible for these basic  
 profiling functions to be called from within an \openshmem function 
 that was originally called from a profiling routine. For example, 
 \openshmem collective operations can be implemented using basic 
 point-to-point operations. Thus, profiling such a collective 
-operation may lead to counting a profiling function for 
+operation may lead to counting a profiling function for a
 point-to-point operation more than once after being called from the 
-collective function. It is the developer's responsibility to protect 
-the profiling application not to count a function more than once if 
+collective function. It is the developer's responsibility to ensure 
+the profiling application does not count a function more than once if 
 that effect is not intended. For a single-threaded profiler, this 
 can be achieved through a static variable counting the number of 
 times a function has been profiled. In a multi-threaded environment, 
 additional synchronizations are needed to manage updates to this 
-counter and thus, becomes more complex to accurately profile the 
+counter and thus, it becomes more complex to accurately profile the 
 \openshmem functions.
 
 \subsubsection{Separate Build and Link}
 \label{sec:pshmem_separate_build_link}
 To build the profiling tool with both the default \openshmem
 functions as well as the \openshmem functions to be intercepted, 
-the developers must build the multiple instances of the \openshmem
+developers must build the multiple instances of the \openshmem
 functions separately and link them to provide all the definitions. 
 This is necessary so that the developers of the profiling library 
 need only to define those \openshmem functions that they wish 
