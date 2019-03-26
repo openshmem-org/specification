@@ -164,9 +164,9 @@ or the input is not in accordance with the Specification, the behavior
 is undefined.
 
 \begin{longtable}{|>{\raggedright}p{0.3\textwidth}|>{\raggedright}p{0.6\textwidth}|}
-\hline 
+\hline
 \textbf{Inappropriate Usage} & \textbf{Undefined Behavior}\tabularnewline
-\hline 
+\hline
 \endhead
 Uninitialized library & If the \openshmem library is not initialized,
 calls to non-initializing \openshmem routines have undefined
@@ -185,18 +185,18 @@ non-existent \ac{PE}, then the \openshmem library may handle this
 situation in an implementation-defined way.  For example, the library may report
 an error message saying that the \ac{PE} accessed is outside the range of
 accessible \acp{PE}, or may exit without a warning.\tabularnewline
-\hline 
+\hline
 Use of non-symmetric variables & Some routines require remotely accessible
 variables to perform their function.  For example, a \PUT{} to a non-symmetric variable may
 be trapped where possible and the library may abort the program.  Another
 implementation may choose to continue execution with or without a warning.
 \tabularnewline
-\hline 
+\hline
 Non-symmetric allocation of symmetric memory & The symmetric memory management routines are
 collectives. For example, all \acp{PE} in the program must call
 \FUNC{shmem\_malloc} with the same \VAR{size} argument.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
-\hline 
+\hline
 Use of null pointers with non-zero \VAR{len} specified & In any \openshmem routine
 that takes a pointer and \VAR{len} describing the number of elements in that
 pointer, a null pointer may not be given unless the corresponding \VAR{len} is also
@@ -209,7 +209,7 @@ The following cases summarize this behavior:
     \item \VAR{len} is not 0, pointer is non-null: supported.
 \end{itemize}
 \tabularnewline
-\hline 
+\hline
 \end{longtable}
 
 
@@ -595,7 +595,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 \FUNC{shmem\_global\_exit}.
 \\ See Section \ref{subsec:shmem_global_exit}.
 %
-\item Clarified ordering semantics of memory ordering, point-to-point synchronization, and collective 
+\item Clarified ordering semantics of memory ordering, point-to-point synchronization, and collective
 synchronization routines.
 %
 \item Clarified deprecation overview and added deprecation rationale in Annex F.
@@ -712,7 +712,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 	\FUNC{SHMEM\_SET}.
 \\See Sections \ref{subsec:shmem_atomic_fetch} and \ref{subsec:shmem_atomic_set}
 %
-\item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL} 
+\item New alltoall data exchange operations, \FUNC{SHMEM\_ALLTOALL}
 	and \FUNC{SHMEM\_ALLTOALLS}.
 \\See Sections \ref{subsec:shmem_alltoall} and \ref{subsec:shmem_alltoalls}.
 %
@@ -770,7 +770,7 @@ The following list describes the specific changes in \openshmem[1.2]:
     \FUNC{shmem\_ptr}.
 \\See Section \ref{subsec:shmem_ptr}.
 %
-\item New API to query the version and name information. 
+\item New API to query the version and name information.
 \\See Section \ref{subsec:shmem_info_get_version} and \ref{subsec:shmem_info_get_name}.
 %
 \item \openshmem library API normalization. All \Cstd symmetric memory management
@@ -781,7 +781,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \\See Section \ref{subsec:shfree}.
 %
 \item Deprecation of \Fortran API routine \FUNC{SHMEM\_PUT}.
-\\See Section \ref{subsec:shmem_put}. 
+\\See Section \ref{subsec:shmem_put}.
 %
 \item Clarification related to \FUNC{shmem\_wait}.
 \\See Section \ref{subsec:shmem_wait_until}.
@@ -809,7 +809,7 @@ and general readabilty and usability improvements to the document structure.
 The following list describes the specific changes in \openshmem[1.1]:
 \begin{itemize}
 %
-\item Clarifications of the completion semantics of memory synchronization 
+\item Clarifications of the completion semantics of memory synchronization
       interfaces.
 \\See Section \ref{subsec:memory_order}.
 %
@@ -847,21 +847,21 @@ The following list describes the specific changes in \openshmem[1.1]:
 \\See Section \ref{subsec:library_constants} and \ref{subsec:shmem_wait_until}.
 %
 \item Added \ac{API} calls: \FUNC{shmem\_char\_p}, \FUNC{shmem\_char\_g}.
-\\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}. 
+\\See Sections \ref{subsec:shmem_p} and \ref{subsec:shmem_g}.
 %
 \item Removed \ac{API} calls: \FUNC{shmem\_char\_put},
       \FUNC{shmem\_char\_get}.
-\\See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}. 
+\\See Sections \ref{subsec:shmem_put} and \ref{subsec:shmem_get}.
 %
 \item The usage of \CTYPE{ptrdiff\_t}, \CTYPE{size\_t}, and \CTYPE{int} in the
       interface signature was made consistent with the description.
 \\See Sections \ref{subsec:coll}, \ref{subsec:shmem_iput}, and \ref{subsec:shmem_iget}.
 %
 \item Revised \FUNC{shmem\_barrier} example.
-\\See Section \ref{subsec:shmem_barrier}. 
+\\See Section \ref{subsec:shmem_barrier}.
 %
 \item Clarification of the initial value of \VAR{pSync} work arrays for
-\FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}. 
+\FUNC{shmem\_barrier}.\\ See Section \ref{subsec:shmem_barrier}.
 %
 \item Clarification of the expected behavior when multiple \FUNC{start\_pes}
 calls are encountered.
@@ -882,26 +882,26 @@ calls are encountered.
       \ref{subsec:shmem_atomic_fetch_add}.
 %
 \item Clarification of the expected behavior on program \OPR{exit}.
-\\See Section \ref{subsec:execution_model}, Execution Model. 
+\\See Section \ref{subsec:execution_model}, Execution Model.
 %
 \item More detailed description for the progress of \openshmem operations
 provided.
-\\See Section \ref{subsec:progress}. 
+\\See Section \ref{subsec:progress}.
 %
 \item Clarification of naming convention for non-standard interfaces and their
 inclusion in \HEADER{shmemx.h}.
-\\See Section \ref{subsec:bindings}. 
+\\See Section \ref{subsec:bindings}.
 %
 \item Various fixes to \openshmem code examples across the Specification to
-include appropriate header files. 
+include appropriate header files.
 %
 \item Removing requirement that implementations should detect size mismatch and
 return error information for \FUNC{shmalloc} and ensuring consistent
 language.
-\\See Sections \ref{subsec:shfree} and Annex \ref{sec:undefined}. 
+\\See Sections \ref{subsec:shfree} and Annex \ref{sec:undefined}.
 %
 \item \Fortran programming fixes for examples.\\ See Sections
-\ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait_until}. 
+\ref{subsec:shmem_reductions} and \ref{subsec:shmem_wait_until}.
 %
 \item Clarifications of the reuse \VAR{pSync} and \VAR{pWork} across
 collectives.
@@ -909,7 +909,7 @@ collectives.
       \ref{subsec:shmem_collect} and \ref{subsec:shmem_reductions}.
 %
 \item Name changes for UV and ICE for \ac{SGI} systems.
-\\See Annex \ref{sec:openshmem_history}. 
+\\See Annex \ref{sec:openshmem_history}.
 %
 \end{itemize}
 

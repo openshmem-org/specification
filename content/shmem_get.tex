@@ -44,9 +44,9 @@ CALL @\FuncDecl{SHMEM\_REAL\_GET}@(dest, source, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{\oldtext{The context on which to perform the operation.} \newtext{A context handle specifying the context on which to perform the operation.}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
-        \oldtext{\CONST{SHMEM\_CTX\_DEFAULT}} \newtext{the default context}.}
+        the default context.}
     \apiargument{OUT}{dest}{Local data object to be updated.}
     \apiargument{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe}
         that contains the data to be copied.  This data object must be remotely
@@ -65,10 +65,8 @@ CALL @\FuncDecl{SHMEM\_REAL\_GET}@(dest, source, nelems, pe)
    object from a different \ac{PE} to a contiguous data object on the local
    \ac{PE}.  The routines return after the data has been delivered to the
    \dest{} array on the local \ac{PE}. 
-   \newtext{
    If the context handle \VAR{ctx} does not correspond to a valid context,
    the behavior is undefined.
-   }
 }
 
 \apidesctable{
