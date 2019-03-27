@@ -38,7 +38,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     no entries in \VAR{ivars} satisfied the test condition.  This routine
     compares each of the \VAR{nelems} elements in the \VAR{ivars} array with
     the value \VAR{cmp\_value} according to the comparison operator \VAR{cmp}
-    at the calling PE.  The order in which these elements are tested is
+    at the calling \ac{PE}.  The order in which these elements are tested is
     unspecified.  If an entry $i$ in \VAR{ivars} within the test set satisfies
     the test condition, a series of calls to \FUNC{shmem\_test\_any} must
     eventually return $i$.
