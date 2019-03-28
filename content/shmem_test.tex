@@ -33,9 +33,9 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
   calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
   within the calling \ac{PE} or within another \ac{PE}.
 
-  Implementations must ensure that \FUNC{shmem\_test} does not return true before
+  Implementations must ensure that \FUNC{shmem\_test} does not return 1 before
   the update of the memory indicated by \VAR{ivar} is fully complete.
-  Partial updates to the memory must not cause \FUNC{shmem\_test} to return true.
+  Partial updates to the memory must not cause \FUNC{shmem\_test} to return 1.
 }
 
 \apireturnvalues{
