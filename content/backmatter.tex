@@ -238,22 +238,33 @@ finalization call is made.
 \label{subsec:interoperability:mpmd}
 
 MPI defines the dynamic process model that allows creation of processes after
-an MPI application has started, and provides the mechanism to establish communication
-between the newly created processes and the existing MPI application. This model
-can be useful when implementing a MPMD application by dynamically starting multiple
-groups of processes, and each of these groups may launch a different executable
-MPI program. The communication performed within a process group is identified by
-an intracommunicator, and that performed between two process groups is identified
-by an intercommunicator. The two types of communication do not interfere with
-each other.
-
+an MPI application has started (e.g., by calling \FUNC{MPI\_Comm\_spawn}),
+and provides the mechanism to establish communication
+between the newly created processes and the existing MPI application (see
+MPI standard version 3.1, Chapter 10).
 Unlike MPI, \openshmem requires all PEs to collectively allocate and initialize
 resources used by the \openshmem library before any other \openshmem routine may
-be called. Thus, the dynamic process model is not supported in \openshmem. For
-instance, the processes newly created by a call to \FUNC{MPI\_Comm\_spawn} cannot
-join the existing \openshmem environment that was initialized by other existing
-PEs. The \FUNC{shmem\_pe\_accessible} routine can be used in this scenario to
-portably ensure that a remote PE is accessible via \openshmem communication.
+be called. Hence, attention must be paid when using \openshmem together with the
+MPI dynamic process routines. Specifically, we clarify the following three scenarios:
+
+\begin{enumerate}
+\item After MPI initialization and before any PEs start \openshmem initialization,
+it is implementation defined whether processes created by a call to MPI dynamic
+process routine are able to join the call to \FUNC{shmem\_init} or
+\FUNC{shmem\_init\_thread} and establish the same \openshmem environment together
+with other existing PEs.
+
+\item After \openshmem initialization, a process newly created by
+the MPI dynamic process routine cannot join the existing \openshmem environment
+that was initialized by other existing PEs. The \FUNC{shmem\_pe\_accessible} routine
+may be used in this scenario to portably ensure that a remote PE is accessible
+via \openshmem communication.
+
+\item After \openshmem initialization, it is implementation defined whether
+processes newly created by MPI dynamic process routine can make a call to
+\FUNC{shmem\_init} or \FUNC{shmem\_init\_thread} and establish a separate
+\openshmem environment.
+\end{enumerate}
 
 
 \subsection{Thread Safety}
