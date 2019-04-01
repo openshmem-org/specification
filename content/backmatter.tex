@@ -322,7 +322,7 @@ result.
 \apiimpnotes{
 In the implementations that share the same communication resources for \openshmem
 and MPI, the memory or network synchronization internally issued for one
-programming model may also effect the status of operations in the other model.
+programming model may also affect the status of operations in the other model.
 Although the user program must make necessary synchronization calls for both models
 in order to ensure semantics correctness, a high performance implementation may
 internally avoid the later synchronization made by the other model when no
@@ -347,7 +347,7 @@ order to prevent any deadlock or performance degradation.
 \apiimpnotes{
 Implementations that provide both \openshmem and MPI interfaces should try
 to ensure progress for both models when necessary and possible, for performance
-reasons. For instance, a high-quality implementation may start making progress for
+reasons. For instance, an implementation may start making progress for
 both \openshmem and MPI whenever possible, after the user program has called
 \FUNC{shmem\_init} and \FUNC{MPI\_init} provided by the same system.
 }
