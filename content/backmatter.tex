@@ -301,23 +301,68 @@ in each communication environment and manage the mapping of identifiers in the
 program when necessary.
 
 
-\subsection{RMA Synchronization, Ordering and Atomicity}
+\subsection{RMA Memory Semantics, Completion, Ordering and Atomicity}
 \label{subsec:interoperability:rma}
 
-Both \openshmem and MPI define similar RMA and atomic operations with additional
-semantics and synchronization routines to ensure the operations' ordering and
-completion. A synchronization call in \openshmem, however, does not interfere
-with the outstanding operations issued in the MPI environment. For instance,
+Both \openshmem and MPI define similar RMA and atomic operations for remote memory 
+access, however, each model defines different semantics for memory synchronization,
+operation completion, ordering, and atomicity.
+We clarify the semantics differences and interoperability of these two models 
+as below.
+
+\begin{itemize}
+
+\item Memory Semantics: MPI defines the concept of public and private copies
+for each RMA window. Any remote RMA operation can access only the
+public copy of that window, and memory load\slash store can access only the
+private copy. MPI defines two memory models for memory
+synchronization between the copies: RMA separate and RMA unified (see definition
+in MPI standard version 3.1, Section 11.4), and requires additional RMA
+synchronization call to ensure consistent view on memory in each memory model
+(see requirement of RMA synchronization in MPI standard version 3.1, Section 11.7).
+Unlike MPI, the memory model in \openshmem is implicit.
+However, additional synchronization is still required to ensure consistent view
+between remote memory access and memory load\slash store (e.g., \FUNC{shmem\_barrier}).
+
+To ensure portability, a hybrid program should always make appropriate \openshmem
+and MPI synchronization calls for remote access in each environment respectively
+in order to ensure any remote updates are visible to the target PE
+and also become visible to other remote access operations. For instance, a program
+can make a call to \FUNC{shmem\_barrier} on both local and target PEs after
+a \FUNC{shmem\_put} operation in order to ensure the remote update is visible to
+the target PE, and then make a call to \FUNC{MPI\_Win\_sync} on the target
+PE before the data can be accessed by other PEs using MPI RMA operations.
+
+\item Completion: Unlike \openshmem RMA operations, all MPI RMA communication
+operations including the atomic operations such as \FUNC{MPI\_Accumulate} are
+nonblocking. Similar to \openshmem nonblocking RMA, the program should perform
+additional MPI synchronization to ensure any local buffers involved in the outstanding
+MPI RMA operations can be safely reused (see definition of MPI RMA synchronization
+in MPI standard version 3.1, Section 11.5).
+A synchronization call in \openshmem, however, does not interfere
+with any outstanding operations issued in the MPI environment. For instance,
 the \FUNC{shmem\_quiet} function only ensures completion of \openshmem RMA,
 AMO, and memory store operations. It does not force the completion
 of any MPI outstanding operations. To ensure the completion of RMA operations
 in MPI, the program should use an appropriate MPI synchronization routine in the
 MPI context (e.g., using \FUNC{MPI\_Win\_flush\_all} to ensure remote completion
-of all outstanding operations in the passive-target mode). Similarly, \openshmem
+of all outstanding operations in the passive-target mode).
+
+\item Ordering: Unlike \openshmem ordering semantics, MPI does not ensure the
+ordering of {\PUT} and {\GET} operations, however, it guarantees ordering between
+MPI atomic operations from one process to the same (or overlapping) memory
+locations at another process via the same window. A call to \FUNC{shmem\_fence}
+forces neither ordering of any MPI operations, nor ordering between outstanding
+MPI operations
+and \openshmem operations.
+
+\item Atomicity:  \openshmem
 guarantees only the atomicity of concurrent AMO operations that operate on
 symmetric data with the same datatype. Access to the same symmetric object with
-MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may result in undefined
-result.
+MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may result in
+undefined result.
+
+\end{itemize}
 
 \apiimpnotes{
 In the implementations that share the same communication resources for \openshmem
