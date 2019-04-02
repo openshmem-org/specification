@@ -46,7 +46,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     \VAR{status} set to 0 will be included in the wait set, and elements set to
     1 will be ignored.  If all elements in \VAR{status} are set to 1 or
     \VAR{nelems} is 0, the wait set is empty and this routine returns
-    \CONST{SIZE\_MAX}.  If \VAR{status} is a null pointer, it is ignored and
+    immediately.  If \VAR{status} is a null pointer, it is ignored and
     all elements in \VAR{ivars} are included in the wait set.  The \VAR{ivars}
     and \VAR{status} arrays must not overlap in memory.
 }
