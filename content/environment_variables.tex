@@ -34,8 +34,8 @@ deprecation rationale for more details.
     character suffix
     & The value set in this environment variable is interpreted as an
     implementation-defined size (in bytes) at least as large as the integer
-    ceiling of the product of the numeric prefix and the scaling factor per PE.
-    The allowed character suffix for the scaling factor are as follows:
+    ceiling of the product of the numeric prefix and the scaling factor per
+    \ac{PE}. The allowed character suffix for the scaling factor are as follows:
       \begin{itemize}
         \item k or K multiplies by \(2^{10}\)  (kibibytes)
         \item m or M multiplies by \(2^{20}\)  (mebibytes)
@@ -50,7 +50,7 @@ deprecation rationale for more details.
       the string \enquote{0.5m}.
 
       An invalid value for {SHMEM\_SYMMETRIC\_SIZE} is an error, which the
-      OpenSHMEM library shall report by either returning a nonzero value from
+      \openshmem library shall report by either returning a nonzero value from
       \FUNC{shmem\_init\_thread} or causing program termination.
     \tabularnewline\hline
 %%
