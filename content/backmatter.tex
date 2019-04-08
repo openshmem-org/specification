@@ -510,6 +510,15 @@ Major changes in \openshmem[1.5] include \dots
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
+\item Added a new multiple-element point-to-point synchronization API with
+  the functions: \FUNC{shmem\_wait\_until\_all}, \FUNC{shmem\_wait\_until\_any},
+  \FUNC{shmem\_wait\_until\_some}, \FUNC{shmem\_test\_all},
+  \FUNC{shmem\_test\_any}, and \FUNC{shmem\_test\_some}.
+  \\See Sections \ref{subsec:shmem_wait_until_all},
+  \ref{subsec:shmem_wait_until_any}, \ref{subsec:shmem_wait_until_some},
+  \ref{subsec:shmem_test_all}, \ref{subsec:shmem_test_any}, and
+  \ref{subsec:shmem_test_some}.
+%
 \item Added \openshmem profiling interface.
   \\ See Section~\ref{sec:openshmem_profiling_interface}.
 %
