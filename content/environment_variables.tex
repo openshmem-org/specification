@@ -47,9 +47,11 @@ deprecation rationale for more details.
       equivalent to the integer value 3250586. Only one multiplier is
       recognized, so \enquote{20kk} will not produce the same desired result as
       \enquote{20m}. Usage of string \enquote{.5m} will yield the same result as
-      the string \enquote{0.5m}. Any unrecognized suffix is an error, generates
-      an error report, and either returns from shmem_init_thread or otherwise
-      causes program termination.
+      the string \enquote{0.5m}.
+
+      An invalid value for {SHMEM\_SYMMETRIC\_SIZE} is an error, which the
+      OpenSHMEM library shall report by either returning a nonzero value from
+      \FUNC{shmem\_init\_thread} or causing program termination.
     \tabularnewline\hline
 %%
 \EnvVarDecl{SHMEM\_DEBUG}
