@@ -30,12 +30,13 @@ deprecation rationale for more details.
     \tabularnewline\hline
 %%
 \EnvVarDecl{SHMEM\_SYMMETRIC\_SIZE}
-    & Non-negative decimal value (integer or floating point) with an optional
-    character suffix
+    & Non-negative integer or floating point value with an optional character
+    suffix
     & The value set in this environment variable is interpreted as an
     implementation-defined size (in bytes) at least as large as the integer
     ceiling of the product of the numeric prefix and the scaling factor per
-    \ac{PE}. The allowed character suffix for the scaling factor are as follows:
+    \ac{PE}. The allowed character suffixes for the scaling factor are as
+    follows:
       \begin{itemize}
         \item k or K multiplies by \(2^{10}\)  (kibibytes)
         \item m or M multiplies by \(2^{20}\)  (mebibytes)
@@ -43,11 +44,11 @@ deprecation rationale for more details.
         \item t or T multiplies by \(2^{40}\)  (tebibytes)
       \end{itemize}
       For example, string \enquote{20m} is equivalent to the integer value
-      20971520, or 20 megabytes. Similarly the string \enquote{3.1m} is
+      20971520, or 20 mebibytes. Similarly the string \enquote{3.1m} is
       equivalent to the integer value 3250586. Only one multiplier is
-      recognized, so \enquote{20kk} will not produce the same desired result as
-      \enquote{20m}. Usage of string \enquote{.5m} will yield the same result as
-      the string \enquote{0.5m}.
+      recognized, so \enquote{20kk} will not produce the same result as
+      \enquote{20m}. Usage of string \enquote{.5m} will yield the same result
+      as the string \enquote{0.5m}.
 
       An invalid value for {SHMEM\_SYMMETRIC\_SIZE} is an error, which the
       \openshmem library shall report by either returning a nonzero value from
