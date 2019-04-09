@@ -45,10 +45,11 @@ deprecation rationale for more details.
       \end{itemize}
       For example, string \enquote{20m} is equivalent to the integer value
       20971520, or 20 mebibytes. Similarly the string \enquote{3.1m} is
-      equivalent to the integer value 3250586. Only one multiplier is
-      recognized, so \enquote{20kk} will not produce the same result as
-      \enquote{20m}. Usage of string \enquote{.5m} will yield the same result
-      as the string \enquote{0.5m}.
+      equivalent to the integer value 3250586.
+      Only one multiplier is recognized and any characters following the
+      multiplier are ignored, so \enquote{20kk} will not produce the same
+      result as \enquote{20m}. Usage of string \enquote{.5m} will yield the
+      same result as the string \enquote{0.5m}.
 
       An invalid value for {SHMEM\_SYMMETRIC\_SIZE} is an error, which the
       \openshmem library shall report by either returning a nonzero value from
