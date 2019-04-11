@@ -32,10 +32,10 @@ deprecation rationale for more details.
 \EnvVarDecl{SHMEM\_SYMMETRIC\_SIZE}
     & Non-negative integer or floating point value with an optional character
     suffix
-    & The value set in this environment variable is interpreted as an
-    implementation-defined size (in bytes) at least as large as the integer
-    ceiling of the product of the numeric prefix and the scaling factor per
-    \ac{PE}. The allowed character suffixes for the scaling factor are as
+    & Specifies the size (in bytes) of the symmetric heap memory per \ac{PE}.
+    The resulting size is implementation-defined and must be least as large as
+    the integer ceiling of the product of the numeric prefix and the scaling
+    factor. The allowed character suffixes for the scaling factor are as
     follows:
       \begin{itemize}
         \item k or K multiplies by \(2^{10}\)  (kibibytes)
