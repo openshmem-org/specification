@@ -1,32 +1,33 @@
+\color{ForestGreen}
 \apisummary{
     The put-with-signal routines provide a method for copying data from a
     contiguous local data object to a data object on a specified \ac{PE}
-    and subsequently setting a remote flag to signal completion.
+    and subsequently update a remote flag to signal completion.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_putmem\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_putmem\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
 \end{CsynopsisCol}
 
 \begin{apiarguments}
@@ -43,17 +44,23 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     remotely accessible.}
     \apiargument{IN}{signal}{Unsigned 64-bit value that is assigned to the
     remote \VAR{sig\_addr} signal data object.}
+    \apiargument{IN}{sig\_op}{Signal operator that represents the type of update
+    to be performed to the remote \VAR{sig\_addr} signal data object.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
 \apidescription{
     The put-with-signal routines provide a method for copying data from a
     contiguous local data object to a data object on a specified \ac{PE}
-    and subsequently setting a remote flag to signal completion. The routines
+    and subsequently update a remote flag to signal completion. The routines
     return after the data has been copied out of the \source{} array on the
-    local \ac{PE}. The delivery of \VAR{signal} flag on the remote \ac{PE}
-    indicates the delivery of its corresponding \dest{} data words into the
-    data object on the remote \ac{PE}.
+    local \ac{PE}.
+
+    The \VAR{sig\_op} signal operator determines the type of update to be
+    performed on the remote \VAR{sig\_addr} signal data object. The completion
+    of signal update based on the \VAR{sig\_op} signal operator using the
+    \VAR{signal} flag on the remote \ac{PE} indicates the delivery of its
+    corresponding \dest{} data words into the data object on the remote \ac{PE}.
 }
 
 \apireturnvalues{
@@ -68,19 +75,21 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 
     The \VAR{sig\_addr} and \dest{} may not be overlapping in memory.
 
-    The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
-    delivery of its corresponding \dest{} data words into the data object on
-    the remote \ac{PE}. Without a memory-ordering operation, there is no implied
-    ordering between the delivery of the signal word of a put-with-signal
-    routine and another data transfer. For example, the delivery of the signal
-    word in a sequence consisting of a put routine followed by a put-with-signal
-    routine does not imply delivery of the put routine's data.
+    The completion of signal update using the \VAR{signal} flag on the remote
+    \ac{PE} indicates only the delivery of its corresponding \dest{} data words
+    into the data object on the remote \ac{PE}. Without a memory-ordering
+    operation, there is no implied ordering between the signal update of a
+    put-with-signal routine and another data transfer. For example, the
+    completion of the signal update in a sequence consisting of a put routine
+    followed by a put-with-signal routine does not imply delivery of the put
+    routine's data.
 
-    The signal set by the put-with-signal routines is compatible
-    with all point-to-point synchronization interfaces. The delivery of
-    \VAR{signal} flag on the remote \ac{PE} must not cause partial updates. This
-    requires the update on \VAR{signal} flag to be an atomic operation, with
-    atomicity guarantees described in Section~\ref{subsec:amo_guarantees}.
+    The signal update by the put-with-signal routines is compatible with all
+    point-to-point synchronization interfaces. The delivery of \VAR{signal} flag
+    based on the \VAR{sig\_op} signal operator on the remote \ac{PE} must not
+    cause partial updates. Only concurrent accesses on \VAR{sig\_addr} by
+    different signal update operations using the same signal update operator is
+    guaranteed to be exclusive.
 }
 
 \begin{apiexamples}
@@ -95,3 +104,4 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
 \end{apiexamples}
 
 \end{apidefinition}
+\color{black}
