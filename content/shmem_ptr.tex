@@ -25,12 +25,12 @@ PTR = @\FuncDecl{SHMEM\_PTR}@(dest, pe)
 
 \apidescription{
     \FUNC{shmem\_ptr} returns an address that may be used to directly reference
-    \dest{} on the specified \ac{PE}.  This address can be assigned to a pointer.
-    After that, ordinary loads and stores to this remote address may be performed.
-    The address returned by \FUNC{shmem\_ptr} is a local address to a remotely
-    accessible data object.  Providing this address to argument of an
-    \openshmem routine that requires a symmetric address to a remotely
-    accessible object results in undefined behavior.
+    \dest{} on the specified \ac{PE}.  This address can be assigned to a
+    pointer.  After that, ordinary loads and stores to \dest{} may be
+    performed.  The address returned by \FUNC{shmem\_ptr} is a local address to
+    a remotely accessible data object.  Providing this address to argument of
+    an \openshmem routine that requires a symmetric address results in
+    undefined behavior.
     
     The \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish
     communication, for example when a sequence of reads and writes to a data
