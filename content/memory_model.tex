@@ -57,7 +57,7 @@ local pointer to the desired remotely accessible object.  The address contained
 in this pointer is referred to as a {\em symmetric address}.  Manipulation of
 symmetric addresses, including pointer arithmetic; structure or union member
 access; and array indexing are permitted as long as the resulting local pointer
-remains within a given symmetric allocation or object.  Symmetric addresses
+remains within the same symmetric allocation or object.  Symmetric addresses
 provided to typed and type-generic \openshmem interfaces must be naturally
 aligned based on their type and any requirements of the underlying
 architecture.  Symmetric addresses are only valid at the \ac{PE} where they
