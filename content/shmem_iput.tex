@@ -69,9 +69,8 @@ CALL @\FuncDecl{SHMEM\_REAL\_IPUT}@(dest, source, dst, sst, nelems, pe)
     on specified remote \ac{PE}. Both strides, \VAR{dst} and \VAR{sst}, must be
     greater than or equal to \CONST{1}. The routines return when the data has
     been copied out of the \VAR{source} array on the local \ac{PE} but not
-    necessarily before the data has been delivered to the remote data object.
-    If the context handle \VAR{ctx} does not correspond to a valid context,
-    the behavior is undefined.
+    necessarily before the data has been delivered to the remote data object. Use
+    \FUNC{shmem\_quiet} to force completion of all \FUNC{iput} transfers.
 }
 
 \apidesctable{

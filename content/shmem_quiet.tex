@@ -22,7 +22,7 @@ CALL @\FuncDecl{SHMEM\_QUIET}@
 \end{apiarguments}
 
 \apidescription{ 
-    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \ac{AMO},
+    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, strided \PUT{}, \ac{AMO},
     memory store, and nonblocking \PUT{} and \GET{} routines on
     symmetric data objects issued by the calling \ac{PE} on the given context. All \PUT{}, \ac{AMO},
     memory store, and nonblocking \PUT{} and \GET{} routines to
