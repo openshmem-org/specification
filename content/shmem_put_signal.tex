@@ -40,9 +40,8 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
     arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.}
     \apiargument{OUT}{sig\_addr}{Data object to be updated on the remote
-    \ac{PE} as the signal. This signal data object must be
-    remotely accessible.}
-    \apiargument{IN}{signal}{Unsigned 64-bit value that is assigned to the
+    \ac{PE} as the signal. This signal data object must be remotely accessible.}
+    \apiargument{IN}{signal}{Unsigned 64-bit value that is used to update the
     remote \VAR{sig\_addr} signal data object.}
     \apiargument{IN}{sig\_op}{Signal operator that represents the type of update
     to be performed to the remote \VAR{sig\_addr} signal data object.}
@@ -61,6 +60,12 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     of signal update based on the \VAR{sig\_op} signal operator using the
     \VAR{signal} flag on the remote \ac{PE} indicates the delivery of its
     corresponding \dest{} data words into the data object on the remote \ac{PE}.
+
+    The signal update by the put-with-signal routine is compatible with all
+    point-to-point synchronization interfaces. The delivery of \VAR{signal} flag
+    based on the remote \ac{PE} must not cause partial updates. Only concurrent
+    accesses on \VAR{sig\_addr} by different put-with-signal operations using
+    the same signal update operator is guaranteed to be exclusive.
 }
 
 \apireturnvalues{
@@ -83,13 +88,6 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     completion of the signal update in a sequence consisting of a put routine
     followed by a put-with-signal routine does not imply delivery of the put
     routine's data.
-
-    The signal update by the put-with-signal routines is compatible with all
-    point-to-point synchronization interfaces. The delivery of \VAR{signal} flag
-    based on the \VAR{sig\_op} signal operator on the remote \ac{PE} must not
-    cause partial updates. Only concurrent accesses on \VAR{sig\_addr} by
-    different signal update operations using the same signal update operator is
-    guaranteed to be exclusive.
 }
 
 \begin{apiexamples}
