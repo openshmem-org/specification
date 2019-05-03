@@ -5,13 +5,13 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+TYPE @\FuncDecl{shmem\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
@@ -39,7 +39,7 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 \begin{apiarguments}
 
 \apiargument{OUT}{ivar}{A remotely accessible integer variable. When using \CorCpp,
-    the type of \VAR{ivar} should match that implied in the SYNOPSIS section.} 
+    the type of \VAR{ivar} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
   \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
   When using \CorCpp, it must be of type \CTYPE{int}.}
@@ -50,7 +50,7 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 
 \end{apiarguments}
 
-\apidescription{ 
+\apidescription{
     The \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} operations block until
     the value contained in the symmetric data object, \VAR{ivar}, at the
     calling \ac{PE} satisfies the wait condition.  In an \openshmem program
@@ -80,9 +80,13 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 \apitablerow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
 \apitablerow{shmem\_int8\_wait, shmem\_int8\_wait\_until}{INTEGER*8}
 
+\color{ForestGreen}
 \apireturnvalues{
-    None.
+    Returns a single element of type specified in the symopsis. It is the value
+    contained in the symmetric data object, \VAR{ivar}, at the calling \ac{PE}
+    that satisfies the wait condition.
 }
+\color{Black}
 
 \apinotes{
   As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated;
