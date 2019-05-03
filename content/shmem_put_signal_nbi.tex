@@ -57,9 +57,14 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
     complete after a subsequent call to \FUNC{shmem\_quiet}. At the completion
     of \FUNC{shmem\_quiet}, the data has been copied out of the \source{} array
     on the local \ac{PE} and delivered into the \dest{} array on the destination
-    \ac{PE}. The delivery of \VAR{signal} flag on the remote \ac{PE} indicates
-    the delivery of its corresponding \dest{} data words into the data object on
-    the remote \ac{PE}.
+    \ac{PE}.
+
+    The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
+    delivery of its corresponding \dest{} data words into the data object on the
+    remote \ac{PE}. Furthermore, two successive non-blocking put-with-signal
+    routines, or a non-blocking put-with-signal routine with another data
+    transfer may deliver data out of order unless a call to \FUNC{shmem\_fence}
+    is introduced between the two calls.
 
     The \VAR{sig\_op} signal operator determines the type of update to be
     performed on the remote \VAR{sig\_addr} signal data object.
