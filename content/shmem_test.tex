@@ -1,5 +1,5 @@
 \apisummary{
-  Test whether a variable on the local \ac{PE} has changed.
+    Indicate whether a variable on the local \ac{PE} meets the specified condition.
 }
 
 \begin{apidefinition}
@@ -18,7 +18,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-  \apiargument{OUT}{ivar}{A pointer to a remotely accessible data object.}
+  \apiargument{IN}{ivar}{A pointer to a remotely accessible data object.}
   \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.\color{ForestGreen}The comparison operator may be used with
     a point-to-point hint constants by combining them with a bitwise OR
