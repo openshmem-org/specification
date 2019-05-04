@@ -38,11 +38,14 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 
 \begin{apiarguments}
 
-\apiargument{OUT}{ivar}{A remotely accessible integer variable. When using \CorCpp,
-    the type of \VAR{ivar} should match that implied in the SYNOPSIS section.}
-\apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
-  \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
-  When using \CorCpp, it must be of type \CTYPE{int}.}
+\apiargument{OUT}{ivar}{A remotely accessible integer variable. When using
+    \CorCpp, the type of \VAR{ivar} should match that implied in the SYNOPSIS
+    section.}
+\apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
+    \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
+    When using \CorCpp, it must be of type \CTYPE{int}. \color{ForestGreen}The
+    comparison operator may be used with a point-to-point hint constants by
+    combining them with a bitwise OR operation.\color{Black}}
 \apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
     using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
     SYNOPSIS section.  When using \Fortran, cmp\_value must be an integer of

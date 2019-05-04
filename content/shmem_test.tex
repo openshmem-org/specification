@@ -20,7 +20,9 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
   \apiargument{OUT}{ivar}{A pointer to a remotely accessible data object.}
   \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
-    \VAR{cmp\_value}.}
+    \VAR{cmp\_value}.\color{ForestGreen}The comparison operator may be used with
+    a point-to-point hint constants by combining them with a bitwise OR
+    operation.\color{Black}}
   \apiargument{IN}{cmp\_value}{The value against which the object pointed to
     by \VAR{ivar} will be compared.}
 
