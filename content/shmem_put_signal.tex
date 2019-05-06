@@ -66,7 +66,16 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     blocking or non-blocking variant of the put-with-signal routine that updates
     the \VAR{sig\_addr} signal data object using the same \VAR{sig\_op} signal
     update operator and any point-to-point synchronization routine that accesses
-    the \VAR{sig\_addr} signal data object.
+    the \VAR{sig\_addr} signal data object. With the above described atomicity
+    guarantees, the following options can be used as the \VAR{sig\_op} signal
+    operator.
+
+    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_SET}}{An update to \VAR{sig\_addr}
+    signal data object is an atomic set operation. It writes the \VAR{signal}
+    value into \VAR{sig\_addr} on \VAR{PE} as an atomic operation.}
+    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_ADD}}{An update to \VAR{sig\_addr}
+    signal data object is an atomic add operation. It adds the \VAR{signal}
+    value into \VAR{sig\_addr} on \VAR{PE} as an atomic operation.}
 }
 
 \apireturnvalues{

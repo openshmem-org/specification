@@ -70,16 +70,16 @@ See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
 \color{ForestGreen}
 \LibConstDecl{SHMEM\_SIGNAL\_SET} &
 \color{ForestGreen}
-An integer constant expression corresponding to the signal update set operation.
-See Section~\ref{subsec:shmem_put_signal} and
+An integer constant expression corresponding to the signal update operation of
+type set. See Section~\ref{subsec:shmem_put_signal} and
 Section~\ref{subsec:shmem_put_signal_nbi} for more detail about its use.
 \tabularnewline \hline
 %%
 \color{ForestGreen}
 \LibConstDecl{SHMEM\_SIGNAL\_ADD} &
 \color{ForestGreen}
-An integer constant expression corresponding to the signal update add operation.
-See Section~\ref{subsec:shmem_put_signal} and
+An integer constant expression corresponding to the signal update operation of
+type add. See Section~\ref{subsec:shmem_put_signal} and
 Section~\ref{subsec:shmem_put_signal_nbi} for more detail about its use.
 \tabularnewline \hline
 %%
@@ -290,10 +290,11 @@ See Section~\ref{subsec:p2p_intro} for more detail about its use.
 \LibConstDecl{SHMEM\_SIGNAL\_UPDATE}
 &
 \color{ForestGreen}
-An integer constant expression corresponding to a hint, specifying an update to
-be expected as a signal on a variable on the local \ac{PE} through \openshmem
-routines described in Section~\ref{subsec:shmem_put_signal} and
-Section~\ref{subsec:shmem_put_signal_nbi}. See Section~\ref{subsec:p2p_intro}
+An integer constant expression corresponding to a hint used in point-to-point
+synchronization. It specifies that the remotely accessible data object on a
+local \ac{PE} used for synchronization is expected to be updated as a signal
+through \openshmem routines described in Section~\ref{subsec:shmem_put_signal}
+and Section~\ref{subsec:shmem_put_signal_nbi}. See Section~\ref{subsec:p2p_intro}
 for more detail about its use.
 \tabularnewline \hline
 %%
