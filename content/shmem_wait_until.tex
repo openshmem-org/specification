@@ -43,8 +43,8 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
     section.}
 \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
-    When using \CorCpp, it must be of type \CTYPE{int}. \color{ForestGreen}The
-    comparison operator may be used with a point-to-point hint constants by
+    When using \CorCpp, it must be of type \CTYPE{int} \color{ForestGreen} and
+    the comparison operator may be used with point-to-point hint constants by
     combining them with a bitwise OR operation.\color{Black}}
 \apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
     using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
@@ -85,9 +85,9 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 
 \color{ForestGreen}
 \apireturnvalues{
-    Returns a single element of type specified in the symopsis. It is the value
-    contained in the symmetric data object, \VAR{ivar}, at the calling \ac{PE}
-    that satisfies the wait condition.
+    When using \CorCpp, returns the contents of the symmetric data object,
+    \VAR{ivar}, at the calling \ac{PE} that satisfies the wait condition. The
+    data type of the return value is same as the type of \VAR{ivar}.
 }
 \color{Black}
 

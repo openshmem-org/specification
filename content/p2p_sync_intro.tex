@@ -73,18 +73,20 @@ default kind corresponding to the associated comparison operation.
 
 \color{ForestGreen}
 The point-to-point synchronization interface provides support for passing hints
-to specify the type of \openshmem routine that is expected to update a variable
-on the local \ac{PE} on which the point-to-point synchronization operation is
-performed. The hints are named constants whose values are integer constant
-expressions. The hint names and associated \openshmem routines that are expected
-to update the variable on the local \ac{PE} are presented in Table~\ref{p2p-hints}.
+to specify the \openshmem routine that is expected to update the remotely
+accessible data object on a local \ac{PE} on which the synchronization operation
+is performed. The hints are named constants whose values are integer constant
+expressions. The hint names and associated \openshmem routines that is expected
+to update the remotely accessible data object on the local \ac{PE} are presented
+in Table~\ref{p2p-hints}.
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{ll}
       \hline
       Hint Name & Associated \openshmem routines \\ \hline
-      \LibConstRef{SHMEM\_SIGNAL\_UPDATE}  & Section~\ref{subsec:shmem_put_signal}
-      and Section~\ref{subsec:shmem_put_signal_nbi} \\ \hline
+      \LibConstRef{SHMEM\_SIGNAL\_UPDATE}  & Data object used for signalling
+      through routines from Sections~\ref{subsec:shmem_put_signal} and
+      ~\ref{subsec:shmem_put_signal_nbi} \\ \hline
     \end{tabular}
     \TableCaptionRef{Point-to-Point Hint Constants}
     \label{p2p-hints}
