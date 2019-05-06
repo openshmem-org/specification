@@ -38,11 +38,11 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     entries in the test set specified by \VAR{ivars} and \VAR{status} have
     satisfied the test condition at the calling \ac{PE}.  This routine does not
     block and returns zero if not all entries in \VAR{ivars} satisfied the test
-    condition\newtext{s}.  This routine \newtext{respectively} compares each of
-    the \VAR{nelems} elements in the \VAR{ivars} array with \oldtext{the}
-    \newtext{each} value \newtext{in} \VAR{cmp\_value\newtext{s}} according to
-    the comparison operator \VAR{cmp} at the calling \ac{PE}.  If \VAR{nelems}
-    is 0, the test set is empty and this routine returns 1.
+    condition\newtext{s}.  \newtext{This routine compares each element of the
+    \VAR{ivars} array in the test set with each respective value in
+    \VAR{cmp\_values} according to the comparison operator \VAR{cmp} at the
+    calling \ac{PE}}.  If \VAR{nelems} is 0, the test set is empty and this
+    routine returns 1.
 
     The optional \VAR{status} is a mask array of length \VAR{nelems} where each element
     corresponds to the respective element in \VAR{ivars} and indicates whether
