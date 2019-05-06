@@ -64,7 +64,8 @@ CALL @\FuncDecl{SHMEM\_REAL\_PUT}@(dest, source, nelems, pe)
     on the local \ac{PE}.  The delivery of data words into the data object on the
     destination \ac{PE} may occur in any order.  Furthermore, two successive put
     routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
-    introduced between the two calls.
+    introduced between the two calls. The routines are considered complete after
+	a subsequent call to \FUNC{shmem\_quiet}.
     If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
  }
