@@ -41,7 +41,8 @@ CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
         When this argument is not provided, the operation is performed on
         the default context.}
     \apiargument{OUT}{dest}{Array to be updated on the local \ac{PE}. }
-    \apiargument{IN}{source}{Array containing the data to be copied on the remote \ac{PE}.}
+    \apiargument{IN}{source}{Symmetric address of the source array data object.
+        The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.
         A  value of \CONST{1} indicates contiguous data. \VAR{dst} must be of

@@ -20,7 +20,8 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
   \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
     the default context.}
-  \apiargument{OUT}{dest}{Symmetric address of the remotely accessible object that will be updated.}
+  \apiargument{OUT}{dest}{Symmetric address of the destination data object.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{value}{The value to be transferred to \VAR{dest}.}
   \apiargument{IN}{pe}{The number of the remote \ac{PE}.}
 \end{apiarguments}

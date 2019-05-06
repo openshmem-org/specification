@@ -44,8 +44,8 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FADD}@(dest, value_i8, pe)
 \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
     the default context.}
-\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated on
-    the remote \ac{PE}. The type of \VAR{dest} should match that implied in the
+\apiargument{OUT}{dest}{Symmetric address of the destination data object.
+    The type of \VAR{dest} should match that implied in the
     SYNOPSIS section.}
 \apiargument{IN}{value}{The value to be atomically added to \VAR{dest}.  The
     type of \VAR{value} should match that implied in the SYNOPSIS section.}

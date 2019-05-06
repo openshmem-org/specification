@@ -49,9 +49,8 @@ CALL @\FuncDecl{SHMEM\_REAL\_GET\_NBI}@(dest, source, nelems, pe)
         When this argument is not provided, the operation is performed on
         the default context.}
     \apiargument{OUT}{dest}{Local data object to be updated.}
-    \apiargument{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe}
-        that contains the data to be copied.  This data object must be remotely
-        accessible.}
+    \apiargument{IN}{source}{Symmetric address of the source data object.
+        The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
         using \Fortran, it must be a constant, variable, or array element of default
