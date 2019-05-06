@@ -52,3 +52,11 @@ that \ac{PE} next engages in an \openshmem call.
       provide asynchronous one-sided operations, as these have very limited
       performance value for \openshmem programs.
 \end{itemize}
+
+\subsection{Invoking OpenSHMEM Operations}
+
+Pointer arguments to \openshmem routines that point to non-const data must not
+overlap in memory with other arguments to the same \openshmem operation.
+Otherwise, the behavior is undefined.  Two arguments overlap in memory if any
+of their data elements are located at the same address on the same \ac{PE}.
+
