@@ -67,8 +67,7 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 
     Implementations must ensure that \FUNC{shmem\_wait} and
     \FUNC{shmem\_wait\_until} do not return before the update of the memory
-    indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
-    must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
+    indicated by \VAR{ivar} is fully complete.
 }
 
 
