@@ -28,14 +28,14 @@ int main(void)
    int my_pe_twos = shmem_team_my_pe(twos_team);
    int my_pe_threes = shmem_team_my_pe(threes_team);
 
-   if (my_pe_twos != SHMEM_TEAM_NULL) {
+   if (twos_team != SHMEM_TEAM_NULL) {
       /* put the value 2 to the next team member in a circular fashion */
       shmem_p(&x, 2, (me + 2) % npes);
       shmem_quiet();
       shmem_sync(twos_team);
    }
 
-   if (my_pe_threes != SHMEM_TEAM_NULL) {
+   if (threes_team != SHMEM_TEAM_NULL) {
       /* put the value 3 to the next team member in a circular fashion */
       shmem_p(&x, 3, (me + 3) % npes);
       shmem_quiet();
