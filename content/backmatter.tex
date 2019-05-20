@@ -189,26 +189,26 @@ The following cases summarize this behavior:
 
 OpenSHMEM routines may be used in conjunction with the routines of other
 communication libraries or parallel languages in the same program. This section
-describes the interoperability with other programming models including
+describes the interoperability with other programming models, including
 clarification of undefined behaviors caused by mixed use of different models,
 advice to \openshmem library users and developers that may improve the portability
-and performance of hybrid programs, and the definition of an OpenSHMEM extension
+and performance of hybrid programs, and definition of an OpenSHMEM extension
 API that queries the interoperability features provided by an \openshmem library.
 
 
 \section{MPI Interoperability}
 
-\openshmem and MPI are two commonly used parallel programming models for distributed
-memory systems. The user can choose to utilize both models in the same program
+\openshmem and MPI are two commonly used parallel programming models for
+distributed-memory systems. The user can choose to utilize both models in the same program
 to efficiently and easily support various communication patterns.
 
 A vendor may implement the \openshmem and MPI libraries in different ways. For
-instance, one may implement both \openshmem and MPI as standalone libraries
-and each of them allocates and initializes fully isolated communication
+instance, one may implement both \openshmem and MPI as standalone libraries,
+each of which allocates and initializes fully isolated communication
 resources. Consequently, an \openshmem call does not interfere with any MPI
 communication in the same application. As the other common approach, however,
-a vendor may also implement both \openshmem and MPI interfaces within the
-same software system in order to share communication resource when possible.
+a vendor may implement both \openshmem and MPI interfaces within the
+same software system in order to share a communication resource when possible.
 In such a case, internal interference may occur.
 
 To improve interoperability and portability in \openshmem + MPI hybrid
@@ -218,18 +218,18 @@ programming, we clarify several aspects in the following subsections.
 \subsection{Initialization}
 To ensure that a hybrid program can be portably performed with different vendor
 implementations, the \openshmem environment of the program must be initialized by
-a call to \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}, and be finalized by
+a call to \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread} and be finalized by
 a call to \FUNC{shmem\_finalize}; the MPI environment of the program must be initialized
-by a call to \FUNC{MPI\_Init} or \FUNC{MPI\_Init\_thread}, and be finalized by a
+by a call to \FUNC{MPI\_Init} or \FUNC{MPI\_Init\_thread} and be finalized by a
 call to \FUNC{MPI\_Finalize}.
 
 \apiimpnotes{
 Portable implementations of OpenSHMEM and MPI must ensure that the initialization
 calls can be made in an arbitrary order within a program; the same rule also
-applies to the finalization calls. A software runtime that utilizes shared
+applies to the finalization calls. A software runtime that utilizes a shared
 communication resource for \openshmem and MPI communication may maintain an
 internal reference counter in order to ensure that the shared resource is
-initialized only once, and no shared resource is released until the last
+initialized only once and thus no shared resource is released until the last
 finalization call is made.
 }
 
@@ -237,9 +237,11 @@ finalization call is made.
 \subsection{Dynamic Process Creation and MPMD Programming}
 \label{subsec:interoperability:mpmd}
 
-MPI defines the dynamic process model that allows creation of processes after
-an MPI application has started (e.g., by calling \FUNC{MPI\_Comm\_spawn}),
-and provides the mechanism to establish communication
+MPI defines a dynamic process model that allows creation of processes after
+an MPI application has started (e.g., by calling \FUNC{MPI\_Comm\_spawn}) and
+connection to independent processes (e.g., through \FUNC{MPI\_Comm\_accept}
+and \FUNC{MPI\_Comm\_connect})
+and provides a mechanism to establish communication
 between the newly created processes and the existing MPI application (see
 MPI standard version 3.1, Chapter 10).
 Unlike MPI, \openshmem requires all PEs to collectively allocate and initialize
@@ -272,12 +274,12 @@ processes newly created by MPI dynamic process routine can make a call to
 Both \openshmem and MPI define the interaction with user threads in a program
 with routines that can be used for initializing and querying the thread
 environment. In a hybrid program, the user can request different thread levels
-at the initialization calls of \openshmem and MPI environments, however, the
+at the initialization calls of \openshmem and MPI environments; however, the
 returned support level provided by the \openshmem library might be different
 from that returned in an \openshmem-only program. For instance, the former
-initialization call in a hybrid program may initialize resource with the user
-requested thread level but the supported level cannot be updated by the latter
-initialization call, if the underlying software runtime of \openshmem and MPI
+initialization call in a hybrid program may initialize a resource with the
+user-requested thread level, but the supported level cannot be updated by the latter
+initialization call if the underlying software runtime of \openshmem and MPI
 share the same internal communication resource.
 The program should always check the \VAR{provided} thread level returned
 at the corresponding initialization call to portably ensure thread support in each
@@ -290,18 +292,18 @@ communication environment.
 Similar to the PE identifier in \openshmem, MPI defines rank as the
 identification number of a process in a communicator. Both \openshmem PE
 and MPI rank are unique integers assigned from zero to one less than the total
-number of processes. In a hybrid program, one may observe that the \openshmem
+number of processes. In a hybrid program, the \openshmem
 PE and the MPI rank in \VAR{MPI\_COMM\_WORLD} of a process can be equal.
 This feature, however, may be provided by only some of the \openshmem and MPI
 implementations (e.g., if both environments share the same underlying process
-manager), and is not portably guaranteed. A portable program should always
-use the standard functions in each model, i.e., \FUNC{shmem\_my\_pe} in \openshmem
+manager) and is not portably guaranteed. A portable program should always
+use the standard functions in each model, namely, \FUNC{shmem\_my\_pe} in \openshmem
 and \FUNC{MPI\_Comm\_rank} in MPI, to query the process identification numbers
 in each communication environment and manage the mapping of identifiers in the
 program when necessary.
 
 
-\subsection{RMA Memory Semantics, Completion, Ordering and Atomicity}
+\subsection{RMA Memory Semantics, Completion, Ordering, and Atomicity}
 \label{subsec:interoperability:rma}
 
 Both \openshmem and MPI define similar RMA and atomic operations for remote memory 
@@ -341,7 +343,7 @@ MPI RMA operations can be safely reused (see definition of MPI RMA synchronizati
 in MPI standard version 3.1, Section 11.5).
 A synchronization call in \openshmem, however, does not interfere
 with any outstanding operations issued in the MPI environment. For instance,
-the \FUNC{shmem\_quiet} function only ensures completion of \openshmem RMA,
+the \FUNC{shmem\_quiet} function ensures completion only of \openshmem RMA,
 AMO, and memory store operations. It does not force the completion
 of any MPI outstanding operations. To ensure the completion of RMA operations
 in MPI, the program should use an appropriate MPI synchronization routine in the
@@ -357,9 +359,9 @@ MPI operations
 and \openshmem operations.
 
 \item Atomicity:  \openshmem
-guarantees only the atomicity of concurrent AMO operations that operate on
+guarantees the atomicity only of concurrent AMO operations that operate on
 symmetric data with the same datatype. Access to the same symmetric object with
-MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may result in
+MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may result in an
 undefined result.
 
 \end{itemize}
@@ -369,7 +371,7 @@ In the implementations that share the same communication resources for \openshme
 and MPI, the memory or network synchronization internally issued for one
 programming model may also affect the status of operations in the other model.
 Although the user program must make necessary synchronization calls for both models
-in order to ensure semantics correctness, a high performance implementation may
+in order to ensure semantics correctness, a high-performance implementation may
 internally avoid the later synchronization made by the other model when no
 subsequent operation is issued between these two synchronization calls.
 }
@@ -378,12 +380,12 @@ subsequent operation is issued between these two synchronization calls.
 \label{subsec:interoperability:progress}
 
 \openshmem promises the progression of communication both with and without
-\openshmem calls and requires the software progress mechanism in implementation
+\openshmem calls and requires the software progress mechanism in the implementation
 (e.g., a progress thread) when the hardware does not provide asynchronous communication
 capabilities. In MPI, however, a weak progress semantics is applied. That is,
-an MPI communication call is only guaranteed to complete in finite time. For
+an MPI communication call is guaranteed only to complete in finite time. For
 instance, an MPI Put may be completed only when the remote process makes an MPI
-call which internally triggers the progress of MPI, if the underlying hardware
+call that internally triggers the progress of MPI, if the underlying hardware
 does not support asynchronous communication. A portable hybrid program
 should not assume that a call to the \openshmem library also makes progress for MPI,
 and it may have to explicitly manage the asynchronous communication in MPI in
@@ -424,7 +426,7 @@ int @\FuncDecl{shmemx\_query\_interoperability}@(int property);
 % \apidescription{
 \FUNC{shmemx\_query\_interoperability} is an extended \openshmem routine that queries
 whether an interoperability property is supported by the \openshmem library. One of the
-following property can be queried in an \openshmem program after finishing the
+following properties can be queried in an \openshmem program after finishing the
 initialization call to \openshmem and that of the relevant programming models
 being used in the program. An OpenSHMEM library implementation may extend the
 available properties.
