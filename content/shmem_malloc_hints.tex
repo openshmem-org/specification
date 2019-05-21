@@ -25,12 +25,10 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     the \FUNC{shmem\_malloc\_with\_hint} routine performs no action and returns a null pointer. 
     
     In addition to the \VAR{size} argument, the \VAR{hint} argument is provided by the user. 
-    The \VAR{hint} could describe the trait of memory storage where memory is allocated or 
-    it could describe the expected manner in which the \openshmem program may use the allocated memory.
-    The valid storage trait hints are described in Table~\ref{traithints} and the valid usage hints 
-    are described in Table~\ref{usagehints}. Multiple hints are expressed as \CONST{OR} of \VAR{hints}.
+    The \VAR{hint} describes the expected manner in which the \openshmem program may use the allocated memory.
+    The valid usage hints are described in Table~\ref{usagehints}. Multiple hints are expressed as \CONST{OR} of \VAR{hints}.
     
-     The information provided by the \VAR{hint} is used to optimize for performance by the implementation. 
+    The information provided by the \VAR{hint} is used to optimize for performance by the implementation. 
     If the implementation cannot optimize, the behavior is same as \FUNC{shmem\_malloc}.
     If more than one hint is provided, the implementation will make the best effort to use one or more hints 
     to optimize performance. 
@@ -57,9 +55,9 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 
 \apiimpnotes{
 }
-    \begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+	\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
 	\hline
-	\textbf{Hints} & \textbf{Storage Trait}
+	\textbf{Hints} & \textbf{Usage hint}
 	\tabularnewline \hline
 	\endhead
 	%%
@@ -75,24 +73,6 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 	Allocate memory on high-bandwidth storage	
 	\tabularnewline \hline
 
-	\LibConstDecl{SHMEM\_HINT\_NEAR\_NIC\_MEM} &
-	Allocate memory on storage near to the network card	
-	\tabularnewline \hline
-	
-	\LibConstDecl{SHMEM\_HINT\_DEVICE\_NIC\_MEM} &
-	Allocate memory on the network interface card 
-	\tabularnewline \hline
-        \TableCaptionRef{Storage trait hints}
-        \label{traithints}
-    \end{longtable}
-   
-
-    \begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
-	\hline
-	\textbf{Hints} & \textbf{Usage hint}
-	\tabularnewline \hline
-	\endhead
-	%%
 	\LibConstDecl{SHMEM\_HINT\_PSYNC} &
 	Memory used as \CONST{PSYNC} array
 	\tabularnewline \hline
@@ -102,11 +82,16 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 	\tabularnewline \hline
 	
 	\LibConstDecl{SHMEM\_HINT\_ATOMICS} &
-	 Memory used for \VAR{Atomic} operations	
+	Memory used for \VAR{Atomic} operations
 	\tabularnewline \hline
 	
+	\LibConstDecl{SHMEM\_HINT\_SIGNAL} &
+	Memory used for \VAR{signal} operations
+	\tabularnewline \hline
+
 	\TableCaptionRef{Memory usage hints}
         \label{usagehints}
     \end{longtable}
+
 \end{apidefinition}
 \newpage
