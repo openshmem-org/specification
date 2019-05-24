@@ -37,9 +37,9 @@ CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{The context on which to perform the operation.
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
-        \CONST{SHMEM\_CTX\_DEFAULT}.}
+        the default context.}
     \apiargument{OUT}{dest}{Array to be updated on the local \ac{PE}. }
     \apiargument{IN}{source}{Array containing the data to be copied on the remote \ac{PE}.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
@@ -66,6 +66,8 @@ CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
     a symmetric array from a specified remote \ac{PE} to strided locations on a
     local array.  The routines return when the data has been copied into the local
     \VAR{dest} array.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
 
 \apidesctable{

@@ -118,8 +118,8 @@ symmetric data objects in the symmetric heap.
 
 \subsection{Communication Management Routines}
 \label{sec:ctx}
-All \openshmem RMA, AMO, and memory ordering routines are
-performed on a communication context.  The communication context defines an
+All \openshmem \ac{RMA}, \ac{AMO}, and memory ordering routines must be
+performed on a valid communication context.  The communication context defines an
 independent ordering and completion environment, allowing users to manage the
 overlap of communication with computation and also to manage communication
 operations performed by separate threads within a multithreaded \ac{PE}.  For
@@ -128,12 +128,26 @@ communication and computation.  In multithreaded environments, contexts may
 additionally provide thread isolation, eliminating overheads resulting from
 thread interference.
 
-Context handles are of type \CTYPE{shmem\_ctx\_t} and are valid for
-language-level assignment and equality comparison.  A handle to the desired context is
-passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic API
-routines.  API routines that do not accept a context argument operate on the
+A specific communication context is referenced through a context handle, which is
+passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic \ac{API}
+routines.  \ac{API} routines that do not accept a context handle argument operate on the
 default context.  The default context can be used explicitly through the
 \LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.
+Context handles are of type \CTYPE{shmem\_ctx\_t} and may be used for
+language-level assignment and equality comparison.
+
+The default context is valid for the duration of the \openshmem portion of
+an application.
+Contexts created by a successful call to \FUNC{shmem\_ctx\_create} remain
+valid until they are destroyed.
+A handle value that does not correspond to a valid context is considered
+to be invalid, and its use in \ac{RMA} and \ac{AMO} routines results in
+undefined behavior.
+A context handle may be initialized to or assigned the value
+\CONST{SHMEM\_CTX\_INVALID} to indicate that handle does not reference a
+valid communication context.
+When managed in this way, applications can use an equality comparison
+to test whether a given context handle references a valid context.
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
@@ -278,9 +292,26 @@ default context.  The default context can be used explicitly through the
 \subsubsection{\textbf{SHMEM\_WAIT\_UNTIL}}\label{subsec:shmem_wait_until}
 \input{content/shmem_wait_until.tex}
 
+\subsubsection{\textbf{SHMEM\_WAIT\_UNTIL\_ALL}}\label{subsec:shmem_wait_until_all}
+\input{content/shmem_wait_until_all.tex}
+
+\subsubsection{\textbf{SHMEM\_WAIT\_UNTIL\_ANY}}\label{subsec:shmem_wait_until_any}
+\input{content/shmem_wait_until_any.tex}
+
+\subsubsection{\textbf{SHMEM\_WAIT\_UNTIL\_SOME}}\label{subsec:shmem_wait_until_some}
+\input{content/shmem_wait_until_some.tex}
+
 \subsubsection{\textbf{SHMEM\_TEST}}\label{subsec:shmem_test}
 \input{content/shmem_test.tex}
 
+\subsubsection{\textbf{SHMEM\_TEST\_ALL}}\label{subsec:shmem_test_all}
+\input{content/shmem_test_all.tex}
+
+\subsubsection{\textbf{SHMEM\_TEST\_ANY}}\label{subsec:shmem_test_any}
+\input{content/shmem_test_any.tex}
+
+\subsubsection{\textbf{SHMEM\_TEST\_SOME}}\label{subsec:shmem_test_some}
+\input{content/shmem_test_some.tex}
 
 
 
@@ -324,6 +355,9 @@ their use.
 
 \subsubsection{\textbf{SHMEM\_CACHE}}\label{subsec:shmem_cache}
 \input{content/shmem_cache.tex}
+
+\section{OpenSHMEM Profiling Interface}\label{sec:openshmem_profiling_interface}
+\input{content/profiling_interface.tex}
 
 \clearpage
 \input{content/backmatter}

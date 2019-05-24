@@ -63,7 +63,7 @@ The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex
 Note the declaration of the \VAR{static short dest} array and its use as the
 remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
 
-The \VAR{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
+The \KEYWORD{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
 Each \ac{PE} is able to transfer data to a remote \dest{} array by simply
 specifying to an OpenSHMEM routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
 the local address of the symmetric data object that will receive the data.
@@ -215,51 +215,6 @@ The following cases summarize this behavior:
 
 
 
-\chapter{Interoperability with other Programming Models}\label{sec:mpi}
-
-\section{\ac{MPI} Interoperability}
-
-\begin{sloppypar} % to prevent constants from running into margins.
-%
-\openshmem routines may be used in conjunction with \ac{MPI} routines in the
-same program.  For example, on \ac{SGI} systems, programs that use both \ac{MPI} and
-\openshmem routines call \FUNC{MPI\_Init} and \FUNC{MPI\_Finalize} but omit the
-call to the \FUNC{shmem\_init} routine.  \openshmem \ac{PE} numbers are equal to
-the \ac{MPI} rank within the \CONST{MPI\_COMM\_WORLD} environment variable.
-Note that this indexing precludes use of \openshmem routines between processes in
-different \CONST{MPI\_COMM\_WORLD}s.  For example, \ac{MPI} processes started using the
-\FUNC{MPI\_Comm\_spawn} routine cannot use \openshmem routines to
-communicate with their parent \ac{MPI} processes.
-%
-\end{sloppypar}
-%
-On \ac{SGI} systems where \ac{MPI} jobs use \ac{TCP}/sockets for inter-host communication,
-\openshmem routines may be used to communicate with processes running on the
-same host.  The \FUNC{shmem\_pe\_accessible} routine should be used to determine if
-a remote \ac{PE} is accessible via \openshmem communication from the local
-\ac{PE}. When running an \ac{MPI} program involving multiple executable files,
-\openshmem routines may be used to communicate with processes running from the
-same or different executable files, provided that the communication is limited
-to symmetric data objects.  On these systems, static memory---such as a
-\Fortran common block or \Cstd global variable---is symmetric between
-processes running from the same executable file, but is not symmetric between
-processes running from different executable files.  Data allocated from the
-symmetric heap (e.g., \FUNC{shmem\_malloc}, \FUNC{shpalloc}) is symmetric across the
-same or different executable files. The \FUNC{shmem\_addr\_accessible} routine
-should be used to determine if a local address is accessible via \openshmem
-communication from a remote \ac{PE}.
-
-Another important feature of these systems is that the
-\FUNC{shmem\_pe\_accessible} routine returns \CONST{TRUE} only if the remote
-\ac{PE} is a process running from the same executable file as the local \ac{PE},
-indicating that full \openshmem support (static memory and symmetric heap) is
-available.  When using \openshmem routines within an \ac{MPI} program, the use
-of \ac{MPI} memory-placement environment variables is required when using
-non-default memory-placement options.
-
-
-
-
 \chapter{History of OpenSHMEM}\label{sec:openshmem_history}
 
 SHMEM has a long history as a parallel-programming model and has been
@@ -369,10 +324,10 @@ supported before removal.
     \LibConstRef{\_SHMEM\_CMP\_LE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_LE}} \\ \hline
     \LibConstRef{\_SHMEM\_CMP\_GT} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GT}} \\ \hline
     \LibConstRef{\_SHMEM\_CMP\_GE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GE}} \\ \hline
-    \EnvVarRef{SMA\_VERSION}         & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_VERSION}} \\ \hline
-    \EnvVarRef{SMA\_INFO}            & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_INFO}} \\ \hline
-    \EnvVarRef{SMA\_SYMMETRIC\_SIZE} & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_SYMMETRIC\_SIZE}} \\ \hline
-    \EnvVarRef{SMA\_DEBUG}           & 1.4 & Current & \hyperref[subsec:environment_variables]{\VAR{SHMEM\_DEBUG}} \\ \hline
+    \EnvVarRef{SMA\_VERSION}         & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_VERSION}} \\ \hline
+    \EnvVarRef{SMA\_INFO}            & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_INFO}} \\ \hline
+    \EnvVarRef{SMA\_SYMMETRIC\_SIZE} & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_SYMMETRIC\_SIZE}} \\ \hline
+    \EnvVarRef{SMA\_DEBUG}           & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_DEBUG}} \\ \hline
     \minitab{\CorCpp: \FuncRef{shmem\_wait}
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_wait}}
         & 1.4 & Current & See \textbf{Notes} for \hyperref[subsec:shmem_wait_until]{\FUNC{shmem\_wait\_until}} \\ \hline
@@ -492,9 +447,9 @@ standard's reserved names.  These constants were deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran naming conventions.
 
-\subsection{\VAR{SMA\_*} Environment Variables}\label{subsec:deprecate-sma-env}
-The environment variables \VAR{SMA\_VERSION}, \VAR{SMA\_INFO},
-\VAR{SMA\_SYMMETRIC\_SIZE}, and \VAR{SMA\_DEBUG}
+\subsection{\ENVVAR{SMA\_*} Environment Variables}\label{subsec:deprecate-sma-env}
+The environment variables \ENVVAR{SMA\_VERSION}, \ENVVAR{SMA\_INFO},
+\ENVVAR{SMA\_SYMMETRIC\_SIZE}, and \ENVVAR{SMA\_DEBUG}
 were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
@@ -550,12 +505,49 @@ leverage the \openshmem Specification's \Cstd API through the
 \chapter{Changes to this Document}\label{sec:changelog}
 
 \section{Version 1.5}
+Major changes in \openshmem[1.5] include \dots
+
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
 \item Added support for multipliers in \VAR{SHMEM\_SYMMETRIC\_SIZE}
 environment variables.
 \\ See Section \ref{subsec:environment_variables}.
+%
+\item Added a new multiple-element point-to-point synchronization API with
+  the functions: \FUNC{shmem\_wait\_until\_all}, \FUNC{shmem\_wait\_until\_any},
+  \FUNC{shmem\_wait\_until\_some}, \FUNC{shmem\_test\_all},
+  \FUNC{shmem\_test\_any}, and \FUNC{shmem\_test\_some}.
+  \\See Sections \ref{subsec:shmem_wait_until_all},
+  \ref{subsec:shmem_wait_until_any}, \ref{subsec:shmem_wait_until_some},
+  \ref{subsec:shmem_test_all}, \ref{subsec:shmem_test_any}, and
+  \ref{subsec:shmem_test_some}.
+%
+\item Added \openshmem profiling interface.
+  \\ See Section~\ref{sec:openshmem_profiling_interface}.
+%
+\item Specified the validity of communication contexts, added the constant
+  \CONST{SHMEM\_CTX\_INVALID}, and clarified the behavior of
+  \FUNC{shmem\_ctx\_*} routines on invalid contexts.
+  \\ See Section~\ref{sec:ctx}.
+%
+\item Clarified \ac{PE} active set requirements.
+    \\See Section~\ref{subsec:coll}.
+%
+\item Clarified that when the \VAR{size} argument is zero, symmetric heap
+    allocation routines perform no action and return a null pointer; that
+    symmetric heap management routines that perform no action do not perform a
+    barrier; and that the \VAR{alignment} argument to \FUNC{shmem\_align} must
+    be power of two multiple of \CONST{sizeof(void*)}.
+    \\See Section~\ref{subsec:shfree}.
+%
+\item Clarified that the \openshmem lock API provides a non-reentrant mutex and
+    that \FUNC{shmem\_clear\_lock} performs a quiet operation on the default
+    context.
+    \\See Section~\ref{subsec:shmem_lock}
+%
+\item Clarified the atomicity guarantees of the \openshmem memory model.
+    \\See Section~\ref{subsec:amo_guarantees}.
 %
 \end{itemize}
 
@@ -762,7 +754,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \item Added specification of \VAR{pSync} initialization for all routines that use it.
 %
 \item Replaced all placeholder variable names \VAR{target} with \VAR{dest} to
-      avoid confusion with \Fortran's \CONST{target} keyword. % FIXME: Change to \KEYWORD{target}
+      avoid confusion with \Fortran's \KEYWORD{target} keyword.
 %
 \item New Execution Model for exiting/finishing \openshmem programs.
 \\See Section  \ref{subsec:execution_model}.
@@ -857,7 +849,7 @@ The following list describes the specific changes in \openshmem[1.1]:
 \\See Section \ref{subsec:shmem_pe_accessible} and \ref{subsec:shmem_addr_accessible}.
 %
 \item Added an annex on interoperability with \ac{MPI}.
-\\See Annex \ref{sec:mpi}.
+\\See Annex D.
 %
 \item Added examples to the different interfaces.
 %

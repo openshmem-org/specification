@@ -45,9 +45,9 @@ res\_r8 = @\FuncDecl{SHMEM\_REAL8\_SWAP}@(dest, value_r8, pe)
 \end{Fsynopsis}
 
 \begin{apiarguments}
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    the default context.}
   \apiargument{OUT}{dest}{The  remotely accessible integer data object to be
     updated on the remote \ac{PE}.	 When using \CorCpp, the type of
     \dest{} should match that  implied in the SYNOPSIS section.}
@@ -62,6 +62,8 @@ res\_r8 = @\FuncDecl{SHMEM\_REAL8\_SWAP}@(dest, value_r8, pe)
     \FUNC{shmem\_atomic\_swap} performs an atomic swap operation.
     It writes \VAR{value} into \dest{} on \ac{PE} and returns the previous
     contents of \dest{} as an atomic operation.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
 
 \apidesctable{
