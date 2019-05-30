@@ -37,9 +37,8 @@ int @\FuncDecl{shmem\_addr\_accessible}@(const void *addr, int pe);
     memory, such as a \Cstd global variable, is
     symmetric between processes running from the same executable file, but is
     not symmetric between processes running from different executable files.
-    Data allocated from the symmetric heap (\FUNC{shmem\_malloc} or
-    \FUNC{shpalloc}) is symmetric across the same or different executable
-    files.
+    Data allocated from the symmetric heap (e.g., using \FUNC{shmem\_malloc})
+    is symmetric across the same or different executable files.
 }
 
 \end{apidefinition}
