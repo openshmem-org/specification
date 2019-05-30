@@ -58,5 +58,14 @@ that \ac{PE} next engages in an \openshmem call.
 Pointer arguments to \openshmem routines that point to non-const data must not
 overlap in memory with other arguments to the same \openshmem operation.
 Otherwise, the behavior is undefined.  Two arguments overlap in memory if any
-of their data elements are located at the same address on the same \ac{PE}.
+of their data elements are contained in the same physical memory locations.
+For example, consider an address $a$ returned by the \OPR{shmem\_ptr} operation
+for symmetric object $A$ on \ac{PE} $i$.  Providing the local address $a$ and
+the symmetric address of object $A$ to an \openshmem operation targeting
+\ac{PE} $i$ results in undefined behavior.
 
+\openshmem routines with multiple symmetric object arguments do not require
+these symmetric objects to be located within the same symmetric memory segment.
+For example, objects located in the symmetric data segment and objects located
+in the symmetric heap can be provided as arguments to the same \openshmem
+operation.
