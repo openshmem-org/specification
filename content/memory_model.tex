@@ -40,15 +40,15 @@ data objects are symmetric:
 \end{itemize}       
 
 \openshmem dynamic memory allocation routines (\FUNC{shpalloc} and
-\FUNC{shmem\_malloc}) allow collective allocation of \emph{Symmetric Data
-Objects} on a special memory region called the \emph{Symmetric Heap}. The
-Symmetric Heap is created during the execution of a program at a memory location
-determined by the implementation. The Symmetric Heap may reside in different
-memory regions on different \acp{PE}. Figure~\ref{fig:mem_model} shows how
-\openshmem implements a \ac{PGAS} model using remotely accessible symmetric
-objects and private data objects when executing an \openshmem program.
-Symmetric data objects are stored on the symmetric heap or in the global/static
-memory section of each \ac{PE}. 
+\FUNC{shmem\_malloc}) allow collective allocation of symmetric data objects on
+a special memory region called the \emph{Symmetric Heap}. The symmetric heap is
+created during the execution of a program at a memory location determined by
+the implementation. The symmetric heap may reside in different memory regions
+on different \acp{PE}. Figure~\ref{fig:mem_model} shows an example \openshmem
+memory layout, illustrating the location of remotely accessible symmetric
+objects and private data objects.  As shown, symmetric data objects can be
+located either in the symmetric heap or in the global/static memory section of
+each \ac{PE}.
 
 \subsection{Pointers to Symmetric Objects}
 
