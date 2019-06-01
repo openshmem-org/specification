@@ -46,7 +46,7 @@ where the subset is defined by the \ac{PE} triplet (\VAR{PE\_start},
 This routine must be called by all processes contained in the \ac{PE} triplet
 specification. It may be called by additional \acp{PE} not included in the
 triplet specification, but for those processes a \VAR{new\_team} value of
-\LibConstRef{SHMEM\_TEAM\_NULL} is returned. All calling processes must provide the
+\LibConstRef{SHMEM\_TEAM\_INVALID} is returned. All calling processes must provide the
 same values for the \ac{PE} triplet. This routine will return a \VAR{new\_team}
 containing the \ac{PE} subset specified by the triplet, and ordered by the
 existing global \ac{PE} number. None of the parameters need to reside in
@@ -64,14 +64,14 @@ default configuration parameters.
 
 If \VAR{parent\_team} is an invalid team handle, the behavior is undefined.
 
-If \VAR{parent\_team} compares equal to \LibConstRef{SHMEM\_TEAM\_NULL}, then no
+If \VAR{parent\_team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no
 new team will be created, and  \VAR{new\_team} will be assigned the value
-\LibConstRef{SHMEM\_TEAM\_NULL}.
+\LibConstRef{SHMEM\_TEAM\_INVALID}.
 
 If an invalid \ac{PE} triplet is provided, then the \VAR{new\_team} will not be created.
 
 If \VAR{new\_team} cannot be created, then it will be assigned the value
-\LibConstRef{SHMEM\_TEAM\_NULL}.
+\LibConstRef{SHMEM\_TEAM\_INVALID}.
 }
 
 \apireturnvalues{

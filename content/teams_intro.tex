@@ -26,7 +26,7 @@ routines and destroyed by the team destroy routine. Team handles have local
 semantics only. That is, team handles should not be stored in shared variables
 and used across other \acp{PE}. Doing so will result in undefined behavior.
 
-A special team handle value, \LibConstRef{SHMEM\_TEAM\_NULL}, may be used to
+A special team handle value, \LibConstRef{SHMEM\_TEAM\_INVALID}, may be used to
 indicate that a returned team handle is not valid. This value can be tested
 against to check for successful split operations and can be assigned to user
 declared team handles as a sentinel value.

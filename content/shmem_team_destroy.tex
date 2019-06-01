@@ -28,7 +28,7 @@ If the pointer to \VAR{team} is a null pointer, then no team is destroyed,
 and a nonzero value is returned.
 
 After returning from the routine, if the team was successfully destroyed,
-the handle will be assigned the value \LibConstRef{SHMEM\_TEAM\_NULL}.
+the handle will be assigned the value \LibConstRef{SHMEM\_TEAM\_INVALID}.
 
 Team destruction assumes that any resources explicitly created from the team,
 such as contexts created from the team, have already been released through

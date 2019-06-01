@@ -23,7 +23,7 @@ The team-based collective routines are performed with respect to a valid
 \openshmem team, which is specified by a team handle argument.
 Team-based collective operations require all \acp{PE} in the team to call
 the routine in order for the operation to complete. If an invalid team handle
-or \LibConstRef{SHMEM\_TEAM\_NULL} is passed to a team-based collective
+or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to a team-based collective
 routine, the behavior is undefined.
 
 Team objects encapsulate the per \ac{PE} system resources required to complete

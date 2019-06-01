@@ -92,12 +92,12 @@ default configuration parameters.
 
 If \VAR{parent\_team} is an invalid team handle, the behavior is undefined.
 
-If \VAR{parent\_team} compares equal to \LibConstRef{SHMEM\_TEAM\_NULL}, no new
+If \VAR{parent\_team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, no new
 teams will be created, and both \VAR{xaxis\_team} and \VAR{yaxis\_team}
-will be assigned the value \LibConstRef{SHMEM\_TEAM\_NULL}.
+will be assigned the value \LibConstRef{SHMEM\_TEAM\_INVALID}.
 
 If either team cannot be created, that team will be assigned the value
-\LibConstRef{SHMEM\_TEAM\_NULL}.
+\LibConstRef{SHMEM\_TEAM\_INVALID}.
 }
 
 \apireturnvalues{
