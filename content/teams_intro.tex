@@ -1,65 +1,66 @@
 The \acp{PE} in an \openshmem program communicate using either
-point-to-point routines that specify the \ac{PE} number of the target
-\ac{PE} or collective routines that operate over some predefined
-set of \acp{PE}. Teams in \openshmem allow programs to group subsets
-of \acp{PE} for communications. Collective communications operate on
-teams objects across the \acp{PE} in the team. Point-to-point routines
-can make use of team based renumbering of \acp{PE} by utilizing team
-based contexts or \ac{PE} number translation.
+point-to-point routines, which specify the \ac{PE} number of the target
+\ac{PE}, or collective routines, which operate over a set of \acp{PE}.
+In \openshmem, teams allow programs to group a set of \acp{PE} for
+communication.
+Team-based collective communications operate across all the \acp{PE}
+in a valid team.
+Point-to-point communication can make use of team-relative \ac{PE}
+numbering through team-based contexts (see Section~\ref{sec:ctx}) or
+\ac{PE} number translation.
 
-An \openshmem team is a set of \acp{PE} defined by calling a specific team
-split routine with a parent team argument and other arguments to
-specify how the parent team is to be split into one or more new teams.
-Any team created by a \FUNC{shmem\_team\_split\_*} routine can subsequently
-be used as the parent team for further calls to team split routines.
-A team persists and can be used for team-based routine calls
-until it is destroyed by \FUNC{shmem\_team\_destroy}.
+\subsubsection*{Predefined and Program-Defined Teams}
 
-Every team must have a least one member. Any attempt to create a team over an
-empty set of \acp{PE} will result in no new team being created.
+An \openshmem team may be predefined (i.e., provided by the \openshmem
+library) or defined by the \openshmem program.
+A program-defined team is created by ``splitting'' a parent team into
+one or more new teams---each with some subset of \acp{PE} of the
+parent team---via one of the \FUNC{shmem\_team\_split\_*} routines.
 
-\subsubsection*{Team Handles and Predefined Teams}
+All predefined teams are valid for the duration of the \openshmem
+portion of an application.
+Any team successfully created by a \FUNC{shmem\_team\_split\_*}
+routine is valid until it is destroyed.
+All valid teams have a least one member.
 
-A ``team handle'' is an opaque object with type \CTYPE{shmem\_team\_t} that is used
-to reference a defined team.  Team handles are created by one of the team split
-routines and destroyed by the team destroy routine. Team handles have local
-semantics only. That is, team handles should not be stored in shared variables
-and used across other \acp{PE}. Doing so will result in undefined behavior.
+\subsubsection*{Team Handles}
 
-A special team handle value, \LibConstRef{SHMEM\_TEAM\_INVALID}, may be used to
-indicate that a returned team handle is not valid. This value can be tested
-against to check for successful split operations and can be assigned to user
-declared team handles as a sentinel value.
+A ``team handle'' is an opaque object with type \CTYPE{shmem\_team\_t}
+that is used to reference a team.
+Team handles are not remotely accessible objects
+The predefined teams may be accessed via the team handles listed in
+Section~\ref{subsec:library_handles}.
 
-By default, \openshmem creates predefined teams that will be available
-for use once the routine \FUNC{shmem\_init} has been called. See
-Section~\ref{subsec:library_handles} for a description of all predefined team handles
-provided by \openshmem. Predefined \CTYPE{shmem\_team\_t} handles can be used as
-the parent team when creating new \openshmem teams.
+\openshmem communication routines that do not accept a team handle
+argument operate on the default team, which may be accessed through
+the \LibHandleRef{SHMEM\_TEAM\_WORLD} handle.
+The default team encompasses the set of all \acp{PE} in the \openshmem
+program, and a \ac{PE} number in the default team is the same as the
+value returned by \FUNC{shmem\_my\_pe}.
 
-Every \ac{PE} is a member of the default team, which may be referenced
-through the team handle \LibHandleRef{SHMEM\_TEAM\_WORLD}.
-The \ac{PE} number in the default team is equal to the
-value of its \ac{PE} number as returned by \FUNC{shmem\_my\_pe}.
+A team handle may be initialized to or assigned the value
+\CONST{SHMEM\_TEAM\_INVALID} to indicate that handle does not
+reference a valid team.
+When managed in this way, applications can use an equality comparison
+to test whether a given team handle references a valid team.
 
-\subsubsection*{Team Objects and Multithreading Within a \ac{PE}}
+\subsubsection*{Thread Safety}
 
-Team handles are passed as arguments to a variety of \openshmem routines,
-including collective routines (see Section~\ref{subsec:coll}), include team
-creation routines.  While \openshmem routines are thread-safe as
-per threading model (see section \ref{subsec:thread_support}),\openshmem
-teams objects are not themselves thread-safe. It is the responsibility
-of the application to ensure that there are no simultaneous collective
-routines operating on the same \openshmem team on a given \ac{PE}.
+When it is allowed by the threading model provided by the OpenSHMEM
+library, a team may be used concurrently in non-collective operations
+(e.g., \FUNC{shmem\_team\_my\_pe}) by multiple threads within the
+\ac{PE} where it was created.
+For collective operations, a team may not be used concurrently by
+multiple threads in the same \ac{PE}.
 
-\subsubsection*{Team Objects and Collective Ordering across \acp{PE}}
+\subsubsection*{Collective Ordering}
 
-In \openshmem, a team object encapsulates resources uses to communicate
+In \openshmem, a team object encapsulates resources used to communicate
 between \acp{PE} in collective operations. When calling multiple subsequent
-collective operations on a team, the collective operations -- along with any
-relevant team based resources -- are matched across the \acp{PE} in the team
+collective operations on a team, the collective operations---along with any
+relevant team based resources---are matched across the \acp{PE} in the team
 based on ordering of collective routine calls. It is the responsibility
-of the application to ensure a consistent ordering of collective routine calls
+of the \openshmem program to ensure the same ordering of collective routine calls
 across all \acp{PE} in a team.
 
 There is no need for explicit synchronization between subsequent calls
