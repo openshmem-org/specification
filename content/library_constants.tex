@@ -52,8 +52,11 @@ See Sections~\ref{subsec:shmem_team_config_t} and
 \color{Green}
 \LibConstDecl{SHMEM\_TEAM\_INVALID} &
 \color{Green}
-Predefined constant that can be compared against handles of type
-\CTYPE{shmem\_team\_t} to determine if they refer to a valid team.
+A value corresponding to an invalid team.
+This value can be used to initialize or update team handles to indicate
+that they do not reference a valid team.
+When managed in this way, applications can use an equality comparison
+to test whether a given team handle references a valid team.
 See Section~\ref{subsec:team} for more detail about its use.
 \tabularnewline \hline
 %%
