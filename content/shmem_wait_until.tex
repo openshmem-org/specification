@@ -5,13 +5,13 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE @\FuncDecl{shmem\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+void @\FuncDecl{shmem\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
 corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
@@ -43,9 +43,7 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
     section.}
 \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
-    When using \CorCpp, it must be of type \CTYPE{int} \color{ForestGreen} and
-    it may be used with point-to-point hint constants by combining them with a
-    bitwise OR operation.\color{Black}}
+    When using \CorCpp, it must be of type \CTYPE{int}.}
 \apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
     using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
     SYNOPSIS section.  When using \Fortran, cmp\_value must be an integer of
@@ -83,13 +81,9 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 \apitablerow{shmem\_int4\_wait, shmem\_int4\_wait\_until}{INTEGER*4}
 \apitablerow{shmem\_int8\_wait, shmem\_int8\_wait\_until}{INTEGER*8}
 
-\color{ForestGreen}
 \apireturnvalues{
-    When using \CorCpp, returns the contents of the symmetric data object,
-    \VAR{ivar}, at the calling \ac{PE} that satisfies the wait condition. The
-    data type of the return value is same as the type of \VAR{ivar}.
+  None
 }
-\color{Black}
 
 \apinotes{
   As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated;
