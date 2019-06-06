@@ -1,0 +1,55 @@
+\color{ForestGreen}
+\apisummary{
+    Wait for a variable on the local \ac{PE} to change from a signaling operation.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+uint64_t @\FuncDecl{shmem\_signal\_wait\_until}@(uint64_t *sig_addr, int cmp, uint64_t cmp_value);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+\apiargument{OUT}{sig\_addr}{A pointer to a remotely accessible variable.}
+\apiargument{IN}{cmp}{The comparison operator that compares \VAR{sig\_addr} with
+    \VAR{cmp\_value}.}
+\apiargument{IN}{cmp\_value}{The value against which the object pointed to
+    by \VAR{sig\_addr} will be compared.}
+
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_signal\_wait\_until} operation blocks until the value contained
+    in the symmetric data object, \VAR{sig\_addr}, at the calling \ac{PE}
+    satisfies the wait condition. In an \openshmem program with single-threaded
+    or multithreaded \acp{PE}, the \VAR{sig\_addr} object at the calling \ac{PE}
+    is expected only to be updated as a signal, through the signalling operations
+    available in Section~\ref{subsec:shmem_signal}.
+
+    This routine can be used to implement point-to-point synchronization between
+    \acp{PE} or between threads within the same \ac{PE}. A call to this routine
+    blocks until the value of \VAR{sig\_addr} at the calling \ac{PE} satisfies
+    the wait condition specified by the comparison operator, \VAR{cmp}, and
+    comparison value, \VAR{cmp\_value}.
+}
+
+\apireturnvalues{
+    Return the contents of the symmetric data object, \VAR{sig\_addr}, at the
+    calling \ac{PE} that satisfies the wait condition.
+}
+
+
+\apinotes{
+    None.
+}
+
+\apiimpnotes{
+    Implementations must ensure that \FUNC{shmem\_signal\_wait\_until} do not
+    return before the update of the memory indicated by \VAR{sig\_addr} is fully
+    complete. Partial updates to the memory must not cause
+    \FUNC{shmem\_signal\_wait\_until} to return.
+}
+
+\end{apidefinition}
+\color{Black}
