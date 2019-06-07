@@ -21,11 +21,12 @@ CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
 \end{apiarguments}
 
 \apidescription{   
-    The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at
-    a barrier. Barriers are a mechanism for synchronizing all \acp{PE} at
-    once. This routine blocks the \ac{PE} until all \acp{PE} have called
+    The \FUNC{shmem\_barrier\_all} routine \oldtext{registers the arrival of a \ac{PE} at
+    a barrier. Barriers are} \newtext{is} a mechanism for synchronizing all \acp{PE} \newtext{in the default team} at
+    once. This routine blocks the \newtext{calling} \ac{PE} until all \acp{PE} have called
     \FUNC{shmem\_barrier\_all}. In a multithreaded \openshmem
-    program, only the calling thread is blocked.
+    program, only the calling thread is blocked\newtext{, however,
+    it may not be called concurrently by multiple threads in the same \ac{PE}}.
 
     Prior to synchronizing with other \acp{PE}, \FUNC{shmem\_barrier\_all}
     ensures completion of all previously issued memory stores and remote memory
@@ -40,9 +41,17 @@ CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
 }
 
 \apinotes{
+    \newtext{%
+    The \FUNC{shmem\_barrier\_all} routine is equivalent to calling
+    \FUNC{shmem\_ctx\_quiet} on the default context followed by
+    calling \FUNC{shmem\_team\_sync} on the default team.
+    }
+
+    \oldtext{%
     The \FUNC{shmem\_barrier\_all} routine can be used to
     portably ensure that memory access operations observe remote updates in the order
     enforced by initiator \acp{PE}.
+    }
 
     Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
     to calling the barrier routine to ensure completion of operations issued on
