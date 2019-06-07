@@ -1,34 +1,30 @@
 \apisummary{
-    Destroys existing team.
+  Destroy an existing team.
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_team\_destroy}@(shmem_team_t *team);
+void @\FuncDecl{shmem\_team\_destroy}@(shmem_team_t team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{INOUT}{team}{A pointer to a valid \openshmem team handle.}
+\apiargument{IN}{team}{An \openshmem team handle.}
 \end{apiarguments}
 
 \apidescription{
 The \FUNC{shmem\_team\_destroy} routine destroys an existing team. This is a
 collective call, in which every member of the team being destroyed needs
-to participate. This will free all internal memory structures associated
-with the team and invalidate the team handle. Upon return, the team
+to participate. This will free all internal resources associated
+with the team. Upon return, the team
 handle can no longer be used for team API calls.
 
 It is considered erroneous to free \LibHandleRef{SHMEM\_TEAM\_WORLD} or
 any other predefined team.
 
-If a pointer to an invalid handle is provided, the behavior is undefined.
-
-If the pointer to \VAR{team} is a null pointer, then no team is destroyed,
-and a nonzero value is returned.
-
-After returning from the routine, if the team was successfully destroyed,
-the handle will be assigned the value \LibConstRef{SHMEM\_TEAM\_INVALID}.
+When \VAR{team} specifies an invalid team, if \VAR{team} compares
+equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no operation is
+performed; otherwise, the behavior is undefined.
 
 Team destruction assumes that any resources explicitly created from the team,
 such as contexts created from the team, have already been released through
@@ -39,11 +35,11 @@ undefined.
 }
 
 \apireturnvalues{
-Zero upon successful destruction of the team, nonzero otherwise.
+  None.
 }
 
 \apinotes{
-None.
+  None.
 }
 
 \end{apidefinition}
