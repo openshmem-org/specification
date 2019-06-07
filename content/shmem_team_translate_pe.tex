@@ -1,5 +1,6 @@
 \apisummary{
-    Translates a given \ac{PE} number to the corresponding \ac{PE} number in another team.
+  Translate a given \ac{PE} number from one team to the corresponding
+  \ac{PE} number in another team.
 }
 
 \begin{apidefinition}
@@ -22,9 +23,6 @@ Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this routine returns t
 \ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both the
 \VAR{src\_team} and \VAR{dest\_team}, a value of \CONST{-1} is returned.
 
-If \LibHandleRef{SHMEM\_TEAM\_WORLD} is provided as the \VAR{dest\_team} parameter,
-this routine acts as a global \ac{PE} number translator and will return the corresponding
-\LibHandleRef{SHMEM\_TEAM\_WORLD} number.
 
 If either of the \VAR{src\_team} or \VAR{dest\_team} handle is invalid, the behavior is undefined.
 }
@@ -35,7 +33,10 @@ team handle arguments are invalid or the \VAR{src\_pe} is not in both the source
 }
 
 \apinotes{
-None.
+  If \LibHandleRef{SHMEM\_TEAM\_WORLD} is provided as the
+  \VAR{dest\_team} parameter, this routine acts as a global \ac{PE}
+  number translator and will return the corresponding
+  \LibHandleRef{SHMEM\_TEAM\_WORLD} number.
 }
 
 \begin{apiexamples}
