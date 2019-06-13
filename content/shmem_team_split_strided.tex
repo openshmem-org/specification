@@ -1,26 +1,26 @@
 \apisummary{
 Create a new \openshmem team from a subset of the existing parent team \acp{PE},
 where the subset is defined by the
-\ac{PE} triplet (\VAR{PE\_start}, \VAR{PE\_stride}, and \VAR{PE\_size}) supplied to the routine.}
+\ac{PE} triplet (\VAR{start}, \VAR{stride}, and \VAR{size}) supplied to the routine.}
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int PE_start, int PE_stride,
-     int PE_size, const shmem_team_config_t *config, long config_mask, shmem_team_t *new_team);
+int @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int start, int stride,
+     int size, const shmem_team_config_t *config, long config_mask, shmem_team_t *new_team);
 \end{Csynopsis}
 
 \begin{apiarguments}
 \apiargument{IN}{parent\_team}{An \openshmem team.}
 
-\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the subset of \acp{PE} from
+\apiargument{IN}{start}{The lowest \ac{PE} number of the subset of \acp{PE} from
 the parent team that will form the new team.}
 
-\apiargument{IN}{PE\_stride}{The stride between team \ac{PE}
+\apiargument{IN}{stride}{The stride between team \ac{PE}
 numbers in the parent team that comprise the subset of \acp{PE} that will form
 the new team.}
 
-\apiargument{IN}{PE\_size}{The number of \acp{PE} from the parent team in the subset
+\apiargument{IN}{size}{The number of \acp{PE} from the parent team in the subset
 of \acp{PE} that will form the new team.}
 
 \apiargument{IN}{config}{
@@ -40,7 +40,7 @@ the \ac{PE} triplet provided.}
 The \FUNC{shmem\_team\_split\_strided} routine is a collective routine.
 It creates a new \openshmem team from a subset of the existing parent team,
 where the \ac{PE} subset is defined by the triplet of arguments
-(\VAR{PE\_start}, \VAR{PE\_stride}, \VAR{PE\_size}).
+(\VAR{start}, \VAR{stride}, \VAR{size}).
 A valid triplet is one such that:
 \begin{equation*}
   start + stride \cdot i \in \mathbb{Z}_N
@@ -86,7 +86,7 @@ If \VAR{new\_team} cannot be created, then it will be assigned the value
 
 \apinotes{
   It is important to note the use of the less restrictive
-  \VAR{PE\_stride} argument instead of \VAR{logPE\_stride}. This method of
+  \VAR{stride} argument instead of \VAR{logPE\_stride}. This method of
   creating a team with an arbitrary set of \acp{PE} is inherently restricted
   by its parameters, but allows for many additional use-cases over using a
   \VAR{logPE\_stride} parameter, and may provide an easier transition for
