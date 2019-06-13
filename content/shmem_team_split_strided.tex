@@ -39,8 +39,17 @@ the \ac{PE} triplet provided.}
 \apidescription{
 The \FUNC{shmem\_team\_split\_strided} routine is a collective routine.
 It creates a new \openshmem team from a subset of the existing parent team,
-where the subset is defined by the \ac{PE} triplet (\VAR{PE\_start},
-\VAR{PE\_stride}, and \VAR{PE\_size}) supplied to the routine.
+where the \ac{PE} subset is defined by the triplet of arguments
+(\VAR{PE\_start}, \VAR{PE\_stride}, \VAR{PE\_size}).
+A valid triplet is one such that:
+\begin{equation*}
+  start + stride \cdot i \in \mathbb{Z}_N
+  \hspace{0.35em}
+  \forall
+  \hspace{0.35em}
+  i \in \mathbb{Z}_{size}
+\end{equation*}
+where $N$ is the number of \acp{PE} in the parent team.
 
 This routine must be called by all \acp{PE} contained in the \ac{PE} triplet
 specification. It may be called by additional \acp{PE} not included in the
