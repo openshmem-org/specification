@@ -25,7 +25,8 @@ uint64_t @\FuncDecl{shmem\_signal\_wait\_until}@(uint64_t *sig_addr, int cmp, ui
     satisfies the wait condition. In an \openshmem program with single-threaded
     or multithreaded \acp{PE}, the \VAR{sig\_addr} object at the calling \ac{PE}
     is expected only to be updated as a signal, through the signalling operations
-    available in Section~\ref{sec:shmem_signal}.
+    available in Section~\ref{subsec:shmem_put_signal} and
+    Section~\ref{subsec:shmem_put_signal_nbi}.
 
     This routine can be used to implement point-to-point synchronization between
     \acp{PE} or between threads within the same \ac{PE}. A call to this routine

@@ -1,0 +1,36 @@
+\color{ForestGreen}
+\apisummary{
+    Atomically fetches the signal update on a local data object.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+uint64_t @\FuncDecl{shmem\_signal\_fetch}@(const TYPE *sig_addr);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{sig\_addr}{A pointer to a remotely accessible variable.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_signal\_fetch} performs an atomic fetch operation and returns
+    the contents of the \VAR{sig\_addr} signal data object as an atomic operation.
+    In an \openshmem program with single-threaded or multithreaded \acp{PE}, the
+    \VAR{sig\_addr} object at the calling \ac{PE} is expected only to be updated
+    as a signal, through the signalling operations available in
+    Section~\ref{subsec:shmem_put_signal} and
+    Section~\ref{subsec:shmem_put_signal_nbi}.
+}
+
+\apireturnvalues{
+    Returns the contents of the symmetric data object, \VAR{sig\_addr}, at the
+    calling \ac{PE}.
+}
+
+\apinotes{
+    None.
+}
+
+\end{apidefinition}
+\color{Black}
