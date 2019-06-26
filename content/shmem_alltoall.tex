@@ -89,14 +89,6 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
     The values in the \VAR{pSync} array are restored to the original values.
 }
 
-\apidesctable{
-The  \dest{}  and \source{} data  objects must conform to certain typing
-constraints, which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
-
-\apitablerow{shmem\_alltoall64}{\CONST{64} bits aligned.}
-\apitablerow{shmem\_alltoall32}{\CONST{32} bits aligned.}
-
 \apireturnvalues{
     None.
 }
