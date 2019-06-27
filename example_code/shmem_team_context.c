@@ -19,7 +19,7 @@ int my_ctx_translate_pe(shmem_ctx_t src_ctx, int src_pe, shmem_ctx_t dest_ctx)
 }
 
 shmem_ctx_t my_team_create_ctx(shmem_team_t team) {
-  if (team == SHMEM_TEAM_NULL) {
+  if (team == SHMEM_TEAM_INVALID) {
     return SHMEM_CTX_INVALID;
   }
 
@@ -83,7 +83,7 @@ int main()
   shmem_team_sync(SHMEM_TEAM_WORLD);
 
   // We will add up some results on pe 4 of team_3s using ctx_2s
-  if ((team_3s != SHMEM_TEAM_NULL) && (team_2s != SHMEM_TEAM_NULL)) {
+  if ((team_3s != SHMEM_TEAM_INVALID) && (team_2s != SHMEM_TEAM_INVALID)) {
     int _pe4_of_3s_in_2s = my_ctx_translate_pe(ctx_3s, 4, ctx_2s);
 
     if (_pe4_of_3s_in_2s < 0) {

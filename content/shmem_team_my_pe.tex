@@ -1,5 +1,5 @@
 \apisummary{
-    Returns the number of the calling \ac{PE} within the provided team.
+  Returns the number of the calling \ac{PE} within a specified team.
 }
 
 \begin{apidefinition}
@@ -9,26 +9,30 @@ int @\FuncDecl{shmem\_team\_my\_pe}@(shmem_team_t team);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{team}{A valid \openshmem team handle.}
+\apiargument{IN}{team}{An \openshmem team handle.}
 \end{apiarguments}
 
 \apidescription{
-The \FUNC{shmem\_team\_my\_pe} routine returns the number of calling \ac{PE} within the
-provided team. The number will be a value between 0 and N-1,
-for a team of size N. Each member of the team has a unique number.
-For the team \LibHandleRef{SHMEM\_TEAM\_WORLD}, this will return the same value
-as \FUNC{shmem\_my\_pe}.
+  When \VAR{team} specifies a valid team, the
+  \FUNC{shmem\_team\_my\_pe} routine returns the number of the calling
+  \ac{PE} within the specified team.
+  The number is an integer between $0$ and $N-1$ for a team of size $N$.
+  Each member of the team has a unique number.
 
-If the provided team handle is invalid, the behavior is undefined.
+  When \VAR{team} specifies an invalid team, if \VAR{team} compares
+  equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then the value
+  \CONST{-1} is returned; otherwise, the behavior is undefined.
 }
 
 \apireturnvalues{
-The number of the calling \ac{PE} within the provided team, or the value
-\CONST{-1} if the provided team compares equal to \LibConstRef{SHMEM\_TEAM\_NULL}.
+  The number of the calling \ac{PE} within the specified team, or the
+  value \CONST{-1} if the team handle compares equal to
+  \LibConstRef{SHMEM\_TEAM\_INVALID}.
 }
 
 \apinotes{
-None.
+  For the default team, this routine will return the same value as
+  \FUNC{shmem\_my\_pe}.
 }
 
 \end{apidefinition}
