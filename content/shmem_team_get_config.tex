@@ -5,11 +5,11 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_t *config);
+int @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_t *config);
 \end{Csynopsis}
 
 \begin{apiarguments}
-  \apiargument{IN}{team}{A valid \openshmem team handle.}
+  \apiargument{IN}{team}{An \openshmem team handle.}
   \apiargument{OUT}{config}{
     A pointer to the configuration parameters for the given team.}
 \end{apiarguments}
@@ -19,12 +19,16 @@ void @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_
 the configuration parameters of the given team, which were assigned according
 to input configuration parameters when the team was created.
 
-If the \VAR{team} argument does not specify a valid team, the behavior is
-undefined. If \VAR{team} is equal to \LibConstRef{SHMEM\_TEAM\_NULL}, then config will be set to the null pointer.
+When \VAR{team} specifies an invalid team, if \VAR{team} compares
+equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no operation is
+performed; otherwise, the behavior is undefined.
 }
 
 \apireturnvalues{
-  None.
+  If \VAR{team} does not compare equal to
+  \LibConstRef{SHMEM\_TEAM\_INVALID}, then
+  \FUNC{shmem\_team\_get\_config} returns \CONST{0}; otherwise,
+  returns nonzero.
 }
 
 \apinotes{

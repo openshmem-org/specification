@@ -25,9 +25,12 @@ int @\FuncDecl{shmem\_ctx\_get\_team}@(shmem_ctx_t ctx, shmem_team_t *team);
   If \VAR{ctx} is the default context or one created by a call to
   \FUNC{shmem\_ctx\_create}, the returned team is the default team.
 
-  If \VAR{ctx} is an invalid context, the behavior is undefined.
+  When \VAR{ctx} is an invalid context, if \VAR{ctx} compares equal to
+  \LibConstRef{SHMEM\_CTX\_INVALID}, then \VAR{team} is assigned the
+  value \LibConstRef{SHMEM\_TEAM\_INVALID} and a nonzero value is
+  returned; otherwise, the behavior is undefined.
 
-  If \VAR{team} is a null pointer, a value of \CONST{-1} is returned.
+  If \VAR{team} is a null pointer, the behavior is undefined.
 }
 
 \apireturnvalues{

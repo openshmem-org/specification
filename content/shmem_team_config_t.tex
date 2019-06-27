@@ -10,59 +10,62 @@ typedef struct {
 } shmem_team_config_t;
 \end{Csynopsis}
 
-  \vspace{1.0em}
+\begin{apiarguments}
+  None.
+\end{apiarguments}
 
-  \apidescription{
-    A team configuration argument acts as an input
-    \FUNC{shmem\_team\_split\_*} routines.
-    It specifies the requested capabilities of the team to be
-    created. 
 
-    The \VAR{num\_contexts} member specifies the total number of simultaneously
-    existing contexts that the program requests to create from this team.
-    These contexts may be created in any number of threads. Successful
-    creation of a team configured with \VAR{num\_contexts} of $N$ means
-    that the implementation will make a best effort to reserve enough
-    resources to allow the team to have $N$ contexts created from the team
-    in existance at any given time. It is not a guaruntee that $N$
-    calls to \FUNC{shmem\_team\_create\_ctx} will succeed.
-    See Section~\ref{sec:ctx} for more on communication contexts and
-    Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
+\apidescription{
+  A team configuration argument acts as an input
+  \FUNC{shmem\_team\_split\_*} routines.
+  It specifies the requested capabilities of the team to be
+  created.
 
-    When using the configuration structure to create teams, a mask parameter
-    controls which fields to use.
-    Any configuration parameter value that is not indicated in the mask will be
-    ignored, and the default value will be used instead.
-    Therefore, a program does not have to set all fields in the config struct;
-    only those for which it does not want the default values.
+  The \VAR{num\_contexts} member specifies the total number of simultaneously
+  existing contexts that the program requests to create from this team.
+  These contexts may be created in any number of threads. Successful
+  creation of a team configured with \VAR{num\_contexts} of $N$ means
+  that the implementation will make a best effort to reserve enough
+  resources to allow the team to have $N$ contexts created from the team
+  in existance at any given time. It is not a guaruntee that $N$
+  calls to \FUNC{shmem\_team\_create\_ctx} will succeed.
+  See Section~\ref{sec:ctx} for more on communication contexts and
+  Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
 
-    A configuration mask value is created by combining individual field
-    masks with through a bitwise OR operation of the following library constants:
-    
-  {
-  \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_CONTEXTS}}{
-    The team should be created using the value of the
-    \VAR{num\_contexts} member of the configuration parameter
-    \VAR{config} as a requirement.
-  }
-  }
+  When using the configuration structure to create teams, a mask parameter
+  controls which fields to use.
+  Any configuration parameter value that is not indicated in the mask will be
+  ignored, and the default value will be used instead.
+  Therefore, a program does not have to set all fields in the config struct;
+  only those for which it does not want the default values.
 
-   A configuration mask value of \CONST{0} indicates that the team
-   should be created with the default values for all configuration
-   parameters.
-
-   The default values for configuration parameters are:
+  A configuration mask value is created by combining individual field
+  masks with through a bitwise OR operation of the following library constants:
 
   {
-  \apitablerow{num\_contexts = \CONST{0}}{
-    By default, no contexts can be created on a new team
+    \apitablerow{\LibConstRef{SHMEM\_TEAM\_NUM\_CONTEXTS}}{
+      The team should be created using the value of the
+      \VAR{num\_contexts} member of the configuration parameter
+      \VAR{config} as a requirement.
     }
   }
 
+  A configuration mask value of \CONST{0} indicates that the team
+  should be created with the default values for all configuration
+  parameters.
+
+  The default values for configuration parameters are:
+
+  {
+    \apitablerow{num\_contexts = \CONST{0}}{
+      By default, no contexts can be created on a new team
+    }
   }
 
-  \apinotes{
-     None.
-  }
+}
+
+\apinotes{
+  None.
+}
 
 \end{apidefinition}

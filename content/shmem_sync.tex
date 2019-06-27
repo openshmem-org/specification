@@ -57,7 +57,7 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 
     Team-based sync routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the sync operation.
-    If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_NULL}
+    If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_INVALID}
     is passed to this routine, the behavior is undefined.
 
     Active-set-based sync routines operate over all \acp{PE} in the active set
@@ -93,7 +93,7 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
     See section \ref{subsec:error_handling} for expected error checking and
     return code behavior specific to implementations. For portable
     error checking and debugging behavior, programs should do their own checks
-    for invalid team handles or \LibConstRef{SHMEM\_TEAM\_NULL}
+    for invalid team handles or \LibConstRef{SHMEM\_TEAM\_INVALID}
     }
 
     If the \VAR{pSync} array is initialized at run time, another method of
