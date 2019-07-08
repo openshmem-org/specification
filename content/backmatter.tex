@@ -510,6 +510,15 @@ Major changes in \openshmem[1.5] include \dots
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
+\item Clarified that point-to-point synchronization routines preserve the
+  atomicity of OpenSHMEM \acp{AMO}.
+\\ See Section~\ref{subsec:amo_guarantees}.
+%
+\item Clarified that symmetric variables used as \VAR{ivar} arguments to
+  point-to-point synchronization routines must be updated using OpenSHMEM
+  \acp{AMO}.
+\\ See Section~\ref{subsec:p2p_intro}.
+%
 \item Added support for multipliers in \VAR{SHMEM\_SYMMETRIC\_SIZE}
 environment variables.
 \\ See Section \ref{subsec:environment_variables}.
