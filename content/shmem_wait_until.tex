@@ -38,7 +38,7 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 
 \begin{apiarguments}
 
-\apiargument{OUT}{ivar}{A remotely accessible integer variable. When using \CorCpp,
+\apiargument{IN}{ivar}{A remotely accessible integer variable. When using \CorCpp,
     the type of \VAR{ivar} should match that implied in the SYNOPSIS section.} 
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
   \VAR{cmp\_value}.  When using \Fortran, it must  be of default kind.
@@ -105,9 +105,9 @@ call to \FUNC{SHMEM\_INT8\_WAIT} in example 1:}
 {}
 
 \apicexample
-{The following \CorCpp{} call waits until the value in \VAR{ivar} is set to
+{The following \CorCpp{} routine waits until the value in \VAR{ivar} is set to
 be less than zero by a transfer from a remote PE:}
-{./example_code/shmem_wait3_example.f90}
+{./example_code/shmem_wait3_example.c}
 {}
 
 \apifexample
