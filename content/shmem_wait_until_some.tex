@@ -37,9 +37,11 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \apidescription{ 
     The \FUNC{shmem\_wait\_until\_some} routine waits until at least one entry
     in the wait set specified by \VAR{ivars} and \VAR{status} satisfies the
-    wait condition at the calling \ac{PE}.  This routine tests all elements of
-    \VAR{ivars} in the wait set at least once, and the order in which the
-    elements are waited upon is unspecified.
+    wait condition at the calling \ac{PE}.  The \VAR{ivar} object at the
+    calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
+    within the calling \ac{PE} or within another \ac{PE}.  This routine tests
+    all elements of \VAR{ivars} in the wait set at least once, and the order in
+    which the elements are waited upon is unspecified.
 
     Upon return, the \VAR{indices} array contains the indices of at least one
     element in the wait set that satisfied the wait condition during the call
@@ -66,6 +68,10 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     and all elements in \VAR{ivars} are included in the wait set.  The
     \VAR{ivars}, \VAR{indices}, and \VAR{status} arrays must not overlap in
     memory.
+
+    Implementations must ensure that \FUNC{shmem\_wait\_until\_some} does not
+    return before the update of the memory indicated by \VAR{ivar} is fully
+    complete.
 }
 
 
@@ -76,13 +82,6 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \apinotes{
     None.
-}
-
-\apiimpnotes{
-    Implementations must ensure that \FUNC{shmem\_wait\_until\_some} does not
-    return before the update of the memory indicated by the completed indices of \VAR{ivars} is fully
-    executed.  Partial updates to the memory must not cause
-    \FUNC{shmem\_wait\_until\_some} to return.
 }
 
 
