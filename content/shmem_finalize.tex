@@ -26,7 +26,11 @@ CALL @\FuncDecl{SHMEM\_FINALIZE}@()
     implicit global barrier in \FUNC{shmem\_finalize} to ensure that pending
     communications are completed and that no resources are released until all
     \acp{PE} have entered \FUNC{shmem\_finalize}.
-    This routine destroys all shareable contexts.  The user is
+    \oldtext{This routine destroys all shareable contexts.}
+    \newtext{
+    This routine destroys all teams created by the \openshmem program.
+    As a result, all shareable contexts are destroyed.
+    }  The user is
     responsible for destroying all contexts with the
     \CONST{SHMEM\_CTX\_PRIVATE} option enabled prior to calling this routine;
     otherwise, the behavior is undefined.
