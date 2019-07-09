@@ -1,11 +1,11 @@
 The \acp{PE} in an \openshmem program communicate using either
-point-to-point routines, which specify the \ac{PE} number of the target
+\ac{RMA} and \ac{AMO} routines, which specify the \ac{PE} number of the target
 \ac{PE}, or collective routines, which operate over a set of \acp{PE}.
 In \openshmem, teams allow programs to group a set of \acp{PE} for
 communication.
 Team-based collective communications operate across all the \acp{PE}
 in a valid team.
-Point-to-point communication can make use of team-relative \ac{PE}
+\ac{RMA} and \ac{AMO} communication can make use of team-relative \ac{PE}
 numbering through team-based contexts (see Section~\ref{sec:ctx}) or
 \ac{PE} number translation.
 
