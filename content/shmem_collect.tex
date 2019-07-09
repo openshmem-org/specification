@@ -16,10 +16,10 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 
 \apiargument{OUT}{dest}{A symmetric array. The \dest{} argument must be large enough
     to accept the concatenation of the \source{} arrays on all participating \acp{PE}.  The data
-    types are as follows: For \FUNC{shmem\_collect8}, \FUNC{shmem\_collect64},
-    \FUNC{shmem\_fcollect8}, and \FUNC{shmem\_fcollect64}, any data type with an
-    element size of 64 bits. \CorCpp{}  structures  are not permitted.  For \FUNC{shmem\_collect4},
-    \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, and \FUNC{shmem\_fcollect32},
+    types are as follows: For \FUNC{shmem\_collect64},
+    and \FUNC{shmem\_fcollect64}, any data type with an
+    element size of 64 bits. \CorCpp{}  structures  are not permitted.  For
+    \FUNC{shmem\_collect32}, and \FUNC{shmem\_fcollect32},
     any data type with an element size of \CONST{32} bits. \CorCpp{} structures are not permitted.}
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}

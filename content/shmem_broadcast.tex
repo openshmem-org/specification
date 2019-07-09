@@ -16,7 +16,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 \apiargument{IN}{source}{A symmetric data object that can be of any data type
     that is permissible for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in \source.  For
-    \FUNC{shmem\_broadcast32} and \FUNC{shmem\_broadcast4}, this is the number of
+    \FUNC{shmem\_broadcast32}, this is the number of
     32-bit halfwords.  nelems must be of type \VAR{size\_t} in \Cstd.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the active set,	from which the data is copied. Must be greater than or equal to
@@ -79,12 +79,8 @@ The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
-\apitablerow{shmem\_broadcast64}{Any noncharacter
-    type that has an element size of \CONST{64} bits. No
-    \CorCpp{} structures are allowed.}
-\apitablerow{shmem\_broadcast32}{Any noncharacter
-    type that has an element size of \CONST{32} bits. No
-    \CorCpp{} structures are allowed.}
+\apitablerow{shmem\_broadcast64}{No \CorCpp{} structures are allowed.}
+\apitablerow{shmem\_broadcast32}{No \CorCpp{} structures are allowed.}
 
 \apireturnvalues{
     None.

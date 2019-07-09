@@ -462,7 +462,8 @@ In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
 \subsection{\textit{Fortran} API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
-The entire \openshmem \Fortran API was deprecated because of a general lack of
+The entire \openshmem \Fortran API was deprecated in \openshmem[1.4] and
+removed in \openshmem[1.5] because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
 extensive update of the \Fortran API, \Fortran users are encouraged to
 leverage the \openshmem Specification's \Cstd API through the
@@ -480,6 +481,8 @@ Major changes in \openshmem[1.5] include \dots
 
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
+%
+\item Removed the entire \openshmem \Fortran API. 
 %
 \item Specified the validity of communication contexts, added the constant
   \CONST{SHMEM\_CTX\_INVALID}, and clarified the behavior of

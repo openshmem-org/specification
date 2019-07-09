@@ -55,21 +55,6 @@ void @\FuncDecl{shmem\_ctx\_putmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
     the behavior is undefined.
  }
 
-\apidesctable{
-    The \dest{} and \source{} data objects must conform to certain typing
-    constraints, which are as follows:}
-    {Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_putmem\_nbi}{\Cstd:
-        Any  data  type.  nelems is scaled in bytes.}
-    \apitablerow{shmem\_put4\_nbi, shmem\_put32\_nbi}{Any noncharacter type
-        that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_put8\_nbi}{\Cstd: Any noncharacter type that
-        has a storage size equal to \CONST{8} bits.}
-    \apitablerow{shmem\_put64\_nbi}{Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_put128\_nbi}{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}
-
 \apireturnvalues{
     None.
 }

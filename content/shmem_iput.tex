@@ -56,19 +56,6 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
     the behavior is undefined.
 }
 
-\apidesctable{
-    The \dest{} and \source{} data objects must conform to typing constraints,
-    which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_iput4, shmem\_iput32}{Any noncharacter type
-        that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_iput8}{\Cstd: Any noncharacter type that
-        has a storage size equal to \CONST{8} bits.}
-    \apitablerow{shmem\_iput64}{Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_iput128}{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}
-
 \apireturnvalues{
     None.
 }
