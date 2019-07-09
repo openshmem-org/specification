@@ -70,26 +70,10 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
     performed on the remote \VAR{sig\_addr} signal data object.
 
     An update to the \VAR{sig\_addr} signal data object through a non-blocking
-    put-with-signal routine completes as if performed atomically with respect to
-    the following:
-    \begin{itemize}
-        \item other blocking or non-blocking variant of the put-with-signal
-        routine that updates the \VAR{sig\_addr} signal data object using the
-        same \VAR{sig\_op} signal update operator,
-        \item \FUNC{shmem\_signal\_fetch} routine that fetches the
-        \VAR{sig\_addr} signal data object on the specified remote \ac{PE}, and
-        \item any point-to-point synchronization routine that accesses the
-        \VAR{sig\_addr} signal data object.
-    \end{itemize}
-    With the above described atomicity guarantees, the following options can be
-    used as the \VAR{sig\_op} signal operator.
-
-    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_SET}}{An update to \VAR{sig\_addr}
-    signal data object is an atomic set operation. It writes the \VAR{signal}
-    value into \VAR{sig\_addr} on \VAR{PE} as an atomic operation.}
-    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_ADD}}{An update to \VAR{sig\_addr}
-    signal data object is an atomic add operation. It adds the \VAR{signal}
-    value into \VAR{sig\_addr} on \VAR{PE} as an atomic operation.}
+    put-with-signal routine completes as if performed atomically as described in
+    Section~\ref{subsec:signal_atomicity}. The various options as described in
+    Section~\ref{subsec:signal_operator} can be used as the \VAR{sig\_op} signal
+    operator.
 }
 
 \apireturnvalues{
