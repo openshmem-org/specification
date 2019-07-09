@@ -1,11 +1,11 @@
 The \acp{PE} in an \openshmem program communicate using either
-point-to-point routines, which specify the \ac{PE} number of the target
+\ac{RMA} and \ac{AMO} routines, which specify the \ac{PE} number of the target
 \ac{PE}, or collective routines, which operate over a set of \acp{PE}.
 In \openshmem, teams allow programs to group a set of \acp{PE} for
 communication.
 Team-based collective communications operate across all the \acp{PE}
 in a valid team.
-Point-to-point communication can make use of team-relative \ac{PE}
+\ac{RMA} and \ac{AMO} communication can make use of team-relative \ac{PE}
 numbering through team-based contexts (see Section~\ref{sec:ctx}) or
 \ac{PE} number translation.
 
@@ -74,7 +74,12 @@ A full discussion of collective semantics follows in Section~\ref{subsec:coll}.
 Team creation is a collective operation on the parent team object. New teams
 result from a \FUNC{shmem\_team\_split\_*} routine, which takes a parent team
 and other arguments and produces new teams that are a subset of the parent
-team. Teams that are created by a \FUNC{shmem\_team\_split\_*} routine may be
+team. All \acp{PE} in a parent team must participate in a split operation
+to create new teams. If a \ac{PE} from the parent team is not a member of any
+resulting new teams, it will receive a value of \CONST{SHMEM\_TEAM\_INVALID}
+as the value for the new team handle.
+
+Teams that are created by a \FUNC{shmem\_team\_split\_*} routine may be
 provided a configuration argument that specifies attributes of each new team.
 This configuration argument is of type \CTYPE{shmem\_team\_config\_t}, which
 is detailed further in Section~\ref{subsec:shmem_team_config_t}.
@@ -85,18 +90,8 @@ given \ac{PE}, i.e. in separate threads.
 
 As with any collective routine on a team, team creation is matched across PEs based
 on ordering. So, team creation events must occur in the same order on all \acp{PE}
-in the parent team. Additionally, there must not be team creation
-operations from the same parent team simultaneously occurring that involve
-the same \acp{PE} in any resulting child teams.
+in the parent team.
 
-\begin{itemize}
-\item[] The following rule of practice will avoid any conflicts on team
-object resources during team creation:
-\item[] \emph{When a parent team is split multiple times, and the resulting child teams
-have overlapping membership, the program must call the \FUNC{shmem\_team\_sync}
-routine on the parent team between subsequent calls to split routines.}
-\end{itemize}
-
-Upon completion of a team creation operation, any resulting child teams will be
-immediately usable for any team-based operations, including creating new child teams,
-without any intervening synchronization.
+Upon completion of a team creation operation, the parent and any resulting child teams
+will be immediately usable for any team-based operations, including creating new child
+teams, without any intervening synchronization.
