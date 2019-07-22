@@ -1,4 +1,4 @@
-\apisummary{ 
+\apisummary{
     Called at the beginning of an \openshmem program to initialize the execution
     environment. This routine is deprecated and is provided for backwards
     compatibility. Implementations must include it, and the routine should
@@ -13,15 +13,11 @@ void @\FuncDecl{start\_pes}@(int npes);
 \end{Csynopsis}
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{START\_PES}@(npes)
-\end{Fsynopsis}
-
 \begin{apiarguments}
        \apiargument{npes}{Unused}{ Should be set to \CONST{0}.}
 \end{apiarguments}
 
-\apidescription{   
+\apidescription{
      The \FUNC{start\_pes} routine initializes the \openshmem execution
      environment.  An \openshmem program must call \FUNC{start\_pes},
      \FUNC{shmem\_init}, or \FUNC{shmem\_init\_thread} before calling any other \openshmem routine.  Unlike
@@ -48,15 +44,5 @@ CALL @\FuncDecl{START\_PES}@(npes)
     call, users are encouraged to use \FUNC{shmem\_init} or
     \FUNC{shmem\_init\_thread} instead.
 }
-
-
-\begin{apiexamples}
-
-\apicexample
-    { This is a simple program that calls \FUNC{start\_pes}:}
-    {./example_code/shmem_startpes_example.f90}
-    {} 
-
-\end{apiexamples}
 
 \end{apidefinition}

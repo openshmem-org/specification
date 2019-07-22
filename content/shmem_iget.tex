@@ -22,20 +22,6 @@ void @\FuncDecl{shmem\_ctx\_iget\FuncParam{SIZE}}@(shmem_ctx_t ctx, void *dest, 
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
-\begin{Fsynopsis}
-INTEGER dst, sst, nelems, pe
-CALL @\FuncDecl{SHMEM\_COMPLEX\_IGET}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_DOUBLE\_IGET}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_IGET4}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_IGET8}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_IGET32}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_IGET64}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_IGET128}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_INTEGER\_IGET}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_LOGICAL\_IGET}@(dest, source, dst, sst, nelems, pe)
-CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
     \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
@@ -45,20 +31,15 @@ CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.
         A  value of \CONST{1} indicates contiguous data. \VAR{dst} must be of
-        type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
-        be a default integer value.}
+        type \CTYPE{ptrdiff\_t}.}
     \apiargument{IN}{sst}{The stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
         array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \CTYPE{ptrdiff\_t}.  When using  \Fortran,  it  must
-        be a default integer value.}
+        of type \CTYPE{ptrdiff\_t}.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
-        using \Fortran, it must be  a constant, variable, or array element of
-        default integer type.}
+        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
-        of type integer. When using  \Fortran, it must be a constant,
-        variable, or array element of default integer type.}
+        of type integer.}
 \end{apiarguments}
 
 \apidescription{
@@ -70,44 +51,12 @@ CALL @\FuncDecl{SHMEM\_REAL\_IGET}@(dest, source, dst, sst, nelems, pe)
     the behavior is undefined.
 }
 
-\apidesctable{
-    The \VAR{dest} and \VAR{source} data objects must conform to typing
-    constraints, which are as follows:}
-    {Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_iget4, shmem\_iget32}{Any noncharacter type
-        that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_iget8}{\Cstd: Any noncharacter type that
-        has a storage size equal to \CONST{8} bits.}
-    \apitablerow{}{\Fortran: Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_iget64}{Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_iget128}{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}
-    \apitablerow{SHMEM\_COMPLEX\_IGET}{Elements of type complex of default size.}
-    \apitablerow{SHMEM\_DOUBLE\_IGET}{\Fortran: Elements of type double precision.}
-    \apitablerow{SHMEM\_INTEGER\_IGET}{Elements of type integer.}
-    \apitablerow{SHMEM\_LOGICAL\_IGET}{Elements of type logical.}
-    \apitablerow{SHMEM\_REAL\_IGET}{Elements of type real.}
-
 \apireturnvalues{
     None.
 }
 
 \apinotes{
-    When using \Fortran, data types must be of default size. For example, a
-    real variable must be declared as \CONST{REAL}, \CONST{REAL*4}, or
-    \CONST{REAL(KIND=KIND(1.0))}. 
+    None.
 }
-
-\begin{apiexamples}
-
-\apifexample
-    {The following example uses \FUNC{shmem\_logical\_iget}  in a \Fortran
-    program.} 
-    {./example_code/shmem_iget_example.f90}
-    {}
-
-\end{apiexamples}
 
 \end{apidefinition}
