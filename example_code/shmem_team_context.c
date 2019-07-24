@@ -15,7 +15,7 @@ int my_ctx_translate_pe(shmem_ctx_t src_ctx, int src_pe, shmem_ctx_t dest_ctx)
   shmem_team_t src_team, dest_team;
   shmem_ctx_get_team(src_ctx, &src_team);
   shmem_ctx_get_team(dest_ctx, &dest_team);
-  return shmem_team_translate(src_team, src_pe, dest_pe);
+  return shmem_team_translate_pe(src_team, src_pe, dest_pe);
 }
 
 shmem_ctx_t my_team_create_ctx(shmem_team_t team) {
