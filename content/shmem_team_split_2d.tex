@@ -65,8 +65,8 @@ new \VAR{yteam}s will contain all \acp{PE} with the same coordinate along the
 
 The \acp{PE} are numbered in the new teams based on the coordinate of the
 \ac{PE} along the given axis. So, another way to think of the result of the split
-operation is that the value returned by \FUNC{shmem\_team\_my\_pe}(\VAR(xteam)) is the
-x-coordinate and the value returned by \FUNC{shmem\_team\_my\_pe}(\VAR(yteam))
+operation is that the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{xteam})} is the
+x-coordinate and the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{yteam})}
 is the y-coordinate of the calling \ac{PE}.
 
 Any valid \openshmem team can be used as the parent team. This routine must be
@@ -82,7 +82,7 @@ configuration parameters.
 The \acp{PE} in the parent team \emph{do not} have to all provide the same
 parameters for new teams.
 
-The \VAR{xaxis\_mask} and\VAR{xaxis\_mask} arguments are a bitwise masks
+The \VAR{xaxis\_mask} and \VAR{yaxis\_mask} arguments are a bitwise masks
 representing the set of configuration parameters to use from
 \VAR{xaxis\_config} and \VAR{yaxis\_config}, respectively.
 A mask value of \CONST{0} indicates that the team
