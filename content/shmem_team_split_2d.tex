@@ -8,8 +8,8 @@ and \emph{y}-dimensions.}
 
 \begin{Csynopsis}
 int @\FuncDecl{shmem\_team\_split\_2d}@(shmem_team_t parent_team, int xrange,
-     shmem_team_config_t *xaxis_config, long xaxis_mask, shmem_team_t *xaxis_team,
-     shmem_team_config_t *yaxis_config, long yaxis_mask, shmem_team_t *yaxis_team);
+    const shmem_team_config_t *xaxis_config, long xaxis_mask, shmem_team_t *xaxis_team,
+    const shmem_team_config_t *yaxis_config, long yaxis_mask, shmem_team_t *yaxis_team);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -19,7 +19,7 @@ int @\FuncDecl{shmem\_team\_split\_2d}@(shmem_team_t parent_team, int xrange,
 \apiargument{IN}{xrange}{A nonnegative integer representing the number of
 elements in the first dimension.}
 
-\apiargument{INOUT}{xaxis\_config}{
+\apiargument{IN}{xaxis\_config}{
   A pointer to the configuration parameters for the new \VAR{x}-axis team.}
 
 \apiargument{IN}{xaxis\_mask}{
@@ -30,7 +30,7 @@ elements in the first dimension.}
 subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{x}-axis
 as the calling \ac{PE}.}
 
-\apiargument{INOUT}{yaxis\_config}{
+\apiargument{IN}{yaxis\_config}{
   A pointer to the configuration parameters for the new \VAR{y}-axis team.}
 
 \apiargument{IN}{yaxis\_mask}{
