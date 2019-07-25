@@ -1,0 +1,31 @@
+\openshmem \Fortran[bind(C)] language bindings is based on \Fortran-\Cstd
+interoperability feature introduced in \Fortran[2018](ISO/IEC 1539-1:2018(E))
+language standard. \Fortran[2018] defines a standard way to generate procedure,
+derived-type declarations and global variables which are interoperable with
+\Cstd(ISO/IEC 9899:2011). The bind(C) attribute available in the \Fortran
+language enables the interoperability with \Cstd. The \openshmem
+\Fortran[bind(C)] language bindings use this standard way to generate \Fortran
+wrappers over the primary \Cstd language bindings provided by \openshmem.
+
+\begin{itemize}
+    \item All the \openshmem APIs specified by the \openshmem \Fortran[bind(C)]
+    language bindings are implemented as a wrapper interface using \Fortran
+    bind(C) attribute over the \Cstd language bindings specified by \openshmem
+    specification.
+    \item All available language constants, library handles, and environment
+    variables from the \openshmem specification are supported by \openshmem
+    \Fortran[bind(C)] language bindings.
+    \item The \Fortran[bind(C)] language bindings is defined in a module named
+    \textit{shmem}. The \textit{shmem} module must contain only the interfaces
+    and constant names defined in this specification.
+    \item All \openshmem extension APIs that are not part of this specification
+    must be defined in a separate \textit{shmemx} module. The \textit{shmemx}
+    module must exist, even if no extensions are provided. Any extensions shall
+    use the \textit{shmemx\_} prefix for all routine, variable, and constant
+    names.
+    \item \openshmem APIs in this language bindings are available either as a
+    subroutine or a function. \openshmem \Cstd APIs which returns a value are
+    wrapped as functions, while those APIs that have some arguments and perform
+    a specific operation without returning any values are wrapped as
+    subroutines.
+\end{itemize}

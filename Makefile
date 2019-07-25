@@ -1,10 +1,18 @@
 TARGET   = main_spec
+LANG_EXT = language_ext
 SOURCES  = $(shell find . -name '*.tex' -print)
 FIGURES  = $(shell find figures -name '*.pdf' -print)
 EXAMPLES = $(shell find example_code -name '*.[c,f]*' -print)
 
 .PHONY: all
-all: ${TARGET}.pdf
+all: ${TARGET}.pdf ${LANG_EXT}.pdf
+
+${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
+	pdflatex $(LATEXOPT) ${TARGET}
+	makeindex ${TARGET}
+	pdflatex $(LATEXOPT) ${TARGET}
+	makeindex ${TARGET}
+	pdflatex $(LATEXOPT) ${TARGET}
 
 ${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
 	pdflatex $(LATEXOPT) ${TARGET}
@@ -15,5 +23,7 @@ ${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
 
 .PHONY: clean
 clean:
-	rm -f ${TARGET}.{log,aux,ps,dvi,bbl,blg,log,idx,out,toc,pdf,out} chappage.txt
+	rm -f ${TARGET}.{log,aux,ps,dvi,bbl,blg,log,idx,out,toc,pdf,out} \
+	${LANG_EXT}.{log,aux,ps,dvi,bbl,blg,log,idx,out,toc,pdf,out} \
+	chappage.txt
 
