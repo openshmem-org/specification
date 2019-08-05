@@ -33,14 +33,12 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \apidescription{ 
     The \FUNC{shmem\_wait\_until\_all} routine waits until all entries in the
-    wait set specified by \VAR{ivars} and \VAR{status} have satisfied the wait
-    condition at the calling \ac{PE}.  The \VAR{ivar} object at the calling
-    \ac{PE} may be updated by an \ac{AMO} performed by a thread located within
-    the calling \ac{PE} or within another \ac{PE}.  If \VAR{nelems} is 0, the
-    wait set is empty and this routine returns immediately.  This routine is
-    semantically similar to \FUNC{shmem\_wait\_until} in
-    Section~\ref{subsec:shmem_wait_until}, but adds support for point-to-point
-    synchronization involving an array of symmetric data objects.
+    wait set specified by \VAR{ivars} and \VAR{status} have satisfied the wait condition at the
+    calling \ac{PE}.  If \VAR{nelems} is 0, the wait set is empty and this routine returns immediately.
+    This routine is semantically similar to
+    \FUNC{shmem\_wait\_until} in Section~\ref{subsec:shmem_wait_until}, but
+    adds support for point-to-point synchronization involving an array of
+    symmetric data objects.
 
     The optional \VAR{status} is a mask array of length \VAR{nelems} where each
     element corresponds to the respective element in \VAR{ivars} and indicates
