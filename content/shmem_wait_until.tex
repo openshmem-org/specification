@@ -92,12 +92,11 @@ CALL @\FuncDecl{SHMEM\_WAIT\_UNTIL}@(ivar, cmp, cmp_value)
 
 \apiimpnotes{
   Some platforms may allow wait operations to efficiently poll or block on an
-  update to \VAR{ivar}.  On others, an atomic-compatible read operation may be
-  needed to preserve the atomicity of updates to \VAR{ivar}.  On platforms
-  where atomic-compatible read operations negatively impact performance,
-  implementations may be able to limit the number of atomic-compatible reads
-  performed by using non-atomic reads of \VAR{ivar} to wait for a change to
-  occur, followed by an atomic-compatible read operation to fetch the updated
+  update to \VAR{ivar}.  On others, an atomic read operation may be needed to
+  observe updates to \VAR{ivar}.  On platforms where atomic read operations
+  incur high overhead, implementations may be able to reduce the number of
+  atomic reads performed by using non-atomic reads of \VAR{ivar} to wait for a
+  change to occur, followed by an atomic read operation to fetch the updated
   value.
 }
 
