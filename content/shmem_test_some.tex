@@ -70,8 +70,9 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     elements in \VAR{ivars} are included in the test set.  The \VAR{ivars},
     \VAR{indices}, and \VAR{status} arrays must not overlap in memory.
 
-    Implementations must ensure that \FUNC{shmem\_test\_some} does not return 1
-    before the update of the memory indicated by \VAR{ivar} is fully complete.
+    Implementations must ensure that \FUNC{shmem\_test\_some} does not return
+    indices before the updates of the memory indicated by the corresponding
+    \VAR{ivars} elements are fully complete.
 }
 
 \apireturnvalues{
