@@ -37,7 +37,10 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \apidescription{ 
     The \FUNC{shmem\_wait\_until\_some} routine waits until at least one entry
     in the wait set specified by \VAR{ivars} and \VAR{status} satisfies the
-    wait condition at the calling \ac{PE}.  This routine tests all elements of
+    wait condition at the calling \ac{PE}.  The \VAR{ivars} objects at the
+    calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
+    within the calling \ac{PE} or within another \ac{PE}.
+    This routine tests all elements of
     \VAR{ivars} in the wait set at least once, and the order in which the
     elements are waited upon is unspecified.
 

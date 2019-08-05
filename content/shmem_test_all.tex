@@ -34,7 +34,10 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \apidescription{
     The \FUNC{shmem\_test\_all} routine indicates whether all entries in the
     test set specified by \VAR{ivars} and \VAR{status} have satisfied the test
-    condition at the calling \ac{PE}.  This routine does not block and returns zero if
+    condition at the calling \ac{PE}.  The \VAR{ivars} objects at the calling
+    \ac{PE} may be updated by an \ac{AMO} performed by a thread located within
+    the calling \ac{PE} or within another \ac{PE}.
+    This routine does not block and returns zero if
     not all entries in \VAR{ivars} satisfied the test condition.  This routine
     compares each of the \VAR{nelems} elements in the \VAR{ivars} array with
     the value \VAR{cmp\_value} according to the comparison operator \VAR{cmp}
