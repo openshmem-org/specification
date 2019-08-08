@@ -1,7 +1,6 @@
-\begin{DeprecateBlock}
 \apisummary{
-    \newtext{Performs all operations described in the \FUNC{shmem\_sync} interface
-    but implicitly operates on \LibConstRef{SHMEM\_TEAM\_WORLD}.}
+    Registers the arrival of a \ac{PE} at a \newtext{synchronization point} \oldtext{barrier} and suspends \ac{PE}
+    execution until all other \acp{PE} \newtext{in the default team} arrive at \newtext{a synchronization point} \oldtext{the barrier}.
 }
 
 \begin{apidefinition}
@@ -17,19 +16,24 @@ void @\FuncDecl{shmem\_sync\_all}@(void);
 \end{apiarguments}
 
 \apidescription{
-{\color{Green}
-    This routine blocks the \ac{PE} until all \acp{PE} in the \openshmem
-    program have called \FUNC{shmem\_sync\_all}. In a multithreaded \openshmem
-    program, only the calling thread is blocked.
+
+  \newtext{%
+    This routine blocks the calling \ac{PE} until all \acp{PE} in the
+    default team have called \FUNC{shmem\_sync\_all}.
+  }
+  \oldtext{%
+    The \FUNC{shmem\_sync\_all} routine registers the arrival of a \ac{PE} at a
+    barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
+    once.  This routine blocks the \ac{PE} until all \acp{PE} have called
+    \FUNC{shmem\_sync\_all}.
+  }
+    In a multithreaded \openshmem program, only the calling thread is
+    blocked.
 
     In contrast with the \FUNC{shmem\_barrier\_all} routine,
     \FUNC{shmem\_sync\_all} only ensures completion and visibility of previously issued memory
     stores and does not ensure completion of remote memory updates issued via
     \openshmem routines.
-
-    The \FUNC{shmem\_sync\_all} routine is deprecated in favor of the equivalent call to
-    \FUNC{shmem\_sync(SHMEM\_TEAM\_WORLD)}.
-}
 }
 
 \apireturnvalues{
@@ -37,8 +41,17 @@ void @\FuncDecl{shmem\_sync\_all}@(void);
 }
 
 \apinotes{
-    None.
+  \newtext{%
+    The \FUNC{shmem\_sync\_all} routine is equivalent to calling
+    \FUNC{shmem\_team\_sync} on the default team.
+  }
+  \oldtext{%
+    The \FUNC{shmem\_sync\_all} routine can be used to portably ensure that
+    memory access operations observe remote updates in the order enforced by the
+    initiator \acp{PE}, provided that the initiator PE ensures completion of remote
+    updates with a call to \FUNC{shmem\_quiet} prior to the call to the
+    \FUNC{shmem\_sync\_all} routine.
+  }
 }
 
 \end{apidefinition}
-\end{DeprecateBlock}

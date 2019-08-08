@@ -1,11 +1,11 @@
 The \acp{PE} in an \openshmem program communicate using either
-\ac{RMA} and \ac{AMO} routines, which specify the \ac{PE} number of the target
+point-to-point routines---such as \ac{RMA} and \ac{AMO} routines---which specify the \ac{PE} number of the target
 \ac{PE}, or collective routines, which operate over a set of \acp{PE}.
 In \openshmem, teams allow programs to group a set of \acp{PE} for
 communication.
 Team-based collective communications operate across all the \acp{PE}
 in a valid team.
-\ac{RMA} and \ac{AMO} communication can make use of team-relative \ac{PE}
+Point-to-point communication can make use of team-relative \ac{PE}
 numbering through team-based contexts (see Section~\ref{sec:ctx}) or
 \ac{PE} number translation.
 
@@ -27,7 +27,7 @@ All valid teams have a least one member.
 
 A ``team handle'' is an opaque object with type \CTYPE{shmem\_team\_t}
 that is used to reference a team.
-Team handles are not remotely accessible objects
+Team handles are not remotely accessible objects.
 The predefined teams may be accessed via the team handles listed in
 Section~\ref{subsec:library_handles}.
 

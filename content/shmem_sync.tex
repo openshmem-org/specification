@@ -1,7 +1,11 @@
 \apisummary{
     \newtext{Registers the arrival of a \ac{PE} at a synchronization point and suspends \ac{PE}
     execution until all other \acp{PE} in a given \openshmem team or active set
-    arrive at the same synchronization point.}
+    arrive at a synchronization point.}
+    \oldtext{%
+    Performs all operations described in the \FUNC{shmem\_sync\_all} interface
+    but with respect to a subset of \acp{PE} defined by the active set.
+    }
 }
 
 \begin{apidefinition}
@@ -45,13 +49,18 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 \end{apiarguments}
 
 \apidescription{
-    \FUNC{shmem\_sync} is a collective synchronization routine over
-    \newtext{an existing \openshmem team or} an active set
+    \FUNC{shmem\_sync} is a collective synchronization routine over an
+    \newtext{existing \openshmem team or} active set.
+    \oldtext{%
+    Control returns from \FUNC{shmem\_sync} after all \acp{PE} in
+    the active set (specified by \VAR{PE\_start}, \VAR{logPE\_stride}, and
+    \VAR{PE\_size}) have called \FUNC{shmem\_sync}.
+    }
 
 {\color{Green}
     The routine registers the arrival of a \ac{PE} at a synchronization point in the program.
     This is a fast mechanism for synchronizing all \acp{PE} that participate in this
-    collective call. The routine blocks the calling \ac{PE} until all \ac{PE} in the
+    collective call. The routine blocks the calling \ac{PE} until all \acp{PE} in the
     specified team or active set have called \FUNC{shmem\_sync}. In a multithreaded \openshmem
     program, only the calling thread is blocked.
 
@@ -84,13 +93,14 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 
 \apireturnvalues{
     \newtext{Zero on successful local completion. Nonzero otherwise.}
+    \oldtext{None.}
 }
 
 \apinotes{
 
 \newtext{%
     There are no specifically defined error codes for sync operations.
-    See section \ref{subsec:error_handling} for expected error checking and
+    See Section~\ref{subsec:error_handling} for expected error checking and
     return code behavior specific to implementations. For portable
     error checking and debugging behavior, programs should do their own checks
     for invalid team handles or \LibConstRef{SHMEM\_TEAM\_INVALID}

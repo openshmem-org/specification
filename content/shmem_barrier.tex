@@ -58,12 +58,6 @@ CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
     The  same  \VAR{pSync} array may be reused on consecutive calls   to
     \FUNC{shmem\_barrier} if the same active set is used.
 
-{\color{Green}
-    \FUNC{shmem\_barrier} has been deprecated in favor of the equivalent
-    call to \FUNC{shmem\_quiet} followed by a call to
-    \FUNC{shmem\_sync} on a team or active set with the desired
-    set of \acp{PE}.
-}
 }
 
 \apireturnvalues{
@@ -71,6 +65,16 @@ CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
 }
 
 \apinotes{
+    \newtext{
+    As of \openshmem[1.5], \FUNC{shmem\_barrier} has been deprecated.
+    No team-based barrier is provided by \openshmem, as a team may have any
+    number of communication contexts associated with the team.
+    Applications seeking such an idiom should call
+    \FUNC{shmem\_ctx\_quiet} on the desired communication context,
+    followed by a call to \FUNC{shmem\_team\_sync} on the desired
+    team.
+    }
+
     If the \VAR{pSync} array is initialized at the run time, all
     \acp{PE} must be synchronized before the first call to \FUNC{shmem\_barrier}
     (e.g., by \FUNC{shmem\_barrier\_all}) to ensure the array has been initialized
@@ -87,14 +91,6 @@ CALL @\FuncDecl{SHMEM\_BARRIER}@(PE_start, logPE_stride, PE_size, pSync)
     Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior
     to calling the barrier routine to ensure completion of operations issued on
     additional contexts.
-
-    \newtext{
-    No team-based barrier is provided by \openshmem, as a team may have any
-    number of communication contexts associated with the team.
-    Applications seeking such an idiom should call \FUNC{shmem\_ctx\_quiet}
-    on the desired context, followed by a call to \FUNC{shmem\_team\_sync}
-    on the desired team.
-    }
 }
 
 \begin{apiexamples}

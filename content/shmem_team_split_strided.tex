@@ -6,8 +6,8 @@ where the subset is defined by the
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int start, int stride,
-     int size, const shmem_team_config_t *config, long config_mask, shmem_team_t *new_team);
+int @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int start, int stride, int size,
+    const shmem_team_config_t *config, long config_mask, shmem_team_t *new_team);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -51,13 +51,18 @@ A valid triplet is one such that:
 \end{equation*}
 where $N$ is the number of \acp{PE} in the parent team.
 
-This routine must be called by all \acp{PE} contained in the \ac{PE} triplet
-specification. It may be called by additional \acp{PE} not included in the
-triplet specification, but for those \acp{PE} a \VAR{new\_team} value of
-\LibConstRef{SHMEM\_TEAM\_INVALID} is returned. All \acp{PE} must provide the
-same values for the \ac{PE} triplet. This routine will return a \VAR{new\_team}
-containing the \ac{PE} subset specified by the triplet and ordered by the
-existing global \ac{PE} number.
+This routine must be called by all \acp{PE} in the parent team.
+All \acp{PE} must provide the same values for the \ac{PE} triplet.
+This routine will return a \VAR{new\_team} containing the \ac{PE}
+subset specified by the triplet and ordered by the existing global
+\ac{PE} number.
+
+On successful creation of the new team, the \VAR{new\_team} handle
+will reference a valid team for the subset of \acp{PE} in the parent
+team specified by the triplet.
+Those \acp{PE} in the parent team that are not in the subset specified
+by the triplet will have \VAR{new\_team} assigned to
+\LibConstRef{SHMEM\_TEAM\_INVALID}.
 
 The \VAR{config} argument specifies team configuration parameters, which are
 described in Section~\ref{subsec:shmem_team_config_t}.
@@ -74,7 +79,8 @@ compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no new team
 will be created and \VAR{new\_team} will be assigned the value
 \LibConstRef{SHMEM\_TEAM\_INVALID}; otherwise, the behavior is undefined.
 
-If an invalid \ac{PE} triplet is provided, then the \VAR{new\_team} will not be created.
+If an invalid \ac{PE} triplet is provided, then the \VAR{new\_team}
+will not be created.
 
 If \VAR{new\_team} cannot be created, then it will be assigned the value
 \LibConstRef{SHMEM\_TEAM\_INVALID}.
