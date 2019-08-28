@@ -8,11 +8,6 @@
 void @\FuncDecl{shmem\_info\_get\_version}@(int *major, int *minor);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-INTEGER MAJOR, MINOR
-CALL @\FuncDecl{SHMEM\_INFO\_GET\_VERSION}@(MAJOR, MINOR)
-\end{Fsynopsis}
-
 \begin{apiarguments}
     \apiargument{OUT}{major}{The major version of the \openshmem Specification in use.}
     \apiargument{OUT}{minor}{The minor version of the \openshmem Specification in use.}
@@ -30,7 +25,7 @@ CALL @\FuncDecl{SHMEM\_INFO\_GET\_VERSION}@(MAJOR, MINOR)
 }
 
 \apinotes{
-    None. 
+    None.
 }
 
 \end{apidefinition}

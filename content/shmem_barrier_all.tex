@@ -10,13 +10,9 @@
 void @\FuncDecl{shmem\_barrier\_all}@(void);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
-    \apiargument{None.}{}{} 
+    \apiargument{None.}{}{}
 
 \end{apiarguments}
 
@@ -32,7 +28,7 @@ CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
     ensures completion of all previously issued memory stores and remote memory
     updates issued on the default context via \openshmem \acp{AMO} and
     \ac{RMA} routine calls such
-    as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32}, 
+    as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32},
     \FUNC{shmem\_put\_nbi}, and \FUNC{shmem\_get\_nbi}.
 }
 
@@ -63,7 +59,7 @@ CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
 \apicexample
     { The following \FUNC{shmem\_barrier\_all} example is for \Cstd[11] programs:}
     {./example_code/shmem_barrierall_example.c}
-    {} 
+    {}
 
 \end{apiexamples}
 

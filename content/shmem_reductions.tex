@@ -60,13 +60,6 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_to\_all}@(TYPE *dest, const TY
 \end{DeprecateBlock}
 \newtext{where \TYPE{} is one of the integer types supported for the AND operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
 
-%% Fortran
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_AND\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_AND\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-%%
-
 \paragraph{OR}
 Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 
@@ -92,13 +85,6 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}@(TYPE *dest, const TYP
 \end{CsynopsisCol}
 \end{DeprecateBlock}
 \newtext{where \TYPE{} is one of the integer types supported for the OR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
-
-%% Fortran
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_OR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_OR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-%%
 
 \paragraph{XOR}
 Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
@@ -126,13 +112,6 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_to\_all}@(TYPE *dest, const TY
 \end{DeprecateBlock}
 \newtext{where \TYPE{} is one of the integer types supported for the XOR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
 
-%% Fortran
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-%%
-
 \paragraph{MAX}
 Performs a maximum-value reduction across a set of \acp{PE}.\newline
 
@@ -147,6 +126,7 @@ where \TYPE{} is one of the integer or real types supported for the MAX operatio
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
+
 {\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
@@ -158,15 +138,6 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_to\_all}@(TYPE *dest, const TY
 \end{CsynopsisCol}
 \end{DeprecateBlock}
 \newtext{where \TYPE{} is one of the integer or real types supported for the MAX operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
-
-%% Fortran
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
 
 \paragraph{MIN}
 Performs a minimum-value reduction across a set of \acp{PE}.\newline
@@ -182,6 +153,7 @@ where \TYPE{} is one of the integer or real types supported for the MIN operatio
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
+
 {\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
@@ -193,15 +165,6 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_to\_all}@(TYPE *dest, const TY
 \end{CsynopsisCol}
 \end{DeprecateBlock}
 \newtext{where \TYPE{} is one of the integer or real types supported for the MIN operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
-
-%% Fortran
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
 
 \paragraph{SUM}
 Performs a sum reduction across a set of \acp{PE}.\newline
@@ -217,6 +180,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the SU
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
+
 {\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
@@ -228,17 +192,6 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_to\_all}@(TYPE *dest, const TY
 \end{CsynopsisCol}
 \end{DeprecateBlock}
 \newtext{where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
-
-%% Fortran
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_COMP4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_COMP8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
 
 \paragraph{PROD}
 Performs a product reduction across a set of \acp{PE}.\newline
@@ -254,6 +207,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
+
 {\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
@@ -265,19 +219,6 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const T
 \end{CsynopsisCol}
 \end{DeprecateBlock}
 \newtext{where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
-
-%% Fortran
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_COMP4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_COMP8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-
-
 
 \begin{apiarguments}
 
@@ -295,20 +236,15 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
     arrays. \newtext{In teams based API calls, \VAR{nreduce} must be of type size\_t.
     In deprecated active-set based API calls,}
-    \VAR{nreduce} must be of type int. When using \Fortran, it
-    must be a default integer value.}
-
+    \VAR{nreduce} must be of type integer.}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
-    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.
-    When using \Fortran, it must be a default integer value.}
+    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
-    default integer value.}
+    \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pWrk}{
     A symmetric work array of size at least
     max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
@@ -316,7 +252,6 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
 \apiargument{IN}{pSync}{
     A symmetric work array of size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.
     In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter the reduction routine.}
@@ -389,46 +324,6 @@ CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, 
     implementation is not required to provide support for these
     complex-typed interfaces.
 }
-
-
-
-%\deprecationstart
-\apidesctable{
-    When calling from \Fortran, the \dest{} date types are as follows:
-}{Routine}{Data type}
-    \apitablerow{shmem\_int8\_and\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_and\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_comp8\_max\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_max\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_max\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_max\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real16\_max\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_int4\_min\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_min\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_min\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_min\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_min\_to\_all}{Real,with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_sum\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
-    \apitablerow{shmem\_comp8\_sum\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_sum\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_sum\_to\_all}{Integer, with an element size of 8 bytes..}
-    \apitablerow{shmem\_real4\_sum\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_sum\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_sum\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_prod\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
-    \apitablerow{shmem\_comp8\_prod\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_prod\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_prod\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_prod\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_prod\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_int8\_or\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_xor\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_xor\_to\_all}{Integer, with an element size of 4 bytes.}
-
-%\deprecationend
-
 
 \apireturnvalues{
   \newtext{Zero on successful local completion. Nonzero otherwise.}

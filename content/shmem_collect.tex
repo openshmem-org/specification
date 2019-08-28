@@ -38,20 +38,6 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 \end{CsynopsisCol}
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER nelems
-INTEGER PE_start, logPE_stride, PE_size
-INTEGER pSync(SHMEM_COLLECT_SYNC_SIZE)
-CALL @\FuncDecl{SHMEM\_COLLECT4}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_COLLECT8}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_COLLECT32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_COLLECT64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_FCOLLECT4}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_FCOLLECT8}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_FCOLLECT32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
 \newtext{%
@@ -64,23 +50,19 @@ CALL @\FuncDecl{SHMEM\_FCOLLECT64}@(dest, source, nelems, PE_start, logPE_stride
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
-    must be of type \VAR{size\_t} for \Cstd. When using \Fortran, it must be
-    a default integer value.}
+    must be of type \VAR{size\_t} for \Cstd.}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between
     consecutive \ac{PE} numbers in the active set. \VAR{logPE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set. \VAR{PE\_size}
-    must be of type integer.  When using  \Fortran, it must be a default
-    integer value.}
+    must be of type integer.}
 \apiargument{IN}{pSync}{
     A symmetric work array of size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
     In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
@@ -169,7 +151,7 @@ constraints, which are as follows:
     All \openshmem collective routines reset the values in \VAR{pSync} before they
     return, so a particular \VAR{pSync} buffer need only be initialized the first
     time it is used.
-    
+
     The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
     in the active set while any of the \acp{PE} participate in processing of an
     \openshmem collective routine.  Be careful to avoid these situations: If the
@@ -180,8 +162,8 @@ constraints, which are as follows:
     subsequent \openshmem collective routine only if none of the \acp{PE} in the
     active set  are still processing a  prior \openshmem collective routine call
     that used the same \VAR{pSync} array.  In general, this may be ensured only by
-    doing some type of synchronization.  
-    
+    doing some type of synchronization.
+
     The collective routines operate on active \ac{PE} sets that have a
     non-power-of-two \VAR{PE\_size} with some performance degradation.  They operate
     with no performance degradation when \VAR{nelems} is a non-power-of-two value.
@@ -192,11 +174,6 @@ constraints, which are as follows:
 \apicexample
     {The following \FUNC{shmem\_collect} example is for \CorCpp{} programs:}
     {./example_code/shmem_collect_example.c}
-    {}
-
-\apifexample
-    {The following \FUNC{SHMEM\_COLLECT} example is for \Fortran programs:}
-    {./example_code/shmem_collect_example.f90}
     {}
 
 \end{apiexamples}

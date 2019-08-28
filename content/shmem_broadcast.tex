@@ -33,15 +33,6 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 \end{CsynopsisCol}
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER nelems, PE_root, PE_start, logPE_stride, PE_size
-INTEGER pSync(SHMEM_BCAST_SYNC_SIZE)
-CALL @\FuncDecl{SHMEM\_BROADCAST4}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_BROADCAST8}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_BROADCAST32}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
-CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, logPE_stride, PE_size,pSync)
-\end{Fsynopsis}
- 
 \begin{apiarguments}
 
 \newtext{%
@@ -61,19 +52,17 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
     When using \Fortran, it must be a default integer value.}
 
 \begin{DeprecateBlock}
+
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{ The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the active set. \VAR{log\_PE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.}
 \apiargument{IN}{PE\_size}{ The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
-    default integer value.}
+    \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pSync}{
     A symmetric work array of size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
     In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enters \FUNC{shmem\_broadcast}.}
@@ -129,7 +118,7 @@ CALL @\FuncDecl{SHMEM\_BROADCAST64}@(dest, source, nelems, PE_root, PE_start, lo
       \openshmem routine.
     \end{itemize}
     Otherwise, the behavior is undefined.
-    
+
     Upon return from a broadcast routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
@@ -147,12 +136,8 @@ constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 
 \apitablerow{shmem\_broadcastmem}{\Cstd: Any data  type.  nelems is scaled in bytes.}
-\apitablerow{shmem\_broadcast8, shmem\_broadcast64}{Any noncharacter
-    type that has an element size of \CONST{64} bits. No \Fortran derived types \newtext{nor} \oldtext{or} 
-    \CorCpp{} structures are allowed.}
-\apitablerow{shmem\_broadcast4, shmem\_broadcast32}{Any noncharacter
-    type that has an element size of \CONST{32} bits. No \Fortran derived types \newtext{nor} \oldtext{or} 
-    \CorCpp{} structures are allowed.}
+\apitablerow{shmem\_broadcast64}{No \CorCpp{} structures are allowed.}
+\apitablerow{shmem\_broadcast32}{No \CorCpp{} structures are allowed.}
 
 \apireturnvalues{
    \newtext{Zero on successful local completion. Nonzero otherwise.}
@@ -170,7 +155,7 @@ constraints, which are as follows:
     All \openshmem broadcast routines restore \VAR{pSync} to its original contents.
     Multiple calls to \openshmem routines that use the same \VAR{pSync} array do not
     require that \VAR{pSync} be reinitialized after the first call.
-    
+
     The user must ensure that the \VAR{pSync} array is not being updated by any
     \ac{PE} in the active set while any of the \acp{PE} participates in processing
     of an \openshmem broadcast routine. Be careful to avoid these situations: If the
@@ -194,7 +179,7 @@ constraints, which are as follows:
 \apicexample
     {In the following \Cstd[11] example, the call to \FUNC{shmem\_broadcast} copies \source{}
     on \ac{PE} $0$ to \dest{} on \acp{PE} $1\dots npes-1$.
-    
+
     \CorCpp{} example:}
     {./example_code/shmem_broadcast_example.c}
     {}
