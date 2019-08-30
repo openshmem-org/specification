@@ -14,11 +14,6 @@ void @\FuncDecl{shmem\_long\_and\_to\_all}@(long *dest, const long *source, int 
 void @\FuncDecl{shmem\_longlong\_and\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_AND\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_AND\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-
 \paragraph{MAX}
 Performs a maximum-value reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
@@ -31,14 +26,6 @@ void @\FuncDecl{shmem\_longdouble\_max\_to\_all}@(long double *dest, const long 
 void @\FuncDecl{shmem\_longlong\_max\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_MAX\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-
 \paragraph{MIN}
 Performs a minimum-value reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
@@ -50,14 +37,6 @@ void @\FuncDecl{shmem\_long\_min\_to\_all}@(long *dest, const long *source, int 
 void @\FuncDecl{shmem\_longdouble\_min\_to\_all}@(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
 void @\FuncDecl{shmem\_longlong\_min\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
-
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_MIN\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
 
 \paragraph{SUM}
 Performs a sum reduction across a set of \acp{PE}.\newline
@@ -73,16 +52,6 @@ void @\FuncDecl{shmem\_longdouble\_sum\_to\_all}@(long double *dest, const long 
 void @\FuncDecl{shmem\_longlong\_sum\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_COMP4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_COMP8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_SUM\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-
 \paragraph{PROD}
 Performs a product reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
@@ -97,16 +66,6 @@ void @\FuncDecl{shmem\_longdouble\_prod\_to\_all}@(long double *dest, const long
 void @\FuncDecl{shmem\_longlong\_prod\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_COMP4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_COMP8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL4\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL8\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_REAL16\_PROD\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-
 \paragraph{OR}
 Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
@@ -116,11 +75,6 @@ void @\FuncDecl{shmem\_long\_or\_to\_all}@(long *dest, const long *source, int n
 void @\FuncDecl{shmem\_longlong\_or\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_OR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_OR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-
 \paragraph{XOR}
 Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
 \begin{Csynopsis}
@@ -129,11 +83,6 @@ void @\FuncDecl{shmem\_int\_xor\_to\_all}@(int *dest, const int *source, int nre
 void @\FuncDecl{shmem\_long\_xor\_to\_all}@(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
 void @\FuncDecl{shmem\_longlong\_xor\_to\_all}@(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
-
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INT4\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL @\FuncDecl{SHMEM\_INT8\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
 
 \begin{apiarguments}
 
@@ -145,17 +94,13 @@ CALL @\FuncDecl{SHMEM\_INT8\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, log
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
-    must be a default integer value.}
+    arrays.  \VAR{nreduce} must be of type integer.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
-    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.
-    When using \Fortran, it must be a default integer value.}
+    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
-    default integer value.}
+    \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pWrk}{
     A symmetric work array of size at least
     max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
@@ -163,7 +108,6 @@ CALL @\FuncDecl{SHMEM\_INT8\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, log
 \apiargument{IN}{pSync}{
     A symmetric work array of size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.
     In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter the reduction routine.}
@@ -218,46 +162,6 @@ CALL @\FuncDecl{SHMEM\_INT8\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, log
     complex-typed interfaces.
 }
 
-
-
-%\deprecationstart
-\apidesctable{
-    When calling from \Fortran, the \dest{} date types are as follows:
-}{Routine}{Data type}
-    \apitablerow{shmem\_int8\_and\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_and\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_comp8\_max\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_max\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_max\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_max\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real16\_max\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_int4\_min\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_min\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_min\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_min\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_min\_to\_all}{Real,with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_sum\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
-    \apitablerow{shmem\_comp8\_sum\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_sum\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_sum\_to\_all}{Integer, with an element size of 8 bytes..}
-    \apitablerow{shmem\_real4\_sum\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_sum\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_sum\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_prod\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
-    \apitablerow{shmem\_comp8\_prod\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_prod\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_prod\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_prod\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_prod\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_int8\_or\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_xor\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_xor\_to\_all}{Integer, with an element size of 4 bytes.}
-
-%\deprecationend
-
-
 \apireturnvalues{
     None.
 }
@@ -277,55 +181,5 @@ CALL @\FuncDecl{SHMEM\_INT8\_XOR\_TO\_ALL}@(dest, source, nreduce, PE_start, log
     the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be assured only
     by doing some type of synchronization.
 }
-
-\begin{apiexamples}
-
-\apifexample
-    {This \Fortran reduction example statically initializes the \VAR{pSync} array
-    and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all
-    even \acp{PE}.}
-    {./example_code/shmem_and_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_max_example.f90}
-    {}
-
-\apifexample
-    { This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{minimum} value of real variable \VAR{FOO} across all the even
-    \acp{PE}.}
-    {./example_code/shmem_min_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{sum} of the real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_sum_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{product} of the real variable \VAR{FOO} across all the even \acp{PE}.}
-    {./example_code/shmem_prod_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_or_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and
-    computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_xor_example.f90}
-    {}
-
-\end{apiexamples}
 
 \end{apidefinition}

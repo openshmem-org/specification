@@ -8,25 +8,17 @@
 void *@\FuncDecl{shmem\_ptr}@(const void *dest, int pe);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-POINTER (PTR, POINTEE)
-INTEGER pe
-PTR = @\FuncDecl{SHMEM\_PTR}@(dest, pe)
-\end{Fsynopsis}
-
-
 \begin{apiarguments}
 \apiargument{IN}{dest}{The symmetric data object to be referenced.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which \dest{} is to
-		 be accessed.  When using \Fortran, it must be a  default
-		 integer value.}
+		 be accessed.}
 \end{apiarguments}
 
 \apidescription{
     \FUNC{shmem\_ptr} returns an address that may be used to directly reference
     \dest{} on the specified \ac{PE}.  This address can be assigned to a pointer.
     After that, ordinary loads and stores to this remote address may be performed.
-    
+
     The \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish
     communication, for example when a sequence of reads and writes to a data
     object on a remote \ac{PE} does not match the access pattern provided in an
@@ -46,12 +38,6 @@ PTR = @\FuncDecl{SHMEM\_PTR}@(dest, pe)
 
 \begin{apiexamples}
 
-\apifexample
-    { This  \Fortran  program calls \FUNC{shmem\_ptr} and then \ac{PE} 0 writes to
-    the \VAR{BIGD} array on \ac{PE} 1: }
-    {./example_code/shmem_ptr_example.f90 }
-    {}
-    
 \apicexample
     {This is the equivalent program written in \Cstd[11]:}
     {./example_code/shmem_ptr_example.c}

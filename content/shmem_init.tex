@@ -9,11 +9,6 @@
 void @\FuncDecl{shmem\_init}@(void);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_INIT}@()
-\end{Fsynopsis}
-
-
 \begin{apiarguments}
     \apiargument{None.}{}{}
 \end{apiarguments}
@@ -30,13 +25,13 @@ CALL @\FuncDecl{SHMEM\_INIT}@()
 
 \apireturnvalues{
     None.
-}      
+}
 
 \apinotes{
     As of \openshmem[1.2], the use of \FUNC{start\_pes} has been
-    deprecated and calls to it should be replaced with calls to \FUNC{shmem\_init}. While support for
-    \FUNC{start\_pes} is still required in \openshmem libraries, users are
-    encouraged to use \FUNC{shmem\_init}. An important difference between
+    deprecated and calls to it should be replaced with calls to \FUNC{shmem\_init}.
+    While support for \FUNC{start\_pes} is still required in \openshmem libraries,
+    users are encouraged to use \FUNC{shmem\_init}. An important difference between
     \FUNC{shmem\_init} and \FUNC{start\_pes} is that multiple calls to
     \FUNC{shmem\_init} within a program results in undefined behavior, while in the
     case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the

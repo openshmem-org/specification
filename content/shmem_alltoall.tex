@@ -10,13 +10,6 @@ void @\FuncDecl{shmem\_alltoall32}@(void *dest, const void *source, size_t nelem
 void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-INTEGER pSync(SHMEM_ALLTOALL_SYNC_SIZE)
-INTEGER PE_start, logPE_stride, PE_size, nelems
-CALL @\FuncDecl{SHMEM\_ALLTOALL32}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride, PE_size, pSync)
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
 \apiargument{OUT}{dest}{A symmetric data object large enough to receive
@@ -26,21 +19,17 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
     elements of data for each \ac{PE} in the active set, ordered according to
     destination \ac{PE}.}
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
-    \VAR{nelems} must be of type size\_t for \CorCpp.  When using
-    \Fortran, it must be a default integer value.}
+    \VAR{nelems} must be of type size\_t for \CorCpp.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must
-    be a default integer value.}
+    \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pSync}{
     A symmetric work array of size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.
     In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter the routine.}
@@ -56,7 +45,7 @@ CALL @\FuncDecl{SHMEM\_ALLTOALL64}@(dest, source, nelems, PE_start, logPE_stride
     \VAR{source} object and \VAR{dest} object is \VAR{nelems} times the size of
     an element (32 bits or 64 bits) times \VAR{PE\_size}.
     The \VAR{source} object contains \VAR{PE\_size} blocks of data (the size of each
-    block defined by \VAR{nelems}) and each block of data is sent to a different \ac{PE}. 
+    block defined by \VAR{nelems}) and each block of data is sent to a different \ac{PE}.
     Given a \ac{PE} \VAR{i} that is the \kth PE in the active set and a \ac{PE}
     \VAR{j} that is the \lth \ac{PE} in the active set,
     \ac{PE} \VAR{i} sends the \lth block of its \VAR{source} object to

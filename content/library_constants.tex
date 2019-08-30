@@ -86,7 +86,6 @@ Section~\ref{subsec:shmem_put_signal_nbi} for more detail about its use.
 \LibConstDecl{SHMEM\_SYNC\_VALUE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_SYNC\_VALUE}
-  \LibConstDecl[\Fortran]{SHMEM\_SYNC\_VALUE}
 \end{DeprecateBlock}
 &
 The value used to initialize the elements of \VAR{pSync} arrays.
@@ -95,9 +94,6 @@ See Section~\ref{subsec:coll} for more detail about its use.
 \tabularnewline \hline
 %%
 \LibConstDecl{SHMEM\_SYNC\_SIZE}
-\begin{DeprecateBlock}
-  \LibConstDecl[\Fortran]{SHMEM\_SYNC\_SIZE}
-\end{DeprecateBlock}
 &
 Length of a work array that can be used with any SHMEM collective
 communication operation.
@@ -109,7 +105,6 @@ See Section~\ref{subsec:coll} for more detail about its use.
 \LibConstDecl{SHMEM\_BCAST\_SYNC\_SIZE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_BCAST\_SYNC\_SIZE}
-  \LibConstDecl[\Fortran]{SHMEM\_BCAST\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the \VAR{pSync} arrays needed for broadcast routines. The value
@@ -120,7 +115,6 @@ See Section~\ref{subsec:shmem_broadcast} for more detail about its use.
 \LibConstDecl{SHMEM\_REDUCE\_SYNC\_SIZE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_REDUCE\_SYNC\_SIZE}
-  \LibConstDecl[\Fortran]{SHMEM\_REDUCE\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the work arrays needed for reduction routines.
@@ -131,7 +125,6 @@ See Section~\ref{subsec:shmem_reductions} for more detail about its use.
 \LibConstDecl{SHMEM\_BARRIER\_SYNC\_SIZE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_BARRIER\_SYNC\_SIZE}
-  \LibConstDecl[\Fortran]{SHMEM\_BARRIER\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the work array needed for barrier routines.
@@ -143,7 +136,6 @@ See Section~\ref{subsec:shmem_barrier} for more detail about its use.
 \LibConstDecl{SHMEM\_COLLECT\_SYNC\_SIZE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_COLLECT\_SYNC\_SIZE}
-  \LibConstDecl[\Fortran]{SHMEM\_COLLECT\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the work array needed for collect routines.
@@ -153,7 +145,6 @@ See Section~\ref{subsec:shmem_collect} for more detail about its use.
 %%
 \LibConstDecl{SHMEM\_ALLTOALL\_SYNC\_SIZE}
 \begin{DeprecateBlock}
-  \LibConstDecl[\Fortran]{SHMEM\_ALLTOALL\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the work array needed for \FUNC{shmem\_alltoall} routines.
@@ -163,7 +154,6 @@ See Section~\ref{subsec:shmem_alltoall} for more detail about its use.
 %%
 \LibConstDecl{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
 \begin{DeprecateBlock}
-  \LibConstDecl[\Fortran]{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the work array needed for \FUNC{shmem\_alltoalls} routines.
@@ -174,7 +164,6 @@ See Section~\ref{subsec:shmem_alltoalls} for more detail about its use.
 \LibConstDecl{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
-  \LibConstDecl[\Fortran]{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
 \end{DeprecateBlock}
 &
 Minimum length of work arrays used in various collective routines.
@@ -183,7 +172,6 @@ Minimum length of work arrays used in various collective routines.
 \LibConstDecl{SHMEM\_MAJOR\_VERSION}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_MAJOR\_VERSION}
-  \LibConstDecl[\Fortran]{SHMEM\_MAJOR\_VERSION}
 \end{DeprecateBlock}
 &
 Integer representing the major version of \openshmem Specification in use.
@@ -192,7 +180,6 @@ Integer representing the major version of \openshmem Specification in use.
 \LibConstDecl{SHMEM\_MINOR\_VERSION}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_MINOR\_VERSION}
-  \LibConstDecl[\Fortran]{SHMEM\_MINOR\_VERSION}
 \end{DeprecateBlock}
 &
 Integer representing the minor version of \openshmem Specification in use.
@@ -201,7 +188,6 @@ Integer representing the minor version of \openshmem Specification in use.
 \LibConstDecl{SHMEM\_MAX\_NAME\_LEN}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_MAX\_NAME\_LEN}
-  \LibConstDecl[\Fortran]{SHMEM\_MAX\_NAME\_LEN}
 \end{DeprecateBlock}
 &
 Integer representing the maximum length of \CONST{SHMEM\_VENDOR\_STRING}.
@@ -210,20 +196,16 @@ Integer representing the maximum length of \CONST{SHMEM\_VENDOR\_STRING}.
 \LibConstDecl{SHMEM\_VENDOR\_STRING}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_VENDOR\_STRING}
-  \LibConstDecl[\Fortran]{SHMEM\_VENDOR\_STRING}
 \end{DeprecateBlock}
 &
 String representing vendor defined information of size at most
 \CONST{SHMEM\_MAX\_NAME\_LEN}.
-In \CorCpp{}, the string is terminated by a null character.  In \Fortran, the
-string of size less than \CONST{SHMEM\_MAX\_NAME\_LEN} is padded with blank
-characters up to size \CONST{SHMEM\_MAX\_NAME\_LEN}.
+In \CorCpp{}, the string is terminated by a null character.
 \tabularnewline \hline
 %%
 \LibConstDecl{SHMEM\_CMP\_EQ}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_CMP\_EQ}
-  \LibConstDecl[\Fortran]{SHMEM\_CMP\_EQ}
 \end{DeprecateBlock}
 &
 An integer constant expression corresponding to the
@@ -234,7 +216,6 @@ See Section~\ref{subsec:p2p_intro} for more detail about its use.
 \LibConstDecl{SHMEM\_CMP\_NE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_CMP\_NE}
-  \LibConstDecl[\Fortran]{SHMEM\_CMP\_NE}
 \end{DeprecateBlock}
 &
 An integer constant expression corresponding to the
@@ -245,7 +226,6 @@ See Section~\ref{subsec:p2p_intro} for more detail about its use.
 \LibConstDecl{SHMEM\_CMP\_LT}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_CMP\_LT}
-  \LibConstDecl[\Fortran]{SHMEM\_CMP\_LT}
 \end{DeprecateBlock}
 &
 An integer constant expression corresponding to the
@@ -256,7 +236,6 @@ See Section~\ref{subsec:p2p_intro} for more detail about its use.
 \LibConstDecl{SHMEM\_CMP\_LE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_CMP\_LE}
-  \LibConstDecl[\Fortran]{SHMEM\_CMP\_LE}
 \end{DeprecateBlock}
 &
 An integer constant expression corresponding to the
@@ -267,7 +246,6 @@ See Section~\ref{subsec:p2p_intro} for more detail about its use.
 \LibConstDecl{SHMEM\_CMP\_GT}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_CMP\_GT}
-  \LibConstDecl[\Fortran]{SHMEM\_CMP\_GT}
 \end{DeprecateBlock}
 &
 An integer constant expression corresponding to the
@@ -278,7 +256,6 @@ See Section~\ref{subsec:p2p_intro} for more detail about its use.
 \LibConstDecl{SHMEM\_CMP\_GE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_CMP\_GE}
-  \LibConstDecl[\Fortran]{SHMEM\_CMP\_GE}
 \end{DeprecateBlock}
 &
 An integer constant expression corresponding to the
