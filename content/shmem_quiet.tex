@@ -1,6 +1,7 @@
 \apisummary{
-    Waits for completion of all outstanding \PUT{}, \ac{AMO}, memory store,
-    and nonblocking \PUT{}, \GET{}, and \ac{AMO} routines to symmetric data
+    Waits for completion of all outstanding memory store, blocking 
+    \PUT{}, and \ac{AMO}, as well as nonblocking 
+    \PUT{}, \GET{}, and \ac{AMO} routines to symmetric data
     objects issued by a \ac{PE}.
 }
 
@@ -35,15 +36,16 @@ void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
 
 \apinotes{
     \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
-    several \PUT{}, \ac{AMO}, memory store, and nonblocking \PUT{},
-    \GET{} and \ac{AMO} routines to symmetric data objects initiated by the calling
+    several memory store, blocking \PUT{}, and \ac{AMO}, as well as nonblocking \PUT{},
+    \GET{}, and \ac{AMO} routines to symmetric data objects initiated by the calling
     \ac{PE}.  For example, one might use \FUNC{shmem\_quiet} to await delivery
     of a block of data before issuing another \PUT{} or nonblocking
     \PUT{} routine, which sets a completion flag on another \ac{PE}.
      \FUNC{shmem\_quiet} is not usually needed if
     \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} are called.  The barrier
-    routines wait for the completion of outstanding writes (\PUT{}, \ac{AMO},
-    memory stores, and nonblocking \PUT{}, \GET{} and \ac{AMO} routines) to
+    routines wait for the completion of outstanding writes (memory store,
+    blocking \PUT{}, and \ac{AMO},
+    as well as nonblocking \PUT{}, \GET{} and \ac{AMO} routines) to
     symmetric data objects on all \acp{PE}.
 
     In an \openshmem program with multithreaded \acp{PE}, it is the

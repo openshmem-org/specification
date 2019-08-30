@@ -1,6 +1,6 @@
 \color{Green}
 \apisummary{
-    This nonblocking atomic operation perform an atomic fetching bitwise AND
+    This nonblocking atomic operation performs an atomic fetching bitwise AND
     operation on a remote data object.
 }
 
@@ -35,12 +35,12 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
 \end{apiarguments}
 
 \apidescription{
-    The nonblocking \FUNC{shmem\_atomic\_fetch\_and\_nbi} routines perform an
+    The nonblocking \FUNC{shmem\_atomic\_fetch\_and\_nbi} routines performs an
     atomic fetching bitwise AND on the remotely accessible data object pointed
     by \VAR{dest} at PE \VAR{pe} with the operand \VAR{value}. This routine
     returns after initiating the operation. The operation is considered complete
     after a subsequent call to \FUNC{shmem\_quiet}. At the completion of
-    \FUNC{shmem\_quiet}, these routines perform a fetching bitwise AND on
+    \FUNC{shmem\_quiet}, these routines performs a fetching bitwise AND on
     \VAR{dest} at PE \VAR{pe} with the operand \VAR{value} and fetch the prior
     contents of \VAR{dest} into the \VAR{fetch} local data object.
 }

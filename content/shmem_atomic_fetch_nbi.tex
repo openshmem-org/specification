@@ -1,6 +1,6 @@
 \color{Green}
 \apisummary{
-    The nonblocking atomic fetch routine provide a method for atomically
+    The nonblocking atomic fetch routine provides a method for atomically
     fetching the value of a remote data object.
 }
 
@@ -34,12 +34,12 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \end{apiarguments}
 
 \apidescription{
-    The nonblocking atomic fetch routines perform a nonblocking fetch of a
+    The nonblocking atomic fetch routines performs a nonblocking fetch of a
     value atomically from a remote data object. This routine returns after
     initiating the operation. The operation is considered complete after a
     subsequent call to \FUNC{shmem\_quiet}. At the completion of
     \FUNC{shmem\_quiet}, contents of the \source{} data object from \ac{PE} is
-    atomically fetched into \VAR{fetch} local data object.
+    fetched into \VAR{fetch} local data object.
 }
 
 \apireturnvalues{

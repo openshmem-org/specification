@@ -1,6 +1,6 @@
 \color{Green}
 \apisummary{
-    This nonblocking atomic routine perform an atomic fetch-and-increment
+    This nonblocking atomic routine performs an atomic fetch-and-increment
     operation on a remote data object.
 }
 
@@ -35,7 +35,7 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 
 
 \apidescription{
-   The nonblocking \FUNC{shmem\_atomic\_fetch\_inc\_nbi} routines perform an
+   The nonblocking \FUNC{shmem\_atomic\_fetch\_inc\_nbi} routines performs an
    atomic fetch-and-increment operation. This routine returns after initiating the
    operation. The operation is considered complete after a subsequent call to
    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, the \dest{} on

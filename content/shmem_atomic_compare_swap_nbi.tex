@@ -1,6 +1,6 @@
 \color{Green}
 \apisummary{
-    The nonblocking atomic routine provide a method for performing an atomic
+    The nonblocking atomic routine provides a method for performing an atomic
     conditional swap on a remote data object.
 }
 
@@ -39,12 +39,12 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 
 \apidescription{
     The nonblocking conditional swap routines conditionally update a \VAR{dest}
-    data object on the specified \ac{PE} and fetch the prior contents of the
+    data object on the specified \ac{PE} as an atomic operation and fetches the prior contents of the
     \VAR{dest} data object into the \VAR{fetch} local data object.
     This routine returns after initiating the operation. The operation
     is considered complete after a subsequent call to \FUNC{shmem\_quiet}. At the
     completion of \FUNC{shmem\_quiet}, prior contents of the \VAR{dest} data
-    object is atomically fetched into \VAR{fetch} local data object and the
+    object is fetched into \VAR{fetch} local data object and the
     contents of \VAR{value} is conditionally updated into \VAR{dest} on the
     remote \ac{PE}.
 }
