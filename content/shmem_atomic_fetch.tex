@@ -33,23 +33,11 @@ where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER pe
-INTEGER*4 SHMEM_INT4_FETCH, ires_i4
-ires\_i4 = @\FuncDecl{SHMEM\_INT4\_FETCH}@(source, pe)
-INTEGER*8 SHMEM_INT8_FETCH, ires_i8
-ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FETCH}@(source, pe)
-REAL*4 SHMEM_REAL4_FETCH, res_r4
-res\_r4 = @\FuncDecl{SHMEM\_REAL4\_FETCH}@(source, pe)
-REAL*8 SHMEM_REAL8_FETCH, res_r8
-res\_r8 = @\FuncDecl{SHMEM\_REAL8\_FETCH}@(source, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    the default context.}
   \apiargument{IN}{source}{The remotely accessible data object to be fetched from
     the remote \ac{PE}.}
   \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
@@ -60,6 +48,8 @@ res\_r8 = @\FuncDecl{SHMEM\_REAL8\_FETCH}@(source, pe)
 \apidescription{
     \FUNC{shmem\_atomic\_fetch} performs an atomic fetch operation.
     It returns the contents of the \VAR{source} as an atomic operation.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
 
 \apireturnvalues{

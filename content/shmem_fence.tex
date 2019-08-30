@@ -10,14 +10,10 @@ void @\FuncDecl{shmem\_fence}@(void);
 void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_FENCE}@
-\end{Fsynopsis}
-
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{The context on which to perform the operation.
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
-        \CONST{SHMEM\_CTX\_DEFAULT}.}
+        the default context.}
 \end{apiarguments}
 
 \apidescription{
@@ -29,6 +25,8 @@ CALL @\FuncDecl{SHMEM\_FENCE}@
     subsequent \PUT{}, \ac{AMO}, memory store, and nonblocking \PUT{} and \ac{AMO} routines to symmetric data
     objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery,
     not completion. It does not guarantee order of delivery of nonblocking \GET{} routines.
+    If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
+    performed.
 }
 
 \apireturnvalues{

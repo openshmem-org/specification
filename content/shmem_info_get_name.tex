@@ -9,11 +9,6 @@
 void @\FuncDecl{shmem\_info\_get\_name}@(char *name);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CHARACTER *(*)NAME
-CALL @\FuncDecl{SHMEM\_INFO\_GET\_NAME}@(NAME)
-\end{Fsynopsis}
-
 \begin{apiarguments}
     \apiargument{OUT}{name}{The vendor defined string.}
 \end{apiarguments}
@@ -24,21 +19,19 @@ CALL @\FuncDecl{SHMEM\_INFO\_GET\_NAME}@(NAME)
     this function provides the \VAR{name} memory buffer of at least size
     \CONST{SHMEM\_MAX\_NAME\_LEN}. The implementation copies the vendor defined
     string of size at most \CONST{SHMEM\_MAX\_NAME\_LEN} to \VAR{name}. In
-    \CorCpp, the string is terminated by a null character.  In \Fortran,
-    the string of size less than \CONST{SHMEM\_MAX\_NAME\_LEN} is padded with
-    blank characters up to size \CONST{SHMEM\_MAX\_NAME\_LEN}. If the
+    \CorCpp, the string is terminated by a null character. If the
     \VAR{name} memory buffer is provided with size less than
     \CONST{SHMEM\_MAX\_NAME\_LEN}, behavior is undefined. For a given library
     implementation, the vendor string returned is consistent with the library
     constant \CONST{SHMEM\_VENDOR\_STRING}.
 }
 
-\apireturnvalues{ 
-    None. 
+\apireturnvalues{
+    None.
 }
 
-\apinotes{ 
-    None. 
+\apinotes{
+    None.
 }
 
 \end{apidefinition}

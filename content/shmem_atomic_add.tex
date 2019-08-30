@@ -31,41 +31,26 @@ where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER pe
-INTEGER*4  value_i4
-CALL @\FuncDecl{SHMEM\_INT4\_ADD}@(dest, value_i4, pe)
-INTEGER*8 value_i8
-CALL @\FuncDecl{SHMEM\_INT8\_ADD}@(dest, value_i8, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{The context on which to perform the operation.
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
-        \CONST{SHMEM\_CTX\_DEFAULT}.}
+        the default context.}
     \apiargument{OUT}{dest}{The remotely accessible integer data object to be
         updated  on the remote \ac{PE}.  When using \CorCpp, the type of
         \dest{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{value}{The value to be atomically added to \dest. When using \CorCpp, the type of \VAR{value} should match that  implied  in
-        the SYNOPSIS  section.  When using \Fortran, it must be of type
-        integer with an element size of \dest.}
+        the SYNOPSIS  section.}
     \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
-        \dest{} is to be updated.  When using \Fortran, it must be a default
-        integer value.}
+        \dest{} is to be updated.}
 \end{apiarguments}
 
 \apidescription{
     The \FUNC{shmem\_atomic\_add} routine performs an atomic add operation. It adds
     \VAR{value} to \dest{} on \ac{PE} \VAR{pe} and atomically updates the \dest{}
     without returning the value.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
  }
-
-\apidesctable{
-    When using \Fortran, \VAR{dest} and \VAR{value} must be of the following type:
-}{Routine}{Data type of \VAR{dest} and \VAR{value}}
-
-\apitablerow{SHMEM\_INT4\_ADD}{\CONST{4}-byte integer}
-\apitablerow{SHMEM\_INT8\_ADD}{\CONST{8}-byte integer}
 
 \apireturnvalues{
     None.

@@ -17,9 +17,9 @@ TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_g}@(shmem_ctx_t ctx, const TYP
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{apiarguments}
-  \apiargument{IN}{ctx}{The context on which to perform the operation.
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    the default context.}
   \apiargument{IN}{source}{The remotely accessible array element or scalar data object.}
   \apiargument{IN}{pe}{The number of the remote \ac{PE} on which \VAR{source} resides.}
 \end{apiarguments}
@@ -27,6 +27,8 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
 \apidescription{
   These routines provide a very low latency get capability for single elements
   of most basic types. 
+  If the context handle \VAR{ctx} does not correspond to a valid context,
+  the behavior is undefined.
 }
 
 \apireturnvalues{

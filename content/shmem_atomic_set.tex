@@ -33,23 +33,11 @@ where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER pe
-INTEGER*4 SHMEM_INT4_SET, value_i4
-CALL @\FuncDecl{SHMEM\_INT4\_SET}@(dest, value_i4, pe)
-INTEGER*8 SHMEM_INT8_SET, value_i8
-CALL @\FuncDecl{SHMEM\_INT8\_SET}@(dest, value_i8, pe)
-REAL*4 SHMEM_REAL4_SET, value_r4
-CALL @\FuncDecl{SHMEM\_REAL4\_SET}@(dest, value_r4, pe)
-REAL*8 SHMEM_REAL8_SET, value_r8
-CALL @\FuncDecl{SHMEM\_REAL8\_SET}@(dest, value_r8, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{The context on which to perform the operation.
+\apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
+    the default context.}
 \apiargument{OUT}{dest}{The remotely accessible data object to be set on
     the remote \ac{PE}.}
 \apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.}
@@ -61,6 +49,8 @@ CALL @\FuncDecl{SHMEM\_REAL8\_SET}@(dest, value_r8, pe)
 \apidescription{
     \FUNC{shmem\_atomic\_set} performs an atomic set operation. It writes the
     \VAR{value} into \VAR{dest} on \VAR{pe} as an atomic operation.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
 
 \apireturnvalues{

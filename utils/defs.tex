@@ -7,8 +7,8 @@
 
 \hyphenation{Open-SHMEM}
 
-\renewcommand{\chaptername}{Chapter} 
-\renewcommand{\appendixname}{Annex} 
+\renewcommand{\chaptername}{Chapter}
+\renewcommand{\appendixname}{Annex}
 
 % Place some penalty for doing the break
 % The penalty for a ``\gb'' should be greater than a \hyphenpenalty.
@@ -17,15 +17,15 @@
 \penalty10000}
 
 % This macro enables that all "_" (underscore) characters in the pfd
-% file are searchable, and that cut&paste will copy the "_" as underscore. 
+% file are searchable, and that cut&paste will copy the "_" as underscore.
 % Without the following macro, the \_ is treated in searches and cut&paste
-% as a " " (space character). 
-% This macro does not modify the behavior of _ in math or in verbatim 
+% as a " " (space character).
+% This macro does not modify the behavior of _ in math or in verbatim
 % environments. In verbatim environments, the "_" is always treated
 % as a searchable character.
 %
-\DeclareRobustCommand{\_}{\texttt{\char`\_}} 
-% 
+\DeclareRobustCommand{\_}{\texttt{\char`\_}}
+%
 
 \def\colorswapnt{\colorlet{saved}{.}\color{ForestGreen}}
 \def\colorswapot{\colorlet{saved}{.}\color{red}}
@@ -40,10 +40,11 @@
 \newcommand{\FUNC}[1]{\textit{#1}}
 \newcommand{\CTYPE}[1]{\textit{#1}}
 \newcommand{\VAR}[1]{\textit{#1}}
+\newcommand{\ENVVAR}[1]{\textit{#1}}
 \newcommand{\CONST}[1]{\textit{#1}}
+\newcommand{\KEYWORD}[1]{\textit{#1}}
 %%
 \newcommand{\CorCpp}{\textit{C/C++}\xspace}
-\newcommand{\CorCppFor}{\textit{C/C++/Fortran}\xspace}
 \newcommand{\Fortran}[1][]{%
   \textit{Fortran\ifthenelse{\equal{#1}{}}{}{~#1}}\xspace}
 \newcommand{\Cstd}[1][]{%
@@ -75,7 +76,7 @@
 \newcommand{\LibHandleIndex}[1]{\index{#1}}
 \newcommand{\TableIndex}[1]{\index{#1}\index{Tables!#1}}
 %% Write text and generate reference.
-\newcommand{\EnvVarRef}[1]{\VAR{#1}\EnvVarIndex{#1}}
+\newcommand{\EnvVarRef}[1]{\ENVVAR{#1}\EnvVarIndex{#1}}
 \newcommand{\FuncRef}[1]{\FUNC{#1}\FuncIndex{#1}}
 \newcommand{\LibConstRef}[1]{\CONST{#1}\LibConstIndex{#1}}
 \newcommand{\LibHandleRef}[1]{\CONST{#1}\LibHandleIndex{#1}}
@@ -84,9 +85,9 @@
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
 \newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
 \newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
-\newcommand{\LibConstDecl}[2][\CorCppFor]{%
-  \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
-\newcommand{\LibHandleDecl}[2][\CorCppFor]{%
+\newcommand{\LibConstDecl}[2][\CorCpp]{%
+  \parbox[t]{5cm}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
+\newcommand{\LibHandleDecl}[2][\CorCpp]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
 
 \begin{acronym}
@@ -184,11 +185,11 @@
 %
 %
 \makeatletter
-\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
 -.2ex}{2.3ex plus .2ex}{\Large\sf}}
-\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus
 -.2ex}{1.5ex plus .2ex}{\large\sf}}
-\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus
 -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sf\bf}}
 \def\paragraph{\@startsection {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}
 {-1em}{\normalsize\sf\bf}} % Indent after \paragraph
@@ -207,12 +208,12 @@
   breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,                 % sets automatic line breaking
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
                                    % encodings only, does not work with UTF-8
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code 
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code
                                    % (possibly needs columns=flexible)
   morekeywords={*,...},            % if you want to add more keywords to the set
-  showspaces=false,                % show spaces everywhere adding particular underscores; 
+  showspaces=false,                % show spaces everywhere adding particular underscores;
                                    % it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
@@ -224,16 +225,16 @@
     basicstyle=\ttfamily\footnotesize,
     breaklines=true,                 % sets automatic line breaking
     escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits 
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
                                      % encodings only, does not work with UTF-8
     keepspaces=true,                 % keeps spaces in text, useful for keeping
                                      % indentation of code (possibly needs columns=flexible)
     morekeywords={*,...},            % if you want to add more keywords to the set
-    showspaces=false,                % show spaces everywhere adding particular underscores; 
+    showspaces=false,                % show spaces everywhere adding particular underscores;
                                      % it overrides 'showstringspaces'
     showstringspaces=false,          % underline spaces within strings only
     showtabs=false,                  % show tabs within strings adding particular underscores
-    backgroundcolor=\color{gray}, 
+    backgroundcolor=\color{gray},
   }
 }
 
@@ -386,7 +387,7 @@
 
 \newenvironment{apidefinition}{
 \begin{description}
-\item[SYNOPSIS] \hfill \\ \\ 
+\item[SYNOPSIS] \hfill \\ \\
 \vspace{-2em}
 }
 {
@@ -402,15 +403,15 @@
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{C11synopsis}
-{ 
-  \textbf{C11:} 
+{
+  \textbf{C11:}
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
-{ 
+{
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
@@ -418,17 +419,17 @@
 
 
 \lstnewenvironment{Csynopsis}
-{ 
-  \textbf{C/C++:} 
+{
+  \textbf{C/C++:}
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
-{ 
-  \textbf{C/C++:} 
-  \color{red}  
+{
+  \textbf{C/C++:}
+  \color{red}
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t},
@@ -447,11 +448,11 @@
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{
 \begin{tabular}{p{2cm} p{2cm} p{10cm}}
-\textbf{##1} & \textit{##2} & {##3} \\ 
+\textbf{##1} & \textit{##2} & {##3} \\
 \end{tabular}
 }
 \hfill
-\item[DESCRIPTION] \hfill 
+\item[DESCRIPTION] \hfill
 
 \begin{description}
 \item[Arguments] \hfill \\
@@ -464,7 +465,7 @@
 \newcommand{\apidescription}[1]{
 \begin{description}
 \vspace{-1em}
-\item[API description] \hfill \\ 
+\item[API description] \hfill \\
     \begin{sloppypar}
     #1
     \end{sloppypar}
@@ -478,10 +479,10 @@
        \hline \tabularnewline
        \end{tabular}\\
         #4
-}  
+}
 
 \newcommand{\apireturnvalues}[1]{
-\hfill 
+\hfill
 \item[Return Values] \hfill \\
     #1
 \\
@@ -514,7 +515,7 @@
     ##1
     \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{##2}
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]{##2}
     ##3 }
 \newcommand{\apifexample}[3]{
     ##1
@@ -528,6 +529,11 @@
 {
 }
 
+\newcommand{\cexample}[2]{
+    #1
+    \lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize,
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{#2}}
 %
 % End library API description template commands
 %

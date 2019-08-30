@@ -18,6 +18,8 @@ void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
     the context is not used after it has been destroyed, for example when the
     destroyed context is used by multiple threads.  This function
     performs an implicit quiet operation on the given context before it is freed.
+    If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
+    performed.
 }
 
 \apireturnvalues{
@@ -56,6 +58,14 @@ void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
     to overlap an all-to-all exchange of data for segment \VAR{p} with the
     local reduction of segment \VAR{p-1}.}
     {./example_code/shmem_ctx_pipelined_reduce.c}
+    {}
+
+    \apicexample
+    {The following example demonstrates the use of \CONST{SHMEM\_CTX\_INVALID}
+    in a \Cstd[11] program that uses thread-local storage to provide each
+    thread an implicit context handle via a ``library'' put routine without
+    explicit management of the context handle from ``user'' code.}
+    {./example_code/shmem_ctx_invalid.c}
     {}
 
 \end{apiexamples}
