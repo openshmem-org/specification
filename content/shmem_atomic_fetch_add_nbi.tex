@@ -1,6 +1,6 @@
 \color{Green}
 \apisummary{
-    The nonblocking atomic routine performs an atomic fetch-and-add operation on
+    The nonblocking atomic routine perform an atomic fetch-and-add operation on
     a remote data object.
 }
 
@@ -36,14 +36,14 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
 
 \apidescription{
     The nonblocking \FUNC{shmem\_atomic\_fetch\_add\_nbi} routines perform an
-    atomic fetch-and-add operation. An atomic fetch-and-add operation fetches
+    atomic fetch-and-add operation. An atomic fetch-and-add operation fetch
     the old \VAR{dest} and adds \VAR{value} to \VAR{dest} without the
     possibility of another atomic operation on the \VAR{dest} between the time
-    of the fetch and the update. This routine returns after posting the
+    of the fetch and the update. This routine returns after initiating the
     operation. The operation is considered complete after a subsequent call to
     \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, \VAR{value}
     is added to \VAR{dest} on \VAR{pe} and the prior contents of \VAR{dest}
-    are fetched into the \VAR{fetch} local data object as one atomic operation.
+    are fetched into the \VAR{fetch} local data object.
 }
 
 \apireturnvalues{

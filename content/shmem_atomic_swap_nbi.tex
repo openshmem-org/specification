@@ -1,6 +1,6 @@
 \color{Green}
 \apisummary{
-    This nonblocking atomic operation performs an atomic swap to a remote data
+    This nonblocking atomic operation perform an atomic swap to a remote data
     object.
 }
 
@@ -35,11 +35,11 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 
 \apidescription{
     The nonblocking \FUNC{shmem\_atomic\_swap\_nbi} routines perform an atomic
-    swap operation. This routine returns after posting the operation. The
+    swap operation. This routine returns after initiating the operation. The
     operation is considered complete after a subsequent call to
     \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, it writes
-    \VAR{value} into \dest{} on \ac{PE} and fetches the prior contents of
-    \dest{} into \VAR{fetch} local data object as one atomic operation.
+    \VAR{value} into \dest{} on \ac{PE} and fetch the prior contents of
+    \dest{} into \VAR{fetch} local data object.
 }
 
 \apireturnvalues{
