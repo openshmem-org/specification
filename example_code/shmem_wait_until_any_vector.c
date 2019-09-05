@@ -17,7 +17,7 @@ int main(void)
 
   /* All odd PEs put 2 and all even PEs put 1 */
   for (int i = 0; i < npes; i++) {
-      shmem_p(&ivars[mype], mype % 2 + 1, i);
+      shmem_atomic_set(&ivars[mype], mype % 2 + 1, i);
 
       /* Set cmp_values to the expected values coming from each PE */
       cmp_values[i] = i % 2 + 1;
@@ -31,7 +31,7 @@ int main(void)
   }
 
   /* check the result */
-  int correct_result = npes + npes / 2 + npes % 2;
+  int correct_result = npes + npes / 2;
 
   if (total_sum != correct_result) {
       shmem_global_exit(1);
