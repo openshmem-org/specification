@@ -44,10 +44,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     array in the test set with each respective value in \VAR{cmp\_values}
     according to the comparison operator \VAR{cmp} at the calling \ac{PE}}.
     This routine tests all elements of \VAR{ivars} in the test set at least
-    once, and the order in which the elements are tested is unspecified.  If an
-    entry $i$ in \VAR{ivars} within the test set satisfies the test condition,
-    a series of calls to \FUNC{shmem\_test\_some\newtext{\_vector}} must
-    eventually return $i$.
+    once, and the order in which the elements are tested is unspecified.
 
     Upon return, the \VAR{indices} array contains the indices of the elements
     in the test set that satisfied the test condition during the call to
