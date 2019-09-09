@@ -384,7 +384,7 @@ subsequent operation is issued between these two synchronization calls.
 (e.g., a progress thread) when the hardware does not provide asynchronous communication
 capabilities. In MPI, however, a weak progress semantics is applied. That is,
 an MPI communication call is guaranteed only to complete in finite time. For
-instance, an MPI Put may be completed only when the remote process makes an MPI
+instance, an \FUNC{MPI\_Put} may be completed only when the remote process makes an MPI
 call that internally triggers the progress of MPI, if the underlying hardware
 does not support asynchronous communication. A portable hybrid program
 should not assume that a call to the \openshmem library also makes progress for MPI,
