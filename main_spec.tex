@@ -188,6 +188,8 @@ A context's associated team specifies the set of \acp{PE} over which
 explicitly or implicitly, are performed.
 All point-to-point routines that operate on this context will do so with
 respect to the team-relative \ac{PE} numbering of the associated team.
+If the PE number passed to such a routine is invalid, being negative or greater
+than or equal to the size of the \openshmem team, then the behavior is undefined.
 }
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
