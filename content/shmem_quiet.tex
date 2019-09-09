@@ -1,7 +1,8 @@
 \apisummary{
-    Waits for completion of all outstanding \PUT{}, \ac{AMO}, \emph{put-with-signal}, memory store,
-    and nonblocking \PUT{}, \emph{put-with-signal} and \GET{} routines to symmetric data
-    objects issued by a \ac{PE}.
+    Waits for completion of all outstanding memory store, blocking 
+    \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as well as 
+    nonblocking \PUT{}, \emph{put-with-signal}, and \GET{} routines 
+    to symmetric data objects issued by a \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -22,10 +23,12 @@ CALL @\FuncDecl{SHMEM\_QUIET}@
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_quiet} routine ensures completion of \PUT{}, \ac{AMO},
-    \emph{put-with-signal}, memory store, and nonblocking \PUT{},\emph{put-with-signal}, and \GET{} routines on
-    symmetric data objects issued by the calling \ac{PE} on the given context. All \PUT{}, \ac{AMO},
-    \emph{put-with-signal}, memory store, and nonblocking \PUT{}, \emph{put-with-signal}, and \GET{} routines to
+    The \FUNC{shmem\_quiet} routine ensures completion of memory store, blocking
+    \PUT{}, \ac{AMO}, and
+    \emph{put-with-signal}, as well as nonblocking \PUT{},\emph{put-with-signal}, and \GET{} routines on
+    symmetric data objects issued by the calling \ac{PE} on the given context.
+    All memory store, blocking \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as
+    well as nonblocking \PUT{}, \emph{put-with-signal}, and \GET{} routines to
     symmetric data objects are guaranteed to be completed and visible to all
     \acp{PE} when \FUNC{shmem\_quiet} returns.
     If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
@@ -39,15 +42,17 @@ CALL @\FuncDecl{SHMEM\_QUIET}@
 
 \apinotes{
     \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
-    several \PUT{}, \ac{AMO}, \emph{put-with-signal}, memory store, and nonblocking \PUT{},
+    several memory store, blocking \PUT{}, \ac{AMO}, and \emph{put-with-signal},
+    as well as nonblocking \PUT{},
     \emph{put-with-signal}, and \GET{} routines to symmetric data objects initiated by the calling
     \ac{PE}.  For example, one might use \FUNC{shmem\_quiet} to await delivery
     of a block of data before issuing another \PUT{} or nonblocking
     \PUT{} routine, which sets a completion flag on another \ac{PE}.
      \FUNC{shmem\_quiet} is not usually needed if
     \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} are called.  The barrier
-    routines wait for the completion of outstanding writes (\PUT{}, \ac{AMO},
-    \emph{put-with-signal}, memory stores, and nonblocking \PUT{},\emph{put-with-signal}, and \GET{} routines) to
+    routines wait for the completion of outstanding writes (memory store,
+    blocking \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as well as nonblocking \PUT{},
+    \emph{put-with-signal}, and \GET{} routines) to
     symmetric data objects on all \acp{PE}.
 
     In an \openshmem program with multithreaded \acp{PE}, it is the
