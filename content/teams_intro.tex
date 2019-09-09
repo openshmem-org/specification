@@ -63,10 +63,6 @@ based on ordering of collective routine calls. It is the responsibility
 of the \openshmem program to ensure the same ordering of collective routine calls
 across all \acp{PE} in a team.
 
-There is no need for explicit synchronization between subsequent calls
-to collective routines across the team, except in the special case discussed
-below for team creation of overlapping child teams from a common parent team.
-
 A full discussion of collective semantics follows in Section~\ref{subsec:coll}.
 
 \subsubsection*{Team Creation}
