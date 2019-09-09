@@ -65,8 +65,6 @@ int main()
 
   // Create team with PEs numbered 0, 2, 4, ...
   shmem_team_spit_strided(SHMEM_TEAM_WORLD, 0, 2, npes / 2, &conf, cmask, &team_2s);
-  // Sync between splits from same parent team into teams with overlapping membership
-  shmem_team_sync(SHMEM_TEAM_WORLD);
   // Create team with PEs numbered 0, 3, 6, ...
   shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 3, npes / 3, &conf, cmask, &team_3s);
 
@@ -84,9 +82,9 @@ int main()
 
   // We will add up some results on pe 4 of team_3s using ctx_2s
   if ((team_3s != SHMEM_TEAM_INVALID) && (team_2s != SHMEM_TEAM_INVALID)) {
-    int _pe4_of_3s_in_2s = my_ctx_translate_pe(ctx_3s, 4, ctx_2s);
+    int pe4_of_3s_in_2s = my_ctx_translate_pe(ctx_3s, 4, ctx_2s);
 
-    if (_pe4_of_3s_in_2s < 0) {
+    if (pe4_of_3s_in_2s < 0) {
       fprintf (stderr, "Fail to translate pe 4 from 3s context to 2s context\n");
     }
     else {
