@@ -1,0 +1,39 @@
+\apisummary{
+    Determines whether an interoperability feature is supported by the \openshmem
+    library implementation.
+}
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_query\_interoperability}@(int property);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{property}{The interoperability property queried by the user.}
+\end{apiarguments}
+
+% compiling error ?
+% \apidescription{
+\FUNC{shmem\_query\_interoperability} queries whether an interoperability property
+is supported by the \openshmem library. One of the following properties can be 
+queried in an \openshmem program after finishing the
+initialization call to \openshmem and that of the relevant programming models
+being used in the program. An \openshmem library implementation may extend the
+available properties.
+
+\begin{itemize}
+\item \VAR{SHMEM\_PROGRESS\_MPI} Query whether the \openshmem
+implementation makes progress for the MPI communication used in the user program.
+\end{itemize}
+% }
+
+\apireturnvalues{
+    The return value is \CONST{1} if \VAR{property} is supported by the \openshmem library;
+    otherwise, it is \CONST{0}.
+}
+\end{apidefinition}
+
+\apiimpnotes{
+Implementations that do not support interoperability with other programming models
+may simply return \CONST{0} for the relevant interoperability query.
+}

@@ -192,7 +192,7 @@ communication libraries or parallel languages in the same program. This section
 describes the interoperability with other programming models, including
 clarification of undefined behaviors caused by mixed use of different models,
 advice to \openshmem library users and developers that may improve the portability
-and performance of hybrid programs, and definition of an OpenSHMEM extension
+and performance of hybrid programs, and definition of an OpenSHMEM
 API that queries the interoperability features provided by an \openshmem library.
 
 
@@ -399,49 +399,19 @@ both \openshmem and MPI whenever possible, after the user program has called
 \FUNC{shmem\_init} and \FUNC{MPI\_init} provided by the same system.
 }
 
-To avoid unnecessary overhead and programming complexity in the user program,
-the \openshmem implementation may provide an extended \openshmem routine that
-allows the user program to query the progress support for the MPI environment.
-We introduce the definition and semantics of this routine in
-Section~\ref{subsec:interoperability:query}.
 
+\section{Query Interoperability}
 
-\section{Interoperability Query API}
+A hybrid user program can query the interoperability feature of an \openshmem
+implementation in order to avoid unnecessary overhead and programming complexity.
+For instance, the user program can eliminate manual progress polling for MPI
+communication if the underlying software runtime guarantees the progression of
+communication also for MPI even without explicit function calls.
+
+\subsection{\textbf{SHMEM\_QUERY\_INTEROPERABILITY}}
 \label{subsec:interoperability:query}
+\input{content/shmem_query_interoperability}
 
-Determines whether an interoperability feature is supported by the \openshmem
-library implementation.
-
-\begin{apidefinition}
-
-\begin{Csynopsis}
-int @\FuncDecl{shmemx\_query\_interoperability}@(int property);
-\end{Csynopsis}
-
-\begin{apiarguments}
-    \apiargument{IN}{property}{The interoperability property queried by the user.}
-\end{apiarguments}
-
-% compiling error ?
-% \apidescription{
-\FUNC{shmemx\_query\_interoperability} is an extended \openshmem routine that queries
-whether an interoperability property is supported by the \openshmem library. One of the
-following properties can be queried in an \openshmem program after finishing the
-initialization call to \openshmem and that of the relevant programming models
-being used in the program. An OpenSHMEM library implementation may extend the
-available properties.
-
-\begin{itemize}
-    \item \VAR{SHMEM\_PROGRESS\_MPI} Query whether the \openshmem
-    implementation makes progress for the MPI communication used in the user program.
-\end{itemize}
-% }
-
-\apireturnvalues{
-    The return value is \CONST{1} if \VAR{property} is supported by the \openshmem library;
-    otherwise, it is \CONST{0}.
-}
-\end{apidefinition}
 \color{black}
 
 \chapter{History of OpenSHMEM}\label{sec:openshmem_history}
