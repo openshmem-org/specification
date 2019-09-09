@@ -40,15 +40,8 @@ int main(void)
   /* Wait for all PEs to initialize reductions arrays */
   shmem_sync(SHMEM_TEAM_WORLD);
 
-#if __STDC_VERSION__ >= 201112
-  /* C11 generic interface */
   shmem_and_reduce(SHMEM_TEAM_WORLD, valid_all, valid_me, num);
   shmem_sum_reduce(SHMEM_TEAM_WORLD, sums, values, num);
-#else
-  /* C/C++ interface without generic support */
-  shmem_uchar_and_reduce(SHMEM_TEAM_WORLD, valid_all, valid_me, num);
-  shmem_long_sum_reduce(SHMEM_TEAM_WORLD, sums, values, num);
-#endif
 
   for (int i=0; i < num; i++) {
     if (valid_all[i]) {
