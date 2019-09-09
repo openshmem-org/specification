@@ -127,10 +127,10 @@ The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
 \apitablerow{\FUNC{shmem\_collectmem}, \FUNC{shmem\_fcollectmem}}{\Cstd: Any data  type. \VAR{nelems} is scaled in bytes.}%
-\apitablerow{\FUNC{shmem\_collect8}, \FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect8}, \FUNC{shmem\_fcollect64}}%
+\apitablerow{\FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect64}}%
     {Any noncharacter type that has an element size of \CONST{64} bits. No \Fortran derived types nor
     \CorCpp{} structures are allowed.}
-\apitablerow{\FUNC{shmem\_collect4}, \FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect4}, \FUNC{shmem\_fcollect32}}%
+\apitablerow{\FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect32}}%
     {Any noncharacter type that has an element size of \CONST{32} bits. No \Fortran derived types nor
     \CorCpp{} structures are allowed.}
 }
