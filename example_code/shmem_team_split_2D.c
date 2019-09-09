@@ -19,7 +19,6 @@ int main(void)
   shmem_team_t xteam, yzteam, yteam, zteam;
 
   shmem_team_split_2d(SHMEM_TEAM_WORLD, xdim, NULL, 0, &xteam, NULL, 0, &yzteam);
-  // No synchronization is needed between these split operations
   // yzteam is immediately ready to be used in collectives
   shmem_team_split_2d(yzteam, ydim, NULL, 0, &yteam, NULL, 0, &zteam);
 
