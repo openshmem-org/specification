@@ -302,6 +302,13 @@ and \FUNC{MPI\_Comm\_rank} in MPI, to query the process identification numbers
 in each communication environment and manage the mapping of identifiers in the
 program when necessary.
 
+\subsubsection{Example}
+The following example demonstrates how to manage the mapping of process
+identifiers in a hybrid \openshmem and MPI program.
+
+\lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize]
+      {example_code/hybrid_mpi_mapping_id.c}
 
 \subsection{RMA Memory Semantics, Completion, Ordering, and Atomicity}
 \label{subsec:interoperability:rma}
