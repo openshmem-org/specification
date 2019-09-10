@@ -212,7 +212,7 @@ same software system in order to share a communication resource when possible.
 In such a case, internal interference may occur.
 
 To improve interoperability and portability in \openshmem + MPI hybrid
-programming, we clarify several aspects in the following subsections.
+programming, we clarify the relevant semantics in the following subsections.
 
 
 \subsection{Initialization}
@@ -282,8 +282,9 @@ user-requested thread level, but the supported level cannot be updated by the la
 initialization call if the underlying software runtime of \openshmem and MPI
 share the same internal communication resource.
 The program should always check the \VAR{provided} thread level returned
-at the corresponding initialization call to portably ensure thread support in each
-communication environment.
+at the corresponding initialization call or query the level of thread support
+after initialization to portably ensure thread support in each communication
+environment.
 
 
 \subsection{Mapping Process Identification Numbers}
@@ -303,8 +304,10 @@ in each communication environment and manage the mapping of identifiers in the
 program when necessary.
 
 \subsubsection{Example}
-The following example demonstrates how to manage the mapping of process
-identifiers in a hybrid \openshmem and MPI program.
+\label{subsubsec:interoperability:id:example}
+The following example demonstrates how to manage the mapping between \openshmem
+PE identifier and MPI ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
+and MPI program.
 
 \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize]
