@@ -205,11 +205,10 @@ to efficiently and easily support various communication patterns.
 A vendor may implement the \openshmem and MPI libraries in different ways. For
 instance, one may implement both \openshmem and MPI as standalone libraries,
 each of which allocates and initializes fully isolated communication
-resources. Consequently, an \openshmem call does not interfere with any MPI
-communication in the same application. As the other common approach, however,
+resources.
+As the other common approach, however,
 a vendor may implement both \openshmem and MPI interfaces within the
 same software system in order to share a communication resource when possible.
-In such a case, internal interference may occur.
 
 To improve interoperability and portability in \openshmem + MPI hybrid
 programming, we clarify the relevant semantics in the following subsections.
