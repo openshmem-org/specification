@@ -242,12 +242,13 @@ connection to independent processes (e.g., through \FUNC{MPI\_Comm\_accept}
 and \FUNC{MPI\_Comm\_connect})
 and provides a mechanism to establish communication
 between the newly created processes and the existing MPI application (see
-MPI standard version 3.1, Chapter 10). The dynamic process model can be used to
-implement Multiple Program Multiple Data (MPMD) style program.
-Unlike MPI, \openshmem follows the SPMD programming model. It starts
-all processes at once and requires all PEs to collectively allocate and initialize
-resources used by the \openshmem library before any other \openshmem routine may
-be called. Hence, users should avoid using \openshmem and MPI dynamic process model
+MPI standard version 3.1, Chapter 10).
+Unlike MPI, \openshmem starts all processes at once and requires all PEs to
+collectively allocate and initialize resources (e.g., symmetric heap) used by
+the \openshmem library before any other \openshmem routine may
+be called. Communicating with a dynamically created process in the \openshmem
+environment may result in undefined behavior.
+Hence, users should not use \openshmem and MPI dynamic process model
 in the same program.
 
 
