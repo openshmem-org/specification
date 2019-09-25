@@ -125,8 +125,9 @@ void @\FuncDecl{shmem\_longlong\_xor\_to\_all}@(long long *dest, const long long
     \dest{} array on all \acp{PE} in the active set.  The active set is defined
     by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
 
-    The \source{} and \dest{} arrays may be the same array, but they may not be
-    overlapping arrays.
+    The \source{} and \dest{} arrays must not point to partially overlapping
+    memory regions.  That is, they must point to the same region in memory or
+    to completely disjoint regions in memory.
 
     As with all \openshmem collective routines, each of these routines assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
