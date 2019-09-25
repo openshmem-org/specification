@@ -300,30 +300,15 @@ and MPI program.
 \label{subsec:interoperability:rma}
 
 Both \openshmem and MPI define similar RMA and atomic operations for remote memory 
-access, however, each model defines different semantics and functions for memory
-synchronization, operation completion, and ordering. To ensure semantics correctness
-and portability, a hybrid program should always make appropriate \openshmem and MPI
-synchronization calls for remote access in each environment respectively.
-
-\openshmem guarantees the atomicity only of concurrent \openshmem AMO operations
+access, however, a portable program should not assume interoperability between these
+two RMA models.
+For instance, \openshmem guarantees the atomicity only of concurrent \openshmem AMO operations
 that operate on symmetric data with the same datatype. Access to the same symmetric
 object with MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may
-result in an undefined result.
-
-Most RMA programs can be written using either \openshmem or MPI RMA.
-It is recommended to choose only one of the RMA models in the same program, whenever
+result in an undefined result. Furthermore,
+because most RMA programs can be written using either \openshmem or MPI RMA,
+users should choose only one of the RMA models in the same program, whenever
 possible, for performance and code simplicity.
-
-
-\apiimpnotes{
-In the implementations that share the same communication resources for \openshmem
-and MPI, the memory or network synchronization internally issued for one
-programming model may also affect the status of operations in the other model.
-Although the user program must make necessary synchronization calls for both models
-in order to ensure semantics correctness, a high-performance implementation may
-internally avoid the later synchronization made by the other model when no
-subsequent operation is issued between these two synchronization calls.
-}
 
 \subsection{Communication Progress}
 \label{subsec:interoperability:progress}
