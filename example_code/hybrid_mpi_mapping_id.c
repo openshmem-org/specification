@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     int *mpi_ranks = shmem_calloc(npes, sizeof(int));
 
-    shmem_barrier_all();
+    shmem_sync_all();
     shmem_collect32(mpi_ranks, &myrank, 1, 0, 0, npes, pSync);
 
     if (mype == 0)
