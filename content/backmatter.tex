@@ -342,13 +342,13 @@ capabilities. In MPI, however, a weak progress semantics is applied. That is,
 an MPI communication call is guaranteed only to complete in finite time. For
 instance, an \FUNC{MPI\_Put} may be completed only when the remote process makes an MPI
 call that internally triggers the progress of MPI, if the underlying hardware
-does not support asynchronous communication. A portable hybrid program
-should not assume that a call to the \openshmem library also makes progress for MPI.
-A call to \FUNC{shmem\_query\_interoperability} (see definition in \ref{subsec:interoperability:query})
-can be used to check whether the implementation provides such a functionality. 
-If it is provided, then the library ensures progression of
-both \openshmem and MPI communication; otherwise, it may have to explicitly
-manage the asynchronous communication in MPI in
+does not support asynchronous communication. A hybrid program
+should not assume that the \openshmem library also makes progress for MPI.
+A call to \FUNC{shmem\_query\_interoperability} with the \VAR{SHMEM\_PROGRESS\_MPI}
+property (see definition in \ref{subsec:interoperability:query})
+can be used to portably check whether the implementation provides asynchronous
+progression also for MPI. If it is not provided, the user program may have to
+explicitly manage the asynchronous communication in MPI in
 order to prevent any deadlock or performance degradation.
 
 \apiimpnotes{
