@@ -90,19 +90,23 @@ should be created with the default values for all configuration parameters.
 See Section~\ref{subsec:shmem_team_config_t} for field mask names and
 default configuration parameters.
 
-If \VAR{parent\_team} is an invalid team handle, the behavior is undefined.
+When \VAR{parent\_team} specifies an invalid team, if
+\VAR{parent\_team} compares equal to
+\LibConstRef{SHMEM\_TEAM\_INVALID}, then no new teams will be created
+and both \VAR{xaxis\_team} and \VAR{yaxis\_team} will be assigned the
+value \LibConstRef{SHMEM\_TEAM\_INVALID}; otherwise, the behavior is
+undefined.
 
-If \VAR{parent\_team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, no new
-teams will be created, and both \VAR{xaxis\_team} and \VAR{yaxis\_team}
-will be assigned the value \LibConstRef{SHMEM\_TEAM\_INVALID}.
-
-If either team cannot be created, that team will be assigned the value
+If any \VAR{xaxis\_team} or \VAR{yaxis\_team} on any \ac{PE} in
+\VAR{parent\_team} cannot be created, then both team handles on all
+\acp{PE} in \VAR{parent\_team} will be assigned the value
 \LibConstRef{SHMEM\_TEAM\_INVALID}.
+
 }
 
 \apireturnvalues{
-  Zero on successful creation of both \VAR{xaxis\_team} and \VAR{yaxis\_team},
-  nonzero otherwise.
+  Zero on successful creation of all \VAR{xaxis\_team}s and \VAR{yaxis\_team}s;
+  otherwise, nonzero.
 }
 
 \apinotes{

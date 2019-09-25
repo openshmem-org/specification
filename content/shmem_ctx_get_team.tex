@@ -23,7 +23,8 @@ int @\FuncDecl{shmem\_ctx\_get\_team}@(shmem_ctx_t ctx, shmem_team_t *team);
   The team handle is returned through the pointer argument \VAR{team}.
 
   If \VAR{ctx} is the default context or one created by a call to
-  \FUNC{shmem\_ctx\_create}, the returned team is the default team.
+  \FUNC{shmem\_ctx\_create}, the \VAR{team} is assigned the handle value
+  \LibHandleRef{SHMEM\_TEAM\_WORLD}.
 
   When \VAR{ctx} is an invalid context, if \VAR{ctx} compares equal to
   \LibConstRef{SHMEM\_CTX\_INVALID}, then \VAR{team} is assigned the
