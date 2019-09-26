@@ -416,7 +416,7 @@
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t},
+      uint64_t, shmem_team_t, shmem_team_config_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
@@ -424,7 +424,7 @@
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t},
+      uint64_t, shmem_team_t, shmem_team_config_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
@@ -434,7 +434,7 @@
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t},
+      uint64_t, shmem_team_t, shmem_team_config_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
@@ -444,7 +444,7 @@
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t},
+      uint64_t, shmem_team_t},
     aboveskip=0pt, belowskip=0pt}}}{}
 
 \lstnewenvironment{Fsynopsis}
@@ -527,7 +527,7 @@
     ##1
     \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t,  _Thread_local, shmem_team_t}]{##2}
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local, uint64_t, shmem_team_t}]{##2}
     ##3 }
 \newcommand{\apifexample}[3]{
     ##1

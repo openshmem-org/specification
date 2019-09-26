@@ -27,7 +27,7 @@ int main(void)
   shmem_fence();
 
   for (int i = 0; i < npes; i++)
-      shmem_p(&flags[mype], 1, i);
+      shmem_atomic_set(&flags[mype], 1, i);
 
   size_t ncompleted;
   while ((ncompleted = shmem_wait_until_some(flags, npes, indices,

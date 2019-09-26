@@ -39,7 +39,9 @@ void *@\FuncDecl{shmem\_ptr}@(const void *dest, int pe);
 \begin{apiexamples}
 
 \apicexample
-    {This is the equivalent program written in \Cstd[11]:}
+    {In the following \Cstd[11] example, \ac{PE} 0 uses the \FUNC{shmem\_ptr}
+    routine to query a pointer and directly access the \VAR{dest} array on
+    \ac{PE} 1:}
     {./example_code/shmem_ptr_example.c}
     {}
 

@@ -51,6 +51,9 @@ The atomic routines
 guarantee that concurrent accesses by any of these routines to the same
 location and using the same datatype (specified in Tables~\ref{stdamotypes} and
 \ref{extamotypes}) will be exclusive.
+Exclusivity is also guaranteed when the target \ac{PE} performs a wait or test
+operation on the same location and with the same datatype as one or more atomic
+operations.
 \openshmem atomic operations do not guarantee exclusivity in the following
 scenarios, all of which result in undefined behavior.
 \begin{enumerate}
