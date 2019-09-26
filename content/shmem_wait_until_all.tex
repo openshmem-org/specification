@@ -34,7 +34,10 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \apidescription{ 
     The \FUNC{shmem\_wait\_until\_all} routine waits until all entries in the
     wait set specified by \VAR{ivars} and \VAR{status} have satisfied the wait condition at the
-    calling \ac{PE}.  If \VAR{nelems} is 0, the wait set is empty and this routine returns immediately.
+    calling \ac{PE}.  The \VAR{ivars} objects at the calling \ac{PE} may be
+    updated by an \ac{AMO} performed by a thread located within the calling
+    \ac{PE} or within another \ac{PE}.
+    If \VAR{nelems} is 0, the wait set is empty and this routine returns immediately.
     \newtext{This routine compares each element of the \VAR{ivars} array in the
     wait set with the value \VAR{cmp\_value} according to the comparison
     operator \VAR{cmp} at the calling \ac{PE}}.
@@ -52,6 +55,10 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     immediately.  If \VAR{status} is a null pointer, it is ignored and
     all elements in \VAR{ivars} are included in the wait set.  The \VAR{ivars}
     and \VAR{status} arrays must not overlap in memory.
+
+    Implementations must ensure that \FUNC{shmem\_wait\_until\_all} does not
+    return before the update of the memory indicated by \VAR{ivars} is fully
+    complete.
 }
 
 
@@ -61,13 +68,6 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 \apinotes{
     None.
-}
-
-\apiimpnotes{
-    Implementations must ensure that \FUNC{shmem\_wait\_until\_all} does not
-    return before the update of the memory indicated by \VAR{ivars} is fully
-    complete.  Partial updates to the memory must not cause
-    \FUNC{shmem\_wait\_until\_all} to return.
 }
 
 

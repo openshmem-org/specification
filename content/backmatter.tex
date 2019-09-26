@@ -21,7 +21,7 @@ The following section describes how to write a ``Hello World" \openshmem program
 To write a ``Hello World" \openshmem program, the user must:
 
 \begin{itemize}
-\item Include the header file \HEADER{shmem.h} for \Cstd or \HEADER{shmem.fh} for \Fortran.
+\item Include the header file \HEADER{shmem.h} for \Cstd.
 \item Add the initialization call \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}}.
 \item Use \openshmem calls to query the local \ac{PE} number
     (\hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}}) and the total number
@@ -40,21 +40,6 @@ deterministic because \acp{PE} execute asynchronously in parallel.
                 {example_code/hello-openshmem-c.output}
 \vspace{0.1in}
 \end{minipage}
-
-\clearpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{deprecate}
-\openshmem also provides a \Fortran API. Listing~\ref{openshmem-hello-f90} shows a similar program written in \Fortran.
-
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-\numberedlisting{caption={``Hello World'' example program in \Fortran},label=openshmem-hello-f90,language=OSH2+F}
-                {example_code/hello-openshmem.f90}
-\outputlisting{language=bash,caption={Possible ordering of expected output with 4 \acp{PE} from the program in Listing~\ref{openshmem-hello-f90}}}
-                {example_code/hello-openshmem-f90.output}
-\vspace{0.1in}
-\end{minipage}
-\end{deprecate}
 
 \clearpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -120,20 +105,6 @@ oshc++ <compiler options> -o myprogram myprogram.cpp
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
 underlying \Cpp compiler called by \textbf{oshc++}.
 
-
-\subsection*{Programs written in \Fortran}
-
-\begin{deprecate}
-The \openshmem Reference Implementation provides a wrapper program, named
-\textbf{oshfort}, to aid in the compilation of \Fortran programs.
-The wrapper may be called as follows:
-
-\begin{lstlisting}[language=bash]
-oshfort <compiler options> -o myprogram myprogram.f
-\end{lstlisting}
-Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Fortran compiler called by \textbf{oshfort}.
-\end{deprecate}
 
 \section{Running Programs}
 
@@ -491,7 +462,8 @@ In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
 \subsection{\textit{Fortran} API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
-The entire \openshmem \Fortran API was deprecated because of a general lack of
+The entire \openshmem \Fortran API was deprecated in \openshmem[1.4] and
+removed in \openshmem[1.5] because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
 extensive update of the \Fortran API, \Fortran users are encouraged to
 leverage the \openshmem Specification's \Cstd API through the
@@ -509,6 +481,21 @@ Major changes in \openshmem[1.5] include \dots
 
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
+%
+\item Clarified that point-to-point synchronization routines preserve the
+  atomicity of OpenSHMEM \acp{AMO}.
+\\ See Section~\ref{subsec:amo_guarantees}.
+%
+\item Clarified that symmetric variables used as \VAR{ivar} arguments to
+  point-to-point synchronization routines must be updated using OpenSHMEM
+  \acp{AMO}.
+\\ See Section~\ref{subsec:p2p_intro}.
+%
+\item Removed the entire \openshmem \Fortran API. 
+%
+\item Added support for multipliers in \VAR{SHMEM\_SYMMETRIC\_SIZE}
+environment variables.
+\\ See Section \ref{subsec:environment_variables}.
 %
 \item Added a new multiple-element point-to-point synchronization API with
   the functions: \FUNC{shmem\_wait\_until\_all}, \FUNC{shmem\_wait\_until\_any},
