@@ -1,18 +1,19 @@
 \apisummary{
-    Indicate whether at least one variable within an array of variables on the local \ac{PE} meets \oldtext{a} \newtext{its} specified test condition.
+    Indicate whether at least one variable within an array of variables on the
+    local \ac{PE} meets its specified test condition.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-size_t @\FuncDecl{shmem\_test\_some\newtext{\_vector}}@(TYPE *ivars, size_t nelems, size_t *indices, const int *status,
+size_t @\FuncDecl{shmem\_test\_some\_vector}@(TYPE *ivars, size_t nelems, size_t *indices, const int *status,
     int cmp, TYPE *cmp_values);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_some\newtext{\_vector}}@(TYPE *ivars, size_t nelems, size_t *indices,
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_some\_vector}@(TYPE *ivars, size_t nelems, size_t *indices,
     const int *status, int cmp, TYPE *cmp_values);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
@@ -28,38 +29,37 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
   \apiargument{IN}{status}{An optional mask array of length \VAR{nelems}
     that indicates which elements in \VAR{ivars} are excluded from the test set.}
   \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts} that
-    compares elements of \VAR{ivars} with \newtext{elements of}
-    \VAR{cmp\_value\newtext{s}}.}
-  \newtext{\apiargument{IN}{cmp\_values}{An array of length \VAR{nelems}
-    containing values to be compared with the respective objects in \VAR{ivars}.}}
+    compares elements of \VAR{ivars} with elements of \VAR{cmp\_values}.}
+  \apiargument{IN}{cmp\_values}{An array of length \VAR{nelems}
+    containing values to be compared with the respective objects in \VAR{ivars}.}
 
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_test\_some\newtext{\_vector}} routine indicates whether at
+    The \FUNC{shmem\_test\_some\_vector} routine indicates whether at
     least one entry in the test set specified by \VAR{ivars} and \VAR{status}
     satisfies the test condition at the calling \ac{PE}.  The \VAR{ivars}
     objects at the calling \ac{PE} may be updated by an \ac{AMO} performed by a
     thread located within the calling \ac{PE} or within another \ac{PE}.
     This routine does not
     block and returns zero if no entries in \VAR{ivars} satisfied the test
-    condition.  \newtext{This routine compares each element of the \VAR{ivars}
+    condition.  This routine compares each element of the \VAR{ivars}
     array in the test set with each respective value in \VAR{cmp\_values}
-    according to the comparison operator \VAR{cmp} at the calling \ac{PE}}.
+    according to the comparison operator \VAR{cmp} at the calling \ac{PE}.
     This routine tests all elements of \VAR{ivars} in the test set at least
     once, and the order in which the elements are tested is unspecified.
 
     Upon return, the \VAR{indices} array contains the indices of the elements
     in the test set that satisfied the test condition during the call to
-    \FUNC{shmem\_test\_some\newtext{\_vector}}.  The return value of
-    \FUNC{shmem\_test\_some\newtext{\_vector}} is equal to the total number of
+    \FUNC{shmem\_test\_some\_vector}.  The return value of
+    \FUNC{shmem\_test\_some\_vector} is equal to the total number of
     these satisfied elements.  If the return value is $N$, then the first $N$
     elements of the \VAR{indices} array contain those unique indices that
     satisfied the test condition.  These first $N$ elements of \VAR{indices}
     may be unordered with respect to the corresponding indices of \VAR{ivars}.
     The array pointed to by \VAR{indices} must be at least \VAR{nelems} long.
     If an entry $i$ in \VAR{ivars} within the test set satisfies the test
-    condition, a series of calls to \FUNC{shmem\_test\_some\newtext{\_vector}}
+    condition, a series of calls to \FUNC{shmem\_test\_some\_vector}
     must eventually include $i$ in the \VAR{indices} array.
 
     The optional \VAR{status} is a mask array of length \VAR{nelems} where each element
@@ -77,7 +77,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 }
 
 \apireturnvalues{
-    \FUNC{shmem\_test\_some\newtext{\_vector}} returns the number of indices returned in
+    \FUNC{shmem\_test\_some\_vector} returns the number of indices returned in
     the \VAR{indices} array. If the test set is empty, this routine returns 0.
 }
 

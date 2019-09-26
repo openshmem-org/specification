@@ -1,18 +1,19 @@
 \apisummary{
-    Indicate whether any one variable within an array of variables on the local \ac{PE} meets \oldtext{a} \newtext{its} specified test condition.
+    Indicate whether any one variable within an array of variables on the local
+    \ac{PE} meets its specified test condition.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-size_t @\FuncDecl{shmem\_test\_any\newtext{\_vector}}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
+size_t @\FuncDecl{shmem\_test\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
     TYPE *cmp_values);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_any\newtext{\_vector}}@(TYPE *ivars, size_t nelems, const int *status,
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status,
     int cmp, TYPE *cmp_values);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
@@ -26,28 +27,27 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
   \apiargument{IN}{status}{An optional mask array of length \VAR{nelems}
     that indicates which elements in \VAR{ivars} are excluded from the test set.}
   \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts} that
-    compares elements of \VAR{ivars} with \newtext{elements of}
-    \VAR{cmp\_value\newtext{s}}.}
-  \newtext{\apiargument{IN}{cmp\_values}{An array of length \VAR{nelems}
-    containing values to be compared with the respective objects in \VAR{ivars}.}}
+    compares elements of \VAR{ivars} with elements of \VAR{cmp\_values}.}
+  \apiargument{IN}{cmp\_values}{An array of length \VAR{nelems}
+    containing values to be compared with the respective objects in \VAR{ivars}.}
 
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_test\_any\newtext{\_vector}} routine indicates whether any
+    The \FUNC{shmem\_test\_any\_vector} routine indicates whether any
     entry in the test set specified by \VAR{ivars} and \VAR{status} has
     satisfied the test condition at the calling \ac{PE}.  The \VAR{ivars}
     objects at the calling \ac{PE} may be updated by an \ac{AMO} performed by a
     thread located within the calling \ac{PE} or within another \ac{PE}.
     This routine does not
     block and returns \CONST{SIZE\_MAX} if no entries in \VAR{ivars} satisfied
-    the test condition.  \newtext{This routine compares each element of the
+    the test condition.  This routine compares each element of the
     \VAR{ivars} array in the test set with each respective value in
     \VAR{cmp\_values} according to the comparison operator \VAR{cmp} at the
-    calling \ac{PE}}.  The order in which these elements are tested is
+    calling \ac{PE}.  The order in which these elements are tested is
     unspecified.  If an entry $i$ in \VAR{ivars} within the test set satisfies
     the test condition, a series of calls to
-    \FUNC{shmem\_test\_any\newtext{\_vector}} must eventually return $i$.
+    \FUNC{shmem\_test\_any\_vector} must eventually return $i$.
 
     The optional \VAR{status} is a mask array of length \VAR{nelems} where each
     element corresponds to the respective element in \VAR{ivars} and indicates
@@ -65,7 +65,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 }
 
 \apireturnvalues{
-    \FUNC{shmem\_test\_any\newtext{\_vector}} returns the index of an element in the \VAR{ivars}
+    \FUNC{shmem\_test\_any\_vector} returns the index of an element in the \VAR{ivars}
     array that satisfies the test condition. If the test set is empty or no
     conditions in the test set are satisfied, this routine returns \CONST{SIZE\_MAX}.
 }

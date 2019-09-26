@@ -1,18 +1,19 @@
 \apisummary{
-    Wait on an array of variables on the local \ac{PE} until at least one variable meets \oldtext{the} \newtext{its} specified wait condition.
+    Wait on an array of variables on the local \ac{PE} until at least one
+    variable meets the its specified wait condition.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-size_t @\FuncDecl{shmem\_wait\_until\_some\newtext{\_vector}}@(TYPE *ivars, size_t nelems, size_t *indices,
+size_t @\FuncDecl{shmem\_wait\_until\_some\_vector}@(TYPE *ivars, size_t nelems, size_t *indices,
     const int *status, int cmp, TYPE *cmp_values);
 \end{C11synopsis}
 where \TYPE{} is one of the point-to-point synchronization types specified by
 Table \ref{p2psynctypes}.
 
 \begin{Csynopsis}
-size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some\newtext{\_vector}}@(TYPE *ivars, size_t nelems, size_t *indices,
+size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some\_vector}@(TYPE *ivars, size_t nelems, size_t *indices,
     const int *status, int cmp, TYPE *cmp_values);
 \end{Csynopsis}
 where \TYPE{} is one of the point-to-point synchronization types and has a
@@ -28,30 +29,29 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
   \apiargument{IN}{status}{An optional mask array of length \VAR{nelems}
     that indicates which elements in \VAR{ivars} are excluded from the wait set.}
   \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts} that
-    compares elements of \VAR{ivars} with \newtext{elements of}
-    \VAR{cmp\_value\newtext{s}}.}
-  \newtext{\apiargument{IN}{cmp\_values}{An array of length \VAR{nelems}
-    containing values to be compared with the respective objects in \VAR{ivars}.}}
+    compares elements of \VAR{ivars} with elements of \VAR{cmp\_values}.}
+  \apiargument{IN}{cmp\_values}{An array of length \VAR{nelems}
+    containing values to be compared with the respective objects in \VAR{ivars}.}
 
 \end{apiarguments}
 
 \apidescription{ 
-    The \FUNC{shmem\_wait\_until\_some\newtext{\_vector}} routine waits until
+    The \FUNC{shmem\_wait\_until\_some\_vector} routine waits until
     at least one entry in the wait set specified by \VAR{ivars} and
     \VAR{status} satisfies the wait condition at the calling \ac{PE}.
     The \VAR{ivars} objects at the calling \ac{PE} may be updated by an
     \ac{AMO} performed by a thread located within the calling \ac{PE} or within
     another \ac{PE}.
-    \newtext{This routine compares each element of the \VAR{ivars} array in the
+    This routine compares each element of the \VAR{ivars} array in the
     wait set with each respective value in \VAR{cmp\_values} according to the
-    comparison operator \VAR{cmp} at the calling \ac{PE}}.  This routine tests
+    comparison operator \VAR{cmp} at the calling \ac{PE}.  This routine tests
     all elements of \VAR{ivars} in the wait set at least once, and the order in
     which the elements are waited upon is unspecified.
 
     Upon return, the \VAR{indices} array contains the indices of at least one
     element in the wait set that satisfied the wait condition during the call
-    to \FUNC{shmem\_wait\_until\_some\newtext{\_vector}}.  The return value of
-    \FUNC{shmem\_wait\_until\_some\newtext{\_vector}} is equal to the total
+    to \FUNC{shmem\_wait\_until\_some\_vector}.  The return value of
+    \FUNC{shmem\_wait\_until\_some\_vector} is equal to the total
     number of these satisfied elements.  For a given return value $N$, the
     first $N$ elements of the \VAR{indices} array contain those unique indices
     that satisfied the wait condition.  These first $N$ elements of
@@ -59,7 +59,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     \VAR{ivars}.  The array pointed to by \VAR{indices} must be at least
     \VAR{nelems} long.  If an entry $i$ in \VAR{ivars} within the wait set
     satisfies the wait condition, a series of calls to
-    \FUNC{shmem\_wait\_until\_some\newtext{\_vector}} must eventually include
+    \FUNC{shmem\_wait\_until\_some\_vector} must eventually include
     $i$ in the \VAR{indices} array.
 
     The optional \VAR{status} is a mask array of length \VAR{nelems} where each
@@ -80,7 +80,7 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 
 
 \apireturnvalues{
-    \FUNC{shmem\_wait\_until\_some\newtext{\_vector}} returns the number of
+    \FUNC{shmem\_wait\_until\_some\_vector} returns the number of
     indices returned in the \VAR{indices} array. If the wait set is empty, this
     routine returns 0.
 }
