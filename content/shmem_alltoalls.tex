@@ -10,52 +10,38 @@ void @\FuncDecl{shmem\_alltoalls32}@(void *dest, const void *source, ptrdiff_t d
 void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-INTEGER pSync(SHMEM_ALLTOALLS_SYNC_SIZE)
-INTEGER dst, sst, PE_start, logPE_stride, PE_size
-INTEGER nelems 
-CALL @\FuncDecl{SHMEM\_ALLTOALLS32}@(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
-CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, logPE_stride, PE_size, pSync)
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
-\apiargument{OUT}{dest}{A symmetric data object large enough to receive 
+\apiargument{OUT}{dest}{A symmetric data object large enough to receive
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
     active set.}
-\apiargument{IN}{source}{A symmetric data object that contains \VAR{nelems} 
-    elements of data for each \ac{PE} in the active set, ordered according to 
+\apiargument{IN}{source}{A symmetric data object that contains \VAR{nelems}
+    elements of data for each \ac{PE} in the active set, ordered according to
     destination \ac{PE}.}
 \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
     data object.  The stride is scaled by the element size.  A
     value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
-    \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a default integer
-    value.}
+    \CTYPE{ptrdiff\_t}.}
 \apiargument{IN}{sst}{The  stride between consecutive elements of the
     \source{} data object.  The stride is scaled by the element size.
     A value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-    of type \CTYPE{ptrdiff\_t}.  When using \Fortran, it must be a
-    default integer value.}
+    of type \CTYPE{ptrdiff\_t}.}
 \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
-    \VAR{nelems} must be of type size\_t for \CorCpp.  When using
-    \Fortran, it must be a default integer value.}
+    \VAR{nelems} must be of type size\_t for \CorCpp.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of
-    type integer.  When using \Fortran, it must be a default integer value.}
+    type integer.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must
-    be a default integer value.}
+    \VAR{PE\_size} must be of type integer.}
 \apiargument{IN}{pSync}{
     A symmetric work array of size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.
     In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    In \Fortran, \VAR{pSync} must be an array of elements of default integer type.
     Every element of this array must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter the routine.}
-    
+
 \end{apiarguments}
 
 \apidescription{
@@ -94,7 +80,7 @@ CALL @\FuncDecl{SHMEM\_ALLTOALLS64}@(dest, source, dst, sst, nelems, PE_start, l
     the local PE: Its \VAR{dest} symmetric data object is completely updated and
     the data has been copied out of the \VAR{source} data object.
     The values in the \VAR{pSync} array are restored to the original values.
-} 
+}
 
 \apidesctable{
 The  \dest{}  and \source{} data  objects must conform to certain typing
@@ -123,7 +109,7 @@ constraints, which are as follows:
     \FUNC{shmem\_alltoalls} routine only if none of the \acp{PE} in the
     active set are still processing a prior \openshmem\ \FUNC{shmem\_alltoalls}
     routine call that used the same \VAR{pSync} array.  In general, this can be
-    ensured only by doing some type of synchronization.        
+    ensured only by doing some type of synchronization.
 }
 
 \begin{apiexamples}
