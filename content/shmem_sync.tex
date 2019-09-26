@@ -98,15 +98,6 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 }
 
 \apinotes{
-
-\newtext{%
-    There are no specifically defined error codes for sync operations.
-    See Section~\ref{subsec:error_handling} for expected error checking and
-    return code behavior specific to implementations. For portable
-    error checking and debugging behavior, programs should do their own checks
-    for invalid team handles or \LibConstRef{SHMEM\_TEAM\_INVALID}
-    }
-
     If the \VAR{pSync} array is initialized at run time, another method of
     synchronization (e.g., \FUNC{shmem\_sync\_all}) must be used before
     the initial use of that \VAR{pSync} array by \FUNC{shmem\_sync}.
