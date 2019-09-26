@@ -1,5 +1,5 @@
 \apisummary{
-  Create a communication context from a team locally.
+  Create a communication context from a team.
 }
 
 \begin{apidefinition}
@@ -20,7 +20,8 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
 \apidescription{
   The \FUNC{shmem\_team\_create\_ctx} routine creates a new communication
   context and returns its handle through the \VAR{ctx} argument.
-  This context is created from the team specified by the \VAR{team} argument.
+  This context is created from the team specified by the \VAR{team} argument;
+  however, the context creation operation is not collective
 
   In addition to the team, the \FUNC{shmem\_team\_create\_ctx} routine accepts
   the same arguments and provides all the same return conditions as the
