@@ -40,6 +40,9 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
     wait condition at the calling \ac{PE}.  The \VAR{ivars} objects at the
     calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
     within the calling \ac{PE} or within another \ac{PE}.
+    This routine compares each element of the \VAR{ivars} array in the
+    wait set with the value \VAR{cmp\_value} according to the comparison
+    operator \VAR{cmp} at the calling \ac{PE}.
     This routine tests all elements of
     \VAR{ivars} in the wait set at least once, and the order in which the
     elements are waited upon is unspecified.

@@ -39,10 +39,11 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     \ac{PE} may be updated by an \ac{AMO} performed by a thread located within
     the calling \ac{PE} or within another \ac{PE}.
     This routine does not block and returns \CONST{SIZE\_MAX} if
-    no entries in \VAR{ivars} satisfied the test condition.  This routine
-    compares each of the \VAR{nelems} elements in the \VAR{ivars} array with
-    the value \VAR{cmp\_value} according to the comparison operator \VAR{cmp}
-    at the calling \ac{PE}.  The order in which these elements are tested is
+    no entries in \VAR{ivars} satisfied the test condition.
+    This routine compares each element of the \VAR{ivars} array in the
+    test set with the value \VAR{cmp\_value} according to the comparison
+    operator \VAR{cmp} at the calling \ac{PE}.
+    The order in which these elements are tested is
     unspecified.  If an entry $i$ in \VAR{ivars} within the test set satisfies
     the test condition, a series of calls to \FUNC{shmem\_test\_any} must
     eventually return $i$.
