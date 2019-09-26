@@ -38,7 +38,10 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 \apidescription{
     The \FUNC{shmem\_test\_some\newtext{\_vector}} routine indicates whether at
     least one entry in the test set specified by \VAR{ivars} and \VAR{status}
-    satisfies the test condition at the calling \ac{PE}.  This routine does not
+    satisfies the test condition at the calling \ac{PE}.  The \VAR{ivars}
+    objects at the calling \ac{PE} may be updated by an \ac{AMO} performed by a
+    thread located within the calling \ac{PE} or within another \ac{PE}.
+    This routine does not
     block and returns zero if no entries in \VAR{ivars} satisfied the test
     condition.  \newtext{This routine compares each element of the \VAR{ivars}
     array in the test set with each respective value in \VAR{cmp\_values}
@@ -67,6 +70,10 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     empty and this routine returns 0.  If \VAR{status} is a null pointer, it is ignored and all
     elements in \VAR{ivars} are included in the test set.  The \VAR{ivars},
     \VAR{indices}, and \VAR{status} arrays must not overlap in memory.
+
+    Implementations must ensure that \FUNC{shmem\_test\_some\_vector} does not
+    return indices before the updates of the memory indicated by the
+    corresponding \VAR{ivars} elements are fully complete.
 }
 
 \apireturnvalues{
