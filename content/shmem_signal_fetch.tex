@@ -1,0 +1,33 @@
+\color{ForestGreen}
+\apisummary{
+    Fetches the signal update on a local data object.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+uint64_t @\FuncDecl{shmem\_signal\_fetch}@(const uint64_t *sig_addr);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{sig\_addr}{A pointer to a remotely accessible variable.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_signal\_fetch} performs a fetch operation and returns the
+    contents of the \VAR{sig\_addr} signal data object. Access to
+    \VAR{sig\_addr} signal object at the calling \ac{PE} is expected to satisfy
+    the atomicity guarantees as described in Section~\ref{subsec:signal_atomicity}.
+}
+
+\apireturnvalues{
+    Returns the contents of the signal data object, \VAR{sig\_addr}, at the
+    calling \ac{PE}.
+}
+
+\apinotes{
+    None.
+}
+
+\end{apidefinition}
+\color{Black}
