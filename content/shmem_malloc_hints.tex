@@ -18,18 +18,18 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 
 \apidescription{
 
-    The \FUNC{shmem\_malloc\_with\_hint} like \FUNC{shmem\_malloc} routine returns a pointer to a block of at least
+    The \FUNC{shmem\_malloc\_with\_hints} like \FUNC{shmem\_malloc} routine returns a pointer to a block of at least
     \VAR{size} bytes, which shall be suitably aligned so that it may be
     assigned to a pointer to any type of object.  This space is allocated from
     the symmetric heap (similar to \FUNC{shmem\_malloc}).  When the \VAR{size} is zero, 
     the \FUNC{shmem\_malloc\_with\_hint} routine performs no action and returns a null pointer. 
     
-    In addition to the \VAR{size} argument, the \VAR{hint} argument is provided by the user. 
-    The \VAR{hint} describes the expected manner in which the \openshmem program may use the allocated memory.
-    The valid usage hints are described in Table~\ref{usagehints}. Multiple hints are expressed as \CONST{OR} of \VAR{hints}.
+    In addition to the \VAR{size} argument, the \VAR{hints} argument is provided by the user. 
+    The \VAR{hints} describes the expected manner in which the \openshmem program may use the allocated memory.
+    The valid usage hints are described in Table~\ref{usagehints}. Multiple hints may be requested by combining them with a bitwise \CONST{OR} operation.
     
-    The information provided by the \VAR{hint} is used to optimize for performance by the implementation. 
-    If the implementation cannot optimize, the behavior is the same as \FUNC{shmem\_malloc}.
+    The information provided by the \VAR{hints} is used to optimize for performance by the implementation. 
+    If the implementation cannot optimize, the behavior is same as \FUNC{shmem\_malloc}.
     If more than one hint is provided, the implementation will make the best effort to use one or more hints 
     to optimize performance. 
             
@@ -39,14 +39,14 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     This ensures that all \acp{PE} participate in the memory allocation, and that the memory on other
     \acp{PE} can be used as soon as the local \ac{PE} returns. The implicit barrier performed by this routine will quiet the
     default context.  It is the user's responsibility to ensure that no communication operations involving the given memory block are pending on
-    other contexts before calling the \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.
-    The user is also responsible for calling these routines with the identical argument(s) on all
-    \acp{PE}; if differing \VAR{size} or \VAR{hint} arguments are used, the behavior of the call
+    other contexts prior to calling the \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.
+    The user is also responsible for calling these routines with identical argument(s) on all
+    \acp{PE}; if differing \VAR{size}, or \VAR{hints} arguments are used, the behavior of the call
     and any subsequent \openshmem calls is undefined.
 }
 
 \apireturnvalues{
-    The \FUNC{shmem\_malloc\_with\_hint} routine returns a pointer to the allocated space;
+    The \FUNC{shmem\_malloc\_with\_hints} routine returns a pointer to the allocated space;
     otherwise, it returns a null pointer.
 }
 
@@ -62,7 +62,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 	\endhead
 	%%
 	\LibConstDecl{SHMEM\_HINT\_NONE} &
-	Behavior same as shmem\_malloc
+	Behavior same as \FUNC{shmem\_malloc}
 	\tabularnewline \hline
 		
 	\LibConstDecl{SHMEM\_HINT\_LOW\_LAT\_MEM} &
