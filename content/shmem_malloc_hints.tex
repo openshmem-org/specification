@@ -22,7 +22,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     \VAR{size} bytes, which shall be suitably aligned so that it may be
     assigned to a pointer to any type of object.  This space is allocated from
     the symmetric heap (similar to \FUNC{shmem\_malloc}).  When the \VAR{size} is zero, 
-    the \FUNC{shmem\_malloc\_with\_hint} routine performs no action and returns a null pointer. 
+    the \FUNC{shmem\_malloc\_with\_hints} routine performs no action and returns a null pointer. 
     
     In addition to the \VAR{size} argument, the \VAR{hints} argument is provided by the user. 
     The \VAR{hints} describes the expected manner in which the \openshmem program may use the allocated memory.
@@ -33,7 +33,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     If more than one hint is provided, the implementation will make the best effort to use one or more hints 
     to optimize performance. 
             
-    The \FUNC{shmem\_malloc\_with\_hint} routine is provided  so that multiple \acp{PE} in a program can allocate symmetric,
+    The \FUNC{shmem\_malloc\_with\_hints} routine is provided  so that multiple \acp{PE} in a program can allocate symmetric,
     remotely accessible memory blocks.  When no action is performed, these
     routines return without performing a barrier. Otherwise, the routine will call a barrier on exit.
     This ensures that all \acp{PE} participate in the memory allocation, and that the memory on other
@@ -65,22 +65,6 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 	Behavior same as \FUNC{shmem\_malloc}
 	\tabularnewline \hline
 		
-	\LibConstDecl{SHMEM\_HINT\_LOW\_LAT\_MEM} &
-	Allocate memory on low-latency storage	
-	\tabularnewline \hline
-	
-	\LibConstDecl{SHMEM\_HINT\_HIGH\_BW\_MEM} &
-	Allocate memory on high-bandwidth storage	
-	\tabularnewline \hline
-
-	\LibConstDecl{SHMEM\_HINT\_PSYNC} &
-	Memory used as \CONST{PSYNC} array
-	\tabularnewline \hline
-		
-	\LibConstDecl{SHMEM\_HINT\_PWORK} &
-	Memory used as \CONST{PWORK} array
-	\tabularnewline \hline
-	
 	\LibConstDecl{SHMEM\_HINT\_ATOMICS} &
 	Memory used for \VAR{Atomic} operations
 	\tabularnewline \hline
