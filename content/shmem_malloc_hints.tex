@@ -25,7 +25,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     the \FUNC{shmem\_malloc\_with\_hint} routine performs no action and returns a null pointer. 
     
     In addition to the \VAR{size} argument, the \VAR{hint} argument is provided by the user. 
-    The \VAR{hint} describes the expected manner in which the \openshmem program may use the allocated memory.
+    The \VAR{hints} describes the expected manner in which the \openshmem program may use the allocated memory.
     The valid usage hints are described in Table~\ref{usagehints}. Multiple hints may be requested by combining them with a bitwise \CONST{OR} operation.
     
     The information provided by the \VAR{hints} is used to optimize for performance by the implementation. 
