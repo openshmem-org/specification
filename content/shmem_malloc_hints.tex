@@ -41,7 +41,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     default context.  It is the user's responsibility to ensure that no communication operations involving the given memory block are pending on
     other contexts prior to calling the \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.
     The user is also responsible for calling these routines with identical argument(s) on all
-    \acp{PE}; if differing \VAR{size}, or \VAR{hint} arguments are used, the behavior of the call
+    \acp{PE}; if differing \VAR{size}, or \VAR{hints} arguments are used, the behavior of the call
     and any subsequent \openshmem calls is undefined.
 }
 
