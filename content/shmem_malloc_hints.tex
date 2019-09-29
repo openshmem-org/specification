@@ -27,6 +27,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     In addition to the \VAR{size} argument, the \VAR{hints} argument is provided by the user. 
     The \VAR{hints} describes the expected manner in which the \openshmem program may use the allocated memory.
     The valid usage hints are described in Table~\ref{usagehints}. Multiple hints may be requested by combining them with a bitwise \CONST{OR} operation.
+	A zero option can be given if no options are requested.
     
     The information provided by the \VAR{hints} is used to optimize for performance by the implementation. 
     If the implementation cannot optimize, the behavior is same as \FUNC{shmem\_malloc}.
@@ -61,15 +62,20 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 	\tabularnewline \hline
 	\endhead
 	%%
-	\LibConstDecl{SHMEM\_HINT\_NONE} &
+	\newline
+	\CONST{0} &
+	\newline
 	Behavior same as \FUNC{shmem\_malloc}
 	\tabularnewline \hline
+	
 		
 	\LibConstDecl{SHMEM\_HINT\_ATOMICS} &
+	\newline 
 	Memory used for \VAR{Atomic} operations
 	\tabularnewline \hline
 	
 	\LibConstDecl{SHMEM\_HINT\_SIGNAL} &
+	\newline
 	Memory used for \VAR{signal} operations
 	\tabularnewline \hline
 
