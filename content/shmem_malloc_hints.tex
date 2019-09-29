@@ -28,7 +28,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     The \VAR{hint} describes the expected manner in which the \openshmem program may use the allocated memory.
     The valid usage hints are described in Table~\ref{usagehints}. Multiple hints may be requested by combining them with a bitwise \CONST{OR} operation.
     
-    The information provided by the \VAR{hint} is used to optimize for performance by the implementation. 
+    The information provided by the \VAR{hints} is used to optimize for performance by the implementation. 
     If the implementation cannot optimize, the behavior is same as \FUNC{shmem\_malloc}.
     If more than one hint is provided, the implementation will make the best effort to use one or more hints 
     to optimize performance. 
