@@ -503,7 +503,7 @@ The following list describes the specific changes in \openshmem[1.5]:
 environment variables.
 \\ See Section \ref{subsec:environment_variables}.
 %
-\item Added a new multiple-element point-to-point synchronization API with
+\item Added support for a multiple-element point-to-point synchronization API with
   the functions: \FUNC{shmem\_wait\_until\_all}, \FUNC{shmem\_wait\_until\_any},
   \FUNC{shmem\_wait\_until\_some}, \FUNC{shmem\_test\_all},
   \FUNC{shmem\_test\_any}, and \FUNC{shmem\_test\_some}.
@@ -511,6 +511,17 @@ environment variables.
   \ref{subsec:shmem_wait_until_any}, \ref{subsec:shmem_wait_until_some},
   \ref{subsec:shmem_test_all}, \ref{subsec:shmem_test_any}, and
   \ref{subsec:shmem_test_some}.
+%
+\item Added support for vectorized comparison values in the multiple-element
+  point-to-point synchronization API with the functions:
+  \FUNC{shmem\_wait\_until\_all\_vector}, \FUNC{shmem\_wait\_until\_any\_vector},
+  \FUNC{shmem\_wait\_until\_some\_vector}, \\
+  \FUNC{shmem\_test\_all\_vector}, \FUNC{shmem\_test\_any\_vector}, and
+  \FUNC{shmem\_test\_some\_vector}.
+  \\See Sections \ref{subsec:shmem_wait_until_all_vector},
+  \ref{subsec:shmem_wait_until_any_vector}, \ref{subsec:shmem_wait_until_some_vector},
+  \ref{subsec:shmem_test_all_vector}, \ref{subsec:shmem_test_any_vector}, and
+  \ref{subsec:shmem_test_some_vector}.
 %
 \item Added \openshmem profiling interface.
   \\ See Section~\ref{sec:openshmem_profiling_interface}.
