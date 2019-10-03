@@ -8,7 +8,6 @@
 
 \begin{table}[h]
   \begin{center}
-{\color{Green}
     \begin{tabular}{|l|l|l|l|l|}
       \hline
       \TYPE              & \TYPENAME  & \multicolumn{3}{c|}{Operations Supporting \TYPE}\\ \hline
@@ -29,7 +28,6 @@
     \end{tabular}
     \TableCaptionRef{Reduction Types, Names and Supporting Operations}
     \label{reducetypes}
-}
   \end{center} 
 \end{table}
 
@@ -38,193 +36,170 @@
 Performs a bitwise AND reduction across a set of \acp{PE}.\newline
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the AND operation as specified by Table \ref{reducetypes}.
-}
 
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
-}
+
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{CsynopsisCol}
 \end{DeprecateBlock}
-\newtext{where \TYPE{} is one of the integer types supported for the AND operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
+where \TYPE{} is one of the integer types supported for the AND operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{OR}
 Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the OR operation as specified by Table \ref{reducetypes}.
-}
 
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
-}
+
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{CsynopsisCol}
 \end{DeprecateBlock}
-\newtext{where \TYPE{} is one of the integer types supported for the OR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
+where \TYPE{} is one of the integer types supported for the OR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{XOR}
 Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer types supported for the XOR operation as specified by Table \ref{reducetypes}.
-}
 
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
-}
+
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{CsynopsisCol}
 \end{DeprecateBlock}
-\newtext{where \TYPE{} is one of the integer types supported for the XOR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
+where \TYPE{} is one of the integer types supported for the XOR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{MAX}
 Performs a maximum-value reduction across a set of \acp{PE}.\newline
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer or real types supported for the MAX operation as specified by Table \ref{reducetypes}.
-}
 
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
 
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
-}
+
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{CsynopsisCol}
 \end{DeprecateBlock}
-\newtext{where \TYPE{} is one of the integer or real types supported for the MAX operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
+where \TYPE{} is one of the integer or real types supported for the MAX operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{MIN}
 Performs a minimum-value reduction across a set of \acp{PE}.\newline
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer or real types supported for the MIN operation as specified by Table \ref{reducetypes}.
-}
 
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
 
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
-}
+
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{CsynopsisCol}
 \end{DeprecateBlock}
-\newtext{where \TYPE{} is one of the integer or real types supported for the MIN operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
+where \TYPE{} is one of the integer or real types supported for the MIN operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{SUM}
 Performs a sum reduction across a set of \acp{PE}.\newline
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation as specified by Table \ref{reducetypes}.
-}
 
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
 
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
-}
+
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{CsynopsisCol}
 \end{DeprecateBlock}
-\newtext{where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
+where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{PROD}
 Performs a product reduction across a set of \acp{PE}.\newline
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{C11synopsis}
 where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation as specified by Table \ref{reducetypes}.
-}
 
 %% C/C++
 \begin{Csynopsis}
 \end{Csynopsis}
 
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
 \end{CsynopsisCol}
-}
+
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
 \end{CsynopsisCol}
 \end{DeprecateBlock}
-\newtext{where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.}
+where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \begin{apiarguments}
 
-\newtext{%
 \apiargument{IN}{team}{The team over which to perform the operation.}%
-}
 
 \apiargument{OUT}{dest}{A symmetric array, of length \VAR{nreduce} elements, to
     receive the result of the reduction routines.  The data type of \dest{} varies
@@ -234,8 +209,8 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const T
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays. \newtext{In teams based API calls, \VAR{nreduce} must be of type size\_t.
-    In deprecated active-set based API calls,}
+    arrays. In teams based API calls, \VAR{nreduce} must be of type size\_t.
+    In deprecated active-set based API calls,
     \VAR{nreduce} must be of type integer.}
 
 \begin{DeprecateBlock}
@@ -260,36 +235,31 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const T
 \end{apiarguments}
 
 \apidescription{
-    \openshmem reduction routines \newtext{are collective routines over an active set or
-    existing \openshmem team that} compute one or more reductions across symmetric
+    \openshmem reduction routines are collective routines over an active set or
+    existing \openshmem team that compute one or more reductions across symmetric
     arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
     across a set of values.
 
     The \VAR{nreduce} argument determines the number of separate reductions to
-    perform.  The \source{} array on all \acp{PE} \newtext{participating in the reduction}
-    \oldtext{in the active set} %%
+    perform.  The \source{} array on all \acp{PE} participating in the reduction
     provides one element for each reduction.  The results of the reductions are placed in the
-    \dest{} array on all \acp{PE} \newtext{participating in the reduction.}
-    \oldtext{in the active set.} %%
+    \dest{} array on all \acp{PE} participating in the reduction.
     
     The \source{} and \dest{} arrays may be the same array, but they may not be
     overlapping arrays. The same \dest{} and \source{} arrays
-    must be passed to all \acp{PE} \newtext{participating in the reduction.}
-    \oldtext{in the active set.} %%
+    must be passed to all \acp{PE} participating in the reduction.
 
-{\color{Green}
     Team-based reduction routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the reduction. If an invalid team handle
     or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to this routine, the behavior is undefined.
 
     Active-set-based sync routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
-}
 
-    As with all \oldtext{\openshmem} \newtext{active set-based} collective routines,
+    As with all active set-based collective routines,
     each of these routines assumes
     that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
-    the active set calls an \oldtext{\openshmem} \newtext{active set-based} collective routine,
+    the active set calls an active set-based collective routine,
     the behavior is undefined.
 
     The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride},
@@ -299,10 +269,9 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const T
 
     Before any \ac{PE} calls a reduction routine, the following conditions must be ensured:
     \begin{itemize}
-    \item The \dest{} array on all \acp{PE} \newtext{participating in the reduction}
-      \oldtext{in the active set} %%
+    \item The \dest{} array on all \acp{PE} participating in the reduction
       is ready to accept the results of the \OPR{reduction}.
-    \item \newtext{If using active-set-based routines,} the
+    \item If using active-set-based routines, the
       \VAR{pWrk} and \VAR{pSync} arrays on all \acp{PE} in the
       active set are not still in use from a prior call to a collective
       \openshmem routine.
@@ -313,7 +282,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const T
     \ac{PE}:
     \begin{itemize}
     \item The \dest{} array is updated and the \source{} array may be safely reused.
-    \item \newtext{If using active-set-based routines,}
+    \item If using active-set-based routines,
     the values in the \VAR{pSync} array are restored to the original values.
     \end{itemize}
 
@@ -326,7 +295,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const T
 }
 
 \apireturnvalues{
-  \newtext{Zero on successful local completion. Nonzero otherwise.}
+  Zero on successful local completion. Nonzero otherwise.
 }
 
 \apinotes{

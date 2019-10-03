@@ -105,7 +105,6 @@ symmetric data objects in the symmetric heap.
 
 
 
-\color{Green}
 \subsection{Team Management Routines}\label{subsec:team}
 \input{content/teams_intro.tex}
 
@@ -133,7 +132,6 @@ symmetric data objects in the symmetric heap.
 
 \subsubsection{\textbf{SHMEM\_TEAM\_DESTROY}}\label{subsec:shmem_team_destroy}
 \input{content/shmem_team_destroy.tex}
-\color{Black}
 
 
 
@@ -170,7 +168,6 @@ valid communication context.
 When managed in this way, applications can use an equality comparison
 to test whether a given context handle references a valid context.
 
-\newtext{
 Every communication context is associated with a team.
 This association is established at context creation.
 Communication contexts created by \FUNC{shmem\_ctx\_create} are
@@ -185,27 +182,22 @@ All point-to-point routines that operate on this context will do so with
 respect to the team-relative \ac{PE} numbering of the associated team.
 If the PE number passed to such a routine is invalid, being negative or greater
 than or equal to the size of the \openshmem team, then the behavior is undefined.
-}
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
 \input{content/shmem_ctx_create.tex}
 
-\newtext{
 \subsubsection{\textbf{SHMEM\_TEAM\_CREATE\_CTX}}
 \label{subsec:shmem_team_create_ctx}
 \input{content/shmem_team_create_ctx.tex}
-}
 
 \subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
 \label{subsec:shmem_ctx_destroy}
 \input{content/shmem_ctx_destroy.tex}
 
-\newtext{
 \subsubsection{\textbf{SHMEM\_CTX\_GET\_TEAM}}
 \label{subsec:shmem_ctx_get_team}
 \input{content/shmem_ctx_get_team.tex}
-}
 
 
 \subsection{Remote Memory Access Routines}\label{sec:rma}

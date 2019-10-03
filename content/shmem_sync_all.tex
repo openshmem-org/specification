@@ -1,7 +1,7 @@
 \apisummary{
-    Registers the arrival of a \ac{PE} at a \newtext{synchronization point} \oldtext{barrier} and suspends
-    execution until all other \acp{PE} \newtext{in the default team} arrive at \newtext{a synchronization point} \oldtext{the barrier}. \newtext{For multithreaded programs, execution is suspended
-    as specified by the threading model (Section \ref{subsec:thread_support})}.
+    Registers the arrival of a \ac{PE} at a synchronization point and suspends
+    execution until all other \acp{PE} in the default team arrive at a synchronization point. For multithreaded programs, execution is suspended
+    as specified by the threading model (Section \ref{subsec:thread_support}).
 }
 
 \begin{apidefinition}
@@ -18,16 +18,9 @@ void @\FuncDecl{shmem\_sync\_all}@(void);
 
 \apidescription{
 
-  \newtext{%
     This routine blocks the calling \ac{PE} until all \acp{PE} in the
     default team have called \FUNC{shmem\_sync\_all}.
-  }
-  \oldtext{%
-    The \FUNC{shmem\_sync\_all} routine registers the arrival of a \ac{PE} at a
-    barrier. Barriers are a fast mechanism for synchronizing all \acp{PE} at
-    once.  This routine blocks the \ac{PE} until all \acp{PE} have called
-    \FUNC{shmem\_sync\_all}.
-  }
+
     In a multithreaded \openshmem program, only the calling thread is
     blocked.
 
@@ -42,17 +35,8 @@ void @\FuncDecl{shmem\_sync\_all}@(void);
 }
 
 \apinotes{
-  \newtext{%
     The \FUNC{shmem\_sync\_all} routine is equivalent to calling
     \FUNC{shmem\_team\_sync} on the default team.
-  }
-  \oldtext{%
-    The \FUNC{shmem\_sync\_all} routine can be used to portably ensure that
-    memory access operations observe remote updates in the order enforced by the
-    initiator \acp{PE}, provided that the initiator PE ensures completion of remote
-    updates with a call to \FUNC{shmem\_quiet} prior to the call to the
-    \FUNC{shmem\_sync\_all} routine.
-  }
 }
 
 \end{apidefinition}
