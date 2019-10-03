@@ -22,7 +22,7 @@ int main(void)
     printf("PE %d observed first update from PE %d\n", mype, who);
   }
   else
-    shmem_p(&wait_vars[mype], mype, 0);
+    shmem_atomic_set(&wait_vars[mype], mype, 0);
 
   shmem_free(wait_vars);
   shmem_finalize();
