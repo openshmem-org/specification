@@ -60,15 +60,15 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
 
     The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \dest{} data words into the data object on the
-    remote \ac{PE}. Furthermore, two successive non-blocking \OPR{put-with-signal}
-    routines, or a non-blocking \OPR{put-with-signal} routine with another data
+    remote \ac{PE}. Furthermore, two successive nonblocking \OPR{put-with-signal}
+    routines, or a nonblocking \OPR{put-with-signal} routine with another data
     transfer may deliver data out of order unless a call to \FUNC{shmem\_fence}
     is introduced between the two calls.
 
     The \VAR{sig\_op} signal operator determines the type of update to be
     performed on the remote \VAR{sig\_addr} signal data object.
 
-    An update to the \VAR{sig\_addr} signal data object through a non-blocking
+    An update to the \VAR{sig\_addr} signal data object through a nonblocking
     \OPR{put-with-signal} routine completes as if performed atomically as described in
     Section~\ref{subsec:signal_atomicity}. The various options as described in
     Section~\ref{subsec:signal_operator} can be used as the \VAR{sig\_op} signal

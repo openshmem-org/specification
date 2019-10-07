@@ -169,7 +169,7 @@ to test whether a given context handle references a valid context.
 \subsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
 \input{content/shmem_iget.tex}
 
-\subsection{Non-blocking Remote Memory Access Routines}\label{sec:rma_nbi}
+\subsection{Nonblocking Remote Memory Access Routines}\label{sec:rma_nbi}
 
 \subsubsection{\textbf{SHMEM\_PUT\_NBI}}\label{subsec:shmem_put_nbi}
 \input{content/shmem_put_nbi.tex}
@@ -238,7 +238,7 @@ to test whether a given context handle references a valid context.
 \label{subsec:shmem_atomic_xor}
 \input{content/shmem_atomic_xor.tex}
 
-\subsection{Non-blocking Atomic Memory Operations}\label{sec:amo-nbi}
+\subsection{Nonblocking Atomic Memory Operations}\label{sec:amo-nbi}
 
 \subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_NBI}}
 \label{subsec:shmem_atomic_fetch_nbi}
@@ -276,7 +276,7 @@ to test whether a given context handle references a valid context.
 
 \subsection{Signaling Operations}\label{sec:shmem_signal}
 This section specifies the OpenSHMEM support for \OPR{put-with-signal},
-non-blocking \OPR{put-with-signal}, and \OPR{signal-fetch} routines. The
+nonblocking \OPR{put-with-signal}, and \OPR{signal-fetch} routines. The
 put-with-signal routines provide a method for copying data from a contiguous
 local data object to a data object on a specified \ac{PE} and subsequently
 updating a remote flag to signal completion. The signal-fetch routine provides
@@ -284,7 +284,7 @@ support for fetching a signal update operation.
 
 \subsubsection{Atomicity Guarantees for Signaling Operations}
 \label{subsec:signal_atomicity}
-All signaling operations put-with-signal, non-blocking put-with-signal, and
+All signaling operations put-with-signal, nonblocking put-with-signal, and
 signal-fetch are performed on a signal data object, a remotely accessible
 symmetric object of type \VAR{uint64\_t}. A signal operator in the
 put-with-signal routine is a \openshmem library constant that determines the
@@ -293,7 +293,7 @@ type of update to be performed as a signal on the signal data object.
 All signaling operations on the signal data object completes as if performed
 atomically with respect to the following:
 \begin{itemize}
-    \item other blocking or non-blocking variant of the put-with-signal routine
+    \item other blocking or nonblocking variant of the put-with-signal routine
     that updates the signal data object using the same signal update operator;
     \item signal-fetch routine that fetches the signal data object; and
     \item any point-to-point synchronization routine that accesses the signal
@@ -416,7 +416,7 @@ signal operator.
 \subsection{Memory Ordering Routines}\label{subsec:memory_order}
 The following section discusses \openshmem \acp{API} that provide mechanisms to
 ensure ordering and/or delivery of memory store, blocking \OPR{Put}, \ac{AMO},
-and \OPR{put-with-signal}, as well as non-blocking \PUT{},
+and \OPR{put-with-signal}, as well as nonblocking \PUT{},
 \OPR{put-with-signal}, \GET{}, and \ac{AMO} routines to symmetric data
 objects.
 
