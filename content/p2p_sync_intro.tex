@@ -3,8 +3,8 @@ for synchronization between two \acp{PE} based on the value of a symmetric data
 object.
 The point-to-point synchronization routines can be used to portably ensure
 that memory access operations observe remote updates in the order enforced by
-the initiator \ac{PE} using the \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}
-routines.
+the initiator \ac{PE} using the put-with-signal, \FUNC{shmem\_fence} and
+\FUNC{shmem\_quiet} routines.
 
 Where appropriate compiler support is available, \openshmem provides
 type-generic point-to-point synchronization interfaces via \Cstd[11] generic
