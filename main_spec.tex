@@ -34,9 +34,6 @@
 \section{Environment Variables }\label{subsec:environment_variables}
 \input{content/environment_variables}
 
-
-
-
 \clearpage
 
 
@@ -106,6 +103,38 @@ symmetric data objects in the symmetric heap.
 \subsubsection{\textbf{SHMEM\_CALLOC}}\label{subsec:shmem_calloc}
 \input{content/shmem_calloc.tex}
 
+
+
+\subsection{Team Management Routines}\label{subsec:team}
+\input{content/teams_intro.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_MY\_PE}}\label{subsec:shmem_team_my_pe}
+\input{content/shmem_team_my_pe.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_N\_PES}}\label{subsec:shmem_team_n_pes}
+\input{content/shmem_team_n_pes.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_CONFIG\_T}}
+\label{subsec:shmem_team_config_t}
+\input{content/shmem_team_config_t.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_GET\_CONFIG}}\label{subsec:shmem_team_get_config}
+\input{content/shmem_team_get_config.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_TRANSLATE\_PE}}\label{subsec:shmem_team_translate_pe}
+\input{content/shmem_team_translate_pe.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_SPLIT\_STRIDED}}\label{subsec:shmem_team_split_strided}
+\input{content/shmem_team_split_strided.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_SPLIT\_2D}}\label{subsec:shmem_team_split_2d}
+\input{content/shmem_team_split_2d.tex}
+
+\subsubsection{\textbf{SHMEM\_TEAM\_DESTROY}}\label{subsec:shmem_team_destroy}
+\input{content/shmem_team_destroy.tex}
+
+
+
 \subsection{Communication Management Routines}
 \label{sec:ctx}
 All \openshmem \ac{RMA}, \ac{AMO}, and memory ordering routines must be
@@ -139,13 +168,36 @@ valid communication context.
 When managed in this way, applications can use an equality comparison
 to test whether a given context handle references a valid context.
 
+Every communication context is associated with a team.
+This association is established at context creation.
+Communication contexts created by \FUNC{shmem\_ctx\_create} are
+associated with the default team, while contexts created by
+\FUNC{shmem\_team\_create\_ctx} are associated with and created from a team
+specified at context creation.
+The default context is associated with the default team.
+A context's associated team specifies the set of \acp{PE} over which
+\ac{PE}-specific routines that operate on a communication context,
+explicitly or implicitly, are performed.
+All point-to-point routines that operate on this context will do so with
+respect to the team-relative \ac{PE} numbering of the associated team.
+If the PE number passed to such a routine is invalid, being negative or greater
+than or equal to the size of the \openshmem team, then the behavior is undefined.
+
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
 \input{content/shmem_ctx_create.tex}
 
+\subsubsection{\textbf{SHMEM\_TEAM\_CREATE\_CTX}}
+\label{subsec:shmem_team_create_ctx}
+\input{content/shmem_team_create_ctx.tex}
+
 \subsubsection{\textbf{SHMEM\_CTX\_DESTROY}}
 \label{subsec:shmem_ctx_destroy}
 \input{content/shmem_ctx_destroy.tex}
+
+\subsubsection{\textbf{SHMEM\_CTX\_GET\_TEAM}}
+\label{subsec:shmem_ctx_get_team}
+\input{content/shmem_ctx_get_team.tex}
 
 
 \subsection{Remote Memory Access Routines}\label{sec:rma}
@@ -338,11 +390,11 @@ signal operator.
 \subsubsection{\textbf{SHMEM\_BARRIER}}\label{subsec:shmem_barrier}
 \input{content/shmem_barrier.tex}
 
-\subsubsection{\textbf{SHMEM\_SYNC\_ALL}}\label{subsec:shmem_sync_all}
-\input{content/shmem_sync_all.tex}
-
 \subsubsection{\textbf{SHMEM\_SYNC}}\label{subsec:shmem_sync}
 \input{content/shmem_sync.tex}
+
+\subsubsection{\textbf{SHMEM\_SYNC\_ALL}}\label{subsec:shmem_sync_all}
+\input{content/shmem_sync_all.tex}
 
 \subsubsection{\textbf{SHMEM\_BROADCAST}}\label{subsec:shmem_broadcast}
 \input{content/shmem_broadcast.tex}
@@ -358,7 +410,6 @@ signal operator.
 
 \subsubsection{\textbf{SHMEM\_ALLTOALLS}}\label{subsec:shmem_alltoalls}
 \input{content/shmem_alltoalls.tex}
-
 
 
 
