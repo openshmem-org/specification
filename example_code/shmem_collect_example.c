@@ -5,9 +5,6 @@
 int main(void)
 {
    static long lock = 0;
-   static long pSync[SHMEM_COLLECT_SYNC_SIZE];
-   for (int i = 0; i < SHMEM_COLLECT_SYNC_SIZE; i++)
-      pSync[i] = SHMEM_SYNC_VALUE;
 
    shmem_init();
    int me = shmem_my_pe();
@@ -23,9 +20,10 @@ int main(void)
    for (int i = 0; i < total_nelem; i++)
       dest[i] = -9999;
 
-   shmem_barrier_all(); /* Wait for all PEs to update source/dest */
+   /* Wait for all PEs to initialize source/dest: */
+   shmem_team_sync(SHMEM_TEAM_WORLD);
 
-   shmem_collect32(dest, source, my_nelem, 0, 0, npes, pSync);
+   shmem_int_collect(SHMEM_TEAM_WORLD, dest, source, my_nelem);
 
    shmem_set_lock(&lock); /* Lock prevents interleaving printfs */
    printf("%d: %d", me, dest[0]);

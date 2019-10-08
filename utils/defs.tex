@@ -359,7 +359,6 @@
   {\strikeline\mbox{} \DeprecationStart \stretchline\mbox{}}}
 \newcommand{\EndDeprecateBlock}{%
   \mbox{}\stretchline\mbox{} \DeprecationEnd \strikeline}
-
 \newenvironment{DeprecateBlock}{%
   \par \StartDeprecateBlock \par}{\par \EndDeprecateBlock \par}
 
@@ -369,16 +368,25 @@
   \strikeline\mbox{} \DeprecationEnd \strikeline}
 \newenvironment{DeprecateInline}{\StartInlineDeprecate}{\EndInlineDeprecate}
 
+\newcommand{\deprecationstart}{%
+  \color{red} \strikeline\mbox{} deprecation start \stretchline \mbox{}}
+\newcommand{\deprecationend}{%
+  \mbox{}\stretchline\mbox{} \color{red} deprecation end \strikeline}
+\newenvironment{deprecate}{\deprecationstart \\}{\\ \deprecationend}
+
+%
+% Design feedback request helpers
+%
+
+\newcommand{\feedbackstart}{\color{RoyalBlue} \strikeline[RoyalBlue]
+  design feedback requested \stretchline[RoyalBlue] \mbox{}}
+\newcommand{\feedbackend}{\mbox{}\stretchline[RoyalBlue]\mbox{}}
+
+\newenvironment{FeedbackRequest}{\feedbackstart \\}{\\ \feedbackend}
+
 %
 % Library API description template commands
 %
-
-\newcommand{\deprecationstart}{\color{red} \raisebox{.5ex}{\rule{1em}{.4pt}}
-  deprecation start \xrfill[.5ex]{.4pt}[red] \mbox{}}
-\newcommand{\deprecationend}{\mbox{}\xrfill[.5ex]{.4pt}[red]\mbox{} \color{red}
-  deprecation end \raisebox{.5ex}{\rule{1em}{.4pt}}}
-
-\newenvironment{deprecate}{\deprecationstart \\}{\\ \deprecationend}
 
 \newcommand{\apisummary}[1]{
     #1
@@ -408,7 +416,7 @@
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t,
-    uint64_t},
+      shmem_team_t, shmem_team_config_t, uint64_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisCol}
@@ -416,7 +424,7 @@
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      uint64_t},
+      shmem_team_t, shmem_team_config_t, uint64_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 
@@ -426,7 +434,7 @@
   \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-    uint64_t},
+      shmem_team_t, shmem_team_config_t, uint64_t},
   aboveskip=0pt, belowskip=0pt}}{}
 
 \lstnewenvironment{CsynopsisST}
@@ -436,7 +444,7 @@
   {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
     escapechar=@,
     morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-    uint64_t},
+      shmem_team_t, uint64_t},
     aboveskip=0pt, belowskip=0pt}}}{}
 
 \lstnewenvironment{Fsynopsis}
@@ -519,7 +527,7 @@
     ##1
     \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local, uint64_t}]{##2}
+      morekeywords={size_t, ptrdiff_t, shmem_ctx_t,  _Thread_local, shmem_team_t, uint64_t}]{##2}
     ##3 }
 \newcommand{\apifexample}[3]{
     ##1

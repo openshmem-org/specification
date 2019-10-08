@@ -1,5 +1,5 @@
 \apisummary{
-    Create a communication context.
+    Create a communication context locally.
 }
 
 \begin{apidefinition}
@@ -27,6 +27,13 @@ int @\FuncDecl{shmem\_ctx\_create}@(long options, shmem_ctx_t *ctx);
     creation call is not treated as an error and the \openshmem library remains
     in a correct state.  The creation call can be reattempted with different
     options or after additional resources become available.
+
+    A newly created communication context has a fixed association with the
+    default team.
+    All \openshmem routines that operate on this context will do so with
+    respect to the associated \ac{PE} team.
+    That is, all point-to-point routines operating on this context will use
+    team-relative \ac{PE} numbering.
 
     By default, contexts are {\em shareable} and, when it is allowed by the
     threading model provided by the \openshmem library, they can be used concurrently by

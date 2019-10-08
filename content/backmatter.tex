@@ -329,6 +329,22 @@ supported before removal.
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & Current & (none) \\ \hline
+    \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
+    \hyperref[subsec:shmem_quiet]{\FUNC{shmem\_quiet}}; \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: Active set based \FuncRef{shmem\_sync} & 1.5 & Current &
+    Team based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_broadcast[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_broadcast]{\FUNC{shmem\_broadcast}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_collect[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_collect}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_fcollect[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_fcollect}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\TYPENAME\_OP\_to\_all} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_\TYPENAME\_OP\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
     \end{longtable}
 \end{center}
 
@@ -471,8 +487,30 @@ leverage the \openshmem Specification's \Cstd API through the
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
 
+\subsection{Active-set-based collective routines}
+With the addition of \openshmem teams, the previous methods for performing collective
+operations has been superseded by a more readable, flexible method for
+organizing and communicating between groups of \acp{PE}. All collective routines
+which previously indicated subgroups of \acp{PE} with a list of
+parameters to describe the subgroup composition should be phased
+out in favor of using collective operations with a team parameter.
 
+When moving from active set routines to teams based routines, the fixed-size
+versions of the routines, e.g. \FUNC{shmem\_broadcast32}, were not
+carried forward. Instead, all teams based collective routines use standard
+\Cstd types with the option to use generic \textit{C11} functions for more portable
+and maintainable implementations.
 
+\subsection{\CorCpp: \FUNC{shmem\_barrier}}
+Each \openshmem team might
+be associated with some number of communication contexts. The \FUNC{shmem\_barrier}
+functions imply that the default context is quiesced after synchronizing
+some set of \acp{PE}. Since teams may have some number of contexts associated
+with the team, it becomes less clear which context would be the ``default'' context
+for that particular team. Rather than continue to support \FUNC{shmem\_barrier}
+for active-sets or teams, programs should use a call to \FUNC{shmem\_quiet}
+followed by a call to \FUNC{shmem\_sync} in order to explicitly
+indicate which context to quiesce.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
@@ -913,4 +951,4 @@ collectives.
 %
 \end{itemize}
 
-} %end of setlength command that was started in frontmatter.tex
+%end of setlength command that was started in frontmatter.tex

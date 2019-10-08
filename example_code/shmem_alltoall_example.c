@@ -4,10 +4,6 @@
 
 int main(void)
 {
-   static long pSync[SHMEM_ALLTOALL_SYNC_SIZE];
-   for (int i = 0; i < SHMEM_ALLTOALL_SYNC_SIZE; i++)
-      pSync[i] = SHMEM_SYNC_VALUE;
-
    shmem_init();
    int me = shmem_my_pe();
    int npes = shmem_n_pes();
@@ -23,11 +19,11 @@ int main(void)
          dest[(pe * count) + i] = 9999;
       }
    }
-   /* wait for all PEs to update source/dest */
-   shmem_barrier_all();
+   /* wait for all PEs to initialize source/dest */
+   shmem_team_sync(SHMEM_TEAM_WORLD);
 
    /* alltoall on all PES */
-   shmem_alltoall64(dest, source, count, 0, 0, npes, pSync);
+   shmem_int64_alltoall(SHMEM_TEAM_WORLD, dest, source, count);
 
    /* verify results */
    for (int pe = 0; pe < npes; pe++) {
