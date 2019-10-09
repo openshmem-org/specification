@@ -45,7 +45,7 @@ void @\FuncDecl{shmem\_ctx\_getmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
 \apidescription{
     The get routines provide a method for copying a contiguous symmetric data
    object from a different \ac{PE} to a contiguous data object on the local
-   \ac{PE}.   The routines return after posting the operation.  The operation is considered
+   \ac{PE}.   The routines return after initiating the operation.  The operation is considered
     complete after a subsequent call to \FUNC{shmem\_quiet}.
     At the completion of \FUNC{shmem\_quiet}, the
     data has been delivered to the \dest{} array on the local \ac{PE}.

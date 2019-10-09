@@ -42,7 +42,7 @@ void @\FuncDecl{shmem\_ctx\_putmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
 \end{apiarguments}
 
 \apidescription{
-    The routines return after posting the operation.  The operation is considered
+    The routines return after initiating the operation.  The operation is considered
     complete after a subsequent call to \FUNC{shmem\_quiet}.
     At the completion of \FUNC{shmem\_quiet}, the data has been copied into the \dest{} array
     on the destination \ac{PE}.
