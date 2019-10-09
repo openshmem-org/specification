@@ -1,20 +1,17 @@
 \apisummary{
-    shmem\_alltoalls is a collective routine where each \ac{PE} exchanges a fixed amount of strided data with all other \acp{PE} \oldtext{in the active set} \newtext{participating in the collective}.
+    shmem\_alltoalls is a collective routine where each \ac{PE} exchanges a fixed amount of strided data with all other \acp{PE} participating in the collective.
 }
 
 \begin{apidefinition}
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_alltoalls}@(shmem_team_t team, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
-}
 
 \begin{Csynopsis}
 \end{Csynopsis}
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_alltoalls}@(shmem_team_t team, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
 \end{CsynopsisCol}
@@ -23,7 +20,6 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_alltoallsmem}@(shmem_team_t team, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems);
 \end{CsynopsisCol}
-}
 
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
@@ -34,9 +30,7 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
 
 \begin{apiarguments}
 
-\newtext{%
 \apiargument{IN}{team}{A valid \openshmem team handle.}
-}
 
 \apiargument{OUT}{dest}{A symmetric data object large enough to receive 
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
@@ -75,31 +69,29 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
 
 \apidescription{
     The \FUNC{shmem\_alltoalls} routines are collective routines.
-    \newtext{These routines are equivalent in functionality to the corresponding
+    These routines are equivalent in functionality to the corresponding
     \FUNC{shmem\_alltoall} routines except that they add explicit stride values
     for accessing the source and destination data arrays, whereas the array
-    access in \FUNC{shmem\_alltoall} is always with a stride of \CONST{1}.}
+    access in \FUNC{shmem\_alltoall} is always with a stride of \CONST{1}.
 
-    Each \ac{PE} \oldtext{in the active set} \newtext{participating in the operation}
-    exchanges \VAR{nelems} strided data elements \oldtext{of size
-    32 bits (for \FUNC{shmem\_alltoalls32}) or 64 bits (for \FUNC{shmem\_alltoalls64})}
-    with all other \acp{PE} \oldtext{in the set} \newtext{participating in the operation}.
+    Each \ac{PE} participating in the operation
+    exchanges \VAR{nelems} strided data elements
+    with all other \acp{PE} participating in the operation.
     Both strides, \VAR{dst} and \VAR{sst}, must be greater
     than or equal to \CONST{1}.
 
-    \newtext{The same \dest{} and \source{} arrays and same values for values of
+    The same \dest{} and \source{} arrays and same values for values of
     arguments \VAR{dst}, \VAR{sst}, \VAR{nelems} must be passed by all \acp{PE}
-    that participate in the collective.}
+    that participate in the collective.
     
-    Given a \ac{PE} \VAR{i} that is the \kth \ac{PE} \oldtext{in the active set}
-    \newtext{participating in the operation} and a \ac{PE}
-    \VAR{j} that is the \lth \ac{PE} \oldtext{in the active set}
-    \newtext{participating in the operation}
+    Given a \ac{PE} \VAR{i} that is the \kth \ac{PE}
+    participating in the operation and a \ac{PE}
+    \VAR{j} that is the \lth \ac{PE}
+    participating in the operation
     \ac{PE} \VAR{i} sends the \VAR{sst}*\lth block of the \VAR{source} data object to
     the \VAR{dst}*\kth block of the \VAR{dest} data object on
     \ac{PE} \VAR{j}.
 
-{\color{Green}
     See the description of \FUNC{shmem\_alltoall} in
     Section~\ref{subsec:shmem_alltoall} for:
     \begin{itemize}
@@ -108,17 +100,16 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
     \item The pre- and post-conditions for symmetric objects.
     \item Typing constraints for \dest{} and \source{} data objects.
     \end{itemize}
-}
     
 } 
 
 
 \apireturnvalues{
-   \newtext{Zero on successful local completion. Nonzero otherwise.}
+   Zero on successful local completion. Nonzero otherwise.
 }
 
 \apinotes{
-    \newtext{See notes for \FUNC{shmem\_alltoall} in Section~\ref{subsec:shmem_alltoall}}.
+    See notes for \FUNC{shmem\_alltoall} in Section~\ref{subsec:shmem_alltoall}.
 }
 
 \begin{apiexamples}

@@ -329,30 +329,22 @@ supported before removal.
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & Current & (none) \\ \hline
-    \color{Green}
-         \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
-         \hyperref[subsec:shmem_quiet]{\FUNC{shmem\_quiet}}; \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
-    \color{Green}
-         \CorCpp: Active set based \FuncRef{shmem\_sync} & 1.5 & Current &
-         Team based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
-    \color{Green}
-         \CorCpp: \FuncRef{shmem\_broadcast[32,64]} & 1.5 & Current &
-         \hyperref[subsec:shmem_broadcast]{\FUNC{shmem\_broadcast}} \\ \hline
-    \color{Green}
-         \CorCpp: \FuncRef{shmem\_collect[32,64]} & 1.5 & Current &
-         \hyperref[subsec:shmem_collect]{\FUNC{shmem\_collect}} \\ \hline
-    \color{Green}
-         \CorCpp: \FuncRef{shmem\_fcollect[32,64]} & 1.5 & Current &
-         \hyperref[subsec:shmem_collect]{\FUNC{shmem\_fcollect}} \\ \hline
-    \color{Green}
-         \CorCpp: \FuncRef{shmem\_\TYPENAME\_OP\_to\_all} & 1.5 & Current &
-         \hyperref[subsec:shmem_collect]{\FUNC{shmem\_\TYPENAME\_OP\_reduce}} \\ \hline
-    \color{Green}
-         \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
-         \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
-    \color{Green}
-         \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
-         \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
+    \hyperref[subsec:shmem_quiet]{\FUNC{shmem\_quiet}}; \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: Active set based \FuncRef{shmem\_sync} & 1.5 & Current &
+    Team based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_broadcast[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_broadcast]{\FUNC{shmem\_broadcast}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_collect[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_collect}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_fcollect[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_fcollect}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\TYPENAME\_OP\_to\_all} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_\TYPENAME\_OP\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
     \end{longtable}
 \end{center}
 
@@ -495,7 +487,6 @@ leverage the \openshmem Specification's \Cstd API through the
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
 
-{\color{Green}
 \subsection{Active-set-based collective routines}
 With the addition of \openshmem teams, the previous methods for performing collective
 operations has been superseded by a more readable, flexible method for
@@ -528,6 +519,21 @@ Major changes in \openshmem[1.5] include \dots
 
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
+%
+\item Added support for blocking put-with-signal functions.
+\\ See Section \ref{subsec:shmem_put_signal}.
+%
+\item Added support for nonblocking put-with-signal functions.
+\\ See Section \ref{subsec:shmem_put_signal_nbi}.
+%
+\item Clarified that point-to-point synchronization routines preserve the
+  atomicity of OpenSHMEM \acp{AMO}.
+\\ See Section~\ref{subsec:amo_guarantees}.
+%
+\item Clarified that symmetric variables used as \VAR{ivar} arguments to
+  point-to-point synchronization routines must be updated using OpenSHMEM
+  \acp{AMO}.
+\\ See Section~\ref{subsec:p2p_intro}.
 %
 \item Removed the entire \openshmem \Fortran API. 
 %
@@ -945,4 +951,4 @@ collectives.
 %
 \end{itemize}
 
-} %end of setlength command that was started in frontmatter.tex
+%end of setlength command that was started in frontmatter.tex

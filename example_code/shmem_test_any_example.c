@@ -11,7 +11,7 @@ int main(void)
   int *status = calloc(npes, sizeof(int));
 
   for (int i = 0; i < npes; i++)
-      shmem_p(&flags[mype], 1, i);
+      shmem_atomic_set(&flags[mype], 1, i);
 
   int ncompleted = 0;
   size_t completed_idx;

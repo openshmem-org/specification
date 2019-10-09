@@ -10,7 +10,7 @@ int main(void)
   int *status = NULL;
 
   for (int i = 0; i < npes; i++)
-      shmem_p(&flags[mype], 1, i);
+      shmem_atomic_set(&flags[mype], 1, i);
 
   shmem_wait_until_all(flags, npes, status, SHMEM_CMP_EQ, 1);
 

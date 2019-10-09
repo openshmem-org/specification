@@ -107,6 +107,11 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Barrier}: All or some \acp{PE} collectively synchronize and ensure
       completion of all remote and local updates prior to any \ac{PE} returning
       from the call.
+  \item \OPR{Wait and Test}: A PE calling a point-to-point synchronization
+      routine ensures the value of a local symmetric object meets a specified
+      condition.  Wait operations block until the specified condition is
+      met, whereas test operations return immediately and indicate whether or
+      not the specified condition is met.
 \end{enumerate}
 
 \item \textbf{Collective Communication}

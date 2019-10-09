@@ -1,22 +1,19 @@
 \apisummary{
     Concatenates blocks of data from multiple \acp{PE} to an array in every
-    \ac{PE} \newtext{participating in the collective routine}.
+    \ac{PE} participating in the collective routine.
 }
 
 \begin{apidefinition}
 
 %% C11
-{\color{Green}
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_collect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 int @\FuncDecl{shmem\_fcollect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
-}
 
 \begin{Csynopsis}
 \end{Csynopsis}
-{\color{Green}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_collect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fcollect}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
@@ -28,7 +25,6 @@ int @\FuncDecl{shmem\_collectmem}@(shmem_team_t team, void *dest, const void *so
 int @\FuncDecl{shmem\_fcollectmem}@(shmem_team_t team, void *dest, const void *source, size_t nelems);
 \end{CsynopsisCol}
 
-}
 \begin{DeprecateBlock}
 \begin{CsynopsisCol}
 void @\FuncDecl{shmem\_collect32}@(void *dest, const void *source, size_t nelems, int PE_start, int logPE_stride, int PE_size, long *pSync);
@@ -40,13 +36,11 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 
 \begin{apiarguments}
 
-\newtext{%
 \apiargument{IN}{team}{A valid \openshmem team handle.}
-}
 
 \apiargument{OUT}{dest}{A symmetric array large enough
     to accept the concatenation of the \source{} arrays on all participating \acp{PE}.
-    \newtext{See table below in this description for allowable data types.}}
+    See table below in this description for allowable data types.}
 \apiargument{IN}{source}{A symmetric data object that can be of any type permissible
     for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
@@ -71,7 +65,6 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 \end{apiarguments}
 
 \apidescription{
-{\color{Green}
     \openshmem \FUNC{collect} and \FUNC{fcollect} routines perform a collective
     operation to concatenate \VAR{nelems}
     data items from the \source{} array into the
@@ -89,13 +82,11 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     The collected result is written to the \dest{} array for all \acp{PE}
     that participate in the operation. The same \dest{} and \source{}
     arrays must be passed by all \acp{PE} that participate in the operation.
-}
     
     The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
     participating \acp{PE}, while the \FUNC{collect} routines allow \VAR{nelems} to
     vary from \ac{PE} to \ac{PE}.
 
-{\color{Green}
     Team-based collect routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the operation.
 
@@ -105,26 +96,23 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     each of these routines assumes that
     only \acp{PE} in the active set call the routine. If a \ac{PE} not in the
     active set and calls this collective routine, the behavior is undefined.
-}
     
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
     must be the same value on all \acp{PE} in the active set. The same
-    \oldtext{\dest{} and \source{} arrays and the same} %%
     \VAR{pSync} work array must be passed by all \acp{PE} in the active set.
     
     Upon return from a collective routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
     \item The \dest{} array is updated and the \source{} array may be safely reused. 
-    \item \newtext{For active-set-based collective routines,} the values in the \VAR{pSync} array are
+    \item For active-set-based collective routines, the values in the \VAR{pSync} array are
     restored to the original values.
     \end{itemize}
 }
 
-{\color{Green}
 
 \apireturnvalues{
-    \newtext{Zero on successful local completion. Nonzero otherwise.}
+    Zero on successful local completion. Nonzero otherwise.
 }
 
 \apinotes{

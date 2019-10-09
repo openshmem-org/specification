@@ -39,9 +39,7 @@ may be multithreaded and any thread may invoke the \openshmem interfaces.
 See Section~\ref{subsec:thread_support} for more detail about its use.
 \tabularnewline \hline
 %%
-\color{Green}
 \LibConstDecl{SHMEM\_TEAM\_NUM\_CONTEXTS} &
-\color{Green}
 The bitwise flag which specifies that a team creation routine should use the
 \VAR{num\_contexts} member of the provided
 \CTYPE{shmem\_team\_config\_t} configuration parameter as a request.
@@ -49,9 +47,7 @@ See Sections~\ref{subsec:shmem_team_config_t} and
 \ref{subsec:shmem_team_split_strided} for more detail about its use.
 \tabularnewline \hline
 %%
-\color{Green}
 \LibConstDecl{SHMEM\_TEAM\_INVALID} &
-\color{Green}
 A value corresponding to an invalid team.
 This value can be used to initialize or update team handles to indicate
 that they do not reference a valid team.
@@ -86,6 +82,18 @@ The context creation option which specifies that quiet and fence operations
 performed on the given context are not required to enforce completion and
 ordering of memory store operations.
 See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_SIGNAL\_SET} &
+An integer constant expression corresponding to the signal update set operation.
+See Section~\ref{subsec:shmem_put_signal} and
+Section~\ref{subsec:shmem_put_signal_nbi} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_SIGNAL\_ADD} &
+An integer constant expression corresponding to the signal update add operation.
+See Section~\ref{subsec:shmem_put_signal} and
+Section~\ref{subsec:shmem_put_signal_nbi} for more detail about its use.
 \tabularnewline \hline
 %%
 \LibConstDecl{SHMEM\_SYNC\_VALUE}
