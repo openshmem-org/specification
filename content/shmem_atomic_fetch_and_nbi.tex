@@ -40,7 +40,7 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
     returns after initiating the operation. The operation is considered complete
     after a subsequent call to \FUNC{shmem\_quiet}. At the completion of
     \FUNC{shmem\_quiet}, these routines have performed a fetching bitwise AND on
-    \VAR{dest} at \ac{PE} \VAR{pe} with the operand \VAR{value} and fetch the prior
+    \VAR{dest} at \ac{PE} \VAR{pe} with the operand \VAR{value} and fetched the prior
     contents of \VAR{dest} into the \VAR{fetch} local data object.
 }
 
