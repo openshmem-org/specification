@@ -1,7 +1,7 @@
 \apisummary{
     Assures ordering of delivery of memory store, blocking \PUT{}, 
-    \ac{AMO}, and \emph{put-with-signal}, as well as nonblocking 
-    \PUT{}, and \emph{put-with-signal} 
+    \ac{AMO}, and \OPR{put-with-signal}, as well as nonblocking 
+    \PUT{}, \OPR{put-with-signal}, and \ac{AMO}
     routines to symmetric data objects.
 }
 
@@ -20,19 +20,20 @@ void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
 
 \apidescription{
     This routine assures ordering of delivery of memory store, blocking \PUT{},
-    \ac{AMO}, and \emph{put-with-signal}, as well as nonblocking \PUT{},
-    and \emph{put-with-signal}
+    \ac{AMO}, and \OPR{put-with-signal}, as well as nonblocking \PUT{},
+    \OPR{put-with-signal}, and \ac{AMO}
     routines to symmetric data objects.  All memory store, blocking \PUT{},
-    \ac{AMO}, amd \emph{put-with-signal}, as well as nonblocking \PUT{},
-    and \emph{put-with-signal}
+    \ac{AMO}, and \OPR{put-with-signal}, as well as nonblocking \PUT{},
+    \OPR{put-with-signal}, and \ac{AMO}
     routines to symmetric data objects issued to a particular remote \ac{PE}
     on the given context prior
     to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before any
-    subsequent memory store, blocking \PUT{}, \ac{AMO}, and \emph{put-with-signal}, 
-    as well as nonblocking \PUT{}, and \emph{put-with-signal}
+    subsequent memory store, blocking \PUT{}, \ac{AMO}, and \OPR{put-with-signal}, 
+    as well as nonblocking \PUT{}, \OPR{put-with-signal}, and \ac{AMO}
     routines to symmetric data
     objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery,
-    not completion. It does not guarantee order of delivery of nonblocking \GET{} routines.
+    not completion. It does not guarantee order of delivery of nonblocking
+    \GET{} or values fetched by nonblocking \ac{AMO} routines.
     If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
     performed.
 }
@@ -51,18 +52,18 @@ void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
     There is a subtle difference between
     \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}, in that, \FUNC{shmem\_quiet}
     guarantees completion of memory store, blocking \PUT{}, \ac{AMO}, and
-    \emph{put-with-signal}, as well as nonblocking \PUT{}, and \emph{put-with-signal} routines to
+    \OPR{put-with-signal}, as well as nonblocking \PUT{}, \OPR{put-with-signal}, and \ac{AMO} routines to
     symmetric data objects which makes the updates visible to all other
     \acp{PE}.
 
     The \FUNC{shmem\_quiet} routine should be called if completion of memory
-    store, blocking \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as well as
-    nonblocking \PUT{}, and \emph{put-with-signal} routines to symmetric data objects is desired
+    store, blocking \PUT{}, \ac{AMO}, and \OPR{put-with-signal}, as well as
+    nonblocking \PUT{}, \OPR{put-with-signal}, and \ac{AMO} routines to symmetric data objects is desired
     when multiple remote \acp{PE} are involved.
 
     In an \openshmem program with multithreaded \acp{PE}, it is the
     user's responsibility to ensure ordering between operations issued by the threads
-    in a \ac{PE} that target symmetric memory (e.g. \PUT{}, \ac{AMO}, \emph{put-with-signal}, memory stores,
+    in a \ac{PE} that target symmetric memory (e.g. \PUT{}, \ac{AMO}, \OPR{put-with-signal}, memory stores,
     and nonblocking routines) and calls by threads in that \ac{PE} to
     \FUNC{shmem\_fence}. The \FUNC{shmem\_fence} routine can enforce memory store ordering only for the
     calling thread. Thus, to ensure ordering for memory stores performed by a thread that is

@@ -1,5 +1,5 @@
 \apisummary{
-    The nonblocking put-with-signal routines provide a method for copying data
+    The nonblocking \OPR{put-with-signal} routines provide a method for copying data
     from a contiguous local data object to a data object on a specified \ac{PE}
     and subsequently updating a remote flag to signal completion.
 }
@@ -48,11 +48,11 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
 \end{apiarguments}
 
 \apidescription{
-    The nonblocking put-with-signal routines provide a method for copying data
+    The nonblocking \OPR{put-with-signal} routines provide a method for copying data
     from a contiguous local data object to a data object on a specified \ac{PE}
     and subsequently updating a remote flag to signal completion.
 
-    The routines return after posting the operation. The operation is considered
+    The routines return after initiating the operation. The operation is considered
     complete after a subsequent call to \FUNC{shmem\_quiet}. At the completion
     of \FUNC{shmem\_quiet}, the data has been copied out of the \source{} array
     on the local \ac{PE} and delivered into the \dest{} array on the destination
@@ -60,16 +60,16 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
 
     The delivery of \VAR{signal} flag on the remote \ac{PE} indicates only the
     delivery of its corresponding \dest{} data words into the data object on the
-    remote \ac{PE}. Furthermore, two successive non-blocking put-with-signal
-    routines, or a non-blocking put-with-signal routine with another data
+    remote \ac{PE}. Furthermore, two successive nonblocking \OPR{put-with-signal}
+    routines, or a nonblocking \OPR{put-with-signal} routine with another data
     transfer may deliver data out of order unless a call to \FUNC{shmem\_fence}
     is introduced between the two calls.
 
     The \VAR{sig\_op} signal operator determines the type of update to be
     performed on the remote \VAR{sig\_addr} signal data object.
 
-    An update to the \VAR{sig\_addr} signal data object through a non-blocking
-    put-with-signal routine completes as if performed atomically as described in
+    An update to the \VAR{sig\_addr} signal data object through a nonblocking
+    \OPR{put-with-signal} routine completes as if performed atomically as described in
     Section~\ref{subsec:signal_atomicity}. The various options as described in
     Section~\ref{subsec:signal_operator} can be used as the \VAR{sig\_op} signal
     operator.
