@@ -138,9 +138,9 @@ and MPI program.
 \subsection{RMA Programming Models}
 \label{subsec:interoperability:rma}
 
-Both \openshmem and MPI define similar RMA and atomic operations for remote memory 
-access, however, a portable program should not assume interoperability between these
-two RMA models.
+\openshmem and MPI each defines similar one-sided communication models,
+however, a portable program should not assume interoperability between these
+models.
 For instance, \openshmem guarantees the atomicity only of concurrent \openshmem AMO operations
 that operate on symmetric data with the same datatype. Access to the same symmetric
 object with MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may
