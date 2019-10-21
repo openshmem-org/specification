@@ -85,7 +85,10 @@ environment.
 Both \openshmem and MPI define similar thread levels, namely, \VAR{THREAD\_SINGLE},
 \VAR{THREAD\_FUNNELED}, \VAR{THREAD\_SERIALIZED}, and \VAR{THREAD\_MULTIPLE}.
 When requesting threading support in a hybrid program, however,
-users should follow additional rules as described below.
+the following additional rules are applied if the implementations of \openshmem
+and MPI share the same internal communication resource.
+Users are strongly advised to always follow these rules to ensure program
+portability.
 
 \begin{itemize}
     \item The \VAR{THREAD\_SINGLE} thread level requires a single-threaded program.
@@ -99,10 +102,11 @@ users should follow additional rules as described below.
     is used in both communication environments.
 
     \item The \VAR{THREAD\_SERIALIZED} thread level requires the program to ensure
-    communication calls are not made concurrently by multiple threads. A hybrid
-    program should ensure serialized calls to both \openshmem and MPI libraries,
-    if the program uses \VAR{THREAD\_SERIALIZED} in one communication environment
-    and \VAR{THREAD\_SERIALIZED} or \VAR{THREAD\_FUNNELED} in the other one.
+    communication calls are not made concurrently by multiple threads. If a
+    hybrid program uses \VAR{THREAD\_SERIALIZED} in one communication environment
+    and \VAR{THREAD\_SERIALIZED} or \VAR{THREAD\_FUNNELED} in the other one, it
+    should also guarantee that the \openshmem and MPI calls are not made concurrently
+    from two distinct threads.
 \end{itemize}
 
 \subsection{Mapping Process Identification Numbers}
