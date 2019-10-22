@@ -80,7 +80,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 
 \apinotes{
 		The \openshmem programs should allocate memory with
-		\CONST{SHMEM\_HINT\_ATOMIC\_REMOTE}, when the majority of
+		\CONST{SHMEM\_HINT\_ATOMICS\_REMOTE}, when the majority of
 		operations performed on this memory are atomic operations, and origin
 		and target \ac{PE} of the atomic operations do not share a memory domain
 		.i.e., symmetric objects on the target \ac{PE} is not accessible using
