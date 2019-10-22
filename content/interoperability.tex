@@ -1,4 +1,4 @@
-\chapter{Interoperability with other Programming Models}\label{sec:interoperability}
+\chapter{Interoperability with Other Programming Models}\label{sec:interoperability}
 
 OpenSHMEM routines may be used in conjunction with the routines of other
 communication libraries or parallel languages in the same program. This section
@@ -19,8 +19,8 @@ A vendor may implement the \openshmem and MPI libraries in different ways. For
 instance, one may implement both \openshmem and MPI as standalone libraries,
 each of which allocates and initializes fully isolated communication
 resources.
-As the other common approach, however,
-a vendor may implement both \openshmem and MPI interfaces within the
+Another common approach
+is to implement both \openshmem and MPI interfaces within the
 same software system in order to share a communication resource when possible.
 
 To improve interoperability and portability in \openshmem + MPI hybrid
@@ -28,7 +28,7 @@ programming, we clarify the relevant semantics in the following subsections.
 
 
 \subsection{Initialization}
-To ensure that a hybrid program can be portably performed with different vendor
+In order to ensure that a hybrid program can be portably performed with different vendor
 implementations, the \openshmem environment of the program must be initialized by
 a call to \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread} and be finalized by
 a call to \FUNC{shmem\_finalize}; the MPI environment of the program must be initialized
@@ -61,7 +61,7 @@ collectively allocate and initialize resources (e.g., symmetric heap) used by
 the \openshmem library before any other \openshmem routine may
 be called. Communicating with a dynamically created process in the \openshmem
 environment may result in undefined behavior.
-Hence, users should not use \openshmem and MPI dynamic process model
+Hence, users should not use \openshmem and MPI dynamic process models
 in the same program.
 
 
@@ -98,11 +98,11 @@ portability.
 
     \item The \VAR{THREAD\_FUNNELED} thread level allows only the main thread to
     make communication calls. A hybrid program using the \VAR{THREAD\_FUNNELED}
-    thread level in both \openshmem and MPI should ensure the same main thread
+    thread level in both \openshmem and MPI should ensure that the same main thread
     is used in both communication environments.
 
     \item The \VAR{THREAD\_SERIALIZED} thread level requires the program to ensure
-    communication calls are not made concurrently by multiple threads. If a
+    that communication calls are not made concurrently by multiple threads. If a
     hybrid program uses \VAR{THREAD\_SERIALIZED} in one communication environment
     and \VAR{THREAD\_SERIALIZED} or \VAR{THREAD\_FUNNELED} in the other one, it
     should also guarantee that the \openshmem and MPI calls are not made concurrently
@@ -113,8 +113,8 @@ portability.
 \label{subsec:interoperability:id}
 
 Similar to the PE identifier in \openshmem, MPI defines rank as the
-identification number of a process in a communicator. Both \openshmem PE
-and MPI rank are unique integers assigned from zero to one less than the total
+identification number of a process in a communicator. Both the \openshmem PE
+and the MPI rank are unique integers assigned from zero to one less than the total
 number of processes. In a hybrid program, the \openshmem
 PE and the MPI rank in \VAR{MPI\_COMM\_WORLD} of a process can be equal.
 This feature, however, may be provided by only some of the \openshmem and MPI
@@ -125,7 +125,7 @@ and \FUNC{MPI\_Comm\_rank} in MPI, to query the process identification numbers
 in each communication environment and manage the mapping of identifiers in the
 program when necessary.
 
-\subsubsection{Example}
+\subsubsection*{Example}
 \label{subsubsec:interoperability:id:example}
 The following example demonstrates how to manage the mapping between \openshmem
 PE identifier and MPI ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
@@ -138,14 +138,14 @@ and MPI program.
 \subsection{RMA Programming Models}
 \label{subsec:interoperability:rma}
 
-\openshmem and MPI each defines similar one-sided communication models,
+\openshmem and MPI each define similar one-sided communication models;
 however, a portable program should not assume interoperability between these
 models.
 For instance, \openshmem guarantees the atomicity only of concurrent \openshmem AMO operations
 that operate on symmetric data with the same datatype. Access to the same symmetric
 object with MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may
 result in an undefined result. Furthermore,
-because most RMA programs can be written using either \openshmem or MPI RMA,
+because most RMA programs can be written by using either \openshmem or MPI RMA,
 users should choose only one of the RMA models in the same program, whenever
 possible, for performance and code simplicity.
 
