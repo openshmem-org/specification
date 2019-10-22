@@ -170,10 +170,11 @@ order to prevent any deadlock or performance degradation.
 
 \apiimpnotes{
 Implementations that provide both \openshmem and MPI interfaces should try
-to ensure progress for both models when necessary and possible, for performance
-reasons. For instance, an implementation may start making progress for
-both \openshmem and MPI whenever possible, after the user program has called
-\FUNC{shmem\_init} and \FUNC{MPI\_init} provided by the same system.
+to ensure progress for both models, when necessary and possible, for performance
+reasons. For instance, an implementation
+may utilize a software progress thread to process any software-handled
+communication requests, after the user program has called
+\FUNC{shmem\_init} and \FUNC{MPI\_Init} provided by the same system.
 }
 
 
