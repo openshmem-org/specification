@@ -183,8 +183,8 @@ communication requests, after the user program has called
 A hybrid user program can query the interoperability feature of an \openshmem
 implementation in order to avoid unnecessary overhead and programming complexity.
 For instance, the user program can eliminate manual progress polling for MPI
-communication if the underlying software runtime guarantees the progression of
-communication also for MPI even without explicit function calls.
+communication if the \openshmem implementation guarantees asynchronous
+communication also for MPI.
 
 \subsection{\textbf{SHMEM\_QUERY\_INTEROPERABILITY}}
 \label{subsec:interoperability:query}
