@@ -111,7 +111,7 @@ portability.
 \subsection{Mapping Process Identification Numbers}
 \label{subsec:interoperability:id}
 
-Similar to the PE identifier in \openshmem, MPI defines rank as the
+Similar to the PE number in \openshmem, MPI defines rank as the
 identification number of a process in a communicator. Both the \openshmem PE
 and the MPI rank are unique integers assigned from zero to one less than the total
 number of processes. In a hybrid program, the \openshmem
@@ -127,7 +127,7 @@ program when necessary.
 \subsubsection*{Example}
 \label{subsubsec:interoperability:id:example}
 The following example demonstrates how to manage the mapping between \openshmem
-PE identifier and MPI ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
+PE numbers and MPI ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
 and MPI program.
 
 \lstinputlisting[language={C}, tabsize=2,
