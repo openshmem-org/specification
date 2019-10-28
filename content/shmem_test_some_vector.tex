@@ -21,8 +21,9 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ivars}{A pointer to an array of remotely accessible data
-    objects.}
+  \apiargument{IN}{ivars}{A local pointer to an array of remotely accessible data
+    objects.
+    The type of \VAR{ivars} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
   \apiargument{OUT}{indices}{An array of indices of length at least
     \VAR{nelems} into \VAR{ivars} that satisfied the test condition.}

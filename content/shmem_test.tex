@@ -18,7 +18,8 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ivar}{A pointer to a remotely accessible data object.}
+  \apiargument{IN}{ivar}{A local pointer to a remotely accessible data object.
+    The type of \VAR{ivar} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value against which the object pointed to

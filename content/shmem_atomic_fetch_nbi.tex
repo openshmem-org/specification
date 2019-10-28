@@ -24,9 +24,9 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
   \apiargument{IN}{ctx}{A context handle specifying the context on which to
     perform the operation. When this argument is not provided, the operation is
     performed on the default context.}
-  \apiargument{OUT}{fetch}{Local data object to be updated.}
-  \apiargument{IN}{source}{The remotely accessible data object to be fetched
-    from the remote \ac{PE}.}
+  \apiargument{OUT}{fetch}{Local address of data object to be updated.}
+  \apiargument{OUT}{source}{Symmetric address of the source data object.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
     \VAR{source} is to be fetched.}
 
