@@ -59,10 +59,9 @@ MPI standard version 3.1, Chapter 10).
 Unlike MPI, \openshmem starts all processes at once and requires all PEs to
 collectively allocate and initialize resources (e.g., symmetric heap) used by
 the \openshmem library before any other \openshmem routine may
-be called. Communicating with a dynamically created process in the \openshmem
-environment may result in undefined behavior.
-Hence, users should not use \openshmem and MPI dynamic process models
-in the same program.
+be called. \openshmem does not support communication with dynamically created
+or connected processes. In such a scenario, MPI must be used to communicate
+with these processes.
 
 
 \subsection{Thread Safety}
