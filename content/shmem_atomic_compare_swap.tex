@@ -31,14 +31,6 @@ where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER pe
-INTEGER*4 SHMEM_INT4_CSWAP,  cond_i4, value_i4, ires_i4
-ires\_i4 = @\FuncDecl{SHMEM\_INT4\_CSWAP}@(dest, cond_i4, value_i4, pe)
-INTEGER*8 SHMEM_INT8_CSWAP,  cond_i8, value_i8, ires_i8
-ires\_i8 = @\FuncDecl{SHMEM\_INT8\_CSWAP}@(dest, cond_i8, value_i8, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
     \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
@@ -54,8 +46,7 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_CSWAP}@(dest, cond_i8, value_i8, pe)
     \apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.
         The type of \VAR{value} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number upon which
-        \VAR{dest} is to be updated. When using \Fortran, it must be a default
-        integer value.}
+        \VAR{dest} is to be updated.}
 \end{apiarguments}
 
 \apidescription{
@@ -65,13 +56,6 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_CSWAP}@(dest, cond_i8, value_i8, pe)
     If the context handle \VAR{ctx} does not correspond to a valid context,
     the behavior is undefined.
 }
-\apidesctable{
-    When using \Fortran, \VAR{dest}, \VAR{cond}, and \VAR{value} must be of the following type:
-}{Routine}{Data type of \VAR{dest}, \VAR{cond}, and \VAR{value}}
-
-\apitablerow{SHMEM\_INT4\_CSWAP}{\CONST{4}-byte integer.}
-\apitablerow{SHMEM\_INT8\_CSWAP}{\CONST{8}-byte integer.}
-
 
 \apireturnvalues{
     The contents that had been in the \VAR{dest} data object on the remote

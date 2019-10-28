@@ -3,8 +3,8 @@ for synchronization between two \acp{PE} based on the value of a symmetric data
 object.
 The point-to-point synchronization routines can be used to portably ensure
 that memory access operations observe remote updates in the order enforced by
-the initiator \ac{PE} using the \FUNC{shmem\_fence} and \FUNC{shmem\_quiet}
-routines.
+the initiator \ac{PE} using the \OPR{put-with-signal}, \FUNC{shmem\_fence} and
+\FUNC{shmem\_quiet} routines.
 
 Where appropriate compiler support is available, \openshmem provides
 type-generic point-to-point synchronization interfaces via \Cstd[11] generic
@@ -50,9 +50,7 @@ The point-to-point synchronization interface provides named constants whose
 values are integer constant expressions that specify the comparison operators
 used by \openshmem synchronization routines.
 The constant names and associated operations are
-presented in Table~\ref{p2p-consts}.  For Fortran, the constant names of
-Table~\ref{p2p-consts} shall be identifiers for integer parameters of
-default kind corresponding to the associated comparison operation.
+presented in Table~\ref{p2p-consts}.
 
 \begin{table}[h]
   \begin{center}

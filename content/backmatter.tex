@@ -21,7 +21,7 @@ The following section describes how to write a ``Hello World" \openshmem program
 To write a ``Hello World" \openshmem program, the user must:
 
 \begin{itemize}
-\item Include the header file \HEADER{shmem.h} for \Cstd or \HEADER{shmem.fh} for \Fortran.
+\item Include the header file \HEADER{shmem.h} for \Cstd.
 \item Add the initialization call \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}}.
 \item Use \openshmem calls to query the local \ac{PE} number
     (\hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}}) and the total number
@@ -40,21 +40,6 @@ deterministic because \acp{PE} execute asynchronously in parallel.
                 {example_code/hello-openshmem-c.output}
 \vspace{0.1in}
 \end{minipage}
-
-\clearpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{deprecate}
-\openshmem also provides a \Fortran API. Listing~\ref{openshmem-hello-f90} shows a similar program written in \Fortran.
-
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-\numberedlisting{caption={``Hello World'' example program in \Fortran},label=openshmem-hello-f90,language=OSH2+F}
-                {example_code/hello-openshmem.f90}
-\outputlisting{language=bash,caption={Possible ordering of expected output with 4 \acp{PE} from the program in Listing~\ref{openshmem-hello-f90}}}
-                {example_code/hello-openshmem-f90.output}
-\vspace{0.1in}
-\end{minipage}
-\end{deprecate}
 
 \clearpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -120,20 +105,6 @@ oshc++ <compiler options> -o myprogram myprogram.cpp
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
 underlying \Cpp compiler called by \textbf{oshc++}.
 
-
-\subsection*{Programs written in \Fortran}
-
-\begin{deprecate}
-The \openshmem Reference Implementation provides a wrapper program, named
-\textbf{oshfort}, to aid in the compilation of \Fortran programs.
-The wrapper may be called as follows:
-
-\begin{lstlisting}[language=bash]
-oshfort <compiler options> -o myprogram myprogram.f
-\end{lstlisting}
-Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
-underlying \Fortran compiler called by \textbf{oshfort}.
-\end{deprecate}
 
 \section{Running Programs}
 
@@ -358,6 +329,22 @@ supported before removal.
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & Current & (none) \\ \hline
+    \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
+    \hyperref[subsec:shmem_quiet]{\FUNC{shmem\_quiet}}; \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: Active set based \FuncRef{shmem\_sync} & 1.5 & Current &
+    Team based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_broadcast[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_broadcast]{\FUNC{shmem\_broadcast}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_collect[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_collect}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_fcollect[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_fcollect}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\TYPENAME\_OP\_to\_all} & 1.5 & Current &
+    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_\TYPENAME\_OP\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
     \end{longtable}
 \end{center}
 
@@ -491,7 +478,8 @@ In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
 \subsection{\textit{Fortran} API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
-The entire \openshmem \Fortran API was deprecated because of a general lack of
+The entire \openshmem \Fortran API was deprecated in \openshmem[1.4] and
+removed in \openshmem[1.5] because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
 extensive update of the \Fortran API, \Fortran users are encouraged to
 leverage the \openshmem Specification's \Cstd API through the
@@ -499,8 +487,30 @@ leverage the \openshmem Specification's \Cstd API through the
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
 
+\subsection{Active-set-based collective routines}
+With the addition of \openshmem teams, the previous methods for performing collective
+operations has been superseded by a more readable, flexible method for
+organizing and communicating between groups of \acp{PE}. All collective routines
+which previously indicated subgroups of \acp{PE} with a list of
+parameters to describe the subgroup composition should be phased
+out in favor of using collective operations with a team parameter.
 
+When moving from active set routines to teams based routines, the fixed-size
+versions of the routines, e.g. \FUNC{shmem\_broadcast32}, were not
+carried forward. Instead, all teams based collective routines use standard
+\Cstd types with the option to use generic \textit{C11} functions for more portable
+and maintainable implementations.
 
+\subsection{\CorCpp: \FUNC{shmem\_barrier}}
+Each \openshmem team might
+be associated with some number of communication contexts. The \FUNC{shmem\_barrier}
+functions imply that the default context is quiesced after synchronizing
+some set of \acp{PE}. Since teams may have some number of contexts associated
+with the team, it becomes less clear which context would be the ``default'' context
+for that particular team. Rather than continue to support \FUNC{shmem\_barrier}
+for active-sets or teams, programs should use a call to \FUNC{shmem\_quiet}
+followed by a call to \FUNC{shmem\_sync} in order to explicitly
+indicate which context to quiesce.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
@@ -510,7 +520,31 @@ Major changes in \openshmem[1.5] include \dots
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
-\item Added a new multiple-element point-to-point synchronization API with
+\item Added support for nonblocking \ac{AMO} functions.
+\\ See Section \ref{sec:amo-nbi}.
+%
+\item Added support for blocking \OPR{put-with-signal} functions.
+\\ See Section \ref{subsec:shmem_put_signal}.
+%
+\item Added support for nonblocking \OPR{put-with-signal} functions.
+\\ See Section \ref{subsec:shmem_put_signal_nbi}.
+%
+\item Clarified that point-to-point synchronization routines preserve the
+  atomicity of OpenSHMEM \acp{AMO}.
+\\ See Section~\ref{subsec:amo_guarantees}.
+%
+\item Clarified that symmetric variables used as \VAR{ivar} arguments to
+  point-to-point synchronization routines must be updated using OpenSHMEM
+  \acp{AMO}.
+\\ See Section~\ref{subsec:p2p_intro}.
+%
+\item Removed the entire \openshmem \Fortran API. 
+%
+\item Added support for multipliers in \VAR{SHMEM\_SYMMETRIC\_SIZE}
+environment variables.
+\\ See Section \ref{subsec:environment_variables}.
+%
+\item Added support for a multiple-element point-to-point synchronization API with
   the functions: \FUNC{shmem\_wait\_until\_all}, \FUNC{shmem\_wait\_until\_any},
   \FUNC{shmem\_wait\_until\_some}, \FUNC{shmem\_test\_all},
   \FUNC{shmem\_test\_any}, and \FUNC{shmem\_test\_some}.
@@ -518,6 +552,17 @@ The following list describes the specific changes in \openshmem[1.5]:
   \ref{subsec:shmem_wait_until_any}, \ref{subsec:shmem_wait_until_some},
   \ref{subsec:shmem_test_all}, \ref{subsec:shmem_test_any}, and
   \ref{subsec:shmem_test_some}.
+%
+\item Added support for vectorized comparison values in the multiple-element
+  point-to-point synchronization API with the functions:
+  \FUNC{shmem\_wait\_until\_all\_vector}, \FUNC{shmem\_wait\_until\_any\_vector},
+  \FUNC{shmem\_wait\_until\_some\_vector}, \\
+  \FUNC{shmem\_test\_all\_vector}, \FUNC{shmem\_test\_any\_vector}, and
+  \FUNC{shmem\_test\_some\_vector}.
+  \\See Sections \ref{subsec:shmem_wait_until_all_vector},
+  \ref{subsec:shmem_wait_until_any_vector}, \ref{subsec:shmem_wait_until_some_vector},
+  \ref{subsec:shmem_test_all_vector}, \ref{subsec:shmem_test_any_vector}, and
+  \ref{subsec:shmem_test_some_vector}.
 %
 \item Added \openshmem profiling interface.
   \\ See Section~\ref{sec:openshmem_profiling_interface}.
@@ -920,4 +965,4 @@ collectives.
 %
 \end{itemize}
 
-} %end of setlength command that was started in frontmatter.tex
+%end of setlength command that was started in frontmatter.tex
