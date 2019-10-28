@@ -62,7 +62,8 @@ that \ac{PE} next engages in an \openshmem call.
 \subsection{Invoking OpenSHMEM Operations}
 
 Pointer arguments to \openshmem routines that point to non-const data must not
-overlap in memory with other arguments to the same \openshmem operation.
+overlap in memory with other arguments to the same \openshmem operation, with
+the exception of in-place reductions as described in Section~\ref{subsec:shmem_reductions}.
 Otherwise, the behavior is undefined.  Two arguments overlap in memory if any
 of their data elements are contained in the same physical memory locations.
 For example, consider an address $a$ returned by the \FUNC{shmem\_ptr} operation
