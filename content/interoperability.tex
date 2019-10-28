@@ -70,10 +70,10 @@ Both \openshmem and MPI define the interaction with user threads in a program
 with routines that can be used for initializing and querying the thread
 environment. In a hybrid program, the user may request different thread levels
 at the initialization calls of \openshmem and MPI environments; however, the
-returned support level provided by the \openshmem library might be different
-from that returned in an \openshmem-only program. For instance, the former
+returned support level provided by the \openshmem or MPI library might be different
+from that returned in an non-hybrid program. For instance, the former
 initialization call in a hybrid program may initialize a resource with the
-user-requested thread level, but the supported level cannot be updated by the latter
+user-requested thread level, but the supported level cannot be updated by a subsequent
 initialization call if the underlying software runtime of \openshmem and MPI
 share the same internal communication resource.
 The program should always check the \VAR{provided} thread level returned
