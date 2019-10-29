@@ -21,16 +21,17 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ivars}{A local pointer to an array of remotely accessible data
+  \apiargument{IN}{ivars}{Local address of an array of remotely accessible data
     objects.
     The type of \VAR{ivars} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
-  \apiargument{IN}{status}{An optional mask array of length \VAR{nelems}
+  \apiargument{IN}{status}{Local address of an optional mask array of length \VAR{nelems}
     that indicates which elements in \VAR{ivars} are excluded from the test set.}
   \apiargument{IN}{cmp}{A comparison operator from Table~\ref{p2p-consts} that
     compares elements of \VAR{ivars} with elements of \VAR{cmp\_values}.}
-  \apiargument{IN}{cmp\_values}{An array of length \VAR{nelems}
-    containing values to be compared with the respective objects in \VAR{ivars}.}
+  \apiargument{IN}{cmp\_values}{Local address of an array of length \VAR{nelems}
+    containing values to be compared with the respective objects in \VAR{ivars}.
+    The type of \VAR{cmp\_values} should match that implied in the SYNOPSIS section.}
 
 \end{apiarguments}
 

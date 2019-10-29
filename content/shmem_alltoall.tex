@@ -30,29 +30,27 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
 
 \begin{apiarguments}
 
-\apiargument{IN}{team}{A valid \openshmem team handle to a team.}
+\apiargument{IN}{team}{A valid \openshmem team handle to a team.}%
 
-\apiargument{OUT}{dest}{A symmetric data object large enough to receive
+\apiargument{OUT}{dest}{Symmetric address of a data object large enough to receive
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
-    active set.}
-\apiargument{IN}{source}{A symmetric data object that contains \VAR{nelems}
+    active set.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{source}{Symmetric address of a data object that contains \VAR{nelems}
     elements of data for each \ac{PE} in the active set, ordered according to
-    destination \ac{PE}.}
-\apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.
-    \VAR{nelems} must be of type size\_t for \CorCpp.}
+    destination \ac{PE}.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
+    \acp{PE}.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
-    consecutive \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of
-    type integer.}
-\apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.}
+    consecutive \ac{PE} numbers in the active set.}
+    \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    A symmetric work array of size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.
-    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    Every element of this array must be initialized with the value
+    Symmetric address of a work array of size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.
+    Every element of \VAR{pSync} must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter the routine.}
 \end{DeprecateBlock}

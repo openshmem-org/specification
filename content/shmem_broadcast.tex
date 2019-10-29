@@ -34,31 +34,24 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 
 \apiargument{IN}{team}{The team over which to perform the operation.}%
 
-\apiargument{OUT}{dest}{A symmetric data object. See the table below in this description
-    for allowable types.} 
-\apiargument{IN}{source}{A symmetric data object that can be of any data type
-    that is permissible for the \dest{} argument.}
-\apiargument{IN}{nelems}{The number of elements in \source.
-    nelems must be of type \VAR{size\_t} in \Cstd.  When
-    using \Fortran, it must be a default integer value.}
+    \apiargument{OUT}{dest}{Symmetric address of destination data object.
+      The type of \dest{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{source}{Symmetric address of the source data object.
+      The type of \source{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{nelems}{The number of elements in \source.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
-    the team or active set, from which the data is copied.
-    \VAR{PE\_root} must be of type \CTYPE{int}.
-    When using \Fortran, it must be a default integer value.}
+    the team or active set, from which the data is copied.}
 
 \begin{DeprecateBlock}
 
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
+    \acp{PE}.}
 \apiargument{IN}{logPE\_stride}{ The log (base 2) of the stride between
-    consecutive \ac{PE} numbers in the active set. \VAR{log\_PE\_stride} must be of
-    type integer.}
-\apiargument{IN}{PE\_size}{ The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.}
+    consecutive \ac{PE} numbers in the active set.}
+    \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    A symmetric work array of size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
-    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    Every element of this array must be initialized with the value
+    Symmetric address of a work array of size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
+    Every element of \VAR{pSync} must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enters \FUNC{shmem\_broadcast}.}
 \end{DeprecateBlock}
@@ -122,14 +115,6 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
     \end{itemize}
 }
 
-\apidesctable{
-The  \dest{}  and \source{} data  objects must conform to certain typing
-constraints, which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
-
-\apitablerow{shmem\_broadcastmem}{\Cstd: Any data  type.  nelems is scaled in bytes.}
-\apitablerow{shmem\_broadcast64}{No \CorCpp{} structures are allowed.}
-\apitablerow{shmem\_broadcast32}{No \CorCpp{} structures are allowed.}
 
 \apireturnvalues{
    Zero on successful local completion. Nonzero otherwise.

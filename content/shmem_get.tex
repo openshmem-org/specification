@@ -31,13 +31,12 @@ void @\FuncDecl{shmem\_ctx\_getmem}@(shmem_ctx_t ctx, void *dest, const void *so
     \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
         the default context.}
-    \apiargument{OUT}{dest}{Local data object to be updated.}
+    \apiargument{OUT}{dest}{Local address of the data object to be updated.
+      The type of \dest{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{source}{Symmetric address of the source data object.
       The type of \source{} should match that implied in the SYNOPSIS section.}
-    \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.}
-    \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must
-        be of type integer.}
+    \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{} arrays.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
 \apidescription{

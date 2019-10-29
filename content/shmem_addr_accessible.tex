@@ -10,7 +10,7 @@ int @\FuncDecl{shmem\_addr\_accessible}@(const void *addr, int pe);
 \end{Csynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{addr}{Local address of data object on the local \ac{PE}.}
+    \apiargument{IN}{addr}{Local address of data object to query.}
     \apiargument{IN}{pe}{Integer id of a remote \ac{PE}.}
 \end{apiarguments}
 
@@ -21,7 +21,7 @@ int @\FuncDecl{shmem\_addr\_accessible}@(const void *addr, int pe);
     
     This routine verifies that the data object is symmetric and accessible with
     respect to a remote \ac{PE} via \openshmem data transfer routines.  The
-    specified address \VAR{addr} is a local address of a data object on the
+    specified address \VAR{addr} is the local address of the data object on the
     local \ac{PE}.
 }
 
