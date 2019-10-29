@@ -145,7 +145,8 @@ For instance, \openshmem guarantees the atomicity only of concurrent \openshmem 
 that operate on symmetric data with the same datatype. Access to the same symmetric
 object with MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may
 result in an undefined result. Users should avoid situations where MPI and
-\openshmem operations perform concurrent accesses to the same memory location.
+\openshmem one-sided operations perform concurrent accesses to the same memory
+location; otherwise, the behavior is undefined.
 
 \subsection{Communication Progress}
 \label{subsec:interoperability:progress}
