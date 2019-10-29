@@ -55,7 +55,7 @@ and \FUNC{MPI\_Comm\_connect}).
 It provides a mechanism to establish communication
 between the newly created processes and the existing MPI application (see
 MPI standard version 3.1, Chapter 10).
-Unlike MPI, \openshmem starts all processes at once and requires all PEs to
+Unlike MPI, \openshmem starts all processes at once and requires all \acp{PE} to
 collectively allocate and initialize resources (e.g., symmetric heap) used by
 the \openshmem library before any other \openshmem routine may
 be called. \openshmem does not support communication with dynamically created
@@ -110,11 +110,11 @@ portability.
 \subsection{Mapping Process Identification Numbers}
 \label{subsec:interoperability:id}
 
-Similar to the PE number in \openshmem, MPI defines rank as the
-identification number of a process in a communicator. Both the \openshmem PE
+Similar to the \ac{PE} number in \openshmem, MPI defines rank as the
+identification number of a process in a communicator. Both the \openshmem \ac{PE}
 and the MPI rank are unique integers assigned from zero to one less than the total
 number of processes. In a hybrid program, the \openshmem
-PE number in \LibHandleRef{SHMEM\_TEAM\_WORLD}
+\ac{PE} number in \LibHandleRef{SHMEM\_TEAM\_WORLD}
 and the MPI rank in \VAR{MPI\_COMM\_WORLD} of a process can be equal.
 This feature, however, may be provided by only some of the \openshmem and MPI
 implementations (e.g., if both environments share the same underlying process
@@ -127,7 +127,7 @@ program when necessary.
 \subsubsection*{Example}
 \label{subsubsec:interoperability:id:example}
 The following example demonstrates how to manage the mapping between \openshmem
-PE numbers and MPI ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
+\ac{PE} numbers and MPI ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
 and MPI program.
 
 \lstinputlisting[language={C}, tabsize=2,
