@@ -46,17 +46,38 @@ memory section of each \ac{PE}.
 \subsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
 
 \openshmem contains a number of routines that perform atomic operations on
-symmetric data objects, which are defined in Section \ref{sec:amo}.
+symmetric data objects, which are defined in Section~\ref{sec:amo}.
 The atomic routines
 guarantee that concurrent accesses by any of these routines to the same
-location and using the same datatype (specified in Tables~\ref{stdamotypes} and
-\ref{extamotypes}) will be exclusive.
+location, using the same datatype (specified in Tables~\ref{stdamotypes} and
+\ref{extamotypes}), and using communication contexts (see Section~\ref{sec:ctx})
+in the same atomicity domain will be exclusive.
 Exclusivity is also guaranteed when the target \ac{PE} performs a wait or test
 operation on the same location and with the same datatype as one or more atomic
 operations.
+
+An \openshmem \emph{atomicity domain} is a set of communication
+contexts whose associated teams (see Section~\ref{subsec:team}) are
+all derived from the same root team (i.e., a team with no parent) in
+the hierarchy of parent-child teams.
+\openshmem defines two such root teams, \LibHandleRef{SHMEM\_TEAM\_WORLD}
+and \LibHandleRef{SHMEM\_TEAM\_SHARED} (see Section~\ref{subsec:library_handles}).%
+\footnote{
+  Although all \acp{PE} in \LibHandleRef{SHMEM\_TEAM\_SHARED} are also
+  in \LibHandleRef{SHMEM\_TEAM\_WORLD}, and a \ac{PE}'s number can be
+  translated from \LibHandleRef{SHMEM\_TEAM\_SHARED} to
+  \LibHandleRef{SHMEM\_TEAM\_WORLD}, the two teams are defined here as
+  having no explicit parent-child relationship.
+  Therefore, the two teams each represent distinct root teams forming
+  disjoint team hierarchies.
+}
+
 \openshmem atomic operations do not guarantee exclusivity in the following
 scenarios, all of which result in undefined behavior.
 \begin{enumerate}
+    \item When concurrent accesses to the same location are performed using
+        \openshmem atomic operations using communication contexts in
+        different atomicity domains.
     \item When concurrent accesses to the same location are performed using
         \openshmem atomic operations using different datatypes.
     \item When atomic and non-atomic \openshmem operations are used to access
@@ -74,27 +95,36 @@ with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
 will invalidate the atomicity guarantees.
 
 \cexample
-    {The following \CorCpp example illustrates scenario 1.  In this example,
+    {
+      The following \CorCpp example illustrates scenario 1.
+      In this example, different atomicity domains are used to access
+      the same location, resulting in undefined behavior.
+      The undefined behavior can be resolved by using communication
+      contexts in the same atomicity domain in all concurrent operations.
+    } {./example_code/amo_scenario_1.c}
+
+\cexample
+    {The following \CorCpp example illustrates scenario 2.  In this example,
     different datatypes are used to access the same location concurrently,
     resulting in undefined behavior.  The undefined behavior can be resolved by
     using the same datatype in all concurrent operations.  For example, the
     32-bit value can be left-shifted and a 64-bit atomic OR operation can be
     used.}
-    {./example_code/amo_scenario_1.c}
+    {./example_code/amo_scenario_2.c}
 
 \cexample
-    {The following \CorCpp example illustrates scenario 2.  In this example,
+    {The following \CorCpp example illustrates scenario 3.  In this example,
     atomic increment operations are concurrent with a non-atomic reduction
     operation, resulting in undefined behavior.  The undefined behavior can be
     resolved by inserting a barrier operation before the reduction.  The
     barrier ensures that all local and remote AMOs have completed before the
     reduction operation accesses $x$.}
-    {./example_code/amo_scenario_2.c}
+    {./example_code/amo_scenario_3.c}
 
 \cexample
-    {The following \CorCpp example illustrates scenario 3.  In this example, an
+    {The following \CorCpp example illustrates scenario 4.  In this example, an
     \openshmem atomic increment operation is concurrent with a local increment
     operation, resulting in undefined behavior.  The undefined behavior can be
     resolved by replacing the local increment operation with an \openshmem
     atomic increment.}
-    {./example_code/amo_scenario_3.c}
+    {./example_code/amo_scenario_4.c}
