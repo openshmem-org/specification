@@ -19,9 +19,9 @@ int @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_t
 the configuration parameters of the given team, which were assigned according
 to input configuration parameters when the team was created.
 
-When \VAR{team} specifies an invalid team, if \VAR{team} compares
-equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no operation is
-performed; otherwise, the behavior is undefined.
+If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
+then no operation is performed.
+If \VAR{team} is otherwise invalid, the behavior is undefined.
 }
 
 \apireturnvalues{
