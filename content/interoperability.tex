@@ -68,12 +68,12 @@ with these processes.
 \label{subsec:interoperability:thread}
 Both \openshmem and MPI define the interaction with user threads in a program
 with routines that can be used for initializing and querying the thread
-environment. In a hybrid program, the user may request different thread levels
+environment. A hybrid program may request different thread levels
 at the initialization calls of \openshmem and MPI environments; however, the
 returned support level provided by the \openshmem or MPI library might be different
 from that returned in an non-hybrid program. For instance, the former
 initialization call in a hybrid program may initialize a resource with the
-user-requested thread level, but the supported level cannot be updated by a subsequent
+requested thread level, but the supported level cannot be updated by a subsequent
 initialization call if the underlying software runtime of \openshmem and MPI
 share the same internal communication resource.
 The program should always check the \VAR{provided} thread level returned
@@ -86,14 +86,14 @@ Both \openshmem and MPI define similar thread levels, namely, \VAR{THREAD\_SINGL
 When requesting threading support in a hybrid program, however,
 the following additional rules are applied if the implementations of \openshmem
 and MPI share the same internal communication resource.
-Users are strongly advised to always follow these rules to ensure program
+It is strongly recommended to always follow these rules to ensure program
 portability.
 
 \begin{itemize}
     \item The \VAR{THREAD\_SINGLE} thread level requires a single-threaded program.
-    Hence, users should not request \VAR{THREAD\_SINGLE} at the initialization
+    Hence, a hybrid program should not request \VAR{THREAD\_SINGLE} at the initialization
     call of either \openshmem or MPI but request a different thread level at the
-    initialization call of the other model in the same program.
+    initialization call of the other model.
 
     \item The \VAR{THREAD\_FUNNELED} thread level allows only the main thread to
     make communication calls. A hybrid program using the \VAR{THREAD\_FUNNELED}
@@ -144,7 +144,7 @@ models.
 For instance, \openshmem guarantees the atomicity only of concurrent \openshmem AMO operations
 that operate on symmetric data with the same datatype. Access to the same symmetric
 object with MPI atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may
-result in an undefined result. Users should avoid situations where MPI and
+result in an undefined result. A hybrid program should avoid situations where MPI and
 \openshmem one-sided operations perform concurrent accesses to the same memory
 location; otherwise, the behavior is undefined.
 
