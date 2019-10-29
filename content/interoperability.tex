@@ -19,7 +19,7 @@ A vendor may implement the \openshmem and MPI libraries in different ways. For
 instance, one may implement both \openshmem and MPI as standalone libraries,
 each of which allocates and initializes fully isolated communication
 resources.
-Another common approach
+Another approach
 is to implement both \openshmem and MPI interfaces within the
 same software system in order to share a communication resource when possible.
 
@@ -52,15 +52,15 @@ finalization call is made.
 MPI defines a dynamic process model that allows creation of processes after
 an MPI application has started (e.g., by calling \FUNC{MPI\_Comm\_spawn}) and
 connection to independent processes (e.g., through \FUNC{MPI\_Comm\_accept}
-and \FUNC{MPI\_Comm\_connect})
-and provides a mechanism to establish communication
+and \FUNC{MPI\_Comm\_connect}).
+It provides a mechanism to establish communication
 between the newly created processes and the existing MPI application (see
 MPI standard version 3.1, Chapter 10).
 Unlike MPI, \openshmem starts all processes at once and requires all PEs to
 collectively allocate and initialize resources (e.g., symmetric heap) used by
 the \openshmem library before any other \openshmem routine may
 be called. \openshmem does not support communication with dynamically created
-or connected processes. In such a scenario, MPI must be used to communicate
+or connected processes. In such a scenario, MPI can be used to communicate
 with these processes.
 
 
