@@ -13,11 +13,11 @@ int main(void) {
   }
   else {
     shmem_team_create_ctx(SHMEM_TEAM_SHARED, 0, &ctx);
-    target = shmem_team_translate_pe(SHMEM_TEAM_SHARED, 0, SHMEM_TEAM_WORLD);
+    target = shmem_team_translate_pe(SHMEM_TEAM_WORLD, 0, SHMEM_TEAM_SHARED);
   }
 
-  // Undefined behavior: The following AMO accesses the same location
-  // concurrently using different atomicity domains.
+  // Undefined behavior: The following AMO may access the same
+  // location concurrently using different atomicity domains.
   if (target >= 0)
     shmem_ctx_uint64_atomic_inc(ctx, &x, target);
 
