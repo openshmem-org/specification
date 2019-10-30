@@ -58,18 +58,20 @@ operations.
 
 An \openshmem \emph{atomicity domain} is a set of communication
 contexts whose associated teams (see Section~\ref{subsec:team}) are
-all derived from the same root team (i.e., a team with no parent) in
-the hierarchy of parent-child teams.
-\openshmem defines two such root teams, \LibHandleRef{SHMEM\_TEAM\_WORLD}
+all split by (possibly recursive) calls to a
+\FUNC{shmem\_team\_split\_*} routine from a common predefined team.
+\openshmem defines two such predefined teams, \LibHandleRef{SHMEM\_TEAM\_WORLD}
 and \LibHandleRef{SHMEM\_TEAM\_SHARED} (see Section~\ref{subsec:library_handles}).%
 \footnote{
   Although all \acp{PE} in \LibHandleRef{SHMEM\_TEAM\_SHARED} are also
   in \LibHandleRef{SHMEM\_TEAM\_WORLD}, and a \ac{PE}'s number can be
-  translated from \LibHandleRef{SHMEM\_TEAM\_SHARED} to
-  \LibHandleRef{SHMEM\_TEAM\_WORLD}, the two teams are defined here as
-  having no explicit parent-child relationship.
-  Therefore, the two teams each represent distinct root teams forming
-  disjoint team hierarchies.
+  translated from its \LibHandleRef{SHMEM\_TEAM\_SHARED} to
+  \LibHandleRef{SHMEM\_TEAM\_WORLD}, the
+  \LibHandleRef{SHMEM\_TEAM\_SHARED} team is defined as not having
+  been created by a call to a \FUNC{shmem\_team\_split\_*} routine on
+  \LibHandleRef{SHMEM\_TEAM\_WORLD}.
+  Therefore, the two teams are distinct predefined teams forming
+  separate atomicity domains.
 }
 
 \openshmem atomic operations do not guarantee exclusivity in the following
