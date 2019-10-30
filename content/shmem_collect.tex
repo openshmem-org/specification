@@ -114,13 +114,15 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 The  \dest{}  and \source{} data  objects must conform to certain typing
 constraints, which are as follows:
 }{Routine}{Data type of \VAR{dest} and \VAR{source}}
-\apitablerow{\FUNC{shmem\_collectmem}, \FUNC{shmem\_fcollectmem}}{\Cstd: Any data  type. \VAR{nelems} is scaled in bytes.}%
-\apitablerow{\FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect64}}%
-    {Any noncharacter type that has an element size of \CONST{64} bits. No \Fortran derived types nor
-    \CorCpp{} structures are allowed.}
-\apitablerow{\FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect32}}%
-    {Any noncharacter type that has an element size of \CONST{32} bits. No \Fortran derived types nor
-    \CorCpp{} structures are allowed.}
+\apitablerow{\FUNC{shmem\_collectmem}, \FUNC{shmem\_fcollectmem}}{
+  \source{} and \dest{} objects are byte aligned;
+  \VAR{nelems} is the object size in bytes}
+\apitablerow{\FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect64}}{
+  \source{} and \dest{} objects are 8-byte aligned;
+  \VAR{nelems} is the count of the number of 8-byte elements}
+\apitablerow{\FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect32}}{
+  \source{} and \dest{} objects are 4-byte aligned;
+  \VAR{nelems} is the count of the number of 4-byte elements}
 
 \apireturnvalues{
     Zero on successful local completion. Nonzero otherwise.

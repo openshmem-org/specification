@@ -39,12 +39,10 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 \apiargument{IN}{source}{A symmetric data object that can be of any data type
     that is permissible for the \dest{} argument.}
 \apiargument{IN}{nelems}{The number of elements in \source.
-    nelems must be of type \VAR{size\_t} in \Cstd.  When
-    using \Fortran, it must be a default integer value.}
+    \VAR{nelems} must be of type \VAR{size\_t}.}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the team or active set, from which the data is copied.
-    \VAR{PE\_root} must be of type \CTYPE{int}.
-    When using \Fortran, it must be a default integer value.}
+    \VAR{PE\_root} must be of type \CTYPE{int}.}
 
 \begin{DeprecateBlock}
 
