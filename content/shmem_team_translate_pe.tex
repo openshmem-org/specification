@@ -24,8 +24,7 @@ Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this routine returns t
 \VAR{src\_team} and \VAR{dest\_team}, a value of \CONST{-1} is returned.
 
 If at least one of \VAR{src\_team} and \VAR{dest\_team} compares equal
-to \LibConstRef{SHMEM\_TEAM\_INVALID}, then a nonzero value is
-returned.
+to \LibConstRef{SHMEM\_TEAM\_INVALID}, then \CONST{-1} is returned.
 If either of the \VAR{src\_team} or \VAR{dest\_team} handles are
 otherwise invalid, the behavior is undefined.
 }
