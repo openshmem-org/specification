@@ -17,6 +17,8 @@ jobs:
       run: make LATEXOPT="-interaction batchmode -halt-on-error"
     - name: Upload PDF artifact
       uses: actions/upload-artifact@v1
+      env:
+        COMMIT: ${GITHUB_SHA::7}
       with:
-        name: openshmem-draft-${GITHUB_SHA::7}.pdf
+        name: openshmem-draft-$COMMIT
         path: main_spec.pdf
