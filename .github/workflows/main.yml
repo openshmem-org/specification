@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
-      run: sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-generic-recommended latex-xcolor texlive-fonts-recommended texlive-fonts-extra
+      run: sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
     - name: Build PDF
       run: make LATEXOPT="-interaction batchmode -halt-on-error"
     - name: Upload PDF artifact
