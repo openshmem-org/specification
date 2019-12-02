@@ -19,9 +19,9 @@ jobs:
     - name: Build PDF
       run: make LATEXOPT="-interaction batchmode -halt-on-error"
     - name: Rename PDF
-      run: mv main_spec.pdf openshmem-draft.pdf
+      run: mv main_spec.pdf openshmem-draft-$COMMIT.pdf
     - name: Upload PDF artifact
       uses: actions/upload-artifact@v1
       with:
-        name: openshmem-draft
-        path: openshmem-draft.pdf
+        name: openshmem-draft-${{ env.COMMIT }}
+        path: openshmem-draft-${{ env.COMMIT }}.pdf
