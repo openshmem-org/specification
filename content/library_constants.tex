@@ -96,6 +96,18 @@ See Section~\ref{subsec:shmem_put_signal} and
 Section~\ref{subsec:shmem_put_signal_nbi} for more detail about its use.
 \tabularnewline \hline
 %%
+\LibConstDecl{SHMEM\_MALLOC\_ATOMICS\_REMOTE} &
+The hint to the memory allocation routine which specifies that the allocated
+memory will be used for atomic variables. See Section \ref{subsec:shmmallochint}
+for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_MALLOC\_SIGNAL\_REMOTE} &
+The hint to the memory allocation routine which specifies that the allocated
+memory will be used for signal variables. See Section
+\ref{subsec:shmmallochint} for more detail about its use.
+\tabularnewline \hline
+%%
 \LibConstDecl{SHMEM\_SYNC\_VALUE}
 \begin{DeprecateBlock}
   \LibConstDecl{\_SHMEM\_SYNC\_VALUE}
