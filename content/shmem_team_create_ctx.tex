@@ -1,0 +1,63 @@
+\apisummary{
+  Create a communication context from a team locally.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem_ctx_t *ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{team}{A handle to the specified \ac{PE} team.}
+  \apiargument{IN}{options}{
+    The set of options requested for the given context.
+    Multiple options may be requested by combining them with a bitwise OR
+    operation; otherwise, \CONST{0} can be given if no options are requested.}
+  \apiargument{OUT}{ctx}{A handle to the newly created context.}
+\end{apiarguments}
+
+\apidescription{
+  The \FUNC{shmem\_team\_create\_ctx} routine creates a new communication
+  context and returns its handle through the \VAR{ctx} argument.
+  This context is created from the team specified by the \VAR{team} argument.
+
+  In addition to the team, the \FUNC{shmem\_team\_create\_ctx} routine accepts
+  the same arguments and provides all the same return conditions as the
+  \FUNC{shmem\_ctx\_create} routine.
+
+  The \FUNC{shmem\_team\_create\_ctx} routine may be called any number of times
+  to create multiple simultaneously existing contexts for the team. Programs
+  should request the total number of simultaneous contexts to be created from
+  the team during team creation. See Section~\ref{subsec:shmem_team_config_t}
+  for more information on how to request contexts during team creation.
+
+  A call to \FUNC{shmem\_team\_create\_ctx} on a team may fail, regardless
+  of the configuration request for contexts, if the implementation is unable
+  to create a context at the time when \FUNC{shmem\_team\_create\_ctx} is
+  called.
+
+  All explicitly created resources associated with a team must be destroyed
+  before the \FUNC{shmem\_team\_destroy} routine is called. If a context
+  returned from \FUNC{shmem\_team\_create\_ctx} is not explicitly
+  destroyed before the team is destroyed, behavior is undefined.
+
+  All \openshmem routines that operate on this context will do so with
+  respect to the associated \ac{PE} team.
+  That is, all point-to-point routines operating on this context will use
+  team-relative \ac{PE} numbering.
+}
+
+\apireturnvalues{
+  Zero on success and nonzero otherwise.
+}
+
+\apinotes{
+  None.
+}
+
+\begin{apiexamples}
+     See example in Section \ref{subsec:shmem_ctx_get_team}
+\end{apiexamples}
+
+\end{apidefinition}

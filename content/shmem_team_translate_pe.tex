@@ -1,0 +1,55 @@
+\apisummary{
+  Translate a given \ac{PE} number from one team to the corresponding
+  \ac{PE} number in another team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_team\_translate\_pe}@(shmem_team_t src_team, int src_pe,
+    shmem_team_t dest_team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{src\_team}{A valid SHMEM team handle.}
+\apiargument{IN}{src\_pe}{A \ac{PE} number in src\_team.}
+\apiargument{IN}{dest\_team}{A valid SHMEM team handle.}
+\end{apiarguments}
+
+\apidescription{
+The \FUNC{shmem\_team\_translate\_pe} routine will translate a given \ac{PE} number
+to the corresponding \ac{PE} number in another team.
+Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this routine returns that
+\ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both the
+\VAR{src\_team} and \VAR{dest\_team}, a value of \CONST{-1} is returned.
+
+
+If either of the \VAR{src\_team} or \VAR{dest\_team} handle is invalid, the behavior is undefined.
+}
+
+\apireturnvalues{
+The specified \ac{PE}'s number in the \VAR{dest\_team}, or a value of \CONST{-1} if any
+team handle arguments are invalid or the \VAR{src\_pe} is not in both the source and destination teams.
+}
+
+\apinotes{
+  If \LibHandleRef{SHMEM\_TEAM\_WORLD} is provided as the
+  \VAR{dest\_team} parameter, this routine acts as a global \ac{PE}
+  number translator and will return the corresponding
+  \LibHandleRef{SHMEM\_TEAM\_WORLD} number.
+}
+
+\begin{apiexamples}
+
+    \apicexample
+    {The following example demonstrates the use of the team \ac{PE}
+    number translation routine. The program makes a new team of all
+    of the even number \acp{PE} in the default team. Then, all \acp{PE}
+    in the new team acquire their \ac{PE} number in the new team
+    and translate it to the \ac{PE} number in the default team.}
+    {./example_code/shmem_team_translate_pe.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}

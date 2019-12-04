@@ -27,12 +27,12 @@ int main(void)
   shmem_fence();
 
   for (int i = 0; i < npes; i++)
-      shmem_p(&flags[mype], 1, i);
+      shmem_atomic_set(&flags[mype], 1, i);
 
   int ncompleted = 0;
 
   while (ncompleted < npes) {
-      int ntested = shmem_test_some(flags, npes, indices, status, SHMEM_CMP_NE, 0); 
+      int ntested = shmem_test_some(flags, npes, indices, status, SHMEM_CMP_NE, 0);
       if (ntested > 0) {
           for (int i = 0; i < ntested; i++) {
               for (int j = 0; j < N; j++) {

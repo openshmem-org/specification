@@ -43,13 +43,9 @@ Table~\ref{p2psynctypes}.
 \apidescription{
     The \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} operations block until
     the value contained in the symmetric data object, \VAR{ivar}, at the
-    calling \ac{PE} satisfies the wait condition.  In an \openshmem program
-    with single-threaded \acp{PE}, the \VAR{ivar} object at the calling \ac{PE}
-    may be updated by an \ac{RMA}, \ac{AMO}, or store operation performed by another
-    \ac{PE}.  In an \openshmem program with multithreaded \acp{PE}, the
-    \VAR{ivar} object at the calling \ac{PE} may be updated by an \ac{RMA}, \ac{AMO}, or
-    store operation performed by a thread located within the calling \ac{PE} or
-    within another \ac{PE}.
+    calling \ac{PE} satisfies the wait condition.  The \VAR{ivar} object at the
+    calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
+    within the calling \ac{PE} or within another \ac{PE}.
 
     These routines can be used to implement point-to-point synchronization
     between \acp{PE} or between threads within the same \ac{PE}.  A call to
@@ -58,10 +54,14 @@ Table~\ref{p2psynctypes}.
     to \FUNC{shmem\_wait\_until} blocks until the value of \VAR{ivar} at the
     calling \ac{PE} satisfies the wait condition specified by the comparison
     operator, \VAR{cmp}, and comparison value, \VAR{cmp\_value}.
+
+    Implementations must ensure that \FUNC{shmem\_wait} and
+    \FUNC{shmem\_wait\_until} do not return before the update of the memory
+    indicated by \VAR{ivar} is fully complete.
 }
 
 \apireturnvalues{
-    None.
+  None
 }
 
 \apinotes{
@@ -71,10 +71,13 @@ Table~\ref{p2psynctypes}.
 }
 
 \apiimpnotes{
-    Implementations must ensure that \FUNC{shmem\_wait} and
-    \FUNC{shmem\_wait\_until} do not return before the update of the memory
-    indicated by \VAR{ivar} is fully complete.  Partial updates to the memory
-    must not cause \FUNC{shmem\_wait} or \FUNC{shmem\_wait\_until} to return.
+  Some platforms may allow wait operations to efficiently poll or block on an
+  update to \VAR{ivar}.  On others, an atomic read operation may be needed to
+  observe updates to \VAR{ivar}.  On platforms where atomic read operations
+  incur high overhead, implementations may be able to reduce the number of
+  atomic reads performed by using non-atomic reads of \VAR{ivar} to wait for a
+  change to occur, followed by an atomic read operation to fetch the updated
+  value.
 }
 
 \end{apidefinition}

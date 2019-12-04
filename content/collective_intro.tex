@@ -1,49 +1,128 @@
-\emph{Collective routines} are defined as communication or synchronization
-operations on a group of \acp{PE} called an active set. The collective
-routines require all \acp{PE} in the active set to simultaneously call the
+\emph{Collective routines} are defined as coordinated communication or synchronization
+operations performed by a group of \acp{PE}.
+
+\openshmem provides three types of collective routines:
+
+\begin{enumerate}
+\item Collective routines that operate on teams use a team handle parameter to determine
+  which \acp{PE} will participate in the routine, and use resources encapsulated by the team object
+  to perform operations. See Section~\ref{subsec:team} for details on team management.
+
+\begin{DeprecateBlock}
+\item Collective routines that operate on active sets use a set of parameters to determine
+  which \acp{PE} will participate and what resources are used to perform operations.
+\end{DeprecateBlock}
+
+\item Collective routines that accept neither team nor active set
+  parameters, which implicitly operate on the default team and, as
+  required, the default context.
+\end{enumerate}
+
+\subsubsection*{Team-based collectives}
+
+The team-based collective routines are performed with respect to a valid
+\openshmem team, which is specified by a team handle argument.
+Team-based collective operations require all \acp{PE} in the team to call
+the routine in order for the operation to complete. If an invalid team handle
+or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to a team-based collective
+routine, the behavior is undefined.
+
+Team objects encapsulate the per \ac{PE} system resources required to complete
+team-based collective routines.
+All \openshmem teams-based collective calls are blocking routines which may use those
+system resources. On completion of a team-based collective call, the \ac{PE} may
+immediately call another collective on that same team without any other intervening
+synchronization across the team.
+
+While \openshmem routines provide thread support according to the
+thread-support level provided at initialization (see
+Section~\ref{subsec:thread_support}), team-based collective routines
+may not be called simultaneously by multiple threads on a given team.
+
+Collective operations are matched across a given team based on ordering. So for a given team,
+collectives must occur in the same order across all PEs in a team.
+
+The team-based collective routines defined in the \openshmem Specification are:
+
+\begin{itemize}
+\item \FUNC{shmem\_team\_sync}
+\item \FUNC{shmem\_\{TYPE\_\}broadcast\{mem\}}
+\item \FUNC{shmem\_\{TYPE\_\}collect\{mem\}}
+\item \FUNC{shmem\_\{TYPE\_\}fcollect\{mem\}}
+\item Reduction routines for the following operations: AND, OR, XOR, MAX, MIN, SUM, PROD
+\item \FUNC{shmem\_\{TYPE\_\}alltoall\{mem\}}
+\item \FUNC{shmem\_\{TYPE\_\}alltoalls\{mem\}}
+\end{itemize}
+
+In addition, all team creation functions are collective operations. In addition to the ordering
+and thread safety requirements described here, there are additional synchronization requirements
+on team creation operations. See Section~\ref{subsec:team} for more details.
+
+\begin{DeprecateBlock}
+
+\subsubsection*{Active-set-based collectives}
+
+The active-set-based collective routines require all \acp{PE}
+in the active set to simultaneously call the
 routine.  A \ac{PE} that is not in the active set calling the collective
-routine results in undefined behavior.  All collective routines have an
-active set as an input parameter except \FUNC{shmem\_barrier\_all} and
-\FUNC{shmem\_sync\_all}. Both \FUNC{shmem\_barrier\_all} and
-\FUNC{shmem\_sync\_all} must be called by all \acp{PE} of the \openshmem program.
+routine results in undefined behavior.
 
 The active set is defined by the arguments \VAR{PE\_start}, \VAR{logPE\_stride},
 and \VAR{PE\_size}.  \VAR{PE\_start} specifies the starting \ac{PE} number and
-is the lowest numbered PE in the active set.  The stride between successive
+is the lowest numbered \ac{PE} in the active set.  The stride between successive
 \acp{PE} in the active set is $2^{logPE\_stride}$ and \VAR{logPE\_stride} must
 be greater than or equal to zero.  \VAR{PE\_size} specifies the number of
 \acp{PE} in the active set and must be greater than zero.  The active set must
 satisfy the requirement that its last member corresponds to a valid \ac{PE}
 number, that is
 $0 \le PE\_start + (PE\_size - 1) * 2^{logPE\_stride} < npes$.
-All \acp{PE} participating in the collective routine must provide the same
+
+All \acp{PE} participating in the active-set-based collective routine must provide the same
 values for these arguments.  If any of these requirements are not met, the
 behavior is undefined.
 
-Another argument important to collective routines is \VAR{pSync}, which is a
-symmetric work array.  All \acp{PE} participating in a collective must pass the
-same \VAR{pSync} array.  On completion of a collective call, the \VAR{pSync} is
+Another argument important to active-set-based collective routines is \VAR{pSync}, which is a
+symmetric work array.  All \acp{PE} participating in an active-set-based collective must pass the
+same \VAR{pSync} array.  On completion of such a collective call, the \VAR{pSync} is
 restored to its original contents.  The user is permitted to reuse a \VAR{pSync}
 array if all previous collective routines using the \VAR{pSync} array have been
-completed by all participating \acp{PE}.  One can use a synchronization
-collective routine such as \FUNC{shmem\_barrier} to ensure completion of previous collective
+completed by all participating \acp{PE}. One can use a synchronization
+collective routine such as \FUNC{shmem\_barrier} to ensure completion of previous active-set-based collective
 routines. The \FUNC{shmem\_barrier} and \FUNC{shmem\_sync} routines allow the same
 \VAR{pSync} array to be used on consecutive calls as long as the \acp{PE}
 in the active set do not change.
 
 All collective routines defined in the Specification are blocking.  The
-collective routines return on completion.  The collective routines defined in
-the \openshmem Specification are:
+collective routines return on completion.  The active-set-based collective
+routines defined in the \openshmem Specification are:
 
 \begin{itemize}
-\item \FUNC{shmem\_barrier\_all}
 \item \FUNC{shmem\_barrier}
-\item \FUNC{shmem\_sync\_all}
 \item \FUNC{shmem\_sync}
 \item \FUNC{shmem\_broadcast\{32, 64\}}
 \item \FUNC{shmem\_collect\{32, 64\}}
 \item \FUNC{shmem\_fcollect\{32, 64\}}
-\item Reductions for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
+\item Reduction routines for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
 \item \FUNC{shmem\_alltoall\{32, 64\}}
 \item \FUNC{shmem\_alltoalls\{32, 64\}}
 \end{itemize}
+
+\end{DeprecateBlock}
+
+
+\subsubsection*{Team-implicit collectives}
+
+The \FUNC{shmem\_sync\_all} routine synchronizes all \acp{PE} in the
+computation through the default team. This routine is equivalent to a
+call to \FUNC{shmem\_team\_sync} on the default team.
+
+The \FUNC{shmem\_barrier\_all} routine synchronizes all \acp{PE} in
+the default team and ensures completion of all local and remote memory
+updates issued via the default context.  This routine is equivalent to
+a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
+call to \FUNC{shmem\_team\_sync} on the default team.
+
+\subsubsection*{Error codes returned from collectives}
+\CorCpp routines that return an integer error code follow the convention that \CONST{0} indicates successful local completion of the operation. This is considered a best effort of the implementation to indicate that all required local operations have been performed correctly inside the routine and the internal \openshmem state on the calling \ac{PE} is consistent with the description of the routine and its arguments upon completion. Implementations may use an integer return value from a routine to define integer error codes specific to the implementation as long as those codes are not already explicitly defined for that routine by the \openshmem specification.
+
+Collective operations involving many \acp{PE} may return values indicating success while other \acp{PE} are still executing the collective operation. Return values indicating success of a collective routine on one \ac{PE} do not indicate that all \acp{PE} involved in the collective operation will return from the routine successfully. In the case where successful local completion of a collective implies the success of some global operation, such as team creation resulting in a valid team on all involved \acp{PE}, the implementation should not return \CONST{0} from the routine if the implied or stated global guarantees of the routine are not met.
