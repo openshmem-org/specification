@@ -26,7 +26,7 @@ int @\FuncDecl{shmem\_addr\_accessible}@(const void *addr, int pe);
 }
 
 \apireturnvalues{
-    The return value is \CONST{1} if \VAR{addr} is also a symmetric
+    The return value is \CONST{1} if the local address \VAR{addr} is also a symmetric
     address and the given data object is accessible via \openshmem routines on
     the specified remote \ac{PE}; otherwise, it is \CONST{0}.
 }

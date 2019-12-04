@@ -20,7 +20,7 @@ void *@\FuncDecl{shmem\_ptr}@(const void *dest, int pe);
     \dest{} on the specified \ac{PE}.  This address can be assigned to a
     pointer.  After that, ordinary loads and stores to \dest{} may be
     performed.  The address returned by \FUNC{shmem\_ptr} is a local address to
-    a remotely accessible data object.  Providing this address to argument of
+    a remotely accessible data object.  Providing this address to an argument of
     an \openshmem routine that requires a symmetric address results in
     undefined behavior.
     
