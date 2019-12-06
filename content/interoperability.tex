@@ -153,7 +153,8 @@ location; otherwise, the behavior is undefined.
 \openshmem promises the progression of communication both with and without
 \openshmem calls and requires the software progress mechanism in the implementation
 (e.g., a progress thread) when the hardware does not provide asynchronous communication
-capabilities. In \ac{MPI}, however, a weak progress semantics is applied. That is,
+capabilities (see Section \ref{subsec:progress}).
+In \ac{MPI}, however, a weak progress semantics is applied. That is,
 an \ac{MPI} communication call is guaranteed only to complete in finite time. For
 instance, an \FUNC{MPI\_Put} may be completed only when the remote process makes an \ac{MPI}
 call that internally triggers the progress of \ac{MPI}, if the underlying hardware
