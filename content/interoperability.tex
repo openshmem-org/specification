@@ -124,7 +124,7 @@ and \FUNC{MPI\_Comm\_rank} in \ac{MPI}, to query the process identification numb
 in each communication environment and manage the mapping of identifiers in the
 program when necessary.
 
-\subsubsection*{Example}
+\subsubsection*{Examples}
 \label{subsubsec:interoperability:id:example}
 The following example demonstrates how to manage the mapping between \openshmem
 \ac{PE} numbers and \ac{MPI} ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
@@ -133,6 +133,16 @@ and \ac{MPI} program.
 \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize]
       {example_code/hybrid_mpi_mapping_id.c}
+
+The following example demonstrates an alternative approach for managing the mapping
+of process identification numbers in a hybrid program. The program creates a
+new MPI communicator, named \VAR{shmem\_comm}, that contains all
+processes in \VAR{MPI\_COMM\_WORLD} and uses the same \ac{MPI} rank and
+\openshmem \ac{PE} numbering.
+
+\lstinputlisting[language={C}, tabsize=2,
+      basicstyle=\ttfamily\footnotesize]
+      {example_code/hybrid_mpi_mapping_id_shmem_comm.c}
 
 \subsection{RMA Programming Models}
 \label{subsec:interoperability:rma}
