@@ -44,6 +44,17 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     The user is also responsible for calling these routines with identical argument(s) on all
     \acp{PE}; if differing \VAR{size}, or \VAR{hints} arguments are used, the behavior of the call
     and any subsequent \openshmem calls is undefined.
+
+	Calling the routine \FUNC{shmem\_realloc(void *ptr, size\_t size)} on the
+	ptr allocated by \FUNC{shmem\_malloc\_with\_hints} has a behavior similar to
+	calling \FUNC{shmem\_realloc} on the ptr allocated by \FUNC{shmem\_malloc}.
+	If the new size is larger, the memory is allocated with the same hints that
+	were passed when calling \FUNC{shmem\_malloc\_with\_hints}, and the newly
+	allocated portion of the block is uninitialized. If ptr is a null pointer,
+	the \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc}
+	routine for the specified size. If the size is 0 and ptr is not a null pointer,
+	the block to which it points is freed. If space cannot be allocated, the
+	block to which ptr points is unchanged.
 }
 
 \apireturnvalues{
