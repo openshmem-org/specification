@@ -1,0 +1,55 @@
+\apisummary{
+    This nonblocking atomic operation performs an atomic fetching bitwise OR
+    operation on a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_atomic\_fetch\_or\_nbi}@(TYPE *fetch, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_fetch\_or\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the bitwise \ac{AMO} types specified by
+Table~\ref{bitamotypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_fetch\_or\_nbi}@(TYPE *fetch, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch\_or\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{bitamotypes}.
+
+\begin{apiarguments}
+
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to
+      perform the operation. When this argument is not provided, the
+      operation is performed on the default context.}
+  \apiargument{OUT}{fetch}{Local data object to be updated.}
+  \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
+    be updated.}
+  \apiargument{IN}{value}{The operand to the bitwise OR operation.}
+  \apiargument{IN}{pe}{An integer value for the \ac{PE} on which \VAR{dest}
+    is to be updated.}
+
+\end{apiarguments}
+
+\apidescription{
+    The nonblocking \FUNC{shmem\_atomic\_fetch\_or\_nbi} routines perform an
+    atomic fetching bitwise OR on the remotely accessible data object pointed
+    by \VAR{dest} at PE \VAR{pe} with the operand \VAR{value}. This routine
+    returns after initiating the operation. The operation is considered complete
+    after a subsequent call to \FUNC{shmem\_quiet}. At the completion of
+    \FUNC{shmem\_quiet}, these routines have performed a fetching bitwise OR on
+    \VAR{dest} at PE \VAR{pe} with the operand \VAR{value} and fetched the prior
+    contents of \VAR{dest} into the \VAR{fetch} local data object.
+}
+
+\apireturnvalues{
+  None.
+}
+
+\apinotes{
+  None.
+}
+
+\end{apidefinition}

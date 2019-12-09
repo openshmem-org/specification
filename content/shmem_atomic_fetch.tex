@@ -5,53 +5,61 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-TYPE shmem_atomic_fetch(const TYPE *dest, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch}@(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_atomic\_fetch}@(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the extended \ac{AMO} types specified by
 Table~\ref{extamotypes}.
 
 \begin{Csynopsis}
-TYPE shmem_<TYPENAME>_atomic_fetch(const TYPE *dest, int pe);
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_fetch}@(const TYPE *source, int pe);
+TYPE @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch}@(shmem_ctx_t ctx, const TYPE *source, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
 \TYPENAME{} specified by Table~\ref{extamotypes}.
 
-\begin{Fsynopsis}
-INTEGER pe
-INTEGER*4 SHMEM_INT4_FETCH, ires_i4
-ires_i4 = SHMEM_INT4_FETCH(dest, pe)
-INTEGER*8 SHMEM_INT8_FETCH, ires_i8
-ires_i8 = SHMEM_INT8_FETCH(dest, pe)
-REAL*4 SHMEM_REAL4_FETCH, res_r4
-res_r4 = SHMEM_REAL4_FETCH(dest, pe)
-REAL*8 SHMEM_REAL8_FETCH, res_r8
-res_r8 = SHMEM_REAL8_FETCH(dest, pe)
-\end{Fsynopsis}
+\begin{DeprecateBlock}
+\begin{C11synopsis}
+TYPE @\FuncDecl{shmem\_fetch}@(const TYPE *source, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\}.
+
+\begin{Csynopsis}
+TYPE @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_fetch}@(const TYPE *source, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
+\CTYPE{long}, \CTYPE{long long}\} and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 
-\apiargument{IN}{dest}{The remotely accessible data object to be fetched from
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
+    When this argument is not provided, the operation is performed on
+    the default context.}
+  \apiargument{IN}{source}{The remotely accessible data object to be fetched from
     the remote \ac{PE}.}
-\apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
-    \VAR{dest} is to be fetched.}
+  \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
+    \VAR{source} is to be fetched.}
 
 \end{apiarguments}
 
 \apidescription{
     \FUNC{shmem\_atomic\_fetch} performs an atomic fetch operation.
-    It returns the contents of the \VAR{dest} as an atomic operation.
+    It returns the contents of the \VAR{source} as an atomic operation.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
 
 \apireturnvalues{
-    The contents at the \VAR{dest} address on the remote \ac{PE}.
+    The contents at the \VAR{source} address on the remote \ac{PE}.
     The data type of the return value is the same as the type of
     the remote data object.
 }
 
 \apinotes{
-    As of \openshmem[1.4], \FUNC{shmem\_fetch} has been deprecated.
-    Its behavior and call signature are identical to the replacement
-    interface, \FUNC{shmem\_atomic\_fetch}.
+    None.
 }
 
 \end{apidefinition}

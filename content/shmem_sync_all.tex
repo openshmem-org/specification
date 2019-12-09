@@ -1,0 +1,42 @@
+\apisummary{
+    Registers the arrival of a \ac{PE} at a synchronization point and suspends
+    execution until all other \acp{PE} in the default team arrive at a synchronization point. For multithreaded programs, execution is suspended
+    as specified by the threading model (Section \ref{subsec:thread_support}).
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_sync\_all}@(void);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+    \apiargument{None.}{}{}
+
+\end{apiarguments}
+
+\apidescription{
+
+    This routine blocks the calling \ac{PE} until all \acp{PE} in the
+    default team have called \FUNC{shmem\_sync\_all}.
+
+    In a multithreaded \openshmem program, only the calling thread is
+    blocked.
+
+    In contrast with the \FUNC{shmem\_barrier\_all} routine,
+    \FUNC{shmem\_sync\_all} only ensures completion and visibility of previously issued memory
+    stores and does not ensure completion of remote memory updates issued via
+    \openshmem routines.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    The \FUNC{shmem\_sync\_all} routine is equivalent to calling
+    \FUNC{shmem\_team\_sync} on the default team.
+}
+
+\end{apidefinition}

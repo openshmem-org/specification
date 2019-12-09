@@ -1,0 +1,83 @@
+\apisummary{
+    Wait for a variable on the local \ac{PE} to change.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+\end{C11synopsis}
+where \TYPE{} is one of the point-to-point synchronization types specified by
+Table \ref{p2psynctypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until}@(TYPE *ivar, int cmp, TYPE cmp_value);
+\end{Csynopsis}
+where \TYPE{} is one of the point-to-point synchronization types and has a
+corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
+
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_wait\_until}@(long *ivar, int cmp, long cmp_value);
+void @\FuncDecl{shmem\_wait}@(long *ivar, long cmp_value);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait}@(TYPE *ivar, TYPE cmp_value);
+\end{CsynopsisCol}
+where \TYPE{} is one of \{\CTYPE{short}, \CTYPE{int}, \CTYPE{long},
+\CTYPE{long long}\} and has a corresponding \TYPENAME{} specified by
+Table~\ref{p2psynctypes}.
+\end{DeprecateBlock}
+
+\begin{apiarguments}
+
+\apiargument{IN}{ivar}{A remotely accessible integer variable. When using \CorCpp,
+    the type of \VAR{ivar} should match that implied in the SYNOPSIS section.} 
+\apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
+  \VAR{cmp\_value}.
+  When using \CorCpp, it must be of type \CTYPE{int}.}
+\apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
+    using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
+    SYNOPSIS section.}
+
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_wait} and \FUNC{shmem\_wait\_until} operations block until
+    the value contained in the symmetric data object, \VAR{ivar}, at the
+    calling \ac{PE} satisfies the wait condition.  The \VAR{ivar} object at the
+    calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
+    within the calling \ac{PE} or within another \ac{PE}.
+
+    These routines can be used to implement point-to-point synchronization
+    between \acp{PE} or between threads within the same \ac{PE}.  A call to
+    \FUNC{shmem\_wait} blocks until the value of
+    \VAR{ivar} at the calling \ac{PE} is not equal to \VAR{cmp\_value}.  A call
+    to \FUNC{shmem\_wait\_until} blocks until the value of \VAR{ivar} at the
+    calling \ac{PE} satisfies the wait condition specified by the comparison
+    operator, \VAR{cmp}, and comparison value, \VAR{cmp\_value}.
+
+    Implementations must ensure that \FUNC{shmem\_wait} and
+    \FUNC{shmem\_wait\_until} do not return before the update of the memory
+    indicated by \VAR{ivar} is fully complete.
+}
+
+\apireturnvalues{
+  None
+}
+
+\apinotes{
+  As of \openshmem[1.4], the \FUNC{shmem\_wait} routine is deprecated;
+  however, \FUNC{shmem\_wait} is equivalent to \FUNC{shmem\_wait\_until}
+  where \VAR{cmp} is \CONST{SHMEM\_CMP\_NE}.
+}
+
+\apiimpnotes{
+  Some platforms may allow wait operations to efficiently poll or block on an
+  update to \VAR{ivar}.  On others, an atomic read operation may be needed to
+  observe updates to \VAR{ivar}.  On platforms where atomic read operations
+  incur high overhead, implementations may be able to reduce the number of
+  atomic reads performed by using non-atomic reads of \VAR{ivar} to wait for a
+  change to occur, followed by an atomic read operation to fetch the updated
+  value.
+}
+
+\end{apidefinition}

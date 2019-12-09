@@ -1,0 +1,73 @@
+\apisummary{
+    Destroy a communication context.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_ctx\_destroy}@(shmem_ctx_t ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{Handle to the context that will be destroyed.}
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_ctx\_destroy} destroys a context that was created by a call to
+    \FUNC{shmem\_ctx\_create} or \FUNC{shmem\_team\_create\_ctx}.
+    It is the user's responsibility to ensure that
+    the context is not used after it has been destroyed, for example when the
+    destroyed context is used by multiple threads.  This function
+    performs an implicit quiet operation on the given context before it is freed.
+    If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
+    performed.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    Destroying a context makes it impossible for the user to complete
+    communication operations that are pending on that context.  This includes
+    nonblocking communication operations, whose local buffers are only returned
+    to the user after the operations have been completed.  An implicit quiet is
+    performed when freeing a context to avoid this ambiguity.
+
+    A context with the \CONST{SHMEM\_CTX\_PRIVATE} option enabled must be
+    destroyed by the thread that created it.
+}
+
+\begin{apiexamples}
+
+    \apicexample
+    {The following example demonstrates the use of contexts in a multithreaded
+    \Cstd[11] program that uses OpenMP for threading.  This example shows the
+    shared counter load balancing method and illustrates the use of contexts
+    for thread isolation.}
+    {./example_code/shmem_ctx.c}
+    {}
+
+    \apicexample
+    {The following example demonstrates the use of contexts in a
+    single-threaded \Cstd[11] program that performs a summation reduction where
+    the data contained in the \VAR{in\_buf} arrays on all \acp{PE} is reduced into
+    the \VAR{out\_buf} arrays on all \acp{PE}.  The buffers are divided into
+    segments and processing of the segments is pipelined.  Contexts are used
+    to overlap an all-to-all exchange of data for segment \VAR{p} with the
+    local reduction of segment \VAR{p-1}.}
+    {./example_code/shmem_ctx_pipelined_reduce.c}
+    {}
+
+    \apicexample
+    {The following example demonstrates the use of \CONST{SHMEM\_CTX\_INVALID}
+    in a \Cstd[11] program that uses thread-local storage to provide each
+    thread an implicit context handle via a ``library'' put routine without
+    explicit management of the context handle from ``user'' code.}
+    {./example_code/shmem_ctx_invalid.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}
+

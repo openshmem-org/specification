@@ -1,0 +1,42 @@
+\TableIndex{Library Handles}
+\TableIndex{Handles}
+
+The \openshmem library provides a set of predefined named constant handles.
+All named constants can be used in initialization expressions or assignments,
+but not necessarily in array declarations or as labels in \Cstd switch statements.
+This implies named constants to be link-time but not necessarily compile-time
+constants.
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\hline
+\textbf{Handle} & \textbf{Description}
+\tabularnewline \hline
+\endhead
+%%
+\LibHandleDecl{SHMEM\_TEAM\_WORLD} &
+Handle of type \CTYPE{shmem\_team\_t} that corresponds to the
+default team of all \acp{PE} in the \openshmem program.  All point-to-point
+communication operations and collective synchronizations that do not specify a team
+are performed on the default team.
+See Section~\ref{subsec:team} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibHandleDecl{SHMEM\_TEAM\_SHARED} &
+Handle of type \CTYPE{shmem\_team\_t} that corresponds to a team of \acp{PE}
+that share a memory domain. When this handle is used by some \ac{PE},
+it will refer to the team of all \acp{PE} that would return a non-null
+pointer from \FUNC{shmem\_ptr} for symmetric objects on that \ac{PE},
+and vice versa. This means that symmetric objects on each \ac{PE} are
+directly load/store accessible by all \acp{PE} in the team.
+See Section~\ref{subsec:team} for more detail about its use.
+\tabularnewline \hline
+%%
+\LibHandleDecl{SHMEM\_CTX\_DEFAULT} &
+Handle of type \CTYPE{shmem\_ctx\_t} that corresponds to the
+default communication context.  All point-to-point communication operations
+and synchronizations that do not specify a context are performed on the
+default context.
+See Section~\ref{sec:ctx} for more detail about its use.
+\tabularnewline \hline
+%%
+\end{longtable}

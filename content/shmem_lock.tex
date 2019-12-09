@@ -4,51 +4,57 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void shmem_clear_lock(long *lock);
-void shmem_set_lock(long *lock);
-int shmem_test_lock(long *lock);
+void @\FuncDecl{shmem\_clear\_lock}@(long *lock);
+void @\FuncDecl{shmem\_set\_lock}@(long *lock);
+int @\FuncDecl{shmem\_test\_lock}@(long *lock);
 \end{Csynopsis}
-
-\begin{Fsynopsis}
-INTEGER lock, SHMEM_TEST_LOCK
-CALL SHMEM_CLEAR_LOCK(lock)
-CALL SHMEM_SET_LOCK(lock)
-I = SHMEM_TEST_LOCK(lock)
-\end{Fsynopsis}
 
 \begin{apiarguments}
 \apiargument{IN}{lock}{A symmetric data object that is a scalar variable or an array
-    of  length \CONST{1}.  This data  object  must  be set to \CONST{0} on all
-    \acp{PE} prior to the first use.  \VAR{lock}  must  be  of type \CONST{long}.
-    When using \Fortran, it must be of default kind.}
+    of length \CONST{1}.  This data object must be set to \CONST{0} on all
+    \acp{PE} prior to the first use.  \VAR{lock} must be of type \CONST{long}.}
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_set\_lock} routine sets a mutual exclusion lock after  waiting
-    for  the lock  to be freed by any other \ac{PE} currently holding the lock.
-    Waiting \acp{PE} are assured of getting the lock in a first-come, first-served
-    manner.  The \FUNC{shmem\_clear\_lock} routine releases a lock  previously set
-    by \FUNC{shmem\_set\_lock} after ensuring that all local and remote	 stores
-    initiated in the critical region are complete.  The \FUNC{shmem\_test\_lock}
-    routine sets a mutual exclusion lock only if it is currently cleared.  By using
-    this routine, a \ac{PE} can avoid blocking on a set lock.  If the lock is
-    currently set, the routine returns without waiting.  These routines are
-    appropriate for protecting a critical region from simultaneous update by
-    multiple \acp{PE}.
+    The \FUNC{shmem\_set\_lock} routine sets a mutual exclusion lock after
+    waiting for the lock to be freed by any other \ac{PE} currently holding
+    the lock.  Waiting \acp{PE} are assured of getting the lock in a
+    first-come, first-served manner.  The \FUNC{shmem\_test\_lock} routine sets
+    a mutual exclusion lock only if it is currently cleared.  By using this
+    routine, a \ac{PE} can avoid blocking on a set lock.  If the lock is
+    currently set, the routine returns without waiting.  The
+    \FUNC{shmem\_clear\_lock} routine releases a lock previously set by
+    \FUNC{shmem\_set\_lock} or \FUNC{shmem\_test\_lock} after performing a
+    quiet operation on the default context to ensure that all symmetric memory
+    accesses that occurred during the critical region are complete.  These
+    routines are appropriate for protecting a critical region from simultaneous
+    update by multiple \acp{PE}.
+
+    The \openshmem lock API provides a non-reentrant mutex.  Thus, a call to
+    \FUNC{shmem\_set\_lock} or \FUNC{shmem\_test\_lock} when the calling PE
+    already holds the given lock will result in undefined behavior.  In a
+    multithreaded \openshmem program, the user must ensure that such calls do
+    not occur.
 }
 
 \apireturnvalues{
-    The \FUNC{shmem\_test\_lock} routine returns \CONST{0} if  the lock  was
-    originally cleared and  this  call was  able  to set the lock.  A value of
+    The \FUNC{shmem\_test\_lock} routine returns \CONST{0} if the lock was
+    originally cleared and this call was able to set the lock. A value of
     \CONST{1} is returned if the lock had been set and the call returned without
     waiting to set the lock.
 }
 
 \apinotes{
     The term symmetric data object is defined in Section \ref{subsec:memory_model}.
-    The lock variable should always be initialized to zero and accessed only by the \openshmem locking
-    \ac{API}.  Changing the value of the lock variable by other means without using
-    the \openshmem \ac{API}, can lead to undefined behavior.
+
+    The lock variable must be initialized to zero before any PE performs an
+    \openshmem lock operation on the given variable.  Accessing an in-use lock
+    variable using any method other than the \openshmem lock API, e.g. using
+    local load/store, RMA, or AMO operations, results in undefined behavior.
+
+    Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior to calling the
+    \FUNC{shmem\_clear\_lock} routine to ensure completion of operations issued
+    on additional contexts.
 }
 
 \begin{apiexamples}

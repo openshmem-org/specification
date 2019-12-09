@@ -1,148 +1,207 @@
 \apisummary{
-    Performs arithmetic and logical operations across a set of \acp{PE}.
+    The following functions perform reduction operations across all
+    \acp{PE} in a set of \acp{PE}.
 }
 
 \begin{apidefinition}
 
-\textbf{AND} \newline
-Performs a bitwise AND function across a set of processing elements (\acp{PE}).\newline
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      \TYPE              & \TYPENAME  & \multicolumn{3}{c|}{Operations Supporting \TYPE}\\ \hline
+      unsigned char      & uchar      & AND, OR, XOR & & \\ \hline
+      short              & short      & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned short     & ushort     & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      int                & int        & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned int       & uint       & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      long               & long       & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned long      & ulong      & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline  
+      long long          & longlong   & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      unsigned long long & ulonglong  & AND, OR, XOR & MAX, MIN & SUM, PROD \\ \hline
+      float              & float      & & MAX, MIN & SUM, PROD \\ \hline
+      double             & double     & & MAX, MIN & SUM, PROD \\ \hline
+      long double        & longdouble & & MAX, MIN & SUM, PROD \\ \hline
+      double \_Complex   & complexd   & & & SUM, PROD \\ \hline
+      float  \_Complex   & complexf   & & & SUM, PROD \\ \hline
+    \end{tabular}
+    \TableCaptionRef{Reduction Types, Names and Supporting Operations}
+    \label{reducetypes}
+  \end{center} 
+\end{table}
+
+
+\paragraph{AND}
+Performs a bitwise AND reduction across a set of \acp{PE}.\newline
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer types supported for the AND operation as specified by Table \ref{reducetypes}.
+
+%% C/C++
 \begin{Csynopsis}
-void shmem_short_and_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_and_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_long_and_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longlong_and_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
+\end{Csynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{CsynopsisCol}
+
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+\end{CsynopsisCol}
+\end{DeprecateBlock}
+where \TYPE{} is one of the integer types supported for the AND operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
+
+\paragraph{OR}
+Performs a bitwise OR reduction across a set of \acp{PE}.\newline
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer types supported for the OR operation as specified by Table \ref{reducetypes}.
+
+%% C/C++
+\begin{Csynopsis}
+\end{Csynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{CsynopsisCol}
+
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+\end{CsynopsisCol}
+\end{DeprecateBlock}
+where \TYPE{} is one of the integer types supported for the OR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
+
+\paragraph{XOR}
+Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer types supported for the XOR operation as specified by Table \ref{reducetypes}.
+
+%% C/C++
+\begin{Csynopsis}
+\end{Csynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{CsynopsisCol}
+
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+\end{CsynopsisCol}
+\end{DeprecateBlock}
+where \TYPE{} is one of the integer types supported for the XOR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
+
+\paragraph{MAX}
+Performs a maximum-value reduction across a set of \acp{PE}.\newline
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer or real types supported for the MAX operation as specified by Table \ref{reducetypes}.
+
+%% C/C++
+\begin{Csynopsis}
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL SHMEM_INT4_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_AND_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{CsynopsisCol}
 
-\bigskip
-\textbf{MAX} \newline
-Performs a maximum function reduction across a set of processing elements (\acp{PE}).\newline
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+\end{CsynopsisCol}
+\end{DeprecateBlock}
+where \TYPE{} is one of the integer or real types supported for the MAX operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
+
+\paragraph{MIN}
+Performs a minimum-value reduction across a set of \acp{PE}.\newline
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer or real types supported for the MIN operation as specified by Table \ref{reducetypes}.
+
+%% C/C++
 \begin{Csynopsis}
-void shmem_short_max_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_max_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_max_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_max_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_max_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_max_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_max_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL SHMEM_INT4_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_MAX_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{CsynopsisCol}
 
-\bigskip
-\textbf{MIN} \newline
-Performs a minimum function reduction across a set of processing elements (\acp{PE}).\newline
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+\end{CsynopsisCol}
+\end{DeprecateBlock}
+where \TYPE{} is one of the integer or real types supported for the MIN operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
+
+\paragraph{SUM}
+Performs a sum reduction across a set of \acp{PE}.\newline
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation as specified by Table \ref{reducetypes}.
+
+%% C/C++
 \begin{Csynopsis}
-void shmem_short_min_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_min_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_min_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_min_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_min_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_min_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_min_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL SHMEM_INT4_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_MIN_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{CsynopsisCol}
 
-\bigskip
-\textbf{SUM} \newline
-Performs a sum reduction across a set of processing elements (\acp{PE}).\newline
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+\end{CsynopsisCol}
+\end{DeprecateBlock}
+where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
+
+\paragraph{PROD}
+Performs a product reduction across a set of \acp{PE}.\newline
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation as specified by Table \ref{reducetypes}.
+
+%% C/C++
 \begin{Csynopsis}
-void shmem_complexd_sum_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
-void shmem_complexf_sum_to_all(float _Complex *dest, const float _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
-void shmem_short_sum_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_sum_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_sum_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_sum_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_sum_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride,int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_sum_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_sum_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL SHMEM_COMP4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_COMP8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_SUM_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_reduce}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{CsynopsisCol}
 
-\bigskip
-\textbf{PROD} \newline
-Performs a product reduction across a set of processing elements (\acp{PE}).\newline
-\begin{Csynopsis}
-void shmem_complexd_prod_to_all(double _Complex *dest, const double _Complex *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double _Complex *pWrk, long |\mbox{*pSync);}|
-void shmem_complexf_prod_to_all(float _Complex *dest, const float _Complex *source, int |\mbox{nreduce,}| int PE_start, int logPE_stride, int PE_size, float _Complex *pWrk, long *pSync);
-void shmem_short_prod_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_prod_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_double_prod_to_all(double *dest, const double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, double *pWrk, long *pSync);
-void shmem_float_prod_to_all(float *dest, const float *source, int nreduce, int PE_start, int logPE_stride, int PE_size, float *pWrk, long *pSync);
-void shmem_long_prod_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longdouble_prod_to_all(long double *dest, const long double *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long double *pWrk, long *pSync);
-void shmem_longlong_prod_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
-\end{Csynopsis}
-
-\begin{Fsynopsis}
-CALL SHMEM_COMP4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_COMP8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL4_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL8_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_REAL16_PROD_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
-
-\bigskip
-\textbf{OR} \newline
-Performs  a  bitwise  OR  function reduction across a set of processing elements (\acp{PE}).\newline
-\begin{Csynopsis}
-void shmem_short_or_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_or_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_long_or_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longlong_or_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
-\end{Csynopsis}
-
-\begin{Fsynopsis}
-CALL SHMEM_INT4_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|
-CALL SHMEM_INT8_OR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, |\mbox{pSync)}|	
-\end{Fsynopsis}
-
-\bigskip
-\textbf{XOR}\newline
-Performs  a  bitwise  EXCLUSIVE OR reduction across a set of processing elements (\acp{PE}).\newline
-\begin{Csynopsis}
-void shmem_short_xor_to_all(short *dest, const short *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
-void shmem_int_xor_to_all(int *dest, const int *source, int nreduce, int PE_start, int logPE_stride, int PE_size, int *pWrk, long *pSync);
-void shmem_long_xor_to_all(long *dest, const long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long *pWrk, long *pSync);
-void shmem_longlong_xor_to_all(long long *dest, const long long *source, int nreduce, int PE_start, int logPE_stride, int PE_size, long long *pWrk, long *pSync);
-\end{Csynopsis}
-
-\begin{Fsynopsis}
-CALL SHMEM_INT4_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_size, pWrk, pSync)
-\end{Fsynopsis}
+\begin{DeprecateBlock}
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}@(TYPE *dest, const TYPE *source, int nreduce, int PE_start, int logPE_stride, int PE_size, short *pWrk, long *pSync);
+\end{CsynopsisCol}
+\end{DeprecateBlock}
+where \TYPE{} is one of the integer, real, or complex types supported for the PROD operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \begin{apiarguments}
 
-\apiargument{IN}{dest}{A symmetric array, of length \VAR{nreduce} elements, to
+\apiargument{IN}{team}{The team over which to perform the operation.}%
+
+\apiargument{OUT}{dest}{A symmetric array, of length \VAR{nreduce} elements, to
     receive the result of the reduction routines.  The data type of \dest{} varies
     with the version of the reduction routine being called.  When calling from
     \CorCpp, refer to the SYNOPSIS section for data type information.}
@@ -150,178 +209,120 @@ CALL SHMEM_INT8_XOR_TO_ALL(dest, source, nreduce, PE_start, logPE_stride, PE_siz
     contains one element for each separate reduction routine.  The \source{}
     argument must have the same data type as \dest.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays.  \VAR{nreduce} must be of type integer.  When using \Fortran, it
-    must be a default integer value.}
-\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the \activeset{} of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.  When using \Fortran,
-    it must be a default integer value.}
+    arrays. In teams based API calls, \VAR{nreduce} must be of type size\_t.
+    In deprecated active-set based API calls,
+    \VAR{nreduce} must be of type integer.}
+
+\begin{DeprecateBlock}
+\apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
+    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
-    \ac{PE} numbers in the \activeset.  \VAR{logPE\_stride} must be of type integer.
-    When using \Fortran, it must be a default integer value.}
-\apiargument{IN}{PE\_size}{The number of \acp{PE} in the \activeset.
-    \VAR{PE\_size} must be of type integer.  When using \Fortran, it must be a
-    default integer value.}
-\apiargument{IN}{pWrk}{A symmetric work array. The \VAR{pWrk} argument must have the
-    same data type as \dest. In \CorCpp, this contains max(\VAR{nreduce}/2 + 1,
-    \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}) elements. In \Fortran, this
-    contains max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
+    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.}
+\apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
+    \VAR{PE\_size} must be of type integer.}
+\apiargument{IN}{pWrk}{
+    A symmetric work array of size at least
+    max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
     elements.}
-\apiargument{IN}{pSync}{A symmetric work array. In \CorCpp, \VAR{pSync} must be of
-    type long and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}. In \Fortran, \VAR{pSync}
-    must be of type integer and size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.  When
-    using \Fortran, it must be a default integer value. Every element of this array
-    must be initialized with the value \CONST{SHMEM\_SYNC\_VALUE} (in \CorCpp) or
-    \CONST{SHMEM\_SYNC\_VALUE} (in \Fortran) before any of the \acp{PE} in the
-    \activeset{} enter the reduction routine.}
-    
+\apiargument{IN}{pSync}{
+    A symmetric work array of size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.
+    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
+    Every element of this array must be initialized with the value
+    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
+    enter the reduction routine.}
+\end{DeprecateBlock}
+
 \end{apiarguments}
 
 \apidescription{
-    \openshmem reduction routines compute one or more reductions across symmetric
+    \openshmem reduction routines are collective routines over an active set or
+    existing \openshmem team that compute one or more reductions across symmetric
     arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
-    across a set of values.	 
-    
+    across a set of values.
+
     The \VAR{nreduce} argument determines the number of separate reductions to
-    perform.  The \source{} array on all \acp{PE} in the \activeset{} provides one
-    element for each reduction.  The results of the reductions are placed in the
-    \dest{} array on all \acp{PE} in the \activeset.  The \activeset{} is defined
-    by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
+    perform.  The \source{} array on all \acp{PE} participating in the reduction
+    provides one element for each reduction.  The results of the reductions are placed in the
+    \dest{} array on all \acp{PE} participating in the reduction.
     
     The \source{} and \dest{} arrays may be the same array, but they may not be
-    overlapping arrays.
-    
-    As with all \openshmem collective routines, each of these routines assumes
-    that only \acp{PE} in the \activeset{} call the routine.  If a \ac{PE} not in
-    the \activeset{} calls an \openshmem collective routine, undefined behavior
-    results.
-    
-    The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride}, and
-    \VAR{PE\_size} must be equal on all \acp{PE} in the \activeset. The same \dest{}
-    and \source{} arrays, and the same \VAR{pWrk} and \VAR{pSync} work arrays, must
-    be passed to all \acp{PE} in the \activeset.
-    %FIXME: Reword 'the following conditions must be met.'
-    Before any \ac{PE} calls a reduction routine, the
-    following conditions must be met (synchronization via a \OPR{barrier} or some other
-    method is often needed to ensure this): The \VAR{pWrk} and \VAR{pSync} arrays
-    on all \acp{PE} in the \activeset{} are not still in use from a prior call to a
-    collective \openshmem routine.  The \dest{} array on all \acp{PE} in the
-    \activeset{} is ready to accept the results of the \OPR{reduction}.
+    overlapping arrays. The same \dest{} and \source{} arrays
+    must be passed to all \acp{PE} participating in the reduction.
+
+    Team-based reduction routines operate over all \acp{PE} in the provided team argument. All
+    \acp{PE} in the provided team must participate in the reduction. If an invalid team handle
+    or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to this routine, the behavior is undefined.
+
+    Active-set-based sync routines operate over all \acp{PE} in the active set
+    defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
+
+    As with all active set-based collective routines,
+    each of these routines assumes
+    that only \acp{PE} in the active set call the routine.  If a \ac{PE} not in
+    the active set calls an active set-based collective routine,
+    the behavior is undefined.
+
+    The values of arguments \VAR{nreduce}, \VAR{PE\_start}, \VAR{logPE\_stride},
+    and \VAR{PE\_size} must be equal on all \acp{PE} in the active set.
+    The same \VAR{pWrk} and \VAR{pSync} work arrays must be passed to all
+    \acp{PE} in the active set.
+
+    Before any \ac{PE} calls a reduction routine, the following conditions must be ensured:
+    \begin{itemize}
+    \item The \dest{} array on all \acp{PE} participating in the reduction
+      is ready to accept the results of the \OPR{reduction}.
+    \item If using active-set-based routines, the
+      \VAR{pWrk} and \VAR{pSync} arrays on all \acp{PE} in the
+      active set are not still in use from a prior call to a collective
+      \openshmem routine.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
     
     Upon return from a reduction routine, the following are true for the local
-    \ac{PE}: The \dest{} array is updated and the \source{} array may be safely reused.  
-    The values in the \VAR{pSync} array are
-    restored to the original values.
+    \ac{PE}:
+    \begin{itemize}
+    \item The \dest{} array is updated and the \source{} array may be safely reused.
+    \item If using active-set-based routines,
+    the values in the \VAR{pSync} array are restored to the original values.
+    \end{itemize}
 
-    The sum and product reduction routines include complex-typed interfaces
-    for the \Cstd API only.
-    When the \Cstd translation environment does not support complex types%
-    \footnote{That is, under \Cstd language standards prior to \Cstd[99] or
-      under \Cstd[11] when \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1},
-    an \openshmem implementation is not required to provide support for
-    these complex-typed interfaces.
+    The complex-typed interfaces are only provided for sum and product reductions.
+    When the \Cstd translation environment does not support complex types
+    \footnote{That is, under \Cstd language standards prior to \Cstd[99] or under \Cstd[11]
+    when \CONST{\_\_STDC\_NO\_COMPLEX\_\_} is defined to 1}, an \openshmem
+    implementation is not required to provide support for these
+    complex-typed interfaces.
 }
-
-\apidesctable{ 
-    When calling from \Fortran, the \dest{} date types are as follows:
-}{Routine}{Data type}
-    \apitablerow{shmem\_int8\_and\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_and\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_comp8\_max\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_max\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_max\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_max\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real16\_max\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_int4\_min\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_min\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_min\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_min\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_min\_to\_all}{Real,with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_sum\_to\_all}{Complex, with an element size equal to two 4-byte real values.}
-    \apitablerow{shmem\_comp8\_sum\_to\_all}{Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_sum\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_sum\_to\_all}{Integer, with an element size of 8 bytes..}
-    \apitablerow{shmem\_real4\_sum\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_sum\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_sum\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_comp4\_prod\_to\_all}{ Complex, with an element size equal to two 4-byte real values. }		 
-    \apitablerow{shmem\_comp8\_prod\_to\_all}{ Complex, with an element size equal to two 8-byte real values.}
-    \apitablerow{shmem\_int4\_prod\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_prod\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real4\_prod\_to\_all}{Real, with an element size of 4 bytes.}
-    \apitablerow{shmem\_real8\_prod\_to\_all}{Real, with an element size of 8 bytes.}
-    \apitablerow{shmem\_real16\_prod\_to\_all}{Real, with an element size of 16 bytes.}
-    \apitablerow{shmem\_int8\_or\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_or\_to\_all}{Integer, with an element size of 4 bytes.}
-    \apitablerow{shmem\_int8\_xor\_to\_all}{Integer, with an element size of 8 bytes.}
-    \apitablerow{shmem\_int4\_xor\_to\_all}{Integer, with an element size of 4 bytes.}
 
 \apireturnvalues{
-    None.
+  Zero on successful local completion. Nonzero otherwise.
 }
 
-\apinotes{  
+\apinotes{
     All \openshmem reduction routines reset the values in \VAR{pSync} before they
     return, so a particular \VAR{pSync} buffer need only be initialized the first
     time it is used. The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
-    in the \activeset{} while any of the \acp{PE} participate in processing of an
+    in the active set while any of the \acp{PE} participate in processing of an
     \openshmem reduction routine. Be careful to avoid the following situations: If
     the \VAR{pSync} array is initialized at run time, some type of synchronization
     is needed to ensure that all \acp{PE} in the working set have initialized
     \VAR{pSync} before any of them enter an \openshmem routine called with the
     \VAR{pSync} synchronization array. A \VAR{pSync} or \VAR{pWrk} array can be
     reused in a subsequent reduction routine call only if none of the \acp{PE} in
-    the \activeset{} are still processing a prior reduction routine call that used
+    the active set are still processing a prior reduction routine call that used
     the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be assured only
-    by doing some type of synchronization. 
+    by doing some type of synchronization.
 }
 
 \begin{apiexamples}
 
-\apifexample
-    {This \Fortran reduction example statically initializes the \VAR{pSync} array
-    and finds the logical \OPR{AND} of the integer variable \VAR{FOO} across all
-    even \acp{PE}.}
-    {./example_code/shmem_and_example.f90}
+\apicexample
+    {This \CorCpp reduction example gets integers from an external
+    source (random genererator in this example), tests to see if the \ac{PE} got a valid
+    value, and outputs the sum of values for which all \acp{PE} got a valid
+    value.}
+    {./example_code/shmem_reduce_example.c}
     {}
-    
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{maximum} value of real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_max_example.f90}
-    {}
-
-\apifexample
-    { This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{minimum} value of real variable \VAR{FOO} across all the even
-    \acp{PE}.}
-    {./example_code/shmem_min_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{sum} of the real variable \VAR{FOO} across all even \acp{PE}.}
-    {./example_code/shmem_sum_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the \OPR{product} of the real variable \VAR{FOO} across all the even \acp{PE}.}
-    {./example_code/shmem_prod_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and finds
-    the logical \OPR{OR} of the integer variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_or_example.f90}
-    {}
-
-\apifexample
-    {This \Fortran example statically initializes the \VAR{pSync} array and
-    computes the exclusive \OPR{XOR} of variable \VAR{FOO} across all even
-    \acp{PE}.}
-    {./example_code/shmem_xor_example.f90}
-    {} 
 
 \end{apiexamples}
 

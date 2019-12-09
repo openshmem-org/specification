@@ -1,94 +1,57 @@
 \apisummary{
     The nonblocking get routines provide a method for copying data from a
-    contiguous remote data object on the specified \ac{PE} to the local data object. 
+    contiguous remote data object on the specified \ac{PE} to the local data object.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void shmem_get_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_get\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_get\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void shmem_<TYPENAME>_get_nbi(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_get\_nbi}@(TYPE *dest, const TYPE *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_get\_nbi}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void shmem_get<SIZE>_nbi(void *dest, const void *source, size_t  nelems, int pe);
+void @\FuncDecl{shmem\_get\FuncParam{SIZE}\_nbi}@(void *dest, const void *source, size_t  nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_get\FuncParam{SIZE}\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t  nelems, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \begin{CsynopsisCol}
-void shmem_getmem_nbi(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_getmem\_nbi}@(void *dest, const void *source, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ctx\_getmem\_nbi}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 
-\begin{Fsynopsis}
-INTEGER nelems, pe
-CALL SHMEM_CHARACTER_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_COMPLEX_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_DOUBLE_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET4_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET8_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET32_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET64_NBI(dest, source, nelems, pe)
-CALL SHMEM_GET128_NBI(dest, source, nelems, pe)
-CALL SHMEM_GETMEM_NBI(dest, source, nelems, pe)
-CALL SHMEM_INTEGER_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_LOGICAL_GET_NBI(dest, source, nelems, pe)
-CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        the default context.}
     \apiargument{OUT}{dest}{Local data object to be updated.}
     \apiargument{IN}{source}{Data object on the \ac{PE} identified by \VAR{pe}
         that contains the data to be copied.  This data object must be remotely
         accessible.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When
-        using \Fortran, it must be a constant, variable, or array element of default
-        integer type.}
+        arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.}
     \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.  \VAR{pe} must
-        be of type integer. When using \Fortran, it must be a constant,
-        variable, or array element of default integer type.}
+        be of type integer.}
 \end{apiarguments}
 
 \apidescription{
     The get routines provide a method for copying a contiguous symmetric data
    object from a different \ac{PE} to a contiguous data object on the local
-   \ac{PE}.   The routines return after posting the operation.  The operation is considered 
-    complete after a subsequent call to \FUNC{shmem\_quiet}. 
-    At the completion of \FUNC{shmem\_quiet}, the 
-    data has been delivered to the \dest{} array on the local \ac{PE}. 
+   \ac{PE}.   The routines return after initiating the operation.  The operation is considered
+    complete after a subsequent call to \FUNC{shmem\_quiet}.
+    At the completion of \FUNC{shmem\_quiet}, the
+    data has been delivered to the \dest{} array on the local \ac{PE}.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
-
-\apidesctable{
-    The  \dest{} and \source{} data objects must conform to typing constraints,
-    which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
-
-    \apitablerow{shmem\_getmem\_nbi}{\Fortran: Any noncharacter type. \Cstd:
-        Any  data  type.  nelems is scaled in bytes.}
-    \apitablerow{shmem\_get4\_nbi, shmem\_get32\_nbi}{Any noncharacter type
-        that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_get8\_nbi}{\Cstd: Any noncharacter type that
-        has a storage size equal to \CONST{8} bits.}
-    \apitablerow{}{\Fortran: Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_get64\_nbi}{Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_get128\_nbi}{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}
-    \apitablerow{SHMEM\_CHARACTER\_GET\_NBI}{Elements of type character. \VAR{nelems} is
-    the number  of characters  to transfer. The actual character
-    lengths of the \source{} and \dest{} variables are ignored.}
-    \apitablerow{SHMEM\_COMPLEX\_GET\_NBI}{Elements of type complex of default
-       size.}
-    \apitablerow{SHMEM\_DOUBLE\_GET\_NBI}{\Fortran: Elements of type double precision.}
-    \apitablerow{SHMEM\_INTEGER\_GET\_NBI}{Elements of type integer.}
-    \apitablerow{SHMEM\_LOGICAL\_GET\_NBI}{Elements of type logical.}
-    \apitablerow{SHMEM\_REAL\_GET\_NBI}{Elements of type real.}
 
 \apireturnvalues{
     None.
@@ -97,9 +60,6 @@ CALL SHMEM_REAL_GET_NBI(dest, source, nelems, pe)
 \apinotes{
     See Section \ref{subsec:memory_model} for a definition of the term
     remotely accessible.
-    When using \Fortran, data types must be of default size.  For example, a real
-    variable must be declared as \CONST{REAL}, \CONST{REAL*4},  or
-    \CONST{REAL(KIND=KIND(1.0))}.
 }
 
 \end{apidefinition}
