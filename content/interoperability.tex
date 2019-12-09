@@ -137,8 +137,8 @@ and \ac{MPI} program.
 The following example demonstrates an alternative approach for managing the mapping
 of process identification numbers in a hybrid program. The program creates a
 new MPI communicator, named \VAR{shmem\_comm}, that contains all
-processes in \VAR{MPI\_COMM\_WORLD} and uses the same \ac{MPI} rank and
-\openshmem \ac{PE} numbering.
+processes in \VAR{MPI\_COMM\_WORLD} and each process has the same \ac{MPI} rank
+number as its \openshmem \ac{PE} number.
 
 \lstinputlisting[language={C}, tabsize=2,
       basicstyle=\ttfamily\footnotesize]
