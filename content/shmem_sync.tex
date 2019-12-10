@@ -1,8 +1,7 @@
 \apisummary{
-    Registers the arrival of a \ac{PE} at a synchronization point and suspends
-    execution until all other \acp{PE} in a given \openshmem team or active set
-    arrive at a synchronization point. For multithreaded programs, execution is suspended
-    as specified by the threading model (Section \ref{subsec:thread_support}).
+    Registers the arrival of a \ac{PE} at a synchronization point.
+    This routine does not return until all other \acp{PE} in a given OpenSHMEM team
+    or active set arrive at this synchronization point.
 }
 
 \begin{apidefinition}
