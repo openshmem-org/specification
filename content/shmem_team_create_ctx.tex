@@ -46,6 +46,11 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
   respect to the associated \ac{PE} team.
   That is, all point-to-point routines operating on this context will use
   team-relative \ac{PE} numbering.
+
+  If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
+  then a nonzero value is returned and \VAR{ctx} is set to
+  \LibConstRef{SHMEM\_CTX\_INVALID}.
+  If \VAR{team} is otherwise invalid, the behavior is undefined.
 }
 
 \apireturnvalues{

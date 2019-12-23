@@ -26,10 +26,10 @@ int @\FuncDecl{shmem\_ctx\_get\_team}@(shmem_ctx_t ctx, shmem_team_t *team);
   \FUNC{shmem\_ctx\_create}, the \VAR{team} is assigned the handle value
   \LibHandleRef{SHMEM\_TEAM\_WORLD}.
 
-  When \VAR{ctx} is an invalid context, if \VAR{ctx} compares equal to
-  \LibConstRef{SHMEM\_CTX\_INVALID}, then \VAR{team} is assigned the
-  value \LibConstRef{SHMEM\_TEAM\_INVALID} and a nonzero value is
-  returned; otherwise, the behavior is undefined.
+  If \VAR{ctx} compares equal to \LibConstRef{SHMEM\_CTX\_INVALID},
+  then \VAR{team} is assigned the value
+  \LibConstRef{SHMEM\_TEAM\_INVALID} and a nonzero value is returned.
+  If \VAR{ctx} is otherwise invalid, the behavior is undefined.
 
   If \VAR{team} is a null pointer, the behavior is undefined.
 }
