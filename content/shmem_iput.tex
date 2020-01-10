@@ -26,21 +26,18 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
     \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
         When this argument is not provided, the operation is performed on
         the default context.}
-    \apiargument{OUT}{dest}{Array to be updated on the remote \ac{PE}. This data
-        object  must be remotely accessible.}
-    \apiargument{IN}{source}{Array containing the data to be copied.}
+    \apiargument{OUT}{dest}{Symmetric address of the destination array data object.
+        The type of \dest{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{source}{Local address of the array containing the data to be copied.
+        The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
         array.  The stride is scaled by the element size of the \dest{} array.  A
-        value of \CONST{1} indicates contiguous data.  \VAR{dst} must be of type
-        \CTYPE{ptrdiff\_t}.}
+        value of \CONST{1} indicates contiguous data.}
     \apiargument{IN}{sst}{The  stride between consecutive elements of the
         \source{} array.  The stride is scaled by the element size of the \source{}
-        array.  A  value of \CONST{1} indicates contiguous data.  \VAR{sst} must be
-        of type \CTYPE{ptrdiff\_t}.}
-    \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays.  \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.  \VAR{pe} must be
-        of type integer.}
+        array.  A  value of \CONST{1} indicates contiguous data.}
+    \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{} arrays.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
 

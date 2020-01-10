@@ -33,13 +33,16 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
     \apiargument{IN}{ctx}{A context handle specifying the context on which to
     perform the operation. When this argument is not provided, the operation is
     performed on the default context.}
-    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}.
-    This data object must be remotely accessible.}
-    \apiargument{IN}{source}{Data object containing the data to be copied.}
+    \apiargument{OUT}{dest}{Symmetric address of the data object to be updated
+    on the remote \ac{PE}.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{source}{Local address of data object containing the data
+    to be copied.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd.}
-    \apiargument{OUT}{sig\_addr}{Data object to be updated on the remote
-    \ac{PE} as the signal. This signal data object must be remotely accessible.}
+    arrays.}
+    \apiargument{OUT}{sig\_addr}{Symmetric address of the signal data object to
+    be updated on the remote \ac{PE} as a signal.}
     \apiargument{IN}{signal}{Unsigned 64-bit value that is used for updating the
     remote \VAR{sig\_addr} signal data object.}
     \apiargument{IN}{sig\_op}{Signal operator that represents the type of update

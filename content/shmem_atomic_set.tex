@@ -38,9 +38,10 @@ where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
 \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
     the default context.}
-\apiargument{OUT}{dest}{The remotely accessible data object to be set on
-    the remote \ac{PE}.}
-\apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.}
+\apiargument{OUT}{dest}{Symmetric address of the destination data object.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{value}{The operand to the atomic set operation.
+    The type of \VAR{value} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \VAR{dest} is to be updated.}
 
