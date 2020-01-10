@@ -19,9 +19,9 @@ int @\FuncDecl{shmem\_team\_n\_pes}@(shmem_team_t team);
   This will always be a value between $1$ and $N$, where $N$ is the
   total number of \acp{PE} running in the \openshmem program.
 
-  When \VAR{team} specifies an invalid team, if \VAR{team} compares
-  equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then the value
-  \CONST{-1} is returned; otherwise, the behavior is undefined.
+  If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
+  then the value \CONST{-1} is returned.
+  If \VAR{team} is otherwise invalid, the behavior is undefined.
 }
 
 \apireturnvalues{

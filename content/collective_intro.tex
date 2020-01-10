@@ -123,6 +123,11 @@ a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
 call to \FUNC{shmem\_team\_sync} on the default team.
 
 \subsubsection*{Error codes returned from collectives}
-\CorCpp routines that return an integer error code follow the convention that \CONST{0} indicates successful local completion of the operation. This is considered a best effort of the implementation to indicate that all required local operations have been performed correctly inside the routine and the internal \openshmem state on the calling \ac{PE} is consistent with the description of the routine and its arguments upon completion. Implementations may use an integer return value from a routine to define integer error codes specific to the implementation as long as those codes are not already explicitly defined for that routine by the \openshmem specification.
 
-Collective operations involving many \acp{PE} may return values indicating success while other \acp{PE} are still executing the collective operation. Return values indicating success of a collective routine on one \ac{PE} do not indicate that all \acp{PE} involved in the collective operation will return from the routine successfully. In the case where successful local completion of a collective implies the success of some global operation, such as team creation resulting in a valid team on all involved \acp{PE}, the implementation should not return \CONST{0} from the routine if the implied or stated global guarantees of the routine are not met.
+Collective operations involving multiple \acp{PE} may return values
+indicating success while other \acp{PE} are still executing the
+collective operation. Return values indicating success or failure of a
+collective routine on one \ac{PE} may not indicate that all \acp{PE}
+involved in the collective operation will return the same value. Some
+operations, such as team creation, must return identical return codes
+across multiple \acp{PE}.
