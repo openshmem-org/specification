@@ -244,10 +244,11 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     perform.  The \source{} array on all \acp{PE} participating in the reduction
     provides one element for each reduction.  The results of the reductions are placed in the
     \dest{} array on all \acp{PE} participating in the reduction.
-    
-    The \source{} and \dest{} arrays may be the same array, but they may not be
-    overlapping arrays. The same \dest{} and \source{} arrays
-    must be passed to all \acp{PE} participating in the reduction.
+
+    The \source{} and \dest{} arguments must either be the same symmetric
+    address, or two different symmetric addresses corresponding to buffers that
+    do not overlap in memory. That is, they must be completely overlapping or
+    completely disjoint.
 
     Team-based reduction routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the reduction. If an invalid team handle
