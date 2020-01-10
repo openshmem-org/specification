@@ -201,13 +201,12 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 
 \apiargument{IN}{team}{The team over which to perform the operation.}%
 
-\apiargument{OUT}{dest}{A symmetric array, of length \VAR{nreduce} elements, to
-    receive the result of the reduction routines.  The data type of \dest{} varies
-    with the version of the reduction routine being called.  When calling from
-    \CorCpp, refer to the SYNOPSIS section for data type information.}
-\apiargument{IN}{source}{ A symmetric array, of length \VAR{nreduce} elements, that
-    contains one element for each separate reduction routine.  The \source{}
-    argument must have the same data type as \dest.}
+\apiargument{OUT}{dest}{Symmetric address of an array, of length \VAR{nreduce} elements, to
+    receive the result of the reduction routines.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{source}{Symmetric address of an array, of length \VAR{nreduce} elements, that
+    contains one element for each separate reduction routine.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
     arrays. In teams based API calls, \VAR{nreduce} must be of type size\_t.
     In deprecated active-set based API calls,
@@ -215,19 +214,17 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
+    \acp{PE}.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
-    \ac{PE} numbers in the active set.  \VAR{logPE\_stride} must be of type integer.}
-\apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.
-    \VAR{PE\_size} must be of type integer.}
+    \ac{PE} numbers in the active set.}
+    \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pWrk}{
-    A symmetric work array of size at least
+    Symmetric address of a work array of size at least
     max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
     elements.}
 \apiargument{IN}{pSync}{
-    A symmetric work array of size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.
-    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    Every element of this array must be initialized with the value
+    Symmetric address of a work array of size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.
+    Every element of \VAR{pSync} must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter the reduction routine.}
 \end{DeprecateBlock}
@@ -244,10 +241,11 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     perform.  The \source{} array on all \acp{PE} participating in the reduction
     provides one element for each reduction.  The results of the reductions are placed in the
     \dest{} array on all \acp{PE} participating in the reduction.
-    
-    The \source{} and \dest{} arrays may be the same array, but they may not be
-    overlapping arrays. The same \dest{} and \source{} arrays
-    must be passed to all \acp{PE} participating in the reduction.
+
+    The \source{} and \dest{} arguments must either be the same symmetric
+    address, or two different symmetric addresses corresponding to buffers that
+    do not overlap in memory. That is, they must be completely overlapping or
+    completely disjoint.
 
     Team-based reduction routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the reduction. If an invalid team handle
@@ -316,9 +314,9 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 
 \begin{apiexamples}
 
-\apifexample
+\apicexample
     {This \CorCpp reduction example gets integers from an external
-    source (random genererator in this example), tests to see if the \ac{PE} got a valid
+    source (random generator in this example), tests to see if the \ac{PE} got a valid
     value, and outputs the sum of values for which all \acp{PE} got a valid
     value.}
     {./example_code/shmem_reduce_example.c}

@@ -29,14 +29,12 @@ Table~\ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-\apiargument{IN}{ivar}{A remotely accessible integer variable. When using \CorCpp,
-    the type of \VAR{ivar} should match that implied in the SYNOPSIS section.} 
+\apiargument{IN}{ivar}{Local address of a remotely accessible data object.
+    The type of \VAR{ivar} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{cmp}{The compare operator that compares \VAR{ivar} with
-  \VAR{cmp\_value}.
-  When using \CorCpp, it must be of type \CTYPE{int}.}
-\apiargument{IN}{cmp\_value}{\VAR{cmp\_value} must be of type integer.  When
-    using \CorCpp, the type of \VAR{cmp\_value} should match that implied in the
-    SYNOPSIS section.}
+    \VAR{cmp\_value}.}
+\apiargument{IN}{cmp\_value}{The value to be compared with \VAR{ivar}.
+    The type of \VAR{cmp\_value} should match that implied in the SYNOPSIS section.}
 
 \end{apiarguments}
 

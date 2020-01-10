@@ -24,9 +24,10 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
   \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
     the default context.}
-  \apiargument{OUT}{dest}{A pointer to the remotely accessible data object to
-    be updated.}
-  \apiargument{IN}{value}{The operand to the bitwise XOR operation.}
+  \apiargument{OUT}{dest}{Symmetric address of the destination data object.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+  \apiargument{IN}{value}{The operand to the bitwise XOR operation.
+    The type of \VAR{value} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{pe}{An integer value for the \ac{PE} on which \VAR{dest}
     is to be updated.}
 

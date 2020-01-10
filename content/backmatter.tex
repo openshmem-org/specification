@@ -184,7 +184,9 @@ The following cases summarize this behavior:
 \end{longtable}
 
 
-
+\color{ForestGreen}
+\input{content/interoperability}
+\color{black}
 
 \chapter{History of OpenSHMEM}\label{sec:openshmem_history}
 
@@ -519,6 +521,10 @@ Major changes in \openshmem[1.5] include \dots
 
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
+%
+\item Added \FUNC{shmem\_malloc\_with\_hints} interface and corresponding hints
+\CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
+\\ See Section \ref{subsec:shmmallochint} and \ref{subsec:library_constants}.
 %
 \item Added support for nonblocking \ac{AMO} functions.
 \\ See Section \ref{sec:amo-nbi}.
