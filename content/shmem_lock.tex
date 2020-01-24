@@ -10,9 +10,9 @@ int @\FuncDecl{shmem\_test\_lock}@(long *lock);
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{lock}{A symmetric data object that is a scalar variable or an array
+\apiargument{IN}{lock}{Symmetric address of data object that is a scalar variable or an array
     of length \CONST{1}.  This data object must be set to \CONST{0} on all
-    \acp{PE} prior to the first use.  \VAR{lock} must be of type \CONST{long}.}
+    \acp{PE} prior to the first use.}
 \end{apiarguments}
 
 \apidescription{

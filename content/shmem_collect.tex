@@ -36,28 +36,24 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 
 \begin{apiarguments}
 
-\apiargument{IN}{team}{A valid \openshmem team handle.}
+\apiargument{IN}{team}{A valid \openshmem team handle.}%
 
-\apiargument{OUT}{dest}{A symmetric array large enough
+\apiargument{OUT}{dest}{Symmetric address of an array large enough
     to accept the concatenation of the \source{} arrays on all participating \acp{PE}.
-    See table below in this description for allowable data types.}
-\apiargument{IN}{source}{A symmetric data object that can be of any type permissible
-    for the \dest{} argument.}
-\apiargument{IN}{nelems}{The number of elements in the \source{} array. \VAR{nelems}
-    must be of type \VAR{size\_t} for \Cstd.}
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{source}{Symmetric address of the source data object.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{nelems}{The number of elements in the \source{} array.}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
-    \acp{PE}.  \VAR{PE\_start} must be of type integer.}
+    \acp{PE}.}
 \apiargument{IN}{logPE\_stride}{The log (base \CONST{2}) of the stride between
-    consecutive \ac{PE} numbers in the active set. \VAR{logPE\_stride} must be of
-    type integer.}
-\apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set. \VAR{PE\_size}
-    must be of type integer.}
+    consecutive \ac{PE} numbers in the active set.}
+    \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    A symmetric work array of size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
-    In \CorCpp, \VAR{pSync} must be an array of elements of type \CTYPE{long}.
-    Every element of this array must be initialized with the value
+    Symmetric address of a work array of size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
+    Every element of \VAR{pSync} must be initialized with the value
     \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
     enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
 \end{DeprecateBlock}
@@ -109,18 +105,6 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     restored to the original values.
     \end{itemize}
 }
-
-\apidesctable{
-The  \dest{}  and \source{} data  objects must conform to certain typing
-constraints, which are as follows:
-}{Routine}{Data type of \VAR{dest} and \VAR{source}}
-\apitablerow{\FUNC{shmem\_collectmem}, \FUNC{shmem\_fcollectmem}}{\Cstd: Any data  type. \VAR{nelems} is scaled in bytes.}%
-\apitablerow{\FUNC{shmem\_collect64}, \FUNC{shmem\_fcollect64}}%
-    {Any noncharacter type that has an element size of \CONST{64} bits. No \Fortran derived types nor
-    \CorCpp{} structures are allowed.}
-\apitablerow{\FUNC{shmem\_collect32}, \FUNC{shmem\_fcollect32}}%
-    {Any noncharacter type that has an element size of \CONST{32} bits. No \Fortran derived types nor
-    \CorCpp{} structures are allowed.}
 
 \apireturnvalues{
     Zero on successful local completion. Nonzero otherwise.

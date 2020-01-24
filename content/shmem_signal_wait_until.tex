@@ -11,7 +11,7 @@ uint64_t @\FuncDecl{shmem\_signal\_wait\_until}@(uint64_t *sig_addr, int cmp, ui
 
 \begin{apiarguments}
 
-\apiargument{IN}{sig\_addr}{A pointer to a remotely accessible variable.}
+\apiargument{IN}{sig\_addr}{Local address of the source signal variable.}
 \apiargument{IN}{cmp}{The comparison operator that compares \VAR{sig\_addr} with
     \VAR{cmp\_value}.}
 \apiargument{IN}{cmp\_value}{The value against which the object pointed to

@@ -16,12 +16,12 @@ int @\FuncDecl{shmem\_team\_my\_pe}@(shmem_team_t team);
   When \VAR{team} specifies a valid team, the
   \FUNC{shmem\_team\_my\_pe} routine returns the number of the calling
   \ac{PE} within the specified team.
-  The number is an integer between $0$ and $N-1$ for a team of size $N$.
+  The number is an integer between $0$ and $N-1$ for a team containing $N$ \acp{PE}.
   Each member of the team has a unique number.
 
-  When \VAR{team} specifies an invalid team, if \VAR{team} compares
-  equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then the value
-  \CONST{-1} is returned; otherwise, the behavior is undefined.
+  If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
+  then the value \CONST{-1} is returned.
+  If \VAR{team} is otherwise invalid, the behavior is undefined.
 }
 
 \apireturnvalues{

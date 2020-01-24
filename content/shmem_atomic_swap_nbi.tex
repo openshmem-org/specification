@@ -23,11 +23,13 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
   \apiargument{IN}{ctx}{A context handle specifying the context on which to
       perform the operation. When this argument is not provided, the
       operation is performed on the default context.}
-  \apiargument{OUT}{fetch}{Local data object to be updated.}
-  \apiargument{OUT}{dest}{The remotely accessible data object to be
-    updated on the remote \ac{PE}.}
+  \apiargument{OUT}{fetch}{Local address of data object to be updated.
+      The type of \VAR{fetch} should match that implied in the SYNOPSIS section.}
+  \apiargument{OUT}{dest}{Symmetric address of the destination data object.
+      The type of \dest{} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{value}{The value to be atomically written to the remote
-    \ac{PE}.}
+      \ac{PE}.
+      The type of \VAR{value} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
     \dest{} is to be updated.}
 \end{apiarguments}

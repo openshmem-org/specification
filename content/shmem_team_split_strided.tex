@@ -57,12 +57,21 @@ This routine will return a \VAR{new\_team} containing the \ac{PE}
 subset specified by the triplet and ordered by the existing global
 \ac{PE} number.
 
-On successful creation of the new team, the \VAR{new\_team} handle
-will reference a valid team for the subset of \acp{PE} in the parent
-team specified by the triplet.
-Those \acp{PE} in the parent team that are not in the subset specified
-by the triplet will have \VAR{new\_team} assigned to
-\LibConstRef{SHMEM\_TEAM\_INVALID}.
+On successful creation of the new team:
+\begin{itemize}
+\item The \VAR{new\_team} handle will reference a valid team for the
+  subset of \acp{PE} in the parent team specified by the triplet.
+\item Those \acp{PE} in the parent team that are not in the subset
+  specified by the triplet will have \VAR{new\_team} assigned to
+  \LibConstRef{SHMEM\_TEAM\_INVALID}.
+\item \FUNC{shmem\_team\_split\_strided} will return zero to all
+  \acp{PE} in the parent team.
+\end{itemize}
+
+If the new team cannot be created, then \VAR{new\_team} will be
+assigned the value \LibConstRef{SHMEM\_TEAM\_INVALID} and
+\FUNC{shmem\_team\_split\_strided} will return a nonzero value on all
+\acp{PE} in the parent team.
 
 The \VAR{config} argument specifies team configuration parameters, which are
 described in Section~\ref{subsec:shmem_team_config_t}.
@@ -74,20 +83,17 @@ should be created with the default values for all configuration parameters.
 See Section~\ref{subsec:shmem_team_config_t} for field mask names and
 default configuration parameters.
 
-When \VAR{parent\_team} specifies an invalid team, if \VAR{parent\_team}
+If \VAR{parent\_team}
 compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no new team
 will be created and \VAR{new\_team} will be assigned the value
-\LibConstRef{SHMEM\_TEAM\_INVALID}; otherwise, the behavior is undefined.
+\LibConstRef{SHMEM\_TEAM\_INVALID}.  If \VAR{parent\_team} is otherwise invalid, the behavior is undefined.
 
 If an invalid \ac{PE} triplet is provided, then the \VAR{new\_team}
 will not be created.
-
-If \VAR{new\_team} cannot be created, then it will be assigned the value
-\LibConstRef{SHMEM\_TEAM\_INVALID}.
 }
 
 \apireturnvalues{
-  Zero on successful creation of \VAR{new\_team}, nonzero otherwise.
+  Zero on successful creation of \VAR{new\_team}; otherwise, nonzero.
 }
 
 \apinotes{

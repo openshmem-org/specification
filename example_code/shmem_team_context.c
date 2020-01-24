@@ -11,7 +11,7 @@ int my_ctx_translate_pe(shmem_ctx_t src_ctx, int src_pe, shmem_ctx_t dest_ctx)
   if (dest_ctx == SHMEM_CTX_INVALID) {
     return -1;
   }
-  
+
   shmem_team_t src_team, dest_team;
   shmem_ctx_get_team(src_ctx, &src_team);
   shmem_ctx_get_team(dest_ctx, &dest_team);
@@ -37,7 +37,7 @@ void my_send_to_neighbor(shmem_ctx_t ctx, int *val)
     fprintf (stderr, "Send to neighbor fail due to invalid context\n");
     return;
   }
-  
+
   shmem_team_t team;
   shmem_ctx_get_team(ctx, &team);
   int pe = shmem_team_my_pe(team);
@@ -56,7 +56,7 @@ int main()
 
   int npes = shmem_n_pes();
   isum = 0;
-  
+
   shmem_team_t team_2s, team_3s;
   shmem_ctx_t ctx_2s, ctx_3s;
   shmem_team_config_t conf;
@@ -76,7 +76,7 @@ int main()
   my_send_to_neighbor(ctx_3s, &ival3);
 
   // Quiet all contexts and synchronize all PEs to complete the data transfers
-  shmem_ctx_quiet(ctx_2s);  
+  shmem_ctx_quiet(ctx_2s);
   shmem_ctx_quiet(ctx_3s);
   shmem_team_sync(SHMEM_TEAM_WORLD);
 
@@ -89,10 +89,10 @@ int main()
     }
     else {
       // Add up the results on pe 4 of the 3s team, using the 2s team context
-      shmem_ctx_int_atomic_add(ctx_2s, &isum, ival2 + ival3, _pe4_of_3s_in_2s);
+      shmem_ctx_int_atomic_add(ctx_2s, &isum, ival2 + ival3, pe4_of_3s_in_2s);
     }
   }
-  
+
   // Quiet the context and synchronize PEs to complete the operation
   shmem_ctx_quiet(ctx_2s);
   shmem_team_sync(SHMEM_TEAM_WORLD);

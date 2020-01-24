@@ -11,20 +11,22 @@ int @\FuncDecl{shmem\_team\_translate\_pe}@(shmem_team_t src_team, int src_pe,
 \end{Csynopsis}
 
 \begin{apiarguments}
-\apiargument{IN}{src\_team}{A valid SHMEM team handle.}
-\apiargument{IN}{src\_pe}{A \ac{PE} number in src\_team.}
-\apiargument{IN}{dest\_team}{A valid SHMEM team handle.}
+\apiargument{IN}{src\_team}{An \openshmem team handle.}
+\apiargument{IN}{src\_pe}{A \ac{PE} number in \VAR{src\_team}.}
+\apiargument{IN}{dest\_team}{An \openshmem team handle.}
 \end{apiarguments}
 
 \apidescription{
 The \FUNC{shmem\_team\_translate\_pe} routine will translate a given \ac{PE} number
-to the corresponding \ac{PE} number in another team.
+in one team into the corresponding \ac{PE} number in another team.
 Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this routine returns that
 \ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both the
 \VAR{src\_team} and \VAR{dest\_team}, a value of \CONST{-1} is returned.
 
-
-If either of the \VAR{src\_team} or \VAR{dest\_team} handle is invalid, the behavior is undefined.
+If at least one of \VAR{src\_team} and \VAR{dest\_team} compares equal
+to \LibConstRef{SHMEM\_TEAM\_INVALID}, then \CONST{-1} is returned.
+If either of the \VAR{src\_team} or \VAR{dest\_team} handles are
+otherwise invalid, the behavior is undefined.
 }
 
 \apireturnvalues{
