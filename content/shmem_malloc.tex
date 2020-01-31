@@ -45,13 +45,16 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
            
     The \FUNC{shmem\_realloc} routine changes the size of the block to which
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
-    of the block are unchanged up to the lesser of the new and old sizes. If the new
-    size is larger, the newly allocated portion of the block is
+    of the block are unchanged up to the lesser of the new and old sizes.
+	The \FUNC{shmem\_realloc} routine preserves allocation hints, e.g. if `ptr`
+	was allocated by \FUNC{shmem\_malloc\_with\_hints}.
+	If the new size is larger, the newly allocated portion of the block is
     uninitialized.  If \VAR{ptr} is a null pointer, the
     \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc} routine for
     the specified size.  If \VAR{size} is \CONST{0} and \VAR{ptr} is not a
     null pointer, the block to which it points is freed. If the space cannot
-    be allocated, the block to which \VAR{ptr} points is unchanged.
+    be allocated or if hints cannot be preserved, the block to which \VAR{ptr}
+	points is unchanged.
     
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and \FUNC{shmem\_realloc} routines
     are provided  so that multiple \acp{PE} in a program can allocate symmetric,
