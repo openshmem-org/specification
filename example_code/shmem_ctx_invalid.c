@@ -1,13 +1,13 @@
-#include <stddef.h>
-#include <shmem.h>
 #include <omp.h>
+#include <shmem.h>
+#include <stddef.h>
 
 _Thread_local shmem_ctx_t thread_ctx = SHMEM_CTX_INVALID;
 
 void lib_thread_register(void) {
   if (thread_ctx == SHMEM_CTX_INVALID)
     if (shmem_ctx_create(SHMEM_CTX_PRIVATE, &thread_ctx) &&
-        shmem_ctx_create(                0, &thread_ctx))
+        shmem_ctx_create(0, &thread_ctx))
       thread_ctx = SHMEM_CTX_DEFAULT;
 }
 
@@ -57,7 +57,7 @@ int main() {
 #pragma omp for
     for (int i = 0; i < n_pes; i++)
       lib_thread_putmem(dst_bufs[my_pe], src_bufs[i],
-                         count * sizeof(*src_bufs[i]), i);
+                        count * sizeof(*src_bufs[i]), i);
 
     lib_thread_unregister();
   }
