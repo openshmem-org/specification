@@ -31,26 +31,15 @@ where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER pe
-INTEGER*4 SHMEM_INT4_FINC, ires_i4
-ires\_i4 = @\FuncDecl{SHMEM\_INT4\_FINC}@(dest, pe)
-INTEGER*8 SHMEM_INT8_FINC, ires_i8
-ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FINC}@(dest, pe)
-\end{Fsynopsis}
-
-
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{The context on which to perform the operation.
+\apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
-\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated
-    on the remote \ac{PE}. The type of \dest{} should match that implied in the
-    SYNOPSIS section.}
+    the default context.}
+\apiargument{OUT}{dest}{Symmetric address of the destination data object.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
-    \dest{} is to be updated.  When using \Fortran, it must be a default
-    integer value.}
+    \dest{} is to be updated.}
 
 \end{apiarguments}
 
@@ -59,14 +48,9 @@ ires\_i8 = @\FuncDecl{SHMEM\_INT8\_FINC}@(dest, pe)
    These routines perform a fetch-and-increment operation.  The \dest{} on
    \ac{PE} \VAR{pe} is increased by one and the routine returns the previous
    contents of \dest{} as an atomic operation.
+   If the context handle \VAR{ctx} does not correspond to a valid context,
+   the behavior is undefined.
 }
-
-\apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest}}
-
-\apitablerow{SHMEM\_INT4\_FINC}{\CONST{4}-byte integer}
-\apitablerow{SHMEM\_INT8\_FINC}{\CONST{8}-byte integer}
 
 \apireturnvalues{
     The contents that had been at the \dest{} address on the remote \ac{PE} prior to

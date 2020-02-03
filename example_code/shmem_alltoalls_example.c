@@ -2,14 +2,11 @@
 #include <shmem.h>
 #include <stdio.h>
 
-int main(void) {
-  static long pSync[SHMEM_ALLTOALLS_SYNC_SIZE];
-  for (int i = 0; i < SHMEM_ALLTOALLS_SYNC_SIZE; i++)
-    pSync[i] = SHMEM_SYNC_VALUE;
-
-  shmem_init();
-  int me = shmem_my_pe();
-  int npes = shmem_n_pes();
+int main(void)
+{
+   shmem_init();
+   int me = shmem_my_pe();
+   int npes = shmem_n_pes();
 
   const int count = 2;
   const ptrdiff_t dst = 2;
@@ -18,18 +15,18 @@ int main(void) {
   int64_t *source =
       (int64_t *)shmem_malloc(count * sst * npes * sizeof(int64_t));
 
-  /* assign source values */
-  for (int pe = 0; pe < npes; pe++) {
-    for (int i = 0; i < count; i++) {
-      source[sst * ((pe * count) + i)] = me + pe;
-      dest[dst * ((pe * count) + i)] = 9999;
-    }
-  }
-  /* wait for all PEs to update source/dest */
-  shmem_barrier_all();
+   /* assign source values */
+   for (int pe = 0; pe < npes; pe++) {
+      for (int i = 0; i < count; i++) {
+         source[sst * ((pe * count) + i)] = me + pe;
+         dest[dst * ((pe * count) + i)] = 9999;
+      }
+   }
+   /* wait for all PEs to initialize source/dest */
+   shmem_team_sync(SHMEM_TEAM_WORLD);
 
-  /* alltoalls on all PES */
-  shmem_alltoalls64(dest, source, dst, sst, count, 0, 0, npes, pSync);
+   /* alltoalls on all PES */
+   shmem_int64_alltoalls(SHMEM_TEAM_WORLD, dest, source, dst, sst, count);
 
   /* verify results */
   for (int pe = 0; pe < npes; pe++) {

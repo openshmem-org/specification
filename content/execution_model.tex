@@ -1,27 +1,33 @@
-An \openshmem program consists of a set of \openshmem processes called \acp{PE}
-that execute in an \ac{SPMD}-like model where each \ac{PE} can take a different
-execution path. For example, a \ac{PE} can be implemented using an OS
-process. The \acp{PE} may be either single or multithreaded.
-The \acp{PE} progress asynchronously, and can communicate/synchronize
-via the \openshmem interfaces.  All \acp{PE} in an \openshmem program should
-start by calling the initialization routine \FUNC{shmem\_init}%
+An \openshmem program consists of a set of \openshmem processes called
+\acp{PE}.  While not required by \openshmem, in typical usage, \acp{PE} are
+executed using a single program, multiple data (\ac{SPMD}) model.  \ac{SPMD}
+requires each \ac{PE} to use the same executable; however, \acp{PE} are able to
+follow divergent control paths.  \acp{PE} are often implemented using operating
+system (\ac{OS}) processes and \acp{PE} are permitted to create additional
+threads, when supported by the \openshmem library.
+
+\ac{PE} execution is loosely coupled, relying on \openshmem operations to
+communicate and synchronize among executing \acp{PE}.  The \openshmem phase in
+a program begins with a call to the initialization routine \FUNC{shmem\_init}%
 \footnote{\FUNC{start\_pes} has been deprecated as of \openshmem[1.2]}
-or \FUNC{shmem\_init\_thread} before using any of the other \openshmem library routines. 
+or \FUNC{shmem\_init\_thread}, which must be performed before using any of the
+other \openshmem library routines. 
 An \openshmem program concludes its use of the \openshmem library when all \acp{PE} call
 \FUNC{shmem\_finalize} or any \ac{PE} calls \FUNC{shmem\_global\_exit}.
 During a call to \FUNC{shmem\_finalize}, the \openshmem library must
 complete all pending communication and release all the resources associated to
 the library using an implicit collective synchronization across \acp{PE}.
-Calling any \openshmem routine after \FUNC{shmem\_finalize} leads to undefined
-behavior.
+Calling any \openshmem routine before initialization or after
+\FUNC{shmem\_finalize} leads to undefined behavior. After finalization, a
+subsequent initialization call also leads to undefined behavior.
 
 The \acp{PE} of the \openshmem program are identified by unique integers.  The
 identifiers are integers assigned in a monotonically increasing manner from zero
 to one less than the total number of \acp{PE}. \ac{PE} identifiers are used for
 \openshmem calls (e.g. to specify \OPR{put} or \OPR{get} routines on symmetric
 data objects, collective synchronization calls) or to dictate a control flow for
-\acp{PE} using constructs of \Cstd or \Fortran. The identifiers are fixed for
-the life of the \openshmem program.
+\acp{PE} using constructs of \Cstd. The identifiers are fixed for
+the duration of the \openshmem phase of a program.
 
 \subsection{Progress of OpenSHMEM Operations}\label{subsec:progress}
 
@@ -40,7 +46,7 @@ that \ac{PE} next engages in an \openshmem call.
   \item An \openshmem implementation for hardware that does not provide
       asynchronous communication capabilities may require a software progress
       thread in order to process remotely-issued communication requests without
-      explicit program calls to the \openshmem library.  
+      explicit program calls to the \openshmem library.
   \item High performance implementations of \openshmem are expected to leverage
       hardware offload capabilities and provide asynchronous one-sided
       communication without software assistance.
@@ -52,3 +58,21 @@ that \ac{PE} next engages in an \openshmem call.
       provide asynchronous one-sided operations, as these have very limited
       performance value for \openshmem programs.
 \end{itemize}
+
+\subsection{Invoking OpenSHMEM Operations}
+
+Pointer arguments to \openshmem routines that point to non-const data must not
+overlap in memory with other arguments to the same \openshmem operation, with
+the exception of in-place reductions as described in Section~\ref{subsec:shmem_reductions}.
+Otherwise, the behavior is undefined.  Two arguments overlap in memory if any
+of their data elements are contained in the same physical memory locations.
+For example, consider an address $a$ returned by the \FUNC{shmem\_ptr} operation
+for symmetric object $A$ on \ac{PE} $i$.  Providing the local address $a$ and
+the symmetric address of object $A$ to an \openshmem operation targeting
+\ac{PE} $i$ results in undefined behavior.
+
+\openshmem routines with multiple symmetric object arguments do not require
+these symmetric objects to be located within the same symmetric memory segment.
+For example, objects located in the symmetric data segment and objects located
+in the symmetric heap can be provided as arguments to the same \openshmem
+operation.

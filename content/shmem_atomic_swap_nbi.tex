@@ -1,0 +1,54 @@
+\apisummary{
+    This nonblocking atomic operation performs an atomic swap to a remote data
+    object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_atomic\_swap\_nbi}@(TYPE *fetch, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_atomic\_swap\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, TYPE value, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the extended \ac{AMO} types specified by
+Table~\ref{extamotypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_swap\_nbi}@(TYPE *fetch, TYPE *dest, TYPE value, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_swap\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, TYPE *dest, TYPE value, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+
+\begin{apiarguments}
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to
+      perform the operation. When this argument is not provided, the
+      operation is performed on the default context.}
+  \apiargument{OUT}{fetch}{Local address of data object to be updated.
+      The type of \VAR{fetch} should match that implied in the SYNOPSIS section.}
+  \apiargument{OUT}{dest}{Symmetric address of the destination data object.
+      The type of \dest{} should match that implied in the SYNOPSIS section.}
+  \apiargument{IN}{value}{The value to be atomically written to the remote
+      \ac{PE}.
+      The type of \VAR{value} should match that implied in the SYNOPSIS section.}
+  \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
+    \dest{} is to be updated.}
+\end{apiarguments}
+
+\apidescription{
+    The nonblocking \FUNC{shmem\_atomic\_swap\_nbi} routines perform an atomic
+    swap operation. This routine returns after initiating the operation. The
+    operation is considered complete after a subsequent call to
+    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, it has written
+    \VAR{value} into \dest{} on \ac{PE} and fetched the prior contents of
+    \dest{} into \VAR{fetch} local data object.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    None.
+}
+
+\end{apidefinition}

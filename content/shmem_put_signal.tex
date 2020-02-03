@@ -1,0 +1,106 @@
+\apisummary{
+    The \OPR{put-with-signal} routines provide a method for copying data from a
+    contiguous local data object to a data object on a specified \ac{PE}
+    and subsequently updating a remote flag to signal completion.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_put\_signal}@(TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_put\_signal}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_put\FuncParam{SIZE}\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_ctx\_put\FuncParam{SIZE}\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+\end{CsynopsisCol}
+where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
+
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_putmem\_signal}@(void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, uint64_t *sig_addr, uint64_t signal, int sig_op, int pe);
+\end{CsynopsisCol}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to
+    perform the operation. When this argument is not provided, the operation is
+    performed on the default context.}
+    \apiargument{OUT}{dest}{Symmetric address of the data object to be updated
+    on the remote \ac{PE}.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{source}{Local address of data object containing the data
+    to be copied.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
+    arrays.}
+    \apiargument{OUT}{sig\_addr}{Symmetric address of the signal data object to
+    be updated on the remote \ac{PE} as a signal.}
+    \apiargument{IN}{signal}{Unsigned 64-bit value that is used for updating the
+    remote \VAR{sig\_addr} signal data object.}
+    \apiargument{IN}{sig\_op}{Signal operator that represents the type of update
+    to be performed on the remote \VAR{sig\_addr} signal data object.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
+\end{apiarguments}
+
+\apidescription{
+    The \OPR{put-with-signal} routines provide a method for copying data from a
+    contiguous local data object to a data object on a specified \ac{PE}
+    and subsequently updating a remote flag to signal completion. The routines
+    return after the data has been copied out of the \source{} array on the
+    local \ac{PE}.
+
+    The \VAR{sig\_op} signal operator determines the type of update to be
+    performed on the remote \VAR{sig\_addr} signal data object. The completion
+    of signal update based on the \VAR{sig\_op} signal operator using the
+    \VAR{signal} flag on the remote \ac{PE} indicates the delivery of its
+    corresponding \dest{} data words into the data object on the remote \ac{PE}.
+
+    An update to the \VAR{sig\_addr} signal data object through a
+    \OPR{put-with-signal} routine completes as if performed atomically as described in
+    Section~\ref{subsec:signal_atomicity}. The various options as described in
+    Section~\ref{subsec:signal_operator} can be used as the \VAR{sig\_op} signal
+    operator.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    The \dest{} and \VAR{sig\_addr} data objects must both be remotely
+    accessible. The \VAR{sig\_addr} and \dest{} could be of different kinds,
+    for example, one could be a global/static \Cstd variable and the other could
+    be allocated on the symmetric heap.
+
+    \VAR{sig\_addr} and \dest{} may not be overlapping in memory.
+
+    The completion of signal update using the \VAR{signal} flag on the remote
+    \ac{PE} indicates only the delivery of its corresponding \dest{} data words
+    into the data object on the remote \ac{PE}. Without a memory-ordering
+    operation, there is no implied ordering between the signal update of a
+    \OPR{put-with-signal} routine and another data transfer. For example, the
+    completion of the signal update in a sequence consisting of a put routine
+    followed by a \OPR{put-with-signal} routine does not imply delivery of the put
+    routine's data.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following example demonstrates the usage of \FUNC{shmem\_put\_signal}.
+    It shows the implementation of a broadcast operation from \ac{PE} 0 to
+    itself and all other \acp{PE} in the job as a simple ring-based algorithm
+    using \FUNC{shmem\_put\_signal}:}
+    {./example_code/shmem_put_signal_example.c}
+    {}
+\end{apiexamples}
+
+\end{apidefinition}

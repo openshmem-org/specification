@@ -1,0 +1,100 @@
+The \acp{PE} in an \openshmem program communicate using either
+point-to-point routines---such as \ac{RMA} and \ac{AMO} routines---which specify the \ac{PE} number of the target
+\ac{PE}, or collective routines, which operate over a set of \acp{PE}.
+In \openshmem, teams allow programs to group a set of \acp{PE} for
+communication.
+Team-based collective communications operate across all the \acp{PE}
+in a valid team.
+Point-to-point communication can make use of team-relative \ac{PE}
+numbering through team-based contexts (see Section~\ref{sec:ctx}) or
+\ac{PE} number translation.
+
+\subsubsection*{Predefined and Program-Defined Teams}
+
+An \openshmem team may be predefined (i.e., provided by the \openshmem
+library) or defined by the \openshmem program.
+A program-defined team is created by ``splitting'' a parent team into
+one or more new teams---each with some subset of \acp{PE} of the
+parent team---via one of the \FUNC{shmem\_team\_split\_*} routines.
+
+All predefined teams are valid for the duration of the \openshmem
+portion of an application.
+Any team successfully created by a \FUNC{shmem\_team\_split\_*}
+routine is valid until it is destroyed.
+All valid teams have a least one member.
+
+\subsubsection*{Team Handles}
+
+A ``team handle'' is an opaque object with type \CTYPE{shmem\_team\_t}
+that is used to reference a team.
+Team handles are not remotely accessible objects.
+The predefined teams may be accessed via the team handles listed in
+Section~\ref{subsec:library_handles}.
+
+\openshmem communication routines that do not accept a team handle
+argument operate on the default team, which may be accessed through
+the \LibHandleRef{SHMEM\_TEAM\_WORLD} handle.
+The default team encompasses the set of all \acp{PE} in the \openshmem
+program, and a \ac{PE} number in the default team is the same as the
+value returned by \FUNC{shmem\_my\_pe}.
+
+A team handle may be initialized to or assigned the value
+\CONST{SHMEM\_TEAM\_INVALID} to indicate that handle does not
+reference a valid team.
+When managed in this way, applications can use an equality comparison
+to test whether a given team handle references a valid team.
+
+\subsubsection*{Thread Safety}
+
+When it is allowed by the threading model provided by the OpenSHMEM
+library, a team may be used concurrently in non-collective operations
+(e.g., \FUNC{shmem\_team\_my\_pe}) by multiple threads within the
+\ac{PE} where it was created.
+For collective operations, a team may not be used concurrently by
+multiple threads in the same \ac{PE}.
+
+\subsubsection*{Collective Ordering}
+
+In \openshmem, a team object encapsulates resources used to communicate
+between \acp{PE} in collective operations. When calling multiple subsequent
+collective operations on a team, the collective operations---along with any
+relevant team based resources---are matched across the \acp{PE} in the team
+based on ordering of collective routine calls. It is the responsibility
+of the \openshmem program to ensure the same ordering of collective routine calls
+across all \acp{PE} in a team.
+
+A full discussion of collective semantics follows in Section~\ref{subsec:coll}.
+
+\subsubsection*{Team Creation}
+
+Team creation is a collective operation on the parent team object. New teams
+result from a \FUNC{shmem\_team\_split\_*} routine, which takes a parent team
+and other arguments and produces new teams that are a subset of the parent
+team. All \acp{PE} in a parent team must participate in a split operation
+to create new teams. If a \ac{PE} from the parent team is not a member of any
+resulting new teams, it will receive a value of \CONST{SHMEM\_TEAM\_INVALID}
+as the value for the new team handle.
+
+Teams that are created by a \FUNC{shmem\_team\_split\_*} routine may be
+provided a configuration argument that specifies attributes of each new team.
+This configuration argument is of type \CTYPE{shmem\_team\_config\_t}, which
+is detailed further in Section~\ref{subsec:shmem_team_config_t}.
+
+\acp{PE} in a newly created team are consecutively numbered starting with
+\ac{PE} number 0. \acp{PE} are ordered by their \ac{PE} number in
+the parent team. Team relative \ac{PE}
+numbers can be used for point-to-point operations through team-based
+contexts (see Section~\ref{sec:ctx}) or using the translation routine
+\FUNC{shmem\_team\_translate\_pe}.
+
+As with any collective routine on a team, the program must ensure that there
+are no simultaneous split operations occurring on the same parent team on a
+given \ac{PE}, i.e. in separate threads.
+
+As with any collective routine on a team, team creation is matched across PEs based
+on ordering. So, team creation events must occur in the same order on all \acp{PE}
+in the parent team.
+
+Upon completion of a team creation operation, the parent and any resulting child teams
+will be immediately usable for any team-based operations, including creating new child
+teams, without any intervening synchronization.

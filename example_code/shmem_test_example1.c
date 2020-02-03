@@ -17,8 +17,9 @@ int main(void) {
   if (mype == 0) {
     int who = user_wait_any(wait_vars, npes, SHMEM_CMP_NE, 0);
     printf("PE %d observed first update from PE %d\n", mype, who);
-  } else
-    shmem_p(&wait_vars[mype], mype, 0);
+  }
+  else
+    shmem_atomic_set(&wait_vars[mype], mype, 0);
 
   shmem_free(wait_vars);
   shmem_finalize();

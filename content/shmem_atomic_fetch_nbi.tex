@@ -1,0 +1,53 @@
+\apisummary{
+    The nonblocking atomic fetch routine provides a method for atomically
+    fetching the value of a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_atomic\_fetch\_nbi}@(TYPE *fetch, const TYPE *source, int pe);
+void @\FuncDecl{shmem\_atomic\_fetch\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, const TYPE *source, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the extended \ac{AMO} types specified by
+Table~\ref{extamotypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_atomic\_fetch\_nbi}@(TYPE *fetch, const TYPE *source, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_atomic\_fetch\_nbi}@(shmem_ctx_t ctx, TYPE *fetch, const TYPE *source, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
+\TYPENAME{} specified by Table~\ref{extamotypes}.
+
+\begin{apiarguments}
+
+  \apiargument{IN}{ctx}{A context handle specifying the context on which to
+    perform the operation. When this argument is not provided, the operation is
+    performed on the default context.}
+  \apiargument{OUT}{fetch}{Local address of data object to be updated.
+    The type of \VAR{fetch} should match that implied in the SYNOPSIS section.}
+  \apiargument{OUT}{source}{Symmetric address of the source data object.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
+  \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
+    \VAR{source} is to be fetched.}
+
+\end{apiarguments}
+
+\apidescription{
+    The nonblocking atomic fetch routines perform a nonblocking fetch of a
+    value atomically from a remote data object. This routine returns after
+    initiating the operation. The operation is considered complete after a
+    subsequent call to \FUNC{shmem\_quiet}. At the completion of
+    \FUNC{shmem\_quiet}, contents of the \source{} data object from \ac{PE} has been
+    fetched into \VAR{fetch} local data object.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    None.
+}
+
+\end{apidefinition}

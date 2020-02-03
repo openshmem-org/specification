@@ -7,3 +7,5 @@ main_spec.log
 main_spec.out
 main_spec.pdf
 main_spec.toc
+*.log
+*~

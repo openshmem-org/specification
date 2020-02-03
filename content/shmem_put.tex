@@ -28,35 +28,16 @@ void @\FuncDecl{shmem\_putmem}@(void *dest, const void *source, size_t nelems, i
 void @\FuncDecl{shmem\_ctx\_putmem}@(shmem_ctx_t ctx, void *dest, const void *source, size_t nelems, int pe);
 \end{CsynopsisCol}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_CHARACTER\_PUT}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_COMPLEX\_PUT}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_DOUBLE\_PUT}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_INTEGER\_PUT}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_LOGICAL\_PUT}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_PUT4}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_PUT8}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_PUT32}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_PUT64}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_PUT128}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_PUTMEM}@(dest, source, nelems, pe)
-CALL @\FuncDecl{SHMEM\_REAL\_PUT}@(dest, source, nelems, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{The context on which to perform the operation.
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
       When this argument is not provided, the operation is performed on
-      \CONST{SHMEM\_CTX\_DEFAULT}.}
-    \apiargument{OUT}{dest}{Data object to be updated on the remote \ac{PE}. This
-    data object must be remotely accessible.}
-    \apiargument{IN}{source}{Data object containing the data to be copied.}
-    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
-    arrays. \VAR{nelems} must be of type \VAR{size\_t} for \Cstd. When using
-    \Fortran, it must be a constant, variable, or array element of default
-    integer type.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}. \VAR{pe} must be
-    of type integer. When using \Fortran, it must be a constant, variable,
-    or array element of default integer type.}
+      the default context.}
+    \apiargument{OUT}{dest}{Symmetric address of the destination data object.
+      The type of \dest{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{source}{Local address of the data object containing the data to be copied.
+      The type of \source{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source} arrays.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
 \apidescription{
@@ -64,44 +45,17 @@ CALL @\FuncDecl{SHMEM\_REAL\_PUT}@(dest, source, nelems, pe)
     on the local \ac{PE}.  The delivery of data words into the data object on the
     destination \ac{PE} may occur in any order.  Furthermore, two successive put
     routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
-    introduced between the two calls.   
+    introduced between the two calls.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
  }
-
-\apidesctable{
-    The \dest{} and \source{} data objects must conform to certain typing
-    constraints, which are as follows:}
-    {Routine}{Data type of \VAR{dest} and \VAR{source}}
-    \apitablerow{shmem\_putmem}{\Fortran: Any noncharacter type. \Cstd: Any
-        data  type.  nelems is scaled in bytes.}
-    \apitablerow{shmem\_put4, shmem\_put32}{Any noncharacter type
-        that has a storage size equal to \CONST{32} bits.}
-    \apitablerow{shmem\_put8}{\Cstd: Any noncharacter type that
-        has a storage size equal to \CONST{8} bits.}
-    \apitablerow{}{\Fortran: Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_put64}{Any noncharacter type that
-        has a storage size equal to \CONST{64} bits.}
-    \apitablerow{shmem\_put128}{Any noncharacter type that has a
-        storage size equal to \CONST{128} bits.}
-    \apitablerow{SHMEM\_CHARACTER\_PUT}{Elements of type character.  \VAR{nelems}
-    is  the number  of	 characters to transfer. The actual character lengths of
-    the \source{} and \dest{} variables are ignored. }
-    \apitablerow{SHMEM\_COMPLEX\_PUT}{Elements of type complex of default size.}
-    \apitablerow{SHMEM\_DOUBLE\_PUT}{Elements of type double precision. }
-    \apitablerow{SHMEM\_INTEGER\_PUT}{Elements of type integer.}
-    \apitablerow{SHMEM\_LOGICAL\_PUT}{Elements of type logical.}
-    \apitablerow{SHMEM\_REAL\_PUT}{Elements of type real.}
 
 \apireturnvalues{
     None.
 }
+
 \apinotes{
-    When using \Fortran, data types must be of default size.  For example,
-    a real variable must be declared as \CONST{REAL},  \CONST{REAL*4},  or
-    \CONST{REAL(KIND=KIND(1.0))}.
-    As of \openshmem[1.2], the \Fortran API routine \FUNC{SHMEM\_PUT} has
-    been deprecated, and either \FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64} should
-    be used in its place.
+    None.
 }
 
 \begin{apiexamples}
@@ -109,7 +63,7 @@ CALL @\FuncDecl{SHMEM\_REAL\_PUT}@(dest, source, nelems, pe)
 \apicexample
     { The following \FUNC{shmem\_put} example is for \Cstd[11] programs:}
     {./example_code/shmem_put_example.c}
-    {} 
+    {}
 \end{apiexamples}
 
 \end{apidefinition}

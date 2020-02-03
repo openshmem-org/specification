@@ -1,5 +1,5 @@
 \apisummary{
-  Test whether a variable on the local \ac{PE} has changed.
+    Indicate whether a variable on the local \ac{PE} meets the specified condition.
 }
 
 \begin{apidefinition}
@@ -18,18 +18,25 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
 
 \begin{apiarguments}
 
-  \apiargument{OUT}{ivar}{A pointer to a remotely accessible data object.}
+  \apiargument{IN}{ivar}{Local address of a remotely accessible data object.
+    The type of \VAR{ivar} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.}
   \apiargument{IN}{cmp\_value}{The value against which the object pointed to
-    by \VAR{ivar} will be compared.}
+    by \VAR{ivar} will be compared.
+    The type of \VAR{cmp\_value} should match that implied in the SYNOPSIS section.}
 
 \end{apiarguments}
 
 \apidescription{
   \FUNC{shmem\_test} tests the numeric comparison of the symmetric object
   pointed to by \VAR{ivar} with the value \VAR{cmp\_value} according to the
-  comparison operator \VAR{cmp}.
+  comparison operator \VAR{cmp}.  The \VAR{ivar} object at the
+  calling \ac{PE} may be updated by an \ac{AMO} performed by a thread located
+  within the calling \ac{PE} or within another \ac{PE}.
+
+  Implementations must ensure that \FUNC{shmem\_test} does not return 1 before
+  the update of the memory indicated by \VAR{ivar} is fully complete.
 }
 
 \apireturnvalues{

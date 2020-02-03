@@ -10,28 +10,25 @@
 void @\FuncDecl{shmem\_barrier\_all}@(void);
 \end{Csynopsis}
 
-\begin{Fsynopsis}
-CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
-    \apiargument{None.}{}{} 
+    \apiargument{None.}{}{}
 
 \end{apiarguments}
 
 \apidescription{   
-    The \FUNC{shmem\_barrier\_all} routine registers the arrival of a \ac{PE} at
-    a barrier. Barriers are a mechanism for synchronizing all \acp{PE} at
-    once. This routine blocks the \ac{PE} until all \acp{PE} have called
+    The \FUNC{shmem\_barrier\_all} routine
+    is a mechanism for synchronizing all \acp{PE} in the default team at
+    once. This routine blocks the calling \ac{PE} until all \acp{PE} have called
     \FUNC{shmem\_barrier\_all}. In a multithreaded \openshmem
-    program, only the calling thread is blocked.
+    program, only the calling thread is blocked, however,
+    it may not be called concurrently by multiple threads in the same \ac{PE}.
 
     Prior to synchronizing with other \acp{PE}, \FUNC{shmem\_barrier\_all}
     ensures completion of all previously issued memory stores and remote memory
     updates issued on the default context via \openshmem \acp{AMO} and
     \ac{RMA} routine calls such
-    as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32}, 
+    as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32},
     \FUNC{shmem\_put\_nbi}, and \FUNC{shmem\_get\_nbi}.
 }
 
@@ -40,6 +37,10 @@ CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
 }
 
 \apinotes{
+    The \FUNC{shmem\_barrier\_all} routine is equivalent to calling
+    \FUNC{shmem\_ctx\_quiet} on the default context followed by
+    calling \FUNC{shmem\_team\_sync} on the default team.
+
     The \FUNC{shmem\_barrier\_all} routine can be used to
     portably ensure that memory access operations observe remote updates in the order
     enforced by initiator \acp{PE}.
@@ -54,7 +55,7 @@ CALL @\FuncDecl{SHMEM\_BARRIER\_ALL}@
 \apicexample
     { The following \FUNC{shmem\_barrier\_all} example is for \Cstd[11] programs:}
     {./example_code/shmem_barrierall_example.c}
-    {} 
+    {}
 
 \end{apiexamples}
 

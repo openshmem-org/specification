@@ -31,38 +31,24 @@ where \TYPE{} is one of \{\CTYPE{int}, \CTYPE{long}, \CTYPE{long long}\}
 and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \end{DeprecateBlock}
 
-\begin{Fsynopsis}
-INTEGER pe
-CALL @\FuncDecl{SHMEM\_INT4\_INC}@(dest, pe)
-CALL @\FuncDecl{SHMEM\_INT8\_INC}@(dest, pe)
-\end{Fsynopsis}
-
 \begin{apiarguments}
 
-\apiargument{IN}{ctx}{The context on which to perform the operation.
+\apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
     When this argument is not provided, the operation is performed on
-    \CONST{SHMEM\_CTX\_DEFAULT}.}
-\apiargument{OUT}{dest}{The remotely accessible integer data object to be updated
-    on the remote \ac{PE}. The type of \dest{} should match that implied in the
-    SYNOPSIS section.}
+    the default context.}
+\apiargument{OUT}{dest}{Symmetric address of the destination data object.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number on which
-    \dest{} is to be  updated. When using \Fortran, it must be a default
-    integer value.}
+    \dest{} is to be  updated.}
 
 \end{apiarguments}
 
 \apidescription{
     These  routines perform  an atomic increment operation on the \VAR{dest} data
     object on \ac{PE}.
+    If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
-
-
-\apidesctable{
-    When using \Fortran, \VAR{dest} must be of the following type:
-}{Routine}{Data type of \VAR{dest}}
-
-\apitablerow{SHMEM\_INT4\_INC}{\CONST{4}-byte integer}
-\apitablerow{SHMEM\_INT8\_INC}{\CONST{8}-byte integer}
 
 \apireturnvalues{
     None.

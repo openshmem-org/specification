@@ -1,0 +1,249 @@
+\apisummary{
+Create two new teams by splitting an existing parent team into two subsets based on a
+2D Cartesian space defined by the \VAR{xrange} argument and a \VAR{y} dimension derived from \VAR{xrange}
+and the parent team size. These ranges describe the Cartesian space in \emph{x}-
+and \emph{y}-dimensions.}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_team\_split\_2d}@(shmem_team_t parent_team, int xrange,
+    const shmem_team_config_t *xaxis_config, long xaxis_mask, shmem_team_t *xaxis_team,
+    const shmem_team_config_t *yaxis_config, long yaxis_mask, shmem_team_t *yaxis_team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{parent\_team}{A valid \openshmem team. Any predefined teams, such as
+\LibHandleRef{SHMEM\_TEAM\_WORLD}, may be used, or any team created by the user.}
+
+\apiargument{IN}{xrange}{A nonnegative integer representing the number of
+elements in the first dimension.}
+
+\apiargument{IN}{xaxis\_config}{
+  A pointer to the configuration parameters for the new \VAR{x}-axis team.}
+
+\apiargument{IN}{xaxis\_mask}{
+  The bitwise mask representing the set of configuration parameters to use
+  from \VAR{xaxis\_config}.}
+
+\apiargument{OUT}{xaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
+subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{x}-axis
+as the calling \ac{PE}.}
+
+\apiargument{IN}{yaxis\_config}{
+  A pointer to the configuration parameters for the new \VAR{y}-axis team.}
+
+\apiargument{IN}{yaxis\_mask}{
+  The bitwise mask representing the set of configuration parameters to use
+  from \VAR{yaxis\_config}.}
+
+\apiargument{OUT}{yaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
+subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{y}-axis
+as the calling \ac{PE}.}
+\end{apiarguments}
+
+\apidescription{
+The \FUNC{shmem\_team\_split\_2d} routine is a collective routine. It creates two
+new teams by splitting an existing parent team into up to two subsets based on a
+2D Cartesian space. The user provides the size of the \VAR{x} dimension, which is then
+used to derive the size of the \VAR{y} dimension based on the size of the parent team.
+The size of the \VAR{y} dimension will be equal to $\lceil N \div xrange \rceil$, where
+\VAR{N} is the size of the parent team. In other words,
+$xrange \times yrange \geq N$, so that every \ac{PE} in the parent team has a
+unique \VAR{(x,y)} location the 2D Cartesian space.
+
+The mapping of \ac{PE} number to coordinates is $(x, y) = ( pe \mod xrange, \lfloor pe \div xrange \rfloor )$,
+where $pe$ is the \ac{PE} number in the parent team. So, if $xrange = 3$,
+then the first 3 \acp{PE} in the parent team will form the first
+\VAR{xteam}, the second three \acp{PE} in the parent team form the second \VAR{xteam},
+and so on.
+
+Thus, after the split operation, each of the new \VAR{xteam}s will contain all \acp{PE} that
+have the same coordinate along the \VAR{y}-axis as the calling \ac{PE}. Each of the
+new \VAR{yteam}s will contain all \acp{PE} with the same coordinate along the
+\VAR{x}-axis as the calling \ac{PE}.
+
+The \acp{PE} are numbered in the new teams based on the coordinate of the
+\ac{PE} along the given axis. So, another way to think of the result of the split
+operation is that the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{xteam})} is the
+x-coordinate and the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{yteam})}
+is the y-coordinate of the calling \ac{PE}.
+
+Any valid \openshmem team can be used as the parent team. This routine must be
+called by all \acp{PE} in the parent team. The value of \VAR{xrange} must be
+nonnegative and all \acp{PE} in the parent team must pass the same value for
+\VAR{xrange}.
+
+The \VAR{xaxis\_config} and \VAR{yaxis\_config} arguments specify team
+configuration parameters for the \VAR{x}- and \VAR{y}-axis teams, respectively.
+These parameters are described in Section~\ref{subsec:shmem_team_config_t}.
+All \acp{PE} that will be in the same resultant team must specify the same
+configuration parameters.
+The \acp{PE} in the parent team \emph{do not} have to all provide the same
+parameters for new teams.
+
+The \VAR{xaxis\_mask} and \VAR{yaxis\_mask} arguments are a bitwise masks
+representing the set of configuration parameters to use from
+\VAR{xaxis\_config} and \VAR{yaxis\_config}, respectively.
+A mask value of \CONST{0} indicates that the team
+should be created with the default values for all configuration parameters.
+See Section~\ref{subsec:shmem_team_config_t} for field mask names and
+default configuration parameters.
+
+If \VAR{parent\_team} compares equal to
+\LibConstRef{SHMEM\_TEAM\_INVALID}, then no new teams will be created
+and both \VAR{xaxis\_team} and \VAR{yaxis\_team} will be assigned the
+value \LibConstRef{SHMEM\_TEAM\_INVALID}.
+If \VAR{parent\_team} is otherwise invalid, the behavior is undefined.
+
+If any \VAR{xaxis\_team} or \VAR{yaxis\_team} on any \ac{PE} in
+\VAR{parent\_team} cannot be created, then both team handles on all
+\acp{PE} in \VAR{parent\_team} will be assigned the value
+\LibConstRef{SHMEM\_TEAM\_INVALID} and \FUNC{shmem\_team\_split\_2d}
+will return a nonzero value.
+
+}
+
+\apireturnvalues{
+  Zero on successful creation of all \VAR{xaxis\_team}s and \VAR{yaxis\_team}s;
+  otherwise, nonzero.
+}
+
+\apinotes{
+Since the split may result in a 2D space with more points than there are members of
+the parent team, there may be a final, incomplete row of the 2D mapping of the parent
+team. This means that the resultant \VAR{yteam}s may vary in size by up to 1 \ac{PE},
+and that there may be one resultant \VAR{xteam} of smaller size than all of the other
+\VAR{xteam}s.
+
+The following grid shows the 12 teams that would result from splitting a parent team
+of size 10 with \VAR{xrange} of 3. The numbers in the grid cells are the \ac{PE} numbers
+in the parent team. The rows are the \VAR{xteam}s. The columns are the \VAR{yteam}s.
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+ \hline
+             & yteam & yteam & yteam \\
+             & x=0 & x=1 & x=2  \\ \hline
+ xteam, y=0  & 0   & 1   & 2  \\ \hline
+ xteam, y=1  & 3   & 4   & 5  \\ \hline
+ xteam, y=2  & 6   & 7   & 8  \\ \hline
+ xteam, y=3  & 9  \\
+ \cline{0-1}
+\end{tabular}
+\end{center}
+
+It would be legal, for example, if \acp{PE} 0, 3, 6, 9 specified a different value
+for \VAR{yaxis\_config} than all of the other \acp{PE}, as long as the configuration parameters match
+for all \acp{PE} in each of the new teams.
+
+See the description of team handles and predefined teams at the top of section
+\ref{subsec:team} for more information about team handle semantics and usage.
+}
+
+\begin{apiexamples}
+
+    \apicexample
+    {The following example demonstrates the use of 2D Cartesian split in a
+    \Cstd[11] program. This example shows how multiple 2D splits can be used
+    to generate a 3D Cartesian split. This method can be extrapolated to
+    generate splits of any number of dimensions.}
+    {./example_code/shmem_team_split_2D.c}
+    {
+    The example above splits \LibHandleRef{SHMEM\_TEAM\_WORLD} into a 3D team
+    with dimensions 3x4xN.  For example, if \VAR{npes} = 16,  \VAR{xdim} = 3,
+    and \VAR{ydim} = 4, then the final dimensions are 3x4x2.  In this case, the
+    first split of \LibHandleRef{SHMEM\_TEAM\_WORLD} results in 6 \VAR{xteams}
+    and 3 \VAR{yzteams}:
+
+    \begin{center}
+    \begin{tabular}{|l|l|l|l|l|}
+     \hline
+      \multicolumn{2}{|c|}{} & \multicolumn{3}{c|}{\VAR{yzteam}} \\ \cline{3-5}
+      \multicolumn{2}{|c|}{} & \VAR{x} = 0 & \VAR{x} = 1 & \VAR{x} = 2  \\ \hline
+\multirow{6}{*}{\VAR{xteam}} & \VAR{yz} = 0  & 0   & 1   & 2  \\ \cline{2-5}
+                             & \VAR{yz} = 1  & 3   & 4   & 5  \\ \cline{2-5}
+                             & \VAR{yz} = 2  & 6   & 7   & 8  \\ \cline{2-5}
+                             & \VAR{yz} = 3  & 9   & 10 &  11 \\ \cline{2-5}
+                             & \VAR{yz} = 4  & 12  & 13 & 14  \\ \cline{2-5}
+                             & \VAR{yz} = 5  & 15  \\
+     \cline{0-2}
+    \end{tabular}
+    \end{center}
+
+    The second split of \VAR{yzteam} for \VAR{x} = 0, \VAR{ydim} = 4 results in 2
+    \VAR{yteams} and 4 \VAR{zteams}:
+
+
+    \begin{center}
+    \begin{tabular}{|l|l|l|l|l|l|}
+     \hline
+      \multicolumn{2}{|c|}{} & \multicolumn{4}{c|}{\VAR{zteam}} \\ \cline{3-6}
+      \multicolumn{2}{|c|}{} & \VAR{y} = 0 & \VAR{y} = 1 & \VAR{y} = 2 & \VAR{y} = 3 \\ \hline
+\multirow{2}{*}{\VAR{yteam}} & \VAR{z} = 0  & 0    & 3    & 6  & 9 \\ \cline{2-6}
+                             & \VAR{z} = 1  & 12   & 15 \\
+     \cline{0-3}
+    \end{tabular}
+    \end{center}
+
+    The second split of \VAR{yzteam} for \VAR{x} = 1, \VAR{ydim} = 4 results in
+    2 \VAR{yteams} and 4 \VAR{zteams}:
+
+    \begin{center}
+    \begin{tabular}{|l|l|l|l|l|l|}
+     \hline
+      \multicolumn{2}{|c|}{} & \multicolumn{4}{c|}{\VAR{zteam}} \\ \cline{3-6}
+      \multicolumn{2}{|c|}{} & \VAR{y} = 0 & \VAR{y} = 1 & \VAR{y} = 2 & \VAR{y} = 3 \\ \hline
+\multirow{2}{*}{\VAR{yteam}} & \VAR{z} = 0  & 1    & 4    & 7  & 10 \\ \cline{2-6}
+                             & \VAR{z} = 1  & 13 \\
+     \cline{0-2}
+    \end{tabular}
+    \end{center}
+
+    The second split of \VAR{yzteam} for \VAR{x} = 2, \VAR{ydim} = 4 results in
+    2 \VAR{yteams} and 4 \VAR{zteams}:
+
+    \begin{center}
+    \begin{tabular}{|l|l|l|l|l|l|}
+     \hline
+      \multicolumn{2}{|c|}{} & \multicolumn{4}{c|}{\VAR{zteam}} \\ \cline{3-6}
+      \multicolumn{2}{|c|}{} & \VAR{y} = 0 & \VAR{y} = 1 & \VAR{y} = 2 & \VAR{y} = 3 \\ \hline
+\multirow{2}{*}{\VAR{yteam}} & \VAR{z} = 0  & 2    & 5    & 8  & 11 \\ \cline{2-6}
+                             & \VAR{z} = 1  & 14 \\
+     \cline{0-2}
+    \end{tabular}
+    \end{center}
+
+    The final number of teams for each dimension are:
+    \begin{itemize}
+        \item 6 \VAR{xteams}: these are teams where (\VAR{z},\VAR{y}) is fixed and \VAR{x} varies.
+        \item 6 \VAR{yteams}: these are teams where (\VAR{x},\VAR{z}) is fixed and \VAR{y} varies.
+        \item 12 \VAR{zteams}: these are teams where (\VAR{x},\VAR{y}) is fixed and \VAR{z} varies.
+    \end{itemize}
+
+    The expected output is: \\
+    \begin{small}
+    \texttt{
+    (0, 0, 0) is me = 0  \\
+    (1, 0, 0) is me = 1  \\
+    (2, 0, 0) is me = 2  \\
+    (0, 1, 0) is me = 3  \\
+    (1, 1, 0) is me = 4  \\
+    (2, 1, 0) is me = 5  \\
+    (0, 2, 0) is me = 6  \\
+    (1, 2, 0) is me = 7  \\
+    (2, 2, 0) is me = 8  \\
+    (0, 3, 0) is me = 9  \\
+    (1, 3, 0) is me = 10 \\
+    (2, 3, 0) is me = 11 \\
+    (0, 0, 1) is me = 12 \\
+    (1, 0, 1) is me = 13 \\
+    (2, 0, 1) is me = 14 \\
+    (0, 1, 1) is me = 15
+    }
+    \end{small}
+}
+
+\end{apiexamples}
+
+\end{apidefinition}

@@ -1,0 +1,42 @@
+\apisummary{
+  Destroy an existing team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_team\_destroy}@(shmem_team_t team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{team}{An \openshmem team handle.}
+\end{apiarguments}
+
+\apidescription{
+
+The \FUNC{shmem\_team\_destroy} routine is a collective operation that
+destroys the team referenced by the team handle argument \VAR{team}.
+Upon return, the referenced team is invalid.
+
+This routine destroys all shareable contexts created from the
+referenced team.  The user is responsible for destroying all contexts
+created from this team with the \CONST{SHMEM\_CTX\_PRIVATE} option
+enabled prior to calling this routine; otherwise, the behavior is
+undefined.
+
+It is an error to destroy the default team or any other predefined team.
+
+If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
+then no operation is performed.
+If \VAR{team} is otherwise invalid, the behavior is undefined.
+}
+
+\apireturnvalues{
+  None.
+}
+
+\apinotes{
+  None.
+}
+
+\end{apidefinition}

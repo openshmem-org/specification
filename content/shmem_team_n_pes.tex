@@ -1,0 +1,38 @@
+\apisummary{
+  Returns the number of \acp{PE} in a specified team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_team\_n\_pes}@(shmem_team_t team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{team}{An \openshmem team handle.}
+\end{apiarguments}
+
+\apidescription{
+  When \VAR{team} specifies a valid team, the
+  \FUNC{shmem\_team\_n\_pes} routine returns the number of \acp{PE} in
+  the team.
+  This will always be a value between $1$ and $N$, where $N$ is the
+  total number of \acp{PE} running in the \openshmem program.
+
+  If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
+  then the value \CONST{-1} is returned.
+  If \VAR{team} is otherwise invalid, the behavior is undefined.
+}
+
+\apireturnvalues{
+  The number of \acp{PE} in the specified team, or the value
+  \CONST{-1} if the team handle compares equal to
+  \LibConstRef{SHMEM\_TEAM\_INVALID}.
+}
+
+\apinotes{
+  For the default team, this routine will return the same value as
+  \FUNC{shmem\_n\_pes}.
+}
+
+\end{apidefinition}

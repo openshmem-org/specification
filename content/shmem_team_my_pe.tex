@@ -1,0 +1,38 @@
+\apisummary{
+  Returns the number of the calling \ac{PE} within a specified team.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_team\_my\_pe}@(shmem_team_t team);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{IN}{team}{An \openshmem team handle.}
+\end{apiarguments}
+
+\apidescription{
+  When \VAR{team} specifies a valid team, the
+  \FUNC{shmem\_team\_my\_pe} routine returns the number of the calling
+  \ac{PE} within the specified team.
+  The number is an integer between $0$ and $N-1$ for a team containing $N$ \acp{PE}.
+  Each member of the team has a unique number.
+
+  If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
+  then the value \CONST{-1} is returned.
+  If \VAR{team} is otherwise invalid, the behavior is undefined.
+}
+
+\apireturnvalues{
+  The number of the calling \ac{PE} within the specified team, or the
+  value \CONST{-1} if the team handle compares equal to
+  \LibConstRef{SHMEM\_TEAM\_INVALID}.
+}
+
+\apinotes{
+  For the default team, this routine will return the same value as
+  \FUNC{shmem\_my\_pe}.
+}
+
+\end{apidefinition}
