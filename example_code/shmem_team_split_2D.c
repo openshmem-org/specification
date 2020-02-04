@@ -6,7 +6,7 @@ int main(void) {
   int ydim = 4;
 
   shmem_init();
-  int pe = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
   if (npes < (xdim * ydim)) {
@@ -29,14 +29,17 @@ int main(void) {
   int my_y = shmem_team_my_pe(yteam);
   int my_z = shmem_team_my_pe(zteam);
 
-  for (int zdx = 0; zdx < zdim; zdx++)
-    for (int ydx = 0; ydx < ydim; ydx++)
+  for (int zdx = 0; zdx < zdim; zdx++) {
+    for (int ydx = 0; ydx < ydim; ydx++) {
       for (int xdx = 0; xdx < xdim; xdx++) {
         if ((my_x == xdx) && (my_y == ydx) && (my_z == zdx)) {
-          printf("(%d, %d, %d) is mype = %d\n", my_x, my_y, my_z, pe);
+          printf("(%d, %d, %d) is mype = %d\n", my_x, my_y, my_z, mype);
         }
         shmem_team_sync(SHMEM_TEAM_WORLD);
       }
+    }
+  }
 
   shmem_finalize();
+  return 0;
 }
