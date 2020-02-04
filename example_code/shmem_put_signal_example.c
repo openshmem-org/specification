@@ -10,8 +10,8 @@ int main(void) {
 
   size_t size = 2048;
   int mype = shmem_my_pe();
-  int n = shmem_n_pes();
-  int pe = (mype + 1) % n;
+  int npes = shmem_n_pes();
+  int pe = (mype + 1) % npes;
   uint64_t *message = malloc(size * sizeof(uint64_t));
   static uint64_t sig_addr = 0;
 
