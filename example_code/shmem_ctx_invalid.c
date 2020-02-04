@@ -30,12 +30,12 @@ int main() {
     shmem_global_exit(2);
 
   const int my_pe = shmem_my_pe();
-  const int n_pes = shmem_n_pes();
+  const int npes = shmem_n_pes();
   const int count = 1 << 15;
 
-  int *src_bufs[n_pes];
-  int *dst_bufs[n_pes];
-  for (int i = 0; i < n_pes; i++) {
+  int *src_bufs[npes];
+  int *dst_bufs[npes];
+  for (int i = 0; i < npes; i++) {
     src_bufs[i] = shmem_calloc(count, sizeof(*src_bufs[i]));
     if (src_bufs[i] == NULL)
       shmem_global_exit(3);
@@ -48,14 +48,14 @@ int main() {
   {
     int my_thrd = omp_get_thread_num();
 #pragma omp for
-    for (int i = 0; i < n_pes; i++)
+    for (int i = 0; i < npes; i++)
       for (int j = 0; j < count; j++)
         src_bufs[i][j] = (my_pe << 10) + my_thrd;
 
     lib_thread_register();
 
 #pragma omp for
-    for (int i = 0; i < n_pes; i++)
+    for (int i = 0; i < npes; i++)
       lib_thread_putmem(dst_bufs[my_pe], src_bufs[i],
                         count * sizeof(*src_bufs[i]), i);
 
