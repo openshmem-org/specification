@@ -33,7 +33,7 @@ int main(void) {
     for (int ydx = 0; ydx < ydim; ydx++)
       for (int xdx = 0; xdx < xdim; xdx++) {
         if ((my_x == xdx) && (my_y == ydx) && (my_z == zdx)) {
-          printf("(%d, %d, %d) is me = %d\n", my_x, my_y, my_z, pe);
+          printf("(%d, %d, %d) is mype = %d\n", my_x, my_y, my_z, pe);
         }
         shmem_team_sync(SHMEM_TEAM_WORLD);
       }

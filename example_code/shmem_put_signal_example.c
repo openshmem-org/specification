@@ -9,19 +9,19 @@ int main(void) {
   shmem_init();
 
   size_t size = 2048;
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int n = shmem_n_pes();
-  int pe = (me + 1) % n;
+  int pe = (mype + 1) % n;
   uint64_t *message = malloc(size * sizeof(uint64_t));
   static uint64_t sig_addr = 0;
 
   for (i = 0; i < size; i++) {
-    message[i] = me;
+    message[i] = mype;
   }
 
   uint64_t *data = shmem_calloc(size, sizeof(uint64_t));
 
-  if (me == 0) {
+  if (mype == 0) {
     shmem_put_signal(data, message, size, &sig_addr, 1, SHMEM_SIGNAL_SET, pe);
   }
   else {

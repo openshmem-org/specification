@@ -4,14 +4,14 @@
 int main(void) {
   static long dest;
   shmem_init();
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
-  dest = me;
+  dest = mype;
   shmem_barrier_all();
-  long new_val = me;
-  if (me & 1) {
-    long swapped_val = shmem_atomic_swap(&dest, new_val, (me + 1) % npes);
-    printf("%d: dest = %ld, swapped = %ld\n", me, dest, swapped_val);
+  long new_val = mype;
+  if (mype & 1) {
+    long swapped_val = shmem_atomic_swap(&dest, new_val, (mype + 1) % npes);
+    printf("%d: dest = %ld, swapped = %ld\n", mype, dest, swapped_val);
   }
   shmem_finalize();
   return 0;

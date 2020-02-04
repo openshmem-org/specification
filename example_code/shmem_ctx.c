@@ -19,17 +19,17 @@ int main(void) {
   if (tl != SHMEM_THREAD_MULTIPLE)
     shmem_global_exit(1);
 
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
 #pragma omp parallel reduction(+ : tasks_done)
   {
     shmem_ctx_t ctx;
-    int task_pe = me, pes_done = 0;
+    int task_pe = mype, pes_done = 0;
     int ret = shmem_ctx_create(SHMEM_CTX_PRIVATE, &ctx);
 
     if (ret != 0) {
-      printf("%d: Error creating context (%d)\n", me, ret);
+      printf("%d: Error creating context (%d)\n", mype, ret);
       shmem_global_exit(2);
     }
 

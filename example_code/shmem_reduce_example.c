@@ -17,7 +17,7 @@ unsigned char is_valid(long value, int npes) {
 
 int main(void) {
   shmem_init();
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
   size_t num = 32;
 
@@ -27,7 +27,7 @@ int main(void) {
   unsigned char *valid_me = shmem_malloc(num * sizeof(unsigned char));
   unsigned char *valid_all = shmem_malloc(num * sizeof(unsigned char));
 
-  values[0] = recv_a_value((unsigned)me, npes);
+  values[0] = recv_a_value((unsigned)mype, npes);
   valid_me[0] = is_valid(values[0], npes);
 
   for (int i = 1; i < num; i++) {

@@ -8,9 +8,9 @@ int main(void) {
   static short dest[SIZE];
   static long lock = 0;
   shmem_init();
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
-  if (me == 0) {
+  if (mype == 0) {
     /* initialize array */
     for (int i = 0; i < SIZE; i++)
       source[i] = i;
@@ -21,9 +21,9 @@ int main(void) {
       shmem_put(dest, source, SIZE, i);
   }
   shmem_barrier_all(); /* sync sender and receiver */
-  if (me != 0) {
+  if (mype != 0) {
     shmem_set_lock(&lock);
-    printf("dest on PE %d is \t", me);
+    printf("dest on PE %d is \t", mype);
     for (int i = 0; i < SIZE; i++)
       printf("%hd \t", dest[i]);
     printf("\n");

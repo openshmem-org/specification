@@ -4,7 +4,7 @@
 
 int main(void) {
   shmem_init();
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
   const int count = 2;
@@ -14,7 +14,7 @@ int main(void) {
   /* assign source values */
   for (int pe = 0; pe < npes; pe++) {
     for (int i = 0; i < count; i++) {
-      source[(pe * count) + i] = me + pe;
+      source[(pe * count) + i] = mype + pe;
       dest[(pe * count) + i] = 9999;
     }
   }
@@ -27,9 +27,9 @@ int main(void) {
   /* verify results */
   for (int pe = 0; pe < npes; pe++) {
     for (int i = 0; i < count; i++) {
-      if (dest[(pe * count) + i] != pe + me) {
-        printf("[%d] ERROR: dest[%d]=%" PRId64 ", should be %d\n", me,
-               (pe * count) + i, dest[(pe * count) + i], pe + me);
+      if (dest[(pe * count) + i] != pe + mype) {
+        printf("[%d] ERROR: dest[%d]=%" PRId64 ", should be %d\n", mype,
+               (pe * count) + i, dest[(pe * count) + i], pe + mype);
       }
     }
   }

@@ -10,7 +10,7 @@ int main(void) {
 
   shmem_init();
   config = NULL;
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
   if (npes > 2)
@@ -47,11 +47,11 @@ int main(void) {
     shmem_sync(threes_team);
   }
 
-  if (me && me % 3 == 0) {
+  if (mype && mype % 3 == 0) {
     if (x != 3)
       shmem_global_exit(3);
   }
-  else if (me && me % 2 == 0) {
+  else if (mype && mype % 2 == 0) {
     if (x != 2)
       shmem_global_exit(2);
   }

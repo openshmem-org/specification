@@ -6,13 +6,13 @@ int main(void) {
   long y = -1;
 
   shmem_init();
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
-  if (me == 0)
+  if (mype == 0)
     y = shmem_g(&x, npes - 1);
 
-  printf("%d: y = %ld\n", me, y);
+  printf("%d: y = %ld\n", mype, y);
 
   shmem_finalize();
   return 0;

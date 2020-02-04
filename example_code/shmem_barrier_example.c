@@ -8,16 +8,16 @@ int main(void) {
     pSync[i] = SHMEM_SYNC_VALUE;
 
   shmem_init();
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
-  if (me % 2 == 0) {
+  if (mype % 2 == 0) {
     /* put to next even PE in a circular fashion */
-    shmem_p(&x, 4, (me + 2) % npes);
+    shmem_p(&x, 4, (mype + 2) % npes);
     /* synchronize all even pes */
     shmem_barrier(0, 1, (npes / 2 + npes % 2), pSync);
   }
-  printf("%d: x = %d\n", me, x);
+  printf("%d: x = %d\n", mype, x);
   shmem_finalize();
   return 0;
 }

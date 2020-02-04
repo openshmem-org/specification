@@ -5,10 +5,10 @@ int main(void) {
   static long lock = 0;
   static int count = 0;
   shmem_init();
-  int me = shmem_my_pe();
+  int mype = shmem_my_pe();
   shmem_set_lock(&lock);
   int val = shmem_g(&count, 0); /* get count value on PE 0 */
-  printf("%d: count is %d\n", me, val);
+  printf("%d: count is %d\n", mype, val);
   val++; /* incrementing and updating count on PE 0 */
   shmem_p(&count, val, 0);
   shmem_clear_lock(
