@@ -29,7 +29,7 @@ int main() {
   if (provided != SHMEM_THREAD_MULTIPLE)
     shmem_global_exit(2);
 
-  const int my_pe = shmem_my_pe();
+  const int mype = shmem_my_pe();
   const int npes = shmem_n_pes();
   const int count = 1 << 15;
 
@@ -50,13 +50,13 @@ int main() {
 #pragma omp for
     for (int i = 0; i < npes; i++)
       for (int j = 0; j < count; j++)
-        src_bufs[i][j] = (my_pe << 10) + my_thrd;
+        src_bufs[i][j] = (mype << 10) + my_thrd;
 
     lib_thread_register();
 
 #pragma omp for
     for (int i = 0; i < npes; i++)
-      lib_thread_putmem(dst_bufs[my_pe], src_bufs[i],
+      lib_thread_putmem(dst_bufs[mype], src_bufs[i],
                         count * sizeof(*src_bufs[i]), i);
 
     lib_thread_unregister();
