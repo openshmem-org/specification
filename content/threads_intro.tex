@@ -52,9 +52,8 @@ prevent them from executing other \openshmem calls when the thread level permits
 In addition, a blocked thread will not prevent the progress of \openshmem calls
 performed on other \acp{PE}.
 
-\item In the \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, all \openshmem calls are thread-safe.
-Any two concurrently running threads may make \openshmem calls and the outcome
-will be as if the calls executed in some order, even if their execution is interleaved.
+\item In the \CONST{SHMEM\_THREAD\_MULTIPLE} thread level, all \openshmem calls
+are thread-safe .i.e., any two concurrently running threads may make \openshmem calls.
 
 \item In the \CONST{SHMEM\_THREAD\_SERIALIZED} and \CONST{SHMEM\_THREAD\_MULTIPLE} thread levels,
 if multiple threads call collective routines, including the symmetric heap
