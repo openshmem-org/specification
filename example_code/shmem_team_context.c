@@ -38,9 +38,9 @@ void my_send_to_neighbor(shmem_ctx_t ctx, int *val) {
 
   shmem_team_t team;
   shmem_ctx_get_team(ctx, &team);
-  int pe = shmem_team_my_pe(team);
-  int npes = shmem_team_n_pes(team);
-  int rpe = (pe + 1) % npes;
+  int team_mype = shmem_team_my_pe(team);
+  int team_npes = shmem_team_n_pes(team);
+  int rpe = (team_mype + 1) % team_npes;
 
   // put my pe number in the buffer on my right hand neighbor
   shmem_ctx_int_put(ctx, val, &pe, 1, rpe);
