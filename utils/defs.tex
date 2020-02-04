@@ -204,145 +204,51 @@
 %
 % This section is for example code listings
 %
+
+\lstdefinestyle{SourceListingsDefault}{
+  language={C},
+  escapechar=@,
+  tabsize=2,
+  basicstyle=\ttfamily\footnotesize,
+  showstringspaces=false,
+  % Preprocessor directives
+  classoffset=0,
+  keywords={\#include, \#pragma, \#if, \#ifdef, \#else, \#endif},
+  keywordstyle=\bfseries\color{CadetBlue},
+  % Language keywords
+  classoffset=1,
+  keywords={if, else, for, while, return, break, static, const, volatile,
+    sizeof},
+  keywordstyle=\bfseries\color{Orchid},
+  % Types
+  classoffset=2,
+  keywords={TYPE, TYPENAME, SIZE,
+    void, bool, _Bool, unsigned, char, short, int, long,
+    float, double, _Complex, complex, size_t, ptrdiff_t,
+    _Thread_local, shmem_ctx_t, shmem_team_t,
+    int8_t, int16_t, int32_t, int64_t,
+    uint8_t, uint16_t, uint32_t, uint64_t},
+  keywordstyle=\color{OliveGreen},
+  % Other elements
+  classoffset=3,
+  keywords={NULL},
+  keywordstyle=\color{Cyan},
+  % Other syntax elements
+  classoffset=0,
+  % morecomment=[s]{\<}{\>},
+  commentstyle=\itshape\color{BrickRed},
+  stringstyle=\color{DarkOrchid},
+  backgroundcolor=\color{gray},
+}
+
 \definecolor{gray}{rgb}{0.92,0.92,0.92}
 
-\lstset{ % set defaults for languages not otherwise defined
-  breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
-  basicstyle=\ttfamily\footnotesize,
-  breaklines=true,                 % sets automatic line breaking
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
-                                   % encodings only, does not work with UTF-8
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code
-                                   % (possibly needs columns=flexible)
-  morekeywords={*,...},            % if you want to add more keywords to the set
-  showspaces=false,                % show spaces everywhere adding particular underscores;
-                                   % it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
+\lstdefinestyle{PrototypeListingsDefault}{
+  style=SourceListingsDefault,
+  backgroundcolor=\color{gray},
 }
 
-\def\StandardListing {
-  \lstset {
-    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-    basicstyle=\ttfamily\footnotesize,
-    breaklines=true,                 % sets automatic line breaking
-    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
-                                     % encodings only, does not work with UTF-8
-    keepspaces=true,                 % keeps spaces in text, useful for keeping
-                                     % indentation of code (possibly needs columns=flexible)
-    morekeywords={*,...},            % if you want to add more keywords to the set
-    showspaces=false,                % show spaces everywhere adding particular underscores;
-                                     % it overrides 'showstringspaces'
-    showstringspaces=false,          % underline spaces within strings only
-    showtabs=false,                  % show tabs within strings adding particular underscores
-    backgroundcolor=\color{gray},
-  }
-}
-
-\def\ProgramNumberedListing {
-  \StandardListing
-  \lstset {
-    numbers=left,
-    numberstyle=\footnotesize
-  }
-}
-
-\newcommand{\numberedlisting}[2] {
-  \ProgramNumberedListing
-  \lstinputlisting[#1]{#2}
-  \StandardListing
-}
-
-\newcommand{\outputlisting}[2] {
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-  \lstinputlisting[#1]{#2}
-  \StandardListing
-\vspace{0.1in}
-\end{minipage}
-}
-
-\lstdefinelanguage{OSH+C}[]{C}{
-  classoffset=1,
-  morekeywords={
-    size_t, ptrdiff_t,
-    SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
-    start_pes,
-    my_pe, _my_pe, shmem_my_pe,
-    num_pes, _num_pes, shmem_n_pes,
-    shmem_int_p, shmem_short_p, shmem_long_p,
-    shmem_int_put, shmem_short_put, shmem_long_put,
-    shmem_barrier_all, shmem_barrier,
-    shmalloc,  shfree, shrealloc,
-    shmem_broadcast32, shmem_broadcast64,
-    shmem_short_inc, shmem_int_inc, shmem_long_inc,
-    shmem_short_add, shmem_int_add, shmem_long_add,
-    shmem_short_finc, shmem_int_finc, shmem_long_finc,
-    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
-    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
-    shmem_long_sum_to_all,
-    shmem_complexd_sum_to_all
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=true
-}
-
-\lstdefinelanguage{OSH2+C}[]{OSH+C}{
-  classoffset=1,
-  morekeywords={
-    shmem_init,
-    shmem_finalize,
-    shmem_malloc,
-    shmem_my_pe,
-    shmem_error,
-    shmem_global_exit,
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=true
-}
-
-\lstdefinelanguage{OSH+F}[]{Fortran}{
-  classoffset=1,
-  morekeywords={
-    SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
-    start_pes,
-    my_pe, shmem_my_pe,
-    num_pes, shmem_n_pes,
-    shmem_int_p, shmem_short_p, shmem_long_p,
-    shmem_int_put, shmem_short_put, shmem_long_put,
-    shmem_barrier_all, shmem_barrier,
-    shpalloc,  shpdeallc, shpclmove,
-    shmem_broadcast32, shmem_broadcast64,
-    shmem_broadcast4, shmem_broadcast8,
-    shmem_short_inc, shmem_int_inc, shmem_long_inc,
-    shmem_short_add, shmem_int_add, shmem_long_add,
-    shmem_short_finc, shmem_int_finc, shmem_long_finc,
-    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
-    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
-    shmem_long_sum_to_all,
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=false
-}
-
-\lstdefinelanguage{OSH2+F}[]{OSH+F}{
-  classoffset=1,
-  morekeywords={
-    shmem_init,
-    shmem_finalize,
-    shmem_malloc,
-    shmem_my_pe,
-    shmem_error,
-    shmem_global_exit,
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=true
-}
+\lstset{style=SourceListingsDefault}
 
 %
 % End this section is for example code listings
@@ -407,57 +313,34 @@
 \lstnewenvironment{Cpp11synopsis}
 {
   \textbf{C++11:}
-  \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-  morekeywords={size_t, ptrdiff_t, TYPE, noreturn},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 \lstnewenvironment{C11synopsis}
 {
   \textbf{C11:}
-  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t, uint64_t},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 \lstnewenvironment{CsynopsisCol}
 {
-  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t, uint64_t},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 
 \lstnewenvironment{Csynopsis}
 {
   \textbf{C/C++:}
-  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t, uint64_t},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 \lstnewenvironment{CsynopsisST}
 {
   \textbf{C/C++:}
-  \color{red}
-  {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, uint64_t},
-    aboveskip=0pt, belowskip=0pt}}}{}
-
-\lstnewenvironment{Fsynopsis}
-{ \deprecationstart \\
-  \textbf{FORTRAN:}
-  \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
-    escapechar=@,
-  deletekeywords=[2]{STATUS},
-  deletekeywords=[3]{LOG}, aboveskip=0pt,
-  belowskip=0pt}}
-{ \deprecationend }
+  \color{red}{
+    \lstset{style=PrototypeListingsDefault}
+  }
+}{}
 
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{
@@ -525,61 +408,46 @@
 }
 
 \theoremstyle{definition}
-\newtheorem{example}{Example}
+\newtheorem{source_example}{Example}
+\newtheorem{program_output}{Output}
+
 \newenvironment{apiexamples}{
   \newcommand{\apicexample}[4][]{
-    \begin{example}
+    \begin{source_example}
       \ifthenelse{\equal{##1}{}}{}{\label{##1}}
       ##2
-    \end{example}
-    \lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      % Preprocessor directives
-      classoffset=0,
-      keywords={\#include, \#pragma, \#if, \#ifdef, \#else, \#endif},
-      keywordstyle=\bfseries\color{CadetBlue},
-      % Language keywords
-      classoffset=1,
-      keywords={if, else, for, while, return, break, static, const, volatile,
-        sizeof},
-      keywordstyle=\bfseries\color{Orchid},
-      % Types
-      classoffset=2,
-      keywords={void, bool, _Bool, unsigned, char, short, int, long,
-        float, double, _Complex, complex, size_t, ptrdiff_t,
-        _Thread_local, shmem_ctx_t, shmem_team_t,
-        int8_t, int16_t, int32_t, int64_t,
-        uint8_t, uint16_t, uint32_t, uint64_t},
-      keywordstyle=\color{OliveGreen},
-      % Other elements
-      classoffset=3,
-      keywords={NULL},
-      keywordstyle=\color{Cyan},
-      % Other syntax elements
-      classoffset=0,
-      % morecomment=[s]{\<}{\>},
-      commentstyle=\itshape\color{BrickRed},
-      stringstyle=\color{DarkOrchid},
-    ]{##3}
-    ##4}
-  \newcommand{\apifexample}[4][]{
-    \begin{example}
-      \ifthenelse{\equal{##1}{}}{}{\label{##1}}
-      ##2
-    \end{example}
-    \lstinputlisting[language={Fortran}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize, deletekeywords={TARGET}]{##3}
+    \end{source_example}
+    \lstinputlisting[style=SourceListingsDefault]{##3}
     ##4}
   \vspace{-2pt}
 \item[EXAMPLES] \hfill \\
   \vspace{-2pt}
 }{}
 
-\newcommand{\cexample}[2]{
-    #1
-    \lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{#2}}
+\newcommand{\SourceExample}[2]{
+  \noindent
+  \begin{minipage}{\linewidth}
+    \vspace{0.1in}
+    \begin{source_example}
+      #2 \hfill
+      \lstinputlisting[style=SourceListingsDefault]{#1}
+    \end{source_example}
+    \vspace{0.1in}
+  \end{minipage}
+}
+
+\newcommand{\ProgramOutput}[2]{
+  \noindent
+  \begin{minipage}{\linewidth}
+    \vspace{0.1in}
+    \begin{program_output}
+      #2 \hfill
+      \lstinputlisting[style=SourceListingsDefault]{#1}
+    \end{program_output}
+    \vspace{0.1in}
+  \end{minipage}
+}
+
 %
 % End library API description template commands
 %

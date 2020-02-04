@@ -32,18 +32,19 @@ To write a ``Hello World" \openshmem program, the user must:
 In \openshmem, the order in which lines appear in the output is not
 deterministic because \acp{PE} execute asynchronously in parallel.
 
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-\numberedlisting{caption={``Hello World'' example program in \Cstd},label=openshmem-hello,language=OSH2+C}
-                {example_code/hello-openshmem.c}
-\outputlisting{language=bash,caption={Possible ordering of expected output with 4 \acp{PE} from the program in Listing~\ref{openshmem-hello}}}
-                {example_code/hello-openshmem-c.output}
-\vspace{0.1in}
-\end{minipage}
+\SourceExample{example_code/hello-openshmem.c}{
+  \label{openshmem-hello}
+  ``Hello World'' example program in \Cstd
+}
+
+\ProgramOutput{example_code/hello-openshmem-c.output}{
+  Possible ordering of expected output with 4 \acp{PE} from the
+  program in Example~\ref{openshmem-hello}
+}
 
 \clearpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex
+The example in Example~\ref{openshmem-hello-symmetric} shows a more complex
 \openshmem program that illustrates the use of symmetric data objects.
 Note the declaration of the \VAR{static short dest} array and its use as the
 remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
@@ -61,17 +62,15 @@ Conversely, the declaration of the \VAR{short source} array is asymmetric
 The \source{} object does not need to be symmetric because \PUT{} handles the
 references to the \VAR{source} array only on the active (local) side.
 
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-\numberedlisting{caption={Example program with symmetric data objects},label=openshmem-hello-symmetric,language=OSH2+C}
-                {example_code/writing_shmem_example.c}
-\outputlisting{language=bash,caption={Possible ordering of expected output with 4 \acp{PE} from the program in Listing~\ref{openshmem-hello-symmetric}}}
-                {example_code/writing_shmem_example.output}
-\vspace{0.1in}
-\end{minipage}
+\SourceExample{example_code/writing_shmem_example.c}{
+  \label{openshmem-hello-symmetric}
+  Example program with symmetric data objects
+}
 
-
-
+\ProgramOutput{example_code/writing_shmem_example.output}{
+  Possible ordering of expected output with 4~\acp{PE} from the
+  program in Example~\ref{openshmem-hello-symmetric}
+}
 
 \chapter{Compiling and Running Programs}\label{sec:compiling}
 The \openshmem Specification does not specify how

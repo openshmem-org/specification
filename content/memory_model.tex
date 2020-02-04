@@ -129,37 +129,37 @@ may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
 with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
 will invalidate the atomicity guarantees.
 
-\cexample
-    {
-      The following \CorCpp example illustrates scenario 1.
-      In this example, different atomicity domains are used to access
-      the same location, resulting in undefined behavior.
-      The undefined behavior can be resolved by using communication
-      contexts in the same atomicity domain in all concurrent operations.
-    } {./example_code/amo_scenario_1.c}
+\SourceExample{./example_code/amo_scenario_1.c}{
+  The following \CorCpp example illustrates scenario 1.
+  In this example, different atomicity domains are used to access
+  the same location, resulting in undefined behavior.
+  The undefined behavior can be resolved by using communication
+  contexts in the same atomicity domain in all concurrent operations.
+}
 
-\cexample
-    {The following \CorCpp example illustrates scenario 2.  In this example,
-    different datatypes are used to access the same location concurrently,
-    resulting in undefined behavior.  The undefined behavior can be resolved by
-    using the same datatype in all concurrent operations.  For example, the
-    32-bit value can be left-shifted and a 64-bit atomic OR operation can be
-    used.}
-    {./example_code/amo_scenario_2.c}
+\SourceExample{./example_code/amo_scenario_2.c}{
+  The following \CorCpp example illustrates scenario 2.  In this example,
+  different datatypes are used to access the same location concurrently,
+  resulting in undefined behavior.  The undefined behavior can be resolved by
+  using the same datatype in all concurrent operations.  For example, the
+  32-bit value can be left-shifted and a 64-bit atomic OR operation can be
+  used.
+}
 
-\cexample
-    {The following \CorCpp example illustrates scenario 3.  In this example,
-    atomic increment operations are concurrent with a non-atomic reduction
-    operation, resulting in undefined behavior.  The undefined behavior can be
-    resolved by inserting a barrier operation before the reduction.  The
-    barrier ensures that all local and remote AMOs have completed before the
-    reduction operation accesses $x$.}
-    {./example_code/amo_scenario_3.c}
+\SourceExample{./example_code/amo_scenario_3.c}{
+  The following \CorCpp example illustrates scenario 3.  In this example,
+  atomic increment operations are concurrent with a non-atomic reduction
+  operation, resulting in undefined behavior.  The undefined behavior can be
+  resolved by inserting a barrier operation before the reduction.  The
+  barrier ensures that all local and remote AMOs have completed before the
+  reduction operation accesses $x$.
+}
 
-\cexample
-    {The following \CorCpp example illustrates scenario 4.  In this example, an
-    \openshmem atomic increment operation is concurrent with a local increment
-    operation, resulting in undefined behavior.  The undefined behavior can be
-    resolved by replacing the local increment operation with an \openshmem
-    atomic increment.}
-    {./example_code/amo_scenario_4.c}
+\SourceExample{./example_code/amo_scenario_4.c}{
+  The following \CorCpp example illustrates scenario 4.  In this example, an
+  \openshmem atomic increment operation is concurrent with a local increment
+  operation, resulting in undefined behavior.  The undefined behavior can be
+  resolved by replacing the local increment operation with an \openshmem
+  atomic increment.
+}
+
