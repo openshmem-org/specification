@@ -84,7 +84,7 @@
 %% Specialized declaration/creation and generate reference.
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
 \newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
-\newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
+\newcommand{\FuncParam}[1]{{\ListingsParamStyle{#1}}}
 \newcommand{\LibConstDecl}[2][\CorCpp]{%
   \parbox[t]{5cm}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\LibHandleDecl}[2][\CorCpp]{%
@@ -126,9 +126,6 @@
 \newcommand\ListingsCurrentStyle{}
 \lst@AddToHook{Output}{\global\let\ListingsCurrentStyle\lst@thestyle}
 \lst@AddToHook{OutputOther}{\global\let\ListingsCurrentStyle\lst@thestyle}
-\newcommand\ListingsKeywordStyle{}
-\lst@AddToHook{Output}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
-\lst@AddToHook{OutputOther}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
 \makeatother
 
 %
@@ -205,6 +202,8 @@
 % This section is for example code listings
 %
 
+\newcommand{\ListingsParamStyle}{\bfseries\itshape\color{CadetBlue}}
+
 \lstdefinestyle{SourceListingsDefault}{
   language={C},
   escapechar=@,
@@ -217,22 +216,30 @@
   keywordstyle=\bfseries\color{CadetBlue},
   % Language keywords
   classoffset=1,
-  keywords={if, else, for, while, return, break, static, const, volatile,
-    sizeof},
+  keywords={
+    if, else, for, while, return, break, static, const, volatile,
+    sizeof, typedef, struct, union,
+  },
   keywordstyle=\bfseries\color{Orchid},
   % Types
   classoffset=2,
-  keywords={TYPE, TYPENAME, SIZE,
+  keywords={
+    _Thread_local, _Noreturn,
     void, bool, _Bool, unsigned, char, short, int, long,
     float, double, _Complex, complex, size_t, ptrdiff_t,
-    _Thread_local, shmem_ctx_t, shmem_team_t,
     int8_t, int16_t, int32_t, int64_t,
-    uint8_t, uint16_t, uint32_t, uint64_t},
+    uint8_t, uint16_t, uint32_t, uint64_t,
+    shmem_ctx_t, shmem_team_t, shmem_team_config_t,
+  },
   keywordstyle=\color{OliveGreen},
   % Other elements
   classoffset=3,
   keywords={NULL},
   keywordstyle=\color{Cyan},
+  % Type-generic parameters (see FuncParam)
+  classoffset=4,
+  keywords={TYPE, TYPENAME, SIZE},
+  keywordstyle=\ListingsParamStyle,
   % Other syntax elements
   classoffset=0,
   % morecomment=[s]{\<}{\>},
