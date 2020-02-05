@@ -49,7 +49,7 @@ A valid triplet is one such that:
   \hspace{0.35em}
   i \in \mathbb{Z}_{size}
 \end{equation*}
-where $N$ is the number of \acp{PE} in the parent team.
+where $N$ is the number of \acp{PE} in the parent team and $size$ is greater than zero.
 
 This routine must be called by all \acp{PE} in the parent team.
 All \acp{PE} must provide the same values for the \ac{PE} triplet.
@@ -68,8 +68,8 @@ On successful creation of the new team:
   \acp{PE} in the parent team.
 \end{itemize}
 
-If the new team cannot be created, then \VAR{new\_team} will be
-assigned the value \LibConstRef{SHMEM\_TEAM\_INVALID} and
+If the new team cannot be created or an invalid \ac{PE} triplet is provided,
+then \VAR{new\_team} will be assigned the value \LibConstRef{SHMEM\_TEAM\_INVALID} and
 \FUNC{shmem\_team\_split\_strided} will return a nonzero value on all
 \acp{PE} in the parent team.
 
@@ -87,9 +87,6 @@ If \VAR{parent\_team}
 compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no new team
 will be created and \VAR{new\_team} will be assigned the value
 \LibConstRef{SHMEM\_TEAM\_INVALID}.  If \VAR{parent\_team} is otherwise invalid, the behavior is undefined.
-
-If an invalid \ac{PE} triplet is provided, then the \VAR{new\_team}
-will not be created.
 }
 
 \apireturnvalues{
