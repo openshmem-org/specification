@@ -1,6 +1,6 @@
 \apisummary{
-    Waits for completion of all outstanding operations as listed in
-    Table~\ref{quietops} to symmetric data objects issued by a \ac{PE}.
+    Waits for completion of outstanding operations on symmetric data objects
+    issued by a \ac{PE}.
 }
 
 \begin{apidefinition}
@@ -18,32 +18,13 @@ void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
 
 \apidescription{
     The \FUNC{shmem\_quiet} routine ensures completion of all operations
-    (as listed in Table~\ref{quietops}) on
-    symmetric data objects issued by the calling \ac{PE} on the given context.
-    All operations as specified in Table~\ref{quietops}
-    to symmetric data objects are guaranteed to be completed and visible to all
-    \acp{PE} when \FUNC{shmem\_quiet} returns.
+    on symmetric data objects issued by the calling \ac{PE} on the given context.
+    Table~\ref{mem-order} lists the operations for which the
+    \FUNC{shmem\_quiet} routine ensures completion..
+    All operations on symmetric data objects are guaranteed to be complete and
+    visible to all \acp{PE} when \FUNC{shmem\_quiet} returns.
     If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is
     performed.
-
-    \begin{table}[h]
-  \begin{center}
-    \begin{tabular}{l}
-      \hline
-      Supported Operations               \\ \hline
-      Memory Store                       \\
-      Blocking \OPR{Put}                 \\
-      Blocking \OPR{AMO}                 \\
-      Blocking \OPR{put-with-signal}     \\
-      Non-blocking \OPR{Put}             \\
-      Non-blocking \OPR{Get}             \\
-      Non-blocking \OPR{AMO}             \\
-      Non-blocking \OPR{put-with-signal} \\ \hline
-    \end{tabular}
-    \TableCaptionRef{List Of Operations Ensured Completion by \FUNC{shmem\_quiet}}
-    \label{quietops}
-  \end{center}
-\end{table}
 }
 
 
@@ -53,20 +34,18 @@ void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
 
 \apinotes{
     \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
-    several operations as listed in Table~\ref{quietops}
-    to symmetric data objects initiated by the calling
-    \ac{PE}.  For example, one might use \FUNC{shmem\_quiet} to await delivery
+    several operations on symmetric data objects initiated by the calling
+    \ac{PE}. For example, one might use \FUNC{shmem\_quiet} to await delivery
     of a block of data before issuing another \PUT{} or nonblocking
     \PUT{} routine, which sets a completion flag on another \ac{PE}.
-     \FUNC{shmem\_quiet} is not usually needed if
+    \FUNC{shmem\_quiet} is not usually needed if
     \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} are called.  The barrier
-    routines wait for the completion of outstanding writes (from all operations
-    as listed in Table~\ref{quietops}) to
+    routines wait for the completion of outstanding writes to
     symmetric data objects on all \acp{PE}.
 
     In an \openshmem program with multithreaded \acp{PE}, it is the
-    user's responsibility to ensure ordering between operations issued by the threads
-    in a \ac{PE} that target symmetric memory
+    user's responsibility to ensure ordering between operations issued by the
+    threads in a \ac{PE} that target symmetric memory
     (e.g. \PUT{}, \ac{AMO}, \OPR{put-with-signal}, memory stores,
     and nonblocking routines)
     and calls by threads in that \ac{PE} to
