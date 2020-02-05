@@ -48,8 +48,6 @@ void @\FuncDecl{shmem\_ctx\_getmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
     complete after a subsequent call to \FUNC{shmem\_quiet}.
     At the completion of \FUNC{shmem\_quiet}, the
     data has been delivered to the \dest{} array on the local \ac{PE}.
-    If the context handle \VAR{ctx} does not correspond to a valid context,
-    the behavior is undefined.
 }
 
 \apireturnvalues{
