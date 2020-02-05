@@ -27,20 +27,16 @@ the routine in order for the operation to complete. If an invalid team handle
 or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to a team-based collective
 routine, the behavior is undefined.
 
-Team objects encapsulate the per \ac{PE} system resources required to complete
-team-based collective routines.
-All \openshmem teams-based collective calls are blocking routines which may use those
-system resources. On completion of a team-based collective call, the \ac{PE} may
-immediately call another collective on that same team without any other intervening
-synchronization across the team.
+All \openshmem teams-based collective calls are blocking routines.  On
+completion of a team-based collective call, the \ac{PE} may immediately call
+another collective on that same team without any other intervening
+synchronization across the team.  Team-based collectives must occur in the same
+program order across all PEs in a team.
 
 While \openshmem routines provide thread support according to the
 thread-support level provided at initialization (see
 Section~\ref{subsec:thread_support}), team-based collective routines
 may not be called simultaneously by multiple threads on a given team.
-
-Collective operations are matched across a given team based on ordering. So for a given team,
-collectives must occur in the same order across all PEs in a team.
 
 The team-based collective routines defined in the \openshmem Specification are:
 
