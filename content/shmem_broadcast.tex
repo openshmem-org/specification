@@ -50,10 +50,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
     consecutive \ac{PE} numbers in the active set.}
     \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    Symmetric address of a work array of size \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.
-    Every element of \VAR{pSync} must be initialized with the value
-    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
-    enters \FUNC{shmem\_broadcast}.}
+    Symmetric address of a work array of size at least \CONST{SHMEM\_BCAST\_SYNC\_SIZE}.}
 \end{DeprecateBlock}
 
 \end{apiarguments}
@@ -109,8 +106,8 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
       is ready to accept the broadcast data.
     \item For active-set-based broadcasts, the
       \VAR{pSync} array on all \acp{PE} in the
-      active set is not still in use from a prior call to a collective
-      \openshmem routine.
+      active set is not still in use from a prior call to an \openshmem
+      collective routine.
     \end{itemize}
     Otherwise, the behavior is undefined.
 
@@ -138,22 +135,6 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 }
 
 \apinotes{
-    Active-set-based \openshmem broadcast routines restore \VAR{pSync} to its original contents.
-    Multiple calls to active-set-based routines that use the same \VAR{pSync} array do not
-    require that \VAR{pSync} be reinitialized after the first call.
-
-    The user must ensure that the \VAR{pSync} array is not being updated by any
-    \ac{PE} in the active set while any of the \acp{PE} participates in processing
-    of an \openshmem broadcast routine. Be careful to avoid these situations: If the
-    \VAR{pSync} array is initialized at run time, before its first use, some type of synchronization is
-    needed to ensure that all \acp{PE} in the active set have initialized
-    \VAR{pSync} before any of them enter an \openshmem routine called with the
-    \VAR{pSync} synchronization array.  A \VAR{pSync} array may be reused on a
-    subsequent \openshmem broadcast routine only if none of the \acp{PE} in the
-    active set are still processing a prior \openshmem broadcast routine call that
-    used the same \VAR{pSync} array. In general, this can be ensured only by doing
-    some type of synchronization.        
-
     Team handle error checking and integer return codes are currently undefined.
     Implementations may define these behaviors as needed, but programs should
     ensure portability by doing their own checks for invalid team handles and for

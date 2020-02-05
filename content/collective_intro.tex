@@ -83,10 +83,14 @@ behavior is undefined.
 
 Another argument important to active-set-based collective routines is \VAR{pSync}, which is a
 symmetric work array.  All \acp{PE} participating in an active-set-based collective must pass the
-same \VAR{pSync} array.  On completion of such a collective call, the \VAR{pSync} is
+same \VAR{pSync} array.
+Every element of the \VAR{pSync} array must be initialized to
+\LibConstRef{SHMEM\_SYNC\_VALUE} before it is used as an argument to
+any active-set-based collective routine.
+On completion of such a collective call, the \VAR{pSync} is
 restored to its original contents.  The user is permitted to reuse a \VAR{pSync}
-array if all previous collective routines using the \VAR{pSync} array have been
-completed by all participating \acp{PE}. One can use a synchronization
+array if all previous collective routines using the \VAR{pSync} array have
+completed on all participating \acp{PE}. One can use a synchronization
 collective routine such as \FUNC{shmem\_barrier} to ensure completion of previous active-set-based collective
 routines. The \FUNC{shmem\_barrier} and \FUNC{shmem\_sync} routines allow the same
 \VAR{pSync} array to be used on consecutive calls as long as the \acp{PE}

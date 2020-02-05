@@ -223,10 +223,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     max(\VAR{nreduce}/2 + 1, \CONST{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE})
     elements.}
 \apiargument{IN}{pSync}{
-    Symmetric address of a work array of size \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.
-    Every element of \VAR{pSync} must be initialized with the value
-    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
-    enter the reduction routine.}
+    Symmetric address of a work array of size at least \CONST{SHMEM\_REDUCE\_SYNC\_SIZE}.}
 \end{DeprecateBlock}
 
 \end{apiarguments}
@@ -297,19 +294,8 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 }
 
 \apinotes{
-    All \openshmem reduction routines reset the values in \VAR{pSync} before they
-    return, so a particular \VAR{pSync} buffer need only be initialized the first
-    time it is used. The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
-    in the active set while any of the \acp{PE} participate in processing of an
-    \openshmem reduction routine. Be careful to avoid the following situations: If
-    the \VAR{pSync} array is initialized at run time, some type of synchronization
-    is needed to ensure that all \acp{PE} in the working set have initialized
-    \VAR{pSync} before any of them enter an \openshmem routine called with the
-    \VAR{pSync} synchronization array. A \VAR{pSync} or \VAR{pWrk} array can be
-    reused in a subsequent reduction routine call only if none of the \acp{PE} in
-    the active set are still processing a prior reduction routine call that used
-    the same \VAR{pSync} or \VAR{pWrk} arrays. In general, this can be assured only
-    by doing some type of synchronization.
+  % TODO: Remove me!
+  None.
 }
 
 \begin{apiexamples}

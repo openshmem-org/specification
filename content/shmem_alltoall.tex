@@ -49,10 +49,7 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     consecutive \ac{PE} numbers in the active set.}
     \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    Symmetric address of a work array of size \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.
-    Every element of \VAR{pSync} must be initialized with the value
-    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
-    enter the routine.}
+    Symmetric address of a work array of size at least \CONST{SHMEM\_ALLTOALL\_SYNC\_SIZE}.}
 \end{DeprecateBlock}
 
 \end{apiarguments}
@@ -135,21 +132,8 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
 }
 
 \apinotes{
-    This routine restores \VAR{pSync} to its original contents.  Multiple calls
-    to \openshmem\ routines that use the same \VAR{pSync} array do not require
-    that \VAR{pSync} be reinitialized after the first call.
-    The user must ensure that the \VAR{pSync} array is not being updated by any
-    \ac{PE} in the active set while any of the \acp{PE} participates in
-    processing of an \openshmem\ \FUNC{shmem\_alltoall} routine. Be careful to
-    avoid these situations: If the \VAR{pSync} array is initialized at run time,
-    some type of synchronization is needed to ensure that all \acp{PE} in the
-    active set have initialized \VAR{pSync} before any of them enter an
-    \openshmem\ routine called with the \VAR{pSync} synchronization array.  A
-    \VAR{pSync} array may be reused on a subsequent \openshmem\
-    \FUNC{shmem\_alltoall} routine only if none of the \acp{PE} in the
-    active set are still processing a prior \openshmem\ \FUNC{shmem\_alltoall}
-    routine call that used the same \VAR{pSync} array.  In general, this can be
-    ensured only by doing some type of synchronization.
+  % TODO: REMOVE ME!
+  None.
 }
 
 \begin{apiexamples}

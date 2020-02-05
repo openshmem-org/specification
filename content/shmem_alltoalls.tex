@@ -55,10 +55,7 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
     consecutive \ac{PE} numbers in the active set.}
     \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    Symmetric address of a work array of size \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.
-    Every element of \VAR{pSync} must be initialized with the value
-    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
-    enter the routine.}
+    Symmetric address of a work array of size at least \CONST{SHMEM\_ALLTOALLS\_SYNC\_SIZE}.}
 \end{DeprecateBlock}
 
 \end{apiarguments}
@@ -105,7 +102,8 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
 }
 
 \apinotes{
-    See notes for \FUNC{shmem\_alltoall} in Section~\ref{subsec:shmem_alltoall}.
+  % TODO: Remove me!
+  None.
 }
 
 \begin{apiexamples}
