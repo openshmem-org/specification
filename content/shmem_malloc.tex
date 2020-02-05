@@ -14,7 +14,7 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
 \begin{apiarguments}
     \apiargument{IN}{size}{The size, in bytes, of a block to be
         allocated from the symmetric heap.}
-    \apiargument{IN}{ptr}{Pointer to a block within the symmetric heap.}
+    \apiargument{IN}{ptr}{Symmetric address of an object in the symmetric heap.}
     \apiargument{IN}{alignment}{Byte alignment of the block allocated from the
         symmetric heap.}
 \end{apiarguments}
@@ -25,7 +25,7 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     \FUNC{shmem\_align} routines are collective operations that require
     participation by all \acp{PE} in the default team.
 
-    The \FUNC{shmem\_malloc} routine returns a pointer to a block of at least
+    The \FUNC{shmem\_malloc} routine returns the symmetric address of a block of at least
     \VAR{size} bytes, which shall be suitably aligned so that it may be
     assigned to a pointer to any type of object.  This space is allocated from
     the symmetric heap (in contrast to \FUNC{malloc}, which allocates from the
@@ -82,12 +82,12 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
 }
 
 \apireturnvalues{
-    The \FUNC{shmem\_malloc} routine returns a pointer to the allocated space;
+    The \FUNC{shmem\_malloc} routine returns the symmetric address of the allocated space;
     otherwise, it returns a null pointer.
     
     The \FUNC{shmem\_free} routine returns no value.
     
-    The \FUNC{shmem\_realloc} routine returns a pointer to the allocated space
+    The \FUNC{shmem\_realloc} routine returns the symmetric address of the allocated space
     (which may have moved); otherwise, all \acp{PE} return a null pointer.
     
     The \FUNC{shmem\_align} routine returns an aligned pointer whose value is a
@@ -117,7 +117,7 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
 }
 
 \apiimpnotes{
-    The symmetric heap allocation routines always return a pointer to corresponding
+    The symmetric heap allocation routines always return the symmetric addresses of corresponding
     symmetric objects across all \acp{PE}. The \openshmem specification does not
     require that the virtual addresses are equal across all \acp{PE}. Nevertheless,
     the implementation must avoid costly address translation operations in the
