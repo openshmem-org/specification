@@ -401,6 +401,7 @@
 \vspace{-2em}
 }
 {
+\end{description} % ends \begin{description} from \apidescription
 \end{description}
 }
 
@@ -513,14 +514,18 @@
 \item[Notes] \hfill \\
     #1
 \hfill \\
-\end{description}
 }
 
 \newcommand{\apiimpnotes}[1]{
-\begin{description}
-\item[Note to implementors] \hfill \\
+\item[Note to implementers] \hfill \\
     #1
 \hfill \\
+}
+
+\newcommand{\parimpnotes}[1]{
+\begin{description}
+\item[Note to implementers] \leavevmode \\
+    #1
 \end{description}
 }
 
