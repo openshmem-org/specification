@@ -13,8 +13,7 @@ int main(void) {
   int npes = shmem_n_pes();
 
   if (npes > 2)
-    shmem_team_split_strided(SHMEM_TEAM_WORLD, 2, 2, (npes - 1) / 2, config, 0,
-                             &twos_team);
+    shmem_team_split_strided(SHMEM_TEAM_WORLD, 2, 2, (npes - 1) / 2, config, 0, &twos_team);
 
   if (npes > 3)
     shmem_team_split_strided(SHMEM_TEAM_WORLD, 3, 3, (npes - 1) / 3, config, 0,
@@ -27,9 +26,9 @@ int main(void) {
 
   if (twos_team != SHMEM_TEAM_INVALID) {
     /* put the value 2 to the next team member in a circular fashion */
-    shmem_p(&x, 2,
-            shmem_team_translate_pe(twos_team, (mype_twos + 1) % npes_twos,
-                                    SHMEM_TEAM_WORLD));
+    shmem_p(
+        &x, 2,
+        shmem_team_translate_pe(twos_team, (mype_twos + 1) % npes_twos, SHMEM_TEAM_WORLD));
     shmem_quiet();
     shmem_sync(twos_team);
   }
