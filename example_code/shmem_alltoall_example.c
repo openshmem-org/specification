@@ -28,8 +28,8 @@ int main(void) {
   for (int pe = 0; pe < npes; pe++) {
     for (int i = 0; i < count; i++) {
       if (dest[(pe * count) + i] != pe + mype) {
-        printf("[%d] ERROR: dest[%d]=%" PRId64 ", should be %d\n", mype,
-               (pe * count) + i, dest[(pe * count) + i], pe + mype);
+        printf("[%d] ERROR: dest[%d]=%" PRId64 ", should be %d\n", mype, (pe * count) + i,
+               dest[(pe * count) + i], pe + mype);
       }
     }
   }

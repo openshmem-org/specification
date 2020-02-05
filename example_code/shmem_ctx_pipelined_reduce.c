@@ -28,19 +28,18 @@ int main(void) {
     out_buf[i] = 0;
   }
 
-  int p_idx = 0,
-      p = 0; /* Index of ctx and pbuf (p_idx) for current pipeline stage (p) */
+  int p_idx = 0, p = 0; /* Index of ctx and pbuf (p_idx) for current pipeline stage (p) */
   for (i = 1; i <= npes; i++)
-    shmem_put_nbi(ctx[p_idx], &pbuf[p_idx][PLEN * mype], &in_buf[PLEN * p],
-                  PLEN, (mype + i) % npes);
+    shmem_put_nbi(ctx[p_idx], &pbuf[p_idx][PLEN * mype], &in_buf[PLEN * p], PLEN,
+                  (mype + i) % npes);
 
   /* Issue communication for pipeline stage p, then accumulate results for stage
    * p-1 */
   for (p = 1; p < LEN / PLEN; p++) {
     p_idx ^= 1;
     for (i = 1; i <= npes; i++)
-      shmem_put_nbi(ctx[p_idx], &pbuf[p_idx][PLEN * mype], &in_buf[PLEN * p],
-                    PLEN, (mype + i) % npes);
+      shmem_put_nbi(ctx[p_idx], &pbuf[p_idx][PLEN * mype], &in_buf[PLEN * p], PLEN,
+                    (mype + i) % npes);
 
     shmem_ctx_quiet(ctx[p_idx ^ 1]);
     shmem_sync_all();

@@ -58,11 +58,9 @@ int main() {
   long cmask = SHMEM_TEAM_NUM_CONTEXTS;
 
   // Create team with PEs numbered 0, 2, 4, ...
-  shmem_team_spit_strided(SHMEM_TEAM_WORLD, 0, 2, npes / 2, &conf, cmask,
-                          &team_2s);
+  shmem_team_spit_strided(SHMEM_TEAM_WORLD, 0, 2, npes / 2, &conf, cmask, &team_2s);
   // Create team with PEs numbered 0, 3, 6, ...
-  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 3, npes / 3, &conf, cmask,
-                           &team_3s);
+  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 3, npes / 3, &conf, cmask, &team_3s);
 
   ctx_2s = my_team_create_ctx(team_2s);
   ctx_3s = my_team_create_ctx(team_3s);

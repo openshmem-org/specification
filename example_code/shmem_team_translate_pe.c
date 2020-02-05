@@ -8,13 +8,11 @@ int main(void) {
   int npes = shmem_n_pes();
 
   shmem_team_t new_team;
-  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, (npes + 1) / 2, config, 0,
-                           &new_team);
+  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, (npes + 1) / 2, config, 0, &new_team);
 
   if (new_team != SHMEM_TEAM_INVALID) {
     int team_mype = shmem_team_my_pe(new_team);
-    int global_mype =
-        shmem_team_translate_pe(new_team, team_mype, SHMEM_TEAM_WORLD);
+    int global_mype = shmem_team_translate_pe(new_team, team_mype, SHMEM_TEAM_WORLD);
 
     if (global_mype != mype) {
       shmem_global_exit(1);

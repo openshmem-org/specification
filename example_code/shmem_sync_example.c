@@ -39,8 +39,7 @@ int main(void) {
   if (threes_team != SHMEM_TEAM_INVALID) {
     /* put the value 3 to the next team member in a circular fashion */
     shmem_p(&x, 3,
-            shmem_team_translate_pe(threes_team,
-                                    (mype_threes + 1) % npes_threes,
+            shmem_team_translate_pe(threes_team, (mype_threes + 1) % npes_threes,
                                     SHMEM_TEAM_WORLD));
     shmem_quiet();
     shmem_sync(threes_team);

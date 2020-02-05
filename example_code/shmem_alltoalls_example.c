@@ -11,8 +11,7 @@ int main(void) {
   const ptrdiff_t dst = 2;
   const ptrdiff_t sst = 3;
   int64_t *dest = (int64_t *)shmem_malloc(count * dst * npes * sizeof(int64_t));
-  int64_t *source =
-      (int64_t *)shmem_malloc(count * sst * npes * sizeof(int64_t));
+  int64_t *source = (int64_t *)shmem_malloc(count * sst * npes * sizeof(int64_t));
 
   /* assign source values */
   for (int pe = 0; pe < npes; pe++) {
@@ -32,8 +31,8 @@ int main(void) {
     for (int i = 0; i < count; i++) {
       int j = dst * ((pe * count) + i);
       if (dest[j] != pe + mype) {
-        printf("[%d] ERROR: dest[%d]=%" PRId64 ", should be %d\n", mype, j,
-               dest[j], pe + mype);
+        printf("[%d] ERROR: dest[%d]=%" PRId64 ", should be %d\n", mype, j, dest[j],
+               pe + mype);
       }
     }
   }

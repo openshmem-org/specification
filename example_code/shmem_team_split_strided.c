@@ -10,8 +10,7 @@ int main(void) {
   int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
-  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, npes / 2, config, 0,
-                           &new_team);
+  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, npes / 2, config, 0, &new_team);
 
   if (new_team != SHMEM_TEAM_INVALID) {
     int team_npes = shmem_team_n_pes(new_team);

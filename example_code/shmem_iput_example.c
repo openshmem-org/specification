@@ -10,8 +10,8 @@ int main(void) {
     shmem_iput(dest, source, 1, 2, 5, 1);
   shmem_barrier_all(); /* sync sender and receiver */
   if (mype == 1) {
-    printf("dest on PE %d is %hd %hd %hd %hd %hd\n", mype, dest[0], dest[1],
-           dest[2], dest[3], dest[4]);
+    printf("dest on PE %d is %hd %hd %hd %hd %hd\n", mype, dest[0], dest[1], dest[2],
+           dest[3], dest[4]);
   }
   shmem_finalize();
   return 0;

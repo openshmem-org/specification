@@ -56,8 +56,7 @@ int main() {
 
 #pragma omp for
     for (int i = 0; i < npes; i++)
-      lib_thread_putmem(dst_bufs[mype], src_bufs[i],
-                        count * sizeof(*src_bufs[i]), i);
+      lib_thread_putmem(dst_bufs[mype], src_bufs[i], count * sizeof(*src_bufs[i]), i);
 
     lib_thread_unregister();
   }

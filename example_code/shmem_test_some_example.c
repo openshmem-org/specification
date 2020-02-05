@@ -31,8 +31,7 @@ int main(void) {
   int ncompleted = 0;
 
   while (ncompleted < npes) {
-    int ntested =
-        shmem_test_some(flags, npes, indices, status, SHMEM_CMP_NE, 0);
+    int ntested = shmem_test_some(flags, npes, indices, status, SHMEM_CMP_NE, 0);
     if (ntested > 0) {
       for (int i = 0; i < ntested; i++) {
         for (int j = 0; j < N; j++) {

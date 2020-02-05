@@ -28,8 +28,7 @@ int main(void) {
     shmem_atomic_set(&flags[mype], 1, i);
 
   for (int i = 0; i < npes; i++) {
-    size_t completed_idx =
-        shmem_wait_until_any(flags, npes, status, SHMEM_CMP_NE, 0);
+    size_t completed_idx = shmem_wait_until_any(flags, npes, status, SHMEM_CMP_NE, 0);
     for (int j = 0; j < N; j++) {
       total_sum += all_data[completed_idx * N + j];
     }
