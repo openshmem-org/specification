@@ -6,8 +6,7 @@ _Thread_local shmem_ctx_t thread_ctx = SHMEM_CTX_INVALID;
 
 void lib_thread_register(void) {
   if (thread_ctx == SHMEM_CTX_INVALID)
-    if (shmem_ctx_create(SHMEM_CTX_PRIVATE, &thread_ctx) &&
-        shmem_ctx_create(0, &thread_ctx))
+    if (shmem_ctx_create(SHMEM_CTX_PRIVATE, &thread_ctx) && shmem_ctx_create(0, &thread_ctx))
       thread_ctx = SHMEM_CTX_DEFAULT;
 }
 
