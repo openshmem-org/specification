@@ -55,7 +55,8 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     contiguous local data object to a data object on a specified \ac{PE}
     and subsequently updating a remote flag to signal completion. The routines
     return after the data has been copied out of the \source{} array on the
-    local \ac{PE}.
+    local \ac{PE}. If the context handle \VAR{ctx} does not correspond to a
+    valid context, the behavior is undefined.
 
     The \VAR{sig\_op} signal operator determines the type of update to be
     performed on the remote \VAR{sig\_addr} signal data object. The completion

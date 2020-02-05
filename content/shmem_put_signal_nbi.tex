@@ -53,7 +53,8 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal\_nbi}@(shmem_ctx_t ctx, void *dest, c
 \apidescription{
     The nonblocking \OPR{put-with-signal} routines provide a method for copying data
     from a contiguous local data object to a data object on a specified \ac{PE}
-    and subsequently updating a remote flag to signal completion.
+    and subsequently updating a remote flag to signal completion. If the context
+    handle \VAR{ctx} does not correspond to a valid context, the behavior is undefined.
 
     The routines return after initiating the operation. The operation is considered
     complete after a subsequent call to \FUNC{shmem\_quiet}. At the completion

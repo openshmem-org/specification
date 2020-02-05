@@ -40,7 +40,8 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
    operation. The operation is considered complete after a subsequent call to
    \FUNC{shmem\_quiet}. At the completion of \FUNC{shmem\_quiet}, \dest{} on
    \ac{PE} \VAR{pe} has been increased by one and the previous contents of \dest{}
-   fetched into the \VAR{fetch} local data object.
+   fetched into the \VAR{fetch} local data object. If the context handle \VAR{ctx} 
+   does not correspond to a valid context, the behavior is undefined.
 }
 
 \apireturnvalues{

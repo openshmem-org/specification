@@ -43,7 +43,8 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
     after a subsequent call to \FUNC{shmem\_quiet}. At the completion of
     \FUNC{shmem\_quiet}, these routines have performed a fetching bitwise XOR on
     \VAR{dest} at PE \VAR{pe} with the operand \VAR{value} and fetched the prior
-    contents of \VAR{dest} into the \VAR{fetch} local data object.
+    contents of \VAR{dest} into the \VAR{fetch} local data object. If the context
+    handle \VAR{ctx} does not correspond to a valid context, the behavior is undefined.
 }
 
 \apireturnvalues{

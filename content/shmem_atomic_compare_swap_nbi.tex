@@ -48,7 +48,8 @@ where \TYPE{} is one of the standard \ac{AMO} types and has a corresponding
     completion of \FUNC{shmem\_quiet}, prior contents of the \VAR{dest} data
     object have been fetched into \VAR{fetch} local data object and the
     contents of \VAR{value} have been conditionally updated into \VAR{dest} on the
-    remote \ac{PE}.
+    remote \ac{PE}. If the context handle \VAR{ctx} does not correspond to a valid context,
+    the behavior is undefined.
 }
 
 \apireturnvalues{

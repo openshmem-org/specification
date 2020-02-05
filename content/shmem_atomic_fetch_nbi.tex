@@ -39,7 +39,8 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
     initiating the operation. The operation is considered complete after a
     subsequent call to \FUNC{shmem\_quiet}. At the completion of
     \FUNC{shmem\_quiet}, contents of the \source{} data object from \ac{PE} has been
-    fetched into \VAR{fetch} local data object.
+    fetched into \VAR{fetch} local data object. If the context handle \VAR{ctx}
+    does not correspond to a valid context, the behavior is undefined.
 }
 
 \apireturnvalues{
