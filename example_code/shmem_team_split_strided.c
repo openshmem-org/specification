@@ -1,12 +1,7 @@
-/*
- * OpenSHMEM shmem_team_split_strided example to create a team of all even
- * ranked PEs from SHMEM_TEAM_WORLD
- */
-
 #include <shmem.h>
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
+int main(void) {
   shmem_team_t new_team;
   shmem_team_config_t *config;
 

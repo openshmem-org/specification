@@ -54,8 +54,7 @@ int main() {
 
   shmem_team_t team_2s, team_3s;
   shmem_ctx_t ctx_2s, ctx_3s;
-  shmem_team_config_t conf;
-  conf.num_contexts = 1;
+  shmem_team_config_t conf = {.num_contexts = 1};
   long cmask = SHMEM_TEAM_NUM_CONTEXTS;
 
   // Create team with PEs numbered 0, 2, 4, ...
@@ -106,4 +105,5 @@ int main() {
   shmem_team_destroy(team_3s);
 
   shmem_finalize();
+  return 0;
 }

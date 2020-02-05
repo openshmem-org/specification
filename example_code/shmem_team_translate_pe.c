@@ -2,14 +2,12 @@
 #include <stddef.h>
 
 int main(void) {
-  shmem_team_t new_team;
-  shmem_team_config_t *config;
-
   shmem_init();
-  config = NULL;
+  shmem_team_config_t *config = NULL;
   int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
+  shmem_team_t new_team;
   shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, (npes + 1) / 2, config, 0,
                            &new_team);
 
