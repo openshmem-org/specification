@@ -94,6 +94,8 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
 
     Team-based collect routines operate over all \acp{PE} in the provided team
     argument. All \acp{PE} in the provided team must participate in the collective.
+    If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
+    otherwise invalid, the behavior is undefined.
 
     Active-set-based collective routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.

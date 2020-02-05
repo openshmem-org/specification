@@ -74,9 +74,8 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
     \item The \dest{} object is updated on all \acp{PE}.
     \item All \acp{PE} in the \VAR{team} argument must participate in
       the operation.
-    \item If an invalid team handle or
-      \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to this routine,
-      the behavior is undefined.
+    \item If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
+      otherwise invalid, the behavior is undefined.
     \item \ac{PE} numbering is relative to the team. The specified
       root \ac{PE} must be a valid \ac{PE} number for the team,
       between \CONST{0} and \VAR{N$-$1}, where \VAR{N} is the size of
