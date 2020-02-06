@@ -5,18 +5,21 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, shmem_team_config_t *config);
+int @\FuncDecl{shmem\_team\_get\_config}@(shmem_team_t team, long config_mask, shmem_team_config_t *config);
 \end{Csynopsis}
 
 \begin{apiarguments}
   \apiargument{IN}{team}{An \openshmem team handle.}
+  \apiargument{IN}{config\_mask}{
+    The bitwise mask representing the set of configuration parameters to fetch from the given team.
+    }
   \apiargument{OUT}{config}{
     A pointer to the configuration parameters for the given team.}
 \end{apiarguments}
 
 \apidescription{
 \FUNC{shmem\_team\_get\_config} returns through the \VAR{config} argument
-the configuration parameters of the given team, which were assigned according
+the configuration parameters as described by the mask, which were assigned according
 to input configuration parameters when the team was created.
 
 If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
