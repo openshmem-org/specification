@@ -132,57 +132,6 @@
 \makeatother
 
 %
-% This is used to put line numbers on plain pages.  Used in draft.tex
-%
-\makeatletter
-
-\def\withlinenumbers{\relax
-  \def\@evenfoot{\hbox to 0pt{\hss\LineNumberRuler\hskip 1.5pc}\hfil}\relax
-  \def\@oddfoot{\hfil\hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}}
-
-\def\LineNumberRuler{\vbox to 0pt{\vss\normalsize \baselineskip13.6pt
-    \lineskip 1pt \normallineskip 1pt \def\baselinestretch{1}\relax
-    \LNR{1}\LNR{2}\LNR{3}\LNR{4}\LNR{5}\LNR{6}\LNR{7}\LNR{8}\LNR{9}
-    \LNR{10}\LNR{11}\LNR{12}\LNR{13}\LNR{14}
-        \LNR{15}\LNR{16}\LNR{17}\LNR{18}\LNR{19}
-    \LNR{20}\LNR{21}\LNR{22}\LNR{23}\LNR{24}
-        \LNR{25}\LNR{26}\LNR{27}\LNR{28}\LNR{29}
-    \LNR{30}\LNR{31}\LNR{32}\LNR{33}\LNR{34}\LNR{35}
-        \LNR{36}\LNR{37}\LNR{38}\LNR{39}
-    \LNR{40}\LNR{41}\LNR{42}\LNR{43}\LNR{44}
-        \LNR{45}\LNR{46}\LNR{47}\LNR{48}
-    \vskip 31pt}}
-\def\LNR#1{\hbox to 1pc{\hfil\tiny#1\hfil}}
-
-\def\ps@plainwithlinenumbers{\let\@mkboth\@gobbletwo
-     \def\@oddhead{}
-     \def\@oddfoot{\hfil\rm\thepage\hfil
-       \hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}
-     \def\@evenhead{}
-     \def\@evenfoot{\hbox to 0pt{\hss
-     \LineNumberRuler\hskip 1.5pc}\rm\hfil\thepage\hfil}}
-
-    % Contents is done with \chapter*{Contents}, so we need to turn off the
-    % line numbers in this case.  Easiest to look at def
-
-\newwrite\chappages
-\immediate\openout\chappages=chappage.txt
-\def\writespace{ }
-
-\def\incontents{0}
-\newif\ifcontents
-\contentsfalse
-\def\chapter{\clearpage \ifcontents\else\thispagestyle{plainwithlinenumbers}\fi
-        \write\chappages{Chapter \thechapter\writespace - \the\count0}
-        \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter}
-
-\makeatother
-
-%
-% End this is used to put line numbers on plain pages.  Used in draft.tex
-%
-
-%
 % Use Sans Serif font for sections, etc.
 %
 %
