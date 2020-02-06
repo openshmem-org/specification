@@ -207,30 +207,31 @@ than or equal to the size of the \openshmem team, then the behavior is undefined
 \subsection{Remote Memory Access Routines}\label{sec:rma}
 \input{content/rma_intro.tex}
 
-\subsubsection{\textbf{SHMEM\_PUT}}\label{subsec:shmem_put}
+\subsubsection{Blocking Remote Memory Access Routines}\label{sec:rma_nbi}
+\subsubsubsection{\textbf{SHMEM\_PUT}}\label{subsec:shmem_put}
 \input{content/shmem_put.tex}
 
-\subsubsection{\textbf{SHMEM\_P}}\label{subsec:shmem_p}
+\subsubsubsection{\textbf{SHMEM\_P}}\label{subsec:shmem_p}
 \input{content/shmem_p.tex}
 
-\subsubsection{\textbf{SHMEM\_IPUT}}\label{subsec:shmem_iput}
+\subsubsubsection{\textbf{SHMEM\_IPUT}}\label{subsec:shmem_iput}
 \input{content/shmem_iput.tex}
 
-\subsubsection{\textbf{SHMEM\_GET}}\label{subsec:shmem_get}
+\subsubsubsection{\textbf{SHMEM\_GET}}\label{subsec:shmem_get}
 \input{content/shmem_get.tex}
 
-\subsubsection{\textbf{SHMEM\_G}}\label{subsec:shmem_g}
+\subsubsubsection{\textbf{SHMEM\_G}}\label{subsec:shmem_g}
 \input{content/shmem_g.tex}
 
-\subsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
+\subsubsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
 \input{content/shmem_iget.tex}
 
-\subsection{Nonblocking Remote Memory Access Routines}\label{sec:rma_nbi}
+\subsubsection{Nonblocking Remote Memory Access Routines}\label{sec:rma_nbi}
 
-\subsubsection{\textbf{SHMEM\_PUT\_NBI}}\label{subsec:shmem_put_nbi}
+\subsubsubsection{\textbf{SHMEM\_PUT\_NBI}}\label{subsec:shmem_put_nbi}
 \input{content/shmem_put_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_GET\_NBI}}\label{subsec:shmem_get_nbi}
+\subsubsubsection{\textbf{SHMEM\_GET\_NBI}}\label{subsec:shmem_get_nbi}
 \input{content/shmem_get_nbi.tex}
 
 
@@ -238,93 +239,95 @@ than or equal to the size of the \openshmem team, then the behavior is undefined
 \subsection{Atomic Memory Operations}\label{sec:amo}
 \input{content/atomics_intro}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH}}
+\subsubsection{Blocking Atomic Memory Operations}\label{sec:amo-nbi}
+
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH}}
 \label{subsec:shmem_atomic_fetch}
 \input{content/shmem_atomic_fetch.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_SET}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_SET}}
 \label{subsec:shmem_atomic_set}
 \input{content/shmem_atomic_set.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP}}
 \label{subsec:shmem_atomic_compare_swap}
 \input{content/shmem_atomic_compare_swap.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_SWAP}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_SWAP}}
 \label{subsec:shmem_atomic_swap}
 \input{content/shmem_atomic_swap.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC}}
 \label{subsec:shmem_atomic_fetch_inc}
 \input{content/shmem_atomic_fetch_inc.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_INC}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_INC}}
 \label{subsec:shmem_atomic_inc}
 \input{content/shmem_atomic_inc.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD}}
 \label{subsec:shmem_atomic_fetch_add}
 \input{content/shmem_atomic_fetch_add.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_ADD}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_ADD}}
 \label{subsec:shmem_atomic_add}
 \input{content/shmem_atomic_add.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND}}
 \label{subsec:shmem_atomic_fetch_and}
 \input{content/shmem_atomic_fetch_and.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_AND}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_AND}}
 \label{subsec:shmem_atomic_and}
 \input{content/shmem_atomic_and.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR}}
 \label{subsec:shmem_atomic_fetch_or}
 \input{content/shmem_atomic_fetch_or.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_OR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_OR}}
 \label{subsec:shmem_atomic_or}
 \input{content/shmem_atomic_or.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR}}
 \label{subsec:shmem_atomic_fetch_xor}
 \input{content/shmem_atomic_fetch_xor.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_XOR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_XOR}}
 \label{subsec:shmem_atomic_xor}
 \input{content/shmem_atomic_xor.tex}
 
-\subsection{Nonblocking Atomic Memory Operations}\label{sec:amo-nbi}
+\subsubsection{Nonblocking Atomic Memory Operations}\label{sec:amo-nbi}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_NBI}}
 \label{subsec:shmem_atomic_fetch_nbi}
 \input{content/shmem_atomic_fetch_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP\_NBI}}
 \label{subsec:shmem_atomic_compare_swap_nbi}
 \input{content/shmem_atomic_compare_swap_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_SWAP\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_SWAP\_NBI}}
 \label{subsec:shmem_atomic_swap_nbi}
 \input{content/shmem_atomic_swap_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC\_NBI}}
 \label{subsec:shmem_atomic_fetch_inc_nbi}
 \input{content/shmem_atomic_fetch_inc_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD\_NBI}}
 \label{subsec:shmem_atomic_fetch_add_nbi}
 \input{content/shmem_atomic_fetch_add_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND\_NBI}}
 \label{subsec:shmem_atomic_fetch_and_nbi}
 \input{content/shmem_atomic_fetch_and_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR\_NBI}}
 \label{subsec:shmem_atomic_fetch_or_nbi}
 \input{content/shmem_atomic_fetch_or_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR\_NBI}}
 \label{subsec:shmem_atomic_fetch_xor_nbi}
 \input{content/shmem_atomic_fetch_xor_nbi.tex}
 

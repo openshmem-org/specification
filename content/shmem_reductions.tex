@@ -32,7 +32,7 @@
 \end{table}
 
 
-\paragraph{AND}
+\subsubsubsection{AND}
 Performs a bitwise AND reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -55,7 +55,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_to\_all}@(TYPE *dest, const TY
 \end{DeprecateBlock}
 where \TYPE{} is one of the integer types supported for the AND operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
-\paragraph{OR}
+\subsubsubsection{OR}
 Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -78,7 +78,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}@(TYPE *dest, const TYP
 \end{DeprecateBlock}
 where \TYPE{} is one of the integer types supported for the OR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
-\paragraph{XOR}
+\subsubsubsection{XOR}
 Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -101,7 +101,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_to\_all}@(TYPE *dest, const TY
 \end{DeprecateBlock}
 where \TYPE{} is one of the integer types supported for the XOR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
-\paragraph{MAX}
+\subsubsubsection{MAX}
 Performs a maximum-value reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -125,7 +125,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_to\_all}@(TYPE *dest, const TY
 \end{DeprecateBlock}
 where \TYPE{} is one of the integer or real types supported for the MAX operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
-\paragraph{MIN}
+\subsubsubsection{MIN}
 Performs a minimum-value reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -149,7 +149,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_to\_all}@(TYPE *dest, const TY
 \end{DeprecateBlock}
 where \TYPE{} is one of the integer or real types supported for the MIN operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
-\paragraph{SUM}
+\subsubsubsection{SUM}
 Performs a sum reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -173,7 +173,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_to\_all}@(TYPE *dest, const TY
 \end{DeprecateBlock}
 where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
-\paragraph{PROD}
+\subsubsubsection{PROD}
 Performs a product reduction across a set of \acp{PE}.\newline
 
 %% C11
