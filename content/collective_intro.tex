@@ -31,7 +31,7 @@ All \openshmem teams-based collective calls are blocking routines.  On
 completion of a team-based collective call, the \ac{PE} may immediately call
 another collective on that same team without any other intervening
 synchronization across the team.  Team-based collectives must occur in the same
-program order across all PEs in a team.
+program order across all \acp{PE} in a team.
 
 While \openshmem routines provide thread support according to the
 thread-support level provided at initialization (see
