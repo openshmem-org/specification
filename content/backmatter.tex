@@ -157,6 +157,12 @@ situation in an implementation-defined way.  For example, the library may report
 an error message saying that the \ac{PE} accessed is outside the range of
 accessible \acp{PE}, or may exit without a warning.\tabularnewline
 \hline
+Accessing an invalid team member \ac{PE} & Passing a \ac{PE} value that
+corresponds to an invalid team member to an RMA/AMO routine, as the root of
+a broadcast, etc. results in undefined behavior.  Invalid team member
+\ac{PE} values include those that are negative or greater than the size of
+the team.\tabularnewline
+\hline
 Use of non-symmetric variables & Some routines require remotely accessible
 variables to perform their function.  For example, a \PUT{} to a non-symmetric variable may
 be trapped where possible and the library may abort the program.  Another
@@ -180,6 +186,16 @@ The following cases summarize this behavior:
     \item \VAR{len} is not 0, pointer is non-null: supported.
 \end{itemize}
 \tabularnewline
+\hline
+Concurrently using active-set-based and team-based collectives & Concurrently
+using the default team on an active-set-based collective with the default
+team in a team-based collective, for instance inside a parallel region,
+results in undefined behavior.\tabularnewline
+\hline
+Destroying a team with unfreed private contexts & Before destroying a given
+team, the user is responsible for destroying all contexts within that team
+having the \LibConstRef{SHMEM\_CTX\_PRIVATE} option enabled, otherwise, the
+behavior is undefined.\tabularnewline
 \hline
 \end{longtable}
 
