@@ -15,5 +15,5 @@ ${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
 
 .PHONY: clean
 clean:
-	rm -f ${TARGET}.{log,aux,ps,dvi,bbl,blg,log,idx,out,toc,pdf,out} chappage.txt
+	rm -f ${TARGET}.{log,aux,ps,dvi,bbl,blg,log,idx,ind,ilg,out,toc,pdf,out} chappage.txt
 
