@@ -61,7 +61,7 @@ that \ac{PE} next engages in an \openshmem call.
 
 \subsection{Invoking OpenSHMEM Operations}
 
-Pointer arguments to \openshmem routines that point to non-const data must not
+Pointer arguments to \openshmem routines that point to non-\CTYPE{const} data must not
 overlap in memory with other arguments to the same \openshmem operation, with
 the exception of in-place reductions as described in Section~\ref{subsec:shmem_reductions}.
 Otherwise, the behavior is undefined.  Two arguments overlap in memory if any
@@ -70,6 +70,16 @@ For example, consider an address $a$ returned by the \FUNC{shmem\_ptr} operation
 for symmetric object $A$ on \ac{PE} $i$.  Providing the local address $a$ and
 the symmetric address of object $A$ to an \openshmem operation targeting
 \ac{PE} $i$ results in undefined behavior.
+
+Buffers provided to \openshmem routines are \emph{in-use} until the
+corresponding \openshmem operation has completed at the calling \ac{PE}.
+Updates to a buffer that is in-use, including updates performed through locally
+and remotely issued \openshmemem operations, result in undefined behavior.
+Similarly, reads from a buffer that is in-use are allowed only when the buffer
+was provided as a \CTYPE{const} argument to the \openshmem routine that it is
+in-use by.  Otherwise, the behavior is undefined. Exceptions are made for
+buffers that are in-use by \acp{AMOs}, as described in
+Section~\ref{subsec:amo_guarantees}}.
 
 \openshmem routines with multiple symmetric object arguments do not require
 these symmetric objects to be located within the same symmetric memory segment.
