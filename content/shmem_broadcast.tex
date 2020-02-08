@@ -145,7 +145,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 
 \apicexample
     {In the following \Cstd[11] example, the call to \FUNC{shmem\_broadcast} copies \source{}
-    on \ac{PE} $0$ to \dest{} on \acp{PE} $1\dots npes-1$.
+    on \ac{PE} $0$ to \dest{} on \acp{PE} $0\dots npes-1$.
 
     \CorCpp{} example:}
     {./example_code/shmem_broadcast_example.c}
