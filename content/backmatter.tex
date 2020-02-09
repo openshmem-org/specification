@@ -526,6 +526,19 @@ The following list describes the specific changes in \openshmem[1.5]:
 all PEs, including the root PE.
 \\ See Section \ref{subsec:shmem_broadcast}.
 %
+\item Deprecated active-set-based collective functions.
+\\ See Section \ref{subsec:coll}.
+%
+\item Added team-based collective functions: \FUNC{shmem\_sync},
+  \FUNC{shmem\_broadcast\{mem\}}, \FUNC{shmem\_collect\{mem\}},\\
+  \FUNC{shmem\_TYPENAME\_OP\_reduce},
+  \FUNC{shmem\_alltoall\{mem\}}, and
+  \FUNC{shmem\_alltoalls\{mem\}}.
+  \\ See Sections \ref{subsec:shmem_sync},
+  \ref{subsec:shmem_broadcast}, \ref{subsec:shmem_collect},
+  \ref{subsec:shmem_reductions}, \ref{subsec:shmem_alltoall},
+  and \ref{subsec:shmem_alltoalls}.
+%
 \item Added support for nonblocking \ac{AMO} functions.
 \\ See Section \ref{sec:amo-nbi}.
 %
