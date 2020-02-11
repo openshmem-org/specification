@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="12.5 9.5 796.6997 444.2194" width="796.6997" height="444.2194">
+  <defs>
+    <filter id="Shadow" filterUnits="userSpaceOnUse" x="12.5" y="9.5">
+      <feGaussianBlur in="SourceAlpha" result="blur" stdDeviation="1.308"/>
+      <feOffset in="blur" result="offset" dx="0" dy="2"/>
+      <feFlood flood-color="black" flood-opacity=".5" result="flood"/>
+      <feComposite in="flood" in2="offset" operator="in"/>
+    </filter>
+    <filter id="Shadow_2" filterUnits="userSpaceOnUse" x="12.5" y="9.5">
+      <feOffset in="SourceAlpha" result="offset" dx="0" dy="2"/>
+      <feFlood flood-color="black" flood-opacity=".4" result="flood"/>
+      <feComposite in="flood" in2="offset" operator="in"/>
+    </filter>
+    <font-face font-family="Helvetica" font-size="16" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="522.9492" cap-height="717.28516" ascent="770.0195" descent="-229.98047" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Helvetica"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica" font-size="14" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="522.9492" cap-height="717.28516" ascent="770.0195" descent="-229.98047" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Helvetica"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica" font-size="15" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="522.9492" cap-height="717.28516" ascent="770.0195" descent="-229.98047" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Helvetica"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.11.5 
+    <dc:date>2014-02-21 22:17:58 +0000</dc:date>
+  </metadata>
+  <g id="Canvas_1" stroke-dasharray="none" stroke-opacity="1" fill="none" stroke="none" fill-opacity="1">
+    <title>Canvas 1</title>
+    <rect fill="white" x="12.5" y="9.5" width="796.6997" height="444.2194"/>
+    <g id="Canvas_1: Layer 1">
+      <title>Layer 1</title>
+      <g id="Graphic_30_shadow" filter="url(#Shadow)">
+        <rect x="520.1997" y="62.500225" width="10" height="202.2194" fill="white"/>
+        <rect x="520.1997" y="62.500225" width="10" height="202.2194" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_29_shadow" filter="url(#Shadow)">
+        <ellipse cx="288.09985" cy="30.5" rx="35.0000559265664" ry="19.500031159087" fill="white"/>
+        <ellipse cx="288.09985" cy="30.5" rx="35.0000559265664" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_28_shadow" filter="url(#Shadow)">
+        <ellipse cx="525.1997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" fill="white"/>
+        <ellipse cx="525.1997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_27_shadow" filter="url(#Shadow_2)">
+        <path d="M 434.98123 121.1887 L 437.01877 116.8113 L 490.0434 141.49248 L 492.18954 136.88168 L 502.59985 150 L 485.85967 150.48068 L 488.00584 145.86988 Z"/>
+        <path d="M 434.98123 121.1887 L 437.01877 116.8113 L 490.0434 141.49248 L 492.18954 136.88168 L 502.59985 150 L 485.85967 150.48068 L 488.00584 145.86988 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_26_shadow" filter="url(#Shadow)">
+        <rect x="283.09985" y="62.50023" width="10" height="27.675964" fill="white"/>
+        <rect x="283.09985" y="62.50023" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_25_shadow" filter="url(#Shadow)">
+        <rect x="283.09985" y="210.20545" width="10" height="27.675964" fill="white"/>
+        <rect x="283.09985" y="210.20545" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_24_shadow" filter="url(#Shadow)">
+        <path d="M 161.54992 102.67642 L 414.6498 102.67642 C 417.4112 102.67642 419.6498 104.915 419.6498 107.67642 L 419.6498 125.35239 C 419.6498 128.11381 417.4112 130.35239 414.6498 130.35239 L 161.54992 130.35239 C 158.7885 130.35239 156.54992 128.11381 156.54992 125.35239 L 156.54992 107.67642 C 156.54992 104.915 158.7885 102.67642 161.54992 102.67642 Z" fill="white"/>
+        <path d="M 161.54992 102.67642 L 414.6498 102.67642 C 417.4112 102.67642 419.6498 104.915 419.6498 107.67642 L 419.6498 125.35239 C 419.6498 128.11381 417.4112 130.35239 414.6498 130.35239 L 161.54992 130.35239 C 158.7885 130.35239 156.54992 128.11381 156.54992 125.35239 L 156.54992 107.67642 C 156.54992 104.915 158.7885 102.67642 161.54992 102.67642 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_23_shadow" filter="url(#Shadow)">
+        <path d="M 229 250.38165 L 347.09985 250.38165 C 349.86128 250.38165 352.09985 252.62023 352.09985 255.38165 L 352.09985 273.05762 C 352.09985 275.81904 349.86128 278.05762 347.09985 278.05762 L 229 278.05762 C 226.23858 278.05762 224 275.81904 224 273.05762 L 224 255.38165 C 224 252.62023 226.23858 250.38165 229 250.38165 Z" fill="white"/>
+        <path d="M 229 250.38165 L 347.09985 250.38165 C 349.86128 250.38165 352.09985 252.62023 352.09985 255.38165 L 352.09985 273.05762 C 352.09985 275.81904 349.86128 278.05762 347.09985 278.05762 L 229 278.05762 C 226.23858 278.05762 224 275.81904 224 273.05762 L 224 255.38165 C 224 252.62023 226.23858 250.38165 229 250.38165 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_22_shadow" filter="url(#Shadow)">
+        <path d="M 161.54992 136.35284 L 414.6498 136.35284 C 417.4112 136.35284 419.6498 138.59142 419.6498 141.35284 L 419.6498 159.0288 C 419.6498 161.79023 417.4112 164.0288 414.6498 164.0288 L 161.54992 164.0288 C 158.7885 164.0288 156.54992 161.79023 156.54992 159.0288 L 156.54992 141.35284 C 156.54992 138.59142 158.7885 136.35284 161.54992 136.35284 Z" fill="white"/>
+        <path d="M 161.54992 136.35284 L 414.6498 136.35284 C 417.4112 136.35284 419.6498 138.59142 419.6498 141.35284 L 419.6498 159.0288 C 419.6498 161.79023 417.4112 164.0288 414.6498 164.0288 L 161.54992 164.0288 C 158.7885 164.0288 156.54992 161.79023 156.54992 159.0288 L 156.54992 141.35284 C 156.54992 138.59142 158.7885 136.35284 161.54992 136.35284 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_21_shadow" filter="url(#Shadow)">
+        <path d="M 161.54992 172.49286 L 414.6498 172.49286 C 417.4112 172.49286 419.6498 174.73144 419.6498 177.49286 L 419.6498 195.16882 C 419.6498 197.93025 417.4112 200.16882 414.6498 200.16882 L 161.54992 200.16882 C 158.7885 200.16882 156.54992 197.93025 156.54992 195.16882 L 156.54992 177.49286 C 156.54992 174.73144 158.7885 172.49286 161.54992 172.49286 Z" fill="white"/>
+        <path d="M 161.54992 172.49286 L 414.6498 172.49286 C 417.4112 172.49286 419.6498 174.73144 419.6498 177.49286 L 419.6498 195.16882 C 419.6498 197.93025 417.4112 200.16882 414.6498 200.16882 L 161.54992 200.16882 C 158.7885 200.16882 156.54992 197.93025 156.54992 195.16882 L 156.54992 177.49286 C 156.54992 174.73144 158.7885 172.49286 161.54992 172.49286 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_20_shadow" filter="url(#Shadow)">
+        <rect x="283.09985" y="290.55786" width="10" height="27.675964" fill="#dcdcdc"/>
+        <rect x="283.09985" y="290.55786" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_19_shadow" filter="url(#Shadow)">
+        <path d="M 161.54992 333.662 L 414.6498 333.662 C 417.4112 333.662 419.6498 335.9006 419.6498 338.662 L 419.6498 356.338 C 419.6498 359.0994 417.4112 361.338 414.6498 361.338 L 161.54992 361.338 C 158.7885 361.338 156.54992 359.0994 156.54992 356.338 L 156.54992 338.662 C 156.54992 335.9006 158.7885 333.662 161.54992 333.662 Z" fill="#dcdcdc"/>
+        <path d="M 161.54992 333.662 L 414.6498 333.662 C 417.4112 333.662 419.6498 335.9006 419.6498 338.662 L 419.6498 356.338 C 419.6498 359.0994 417.4112 361.338 414.6498 361.338 L 161.54992 361.338 C 158.7885 361.338 156.54992 359.0994 156.54992 356.338 L 156.54992 338.662 C 156.54992 335.9006 158.7885 333.662 161.54992 333.662 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_18_shadow" filter="url(#Shadow)">
+        <path d="M 161.54992 377.1027 L 414.6498 377.1027 C 417.4112 377.1027 419.6498 379.3413 419.6498 382.1027 L 419.6498 399.7787 C 419.6498 402.5401 417.4112 404.7787 414.6498 404.7787 L 161.54992 404.7787 C 158.7885 404.7787 156.54992 402.5401 156.54992 399.7787 L 156.54992 382.1027 C 156.54992 379.3413 158.7885 377.1027 161.54992 377.1027 Z" fill="#dcdcdc"/>
+        <path d="M 161.54992 377.1027 L 414.6498 377.1027 C 417.4112 377.1027 419.6498 379.3413 419.6498 382.1027 L 419.6498 399.7787 C 419.6498 402.5401 417.4112 404.7787 414.6498 404.7787 L 161.54992 404.7787 C 158.7885 404.7787 156.54992 402.5401 156.54992 399.7787 L 156.54992 382.1027 C 156.54992 379.3413 158.7885 377.1027 161.54992 377.1027 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_17_shadow" filter="url(#Shadow)">
+        <rect x="283.09985" y="420.54343" width="10" height="27.675964" fill="#dcdcdc"/>
+        <rect x="283.09985" y="420.54343" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_16_shadow" filter="url(#Shadow)">
+        <rect x="520.1997" y="263.71962" width="10" height="184.49977" fill="#dcdcdc"/>
+        <rect x="520.1997" y="263.71962" width="10" height="184.49977" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_15_shadow" filter="url(#Shadow_2)">
+        <path d="M 432.0084 187.20114 L 433.9916 182.79886 L 490.989 208.47588 L 493.07794 203.83888 L 503.6498 216.82736 L 486.91684 217.51517 L 489.0058 212.87817 Z"/>
+        <path d="M 432.0084 187.20114 L 433.9916 182.79886 L 490.989 208.47588 L 493.07794 203.83888 L 503.6498 216.82736 L 486.91684 217.51517 L 489.0058 212.87817 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_13_shadow" filter="url(#Shadow_2)">
+        <path d="M 436.82064 351.1065 L 439.17937 346.8935 L 495.18877 378.2512 L 497.67326 373.81355 L 507.0749 387.67264 L 490.34555 386.9019 L 492.83004 382.46424 Z" fill="black" fill-opacity=".1"/>
+        <path d="M 436.82064 351.1065 L 439.17937 346.8935 L 495.18877 378.2512 L 497.67326 373.81355 L 507.0749 387.67264 L 490.34555 386.9019 L 492.83004 382.46424 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_12_shadow" filter="url(#Shadow)">
+        <rect x="765.6997" y="62.500225" width="10" height="202.2194" fill="white"/>
+        <rect x="765.6997" y="62.500225" width="10" height="202.2194" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_11_shadow" filter="url(#Shadow)">
+        <ellipse cx="770.6997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" fill="white"/>
+        <ellipse cx="770.6997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_10_shadow" filter="url(#Shadow)">
+        <rect x="765.6997" y="263.71962" width="10" height="184.49977" fill="#dcdcdc"/>
+        <rect x="765.6997" y="263.71962" width="10" height="184.49977" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_9_shadow" filter="url(#Shadow)">
+        <rect x="46" y="62.500225" width="10" height="202.2194" fill="white"/>
+        <rect x="46" y="62.500225" width="10" height="202.2194" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_8_shadow" filter="url(#Shadow)">
+        <ellipse cx="51" cy="30.5" rx="35.0000559265664" ry="19.500031159087" fill="white"/>
+        <ellipse cx="51" cy="30.5" rx="35.0000559265664" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_7_shadow" filter="url(#Shadow)">
+        <rect x="46" y="263.71962" width="10" height="184.49977" fill="#dcdcdc"/>
+        <rect x="46" y="263.71962" width="10" height="184.49977" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_6_shadow" filter="url(#Shadow)">
+        <rect x="548.9497" y="123" width="198" height="125.83084" fill="white"/>
+        <rect x="548.9497" y="123" width="198" height="125.83084" stroke="#dcdcdc" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_4_shadow" filter="url(#Shadow_2)">
+        <path d="M 142.935 151.83342 L 145.065 156.16658 L 88.61819 183.91355 L 90.86176 188.47774 L 74.11514 188.35256 L 84.24461 175.0162 L 86.48818 179.58039 Z"/>
+        <path d="M 142.935 151.83342 L 145.065 156.16658 L 88.61819 183.91355 L 90.86176 188.47774 L 74.11514 188.35256 L 84.24461 175.0162 L 86.48818 179.58039 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3_shadow" filter="url(#Shadow_2)">
+        <path d="M 141.92565 393.83804 L 144.07435 398.16196 L 88.59888 425.7295 L 90.86214 430.28396 L 74.11514 430.2311 L 84.18693 416.8511 L 86.45019 421.4056 Z" fill="#dcdcdc"/>
+        <path d="M 141.92565 393.83804 L 144.07435 398.16196 L 88.59888 425.7295 L 90.86214 430.28396 L 74.11514 430.2311 L 84.18693 416.8511 L 86.45019 421.4056 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_30">
+        <rect x="520.1997" y="62.500225" width="10" height="202.2194" fill="white"/>
+        <rect x="520.1997" y="62.500225" width="10" height="202.2194" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_29">
+        <ellipse cx="288.09985" cy="30.5" rx="35.0000559265664" ry="19.500031159087" fill="white"/>
+        <ellipse cx="288.09985" cy="30.5" rx="35.0000559265664" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(265.09985 21)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x="5.65625" y="15">PE 0</tspan>
+        </text>
+      </g>
+      <g id="Graphic_28">
+        <ellipse cx="525.1997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" fill="white"/>
+        <ellipse cx="525.1997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(502.1997 22)" fill="black">
+          <tspan font-family="Helvetica" font-size="14" font-weight="400" fill="black" x="7.824219" y="14">PE 1</tspan>
+        </text>
+      </g>
+      <g id="Graphic_27">
+        <path d="M 434.98123 121.1887 L 437.01877 116.8113 L 490.0434 141.49248 L 492.18954 136.88168 L 502.59985 150 L 485.85967 150.48068 L 488.00584 145.86988 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_26">
+        <rect x="283.09985" y="62.50023" width="10" height="27.675964" fill="white"/>
+        <rect x="283.09985" y="62.50023" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_25">
+        <rect x="283.09985" y="210.20545" width="10" height="27.675964" fill="white"/>
+        <rect x="283.09985" y="210.20545" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_24">
+        <path d="M 161.54992 102.67642 L 414.6498 102.67642 C 417.4112 102.67642 419.6498 104.915 419.6498 107.67642 L 419.6498 125.35239 C 419.6498 128.11381 417.4112 130.35239 414.6498 130.35239 L 161.54992 130.35239 C 158.7885 130.35239 156.54992 128.11381 156.54992 125.35239 L 156.54992 107.67642 C 156.54992 104.915 158.7885 102.67642 161.54992 102.67642 Z" fill="white"/>
+        <path d="M 161.54992 102.67642 L 414.6498 102.67642 C 417.4112 102.67642 419.6498 104.915 419.6498 107.67642 L 419.6498 125.35239 C 419.6498 128.11381 417.4112 130.35239 414.6498 130.35239 L 161.54992 130.35239 C 158.7885 130.35239 156.54992 128.11381 156.54992 125.35239 L 156.54992 107.67642 C 156.54992 104.915 158.7885 102.67642 161.54992 102.67642 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(161.54992 107.0144)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x=".70617676" y="15">shmem_int_p (addr1, value1, PE 1)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_23">
+        <path d="M 229 250.38165 L 347.09985 250.38165 C 349.86128 250.38165 352.09985 252.62023 352.09985 255.38165 L 352.09985 273.05762 C 352.09985 275.81904 349.86128 278.05762 347.09985 278.05762 L 229 278.05762 C 226.23858 278.05762 224 275.81904 224 273.05762 L 224 255.38165 C 224 252.62023 226.23858 250.38165 229 250.38165 Z" fill="white"/>
+        <path d="M 229 250.38165 L 347.09985 250.38165 C 349.86128 250.38165 352.09985 252.62023 352.09985 255.38165 L 352.09985 273.05762 C 352.09985 275.81904 349.86128 278.05762 347.09985 278.05762 L 229 278.05762 C 226.23858 278.05762 224 275.81904 224 273.05762 L 224 255.38165 C 224 252.62023 226.23858 250.38165 229 250.38165 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(229 254.71964)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x="5.698364" y="15">shmem_quiet()</tspan>
+        </text>
+      </g>
+      <g id="Graphic_22">
+        <path d="M 161.54992 136.35284 L 414.6498 136.35284 C 417.4112 136.35284 419.6498 138.59142 419.6498 141.35284 L 419.6498 159.0288 C 419.6498 161.79023 417.4112 164.0288 414.6498 164.0288 L 161.54992 164.0288 C 158.7885 164.0288 156.54992 161.79023 156.54992 159.0288 L 156.54992 141.35284 C 156.54992 138.59142 158.7885 136.35284 161.54992 136.35284 Z" fill="white"/>
+        <path d="M 161.54992 136.35284 L 414.6498 136.35284 C 417.4112 136.35284 419.6498 138.59142 419.6498 141.35284 L 419.6498 159.0288 C 419.6498 161.79023 417.4112 164.0288 414.6498 164.0288 L 161.54992 164.0288 C 158.7885 164.0288 156.54992 161.79023 156.54992 159.0288 L 156.54992 141.35284 C 156.54992 138.59142 158.7885 136.35284 161.54992 136.35284 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(161.54992 140.69082)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x=".70617676" y="15">shmem_int_p (addr2, value2, PE 2)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_21">
+        <path d="M 161.54992 172.49286 L 414.6498 172.49286 C 417.4112 172.49286 419.6498 174.73144 419.6498 177.49286 L 419.6498 195.16882 C 419.6498 197.93025 417.4112 200.16882 414.6498 200.16882 L 161.54992 200.16882 C 158.7885 200.16882 156.54992 197.93025 156.54992 195.16882 L 156.54992 177.49286 C 156.54992 174.73144 158.7885 172.49286 161.54992 172.49286 Z" fill="white"/>
+        <path d="M 161.54992 172.49286 L 414.6498 172.49286 C 417.4112 172.49286 419.6498 174.73144 419.6498 177.49286 L 419.6498 195.16882 C 419.6498 197.93025 417.4112 200.16882 414.6498 200.16882 L 161.54992 200.16882 C 158.7885 200.16882 156.54992 197.93025 156.54992 195.16882 L 156.54992 177.49286 C 156.54992 174.73144 158.7885 172.49286 161.54992 172.49286 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(161.54992 176.83084)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x=".70617676" y="15">shmem_int_p (addr3, value3, PE 1)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_20">
+        <rect x="283.09985" y="290.55786" width="10" height="27.675964" fill="#dcdcdc"/>
+        <rect x="283.09985" y="290.55786" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_19">
+        <path d="M 161.54992 333.662 L 414.6498 333.662 C 417.4112 333.662 419.6498 335.9006 419.6498 338.662 L 419.6498 356.338 C 419.6498 359.0994 417.4112 361.338 414.6498 361.338 L 161.54992 361.338 C 158.7885 361.338 156.54992 359.0994 156.54992 356.338 L 156.54992 338.662 C 156.54992 335.9006 158.7885 333.662 161.54992 333.662 Z" fill="#dcdcdc"/>
+        <path d="M 161.54992 333.662 L 414.6498 333.662 C 417.4112 333.662 419.6498 335.9006 419.6498 338.662 L 419.6498 356.338 C 419.6498 359.0994 417.4112 361.338 414.6498 361.338 L 161.54992 361.338 C 158.7885 361.338 156.54992 359.0994 156.54992 356.338 L 156.54992 338.662 C 156.54992 335.9006 158.7885 333.662 161.54992 333.662 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(161.54992 338)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x=".70617676" y="15">shmem_int_p (addr4, value4, PE 1)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_18">
+        <path d="M 161.54992 377.1027 L 414.6498 377.1027 C 417.4112 377.1027 419.6498 379.3413 419.6498 382.1027 L 419.6498 399.7787 C 419.6498 402.5401 417.4112 404.7787 414.6498 404.7787 L 161.54992 404.7787 C 158.7885 404.7787 156.54992 402.5401 156.54992 399.7787 L 156.54992 382.1027 C 156.54992 379.3413 158.7885 377.1027 161.54992 377.1027 Z" fill="#dcdcdc"/>
+        <path d="M 161.54992 377.1027 L 414.6498 377.1027 C 417.4112 377.1027 419.6498 379.3413 419.6498 382.1027 L 419.6498 399.7787 C 419.6498 402.5401 417.4112 404.7787 414.6498 404.7787 L 161.54992 404.7787 C 158.7885 404.7787 156.54992 402.5401 156.54992 399.7787 L 156.54992 382.1027 C 156.54992 379.3413 158.7885 377.1027 161.54992 377.1027 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(161.54992 381.4407)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x=".70617676" y="15">shmem_int_p (addr5, value5, PE 2)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_17">
+        <rect x="283.09985" y="420.54343" width="10" height="27.675964" fill="#dcdcdc"/>
+        <rect x="283.09985" y="420.54343" width="10" height="27.675964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_16">
+        <rect x="520.1997" y="263.71962" width="10" height="184.49977" fill="#dcdcdc"/>
+        <rect x="520.1997" y="263.71962" width="10" height="184.49977" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_15">
+        <path d="M 432.0084 187.20114 L 433.9916 182.79886 L 490.989 208.47588 L 493.07794 203.83888 L 503.6498 216.82736 L 486.91684 217.51517 L 489.0058 212.87817 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_14">
+        <line x1="352.09985" y1="264.21964" x2="805.6997" y2="263" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+      </g>
+      <g id="Graphic_13">
+        <path d="M 436.82064 351.1065 L 439.17937 346.8935 L 495.18877 378.2512 L 497.67326 373.81355 L 507.0749 387.67264 L 490.34555 386.9019 L 492.83004 382.46424 Z" fill="black" fill-opacity=".1"/>
+        <path d="M 436.82064 351.1065 L 439.17937 346.8935 L 495.18877 378.2512 L 497.67326 373.81355 L 507.0749 387.67264 L 490.34555 386.9019 L 492.83004 382.46424 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_12">
+        <rect x="765.6997" y="62.500225" width="10" height="202.2194" fill="white"/>
+        <rect x="765.6997" y="62.500225" width="10" height="202.2194" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_11">
+        <ellipse cx="770.6997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" fill="white"/>
+        <ellipse cx="770.6997" cy="30.5" rx="35.0000559265663" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(747.6997 21)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x="4.769531" y="15">PE K</tspan>
+        </text>
+      </g>
+      <g id="Graphic_10">
+        <rect x="765.6997" y="263.71962" width="10" height="184.49977" fill="#dcdcdc"/>
+        <rect x="765.6997" y="263.71962" width="10" height="184.49977" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_9">
+        <rect x="46" y="62.500225" width="10" height="202.2194" fill="white"/>
+        <rect x="46" y="62.500225" width="10" height="202.2194" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_8">
+        <ellipse cx="51" cy="30.5" rx="35.0000559265664" ry="19.500031159087" fill="white"/>
+        <ellipse cx="51" cy="30.5" rx="35.0000559265664" ry="19.500031159087" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(28 21)" fill="black">
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x="5.65625" y="15">PE 2</tspan>
+        </text>
+      </g>
+      <g id="Graphic_7">
+        <rect x="46" y="263.71962" width="10" height="184.49977" fill="#dcdcdc"/>
+        <rect x="46" y="263.71962" width="10" height="184.49977" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_6">
+        <rect x="548.9497" y="123" width="198" height="125.83084" fill="white"/>
+        <rect x="548.9497" y="123" width="198" height="125.83084" stroke="#dcdcdc" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(553.9497 122.91542)" fill="black">
+          <tspan font-family="Helvetica" font-size="15" font-weight="400" fill="black" x="20.629639" y="15"> PE K is any PE in the </tspan>
+          <tspan font-family="Helvetica" font-size="15" font-weight="400" fill="black" x="68.16382" y="33">system.</tspan>
+          <tspan font-family="Helvetica" font-size="15" font-weight="400" fill="black" x="4.765381" y="69">value1, value2, and value3</tspan>
+          <tspan font-family="Helvetica" font-size="15" font-weight="400" fill="black" x="5.201172" y="87">are delivered to target PEs </tspan>
+          <tspan font-family="Helvetica" font-size="15" font-weight="400" fill="black" x="11.459717" y="105">and visible for PE K after </tspan>
+          <tspan font-family="Helvetica" font-size="15" font-weight="400" fill="black" x="16.052002" y="123">the shmem_quiet() call.</tspan>
+        </text>
+      </g>
+      <g id="Line_5">
+        <line x1="16" y1="264" x2="224" y2="264.21964" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+      </g>
+      <g id="Graphic_4">
+        <path d="M 142.935 151.83342 L 145.065 156.16658 L 88.61819 183.91355 L 90.86176 188.47774 L 74.11514 188.35256 L 84.24461 175.0162 L 86.48818 179.58039 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3">
+        <path d="M 141.92565 393.83804 L 144.07435 398.16196 L 88.59888 425.7295 L 90.86214 430.28396 L 74.11514 430.2311 L 84.18693 416.8511 L 86.45019 421.4056 Z" fill="#dcdcdc"/>
+        <path d="M 141.92565 393.83804 L 144.07435 398.16196 L 88.59888 425.7295 L 90.86214 430.28396 L 74.11514 430.2311 L 84.18693 416.8511 L 86.45019 421.4056 Z" stroke="black" stroke-opacity=".75" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

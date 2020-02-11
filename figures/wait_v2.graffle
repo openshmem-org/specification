@@ -117,9 +117,9 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2017-10-12 23:18:46 +0000</string>
+	<string>2020-02-11 00:57:04 +0000</string>
 	<key>Modifier</key>
-	<string>Sreeram Potluri</string>
+	<string>Manjunath GV (work)</string>
 	<key>MovementHandleVisible</key>
 	<string>NO</string>
 	<key>NotesVisible</key>
@@ -380,11 +380,11 @@
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs32 \cf0 shmem_int_wait_until \
-(addr, _
+(addr, 
 \f1 SHMEM_CMP_EQ
 \f0 , value)}</string>
 						<key>TextAlongPathGlyphAnchor</key>
-						<string>left</string>
+						<string>center</string>
 					</dict>
 				</dict>
 				<dict>
@@ -813,7 +813,7 @@ is
 		<key>CurrentSheet</key>
 		<integer>0</integer>
 		<key>Frame</key>
-		<string>{{732, 135}, {1363, 872}}</string>
+		<string>{{612, 254}, {1363, 872}}</string>
 		<key>ShowInfo</key>
 		<true/>
 		<key>ShowRuler</key>
@@ -863,7 +863,7 @@ is
 	<key>includeNonPrintingLayersKey</key>
 	<false/>
 	<key>lastExportTypeKey</key>
-	<integer>11</integer>
+	<integer>8</integer>
 	<key>marginWidthKey</key>
 	<real>0.0</real>
 	<key>readOnlyKey</key>
@@ -887,7 +887,7 @@ is
 	<key>useArtboardsKey</key>
 	<false/>
 	<key>useMarginKey</key>
-	<true/>
+	<false/>
 	<key>useNotesKey</key>
 	<false/>
 </dict>
