@@ -27,7 +27,7 @@ the routine in order for the operation to complete. If an invalid team handle
 or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to a team-based collective
 routine, the behavior is undefined.
 
-All \openshmem teams-based collective calls are blocking routines.  On
+All \openshmem teams-based collective operations are blocking routines.  On
 completion of a team-based collective call, the \ac{PE} may immediately call
 another collective on that same team without any other intervening
 synchronization across the team.  Team-based collectives must occur in the same
