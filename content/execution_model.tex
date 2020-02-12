@@ -74,12 +74,13 @@ the symmetric address of object $A$ to an \openshmem operation targeting
 Buffers provided to \openshmem routines are \emph{in-use} until the
 corresponding \openshmem operation has completed at the calling \ac{PE}.
 Updates to a buffer that is in-use, including updates performed through locally
-and remotely issued \openshmemem operations, result in undefined behavior.
+and remotely issued \openshmem operations, result in undefined behavior.
 Similarly, reads from a buffer that is in-use are allowed only when the buffer
-was provided as a \CTYPE{const} argument to the \openshmem routine that it is
-in-use by.  Otherwise, the behavior is undefined. Exceptions are made for
+was provided as a \CTYPE{const}-qualified argument to the \openshmem routine for
+which it is in-use.  Otherwise, the behavior is undefined. Exceptions are made for
 buffers that are in-use by \acp{AMOs}, as described in
-Section~\ref{subsec:amo_guarantees}}.
+Section~\ref{subsec:amo_guarantees}}. For information regarding the completion
+of \openshmem operations, see Section~\ref{sec:memory_order}.
 
 \openshmem routines with multiple symmetric object arguments do not require
 these symmetric objects to be located within the same symmetric memory segment.
