@@ -29,7 +29,7 @@ routine, the behavior is undefined.
 
 All \openshmem teams-based collective operations are blocking routines.  On
 completion of a team-based collective call, the \ac{PE} may immediately call
-another collective on that same team without any other intervening
+another collective operation on that same team.
 synchronization across the team.  Team-based collectives must occur in the same
 program order across all \acp{PE} in a team.
 
