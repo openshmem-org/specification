@@ -36,7 +36,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
             
     The \FUNC{shmem\_malloc\_with\_hints} routine is provided  so that multiple \acp{PE} in a program can allocate symmetric,
     remotely accessible memory blocks.  When no action is performed, these
-    routines return without performing a barrier. Otherwise, the routine will call a barrier on \LibHandleRef{SHMEM\_TEAM\_WORLD} on exit.
+    routines return without performing a barrier. Otherwise, the routine will call a procedure that is semantically equivalent to \FUNC{shmem\_barrier\_all} on exit.
     This ensures that all \acp{PE} participate in the memory allocation, and that the memory on other
     \acp{PE} can be used as soon as the local \ac{PE} returns. The implicit barrier performed by this routine will quiet the
     default context.  It is the user's responsibility to ensure that no communication operations involving the given memory block are pending on
