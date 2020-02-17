@@ -132,7 +132,7 @@ updates issued via the default context.  This routine is equivalent to
 a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
 call to \FUNC{shmem\_team\_sync} on the default team.
 
-\subsubsection*{Error codes returned from collectives}
+\subsubsection*{Error codes returned from team-based collectives}
 
 Collective operations involving multiple \acp{PE} may return values
 indicating success while other \acp{PE} are still executing the
