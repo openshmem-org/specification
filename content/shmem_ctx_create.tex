@@ -29,7 +29,7 @@ int @\FuncDecl{shmem\_ctx\_create}@(long options, shmem_ctx_t *ctx);
     options or after additional resources become available.
 
     A newly created communication context has a fixed association with the
-    default team.
+    world team.
     All \openshmem routines that operate on this context will do so with
     respect to the associated \ac{PE} team.
     That is, all point-to-point routines operating on this context will use
