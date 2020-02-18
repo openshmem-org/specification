@@ -15,8 +15,8 @@ Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
   the remote data object.
 
   The fetching routines include:
-  \FUNC{shmem\_atomic\_\{fetch, compare\_swap, swap\}} and
-  \FUNC{shmem\_atomic\_fetch\_\{inc, add, and, or, xor\}}.
+  \FUNC{shmem\_atomic\_\{fetch, compare\_swap, swap\}\{\_nbi\}} and
+  \FUNC{shmem\_atomic\_fetch\_\{inc, add, and, or, xor\}\{\_nbi\}}.
 
 \item
   The \emph{non-fetching} routines update the remote data object in a single
@@ -27,7 +27,7 @@ Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
   atomic routines.
 
   The non-fetching routines include:
-  \FUNC{shmem\_atomic\_\{set, inc, add, and, or, xor\}}.
+  \FUNC{shmem\_atomic\_\{set, inc, add, and, or, xor\}\{\_nbi\}}.
 
 \end{itemize}
 
@@ -36,11 +36,11 @@ type-generic \ac{AMO} interfaces via \Cstd[11] generic selection.
 The type-generic support for the \ac{AMO} routines is as follows:
 
 \begin{itemize}
-\item \FUNC{shmem\_atomic\_\{compare\_swap, fetch\_inc, inc, fetch\_add, add\}}
+\item \FUNC{shmem\_atomic\_\{compare\_swap, fetch\_inc, inc, fetch\_add, add\}\{\_nbi\}}
   support the ``standard \ac{AMO} types'' listed in Table~\ref{stdamotypes},
 \item \FUNC{shmem\_atomic\_\{fetch, set, swap\}} support
   the ``extended \ac{AMO} types'' listed in Table~\ref{extamotypes}, and
-\item \FUNC{shmem\_atomic\_\{fetch\_and, and, fetch\_or, or, fetch\_xor, xor\}}
+\item \FUNC{shmem\_atomic\_\{fetch\_and, and, fetch\_or, or, fetch\_xor, xor\}\{\_nbi\}}
   support the ``bitwise \ac{AMO} types'' listed in Table~\ref{bitamotypes}.
 \end{itemize}
 
