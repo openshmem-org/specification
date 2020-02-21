@@ -40,7 +40,7 @@
     </font-face>
   </defs>
   <metadata> Produced by OmniGraffle 7.11.5 
-    <dc:date>2020-02-11 00:57:04 +0000</dc:date>
+    <dc:date>2017-10-12 23:18:46 +0000</dc:date>
   </metadata>
   <g id="Canvas_1" stroke-dasharray="none" stroke-opacity="1" fill="none" stroke="none" fill-opacity="1">
     <title>Canvas 1</title>
@@ -157,7 +157,7 @@
         <path d="M 311 102 L 559.90015 102 C 562.6616 102 564.90015 104.23858 564.90015 107 L 564.90015 136 C 564.90015 138.76142 562.6616 141 559.90015 141 L 311 141 C 308.23858 141 306 138.76142 306 136 L 306 107 C 306 104.23858 308.23858 102 311 102 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
         <text transform="translate(311 102.5)" fill="black">
           <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x="47.52429" y="15">shmem_int_wait_until </tspan>
-          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x="10.629761" y="34">(addr, </tspan>
+          <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" x="6.180542" y="34">(addr, _</tspan>
           <tspan font-family="Times" font-size="16" font-weight="400" fill="black" y="34">SHMEM_CMP_EQ</tspan>
           <tspan font-family="Helvetica" font-size="16" font-weight="400" fill="black" y="34">, value)</tspan>
         </text>
