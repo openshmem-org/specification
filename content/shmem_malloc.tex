@@ -23,7 +23,7 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
 \apidescription{
     The \FUNC{shmem\_malloc}, \FUNC{shmem\_free}, \FUNC{shmem\_realloc}, and
     \FUNC{shmem\_align} routines are collective operations that require
-    participation by all \acp{PE} in the default team.
+    participation by all \acp{PE} in the world team.
 
     The \FUNC{shmem\_malloc} routine returns the symmetric address of a block of at least
     \VAR{size} bytes, which shall be suitably aligned so that it may be
