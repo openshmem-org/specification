@@ -340,6 +340,14 @@ local data object to a data object on a specified \ac{PE} and subsequently
 updating a remote flag to signal completion. The signal-fetch routine provides
 support for fetching a signal update operation.
 
+\openshmem \OPR{put-with-signal} routines specified in this section have two
+variants. In one of the variants, the context handle, \VAR{ctx}, is explicitly
+passed as an argument. In this variant, the operation is performed on the
+specified context. If the context handle \VAR{ctx} does not correspond to a
+valid context, the behavior is undefined. In the other variant, the context
+handle is not explicitly passed and thus, the operations are performed on the
+default context.
+
 \subsubsection{Atomicity Guarantees for Signaling Operations}
 \label{subsec:signal_atomicity}
 All signaling operations put-with-signal, nonblocking put-with-signal, and
