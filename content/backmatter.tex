@@ -160,7 +160,7 @@ accessible \acp{PE}, or may exit without a warning.\tabularnewline
 Accessing an invalid team member \ac{PE} & Passing a \ac{PE} value that
 corresponds to an invalid team member to an RMA/AMO routine, as the root of
 a broadcast, etc. results in undefined behavior.  Invalid team member
-\ac{PE} values include those that are negative or greater than the size of
+\ac{PE} values include those that are negative or greater than or equal to the size of
 the team.\tabularnewline
 \hline
 Use of non-symmetric variables & Some routines require remotely accessible
