@@ -14,7 +14,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
     - name: Build PDF
-      run: make LATEXOPT="-interaction batchmode -halt-on-error"
+      run: make LATEXOPT="-interaction nonstopmode -halt-on-error"
     - name: Rename PDF
       run: mv main_spec.pdf openshmem-draft-${{ github.event.pull_request.head.sha }}.pdf
     - name: Upload PDF artifact
