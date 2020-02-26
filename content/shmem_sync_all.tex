@@ -1,6 +1,6 @@
 \apisummary{
     Registers the arrival of a \ac{PE} at a synchronization point and suspends
-    execution until all other \acp{PE} in the default team arrive at a synchronization point. For multithreaded programs, execution is suspended
+    execution until all other \acp{PE} in the world team arrive at a synchronization point. For multithreaded programs, execution is suspended
     as specified by the threading model (Section \ref{subsec:thread_support}).
 }
 
@@ -19,7 +19,7 @@ void @\FuncDecl{shmem\_sync\_all}@(void);
 \apidescription{
 
     This routine blocks the calling \ac{PE} until all \acp{PE} in the
-    default team have called \FUNC{shmem\_sync\_all}.
+    world team have called \FUNC{shmem\_sync\_all}.
 
     In a multithreaded \openshmem program, only the calling thread is
     blocked.
@@ -36,7 +36,7 @@ void @\FuncDecl{shmem\_sync\_all}@(void);
 
 \apinotes{
     The \FUNC{shmem\_sync\_all} routine is equivalent to calling
-    \FUNC{shmem\_team\_sync} on the default team.
+    \FUNC{shmem\_team\_sync} on the world team.
 }
 
 \end{apidefinition}

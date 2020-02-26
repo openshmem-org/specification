@@ -14,7 +14,7 @@ operations performed by a group of \acp{PE}.
 \end{DeprecateBlock}
 
 \item Collective routines that accept neither team nor active set
-  parameters, which implicitly operate on the default team and, as
+  parameters, which implicitly operate on the world team and, as
   required, the default context.
 \end{enumerate}
 
@@ -119,14 +119,14 @@ routines defined in the \openshmem Specification are:
 \subsubsection*{Team-implicit collectives}
 
 The \FUNC{shmem\_sync\_all} routine synchronizes all \acp{PE} in the
-computation through the default team. This routine is equivalent to a
-call to \FUNC{shmem\_team\_sync} on the default team.
+computation through the world team. This routine is equivalent to a
+call to \FUNC{shmem\_team\_sync} on the world team.
 
 The \FUNC{shmem\_barrier\_all} routine synchronizes all \acp{PE} in
-the default team and ensures completion of all local and remote memory
+the world team and ensures completion of all local and remote memory
 updates issued via the default context.  This routine is equivalent to
 a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
-call to \FUNC{shmem\_team\_sync} on the default team.
+call to \FUNC{shmem\_team\_sync} on the world team.
 
 \subsubsection*{Error codes returned from collectives}
 
