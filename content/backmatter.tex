@@ -187,14 +187,16 @@ The following cases summarize this behavior:
 \end{itemize}
 \tabularnewline
 \hline
-Concurrently using active-set-based and team-based collectives & Concurrently
-using the default team on an active-set-based collective with the default
-team in a team-based collective, for instance inside a parallel region,
-results in undefined behavior.\tabularnewline
+Concurrent use of a team & Teams are not thread-safe objects.
+Concurrent use of a team from multiple threads results in undefined
+behavior.  Such a situation can arise when one thread is calling a
+team-implicit collective (e.g., \FUNC{shmem\_barrier\_all}), which
+implicitly operate on the world team, and another calls a team-based
+collective (e.g., \FUNC{shmem\_broadcastmem}). \tabularnewline
 \hline
 Destroying a team with unfreed private contexts & Before destroying a given
-team, the user is responsible for destroying all contexts within that team
-having the \LibConstRef{SHMEM\_CTX\_PRIVATE} option enabled, otherwise, the
+team, the user is responsible for destroying all contexts created from that team
+with the \LibConstRef{SHMEM\_CTX\_PRIVATE} option enabled; otherwise, the
 behavior is undefined.\tabularnewline
 \hline
 \end{longtable}
