@@ -8,14 +8,14 @@
 size_t @\FuncDecl{shmem\_wait\_until\_any}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
     TYPE cmp_value);
 \end{C11synopsis}
-where \TYPE{} is one of the point-to-point synchronization types specified by
+where \TYPE{} is one of the standard \ac{AMO} specified by
 Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_any}@(TYPE *ivars, size_t nelems, const int *status,
     int cmp, TYPE cmp_value);
 \end{Csynopsis}
-where \TYPE{} is one of the point-to-point synchronization types and has a
+where \TYPE{} is one of the standard \ac{AMO} types and has a
 corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{apiarguments}
@@ -81,4 +81,3 @@ corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 \end{apiexamples}
 
 \end{apidefinition}
-
