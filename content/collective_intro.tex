@@ -108,7 +108,7 @@ routines defined in the \openshmem Specification are:
 \item \FUNC{shmem\_broadcast\{32, 64\}}
 \item \FUNC{shmem\_collect\{32, 64\}}
 \item \FUNC{shmem\_fcollect\{32, 64\}}
-\item Reduction routines for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
+\item Reduction routines for the following operations: AND, OR, XOR, MAX, MIN, SUM, PROD
 \item \FUNC{shmem\_alltoall\{32, 64\}}
 \item \FUNC{shmem\_alltoalls\{32, 64\}}
 \end{itemize}
@@ -128,7 +128,7 @@ updates issued via the default context.  This routine is equivalent to
 a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
 call to \FUNC{shmem\_team\_sync} on the world team.
 
-\subsubsection*{Error codes returned from collectives}
+\subsubsection*{Error codes returned from team-based collectives}
 
 Collective operations involving multiple \acp{PE} may return values
 indicating success while other \acp{PE} are still executing the
