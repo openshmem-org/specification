@@ -78,7 +78,7 @@ and remotely issued \openshmem operations, result in undefined behavior.
 Similarly, reads from a buffer that is in-use are allowed only when the buffer
 was provided as a \CTYPE{const}-qualified argument to the \openshmem routine for
 which it is in-use.  Otherwise, the behavior is undefined. Exceptions are made for
-buffers that are in-use by \acp{AMOs}, as described in
+buffers that are in-use by \acp{AMO}, as described in
 Section~\ref{subsec:amo_guarantees}}. For information regarding the completion
 of \openshmem operations, see Section~\ref{sec:memory_order}.
 
