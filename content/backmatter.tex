@@ -522,8 +522,8 @@ The following list describes the specific changes in \openshmem[1.5]:
 \CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
 \\ See Section \ref{subsec:shmmallochint} and \ref{subsec:library_constants}.
 %
-\item Changed the team-based broadcast function to update the dest object on
-all PEs, including the root PE.
+\item Changed the team-based broadcast function to update the \VAR{dest} object on
+all \acp{PE}, including the root \ac{PE}.
 \\ See Section \ref{subsec:shmem_broadcast}.
 %
 \item Deprecated active-set-based collective functions.
