@@ -60,7 +60,7 @@ between \acp{PE} in collective operations. When calling multiple subsequent
 collective operations on a team, the collective operations---along with any
 relevant team based resources---are matched across the \acp{PE} in the team
 based on ordering of collective routine calls. It is the responsibility
-of the \openshmem program to ensure the same ordering of collective routine calls
+of the user to ensure that team-based collectives occur in the same program order
 across all \acp{PE} in a team.
 
 A full discussion of collective semantics follows in Section~\ref{subsec:coll}.

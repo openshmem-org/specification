@@ -14,7 +14,7 @@ operations performed by a group of \acp{PE}.
 \end{DeprecateBlock}
 
 \item Collective routines that accept neither team nor active set
-  parameters, which implicitly operate on the default team and, as
+  parameters, which implicitly operate on the world team and, as
   required, the default context.
 \end{enumerate}
 
@@ -33,20 +33,16 @@ the routine in order for the operation to complete. If an invalid team handle
 or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to a team-based collective
 routine, the behavior is undefined.
 
-Team objects encapsulate the per \ac{PE} system resources required to complete
-team-based collective routines.
-All \openshmem teams-based collective calls are blocking routines which may use those
-system resources. On completion of a team-based collective call, the \ac{PE} may
-immediately call another collective on that same team without any other intervening
-synchronization across the team.
+All \openshmem teams-based collective operations are blocking routines.  On
+return from a team-based collective call, the \ac{PE} may immediately call
+another collective operation on that same team.
+Team-based collectives must occur in the same
+program order across all \acp{PE} in a team.
 
 While \openshmem routines provide thread support according to the
 thread-support level provided at initialization (see
 Section~\ref{subsec:thread_support}), team-based collective routines
 may not be called simultaneously by multiple threads on a given team.
-
-Collective operations are matched across a given team based on ordering. So for a given team,
-collectives must occur in the same order across all PEs in a team.
 
 The team-based collective routines defined in the \openshmem Specification are:
 
@@ -123,14 +119,14 @@ routines defined in the \openshmem Specification are:
 \subsubsection*{Team-implicit collectives}
 
 The \FUNC{shmem\_sync\_all} routine synchronizes all \acp{PE} in the
-computation through the default team. This routine is equivalent to a
-call to \FUNC{shmem\_team\_sync} on the default team.
+computation through the world team. This routine is equivalent to a
+call to \FUNC{shmem\_team\_sync} on the world team.
 
 The \FUNC{shmem\_barrier\_all} routine synchronizes all \acp{PE} in
-the default team and ensures completion of all local and remote memory
+the world team and ensures completion of all local and remote memory
 updates issued via the default context.  This routine is equivalent to
 a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
-call to \FUNC{shmem\_team\_sync} on the default team.
+call to \FUNC{shmem\_team\_sync} on the world team.
 
 \subsubsection*{Error codes returned from team-based collectives}
 
