@@ -151,17 +151,12 @@ have already been called, any subsequent calls to these initialization routines
 result in undefined behavior.
 \tabularnewline
 \hline
-Accessing non-existent \acp{PE} & If a communications routine accesses a
-non-existent \ac{PE}, then the \openshmem library may handle this
-situation in an implementation-defined way.  For example, the library may report
-an error message saying that the \ac{PE} accessed is outside the range of
-accessible \acp{PE}, or may exit without a warning.\tabularnewline
-\hline
-Accessing an invalid team member \ac{PE} & Passing a \ac{PE} value that
-corresponds to an invalid team member to an RMA/AMO routine, as the root of
-a broadcast, etc. results in undefined behavior.  Invalid team member
-\ac{PE} values include those that are negative or greater than or equal to the size of
-the team.\tabularnewline
+Specifying invalid \ac{PE} numbers & For \openshmem routines that accept a
+\ac{PE} number as an argument, if the \ac{PE} number is invalid for the
+team associated with the operation (either implicitly or explicitly), the
+behavior is undefined.  An invalid \ac{PE} number includes those that are
+negative or greater than or equal to the size of the associated team.
+\tabularnewline
 \hline
 Use of non-symmetric variables & Some routines require remotely accessible
 variables to perform their function.  For example, a \PUT{} to a non-symmetric variable may
@@ -191,7 +186,7 @@ Concurrent use of a team & Teams are not thread-safe objects.
 Concurrent use of a team from multiple threads results in undefined
 behavior.  Such a situation can arise when one thread is calling a
 team-implicit collective (e.g., \FUNC{shmem\_barrier\_all}), which
-implicitly operate on the world team, and another calls a team-based
+implicitly operates on the world team, and another calls a team-based
 collective (e.g., \FUNC{shmem\_broadcastmem}). \tabularnewline
 \hline
 Destroying a team with unfreed private contexts & Before destroying a given
