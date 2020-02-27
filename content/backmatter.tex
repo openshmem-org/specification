@@ -513,13 +513,6 @@ The \CTYPE{long}-typed \CorCpp routine \FUNC{shmem\_wait\_until} was deprecated
 in favor of the \Cstd[11] type-generic interface of the same name or the
 explicitly typed \CorCpp routine \FUNC{shmem\_long\_wait\_until}.
 
-\subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} --- \CTYPE{short} and \CTYPE{unsigned short} variants}
-The \CTYPE{short} and \CTYPE{unsigned short} type \CorCpp and \textit{C11}
-routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
-because point-to-point synchronization routines are only compatible with
-\acp{AMO} (as of \openshmem 1.5), and there is no corresponding AMO for
-\CTYPE{short} and \CTYPE{unsigned short}.
-
 \subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, %% Issue #66.
     \FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc},
     \FUNC{shmem\_inc}, \FUNC{shmem\_fadd}, \FUNC{shmem\_add}}
@@ -614,6 +607,13 @@ for that particular team. Rather than continue to support \FUNC{shmem\_barrier}
 for active-sets or teams, programs should use a call to \FUNC{shmem\_quiet}
 followed by a call to \FUNC{shmem\_sync} in order to explicitly
 indicate which context to quiesce.
+
+\subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} --- \CTYPE{short} and \CTYPE{unsigned short} variants}
+The \CTYPE{short} and \CTYPE{unsigned short} type \CorCpp and \textit{C11}
+routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
+because point-to-point synchronization routines are only compatible with
+\acp{AMO} (as of \openshmem 1.5), and there is no corresponding AMO for
+\CTYPE{short} and \CTYPE{unsigned short}.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
