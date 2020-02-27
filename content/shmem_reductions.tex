@@ -33,6 +33,7 @@
 
 
 \paragraph{AND}
+\label{subsec:shmem_and_reduce}
 Performs a bitwise AND reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -56,6 +57,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_and\_to\_all}@(TYPE *dest, const TY
 where \TYPE{} is one of the integer types supported for the AND operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{OR}
+\label{subsec:shmem_or_reduce}
 Performs a bitwise OR reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -79,6 +81,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}@(TYPE *dest, const TYP
 where \TYPE{} is one of the integer types supported for the OR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{XOR}
+\label{subsec:shmem_xor_reduce}
 Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -102,6 +105,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_xor\_to\_all}@(TYPE *dest, const TY
 where \TYPE{} is one of the integer types supported for the XOR operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{MAX}
+\label{subsec:shmem_max_reduce}
 Performs a maximum-value reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -126,6 +130,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_max\_to\_all}@(TYPE *dest, const TY
 where \TYPE{} is one of the integer or real types supported for the MAX operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{MIN}
+\label{subsec:shmem_min_reduce}
 Performs a minimum-value reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -150,6 +155,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_min\_to\_all}@(TYPE *dest, const TY
 where \TYPE{} is one of the integer or real types supported for the MIN operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{SUM}
+\label{subsec:shmem_sum_reduce}
 Performs a sum reduction across a set of \acp{PE}.\newline
 
 %% C11
@@ -174,6 +180,7 @@ void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_to\_all}@(TYPE *dest, const TY
 where \TYPE{} is one of the integer, real, or complex types supported for the SUM operation and has a corresponding \TYPENAME{} as specified by Table \ref{reducetypes}.
 
 \paragraph{PROD}
+\label{subsec:shmem_prod_reduce}
 Performs a product reduction across a set of \acp{PE}.\newline
 
 %% C11
