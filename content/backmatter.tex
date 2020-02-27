@@ -250,33 +250,35 @@ supported before removal.
     \endhead
     Header Directory: \hyperref[subsec:dep_rationale:mpp]{\HEADER{mpp}} & 1.1 & Current & (none) \\ \hline
     \CorCpp: \hyperref[subsec:start_pes]{\FuncRef{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
-    \Fortran: \hyperref[subsec:start_pes]{\FuncRef{START\_PES}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
+    \Fortran: \hyperref[subsec:start_pes]{\FuncRef{START\_PES}} & 1.2 & 1.4 & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
     \hyperref[subsec:start_pes]{Implicit finalization} & 1.2 & Current & \hyperref[subsec:shmem_finalize]{\FUNC{shmem\_finalize}} \\ \hline
     \CorCpp: \FuncRef{\_my\_pe} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{shmem\_my\_pe}} \\ \hline
     \CorCpp: \FuncRef{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
-    \Fortran: \FuncRef{MY\_PE} & 1.2 & Current & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
-    \Fortran: \FuncRef{NUM\_PES} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{SHMEM\_N\_PES}} \\ \hline
+    \Fortran: \FuncRef{MY\_PE} & 1.2 & 1.4 & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
+    \Fortran: \FuncRef{NUM\_PES} & 1.2 & 1.4 & \hyperref[subsec:shmem_n_pes]{\FUNC{SHMEM\_N\_PES}} \\ \hline
     \CorCpp: \FuncRef{shmalloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
     \CorCpp: \FuncRef{shfree} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
     \CorCpp: \FuncRef{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
     \CorCpp: \FuncRef{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
-    \Fortran: \FuncRef{SHMEM\_PUT} & 1.2 & Current & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
-    \minitab{\CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_clear\_cache\_inv}}
-        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_CLEAR\_CACHE\_INV}}}
-        & 1.3 & Current & (none) \\ \hline
-    \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_clear\_cache\_line\_inv}} & 1.3 & Current & (none) \\ \hline
-    \minitab{\CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_set\_cache\_inv}}
-        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_SET\_CACHE\_INV}}}
-        & 1.3 & Current & (none) \\ \hline
-    \minitab{\CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_set\_cache\_line\_inv}}
-        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_SET\_CACHE\_LINE\_INV}}}
-        & 1.3 & Current & (none) \\ \hline
-    \minitab{\CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_udcflush}}
-        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_UDCFLUSH}}}
-        & 1.3 & Current & (none) \\ \hline
-    \minitab{\CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_udcflush\_line}}
-        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_UDCFLUSH\_LINE}}}
-        & 1.3 & Current & (none) \\ \hline
+    \Fortran: \FuncRef{SHMEM\_PUT} & 1.2 & 1.4 & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
+    \minitab{
+        \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_clear\_cache\_inv}}
+        \\ \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_clear\_cache\_line\_inv}}
+        \\ \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_set\_cache\_inv}}
+        \\ \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_set\_cache\_line\_inv}}
+        \\ \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_udcflush}}
+        \\ \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_udcflush\_line}}
+        } & 1.3 & Current & (none) \\ \hline
+    \minitab{
+        \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_CLEAR\_CACHE\_INV}}
+        %% Note: At the time of deprecation in 1.4, the Fortran API did not specify
+        %% SHMEM_CLEAR_CACHE_LINE_INV. While this omission is certainly an error,
+        %% Fortran was removed in 1.5 so the omission was never corrected.
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_SET\_CACHE\_INV}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_SET\_CACHE\_LINE\_INV}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_UDCFLUSH}}
+        \\ \Fortran: \hyperref[subsec:shmem_cache]{\FuncRef{SHMEM\_UDCFLUSH\_LINE}}
+        } & 1.3 & 1.4 & (none) \\ \hline
     \LibConstRef{\_SHMEM\_SYNC\_VALUE}         & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_SYNC\_VALUE}} \\ \hline
     \LibConstRef{\_SHMEM\_BARRIER\_SYNC\_SIZE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_BARRIER\_SYNC\_SIZE}} \\ \hline
     \LibConstRef{\_SHMEM\_BCAST\_SYNC\_SIZE}   & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_BCAST\_SYNC\_SIZE}} \\ \hline
@@ -326,7 +328,7 @@ supported before removal.
     \minitab{\Cstd[11]: \FuncRef{shmem\_add}
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
-    Entire \Fortran API & 1.4 & Current & (none) \\ \hline
+    Entire \Fortran API & 1.4 & 1.4 & (none) \\ \hline
     \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
     \hyperref[subsec:shmem_quiet]{\FUNC{shmem\_quiet}}; \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
     \CorCpp: Active set based \FuncRef{shmem\_sync} & 1.5 & Current &
