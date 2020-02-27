@@ -41,7 +41,12 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     elements of data for each \ac{PE} in the active set, ordered according to
     destination \ac{PE}.
     The type of \source{} should match that implied in the SYNOPSIS section.}
-    \apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.}
+\apiargument{IN}{nelems}{
+  The number of elements to exchange for each \ac{PE}.
+  For \FUNC{shmem\_alltoallmem}, elements are bytes;
+  for \FUNC{shmem\_alltoall\{32,64\}}, elements are 4 or 8 bytes,
+  respectively.
+}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of

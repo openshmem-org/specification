@@ -43,7 +43,12 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     The type of \dest{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{source}{Symmetric address of the source data object.
     The type of \source{} should match that implied in the SYNOPSIS section.}
-\apiargument{IN}{nelems}{The number of elements in the \source{} array.}
+\apiargument{IN}{nelems}{
+  The number of elements in \source{} array.
+  For \FUNC{shmem\_[f]collectmem}, elements are bytes;
+  for \FUNC{shmem\_[f]collect\{32,64\}}, elements are 4 or 8 bytes,
+  respectively.
+}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of

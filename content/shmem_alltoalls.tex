@@ -47,9 +47,14 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
 \apiargument{IN}{sst}{The  stride between consecutive elements of the
     \source{} data object.  The stride is scaled by the element size.
     A value of \CONST{1} indicates contiguous data.}
+\apiargument{IN}{nelems}{
+  The number of elements to exchange for each \ac{PE}.
+  For \FUNC{shmem\_alltoallsmem}, elements are bytes;
+  for \FUNC{shmem\_alltoalls\{32,64\}}, elements are 4 or 8 bytes,
+  respectively.
+}
     
 \begin{DeprecateBlock}
-\apiargument{IN}{nelems}{The number of elements to exchange for each \ac{PE}.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between

@@ -38,7 +38,12 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
       The type of \dest{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{source}{Symmetric address of the source data object.
       The type of \source{} should match that implied in the SYNOPSIS section.}
-    \apiargument{IN}{nelems}{The number of elements in \source.}
+\apiargument{IN}{nelems}{
+  The number of elements in \source{} and \dest{} arrays.
+  For \FUNC{shmem\_broadcastmem}, elements are bytes;
+  for \FUNC{shmem\_broadcast\{32,64\}}, elements are 4 or 8 bytes,
+  respectively.
+}
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the team or active set, from which the data is copied.}
 
@@ -64,7 +69,6 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
     The same \dest{} and \source{} data objects and the same value of
     \VAR{PE\_root} must be passed by all \acp{PE} participating in the
     collective operation.
-
 
     For team-based broadcasts:
     \begin{itemize}
