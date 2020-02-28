@@ -32,10 +32,10 @@ The predefined teams may be accessed via the team handles listed in
 Section~\ref{subsec:library_handles}.
 
 \openshmem communication routines that do not accept a team handle
-argument operate on the default team, which may be accessed through
+argument operate on the world team, which may be accessed through
 the \LibHandleRef{SHMEM\_TEAM\_WORLD} handle.
-The default team encompasses the set of all \acp{PE} in the \openshmem
-program, and a \ac{PE} number in the default team is the same as the
+The world team encompasses the set of all \acp{PE} in the \openshmem
+program, and a \ac{PE} number in the world team is the same as the
 value returned by \FUNC{shmem\_my\_pe}.
 
 A team handle may be initialized to or assigned the value
