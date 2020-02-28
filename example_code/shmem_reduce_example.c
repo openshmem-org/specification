@@ -2,53 +2,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* As if we receive some value from external source */
-long recv_a_value(unsigned seed, int npes) {
-  srand(seed);
-  return rand() % npes;
-}
-
-/* Validate the value we recieved */
-unsigned char is_valid(long value, int npes) {
-  if (value == (npes - 1))
-    return 0;
-  return 1;
-}
+#define NELEMS 32
 
 int main(void) {
   shmem_init();
   int mype = shmem_my_pe();
   int npes = shmem_n_pes();
-  size_t num = 32;
 
-  long *values = shmem_malloc(num * sizeof(long));
-  long *sums = shmem_malloc(num * sizeof(long));
+  int *values = shmem_malloc(NELEMS * sizeof(int));
 
-  unsigned char *valid_me = shmem_malloc(num * sizeof(unsigned char));
-  unsigned char *valid_all = shmem_malloc(num * sizeof(unsigned char));
+  static int my_maximal_values = 0;
+  static int all_maximal_values;
 
-  values[0] = recv_a_value((unsigned)mype, npes);
-  valid_me[0] = is_valid(values[0], npes);
+  srand((unsigned)mype);
 
-  for (int i = 1; i < num; i++) {
-    values[i] = recv_a_value((unsigned)values[i - 1], npes);
-    valid_me[i] = is_valid(values[i], npes);
+  for (int i = 0; i < NELEMS ; i++) {
+    values[i] = rand() % npes;
+
+    /* Count the instances of maximal values (i.e., equal to (npes-1)) */
+    my_maximal_values += (values[i] == (npes - 1)) ? 1 : 0;
   }
 
   /* Wait for all PEs to initialize reductions arrays */
   shmem_sync(SHMEM_TEAM_WORLD);
 
-  shmem_and_reduce(SHMEM_TEAM_WORLD, valid_all, valid_me, num);
-  shmem_sum_reduce(SHMEM_TEAM_WORLD, sums, values, num);
+  shmem_sum_reduce(SHMEM_TEAM_WORLD, &all_maximal_values, &my_maximal_values, 1);
 
-  for (int i = 0; i < num; i++) {
-    if (valid_all[i]) {
-      printf("[%d] = %ld\n", i, sums[i]);
-    }
-    else {
-      printf("[%d] = invalid on one or more pe\n", i);
-    }
-  }
+  if (mype == 0)
+    printf("found a total of %d maximal random numbers\n", all_maximal_values);
 
   shmem_finalize();
   return 0;
