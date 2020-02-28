@@ -51,8 +51,6 @@ void @\FuncDecl{shmem\_ctx\_putmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
     Furthermore, two successive put
     routines may deliver data out of order unless a call to \FUNC{shmem\_fence} is
     introduced between the two calls.
-    If the context handle \VAR{ctx} does not correspond to a valid context,
-    the behavior is undefined.
  }
 
 \apireturnvalues{
