@@ -17,10 +17,7 @@ void @\FuncDecl{shmem\_barrier}@(int PE_start, int logPE_stride, int PE_size, lo
     \ac{PE} numbers in the active set.}
     \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    Symmetric address of a work array of size \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.
-    Every element
-    of \VAR{pSync} must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of
-    the \acp{PE} in the active set enter \FUNC{shmem\_barrier} the first time.}
+    Symmetric address of a work array of size at least \CONST{SHMEM\_BARRIER\_SYNC\_SIZE}.}
 
 \end{apiarguments}
 
@@ -42,9 +39,8 @@ void @\FuncDecl{shmem\_barrier}@(int PE_start, int logPE_stride, int PE_size, lo
     memory updates, including \acp{AMO} and \ac{RMA} operations, done by any of the
     \acp{PE} in the active set on the default context are complete before returning.
 
-    The  same  \VAR{pSync} array may be reused on consecutive calls   to
+    The same \VAR{pSync} array may be reused on consecutive calls to
     \FUNC{shmem\_barrier} if the same active set is used.
-
 }
 
 \apireturnvalues{
@@ -59,15 +55,6 @@ void @\FuncDecl{shmem\_barrier}@(int PE_start, int logPE_stride, int PE_size, lo
     \FUNC{shmem\_ctx\_quiet} on the desired communication context,
     followed by a call to \FUNC{shmem\_team\_sync} on the desired
     team.
-
-    If the \VAR{pSync} array is initialized at the run time, all
-    \acp{PE} must be synchronized before the first call to \FUNC{shmem\_barrier}
-    (e.g., by \FUNC{shmem\_barrier\_all}) to ensure the array has been initialized
-    by all \acp{PE} before it is used.
-
-    If  the active set does not change, \FUNC{shmem\_barrier} can  be called
-    repeatedly with the same \VAR{pSync} array.  No additional synchronization
-    beyond that implied by \FUNC{shmem\_barrier} itself is necessary in this case.
 
     The \FUNC{shmem\_barrier} routine can be used to
     portably ensure that memory access operations observe remote updates in the order

@@ -52,10 +52,7 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     consecutive \ac{PE} numbers in the active set.}
     \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
 \apiargument{IN}{pSync}{
-    Symmetric address of a work array of size \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.
-    Every element of \VAR{pSync} must be initialized with the value
-    \CONST{SHMEM\_SYNC\_VALUE} before any of the \acp{PE} in the active set
-    enter \FUNC{shmem\_collect} or \FUNC{shmem\_fcollect}.}
+    Symmetric address of a work array of size at least \CONST{SHMEM\_COLLECT\_SYNC\_SIZE}.}
 \end{DeprecateBlock}
 
 \end{apiarguments}
@@ -85,6 +82,8 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 
     Team-based collect routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the operation.
+    If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
+    otherwise invalid, the behavior is undefined.
 
     Active-set-based collective routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
@@ -111,22 +110,6 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 }
 
 \apinotes{
-    All \openshmem collective routines reset the values in \VAR{pSync} before they
-    return, so a particular \VAR{pSync} buffer need only be initialized the first
-    time it is used.
-
-    The user must ensure that the \VAR{pSync} array is not being updated on any \ac{PE}
-    in the active set while any of the \acp{PE} participate in processing of an
-    \openshmem collective routine.  Be careful to avoid these situations: If the
-    \VAR{pSync} array is initialized at run time, some type of synchronization is
-    needed to ensure that all \acp{PE} in the working set have initialized
-    \VAR{pSync} before any of them  enter an \openshmem routine called with the
-    \VAR{pSync} synchronization array.  A \VAR{pSync} array can be reused on a
-    subsequent \openshmem collective routine only if none of the \acp{PE} in the
-    active set  are still processing a  prior \openshmem collective routine call
-    that used the same \VAR{pSync} array.  In general, this may be ensured only by
-    doing some type of synchronization.
-
     The collective routines operate on active \ac{PE} sets that have a
     non-power-of-two \VAR{PE\_size} with some performance degradation.  They operate
     with no performance degradation when \VAR{nelems} is a non-power-of-two value.
