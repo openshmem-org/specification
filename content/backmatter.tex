@@ -398,6 +398,8 @@ supported before removal.
     \minitab{\Cstd[11]: \FuncRef{shmem\_test(\CTYPE{unsigned short} ...)}
         \\ \CorCpp: \FuncRef{shmem\_ushort\_test}}
         & 1.5 & Current & (none) \\ \hline
+    \minitab{Table~\ref{p2psynctypes}: point-to-point synchronization types}
+        & 1.5 & Current & Table~\ref{stdamotypes}: standard AMO types \\ \hline
     %% Deprecated in 1.6
     %% Deprecated in 1.7
     %% Notes
@@ -614,6 +616,11 @@ routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
 because point-to-point synchronization routines are only compatible with
 \acp{AMO} (as of \openshmem 1.5), and there is no corresponding AMO for
 \CTYPE{short} and \CTYPE{unsigned short}.
+
+\subsection{Table~\ref{p2psynctypes}: point-to-point synchronization types}
+As of \openshmem 1.5, the point-to-point synchronization routines are only
+compatible with \acp{AMO}, so their interfaces are defined via the
+standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
