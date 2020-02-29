@@ -3,15 +3,26 @@ provides \Cstd bindings can claim conformance to the specification. The
 \openshmem header file \HEADER{shmem.h} for \Cstd must contain only the
 interfaces and constant names defined in this specification.
 
-\openshmem \acp{API} can be implemented as either routines or macros. However,
-implementing the interfaces using macros is strongly discouraged as this could
-severely limit the use of external profiling tools and high-level compiler
+\openshmem \acp{API} can be implemented as functions, inline functions, or
+macros. However, implementing the interfaces using inline functions or macros
+could limit the use of external profiling tools and high-level compiler
 optimizations. An \openshmem program should avoid defining routine names,
-variables, or identifiers with the prefix \shmemprefix, \shmemprefixC, or with
-\openshmem \ac{API} names.
+variables, or other identifiers with the prefix ``shmem'' using any combination
+of uppercase letters, lowercase letters, and underscores.
 
-All \openshmem extension \acp{API} that are not part of this specification must
-be defined in the \HEADER{shmemx.h} include file for language bindings. This
+All extensions to the \openshmem \ac{API} that are not part of this
+specification must be defined in the \HEADER{shmemx.h} header file, with the
+following exceptions.
+
+\begin{enumerate}
+    \item Extensions to the \openshmem interfaces that add support for
+        additional datatypes.
+    \item Implementation-specific constants, types, and macros that use a
+        consistent, implementation-defined prefix.
+    \item Extensions to the type-generic interfaces.
+\end{enumerate}
+
+The \HEADER{shmemx.h}
 header file must exist, even if no extensions are provided. Any extensions
 shall use the \FUNC{shmemx\_} prefix for all routine, variable, and constant
 names.
