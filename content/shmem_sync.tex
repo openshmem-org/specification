@@ -30,9 +30,8 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between
     consecutive \ac{PE} numbers in the active set.}
 \apiargument{IN}{PE\_size}{The number of \acp{PE} in the active set.}
-\apiargument{IN}{pSync}{Symmetric address of a work array.  Every element of
-    \VAR{pSync} must be initialized to \CONST{SHMEM\_SYNC\_VALUE} before any of the
-    \acp{PE} in the active set enter \FUNC{shmem\_sync} the first time.}
+\apiargument{IN}{pSync}{
+  Symmetric address of a work array of size at least \CONST{SHMEM\_SYNC\_SIZE}.}
 \end{DeprecateBlock}
 
 \end{apiarguments}
@@ -49,8 +48,8 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 
     Team-based sync routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the sync operation.
-    If an invalid team handle or \LibConstRef{SHMEM\_TEAM\_INVALID}
-    is passed to this routine, the behavior is undefined.
+    If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
+    otherwise invalid, the behavior is undefined.
 
     Active-set-based sync routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
@@ -78,14 +77,6 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 }
 
 \apinotes{
-    If the \VAR{pSync} array is initialized at run time, another method of
-    synchronization (e.g., \FUNC{shmem\_sync\_all}) must be used before
-    the initial use of that \VAR{pSync} array by \FUNC{shmem\_sync}.
-
-    If the active set does not change, \FUNC{shmem\_sync} can be called
-    repeatedly with the same \VAR{pSync} array.  No additional synchronization
-    beyond that implied by \FUNC{shmem\_sync} itself is necessary in this case.
-
     The \FUNC{shmem\_sync} routine can be used to portably ensure that
     memory access operations observe remote updates in the order enforced by the
     initiator \acp{PE}, provided that the initiator PE ensures completion of remote
@@ -96,7 +87,7 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 \begin{apiexamples}
 
 \apicexample
-    {The following \FUNC{shmem\_sync\_all} and \FUNC{shmem\_sync} example is
+    {The following \FUNC{shmem\_sync} example is
     for \Cstd[11] programs:}
     {./example_code/shmem_sync_example.c}
     {}
