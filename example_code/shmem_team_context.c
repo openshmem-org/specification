@@ -11,8 +11,8 @@ int main(void)
 
   shmem_init();
 
-  int npes  = shmem_n_pes();
-  int my_pe = shmem_my_pe();
+  int npes = shmem_n_pes();
+  int mype = shmem_my_pe();
   conf.num_contexts = 1;
   long cmask = SHMEM_TEAM_NUM_CONTEXTS;
 
@@ -25,8 +25,18 @@ int main(void)
   /* Create a context on team_2. */
   int ret = shmem_team_create_ctx(team_2, 0, &ctx_2);
 
+  if (ret != 0) {
+      printf("%d: Error creating context ctx_2 (%d)\n", mype, ret);
+      shmem_global_exit(ret);
+  }
+
   /* Create a context on team_3. */
   ret = shmem_team_create_ctx(team_3, 0, &ctx_3);
+
+  if (ret != 0) {
+      printf("%d: Error creating context ctx_3 (%d)\n", mype, ret);
+      shmem_global_exit(ret);
+  }
 
   /* Within each team, put my PE number to my neighbor in a ring-based manner. */
   if (ctx_2 != SHMEM_CTX_INVALID) {
@@ -53,7 +63,7 @@ int main(void)
   shmem_team_sync(SHMEM_TEAM_WORLD);
 
   /* Validate the result. */
-  if (shmem_my_pe() == 0) {
+  if (mype == 0) {
       int vsum = 0;
       for (int i = 0; i < npes; i ++) {
           if (i % 2 == 0 && i % 3 == 0) {
