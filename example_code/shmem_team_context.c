@@ -87,4 +87,5 @@ int main(void)
   shmem_team_destroy(team_3);
 
   shmem_finalize();
+  return 0;
 }
