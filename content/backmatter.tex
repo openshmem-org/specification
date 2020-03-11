@@ -335,26 +335,26 @@ supported before removal.
     \minitab{
         \LibConstRef{SHMEM\_SYNC\_VALUE}
         \\ \LibConstRef{SHMEM\_SYNC\_SIZE}
-        \\ \LibConstRef{SHMEM\_BCAST\_SYNC\_SIZE}
-        \\ \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE}
         \\ \LibConstRef{SHMEM\_BARRIER\_SYNC\_SIZE}
-        \\ \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE}
         \\ \LibConstRef{SHMEM\_ALLTOALL\_SYNC\_SIZE}
         \\ \LibConstRef{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_BCAST\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE}
         \\ \LibConstRef{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
     } & 1.5 & Current & \minitab{\hyperref[subsec:team_collectives]{Team-based collectives}} \\ \hline
     \CorCpp: Active-set-based \FuncRef{shmem\_sync}
         & 1.5 & Current & Team-based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
     \CorCpp: \FuncRef{shmem\_broadcast[32,64]} & 1.5 & Current &
     \hyperref[subsec:shmem_broadcast]{\FUNC{shmem\_broadcast}} \\ \hline
     \CorCpp: \FuncRef{shmem\_collect[32,64]} & 1.5 & Current &
     \hyperref[subsec:shmem_collect]{\FUNC{shmem\_collect}} \\ \hline
     \CorCpp: \FuncRef{shmem\_fcollect[32,64]} & 1.5 & Current &
     \hyperref[subsec:shmem_collect]{\FUNC{shmem\_fcollect}} \\ \hline
-    \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
-    \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
-    \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
-    \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
     \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_and\_to\_all}
         & 1.5 & Current & \hyperref[subsec:shmem_and_reduce]{\FUNC{shmem\_and\_reduce}} \\ \hline
     \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}
@@ -530,11 +530,11 @@ out in favor of using collective operations with a team parameter.
 The library constants
 \begin{center}
 \begin{tabular}{ll}
-    \LibConstRef{SHMEM\_SYNC\_VALUE}         & \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE} \\
-    \LibConstRef{SHMEM\_SYNC\_SIZE}          & \LibConstRef{SHMEM\_ALLTOALL\_SYNC\_SIZE} \\
-    \LibConstRef{SHMEM\_BCAST\_SYNC\_SIZE}   & \LibConstRef{SHMEM\_ALLTOALLS\_SYNC\_SIZE} \\
-    \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE}  & \LibConstRef{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} \\
-    \LibConstRef{SHMEM\_BARRIER\_SYNC\_SIZE} \\
+    \LibConstRef{SHMEM\_SYNC\_VALUE}            & \LibConstRef{SHMEM\_BCAST\_SYNC\_SIZE} \\
+    \LibConstRef{SHMEM\_SYNC\_SIZE}             & \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE} \\
+    \LibConstRef{SHMEM\_BARRIER\_SYNC\_SIZE}    & \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE} \\
+    \LibConstRef{SHMEM\_ALLTOALL\_SYNC\_SIZE}   & \LibConstRef{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} \\
+    \LibConstRef{SHMEM\_ALLTOALLS\_SYNC\_SIZE} \\
 \end{tabular}
 \end{center}
 were deprecated as these constants pertain only to active-set-based collectives.
@@ -546,11 +546,11 @@ replaced with the team-based \Cstd[11] \FuncRef{shmem\_sync} or \CorCpp
 The fixed-sized versions of the active-set-based routines
 \begin{center}
 \begin{tabular}{ll}
+    \FuncRef{shmem\_alltoall32} & \FuncRef{shmem\_alltoall64} \\
+    \FuncRef{shmem\_alltoalls32} & \FuncRef{shmem\_alltoalls64} \\
     \FuncRef{shmem\_broadcast32} & \FuncRef{shmem\_broadcast64} \\
     \FuncRef{shmem\_collect32} & \FuncRef{shmem\_collect64} \\
     \FuncRef{shmem\_fcollect32} & \FuncRef{shmem\_fcollect64} \\
-    \FuncRef{shmem\_alltoall32} & \FuncRef{shmem\_alltoall64} \\
-    \FuncRef{shmem\_alltoalls32} & \FuncRef{shmem\_alltoalls64} \\
 \end{tabular}
 \end{center}
 were deprecated. Instead, all team-based collective routines use standard
