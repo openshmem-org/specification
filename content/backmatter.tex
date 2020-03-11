@@ -327,6 +327,17 @@ supported before removal.
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & Current & (none) \\ \hline
+    \minitab{
+        \LibConstRef{SHMEM\_SYNC\_VALUE}
+        \\ \LibConstRef{SHMEM\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_BCAST\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_BARRIER\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_ALLTOALL\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
+    } & 1.5 & Current & \minitab{\hyperref[subsec:team_collectives]{Team-based collectives}} \\ \hline
     \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
     \hyperref[subsec:shmem_quiet]{\FUNC{shmem\_quiet}}; \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
     \CorCpp: Active set based \FuncRef{shmem\_sync} & 1.5 & Current &
