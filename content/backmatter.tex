@@ -248,7 +248,9 @@ supported before removal.
     & \textbf{Replaced By} \\
     \hline
     \endhead
+    %% Deprecated in 1.1
     Header Directory: \hyperref[subsec:dep_rationale:mpp]{\HEADER{mpp}} & 1.1 & Current & (none) \\ \hline
+    %% Deprecated in 1.2
     \CorCpp: \hyperref[subsec:start_pes]{\FuncRef{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \hyperref[subsec:start_pes]{\FuncRef{START\_PES}} & 1.2 & 1.4 & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
     \hyperref[subsec:start_pes]{Implicit finalization} & 1.2 & Current & \hyperref[subsec:shmem_finalize]{\FUNC{shmem\_finalize}} \\ \hline
@@ -261,6 +263,7 @@ supported before removal.
     \CorCpp: \FuncRef{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
     \CorCpp: \FuncRef{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
     \Fortran: \FuncRef{SHMEM\_PUT} & 1.2 & 1.4 & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
+    %% Deprecated in 1.3
     \minitab{
         \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_clear\_cache\_inv}}
         \\ \CorCpp: \hyperref[subsec:shmem_cache]{\FuncRef{shmem\_clear\_cache\_line\_inv}}
@@ -295,6 +298,7 @@ supported before removal.
     \LibConstRef{\_SHMEM\_CMP\_LE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_LE}} \\ \hline
     \LibConstRef{\_SHMEM\_CMP\_GT} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GT}} \\ \hline
     \LibConstRef{\_SHMEM\_CMP\_GE} & 1.3 & Current & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CMP\_GE}} \\ \hline
+    %% Deprecated in 1.4
     \EnvVarRef{SMA\_VERSION}         & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_VERSION}} \\ \hline
     \EnvVarRef{SMA\_INFO}            & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_INFO}} \\ \hline
     \EnvVarRef{SMA\_SYMMETRIC\_SIZE} & 1.4 & Current & \hyperref[subsec:environment_variables]{\ENVVAR{SHMEM\_SYMMETRIC\_SIZE}} \\ \hline
@@ -329,22 +333,52 @@ supported before removal.
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
     Entire \Fortran API & 1.4 & 1.4 & (none) \\ \hline
-    \CorCpp: \FuncRef{shmem\_barrier} & 1.5 & Current &
-    \hyperref[subsec:shmem_quiet]{\FUNC{shmem\_quiet}}; \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
-    \CorCpp: Active set based \FuncRef{shmem\_sync} & 1.5 & Current &
-    Team based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    %% Deprecated in 1.5
+    \minitab{
+        \LibConstRef{SHMEM\_SYNC\_VALUE}
+        \\ \LibConstRef{SHMEM\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_BARRIER\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_ALLTOALL\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_BCAST\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE}
+        \\ \LibConstRef{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
+    } & 1.5 & Current & \minitab{\hyperref[subsec:team_collectives]{Team-based collectives}} \\ \hline
+    \CorCpp: Active-set-based \FuncRef{shmem\_sync}
+        & 1.5 & Current & Team-based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
+    \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
     \CorCpp: \FuncRef{shmem\_broadcast[32,64]} & 1.5 & Current &
     \hyperref[subsec:shmem_broadcast]{\FUNC{shmem\_broadcast}} \\ \hline
     \CorCpp: \FuncRef{shmem\_collect[32,64]} & 1.5 & Current &
     \hyperref[subsec:shmem_collect]{\FUNC{shmem\_collect}} \\ \hline
     \CorCpp: \FuncRef{shmem\_fcollect[32,64]} & 1.5 & Current &
     \hyperref[subsec:shmem_collect]{\FUNC{shmem\_fcollect}} \\ \hline
-    \CorCpp: \FuncRef{shmem\_\TYPENAME\_OP\_to\_all} & 1.5 & Current &
-    \hyperref[subsec:shmem_collect]{\FUNC{shmem\_\TYPENAME\_OP\_reduce}} \\ \hline
-    \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
-    \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
-    \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
-    \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_and\_to\_all}
+        & 1.5 & Current & \hyperref[subsec:shmem_and_reduce]{\FUNC{shmem\_and\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}
+        & 1.5 & Current & \hyperref[subsec:shmem_or_reduce]{\FUNC{shmem\_or\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_xor\_to\_all}
+        & 1.5 & Current & \hyperref[subsec:shmem_xor_reduce]{\FUNC{shmem\_xor\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_max\_to\_all}
+        & 1.5 & Current & \hyperref[subsec:shmem_max_reduce]{\FUNC{shmem\_max\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_min\_to\_all}
+        & 1.5 & Current & \hyperref[subsec:shmem_min_reduce]{\FUNC{shmem\_min\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_sum\_to\_all}
+        & 1.5 & Current & \hyperref[subsec:shmem_sum_reduce]{\FUNC{shmem\_sum\_reduce}} \\ \hline
+    \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all}
+        & 1.5 & Current & \hyperref[subsec:shmem_prod_reduce]{\FUNC{shmem\_prod\_reduce}} \\ \hline
+    \CorCpp: \hyperref[subsec:shmem_barrier]{\FuncRef{shmem\_barrier}}
+        & 1.5 & Current & \hyperref[subsec:shmem_quiet]{\FuncRef{shmem\_quiet}} + \hyperref[subsec:shmem_sync]{\FuncRef{shmem\_sync}} \\ \hline
+    %% Deprecated in 1.6
+    %% Deprecated in 1.7
+    %% Notes
+    %% - If a hyperref spans more than one line vertically, the clickable box
+    %%   will also span more than one line. To prevent this, wrap the hyperref
+    %%   in a minitab. Example in 1.5: "Team-based collectives".
     \end{longtable}
 \end{center}
 
@@ -487,25 +521,61 @@ leverage the \openshmem Specification's \Cstd API through the
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
 
-\subsection{Active-set-based collective routines}
-With the addition of \openshmem teams, the previous methods for performing collective
+\subsection{Active-set-based collectives}
+With the addition of \hyperref[subsec:team]{\openshmem teams}, the previous method for performing collective
 operations has been superseded by a more readable, flexible method for
 organizing and communicating between groups of \acp{PE}. All collective routines
 which previously indicated subgroups of \acp{PE} with a list of
-parameters to describe the subgroup composition should be phased
+parameters to describe the subgroup composition (active set) should be phased
 out in favor of using collective operations with a team parameter.
 
-When moving from active set routines to teams based routines, the fixed-size
-versions of the routines, e.g. \FUNC{shmem\_broadcast32}, were not
-carried forward. Instead, all teams based collective routines use standard
-\Cstd types with the option to use generic \textit{C11} functions for more portable
+The library constants
+\begin{center}
+\begin{tabular}{ll}
+    \LibConstRef{SHMEM\_SYNC\_VALUE}            & \LibConstRef{SHMEM\_BCAST\_SYNC\_SIZE} \\
+    \LibConstRef{SHMEM\_SYNC\_SIZE}             & \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE} \\
+    \LibConstRef{SHMEM\_BARRIER\_SYNC\_SIZE}    & \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE} \\
+    \LibConstRef{SHMEM\_ALLTOALL\_SYNC\_SIZE}   & \LibConstRef{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE} \\
+    \LibConstRef{SHMEM\_ALLTOALLS\_SYNC\_SIZE} \\
+\end{tabular}
+\end{center}
+were deprecated as these constants pertain only to active-set-based collectives.
+
+The \CorCpp active-set-based \FuncRef{shmem\_sync} routine was deprecated and
+replaced with the team-based \Cstd[11] \FuncRef{shmem\_sync} or \CorCpp
+\FuncRef{shmem\_team\_sync} routine.
+
+The fixed-sized versions of the active-set-based routines
+\begin{center}
+\begin{tabular}{ll}
+    \FuncRef{shmem\_alltoall32} & \FuncRef{shmem\_alltoall64} \\
+    \FuncRef{shmem\_alltoalls32} & \FuncRef{shmem\_alltoalls64} \\
+    \FuncRef{shmem\_broadcast32} & \FuncRef{shmem\_broadcast64} \\
+    \FuncRef{shmem\_collect32} & \FuncRef{shmem\_collect64} \\
+    \FuncRef{shmem\_fcollect32} & \FuncRef{shmem\_fcollect64} \\
+\end{tabular}
+\end{center}
+were deprecated. Instead, all team-based collective routines use standard
+\Cstd types with the option to use generic \Cstd[11] functions for more portable
 and maintainable implementations.
+
+The active-set-based reduction routines
+\begin{center}
+\begin{tabular}{ll}
+    \FuncRef{shmem\_\FuncParam{TYPENAME}\_and\_to\_all} & \FuncRef{shmem\_\FuncParam{TYPENAME}\_max\_to\_all} \\
+    \FuncRef{shmem\_\FuncParam{TYPENAME}\_or\_to\_all}  & \FuncRef{shmem\_\FuncParam{TYPENAME}\_min\_to\_all} \\
+    \FuncRef{shmem\_\FuncParam{TYPENAME}\_xor\_to\_all} & \FuncRef{shmem\_\FuncParam{TYPENAME}\_sum\_to\_all} \\
+                                                        & \FuncRef{shmem\_\FuncParam{TYPENAME}\_prod\_to\_all} \\
+\end{tabular}
+\end{center}
+were deprecated and replaced with team-based reduction routines.
+
 
 \subsection{\CorCpp: \FUNC{shmem\_barrier}}
 Each \openshmem team might
 be associated with some number of communication contexts. The \FUNC{shmem\_barrier}
-functions imply that the default context is quiesced after synchronizing
-some set of \acp{PE}. Since teams may have some number of contexts associated
+function implies that the default context is quiesced after synchronizing
+some active set of \acp{PE}. Since teams may have some number of contexts associated
 with the team, it becomes less clear which context would be the ``default'' context
 for that particular team. Rather than continue to support \FUNC{shmem\_barrier}
 for active-sets or teams, programs should use a call to \FUNC{shmem\_quiet}
