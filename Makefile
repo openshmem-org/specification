@@ -13,7 +13,9 @@ ${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
 	makeindex ${TARGET}
 	pdflatex $(LATEXOPT) ${TARGET}
 
-CLEAN_EXTENSIONS = log aux ps dvi bbl blg log idx ind ilg out toc pdf out
+RM ?= rm -f
+CLEAN_EXTENSIONS = aux bbl blg dvi idx ilg ind log out pdf ps toc
 .PHONY: clean
 clean:
-	$(RM) $(addprefix ${TARGET}.,${CLEAN_EXTENSIONS}) chappage.txt
+	for e in ${CLEAN_EXTENSIONS}; do $(RM) ${TARGET}.$$e; done
+	$(RM) content/chappage.txt
