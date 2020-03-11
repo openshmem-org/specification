@@ -9,15 +9,15 @@
 size_t @\FuncDecl{shmem\_wait\_until\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
     TYPE *cmp_values);
 \end{C11synopsis}
-where \TYPE{} is one of the point-to-point synchronization types specified by
-Table \ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status,
     int cmp, TYPE *cmp_values);
 \end{Csynopsis}
-where \TYPE{} is one of the point-to-point synchronization types and has a
-corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a
+corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \begin{apiarguments}
 
@@ -80,4 +80,3 @@ corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
 \end{apiexamples}
 
 \end{apidefinition}
-
