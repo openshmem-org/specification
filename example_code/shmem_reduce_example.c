@@ -40,7 +40,8 @@ int main(void) {
       if (value_is_maximal_all[i] == 1) {
         printf("%d ", i);
       }
-    } printf("\n");
+    }
+    printf("\n");
   }
 
   shmem_finalize();
