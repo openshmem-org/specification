@@ -13,7 +13,8 @@ ${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
 	makeindex ${TARGET}
 	pdflatex $(LATEXOPT) ${TARGET}
 
+RM ?= rm -f
+CLEAN_EXTENSIONS = aux idx ilg ind log out pdf toc
 .PHONY: clean
 clean:
-	rm -f ${TARGET}.{log,aux,ps,dvi,bbl,blg,log,idx,ind,ilg,out,toc,pdf,out} chappage.txt
-
+	for e in ${CLEAN_EXTENSIONS}; do $(RM) ${TARGET}.$$e; done
