@@ -14,7 +14,7 @@ ${TARGET}.pdf: ${SOURCES} ${FIGURES} ${EXAMPLES}
 	pdflatex $(LATEXOPT) ${TARGET}
 
 RM ?= rm -f
-CLEAN_EXTENSIONS = aux bbl blg dvi idx ilg ind log out pdf ps toc
+CLEAN_EXTENSIONS = aux idx ilg ind log out pdf toc
 .PHONY: clean
 clean:
 	for e in ${CLEAN_EXTENSIONS}; do $(RM) ${TARGET}.$$e; done
