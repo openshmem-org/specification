@@ -17,15 +17,25 @@ int main(void)
   long cmask = SHMEM_TEAM_NUM_CONTEXTS;
 
   /* Create team_2 with PEs numbered 0, 2, 4, ... */
-  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, (npes + 1) / 2, &conf, cmask, &team_2);
-
-  /* Create team_3 with PEs numbered 0, 3, 6, ... */
-  shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 3, (npes + 2) / 3, &conf, cmask, &team_3);
-
-  /* Create a context on team_2. */
-  int ret = shmem_team_create_ctx(team_2, 0, &ctx_2);
+  int ret = shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 2, (npes + 1) / 2, &conf, cmask, &team_2);
 
   if (ret != 0) {
+      printf("%d: Error creating team team_2 (%d)\n", mype, ret);
+      shmem_global_exit(ret);
+  }
+
+  /* Create team_3 with PEs numbered 0, 3, 6, ... */
+  ret = shmem_team_split_strided(SHMEM_TEAM_WORLD, 0, 3, (npes + 2) / 3, &conf, cmask, &team_3);
+
+  if (ret != 0) {
+      printf("%d: Error creating team team_3 (%d)\n", mype, ret);
+      shmem_global_exit(ret);
+  }
+
+  /* Create a context on team_2. */
+  ret = shmem_team_create_ctx(team_2, 0, &ctx_2);
+
+  if (ret != 0 && team_2 != SHMEM_TEAM_INVALID) {
       printf("%d: Error creating context ctx_2 (%d)\n", mype, ret);
       shmem_global_exit(ret);
   }
@@ -33,7 +43,7 @@ int main(void)
   /* Create a context on team_3. */
   ret = shmem_team_create_ctx(team_3, 0, &ctx_3);
 
-  if (ret != 0) {
+  if (ret != 0 && team_3 != SHMEM_TEAM_INVALID) {
       printf("%d: Error creating context ctx_3 (%d)\n", mype, ret);
       shmem_global_exit(ret);
   }
