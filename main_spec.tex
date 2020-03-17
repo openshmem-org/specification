@@ -490,11 +490,15 @@ memory ordering routines provide guarantees of ordering or completion.
       Non-blocking \OPR{put-with-signal} & X & X \\
       Non-blocking \OPR{Get}             &   & X \\ \hline
     \end{tabular}
-    \TableCaptionRef{List of operations ensured ordering and delivery by Memory
-    Ordering routines}
+    \TableCaptionRef{List of operations ensured ordering and/or delivery by
+    Memory Ordering routines}
     \label{mem-order}
   \end{center}
 \end{table}
+
+Ordering and/or delivery of memory store operations are ensured only on contexts
+created with certain options. For details, refer the description of context
+options in Section~\ref{subsec:shmem_ctx_create}.
 
 \subsubsection{\textbf{SHMEM\_FENCE}}\label{subsec:shmem_fence}
 \input{content/shmem_fence.tex}
