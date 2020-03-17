@@ -21,7 +21,7 @@ void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
     Table~\ref{mem-order} lists the operations that are ordered
     by the \FUNC{shmem\_fence} routine.
     All operations on symmetric data objects issued to a particular
-    remote \ac{PE} on the given context prior
+    \ac{PE} on the given context prior
     to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before any
     subsequent operations on symmetric data
     objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery,
