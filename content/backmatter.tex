@@ -607,8 +607,13 @@ interface, and the removal of the entire \Fortran API.
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
-\item Added teams API: team management and team-based collectives.
-\\ See Section \ref{subsec:team} and \ref{subsec:team_collectives}.
+\item Added teams API: team management, team-based communication management,
+  and team-based collectives.
+\\ See Section \ref{subsec:team}, \ref{sec:ctx}, \ref{subsec:shmem_team_create_ctx},
+\ref{subsec:shmem_ctx_get_team}, \ref{subsec:team_collectives}.
+%
+\item Deprecated active-set-based library constants and collective routines.
+\\ See Section \ref{subsec:library_constants}, \ref{subsec:coll}.
 %
 \item Added \FUNC{shmem\_malloc\_with\_hints} interface and corresponding hints
 \CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
