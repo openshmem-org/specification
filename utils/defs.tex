@@ -153,6 +153,8 @@
 
 \newcommand{\ListingsParamStyle}{\bfseries\itshape\color{CadetBlue}}
 
+\definecolor{DarkGreen}{rgb}{0, 0.25, 0}
+
 \lstdefinestyle{SourceListingsDefault}{
   language={C},
   breaklines=true,
@@ -186,11 +188,11 @@
     shmem_ctx_t, shmem_team_t, shmem_team_config_t,
     FILE,
   },
-  keywordstyle=\color{OliveGreen},
+  keywordstyle=\color{DarkGreen},
   % Other elements
   classoffset=3,
   keywords={NULL},
-  keywordstyle=\color{Cyan},
+  keywordstyle=\color{MidnightBlue},
   % Type-generic parameters (see FuncParam)
   classoffset=4,
   keywords={TYPE, TYPENAME, SIZE},
@@ -201,11 +203,12 @@
   backgroundcolor=\color{white},
 }
 
-\definecolor{gray}{rgb}{0.92,0.92,0.92}
+\definecolor{gray}{rgb}{0.97,0.97,0.97}
 
 \lstdefinestyle{PrototypeListingsDefault}{
   style=SourceListingsDefault,
   frame=none,
+  backgroundcolor=\color{gray},
 }
 
 \lstset{style=SourceListingsDefault}
