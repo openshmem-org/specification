@@ -357,7 +357,7 @@ supported before removal.
         \\ \LibConstRef{SHMEM\_COLLECT\_SYNC\_SIZE}
         \\ \LibConstRef{SHMEM\_REDUCE\_SYNC\_SIZE}
         \\ \LibConstRef{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
-    } & 1.5 & Current & \minitab{\hyperref[subsec:team_collectives]{Team-based collectives}} \\ \hline
+    } & 1.5 & Current & Team-based collectives, \minitab{Section~\ref{subsec:team_collectives}}. \\ \hline
     \CorCpp: Active-set-based \FuncRef{shmem\_sync}
         & 1.5 & Current & Team-based \hyperref[subsec:shmem_sync]{\FUNC{shmem\_sync}} \\ \hline
     \CorCpp: \FuncRef{shmem\_alltoall[32,64]} & 1.5 & Current &
@@ -535,7 +535,8 @@ leverage the \openshmem Specification's \Cstd API through the
 
 
 \subsection{Active-set-based collectives}
-With the addition of \hyperref[subsec:team]{\openshmem teams}, the previous method for performing collective
+With the addition of \openshmem teams, Section~\ref{subsec:team}, the previous
+method for performing collective
 operations has been superseded by a more readable, flexible method for
 organizing and communicating between groups of \acp{PE}. All collective routines
 which previously indicated subgroups of \acp{PE} with a list of
