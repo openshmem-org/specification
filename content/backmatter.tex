@@ -138,7 +138,7 @@ is undefined.
 \hline
 \endhead
 Uninitialized library & If the \openshmem library is not initialized,
-calls to non-initializing \openshmem routines have undefined
+calls to \openshmem routines that do not initialize the \openshmem library have undefined
 behavior.  For example, an implementation may try to continue or may abort
 immediately upon an \openshmem call into the uninitialized library.
 \tabularnewline
@@ -149,8 +149,8 @@ have already been called, any subsequent calls to these initialization routines
 result in undefined behavior.
 \tabularnewline
 \hline
-Accessing non-existent \acp{PE} & If a communications routine accesses a
-non-existent \ac{PE}, then the \openshmem library may handle this
+Accessing nonexistent \acp{PE} & If a communications routine accesses a
+nonexistent \ac{PE}, then the \openshmem library may handle this
 situation in an implementation-defined way.  For example, the library may report
 an error message saying that the \ac{PE} accessed is outside the range of
 accessible \acp{PE}, or may exit without a warning.\tabularnewline
@@ -166,7 +166,7 @@ collectives. For example, all \acp{PE} in the program must call
 \FUNC{shmem\_malloc} with the same \VAR{size} argument.  Program behavior after a
 mismatched \FUNC{shmem\_malloc} call is undefined.\tabularnewline
 \hline
-Use of null pointers with non-zero \VAR{len} specified & In any \openshmem routine
+Use of null pointers with nonzero \VAR{len} specified & In any \openshmem routine
 that takes a pointer and \VAR{len} describing the number of elements in that
 pointer, a null pointer may not be given unless the corresponding \VAR{len} is also
 specified as zero. Otherwise, the resulting behavior is undefined.
@@ -854,7 +854,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 
 \section{Version 1.1}
 Major changes from \openshmem[1.0] to \openshmem[1.1] include
-the introduction of the \HEADER{shmemx.h} header file for non-standard API
+the introduction of the \HEADER{shmemx.h} header file for nonstandard API
 extensions,
 clarifications to completion semantics and API descriptions in agreement with
 the \ac{SGI} SHMEM specification,
@@ -942,7 +942,7 @@ calls are encountered.
 provided.
 \\See Section \ref{subsec:progress}.
 %
-\item Clarification of naming convention for non-standard interfaces and their
+\item Clarification of naming convention for nonstandard interfaces and their
 inclusion in \HEADER{shmemx.h}.
 \\See Section \ref{subsec:bindings}.
 %
