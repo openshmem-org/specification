@@ -82,125 +82,103 @@ These functionalities can be achieved through the usage of
 \subsubsection{Profiler}
 \label{sec:pshmem_example_profiler}
 
-The following example illustrates how a profiler can measure the
-total and average time spent by the \FUNC{shmem\_long\_put} 
-function in the profiling library that intercepts the \openshmem 
-function calls from the user application.
-
-\lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
-      {example_code/pshmem_example.c}
+\SourceExample{example_code/pshmem_example.c}{
+  The following example illustrates how a profiler can measure the
+  total and average time spent by the \FUNC{shmem\_long\_put}
+  function in the profiling library that intercepts the \openshmem
+  function calls from the user application.
+}
 
 \subsubsection{\openshmem Library}
 \label{sec:pshmem_example_library}
-To implement the name-shift versions of the \openshmem functions, 
-there are various options available. The following two examples 
-present two such options that can be implemented in C on a Unix 
-system. These two options are dependent on whether the linker 
-and compiler support weak symbols. 
+To implement the name-shift versions of the \openshmem functions,
+there are various options available. The following two examples
+present two such options that can be implemented in C on a Unix
+system. These two options are dependent on whether the linker
+and compiler support weak symbols.
 
-If the compiler and linker support weak external symbols, then 
-only a single library is required. The following two examples show 
-how the name-shifted requirement can be achieved on such platforms. 
+If the compiler and linker support weak external symbols, then
+only a single library is required. The following two examples show
+how the name-shifted requirement can be achieved on such platforms.
 
-\noindent\textbf{Example 1}
+\SourceExample{example_code/pshmem_weak_symbol_1.c}{
+  Here, the effect of the \FUNC{\#pragma} directive is to define the
+  external symbol \FUNC{shmem\_example} as a weak definition that
+  aliases the \FUNC{pshmem\_example} function. This
+  means that the linker will allow another definition
+  of the symbol (e.g. the profiling library may contain an alternate
+  definition). The weak definition is used in the case where no other
+  definition for the same function exists.
+}
 
-\lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
-      {example_code/pshmem_weak_symbol_1.c}
+\SourceExample{example_code/pshmem_weak_symbol_2.c}{
+  In this example, the keyword \FUNC{\_\_attribute\_\_} is used to
+  declare the \FUNC{shmem\_example} function as an alias for
+  the original function, \FUNC{pshmem\_example}.
+}
 
-The effect of the \FUNC{\#pragma} directive is to define the 
-external symbol \FUNC{shmem\_example} as a weak definition that 
-aliases the \FUNC{pshmem\_example} function. This 
-means that the linker will allow another definition 
-of the symbol (e.g. the profiling library may contain an alternate 
-definition). The weak definition is used in the case where no other 
-definition for the same function exists. 
+In the absence of weak symbols, one possible solution would be to
+use the \Cstd macro preprocessor as shown in the following example.
 
-\noindent\textbf{Example 2}
-
-\lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
-      {example_code/pshmem_weak_symbol_2.c}
-
-In this example, the keyword \FUNC{\_\_attribute\_\_} is used to 
-declare the \FUNC{shmem\_example} function as an alias for 
-the original function, \FUNC{pshmem\_example}.
-
-In the absence of weak symbols, one possible solution would be to 
-use the C macro preprocessor as shown in the following example. 
-
-\lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
-      {example_code/pshmem_no_weak_symbol_1.c}
-
-Each of the user-defined functions in the profiling library would 
-then be declared in the following manner. 
-
-\lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t, _Thread_local}]
-      {example_code/pshmem_no_weak_symbol_2.c}
-
-The same source file can then be compiled to produce both versions 
-of the library, depending on the state of the 
-\VAR{BUILD\_PSHMEM\_INTERFACES} macro symbol.
+\SourceExample{example_code/pshmem_no_weak_symbol.c}{
+  Each of the user-defined functions in the profiling library is
+  declared using the \FUNC{SHFN} macro, which name-shifts the function
+  depending on the state of the \VAR{BUILD\_PSHMEM\_INTERFACES} macro
+  symbol.  The same source file can then be compiled to produce both
+  versions of the library.
+}
 
 \subsection{Limitations}
 \label{sec:pshmem_limitations}
 
 \subsubsection{Multiple Counting}
 \label{sec:pshmem_multiple_count}
-Since some functions in \openshmem library may be implemented 
-using more basic \openshmem functions, it is possible for these basic  
-profiling functions to be called from within an \openshmem function 
-that was originally called from a profiling routine. For example, 
-\openshmem collective operations can be implemented using basic 
-point-to-point operations. Thus, profiling such a collective 
+Since some functions in \openshmem library may be implemented
+using more basic \openshmem functions, it is possible for these basic
+profiling functions to be called from within an \openshmem function
+that was originally called from a profiling routine. For example,
+\openshmem collective operations can be implemented using basic
+point-to-point operations. Thus, profiling such a collective
 operation may lead to counting a profiling function for a
-point-to-point operation more than once after being called from the 
-collective function. It is the developer's responsibility to ensure 
-the profiling application does not count a function more than once if 
-that effect is not intended. For a single-threaded profiler, this 
-can be achieved through a static variable counting the number of 
-times a function has been profiled. In a multi-threaded environment, 
-additional synchronizations are needed to manage updates to this 
-counter and thus, it becomes more complex to accurately profile the 
+point-to-point operation more than once after being called from the
+collective function. It is the developer's responsibility to ensure
+the profiling application does not count a function more than once if
+that effect is not intended. For a single-threaded profiler, this
+can be achieved through a static variable counting the number of
+times a function has been profiled. In a multi-threaded environment,
+additional synchronizations are needed to manage updates to this
+counter and thus, it becomes more complex to accurately profile the
 \openshmem functions.
 
 \subsubsection{Separate Build and Link}
 \label{sec:pshmem_separate_build_link}
 To build the profiling tool with both the default \openshmem
-functions as well as the \openshmem functions to be intercepted, 
+functions as well as the \openshmem functions to be intercepted,
 developers must build the multiple instances of the \openshmem
-functions separately and link them to provide all the definitions. 
-This is necessary so that the developers of the profiling library 
-need only to define those \openshmem functions that they wish 
-to intercept; references to any other functions will be fulfilled 
-by the default \openshmem library. The link step can be summarized 
+functions separately and link them to provide all the definitions.
+This is necessary so that the developers of the profiling library
+need only to define those \openshmem functions that they wish
+to intercept; references to any other functions will be fulfilled
+by the default \openshmem library. The link step can be summarized
 as follows. \\
 
 \noindent\texttt{\% cc ... -lmyprof -lpsma -lsma} \\
 
-Here, \texttt{libmyprof.a} contains the profiler functions that 
-intercept the \openshmem functions to be profiled, 
-\texttt{libpsma.a} contains the name-shifted \openshmem function 
+Here, \texttt{libmyprof.a} contains the profiler functions that
+intercept the \openshmem functions to be profiled,
+\texttt{libpsma.a} contains the name-shifted \openshmem function
 definitions, and \texttt{libsma.a} contains the default \openshmem
-function definitions. 
+function definitions.
 
 \subsubsection{\Cstd[11] Type-Generic Interfaces}
 \label{sec:pshmem_c11_type_generic_interfaces}
-\openshmem provides type-generic interfaces through \Cstd[11] 
-generic selection. These interfaces are defined as macros 
-and are mapped to \Cstd interface bindings. As a result, the 
-\Cstd[11] type-generic interfaces cannot be intercepted and  
-name-shifted \FUNC{pshmem\_} routines are not provided for these  
-bindings. Furthermore, because no two associations in a \Cstd[11] 
-\FUNC{\_Generic} selection expression can contain compatible types, 
-the type name of the \Cstd operation that is invoked may not be 
-identical to the type name of the original call's arguments (e.g. 
+\openshmem provides type-generic interfaces through \Cstd[11]
+generic selection. These interfaces are defined as macros
+and are mapped to \Cstd interface bindings. As a result, the
+\Cstd[11] type-generic interfaces cannot be intercepted and
+name-shifted \FUNC{pshmem\_} routines are not provided for these
+bindings. Furthermore, because no two associations in a \Cstd[11]
+\FUNC{\_Generic} selection expression can contain compatible types,
+the type name of the \Cstd operation that is invoked may not be
+identical to the type name of the original call's arguments (e.g.
 \VAR{int32\_t} may map to \VAR{int}).

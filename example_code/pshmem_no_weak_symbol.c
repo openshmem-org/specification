@@ -3,3 +3,6 @@
 #else
 #define SHFN(fn) fn
 #endif
+
+void SHFN(shmem_example)(/* appropriate arguments */) { /* function body */
+}
