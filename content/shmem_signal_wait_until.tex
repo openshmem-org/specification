@@ -33,15 +33,18 @@ uint64_t @\FuncDecl{shmem\_signal\_wait\_until}@(uint64_t *sig_addr, int cmp, ui
     blocks until the value of \VAR{sig\_addr} at the calling \ac{PE} satisfies
     the wait condition specified by the comparison operator, \VAR{cmp}, and
     comparison value, \VAR{cmp\_value}.
-
-    Implementations must ensure that \FUNC{shmem\_signal\_wait\_until} do not
-    return before the update of the memory indicated by \VAR{sig\_addr} is
-    fully complete.
 }
 
 \apireturnvalues{
     Return the contents of the signal data object, \VAR{sig\_addr}, at the
     calling \ac{PE} that satisfies the wait condition.
+}
+
+\apiimpnotes{
+    Implementations must ensure that \FUNC{shmem\_signal\_wait\_until} do not
+    return before the update of the memory indicated by \VAR{sig\_addr} is fully
+    complete. Partial updates to the memory must not cause
+    \FUNC{shmem\_signal\_wait\_until} to return.
 }
 
 \end{apidefinition}
