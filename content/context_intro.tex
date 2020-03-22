@@ -9,7 +9,7 @@ additionally provide thread isolation, eliminating overheads resulting from
 thread interference.
 
 A specific communication context is referenced through a context handle, which is
-passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic \ac{API}
+passed as an argument in the \CTYPE{shmem\_ctx\_*} and type-generic \ac{API}
 routines.  \ac{API} routines that do not accept a context handle argument operate on the
 default context.  The default context can be used explicitly through the
 \LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.

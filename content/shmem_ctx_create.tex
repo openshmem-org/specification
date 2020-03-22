@@ -18,7 +18,10 @@ int @\FuncDecl{shmem\_ctx\_create}@(long options, shmem_ctx_t *ctx);
 
 \apidescription{
     The \FUNC{shmem\_ctx\_create} routine creates a new communication context
-    and returns its handle through the \VAR{ctx} argument.  If the context was
+    and returns its handle through the \VAR{ctx} argument.
+    This context is created from the world team;
+    however, the context creation operation is not collective.
+    If the context was
     created successfully, a value of zero is returned
     and the context handle pointed to by \VAR{ctx} specifies a valid context;
     otherwise, a nonzero value is returned and \VAR{ctx} is set to
@@ -28,8 +31,6 @@ int @\FuncDecl{shmem\_ctx\_create}@(long options, shmem_ctx_t *ctx);
     in a correct state.  The creation call can be reattempted with different
     options or after additional resources become available.
 
-    A newly created communication context has a fixed association with the
-    world team.
     All \openshmem routines that operate on this context will do so with
     respect to the associated \ac{PE} team.
     That is, all point-to-point routines operating on this context will use
