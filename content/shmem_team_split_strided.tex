@@ -30,40 +30,40 @@ of \acp{PE} that will form the new team. \VAR{size} must be a positive integer.}
   The bitwise mask representing the set of configuration parameters to use
   from \VAR{config}.}
 
-\apiargument{OUT}{new\_team}{A new \openshmem team handle, representing a \ac{PE}
-subset of all the \acp{PE} in the parent team that is created from
-the \ac{PE} triplet provided.}
+\apiargument{OUT}{new\_team}{An \openshmem team handle. Upon successful creation, it
+references an \openshmem team that contains the subset of all \acp{PE} in the
+parent team specified by the \ac{PE} triplet provided.}
 
 \end{apiarguments}
 
 \apidescription{
 The \FUNC{shmem\_team\_split\_strided} routine is a collective routine.
-It creates a new \openshmem team from a subset of the existing parent team,
-where the \ac{PE} subset is defined by the triplet of arguments
+It creates a new \openshmem team from an existing parent team,
+where the \ac{PE} subset of the resulting team is defined by the triplet of arguments
 (\VAR{start}, \VAR{stride}, \VAR{size}).
 A valid triplet is one such that:
 \begin{equation*}
-  start + stride \cdot i \in \mathbb{Z}_N
-  \hspace{0.35em}
+  start + stride \cdot i \in \mathbb{Z}_{N-1}
+  \;
   \forall
-  \hspace{0.35em}
-  i \in \mathbb{Z}_{size}
+  \;
+  i \in \mathbb{Z}_{size-1}
 \end{equation*}
-where $N$ is the number of \acp{PE} in the parent team and $size$ is greater than zero.
+where $\mathbb{Z}$ is the set of natural numbers ($0, 1, \dots$), $N$ is the
+number of \acp{PE} in the parent team and $size$ is a positivie number indicating
+the number of \acp{PE} in the new team. The index $i$ specifies the number of
+the given PE in the new team. Thus, \acp{PE} in the new team remain in the same
+relative order as in the parent team.
 
 This routine must be called by all \acp{PE} in the parent team.
 All \acp{PE} must provide the same values for the \ac{PE} triplet.
-This routine will return a \VAR{new\_team} containing the \ac{PE}
-subset specified by the triplet and ordered by the existing global
-\ac{PE} number.
-
 On successful creation of the new team:
+
 \begin{itemize}
 \item The \VAR{new\_team} handle will reference a valid team for the
-  subset of \acp{PE} in the parent team specified by the triplet.
-\item Those \acp{PE} in the parent team that are not in the subset
-  specified by the triplet will have \VAR{new\_team} assigned to
-  \LibConstRef{SHMEM\_TEAM\_INVALID}.
+  subset of \acp{PE} in the parent team that are members of the new team.
+\item Those \acp{PE} in the parent team that are not members of the new team
+  will have \VAR{new\_team} assigned to \LibConstRef{SHMEM\_TEAM\_INVALID}.
 \item \FUNC{shmem\_team\_split\_strided} will return zero to all
   \acp{PE} in the parent team.
 \end{itemize}
@@ -94,15 +94,14 @@ will be created and \VAR{new\_team} will be assigned the value
 }
 
 \apinotes{
-  It is important to note the use of the less restrictive
-  \VAR{stride} argument instead of \VAR{logPE\_stride}. This method of
-  creating a team with an arbitrary set of \acp{PE} is inherently restricted
-  by its parameters, but allows for many additional use-cases over using a
-  \VAR{logPE\_stride} parameter, and may provide an easier transition for
-  existing \openshmem programs to create and use \openshmem teams.
+  The \FUNC{shmem\_team\_split\_strided} operation uses an arbitrary
+  \VAR{stride} argument, whereas the \VAR{logPE\_stride} argument to the
+  active set collective operations only permits strides that are a power of two.
+  Arbitrary strides allow a greater number of PE subsets to be expressed
+  and can support a broader range of usage models.
 
-  See the description of team handles and predefined teams at the top of
-  Section~\ref{subsec:team} for more information about semantics and usage.
+  See the description of team handles and predefined teams in
+  Section~\ref{subsec:team} for more information about team handle semantics and usage.
 }
 
 \begin{apiexamples}
