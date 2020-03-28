@@ -89,9 +89,10 @@ numbers can be used for point-to-point operations through team-based
 contexts (see Section~\ref{sec:ctx}) or using the translation routine
 \FUNC{shmem\_team\_translate\_pe}.
 
-As with any collective routine on a team, the program must ensure that in multithreaded executions there
-are no simultaneous split operations occurring on the same parent team on a
-given \ac{PE}.
+Split operations are collective and are subject to the constraints on
+team-based collectives specified in Section~\ref{subsec:coll}. In particular,
+in multithreaded executions, threads at a given \ac{PE} must not perform
+simultaneous split operations on the same parent team.
 Team creation operations are matched across participating PEs based
 on the order in which they are performed. Thus, team creation events must also
 occur in the same order on all \acp{PE} in the parent team.
