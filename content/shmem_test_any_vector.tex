@@ -9,19 +9,19 @@
 size_t @\FuncDecl{shmem\_test\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
     TYPE *cmp_values);
 \end{C11synopsis}
-where \TYPE{} is one of the point-to-point synchronization types specified by
-Table \ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status,
     int cmp, TYPE *cmp_values);
 \end{Csynopsis}
-where \TYPE{} is one of the point-to-point synchronization types and has a
-corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a
+corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ivars}{Local address of an array of remotely accessible data
+  \apiargument{IN}{ivars}{Symmetric address of an array of remotely accessible data
     objects.
     The type of \VAR{ivars} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}

@@ -3,8 +3,7 @@
 
 int isum, ival;
 
-int my_ctx_translate_pe(shmem_ctx_t src_ctx, int src_pe, shmem_ctx_t dest_ctx)
-{
+int my_ctx_translate_pe(shmem_ctx_t src_ctx, int src_pe, shmem_ctx_t dest_ctx) {
   if (src_ctx == SHMEM_CTX_INVALID) {
     return -1;
   }
@@ -25,33 +24,29 @@ shmem_ctx_t my_team_create_ctx(shmem_team_t team) {
 
   shmem_ctx_t ctx;
   if (shmem_team_create_ctx(team, 0, &ctx) != 0) {
-    fprintf (stderr, "Failed to create context for PE team\n");
+    fprintf(stderr, "Failed to create context for PE team\n");
     return SHMEM_CTX_INVALID;
   }
   return ctx;
 }
 
-void my_send_to_neighbor(shmem_ctx_t ctx, int *val)
-{
+void my_send_to_neighbor(shmem_ctx_t ctx, int *val) {
   if (ctx == SHMEM_CTX_INVALID) {
-    fprintf (stderr, "Send to neighbor fail due to invalid context\n");
+    fprintf(stderr, "Send to neighbor fail due to invalid context\n");
     return;
   }
 
   shmem_team_t team;
   shmem_ctx_get_team(ctx, &team);
-  int pe = shmem_team_my_pe(team);
-  int npes = shmem_team_n_pes(team);
-  int rpe = (pe + 1) % npes;
+  int team_mype = shmem_team_my_pe(team);
+  int team_npes = shmem_team_n_pes(team);
+  int rpe = (team_mype + 1) % team_npes;
 
   // put my pe number in the buffer on my right hand neighbor
   shmem_ctx_int_put(ctx, val, &pe, 1, rpe);
 }
 
-
-
-int main()
-{
+int main() {
   shmem_init();
 
   int npes = shmem_n_pes();
@@ -59,8 +54,7 @@ int main()
 
   shmem_team_t team_2s, team_3s;
   shmem_ctx_t ctx_2s, ctx_3s;
-  shmem_team_config_t conf;
-  conf.num_contexts = 1;
+  shmem_team_config_t conf = {.num_contexts = 1};
   long cmask = SHMEM_TEAM_NUM_CONTEXTS;
 
   // Create team with PEs numbered 0, 2, 4, ...
@@ -85,7 +79,7 @@ int main()
     int pe4_of_3s_in_2s = my_ctx_translate_pe(ctx_3s, 4, ctx_2s);
 
     if (pe4_of_3s_in_2s < 0) {
-      fprintf (stderr, "Fail to translate pe 4 from 3s context to 2s context\n");
+      fprintf(stderr, "Fail to translate pe 4 from 3s context to 2s context\n");
     }
     else {
       // Add up the results on pe 4 of the 3s team, using the 2s team context
@@ -98,7 +92,7 @@ int main()
   shmem_team_sync(SHMEM_TEAM_WORLD);
 
   if (shmem_team_my_pe(team_3s) == 4) {
-    printf ("The total value on PE 4 of the 3s team is %d\n", isum);
+    printf("The total value on PE 4 of the 3s team is %d\n", isum);
   }
 
   // Destroy contexts before teams
@@ -109,4 +103,5 @@ int main()
   shmem_team_destroy(team_3s);
 
   shmem_finalize();
+  return 0;
 }

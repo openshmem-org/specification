@@ -3,8 +3,7 @@
 \appendix
 
 %defining pagestyle for annex
-%\pagestyle{plain} \withlinenumbers
-\pagestyle{fancy} \withlinenumbers
+\pagestyle{fancy}
 \fancyhf{}
 \fancyhead[RE, LO]{\leftmark}
 \fancyhead[RO, LE]{\thepage}
@@ -32,18 +31,19 @@ To write a ``Hello World" \openshmem program, the user must:
 In \openshmem, the order in which lines appear in the output is not
 deterministic because \acp{PE} execute asynchronously in parallel.
 
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-\numberedlisting{caption={``Hello World'' example program in \Cstd},label=openshmem-hello,language=OSH2+C}
-                {example_code/hello-openshmem.c}
-\outputlisting{language=bash,caption={Possible ordering of expected output with 4 \acp{PE} from the program in Listing~\ref{openshmem-hello}}}
-                {example_code/hello-openshmem-c.output}
-\vspace{0.1in}
-\end{minipage}
+\SourceExample{example_code/hello-openshmem.c}{
+  \label{openshmem-hello}
+  ``Hello World'' example program in \Cstd
+}
+
+\ProgramOutput{example_code/hello-openshmem-c.output}{
+  Possible ordering of expected output with 4 \acp{PE} from the
+  program in Example~\ref{openshmem-hello}
+}
 
 \clearpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The example in Listing~\ref{openshmem-hello-symmetric} shows a more complex
+Example~\ref{openshmem-hello-symmetric} shows a more complex
 \openshmem program that illustrates the use of symmetric data objects.
 Note the declaration of the \VAR{static short dest} array and its use as the
 remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
@@ -61,17 +61,15 @@ Conversely, the declaration of the \VAR{short source} array is asymmetric
 The \source{} object does not need to be symmetric because \PUT{} handles the
 references to the \VAR{source} array only on the active (local) side.
 
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-\numberedlisting{caption={Example program with symmetric data objects},label=openshmem-hello-symmetric,language=OSH2+C}
-                {example_code/writing_shmem_example.c}
-\outputlisting{language=bash,caption={Possible ordering of expected output with 4 \acp{PE} from the program in Listing~\ref{openshmem-hello-symmetric}}}
-                {example_code/writing_shmem_example.output}
-\vspace{0.1in}
-\end{minipage}
+\SourceExample{example_code/writing_shmem_example.c}{
+  \label{openshmem-hello-symmetric}
+  Example program with symmetric data objects
+}
 
-
-
+\ProgramOutput{example_code/writing_shmem_example.output}{
+  Possible ordering of expected output with 4~\acp{PE} from the
+  program in Example~\ref{openshmem-hello-symmetric}
+}
 
 \chapter{Compiling and Running Programs}\label{sec:compiling}
 The \openshmem Specification does not specify how
@@ -86,7 +84,7 @@ The \openshmem Reference Implementation provides a wrapper program, named
 \textbf{oshcc}, to aid in the compilation of \Cstd programs.
 The wrapper may be called as follows:
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[]
 oshcc <compiler options> -o myprogram myprogram.c
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
@@ -99,7 +97,7 @@ The \openshmem Reference Implementation provides a wrapper program, named
 \textbf{oshc++}, to aid in the compilation of \Cpp programs.
 The wrapper may be called as follows:
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[]
 oshc++ <compiler options> -o myprogram myprogram.cpp
 \end{lstlisting}
 Where the $\langle\mbox{compiler options}\rangle$ are options understood by the
@@ -112,7 +110,7 @@ The \openshmem Reference Implementation provides a wrapper program, named
 \textbf{oshrun}, to launch \openshmem programs.
 The wrapper may be called as follows:
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[]
 oshrun <runner options> -np <#> <program> <program arguments>
 \end{lstlisting}
 The arguments for \textbf{oshrun} are:
@@ -345,6 +343,20 @@ supported before removal.
     \hyperref[subsec:shmem_alltoall]{\FUNC{shmem\_alltoall}} \\ \hline
     \CorCpp: \FuncRef{shmem\_alltoalls[32,64]} & 1.5 & Current &
     \hyperref[subsec:shmem_alltoalls]{\FUNC{shmem\_alltoalls}} \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_wait\_until(\CTYPE{short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_short\_wait\_until}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_wait\_until(\CTYPE{unsigned short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_ushort\_wait\_until}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_test(\CTYPE{short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_short\_test}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_test(\CTYPE{unsigned short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_ushort\_test}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{Table~\ref{p2psynctypes}: point-to-point synchronization types}
+        & 1.5 & Current & Table~\ref{stdamotypes}: standard AMO types \\ \hline
     \end{longtable}
 \end{center}
 
@@ -511,6 +523,18 @@ for that particular team. Rather than continue to support \FUNC{shmem\_barrier}
 for active-sets or teams, programs should use a call to \FUNC{shmem\_quiet}
 followed by a call to \FUNC{shmem\_sync} in order to explicitly
 indicate which context to quiesce.
+
+\subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} --- \CTYPE{short} and \CTYPE{unsigned short} variants}
+The \CTYPE{short} and \CTYPE{unsigned short} type \CorCpp and \textit{C11}
+routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
+because point-to-point synchronization routines are only compatible with
+\acp{AMO} (as of \openshmem 1.5), and there is no corresponding AMO for
+\CTYPE{short} and \CTYPE{unsigned short}.
+
+\subsection{Table~\ref{p2psynctypes}: point-to-point synchronization types}
+As of \openshmem 1.5, the point-to-point synchronization routines are only
+compatible with \acp{AMO}, so their interfaces are defined via the
+standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 

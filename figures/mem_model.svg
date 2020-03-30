@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="0 0 1152 733" width="1152" height="733">
+  <defs>
+    <filter id="Shadow" filterUnits="userSpaceOnUse" x="0" y="0">
+      <feGaussianBlur in="SourceAlpha" result="blur" stdDeviation="1.308"/>
+      <feOffset in="blur" result="offset" dx="0" dy="2"/>
+      <feFlood flood-color="black" flood-opacity=".5" result="flood"/>
+      <feComposite in="flood" in2="offset" operator="in"/>
+    </filter>
+    <font-face font-family="Helvetica" font-size="20" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="532.22656" cap-height="719.7266" ascent="770.0195" descent="-229.98047" font-weight="700">
+      <font-face-src>
+        <font-face-name name="Helvetica-Bold"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica" font-size="12" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="522.9492" cap-height="717.28516" ascent="770.0195" descent="-229.98047" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Helvetica"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica" font-size="13" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="522.9492" cap-height="717.28516" ascent="770.0195" descent="-229.98047" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Helvetica"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.11.5 
+    <dc:date>2015-02-04 21:52:01 +0000</dc:date>
+  </metadata>
+  <g id="Canvas_1" stroke-dasharray="none" stroke-opacity="1" fill="none" stroke="none" fill-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1: Layer 1">
+      <title>Layer 1</title>
+      <g id="Graphic_69_shadow" filter="url(#Shadow)">
+        <rect x="625" y="333.03008" width="147" height="105.71429" fill="white"/>
+        <rect x="625" y="333.03008" width="147" height="105.71429" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_68_shadow" filter="url(#Shadow)">
+        <rect x="625" y="180.57895" width="147" height="133.53383" fill="#f5f5f5"/>
+        <rect x="625" y="180.57895" width="147" height="133.53383" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_67_shadow" filter="url(#Shadow)">
+        <rect x="625" y="109.3609" width="147" height="58.977444" fill="#dcdcdc"/>
+        <rect x="625" y="109.3609" width="147" height="58.977444" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_66_shadow" filter="url(#Shadow)">
+        <path d="M 623 17 L 773 17 C 777.9706 17 782 21.029437 782 26 L 782 452 C 782 456.97056 777.9706 461 773 461 L 623 461 C 618.02944 461 614 456.97056 614 452 L 614 26 C 614 21.029437 618.02944 17 623 17 Z" fill="white"/>
+        <path d="M 623 17 L 773 17 C 777.9706 17 782 21.029437 782 26 L 782 452 C 782 456.97056 777.9706 461 773 461 L 623 461 C 618.02944 461 614 456.97056 614 452 L 614 26 C 614 21.029437 618.02944 17 623 17 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_42_shadow" filter="url(#Shadow)">
+        <rect x="80" y="333.03008" width="147" height="105.71429" fill="white"/>
+        <rect x="80" y="333.03008" width="147" height="105.71429" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_43_shadow" filter="url(#Shadow)">
+        <rect x="80" y="180.57895" width="147" height="133.53383" fill="#f5f5f5"/>
+        <rect x="80" y="180.57895" width="147" height="133.53383" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_44_shadow" filter="url(#Shadow)">
+        <rect x="80" y="109.3609" width="147" height="58.977444" fill="#dcdcdc"/>
+        <rect x="80" y="109.3609" width="147" height="58.977444" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_45_shadow" filter="url(#Shadow)">
+        <path d="M 78 17 L 228 17 C 232.97056 17 237 21.029437 237 26 L 237 452 C 237 456.97056 232.97056 461 228 461 L 78 461 C 73.02944 461 69 456.97056 69 452 L 69 26 C 69 21.029437 73.02944 17 78 17 Z" fill="white"/>
+        <path d="M 78 17 L 228 17 C 232.97056 17 237 21.029437 237 26 L 237 452 C 237 456.97056 232.97056 461 228 461 L 78 461 C 73.02944 461 69 456.97056 69 452 L 69 26 C 69 21.029437 73.02944 17 78 17 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_37_shadow" filter="url(#Shadow)">
+        <rect x="269" y="333.03008" width="147" height="105.71429" fill="white"/>
+        <rect x="269" y="333.03008" width="147" height="105.71429" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_38_shadow" filter="url(#Shadow)">
+        <rect x="269" y="180.57895" width="147" height="133.53383" fill="#f5f5f5"/>
+        <rect x="269" y="180.57895" width="147" height="133.53383" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_39_shadow" filter="url(#Shadow)">
+        <rect x="269" y="109.3609" width="147" height="58.977444" fill="#dcdcdc"/>
+        <rect x="269" y="109.3609" width="147" height="58.977444" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_40_shadow" filter="url(#Shadow)">
+        <path d="M 267 17 L 417 17 C 421.97056 17 426 21.029437 426 26 L 426 452 C 426 456.97056 421.97056 461 417 461 L 267 461 C 262.02944 461 258 456.97056 258 452 L 258 26 C 258 21.029437 262.02944 17 267 17 Z" fill="white"/>
+        <path d="M 267 17 L 417 17 C 421.97056 17 426 21.029437 426 26 L 426 452 C 426 456.97056 421.97056 461 417 461 L 267 461 C 262.02944 461 258 456.97056 258 452 L 258 26 C 258 21.029437 262.02944 17 267 17 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_28_shadow" filter="url(#Shadow)">
+        <circle cx="469.5" cy="260" r="11.5000183758718" fill="white"/>
+        <circle cx="469.5" cy="260" r="11.5000183758718" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_29_shadow" filter="url(#Shadow)">
+        <circle cx="520.5" cy="260" r="11.5000183758718" fill="white"/>
+        <circle cx="520.5" cy="260" r="11.5000183758718" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_30_shadow" filter="url(#Shadow)">
+        <circle cx="571.5" cy="260" r="11.5000183758718" fill="white"/>
+        <circle cx="571.5" cy="260" r="11.5000183758718" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_58_shadow" filter="url(#Shadow)">
+        <path d="M 100 191 L 757 191 C 761.9706 191 766 195.02944 766 200 L 766 219 C 766 223.97056 761.9706 228 757 228 L 100 228 C 95.02944 228 91 223.97056 91 219 L 91 200 C 91 195.02944 95.02944 191 100 191 Z"/>
+        <path d="M 100 191 L 757 191 C 761.9706 191 766 195.02944 766 200 L 766 219 C 766 223.97056 761.9706 228 757 228 L 100 228 C 95.02944 228 91 223.97056 91 219 L 91 200 C 91 195.02944 95.02944 191 100 191 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+      </g>
+      <g id="Graphic_57_shadow" filter="url(#Shadow)">
+        <rect x="116.92512" y="198.1496" width="72.14975" height="23" fill="white"/>
+        <path d="M 116.92512 198.1496 L 189.07487 198.1496 L 189.07487 221.1496 L 116.92512 221.1496 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+      </g>
+      <g id="Graphic_56_shadow" filter="url(#Shadow)">
+        <rect x="305.92513" y="198.1496" width="72.14975" height="23" fill="white"/>
+        <path d="M 305.92513 198.1496 L 378.07488 198.1496 L 378.07488 221.1496 L 305.92513 221.1496 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+      </g>
+      <g id="Graphic_55_shadow" filter="url(#Shadow)">
+        <rect x="661.9251" y="197.5" width="72.14975" height="23" fill="white"/>
+        <path d="M 661.9251 197.5 L 734.0749 197.5 L 734.0749 220.5 L 661.9251 220.5 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+      </g>
+      <g id="Group_65">
+        <g id="Graphic_66">
+          <path d="M 623 17 L 773 17 C 777.9706 17 782 21.029437 782 26 L 782 452 C 782 456.97056 777.9706 461 773 461 L 623 461 C 618.02944 461 614 456.97056 614 452 L 614 26 C 614 21.029437 618.02944 17 623 17 Z" fill="white"/>
+          <path d="M 623 17 L 773 17 C 777.9706 17 782 21.029437 782 26 L 782 452 C 782 456.97056 777.9706 461 773 461 L 623 461 C 618.02944 461 614 456.97056 614 452 L 614 26 C 614 21.029437 618.02944 17 623 17 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(619 22)" fill="black">
+            <tspan font-family="Helvetica" font-size="20" font-weight="700" fill="black" x="46.768555" y="19">PE N-1</tspan>
+          </text>
+        </g>
+        <g id="Graphic_67">
+          <rect x="625" y="109.3609" width="147" height="58.977444" fill="#dcdcdc"/>
+          <rect x="625" y="109.3609" width="147" height="58.977444" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(630 124.84962)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="22.805664" y="11">Global and Static </tspan>
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="43.92871" y="25">Variables</tspan>
+          </text>
+        </g>
+        <g id="Graphic_68">
+          <rect x="625" y="180.57895" width="147" height="133.53383" fill="#f5f5f5"/>
+          <rect x="625" y="180.57895" width="147" height="133.53383" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(630 240.34586)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="24.15625" y="11">Symmetric Heap</tspan>
+          </text>
+        </g>
+        <g id="Graphic_69">
+          <rect x="625" y="333.03008" width="147" height="105.71429" fill="white"/>
+          <rect x="625" y="333.03008" width="147" height="105.71429" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(630 378.8872)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="27.91797" y="11">Local Variables</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Group_41">
+        <g id="Graphic_45">
+          <path d="M 78 17 L 228 17 C 232.97056 17 237 21.029437 237 26 L 237 452 C 237 456.97056 232.97056 461 228 461 L 78 461 C 73.02944 461 69 456.97056 69 452 L 69 26 C 69 21.029437 73.02944 17 78 17 Z" fill="white"/>
+          <path d="M 78 17 L 228 17 C 232.97056 17 237 21.029437 237 26 L 237 452 C 237 456.97056 232.97056 461 228 461 L 78 461 C 73.02944 461 69 456.97056 69 452 L 69 26 C 69 21.029437 73.02944 17 78 17 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(74 22)" fill="black">
+            <tspan font-family="Helvetica" font-size="20" font-weight="700" fill="black" x="57.32031" y="19">PE 0</tspan>
+          </text>
+        </g>
+        <g id="Graphic_44">
+          <rect x="80" y="109.3609" width="147" height="58.977444" fill="#dcdcdc"/>
+          <rect x="80" y="109.3609" width="147" height="58.977444" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(85 124.84962)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="22.805664" y="11">Global and Static </tspan>
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="43.92871" y="25">Variables</tspan>
+          </text>
+        </g>
+        <g id="Graphic_43">
+          <rect x="80" y="180.57895" width="147" height="133.53383" fill="#f5f5f5"/>
+          <rect x="80" y="180.57895" width="147" height="133.53383" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(85 240.34586)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="24.15625" y="11">Symmetric Heap</tspan>
+          </text>
+        </g>
+        <g id="Graphic_42">
+          <rect x="80" y="333.03008" width="147" height="105.71429" fill="white"/>
+          <rect x="80" y="333.03008" width="147" height="105.71429" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(85 378.8872)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="27.91797" y="11">Local Variables</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Group_36">
+        <g id="Graphic_40">
+          <path d="M 267 17 L 417 17 C 421.97056 17 426 21.029437 426 26 L 426 452 C 426 456.97056 421.97056 461 417 461 L 267 461 C 262.02944 461 258 456.97056 258 452 L 258 26 C 258 21.029437 262.02944 17 267 17 Z" fill="white"/>
+          <path d="M 267 17 L 417 17 C 421.97056 17 426 21.029437 426 26 L 426 452 C 426 456.97056 421.97056 461 417 461 L 267 461 C 262.02944 461 258 456.97056 258 452 L 258 26 C 258 21.029437 262.02944 17 267 17 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(263 22)" fill="black">
+            <tspan font-family="Helvetica" font-size="20" font-weight="700" fill="black" x="57.32031" y="19">PE 1</tspan>
+          </text>
+        </g>
+        <g id="Graphic_39">
+          <rect x="269" y="109.3609" width="147" height="58.977444" fill="#dcdcdc"/>
+          <rect x="269" y="109.3609" width="147" height="58.977444" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(274 124.84962)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="22.805664" y="11">Global and Static </tspan>
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="43.92871" y="25">Variables</tspan>
+          </text>
+        </g>
+        <g id="Graphic_38">
+          <rect x="269" y="180.57895" width="147" height="133.53383" fill="#f5f5f5"/>
+          <rect x="269" y="180.57895" width="147" height="133.53383" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(274 240.34586)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="24.15625" y="11">Symmetric Heap</tspan>
+          </text>
+        </g>
+        <g id="Graphic_37">
+          <rect x="269" y="333.03008" width="147" height="105.71429" fill="white"/>
+          <rect x="269" y="333.03008" width="147" height="105.71429" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(274 378.8872)" fill="black">
+            <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="27.91797" y="11">Local Variables</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Graphic_28">
+        <circle cx="469.5" cy="260" r="11.5000183758718" fill="white"/>
+        <circle cx="469.5" cy="260" r="11.5000183758718" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_29">
+        <circle cx="520.5" cy="260" r="11.5000183758718" fill="white"/>
+        <circle cx="520.5" cy="260" r="11.5000183758718" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_30">
+        <circle cx="571.5" cy="260" r="11.5000183758718" fill="white"/>
+        <circle cx="571.5" cy="260" r="11.5000183758718" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_35">
+        <path d="M 12.752892 313.35432 L 12.044316 110.3753 C 12.026964 105.40477 16.04231 101.36129 21.012843 101.34394 L 786.6735 98.6711 C 791.6441 98.65375 795.6875 102.6691 795.7049 107.63963 C 795.7049 107.63963 795.7049 107.63963 795.7049 107.63963 L 796.4135 310.61865 C 796.4308 315.5892 792.4155 319.63266 787.4449 319.65 L 21.784255 322.32285 C 16.813723 322.3402 12.770244 318.32485 12.752892 313.35432 C 12.752892 313.35432 12.752892 313.35432 12.752892 313.35432 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(17.766825 317.33684) rotate(-90.20001)" fill="black">
+          <tspan font-family="Helvetica" font-size="13" font-weight="400" fill="black" x="13.017471" y="13">Remotely Accessible Symmetric </tspan>
+          <tspan font-family="Helvetica" font-size="13" font-weight="400" fill="black" x="67.91835" y="29">Data Objects</tspan>
+        </text>
+      </g>
+      <g id="Graphic_58">
+        <path d="M 100 191 L 757 191 C 761.9706 191 766 195.02944 766 200 L 766 219 C 766 223.97056 761.9706 228 757 228 L 100 228 C 95.02944 228 91 223.97056 91 219 L 91 200 C 91 195.02944 95.02944 191 100 191 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+      </g>
+      <g id="Graphic_57">
+        <rect x="116.92512" y="198.1496" width="72.14975" height="23" fill="white"/>
+        <path d="M 116.92512 198.1496 L 189.07487 198.1496 L 189.07487 221.1496 L 116.92512 221.1496 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+        <text transform="translate(121.92512 202.6496)" fill="black">
+          <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="2.1676483" y="11">Variable: X </tspan>
+        </text>
+      </g>
+      <g id="Graphic_56">
+        <rect x="305.92513" y="198.1496" width="72.14975" height="23" fill="white"/>
+        <path d="M 305.92513 198.1496 L 378.07488 198.1496 L 378.07488 221.1496 L 305.92513 221.1496 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+        <text transform="translate(310.92513 202.6496)" fill="black">
+          <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="2.1676483" y="11">Variable: X </tspan>
+        </text>
+      </g>
+      <g id="Graphic_55">
+        <rect x="661.9251" y="197.5" width="72.14975" height="23" fill="white"/>
+        <path d="M 661.9251 197.5 L 734.0749 197.5 L 734.0749 220.5 L 661.9251 220.5 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+        <text transform="translate(666.9251 202)" fill="black">
+          <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="2.1676483" y="11">Variable: X </tspan>
+        </text>
+      </g>
+      <g id="Graphic_63">
+        <path d="M 436 179 L 604.5 179 C 609.47056 179 613.5 183.02944 613.5 188 L 613.5 193 C 613.5 197.97056 609.47056 202 604.5 202 L 436 202 C 431.02944 202 427 197.97056 427 193 L 427 188 C 427 183.02944 431.02944 179 436 179 Z" fill="white"/>
+        <path d="M 436 179 L 604.5 179 C 609.47056 179 613.5 183.02944 613.5 188 L 613.5 193 C 613.5 197.97056 609.47056 202 604.5 202 L 436 202 C 431.02944 202 427 197.97056 427 193 L 427 188 C 427 183.02944 431.02944 179 436 179 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.0,2.0" stroke-width="1"/>
+        <text transform="translate(432 184)" fill="black">
+          <tspan font-family="Helvetica" font-size="12" font-weight="400" fill="black" x="2.055664" y="11">X = shmem_malloc(sizeof(long))</tspan>
+        </text>
+      </g>
+      <g id="Graphic_64">
+        <path d="M 12.176054 436.87673 L 11.829391 337.5716 C 11.81204 332.6011 15.827386 328.5576 20.79792 328.54025 L 787.0354 325.8654 C 792.006 325.84805 796.04945 329.8634 796.0668 334.83393 L 796.4135 434.13905 C 796.4308 439.1096 792.4155 443.15306 787.4449 443.1704 L 21.207417 445.84526 C 16.236885 445.8626 12.193406 441.84727 12.176054 436.87673 C 12.176054 436.87673 12.176054 436.87673 12.176054 436.87673 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(17.189987 440.85925) rotate(-90.20001)" fill="black">
+          <tspan font-family="Helvetica" font-size="13" font-weight="400" fill="black" x="17.886993" y="13">Private Data </tspan>
+          <tspan font-family="Helvetica" font-size="13" font-weight="400" fill="black" x="31.616974" y="29">Objects</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

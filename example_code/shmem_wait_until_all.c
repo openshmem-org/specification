@@ -1,7 +1,6 @@
 #include <shmem.h>
 
-int main(void)
-{
+int main(void) {
   shmem_init();
   int mype = shmem_my_pe();
   int npes = shmem_n_pes();
@@ -10,7 +9,7 @@ int main(void)
   int *status = NULL;
 
   for (int i = 0; i < npes; i++)
-      shmem_atomic_set(&flags[mype], 1, i);
+    shmem_atomic_set(&flags[mype], 1, i);
 
   shmem_wait_until_all(flags, npes, status, SHMEM_CMP_EQ, 1);
 
