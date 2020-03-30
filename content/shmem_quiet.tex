@@ -39,7 +39,7 @@ void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
     \PUT{} routine, which sets a completion flag on another \ac{PE}.
     \FUNC{shmem\_quiet} is not usually needed if
     \FUNC{shmem\_barrier\_all} or \FUNC{shmem\_barrier} are called.  The barrier
-    routines wait for the completion of outstanding writes to
+    routines wait for the completion of outstanding operations to
     symmetric data objects on all \acp{PE}.
 
     In an \openshmem program with multithreaded \acp{PE}, it is the
