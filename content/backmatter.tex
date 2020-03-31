@@ -628,14 +628,13 @@ all \acp{PE}, including the root \ac{PE}.
 \\ See Section \ref{subsec:coll}.
 %
 \item Added team-based collective functions: \FUNC{shmem\_sync},
-  \FUNC{shmem\_broadcast\{mem\}}, \FUNC{shmem\_collect\{mem\}},\\
-  \FUNC{shmem\_TYPENAME\_OP\_reduce},
-  \FUNC{shmem\_alltoall\{mem\}}, and
-  \FUNC{shmem\_alltoalls\{mem\}}.
+  \FUNC{shmem\_alltoall[mem]}, \FUNC{shmem\_alltoalls[mem]}, \\
+  \FUNC{shmem\_broadcast[mem]}, \FUNC{shmem\_collect[mem]}, \FUNC{shmem\_fcollect[mem]}, and \\
+  \FUNC{shmem\_\{and, or, xor, max, min, sum, prod\}\_reduce}.
   \\ See Sections \ref{subsec:shmem_sync},
+  \ref{subsec:shmem_alltoall}, \ref{subsec:shmem_alltoalls},
   \ref{subsec:shmem_broadcast}, \ref{subsec:shmem_collect},
-  \ref{subsec:shmem_reductions}, \ref{subsec:shmem_alltoall},
-  and \ref{subsec:shmem_alltoalls}.
+  and \ref{subsec:shmem_reductions}.
 %
 \item Added support for nonblocking \ac{AMO} functions.
 \\ See Section \ref{sec:amo-nbi}.
