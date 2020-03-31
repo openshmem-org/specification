@@ -48,12 +48,12 @@ The team-based collective routines defined in the \openshmem Specification are:
 
 \begin{itemize}
 \item \FUNC{shmem\_team\_sync}
+\item \FUNC{shmem\_\{TYPE\_\}alltoall\{mem\}}
+\item \FUNC{shmem\_\{TYPE\_\}alltoalls\{mem\}}
 \item \FUNC{shmem\_\{TYPE\_\}broadcast\{mem\}}
 \item \FUNC{shmem\_\{TYPE\_\}collect\{mem\}}
 \item \FUNC{shmem\_\{TYPE\_\}fcollect\{mem\}}
 \item Reduction routines for the following operations: AND, OR, XOR, MAX, MIN, SUM, PROD
-\item \FUNC{shmem\_\{TYPE\_\}alltoall\{mem\}}
-\item \FUNC{shmem\_\{TYPE\_\}alltoalls\{mem\}}
 \end{itemize}
 
 In addition, all team creation functions are collective operations. In addition to the ordering
@@ -105,12 +105,12 @@ routines defined in the \openshmem Specification are:
 \begin{itemize}
 \item \FUNC{shmem\_barrier}
 \item \FUNC{shmem\_sync}
+\item \FUNC{shmem\_alltoall\{32, 64\}}
+\item \FUNC{shmem\_alltoalls\{32, 64\}}
 \item \FUNC{shmem\_broadcast\{32, 64\}}
 \item \FUNC{shmem\_collect\{32, 64\}}
 \item \FUNC{shmem\_fcollect\{32, 64\}}
 \item Reduction routines for the following operations: AND, OR, XOR, MAX, MIN, SUM, PROD
-\item \FUNC{shmem\_alltoall\{32, 64\}}
-\item \FUNC{shmem\_alltoalls\{32, 64\}}
 \end{itemize}
 
 \end{DeprecateBlock}
