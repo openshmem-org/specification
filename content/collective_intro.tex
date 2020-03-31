@@ -118,15 +118,21 @@ routines defined in the \openshmem Specification are:
 
 \subsubsection*{Team-implicit collectives}
 
-The \FUNC{shmem\_sync\_all} routine synchronizes all \acp{PE} in the
-computation through the world team. This routine is equivalent to a
-call to \FUNC{shmem\_team\_sync} on the world team.
+Some \openshmem collective routines implicitly operate on the world
+team. These routines include:
 
-The \FUNC{shmem\_barrier\_all} routine synchronizes all \acp{PE} in
-the world team and ensures completion of all local and remote memory
-updates issued via the default context.  This routine is equivalent to
-a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
-call to \FUNC{shmem\_team\_sync} on the world team.
+\begin{itemize}
+\item \FUNC{shmem\_sync\_all}, which synchronizes all \acp{PE} in the
+  computation through the world team. This routine is equivalent to a
+  call to \FUNC{shmem\_team\_sync} on the world team.
+\item \FUNC{shmem\_barrier\_all}, which synchronizes all \acp{PE} in
+  the world team and ensures completion of all local and remote memory
+  updates issued via the default context.  This routine is equivalent to
+  a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
+  call to \FUNC{shmem\_team\_sync} on the world team.
+\item \openshmem memory-management routines, which imply one or more
+  calls to a routine equivalent to \FUNC{shmem\_barrier\_all}.
+\end{itemize}
 
 \subsubsection*{Error codes returned from team-based collectives}
 
