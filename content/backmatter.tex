@@ -608,17 +608,49 @@ interface, and the removal of the entire \Fortran API.
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
-\item Added teams API: team management, team-based communication management,
-  and team-based collectives.
-\\ See Section \ref{subsec:team}, \ref{sec:ctx}, \ref{subsec:shmem_team_create_ctx},
-\ref{subsec:shmem_ctx_get_team}, \ref{subsec:team_collectives}.
-%
-\item Deprecated active-set-based library constants and collective routines.
-\\ See Section \ref{subsec:library_constants}, \ref{subsec:coll}.
-%
 \item Added \FUNC{shmem\_malloc\_with\_hints} interface and corresponding hints
 \CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
 \\ See Section \ref{subsec:shmmallochint} and \ref{subsec:library_constants}.
+%
+\item Specified that team-based broadcast operations update the \VAR{dest} object on
+all \acp{PE}, including the root \ac{PE}.
+\\ See Section \ref{subsec:shmem_broadcast}.
+%
+\item Deprecated active-set-based library constants and collective functions.
+\\ See Sections \ref{subsec:library_constants} and \ref{subsec:coll}.
+%
+\item Added team management functions:
+  \FUNC{shmem\_team\_my\_pe},
+  \FUNC{shmem\_team\_n\_pes},
+  \FUNC{shmem\_team\_get\_config}, \\
+  \FUNC{shmem\_team\_translate\_pe},
+  \FUNC{shmem\_team\_split\_strided},
+  \FUNC{shmem\_team\_split\_2d}, and
+  \FUNC{shmem\_team\_destroy}.
+\\ See Sections
+  \ref{subsec:shmem_team_my_pe},
+  \ref{subsec:shmem_team_n_pes},
+  \ref{subsec:shmem_team_get_config},
+  \ref{subsec:shmem_team_translate_pe},
+  \ref{subsec:shmem_team_split_strided},
+  \ref{subsec:shmem_team_split_2d}, and
+  \ref{subsec:shmem_team_destroy}.
+%
+\item Added team-based communication-management functions:
+  \FUNC{shmem\_team\_create\_ctx} and
+  \FUNC{shmem\_ctx\_get\_team}.
+\\ See Sections
+  \ref{subsec:shmem_team_create_ctx} and
+  \ref{subsec:shmem_ctx_get_team}.
+%
+\item Added team-based collective functions: \FUNC{shmem\_sync},
+  \FUNC{shmem\_alltoall[mem]}, \FUNC{shmem\_alltoalls[mem]}, \\
+  \FUNC{shmem\_broadcast[mem]}, \FUNC{shmem\_collect[mem]}, \FUNC{shmem\_fcollect[mem]}, and \\
+  \FUNC{shmem\_\{and, or, xor, max, min, sum, prod\}\_reduce}.
+  \\ See Sections \ref{subsec:shmem_sync},
+  \ref{subsec:shmem_alltoall}, \ref{subsec:shmem_alltoalls},
+  \ref{subsec:shmem_broadcast}, \ref{subsec:shmem_collect},
+  and \ref{subsec:shmem_reductions}.
 %
 \item Added support for nonblocking \ac{AMO} functions.
 \\ See Section \ref{sec:amo-nbi}.
