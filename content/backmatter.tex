@@ -608,6 +608,8 @@ interface, and the removal of the entire \Fortran API.
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
+\item Removed \FUNC{SHMEM\_CACHE}.
+%
 \item Added \FUNC{shmem\_malloc\_with\_hints} interface and corresponding hints
 \CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
 \\ See Section \ref{subsec:shmmallochint} and \ref{subsec:library_constants}.
@@ -671,8 +673,6 @@ all \acp{PE}, including the root \ac{PE}.
 \\ See Section~\ref{subsec:p2p_intro}.
 %
 \item Removed the entire \openshmem \Fortran API. 
-%
-\item Removed \FUNC{SHMEM\_CACHE}.
 %
 \item Added support for multipliers in \VAR{SHMEM\_SYMMETRIC\_SIZE}
 environment variables.
