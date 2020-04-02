@@ -386,6 +386,18 @@ supported before removal.
         & 1.5 & Current & \hyperref[subsec:shmem_prod_reduce]{\FUNC{shmem\_prod\_reduce}} \\ \hline
     \CorCpp: \hyperref[subsec:shmem_barrier]{\FuncRef{shmem\_barrier}}
         & 1.5 & Current & \hyperref[subsec:shmem_quiet]{\FuncRef{shmem\_quiet}} + \hyperref[subsec:shmem_sync]{\FuncRef{shmem\_sync}} \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_wait\_until(\CTYPE{short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_short\_wait\_until}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_wait\_until(\CTYPE{unsigned short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_ushort\_wait\_until}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_test(\CTYPE{short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_short\_test}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_test(\CTYPE{unsigned short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_ushort\_test}}
+        & 1.5 & Current & (none) \\ \hline
     %% Deprecated in 1.6
     %% Deprecated in 1.7
     %% Notes
@@ -500,6 +512,13 @@ explicit and better communicates the developer's intent.
 The \CTYPE{long}-typed \CorCpp routine \FUNC{shmem\_wait\_until} was deprecated
 in favor of the \Cstd[11] type-generic interface of the same name or the
 explicitly typed \CorCpp routine \FUNC{shmem\_long\_wait\_until}.
+
+\subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} --- \CTYPE{short} and \CTYPE{unsigned short} variants}
+The \CTYPE{short} and \CTYPE{unsigned short} type \CorCpp and \textit{C11}
+routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
+because point-to-point synchronization routines are only compatible with
+\acp{AMO} (as of \openshmem 1.5), and there is no corresponding AMO for
+\CTYPE{short} and \CTYPE{unsigned short}.
 
 \subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, %% Issue #66.
     \FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc},
