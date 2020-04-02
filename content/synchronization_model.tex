@@ -66,26 +66,6 @@ a local \ac{PE} need to be visible  to all other \acp{PE} before the local
 
 
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-Collective synchronization over an active set \\
-\FUNC{shmem\_barrier}
-&
-\raisebox{-\totalheight}{\includegraphics[width=\textwidth]{figures/barrier}}
-\end{tabular}
-
-\begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-{}
-&
-{All local and remote memory operations issued by all \acp{PE} within the
-active set are guaranteed to be completed before any \ac{PE} in the
-active set returns from the call. Additionally, no \ac{PE} shall return from the
-barrier until all \acp{PE} in the active set have entered the same barrier
-call. This routine should be used when synchronization as well as completion of
-all stores and remote memory updates via \openshmem is required over a sub set
-of the executing \acp{PE}.} \tabularnewline
-\hline
-\end{tabular}
-
-\begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 \hline
 \textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
 \hline
