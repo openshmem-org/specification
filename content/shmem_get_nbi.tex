@@ -37,7 +37,8 @@ void @\FuncDecl{shmem\_ctx\_getmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
     \apiargument{IN}{source}{Symmetric address of the source data object.
         The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
-        arrays.}
+        arrays. For \func{shmem\_getmem\_nbi} and
+        \func{shmem\_ctx\_getmem\_nbi}, elements are bytes.}
     \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.}
 \end{apiarguments}
 
