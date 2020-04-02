@@ -8,12 +8,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   viewBox="0 0 1152 733"
-   width="1152"
-   height="733"
+   viewBox="0 0 1058.4991 561.50244"
+   width="1058.4991"
+   height="561.50244"
    id="svg521"
    sodipodi:docname="barrierall.svg"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -23,17 +23,22 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1027"
+     inkscape:window-width="1792"
+     inkscape:window-height="1075"
      id="namedview523"
      showgrid="false"
-     inkscape:zoom="0.77094281"
-     inkscape:cx="837.49082"
-     inkscape:cy="510.68405"
-     inkscape:window-x="1072"
-     inkscape:window-y="1136"
+     inkscape:zoom="1.0902778"
+     inkscape:cx="582.64163"
+     inkscape:cy="250.61494"
+     inkscape:window-x="-1"
+     inkscape:window-y="23"
      inkscape:window-maximized="1"
-     inkscape:current-layer="Canvas_1" />
+     inkscape:current-layer="Graphic_48"
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <defs
      id="defs15">
     <filter
@@ -75,7 +80,22 @@
        ascent="770.0195"
        descent="-229.98047"
        font-weight="700"
-       id="font-face11">
+       id="font-face11"
+       stemv="0"
+       stemh="0"
+       accent-height="0"
+       ideographic="0"
+       alphabetic="0"
+       mathematical="0"
+       hanging="0"
+       v-ideographic="0"
+       v-alphabetic="0"
+       v-mathematical="0"
+       v-hanging="0"
+       strikethrough-position="0"
+       strikethrough-thickness="0"
+       overline-position="0"
+       overline-thickness="0">
       <font-face-src>
         <font-face-name
            name="Helvetica-Bold" />
@@ -93,7 +113,22 @@
        ascent="770.0195"
        descent="-229.98047"
        font-weight="400"
-       id="font-face13">
+       id="font-face13"
+       stemv="0"
+       stemh="0"
+       accent-height="0"
+       ideographic="0"
+       alphabetic="0"
+       mathematical="0"
+       hanging="0"
+       v-ideographic="0"
+       v-alphabetic="0"
+       v-mathematical="0"
+       v-hanging="0"
+       strikethrough-position="0"
+       strikethrough-thickness="0"
+       overline-position="0"
+       overline-thickness="0">
       <font-face-src>
         <font-face-name
            name="Helvetica" />
@@ -109,6 +144,7 @@
     <dc:format>image/svg+xml</dc:format>
     <dc:type
        rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title></dc:title>
   </cc:Work>
 </rdf:RDF>
 </metadata>
@@ -802,15 +838,13 @@
            clip-path="url(#clip_path)"
            transform="translate(24,534)"
            id="text230"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="18"
              font-weight="700"
              x="483.48779"
              y="18"
              id="tspan228"
-             style="font-weight:700;font-size:18px;font-family:Helvetica;fill:#000000">All PEs</tspan>
-        </text>
+             style="font-weight:700;font-size:18px;font-family:Helvetica;fill:#000000">All PEs</tspan></text>
       </g>
       <g
          id="Graphic_1">
@@ -848,15 +882,13 @@
         <text
            transform="translate(350,38)"
            id="text244"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="5.65625"
              y="15"
              id="tspan242"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE 0</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE 0</tspan></text>
       </g>
       <g
          id="Graphic_30">
@@ -877,15 +909,13 @@
         <text
            transform="translate(587.09986,38)"
            id="text253"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="5.65625"
              y="15"
              id="tspan251"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE 1</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE 1</tspan></text>
       </g>
       <g
          id="Graphic_33">
@@ -934,17 +964,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(277,124.0144)"
+           y="124.93159"
+           x="288.00638"
            id="text272"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="33.757812"
-             y="15"
+             x="321.76419"
+             y="139.93159"
              id="tspan270"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_int_p (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_p (...)</tspan></text>
       </g>
       <g
          id="Graphic_45">
@@ -961,15 +990,13 @@
         <text
            transform="translate(277,271.71964)"
            id="text281"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="16.425781"
              y="15"
              id="tspan279"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan></text>
       </g>
       <g
          id="Graphic_47">
@@ -984,17 +1011,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(277,157.69082)"
+           y="157.69083"
+           x="295.34396"
            id="text290"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="21.300779"
-             y="15"
+             x="316.64471"
+             y="172.69083"
              id="tspan288"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_long_put(…)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_put(…)</tspan></text>
       </g>
       <g
          id="Graphic_48">
@@ -1009,17 +1035,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(514.09985,137.02875)"
+           y="137.02875"
+           x="499.42468"
            id="text299"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="24.859375"
-             y="15"
+             x="524.28406"
+             y="152.02875"
              id="tspan297"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_int_add (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_atomic_add (...)</tspan></text>
       </g>
       <g
          id="Graphic_49">
@@ -1051,17 +1076,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(277,410.44214)"
+           y="410.44214"
+           x="292.59235"
            id="text313"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="33.757812"
-             y="15"
+             x="326.35016"
+             y="425.44214"
              id="tspan311"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_int_p (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_p (...)</tspan></text>
       </g>
       <g
          id="Graphic_51">
@@ -1076,17 +1100,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(277,453.88284)"
+           y="452.04843"
+           x="299.92993"
            id="text322"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="27.082029"
-             y="15"
+             x="327.01196"
+             y="467.04843"
              id="tspan320"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_long_p (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_p (...)</tspan></text>
       </g>
       <g
          id="Graphic_52">
@@ -1168,15 +1191,13 @@
         <text
            transform="translate(112.90015,38)"
            id="text349"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="5.65625"
              y="15"
              id="tspan347"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE 2</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE 2</tspan></text>
       </g>
       <g
          id="Graphic_76">
@@ -1224,15 +1245,13 @@
         <text
            transform="translate(44,317.17615)"
            id="text366"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="60.037384"
              y="15"
              id="tspan364"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">All local and remote memory operations issued by PEs are guaranteed to be completed before any PE returns from the call.</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">All local and remote memory operations issued by PEs are guaranteed to be completed before any PE returns from the call.</tspan></text>
       </g>
       <g
          id="Graphic_79">
@@ -1249,15 +1268,13 @@
         <text
            transform="translate(514.9989,271.58033)"
            id="text375"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="16.425781"
              y="15"
              id="tspan373"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan></text>
       </g>
       <g
          id="Graphic_81">
@@ -1274,15 +1291,13 @@
         <text
            transform="translate(38.002983,271.71964)"
            id="text384"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="16.425781"
              y="15"
              id="tspan382"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan></text>
       </g>
       <g
          id="Graphic_82">
@@ -1297,36 +1312,33 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(39.900146,190.33798)"
+           y="190.33798"
+           x="55.492504"
            id="text393"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="33.757812"
-             y="15"
+             x="89.250313"
+             y="205.33798"
              id="tspan391"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_int_p (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_p (...)</tspan></text>
       </g>
       <path
-         style="stroke:#000000;stroke-width:1.12346196;stroke-linecap:round;stroke-linejoin:round"
+         style="stroke:#000000;stroke-width:1.12346;stroke-linecap:round;stroke-linejoin:round"
          inkscape:connector-curvature="0"
          id="path398"
          d="M 17.214388,103.96978 H 259.55041 c 3.48537,0 6.31083,2.23858 6.31083,5 v 17.67596 c 0,2.76143 -2.82546,5 -6.31083,5 H 17.214388 c -3.485377,0 -6.310834,-2.23857 -6.310834,-5 v -17.67596 c 0,-2.76142 2.825457,-5 6.310834,-5 z" />
       <text
-         y="107.01065"
-         x="-4.7993312"
+         y="107.92785"
+         x="16.296209"
          style="fill:#000000"
-         id="text402">
-        <tspan
+         id="text402"><tspan
            style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000"
            id="tspan400"
-           y="122.01065"
-           x="13.384262"
+           y="122.92785"
+           x="34.479805"
            font-weight="400"
-           font-size="16">shmem_long_atomic_fetch_add(...)</tspan>
-      </text>
+           font-size="16">shmem_atomic_fetch_add(...)</tspan></text>
       <g
          id="Graphic_84">
         <path
@@ -1340,17 +1352,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(44,391.338)"
+           y="391.33801"
+           x="56.840763"
            id="text411"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="27.085938"
-             y="15"
+             x="83.926704"
+             y="406.33801"
              id="tspan409"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_int_get (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_get (...)</tspan></text>
       </g>
       <g
          id="Graphic_85">
@@ -1365,17 +1376,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(515.997,464.338)"
+           y="463.42081"
+           x="527.92059"
            id="text420"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="33.757812"
-             y="15"
+             x="561.67841"
+             y="478.42081"
              id="tspan418"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_int_p (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_p (...)</tspan></text>
       </g>
       <g
          id="Graphic_87">
@@ -1498,15 +1508,13 @@
         <text
            transform="translate(920.1998,38)"
            id="text459"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="4.7695308"
              y="15"
              id="tspan457"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE K</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">PE K</tspan></text>
       </g>
       <g
          id="Graphic_104">
@@ -1521,17 +1529,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(847.1998,137.02875)"
+           y="136.11156"
+           x="860.04059"
            id="text468"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="27.085938"
-             y="15"
+             x="887.12653"
+             y="151.11156"
              id="tspan466"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_int_get (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_get (...)</tspan></text>
       </g>
       <g
          id="Graphic_108">
@@ -1565,15 +1572,13 @@
         <text
            transform="translate(847.1997,270.8598)"
            id="text482"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
              x="16.425781"
              y="15"
              id="tspan480"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_barrier_all(…)</tspan></text>
       </g>
       <g
          id="Graphic_114">
@@ -1605,17 +1610,16 @@
            inkscape:connector-curvature="0"
            style="stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round" />
         <text
-           transform="translate(847.1998,422.17615)"
+           y="421.25894"
+           x="863.70935"
            id="text496"
-           style="fill:#000000">
-          <tspan
+           style="fill:#000000"><tspan
              font-size="16"
              font-weight="400"
-             x="27.082029"
-             y="15"
+             x="890.79138"
+             y="436.25894"
              id="tspan494"
-             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_long_p (...)</tspan>
-        </text>
+             style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000">shmem_p (...)</tspan></text>
       </g>
       <g
          id="Graphic_116">
