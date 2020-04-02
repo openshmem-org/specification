@@ -1,8 +1,8 @@
 \apisummary{
 Create two new teams by splitting an existing parent team into two subsets based on a
-2D Cartesian space defined by the \VAR{xrange} argument and a \VAR{y} dimension derived from \VAR{xrange}
-and the parent team size. These ranges describe the Cartesian space in \emph{x}-
-and \emph{y}-dimensions.}
+2D Cartesian space defined by the \VAR{xrange} argument and a \VAR{y} dimension that is derived from \VAR{xrange}
+and the parent team size.
+}
 
 \begin{apidefinition}
 
@@ -16,7 +16,7 @@ int @\FuncDecl{shmem\_team\_split\_2d}@(shmem_team_t parent_team, int xrange,
 \apiargument{IN}{parent\_team}{A valid \openshmem team. Any predefined teams, such as
 \LibHandleRef{SHMEM\_TEAM\_WORLD}, may be used, or any team created by the user.}
 
-\apiargument{IN}{xrange}{A nonnegative integer representing the number of
+\apiargument{IN}{xrange}{A positive integer representing the number of
 elements in the first dimension.}
 
 \apiargument{IN}{xaxis\_config}{
@@ -27,7 +27,7 @@ elements in the first dimension.}
   from \VAR{xaxis\_config}.}
 
 \apiargument{OUT}{xaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
-subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{x}-axis
+subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{y}-axis
 as the calling \ac{PE}.}
 
 \apiargument{IN}{yaxis\_config}{
@@ -38,22 +38,24 @@ as the calling \ac{PE}.}
   from \VAR{yaxis\_config}.}
 
 \apiargument{OUT}{yaxis\_team}{A new \ac{PE} team handle representing a \ac{PE}
-subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{y}-axis
+subset consisting of all the \acp{PE} that have the same coordinate along the \VAR{x}-axis
 as the calling \ac{PE}.}
 \end{apiarguments}
 
 \apidescription{
-The \FUNC{shmem\_team\_split\_2d} routine is a collective routine. It creates two
-new teams by splitting an existing parent team into up to two subsets based on a
+The \FUNC{shmem\_team\_split\_2d} routine is a collective operation. It returns two
+new teams to the calling \ac{PE} by splitting an existing parent team into subsets based on a
 2D Cartesian space. The user provides the size of the \VAR{x} dimension, which is then
 used to derive the size of the \VAR{y} dimension based on the size of the parent team.
 The size of the \VAR{y} dimension will be equal to $\lceil N \div xrange \rceil$, where
 \VAR{N} is the size of the parent team. In other words,
 $xrange \times yrange \geq N$, so that every \ac{PE} in the parent team has a
-unique \VAR{(x,y)} location the 2D Cartesian space.
+unique \VAR{(x,y)} location in the 2D Cartesian space. The resulting \VAR{xaxis\_team}
+and \VAR{yaxis\_team} correspond to the calling \ac{PE}'s row and column, respectively, in the
+2D Cartesian space.
 
 The mapping of \ac{PE} number to coordinates is $(x, y) = ( pe \mod xrange, \lfloor pe \div xrange \rfloor )$,
-where $pe$ is the \ac{PE} number in the parent team. So, if $xrange = 3$,
+where $pe$ is the \ac{PE} number in the parent team. For example, if $xrange = 3$,
 then the first 3 \acp{PE} in the parent team will form the first
 \VAR{xteam}, the second three \acp{PE} in the parent team form the second \VAR{xteam},
 and so on.
@@ -64,14 +66,14 @@ new \VAR{yteam}s will contain all \acp{PE} with the same coordinate along the
 \VAR{x}-axis as the calling \ac{PE}.
 
 The \acp{PE} are numbered in the new teams based on the coordinate of the
-\ac{PE} along the given axis. So, another way to think of the result of the split
-operation is that the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{xteam})} is the
-x-coordinate and the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{yteam})}
-is the y-coordinate of the calling \ac{PE}.
+\ac{PE} along the given axis. As a result,
+the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{xteam})} is the
+\VAR{x}-coordinate and the value returned by \FUNC{shmem\_team\_my\_pe(\VAR{yteam})}
+is the \VAR{y}-coordinate of the calling \ac{PE}.
 
 Any valid \openshmem team can be used as the parent team. This routine must be
 called by all \acp{PE} in the parent team. The value of \VAR{xrange} must be
-nonnegative and all \acp{PE} in the parent team must pass the same value for
+a positive integer and all \acp{PE} in the parent team must pass the same value for
 \VAR{xrange}.
 
 The \VAR{xaxis\_config} and \VAR{yaxis\_config} arguments specify team
@@ -137,8 +139,8 @@ It would be legal, for example, if \acp{PE} 0, 3, 6, 9 specified a different val
 for \VAR{yaxis\_config} than all of the other \acp{PE}, as long as the configuration parameters match
 for all \acp{PE} in each of the new teams.
 
-See the description of team handles and predefined teams at the top of section
-\ref{subsec:team} for more information about team handle semantics and usage.
+See the description of team handles and predefined teams in Section~\ref{subsec:team}
+for more information about team handle semantics and usage.
 }
 
 \begin{apiexamples}

@@ -20,7 +20,7 @@ int @\FuncDecl{shmem\_team\_translate\_pe}@(shmem_team_t src_team, int src_pe,
 The \FUNC{shmem\_team\_translate\_pe} routine will translate a given \ac{PE} number
 in one team into the corresponding \ac{PE} number in another team.
 Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this routine returns that
-\ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both the
+\ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both
 \VAR{src\_team} and \VAR{dest\_team}, a value of \CONST{-1} is returned.
 
 If at least one of \VAR{src\_team} and \VAR{dest\_team} compares equal

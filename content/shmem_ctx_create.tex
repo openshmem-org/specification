@@ -18,7 +18,10 @@ int @\FuncDecl{shmem\_ctx\_create}@(long options, shmem_ctx_t *ctx);
 
 \apidescription{
     The \FUNC{shmem\_ctx\_create} routine creates a new communication context
-    and returns its handle through the \VAR{ctx} argument.  If the context was
+    and returns its handle through the \VAR{ctx} argument.
+    This context is created from the world team;
+    however, the context creation operation is not collective.
+    If the context was
     created successfully, a value of zero is returned
     and the context handle pointed to by \VAR{ctx} specifies a valid context;
     otherwise, a nonzero value is returned and \VAR{ctx} is set to
@@ -28,40 +31,10 @@ int @\FuncDecl{shmem\_ctx\_create}@(long options, shmem_ctx_t *ctx);
     in a correct state.  The creation call can be reattempted with different
     options or after additional resources become available.
 
-    A newly created communication context has a fixed association with the
-    world team.
     All \openshmem routines that operate on this context will do so with
     respect to the associated \ac{PE} team.
     That is, all point-to-point routines operating on this context will use
     team-relative \ac{PE} numbering.
-
-    By default, contexts are {\em shareable} and, when it is allowed by the
-    threading model provided by the \openshmem library, they can be used concurrently by
-    multiple threads within the PE where they were created.
-    %
-    The following options can be supplied during context creation to restrict
-    this usage model and enable performance optimizations.  When using a given
-    context, the application must comply with the requirements of all options
-    set on that context; otherwise, the behavior is undefined.
-    No options are enabled on the default context.
-
-        \apitablerow{\LibConstRef{SHMEM\_CTX\_SERIALIZED}}{
-            The given context is shareable; however, it will not be used by multiple threads
-            concurrently.  When the \CONST{SHMEM\_CTX\_SERIALIZED} option is
-            set, the user must ensure that operations involving the given
-            context are serialized by the application.}
-
-        \apitablerow{\LibConstRef{SHMEM\_CTX\_PRIVATE}}{
-            The given context will be used only by the thread that created it.}
-
-        \apitablerow{\LibConstRef{SHMEM\_CTX\_NOSTORE}}{
-            Quiet and fence operations performed on the given context are not
-            required to enforce completion and ordering of memory store
-            operations.
-            When ordering of store operations is needed, the application must
-            perform a synchronization operation on a context without the
-            \CONST{SHMEM\_CTX\_NOSTORE} option enabled.}
-
 }
 
 \apireturnvalues{
