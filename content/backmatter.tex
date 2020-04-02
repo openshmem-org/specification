@@ -386,6 +386,20 @@ supported before removal.
         & 1.5 & Current & \hyperref[subsec:shmem_prod_reduce]{\FUNC{shmem\_prod\_reduce}} \\ \hline
     \CorCpp: \hyperref[subsec:shmem_barrier]{\FuncRef{shmem\_barrier}}
         & 1.5 & Current & \hyperref[subsec:shmem_quiet]{\FuncRef{shmem\_quiet}} + \hyperref[subsec:shmem_sync]{\FuncRef{shmem\_sync}} \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_wait\_until(\CTYPE{short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_short\_wait\_until}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_wait\_until(\CTYPE{unsigned short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_ushort\_wait\_until}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_test(\CTYPE{short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_short\_test}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{\Cstd[11]: \FuncRef{shmem\_test(\CTYPE{unsigned short} ...)}
+        \\ \CorCpp: \FuncRef{shmem\_ushort\_test}}
+        & 1.5 & Current & (none) \\ \hline
+    \minitab{Table~\ref{p2psynctypes}: point-to-point synchronization types}
+        & 1.5 & Current & Table~\ref{stdamotypes}: standard AMO types \\ \hline
     %% Deprecated in 1.6
     %% Deprecated in 1.7
     %% Notes
@@ -595,6 +609,18 @@ for that particular team. Rather than continue to support \FUNC{shmem\_barrier}
 for active-sets or teams, programs should use a call to \FUNC{shmem\_quiet}
 followed by a call to \FUNC{shmem\_sync} in order to explicitly
 indicate which context to quiesce.
+
+\subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} --- \CTYPE{short} and \CTYPE{unsigned short} variants}
+The \CTYPE{short} and \CTYPE{unsigned short} type \CorCpp and \textit{C11}
+routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
+because point-to-point synchronization routines are only compatible with
+\acp{AMO} (as of \openshmem 1.5), and there is no corresponding AMO for
+\CTYPE{short} and \CTYPE{unsigned short}.
+
+\subsection{Table~\ref{p2psynctypes}: point-to-point synchronization types}
+As of \openshmem 1.5, the point-to-point synchronization routines are only
+compatible with \acp{AMO}, so their interfaces are defined via the
+standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
