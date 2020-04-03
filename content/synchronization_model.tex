@@ -64,27 +64,6 @@ a local \ac{PE} need to be visible  to all other \acp{PE} before the local
 \hline
 \end{tabular}
 
-
-\begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-Collective synchronization over an active set \\
-\FUNC{shmem\_barrier}
-&
-\raisebox{-\totalheight}{\includegraphics[width=\textwidth]{figures/barrier}}
-\end{tabular}
-
-\begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
-{}
-&
-{All local and remote memory operations issued by all \acp{PE} within the
-active set are guaranteed to be completed before any \ac{PE} in the
-active set returns from the call. Additionally, no \ac{PE} shall return from the
-barrier until all \acp{PE} in the active set have entered the same barrier
-call. This routine should be used when synchronization as well as completion of
-all stores and remote memory updates via \openshmem is required over a sub set
-of the executing \acp{PE}.} \tabularnewline
-\hline
-\end{tabular}
-
 \begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
 \hline
 \textbf{\openshmem  \ac{API}} & \centering \textbf{Working of \openshmem \ac{API}} \tabularnewline
@@ -105,6 +84,28 @@ shall return from the barrier until all \acp{PE} have entered the same
 \FUNC{shmem\_barrier\_all} call. This routine should be used when
 synchronization as well as completion of all stores and remote memory updates
 via \openshmem is required over all \acp{PE}. } \tabularnewline
+\hline
+\end{tabular}
+\clearpage
+
+\begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
+Collective synchronization over \\
+\FUNC{shmem\_team\_sync}
+&
+\raisebox{-\totalheight}{\includegraphics[width=0.8\textwidth]{figures/sync}}
+\end{tabular}
+
+\begin{tabular}{p{0.2\textwidth} | p{0.7\textwidth}}
+{}
+&
+{\FUNC{shmem\_team\_sync} guarantees that no \ac{PE} shall return from the
+synchronization routine until all \acp{PE} in the team have entered the same
+\FUNC{shmem\_team\_sync} call. It does not guarantee completion of
+local and remote memory operations issued by \acp{PE} within the team.
+To do so, \FUNC{shmem\_quiet} should be called on the desired context(s) by all
+\acp{PE} within the team before the \FUNC{shmem\_team\_sync} call to
+guarantee the completion of the associated stores and remote memory updates via \openshmem.}
+\tabularnewline
 \hline
 \end{tabular}
 \clearpage
