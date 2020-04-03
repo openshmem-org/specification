@@ -636,6 +636,9 @@ The following list describes the specific changes in \openshmem[1.5]:
 %
 \item Removed \FUNC{SHMEM\_CACHE}.
 %
+\item Deprecated \CTYPE{short} and \CTYPE{unsigned short} variants for
+\FUNC{shmem\_wait\_until} and \FUNC{shmem\_test}.
+%
 \item Added \FUNC{shmem\_malloc\_with\_hints} interface and corresponding hints
 \CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
 \\ See Section \ref{subsec:shmmallochint} and \ref{subsec:library_constants}.
@@ -688,6 +691,8 @@ all \acp{PE}, including the root \ac{PE}.
 %
 \item Added support for nonblocking \OPR{put-with-signal} functions.
 \\ See Section \ref{subsec:shmem_put_signal_nbi}.
+%
+\item Deprecated Table~\ref{p2psynctypes}: point-to-point synchronization types and names.
 %
 \item Clarified that point-to-point synchronization routines preserve the
   atomicity of OpenSHMEM \acp{AMO}.
