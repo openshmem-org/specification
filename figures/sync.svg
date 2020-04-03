@@ -12,7 +12,7 @@
    width="728.42676"
    height="525.46161"
    id="svg4651"
-   sodipodi:docname="barrier.svg"
+   sodipodi:docname="sync.svg"
    inkscape:version="1.0beta2 (2b71d25, 2019-12-03)">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -27,13 +27,13 @@
      inkscape:window-height="1075"
      id="namedview4653"
      showgrid="false"
-     inkscape:zoom="1.1296044"
-     inkscape:cx="217.41201"
-     inkscape:cy="215.91667"
-     inkscape:window-x="-1"
+     inkscape:zoom="1.6048167"
+     inkscape:cx="308.19684"
+     inkscape:cy="161.87175"
+     inkscape:window-x="0"
      inkscape:window-y="23"
      inkscape:window-maximized="1"
-     inkscape:current-layer="Canvas_1"
+     inkscape:current-layer="Graphic_78"
      inkscape:document-rotation="0"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -1002,7 +1002,7 @@
     </g>
     <g
        id="Graphic_49"
-       transform="translate(-14.164251)">
+       transform="translate(-14.164251,22.69247)">
       <rect
          style="fill:#dcdcdc"
          id="rect4459"
@@ -1020,7 +1020,7 @@
     </g>
     <g
        id="Graphic_50"
-       transform="translate(-14.164251)">
+       transform="translate(-14.164251,16.503614)">
       <path
          style="fill:#dcdcdc"
          inkscape:connector-curvature="0"
@@ -1045,7 +1045,7 @@
     </g>
     <g
        id="Graphic_51"
-       transform="translate(-14.164251)">
+       transform="translate(-14.164251,8.2518064)">
       <path
          style="fill:#dcdcdc"
          inkscape:connector-curvature="0"
@@ -1088,7 +1088,7 @@
     </g>
     <g
        id="Graphic_53"
-       transform="translate(-14.164251)">
+       transform="matrix(1.0145701,0,0,0.7497283,-25.632408,113.94436)">
       <rect
          style="fill:#dcdcdc"
          id="rect4487"
@@ -1163,7 +1163,7 @@
     </g>
     <g
        id="Graphic_76"
-       transform="translate(-14.164251)">
+       transform="matrix(1.0177266,0,0,0.70068645,-19.677289,157.4234)">
       <rect
          style="fill:#dcdcdc"
          id="rect4509"
@@ -1194,35 +1194,52 @@
        id="Graphic_78"
        transform="translate(-14.164251)">
       <rect
-         style="fill:#dcdcdc"
+         style="fill:#dcdcdc;stroke-width:1.34017"
          id="rect4517"
-         height="39"
+         height="70.046425"
          width="676.19971"
          y="314.83817"
          x="211.90015" />
       <rect
-         style="stroke:#dcdcdc;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
+         style="stroke:#dcdcdc;stroke-width:1.25586;stroke-linecap:round;stroke-linejoin:round"
          id="rect4519"
-         height="39"
-         width="676.19971"
-         y="314.83817"
-         x="211.90015" />
+         height="61.536518"
+         width="675.91174"
+         y="314.98404"
+         x="212.04414" />
       <text
          style="fill:#000000"
          id="text4525"
-         transform="translate(216.90015,315.33817)"><tspan
+         x="196.06284"
+         y="319.22742"><tspan
            style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000"
            id="tspan4521"
-           y="15"
-           x="23.595947"
+           y="334.22742"
+           x="219.65878"
            font-weight="400"
-           font-size="16">All local and remote memory operations issued by PEs are guaranteed to be completed</tspan><tspan
+           font-size="16">A shmem_quiet is required to be used by all PEs within a Team before the shmem_team_sync</tspan></text>
+      <text
+         style="fill:#000000"
+         id="text316"
+         x="213.75188"
+         y="339.09637"><tspan
            style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000"
-           id="tspan4523"
-           y="34"
-           x="207.26392"
+           y="354.09637"
+           x="237.34782"
            font-weight="400"
-           font-size="16">before any PE returns from the call.</tspan></text>
+           font-size="16"
+           id="tspan318">call to guarantee completion of all local and remote memory operations issued by all PEs</tspan></text>
+      <text
+         style="fill:#000000"
+         x="280.29959"
+         y="357.62939"
+         id="text320"><tspan
+           style="font-weight:400;font-size:16px;font-family:Helvetica;fill:#000000"
+           y="372.62939"
+           x="303.89551"
+           font-weight="400"
+           font-size="16"
+           id="tspan322">within the team before any PE returns from the shmem_team_sync call</tspan></text>
     </g>
     <g
        id="Graphic_79"
@@ -1321,7 +1338,7 @@
     </g>
     <g
        id="Graphic_84"
-       transform="translate(-14.164251)">
+       transform="translate(-14.164251,25.567643)">
       <path
          style="fill:#dcdcdc"
          inkscape:connector-curvature="0"
@@ -1425,7 +1442,7 @@
     </g>
     <g
        id="Graphic_90"
-       transform="translate(-14.164251)">
+       transform="translate(-14.164251,26.814546)">
       <rect
          style="fill:#dcdcdc"
          id="rect4597"
