@@ -100,11 +100,11 @@ Collective synchronization over \\
 &
 {\FUNC{shmem\_team\_sync} guarantees that no \ac{PE} shall return from the
 synchronization routine until all \acp{PE} in the team have entered the same
-\FUNC{shmem\_team\_sync} call. But, it does not guarantee completion of all
-local and remote memory operations issues by all \acp{PE} within the team.
-Additionally, a \FUNC{shmem\_quiet} routine is required to be used by all
+\FUNC{shmem\_team\_sync} call. It does not guarantee completion of
+local and remote memory operations issued by \acp{PE} within the team.
+To do so, \FUNC{shmem\_quiet} should be called on the desired context(s) by all
 \acp{PE} within the team before the \FUNC{shmem\_team\_sync} call to
-guarantee the completion of stores and remote memory updates via \openshmem.}
+guarantee the completion of the associated stores and remote memory updates via \openshmem.}
 \tabularnewline
 \hline
 \end{tabular}
