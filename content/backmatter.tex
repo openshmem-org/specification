@@ -9,6 +9,7 @@
 \fancyhead[RO, LE]{\thepage}
 \fancyfoot[CE, CO]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
+\renewcommand{\thesection}{\thesectionOrig}
 
 
 
@@ -213,6 +214,7 @@ clusters, and InfiniBand-based clusters.
     \item Cray was acquired by \ac{SGI} in 1996
     \item Cray was acquired by Tera in 2000 (MTA)
     \item Platforms: Cray T3D, T3E, C90, J90, SV1, SV2, X1, X2, XE, XMT, XT
+    \item \ac{HPE} acquired \ac{SGI} in 2019
     \end{itemize}
   \item \ac{SGI} SHMEM
     \begin{itemize}
@@ -223,7 +225,7 @@ clusters, and InfiniBand-based clusters.
     \item \ac{SGI} was acquired by Rackable Systems in 2009
     \item \ac{SGI} and \ac{OSSS} signed a
       SHMEM trademark licensing agreement in 2010
-    \item \ac{HPE} acquired {SGI} in 2016
+    \item \ac{HPE} acquired \ac{SGI} in 2016
     \end{itemize}
   \end{itemize}
 \end{itemize}
@@ -238,9 +240,9 @@ A listing of \openshmem implementations can be found on
 
 
 
-\chapter{OpenSHMEM Specification and Deprecated API}\label{sec:dep_api}
+\chapter{OpenSHMEM Specification and Deprecated API}\label{sec:dep}
 
-\section{Overview}\label{subsec:dep_overview}
+\section{Overview}\label{dep:overview}
 \TableIndex{Deprecated API}
 For the \openshmem Specification, deprecation is the process of identifying
 API that is supported but no longer recommended for use by users.
@@ -262,7 +264,7 @@ supported before removal.
     \hline
     \endhead
     %% Deprecated in 1.1
-    Header Directory: \hyperref[subsec:dep_rationale:mpp]{\HEADER{mpp}} & 1.1 & Current & (none) \\ \hline
+    Header Directory: \hyperref[dep:mpp_header]{\HEADER{mpp}} & 1.1 & Current & (none) \\ \hline
     %% Deprecated in 1.2
     \CorCpp: \hyperref[subsec:start_pes]{\FuncRef{start\_pes}} & 1.2 & Current & \hyperref[subsec:shmem_init]{\FUNC{shmem\_init}} \\ \hline
     \Fortran: \hyperref[subsec:start_pes]{\FuncRef{START\_PES}} & 1.2 & 1.4 & \hyperref[subsec:shmem_init]{\FUNC{SHMEM\_INIT}} \\ \hline
@@ -409,10 +411,10 @@ supported before removal.
     \end{longtable}
 \end{center}
 
-\section{Deprecation Rationale}\label{subsec:dep_rationale}
+\section{Deprecation Rationale}\label{dep:rationale}
 
 \subsection{Header Directory: \HEADER{mpp}}
-\label{subsec:dep_rationale:mpp}
+\label{dep:mpp_header}
 In addition to the default system header paths, \openshmem implementations
 must provide all \openshmem-specified header files from the \HEADER{mpp}
 header directory such that these headers can be referenced in \CorCpp as
@@ -658,14 +660,14 @@ all \acp{PE}, including the root \ac{PE}.
   \FUNC{shmem\_team\_split\_strided},
   \FUNC{shmem\_team\_split\_2d}, and
   \FUNC{shmem\_team\_destroy}.
-\\ See Sections
-  \ref{subsec:shmem_team_my_pe},
-  \ref{subsec:shmem_team_n_pes},
-  \ref{subsec:shmem_team_get_config},
-  \ref{subsec:shmem_team_translate_pe},
-  \ref{subsec:shmem_team_split_strided},
-  \ref{subsec:shmem_team_split_2d}, and
-  \ref{subsec:shmem_team_destroy}.
+\ChangelogRef{
+  subsec:shmem_team_my_pe,
+  subsec:shmem_team_n_pes,
+  subsec:shmem_team_get_config,
+  subsec:shmem_team_translate_pe,
+  subsec:shmem_team_split_strided,
+  subsec:shmem_team_split_2d,
+  subsec:shmem_team_destroy}%
 %
 \item Added team-based communication-management functions:
   \FUNC{shmem\_team\_create\_ctx} and
@@ -810,7 +812,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 \FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
 \emph{Rationale: Volatile qualifiers were added to several API routines in
 \openshmem[1.3]; however, they were later found to be unnecessary.}
-\\ See Sections \ref{subsec:shmem_wait_until} and \ref{subsec:shmem_lock}.
+\ChangelogRef{subsec:shmem_wait_until, subsec:shmem_lock}%
 %
 \item Deprecated the \VAR{SMA\_}* environment variables and added equivalent
 \VAR{SHMEM\_}* environment variables.
@@ -823,11 +825,11 @@ The following list describes the specific changes in \openshmem[1.4]:
 \item Clarified ordering semantics of memory ordering, point-to-point synchronization, and collective
 synchronization routines.
 %
-\item Clarified deprecation overview and added deprecation rationale in Annex F.
-\\See Section \ref{sec:dep_api}.
+\item Clarified deprecation overview and added deprecation rationale.
+\ChangelogRef{dep:overview, dep:rationale}%
 %
 \item Deprecated header directory \HEADER{mpp}.
-\\See Section \ref{sec:dep_api}.
+\\ See Section~\ref{dep:mpp_header}.
 %
 \item Deprecated the \FUNC{shmem\_wait} functions and the \CTYPE{long}-typed \CorCpp \FUNC{shmem\_wait\_until} function.
 \\ See Section \ref{subsec:p2p_intro}.
@@ -1013,9 +1015,9 @@ The following list describes the specific changes in \openshmem[1.2]:
 \item Undefined behavior for null pointers without zero counts added.
 \\See Annex \ref{sec:undefined}
 %
-\item Addition of new Annex for clearly specifying deprecated API and its
+\item Added new Annex for clearly specifying deprecated API and its
       support across versions of the \openshmem Specification.
-\\See Annex \ref{sec:dep_api}.
+\\See Annex \ref{sec:dep}.
 %
 \end{itemize}
 
@@ -1062,7 +1064,7 @@ The following list describes the specific changes in \openshmem[1.1]:
 \\See Section \ref{subsec:shmem_pe_accessible} and \ref{subsec:shmem_addr_accessible}.
 %
 \item Added an annex on interoperability with \ac{MPI}.
-\\See Annex D.
+\\See Annex~\ref{sec:interoperability}.
 %
 \item Added examples to the different interfaces.
 %
