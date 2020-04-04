@@ -9,6 +9,7 @@
 
 \renewcommand{\chaptername}{Chapter}
 \renewcommand{\appendixname}{Annex}
+\Crefname{appendix}{Annex}{Annexes}
 
 % Place some penalty for doing the break
 % The penalty for a ``\gb'' should be greater than a \hyphenpenalty.
@@ -119,6 +120,18 @@
 \acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
+% Remove whitespace and retain commas when using cleveref's `\cref`.
+% https://tex.stackexchange.com/a/340502 by users/16967/heiko-oberdiek
+\makeatletter
+\let\org@@cref\@cref
+% Modify cleveref's internal \@cref to zap spaces between list elements.
+\renewcommand*{\@cref}[2]{%
+  \edef\process@me{%
+    \noexpand\org@@cref{#1}{\zap@space#2 \@empty}%
+  }\process@me
+}
+\makeatother
+\newcommand{\ChangelogRef}[1]{\\See \Cref{#1}.}
 
 % Grab current listings style for use in environment escape to LaTeX.
 % https://tex.stackexchange.com/a/209644 by users/21891/jub0bs

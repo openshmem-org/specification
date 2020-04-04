@@ -660,14 +660,14 @@ all \acp{PE}, including the root \ac{PE}.
   \FUNC{shmem\_team\_split\_strided},
   \FUNC{shmem\_team\_split\_2d}, and
   \FUNC{shmem\_team\_destroy}.
-\\ See Sections
-  \ref{subsec:shmem_team_my_pe},
-  \ref{subsec:shmem_team_n_pes},
-  \ref{subsec:shmem_team_get_config},
-  \ref{subsec:shmem_team_translate_pe},
-  \ref{subsec:shmem_team_split_strided},
-  \ref{subsec:shmem_team_split_2d}, and
-  \ref{subsec:shmem_team_destroy}.
+\ChangelogRef{
+  subsec:shmem_team_my_pe,
+  subsec:shmem_team_n_pes,
+  subsec:shmem_team_get_config,
+  subsec:shmem_team_translate_pe,
+  subsec:shmem_team_split_strided,
+  subsec:shmem_team_split_2d,
+  subsec:shmem_team_destroy}%
 %
 \item Added team-based communication-management functions:
   \FUNC{shmem\_team\_create\_ctx} and
@@ -804,7 +804,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 \FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
 \emph{Rationale: Volatile qualifiers were added to several API routines in
 \openshmem[1.3]; however, they were later found to be unnecessary.}
-\\ See Sections \ref{subsec:shmem_wait_until} and \ref{subsec:shmem_lock}.
+\ChangelogRef{subsec:shmem_wait_until, subsec:shmem_lock}%
 %
 \item Deprecated the \VAR{SMA\_}* environment variables and added equivalent
 \VAR{SHMEM\_}* environment variables.
@@ -818,7 +818,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 synchronization routines.
 %
 \item Clarified deprecation overview and added deprecation rationale.
-\\ See Sections~\ref{dep:overview} and \ref{dep:rationale}.
+\ChangelogRef{dep:overview, dep:rationale}%
 %
 \item Deprecated header directory \HEADER{mpp}.
 \\ See Section~\ref{dep:mpp_header}.
