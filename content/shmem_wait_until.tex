@@ -82,7 +82,7 @@ Table~\ref{p2psynctypes}.
   incur high overhead, implementations may be able to reduce the number of
   atomic reads performed by using non-atomic reads of \VAR{ivar} to wait for a
   change to occur, followed by an atomic read operation to fetch the updated
-  value.
+  value until the synchronization condition is satisfied.
 }
 
 \end{apidefinition}
