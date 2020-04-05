@@ -430,6 +430,7 @@ include 'mpp/shmemx.fh'
 for backwards compatibility with \ac{SGI} SHMEM.
 
 \subsection{\CorCpp: \FUNC{start\_pes}}
+\label{dep:start_pes}
 The \CorCpp routine \FUNC{start\_pes} includes an unnecessary initialization
 argument that is remnant of historical \emph{SHMEM} implementations and no
 longer reflects the requirements of modern \openshmem implementations.
@@ -444,6 +445,7 @@ also improves interoperability with profiling and debugging tools.
 
 \subsection{\CorCpp: \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
     \FUNC{shfree}, \FUNC{shrealloc}, \FUNC{shmemalign}}
+\label{dep:func_not_shmemunder}
 The \CorCpp routines \FUNC{\_my\_pe}, \FUNC{\_num\_pes}, \FUNC{shmalloc},
 \FUNC{shfree}, \FUNC{shrealloc}, and \FUNC{shmemalign} were deprecated in order
 to normalize the \openshmem \ac{API} to use \shmemprefixLC{} as the standard
@@ -455,6 +457,7 @@ were deprecated in order to minimize the API differences from the deprecation
 of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
 
 \subsection{\textit{Fortran}: \FUNC{SHMEM\_PUT}} %% WARNING: Issue #66.
+\label{dep:fortran_shmem_put}
 The \Fortran routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran
 \ac{API} and is semantically identical to \Fortran routines
 \FUNC{SHMEM\_PUT8} and \FUNC{SHMEM\_PUT64}.  Since \FUNC{SHMEM\_PUT8} and
@@ -462,6 +465,7 @@ The \Fortran routine \FUNC{SHMEM\_PUT} is defined only for the \Fortran
 \FUNC{SHMEM\_PUT} is ambiguous and has been deprecated.
 
 \subsection{SHMEM\_CACHE}
+\label{dep:shmem_cache}
 The \FUNC{SHMEM\_CACHE} \ac{API}
 \begin{center}
 \begin{tabular}{ll}
@@ -479,6 +483,7 @@ This API has largely gone unused on cache-coherent system architectures.
 \FUNC{SHMEM\_CACHE} has been deprecated.
 
 \subsection{\CONST{\_SHMEM\_*} Library Constants}
+\label{dep:libconst_undershmem}
 The library constants
 \begin{center}
 \begin{tabular}{ll}
@@ -497,13 +502,15 @@ standard's reserved names.  These constants were deprecated and replaced
 with corresponding constants of prefix \shmemprefix{} that adhere to \CorCpp{}
 and \Fortran naming conventions.
 
-\subsection{\ENVVAR{SMA\_*} Environment Variables}\label{subsec:deprecate-sma-env}
+\subsection{\ENVVAR{SMA\_*} Environment Variables}
+\label{dep:envvar_sma}
 The environment variables \ENVVAR{SMA\_VERSION}, \ENVVAR{SMA\_INFO},
 \ENVVAR{SMA\_SYMMETRIC\_SIZE}, and \ENVVAR{SMA\_DEBUG}
 were deprecated in order to normalize the \openshmem \ac{API} to use
 \shmemprefix{} as the standard prefix for all environment variables.
 
 \subsection{\CorCpp: \FUNC{shmem\_wait}}
+\label{dep:shmem_wait}
 The \CorCpp interface for \FUNC{shmem\_wait} and \FUNC{shmem\_\FuncParam{TYPENAME}\_wait}
 was identified as unintuitive with respect to
 the comparison operation it performed.  As \FUNC{shmem\_wait} can be trivially
@@ -513,6 +520,7 @@ favor of \FUNC{shmem\_wait\_until}, which makes the comparison operation
 explicit and better communicates the developer's intent.
 
 \subsection{\CorCpp: \FUNC{shmem\_wait\_until}}
+\label{dep:long_typed_shmem_wait_until}
 The \CTYPE{long}-typed \CorCpp routine \FUNC{shmem\_wait\_until} was deprecated
 in favor of the \Cstd[11] type-generic interface of the same name or the
 explicitly typed \CorCpp routine \FUNC{shmem\_long\_wait\_until}.
@@ -520,6 +528,7 @@ explicitly typed \CorCpp routine \FUNC{shmem\_long\_wait\_until}.
 \subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_fetch}, \FUNC{shmem\_set}, %% Issue #66.
     \FUNC{shmem\_cswap}, \FUNC{shmem\_swap}, \FUNC{shmem\_finc},
     \FUNC{shmem\_inc}, \FUNC{shmem\_fadd}, \FUNC{shmem\_add}}
+\label{dep:amo_not_shmem_atomic}
 The \Cstd[11] and \CorCpp interfaces for
 \begin{center}
 \begin{tabular}{ll}
@@ -540,7 +549,8 @@ in order to more clearly identify these calls as performing atomic operations.
 In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
-\subsection{\textit{Fortran} API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
+\subsection{\textit{Fortran} API} %% WARNING: Issue #66.
+\label{dep:fortran}
 The entire \openshmem \Fortran API was deprecated in \openshmem[1.4] and
 removed in \openshmem[1.5] because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
@@ -550,7 +560,8 @@ leverage the \openshmem Specification's \Cstd API through the
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
 
-\subsection{Active-set-based collectives}
+\subsection{Active-set-based library constants and collectives}
+\label{dep:active_set_libconst_and_collectives}
 With the addition of \openshmem teams, Section~\ref{subsec:team}, the previous
 method for performing collective
 operations has been superseded by a more readable, flexible method for
@@ -602,6 +613,7 @@ were deprecated and replaced with team-based reduction routines.
 
 
 \subsection{\CorCpp: \FUNC{shmem\_barrier}}
+\label{dep:shmem_barrier}
 Each \openshmem team might
 be associated with some number of communication contexts. The \FUNC{shmem\_barrier}
 function implies that the default context is quiesced after synchronizing
@@ -613,6 +625,7 @@ followed by a call to \FUNC{shmem\_sync} in order to explicitly
 indicate which context to quiesce.
 
 \subsection{\textit{C11} and \CorCpp: \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} --- \CTYPE{short} and \CTYPE{unsigned short} variants}
+\label{dep:short_ushort_typed_shmem_wait_until_and_test}
 The \CTYPE{short} and \CTYPE{unsigned short} type \CorCpp and \textit{C11}
 routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
 because point-to-point synchronization routines are only compatible with
@@ -620,6 +633,7 @@ because point-to-point synchronization routines are only compatible with
 \CTYPE{short} and \CTYPE{unsigned short}.
 
 \subsection{Table~\ref{p2psynctypes}: point-to-point synchronization types}
+\label{dep:p2p_sync_types}
 As of \openshmem 1.5, the point-to-point synchronization routines are only
 compatible with \acp{AMO}, so their interfaces are defined via the
 standard \ac{AMO} types in Table~\ref{stdamotypes}.
@@ -637,9 +651,11 @@ The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
 %
 \item Removed \FUNC{SHMEM\_CACHE}.
+\ChangelogRef{dep:shmem_cache}%
 %
 \item Deprecated \CTYPE{short} and \CTYPE{unsigned short} variants for
 \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test}.
+\ChangelogRef{dep:short_ushort_typed_shmem_wait_until_and_test}%
 %
 \item Added \FUNC{shmem\_malloc\_with\_hints} interface and corresponding hints
 \CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
@@ -650,7 +666,7 @@ all \acp{PE}, including the root \ac{PE}.
 \\ See Section \ref{subsec:shmem_broadcast}.
 %
 \item Deprecated active-set-based library constants and collective functions.
-\\ See Sections \ref{subsec:library_constants} and \ref{subsec:coll}.
+\ChangelogRef{dep:active_set_libconst_and_collectives, dep:shmem_barrier}%
 %
 \item Added team management functions:
   \FUNC{shmem\_team\_my\_pe},
@@ -703,6 +719,7 @@ all \acp{PE}, including the root \ac{PE}.
 \\ See Section \ref{subsec:shmem_put_signal_nbi}.
 %
 \item Deprecated Table~\ref{p2psynctypes}: point-to-point synchronization types and names.
+\ChangelogRef{dep:p2p_sync_types}%
 %
 \item Clarified that point-to-point synchronization routines preserve the
   atomicity of OpenSHMEM \acp{AMO}.
@@ -714,6 +731,7 @@ all \acp{PE}, including the root \ac{PE}.
 \\ See Section~\ref{subsec:p2p_intro}.
 %
 \item Removed the entire \openshmem \Fortran API. 
+\ChangelogRef{dep:fortran}%
 %
 \item Added support for multipliers in \VAR{SHMEM\_SYMMETRIC\_SIZE}
 environment variables.
@@ -816,7 +834,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 %
 \item Deprecated the \VAR{SMA\_}* environment variables and added equivalent
 \VAR{SHMEM\_}* environment variables.
-\\ See Section \ref{subsec:environment_variables}.
+\ChangelogRef{subsec:environment_variables, dep:envvar_sma}%
 %
 \item Added the \Cstd[11] \CTYPE{\_Noreturn} function specifier to
 \FUNC{shmem\_global\_exit}.
@@ -829,10 +847,10 @@ synchronization routines.
 \ChangelogRef{dep:overview, dep:rationale}%
 %
 \item Deprecated header directory \HEADER{mpp}.
-\\ See Section~\ref{dep:mpp_header}.
+\ChangelogRef{dep:mpp_header}%
 %
 \item Deprecated the \FUNC{shmem\_wait} functions and the \CTYPE{long}-typed \CorCpp \FUNC{shmem\_wait\_until} function.
-\\ See Section \ref{subsec:p2p_intro}.
+\ChangelogRef{dep:shmem_wait, dep:long_typed_shmem_wait_until}%
 %
 \item Added the \FUNC{shmem\_test} functions.
 \\ See Section \ref{subsec:p2p_intro}.
@@ -880,13 +898,14 @@ synchronization routines.
 %
 \item Renamed AMO operations to use \FUNC{shmem\_atomic\_*} prefix and
       deprecated old AMO routines.
-\\ See Section \ref{sec:amo}.
+\ChangelogRef{sec:amo, dep:amo_not_shmem_atomic}%
 %
 \item Added fetching and non-fetching bitwise AND, OR, and XOR atomic
       operations.
 \\ See Section \ref{sec:amo}.
 %
 \item Deprecated the entire \Fortran API.
+\ChangelogRef{dep:fortran}%
 %
 \item Replaced the \CTYPE{complex} macro in complex-typed reductions with the
       \Cstd[99] (and later) type specifier \CTYPE{\_Complex} to remove an
@@ -925,7 +944,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 \\See Section \ref{subsec:amo_guarantees}.
 %
 \item Deprecation of all constants that start with \CONST{\_SHMEM\_*}.
-\\See Section \ref{subsec:library_constants}.
+\ChangelogRef{dep:libconst_undershmem}%
 %
 \item Added a type-generic interface to \openshmem \ac{RMA} and \ac{AMO}
     operations based on \Cstd[11] Generics.
@@ -948,6 +967,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 \\See Sections \ref{subsec:shmem_wait_until} and \ref{subsec:shmem_lock}.
 %
 \item Deprecation of \FUNC{SHMEM\_CACHE}.
+\ChangelogRef{dep:shmem_cache}%
 %
 \end{itemize}
 
@@ -979,10 +999,10 @@ The following list describes the specific changes in \openshmem[1.2]:
 %
 \item New API \FUNC{shmem\_init} to provide mechanism to start an \openshmem
       program and replace deprecated \FUNC{start\_pes}.
-\\See Section \ref{subsec:shmem_init}.
+\ChangelogRef{subsec:shmem_init, dep:start_pes}%
 %
 \item Deprecation of \FUNC{\_my\_pe} and \FUNC{\_num\_pes} routines.
-\\See Sections \ref{subsec:shmem_my_pe} and \ref{subsec:shmem_n_pes}.
+\ChangelogRef{dep:func_not_shmemunder}%
 %
 \item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly
       exit an \openshmem program and release resources.
@@ -1001,13 +1021,13 @@ The following list describes the specific changes in \openshmem[1.2]:
 %
 \item \openshmem library API normalization. All \Cstd symmetric memory management
       API begins with  \FUNC{shmem\_}.
-\\See Section \ref{subsec:shfree}.
+\ChangelogRef{subsec:shfree, dep:func_not_shmemunder}%
 %
 \item Notes and clarifications added to \FUNC{shmem\_malloc}.
 \\See Section \ref{subsec:shfree}.
 %
 \item Deprecation of \Fortran API routine \FUNC{SHMEM\_PUT}.
-\\See Section \ref{subsec:shmem_put}.
+\ChangelogRef{dep:fortran_shmem_put}%
 %
 \item Clarification related to \FUNC{shmem\_wait}.
 \\See Section \ref{subsec:shmem_wait_until}.
