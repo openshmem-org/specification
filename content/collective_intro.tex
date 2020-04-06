@@ -48,12 +48,12 @@ The team-based collective routines defined in the \openshmem Specification are:
 
 \begin{itemize}
 \item \FUNC{shmem\_team\_sync}
-\item \FUNC{shmem\_\{TYPE\_\}broadcast\{mem\}}
-\item \FUNC{shmem\_\{TYPE\_\}collect\{mem\}}
-\item \FUNC{shmem\_\{TYPE\_\}fcollect\{mem\}}
-\item Reduction routines for the following operations: AND, OR, XOR, MAX, MIN, SUM, PROD
-\item \FUNC{shmem\_\{TYPE\_\}alltoall\{mem\}}
-\item \FUNC{shmem\_\{TYPE\_\}alltoalls\{mem\}}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]alltoall[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]alltoalls[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]broadcast[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]collect[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]fcollect[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]\{and, or, xor, max, min, sum, prod\}\_reduce}
 \end{itemize}
 
 In addition, all team creation functions are collective operations. In addition to the ordering
@@ -105,12 +105,12 @@ routines defined in the \openshmem Specification are:
 \begin{itemize}
 \item \FUNC{shmem\_barrier}
 \item \FUNC{shmem\_sync}
+\item \FUNC{shmem\_alltoall\{32, 64\}}
+\item \FUNC{shmem\_alltoalls\{32, 64\}}
 \item \FUNC{shmem\_broadcast\{32, 64\}}
 \item \FUNC{shmem\_collect\{32, 64\}}
 \item \FUNC{shmem\_fcollect\{32, 64\}}
-\item Reduction routines for the following operations: AND, OR, XOR, MAX, MIN, SUM, PROD
-\item \FUNC{shmem\_alltoall\{32, 64\}}
-\item \FUNC{shmem\_alltoalls\{32, 64\}}
+\item \FUNC{shmem\_\FuncParam{TYPENAME}\_\{and, or, xor, max, min, sum, prod\}\_to\_all}
 \end{itemize}
 
 \end{DeprecateBlock}
@@ -118,15 +118,21 @@ routines defined in the \openshmem Specification are:
 
 \subsubsection*{Team-implicit collectives}
 
-The \FUNC{shmem\_sync\_all} routine synchronizes all \acp{PE} in the
-computation through the world team. This routine is equivalent to a
-call to \FUNC{shmem\_team\_sync} on the world team.
+Some \openshmem collective routines implicitly operate on the world
+team. These routines include:
 
-The \FUNC{shmem\_barrier\_all} routine synchronizes all \acp{PE} in
-the world team and ensures completion of all local and remote memory
-updates issued via the default context.  This routine is equivalent to
-a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
-call to \FUNC{shmem\_team\_sync} on the world team.
+\begin{itemize}
+\item \FUNC{shmem\_sync\_all}, which synchronizes all \acp{PE} in the
+  computation through the world team. This routine is equivalent to a
+  call to \FUNC{shmem\_team\_sync} on the world team.
+\item \FUNC{shmem\_barrier\_all}, which synchronizes all \acp{PE} in
+  the world team and ensures completion of all local and remote memory
+  updates issued via the default context.  This routine is equivalent to
+  a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
+  call to \FUNC{shmem\_team\_sync} on the world team.
+\item \openshmem memory-management routines, which imply one or more
+  calls to a routine equivalent to \FUNC{shmem\_barrier\_all}.
+\end{itemize}
 
 \subsubsection*{Error codes returned from team-based collectives}
 
