@@ -7,18 +7,25 @@
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_test}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{C11synopsis}
-where \TYPE{} is one of the point-to-point synchronization types specified by
-Table \ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table \ref{stdamotypes},
+\begin{DeprecateBlock}
+or \TYPE{} is one of \{\CTYPE{short}, \CTYPE{unsigned short}\}.
+\end{DeprecateBlock}
 
 \begin{Csynopsis}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test}@(TYPE *ivar, int cmp, TYPE cmp_value);
 \end{Csynopsis}
-where \TYPE{} is one of the point-to-point synchronization types and has a
-corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a
+corresponding \TYPENAME{} specified by Table~\ref{stdamotypes},
+\begin{DeprecateBlock}
+or \TYPE{} is one of \{\CTYPE{short}, \CTYPE{unsigned short}\} and
+has a corresponding \TYPENAME{} specified by Table~\ref{p2psynctypes}.
+\end{DeprecateBlock}
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ivar}{Local address of a remotely accessible data object.
+  \apiargument{IN}{ivar}{Symmetric address of a remotely accessible data object.
     The type of \VAR{ivar} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{cmp}{The comparison operator that compares \VAR{ivar} with
     \VAR{cmp\_value}.}
