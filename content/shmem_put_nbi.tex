@@ -37,7 +37,8 @@ void @\FuncDecl{shmem\_ctx\_putmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
   \apiargument{IN}{source}{Local address of the object containing the data to be copied.
     The type of \source{} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{nelems}{Number of elements in the \VAR{dest} and \VAR{source}
-    arrays.}
+    arrays. For \FUNC{shmem\_putmem\_nbi} and \FUNC{shmem\_ctx\_putmem\_nbi},
+    elements are bytes.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
