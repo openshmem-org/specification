@@ -332,10 +332,12 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 \begin{apiexamples}
 
 \apicexample
-    {This \Cstd[11] reduction example gets integers from an external
-    source (random generator in this example), tests to see if the \ac{PE} got a valid
-    value, and outputs the sum of values for which all \acp{PE} got a valid
-    value.}
+    {In the following \Cstd[11] example, each \ac{PE} intializes an array of
+    random integers with values between $0$ and $npes-1$, inclusively.  An OR
+    reduction then tracks the array indices where maximal values occur (maximal
+    values equal $npes - 1$), and a SUM reduction counts the total number of
+    maximal values across all PEs.
+    }
     {./example_code/shmem_reduce_example.c}
     {}
 
