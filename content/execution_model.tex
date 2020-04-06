@@ -2,14 +2,13 @@ An \openshmem program consists of a set of \openshmem processes called
 \acp{PE}.  While not required by \openshmem, in typical usage, \acp{PE} are
 executed using a single program, multiple data (\ac{SPMD}) model.  \ac{SPMD}
 requires each \ac{PE} to use the same executable; however, \acp{PE} are able to
-follow divergent control paths.  \acp{PE} are often implemented using operating
-system (\ac{OS}) processes and \acp{PE} are permitted to create additional
+follow divergent control paths.  \acp{PE} are often implemented using \ac{OS}
+processes and \acp{PE} are permitted to create additional
 threads, when supported by the \openshmem library.
 
 \ac{PE} execution is loosely coupled, relying on \openshmem operations to
 communicate and synchronize among executing \acp{PE}.  The \openshmem phase in
-a program begins with a call to the initialization routine \FUNC{shmem\_init}%
-\footnote{\FUNC{start\_pes} has been deprecated as of \openshmem[1.2]}
+a program begins with a call to the initialization routine \FUNC{shmem\_init}
 or \FUNC{shmem\_init\_thread}, which must be performed before using any of the
 other \openshmem library routines. 
 An \openshmem program concludes its use of the \openshmem library when all \acp{PE} call
@@ -24,7 +23,7 @@ subsequent initialization call also leads to undefined behavior.
 The \acp{PE} of the \openshmem program are identified by unique integers.  The
 identifiers are integers assigned in a monotonically increasing manner from zero
 to one less than the total number of \acp{PE}. \ac{PE} identifiers are used for
-\openshmem calls (e.g. to specify \OPR{put} or \OPR{get} routines on symmetric
+\openshmem calls (e.g., to specify \OPR{put} or \OPR{get} routines on symmetric
 data objects, collective synchronization calls) or to dictate a control flow for
 \acp{PE} using constructs of \Cstd. The identifiers are fixed for
 the duration of the \openshmem phase of a program.
@@ -35,7 +34,7 @@ The \openshmem model assumes that computation and communication are naturally
 overlapped. \openshmem programs are expected to exhibit progression of
 communication both with and without \openshmem calls. Consider a \ac{PE} that is
 engaged in a computation with no \openshmem calls. Other \acp{PE} should be able
-to communicate (\OPR{put}, \OPR{get}, \OPR{atomic}, etc) and
+to communicate (e.g., \OPR{put}, \OPR{get}, \OPR{atomic}, etc.) and
 complete communication operations with that computationally-bound \ac{PE}
 without that \ac{PE} issuing any explicit \openshmem calls. One-sided \openshmem
 communication calls involving that \ac{PE} should progress regardless of when
