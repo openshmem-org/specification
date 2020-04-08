@@ -9,10 +9,10 @@ the initiator \ac{PE} using the \OPR{put-with-signal}, \FUNC{shmem\_fence} and
 Where appropriate compiler support is available, \openshmem provides
 type-generic point-to-point synchronization interfaces via \Cstd[11] generic
 selection. Such type-generic routines are supported for the
-``point-to-point synchronization types'' identified in
-Table~\ref{p2psynctypes}.
+``standard \ac{AMO} types'' identified in
+Table~\ref{stdamotypes}.
 
-The point-to-point synchronization types include some of the exact-width
+The standard \ac{AMO} types include some of the exact-width
 integer types defined in \HEADER{stdint.h} by \Cstd[99]~\S7.18.1.1 and
 \Cstd[11]~\S7.20.1.1. When the \Cstd translation environment
 does not provide exact-width integer types with \HEADER{stdint.h}, an
@@ -22,6 +22,7 @@ require the \CONST{SIZE\_MAX} macro defined in \HEADER{stdint.h} by
 \Cstd[99]~\S7.18.3 and \Cstd[11]~\S7.20.3.
 
 \begin{table}[h]
+\begin{DeprecateBlock}
   \begin{center}
     \begin{tabular}{|l|l|}
       \hline
@@ -44,6 +45,7 @@ require the \CONST{SIZE\_MAX} macro defined in \HEADER{stdint.h} by
     \TableCaptionRef{Point-to-Point Synchronization Types and Names}
     \label{p2psynctypes}
   \end{center}
+\end{DeprecateBlock}
 \end{table}
 
 The point-to-point synchronization interface provides named constants whose

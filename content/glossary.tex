@@ -1,0 +1,48 @@
+\begin{description}
+
+\item[Blocking] An \openshmem routine for which return from a call to
+  that routine guarantees local completion for its associated local
+  buffers.
+
+\item[Local completion] of an \openshmem operation indicates that all
+  local objects involved in the operation are locally complete.
+
+  For an \openshmem operation that reads a local object of
+  memory---for example, the \source{} argument of \FUNC{shmem\_put}
+  or, for only the root \ac{PE}, \FUNC{shmem\_team\_broadcast}---local
+  completion of that object specifies the point (in time) after which
+  a write (or update) to that object by the \ac{PE} initiating the
+  operation would not affect the value(s) read by the \openshmem
+  implementation in performing the operation.
+
+  For an \openshmem operation that writes a local object of
+  memory---for example, the \dest{} argument of \FUNC{shmem\_get} or
+  \FUNC{shmem\_team\_broadcast}---local completion of that object
+  specifies the point after which a read of that local object by the
+  \ac{PE} initiating the operation will return the value(s) produced
+  by the \openshmem implementation in performing the operation.
+
+\item[Nonblocking] An \openshmem routine for which return from a call
+  to that routine guarantees neither local nor remote completion.
+
+\item[Remote completion] of an \openshmem operation indicates that all
+  remote objects involved in the operation are remotely complete.
+
+  For an \openshmem operation that reads a remote object of
+  memory---for example, the \source{} argument of \FUNC{shmem\_get} or
+  \FUNC{shmem\_team\_alltoall}---remote completion of that object
+  specifies the point (in time) after which a write (or update) to
+  that object by any \ac{PE} would not affect the value(s) read by the
+  \openshmem implementation in performing the operation.
+
+  For an \openshmem operation that writes a remote object of
+  memory---for example, the \dest{} argument of \FUNC{shmem\_put} or
+  \FUNC{shmem\_team\_alltoall}---remote completion of that object
+  specifies the point after which a read of that remote object by the
+  target \ac{PE} will return the value(s) produced by the \openshmem
+  implementation in performing the operation.
+
+  See \FUNC{shmem\_quiet} for mechanisms that ensure remote completion
+  (Section~\ref{subsec:shmem_quiet}).
+
+\end{description}

@@ -9,6 +9,7 @@
 
 \renewcommand{\chaptername}{Chapter}
 \renewcommand{\appendixname}{Annex}
+\Crefname{appendix}{Annex}{Annexes}
 
 % Place some penalty for doing the break
 % The penalty for a ``\gb'' should be greater than a \hyphenpenalty.
@@ -89,11 +90,13 @@
   \parbox[t]{5cm}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\LibHandleDecl}[2][\CorCpp]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\par\nobreak}
+\setlength{\parindent}{0pt}
 
 \begin{acronym}
-\acro{RMA}{\emph{Remote Memory Access}}
+\acro{RMA}{Remote Memory Access}
 \acro{RMO}{\emph{Remote Memory Operation}}
-\acro{AMO}{\emph{Atomic Memory Operation}}
+\acro{AMO}{Atomic Memory Operation}
 \acro{PE}{\emph{Processing Element}}
 \acrodefplural{PE}[PEs]{\emph{Processing Elements}}
 \acro{PGAS}{\emph{Partitioned Global Address Space}}
@@ -110,7 +113,7 @@
 \acro{ORNL}{Oak Ridge National Laboratory}
 \acro{LANL}{Los Alamos National Laboratory}
 \acro{ESSC}{Extreme Scale Systems Center}
-\acro{OS}{Operating System}
+\acro{OS}{operating system}
 \acro{OSSS}{Open Source Software Solutions}
 \acro{SGI}{Silicon Graphics International}
 \acro{DoD}{U.S. Department of Defense}
@@ -119,9 +122,21 @@
 \acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
+% Remove whitespace and retain commas when using cleveref's `\cref`.
+% https://tex.stackexchange.com/a/340502 by users/16967/heiko-oberdiek
+\makeatletter
+\let\org@@cref\@cref
+% Modify cleveref's internal \@cref to zap spaces between list elements.
+\renewcommand*{\@cref}[2]{%
+  \edef\process@me{%
+    \noexpand\org@@cref{#1}{\zap@space#2 \@empty}%
+  }\process@me
+}
+\makeatother
+\newcommand{\ChangelogRef}[1]{\\See \Cref{#1}.}
 
 % Grab current listings style for use in environment escape to LaTeX.
-% https://tex.stackexchange.com/a/209644
+% https://tex.stackexchange.com/a/209644 by users/21891/jub0bs
 \makeatletter
 \newcommand\ListingsCurrentStyle{}
 \lst@AddToHook{Output}{\global\let\ListingsCurrentStyle\lst@thestyle}
@@ -153,6 +168,8 @@
 
 \newcommand{\ListingsParamStyle}{\bfseries\itshape\color{CadetBlue}}
 
+\definecolor{DarkGreen}{rgb}{0, 0.25, 0}
+
 \lstdefinestyle{SourceListingsDefault}{
   language={C},
   breaklines=true,
@@ -161,6 +178,7 @@
   tabsize=2,
   basicstyle=\ttfamily\footnotesize,
   showstringspaces=false,
+  frame=single,
   % Preprocessor directives
   classoffset=0,
   keywords={\#include, \#pragma, \#if, \#ifdef, \#else, \#endif},
@@ -185,11 +203,11 @@
     shmem_ctx_t, shmem_team_t, shmem_team_config_t,
     FILE,
   },
-  keywordstyle=\color{OliveGreen},
+  keywordstyle=\color{DarkGreen},
   % Other elements
   classoffset=3,
   keywords={NULL},
-  keywordstyle=\color{Cyan},
+  keywordstyle=\color{MidnightBlue},
   % Type-generic parameters (see FuncParam)
   classoffset=4,
   keywords={TYPE, TYPENAME, SIZE},
@@ -197,13 +215,14 @@
   % Other syntax elements
   commentstyle=\itshape\color{BrickRed},
   stringstyle=\color{DarkOrchid},
-  backgroundcolor=\color{gray},
+  backgroundcolor=\color{white},
 }
 
-\definecolor{gray}{rgb}{0.92,0.92,0.92}
+\definecolor{gray}{rgb}{0.97,0.97,0.97}
 
 \lstdefinestyle{PrototypeListingsDefault}{
   style=SourceListingsDefault,
+  frame=none,
   backgroundcolor=\color{gray},
 }
 
@@ -322,10 +341,9 @@
 \newcommand{\apidescription}[1]{
 \begin{description}
 \vspace{-1em}
-\item[API description] \hfill \\
-    \begin{sloppypar}
+\item[API Description] \hfill \\
+    \sloppy
     #1
-    \end{sloppypar}
 \hfill
 }
 
@@ -359,14 +377,14 @@
 }
 
 \newcommand{\apiimpnotes}[1]{
-\item[Note to implementers] \hfill \\
+\item[Note to Implementers] \hfill \\
     #1
 \hfill \\
 }
 
 \newcommand{\parimpnotes}[1]{
 \begin{description}
-\item[Note to implementers] \leavevmode \\
+\item[Note to Implementers] \leavevmode \\
     #1
 \end{description}
 }

@@ -46,8 +46,14 @@ Version \insertDocVersion
   \url{http://www.lanl.gov/}
 \end{itemize}
 
-\section*{Current Authors and Collaborators}
+\section*{Authors and Collaborators}
+This document is a collaborative effort consisting of several releases of \openshmem versions 1.0 through 1.5. This section lists the authors and contributors in reverse chronological order, starting with \openshmem 1.5.
+
+
+\subsection*{\openshmem 1.5}
+\begin{multicols}{2}
 \begin{itemize}
+\setlength\itemsep{0.1em}
 \item Matthew Baker, \ac{ORNL}
 \item Swen Boehm, \ac{ORNL}
 \item Aurelien Bouteiller, \ac{UTK}
@@ -55,17 +61,69 @@ Version \insertDocVersion
 \item Bob Cernohous, \ac{HPE}
 \item James Culhane, \ac{LANL}
 \item Tony Curtis, \ac{SBU}
-\item James Dinan, NVIDIA
+\item James Dinan\footnotemark[1] \footnotemark[2], NVIDIA
 \item Mike Dubman, Mellanox
-\item Manjunath Gorentla Venkata, Mellanox
 \item Anshuman Goswami, NVIDIA
 \item Megan Grodowitz, Arm Inc.
 \item Max Grossman, Georgia Tech
 \item Khaled Hamidouche, \ac{AMD}
 \item Jeff Hammond, Intel
 \item Yossi Itigin, Mellanox
-\item Bryant Lam, \ac{DoD}
+\item Bryant Lam\footnotemark[3], \ac{DoD}
 \item Akhil Langer, NVIDIA
+\item John Linford\footnotemark[4], Arm Inc.
+\item Jens Manser, \ac{DoD}
+\item Tiffany M. Mintz, \ac{ORNL}
+\item David Ozog, Intel
+\item Nicholas Park\footnotemark[5], \ac{DoD}
+\item Steve Poole\footnotemark[6], \ac{OSSS}
+\item Wendy Poole, \ac{LANL}
+\item Swaroop Pophale, \ac{ORNL}
+\item Sreeram Potluri, NVIDIA
+\item Howard Pritchard, \ac{LANL}
+\item Md. Wasi-ur- Rahman\footnotemark[4], Intel
+\item Naveen Ravichandrasekaran\footnotemark[7], \ac{HPE}
+\item Michael Raymond\footnotemark[8], \ac{HPE}
+\item James Ross, \ac{ARL}
+\item Pavel Shamis\footnotemark[9], Arm Inc.
+\item Sameer Shende, \ac{UO}
+\item Min Si, \ac{ANL}
+\item Manjunath Gorentla Venkata\footnotemark[10] \footnotemark[11], Mellanox
+\end{itemize}
+\end{multicols}
+
+\footnotetext[1]{\openshmem Document Editor}
+\footnotetext[2]{Teams and Contexts Committee Chair}
+\footnotetext[3]{Back Matter Committee Chair}
+\footnotetext[4]{Profiling Committee Co-chair}
+\footnotetext[5]{Collectives Committee Chair}
+\footnotetext[6]{\openshmem Specification Committee Chair}
+\footnotetext[7]{Synchronization, Ordering, and Locking Committee Chair}
+\footnotetext[8]{Front Matter Committee Chair}
+\footnotetext[9]{RMA, AMO, and Signals Committee Chair}
+\footnotetext[10]{\openshmem Specification Committee Secretary}
+\footnotetext[11]{Library Setup, Threads, and Memory Committee Chair}
+
+\subsection*{\openshmem 1.4}
+\begin{multicols}{2}
+\begin{itemize}
+\setlength\itemsep{0.1em}
+\item Matthew Baker, \ac{ORNL}
+\item Swen Boehm, \ac{ORNL}
+\item Aurelien Bouteiller, \ac{UTK}
+\item Barbara Chapman, \ac{SBU}
+\item Bob Cernohous, Cray Inc.
+\item James Culhane, \ac{LANL}
+\item Tony Curtis, \ac{SBU}
+\item James Dinan, Intel
+\item Mike Dubman, Mellanox
+\item Manjunath Gorentla Venkata, \ac{ORNL}
+\item Max Grossman, Rice University
+\item Khaled Hamidouche, \ac{AMD}
+\item Jeff Hammond, Intel
+\item Yossi Itigin, Mellanox
+\item Bryant Lam, \ac{DoD}
+\item David Knaak, Cray Inc.
 \item Jeff Kuehn, \ac{LANL}
 \item Jens Manser, \ac{DoD}
 \item Tiffany M. Mintz, \ac{ORNL}
@@ -76,32 +134,110 @@ Version \insertDocVersion
 \item Swaroop Pophale, \ac{ORNL}
 \item Sreeram Potluri, NVIDIA
 \item Howard Pritchard, \ac{LANL}
-\item Md. Wasi-ur- Rahman, Intel
-\item Naveen Ravichandrasekaran, \ac{HPE}
+\item Naveen Ravichandrasekaran, Cray Inc.
 \item Michael Raymond, \ac{HPE}
 \item James Ross, \ac{ARL}
-\item Pavel Shamis, Arm Inc.
+\item Pavel Shamis, ARM Inc.
 \item Sameer Shende, \ac{UO}
-\item Min Si, \ac{ANL}
-\item Lauren Smith, \ac{DoD}
-
 \end{itemize}
+\end{multicols}
 
-\section*{Alumni Authors and Collaborators}
+\subsection*{\openshmem 1.3}
+\begin{multicols}{2}
 \begin{itemize}
-\item Amrita Banerjee, \ac{UH}
+\setlength\itemsep{0.1em}
 \item Monika ten Bruggencate, Cray Inc.
-\item Eduardo D'Azevedo, \ac{ORNL}
-\item Karl Feind, Altair
+\item Matthew Baker, \ac{ORNL}
+\item Barbara Chapman, \ac{UH}
+\item Tony Curtis, \ac{UH}
+\item Eduardo D’Azevedo, \ac{ORNL}
+\item James Dinan, Intel
+\item Karl Feind, \ac{SGI}
+\item Manjunath Gorentla Venkata, \ac{ORNL}
+\item Jeff Hammond, Intel
 \item Oscar Hernandez, \ac{ORNL}
 \item David Knaak, Cray Inc.
 \item Gregory Koenig, \ac{ORNL}
+\item Jeff Kuehn, \ac{LANL}
 \item Graham Lopez, \ac{ORNL}
+\item Jens Manser, \ac{DoD}
+\item Tiffany M. Mintz, \ac{ORNL}
+\item Nicholas Park, \ac{DoD}
+\item Steve Poole, \ac{OSSS}
+\item Wendy Poole, \ac{OSSS}
+\item Swaroop Pophale, \ac{ORNL}
+\item Michael Raymond, \ac{SGI}
+\item Pavel Shamis, \ac{ORNL}
+\item Sameer Shende, \ac{UO}
+\item Aaron Welch, \ac{ORNL}
+\end{itemize}
+\end{multicols}
+
+\subsection*{\openshmem 1.2}
+\begin{multicols}{2}
+\begin{itemize}
+\setlength\itemsep{0.1em}
+\item Monika ten Bruggencate, Cray Inc.
+\item Barbara Chapman, \ac{UH}
+\item Tony Curtis, \ac{UH}
+\item Eduardo D’Azevedo, \ac{ORNL}
+\item James Dinan, Intel
+\item Karl Feind, \ac{SGI}
+\item Manjunath Gorentla Venkata, \ac{ORNL}
+\item Jeff Hammond, Intel
+\item Oscar Hernandez, \ac{ORNL}
+\item David Knaak, Cray Inc.
+\item Gregory Koenig, \ac{ORNL}
+\item Jeff Kuehn, \ac{LANL}
+\item Graham Lopez, \ac{ORNL}
+\item Jens Manser, \ac{DoD}
+\item Nick Park, \ac{DoD}
+\item Steve Poole, \ac{OSSS}
+\item Swaroop Pophale, Mellanox
+\item Michael Raymond, \ac{SGI}
+\item Pavel Shamis, \ac{ORNL}
+\item Sameer Shende, \ac{UO}
+\end{itemize}
+\end{multicols}
+
+\subsection*{\openshmem 1.1}
+\begin{multicols}{2}
+\begin{itemize}
+\setlength\itemsep{0.1em}
+\item Monika ten Bruggencate, Cray Inc.
+\item Barbara Chapman, \ac{UH}
+\item Tony Curtis, \ac{UH}
+\item Eduardo D’Azevedo, \ac{ORNL}
+\item Karl Feind, \ac{SGI}
+\item Manjunath Gorentla Venkata, \ac{ORNL}
+\item Oscar Hernandez, \ac{ORNL}
+\item Gregory Koenig, \ac{ORNL}
+\item Jeff Kuehn, \ac{LANL}
+\item Jens Manser, \ac{DoD}
+\item Nick Park, \ac{DoD}
+\item Stephen Poole, \ac{ORNL}
+\item Swaroop Pophale, \ac{UH}
+\item Michael Raymond, \ac{SGI}
+\item Pavel Shamis, \ac{ORNL}
+\end{itemize}
+\end{multicols}
+
+\subsection*{\openshmem 1.0}
+\begin{multicols}{2}
+\begin{itemize}
+\setlength\itemsep{0.1em}
+\item Amrita Banerjee, \ac{UH}
+\item Barbara Chapman, \ac{UH}
+\item Tony Curtis, \ac{UH}
+\item Karl Feind, \ac{SGI}
+\item Jeff Kuehn, \ac{ORNL}
 \item Ricardo Mauricio, \ac{UH}
 \item Ram Nanjegowda, \ac{UH}
-\item Aaron Welch, \ac{ORNL}
-
+\item Stephen Poole, \ac{ORNL}
+\item Swaroop Pophale, \ac{UH}
+\item Lauren Smith, \ac{DoD}
 \end{itemize}
+\end{multicols}
 
 \date{\today}
 

@@ -1,0 +1,72 @@
+All \openshmem \ac{RMA}, \ac{AMO}, and memory ordering routines must be
+performed on a valid communication context.  The communication context defines an
+independent ordering and completion environment, allowing users to manage the
+overlap of communication with computation and also to manage communication
+operations performed by separate threads within a multithreaded \ac{PE}.  For
+example, in single-threaded environments, contexts may be used to pipeline
+communication and computation.  In multithreaded environments, contexts may
+additionally provide thread isolation, eliminating overheads resulting from
+thread interference.
+
+A specific communication context is referenced through a context handle, which is
+passed as an argument in the \CTYPE{shmem\_ctx\_*} and type-generic \ac{API}
+routines.  \ac{API} routines that do not accept a context handle argument operate on the
+default context.  The default context can be used explicitly through the
+\LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.
+Context handles are of type \CTYPE{shmem\_ctx\_t} and may be used for
+language-level assignment and equality comparison.
+
+The default context is valid for the duration of the \openshmem portion of
+an application.
+Contexts created by a successful call to \FUNC{shmem\_ctx\_create} remain
+valid until they are destroyed.
+A handle value that does not correspond to a valid context is considered
+to be invalid, and its use in \ac{RMA} and \ac{AMO} routines results in
+undefined behavior.
+A context handle may be initialized to or assigned the value
+\CONST{SHMEM\_CTX\_INVALID} to indicate that handle does not reference a
+valid communication context.
+When managed in this way, applications can use an equality comparison
+to test whether a given context handle references a valid context.
+
+Every communication context is associated with a team.
+This association is established at context creation.
+Communication contexts created by \FUNC{shmem\_ctx\_create} are
+associated with the world team, while contexts created by
+\FUNC{shmem\_team\_create\_ctx} are associated with and created from a team
+specified at context creation.
+The default context is associated with the world team.
+A context's associated team specifies the set of \acp{PE} over which
+\ac{PE}-specific routines that operate on a communication context,
+explicitly or implicitly, are performed.
+All point-to-point routines that operate on this context will do so with
+respect to the team-relative \ac{PE} numbering of the associated team.
+If the PE number passed to such a routine is invalid, being negative or greater
+than or equal to the size of the \openshmem team, then the behavior is undefined.
+
+By default, contexts are {\em shareable} and, when it is allowed by the
+threading model provided by the \openshmem library, they can be used concurrently by
+multiple threads within the PE where they were created.
+%
+The following options can be supplied during context creation to restrict
+this usage model and enable performance optimizations.  When using a given
+context, the application must comply with the requirements of all options
+set on that context; otherwise, the behavior is undefined.
+No options are enabled on the default context.
+
+\apitablerow{\LibConstRef{SHMEM\_CTX\_SERIALIZED}}{
+    The given context is shareable; however, it will not be used by multiple threads
+    concurrently.  When the \CONST{SHMEM\_CTX\_SERIALIZED} option is
+    set, the user must ensure that operations involving the given
+    context are serialized by the application.}
+
+\apitablerow{\LibConstRef{SHMEM\_CTX\_PRIVATE}}{
+    The given context will be used only by the thread that created it.}
+
+\apitablerow{\LibConstRef{SHMEM\_CTX\_NOSTORE}}{
+    Quiet and fence operations performed on the given context are not
+    required to enforce completion and ordering of memory store
+    operations performed by the application.
+    When ordering of store operations is needed, the application must
+    perform a synchronization operation on a context without the
+    \CONST{SHMEM\_CTX\_NOSTORE} option enabled.}
