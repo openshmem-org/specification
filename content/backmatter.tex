@@ -655,7 +655,10 @@ The following list describes the specific changes in \openshmem[1.5]:
 %
 \item Deprecated \CTYPE{short} and \CTYPE{unsigned short} variants for
 \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test}.
-\ChangelogRef{dep:short_ushort_typed_shmem_wait_until_and_test}%
+\ChangelogRef{
+  subsec:shmem_wait_until,
+  subsec:shmem_test,
+  dep:short_ushort_typed_shmem_wait_until_and_test}%
 %
 \item Added \FUNC{shmem\_malloc\_with\_hints} interface and corresponding hints
 \CONST{SHMEM\_MALLOC\_ATOMICS\_REMOTE} and \CONST{SHMEM\_MALLOC\_SIGNAL\_REMOTE}.
@@ -666,7 +669,11 @@ all \acp{PE}, including the root \ac{PE}.
 \ChangelogRef{subsec:shmem_broadcast}%
 %
 \item Deprecated active-set-based library constants and collective functions.
-\ChangelogRef{dep:active_set_libconst_and_collectives, dep:shmem_barrier}%
+\ChangelogRef{
+  subsec:library_constants,
+  subsec:coll,
+  dep:active_set_libconst_and_collectives,
+  dep:shmem_barrier}%
 %
 \item Added team management functions:
   \FUNC{shmem\_team\_my\_pe},
@@ -721,8 +728,8 @@ all \acp{PE}, including the root \ac{PE}.
 \item Added support for nonblocking \OPR{put-with-signal} functions.
 \ChangelogRef{subsec:shmem_put_signal_nbi}%
 %
-\item Deprecated Table~\ref{p2psynctypes}: point-to-point synchronization types and names.
-\ChangelogRef{dep:p2p_sync_types}%
+\item Deprecated point-to-point synchronization types and names.
+\ChangelogRef{p2psynctypes, dep:p2p_sync_types}%
 %
 \item Clarified that point-to-point synchronization routines preserve the
   atomicity of OpenSHMEM \acp{AMO}.
@@ -859,7 +866,7 @@ synchronization routines.
 \ChangelogRef{dep:mpp_header}%
 %
 \item Deprecated the \FUNC{shmem\_wait} functions and the \CTYPE{long}-typed \CorCpp \FUNC{shmem\_wait\_until} function.
-\ChangelogRef{dep:shmem_wait, dep:long_typed_shmem_wait_until}%
+\ChangelogRef{subsec:shmem_wait_until, dep:shmem_wait, dep:long_typed_shmem_wait_until}%
 %
 \item Added the \FUNC{shmem\_test} functions.
 \ChangelogRef{subsec:p2p_intro}%
@@ -952,7 +959,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 \ChangelogRef{subsec:amo_guarantees}%
 %
 \item Deprecation of all constants that start with \CONST{\_SHMEM\_*}.
-\ChangelogRef{dep:libconst_undershmem}%
+\ChangelogRef{subsec:library_constants, dep:libconst_undershmem}%
 %
 \item Added a type-generic interface to \openshmem \ac{RMA} and \ac{AMO}
     operations based on \Cstd[11] Generics.
@@ -1010,7 +1017,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \ChangelogRef{subsec:shmem_init, dep:start_pes}%
 %
 \item Deprecation of \FUNC{\_my\_pe} and \FUNC{\_num\_pes} routines.
-\ChangelogRef{dep:func_not_shmemunder}%
+\ChangelogRef{subsec:shmem_my_pe, subsec:shmem_n_pes, dep:func_not_shmemunder}%
 %
 \item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly
       exit an \openshmem program and release resources.
@@ -1035,7 +1042,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \ChangelogRef{subsec:shfree}%
 %
 \item Deprecation of \Fortran API routine \FUNC{SHMEM\_PUT}.
-\ChangelogRef{dep:fortran_shmem_put}%
+\ChangelogRef{subsec:shmem_put, dep:fortran_shmem_put}%
 %
 \item Clarification related to \FUNC{shmem\_wait}.
 \ChangelogRef{subsec:shmem_wait_until}%
