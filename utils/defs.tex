@@ -90,7 +90,9 @@
   \parbox[t]{5cm}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\LibHandleDecl}[2][\CorCpp]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
+
 \newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\par\nobreak}
+\Crefname{paragraph}{Section}{Sections}
 \setlength{\parindent}{0pt}
 
 \begin{acronym}
@@ -133,7 +135,7 @@
   }\process@me
 }
 \makeatother
-\newcommand{\ChangelogRef}[1]{\\See \Cref{#1}.}
+\newcommand{\ChangelogRef}[1]{\\See \cref{#1}.\space}
 
 % Grab current listings style for use in environment escape to LaTeX.
 % https://tex.stackexchange.com/a/209644 by users/21891/jub0bs
