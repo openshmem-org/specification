@@ -638,6 +638,16 @@ As of \openshmem 1.5, the point-to-point synchronization routines are only
 compatible with \acp{AMO}, so their interfaces are defined via the
 standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
+
+%%
+%% For section headings, use \textit{Fortran} instead of \Fortran.
+%% Do not use commands that take optional arguments (e.g., \Fortran, \Cstd)
+%% because they do not render at all in the PDF bookmarks.
+%%
+%% See Issue #66 for details.
+%%
+
+
 \chapter{Changes to this Document}\label{sec:changelog}
 
 \section{Version 1.5}
@@ -1042,7 +1052,8 @@ The following list describes the specific changes in \openshmem[1.2]:
 \ChangelogRef{subsec:shfree}%
 %
 \item Deprecation of \Fortran API routine \FUNC{SHMEM\_PUT}.
-\ChangelogRef{subsec:shmem_put, dep:fortran_shmem_put}%
+\ChangelogRef{dep:fortran_shmem_put}%
+See \openshmem[1.4], Section 9.5.1.
 %
 \item Clarification related to \FUNC{shmem\_wait}.
 \ChangelogRef{subsec:shmem_wait_until}%
