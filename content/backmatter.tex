@@ -181,12 +181,16 @@ The following cases summarize this behavior:
 \end{itemize}
 \tabularnewline
 \hline
-Concurrent use of a team & Teams are not thread-safe objects.
-Concurrent use of a team from multiple threads results in undefined
-behavior.  Such a situation can arise when one thread is calling a
-team-implicit collective (e.g., \FUNC{shmem\_barrier\_all}), which
-implicitly operates on the world team, and another calls a team-based
-collective (e.g., \FUNC{shmem\_broadcastmem}). \tabularnewline
+Multithreaded use of a team in concurrent team-based collectives &
+Team-based collective operations are not thread-safe on the same \VAR{team}
+object.
+Concurrent use of a team from multiple threads may result in undefined
+behavior.
+For example, it is undefined behavior for one thread to call a team-implicit
+collective which implicitly operates on the world team (e.g.,
+\FUNC{shmem\_barrier\_all}) and another thread to concurrently call a
+team-based collective (e.g., \FUNC{shmem\_broadcastmem}) on the same world team
+object, \LibHandleRef{SHMEM\_TEAM\_WORLD}. \tabularnewline
 \hline
 Destroying a team with unfreed private contexts & Before destroying a given
 team, the user is responsible for destroying all contexts created from that team
