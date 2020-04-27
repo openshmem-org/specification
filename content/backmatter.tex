@@ -401,7 +401,7 @@ supported before removal.
         \\ \CorCpp: \FuncRef{shmem\_ushort\_test}}
         & 1.5 & Current & (none) \\ \hline
     \minitab{Table~\ref{p2psynctypes}: point-to-point synchronization types}
-        & 1.5 & Current & Table~\ref{stdamotypes}: standard AMO types \\ \hline
+        & 1.5 & Current & Table~\ref{stdamotypes}: standard \ac{AMO} types \\ \hline
     %% Deprecated in 1.6
     %% Deprecated in 1.7
     %% Notes
@@ -616,7 +616,7 @@ indicate which context to quiesce.
 The \CTYPE{short} and \CTYPE{unsigned short} type \CorCpp and \textit{C11}
 routines for \FUNC{shmem\_wait\_until} and \FUNC{shmem\_test} were deprecated
 because point-to-point synchronization routines are only compatible with
-\acp{AMO} (as of \openshmem 1.5), and there is no corresponding AMO for
+\acp{AMO} (as of \openshmem 1.5), and there is no corresponding \ac{AMO} for
 \CTYPE{short} and \CTYPE{unsigned short}.
 
 \subsection{Table~\ref{p2psynctypes}: point-to-point synchronization types}
@@ -783,7 +783,7 @@ The following list describes the specific changes in \openshmem[1.4]:
 \begin{itemize}
 %
 \item New communication management API, including \FUNC{shmem\_ctx\_create};
-    \FUNC{shmem\_ctx\_destroy}; and additional RMA, AMO, and memory ordering
+    \FUNC{shmem\_ctx\_destroy}; and additional \ac{RMA}, \ac{AMO}, and memory ordering
     routines that accept \CTYPE{shmem\_ctx\_t} arguments.
 \\See Section \ref{sec:ctx}.
 %
@@ -873,13 +873,13 @@ synchronization routines.
 \item Clarified API description for \FUNC{shmem\_info\_get\_name}.
 \\See Section \ref{subsec:shmem_info_get_name}.
 %
-\item Expanded the type support for RMA, AMO, and point-to-point
+\item Expanded the type support for \ac{RMA}, \ac{AMO}, and point-to-point
     synchronization operations.
 \\ See Tables \ref{stdrmatypes}, \ref{stdamotypes}, \ref{extamotypes}, and
     \ref{p2psynctypes}
 %
-\item Renamed AMO operations to use \FUNC{shmem\_atomic\_*} prefix and
-      deprecated old AMO routines.
+\item Renamed \ac{AMO} operations to use \FUNC{shmem\_atomic\_*} prefix and
+      deprecated old \ac{AMO} routines.
 \\ See Section \ref{sec:amo}.
 %
 \item Added fetching and non-fetching bitwise AND, OR, and XOR atomic
