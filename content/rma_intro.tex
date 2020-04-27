@@ -20,9 +20,17 @@ The destination \ac{PE} is specified as an integer representing the \ac{PE} numb
 This \ac{PE} number is relative to the team associated with the
 communication context being using for the operation. If no context argument is passed to the routine,
 then the routine operates on the default context, which implies that
-the \ac{PE} number is relative to the default team.
+the \ac{PE} number is relative to the world team.
 If the \ac{PE} number passed to the routine is invalid, being negative
 or greater than or equal to the size of the \openshmem team, then the behavior is undefined.
+
+\openshmem \ac{RMA} routines specified in this section have two variants. In
+one of the variants, the context handle, \VAR{ctx}, is explicitly passed as
+an argument. In this variant, the operation is performed on the specified
+context. If the context handle \VAR{ctx} does not correspond to a valid
+context, the behavior is undefined. In the other variant, the context handle
+is not explicitly passed and thus, the operations are performed on the
+default context.
 
 Where appropriate compiler support is available, \openshmem provides type-generic 
 one-sided communication interfaces via \Cstd[11] generic selection

@@ -18,7 +18,7 @@ int @\FuncDecl{shmem\_test\_lock}@(long *lock);
 \apidescription{
     The \FUNC{shmem\_set\_lock} routine sets a mutual exclusion lock after
     waiting for the lock to be freed by any other \ac{PE} currently holding
-    the lock.  Waiting \acp{PE} are assured of getting the lock in a
+    the lock.  Waiting \acp{PE} are guaranteed to set the lock in a
     first-come, first-served manner.  The \FUNC{shmem\_test\_lock} routine sets
     a mutual exclusion lock only if it is currently cleared.  By using this
     routine, a \ac{PE} can avoid blocking on a set lock.  If the lock is
@@ -30,8 +30,8 @@ int @\FuncDecl{shmem\_test\_lock}@(long *lock);
     routines are appropriate for protecting a critical region from simultaneous
     update by multiple \acp{PE}.
 
-    The \openshmem lock API provides a non-reentrant mutex.  Thus, a call to
-    \FUNC{shmem\_set\_lock} or \FUNC{shmem\_test\_lock} when the calling PE
+    The \openshmem lock \ac{API} provides a non-reentrant mutex.  Thus, a call to
+    \FUNC{shmem\_set\_lock} or \FUNC{shmem\_test\_lock} when the calling \ac{PE}
     already holds the given lock will result in undefined behavior.  In a
     multithreaded \openshmem program, the user must ensure that such calls do
     not occur.
@@ -45,12 +45,10 @@ int @\FuncDecl{shmem\_test\_lock}@(long *lock);
 }
 
 \apinotes{
-    The term symmetric data object is defined in Section \ref{subsec:memory_model}.
-
-    The lock variable must be initialized to zero before any PE performs an
+    The lock variable must be initialized to zero before any \ac{PE} performs an
     \openshmem lock operation on the given variable.  Accessing an in-use lock
-    variable using any method other than the \openshmem lock API, e.g. using
-    local load/store, RMA, or AMO operations, results in undefined behavior.
+    variable using any method other than the \openshmem lock \ac{API} (e.g, using
+    local load/store, \ac{RMA}, or \ac{AMO} operations) results in undefined behavior.
 
     Calls to \FUNC{shmem\_ctx\_quiet} can be performed prior to calling the
     \FUNC{shmem\_clear\_lock} routine to ensure completion of operations issued

@@ -14,11 +14,18 @@ operations performed by a group of \acp{PE}.
 \end{DeprecateBlock}
 
 \item Collective routines that accept neither team nor active set
-  parameters, which implicitly operate on the default team and, as
+  parameters, which implicitly operate on the world team and, as
   required, the default context.
 \end{enumerate}
 
+Concurrent accesses to symmetric memory by an \openshmem collective
+routine and any other means of access---where at least one updates the
+symmetric memory---results in undefined behavior.
+Since \acp{PE} can enter and exit collectives at different times,
+accessing such memory remotely may require additional synchronization.
+
 \subsubsection*{Team-based collectives}
+\label{subsec:team_collectives}
 
 The team-based collective routines are performed with respect to a valid
 \openshmem team, which is specified by a team handle argument.
@@ -27,31 +34,27 @@ the routine in order for the operation to complete. If an invalid team handle
 or \LibConstRef{SHMEM\_TEAM\_INVALID} is passed to a team-based collective
 routine, the behavior is undefined.
 
-Team objects encapsulate the per \ac{PE} system resources required to complete
-team-based collective routines.
-All \openshmem teams-based collective calls are blocking routines which may use those
-system resources. On completion of a team-based collective call, the \ac{PE} may
-immediately call another collective on that same team without any other intervening
-synchronization across the team.
+All \openshmem teams-based collective operations are blocking routines.  On
+return from a team-based collective call, the \ac{PE} may immediately call
+another collective operation on that same team.
+Team-based collectives must occur in the same
+program order across all \acp{PE} in a team.
 
 While \openshmem routines provide thread support according to the
 thread-support level provided at initialization (see
 Section~\ref{subsec:thread_support}), team-based collective routines
 may not be called simultaneously by multiple threads on a given team.
 
-Collective operations are matched across a given team based on ordering. So for a given team,
-collectives must occur in the same order across all PEs in a team.
-
 The team-based collective routines defined in the \openshmem Specification are:
 
 \begin{itemize}
 \item \FUNC{shmem\_team\_sync}
-\item \FUNC{shmem\_\{TYPE\_\}broadcast\{mem\}}
-\item \FUNC{shmem\_\{TYPE\_\}collect\{mem\}}
-\item \FUNC{shmem\_\{TYPE\_\}fcollect\{mem\}}
-\item Reduction routines for the following operations: AND, OR, XOR, MAX, MIN, SUM, PROD
-\item \FUNC{shmem\_\{TYPE\_\}alltoall\{mem\}}
-\item \FUNC{shmem\_\{TYPE\_\}alltoalls\{mem\}}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]alltoall[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]alltoalls[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]broadcast[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]collect[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]fcollect[mem]}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]\{and, or, xor, max, min, sum, prod\}\_reduce}
 \end{itemize}
 
 In addition, all team creation functions are collective operations. In addition to the ordering
@@ -83,10 +86,14 @@ behavior is undefined.
 
 Another argument important to active-set-based collective routines is \VAR{pSync}, which is a
 symmetric work array.  All \acp{PE} participating in an active-set-based collective must pass the
-same \VAR{pSync} array.  On completion of such a collective call, the \VAR{pSync} is
+same \VAR{pSync} array.
+Every element of the \VAR{pSync} array must be initialized to
+\LibConstRef{SHMEM\_SYNC\_VALUE} before it is used as an argument to
+any active-set-based collective routine.
+On completion of such a collective call, the \VAR{pSync} is
 restored to its original contents.  The user is permitted to reuse a \VAR{pSync}
-array if all previous collective routines using the \VAR{pSync} array have been
-completed by all participating \acp{PE}. One can use a synchronization
+array if all previous collective routines using the \VAR{pSync} array have
+completed on all participating \acp{PE}. One can use a synchronization
 collective routine such as \FUNC{shmem\_barrier} to ensure completion of previous active-set-based collective
 routines. The \FUNC{shmem\_barrier} and \FUNC{shmem\_sync} routines allow the same
 \VAR{pSync} array to be used on consecutive calls as long as the \acp{PE}
@@ -99,12 +106,12 @@ routines defined in the \openshmem Specification are:
 \begin{itemize}
 \item \FUNC{shmem\_barrier}
 \item \FUNC{shmem\_sync}
+\item \FUNC{shmem\_alltoall\{32, 64\}}
+\item \FUNC{shmem\_alltoalls\{32, 64\}}
 \item \FUNC{shmem\_broadcast\{32, 64\}}
 \item \FUNC{shmem\_collect\{32, 64\}}
 \item \FUNC{shmem\_fcollect\{32, 64\}}
-\item Reduction routines for the following operations: AND, MAX, MIN, SUM, PROD, OR, XOR
-\item \FUNC{shmem\_alltoall\{32, 64\}}
-\item \FUNC{shmem\_alltoalls\{32, 64\}}
+\item \FUNC{shmem\_\FuncParam{TYPENAME}\_\{and, or, xor, max, min, sum, prod\}\_to\_all}
 \end{itemize}
 
 \end{DeprecateBlock}
@@ -112,17 +119,23 @@ routines defined in the \openshmem Specification are:
 
 \subsubsection*{Team-implicit collectives}
 
-The \FUNC{shmem\_sync\_all} routine synchronizes all \acp{PE} in the
-computation through the default team. This routine is equivalent to a
-call to \FUNC{shmem\_team\_sync} on the default team.
+Some \openshmem collective routines implicitly operate on the world
+team. These routines include:
 
-The \FUNC{shmem\_barrier\_all} routine synchronizes all \acp{PE} in
-the default team and ensures completion of all local and remote memory
-updates issued via the default context.  This routine is equivalent to
-a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
-call to \FUNC{shmem\_team\_sync} on the default team.
+\begin{itemize}
+\item \FUNC{shmem\_sync\_all}, which synchronizes all \acp{PE} in the
+  computation through the world team. This routine is equivalent to a
+  call to \FUNC{shmem\_team\_sync} on the world team.
+\item \FUNC{shmem\_barrier\_all}, which synchronizes all \acp{PE} in
+  the world team and ensures completion of all local and remote memory
+  updates issued via the default context.  This routine is equivalent to
+  a call to \FUNC{shmem\_ctx\_quiet} on the default context followed by a
+  call to \FUNC{shmem\_team\_sync} on the world team.
+\item \openshmem memory-management routines, which imply one or more
+  calls to a routine equivalent to \FUNC{shmem\_barrier\_all}.
+\end{itemize}
 
-\subsubsection*{Error codes returned from collectives}
+\subsubsection*{Error codes returned from team-based collectives}
 
 Collective operations involving multiple \acp{PE} may return values
 indicating success while other \acp{PE} are still executing the

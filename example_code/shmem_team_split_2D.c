@@ -1,20 +1,39 @@
 #include <shmem.h>
 #include <stdio.h>
+#include <math.h>
+
+/*  Find x and y such that x * y == npes and abs(x - y) is minimized.  */
+void find_xy_dims(int npes, int *x, int *y) {
+  for(int divider = ceil(sqrt(npes)); divider >= 1; divider--)
+    if (npes % divider == 0) {
+      *x = divider;
+      *y = npes / divider;
+      return;
+    }
+}
+
+/*  Find x, y, and z such that x * y * z == npes and
+ *  abs(x - y) + abs(x - z) + abs(y - z) is minimized.  */
+void find_xyz_dims(int npes, int *x, int *y, int *z) {
+  for(int divider = ceil(cbrt(npes)); divider >= 1; divider--)
+    if (npes % divider == 0) {
+      *x = divider;
+      find_xy_dims(npes / divider, y, z);
+      return;
+    }
+}
 
 int main(void) {
-  int xdim = 3;
-  int ydim = 4;
+  int xdim, ydim, zdim;
 
   shmem_init();
   int mype = shmem_my_pe();
   int npes = shmem_n_pes();
 
-  if (npes < (xdim * ydim)) {
-    printf("Not enough PEs to create 4x3xN layout\n");
-    exit(1);
-  }
+  find_xyz_dims(npes, &xdim, &ydim, &zdim);
 
-  int zdim = (npes / (xdim * ydim)) + (((npes % (xdim * ydim)) > 0) ? 1 : 0);
+  if (shmem_my_pe() == 0) printf("xdim = %d, ydim = %d, zdim = %d\n", xdim, ydim, zdim);
+
   shmem_team_t xteam, yzteam, yteam, zteam;
 
   shmem_team_split_2d(SHMEM_TEAM_WORLD, xdim, NULL, 0, &xteam, NULL, 0, &yzteam);

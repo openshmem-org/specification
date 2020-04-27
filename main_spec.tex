@@ -138,53 +138,8 @@ symmetric data objects in the symmetric heap.
 
 
 
-\subsection{Communication Management Routines}
-\label{sec:ctx}
-All \openshmem \ac{RMA}, \ac{AMO}, and memory ordering routines must be
-performed on a valid communication context.  The communication context defines an
-independent ordering and completion environment, allowing users to manage the
-overlap of communication with computation and also to manage communication
-operations performed by separate threads within a multithreaded \ac{PE}.  For
-example, in single-threaded environments, contexts may be used to pipeline
-communication and computation.  In multithreaded environments, contexts may
-additionally provide thread isolation, eliminating overheads resulting from
-thread interference.
-
-A specific communication context is referenced through a context handle, which is
-passed as an argument in the \Cstd \CTYPE{shmem\_ctx\_*} and type-generic \ac{API}
-routines.  \ac{API} routines that do not accept a context handle argument operate on the
-default context.  The default context can be used explicitly through the
-\LibHandleRef{SHMEM\_CTX\_DEFAULT} handle.
-Context handles are of type \CTYPE{shmem\_ctx\_t} and may be used for
-language-level assignment and equality comparison.
-
-The default context is valid for the duration of the \openshmem portion of
-an application.
-Contexts created by a successful call to \FUNC{shmem\_ctx\_create} remain
-valid until they are destroyed.
-A handle value that does not correspond to a valid context is considered
-to be invalid, and its use in \ac{RMA} and \ac{AMO} routines results in
-undefined behavior.
-A context handle may be initialized to or assigned the value
-\CONST{SHMEM\_CTX\_INVALID} to indicate that handle does not reference a
-valid communication context.
-When managed in this way, applications can use an equality comparison
-to test whether a given context handle references a valid context.
-
-Every communication context is associated with a team.
-This association is established at context creation.
-Communication contexts created by \FUNC{shmem\_ctx\_create} are
-associated with the default team, while contexts created by
-\FUNC{shmem\_team\_create\_ctx} are associated with and created from a team
-specified at context creation.
-The default context is associated with the default team.
-A context's associated team specifies the set of \acp{PE} over which
-\ac{PE}-specific routines that operate on a communication context,
-explicitly or implicitly, are performed.
-All point-to-point routines that operate on this context will do so with
-respect to the team-relative \ac{PE} numbering of the associated team.
-If the PE number passed to such a routine is invalid, being negative or greater
-than or equal to the size of the \openshmem team, then the behavior is undefined.
+\subsection{Communication Management Routines}\label{sec:ctx}
+\input{content/context_intro.tex}
 
 \subsubsection{\textbf{SHMEM\_CTX\_CREATE}}
 \label{subsec:shmem_ctx_create}
@@ -206,30 +161,31 @@ than or equal to the size of the \openshmem team, then the behavior is undefined
 \subsection{Remote Memory Access Routines}\label{sec:rma}
 \input{content/rma_intro.tex}
 
-\subsubsection{\textbf{SHMEM\_PUT}}\label{subsec:shmem_put}
+\subsubsection{Blocking Remote Memory Access Routines}\label{subsec:rma}
+\subsubsubsection{\textbf{SHMEM\_PUT}}\label{subsec:shmem_put}
 \input{content/shmem_put.tex}
 
-\subsubsection{\textbf{SHMEM\_P}}\label{subsec:shmem_p}
+\subsubsubsection{\textbf{SHMEM\_P}}\label{subsec:shmem_p}
 \input{content/shmem_p.tex}
 
-\subsubsection{\textbf{SHMEM\_IPUT}}\label{subsec:shmem_iput}
+\subsubsubsection{\textbf{SHMEM\_IPUT}}\label{subsec:shmem_iput}
 \input{content/shmem_iput.tex}
 
-\subsubsection{\textbf{SHMEM\_GET}}\label{subsec:shmem_get}
+\subsubsubsection{\textbf{SHMEM\_GET}}\label{subsec:shmem_get}
 \input{content/shmem_get.tex}
 
-\subsubsection{\textbf{SHMEM\_G}}\label{subsec:shmem_g}
+\subsubsubsection{\textbf{SHMEM\_G}}\label{subsec:shmem_g}
 \input{content/shmem_g.tex}
 
-\subsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
+\subsubsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
 \input{content/shmem_iget.tex}
 
-\subsection{Nonblocking Remote Memory Access Routines}\label{sec:rma_nbi}
+\subsubsection{Nonblocking Remote Memory Access Routines}\label{subsec:rma_nbi}
 
-\subsubsection{\textbf{SHMEM\_PUT\_NBI}}\label{subsec:shmem_put_nbi}
+\subsubsubsection{\textbf{SHMEM\_PUT\_NBI}}\label{subsec:shmem_put_nbi}
 \input{content/shmem_put_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_GET\_NBI}}\label{subsec:shmem_get_nbi}
+\subsubsubsection{\textbf{SHMEM\_GET\_NBI}}\label{subsec:shmem_get_nbi}
 \input{content/shmem_get_nbi.tex}
 
 
@@ -237,93 +193,95 @@ than or equal to the size of the \openshmem team, then the behavior is undefined
 \subsection{Atomic Memory Operations}\label{sec:amo}
 \input{content/atomics_intro}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH}}
+\subsubsection{Blocking Atomic Memory Operations}\label{subsec:amo}
+
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH}}
 \label{subsec:shmem_atomic_fetch}
 \input{content/shmem_atomic_fetch.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_SET}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_SET}}
 \label{subsec:shmem_atomic_set}
 \input{content/shmem_atomic_set.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP}}
 \label{subsec:shmem_atomic_compare_swap}
 \input{content/shmem_atomic_compare_swap.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_SWAP}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_SWAP}}
 \label{subsec:shmem_atomic_swap}
 \input{content/shmem_atomic_swap.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC}}
 \label{subsec:shmem_atomic_fetch_inc}
 \input{content/shmem_atomic_fetch_inc.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_INC}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_INC}}
 \label{subsec:shmem_atomic_inc}
 \input{content/shmem_atomic_inc.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD}}
 \label{subsec:shmem_atomic_fetch_add}
 \input{content/shmem_atomic_fetch_add.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_ADD}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_ADD}}
 \label{subsec:shmem_atomic_add}
 \input{content/shmem_atomic_add.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND}}
 \label{subsec:shmem_atomic_fetch_and}
 \input{content/shmem_atomic_fetch_and.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_AND}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_AND}}
 \label{subsec:shmem_atomic_and}
 \input{content/shmem_atomic_and.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR}}
 \label{subsec:shmem_atomic_fetch_or}
 \input{content/shmem_atomic_fetch_or.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_OR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_OR}}
 \label{subsec:shmem_atomic_or}
 \input{content/shmem_atomic_or.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR}}
 \label{subsec:shmem_atomic_fetch_xor}
 \input{content/shmem_atomic_fetch_xor.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_XOR}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_XOR}}
 \label{subsec:shmem_atomic_xor}
 \input{content/shmem_atomic_xor.tex}
 
-\subsection{Nonblocking Atomic Memory Operations}\label{sec:amo-nbi}
+\subsubsection{Nonblocking Atomic Memory Operations}\label{subsec:amo_nbi}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_NBI}}
 \label{subsec:shmem_atomic_fetch_nbi}
 \input{content/shmem_atomic_fetch_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_COMPARE\_SWAP\_NBI}}
 \label{subsec:shmem_atomic_compare_swap_nbi}
 \input{content/shmem_atomic_compare_swap_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_SWAP\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_SWAP\_NBI}}
 \label{subsec:shmem_atomic_swap_nbi}
 \input{content/shmem_atomic_swap_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_INC\_NBI}}
 \label{subsec:shmem_atomic_fetch_inc_nbi}
 \input{content/shmem_atomic_fetch_inc_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_ADD\_NBI}}
 \label{subsec:shmem_atomic_fetch_add_nbi}
 \input{content/shmem_atomic_fetch_add_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_AND\_NBI}}
 \label{subsec:shmem_atomic_fetch_and_nbi}
 \input{content/shmem_atomic_fetch_and_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_OR\_NBI}}
 \label{subsec:shmem_atomic_fetch_or_nbi}
 \input{content/shmem_atomic_fetch_or_nbi.tex}
 
-\subsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR\_NBI}}
+\subsubsubsection{\textbf{SHMEM\_ATOMIC\_FETCH\_XOR\_NBI}}
 \label{subsec:shmem_atomic_fetch_xor_nbi}
 \input{content/shmem_atomic_fetch_xor_nbi.tex}
 
@@ -336,6 +294,14 @@ put-with-signal routines provide a method for copying data from a contiguous
 local data object to a data object on a specified \ac{PE} and subsequently
 updating a remote flag to signal completion. The signal-fetch routine provides
 support for fetching a signal update operation.
+
+\openshmem \OPR{put-with-signal} routines specified in this section have two
+variants. In one of the variants, the context handle, \VAR{ctx}, is explicitly
+passed as an argument. In this variant, the operation is performed on the
+specified context. If the context handle \VAR{ctx} does not correspond to a
+valid context, the behavior is undefined. In the other variant, the context
+handle is not explicitly passed and thus, the operations are performed on the
+default context.
 
 \subsubsection{Atomicity Guarantees for Signaling Operations}
 \label{subsec:signal_atomicity}
@@ -399,6 +365,12 @@ signal operator.
 \subsubsection{\textbf{SHMEM\_SYNC\_ALL}}\label{subsec:shmem_sync_all}
 \input{content/shmem_sync_all.tex}
 
+\subsubsection{\textbf{SHMEM\_ALLTOALL}}\label{subsec:shmem_alltoall}
+\input{content/shmem_alltoall.tex}
+
+\subsubsection{\textbf{SHMEM\_ALLTOALLS}}\label{subsec:shmem_alltoalls}
+\input{content/shmem_alltoalls.tex}
+
 \subsubsection{\textbf{SHMEM\_BROADCAST}}\label{subsec:shmem_broadcast}
 \input{content/shmem_broadcast.tex}
 
@@ -407,12 +379,6 @@ signal operator.
 
 \subsubsection{\textbf{SHMEM\_REDUCTIONS}}\label{subsec:shmem_reductions}
 \input{content/shmem_reductions.tex}
-
-\subsubsection{\textbf{SHMEM\_ALLTOALL}}\label{subsec:shmem_alltoall}
-\input{content/shmem_alltoall.tex}
-
-\subsubsection{\textbf{SHMEM\_ALLTOALLS}}\label{subsec:shmem_alltoalls}
-\input{content/shmem_alltoalls.tex}
 
 
 
@@ -469,10 +435,34 @@ signal operator.
 
 \subsection{Memory Ordering Routines}\label{subsec:memory_order}
 The following section discusses \openshmem \acp{API} that provide mechanisms to
-ensure ordering and/or delivery of memory store, blocking \OPR{Put}, \ac{AMO},
-and \OPR{put-with-signal}, as well as nonblocking \PUT{},
-\OPR{put-with-signal}, \GET{}, and \ac{AMO} routines to symmetric data
-objects.
+ensure ordering and/or delivery of completion on memory store, blocking, and
+nonblocking \openshmem routines. Table~\ref{mem-order} lists the operations
+affected by \openshmem memory ordering routines.
+
+\begin{longtable}{|l|c|c|}
+ \hline
+  Operations & Fence & Quiet \\ \hline
+  Memory Store \footnote{Ordering and/or delivery of memory store operations are
+  ensured only on contexts created with certain options. For details, refer the
+  description of context options in Section~\ref{subsec:shmem_ctx_create}.}
+                                     & X & X \\
+  Blocking \OPR{Put}                 & X & X \\
+  Blocking \OPR{Get}                 &   &   \\
+  Blocking \OPR{AMO}                 & X & X \\
+  Blocking \OPR{put-with-signal}     & X & X \\
+  Non-blocking \OPR{Put}             & X & X \\
+  Non-blocking \OPR{Get}             &   & X \\
+  Non-blocking \OPR{AMO}             & X\footnote{\openshmem fence routines does
+  not guarantee order of delivery of values fetched by nonblocking \ac{AMO}
+  routines.}
+                                         & X \\
+  Non-blocking \OPR{put-with-signal} & X & X \\ \hline
+\TableCaptionRef{List of operations affected by \openshmem Memory Ordering
+routines}
+\label{mem-order}
+\end{longtable}
+
+
 
 \subsubsection{\textbf{SHMEM\_FENCE}}\label{subsec:shmem_fence}
 \input{content/shmem_fence.tex}
@@ -500,20 +490,15 @@ mutual exclusion. Three routines are available for distributed locking,
 
 
 
-\subsection{Cache Management}
-All of these routines are deprecated and are provided for backwards
-compatibility.  Implementations must include all items in this section, and the
-routines should function properly and may notify the user about deprecation of
-their use.
-
-\subsubsection{\textbf{SHMEM\_CACHE}}\label{subsec:shmem_cache}
-\input{content/shmem_cache.tex}
-
 \section{OpenSHMEM Profiling Interface}\label{sec:openshmem_profiling_interface}
 \input{content/profiling_interface.tex}
 
 \clearpage
 \input{content/backmatter}
+
+\chapter*{Glossary}
+\addcontentsline{toc}{chapter}{Glossary}
+\input{content/glossary.tex}
 
 \clearpage
 \phantomsection
@@ -521,4 +506,3 @@ their use.
 \printindex
 
 \end{document}
-
