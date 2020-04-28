@@ -450,13 +450,13 @@ affected by \openshmem memory ordering routines.
   Blocking \OPR{Get}                 &   &   \\
   Blocking \OPR{AMO}                 & X & X \\
   Blocking \OPR{put-with-signal}     & X & X \\
-  Non-blocking \OPR{Put}             & X & X \\
-  Non-blocking \OPR{Get}             &   & X \\
-  Non-blocking \OPR{AMO}             & X\footnote{\openshmem fence routines does
+  Nonblocking \OPR{Put}              & X & X \\
+  Nonblocking \OPR{Get}              &   & X \\
+  Nonblocking \OPR{AMO}              & X\footnote{\openshmem fence routines does
   not guarantee order of delivery of values fetched by nonblocking \ac{AMO}
   routines.}
                                          & X \\
-  Non-blocking \OPR{put-with-signal} & X & X \\ \hline
+  Nonblocking \OPR{put-with-signal}  & X & X \\ \hline
 \TableCaptionRef{List of operations affected by \openshmem Memory Ordering
 routines}
 \label{mem-order}
