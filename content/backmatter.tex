@@ -240,15 +240,15 @@ A listing of \openshmem implementations can be found on
 
 
 
-\chapter{OpenSHMEM Specification and Deprecated API}\label{sec:dep}
+\chapter{OpenSHMEM Specification and Deprecated \ac{API}}\label{sec:dep}
 
 \section{Overview}\label{dep:overview}
-\TableIndex{Deprecated API}
+\TableIndex{Deprecated \ac{API}}
 For the \openshmem Specification, deprecation is the process of identifying
-API that is supported but no longer recommended for use by users.
-The deprecated API \textbf{must} be supported until clearly
+\ac{API} that is supported but no longer recommended for use by users.
+The deprecated \ac{API} \textbf{must} be supported until clearly
 indicated as otherwise by the Specification.
-This chapter records the API or functionality that have been deprecated, the
+This chapter records the \ac{API} or functionality that have been deprecated, the
 version of the \openshmem Specification that effected the deprecation, and the
 most recent version of the \openshmem Specification in which the feature was
 supported before removal.
@@ -257,7 +257,7 @@ supported before removal.
 \scriptsize
 \begin{longtable}{|l|c|c|l|}
     \hline
-    \textbf{Deprecated API}
+    \textbf{Deprecated \ac{API}}
     & \textbf{Deprecated Since}
     & \textbf{Last Version Supported}
     & \textbf{Replaced By} \\
@@ -347,7 +347,7 @@ supported before removal.
     \minitab{\Cstd[11]: \FuncRef{shmem\_add}
         \\ \CorCpp: \FuncRef{shmem\_\FuncParam{TYPENAME}\_add}}
         & 1.4 & Current & \hyperref[subsec:shmem_atomic_add]{\FUNC{shmem\_atomic\_add}} \\ \hline
-    Entire \Fortran API & 1.4 & 1.4 & \openshmem \Cstd API through \Fortran--\Cstd interoperability \\ \hline
+    Entire \Fortran \ac{API} & 1.4 & 1.4 & \openshmem \Cstd \ac{API} through \Fortran--\Cstd interoperability \\ \hline
     %% Deprecated in 1.5
     \minitab{
         \LibConstRef{SHMEM\_SYNC\_VALUE}
@@ -451,7 +451,7 @@ prefix for all routines.
 
 \subsection{\textit{Fortran}: \FUNC{START\_PES}, \FUNC{MY\_PE}, \FUNC{NUM\_PES}} %% WARNING: Issue #66.
 The \Fortran routines \FUNC{START\_PES}, \FUNC{MY\_PE}, and \FUNC{NUM\_PES}
-were deprecated in order to minimize the API differences from the deprecation
+were deprecated in order to minimize the \ac{API} differences from the deprecation
 of \CorCpp routines \FUNC{start\_pes}, \FUNC{\_my\_pe}, and \FUNC{\_num\_pes}.
 
 \subsection{\textit{Fortran}: \FUNC{SHMEM\_PUT}} %% WARNING: Issue #66.
@@ -475,7 +475,7 @@ The \FUNC{SHMEM\_CACHE} \ac{API}
 \end{tabular}
 \end{center}
 was originally implemented for systems with cache-management instructions.
-This API has largely gone unused on cache-coherent system architectures.
+This \ac{API} has largely gone unused on cache-coherent system architectures.
 \FUNC{SHMEM\_CACHE} has been deprecated.
 
 \subsection{\CONST{\_SHMEM\_*} Library Constants}
@@ -540,12 +540,12 @@ in order to more clearly identify these calls as performing atomic operations.
 In addition, the abbreviated names ``cswap'', ``finc'', and ``fadd'' were
 expanded for clarity to ``compare\_swap'', ``fetch\_inc'', and ``fetch\_add''.
 
-\subsection{\textit{Fortran} API}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
-The entire \openshmem \Fortran API was deprecated in \openshmem[1.4] and
+\subsection{\textit{Fortran} \ac{API}}\label{subsec:deprecate-fortran} %% WARNING: Issue #66.
+The entire \openshmem \Fortran \ac{API} was deprecated in \openshmem[1.4] and
 removed in \openshmem[1.5] because of a general lack of
 use and a lack of conformance with legacy \Fortran standards. In lieu of an
-extensive update of the \Fortran API, \Fortran users are encouraged to
-leverage the \openshmem Specification's \Cstd API through the
+extensive update of the \Fortran \ac{API}, \Fortran users are encouraged to
+leverage the \openshmem Specification's \Cstd \ac{API} through the
 \Fortran--\Cstd interoperability initially standardized by \Fortran[2003]%
 \footnote{Formally, \Fortran[2003] is known as ISO/IEC~1539-1:2004(E).}.
 
@@ -631,7 +631,7 @@ Major changes in \openshmem[1.5] include the addition of new team-based
 collective functions, \OPR{put-with-signal} functions, nonblocking \ac{AMO}
 functions, multiple-element point-to-point synchronization and vector
 comparison functions, a \FUNC{shmem\_malloc\_with\_hints} function, a profiling
-interface, and the removal of the entire \Fortran API.
+interface, and the removal of the entire \Fortran \ac{API}.
 
 The following list describes the specific changes in \openshmem[1.5]:
 \begin{itemize}
@@ -713,13 +713,13 @@ all \acp{PE}, including the root \ac{PE}.
   \acp{AMO}.
 \\ See Section~\ref{subsec:p2p_intro}.
 %
-\item Removed the entire \openshmem \Fortran API. 
+\item Removed the entire \openshmem \Fortran \ac{API}.
 %
 \item Added support for multipliers in \VAR{SHMEM\_SYMMETRIC\_SIZE}
 environment variables.
 \\ See Section \ref{subsec:environment_variables}.
 %
-\item Added support for a multiple-element point-to-point synchronization API with
+\item Added support for a multiple-element point-to-point synchronization \ac{API} with
   the functions: \FUNC{shmem\_wait\_until\_all}, \FUNC{shmem\_wait\_until\_any},
   \FUNC{shmem\_wait\_until\_some}, \FUNC{shmem\_test\_all},
   \FUNC{shmem\_test\_any}, and \FUNC{shmem\_test\_some}.
@@ -729,7 +729,7 @@ environment variables.
   \ref{subsec:shmem_test_some}.
 %
 \item Added support for vectorized comparison values in the multiple-element
-  point-to-point synchronization API with the functions:
+  point-to-point synchronization \ac{API} with the functions:
   \FUNC{shmem\_wait\_until\_all\_vector}, \FUNC{shmem\_wait\_until\_any\_vector},
   \FUNC{shmem\_wait\_until\_some\_vector}, \\
   \FUNC{shmem\_test\_all\_vector}, \FUNC{shmem\_test\_any\_vector}, and
@@ -757,7 +757,7 @@ environment variables.
     be power of two multiple of \CONST{sizeof(void*)}.
     \\See Section~\ref{subsec:shfree}.
 %
-\item Clarified that the \openshmem lock API provides a non-reentrant mutex and
+\item Clarified that the \openshmem lock \ac{API} provides a non-reentrant mutex and
     that \FUNC{shmem\_clear\_lock} performs a quiet operation on the default
     context.
     \\See Section~\ref{subsec:shmem_lock}
@@ -787,7 +787,7 @@ The following list describes the specific changes in \openshmem[1.4]:
     routines that accept \CTYPE{shmem\_ctx\_t} arguments.
 \\See Section \ref{sec:ctx}.
 %
-\item New API \FUNC{shmem\_sync\_all} and \FUNC{shmem\_sync} to provide \ac{PE}
+\item New \ac{API} \FUNC{shmem\_sync\_all} and \FUNC{shmem\_sync} to provide \ac{PE}
     synchronization without completing pending communication operations.
     \\See Sections \ref{subsec:shmem_sync_all} and \ref{subsec:shmem_sync}.
 %
@@ -809,8 +809,8 @@ The following list describes the specific changes in \openshmem[1.4]:
 \\ See Section \ref{subsec:shmem_wait_until}.
 %
 \item Removed the \VAR{volatile} qualifiers from the \VAR{ivar} arguments to
-\FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock API.
-\emph{Rationale: Volatile qualifiers were added to several API routines in
+\FUNC{shmem\_wait} routines and the \VAR{lock} arguments in the lock \ac{API}.
+\emph{Rationale: Volatile qualifiers were added to several \ac{API} routines in
 \openshmem[1.3]; however, they were later found to be unnecessary.}
 \ChangelogRef{subsec:shmem_wait_until, subsec:shmem_lock}%
 %
@@ -886,7 +886,7 @@ synchronization routines.
       operations.
 \\ See Section \ref{sec:amo}.
 %
-\item Deprecated the entire \Fortran API.
+\item Deprecated the entire \Fortran \ac{API}.
 %
 \item Replaced the \CTYPE{complex} macro in complex-typed reductions with the
       \Cstd[99] (and later) type specifier \CTYPE{\_Complex} to remove an
@@ -961,7 +961,7 @@ improvements to the execution model with an explicit
 library-finalization routine (\FUNC{shmem\_finalize}),
 an early-exit routine (\FUNC{shmem\_global\_exit}),
 namespace standardization,
-and clarifications to several API descriptions.
+and clarifications to several \ac{API} descriptions.
 
 The following list describes the specific changes in \openshmem[1.2]:
 \begin{itemize}
@@ -974,21 +974,21 @@ The following list describes the specific changes in \openshmem[1.2]:
 \item New Execution Model for exiting/finishing \openshmem programs.
 \\See Section  \ref{subsec:execution_model}.
 %
-\item New library constants to support API that query version and name information.
+\item New library constants to support \ac{API} that query version and name information.
 \\See Section \ref{subsec:library_constants}.
 %
-\item New API \FUNC{shmem\_init} to provide mechanism to start an \openshmem
+\item New \ac{API} \FUNC{shmem\_init} to provide mechanism to start an \openshmem
       program and replace deprecated \FUNC{start\_pes}.
 \\See Section \ref{subsec:shmem_init}.
 %
 \item Deprecation of \FUNC{\_my\_pe} and \FUNC{\_num\_pes} routines.
 \\See Sections \ref{subsec:shmem_my_pe} and \ref{subsec:shmem_n_pes}.
 %
-\item New API \FUNC{shmem\_finalize} to provide collective mechanism to cleanly
+\item New \ac{API} \FUNC{shmem\_finalize} to provide collective mechanism to cleanly
       exit an \openshmem program and release resources.
 \\See Section \ref{subsec:shmem_finalize}.
 %
-\item New API \FUNC{shmem\_global\_exit} to provide mechanism to exit an
+\item New \ac{API} \FUNC{shmem\_global\_exit} to provide mechanism to exit an
     \openshmem program.
 \\See Section \ref{subsec:shmem_global_exit}.
 %
@@ -996,17 +996,17 @@ The following list describes the specific changes in \openshmem[1.2]:
     \FUNC{shmem\_ptr}.
 \\See Section \ref{subsec:shmem_ptr}.
 %
-\item New API to query the version and name information.
+\item New \ac{API} to query the version and name information.
 \\See Section \ref{subsec:shmem_info_get_version} and \ref{subsec:shmem_info_get_name}.
 %
-\item \openshmem library API normalization. All \Cstd symmetric memory management
-      API begins with  \FUNC{shmem\_}.
+\item \openshmem library \ac{API} normalization. All \Cstd symmetric memory management
+      \ac{API} begins with  \FUNC{shmem\_}.
 \\See Section \ref{subsec:shfree}.
 %
 \item Notes and clarifications added to \FUNC{shmem\_malloc}.
 \\See Section \ref{subsec:shfree}.
 %
-\item Deprecation of \Fortran API routine \FUNC{SHMEM\_PUT}.
+\item Deprecation of \Fortran \ac{API} routine \FUNC{SHMEM\_PUT}.
 \\See Section \ref{subsec:shmem_put}.
 %
 \item Clarification related to \FUNC{shmem\_wait}.
@@ -1015,7 +1015,7 @@ The following list describes the specific changes in \openshmem[1.2]:
 \item Undefined behavior for null pointers without zero counts added.
 \\See Annex \ref{sec:undefined}
 %
-\item Added new Annex for clearly specifying deprecated API and its
+\item Added new Annex for clearly specifying deprecated \ac{API} and its
       support across versions of the \openshmem Specification.
 \\See Annex \ref{sec:dep}.
 %
@@ -1026,9 +1026,9 @@ The following list describes the specific changes in \openshmem[1.2]:
 
 \section{Version 1.1}
 Major changes from \openshmem[1.0] to \openshmem[1.1] include
-the introduction of the \HEADER{shmemx.h} header file for non-standard API
+the introduction of the \HEADER{shmemx.h} header file for non-standard \ac{API}
 extensions,
-clarifications to completion semantics and API descriptions in agreement with
+clarifications to completion semantics and \ac{API} descriptions in agreement with
 the \ac{SGI} SHMEM specification,
 and general readabilty and usability improvements to the document structure.
 
