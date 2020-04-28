@@ -23,11 +23,11 @@
 
 % Set header/footer for main content
 \pagestyle{fancy}   %replacing {headings} with {fancy} for customization 
-\withlinenumbers    %adds line numbers to edges of normal pages
 \fancyhf{}
 \fancyhead[RE, LO]{\rightmark}
 \fancyhead[RO, LE]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
+\let\thesectionOrig\thesection % Used by backmatter to restore Annex numbering.
 \renewcommand{\thesection}{\arabic{section}}
 
 { %using setlength to force standardized spacing, if needed

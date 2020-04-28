@@ -36,17 +36,11 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
   \FUNC{shmem\_atomic\_fetch\_and} atomically performs a fetching bitwise AND
   on the remotely accessible data object pointed to by \VAR{dest} at PE
   \VAR{pe} with the operand \VAR{value}.
-  If the context handle \VAR{ctx} does not correspond to a valid context,
-  the behavior is undefined.
 }
 
 \apireturnvalues{
   The value pointed to by \VAR{dest} on PE \VAR{pe} immediately before the
   operation is performed.
-}
-
-\apinotes{
-  None.
 }
 
 \end{apidefinition}

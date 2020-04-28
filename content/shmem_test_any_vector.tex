@@ -9,19 +9,19 @@
 size_t @\FuncDecl{shmem\_test\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
     TYPE *cmp_values);
 \end{C11synopsis}
-where \TYPE{} is one of the point-to-point synchronization types specified by
-Table \ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types specified by
+Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_test\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status,
     int cmp, TYPE *cmp_values);
 \end{Csynopsis}
-where \TYPE{} is one of the point-to-point synchronization types and has a
-corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
+where \TYPE{} is one of the standard \ac{AMO} types and has a
+corresponding \TYPENAME{} specified by Table \ref{stdamotypes}.
 
 \begin{apiarguments}
 
-  \apiargument{IN}{ivars}{Local address of an array of remotely accessible data
+  \apiargument{IN}{ivars}{Symmetric address of an array of remotely accessible data
     objects.
     The type of \VAR{ivars} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{nelems}{The number of elements in the \VAR{ivars} array.}
@@ -55,7 +55,7 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     element corresponds to the respective element in \VAR{ivars} and indicates
     whether the element is excluded from the test set.  Elements of
     \VAR{status} set to 0 will be included in the test set, and elements set to
-    1 will be ignored.  If all elements in \VAR{status} are set to 1 or
+    a nonzero value will be ignored.  If all elements in \VAR{status} are nonzero or
     \VAR{nelems} is 0, the test set is empty and this routine returns
     \CONST{SIZE\_MAX}.  If \VAR{status} is a null pointer, it is ignored and
     all elements in \VAR{ivars} are included in the test set.  The \VAR{ivars}
@@ -71,10 +71,5 @@ corresponding \TYPENAME{} specified by Table \ref{p2psynctypes}.
     array that satisfies the test condition. If the test set is empty or no
     conditions in the test set are satisfied, this routine returns \CONST{SIZE\_MAX}.
 }
-
-\apinotes{
-  None.
-}
-
 
 \end{apidefinition}

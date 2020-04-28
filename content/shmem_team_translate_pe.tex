@@ -20,7 +20,7 @@ int @\FuncDecl{shmem\_team\_translate\_pe}@(shmem_team_t src_team, int src_pe,
 The \FUNC{shmem\_team\_translate\_pe} routine will translate a given \ac{PE} number
 in one team into the corresponding \ac{PE} number in another team.
 Specifically, given the \VAR{src\_pe} in \VAR{src\_team}, this routine returns that
-\ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both the
+\ac{PE}'s number in \VAR{dest\_team}. If \VAR{src\_pe} is not a member of both
 \VAR{src\_team} and \VAR{dest\_team}, a value of \CONST{-1} is returned.
 
 If at least one of \VAR{src\_team} and \VAR{dest\_team} compares equal
@@ -46,9 +46,9 @@ team handle arguments are invalid or the \VAR{src\_pe} is not in both the source
     \apicexample
     {The following example demonstrates the use of the team \ac{PE}
     number translation routine. The program makes a new team of all
-    of the even number \acp{PE} in the default team. Then, all \acp{PE}
+    of the even number \acp{PE} in the world team. Then, all \acp{PE}
     in the new team acquire their \ac{PE} number in the new team
-    and translate it to the \ac{PE} number in the default team.}
+    and translate it to the \ac{PE} number in the world team.}
     {./example_code/shmem_team_translate_pe.c}
     {}
 

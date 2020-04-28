@@ -53,18 +53,12 @@ and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
     The conditional swap routines conditionally update a \VAR{dest} data object on
     the specified \ac{PE} and return the prior contents of the data object in one
     atomic operation.
-    If the context handle \VAR{ctx} does not correspond to a valid context,
-    the behavior is undefined.
 }
 
 \apireturnvalues{
     The contents that had been in the \VAR{dest} data object on the remote
     \ac{PE} prior to the conditional swap. Data type is the same as the
     \VAR{dest} data type.
-}
-
-\apinotes{
-    None.
 }
 
 \begin{apiexamples}

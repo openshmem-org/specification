@@ -1,0 +1,5 @@
+BasedOnStyle:  LLVM
+BreakBeforeBraces: Custom
+BraceWrapping:
+  BeforeElse: true
+ColumnLimit: 93

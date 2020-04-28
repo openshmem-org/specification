@@ -9,6 +9,7 @@
 
 \renewcommand{\chaptername}{Chapter}
 \renewcommand{\appendixname}{Annex}
+\Crefname{appendix}{Annex}{Annexes}
 
 % Place some penalty for doing the break
 % The penalty for a ``\gb'' should be greater than a \hyphenpenalty.
@@ -84,22 +85,25 @@
 %% Specialized declaration/creation and generate reference.
 \newcommand{\EnvVarDecl}[1]{\EnvVarRef{#1}}
 \newcommand{\FuncDecl}[1]{{\ListingsCurrentStyle{#1}}\FuncIndex{#1}}
-\newcommand{\FuncParam}[1]{<{\ListingsKeywordStyle{#1}}>}
+\newcommand{\FuncParam}[1]{{\ListingsParamStyle{#1}}}
 \newcommand{\LibConstDecl}[2][\CorCpp]{%
   \parbox[t]{5cm}{~\\[-4pt] #1: \\\hspace*{8mm} \LibConstRef{#2} \\~}}
 \newcommand{\LibHandleDecl}[2][\CorCpp]{%
   \parbox[t]{0pt}{~\\[-4pt] #1: \\\hspace*{8mm} \LibHandleRef{#2} \\~}}
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\par\nobreak}
+\setlength{\parindent}{0pt}
 
 \begin{acronym}
-\acro{RMA}{\emph{Remote Memory Access}}
+\acro{RMA}{Remote Memory Access}
 \acro{RMO}{\emph{Remote Memory Operation}}
-\acro{AMO}{\emph{Atomic Memory Operation}}
+\acro{AMO}{Atomic Memory Operation}
 \acro{PE}{\emph{Processing Element}}
 \acrodefplural{PE}[PEs]{\emph{Processing Elements}}
 \acro{PGAS}{\emph{Partitioned Global Address Space}}
 \acro{API}{\emph{Application Programming Interface}}
 \acro{MPI}{\emph{Message Passing Interface}}
 \acro{SPMD}{\emph{Single Program Multiple Data}}
+\acro{ANL}{Argonne National Labratory}
 \acro{ARL}{Army Research Laboratory}
 \acro{AMD}{Advanced Micro Devices}
 \acro{MPMD}{\emph{Multiple Program Multiple Data}}
@@ -109,6 +113,7 @@
 \acro{ORNL}{Oak Ridge National Laboratory}
 \acro{LANL}{Los Alamos National Laboratory}
 \acro{ESSC}{Extreme Scale Systems Center}
+\acro{OS}{operating system}
 \acro{OSSS}{Open Source Software Solutions}
 \acro{SGI}{Silicon Graphics International}
 \acro{DoD}{U.S. Department of Defense}
@@ -117,68 +122,26 @@
 \acro{HPE}{Hewlett Packard Enterprise}
 \end{acronym}
 
+% Remove whitespace and retain commas when using cleveref's `\cref`.
+% https://tex.stackexchange.com/a/340502 by users/16967/heiko-oberdiek
+\makeatletter
+\let\org@@cref\@cref
+% Modify cleveref's internal \@cref to zap spaces between list elements.
+\renewcommand*{\@cref}[2]{%
+  \edef\process@me{%
+    \noexpand\org@@cref{#1}{\zap@space#2 \@empty}%
+  }\process@me
+}
+\makeatother
+\newcommand{\ChangelogRef}[1]{\\See \Cref{#1}.}
 
 % Grab current listings style for use in environment escape to LaTeX.
-% https://tex.stackexchange.com/a/209644
+% https://tex.stackexchange.com/a/209644 by users/21891/jub0bs
 \makeatletter
 \newcommand\ListingsCurrentStyle{}
 \lst@AddToHook{Output}{\global\let\ListingsCurrentStyle\lst@thestyle}
 \lst@AddToHook{OutputOther}{\global\let\ListingsCurrentStyle\lst@thestyle}
-\newcommand\ListingsKeywordStyle{}
-\lst@AddToHook{Output}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
-\lst@AddToHook{OutputOther}{\global\let\ListingsKeywordStyle\lst@keywordstyle}
 \makeatother
-
-%
-% This is used to put line numbers on plain pages.  Used in draft.tex
-%
-\makeatletter
-
-\def\withlinenumbers{\relax
-  \def\@evenfoot{\hbox to 0pt{\hss\LineNumberRuler\hskip 1.5pc}\hfil}\relax
-  \def\@oddfoot{\hfil\hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}}
-
-\def\LineNumberRuler{\vbox to 0pt{\vss\normalsize \baselineskip13.6pt
-    \lineskip 1pt \normallineskip 1pt \def\baselinestretch{1}\relax
-    \LNR{1}\LNR{2}\LNR{3}\LNR{4}\LNR{5}\LNR{6}\LNR{7}\LNR{8}\LNR{9}
-    \LNR{10}\LNR{11}\LNR{12}\LNR{13}\LNR{14}
-        \LNR{15}\LNR{16}\LNR{17}\LNR{18}\LNR{19}
-    \LNR{20}\LNR{21}\LNR{22}\LNR{23}\LNR{24}
-        \LNR{25}\LNR{26}\LNR{27}\LNR{28}\LNR{29}
-    \LNR{30}\LNR{31}\LNR{32}\LNR{33}\LNR{34}\LNR{35}
-        \LNR{36}\LNR{37}\LNR{38}\LNR{39}
-    \LNR{40}\LNR{41}\LNR{42}\LNR{43}\LNR{44}
-        \LNR{45}\LNR{46}\LNR{47}\LNR{48}
-    \vskip 31pt}}
-\def\LNR#1{\hbox to 1pc{\hfil\tiny#1\hfil}}
-
-\def\ps@plainwithlinenumbers{\let\@mkboth\@gobbletwo
-     \def\@oddhead{}
-     \def\@oddfoot{\hfil\rm\thepage\hfil
-       \hbox to 0pt{\hskip 1.5pc\LineNumberRuler\hss}}
-     \def\@evenhead{}
-     \def\@evenfoot{\hbox to 0pt{\hss
-     \LineNumberRuler\hskip 1.5pc}\rm\hfil\thepage\hfil}}
-
-    % Contents is done with \chapter*{Contents}, so we need to turn off the
-    % line numbers in this case.  Easiest to look at def
-
-\newwrite\chappages
-\immediate\openout\chappages=chappage.txt
-\def\writespace{ }
-
-\def\incontents{0}
-\newif\ifcontents
-\contentsfalse
-\def\chapter{\clearpage \ifcontents\else\thispagestyle{plainwithlinenumbers}\fi
-        \write\chappages{Chapter \thechapter\writespace - \the\count0}
-        \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter}
-
-\makeatother
-
-%
-% End this is used to put line numbers on plain pages.  Used in draft.tex
-%
 
 %
 % Use Sans Serif font for sections, etc.
@@ -202,145 +165,64 @@
 %
 % This section is for example code listings
 %
+
+\newcommand{\ListingsParamStyle}{\bfseries\itshape\color{CadetBlue}}
+
+\lstdefinestyle{SourceListingsDefault}{
+  language={C},
+  breaklines=true,
+  breakatwhitespace=true,
+  escapechar=@,
+  tabsize=2,
+  basicstyle=\ttfamily\footnotesize,
+  showstringspaces=false,
+  % Preprocessor directives
+  classoffset=0,
+  keywords={\#include, \#pragma, \#if, \#ifdef, \#else, \#endif},
+  keywordstyle=\bfseries\color{CadetBlue},
+  % Language keywords
+  classoffset=1,
+  keywords={
+    if, else, for, while, do, return, break, continue,
+    static, const, volatile,
+    sizeof, typedef, struct, union,
+    switch, case, default, goto,
+  },
+  keywordstyle=\bfseries\color{Orchid},
+  % Types
+  classoffset=2,
+  keywords={
+    _Thread_local, _Noreturn,
+    void, bool, _Bool, unsigned, char, short, int, long,
+    float, double, _Complex, complex, size_t, ptrdiff_t,
+    int8_t, int16_t, int32_t, int64_t,
+    uint8_t, uint16_t, uint32_t, uint64_t,
+    shmem_ctx_t, shmem_team_t, shmem_team_config_t,
+    FILE,
+  },
+  keywordstyle=\color{OliveGreen},
+  % Other elements
+  classoffset=3,
+  keywords={NULL},
+  keywordstyle=\color{Cyan},
+  % Type-generic parameters (see FuncParam)
+  classoffset=4,
+  keywords={TYPE, TYPENAME, SIZE},
+  keywordstyle=\ListingsParamStyle,
+  % Other syntax elements
+  commentstyle=\itshape\color{BrickRed},
+  stringstyle=\color{DarkOrchid},
+  backgroundcolor=\color{gray},
+}
+
 \definecolor{gray}{rgb}{0.92,0.92,0.92}
 
-\lstset{ % set defaults for languages not otherwise defined
-  breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
-  basicstyle=\ttfamily\footnotesize,
-  breaklines=true,                 % sets automatic line breaking
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
-                                   % encodings only, does not work with UTF-8
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code
-                                   % (possibly needs columns=flexible)
-  morekeywords={*,...},            % if you want to add more keywords to the set
-  showspaces=false,                % show spaces everywhere adding particular underscores;
-                                   % it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
+\lstdefinestyle{PrototypeListingsDefault}{
+  style=SourceListingsDefault,
+  backgroundcolor=\color{gray},
 }
 
-\def\StandardListing {
-  \lstset {
-    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-    basicstyle=\ttfamily\footnotesize,
-    breaklines=true,                 % sets automatic line breaking
-    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits
-                                     % encodings only, does not work with UTF-8
-    keepspaces=true,                 % keeps spaces in text, useful for keeping
-                                     % indentation of code (possibly needs columns=flexible)
-    morekeywords={*,...},            % if you want to add more keywords to the set
-    showspaces=false,                % show spaces everywhere adding particular underscores;
-                                     % it overrides 'showstringspaces'
-    showstringspaces=false,          % underline spaces within strings only
-    showtabs=false,                  % show tabs within strings adding particular underscores
-    backgroundcolor=\color{gray},
-  }
-}
-
-\def\ProgramNumberedListing {
-  \StandardListing
-  \lstset {
-    numbers=left,
-    numberstyle=\footnotesize
-  }
-}
-
-\newcommand{\numberedlisting}[2] {
-  \ProgramNumberedListing
-  \lstinputlisting[#1]{#2}
-  \StandardListing
-}
-
-\newcommand{\outputlisting}[2] {
-\begin{minipage}{\linewidth}
-\vspace{0.1in}
-  \lstinputlisting[#1]{#2}
-  \StandardListing
-\vspace{0.1in}
-\end{minipage}
-}
-
-\lstdefinelanguage{OSH+C}[]{C}{
-  classoffset=1,
-  morekeywords={
-    size_t, ptrdiff_t,
-    SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
-    start_pes,
-    my_pe, _my_pe, shmem_my_pe,
-    num_pes, _num_pes, shmem_n_pes,
-    shmem_int_p, shmem_short_p, shmem_long_p,
-    shmem_int_put, shmem_short_put, shmem_long_put,
-    shmem_barrier_all, shmem_barrier,
-    shmalloc,  shfree, shrealloc,
-    shmem_broadcast32, shmem_broadcast64,
-    shmem_short_inc, shmem_int_inc, shmem_long_inc,
-    shmem_short_add, shmem_int_add, shmem_long_add,
-    shmem_short_finc, shmem_int_finc, shmem_long_finc,
-    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
-    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
-    shmem_long_sum_to_all,
-    shmem_complexd_sum_to_all
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=true
-}
-
-\lstdefinelanguage{OSH2+C}[]{OSH+C}{
-  classoffset=1,
-  morekeywords={
-    shmem_init,
-    shmem_finalize,
-    shmem_malloc,
-    shmem_my_pe,
-    shmem_error,
-    shmem_global_exit,
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=true
-}
-
-\lstdefinelanguage{OSH+F}[]{Fortran}{
-  classoffset=1,
-  morekeywords={
-    SHMEM_BCAST_SYNC_SIZE, SHMEM_SYNC_VALUE,
-    start_pes,
-    my_pe, shmem_my_pe,
-    num_pes, shmem_n_pes,
-    shmem_int_p, shmem_short_p, shmem_long_p,
-    shmem_int_put, shmem_short_put, shmem_long_put,
-    shmem_barrier_all, shmem_barrier,
-    shpalloc,  shpdeallc, shpclmove,
-    shmem_broadcast32, shmem_broadcast64,
-    shmem_broadcast4, shmem_broadcast8,
-    shmem_short_inc, shmem_int_inc, shmem_long_inc,
-    shmem_short_add, shmem_int_add, shmem_long_add,
-    shmem_short_finc, shmem_int_finc, shmem_long_finc,
-    shmem_short_fadd, shmem_int_fadd, shmem_long_fadd,
-    shmem_set_lock, shmem_test_lock, shmem_clear_lock,
-    shmem_long_sum_to_all,
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=false
-}
-
-\lstdefinelanguage{OSH2+F}[]{OSH+F}{
-  classoffset=1,
-  morekeywords={
-    shmem_init,
-    shmem_finalize,
-    shmem_malloc,
-    shmem_my_pe,
-    shmem_error,
-    shmem_global_exit,
-  },
-  keywordstyle=\color{black}\textbf,
-  classoffset=0,
-  sensitive=true
-}
+\lstset{style=SourceListingsDefault}
 
 %
 % End this section is for example code listings
@@ -399,63 +281,41 @@
 \vspace{-2em}
 }
 {
+\end{description} % ends \begin{description} from \apidescription
 \end{description}
 }
 
 \lstnewenvironment{Cpp11synopsis}
 {
   \textbf{C++11:}
-  \lstset{language={C++}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-  morekeywords={size_t, ptrdiff_t, TYPE, noreturn},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 \lstnewenvironment{C11synopsis}
 {
   \textbf{C11:}
-  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, _Noreturn, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t, uint64_t},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 \lstnewenvironment{CsynopsisCol}
 {
-  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t, uint64_t},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 
 \lstnewenvironment{Csynopsis}
 {
   \textbf{C/C++:}
-  \lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, shmem_team_config_t, uint64_t},
-  aboveskip=0pt, belowskip=0pt}}{}
+  \lstset{style=PrototypeListingsDefault}
+}{}
 
 \lstnewenvironment{CsynopsisST}
 {
   \textbf{C/C++:}
-  \color{red}
-  {\lstset{language={C}, backgroundcolor=\color{gray}, lineskip=2pt,
-    escapechar=@,
-    morekeywords={size_t, ptrdiff_t, TYPE, TYPENAME, SIZE, shmem_ctx_t,
-      shmem_team_t, uint64_t},
-    aboveskip=0pt, belowskip=0pt}}}{}
-
-\lstnewenvironment{Fsynopsis}
-{ \deprecationstart \\
-  \textbf{FORTRAN:}
-  \lstset{language={Fortran}, backgroundcolor=\color{gray}, lineskip=3pt,
-    escapechar=@,
-  deletekeywords=[2]{STATUS},
-  deletekeywords=[3]{LOG}, aboveskip=0pt,
-  belowskip=0pt}}
-{ \deprecationend }
+  \color{red}{
+    \lstset{style=PrototypeListingsDefault}
+  }
+}{}
 
 \newenvironment{apiarguments}{
 \newcommand{\apiargument}[3]{
@@ -511,36 +371,62 @@
 \item[Notes] \hfill \\
     #1
 \hfill \\
-\end{description}
 }
 
 \newcommand{\apiimpnotes}[1]{
-\begin{description}
-\item[Note to implementors] \hfill \\
+\item[Note to implementers] \hfill \\
     #1
 \hfill \\
+}
+
+\newcommand{\parimpnotes}[1]{
+\begin{description}
+\item[Note to implementers] \leavevmode \\
+    #1
 \end{description}
 }
 
+\theoremstyle{definition}
+\newtheorem{source_example}{Example}
+\newtheorem{program_output}{Output}
+
 \newenvironment{apiexamples}{
-\newcommand{\apicexample}[3]{
-    ##1
-    \lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t,  _Thread_local, shmem_team_t, uint64_t}]{##2}
-    ##3 }
-\vspace{-2pt}
+  \newcommand{\apicexample}[4][]{
+    \begin{source_example}
+      \ifthenelse{\equal{##1}{}}{}{\label{##1}}
+      ##2
+    \end{source_example}
+    \lstinputlisting[style=SourceListingsDefault]{##3}
+    ##4}
+  \vspace{-2pt}
 \item[EXAMPLES] \hfill \\
-\vspace{-2pt}
-}
-{
+  \vspace{-2pt}
+}{}
+
+\newcommand{\SourceExample}[2]{
+  \noindent
+  \begin{minipage}{\linewidth}
+    \vspace{0.1in}
+    \begin{source_example}
+      #2 \hfill
+      \lstinputlisting[style=SourceListingsDefault]{#1}
+    \end{source_example}
+    \vspace{0.1in}
+  \end{minipage}
 }
 
-\newcommand{\cexample}[2]{
-    #1
-    \lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize,
-      morekeywords={size_t, ptrdiff_t, shmem_ctx_t}]{#2}}
+\newcommand{\ProgramOutput}[2]{
+  \noindent
+  \begin{minipage}{\linewidth}
+    \vspace{0.1in}
+    \begin{program_output}
+      #2 \hfill
+      \lstinputlisting[style=SourceListingsDefault]{#1}
+    \end{program_output}
+    \vspace{0.1in}
+  \end{minipage}
+}
+
 %
 % End library API description template commands
 %

@@ -1,6 +1,6 @@
 name: CI
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -14,11 +14,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
     - name: Build PDF
-      run: make LATEXOPT="-interaction batchmode -halt-on-error"
+      run: make LATEXOPT="-interaction nonstopmode -halt-on-error"
     - name: Rename PDF
-      run: mv main_spec.pdf openshmem-draft-${{ github.sha }}.pdf
+      run: mv main_spec.pdf openshmem-draft-${{ github.event.pull_request.head.sha }}.pdf
     - name: Upload PDF artifact
       uses: actions/upload-artifact@v1
       with:
-        name: openshmem-draft-${{ github.sha }}
-        path: openshmem-draft-${{ github.sha }}.pdf
+        name: openshmem-draft-${{ github.event.pull_request.head.sha }}
+        path: openshmem-draft-${{ github.event.pull_request.head.sha }}.pdf

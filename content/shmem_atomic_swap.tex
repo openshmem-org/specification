@@ -47,17 +47,11 @@ where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
     \FUNC{shmem\_atomic\_swap} performs an atomic swap operation.
     It writes \VAR{value} into \dest{} on \ac{PE} and returns the previous
     contents of \dest{} as an atomic operation.
-    If the context handle \VAR{ctx} does not correspond to a valid context,
-    the behavior is undefined.
 }
 
 \apireturnvalues{
        The content that had been at the \dest{} address on the remote \ac{PE}
        prior to the swap is returned.
-}
-
-\apinotes{
-    None.
 }
 
 \begin{apiexamples}

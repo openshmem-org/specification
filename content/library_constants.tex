@@ -108,8 +108,8 @@ memory will be used for signal variables. See Section
 \ref{subsec:shmmallochint} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_SYNC\_VALUE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_SYNC\_VALUE}
   \LibConstDecl{\_SHMEM\_SYNC\_VALUE}
 \end{DeprecateBlock}
 &
@@ -118,17 +118,19 @@ The value of this constant is implementation specific.
 See Section~\ref{subsec:coll} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_SYNC\_SIZE}
+\begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_SYNC\_SIZE}
+\end{DeprecateBlock}
 &
-Length of a work array that can be used with any SHMEM collective
+Length of a work array that can be used with any \openshmem collective
 communication operation.
 Work arrays sized for specific operations may consume less memory.
 The value of this constant is implementation specific.
 See Section~\ref{subsec:coll} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_BCAST\_SYNC\_SIZE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_BCAST\_SYNC\_SIZE}
   \LibConstDecl{\_SHMEM\_BCAST\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
@@ -137,8 +139,8 @@ of this constant is implementation specific.
 See Section~\ref{subsec:shmem_broadcast} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_REDUCE\_SYNC\_SIZE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_REDUCE\_SYNC\_SIZE}
   \LibConstDecl{\_SHMEM\_REDUCE\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
@@ -147,8 +149,8 @@ The value of this constant is implementation specific.
 See Section~\ref{subsec:shmem_reductions} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_BARRIER\_SYNC\_SIZE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_BARRIER\_SYNC\_SIZE}
   \LibConstDecl{\_SHMEM\_BARRIER\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
@@ -158,8 +160,8 @@ See Section~\ref{subsec:shmem_barrier} for more detail about its use.
 
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_COLLECT\_SYNC\_SIZE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_COLLECT\_SYNC\_SIZE}
   \LibConstDecl{\_SHMEM\_COLLECT\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
@@ -168,8 +170,8 @@ The value of this constant is implementation specific.
 See Section~\ref{subsec:shmem_collect} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_ALLTOALL\_SYNC\_SIZE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_ALLTOALL\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the work array needed for \FUNC{shmem\_alltoall} routines.
@@ -177,8 +179,8 @@ The value of this constant is implementation specific.
 See Section~\ref{subsec:shmem_alltoall} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_ALLTOALLS\_SYNC\_SIZE}
 \end{DeprecateBlock}
 &
 Length of the work array needed for \FUNC{shmem\_alltoalls} routines.
@@ -186,8 +188,8 @@ The value of this constant is implementation specific.
 See Section~\ref{subsec:shmem_alltoalls} for more detail about its use.
 \tabularnewline \hline
 %%
-\LibConstDecl{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
 \begin{DeprecateBlock}
+  \LibConstDecl{SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
   \LibConstDecl{\_SHMEM\_REDUCE\_MIN\_WRKDATA\_SIZE}
 \end{DeprecateBlock}
 &

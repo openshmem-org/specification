@@ -53,18 +53,12 @@ and has a corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
     \VAR{dest} between the time of the fetch and the update.  These routines add
     \VAR{value} to \VAR{dest} on \VAR{pe} and return the previous contents of
     \VAR{dest} as an atomic operation.
-    If the context handle \VAR{ctx} does not correspond to a valid context,
-    the behavior is undefined.
 }
 
 \apireturnvalues{
     The contents that had been at the \VAR{dest} address on the remote \ac{PE}
     prior to the atomic addition operation.  The data type of the return value is
     the same as the \VAR{dest}.
-}
-
-\apinotes{
-    None.
 }
 
 \begin{apiexamples}

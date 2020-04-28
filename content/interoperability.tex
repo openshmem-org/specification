@@ -34,14 +34,14 @@ a call to \FUNC{shmem\_finalize}; the \ac{MPI} environment of the program must b
 by a call to \FUNC{MPI\_Init} or \FUNC{MPI\_Init\_thread} and be finalized by a
 call to \FUNC{MPI\_Finalize}.
 
-\apiimpnotes{
-Portable implementations of OpenSHMEM and \ac{MPI} must ensure that the initialization
-calls can be made in an arbitrary order within a program; the same rule also
-applies to the finalization calls. A software runtime that utilizes a shared
-communication resource for \openshmem and \ac{MPI} communication may maintain an
-internal reference counter in order to ensure that the shared resource is
-initialized only once and thus no shared resource is released until the last
-finalization call is made.
+\parimpnotes{
+  Portable implementations of OpenSHMEM and \ac{MPI} must ensure that the initialization
+  calls can be made in an arbitrary order within a program; the same rule also
+  applies to the finalization calls. A software runtime that utilizes a shared
+  communication resource for \openshmem and \ac{MPI} communication may maintain an
+  internal reference counter in order to ensure that the shared resource is
+  initialized only once and thus no shared resource is released until the last
+  finalization call is made.
 }
 
 
@@ -126,23 +126,22 @@ program when necessary.
 
 \subsubsection*{Examples}
 \label{subsubsec:interoperability:id:example}
-The following example demonstrates how to manage the mapping between \openshmem
-\ac{PE} numbers and \ac{MPI} ranks in \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem
-and \ac{MPI} program.
 
-\lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize]
-      {example_code/hybrid_mpi_mapping_id.c}
+\SourceExample{example_code/hybrid_mpi_mapping_id.c}{
+  The following example demonstrates how to manage the mapping between
+  \openshmem \ac{PE} numbers and \ac{MPI} ranks in
+  \VAR{MPI\_COMM\_WORLD} in a hybrid \openshmem and \ac{MPI} program.
+}
 
-The following example demonstrates an alternative approach for managing the mapping
-of process identification numbers in a hybrid program. The program creates a
-new MPI communicator, named \VAR{shmem\_comm}, that contains all
-processes in \VAR{MPI\_COMM\_WORLD} and each process has the same \ac{MPI} rank
-number as its \openshmem \ac{PE} number.
 
-\lstinputlisting[language={C}, tabsize=2,
-      basicstyle=\ttfamily\footnotesize]
-      {example_code/hybrid_mpi_mapping_id_shmem_comm.c}
+\SourceExample{example_code/hybrid_mpi_mapping_id_shmem_comm.c}{
+  The following example demonstrates an alternative approach for
+  managing the mapping of process identification numbers in a hybrid
+  program. The program creates a new MPI communicator, named
+  \VAR{shmem\_comm}, that contains all processes in
+  \VAR{MPI\_COMM\_WORLD} and each process has the same \ac{MPI} rank
+  number as its \openshmem \ac{PE} number.
+}
 
 \subsection{RMA Programming Models}
 \label{subsec:interoperability:rma}

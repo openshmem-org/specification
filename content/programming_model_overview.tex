@@ -2,17 +2,17 @@
 mechanisms to share information among \openshmem processes, or \acp{PE}, and
 private data objects that are accessible by only the \ac{PE} itself. The \ac{API}
 allows communication and synchronization operations on both private (local to
-the PE initiating the operation) and remotely accessible data objects. The key
+the \ac{PE} initiating the operation) and remotely accessible data objects. The key
 feature of \openshmem is that data transfer operations are
 \emph{one-sided} in nature. This means that a local \ac{PE} executing
 a data transfer routine does not require the participation of the remote \ac{PE}
 to complete the routine. This allows for overlap between communication and
 computation to hide data transfer latencies, which makes  \openshmem ideal for
-unstructured, small/medium size data communication patterns. The \openshmem
-library routines have the potential to provide a low-latency, high-bandwidth
+unstructured, small-to-medium-sized data communication patterns. The \openshmem
+library has the potential to provide a low-latency, high-bandwidth
 communication \ac{API} for use in highly parallelized scalable programs.
 
-The \openshmem interfaces can be used to implement \ac{SPMD} style programs.
+\openshmem's interfaces can be used to implement \ac{SPMD} style programs.
 It provides interfaces to start the \openshmem \acp{PE} in parallel and
 communication and synchronization interfaces to access remotely accessible data
 objects across \acp{PE}. These interfaces can be leveraged to divide a problem
@@ -59,7 +59,7 @@ An overview of the \openshmem routines is described below:
         performed by the application.
 \end{enumerate}
 
-\item \textbf{Remote Memory Access}
+\item \textbf{\acf{RMA}}
 \begin{enumerate}
     \item \PUT: The local \ac{PE} specifies the \source{} data object, private
         or symmetric, that is copied to the symmetric data object on the remote
@@ -69,7 +69,7 @@ An overview of the \openshmem routines is described below:
       \ac{PE}.
 \end{enumerate}
 
-\item \textbf{Atomics}
+\item \textbf{\acfp{AMO}}
 \begin{enumerate}
     \item \OPR{Swap}: The \ac{PE} initiating the swap gets the old value of a
         symmetric data object from a remote \ac{PE} and copies a new value to
@@ -99,7 +99,7 @@ An overview of the \openshmem routines is described below:
 \item \textbf{Synchronization and Ordering}
 \begin{enumerate}
   \item \OPR{Fence}: The \ac{PE} calling fence ensures ordering of
-  \PUT, AMO, and memory store operations
+  \PUT, \ac{AMO}, and memory store operations
   to symmetric data objects with respect to a specific
       destination \ac{PE}.
   \item \OPR{Quiet}: The \ac{PE} calling quiet ensures remote completion of remote access
@@ -107,7 +107,7 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Barrier}: All or some \acp{PE} collectively synchronize and ensure
       completion of all remote and local updates prior to any \ac{PE} returning
       from the call.
-  \item \OPR{Wait and Test}: A PE calling a point-to-point synchronization
+  \item \OPR{Wait and Test}: A \ac{PE} calling a point-to-point synchronization
       routine ensures the value of a local symmetric object meets a specified
       condition.  Wait operations block until the specified condition is
       met, whereas test operations return immediately and indicate whether or
@@ -139,13 +139,5 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Clear Lock}: The \ac{PE} which has previously acquired the
       \VAR{lock} releases it.
 \end{enumerate}
-
-\begin{DeprecateBlock}
-\item \textbf{Data Cache Control}
-\begin{enumerate}
-  \item Implementation of mechanisms to exploit the capabilities of hardware cache
-      if available.
-\end{enumerate}
-\end{DeprecateBlock}
 
 \end{enumerate}

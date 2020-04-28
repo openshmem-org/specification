@@ -58,12 +58,13 @@ int @\FuncDecl{shmem\_team\_create\_ctx}@(shmem_team_t team, long options, shmem
   Zero on success and nonzero otherwise.
 }
 
-\apinotes{
-  None.
-}
-
 \begin{apiexamples}
-     See example in Section \ref{subsec:shmem_ctx_get_team}
+    \apicexample
+    {The following example demonstrates the use of contexts for multiple teams in a
+    \Cstd[11] program. This example shows contexts being used to communicate within
+    a team using team \ac{PE} numbers, and across teams using translated \ac{PE} numbers.}
+    {./example_code/shmem_team_context.c}
+    {}
 \end{apiexamples}
 
 \end{apidefinition}
