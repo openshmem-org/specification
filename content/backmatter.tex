@@ -184,7 +184,7 @@ The following cases summarize this behavior:
 Multithreaded use of a team in concurrent team-based collectives &
 Team-based collective operations are not thread-safe on the same \VAR{team}
 object.
-Concurrent use of a team from multiple threads may result in undefined
+Concurrent collective operations on the same team from multiple threads may result in undefined
 behavior.
 For example, it is undefined behavior for one thread to call a team-implicit
 collective which implicitly operates on the world team (e.g.,
