@@ -1,5 +1,5 @@
 The \acp{PE} in an \openshmem program communicate using either
-point-to-point routines --- such as \ac{RMA} and \ac{AMO} routines --- that specify the \ac{PE} number of the target
+point-to-point routines---such as \ac{RMA} and \ac{AMO} routines---that specify the \ac{PE} number of the target
 \ac{PE}, or collective routines that operate over a set of \acp{PE}.
 \openshmem teams allow programs to group a set of \acp{PE} for
 communication.
@@ -14,8 +14,8 @@ numbering through team-based contexts (see Section~\ref{sec:ctx}) or
 An \openshmem team may be predefined (i.e., provided by the \openshmem
 library) or defined by the \openshmem application.
 An application-defined team is created by ``splitting'' a parent team into
-one or more new teams --- each with some subset of \acp{PE} of the
-parent team --- via one of the \FUNC{shmem\_team\_split\_*} routines.
+one or more new teams---each with some subset of \acp{PE} of the
+parent team---via one of the \FUNC{shmem\_team\_split\_*} routines.
 
 All predefined teams are valid for the duration of the \openshmem
 portion of an application.
@@ -58,8 +58,8 @@ teams may be performed in parallel.
 
 In \openshmem, a team object encapsulates resources used to communicate
 between \acp{PE} in collective operations. When calling multiple subsequent
-collective operations on a team, the collective operations --- along with any
-relevant team based resources --- are matched across the \acp{PE} in the team
+collective operations on a team, the collective operations---along with any
+relevant team based resources---are matched across the \acp{PE} in the team
 based on ordering of collective routine calls. It is the responsibility
 of the user to ensure that team-based collectives occur in the same program order
 across all \acp{PE} in a team.
