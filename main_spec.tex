@@ -38,7 +38,7 @@
 
 
 
-\section{OpenSHMEM Library API}\label{sec:openshmem_library_api}
+\section{OpenSHMEM Library \acs{API}}\label{sec:openshmem_library_api}
 
 \subsection{Library Setup, Exit, and Query Routines}
 The library setup and query interfaces that initialize and monitor the parallel
@@ -448,11 +448,11 @@ affected by \openshmem memory ordering routines.
                                      & X & X \\
   Blocking \OPR{Put}                 & X & X \\
   Blocking \OPR{Get}                 &   &   \\
-  Blocking \OPR{AMO}                 & X & X \\
+  Blocking \OPR{\acs{AMO}}           & X & X \\
   Blocking \OPR{put-with-signal}     & X & X \\
   Nonblocking \OPR{Put}              & X & X \\
   Nonblocking \OPR{Get}              &   & X \\
-  Nonblocking \OPR{AMO}              & X\footnote{\openshmem fence routines does
+  Nonblocking \OPR{\acs{AMO}}        & X\footnote{\openshmem fence routines does
   not guarantee order of delivery of values fetched by nonblocking \ac{AMO}
   routines.}
                                          & X \\
