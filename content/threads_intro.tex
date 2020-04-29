@@ -21,7 +21,11 @@ The \openshmem program may be multithreaded and any thread may invoke the \opens
 interfaces.
 \end{description}
 
-\noindent The following semantics apply to the usage of these models:
+\sloppypar
+\noindent The thread level constants must have increasing integer values; i.e.,
+\CONST{SHMEM\_THREAD\_SINGLE} < \CONST{SHMEM\_THREAD\_FUNNELED} <
+\CONST{SHMEM\_THREAD\_SERIALIZED} < \CONST{SHMEM\_THREAD\_MULTIPLE}.
+The following semantics apply to the usage of these models:
 
 \begin{enumerate}
 \item

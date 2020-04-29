@@ -143,13 +143,13 @@ program when necessary.
   number as its \openshmem \ac{PE} number.
 }
 
-\subsection{RMA Programming Models}
+\subsection{\ac{RMA} Programming Models}
 \label{subsec:interoperability:rma}
 
 \openshmem and \ac{MPI} each define similar one-sided communication models;
 however, a portable program should not assume interoperability between these
 models.
-For instance, \openshmem guarantees the atomicity only of concurrent \openshmem AMO operations
+For instance, \openshmem guarantees the atomicity only of concurrent \openshmem \ac{AMO} operations
 that operate on symmetric data with the same datatype. Access to the same symmetric
 object with \ac{MPI} atomic operations, such as an \FUNC{MPI\_Fetch\_and\_op}, may
 result in an undefined result. A hybrid program should avoid situations where \ac{MPI} and

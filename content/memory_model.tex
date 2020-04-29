@@ -156,7 +156,7 @@ will invalidate the atomicity guarantees.
   atomic increment operations are concurrent with a non-atomic reduction
   operation, resulting in undefined behavior.  The undefined behavior can be
   resolved by inserting a barrier operation before the reduction.  The
-  barrier ensures that all local and remote AMOs have completed before the
+  barrier ensures that all local and remote \acp{AMO} have completed before the
   reduction operation accesses $x$.
 }
 

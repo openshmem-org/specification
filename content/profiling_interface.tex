@@ -31,10 +31,10 @@ are layered on top of each other. Using this documentation,
 developers can determine whether they need to implement the 
 profile interface for each binding or not. For example, it must 
 be noted that the \openshmem \Cstd[11] type-generic interfaces for 
-different RMA and AMO operations cannot have any equivalent 
+different \ac{RMA} and \ac{AMO} operations cannot have any equivalent
 \FUNC{pshmem\_} interfaces because the \Cstd[11] type-generic 
 interfaces are implemented as macros.
-\item In the case where the implementation of different API  
+\item In the case where the implementation of different \ac{API}  
 feature sets is implemented through a layered approach using 
 ``wrapper'' functions, the wrapper functions must be kept separate 
 from the rest of the library. This requirement allows the developers 
@@ -63,7 +63,7 @@ purposes of
 \begin{itemize}
 \item Enabling and disabling of profiling based on the current 
 state of the execution and calculation,
-\item Flushing of the trace buffers at non-critical execution 
+\item Flushing of the trace buffers at noncritical execution
 regions,
 \item Adding user events to a trace file.
 \end{itemize}
