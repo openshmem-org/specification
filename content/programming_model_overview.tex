@@ -59,6 +59,16 @@ An overview of the \openshmem routines is described below:
         performed by the application.
 \end{enumerate}
 
+\item \textbf{Team Management}
+\begin{enumerate}
+    \item \OPR{Teams}: Teams are process subsets created by grouping a set of
+    \acp{PE}. Teams are involved in both collective and point-to-point
+    communication operations. Collective communication operations are performed
+    on all \acp{PE} in a valid team and point-to-point communication operations
+    are performed between a local and remote \ac{PE} with team-related \ac{PE}
+    numbering through team-based contexts.
+\end{enumerate}
+
 \item \textbf{\acf{RMA}}
 \begin{enumerate}
     \item \PUT: The local \ac{PE} specifies the \source{} data object, private
@@ -94,6 +104,14 @@ An overview of the \openshmem routines is described below:
       operation specifies the operand value to the bitwise operation to be
       performed on the symmetric data object on the remote \ac{PE}
       and returns the old value.
+\end{enumerate}
+
+\item \textbf{Signaling Operations}
+\begin{enumerate}
+  \item \OPR{Signaling Put}: The local \ac{PE} specifies the \source{} data
+        object, private or symmetric, that is copied to the symmetric data
+        object on the remote \ac{PE} and it subsequently updates a flag
+        on the remote \ac{PE} to signal completion.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
