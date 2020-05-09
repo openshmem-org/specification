@@ -108,10 +108,9 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Signaling Operations}
 \begin{enumerate}
-  \item \OPR{Signaling Put}: The local \ac{PE} specifies the \source{} data
-        object, private or symmetric, that is copied to the symmetric data
-        object on the remote \ac{PE} and it subsequently updates a flag
-        on the remote \ac{PE} to signal completion.
+  \item \OPR{Signaling Put}: The \source{} data is copied to the symmetric
+        object on the remote \ac{PE} and a flag on the remote \ac{PE} is subsequently
+        updated to signal completion.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
