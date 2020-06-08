@@ -126,13 +126,6 @@ scenarios, all of which result in undefined behavior.
         load and store operations) are used to access the same location
         concurrently.
 \end{enumerate}
-For example, during the execution of an atomic remote integer increment
-operation (e.g., \FUNC{shmem\_atomic\_inc}) on a symmetric variable \VAR{X}, no other \openshmem atomic operation
-may access \VAR{X}.  After the increment, \VAR{X} will have increased its value
-by \CONST{1} on the destination \ac{PE}, at which point other atomic operations
-may then modify that \VAR{X}.  However, access to the symmetric object \VAR{X}
-with non-atomic operations, such as one-sided \OPR{put} or \OPR{get} operations,
-will invalidate the atomicity guarantees.
 
 \SourceExample{./example_code/amo_scenario_1.c}{
   The following \CorCpp example illustrates scenario 1.
