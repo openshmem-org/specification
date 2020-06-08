@@ -73,8 +73,10 @@ is the \VAR{y}-coordinate of the calling \ac{PE}.
 
 Any valid \openshmem team can be used as the parent team. This routine must be
 called by all \acp{PE} in the parent team. The value of \VAR{xrange} must be
-a positive integer and all \acp{PE} in the parent team must pass the same value for
-\VAR{xrange}.
+positive and all \acp{PE} in the parent team must pass the same value for
+\VAR{xrange}.  When \VAR{xrange} is greater than the size of the parent team,
+\FUNC{shmem\_team\_split\_2d} behaves as though \VAR{xrange} were equal to the
+size of the parent team.
 
 The \VAR{xaxis\_config} and \VAR{yaxis\_config} arguments specify team
 configuration parameters for the \VAR{x}- and \VAR{y}-axis teams, respectively.
