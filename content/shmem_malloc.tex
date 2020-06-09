@@ -46,7 +46,7 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
     The \FUNC{shmem\_realloc} routine changes the size of the block to which
     \VAR{ptr} points to the size (in bytes) specified by \VAR{size}.  The contents
     of the block are unchanged up to the lesser of the new and old sizes.
-	The \FUNC{shmem\_realloc} routine preserves allocation hints, e.g. if `ptr`
+	The \FUNC{shmem\_realloc} routine preserves allocation hints, e.g., if `ptr`
 	was allocated by \FUNC{shmem\_malloc\_with\_hints}.
 	If the new size is larger, the newly allocated portion of the block is
     uninitialized.  If \VAR{ptr} is a null pointer, the

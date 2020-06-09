@@ -18,7 +18,7 @@ on implementations.
 which all of the \openshmem defined functions may be accessible 
 with a name shift. This requires an alternate 
 entry point name, with the prefix \FUNC{pshmem\_} for each 
-\openshmem function. For \openshmem inlined functions (e.g. macros), 
+\openshmem function. For \openshmem inlined functions (e.g., macros), 
 it is also required that the \FUNC{pshmem\_} version is supplied 
 although it is not possible to replace the \FUNC{shmem\_} version 
 with a user-defined version at link time.
@@ -106,7 +106,7 @@ how the name-shifted requirement can be achieved on such platforms.
   external symbol \FUNC{shmem\_example} as a weak definition that
   aliases the \FUNC{pshmem\_example} function. This
   means that the linker will allow another definition
-  of the symbol (e.g. the profiling library may contain an alternate
+  of the symbol (e.g., the profiling library may contain an alternate
   definition). The weak definition is used in the case where no other
   definition for the same function exists.
 }
@@ -180,5 +180,5 @@ name-shifted \FUNC{pshmem\_} routines are not provided for these
 bindings. Furthermore, because no two associations in a \Cstd[11]
 \FUNC{\_Generic} selection expression can contain compatible types,
 the type name of the \Cstd operation that is invoked may not be
-identical to the type name of the original call's arguments (e.g.
+identical to the type name of the original call's arguments (e.g.,
 \VAR{int32\_t} may map to \VAR{int}).
