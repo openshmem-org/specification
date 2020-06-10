@@ -30,6 +30,8 @@ int @\FuncDecl{shmem\_ctx\_get\_team}@(shmem_ctx_t ctx, shmem_team_t *team);
   then \VAR{team} is assigned the value
   \LibConstRef{SHMEM\_TEAM\_INVALID} and a nonzero value is returned.
   If \VAR{ctx} is otherwise invalid, the behavior is undefined.
+
+  If \VAR{team} is a null pointer, the behavior is undefined.
 }
 
 \apireturnvalues{

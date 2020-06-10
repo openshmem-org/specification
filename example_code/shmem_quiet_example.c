@@ -14,8 +14,8 @@ int main(void) {
     shmem_put(dest, source, 3, 1); /* put1 */
     shmem_put(&targ, &src, 1, 2);  /* put2 */
     shmem_quiet();
-    shmem_get(x, dest, 3, 1);   /* get updated array from dest on PE 1 to local array x */
-    shmem_get(&y, &targ, 1, 2); /* get updated value from targ on PE 2 to local variable y */
+    shmem_get(x, dest, 3, 1);   /* get array dest on PE 1 to local array x */
+    shmem_get(&y, &targ, 1, 2); /* get value targ on PE 2 to local variable y */
     printf("x: { %ld, %ld, %ld }\n", x[0], x[1], x[2]); /* x: { 1, 2, 3 } */
     printf("y: %d\n", y);                               /* y: 90 */
     shmem_put(&targ, &src, 1, 1);                       /* put3 */
