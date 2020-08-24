@@ -1,6 +1,6 @@
 \apisummary{
     The following functions perform reduction operations across all
-    \acp{PE} in a set of \acp{PE}.
+    \acp{PE} in an \openshmem team or active set of \acp{PE}.
 }
 
 \begin{apidefinition}
@@ -32,7 +32,7 @@
 
 \subsubsubsection{AND}
 \label{subsec:shmem_and_reduce}
-Performs a bitwise AND reduction across a set of \acp{PE}.\newline
+Performs a bitwise AND reduction across an \openshmem team or active set of \acp{PE}.\newline
 
 %% C11
 \begin{C11synopsis}
@@ -56,7 +56,7 @@ where \TYPE{} is one of the integer types supported for the AND operation and ha
 
 \subsubsubsection{OR}
 \label{subsec:shmem_or_reduce}
-Performs a bitwise OR reduction across a set of \acp{PE}.\newline
+Performs a bitwise OR reduction across an \openshmem team or active set of \acp{PE}.\newline
 
 %% C11
 \begin{C11synopsis}
@@ -80,7 +80,7 @@ where \TYPE{} is one of the integer types supported for the OR operation and has
 
 \subsubsubsection{XOR}
 \label{subsec:shmem_xor_reduce}
-Performs a bitwise exclusive OR (XOR) reduction across a set of \acp{PE}.\newline
+Performs a bitwise exclusive OR (XOR) reduction across an \openshmem team or active set of \acp{PE}.\newline
 
 %% C11
 \begin{C11synopsis}
@@ -104,7 +104,7 @@ where \TYPE{} is one of the integer types supported for the XOR operation and ha
 
 \subsubsubsection{MAX}
 \label{subsec:shmem_max_reduce}
-Performs a maximum-value reduction across a set of \acp{PE}.\newline
+Performs a maximum-value reduction across an \openshmem team or active set of \acp{PE}.\newline
 
 %% C11
 \begin{C11synopsis}
@@ -129,7 +129,7 @@ where \TYPE{} is one of the integer or real types supported for the MAX operatio
 
 \subsubsubsection{MIN}
 \label{subsec:shmem_min_reduce}
-Performs a minimum-value reduction across a set of \acp{PE}.\newline
+Performs a minimum-value reduction across an \openshmem team or active set of \acp{PE}.\newline
 
 %% C11
 \begin{C11synopsis}
@@ -154,7 +154,7 @@ where \TYPE{} is one of the integer or real types supported for the MIN operatio
 
 \subsubsubsection{SUM}
 \label{subsec:shmem_sum_reduce}
-Performs a sum reduction across a set of \acp{PE}.\newline
+Performs a sum reduction across an \openshmem team or active set of \acp{PE}.\newline
 
 %% C11
 \begin{C11synopsis}
@@ -179,7 +179,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the SU
 
 \subsubsubsection{PROD}
 \label{subsec:shmem_prod_reduce}
-Performs a product reduction across a set of \acp{PE}.\newline
+Performs a product reduction across an \openshmem team or active set of \acp{PE}.\newline
 
 %% C11
 \begin{C11synopsis}
@@ -291,8 +291,8 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 \end{apiarguments}
 
 \apidescription{
-    \openshmem reduction routines are collective routines over an active set or
-    existing \openshmem team that compute one or more reductions across symmetric
+    \openshmem reduction routines are collective routines over an \openshmem team or
+    active set that compute one or more reductions across symmetric
     arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
     across a set of values.
 
