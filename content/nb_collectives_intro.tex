@@ -1,29 +1,29 @@
-An OpenSHMEM nonblocking collective operation, like blocking collective
+An \openshmem nonblocking collective operation, like blocking collective
 operation, is a group communication operation among the
 participants of the team. All participants of the team are required to call the
 collective operation.
 
 \begin{enumerate}
 
-\item Invocation semantics: The non-blocking collective routine initializes the
-buffers, operation type, reduction type, and posts the collective operation. All
-participants of the team should call this routine. The routine returns
-immediately after posting the operation. 
+\item Invocation semantics: Upon invocation of a collective routine interface,
+the operation is posted and returned immediately. All participants of the Team
+should call this routine.
 
-\item Collective Types: Currently, only the nonblocking alltoall, broadcast, and reduction collective
-operations are supported. The reduction operations supported are defined in the
-Table \ref{reducetypes}. 
+\item Collective Types: In the current specification, not all blocking collectives have
+their nonblocking variants. The nonblocking variants supported include alltoall,
+broadcast, and reduction collectives. The reduction types supported
+are defined in the Table \ref{reducetypes}. 
 
-\item Completion semantics: Upon invocation, the collective operations are
-posted and returns immediately. A user can learn the status of the collective operations
-using the \FUNC{shmem\_collective\_test} routine and can be completed using
-the \FUNC{shmem\_collective\_wait} routine.
+\item Completion semantics:  \openshmem programs can learn the status of the collective operations
+using the \FUNC{shmem\_req\_test} routine and can be completed using
+the \FUNC{shmem\_req\_wait} routine.
 
 \item Threads: While using SHMEM\_THREAD\_MULTIPLE, the \openshmem
 programs are allowed to call multiple collective operations on different threads
 and the same Team. The collective operations invoked on different threads
-are ordered by user-provided tag. When the user does not provide the tag, the
-library generates the tag and establishes the order.
+are ordered by user-provided tag. The user may choose to not order the
+collective operations by using the library constant
+\CONST{SHMEM\_COLL\_UNORDERED} instead of specifying the tag.
 
 \end{enumerate}
 

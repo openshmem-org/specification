@@ -8,7 +8,7 @@
 %% C11
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_broadcast\_nb}@(shmem_team_t team, TYPE *dest, const TYPE
-*source, size_t nelems, int PE_root,uint32_t tag, shmem_req_h *request);
+*source, size_t nelems, int PE_root, uint32_t tag, shmem_req_h *request);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
@@ -59,9 +59,16 @@ int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const vo
     \VAR{PE\_root} must be passed by all \acp{PE} participating in the
     collective operation.
 
-    A call to the nonblocking broadcast routine returns immediately without
-    necessarily completing the operation. The operation is completed after a
-    call to \FUNC{shmem\_collective\_test} or \FUNC{shmem\_collective\_wait}.
+    A call to the nonblocking broadcast routine posts the operation and returns
+    immediately without necessarily completing the operation. On the successful
+    post of the operation, an opaque request handle is created and returned. The
+    operation is completed after a call to \FUNC{shmem\_req\_test} or
+    \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
+    is deallocated and cannot be reused.
+
+    The nonblocking broadcast routine is ordered according to the user-defined tag.
+    If \CONST{SHMEM\_COLL\_UNORDERED} is used instead of a tag, the collective
+    operations are not ordered.
 
     Like blocking broadcast, before any \ac{PE} calls a broadcast routine, the following
     conditions must be ensured:
