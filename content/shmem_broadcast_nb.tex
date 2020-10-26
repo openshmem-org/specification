@@ -1,0 +1,104 @@
+\apisummary{
+    Broadcasts a block of data from one \ac{PE} to one or more destination
+    \acp{PE}.
+}
+
+\begin{apidefinition}
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_broadcast\_nb}@(shmem_team_t team, TYPE *dest, const TYPE
+*source, size_t nelems, int PE_root,uint32_t tag, shmem_req_h *request);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
+
+%% C/C++
+\begin{Csynopsis}
+\end{Csynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_broadcast\_nb}@(shmem_team_t team, TYPE
+*dest, const TYPE *source, size_t nelems, int PE_root, uint32_t tag,
+shmem_req_h *request);
+\end{CsynopsisCol}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const void
+*source, size_t nelems, int PE_root, uint32_t tag, shmem_req_h *request);
+\end{CsynopsisCol}
+
+\begin{apiarguments}
+
+\apiargument{IN}{team}{The team over which to perform the operation.}%
+
+\apiargument{OUT}{dest}{Symmetric address of destination data object.
+      The type of \dest{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{source}{Symmetric address of the source data object.
+      The type of \source{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{nelems}{
+  The number of elements in \source{} and \dest{} arrays.
+  For \FUNC{shmem\_broadcastmem\_nb}, elements are bytes;
+  for \FUNC{shmem\_broadcast\{32,64\}\_nb}, elements are 4 or 8 bytes,
+  respectively.
+}
+\apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
+    the team, from which the data is copied.}
+\apiargument{IN}{tag}{A user defined tag to order the collective operation.}
+\apiargument{OUT}{request}{An opaque request handle identifying the collective operation}
+
+
+\end{apiarguments}
+
+\apidescription{   
+    \openshmem nonblocking broadcast routines are collective routines over a 
+    valid \openshmem team.
+    They copy the \source{} data object on the \ac{PE} specified by
+    \VAR{PE\_root} to the \dest{} data object on the \acp{PE}
+    participating in the collective operation.
+    The same \dest{} and \source{} data objects and the same value of
+    \VAR{PE\_root} must be passed by all \acp{PE} participating in the
+    collective operation.
+
+    A call to the nonblocking broadcast routine returns immediately without
+    necessarily completing the operation. The operation is completed after a
+    call to \FUNC{shmem\_collective\_test} or \FUNC{shmem\_collective\_wait}.
+
+    Like blocking broadcast, before any \ac{PE} calls a broadcast routine, the following
+    conditions must be ensured:
+    \begin{itemize}
+    \item The \dest{} array on all \acp{PE} participating in the broadcast
+      is ready to accept the broadcast data.
+    \item All \acp{PE} in the \VAR{team} argument must participate in
+      the operation.
+    \item If the \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
+      otherwise invalid, the behavior is undefined.
+    \item \ac{PE} numbering is relative to the team. The specified
+      root \ac{PE} must be a valid \ac{PE} number for the team,
+      between \CONST{0} and \VAR{N$-$1}, where \VAR{N} is the size of
+      the team.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
+
+    Upon completion of a nonblocking broadcast routine, the following are true for the local
+    \ac{PE}:
+    \begin{itemize}
+    \item The \dest{} data object is
+      updated.
+    \item The \source{} data object may be safely reused.
+    \end{itemize}
+}
+
+
+\apireturnvalues{
+  Zero on successfull posting of the collective
+  operation; otherwise, nonzero.
+}
+
+\apinotes{
+    Team handle error checking and integer return codes are currently undefined.
+    Implementations may define these behaviors as needed, but programs should
+    ensure portability by doing their own checks for invalid team handles and for
+    \LibConstRef{SHMEM\_TEAM\_INVALID}.
+}
+
+\end{apidefinition}
