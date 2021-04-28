@@ -12,7 +12,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
+        sudo apt-get install --ignore-missing texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
     - name: Build PDF
       run: make LATEXOPT="-interaction nonstopmode -halt-on-error"
     - name: Rename PDF
