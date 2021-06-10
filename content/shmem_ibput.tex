@@ -1,24 +1,24 @@
 \apisummary{
-    Copies strided data to a specified \ac{PE}.
+    Copies strided data blocks to a specified \ac{PE}.
 }
 
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_iput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-void @\FuncDecl{shmem\_iput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ibput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+void @\FuncDecl{shmem\_ibput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_iput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_iput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_ibput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_ibput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-void @\FuncDecl{shmem\_iput\FuncParam{SIZE}}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
-void @\FuncDecl{shmem\_ctx\_iput\FuncParam{SIZE}}@(shmem_ctx_t ctx, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe);
+void @\FuncDecl{shmem\_ibput\FuncParam{SIZE}}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+void @\FuncDecl{shmem\_ctx\_ibput\FuncParam{SIZE}}@(shmem_ctx_t ctx, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
 \end{CsynopsisCol}
 where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
@@ -38,13 +38,16 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
         array. The stride must be greater than or equal to \CONST{1} and is
         scaled by the element size of the \source{} array. A value of \CONST{1}
         indicates contiguous data.}
-    \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{} arrays.}
+    \apiargument{IN}{bsize}{Number of elements per block in the \dest{} and \source{}
+        arrays.}
+    \apiargument{IN}{nblocks}{Number of blocks in the \dest{} and \source{}
+        arrays.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
 
 \apidescription{
-    The \FUNC{shmem\_iput} routines provide a method  for  copying strided data
+    The \FUNC{shmem\_ibput} routines provide a method  for  copying strided data
     elements (specified by \VAR{sst}) of an array from a \source{} array on the
     local \ac{PE} to locations specified by stride \VAR{dst} on a \dest{} array
     on specified remote \ac{PE}. The routines return when the data has
@@ -55,13 +58,5 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 \apireturnvalues{
     None.
 }
-
-\begin{apiexamples}
-
-\apicexample
-    {Consider the following \FUNC{shmem\_iput} example for \Cstd[11] programs.}
-    {./example_code/shmem_iput_example.c}
-    {}
-\end{apiexamples}
 
 \end{apidefinition}
