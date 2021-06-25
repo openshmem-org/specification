@@ -1,0 +1,32 @@
+\apisummary{
+  Indicates whether the \openshmem library has been finalized.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_finalized}@(void);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{None}{}{}
+\end{apiarguments}
+
+\apidescription{
+  The \FUNC{shmem\_finalized} routine returns a value indicating
+  whether the \openshmem library has been finalized (i.e, a call to
+  \FUNC{shmem\_finalize} has completed successfully).
+  This routine may be called at any point in an \openshmem program,
+  including before \FUNC{shmem\_init[\_thread]} and after
+  \FUNC{shmem\_finalize}.
+  This routine may be called by any thread of execution in the
+  \ac{PE}, independent of the level of thread support provided by the
+  implementation.
+}
+
+\apireturnvalues{
+  Returns \CONST{1} if the \openshmem library has been finalized;
+  otherwise, returns \CONST{0}.
+}
+
+\end{apidefinition}
