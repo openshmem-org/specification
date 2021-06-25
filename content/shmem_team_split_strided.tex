@@ -85,8 +85,10 @@ default configuration parameters.
 
 If \VAR{parent\_team}
 compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}, then no new team
-will be created and \VAR{new\_team} will be assigned the value
-\LibConstRef{SHMEM\_TEAM\_INVALID}.  If \VAR{parent\_team} is otherwise invalid, the behavior is undefined.
+will be created, \VAR{new\_team} will be assigned the value
+\LibConstRef{SHMEM\_TEAM\_INVALID}, and \FUNC{shmem\_team\_split\_strided} will
+return a nonzero value.  If \VAR{parent\_team} is otherwise invalid, the
+behavior is undefined.
 }
 
 \apireturnvalues{
