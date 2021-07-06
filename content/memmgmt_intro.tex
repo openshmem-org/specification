@@ -1,0 +1,45 @@
+\openshmem provides a set of \acp{API} for managing the symmetric heap. The
+\acp{API} allow one to dynamically allocate, deallocate, reallocate, and align
+symmetric data objects in the symmetric heap.
+
+The symmetric memory allocation routines differ from the private heap
+allocation routines in that they must be called by all \acp{PE} in a
+the world team.  When specified, each of these routines includes at
+least one call to a procedure that is semantically equivalent to
+\FUNC{shmem\_barrier\_all}.  This ensures that all \acp{PE}
+participate in the memory management, and that the memory on other
+\acp{PE} can be used as soon as the local \ac{PE} returns.  The
+implicit barriers performed by these routines quiet the default
+context.  It is the user's responsibility to ensure that no
+communication operations involving the given memory block are pending
+on other contexts prior to calling the \FUNC{shmem\_free} and
+\FUNC{shmem\_realloc} routines.
+
+The total size of the symmetric heap is determined at job startup.  One can
+specify the size of the heap using the \ENVVAR{SHMEM\_SYMMETRIC\_SIZE} environment
+variable (where available).	
+
+\begin{DeprecateBlock}
+  As of \openshmem[1.2] the use of \FUNC{shmalloc}, \FUNC{shmemalign},
+  \FUNC{shfree},  and \FUNC{shrealloc} has been deprecated. Although \openshmem
+  libraries are required to support the calls, users are encouraged to use
+  \FUNC{shmem\_malloc}, \FUNC{shmem\_align}, \FUNC{shmem\_free}, and
+  \FUNC{shmem\_realloc} instead.  The behavior and signature  of the routines
+  remains unchanged from the deprecated versions.
+\end{DeprecateBlock}
+
+\parimpnotes{
+  The symmetric heap allocation routines always return the symmetric
+  addresses of corresponding symmetric objects across all
+  \acp{PE}. The \openshmem specification does not require that the
+  virtual addresses are equal across all \acp{PE}. Nevertheless, the
+  implementation must avoid costly address translation operations in
+  the communication path, including $O(N)$ memory translation tables,
+  where $N$ is the number of \acp{PE}.  In order to avoid address
+  translations, the implementation may re-map the allocated block of
+  memory based on agreed virtual address.  Additionally, some
+  operating systems provide an option to disable virtual address
+  randomization, which enables predictable allocation of virtual
+  memory addresses.
+}
+

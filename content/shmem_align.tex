@@ -1,0 +1,38 @@
+\apisummary{
+  Collectively allocate symmetric memory with a specified alignment.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{alignment}{Byte alignment of the block allocated from the
+    symmetric heap.}
+  \apiargument{IN}{size}{The size, in bytes, of a block to be
+    allocated from the symmetric heap.}
+\end{apiarguments}
+
+
+\apidescription{
+  The \FUNC{shmem\_align} routine allocates a block in the symmetric
+  heap that has a byte alignment specified by the \VAR{alignment}
+  argument.  The value of \VAR{alignment} shall be a multiple of
+  \CONST{sizeof(void *)} that is also a power of two; otherwise, the
+  behavior is undefined.  When \VAR{size} is zero, the
+  \FUNC{shmem\_align} routine performs no action and returns a null
+  pointer; otherwise, \FUNC{shmem\_align} calls a barrier on exit.
+
+  The value of the \VAR{alignment} and \VAR{size} arguments must be
+  identical on all \acp{PE}; otherwise, the behavior is undefined.
+}
+
+\apireturnvalues{
+  The \FUNC{shmem\_align} routine returns an aligned symmetric address
+  whose value is a multiple of \VAR{alignment}; otherwise, it returns
+  a null pointer.
+}
+
+\end{apidefinition}

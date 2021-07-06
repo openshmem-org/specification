@@ -1,0 +1,59 @@
+\apisummary{
+  Collectively resize an allocation of symmetric memory.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void *@\FuncDecl{shmem\_realloc}@(void *ptr, size_t size);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{ptr}{Symmetric address of an object in the symmetric heap.}
+  \apiargument{IN}{size}{The size, in bytes, of a block to be
+    allocated from the symmetric heap.}
+\end{apiarguments}
+
+
+\apidescription{
+  The \FUNC{shmem\_realloc} routine changes the size of the block to
+  which \VAR{ptr} points to the size (in bytes) specified by
+  \VAR{size}.  The contents of the block are unchanged up to the
+  lesser of the new and old sizes.
+
+  The \FUNC{shmem\_realloc} routine preserves allocation hints (e.g.,
+  if \VAR{ptr} was allocated by \FUNC{shmem\_malloc\_with\_hints}).
+  If the new size is larger, the newly allocated portion of the block
+  is uninitialized.  If \VAR{ptr} is a null pointer, the
+  \FUNC{shmem\_realloc} routine behaves like the \FUNC{shmem\_malloc}
+  routine for the specified size.  If \VAR{size} is \CONST{0} and
+  \VAR{ptr} is not a null pointer, the block to which it points is
+  freed as if with \FUNC{shmem\_free}. If the space cannot be
+  allocated or if hints cannot be preserved, the block to which
+  \VAR{ptr} points is unchanged and a null pointer is returned.
+
+  \FUNC{shmem\_realloc} may call barriers on both entry and exit,
+  depending on whether an existing allocation is modified and whether
+  new memory is allocated, respectively.
+  It is the user's responsibility to ensure that no communication
+  operations involving the given memory block are pending on other
+  communication contexts prior to calling \FUNC{shmem\_realloc}.
+
+  The value of the \VAR{ptr} and \VAR{size} arguments must be
+  identical on all \acp{PE}; otherwise, the behavior is undefined.
+}
+
+\apireturnvalues{
+  The \FUNC{shmem\_realloc} routine returns the symmetric address of
+  the allocated space (which may have moved); otherwise, all \acp{PE}
+  return a null pointer.
+}
+
+\apinotes{
+  When the \VAR{ptr} argument in a call to \FUNC{shmem\_realloc} corresponds
+  to a buffer allocated using \FUNC{shmem\_align}, the buffer returned by
+  \FUNC{shmem\_realloc} is not guaranteed to maintain the alignment requested
+  in the original call to \FUNC{shmem\_align}.
+}
+
+\end{apidefinition}
