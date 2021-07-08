@@ -1,0 +1,34 @@
+\apisummary{
+    The routine outputs the status of the collective operation identified by the request.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_req\_test}@(shmem_req_t request);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+  \apiargument{IN}{request}{Request representing a outstanding collective}
+
+\end{apiarguments}
+
+\apidescription{
+    A call to \FUNC{shmem\_req\_test} returns immediately. If the
+    collective operation identified by the request is completed, it returns
+    true (non-negative integer). The request object is deallocated. If the collective operation is not
+    completed, it returns zero. 
+
+    In a multithreaded environment, the collective and the
+    \FUNC{shmem\_req\_test} can be
+    called by different threads. It is the responsibility of the \openshmem user
+    to ensure that the \FUNC{shmem\_collective\_test} operation is called after the
+    collective operation.
+    }
+
+\apireturnvalues{
+    On success returns zero or one, otherwise returns a negative integer.
+    }
+
+\end{apidefinition}
