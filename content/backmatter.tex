@@ -653,6 +653,19 @@ standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
+\section{Version 1.6}
+Major changes in \openshmem[1.6] include the addition of a new
+\FUNC{shmem\_team\_ptr} function.
+
+The following list describes the specific changes in \openshmem[1.6]:
+\begin{itemize}
+%
+\item Added a team-based pointer query routine:
+  \FUNC{shmem\_team\_ptr}.
+\ChangelogRef{subsec:shmem_team_ptr}%
+%
+\end{itemize}
+
 \section{Version 1.5}
 Major changes in \openshmem[1.5] include the addition of new team-based
 collective functions, \OPR{put-with-signal} functions, nonblocking \ac{AMO}
