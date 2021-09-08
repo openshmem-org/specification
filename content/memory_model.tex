@@ -3,7 +3,9 @@
 \caption{\openshmem Memory Model}
 \label{fig:mem_model}
 \end{figure}
-%
+
+\subsection{Object Storage Model}
+
 An \openshmem program consists of data objects that are private to each \ac{PE}
 and data  objects that are remotely accessible by all \acp{PE}. Private data
 objects are stored in the local memory of each \ac{PE} and can only be accessed
@@ -24,8 +26,8 @@ in Sections~\ref{subsec:shmem_pe_accessible} and
 data objects are symmetric:
 %
 \begin{itemize}
-\item Global and static \Cstd and \Cpp variables. These data objects must
-  not be defined in a dynamic shared object (DSO).
+\item Global and static \Cstd and \Cpp variables \emph{not} defined in
+  a dynamic shared object (DSO).
 \item \Cstd and \Cpp data allocated by \openshmem memory management routines
   (Section~\ref{sec:memory_management})
 \end{itemize}
@@ -42,7 +44,7 @@ objects and private data objects.  As shown, symmetric data objects can be
 located either in the symmetric heap or in the global/static memory section of
 each \ac{PE}.
 
-\subsection{Pointers to Symmetric Objects}\label{subsec:pointers_to_symmetric_objects}
+\subsubsection{Pointers to Symmetric Objects}\label{subsec:pointers_to_symmetric_objects}
 
 Symmetric data objects are referenced in \openshmem operations through the
 local pointer to the desired remotely accessible object.  The address contained
@@ -77,7 +79,240 @@ resulting pointer is valid for direct memory access; however, providing this
 address as an argument of an \openshmem routine that requires a symmetric
 address results in undefined behavior.
 
-\subsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
+\subsection{Synchronization, Ordering, and Consistency}
+
+An \openshmem program can have one or more processes of execution
+called \acp{PE}.  The execution of the entire \openshmem program
+consists of the execution of all of its \acp{PE}.
+
+The \openshmem memory model extends the defined behavior for the \Cstd
+language (notably, that specified in \Cstd[11]/\Cstd[17] $\S$5.1.2.4
+and $\S$7.17) for multi-\ac{PE} execution as follows:
+
+\begin{enumerate}
+
+\item \openshmem provides a set of \emph{synchronization operations}
+  % (cf. \Cstd[17]~$\S$5.1.2.4-5)
+  that ensure updates from one \ac{PE} are visible
+  to another \ac{PE}:
+
+  \begin{itemize}
+  \item Atomic operations or \acp{AMO}
+  \item Quiet and fence operations
+  \item Wait operations
+  \item Lock operations
+  \end{itemize}
+
+%% \item Two \openshmem operations \emph{conflict} if one of them
+%%   modifies a memory location (local or symmetric) and the other reads
+%%   or modifies the same memory location.
+
+%% \item An \openshmem operation and an expression evaluation
+%%   \emph{conflict} if one of them modifies a memory location and the
+%%   other reads or modifies the same memory location.
+
+%% \item The execution of an \openshmem program contains a \emph{data
+%%   race} if it contains to conflicting operations
+
+\item No \ac{RMA} operations are synchronizing operations.
+
+\item All \openshmem atomic operations are performed as with the
+  memory ordering \VAR{memory\_order\_relaxed}.
+
+%% \item The execution of a program contains a \emph{data race} if it
+%%   contains two conflicting actions in different \acp{PE}, at least one
+%%   of which is not atomic, and neither happens before the other. Any
+%%   such data race results in undefined behavior.
+
+\item The \FUNC{shmem\_fence} operation is performed as with the
+  memory ordering \VAR{memory\_order\_acq\_rel}.
+
+\item The \FUNC{shmem\_quiet} operation is performed as with the
+  memory ordering \VAR{memory\_order\_seq\_cst}.
+
+\item An evaluation $A$ on \ac{PE}~$X$ \emph{\ac{PE}-happens-before}
+  an evaluation $B$ on \ac{PE}~$Y$ when $A$
+  \emph{\ac{PE}-synchronizes-with} $B$, or
+  \begin{itemize}
+  \item $A$ happens-before some evaluation $C$ on \ac{PE}~$X$,
+  \item $C$ happens-before $B$ on \ac{PE}~$Y$,
+  \item $C$ is a \FUNC{shmem\_team\_\{barrier, sync\}} operation on
+    team $T$, and
+  \item \acp{PE}~$X$ and $Y$ are in $T$
+  \end{itemize}
+
+%% \item A release fence $R$ in \ac{PE}~$X$ synchronizes-with an acquire
+%%   operation $A$ in \ac{PE}~$Y$ if:
+%%   \begin{itemize}
+%%   \item \ac{PE}~$X$ performs an atomic update $U$ of the symmetric
+%%     object $M$ on \ac{PE}~$Y$ via context $C$, and
+%%   \item The release fence $R$ is either a:
+%%     \begin{itemize}
+%%     \item \FUNC{shmem\_fence} operation on context $C$ when $U$ is a
+%%       blocking \ac{AMO}, or
+%%     \item \FUNC{shmem\_quiet} operation on context $C$ when $U$ is a
+%%       blocking or nonblocking \ac{AMO}
+%%     \end{itemize}
+%%     and
+%%   \item $R$ is sequenced-before $U$, and
+%%   \item The acquire operation $A$ on \ac{PE}~$Y$ is one of:
+%%     \begin{itemize}
+%%     \item \FUNC{shmem\_\{test,wait\_until\}} operation on $M$
+%%     \item \FUNC{shmem\_\{test,wait\_until\}\_\{all,any,some\}[\_vector]}
+%%       operation in which $M$ is an element on the array of variables
+%%       being tested or waited upon.
+%%     \end{itemize}
+%%   \end{itemize}
+
+%% \item A release fence $F_{\textrm{release}}$ in \ac{PE}~$X$
+%%   synchronizes-with an acquire fence $F_{\textrm{acquire}}$ in
+%%   \ac{PE}~$Y$ if:
+%%   \begin{itemize}
+%%   \item \ac{PE}~$X$ performs an updating \ac{AMO}
+%%     $A_{\textrm{update}}$ of the symmetric object $M$ on \ac{PE}~$Y$
+%%     via context $C$, and
+%%   \item The release fence $F_{\textrm{release}}$ is either a:
+%%     \begin{itemize}
+%%     \item \FUNC{shmem\_fence} operation on context $C$ when
+%%       $A_{\textrm{update}}$ is a blocking \ac{AMO}, or
+%%     \item \FUNC{shmem\_quiet} operation on context $C$ when
+%%       $A_{\textrm{update}}$ is a blocking or nonblocking \ac{AMO}, 
+%%     \end{itemize}
+%%     and
+%%   \item $F_{\textrm{release}}$ is sequenced-before
+%%     $A_{\textrm{update}}$ in \ac{PE}~$X$, and
+%%   \item \ac{PE}~$Y$ performs a fetching \ac{AMO} $A_{\textrm{fetch}}$
+%%     of the symmetric object $M$ on itself via context $D$, and
+%%   \item The acquire fence $F_{\textrm{acquire}}$ is either a:
+%%     \begin{itemize}
+%%     \item \FUNC{shmem\_fence} operation on context $D$ when
+%%       $A_{\textrm{fetch}}$ is a blocking \ac{AMO}, or
+%%     \item \FUNC{shmem\_quiet} operation on context $D$ when
+%%       $A_{\textrm{fetch}}$ is a blocking or nonblocking \ac{AMO}
+%%     \end{itemize}
+%%     and
+%%   \item $A_{\textrm{fetch}}$ is sequenced-before
+%%     $F_{\textrm{acquire}}$ in \ac{PE}~$Y$.
+%%   \end{itemize}
+
+%%   %% TODO: shmem_{clear,set,test}_lock
+
+%% \item A release operation in \ac{PE}~$X$ synchronizes-with an acquire
+%%   operation in \ac{PE}~$Y$ under the following conditions:
+%%   \begin{itemize}
+%%   \item The release operation is one of:
+%%     \begin{itemize}
+%%     \item A release fence $F_{\mathrm{release}}$ that is
+%%       sequenced-before an updating \ac{AMO} $A_{\mathrm{update}}$
+%%       issued on context $C$ of a symmetric object $M$ on \ac{PE}~$Y$
+%%       when $F_{\mathrm{release}}$ is a(n):
+%%       \begin{itemize}
+%%       \item \FUNC{shmem\_fence} operation on context $C$ when
+%%         $A_{\textrm{update}}$ is a blocking \ac{AMO}, or
+%%       \item \FUNC{shmem\_quiet} operation on context $C$ when
+%%         $A_{\textrm{update}}$ is a blocking or nonblocking \ac{AMO},
+%%         or
+%%       %% \item \openshmem operation that internally performs an operation
+%%       %%   equivalent to \FUNC{shmem\_quiet} on the default context, $C$
+%%       %%   is the the default context (e.g., \tex), and $A_{\textrm{update}}$ is a
+%%       %%   blocking or nonblocking \ac{AMO}
+%%       \end{itemize}
+%%     \item A \FUNC{shmem\_clear\_lock} operation on the symmetric lock
+%%       object $L$
+%%     \end{itemize}
+%%   \item The acquire operation is one of:
+%%     \begin{itemize}
+%%     \item A fetching \ac{AMO} $A_{\mathrm{fetch}}$ on that is
+%%       sequenced-before an acquire fence $F_{\mathrm{acquire}}$
+%%     \item \FUNC{shmem\_\{test,wait\_until\}} operation on $M$
+%%     \item \FUNC{shmem\_\{test,wait\_until\}\_\{all,any,some\}[\_vector]}
+%%       operation in which $M$ is an element on the array of variables
+%%       being tested or waited upon.
+%%     \item A \FUNC{shmem\_set\_lock} operation on the symmetric lock
+%%       object $L$ returns, or a \FUNC{shmem\_test\_lock} operation on
+%%       $L$ returns 0.
+%%     \end{itemize}
+%%   \end{itemize}
+
+\item A release operation issued by \ac{PE}~$X$
+  \ac{PE}-synchronizes-with an acquire operation issued by \ac{PE}~$Y$
+  through a symmetric object $M$ on \ac{PE}~$Y$ when:
+  \begin{itemize}
+  \item The release operation is a release fence
+    $F_{\mathrm{release}}$ issued on context $C$ that is
+    sequenced-before an \ac{AMO} $A_{\mathrm{update}}$
+    % issued on context $D$
+    that updates a symmetric object $M$ on \ac{PE}~$Y$,
+    and
+    %% \begin{itemize}
+    %% \item when $F_{\mathrm{release}}$ is a \FUNC{shmem\_fence}
+    %%   operation on context $C$ and $A_{\textrm{update}}$ is a
+    %%   blocking \ac{AMO}, or
+    %% \item when $F_{\mathrm{release}}$ is a \FUNC{shmem\_quiet}
+    %%   operation on context $C$ and $A_{\textrm{update}}$ is a blocking
+    %%   or nonblocking \ac{AMO}
+    %% \end{itemize}
+    %% and,
+  \item The acquire operation is one of:
+    \begin{itemize}
+    \item A fetching \ac{AMO} $A_{\mathrm{fetch}}$ on $M$ that is
+      sequenced-before an acquire fence $F_{\mathrm{acquire}}$
+    \item \FUNC{shmem\_\{test,wait\_until\}} operation on $M$
+    \item \FUNC{shmem\_\{test,wait\_until\}\_\{all,any,some\}[\_vector]}
+      operation in which $M$ is an element on the array of variables
+      being tested or waited upon.
+    \end{itemize}
+  \end{itemize}
+  %% As a result, all put and updating \ac{AMO} operations issued by
+  %% \ac{PE}~$X$ on context $C$ \ac{PE}-happen-before all get and fetching
+  %% \ac{AMO} operations issued by \ac{PE}~$Y$ to the same
+  As a result, when $F_{\mathrm{release}}$ is:
+  \begin{itemize}
+  \item \FUNC{shmem\_fence}, all blocking put and updating \ac{AMO}
+    operations sequenced-before \FUNC{shmem\_fence} and issued on
+    context $C$ to \ac{PE}~$Y$ will \ac{PE}-happen-before all load,
+    get (blocking or nonblocking), and fetching \ac{AMO} operations
+    from the same locations on \ac{PE}~$Y$ that are sequenced-after
+    the acquire operation.
+  \item \FUNC{shmem\_quiet}, all put and updating \ac{AMO} operations
+    (blocking or nonblocking) sequenced-before \FUNC{shmem\_quiet} and
+    issued on context $C$ to any \ac{PE} will \ac{PE}-happen-before
+    all load, get (blocking or nonblocking), and fetching \ac{AMO}
+    operations from the same locations that are sequenced-after the
+    acquire operation.
+  \end{itemize}
+
+%% \item A release operation issued by \ac{PE}~$X$
+%%   \ac{PE}-synchronizes-with an acquire operation issued by \ac{PE}~$Y$
+%%   through a symmetric object $M$ on a third \ac{PE}~$Z$ in the
+%%   following cases:
+%%   \begin{itemize}
+%%   \item The release operation is a \FUNC{shmem\_quiet} operation that
+%%     is sequenced-before an \ac{AMO} $A_{\mathrm{update}}$ issued on
+%%     context $C$ that updates a symmetric object $M$ on \ac{PE}~$Z$
+%%     when $F_{\mathrm{release}}$ is a \FUNC{shmem\_quiet} operation on
+%%     context $C$ and $A_{\textrm{update}}$ is a blocking or nonblocking
+%%     \ac{AMO}, and
+%%   \item The acquire operation is one of:
+%%     \begin{itemize}
+%%     \item An \ac{AMO} $A_{\mathrm{fetch}}$ issued on context $D$ that
+%%       fetches the value of the symmetric object $M$ from \ac{PE}~$Z$
+%%       that is sequenced-before an acquire fence $F_{\mathrm{acquire}}$
+%%     \end{itemize}
+%%   \end{itemize}
+
+\item There is a single, total order of all operations on a symmetric
+  lock object $L$ such that a lock-release operation (i.e.,
+  \FUNC{shmem\_clear\_lock}) issued by \ac{PE}~$X$
+  \ac{PE}-synchronizes-with the immediately successive lock-acquire
+  operation completed by \ac{PE}~$Y$ on $L$.  Such a lock-acquire
+  operation can be either a \FUNC{shmem\_set\_lock} operation or a
+  \FUNC{shmem\_test\_lock} operation whose return value is zero,
+  indicating the lock was acquired by the call.
+
+\end{enumerate}
+
+\subsubsection{Atomicity Guarantees}\label{subsec:amo_guarantees}
 
 \openshmem contains a number of routines that perform atomic operations on
 symmetric data objects, which are defined in Section~\ref{sec:amo}.
