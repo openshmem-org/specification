@@ -29,8 +29,9 @@ On platforms that provide the referenced POSIX\footnotemark[1] \acp{API}:
   newly created child process shall not call any \openshmem routines;
   otherwise, the behavior is undefined.
 \item Not all \openshmem implementations may support the use of
-  \FUNC{fork} during or after the \openshmem portion of a
-  program. When subprocess creation is needed in these instances, the
+  \FUNC{fork} within the \openshmem portion of the program or after
+  the \openshmem library has been finalized.
+  When subprocess creation is needed in these instances, the
   application is encouraged to make use of the \FUNC{posix\_spawn} and
   \FUNC{posix\_spawnp} \acp{API}.
 \end{itemize}
