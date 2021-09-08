@@ -1,0 +1,44 @@
+\apisummary{
+  Indicates whether the \openshmem library has been initialized.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_initialized}@(void);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{None}{}{}
+\end{apiarguments}
+
+\apidescription{
+  The \FUNC{shmem\_initialized} routine returns a value indicating
+  whether the \openshmem library has been initialized (i.e, a call to
+  either \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread} has
+  completed successfully).
+  This routine may be called at any point in an \openshmem program,
+  including before \FUNC{shmem\_init[\_thread]} and after
+  \FUNC{shmem\_finalize}.
+  This routine may be called by any thread of execution in the
+  \ac{PE}, independent of the level of thread support provided by the
+  implementation.
+}
+
+\apireturnvalues{
+  Returns \CONST{1} if the \openshmem library has been initialized;
+  otherwise, returns \CONST{0}.
+}
+
+\apinotes{
+  Although \FUNC{shmem\_initialized} is thread-safe, its return value
+  is not a sufficient guard to prevent multiple threads from racing to
+  initialize the \openshmem library concurrently, as
+  \FUNC{shmem\_initialized} may return \CONST{0} to one thread while
+  library initialization is in progress due to a call from another
+  thread.  Applications must ensure that only one call to
+  \FUNC{shmem\_init[\_thread]} is made to initialize the \openshmem
+  library.
+}
+
+\end{apidefinition}
