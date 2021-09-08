@@ -30,4 +30,15 @@ int @\FuncDecl{shmem\_initialized}@(void);
   otherwise, returns \CONST{0}.
 }
 
+\apinotes{
+  Although \FUNC{shmem\_initialized} is thread-safe, its return value
+  is not a sufficient guard to prevent multiple threads from racing to
+  initialize the \openshmem library concurrently, as
+  \FUNC{shmem\_initialized} may return \CONST{0} to one thread while
+  library initialization is in progress due to a call from another
+  thread.  Applications must ensure that only one call to
+  \FUNC{shmem\_init[\_thread]} is made to initialize the \openshmem
+  library.
+}
+
 \end{apidefinition}
