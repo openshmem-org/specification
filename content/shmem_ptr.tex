@@ -1,5 +1,5 @@
 \apisummary{
-    Returns a local pointer to a symmetric data object on the specified \ac{PE}.
+    Returns a local pointer to a symmetric data object on the specified \ac{PE} in the world team.
 }
 
 \begin{apidefinition}
@@ -17,11 +17,11 @@ void *@\FuncDecl{shmem\_ptr}@(const void *dest, int pe);
 
 \apidescription{
     \FUNC{shmem\_ptr} returns an address that may be used to directly reference
-    \dest{} on the specified \ac{PE}.  This address can be assigned to a
-    pointer.  After that, ordinary loads and stores to \dest{} may be
-    performed.  The address returned by \FUNC{shmem\_ptr} is a local address to
-    a remotely accessible data object.  Providing this address to an argument of
-    an \openshmem routine that requires a symmetric address results in
+    \dest{} on the specified \ac{PE} in the world team.  This address can be
+    assigned to a pointer.  After that, ordinary loads and stores to \dest{} may
+    be performed.  The address returned by \FUNC{shmem\_ptr} is a local address
+    to a remotely accessible data object.  Providing this address to an argument
+    of an \openshmem routine that requires a symmetric address results in
     undefined behavior.
     
     The \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish
