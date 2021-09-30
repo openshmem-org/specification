@@ -664,6 +664,10 @@ The following list describes the specific changes in \openshmem[1.6]:
   \FUNC{shmem\_team\_ptr}.
 \ChangelogRef{subsec:shmem_team_ptr}%
 %
+\item Clarified that \FUNC{shmem\_team\_split\_strided} and
+    \FUNC{shmem\_team\_split\_strided} return a nonzero value when the parent
+    team compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}.
+\ChangelogRef{subsec:shmem_team_split_strided, subsec:shmem_team_split_2d}%
 \end{itemize}
 
 \section{Version 1.5}
