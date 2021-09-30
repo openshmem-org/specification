@@ -15,6 +15,7 @@ static void find_xy_dims(int npes, int *x, int *y) {
 /*  Find x, y, and z such that x * y * z == npes and
  *  abs(x - y) + abs(x - z) + abs(y - z) is minimized.  */
 static void find_xyz_dims(int npes, int *x, int *y, int *z) {
+  *x = *y = *z = 1;
   for(int divider = ceil(cbrt(npes)); divider >= 1; divider--)
     if (npes % divider == 0) {
       *x = divider;
