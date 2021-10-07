@@ -26,15 +26,15 @@ npes);
 
 \apidescription{
     The \FUNC{shmem\_pe\_quiet} ensures completion of memory store, blocking 
-    \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as well as 
-    nonblocking \PUT{}, \emph{put-with-signal}, and \GET{} routines 
-	on the symmetric data objects issued by the
-	calling \ac{PE} to the target \acp{PE} and on the given context.
+    \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as well as  nonblocking
+    \PUT{}, \emph{put-with-signal}, and \GET{} routines on the symmetric data
+    objects issued by the calling \ac{PE} to the target \acp{PE} and on the
+    given context.
 	
 	The completion and visibility semantics of these routines are the same as the
-	\FUNC{shmem\_quiet} routine. However, it applies only to the target \acp{PE}
-	.i.e., the routines to the target \acp{PE} are guaranteed to be complete and
-	visible to all \acp{PE} when \FUNC{shmem\_pe\_quiet} returns.
+	\FUNC{shmem\_quiet} routine. However, it applies only to the target
+    \acp{PE}, i.e., the routines to the target \acp{PE} are guaranteed to be
+    complete and visible to all \acp{PE} when \FUNC{shmem\_pe\_quiet} returns.
 }
 \apireturnvalues{
     None.
