@@ -1,0 +1,35 @@
+\apisummary{
+    Start a communication bundle.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_bundle\_start}@(void);
+void @\FuncDecl{shmem\_ctx\_bundle\_start}@(shmem_ctx_t ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to
+    perform the optimization. When this argument is not provided, the
+    optimization is performed on the default context.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_bundle\_start} routine provides a hint to the \openshmem
+    library to being applying bundling-related optimizations.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    The \FUNC{shmem\_bundle\_start} routine is a hint for improving
+    performance, and \openshmem implementations are not required to apply any
+    optimization.
+}
+
+\end{apidefinition}
+
+

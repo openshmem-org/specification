@@ -1,0 +1,40 @@
+\apisummary{
+    Stop a communication bundle.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_bundle\_stop}@(void);
+void @\FuncDecl{shmem\_ctx\_bundle\_stop}@(shmem_ctx_t ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to
+    perform the optimization. When this argument is not provided, the
+    optimization is performed on the default context.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_bundle\_stop} routine provides a hint to the \openshmem
+    library to stop applying bundling-related optimizations.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following example demonstrates the usage of
+    \FUNC{shmem\_bundle\_start} and \FUNC{shmem\_bundle\_stop} with a loop of
+    random atomic non-fetching XOR updates to a distributed table, similar to
+    the Giga-updates per second (GUPS) microbenchmark
+    \footnote{http://icl.cs.utk.edu/projectsfiles/hpcc/RandomAccess/}.}
+    {./example_code/shmem_bundle_example.c}
+    {}
+\end{apiexamples}
+
+\end{apidefinition}
+
