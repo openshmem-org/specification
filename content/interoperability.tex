@@ -39,6 +39,12 @@ On platforms that provide the referenced POSIX\footnotemark[1] \acp{API}:
 \parimpnotes{
   All \openshmem implementations should ensure interoperability with
   the \FUNC{posix\_spawn} and \FUNC{posix\_spawnp} \acp{API}.
+
+  \openshmem implementations that support implicit library
+  finalization for compatibility with \FUNC{start\_pes} should ensure
+  that child processes created after library initialization do not
+  implicitly call \openshmem operations as part of exit handlers
+  invoked during normal process termination.
 }
 
 
