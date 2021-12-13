@@ -1,15 +1,19 @@
-\newtext{The performance of \openshmem programs that issue many consecutive and
-small-sized communication routines might be improved by combining these
-operations into fewer messages.
-The \emph{bundling routines} provide a convenient interface for indicating to
-the \openshmem library that a series of operations on a communication context
-are eligible for bundling-related optimization.
+The performance of \openshmem programs that issue many
+consecutive and small-sized communication routines might be
+improved by combining these \oldtext{operations}
+\newtext{routines} into fewer \newtext{operations}
+\oldtext{messages}.
+The \emph{bundling routines} provide a \newtext{mechanism for an application to
+indicate} \oldtext{convenient interface for indicating} to the \openshmem
+library that \newtext{it intends to issue} a series of operations on a
+communication context \newtext{that} are \newtext{suitable} \oldtext{eligible}
+for bundling\oldtext{-related} optimization.
 The \FUNC{shmem\_bundle\_start} routine indicates the beginning of a bundling
 phase, and the \FUNC{shmem\_bundle\_stop} routine indicates the end of a
-bundling phase.}
+bundling phase.
 
-\newtext{The bundling routines are \textit{hints} to the \openshmem library,
-and they do not affect the completion or ordering semantics of any \openshmem
+The bundling routines are \textit{hints} to the \openshmem library\newtext{;}\oldtext{,}
+\oldtext{and} they do not affect the completion or ordering semantics of any \openshmem
 routines in the program.
 For this reason, routines such as non-blocking RMAs, non-blocking AMOs,
 non-blocking \OPR{put-with-signal}, blocking scalar \OPR{puts}, and blocking
@@ -19,5 +23,5 @@ fetching AMOs, blocking scalar \OPR{gets}, and the memory ordering routines
 might require the library to enforce remote completion, reducing the potential
 benefit of bundling optimizations.
 Because bundling is performed with respect to an \openshmem communication
-context, routines not performed on a communication context are ineligible for
-bundling optimization.}
+context, routines not performed on a communication context \newtext{(like collective routines)} are ineligible for
+bundling optimization.
