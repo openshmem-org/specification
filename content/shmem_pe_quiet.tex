@@ -9,8 +9,8 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_pe\_quiet}@(int *target_pes, size_t npes);
-void @\FuncDecl{shmem\_ctx\_pe\_quiet}@(shmem_ctx_t ctx, int *target_pes, size_t
+void @\FuncDecl{shmem\_pe\_quiet}@(const int *target_pes, size_t npes);
+void @\FuncDecl{shmem\_ctx\_pe\_quiet}@(shmem_ctx_t ctx, const int *target_pes, size_t
 npes);
 \end{Csynopsis}
 
@@ -31,15 +31,20 @@ npes);
     objects issued by the calling \ac{PE} to the target \acp{PE} and on the
     given context.
 	
-	The completion and visibility semantics of these routines are the same as the
+	The completion and visibility semantics of these operations are the same as the
 	\FUNC{shmem\_quiet} routine. However, it applies only to the target
     \acp{PE}, i.e., the routines to the target \acp{PE} are guaranteed to be
     complete and visible to all \acp{PE} when \FUNC{shmem\_pe\_quiet} returns.
+    When calling with the \FUNC{shmem\_ctx\_pe\_quiet} interface, the updates are
+    guaranteed to be complete and visible only to the \acp{PE} in the team used to
+    create the context.
 }
 \apireturnvalues{
     None.
 }
 
 \apinotes{
+    On certain platforms, when \FUNC{shmem\_pe\_quiet} is invoked on a set of \acp{PE},
+    the performance might be equivalent to \FUNC{shmem\_quiet}.
 }
 \end{apidefinition}
