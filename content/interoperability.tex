@@ -7,8 +7,48 @@ clarification of undefined behaviors caused by mixed use of different models,
 and advice to \openshmem library users and developers that may improve the portability
 and performance of hybrid programs.
 
+\section{Subprocesses}\label{subsec:subprocess}
 
-\section{MPI Interoperability}
+In some cases, an \openshmem application may be used to create or
+orchestrate other processes, which can be created through a number of
+system-level interfaces.  In these instances, such subprocesses are
+subject to the following interoperability constraints.
+
+On platforms that provide the referenced POSIX\footnotemark[1] \acp{API}:
+
+\footnotetext[1]{POSIX, the Portable Operating System Interface, is
+  formally specified in IEEE Std 1003.1-2017 and The Open Group
+  Technical Standard Base Specifications, Issue 7.}
+
+\begin{itemize}
+\item When \FUNC{fork} is invoked before the \openshmem library is
+  initialized, only one of either the parent or child processes may
+  initialize the \openshmem library.
+\item When \FUNC{fork} is invoked within the \openshmem portion of the
+  program or after the \openshmem library has been finalized, the
+  newly created child process shall not call any \openshmem routines;
+  otherwise, the behavior is undefined.
+\item Not all \openshmem implementations may support the use of
+  \FUNC{fork} within the \openshmem portion of the program or after
+  the \openshmem library has been finalized.
+  When subprocess creation is needed in these instances, the
+  application is encouraged to make use of the \FUNC{posix\_spawn} and
+  \FUNC{posix\_spawnp} \acp{API}.
+\end{itemize}
+
+\parimpnotes{
+  All \openshmem implementations should ensure interoperability with
+  the \FUNC{posix\_spawn} and \FUNC{posix\_spawnp} \acp{API}.
+
+  \openshmem implementations that support implicit library
+  finalization for compatibility with \FUNC{start\_pes} should ensure
+  that child processes created after library initialization do not
+  implicitly call \openshmem operations as part of exit handlers
+  invoked during normal process termination.
+}
+
+
+\section{MPI Interoperability}\label{subsec:mpi}
 
 \openshmem and \ac{MPI} are two commonly used parallel programming models for
 distributed-memory systems. The user can choose to utilize both models in the same program
