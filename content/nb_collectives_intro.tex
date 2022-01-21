@@ -9,10 +9,10 @@ collective operation.
 the operation is posted and returned immediately. All participants of the Team
 should call this routine.
 
-\item Collective Types: In the current specification, not all blocking collectives have
-their nonblocking variants. The nonblocking variants supported include alltoall,
-broadcast, and reduction collectives. The reduction types supported
-are defined in the Table \ref{reducetypes}. 
+\item Collective Types: The nonblocking variants supported include alltoall,
+broadcast, and reduction collectives. Other collective operations such as
+collect, barrier, alltoalls, and sync will not have nonblocking variants. The
+reduction types supported are defined in Table \ref{teamreducetypes}.
 
 \item Completion semantics:  \openshmem programs can learn the status of the collective operations
 using the \FUNC{shmem\_req\_test} routine and can be completed using
@@ -21,7 +21,7 @@ the \FUNC{shmem\_req\_wait} routine.
 \item Threads: While using SHMEM\_THREAD\_MULTIPLE, the \openshmem
 programs are allowed to call multiple collective operations on different threads
 and the same Team. The collective operations invoked on different threads
-are ordered by user-provided tag. The user may choose to not order the
+are ordered by a user-provided tag. The user may choose to not order the
 collective operations by using the library constant
 \CONST{SHMEM\_COLL\_UNORDERED} instead of specifying the tag.
 

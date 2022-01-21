@@ -43,8 +43,10 @@ int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const vo
 }
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the team, from which the data is copied.}
-\apiargument{IN}{tag}{A user defined tag to order the collective operation.}
-\apiargument{OUT}{request}{An opaque request handle identifying the collective operation}
+\apiargument{IN}{tag}{A user defined tag to order the collective operation;
+SHMEM\_COLL\_UNORDERED can be provided if no order is required.}
+\apiargument{OUT}{request}{An opaque request handle identifying the collective
+operation.}
 
 
 \end{apiarguments}
@@ -97,7 +99,7 @@ int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const vo
 
 
 \apireturnvalues{
-  Zero on successfull posting of the collective
+  Zero on successful posting of the collective
   operation; otherwise, nonzero.
 }
 
