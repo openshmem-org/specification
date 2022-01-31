@@ -276,10 +276,10 @@ supported before removal.
     \CorCpp: \FuncRef{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
     \Fortran: \FuncRef{MY\_PE} & 1.2 & 1.4 & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
     \Fortran: \FuncRef{NUM\_PES} & 1.2 & 1.4 & \hyperref[subsec:shmem_n_pes]{\FUNC{SHMEM\_N\_PES}} \\ \hline
-    \CorCpp: \FuncRef{shmalloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
-    \CorCpp: \FuncRef{shfree} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
-    \CorCpp: \FuncRef{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
-    \CorCpp: \FuncRef{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
+    \CorCpp: \FuncRef{shmalloc} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_malloc}} \\ \hline
+    \CorCpp: \FuncRef{shfree} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_free}} \\ \hline
+    \CorCpp: \FuncRef{shrealloc} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_realloc}} \\ \hline
+    \CorCpp: \FuncRef{shmemalign} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_align}} \\ \hline
     \Fortran: \FuncRef{SHMEM\_PUT} & 1.2 & 1.4 & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
     %% Deprecated in 1.3
     \minitab{
@@ -673,6 +673,11 @@ The following list describes the specific changes in \openshmem[1.6]:
     \openshmem[1.5] Table 10, and clarified the types, names, and supporting
     operations for team-based reductions.
 \ChangelogRef{teamreducetypes}%
+%
+\item Split the listings for the \FUNC{shmem\_\{malloc, free, realloc, align\}}
+  functions from a single entry in \openshmem[1.5] into separate entries.
+\ChangelogRef{subsec:shmem_malloc, subsec:shmem_free, subsec:shmem_realloc,
+  subsec:shmem_align}%
 \end{itemize}
 
 \section{Version 1.5}
@@ -824,7 +829,7 @@ environment variables.
     symmetric heap management routines that perform no action do not perform a
     barrier; and that the \VAR{alignment} argument to \FUNC{shmem\_align} must
     be power of two multiple of \CONST{sizeof(void*)}.
-\ChangelogRef{subsec:shfree}%
+\ChangelogRef{subsec:shmem_malloc, subsec:shmem_align, subsec:shmem_realloc}%
 %
 \item Clarified that the \openshmem lock \ac{API} provides a non-reentrant mutex and
     that \FUNC{shmem\_clear\_lock} performs a quiet operation on the default
@@ -1075,10 +1080,10 @@ The following list describes the specific changes in \openshmem[1.2]:
 %
 \item \openshmem library \ac{API} normalization. All \Cstd symmetric memory management
       \ac{API} begins with \FUNC{shmem\_}.
-\ChangelogRef{subsec:shfree, dep:func_not_shmemunder}%
+\ChangelogRef{sec:memory_management, dep:func_not_shmemunder}%
 %
 \item Notes and clarifications added to \FUNC{shmem\_malloc}.
-\ChangelogRef{subsec:shfree}%
+\ChangelogRef{subsec:shmem_malloc}%
 %
 \item Deprecation of \Fortran \ac{API} routine \FUNC{SHMEM\_PUT}.
 \ChangelogRef{dep:fortran_shmem_put}%
@@ -1173,7 +1178,7 @@ calls are encountered.
 \ChangelogRef{subsec:shmem_atomic_inc}%
 %
 \item Clarification of the size of the symmetric heap and when it is set.
-\ChangelogRef{subsec:shfree}%
+\ChangelogRef{sec:memory_management}%
 %
 \item Clarification of the integer and real sizes for \Fortran \ac{API}.
 \ChangelogRef{
@@ -1201,7 +1206,7 @@ include appropriate header files.
 \item Removing requirement that implementations should detect size mismatch and
 return error information for \FUNC{shmalloc} and ensuring consistent
 language.
-\ChangelogRef{subsec:shfree, sec:undefined}%
+\ChangelogRef{subsec:shmem_malloc, sec:undefined}%
 %
 \item \Fortran programming fixes for examples.
 \ChangelogRef{subsec:shmem_reductions, subsec:shmem_wait_until}%

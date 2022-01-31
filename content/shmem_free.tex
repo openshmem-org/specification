@@ -1,0 +1,32 @@
+\apisummary{
+  Collectively deallocate symmetric memory.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_free}@(void *ptr);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{ptr}{Symmetric address of an object in the symmetric heap.}
+\end{apiarguments}
+
+\apidescription{
+  The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr}
+  points to be deallocated, that is, made available for further
+  allocation.  If \VAR{ptr} is a null pointer, no action is performed;
+  otherwise, \FUNC{shmem\_free} calls a barrier on entry.
+  It is the user's responsibility to ensure that no communication
+  operations involving the given memory block are pending on other
+  communication contexts prior to calling \FUNC{shmem\_free}.
+
+  The value of the \VAR{ptr} argument must be identical on all
+  \acp{PE}; otherwise, the behavior is undefined.
+}
+
+\apireturnvalues{
+  None.
+}
+
+\end{apidefinition}
