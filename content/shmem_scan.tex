@@ -1,0 +1,121 @@
+\apisummary {
+  Performs inclusive or exclusive prefix sum operations
+}
+
+\begin{apidefinition}
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_sum\_inscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+int @\FuncDecl{shmem\_sum\_exscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{C11synopsis}
+where \TYPE{} is one of the integer, real, or complex types supported
+for the SUM operation as specified by Table \ref{teamreducetypes}.
+
+%% C/C++
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_inscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_exscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+\end{Csynopsis}
+where \TYPE{} is one of the integer, real, or complex types supported
+for the SUM operation and has a corresponding \TYPENAME{} as specified
+by Table \ref{teamreducetypes}.
+
+\begin{apiarguments}
+  \apiargument{IN}{team}{
+    The team over which to perform the operation.
+  }
+  \apiargument{OUT}{dest}{
+    Symmetric address of an array, of length \VAR{nreduce} elements,
+    to receive the result of the scan routines.  The type of
+    \dest{} should match that implied in the SYNOPSIS section.
+  }
+  \apiargument{IN}{source}{
+    Symmetric address of an array, of length \VAR{nreduce} elements,
+    that contains one element for each separate scan routine.
+    The type of \source{} should match that implied in the SYNOPSIS
+    section.
+  }
+  \apiargument{IN}{nreduce}{
+    The number of elements in the \dest{} and \source{} arrays.
+  }
+\end{apiarguments}
+
+\apidescription{
+
+  The \FUNC{shmem\_sum\_inscan} and \FUNC{shmem\_sum\_exscan} routines
+  are collective routines over an \openshmem team that compute one or
+  more scan (or prefix sum) operations across symmetric arrays on
+  multiple \acp{PE}.  The scan operations are performed with the SUM
+  operator.
+
+  The \VAR{nreduce} argument determines the number of separate scan
+  operations to perform.  The \source{} array on all \acp{PE}
+  participating in the opreation provides one element for each scan.
+  The results of the scan operations are placed in the \dest{} array
+  on all \acp{PE} participating in the scan.
+
+  The \FUNC{shmem\_sum\_inscan} routine performs an inclusive scan
+  operation, while the \FUNC{shmem\_sum\_exscan} routine performs an
+  exclusive scan operation.  
+
+  For \FUNC{shmem\_sum\_inscan}, the value of the $j$-th element in
+  the \VAR{dest} array on \ac{PE}~$i$ is defined as:
+  \begin{equation*}
+    \textrm{dest}_{i,j} = \displaystyle\sum_{k=0}^{i} \textrm{source}_{k,j}
+  \end{equation*}
+
+  For \FUNC{shmem\_sum\_exscan}, the value of the $j$-th element in
+  the \VAR{dest} array on \ac{PE}~$i$ is defined as:
+  \begin{equation*}
+    \textrm{dest}_{i,j} =
+    \begin{cases}
+    \displaystyle\sum_{k=0}^{i-1} \textrm{source}_{k,j}, & \text{if} \; i \neq 0 \\
+    0,  & \text{if} \; i = 0
+    \end{cases}
+  \end{equation*}
+
+  The \source{} and \dest{} arguments must either be the same
+  symmetric address, or two different symmetric addresses
+  corresponding to buffers that do not overlap in memory. That is,
+  they must be completely overlapping or completely disjoint.
+
+  Team-based scan routines operate over all \acp{PE} in the provided
+  team argument. All \acp{PE} in the provided team must participate in
+  the scan operation.  If \VAR{team} compares equal to
+  \LibConstRef{SHMEM\_TEAM\_INVALID} or is otherwise invalid, the
+  behavior is undefined.
+
+  Before any \ac{PE} calls a scan routine, the \dest{} array on all
+  \acp{PE} participating in the operation must be ready to accept the
+  results of the operation.  Otherwise, the behavior is undefined.
+  
+  Upon return from a scan routine, the following are true for the
+  local \ac{PE}: the \dest{} array is updated, and the \source{} array
+  may be safely reused.
+
+  When the \Cstd translation environment does not support complex
+  types, an \openshmem implementation is not required to provide
+  support for these complex-typed interfaces.
+}
+
+\apireturnvalues{
+  Zero on successful local completion. Nonzero otherwise.
+}
+
+\begin{apiexamples}
+
+  \apicexample{
+    In the following \Cstd[11] example, the \FUNC{collect\_at}
+    function gathers a variable amount of data from each \ac{PE} and
+    concatenates it, in order, at the target \ac{PE} \VAR{who}.  Note
+    that this routine is behaviorally similar to
+    \FUNC{shmem\_collect}, except that this routine only gathers the
+    data to a single \ac{PE}.
+  }
+  {./example_code/shmem_scan_example.c}
+  {}
+
+\end{apiexamples}
+
+\end{apidefinition}
