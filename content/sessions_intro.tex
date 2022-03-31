@@ -1,13 +1,12 @@
-The performance of \openshmem programs that issue many
-consecutive and small-sized communication routines might be
-improved by combining these \oldtext{operations}
-\newtext{routines} into fewer \newtext{operations}
-\oldtext{messages}.
-The \emph{bundling routines} provide a \newtext{mechanism for an application to
-indicate} \oldtext{convenient interface for indicating} to the \openshmem
-library that \newtext{it intends to issue} a series of operations on a
-communication context \newtext{that} are \newtext{suitable} \oldtext{eligible}
-for bundling\oldtext{-related} optimization.
+\openSHMEM \emph{Sessions} provide a mechanism for applications to apply property to
+the \openshmem library that a series of operations on a communication context.
+
+
+The \emph{sessions routines} provide a mechanism for an application to
+indicate to the \openshmem
+library that it intends to issue a series of operations on a
+communication context optimization.
+
 The \FUNC{shmem\_bundle\_start} routine indicates the beginning of a bundling
 phase, and the \FUNC{shmem\_bundle\_stop} routine indicates the end of a
 bundling phase.
