@@ -95,13 +95,19 @@ environment of the \acp{PE}.
 
 \subsection{Memory Management Routines}
 \label{sec:memory_management}
+\input{content/memmgmt_intro.tex}
 
-\openshmem provides a set of \acp{API} for managing the symmetric heap. The
-\acp{API} allow one to dynamically allocate, deallocate, reallocate and align
-symmetric data objects in the symmetric heap.
-
-\subsubsection{\textbf{SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}}\label{subsec:shfree}
+\subsubsection{\textbf{SHMEM\_MALLOC}}\label{subsec:shmem_malloc}
 \input{content/shmem_malloc.tex}
+
+\subsubsection{\textbf{SHMEM\_FREE}}\label{subsec:shmem_free}
+\input{content/shmem_free.tex}
+
+\subsubsection{\textbf{SHMEM\_REALLOC}}\label{subsec:shmem_realloc}
+\input{content/shmem_realloc.tex}
+
+\subsubsection{\textbf{SHMEM\_ALIGN}}\label{subsec:shmem_align}
+\input{content/shmem_align.tex}
 
 \subsubsection{\textbf{SHMEM\_MALLOC\_WITH\_HINTS}}\label{subsec:shmmallochint}
 \input{content/shmem_malloc_hints.tex}
@@ -479,6 +485,9 @@ routines}
 
 \subsubsection{\textbf{SHMEM\_QUIET}}\label{subsec:shmem_quiet}
 \input{content/shmem_quiet.tex}
+
+\subsubsection{\textbf{SHMEM\_PE\_QUIET}}\label{subsec:shmem_pe_quiet}
+\input{content/shmem_pe_quiet.tex}
 
 \subsubsection{Synchronization and Communication Ordering in OpenSHMEM}
 \input{content/synchronization_model.tex}
