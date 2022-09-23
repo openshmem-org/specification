@@ -1,0 +1,94 @@
+\apisummary{
+    Start a communication session.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context associated
+    with this session.}
+    \apiargument{IN}{options}{The set of requested options from
+    Table~\ref{session_opts} for this session.  Multiple options may be
+    requested by combining them with a bitwise OR operation; otherwise,
+    \CONST{0} can be given if no options are requested.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_session\_start} routine begins a session on communication
+    context \VAR{ctx} with hints requested via \VAR{options}.
+    If a session is already started on a given context, another call to
+    \FUNC{shmem\_session\_start} on that context combines any new options via a
+    bitwise OR operation.
+    Sessions on a communication context must be stopped with a call to
+    \FUNC{shmem\_session\_stop} on the same context.
+    Passing false or ambiguous \VAR{options} to a session should not result in
+    undefined behavior, but may result in the library aborting the program.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+    \hline
+    \hline
+    \textbf{Option} & \textbf{Usage hint}
+    \tabularnewline \hline
+    \endhead
+    %%
+    \LibConstDecl{SHMEM\_SESSION\_OP\_PUT} &
+    \newline 
+    The session will contain non-blocking \textit{put} and/or scalar put operations.
+    \tabularnewline \hline
+
+    \LibConstDecl{SHMEM\_SESSION\_OP\_GET} &
+    \newline
+    The session will contain non-blocking \textit{get} operations.
+    \tabularnewline \hline
+
+    \LibConstDecl{SHMEM\_SESSION\_OP\_PUT\_SIGNAL} &
+    \newline
+    The session will contain non-blocking \textit{put-with-signal} operations.
+    \tabularnewline \hline
+    
+    \LibConstDecl{SHMEM\_SESSION\_OP\_AMO} &
+    \newline
+    The session will contain non-fetching AMOs.
+    \tabularnewline \hline
+
+    \LibConstDecl{SHMEM\_SESSION\_OP\_AMO\_FETCH} &
+    \newline
+    The session will contain non-blocking fetching AMOs.
+    \tabularnewline \hline
+
+    \LibConstDecl{SHMEM\_SESSION\_CHAIN} &
+    \newline
+    The session will contain a chain (a trivial repeating pattern) of similar RMA operations.
+    \tabularnewline \hline 
+
+    \LibConstDecl{SHMEM\_SESSION\_UNIFORM\_AMO} &
+    \newline
+    The session will contain a chain of AMOs that will not occur concurrently
+    across any different signal operators (i.e.~\ref{subsec:signal_operator}),
+    operations (\ref{sec:amo}), or types (Tables \ref{stdamotypes} and
+    \ref{extamotypes}).
+    \tabularnewline \hline
+    \TableCaptionRef{Session options}
+    \label{session_opts}
+\end{longtable}
+
+\apinotes{
+    The \FUNC{shmem\_session\_start} routine is a hint for improving
+    performance, and \openshmem implementations are not required to apply any
+    optimization.
+
+    Implementations are encouraged to supply users with information about the
+    session options being applied or ignored; for instance, when
+    \LibConstRef{SHMEM\_DEBUG} is set.
+}
+
+\end{apidefinition}

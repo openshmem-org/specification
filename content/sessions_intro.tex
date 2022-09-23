@@ -1,26 +1,25 @@
-\openSHMEM \emph{Sessions} provide a mechanism for applications to apply property to
-the \openshmem library that a series of operations on a communication context.
+\openshmem \emph{sessions} provide a mechanism for applications to inform the
+\openshmem library of an upcoming sequence of communication routines that
+exhibit suitable patterns for runtime optimizations.
+A session is associated with a specific \openshmem communication context
+(Section~\ref{sec:ctx}), and it indicates the beginning and ending of
+communication phases on that context.
+The \FUNC{shmem\_session\_start} routine indicates the beginning of a session,
+and the \FUNC{shmem\_session\_stop} routine indicates the end of a session.
+The \LibConstRef{SHMEM\_SESSION\_*} options (Table~\ref{session_opts}) indicate
+which patterns of \openshmem RMA and AMO routines will occur within a session.
+These options serve only as \textit{hints} to the library; it is up to the
+implementation whether or not to apply any optimizations within a session.
 
-
-The \emph{sessions routines} provide a mechanism for an application to
-indicate to the \openshmem
-library that it intends to issue a series of operations on a
-communication context optimization.
-
-The \FUNC{shmem\_bundle\_start} routine indicates the beginning of a bundling
-phase, and the \FUNC{shmem\_bundle\_stop} routine indicates the end of a
-bundling phase.
-
-The bundling routines are \textit{hints} to the \openshmem library\newtext{;}\oldtext{,}
-\oldtext{and} they do not affect the completion or ordering semantics of any \openshmem
+Sessions do not affect the completion or ordering semantics of any \openshmem
 routines in the program.
 For this reason, routines such as non-blocking RMAs, non-blocking AMOs,
 non-blocking \OPR{put-with-signal}, blocking scalar \OPR{puts}, and blocking
-non-fetching AMOs are viable candidates for bundling optimizations.
+non-fetching AMOs are viable candidates for optimizations.
 Other routines, such as blocking non-scalar \OPR{puts} and \OPR{gets}, blocking
 fetching AMOs, blocking scalar \OPR{gets}, and the memory ordering routines
 might require the library to enforce remote completion, reducing the potential
-benefit of bundling optimizations.
-Because bundling is performed with respect to an \openshmem communication
-context, routines not performed on a communication context \newtext{(like collective routines)} are ineligible for
-bundling optimization.
+benefit of session optimizations.
+Because sessions are associated with an \openshmem communication context,
+routines not performed on a communication context (like collective routines)
+are ineligible for session hints.
