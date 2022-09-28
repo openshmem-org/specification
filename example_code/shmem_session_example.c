@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define N_UPDATES (1lu << 22)
+#define N_UPDATES (1lu << 18)
 #define N_INDICES (1lu << 10)
 #define N_VALUES  (1lu << 31)
 
@@ -16,7 +16,7 @@ int main(void) {
   int npes = shmem_n_pes();
   srand(mype);
 
-  shmem_session_start(SHMEM_CTX_DEFAULT, SHMEM_SESSION_UNIFORM_AMO);
+  shmem_session_start(SHMEM_SESSION_UNIFORM_AMO, SHMEM_CTX_DEFAULT);
 
   for (size_t i = 0; i < N_UPDATES; i++) {
       int random_pe = rand() % npes;
