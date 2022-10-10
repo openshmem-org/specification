@@ -9,12 +9,12 @@ void @\FuncDecl{shmem\_session\_start}@(long options, shmem_ctx_t ctx);
 \end{Csynopsis}
 
 \begin{apiarguments}
-    \apiargument{IN}{ctx}{A context handle specifying the context associated
-    with this session.}
     \apiargument{IN}{options}{The set of requested options from
     Table~\ref{session_opts} for this session.  Multiple options may be
     requested by combining them with a bitwise OR operation; otherwise,
     \CONST{0} can be given if no options are requested.}
+    \apiargument{IN}{ctx}{A context handle specifying the context associated
+    with this session.}
 \end{apiarguments}
 
 \apidescription{
@@ -27,7 +27,7 @@ void @\FuncDecl{shmem\_session\_start}@(long options, shmem_ctx_t ctx);
     \FUNC{shmem\_session\_start} on that same context combines new options via a
     bitwise OR operation.
     Passing false or ambiguous \VAR{options} to a session should never result in
-    undefined behavior, but may result in the library aborting the program.
+    undefined behavior, but may result in poor library performance.
 }
 
 \apireturnvalues{

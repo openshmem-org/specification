@@ -11,15 +11,13 @@ which patterns of \openshmem RMA and AMO routines will occur within a session.
 These options serve only as \textit{hints} to the library; it is up to the
 implementation whether or not to apply any optimizations within a session.
 
-Sessions do not affect the completion or ordering semantics of any \openshmem
-routines in the program.
-For this reason, routines such as non-blocking RMAs, non-blocking AMOs,
-non-blocking \OPR{put-with-signal}, blocking scalar \OPR{puts}, and blocking
-non-fetching AMOs are viable candidates for optimizations.
-Other routines, such as blocking non-scalar \OPR{puts} and \OPR{gets}, blocking
-fetching AMOs, blocking scalar \OPR{gets}, and the memory ordering routines
-might require the library to enforce remote completion, reducing the potential
-benefit of session optimizations.
+Usage of the \openshmem session APIs on a particular context must comply with
+the requirements of all options set on that context.
+Starting and stoping \openshmem sessions should not affect the completion or
+ordering semantics of any \openshmem routines in the program.
+For these reasons, multi-threaded \openshmem programs may require additional
+thread synchronization to ensure sessions hints are correctly applied to
+shareable contexts.
 Because sessions are associated with an \openshmem communication context,
 routines not performed on a communication context (like collective routines)
 are ineligible for session hints.
