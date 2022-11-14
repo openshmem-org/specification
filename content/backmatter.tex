@@ -681,6 +681,12 @@ The following list describes the specific changes in \openshmem[1.6]:
   functions from a single entry in \openshmem[1.5] into separate entries.
 \ChangelogRef{subsec:shmem_malloc, subsec:shmem_free, subsec:shmem_realloc,
   subsec:shmem_align}%
+\item Corrected the level argument's recommended value in API notes for
+    \FUNC{shmem\_pcontrol} to indicate that the value should be greater than
+    2 to enable profiling with profile library defined effects and
+    additional arguments.
+\ChangelogRef{subsec:shmem_pcontrol}
+%
 \end{itemize}
 
 \section{Version 1.5}
