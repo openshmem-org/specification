@@ -660,6 +660,10 @@ Major changes in \openshmem[1.6] include the addition of a new
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{itemize}
 %
+\item Clarified that \OPR{Fence} operations only guarantee ordering for
+    operations that are performed on the same context.
+\ChangelogRef{subsec:shmem_fence}%
+%
 \item Added a team-based pointer query routine:
   \FUNC{shmem\_team\_ptr}.
 \ChangelogRef{subsec:shmem_team_ptr}%
