@@ -486,9 +486,18 @@ routines}
 \input{content/synchronization_model.tex}
 
 
+\color{teal}
+\subsection{Local Completion Operations}\label{sec:lcomplete}
+This section specifies the OpenSHMEM support for \OPR{local-complete} 
+operation. The \OPR{local-complete} operation provide a method for reusing 
+the \VAR{source} buffers associated with the process initiating the 
+non-blocking remote memory access routines and signaling operations as 
+specified in Section~\ref{subsec:shmem_put_nbi} and
+Section~\ref{subsec:shmem_put_signal_nbi} respectively. 
 
-
-
+\subsubsection{\textbf{SHMEM\_LOCAL\_COMPLETE}}\label{subsec:shmem_local_complete}
+\input{content/shmem_local_complete.tex}
+\color{black}
 
 \subsection{Distributed Locking Routines}
 The following section discusses \openshmem locks as a mechanism to provide
