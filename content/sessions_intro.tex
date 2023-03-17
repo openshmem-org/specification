@@ -13,7 +13,7 @@ implementation whether or not to apply any optimizations within a session.
 
 Usage of the \openshmem session APIs on a particular context must comply with
 the requirements of all options set on that context.
-Starting and stoping \openshmem sessions should not affect the completion or
+Starting and stopping \openshmem sessions should not affect the completion or
 ordering semantics of any \openshmem routines in the program.
 For these reasons, multi-threaded \openshmem programs may require additional
 thread synchronization to ensure sessions hints are correctly applied to
