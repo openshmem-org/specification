@@ -1,11 +1,12 @@
 \apisummary{
-    The routine outputs the status of the collective operation identified by the request.
+    The routine waits until a collective operation identified by a request
+    object completes.
 }
 
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_req\_test}@(shmem_req_h request);
+int @\FuncDecl{shmem\_collective\_wait}@(shmem_req_h request);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -15,16 +16,22 @@ int @\FuncDecl{shmem\_req\_test}@(shmem_req_h request);
 \end{apiarguments}
 
 \apidescription{
-    A call to \FUNC{shmem\_req\_test} returns immediately. If the
-    collective operation identified by the request is completed, it returns
-    zero. The request object is deallocated. If the collective operation is not
-    completed, it returns an integer (non-negative integer).
 
-    In a multithreaded environment, the collective and the
-    \FUNC{shmem\_req\_test} can be
-    called by different threads. It is the responsibility of the \openshmem user
-    to ensure that the \FUNC{shmem\_collective\_test} operation is called after the
-    collective operation.
+The \FUNC{shmem\_collective\_wait} function is a blocking operation. It is used to
+determine whether a collective operation identified by the request object has been
+completed. If the collective operation is completed,
+\FUNC{shmem\_collective\_wait}
+returns zero and deallocates the request object. If the collective operation has
+not been completed, \FUNC{shmem\_collective\_wait} blocks until collective
+operation completes and then returns zero.
+
+
+In a multithreaded environment, \FUNC{shmem\_collective\_wait} can be called by different
+threads but on different request objects. It is the responsibility of the
+OpenSHMEM user to ensure that proper synchronization is used to prevent race
+conditions or deadlock. Specifically, the \FUNC{shmem\_collective\_wait} operation should
+be called after the collective operation to ensure that the request object is
+not deallocated prematurely.
     }
 
 \apireturnvalues{
