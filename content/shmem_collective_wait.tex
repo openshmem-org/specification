@@ -6,7 +6,7 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_collective\_wait}@(shmem_req_h request);
+int @\FuncDecl{shmem\_req\_wait}@(shmem_req_h request);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -17,19 +17,19 @@ int @\FuncDecl{shmem\_collective\_wait}@(shmem_req_h request);
 
 \apidescription{
 
-The \FUNC{shmem\_collective\_wait} function is a blocking operation. It is used to
+The \FUNC{shmem\_req\_wait} function is a blocking operation. It is used to
 determine whether a collective operation identified by the request object has been
 completed. If the collective operation is completed,
-\FUNC{shmem\_collective\_wait}
+\FUNC{shmem\_req\_wait}
 returns zero and deallocates the request object. If the collective operation has
-not been completed, \FUNC{shmem\_collective\_wait} blocks until collective
+not been completed, \FUNC{shmem\_req\_wait} blocks until collective
 operation completes and then returns zero.
 
 
-In a multithreaded environment, \FUNC{shmem\_collective\_wait} can be called by different
+In a multithreaded environment, \FUNC{shmem\_req\_wait} can be called by different
 threads but on different request objects. It is the responsibility of the
-OpenSHMEM user to ensure that proper synchronization is used to prevent race
-conditions or deadlock. Specifically, the \FUNC{shmem\_collective\_wait} operation should
+\openshmem user to ensure that proper synchronization is used to prevent race
+conditions or deadlock. Specifically, the \FUNC{shmem\_req\_wait} operation should
 be called after the collective operation to ensure that the request object is
 not deallocated prematurely.
     }
