@@ -72,7 +72,10 @@ void @\FuncDecl{shmem\_session\_start}@(long options, shmem_ctx_t ctx);
 
     \LibConstDecl{SHMEM\_SESSION\_CHAIN} &
     \newline
-    The session will contain a chain (a trivial repeating pattern) of similar RMA operations.
+    The session will contain a \textit{chain} (i.e. a repeating sequence) of
+    RMA operations.  For example, an iterative loop of only non-blocking RMA
+    operations forms a chain. A chain must not include a memory ordering or
+    collective operation.
     \tabularnewline \hline 
 
     \LibConstDecl{SHMEM\_SESSION\_UNIFORM\_AMO} &
