@@ -30,18 +30,18 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
         The type of \dest{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{source}{Symmetric address of the source array data object.
         The type of \source{} should match that implied in the SYNOPSIS section.}
-    \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
-        array. The stride must be greater than or equal to \CONST{1} and is
-        scaled by the element size of the \dest{} array. A value of \CONST{1}
+    \apiargument{IN}{dst}{The stride between consecutive blocks of the \dest{}
+        array. The stride must be greater than or equal to \VAR{bsize} and is
+        scaled by the element size of the \dest{} array. A value of \VAR{bsize}
         indicates contiguous data.}
-    \apiargument{IN}{sst}{The stride between consecutive elements of the \source{}
-        array. The stride must be greater than or equal to \CONST{1} and is
-        scaled by the element size of the \source{} array. A value of \CONST{1}
+    \apiargument{IN}{sst}{The stride between consecutive blocks of the \source{}
+        array. The stride must be greater than or equal to \VAR{bsize} and is
+        scaled by the element size of the \source{} array. A value of \VAR{bsize}
         indicates contiguous data.}
     \apiargument{IN}{bsize}{Number of elements per block in the \dest{} and \source{}
         arrays.}
-    \apiargument{IN}{nblocks}{Number of blocks in the \dest{} and \source{}
-        arrays.}
+    \apiargument{IN}{nblocks}{Number of blocks to be copied from the \source{} array
+        to the \dest{} array.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
