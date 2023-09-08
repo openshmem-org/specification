@@ -56,4 +56,10 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
     None.
 }
 
+\apinotes{
+    The \FUNC{shmem\_ibget} API provides a more general purpose interleaved
+    transfer API than \FUNC{shmem\_iget}. Calling \FUNC{shmem\_ibget} with a
+    block size of 1 is equivalent to the \FUNC{shmem\_iget} API.
+}
+
 \end{apidefinition}
