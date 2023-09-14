@@ -6,12 +6,13 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_barrier\_all\_nb}@(void);
+void @\FuncDecl{shmem\_barrier\_all\_nb}@(shmem_req_h *request);
 \end{Csynopsis}
 
 \begin{apiarguments}
 
-    \apiargument{None.}{}{}
+    \apiargument{OUT}{request}{An opaque request handle identifying the
+    collective operation.}
 
 \end{apiarguments}
 
@@ -21,7 +22,7 @@ void @\FuncDecl{shmem\_barrier\_all\_nb}@(void);
     once. This routine completes when all \acp{PE} have called
     \FUNC{shmem\_barrier\_all\_nb}. 
 
-   A call to the nonblocking barrier routine posts the operation and returns
+    A call to the nonblocking barrier routine posts the operation and returns
     immediately without necessarily completing the operation. Upon successful posting of the operation, 
     an opaque request handle is created and returned. The
     operation is completed after a call to \FUNC{shmem\_req\_test} or
