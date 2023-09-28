@@ -19,11 +19,8 @@ using the \FUNC{shmem\_req\_test} routine and can be completed using
 the \FUNC{shmem\_req\_wait} routine.
 
 \item Threads: While using SHMEM\_THREAD\_MULTIPLE, the \openshmem
-programs are allowed to call multiple collective operations on different threads
-and the same Team. The collective operations invoked on different threads
-are ordered by a user-provided tag. The user may choose to not order the
-collective operations by using the library constant
-\CONST{SHMEM\_COLL\_UNORDERED} instead of specifying the tag.
+programs are not allowed to call multiple collective operations on different threads
+and the same Team.
 
 \end{enumerate}
 

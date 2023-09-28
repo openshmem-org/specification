@@ -8,7 +8,7 @@
 %% C11
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_broadcast\_nb}@(shmem_team_t team, TYPE *dest, const TYPE
-*source, size_t nelems, int PE_root, uint32_t tag, shmem_req_h *request);
+*source, size_t nelems, int PE_root,  shmem_req_h *request);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
@@ -17,14 +17,13 @@ where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdr
 \end{Csynopsis}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_broadcast\_nb}@(shmem_team_t team, TYPE
-*dest, const TYPE *source, size_t nelems, int PE_root, uint32_t tag,
-shmem_req_h *request);
+*dest, const TYPE *source, size_t nelems, int PE_root, shmem_req_h *request);
 \end{CsynopsisCol}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const void
-*source, size_t nelems, int PE_root, uint32_t tag, shmem_req_h *request);
+*source, size_t nelems, int PE_root, shmem_req_h *request);
 \end{CsynopsisCol}
 
 \begin{apiarguments}
@@ -43,8 +42,6 @@ int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const vo
 }
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the team, from which the data is copied.}
-\apiargument{IN}{tag}{A user defined tag to order the collective operation;
-SHMEM\_COLL\_UNORDERED can be provided if no order is required.}
 \apiargument{OUT}{request}{An opaque request handle identifying the collective
 operation.}
 
@@ -67,10 +64,6 @@ operation.}
     operation is completed after a call to \FUNC{shmem\_req\_test} or
     \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
     is deallocated and cannot be reused.
-
-    The nonblocking broadcast routine is ordered according to the user-defined tag.
-    If \CONST{SHMEM\_COLL\_UNORDERED} is used instead of a tag, the collective
-    operations are not ordered.
 
     Like blocking broadcast, before any \ac{PE} calls a broadcast routine, the following
     conditions must be ensured:
