@@ -8,7 +8,7 @@
 %% C11
 \begin{C11synopsis}
 int @\FuncDecl{shmem\_alltoall\_nb}@(shmem_team_t team, TYPE *dest, const TYPE
-*source, size_t nelems, uint32_t tag, shmem_req_h *request);
+*source, size_t nelems, shmem_req_h *request);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
 
@@ -16,13 +16,13 @@ where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdr
 \end{Csynopsis}
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_alltoall\_nb}@(shmem_team_t team,
-TYPE *dest, const TYPE *source, size_t nelems, uint32_t tag, shmem_req_h *request);
+TYPE *dest, const TYPE *source, size_t nelems, shmem_req_h *request);
 \end{CsynopsisCol}
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
 int @\FuncDecl{shmem\_alltoallmem\_nb}@(shmem_team_t team, void *dest, const
-void *source, size_t nelems, uint32_t tag, shmem_req_h *request);
+void *source, size_t nelems, shmem_req_h *request);
 \end{CsynopsisCol}
 
 \begin{apiarguments}
@@ -43,8 +43,6 @@ void *source, size_t nelems, uint32_t tag, shmem_req_h *request);
   for \FUNC{shmem\_alltoall\{32,64\}\_nb}, elements are 4 or 8 bytes,
   respectively.
 }
-\apiargument{IN}{tag}{A user defined tag to order the collective operation;
-SHMEM\_COLL\_UNORDERED can be provided if no order is required.}
 \apiargument{OUT}{request}{An opaque request handle identifying the collective
 operation.}
 
