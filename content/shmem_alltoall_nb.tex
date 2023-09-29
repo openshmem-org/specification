@@ -60,9 +60,9 @@ operation.}
     \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
-    {\bf Invocation and completion}: A call to the nonblocking alltoall routine posts the operation and returns
-    immediately without necessarily completing the operation. On the successful
-    post of the operation, an opaque request handle is created and returned. The
+    {\bf Invocation and completion}: A call to the nonblocking alltoall routine initiates the operation and returns
+    immediately without necessarily completing the operation. On success,
+    an opaque request handle is created and returned. The
     operation is completed after a call to \FUNC{shmem\_req\_test} or
     \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
     is deallocated and cannot be reused.
