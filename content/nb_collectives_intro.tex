@@ -10,9 +10,8 @@ the operation is posted and returned immediately. All participants of the Team
 should call this routine.
 
 \item Collective Types: The nonblocking variants supported include barrier, alltoall,
-broadcast, and reduction collectives. Other collective operations such as
-collect, barrier, alltoalls, and sync will not have nonblocking variants. The
-reduction types supported are defined in Table \ref{teamreducetypes}.
+and broadcast collectives. Other collective operations such as
+reductions, collect, barrier, alltoalls, and sync will not have nonblocking variants.
 
 \item Completion semantics:  \openshmem programs can learn the status of the collective operations
 using the \FUNC{shmem\_req\_test} routine and can be completed using
