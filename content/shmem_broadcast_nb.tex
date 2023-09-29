@@ -64,9 +64,9 @@ operation.}
     \VAR{PE\_root} must be passed by all \acp{PE} participating in the
     collective operation.
 
-    A call to the nonblocking broadcast routine posts the operation and returns
-    immediately without necessarily completing the operation. On the successful
-    post of the operation, an opaque request handle is created and returned. The
+    A call to the nonblocking broadcast routine initiates the operation and returns
+    immediately without necessarily completing the operation. On success,
+    an opaque request handle is created and returned. The
     operation is completed after a call to \FUNC{shmem\_req\_test} or
     \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
     is deallocated and cannot be reused.
