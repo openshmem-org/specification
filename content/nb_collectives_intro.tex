@@ -5,9 +5,9 @@ collective operation.
 
 \begin{enumerate}
 
-\item Invocation semantics: Upon invocation of a collective routine interface,
-the operation is posted and returned immediately. All participants of the Team
-should call this routine.
+\item Invocation semantics: Upon invocation of a nonblocking collective routine,
+the operation is initiated and the routine returns without ensuring completion. All participants of the Team
+must call this routine with identical arguments.
 
 \item Collective Types: The nonblocking variants supported include barrier, alltoall,
 and broadcast collectives. Other collective operations such as
