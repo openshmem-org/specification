@@ -22,12 +22,6 @@ int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_broadcast\_nb}@(shmem_team_t team, T
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_broadcast32\_nb}@(shmem_team_t team, void *dest, const void
-*source, size_t nelems, int PE_root, shmem_req_h *request);
-
-int @\FuncDecl{shmem\_broadcast64\_nb}@(shmem_team_t team, void *dest, const void
-*source, size_t nelems, int PE_root, shmem_req_h *request);
-
 int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const void
 *source, size_t nelems, int PE_root, shmem_req_h *request);
 \end{CsynopsisCol}
@@ -42,9 +36,7 @@ int @\FuncDecl{shmem\_broadcastmem\_nb}@(shmem_team_t team, void *dest, const vo
       The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nelems}{
   The number of elements in \source{} and \dest{} arrays.
-  For \FUNC{shmem\_broadcastmem\_nb}, elements are bytes;
-  for \FUNC{shmem\_broadcast\{32,64\}\_nb}, elements are 4 or 8 bytes,
-  respectively.
+  For\FUNC{shmem\_broadcastmem\_nb}, elements are bytes.
 }
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
     the team, from which the data is copied.}
