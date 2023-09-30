@@ -31,10 +31,10 @@ void *source, size_t nelems, shmem_req_h *request);
 
 \apiargument{OUT}{dest}{Symmetric address of a data object large enough to receive
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
-    active set.
+    team.
     The type of \dest{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{source}{Symmetric address of a data object that contains \VAR{nelems}
-    elements of data for each \ac{PE} in the active set, ordered according to
+    elements of data for each \ac{PE} in the team, ordered according to
     destination \ac{PE}.
     The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nelems}{
@@ -68,7 +68,7 @@ operation.}
     with all other \acp{PE} participating in the operation.
     The size of a data element is:
     \begin{itemize}
-    \item 8 bits for \FUNC{shmem\_alltoallmem}
+    \item 8 bits for \FUNC{shmem\_alltoallmem\_nb}
     \item \FUNC{sizeof}(\TYPE{}) for alltoall routines taking typed \VAR{source} and \VAR{dest}
     \end{itemize}
 
