@@ -1,5 +1,5 @@
 \apisummary{
-    The routine outputs the status of the collective operation identified by the request.
+    The routine outputs the status of the operation identified by the request.
 }
 
 \begin{apidefinition}
@@ -16,15 +16,15 @@ int @\FuncDecl{shmem\_req\_test}@(shmem_req_h request);
 
 \apidescription{
     A call to \FUNC{shmem\_req\_test} returns immediately. If the
-    collective operation identified by the request is completed, it returns
-    zero. The request object is deallocated. If the collective operation is not
-    completed, it returns an integer (non-negative integer).
+    operation identified by the request is completed, it returns
+    zero, and the request object is deallocated. If the operation is not
+    completed, it returns a non-negative integer.
 
-    In a multithreaded environment, the collective and the
+    In a multithreaded environment, the operation identified by the request and the
     \FUNC{shmem\_req\_test} can be
     called by different threads. It is the responsibility of the \openshmem user
-    to ensure that the \FUNC{shmem\_collective\_test} operation is called after the
-    collective operation.
+    to ensure that the \FUNC{shmem\_req\_test} operation is called after the
+    operation has been initiated.
     }
 
 \apireturnvalues{
