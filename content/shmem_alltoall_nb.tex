@@ -21,12 +21,6 @@ TYPE *dest, const TYPE *source, size_t nelems, shmem_req_h *request);
 where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
 
 \begin{CsynopsisCol}
-int @\FuncDecl{shmem\_alltoall32\_nb}@(shmem_team_t team, void *dest, const
-void *source, size_t nelems, shmem_req_h *request);
-
-int @\FuncDecl{shmem\_alltoall64\_nb}@(shmem_team_t team, void *dest, const
-void *source, size_t nelems, shmem_req_h *request);
-
 int @\FuncDecl{shmem\_alltoallmem\_nb}@(shmem_team_t team, void *dest, const
 void *source, size_t nelems, shmem_req_h *request);
 \end{CsynopsisCol}
@@ -45,9 +39,7 @@ void *source, size_t nelems, shmem_req_h *request);
     The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nelems}{
   The number of elements to exchange for each \ac{PE}.
-  For \FUNC{shmem\_alltoallmem\_nb}, elements are bytes;
-  for \FUNC{shmem\_alltoall\{32,64\}\_nb}, elements are 4 or 8 bytes,
-  respectively.
+  For \FUNC{shmem\_alltoallmem\_nb} it represents bytes.
 }
 \apiargument{OUT}{request}{An opaque request handle identifying the collective
 operation.}
@@ -76,8 +68,6 @@ operation.}
     with all other \acp{PE} participating in the operation.
     The size of a data element is:
     \begin{itemize}
-    \item 32 bits for \FUNC{shmem\_alltoall32}
-    \item 64 bits for \FUNC{shmem\_alltoall64}
     \item 8 bits for \FUNC{shmem\_alltoallmem}
     \item \FUNC{sizeof}(\TYPE{}) for alltoall routines taking typed \VAR{source} and \VAR{dest}
     \end{itemize}
