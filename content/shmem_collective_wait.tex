@@ -1,5 +1,5 @@
 \apisummary{
-    The routine waits until a collective operation identified by a request
+    The routine waits until a operation identified by a request
     object completes.
 }
 
@@ -17,13 +17,11 @@ int @\FuncDecl{shmem\_req\_wait}@(shmem_req_h request);
 
 \apidescription{
 
-The \FUNC{shmem\_req\_wait} function is a blocking operation. It is used to
-determine whether a collective operation identified by the request object has been
-completed. If the collective operation is completed,
-\FUNC{shmem\_req\_wait}
-returns zero and deallocates the request object. If the collective operation has
-not been completed, \FUNC{shmem\_req\_wait} blocks until collective
-operation completes and then returns zero.
+The \FUNC{shmem\_req\_wait} function is a blocking operation used to determine whether an
+operation identified by the request object has been completed. If the operation
+is completed, \FUNC{shmem\_req\_wait} returns zero and deallocates the request object. If
+the operation has not been completed, \FUNC{shmem\_req\_wait} blocks until the operation
+completes and then returns zero.
 
 
 In a multithreaded environment, \FUNC{shmem\_req\_wait} can be called by different
