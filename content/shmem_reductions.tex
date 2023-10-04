@@ -283,9 +283,11 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     provides one element for each reduction.  The results of the reductions are placed in the
     \dest{} array on all \acp{PE} participating in the reduction.
 
+    The same \source{} and \dest{} arrays must be passed by all PEs that
+    participate in the collective.
     The \source{} and \dest{} arguments must either be the same symmetric
     address, or two different symmetric addresses corresponding to buffers that
-    do not overlap in memory. That is, they must be completely overlapping or
+    do not overlap in memory. That is, they must be completely overlapping (sometimes referred to as an ``in place'' reduction) or
     completely disjoint.
 
     Team-based reduction routines operate over all \acp{PE} in the provided team argument. All

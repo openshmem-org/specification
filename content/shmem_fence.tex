@@ -24,7 +24,7 @@ void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
     \ac{PE} on the given context prior
     to the call to \FUNC{shmem\_fence} are guaranteed to be delivered before any
     subsequent operations on symmetric data
-    objects to the same \ac{PE}. \FUNC{shmem\_fence} guarantees order of delivery,
+    objects to the same \ac{PE} on the same context. \FUNC{shmem\_fence} guarantees order of delivery,
     not completion. It does not guarantee order of delivery of nonblocking
     \GET{} or values fetched by nonblocking \ac{AMO} routines.
     If \VAR{ctx} has the value \CONST{SHMEM\_CTX\_INVALID}, no operation is

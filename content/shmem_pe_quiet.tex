@@ -1,0 +1,47 @@
+\apisummary{
+    Waits for completion of all outstanding memory store, blocking 
+    \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as well as 
+    nonblocking \PUT{}, \emph{put-with-signal}, and \GET{} routines 
+    to symmetric data objects issued by the calling \ac{PE} at the target
+    \acp{PE}.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_pe\_quiet}@(const int *target_pes, size_t npes);
+void @\FuncDecl{shmem\_ctx\_pe\_quiet}@(shmem_ctx_t ctx, const int *target_pes, size_t npes);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        the default context.}
+	\apiargument{IN}{target\_pes}{Address of target \ac{PE} array where the
+    operations need to be completed}
+	\apiargument{IN}{npes}{The number of \acp{PE} in the target \ac{PE} array}
+
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_pe\_quiet} ensures completion of memory store, blocking 
+    \PUT{}, \ac{AMO}, and \emph{put-with-signal}, as well as  nonblocking
+    \PUT{}, \emph{put-with-signal}, and \GET{} routines on the symmetric data
+    objects issued by the calling \ac{PE} to the target \acp{PE} and on the
+    given context. If \VAR{npes} is set to 0, the \VAR{target\_pes} is ignored
+    and the routine returns immediately.
+	
+	The completion and visibility semantics of these operations are the same as the
+	\FUNC{shmem\_quiet} routine. However, it applies only to the target
+    \acp{PE}, i.e., the operations to the target \acp{PE} are guaranteed to be
+    complete and visible to all \acp{PE} when \FUNC{shmem\_pe\_quiet} returns.
+}
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    On certain platforms, when \FUNC{shmem\_pe\_quiet} is invoked on a set of
+    \acp{PE}, the performance might be equivalent to \FUNC{shmem\_quiet}.
+}
+\end{apidefinition}
