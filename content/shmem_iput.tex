@@ -31,33 +31,29 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
     \apiargument{IN}{source}{Local address of the array containing the data to be copied.
         The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
-        array.  The stride is scaled by the element size of the \dest{} array.  A
-        value of \CONST{1} indicates contiguous data.}
-    \apiargument{IN}{sst}{The  stride between consecutive elements of the
-        \source{} array.  The stride is scaled by the element size of the \source{}
-        array.  A  value of \CONST{1} indicates contiguous data.}
+        array. The stride must be greater than or equal to \CONST{1} and is
+        scaled by the element size of the \dest{} array. A value of \CONST{1}
+        indicates contiguous data.}
+    \apiargument{IN}{sst}{The stride between consecutive elements of the \source{}
+        array. The stride must be greater than or equal to \CONST{1} and is
+        scaled by the element size of the \source{} array. A value of \CONST{1}
+        indicates contiguous data.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{} arrays.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
 
 \apidescription{
-    The \FUNC{iput} routines provide a method  for  copying strided data
+    The \FUNC{shmem\_iput} routines provide a method  for  copying strided data
     elements (specified by \VAR{sst}) of an array from a \source{} array on the
     local \ac{PE} to locations specified by stride \VAR{dst} on a \dest{} array
-    on specified remote \ac{PE}. Both strides, \VAR{dst} and \VAR{sst}, must be
-    greater than or equal to \CONST{1}. The routines return when the data has
+    on specified remote \ac{PE}. The routines return when the data has
     been copied out of the \VAR{source} array on the local \ac{PE} but not
     necessarily before the data has been delivered to the remote data object.
 }
 
 \apireturnvalues{
     None.
-}
-
-\apinotes{
-    See Section \ref{subsec:memory_model} for a definition of the term
-    remotely accessible.
 }
 
 \begin{apiexamples}

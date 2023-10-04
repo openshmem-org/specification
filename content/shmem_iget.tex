@@ -31,18 +31,20 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
     \apiargument{IN}{source}{Symmetric address of the source array data object.
         The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}
-        array.  The stride is scaled by the element size of the \dest{} array.
-        A  value of \CONST{1} indicates contiguous data.}
-    \apiargument{IN}{sst}{The stride between consecutive elements of the
-        \source{} array.  The stride is scaled by the element size of the \source{}
-        array.  A  value of \CONST{1} indicates contiguous data.}
+        array. The stride must be greater than or equal to \CONST{1} and is
+        scaled by the element size of the \dest{} array. A value of \CONST{1}
+        indicates contiguous data.}
+    \apiargument{IN}{sst}{The stride between consecutive elements of the \source{}
+        array. The stride must be greater than or equal to \CONST{1} and is
+        scaled by the element size of the \source{} array. A value of \CONST{1}
+        indicates contiguous data.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays.}
     \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{iget} routines provide a method for copying strided data elements from
+    The \FUNC{shmem\_iget} routines provide a method for copying strided data elements from
     a symmetric array from a specified remote \ac{PE} to strided locations on a
     local array.  The routines return when the data has been copied into the local
     \VAR{dest} array.

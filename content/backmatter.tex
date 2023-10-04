@@ -654,11 +654,16 @@ standard \ac{AMO} types in Table~\ref{stdamotypes}.
 \chapter{Changes to this Document}\label{sec:changelog}
 
 \section{Version 1.6}
-Major changes in \openshmem[1.6] include the addition of a new
-\FUNC{shmem\_team\_ptr} function.
+Major changes in \openshmem[1.6] include the addition of the new
+\FUNC{shmem\_team\_ptr}, \FUNC{shmem\_ibget}, and \FUNC{shmem\_ibput}
+functions.
 
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{itemize}
+%
+\item Added interleaved block transfer APIs \FUNC{shmem\_ibget} and
+    \FUNC{shmem\_ibput}.
+\ChangelogRef{subsec:shmem_ibget, subsec:shmem_ibput}%
 %
 \item Added \FUNC{shmem\_signal\_add} and \FUNC{shmem\_signal\_set} to
   update a remote flag without associated data transfer of a put-with-signal operation.

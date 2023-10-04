@@ -1,0 +1,68 @@
+\apisummary{
+    Copies strided data blocks to a specified \ac{PE}.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_ibput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+void @\FuncDecl{shmem\_ibput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_ibput}@(TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+void @\FuncDecl{shmem\_ctx\_\FuncParam{TYPENAME}\_ibput}@(shmem_ctx_t ctx, TYPE *dest, const TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+\end{Csynopsis}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+void @\FuncDecl{shmem\_ibput\FuncParam{SIZE}}@(void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+void @\FuncDecl{shmem\_ctx\_ibput\FuncParam{SIZE}}@(shmem_ctx_t ctx, void *dest, const void *source, ptrdiff_t dst, ptrdiff_t sst, size_t bsize, size_t nblocks, int pe);
+\end{CsynopsisCol}
+where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        the default context.}
+    \apiargument{OUT}{dest}{Symmetric address of the destination array data object.
+        The type of \dest{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{source}{Local address of the array containing the data to be copied.
+        The type of \source{} should match that implied in the SYNOPSIS section.}
+    \apiargument{IN}{dst}{The stride between consecutive blocks of the \dest{}
+        array. The stride must be greater than or equal to \VAR{bsize} and is
+        scaled by the element size of the \dest{} array. A value of \VAR{bsize}
+        indicates contiguous data.}
+    \apiargument{IN}{sst}{The stride between consecutive blocks of the \source{}
+        array. The stride must be greater than or equal to \VAR{bsize} and is
+        scaled by the element size of the \source{} array. A value of \VAR{bsize}
+        indicates contiguous data.}
+    \apiargument{IN}{bsize}{Number of elements per block in the \dest{} and \source{}
+        arrays.}
+    \apiargument{IN}{nblocks}{Number of blocks to be copied from the \source{} array
+        to the \dest{} array.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
+\end{apiarguments}
+
+
+\apidescription{
+    The \FUNC{shmem\_ibput} routines provide a method  for  copying strided data
+    blocks (specified by \VAR{sst}) of an array from a \source{} array on the
+    local \ac{PE} to locations specified by stride \VAR{dst} on a \dest{} array
+    on specified remote \ac{PE}. The routines return when the data has
+    been copied out of the \VAR{source} array on the local \ac{PE} but not
+    necessarily before the data has been delivered to the remote data object.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+    The \FUNC{shmem\_ibput} API provides a more general purpose interleaved
+    transfer API than \FUNC{shmem\_iput}. Calling \FUNC{shmem\_ibput} with a
+    block size of 1 is equivalent to the \FUNC{shmem\_iput} API.
+}
+
+\end{apidefinition}
