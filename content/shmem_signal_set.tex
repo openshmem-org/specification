@@ -1,0 +1,47 @@
+\apisummary{
+  Sets the signal value of a remote data object.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+void @\FuncDecl{shmem\_signal\_set}@(shmem_ctx_t ctx, const uint64_t *sig_addr, uint64_t signal, int pe);
+\end{C11synopsis}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_signal\_set}@(const uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_signal\_set}@(shmem_ctx_t ctx, const uint64_t *sig_addr, uint64_t signal, int pe);
+\end{Csynopsis}
+
+\begin{apiarguments}
+  \apiargument{IN}{ctx}{
+    A context handle specifying the context on which to perform the
+    operation. When this argument is not provided, the operation is
+    performed on the default context.
+  }
+  \apiargument{OUT}{sig\_addr}{
+    Symmetric address of the signal data object to be updated on the
+    remote \ac{PE}.
+  }
+  \apiargument{IN}{signal}{
+    Unsigned 64-bit value that is used for updating the remote
+    \VAR{sig\_addr} signal data object.
+  }
+  \apiargument{IN}{pe}{
+    \ac{PE} number of the remote \ac{PE}.
+  }
+\end{apiarguments}
+
+\apidescription{
+  \FUNC{shmem\_signal\_set} writes \VAR{value} into the signal data
+  object pointed to by \VAR{sig\_addr} on \ac{PE}~\VAR{pe}.
+  The update to the \VAR{sig\_addr} signal object at the calling
+  \ac{PE} is expected to satisfy the atomicity guarantees as described
+  in Section~\ref{subsec:signal_atomicity}.
+}
+
+\apireturnvalues{
+  None.
+}
+
+\end{apidefinition}
