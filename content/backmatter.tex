@@ -660,6 +660,10 @@ Major changes in \openshmem[1.6] include the addition of a new
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{itemize}
 %
+\item Added \FUNC{shmem\_signal\_add} and \FUNC{shmem\_signal\_set} to
+  update a remote flag without associated data transfer of a put-with-signal operation.
+\ChangelogRef{subsec:shmem_signal_add, subsec:shmem_signal_set}%
+%
 \item Clarified that \OPR{Fence} operations only guarantee ordering for
     operations that are performed on the same context.
 \ChangelogRef{subsec:shmem_fence}%
