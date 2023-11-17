@@ -38,52 +38,45 @@ void @\FuncDecl{shmem\_session\_start}@(long options, shmem_ctx_t ctx);
     None.
 }
 
-\begin{longtable}{|p{0.45\textwidth}|p{0.5\textwidth}|}
+\begin{longtable}{|p{0.40\textwidth}|p{0.55\textwidth}|}
     \hline
     \hline
     \textbf{Option} & \textbf{Usage hint}
     \tabularnewline \hline
     \endhead
     %%
-    \LibConstDecl{SHMEM\_SESSION\_OP\_PUT} &
-    \newline 
-    The session will contain non-blocking \textit{put} and/or scalar put operations.
-    \tabularnewline \hline
-
-    \LibConstDecl{SHMEM\_SESSION\_OP\_GET} &
-    \newline
-    The session will contain non-blocking \textit{get} operations.
-    \tabularnewline \hline
-
-    \LibConstDecl{SHMEM\_SESSION\_OP\_PUT\_SIGNAL} &
-    \newline
-    The session will contain non-blocking \textit{put-with-signal} operations.
-    \tabularnewline \hline
-    
-    \LibConstDecl{SHMEM\_SESSION\_OP\_AMO} &
-    \newline
-    The session will contain non-fetching AMOs.
-    \tabularnewline \hline
-
-    \LibConstDecl{SHMEM\_SESSION\_OP\_AMO\_FETCH} &
-    \newline
-    The session will contain non-blocking fetching AMOs.
-    \tabularnewline \hline
-
     \LibConstDecl{SHMEM\_SESSION\_CHAIN} &
     \newline
-    The session will contain a \textit{chain} (i.e. a repeating sequence) of
-    RMA operations.  For example, an iterative loop of only non-blocking RMA
-    operations forms a chain. A chain must not include a memory ordering or
-    collective operation.
+    The performance of \openshmem programs that issue many consecutive and
+    small-sized communication routines might be improved by combining these
+    routines into fewer operations.
+
+    The \VAR{SHMEM\_SESSION\_CHAIN} hint indicates to the \openshmem library
+    that the program intends to issue a series of operations on a communication
+    context that are suitable for chaining optimizations.  An example of a
+    chain is an iterative loop of non-blocking RMA and/or AMO routines. A chain
+    must not include a memory ordering or collective operation.
+
+    Because sessions do not affect the completion or ordering semantics of any
+    \openshmem routines in the program, routines such as non-blocking RMAs,
+    non-blocking AMOs, non-blocking \OPR{put-with-signal}, blocking scalar
+    \OPR{puts}, and blocking non-fetching AMOs are viable candidates for
+    chaining optimizations.  Other routines, such as blocking non-scalar
+    \OPR{puts} and \OPR{gets}, blocking fetching AMOs, blocking scalar
+    \OPR{gets}, and the memory ordering routines might require the library to
+    enforce remote completion, reducing the potential benefit of chaining
+    optimizations.
+
     \tabularnewline \hline 
 
     \LibConstDecl{SHMEM\_SESSION\_UNIFORM\_AMO} &
     \newline
-    The session will contain a chain of AMOs that will not occur concurrently
-    across any different signal operators (i.e.~\ref{subsec:signal_operator}),
-    operations (\ref{sec:amo}), or types (Tables \ref{stdamotypes} and
-    \ref{extamotypes}).
+    The session will contain a chain (as defined by the
+    \VAR{SHMEM\_SESSION\_CHAIN} option) of only AMOs that will not occur
+    concurrently across any different signal operators
+    (i.e.~\ref{subsec:signal_operator}), operations (\ref{sec:amo}), or types
+    (Tables \ref{stdamotypes} and \ref{extamotypes}).
+
     \tabularnewline \hline
     \TableCaptionRef{Session options}
     \label{session_opts}
