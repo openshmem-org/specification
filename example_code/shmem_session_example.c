@@ -16,7 +16,7 @@ int main(void) {
   int npes = shmem_n_pes();
   srand(mype);
 
-  shmem_session_start(SHMEM_SESSION_UNIFORM_AMO, SHMEM_CTX_DEFAULT);
+  shmem_session_start(SHMEM_CTX_DEFAULT, SHMEM_SESSION_UNIFORM_AMO);
 
   for (size_t i = 0; i < N_UPDATES; i++) {
       int random_pe = rand() % npes;
