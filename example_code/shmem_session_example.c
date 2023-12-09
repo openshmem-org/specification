@@ -27,6 +27,11 @@ int main(void) {
 
   shmem_session_stop(SHMEM_CTX_DEFAULT);
 
+  /* shmem_session_stop does not quiet the context or synchronize */
+  shmem_barrier_all();
+
+  /* Check the table result here... */
+
   shmem_free(table);
   shmem_finalize();
   return 0;
