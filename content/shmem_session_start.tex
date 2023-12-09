@@ -51,9 +51,9 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     small-sized communication routines might be improved by combining these
     routines into fewer operations.
 
-    The \VAR{SHMEM\_SESSION\_CHAIN} hint indicates to the \openshmem library
-    that the program intends to issue a series of operations on a communication
-    context that are suitable for chaining optimizations.  An example of a
+    The \VAR{SHMEM\_SESSION\_CHAIN} hint indicates that a communication context
+    will be used to issue a series of operations that are suitable for the
+    \openshmem library to chain together.  An example of a
     chain is an iterative loop of non-blocking RMA and/or AMO routines. A chain
     must not include a memory ordering or collective operation.
 
