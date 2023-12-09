@@ -59,13 +59,12 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
 
     Because sessions do not affect the completion or ordering semantics of any
     \openshmem routines in the program, routines such as non-blocking RMAs,
-    non-blocking AMOs, non-blocking \OPR{put-with-signal}, blocking scalar
-    \OPR{puts}, and blocking non-fetching AMOs are viable candidates for
-    chaining optimizations.  Other routines, such as blocking non-scalar
-    \OPR{puts} and \OPR{gets}, blocking fetching AMOs, blocking scalar
-    \OPR{gets}, and the memory ordering routines might require the library to
-    enforce remote completion, reducing the potential benefit of chaining
-    optimizations.
+    non-blocking AMOs, non-blocking \OPR{put-with-signals}, blocking scalar
+    \OPR{puts}, small blocking \OPR{puts}, and blocking non-fetching AMOs are
+    viable candidates for chaining.  Other routines, such as large blocking
+    \OPR{puts}, all blocking \OPR{gets}, blocking fetching AMOs, and the memory
+    ordering routines might require the library to enforce completions,
+    reducing the potential benefit of chaining.
 
     \tabularnewline \hline 
 
