@@ -26,6 +26,8 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     If a session is already started on a given context, another call to
     \FUNC{shmem\_session\_start} on that same context combines new options via a
     bitwise OR operation.
+    If \VAR{ctx} compares equal to \LibConstRef{SHMEM\_CTX\_INVALID} then
+    \FUNC{shmem\_session\_start} performs no action and returns immediately.
 
     No combination of \VAR{options} passed to \FUNC{shmem\_session\_start}
     results in undefined behavior, but some combinations may be detrimental for
