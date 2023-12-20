@@ -372,6 +372,26 @@
   \end{tabular}\\
 }
 
+\newcommand{\sessiontablebegin} {
+\begin{table}[h]
+\hspace{-0.5cm}
+\begin{tabular}{|p{4.8cm}|p{12cm}|}
+    \hline
+    \textbf{Option} & \textbf{Usage hint}
+    \tabularnewline \hline
+}
+
+\newcommand{\sessiontableend} {
+\end{tabular}
+\TableCaptionRef{Session options}
+\label{session_opts}
+\end{table}
+}
+
+\newcommand{\sessiontablerow}[2]{
+ #1 & #2 \tabularnewline
+}
+
 \newcommand{\apinotes}[1]{
 \item[Notes] \hfill \\
     #1

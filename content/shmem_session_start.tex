@@ -40,48 +40,46 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     None.
 }
 
-\begin{longtable}{|p{0.40\textwidth}|p{0.55\textwidth}|}
-    \hline
-    \hline
-    \textbf{Option} & \textbf{Usage hint}
-    \tabularnewline \hline
-    \endhead
-    %%
-    \LibConstDecl{SHMEM\_SESSION\_CHAIN} &
-    \newline
-    The performance of \openshmem programs that issue many consecutive and
-    small-sized communication routines might be improved by combining these
-    routines into fewer operations.
+\sessiontablebegin
 
-    The \VAR{SHMEM\_SESSION\_CHAIN} hint indicates that a communication context
-    will be used to issue a series of operations that are suitable for the
-    \openshmem library to chain together.  An example of a
-    chain is an iterative loop of non-blocking RMA and/or AMO routines. A chain
+\sessiontablerow{\LibConstRef{SHMEM\_SESSION\_BATCH}}{
+    A \textit{batch} is a series of calls to OpenSHMEM routines, which occur
+    within a session in program order, that might tolerate an increase in
+    individual call latencies at the opportunity to decrease the overall
+    overhead typically involved with the OpenSHMEM library implementing the
+    series as individual RMA operations.
+    In other words, the performance of \openshmem programs that issue many
+    consecutive and small-sized RMA routines (called a \textit{batch}) might be
+    improved by informing the library implementation ahead of time that it is
+    free to delay initiating the operations in order to combine or coalesce the
+    issued \openshmem routines.
+    The specific mechanisms for improving performance using batching
+    optimizations depend on the \openshmem library implementation.
+
+    The \VAR{SHMEM\_SESSION\_BATCH} hint indicates that a communication context
+    will be used to issue a batch.  An example of a
+    batch is an iterative loop of non-blocking RMA and/or AMO routines. A batch
     must not include a memory ordering or collective operation.
 
     Because sessions do not affect the completion or ordering semantics of any
     \openshmem routines in the program, routines such as non-blocking RMAs,
     non-blocking AMOs, non-blocking \OPR{put-with-signals}, blocking scalar
     \OPR{puts}, small blocking \OPR{puts}, and blocking non-fetching AMOs are
-    viable candidates for chaining.  Other routines, such as large blocking
+    viable candidates for batching.  Other routines, such as large blocking
     \OPR{puts}, all blocking \OPR{gets}, blocking fetching AMOs, and the memory
     ordering routines might require the library to enforce completions,
-    reducing the potential benefit of chaining.
+    reducing the potential benefit of batching.
+    } \hline
 
-    \tabularnewline \hline 
-
-    \LibConstDecl{SHMEM\_SESSION\_UNIFORM\_AMO} &
-    \newline
-    The session will contain a chain (as defined by the
-    \VAR{SHMEM\_SESSION\_CHAIN} option) of only AMOs that will not occur
+\sessiontablerow{\LibConstRef{SHMEM\_SESSION\_SAME\_AMO}}{
+    The session will contain a batch (as defined by the
+    \VAR{SHMEM\_SESSION\_BATCH} option) of only AMOs that will not occur
     concurrently across any different signal operators
     (i.e.~\ref{subsec:signal_operator}), operations (\ref{sec:amo}), or types
     (Tables \ref{stdamotypes} and \ref{extamotypes}).
+    } \hline
 
-    \tabularnewline \hline
-    \TableCaptionRef{Session options}
-    \label{session_opts}
-\end{longtable}
+\sessiontableend
 
 \apinotes{
     The \FUNC{shmem\_session\_start} routine provides hints for improving
