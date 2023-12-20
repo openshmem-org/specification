@@ -87,6 +87,9 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     optimization.
     \FUNC{shmem\_session\_start} is non-collective, so there is no implied
     synchronization.
+    Blocking puts must be sufficiently small to benefit from batching, and the
+    exact threshold for this benefit depends on the \openshmem implemenation
+    and/or the application.
 }
 
 \end{apidefinition}
