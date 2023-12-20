@@ -16,22 +16,25 @@ int main(void) {
   int npes = shmem_n_pes();
   srand(mype);
 
-  shmem_session_start(SHMEM_CTX_DEFAULT, SHMEM_SESSION_UNIFORM_AMO);
+  shmem_ctx_t ctx;            /* 'ctx' exists only to explain session completions, so */
+  shmem_ctx_create(0, &ctx);  /* the return value of shmem_ctx_create() is ignored.   */
+
+  shmem_session_start(ctx, SHMEM_SESSION_SAME_AMO);
 
   for (size_t i = 0; i < N_UPDATES; i++) {
       int random_pe = rand() % npes;
       size_t random_idx = rand() % N_INDICES;
       uint64_t random_val = rand() % N_VALUES;
-      shmem_uint64_atomic_xor(&table[random_idx], random_val, random_pe);
+      shmem_uint64_atomic_xor(ctx, &table[random_idx], random_val, random_pe);
   }
 
-  shmem_session_stop(SHMEM_CTX_DEFAULT);
+  shmem_session_stop(ctx);     /* shmem_session_stop() does not quiet the context or */
+  shmem_ctx_quiet(ctx);        /* synchronize. If this were SHMEM_CTX_DEFAULT, one   */
+  shmem_sync_all();            /* could simply call shmem_barrier_all() instead of   */
+                               /* shmem_ctx_quiet() followed by shmem_sync_all().    */
+  /* At this point, it is safe to check and/or validate the table result...          */
 
-  /* shmem_session_stop does not quiet the context or synchronize */
-  shmem_barrier_all();
-
-  /* Check the table result here... */
-
+  shmem_ctx_destroy(ctx);
   shmem_free(table);
   shmem_finalize();
   return 0;
