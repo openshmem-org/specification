@@ -16,8 +16,12 @@ int main(void) {
   int npes = shmem_n_pes();
   srand(mype);
 
-  shmem_ctx_t ctx;            /* 'ctx' exists only to explain session completions, so */
-  shmem_ctx_create(0, &ctx);  /* the return value of shmem_ctx_create() is ignored.   */
+  shmem_ctx_t ctx;
+  int ret = shmem_ctx_create(0, &ctx);
+  if (ret != 0) {
+      printf("%d: Error creating context (%d)\n", mype, ret);
+      shmem_global_exit(1);
+  }
 
   shmem_session_start(ctx, SHMEM_SESSION_SAME_AMO);
 
@@ -28,11 +32,11 @@ int main(void) {
       shmem_uint64_atomic_xor(ctx, &table[random_idx], random_val, random_pe);
   }
 
-  shmem_session_stop(ctx);     /* shmem_session_stop() does not quiet the context or */
-  shmem_ctx_quiet(ctx);        /* synchronize. If this were SHMEM_CTX_DEFAULT, one   */
-  shmem_sync_all();            /* could simply call shmem_barrier_all() instead of   */
-                               /* shmem_ctx_quiet() followed by shmem_sync_all().    */
-  /* At this point, it is safe to check and/or validate the table result...          */
+  shmem_session_stop(ctx);
+  shmem_ctx_quiet(ctx);    /* shmem_session_stop() does not quiet the context. */
+  shmem_sync_all();        /* shmem_session_stop() does not synchronize.       */
+
+  /* At this point, it is safe to check and/or validate the table result... */
 
   shmem_ctx_destroy(ctx);
   shmem_free(table);
