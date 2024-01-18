@@ -23,7 +23,12 @@ int main(void) {
       shmem_global_exit(1);
   }
 
-  shmem_session_start(ctx, SHMEM_SESSION_SAME_AMO);
+  shmem_config_t config;
+  long config_mask;
+  config.total_ops = N_UPDATES;
+  config_mask = SHMEM_SESSION_TOTAL_OPS;
+
+  shmem_session_start(ctx, SHMEM_SESSION_SAME_AMO, config, config_mask);
 
   for (size_t i = 0; i < N_UPDATES; i++) {
       int random_pe = rand() % npes;

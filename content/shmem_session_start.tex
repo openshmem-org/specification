@@ -5,7 +5,7 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
+void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options, const shmem_session_config_t *config, long config_mask);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -15,6 +15,11 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     Table~\ref{session_opts} for this session.  Multiple options may be
     requested by combining them with a bitwise OR operation; otherwise,
     \CONST{0} can be given if no options are requested.}
+    \apiargument{IN}{config}{
+      A pointer to the configuration parameters for the session.}
+    \apiargument{IN}{config\_mask}{
+      The bitwise mask representing the set of configuration parameters to use
+      from \VAR{config}.}
 \end{apiarguments}
 
 \apidescription{
@@ -24,8 +29,11 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     Sessions on a communication context must be stopped with a call to
     \FUNC{shmem\_session\_stop} on the same context.
     If a session is already started on a given context, another call to
-    \FUNC{shmem\_session\_start} on that same context combines new options via a
-    bitwise OR operation.
+    \FUNC{shmem\_session\_start} on that same context combines new options
+    via a bitwise OR operation. In such a case, unmasked member values in the
+    \VAR{config} argument replace any existing configuration values that are
+    already applied to the session.
+
     If \VAR{ctx} compares equal to \LibConstRef{SHMEM\_CTX\_INVALID} then
     \FUNC{shmem\_session\_start} performs no action and returns immediately.
 
@@ -34,6 +42,16 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     performance; for example, when selecting an option that is not applicable
     to the session. It is the user's responsibility to determine which
     combination of \VAR{options} benefits the performance of the session.
+
+    The \VAR{config} argument specifies session configuration parameters,
+    which are described in Section~\ref{subsec:shmem_session_config_t}.
+
+    The \VAR{config\_mask} argument is a bitwise mask representing the set of
+    configuration parameters to use from \VAR{config}.
+    A \VAR{config\_mask} value of \CONST{0} indicates that the session should
+    be started with the default values for all configuration parameters.
+    See Section~\ref{subsec:shmem_session_config_t} for field mask names and
+    default configuration parameters.
 }
 
 \apireturnvalues{
@@ -43,32 +61,46 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
 \sessiontablebegin
 
 \sessiontablerow{\LibConstRef{SHMEM\_SESSION\_BATCH}}{
-    A \textit{batch} is a series of calls to OpenSHMEM routines, which occur
-    within a session in program order, that might tolerate an increase in
-    individual call latencies at the opportunity to decrease the overall
-    overhead typically involved with the OpenSHMEM library implementing the
-    series as individual RMA operations.
-    In other words, the performance of \openshmem programs that issue many
-    consecutive and small-sized RMA routines (called a \textit{batch}) might be
-    improved by informing the library implementation ahead of time that it is
-    free to delay initiating the operations in order to combine or coalesce the
-    issued \openshmem routines.
-    The specific mechanisms for improving performance using batching
-    optimizations depend on the \openshmem library implementation.
+    A \textit{batch} is a series of calls to \openshmem routines that occur
+    within a session on a communication context (i.e., after a call to
+    \FUNC{shmem\_session\_start} and before a corresponding call to
+    \FUNC{shmem\_session\_stop}), that might tolerate an increase in
+    individual call latencies. Designating a batch may provide an opportunity
+    to decrease the overall overhead typically involved with the \openshmem
+    library implementing the series as individual RMA operations.  In other
+    words, the performance of \openshmem programs that issue many consecutive
+    and small-sized RMA routines might be improved by informing the library
+    implementation ahead of time that it is free to delay transferring data
+    in order to buffer, combine, and/or coalesce the issued \openshmem
+    routines.  The specific mechanisms for improving performance using
+    batching optimizations depend on the \openshmem library implementation.
 
-    The \VAR{SHMEM\_SESSION\_BATCH} hint indicates that a communication context
-    will be used to issue a batch.  An example of a
-    batch is an iterative loop of non-blocking RMA and/or AMO routines. A batch
-    must not include a memory ordering or collective operation.
+    The \VAR{SHMEM\_SESSION\_BATCH} hint indicates that a communication
+    context will be used to issue a batch.  An example of a batch is an
+    iterative loop of non-blocking RMA and/or AMO routines. A batch may
+    include a memory ordering or collective operation, but such routines
+    might require completions and/or synchronization that could degrade
+    performance.
 
     Because sessions do not affect the completion or ordering semantics of any
     \openshmem routines in the program, routines such as non-blocking RMAs,
     non-blocking AMOs, non-blocking \OPR{put-with-signals}, blocking scalar
     \OPR{puts}, small blocking \OPR{puts}, and blocking non-fetching AMOs are
     viable candidates for batching.  Other routines, such as large blocking
-    \OPR{puts}, all blocking \OPR{gets}, blocking fetching AMOs, and the memory
-    ordering routines might require the library to enforce completions,
-    reducing the potential benefit of batching.
+    \OPR{puts}, all blocking \OPR{gets}, blocking fetching AMOs, and the
+    memory ordering routines might require the library to enforce
+    completions, reducing the potential benefit of batching.
+
+    The \VAR{total\_ops} field of \VAR{config} with mask value
+    \LibConstRef{SHMEM\_SESSION\_TOTAL\_OPS} indicates the expected maximum
+    number of calls to \openshmem RMA routines within the session.
+
+    The \VAR{completion\_rate} field of \VAR{config} with mask value
+    \LibConstRef{SHMEM\_SESSION\_COMPLETION\_RATE} indicates a desired
+    number of \openshmem RMA operations to buffer, combine, and/or coalesce
+    before the library enforces local completion of all pending RMA routines
+    in the session. See Section~\ref{subsec:shmem_session_config_t} for
+    details about these parameters.
     } \hline
 
 \sessiontablerow{\LibConstRef{SHMEM\_SESSION\_SAME\_AMO}}{
@@ -77,6 +109,13 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options);
     concurrently across any different signal operators
     (i.e.~\ref{subsec:signal_operator}), operations (\ref{sec:amo}), or types
     (Tables \ref{stdamotypes} and \ref{extamotypes}).
+
+    The same members of the \VAR{config} structure that apply to the
+    \LibConstRef{SHMEM\_SESSION\_BATCH} option (\VAR{total\_ops} and
+    \VAR{completion\_rate}) also apply to the
+    \LibConstRef{SHMEM\_SESSION\_SAME\_AMO} option. See
+    Section~\ref{subsec:shmem_session_config_t} for details about these
+    parameters.
     } \hline
 
 \sessiontableend

@@ -21,3 +21,6 @@ shareable contexts.
 Because sessions are associated with an \openshmem communication context,
 routines not performed on a communication context (like collective routines)
 are ineligible for session hints.
+
+The \FUNC{shmem\_config\_t} object requires the \CONST{SIZE\_MAX} macro
+defined in \HEADER{stdint.h} by \Cstd[99]~\S7.18.3 and \Cstd[11]~\S7.20.3.
