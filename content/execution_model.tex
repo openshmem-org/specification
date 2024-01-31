@@ -32,13 +32,20 @@ the duration of the \openshmem phase of a program.
 
 The \openshmem model assumes that computation and communication are naturally
 overlapped. \openshmem programs are expected to exhibit progression of
-communication both with and without \openshmem calls. Consider a \ac{PE} that is
+communication both with and without \openshmem calls. For point-to-point
+operations, consider a \ac{PE} that is
 engaged in a computation with no \openshmem calls. Other \acp{PE} should be able
 to communicate (e.g., \OPR{put}, \OPR{get}, \OPR{atomic}, etc.) and
 complete communication operations with that computationally-bound \ac{PE}
 without that \ac{PE} issuing any explicit \openshmem calls. One-sided \openshmem
 communication calls involving that \ac{PE} should progress regardless of when
-that \ac{PE} next engages in an \openshmem call.
+that \ac{PE} next engages in an \openshmem call. Similarly,
+for non-blocking collectives, consider the \acp{PE} that are part of a team
+issuing a non-blocking collective and overlapping collective completion with
+computation. Once a non-blocking collective operation is initiated by
+all of the \acp{PE} in the team of the collective, any \ac{PE} in the team must
+eventually observe completion through a call to \FUNC{shmem\_req\_test} or
+\FUNC{shmem\_req\_wait}.
 
 \parimpnotes{
   An \openshmem implementation for hardware that does not provide
