@@ -95,12 +95,12 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options, const shm
     \LibConstRef{SHMEM\_SESSION\_TOTAL\_OPS} indicates the expected maximum
     number of calls to \openshmem RMA routines within the session.
 
-    The \VAR{completion\_rate} field of \VAR{config} with mask value
-    \LibConstRef{SHMEM\_SESSION\_COMPLETION\_RATE} indicates a desired
-    number of \openshmem RMA operations to buffer, combine, and/or coalesce
-    before the library enforces local completion of all pending RMA routines
-    in the session. See Section~\ref{subsec:shmem_session_config_t} for
-    details about these parameters.
+    The \VAR{delivery\_rate} field of \VAR{config} with mask value
+    \LibConstRef{SHMEM\_SESSION\_DELIVERY\_RATE} indicates a desired number
+    of \openshmem RMA operations to buffer, combine, and/or coalesce before
+    the library delivers all pending RMA routines in the session to the
+    network. See Section~\ref{subsec:shmem_session_config_t} for details
+    about these parameters.
     } \hline
 
 \sessiontablerow{\LibConstRef{SHMEM\_SESSION\_SAME\_AMO}}{
@@ -112,7 +112,7 @@ void @\FuncDecl{shmem\_session\_start}@(shmem_ctx_t ctx, long options, const shm
 
     The same members of the \VAR{config} structure that apply to the
     \LibConstRef{SHMEM\_SESSION\_BATCH} option (\VAR{total\_ops} and
-    \VAR{completion\_rate}) also apply to the
+    \VAR{delivery\_rate}) also apply to the
     \LibConstRef{SHMEM\_SESSION\_SAME\_AMO} option. See
     Section~\ref{subsec:shmem_session_config_t} for details about these
     parameters.

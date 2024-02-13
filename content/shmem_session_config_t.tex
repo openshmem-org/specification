@@ -7,7 +7,7 @@
 \begin{Csynopsis}
 typedef struct {
   size_t total_ops;
-  size_t completion_rate; 
+  size_t delivery_rate;
 } shmem_session_config_t;
 \end{Csynopsis}
 
@@ -25,29 +25,29 @@ typedef struct {
   the implementation whether or not to use the parameter values within
   a session.
 
-  The \VAR{total\_ops} member indicates the expected maximum number of all 
+  The \VAR{total\_ops} member indicates the expected maximum number of all
   calls to \openshmem RMA routines within the session (i.e., after a call to
   \FUNC{shmem\_session\_start} and before a corresponding call to
   \FUNC{shmem\_session\_stop}).
   If \VAR{total\_ops} is lower than the actual number of calls to \openshmem
-  RMA routines within the session, then application performance may be
+  RMA routines within the session, then application performance might be
   suboptimal; however, the result of any data transfers, completions, or
   memory ordering operations are unaffected by the value of
   \FUNC{total\_ops}.
 
-  The \VAR{completion\_rate} member indicates the expected number of
+  The \VAR{delivery\_rate} member indicates the expected number of
   \openshmem RMA operations to buffer, combine, and/or coalesce (see
   \LibConstRef{SHMEM\_SESSION\_BATCH} option to
-  \FUNC{shmem\_session\_start} in \ref{subsec:shmem_session_start}) before
-  the library enforces local completion of all pending RMA routines in the
-  session.
-  The value of \VAR{completion\_rate} is expected to be less than the value
+  \FUNC{shmem\_session\_start} within \ref{subsec:shmem_session_start}) before
+  the library delivers all pending RMA routines in the
+  session to the network.
+  The value of \VAR{delivery\_rate} is expected to be less than the value
   of \VAR{total\_ops}; however, the result of any data transfers,
   completions, or memory ordering operations are unaffected by the value of
-  \FUNC{completion\_rate}.
+  \FUNC{delivery\_rate}.
 
   When using the configuration structure to start a communication session, a
-  mask parameter controls which fields may be accessed by the \openshmem
+  mask parameter controls which fields are accessed by the \openshmem
   library.
   Any configuration parameter value that is not indicated in the mask will be
   ignored, and the default value will be used instead.
@@ -65,9 +65,9 @@ typedef struct {
     unmasked within the session and applied as a hint.
   }
 
-  \apitablerow{\LibConstRef{SHMEM\_SESSION\_COMPLETION\_RATE}}{
+  \apitablerow{\LibConstRef{SHMEM\_SESSION\_DELIVERY\_RATE}}{
     \vspace{2mm}
-    The value of the \VAR{completion\_rate} member of the \VAR{config}
+    The value of the \VAR{delivery\_rate} member of the \VAR{config}
     structure is unmasked within the session and applied as a hint.
   }
 
@@ -81,13 +81,26 @@ typedef struct {
     implementation.
   }
 
-  \apitablerow{\VAR{completion\_rate} = \CONST{SIZE\_MAX}}{
+  \apitablerow{\VAR{delivery\_rate} = \CONST{SIZE\_MAX}}{
     By default, the number of expected number of \openshmem RMA calls to
     buffer, combine, and/or coalesce is set to the upper bound of a
     \VAR{size\_t} variable, \VAR{SIZE\_MAX}.  This is a representative
     constant that indicates the \openshmem library is free to select any
     value appropriate for the implementation.
   }
+}
+
+\apinotes{
+    Users are discouraged from calling \FUNC{shmem\_fence},
+    \FUNC{shmem\_cxt\_fence}, \FUNC{shmem\_quiet}, or
+    \FUNC{shmem\_ctx\_quiet} routines within a session when tolerant, because
+    the library must impose strict completions to comply with ordering
+    semantics.  Users are instead encouraged to provide the \FUNC{total\_ops}
+    and \FUNC{delivery\_rate} hints to influence how the library pipelines
+    batched operations (see \LibConstRef{SHMEM\_SESSION\_BATCH} option to
+    \FUNC{shmem\_session\_start} in \ref{subsec:shmem_session_start}).
+    However, only quiet and fence operations guarantee that in-use data
+    buffers can be updated after previously invoked RMA routines.
 }
 
 \end{apidefinition}
