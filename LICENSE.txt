@@ -1,4 +1,5 @@
-Copyright 2011-2020 Hewlett Packard Enterprise Development LP
+Copyright 2011-2024 Hewlett Packard Enterprise Development LP
+Copyright 2011-2024 Open Source Software Solutions, Inc.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
