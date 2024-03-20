@@ -38,18 +38,27 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 
 \apidescription{
     \FUNC{shmem\_sync} is a collective synchronization routine over an
-    existing \openshmem team or active set.
+    existing \openshmem team.
 
     The routine registers the arrival of a \ac{PE} at a synchronization point in the program.
     This is a fast mechanism for synchronizing all \acp{PE} that participate in this
     collective call. The routine blocks the calling \ac{PE} until all \acp{PE} in the
-    specified team or active set have called \FUNC{shmem\_sync}. In a multithreaded \openshmem
+    specified team have called \FUNC{shmem\_sync}. In a multithreaded \openshmem
     program, only the calling thread is blocked.
 
     Team-based sync routines operate over all \acp{PE} in the provided team argument. All
     \acp{PE} in the provided team must participate in the sync operation.
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
+
+\begin{DeprecateBlock}
+    \FUNC{shmem\_sync} is a collective synchronization routine over an active set.
+
+    The routine registers the arrival of a \ac{PE} at a synchronization point in the program.
+    This is a fast mechanism for synchronizing all \acp{PE} that participate in this
+    collective call. The routine blocks the calling \ac{PE} until all \acp{PE} in the
+    active set have called \FUNC{shmem\_sync}. In a multithreaded \openshmem
+    program, only the calling thread is blocked.
 
     Active-set-based sync routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
@@ -64,12 +73,14 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
     \VAR{PE\_size} must be equal on all \acp{PE} in the active set.  The same
     work array must be passed in \VAR{pSync} to all \acp{PE} in the active set.
 
+    The same \VAR{pSync} array may be reused on consecutive calls to
+    \FUNC{shmem\_sync} if the same active set is used.
+\end{DeprecateBlock}
+
     In contrast with the \FUNC{shmem\_barrier} routine, \FUNC{shmem\_sync} only
     ensures completion and visibility of previously issued memory stores and does not ensure
     completion of remote memory updates issued via \openshmem routines.
 
-    The same \VAR{pSync} array may be reused on consecutive calls to
-    \FUNC{shmem\_sync} if the same active set is used.
 }
 
 \apireturnvalues{

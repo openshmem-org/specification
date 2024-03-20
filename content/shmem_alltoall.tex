@@ -35,10 +35,10 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
 
 \apiargument{OUT}{dest}{Symmetric address of a data object large enough to receive
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
-    active set.
+    particpating \acp{PE}.
     The type of \dest{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{source}{Symmetric address of a data object that contains \VAR{nelems}
-    elements of data for each \ac{PE} in the active set, ordered according to
+    elements of data for each \ac{PE} in the participating \acp{PE}, ordered according to
     destination \ac{PE}.
     The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nelems}{
@@ -100,6 +100,21 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
+    Before any \ac{PE} calls a \FUNC{shmem\_alltoall} routine,
+    the following conditions must be ensured:
+    \begin{itemize}
+    	\item The \VAR{dest} data object on all \acp{PE} in the team is
+    	ready to accept the \FUNC{shmem\_alltoall} data.
+	\end{itemize}
+
+    Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
+    the local PE:
+    \begin{itemize}
+	    \item Its \VAR{dest} symmetric data object is completely updated and the 
+		data has been copied out of the source data object.
+	\end{itemize}
+
+\begin{DeprecateBlock}
     Active-set-based collective routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
 
@@ -117,22 +132,23 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     Before any \ac{PE} calls a \FUNC{shmem\_alltoall} routine,
     the following conditions must be ensured:
     \begin{itemize}
-    \item The \VAR{dest} data object on all \acp{PE} in the active set is
-      ready to accept the \FUNC{shmem\_alltoall} data.
-    \item For active-set-based routines, the \VAR{pSync} array
-    on all \acp{PE} in the active set is not still in use from a prior call
-    to a \FUNC{shmem\_alltoall} routine.
+    	\item The \VAR{dest} data object on all \acp{PE} in the active set is
+    	ready to accept the \FUNC{shmem\_alltoall} data.
+    	\item For active-set-based routines, the \VAR{pSync} array
+    	on all \acp{PE} in the active set is not still in use from a prior call
+    	to a \FUNC{shmem\_alltoall} routine.
     \end{itemize}
     Otherwise, the behavior is undefined.
 
     Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
     the local PE:
     \begin{itemize}
-    \item Its \VAR{dest} symmetric data object is completely updated and
-    the data has been copied out of the \VAR{source} data object.
-    \item For active-set-based routines,
-    the values in the \VAR{pSync} array are restored to the original values.
+	    \item Its \VAR{dest} symmetric data object is completely updated and the 
+		data has been copied out of the source data object.
+    	\item For active-set-based routines,
+    	the values in the \VAR{pSync} array are restored to the original values.
     \end{itemize}
+\end{DeprecateBlock}
 }
 
 \apireturnvalues{
