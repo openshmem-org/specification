@@ -90,6 +90,7 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
+\begin{DeprecateBlock}
     Active-set-based collective routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
     As with all active-set-based collective routines,
@@ -108,6 +109,7 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     \item For active-set-based collective routines, the values in the \VAR{pSync} array are
     restored to the original values.
     \end{itemize}
+\end{DeprecateBlock}
 }
 
 \apireturnvalues{
@@ -115,9 +117,15 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 }
 
 \apinotes{
+\begin{DeprecateBlock}
     The collective routines operate on active \ac{PE} sets that have a
     non-power-of-two \VAR{PE\_size} with some performance degradation.  They operate
     with no performance degradation when \VAR{nelems} is a non-power-of-two value.
+\end{DeprecateBlock}
+    The collective routines that operate on teams containing a
+    non-power-of-two of PEs do so with some performance degradation. They operate
+    with no performance degradation when \VAR{nelems} is a non-power-of-two value.
+
 }
 
 \begin{apiexamples}

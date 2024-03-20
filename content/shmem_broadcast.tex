@@ -83,6 +83,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
       the team.
     \end{itemize}
     
+\begin{DeprecateBlock}
     For active-set-based broadcasts:
     \begin{itemize}
     \item The \dest{} object is updated on all \acp{PE} other than the
@@ -128,13 +129,17 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
       \end{itemize}
     \item The \source{} data object may be safely reused.
     \end{itemize}
+\end{DeprecateBlock}
 }
 
 
 \apireturnvalues{
   For team-based broadcasts, zero on successful local completion; otherwise, nonzero.
 
+\begin{DeprecateBlock}
   For active-set-based broadcasts, none.
+\end{DeprecateBlock}
+
 }
 
 \apinotes{
