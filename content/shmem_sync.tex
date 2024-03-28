@@ -1,7 +1,11 @@
 \apisummary{
     Registers the arrival of a \ac{PE} at a synchronization point.
     This routine does not return until all other \acp{PE} in a given OpenSHMEM team
-    or active set arrive at this synchronization point.
+    arrive at this synchronization point.
+\begin{DeprecateBlock}
+    Registers the arrival of a \ac{PE} at a synchronization point.
+    This routine does not return until all other \acp{PE} in a given OpenSHMEM active set arrive at this synchronization point.
+\end{DeprecateBlock}
 }
 
 \begin{apidefinition}
@@ -51,6 +55,10 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
+    In contrast with the \FUNC{shmem\_barrier} routine, \FUNC{shmem\_sync} only
+    ensures completion and visibility of previously issued memory stores and does not ensure
+    completion of remote memory updates issued via \openshmem routines.
+
 \begin{DeprecateBlock}
     \FUNC{shmem\_sync} is a collective synchronization routine over an active set.
 
@@ -77,9 +85,6 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
     \FUNC{shmem\_sync} if the same active set is used.
 \end{DeprecateBlock}
 
-    In contrast with the \FUNC{shmem\_barrier} routine, \FUNC{shmem\_sync} only
-    ensures completion and visibility of previously issued memory stores and does not ensure
-    completion of remote memory updates issued via \openshmem routines.
 
 }
 
