@@ -131,6 +131,7 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
 
     Before any \ac{PE} calls a \FUNC{shmem\_alltoall} routine,
     the following conditions must be ensured:
+
     \begin{itemize}
     	\item The \VAR{dest} data object on all \acp{PE} in the active set is
     	ready to accept the \FUNC{shmem\_alltoall} data.
@@ -138,6 +139,7 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     	on all \acp{PE} in the active set is not still in use from a prior call
     	to a \FUNC{shmem\_alltoall} routine.
     \end{itemize}
+
     Otherwise, the behavior is undefined.
 
     Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
