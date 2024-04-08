@@ -1,0 +1,30 @@
+\apisummary{
+Returns the initialized statis of the \openshmem library.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_query\_initialized}@(int *initialized);
+\end{Csynopsis}
+
+\begin{apiarguments}
+\apiargument{OUT}{initialized}{Nonzero if the \openshmem library is in the initialized state. Nonzero otherwise.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_query\_initialized} call returns the initialization status
+    of the \openshmem library. If the application has called an \openshmem
+    initialization routine and has not yet made the corresponding call to
+    \FUNC{shmem\_finalize}, this routine returns nonzero. Otherwise, it returns
+    zero.
+
+    This function may be called at any time, regardless of the thread safety
+    level of the \openshmem library.
+}
+
+\apireturnvalues{
+None.
+}
+
+\end{apidefinition}
