@@ -28,7 +28,7 @@ typedef struct {
   calls to \openshmem RMA routines within the session (i.e., after a call to
   \FUNC{shmem\_session\_start} and before a corresponding call to
   \FUNC{shmem\_session\_stop}).
-  If \VAR{total\_ops} is lower than the \textit{actual} number of calls to
+  If \VAR{total\_ops} differs from the \textit{actual} number of calls to
   \openshmem RMA routines within the session, then application performance
   might be suboptimal; however, the result of any data transfers,
   completions, or memory ordering operations are unaffected by the value of
