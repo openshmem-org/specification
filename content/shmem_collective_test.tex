@@ -17,18 +17,18 @@ int @\FuncDecl{shmem\_req\_test}@(shmem_req_h request);
 \apidescription{
     A call to \FUNC{shmem\_req\_test} returns immediately. If the
     operation identified by the request is completed, it returns
-    zero, and the request object is deallocated. If the operation is not
-    completed, it returns a non-negative integer.
+    zero, and the request object is deallocated and cannot be reused.
+    If the operation is not completed, it returns a non-negative integer. If
+    the request object is not valid, behavior is undefined.
 
-    In a multithreaded environment, the operation identified by the request and the
-    \FUNC{shmem\_req\_test} can be
-    called by different threads. It is the responsibility of the \openshmem user
-    to ensure that the \FUNC{shmem\_req\_test} operation is called after the
-    operation has been initiated.
+    In a multithreaded environment, \FUNC{shmem\_req\_test} can be called by
+    different threads but on different request objects. It is the responsibility
+    of the \openshmem user to ensure that proper synchronization is used to
+    prevent race conditions or deadlock.
     }
 
 \apireturnvalues{
-    On success returns zero, otherwise returns a negative integer.
+    On success returns zero, otherwise returns a nonzero integer.
     }
 
 \end{apidefinition}
