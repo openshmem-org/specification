@@ -19,17 +19,15 @@ int @\FuncDecl{shmem\_req\_wait}@(shmem_req_h request);
 
 The \FUNC{shmem\_req\_wait} function is a blocking operation used to determine whether an
 operation identified by the request object has been completed. If the operation
-is completed, \FUNC{shmem\_req\_wait} returns zero and deallocates the request object. If
-the operation has not been completed, \FUNC{shmem\_req\_wait} blocks until the operation
-completes and then returns zero.
-
+is completed, \FUNC{shmem\_req\_wait} returns zero, and the request object is
+deallocated and cannot be reused. If the operation has not been completed,
+\FUNC{shmem\_req\_wait} blocks until the operation completes and then returns
+zero. If the request object is not valid, behavior is undefined.
 
 In a multithreaded environment, \FUNC{shmem\_req\_wait} can be called by different
 threads but on different request objects. It is the responsibility of the
 \openshmem user to ensure that proper synchronization is used to prevent race
-conditions or deadlock. Specifically, the \FUNC{shmem\_req\_wait} operation should
-be called after the collective operation to ensure that the request object is
-not deallocated prematurely.
+conditions or deadlock.
     }
 
 \apireturnvalues{
