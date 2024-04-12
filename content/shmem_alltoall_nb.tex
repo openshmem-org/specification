@@ -55,8 +55,8 @@ operation.}
     {\bf Invocation and completion}: A call to the nonblocking alltoall routine initiates the operation and returns
     immediately without necessarily completing the operation. On success,
     an opaque request handle is created and returned. The
-    operation is completed after a call to \FUNC{shmem\_req\_test} or
-    \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
+    operation is completed after at least one call to \FUNC{shmem\_req\_test} or
+    a call to \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
     is deallocated and cannot be reused.
 
     Though nonblocking alltoall varies in invocation and completion semantics
@@ -97,7 +97,7 @@ operation.}
 
     
     Like data exchange semantics, the entry and completion
-    criteria of blocking and nonblocking alltoall is similar. 
+    criteria of blocking and nonblocking alltoall are similar.
 
     {\bf Entry criteria}: Before any \ac{PE} calls a \FUNC{shmem\_alltoall\_nb} routine,
     the following condition must be ensured:
