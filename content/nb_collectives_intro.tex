@@ -1,4 +1,4 @@
-An \openshmem nonblocking collective operation, like blocking collective
+An \openshmem nonblocking collective operation, like a blocking collective
 operation, is a group communication operation among the
 participants of the team. All participants of the team are required to call the
 collective operation.
@@ -9,13 +9,13 @@ collective operation.
 the operation is initiated and the routine returns without ensuring completion. All participants of the Team
 must call this routine with identical arguments.
 
-\item Collective Types: The nonblocking variants supported include barrier, alltoall,
+\item Collective Types: The nonblocking variants supported include barrier all, alltoall,
 and broadcast collectives. Other collective operations such as
 reductions, collect, barrier, alltoalls, and sync will not have nonblocking variants.
 
 \item Completion semantics:  \openshmem programs can learn the status of the collective operations
-using the \FUNC{shmem\_req\_test} routine and can be completed using
-the \FUNC{shmem\_req\_wait} routine.
+using the \FUNC{shmem\_req\_test} routine. The operation is completed after
+at least one call to \FUNC{shmem\_req\_test} or a call to \FUNC{shmem\_req\_wait}.
 
 \item Threads: While using SHMEM\_THREAD\_MULTIPLE, the \openshmem
 programs are not allowed to call multiple collective operations on different threads
@@ -26,6 +26,3 @@ and the same Team.
 Note: Like other nonblocking \openshmem operations, the implementations are
 expected to asynchronously progress the collective operations. The guidance on
 asynchronous progress is provided in Section \ref{subsec:progress}.
-
-
-
