@@ -143,12 +143,6 @@ behavior.  For example, an implementation may try to continue or may abort
 immediately upon an \openshmem call into the uninitialized library.
 \tabularnewline
 \hline
-Multiple calls to initialization routines & In an \openshmem program where
-the initialization routines \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}
-have already been called, any subsequent calls to these initialization routines
-result in undefined behavior.
-\tabularnewline
-\hline
 Specifying invalid \ac{PE} numbers & For \openshmem routines that accept a
 \ac{PE} number as an argument, if the \ac{PE} number is invalid for the
 team associated with the operation (either implicitly or explicitly), the
