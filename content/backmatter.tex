@@ -655,6 +655,11 @@ functions.
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{itemize}
 %
+\item Added support for initialization and finalization routines to be called
+    multiple times, and added an initialization status query API
+    \FUNC{shmem\_query\_initialized}.
+\ChangelogRef{subsec:shmem_init, subsec:shmem_finalize, subsec:shmem_query_initialized}%
+%
 \item Added interleaved block transfer APIs \FUNC{shmem\_ibget} and
     \FUNC{shmem\_ibput}.
 \ChangelogRef{subsec:shmem_ibget, subsec:shmem_ibput}%
