@@ -10,6 +10,10 @@ The \LibConstRef{SHMEM\_SESSION\_*} options (Table~\ref{session_opts}) indicate
 which patterns of \openshmem RMA and AMO routines will occur within a session.
 These options serve only as \textit{hints} to the library; it is up to the
 implementation whether or not to apply any optimizations within a session.
+A session may be provided a configuration argument that specifies attributes
+assosiated with the session. This configuration argument is of type
+\CTYPE{shmem\_session\_config\_t}, which is detailed further in
+Section~\ref{subsec:shmem_team_config_t}.
 
 Usage of the \openshmem session APIs on a particular context must comply with
 the requirements of all options set on that context.
@@ -22,5 +26,5 @@ Because sessions are associated with an \openshmem communication context,
 routines not performed on a communication context (like collective routines)
 are ineligible for session hints.
 
-The \FUNC{shmem\_config\_t} object requires the \CONST{SIZE\_MAX} macro
+The \FUNC{shmem\_session\_config\_t} object requires the \CONST{SIZE\_MAX} macro
 defined in \HEADER{stdint.h} by \Cstd[99]~\S7.18.3 and \Cstd[11]~\S7.20.3.

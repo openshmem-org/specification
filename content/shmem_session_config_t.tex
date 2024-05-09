@@ -34,9 +34,9 @@ typedef struct {
   completions, or memory ordering operations are unaffected by the value of
   \FUNC{total\_ops}.
 
-  When using the configuration structure to start a communication session, a
-  mask parameter controls which fields are accessed by the \openshmem
-  library.
+  When passing a configuration structure to \FUNC{shmem\_session\_start}, the
+  mask parameter specifies which fields the application requests to associate
+  with the session.
   Any configuration parameter value that is not indicated in the mask will be
   ignored, and the default value will be used instead.
   Therefore, a program must set only the fields for which it does not want
@@ -56,17 +56,16 @@ typedef struct {
   The default values for configuration parameters are:
 
   \apitablerow{\VAR{total\_ops} = \CONST{SIZE\_MAX}}{
-    By default, the number of expected maximum number of calls to \openshmem
-    RMA routines is set to the upper bound of a \VAR{size\_t} variable,
-    \VAR{SIZE\_MAX}. This is a representative constant that indicates the
-    \openshmem library is free to select any value appropriate for the
-    implementation.
+    By default, the expected maximum number of calls to \openshmem RMA routines
+    in the session is set to the maximum value of a \VAR{size\_t} variable,
+    \VAR{SIZE\_MAX}. This default setting indicates that the \openshmem
+    application chooses not to specify a value for \VAR{total\_ops}.
   }
 }
 
 \apinotes{
     Users are discouraged from calling \FUNC{shmem\_fence},
-    \FUNC{shmem\_cxt\_fence}, \FUNC{shmem\_quiet}, or \FUNC{shmem\_ctx\_quiet}
+    \FUNC{shmem\_ctx\_fence}, \FUNC{shmem\_quiet}, or \FUNC{shmem\_ctx\_quiet}
     routines within a session whenever possible, because the library must
     impose strict completions to comply with ordering semantics.
     However, hints provided by \FUNC{shmem\_session\_config\_t} do not imply
