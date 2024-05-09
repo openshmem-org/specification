@@ -97,32 +97,6 @@ void @\FuncDecl{shmem\_ctx\_session\_start}@(shmem_ctx_t ctx, long options, cons
     about \VAR{shmem\_ctx\_session\_config\_t} parameters.
     } \hline
 
-\sessiontablerow{\LibConstRef{SHMEM\_CTX\_SESSION\_SAME\_AMO}}{
-    The \VAR{SHMEM\_CTX\_SESSION\_SAME\_AMO} hint indicates the session will contain
-    a series of calls to AMO and/or signaling routines that do not differ in
-    their signal operators (see Section \ref{subsec:signal_operator}), atomic
-    operations (see Section \ref{sec:amo}), or datatypes (see
-    Tables~\ref{stdamotypes} and \ref{extamotypes}).
-    For example, this hint would apply to a session that includes \textit{only}
-    calls to \FUNC{shmem\_int\_atomic\_inc}.
-    However, this hint would not apply to a session that includes both calls to
-    \FUNC{shmem\_int\_atomic\_inc} and \FUNC{shmem\_int\_atomic\_fetch},
-    because the operation \textit{fetch} differs from \textit{increment}.
-    (Similarly, this hint would not apply to a session that includes both calls to
-    \FUNC{shmem\_int\_atomic\_inc} and \FUNC{shmem\_long\_atomic\_inc},
-    because the datatype \textit{long} differs from \textit{int}.)
-    The \VAR{SHMEM\_CTX\_SESSION\_SAME\_AMO} hint is applicable to sessions that
-    exclusively use \textit{either} the \VAR{SHMEM\_SIGNAL\_SET} or the
-    \VAR{SHMEM\_SIGNAL\_ADD} operators in signaling operations, but not both.
-    This hint does not restrict the application from calling other (non-atomic)
-    RMA routines within the session.
-
-    The \VAR{total\_ops} field of \VAR{config} indicates the expected maximum
-    number of calls to \openshmem RMA routines within the session.
-    See Section~\ref{subsec:shmem_ctx_session_config_t} for details about
-    \VAR{shmem\_ctx\_session\_config\_t} parameters.
-    } \hline
-
 \sessiontableend
 
 \apinotes{
