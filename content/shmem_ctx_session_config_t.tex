@@ -7,7 +7,7 @@
 \begin{Csynopsis}
 typedef struct {
   size_t total_ops;
-} shmem_session_config_t;
+} shmem_ctx_session_config_t;
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -17,8 +17,8 @@ typedef struct {
 
 \apidescription{
   A communication session configuration object is provided as an argument to
-  the \FUNC{shmem\_session\_start} routine.
-  The \VAR{shmem\_session\_config\_t} object contains optional parameters
+  the \FUNC{shmem\_ctx\_session\_start} routine.
+  The \VAR{shmem\_ctx\_session\_config\_t} object contains optional parameters
   that are associated with the options of a communication session.
   These parameters serve only as \textit{hints} to the library; it is up to
   the implementation whether or not to use the parameter values within
@@ -26,17 +26,17 @@ typedef struct {
 
   The \VAR{total\_ops} member indicates the expected maximum number of all
   calls to \openshmem RMA routines within the session (i.e., after a call to
-  \FUNC{shmem\_session\_start} and before a corresponding call to
-  \FUNC{shmem\_session\_stop}).
+  \FUNC{shmem\_ctx\_session\_start} and before a corresponding call to
+  \FUNC{shmem\_ctx\_session\_stop}).
   If \VAR{total\_ops} differs from the \textit{actual} number of calls to
   \openshmem RMA routines within the session, then application performance
   might be suboptimal; however, the result of any data transfers,
   completions, or memory ordering operations are unaffected by the value of
   \FUNC{total\_ops}.
 
-  When passing a configuration structure to \FUNC{shmem\_session\_start}, the
-  mask parameter specifies which fields the application requests to associate
-  with the session.
+  When passing a configuration structure to \FUNC{shmem\_ctx\_session\_start},
+  the mask parameter specifies which fields the application requests to
+  associate with the session.
   Any configuration parameter value that is not indicated in the mask will be
   ignored, and the default value will be used instead.
   Therefore, a program must set only the fields for which it does not want
@@ -48,14 +48,14 @@ typedef struct {
   should be started with the default values for all configuration
   parameters.
 
-  \apitablerow{\LibConstRef{SHMEM\_SESSION\_TOTAL\_OPS}}{
+  \widetablerow{\LibConstRef{SHMEM\_CTX\_SESSION\_TOTAL\_OPS}}{
     The value of the \VAR{total\_ops} member of the \VAR{config} structure is
     unmasked within the session and applied as a hint.
   }
 
   The default values for configuration parameters are:
 
-  \apitablerow{\VAR{total\_ops} = \CONST{SIZE\_MAX}}{
+  \widetablerow{\VAR{total\_ops} = \CONST{SIZE\_MAX}}{
     By default, the expected maximum number of calls to \openshmem RMA routines
     in the session is set to the maximum value of a \VAR{size\_t} variable,
     \VAR{SIZE\_MAX}. This default setting indicates that the \openshmem
@@ -68,12 +68,12 @@ typedef struct {
     \FUNC{shmem\_ctx\_fence}, \FUNC{shmem\_quiet}, or \FUNC{shmem\_ctx\_quiet}
     routines within a session whenever possible, because the library must
     impose strict completions to comply with ordering semantics.
-    However, hints provided by \FUNC{shmem\_session\_config\_t} do not imply
+    However, hints provided by \FUNC{shmem\_ctx\_session\_config\_t} do not imply
     the occurence of any completion or memory ordering operations.
     The requirements on buffers provided to \openshmem routines that are
     \textit{in-use} (as described in Section
     \ref{subsec:invoking_openshmem_operations}) apply regardless of any
-    \FUNC{shmem\_session\_config\_t} hints.
+    \FUNC{shmem\_ctx\_session\_config\_t} hints.
 }
 
 \end{apidefinition}

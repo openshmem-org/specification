@@ -5,7 +5,7 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_session\_stop}@(shmem_ctx_t ctx);
+void @\FuncDecl{shmem\_ctx\_session\_stop}@(shmem_ctx_t ctx);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -14,9 +14,9 @@ void @\FuncDecl{shmem\_session\_stop}@(shmem_ctx_t ctx);
 \end{apiarguments}
 
 \apidescription{
-    The \FUNC{shmem\_session\_stop} routine ends a session on context \VAR{ctx}.
+    The \FUNC{shmem\_ctx\_session\_stop} routine ends a session on context \VAR{ctx}.
     If a session is already stopped on a given communication context, another
-    call to \FUNC{shmem\_session\_stop} on that context has no effect.
+    call to \FUNC{shmem\_ctx\_session\_stop} on that context has no effect.
 }
 
 \apireturnvalues{
@@ -26,7 +26,7 @@ void @\FuncDecl{shmem\_session\_stop}@(shmem_ctx_t ctx);
 \apinotes{
     Users are discouraged from including non-\openshmem code, such as a long
     computation loop, within a session without first calling
-    \FUNC{shmem\_session\_stop}.
+    \FUNC{shmem\_ctx\_session\_stop}.
 }
 
 
@@ -34,11 +34,11 @@ void @\FuncDecl{shmem\_session\_stop}@(shmem_ctx_t ctx);
 
 \apicexample
     {The following \CorCpp{} program demonstrates the usage of
-    \FUNC{shmem\_session\_start} and \FUNC{shmem\_session\_stop} with a loop of
+    \FUNC{shmem\_ctx\_session\_start} and \FUNC{shmem\_ctx\_session\_stop} with a loop of
     random atomic non-fetching XOR updates to a distributed table, similar to
     the HPC Challenge RandomAccess GUPS (Giga-updates per second) benchmark
     \footnote{http://icl.cs.utk.edu/projectsfiles/hpcc/RandomAccess/}.}
-    {./example_code/shmem_session_example.c}
+    {./example_code/shmem_ctx_session_example.c}
     {}
 \end{apiexamples}
 

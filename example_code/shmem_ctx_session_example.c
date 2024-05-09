@@ -24,13 +24,13 @@ int main(void) {
       shmem_global_exit(1);
   }
 
-  shmem_session_config_t config;
+  shmem_ctx_session_config_t config;
   long config_mask;
   config.total_ops = N_UPDATES;
-  config_mask = SHMEM_SESSION_TOTAL_OPS;
-  long options = SHMEM_SESSION_BATCH | SHMEM_SESSION_SAME_AMO;
+  config_mask = SHMEM_CTX_SESSION_TOTAL_OPS;
+  long options = SHMEM_CTX_SESSION_BATCH | SHMEM_CTX_SESSION_SAME_AMO;
 
-  shmem_session_start(ctx, options, &config, config_mask);
+  shmem_ctx_session_start(ctx, options, &config, config_mask);
 
   for (size_t i = 0; i < N_UPDATES; i++) {
       int random_pe = rand() % npes;
@@ -39,9 +39,9 @@ int main(void) {
       shmem_ctx_uint64_atomic_xor(ctx, &table[random_idx], random_val, random_pe);
   }
 
-  shmem_session_stop(ctx);
-  shmem_ctx_quiet(ctx);    /* shmem_session_stop() does not quiet the context. */
-  shmem_sync_all();        /* shmem_session_stop() does not synchronize.       */
+  shmem_ctx_session_stop(ctx);
+  shmem_ctx_quiet(ctx);      /* shmem_ctx_session_stop() does not quiet the context. */
+  shmem_sync_all();          /* shmem_ctx_session_stop() does not synchronize.       */
 
   /* At this point, it is safe to check and/or validate the table result... */
 
