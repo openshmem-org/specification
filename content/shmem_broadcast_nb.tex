@@ -59,7 +59,7 @@ operation.}
     A call to the nonblocking broadcast routine initiates the operation and returns
     immediately without necessarily completing the operation. On success,
     an opaque request handle is created and returned. The
-    operation is completed after at least one call to \FUNC{shmem\_req\_test} or a
+    operation is completed after a call to \FUNC{shmem\_req\_test} or a
     call to \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
     is deallocated and cannot be reused.
 
@@ -82,9 +82,9 @@ operation.}
     Upon completion of a nonblocking broadcast routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
-    \item The \dest{} data object is
-      updated.
-    \item The \source{} data object may be safely reused.
+    \item The \dest{} data object is updated.
+    \item If the local \ac{PE} is \VAR{PE\_root}, the data has been copied
+          out of the \source{} data object.
     \end{itemize}
 }
 

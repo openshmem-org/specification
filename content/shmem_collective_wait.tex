@@ -6,7 +6,7 @@
 \begin{apidefinition}
 
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_req\_wait}@(shmem_req_h request);
+int @\FuncDecl{shmem\_req\_wait}@(shmem_req_h *request);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -17,12 +17,13 @@ int @\FuncDecl{shmem\_req\_wait}@(shmem_req_h request);
 
 \apidescription{
 
-The \FUNC{shmem\_req\_wait} function is a blocking operation used to determine whether an
-operation identified by the request object has been completed. If the operation
-is completed, \FUNC{shmem\_req\_wait} returns zero, and the request object is
-deallocated and cannot be reused. If the operation has not been completed,
-\FUNC{shmem\_req\_wait} blocks until the operation completes and then returns
-zero. If the request object is not valid, behavior is undefined.
+The \FUNC{shmem\_req\_wait} function is a blocking operation used to
+determine whether an operation identified by the request object has
+been completed. When the operation is completed, \FUNC{shmem\_req\_wait} returns
+zero, and the request object is deallocated and set to \LibConstRef{SHMEM\_REQ\_INVALID}.
+If the request object is not valid (i.e., it is set to
+\LibConstRef{SHMEM\_REQ\_INVALID}), no operation is performed and a negative
+value is returned.
 
 In a multithreaded environment, \FUNC{shmem\_req\_wait} can be called by different
 threads but on different request objects. It is the responsibility of the
