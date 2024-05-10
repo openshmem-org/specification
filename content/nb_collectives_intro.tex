@@ -15,7 +15,7 @@ reductions, collect, barrier, alltoalls, and sync will not have nonblocking vari
 
 \item Completion semantics:  \openshmem programs can learn the status of the collective operations
 using the \FUNC{shmem\_req\_test} routine. The operation is completed after
-at least one call to \FUNC{shmem\_req\_test} or a call to \FUNC{shmem\_req\_wait}.
+a call to \FUNC{shmem\_req\_test} or a call to \FUNC{shmem\_req\_wait}.
 
 \item Threads: While using SHMEM\_THREAD\_MULTIPLE, the \openshmem
 programs are not allowed to call multiple collective operations on different threads
