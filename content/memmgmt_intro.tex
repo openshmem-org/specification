@@ -3,7 +3,7 @@
 symmetric data objects in the symmetric heap.
 
 The symmetric memory allocation routines differ from the private heap
-allocation routines in that they must be called by all \acp{PE} in a
+allocation routines in that they must be called by all \acp{PE} in
 the world team.  When specified, each of these routines includes at
 least one call to a procedure that is semantically equivalent to
 \FUNC{shmem\_barrier\_all}.  This ensures that all \acp{PE}

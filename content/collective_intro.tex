@@ -19,7 +19,7 @@ operations performed by a group of \acp{PE}.
 \end{enumerate}
 
 Concurrent accesses to symmetric memory by an \openshmem collective
-routine and any other means of access---where at least one updates the
+routine and any other means of access---where at least one PE updates the
 symmetric memory---results in undefined behavior.
 Since \acp{PE} can enter and exit collectives at different times,
 accessing such memory remotely may require additional synchronization.

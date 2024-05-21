@@ -21,7 +21,7 @@ All predefined teams are valid for the duration of the \openshmem
 portion of an application.
 Any team successfully created by a \FUNC{shmem\_team\_split\_*}
 routine is valid until it is destroyed.
-All valid teams have a least one member.
+All valid teams have at least one member.
 
 \subsubsection*{Team Handles}
 
@@ -84,7 +84,7 @@ is detailed further in Section~\ref{subsec:shmem_team_config_t}.
 
 \acp{PE} in a newly created team are consecutively numbered starting with
 \ac{PE} number 0. \acp{PE} are ordered by their \ac{PE} number in
-the parent team. Team relative \ac{PE}
+the parent team. Team-relative \ac{PE}
 numbers can be used for point-to-point operations through team-based
 contexts (see Section~\ref{sec:ctx}) or using the translation routine
 \FUNC{shmem\_team\_translate\_pe}.
