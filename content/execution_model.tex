@@ -12,7 +12,7 @@ a program begins with the first call to the initialization routine \FUNC{shmem\_
 or \FUNC{shmem\_init\_thread}, which must be performed before using any of the
 other \openshmem library routines. 
 An \openshmem program concludes its use of the \openshmem library when all \acp{PE}
-make their final call call
+make their final call to
 \FUNC{shmem\_finalize} or any \ac{PE} calls \FUNC{shmem\_global\_exit}.
 During the last call to \FUNC{shmem\_finalize}, the \openshmem library synchronizes
 all \acp{PE}, completes all pending communication and releases all the resources
