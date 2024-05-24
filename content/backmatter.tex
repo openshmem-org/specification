@@ -143,12 +143,6 @@ behavior.  For example, an implementation may try to continue or may abort
 immediately upon an \openshmem call into the uninitialized library.
 \tabularnewline
 \hline
-Multiple calls to initialization routines & In an \openshmem program where
-the initialization routines \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}
-have already been called, any subsequent calls to these initialization routines
-result in undefined behavior.
-\tabularnewline
-\hline
 Specifying invalid \ac{PE} numbers & For \openshmem routines that accept a
 \ac{PE} number as an argument, if the \ac{PE} number is invalid for the
 team associated with the operation (either implicitly or explicitly), the
@@ -660,6 +654,11 @@ functions.
 
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{itemize}
+%
+\item Added support for initialization and finalization routines to be called
+    multiple times, and added an initialization status query API
+    \FUNC{shmem\_query\_initialized}.
+\ChangelogRef{subsec:shmem_init, subsec:shmem_finalize, subsec:shmem_query_initialized}%
 %
 \item Added interleaved block transfer APIs \FUNC{shmem\_ibget} and
     \FUNC{shmem\_ibput}.
