@@ -32,8 +32,8 @@ typedef struct {
   See Section~\ref{sec:ctx} for more on communication contexts and
   Section~\ref{subsec:shmem_team_create_ctx} for team-based context creation.
 
-  When using the configuration structure to create teams, a mask parameter
-  controls which fields may be accessed by the \openshmem library.
+  When passing a configuration structure to a team creation routine, the mask parameter
+  specifies which fields the application requests to associate with the new team.
   Any configuration parameter value that is not indicated in the mask will be
   ignored, and the default value will be used instead.
   Therefore, a program must set only the fields for which it does not want the default value.
