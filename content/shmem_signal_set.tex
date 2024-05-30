@@ -5,12 +5,12 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_signal\_set}@(shmem_ctx_t ctx, const uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_signal\_set}@(shmem_ctx_t ctx, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{C11synopsis}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_signal\_set}@(const uint64_t *sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_signal\_set}@(shmem_ctx_t ctx, const uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_signal\_set}@(uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_signal\_set}@(shmem_ctx_t ctx, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{Csynopsis}
 
 \begin{apiarguments}
