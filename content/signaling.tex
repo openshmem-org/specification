@@ -1,0 +1,57 @@
+This section specifies the OpenSHMEM support for \OPR{put-with-signal},
+nonblocking \OPR{put-with-signal}, and \OPR{signal-\{add, fetch, set\}} routines. The
+put-with-signal routines provide a method for copying data from a contiguous
+local data object to a data object on a specified \ac{PE} and subsequently
+updating a remote flag to signal completion.
+The signal-add and signal-set routines provide methods for updating
+the signal object without the associated data transfer of a
+put-with-signal operation.
+The signal-fetch routine provides support for reading a local signal value.
+
+\openshmem \OPR{put-with-signal} and \OPR{signal-\{add, set\}}
+routines specified in this section have two
+variants. In one of the variants, the context handle, \VAR{ctx}, is explicitly
+passed as an argument. In this variant, the operation is performed on the
+specified context. If the context handle \VAR{ctx} does not correspond to a
+valid context, the behavior is undefined. In the other variant, the context
+handle is not explicitly passed and thus, the operations are performed on the
+default context.
+
+\subsubsection{Atomicity Guarantees for Signaling Operations}
+\label{subsec:signal_atomicity}
+All signaling operations put-with-signal, nonblocking put-with-signal, and
+signal-\{add, fetch, set\} are performed on a signal data object, a remotely accessible
+symmetric object of type \VAR{uint64\_t}. A signal operator in the
+put-with-signal routine is an \openshmem library constant that determines the
+type of update to be performed as a signal on the signal data object.
+
+All signaling operations on the signal data object complete as if performed
+atomically with respect to the following:
+\begin{itemize}
+    \item other blocking or nonblocking variant of the put-with-signal routine
+    that updates the signal data object using the same signal update operator;
+    \item signal-add routine when the put-with-signal routine uses the
+      \LibConstRef{SHMEM\_SIGNAL\_ADD} signal operator;
+    \item signal-set routine when the put-with-signal routine uses the
+      \LibConstRef{SHMEM\_SIGNAL\_SET} signal operator;
+    \item signal-fetch routine that fetches the signal data object; and
+    \item any point-to-point synchronization routine that accesses the signal
+    data object.
+\end{itemize}
+
+\subsubsection{Available Signal Operators}
+\label{subsec:signal_operator}
+
+With the atomicity guarantees as described in
+Section~\ref{subsec:signal_atomicity}, the following options can be used as a
+signal operator.
+
+    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_SET}}{An update to signal data
+    object is an atomic set operation. It writes an unsigned 64-bit value as a
+    signal into the signal data object on a remote \VAR{PE} as an atomic
+    operation.}
+
+    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_ADD}}{An update to signal data
+    object is an atomic add operation. It adds an unsigned 64-bit value as a
+    signal into the signal data object on a remote \VAR{PE} as an atomic
+    operation.}
