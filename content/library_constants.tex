@@ -84,6 +84,15 @@ ordering of memory store operations.
 See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
 \tabularnewline \hline
 %%
+\LibConstDecl{SHMEM\_REQ\_INVALID} &
+A value corresponding to an invalid request handle.
+This value can be used to initialize or update request handles to indicate
+that they do not reference a valid request.
+When managed in this way, applications can use an equality comparison
+to test whether a given request handle references a valid request.
+See Section~\ref{subsec:nb_coll} for more detail about its use.
+\tabularnewline \hline
+%%
 \LibConstDecl{SHMEM\_SIGNAL\_SET} &
 An integer constant expression corresponding to the signal update set operation.
 See Section~\ref{subsec:shmem_put_signal} and
