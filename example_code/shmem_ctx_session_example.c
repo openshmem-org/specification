@@ -28,8 +28,9 @@ int main(void) {
   long config_mask;
   config.total_ops = N_UPDATES;
   config_mask = SHMEM_CTX_SESSION_TOTAL_OPS;
+  long options = SHMEM_CTX_SESSION_BATCH | SHMEM_CTX_SESSION_SAME_AMO;
 
-  shmem_ctx_session_start(ctx, SHMEM_CTX_SESSION_BATCH, &config, config_mask);
+  shmem_ctx_session_start(ctx, options, &config, config_mask);
 
   for (size_t i = 0; i < N_UPDATES; i++) {
       int random_pe = rand() % npes;
