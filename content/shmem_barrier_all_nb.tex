@@ -34,7 +34,8 @@ void @\FuncDecl{shmem\_barrier\_all\_nb}@(shmem_req_h *request);
     updates issued on the default context via \openshmem \acp{AMO} and
     \ac{RMA} routine calls such
     as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32},
-    \FUNC{shmem\_put\_nbi}, and \FUNC{shmem\_get\_nbi}.
+    \FUNC{shmem\_put\_nbi}, and \FUNC{shmem\_get\_nbi} prior to the invocation
+    of \FUNC{shmem\_barrier\_all\_nb}.
 }
 
 \apireturnvalues{

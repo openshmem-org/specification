@@ -24,7 +24,7 @@ returns zero, and the request object is deallocated and set to
 SHMEM\_REQ\_INVALID. If the operation has not been completed,
 \FUNC{shmem\_req\_wait} blocks until the operation completes and then returns
 zero. If the request object is not valid (i.e., it is set to
-SHMEM\_REQ\_INVALID), behavior is undefined.
+SHMEM\_REQ\_INVALID), no operation is performed and a negative value is returned.
 
 In a multithreaded environment, \FUNC{shmem\_req\_wait} can be called by different
 threads but on different request objects. It is the responsibility of the
