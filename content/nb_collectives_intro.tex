@@ -1,8 +1,8 @@
 An \openshmem nonblocking collective operation, like a blocking collective
 operation, is a group communication operation among the
 participants of the team. All participants of the team are required to call the
-collective operation and the collective operations must occur in the same
-program order across all PEs in the team.
+collective operation and each collective operation must be initiated in the same
+order across all PEs while the execution may be performed in any order.
 
 \begin{enumerate}
 
