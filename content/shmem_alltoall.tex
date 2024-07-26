@@ -42,10 +42,10 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     destination \ac{PE}.
     The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nelems}{
-  The number of elements to exchange for each \ac{PE}.
-  For \FUNC{shmem\_alltoallmem}, elements are bytes;
-  for \FUNC{shmem\_alltoall\{32,64\}}, elements are 4 or 8 bytes,
-  respectively.
+    The number of elements to exchange for each \ac{PE}.
+    For \FUNC{shmem\_alltoallmem}, elements are bytes;
+    for \FUNC{shmem\_alltoall\{32,64\}}, elements are 4 or 8 bytes,
+    respectively.
 }
 
 \begin{DeprecateBlock}
@@ -105,14 +105,14 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     \begin{itemize}
     	\item The \VAR{dest} data object on all \acp{PE} in the team is
     	ready to accept the \FUNC{shmem\_alltoall} data.
-	\end{itemize}
+    \end{itemize}
 
     Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
     the local PE:
     \begin{itemize}
-	    \item Its \VAR{dest} symmetric data object is completely updated and the 
-		data has been copied out of the source data object.
-	\end{itemize}
+        \item Its \VAR{dest} symmetric data object is completely updated and the 
+	data has been copied out of the source data object.
+    \end{itemize}
 
 \begin{DeprecateBlock}
     Active-set-based collective routines operate over all \acp{PE} in the active set
@@ -145,8 +145,8 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
     the local PE:
     \begin{itemize}
-	    \item Its \VAR{dest} symmetric data object is completely updated and the 
-		data has been copied out of the source data object.
+    	\item Its \VAR{dest} symmetric data object is completely updated and the 
+	data has been copied out of the source data object.
     	\item For active-set-based routines,
     	the values in the \VAR{pSync} array are restored to the original values.
     \end{itemize}
