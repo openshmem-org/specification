@@ -96,9 +96,8 @@ behavior is undefined.
 }
 
 \apinotes{
-  The \FUNC{shmem\_team\_split\_strided} operation uses an arbitrary
-  \VAR{stride} argument. Arbitrary strides allow a greater number of 
-  PE subsets to be expressed and can support a broader range of usage models.
+  The \FUNC{shmem\_team\_split\_strided} operation can take any positive integer value
+  \VAR{stride} argument.
 
   See the description of team handles and predefined teams in
   Section~\ref{subsec:team} for more information about team handle semantics and usage.
