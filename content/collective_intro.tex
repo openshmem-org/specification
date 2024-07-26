@@ -1,21 +1,24 @@
 \emph{Collective routines} are defined as coordinated communication or synchronization
 operations performed by a group of \acp{PE}.
 
-\openshmem provides three types of collective routines:
+\openshmem provides four types of collective routines:
 
 \begin{enumerate}
-\item Collective routines that operate on teams use a team handle parameter to determine
-  which \acp{PE} will participate in the routine, and use resources encapsulated by the team object
-  to perform operations. See Section~\ref{subsec:team} for details on team management.
+    \item Collective routines that operate on teams use a team handle parameter to determine
+    which \acp{PE} will participate in the routine, and use resources encapsulated by the team object
+    to perform operations. See Section~\ref{subsec:team} for details on team management.
 
-\begin{DeprecateBlock}
-\item Collective routines that operate on active sets use a set of parameters to determine
-  which \acp{PE} will participate and what resources are used to perform operations.
-\end{DeprecateBlock}
+    \begin{DeprecateBlock}
+    \item Collective routines that operate on active sets use a set of parameters to determine
+    which \acp{PE} will participate and what resources are used to perform operations.
 
-\item Collective routines that accept neither team nor active set
-  parameters, which implicitly operate on the world team and, as
-  required, the default context.
+    \item Collective routines that do not accept active set
+    parameters and, as required, the default context.
+    \end{DeprecateBlock}
+
+    \item Collective routines that do not accept team
+    parameters, which implicitly operate on the world team and, as
+    required, the default context.
 \end{enumerate}
 
 Concurrent accesses to symmetric memory by an \openshmem collective
