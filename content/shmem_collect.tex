@@ -67,12 +67,12 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     operation to concatenate \VAR{nelems}
     data items from the \source{} array into the
     \dest{} array, over an \openshmem team in processor number order. 
-	The resultant \dest{} array contains the contribution from
+    The resultant \dest{} array contains the contribution from
     \acp{PE} as follows:
     
-	\begin{itemize}
-    \item For a team, the data from \ac{PE} number \CONST{0} in the team is first, then the
-    contribution from \ac{PE} \CONST{1} in the team, and so on.
+    \begin{itemize}
+        \item For a team, the data from \ac{PE} number \CONST{0} in the team is first, then the
+        contribution from \ac{PE} \CONST{1} in the team, and so on.
     \end{itemize}
     
     The collected result is written to the \dest{} array for all \acp{PE}
@@ -96,9 +96,9 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     in processor number order. The resultant \dest{} array contains the contribution from
 	\acp{PE} as follows:
     \begin{itemize}
-   		 \item For an active set, the data from \ac{PE} \VAR{PE\_start} is first, then the
-   		 contribution from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on.
-   	\end{itemize}
+        \item For an active set, the data from \ac{PE} \VAR{PE\_start} is first, then the
+   	contribution from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on.
+    \end{itemize}
 
     The collected result is written to the \dest{} array for all \acp{PE}
     that participate in the operation. The same \dest{} and \source{}
