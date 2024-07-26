@@ -96,9 +96,9 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 	Upon return from a team-based broadcast routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
-    \item The \dest{} data object is updated.
-    \item The \source{} data object may be safely reused.
-	\end{itemize}
+        \item The \dest{} data object is updated.
+        \item The \source{} data object may be safely reused.
+    \end{itemize}
     
 \begin{DeprecateBlock}
     \openshmem active-set broadcast routines are collective routines over an active set. 
@@ -111,30 +111,30 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 
     For active-set-based broadcasts:
     \begin{itemize}
-	\item The \VAR{dest} object is updated on all PEs other than the root PE.
-    \item All \acp{PE} in the active set defined by the
-      \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet
-      must participate in the operation.
-    \item Only \acp{PE} in the active set may call the routine.  If a
-      \ac{PE} not in the active set calls an active-set-based
+        \item The \VAR{dest} object is updated on all PEs other than the root PE.
+        \item All \acp{PE} in the active set defined by the
+        \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet
+        must participate in the operation.
+       \item Only \acp{PE} in the active set may call the routine.  If a
+       \ac{PE} not in the active set calls an active-set-based
       collective routine, the behavior is undefined.
-    \item The values of arguments \VAR{PE\_root}, \VAR{PE\_start},
+      \item The values of arguments \VAR{PE\_root}, \VAR{PE\_start},
       \VAR{logPE\_stride}, and \VAR{PE\_size} must be the same value
       on all \acp{PE} in the active set.
-    \item The value of \VAR{PE\_root} must be between \CONST{0} and
+      \item The value of \VAR{PE\_root} must be between \CONST{0} and
       \VAR{PE\_size $-$ 1}.
-    \item The same \VAR{pSync} work array must be passed by all \acp{PE}
+      \item The same \VAR{pSync} work array must be passed by all \acp{PE}
       in the active set.
     \end{itemize}
 
     Before any \ac{PE} calls a active-set-based broadcast routine, the following
     conditions must be ensured:
     \begin{itemize}
-    \item The \dest{} array on all \acp{PE} participating in the broadcast
-      is ready to accept the broadcast data.
-    \item The \VAR{pSync} array on all \acp{PE} in the
-      active set is not still in use from a prior call to an \openshmem
-      collective routine.
+   	 \item The \dest{} array on all \acp{PE} participating in the broadcast
+         is ready to accept the broadcast data.
+   	 \item The \VAR{pSync} array on all \acp{PE} in the
+         active set is not still in use from a prior call to an \openshmem
+         collective routine.
     \end{itemize}
     Otherwise, the behavior is undefined.
 
