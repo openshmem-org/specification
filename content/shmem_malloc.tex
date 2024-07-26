@@ -15,7 +15,8 @@ void *@\FuncDecl{shmem\_malloc}@(size_t size);
 
 
 \apidescription{
-  The \FUNC{shmem\_malloc} routine returns the symmetric address of a
+  The \FUNC{shmem\_malloc} routine is a collective operation on the
+  world team and returns the symmetric address of a
   block of at least \VAR{size} bytes, which shall be suitably aligned
   so that it may be assigned to a pointer to any type of object.
   This space is allocated from the symmetric heap (in contrast to

@@ -13,7 +13,8 @@ void @\FuncDecl{shmem\_free}@(void *ptr);
 \end{apiarguments}
 
 \apidescription{
-  The \FUNC{shmem\_free} routine causes the block to which \VAR{ptr}
+  The \FUNC{shmem\_free} routine is a collective operation on the
+  world team that causes the block to which \VAR{ptr}
   points to be deallocated, that is, made available for further
   allocation.  If \VAR{ptr} is a null pointer, no action is performed;
   otherwise, \FUNC{shmem\_free} calls a barrier on entry.

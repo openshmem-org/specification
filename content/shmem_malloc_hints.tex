@@ -18,7 +18,8 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
 
 \apidescription{
 
-    The \FUNC{shmem\_malloc\_with\_hints} routine, like \FUNC{shmem\_malloc}, returns a pointer to a block of at least
+    The \FUNC{shmem\_malloc\_with\_hints} routine, like \FUNC{shmem\_malloc},
+    is a collective operation on the world team that returns a pointer to a block of at least
     \VAR{size} bytes, which shall be suitably aligned so that it may be
     assigned to a pointer to any type of object.  This space is allocated from
     the symmetric heap (similar to \FUNC{shmem\_malloc}).  When the \VAR{size} is zero, 
