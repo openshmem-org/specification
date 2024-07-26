@@ -489,14 +489,15 @@ affected by \openshmem memory ordering routines.
   Memory Store \footnote{Ordering and/or delivery of memory store operations are
   ensured only on contexts created with certain options. For details, refer the
   description of context options in Section~\ref{subsec:shmem_ctx_create}.}
-                                     & X & X \\
-  Blocking \OPR{Put}                 & X & X \\
-  Blocking \OPR{Get}                 &   &   \\
-  Blocking \OPR{\acs{AMO}}           & X & X \\
-  Blocking \OPR{put-with-signal}     & X & X \\
-  Nonblocking \OPR{Put}              & X & X \\
-  Nonblocking \OPR{Get}              &   & X \\
-  Nonblocking \OPR{\acs{AMO}}        & X\footnote{\openshmem fence routines does
+                                        & X & X \\
+  Blocking \OPR{Put}                    & X & X \\
+  Blocking \OPR{Get}                    &   &   \\
+  Blocking Fetching \OPR{\acs{AMO}}     &   &   \\
+  Blocking Non-fetching \OPR{\acs{AMO}} & X & X \\
+  Blocking \OPR{put-with-signal}        & X & X \\
+  Nonblocking \OPR{Put}                 & X & X \\
+  Nonblocking \OPR{Get}                 &   & X \\
+  Nonblocking \OPR{\acs{AMO}}           & X\footnote{\openshmem fence routines does
   not guarantee order of delivery of values fetched by nonblocking \ac{AMO}
   routines.}
                                          & X \\
