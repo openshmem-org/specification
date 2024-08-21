@@ -25,7 +25,7 @@ void *@\FuncDecl{shmem\_team\_ptr}@(shmem_team_t team, const void *dest, int pe)
     an \openshmem routine that requires a symmetric address results in
     undefined behavior.
     
-    The \FUNC{shmem\_team\_ptr} routine can provide an efficient means to accomplish
+    The \FUNC{shmem\_team\_ptr} routine can provide efficient means to accomplish
     communication, for example when a sequence of reads and writes to a data
     object on a remote \ac{PE} does not match the access pattern provided in an
     \openshmem data transfer routine like \FUNC{shmem\_put} or

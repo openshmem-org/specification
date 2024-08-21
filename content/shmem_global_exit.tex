@@ -48,7 +48,7 @@ void @\FuncDecl{shmem\_global\_exit}@(int status);
     terminate regardless of their current execution state. While I/O must be
     flushed for standard language I/O calls from \CorCpp, it is
     implementation dependent as to how I/O done by other means (e.g., third
-    party I/O libraries) is handled. Similarly, resources are released
+    party I/O libraries) are handled. Similarly, resources are released
     according to \CorCpp standard language requirements, but this may not
     include all resources allocated for the \openshmem program. However, a
     quality implementation will make a best effort to flush all I/O and clean

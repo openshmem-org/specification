@@ -33,6 +33,7 @@ void @\FuncDecl{shmem\_init}@(void);
     None.
 }
 
+\begin{DeprecateBlock}
 \apinotes{
     As of \openshmem[1.2], the use of \FUNC{start\_pes} has been
     deprecated and calls to it should be replaced with calls to \FUNC{shmem\_init}.
@@ -43,6 +44,7 @@ void @\FuncDecl{shmem\_init}@(void);
     case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the
     first one results in a no-op.
 }
+\end{DeprecateBlock}
 
 \begin{apiexamples}
 
