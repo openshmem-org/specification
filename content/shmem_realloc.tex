@@ -16,7 +16,8 @@ void *@\FuncDecl{shmem\_realloc}@(void *ptr, size_t size);
 
 
 \apidescription{
-  The \FUNC{shmem\_realloc} routine changes the size of the block to
+  The \FUNC{shmem\_realloc} routine is a collective operation on
+  the world team that changes the size of the block to
   which \VAR{ptr} points to the size (in bytes) specified by
   \VAR{size}.  The contents of the block are unchanged up to the
   lesser of the new and old sizes.
