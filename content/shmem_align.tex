@@ -17,7 +17,8 @@ void *@\FuncDecl{shmem\_align}@(size_t alignment, size_t size);
 
 
 \apidescription{
-  The \FUNC{shmem\_align} routine allocates a block in the symmetric
+  The \FUNC{shmem\_align} routine is a collective operation on the
+  world team that allocates a block in the symmetric
   heap that has a byte alignment specified by the \VAR{alignment}
   argument.  The value of \VAR{alignment} shall be a multiple of
   \CONST{sizeof(void *)} that is also a power of two; otherwise, the
