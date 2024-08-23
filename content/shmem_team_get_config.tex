@@ -25,6 +25,10 @@ to input configuration parameters when the team was created.
 If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
 then no operation is performed.
 If \VAR{team} is otherwise invalid, the behavior is undefined.
+If \VAR{config\_mask} is 0, then \VAR{shmem\_team\_get\_config} performs no action
+and \VAR{config} may or may not be a null pointer.
+If \VAR{config} is a null pointer, then \VAR{config\_mask} must be 0, otherwise
+the behavior is undefined.
 }
 
 \apireturnvalues{
