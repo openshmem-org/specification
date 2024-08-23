@@ -709,6 +709,11 @@ The following list describes the specific changes in \openshmem[1.6]:
     additional arguments.
 \ChangelogRef{subsec:shmem_pcontrol}
 %
+\item Clarified that \FUNC{shmem\_team\_get\_config} returns the current
+    configuration values, which may differ from the values assigned at the
+        time of the team's creation.
+\ChangelogRef{subsec:shmem_team_get_config}
+%
 \item Clarified the behavior of \FUNC{shmem\_team\_get\_config} when the
     \VAR{config\_mask} is 0 and/or the \VAR{config} argument is a null pointer.
 \ChangelogRef{subsec:shmem_team_get_config}
