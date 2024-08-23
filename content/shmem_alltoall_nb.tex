@@ -1,0 +1,123 @@
+\apisummary{
+  Exchanges a fixed amount of contiguous data blocks between all pairs
+  of \acp{PE} participating in the collective routine.
+}
+
+\begin{apidefinition}
+
+%% C11
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_alltoall\_nb}@(shmem_team_t team, TYPE *dest, const TYPE
+*source, size_t nelems, shmem_req_h *request);
+\end{C11synopsis}
+where \TYPE{} is one of the standard \ac{RMA} types specified by Table \ref{stdrmatypes}.
+
+\begin{Csynopsis}
+\end{Csynopsis}
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_alltoall\_nb}@(shmem_team_t team,
+TYPE *dest, const TYPE *source, size_t nelems, shmem_req_h *request);
+\end{CsynopsisCol}
+where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYPENAME{} specified by Table \ref{stdrmatypes}.
+
+\begin{CsynopsisCol}
+int @\FuncDecl{shmem\_alltoallmem\_nb}@(shmem_team_t team, void *dest, const
+void *source, size_t nelems, shmem_req_h *request);
+\end{CsynopsisCol}
+
+\begin{apiarguments}
+
+\apiargument{IN}{team}{A valid \openshmem team handle to a team.}%
+
+\apiargument{OUT}{dest}{Symmetric address of a data object large enough to receive
+    the combined total of \VAR{nelems} elements from each \ac{PE} in the
+    team.
+    The type of \dest{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{source}{Symmetric address of a data object that contains \VAR{nelems}
+    elements of data for each \ac{PE} in the team, ordered according to
+    destination \ac{PE}.
+    The type of \source{} should match that implied in the SYNOPSIS section.}
+\apiargument{IN}{nelems}{
+  The number of elements to exchange for each \ac{PE}.
+  For \FUNC{shmem\_alltoallmem\_nb} it represents bytes.
+}
+\apiargument{OUT}{request}{An opaque request handle identifying the collective
+operation.}
+
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_alltoall\_nb} routines are collective routines. All
+    \acp{PE} in the provided team must participate in the collective. If
+    \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
+    otherwise invalid, the behavior is undefined.
+
+    {\bf Invocation and completion}: A call to the nonblocking alltoall routine initiates the operation and returns
+    immediately without necessarily completing the operation. On success,
+    an opaque request handle is created and returned. The
+    operation is completed after a call to \FUNC{shmem\_req\_test} or
+    a call to \FUNC{shmem\_req\_wait}. When the operation is complete, the request handle
+    is deallocated and cannot be reused.
+
+    Though nonblocking alltoall varies in invocation and completion semantics
+    when compared to blocking alltoall, the data exchange semantics are similar.
+
+    {\bf Data exchange semantics}:
+    In this routine, each \ac{PE}
+    participating in the operation exchanges \VAR{nelems} data elements
+    with all other \acp{PE} participating in the operation.
+    The size of a data element is:
+    \begin{itemize}
+    \item 8 bits for \FUNC{shmem\_alltoallmem\_nb}
+    \item \FUNC{sizeof}(\TYPE{}) for alltoall routines taking typed \VAR{source} and \VAR{dest}
+    \end{itemize}
+
+    The data being sent and received are
+    stored in a contiguous symmetric data object. The total size of each \ac{PE}'s
+    \VAR{source} object and \VAR{dest} object is \VAR{nelems} times the size of
+    an element
+    times \VAR{N}, where \VAR{N} equals the number of \acp{PE} participating
+    in the operation.
+    The \VAR{source} object contains \VAR{N} blocks of data
+    (where the size of each block is defined by \VAR{nelems}) and each block of data
+    is sent to a different \ac{PE}.
+
+    The same \dest{} and \source{}
+    arrays, and same value for nelems
+    must be passed by all \acp{PE} that participate in the collective.
+
+    Given a \ac{PE} \VAR{i} that is the \kth \ac{PE}
+    participating in the operation and a \ac{PE}
+    \VAR{j} that is the \lth \ac{PE}
+    participating in the operation,
+
+    \ac{PE} \VAR{i} sends the \lth block of its \VAR{source} object to
+    the \kth block of
+    the \VAR{dest} object of \ac{PE} \VAR{j}.
+
+    
+    Like data exchange semantics, the entry and completion
+    criteria of blocking and nonblocking alltoall are similar.
+
+    {\bf Entry criteria}: Before any \ac{PE} calls a \FUNC{shmem\_alltoall\_nb} routine,
+    the following condition must be ensured:
+    \begin{itemize}
+    \item The \VAR{dest} data object on all \acp{PE} in the team is
+      ready to accept the \FUNC{shmem\_alltoall\_nb} data.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
+
+    {\bf Completion criteria}: Upon completion, the following is true for
+    the local PE:
+    \begin{itemize}
+    \item Its \VAR{dest} symmetric data object is completely updated and
+    the data has been copied out of the \VAR{source} data object.
+    \end{itemize}
+}
+
+\apireturnvalues{
+    Zero on successful local completion. Nonzero otherwise.
+}
+
+\end{apidefinition}
+
