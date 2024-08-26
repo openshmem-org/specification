@@ -81,9 +81,12 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{\acfp{AMO}}
 \begin{enumerate}
-    \item \OPR{Swap}: The \ac{PE} initiating the swap gets the old value of a
-        symmetric data object from a remote \ac{PE} and copies a new value to
-        that symmetric data object on the remote \ac{PE}.
+  \item \OPR{Fetch}: The \ac{PE} initiating the fetch returns the value of the
+      symmetric data object on the remote \ac{PE}.
+  \item \OPR{Set}: The \ac{PE} initiating the set copies a new value to the
+      symmetric data object on the remote \ac{PE}.
+  \item \OPR{Swap}: The \ac{PE} initiating the swap copies a new value to the
+      symmetric data object on the remote \ac{PE} and returns the old value.
   \item \OPR{Increment}: The \ac{PE} initiating the increment adds 1 to the
       symmetric data object on the remote \ac{PE}.
   \item \OPR{Add}: The \ac{PE} initiating the add specifies the value to be added
@@ -91,14 +94,14 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Bitwise Operations}: The \ac{PE} initiating the bitwise
       operation specifies the operand value to the bitwise operation to be
       performed on the symmetric data object on the remote \ac{PE}.
-  \item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value
-      of the symmetric data object based on a value to be compared and copies a
-      new value to the symmetric data object on the remote \ac{PE}.
-  \item \OPR{Fetch and Increment}: The \ac{PE} initiating the increment adds 1 to
-      the symmetric data object on the remote \ac{PE} and returns with the old
+  \item \OPR{Compare and Swap}: The \ac{PE} initiating the compare and swap
+      conditionally copies a new value to the symmetric data object on the
+      remote \ac{PE} and returns the old value.
+  \item \OPR{Fetch and Increment}: The \ac{PE} initiating the increment adds 1
+      to the symmetric data object on the remote \ac{PE} and returns the old
       value.
   \item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifies the value to
-      be added to the symmetric data object on the remote \ac{PE} and returns with
+      be added to the symmetric data object on the remote \ac{PE} and returns
       the old value.
   \item \OPR{Fetch and Bitwise Operations}: The \ac{PE} initiating the bitwise
       operation specifies the operand value to the bitwise operation to be
