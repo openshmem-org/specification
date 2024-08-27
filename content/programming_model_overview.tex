@@ -138,7 +138,7 @@ An overview of the \openshmem routines is described below:
 \begin{enumerate}
   \item \OPR{Broadcast}: The \VAR{root} \ac{PE} specifies a symmetric data
       object to be copied to a symmetric data object on one or more remote
-      \acp{PE} (not including itself).
+      \acp{PE}.
   \item \OPR{Collection}: All \acp{PE} participating in the routine get the result
       of concatenated symmetric objects contributed by each of the \acp{PE} in
       another symmetric data object.
@@ -146,8 +146,11 @@ An overview of the \openshmem routines is described below:
       of an associative binary routine over elements of the specified symmetric
       data object on another symmetric data object.
   \item \OPR{All-to-All}: All \acp{PE} participating in the routine exchange
-      a fixed amount of contiguous or strided data with all other \acp{PE}
-      in the active set.
+      a fixed amount of contiguous or strided data with all other participating
+      \acp{PE}.
+  \item \OPR{Scan}: All \acp{PE} participating in the routine perform an
+      inclusive or exclusive prefix sum over elements of the specified
+      symmetric data object.
 \end{enumerate}
 
 \item \textbf{Mutual Exclusion}
