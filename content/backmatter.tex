@@ -1272,4 +1272,41 @@ collectives.
 %
 \end{itemize}
 
+\chapter{Errata}\label{sec:errata}
+
+The \openshmem specification may occasionally include errata that are
+discovered after the release of new versions.
+These errata can range from typographical mistakes to more significant
+technical inaccuracies that may affect the implementation or understanding of
+the \openshmem API semantics.
+This Errata section reports these issues with the goal to maintain the
+integrity and utility of the OpenSHMEM specification.
+
+The sections below documents all known errata, their corresponding corrections,
+and the affected version of the OpenSHMEM specification.
+It serves as a historical record of the changes made and assists users and
+implementers with applying the necessary corrections.
+
+\section{Version 1.5}
+
+\begin{itemize}
+  \item Clarified that \FUNC{shmem\_test\_all} and
+     \FUNC{shmem\_test\_all\_vector} routines return 1 when the test set is empty
+        (\href{https://github.com/openshmem-org/specification/pull/466}{\#466}).
+  \item Clarified that \FUNC{shmem\_team\_split\_strided} and
+     \FUNC{shmem\_team\_split\_2d} return nonzero when the parent team is
+     \LibConstRef{SHMEM\_TEAM\_INVALID}
+        (\href{https://github.com/openshmem-org/specification/pull/461}{\#461}).
+  \item Corrected the \VAR{level} argument's recommended value in API notes for
+     \FUNC{shmem\_pcontrol} to indicate that the value should be greater than 2 to enable
+     profiling with profile library defined effects and additional arguments
+        (\href{https://github.com/openshmem-org/specification/pull/480}{\#480}).
+  \item Clarified that fence operations only guarantee ordering for operations
+     that are performed on the same context
+        (\href{https://github.com/openshmem-org/specification/pull/496}{\#496}).
+  \item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
+      across \acp{PE} in \openshmem reductions
+        (\href{https://github.com/openshmem-org/specification/pull/490}{\#490}).
+\end{itemize}
+
 %end of setlength command that was started in frontmatter.tex
