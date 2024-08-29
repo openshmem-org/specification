@@ -41,7 +41,7 @@ void @\FuncDecl{shmem\_init}@(void);
     users are encouraged to use \FUNC{shmem\_init}. An important difference between
     \FUNC{shmem\_init} and \FUNC{start\_pes} is that every call to
     \FUNC{shmem\_init} within a program must be matched with a call to \FUNC{shmem\_finalize}.
-    while in the case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the
+    In the case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the
     first one results in a no-op.
 }
 \end{DeprecateBlock}

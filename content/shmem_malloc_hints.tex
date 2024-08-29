@@ -27,7 +27,7 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     
     In addition to the \VAR{size} argument, the \VAR{hints} argument is provided by the user. 
     The \VAR{hints} describes the expected manner in which the \openshmem program may use the allocated memory.
-    The valid usage hints are described in Table~\ref{usagehints}. Multiple hints may be requested by combining them with a bitwise \CONST{OR} operation.
+    The valid usage of hints are described in Table~\ref{usagehints}. Multiple hints may be requested by combining them with a bitwise \CONST{OR} operation.
     A zero option can be given if no options are requested.
     
     The information provided by the \VAR{hints} is used to optimize for performance by the implementation. 
@@ -37,11 +37,9 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
             
     The \FUNC{shmem\_malloc\_with\_hints} routine is provided  so that multiple \acp{PE} in a program can allocate symmetric,
     remotely accessible memory blocks.  When no action is performed, these
-    routines return without performing a barrier. Otherwise, the routine will call a procedure that is semantically equivalent to \FUNC{shmem\_barrier\_all} on exit, similar to the behavior of \FUNC{shmem\_malloc}..
-    % Why are these two sentences here? should the go in the shmem_malloc text instead if they are relevant?  BES
-    %  It is the user's responsibility to ensure that no communication operations involving the given memory block are pending on
-    %other contexts prior to calling the \FUNC{shmem\_free} and \FUNC{shmem\_realloc} routines.
-    The user is also responsible for calling these routines with identical argument(s) on all
+    routines return without performing a barrier. Otherwise, the routine will call a procedure that is
+    semantically equivalent to \FUNC{shmem\_barrier\_all} on exit, similar to the behavior of \FUNC{shmem\_malloc}.
+    The user is responsible for calling this routine with identical argument(s) on all
     \acp{PE}; if differing \VAR{size}, or \VAR{hints} arguments are used, the behavior of the call
     is undefined.
 }
