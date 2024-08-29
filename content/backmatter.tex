@@ -673,23 +673,9 @@ The following list describes the specific changes in \openshmem[1.6]:
   update a remote flag without associated data transfer of a put-with-signal operation.
 \ChangelogRef{subsec:shmem_signal_add, subsec:shmem_signal_set}%
 %
-\item Clarified that \OPR{Fence} operations only guarantee ordering for
-    operations that are performed on the same context. \label{changelog:fence_ctx}
-\ChangelogRef{subsec:shmem_fence}%
-%
 \item Added a team-based pointer query routine:
   \FUNC{shmem\_team\_ptr}.
 \ChangelogRef{subsec:shmem_team_ptr}%
-%
-\item Clarified that \FUNC{shmem\_team\_split\_strided} and
-    \FUNC{shmem\_team\_split\_strided} return a nonzero value when the parent
-        team compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}. \label{changelog:split_strided_2d}
-\ChangelogRef{subsec:shmem_team_split_strided, subsec:shmem_team_split_2d}%
-%
-\item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
-    \openshmem[1.5] Table 10, and clarified the types, names, and supporting
-    operations for team-based reductions. \label{changelog:reduction_table}
-\ChangelogRef{teamreducetypes}%
 %
 \item Added the session routines, \FUNC{shmem\_ctx\_session\_start} and
     \FUNC{shmem\_ctx\_session\_stop}, which allow users to pass hints to the
@@ -708,11 +694,6 @@ The following list describes the specific changes in \openshmem[1.6]:
     the world team.
 \ChangelogRef{subsec:shmem_malloc, subsec:shmem_free, subsec:shmem_realloc,
   subsec:shmem_align, subsec:shmmallochint, subsec:shmem_calloc}%
-\item Corrected the level argument's recommended value in API notes for
-    \FUNC{shmem\_pcontrol} to indicate that the value should be greater than
-    2 to enable profiling with profile library defined effects and
-    additional arguments. \label{changelog:pcontrol}
-\ChangelogRef{subsec:shmem_pcontrol}
 %
 \item Clarified that \FUNC{shmem\_team\_get\_config} returns the current
     configuration values, which may differ from the values assigned at the
@@ -727,14 +708,39 @@ The following list describes the specific changes in \openshmem[1.6]:
     stride argument is 0 or negative.
 \ChangelogRef{subsec:shmem_team_split_strided}
 %
-\item Clarified that \FUNC{shmem\_test\_all} and \FUNC{shmem\_test\_all\_vector}
-    routines return 1 when the test set is empty. \label{changelog:test_all}
-\ChangelogRef{subsec:shmem_test_all,subsec:shmem_test_all_vector}%
+\item Added a new Errata Section~\ref{sec:errata} that indicates errors or ambiguities in the
+    \openshmem specification and the version that required correction or clarification.
+\ChangelogRef{sec:errata}
+%
+\item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
+    \openshmem[1.5] Table 10, and clarified the types, names, and supporting
+    operations for team-based reductions. \label{changelog:reduction_table}
+\ChangelogRef{teamreducetypes}%
 %
 \item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
     across \acp{PE} in \openshmem reductions \label{changelog:reduction_args}
 \ChangelogRef{subsec:shmem_reductions}
 %
+\item Clarified that \OPR{Fence} operations only guarantee ordering for
+    operations that are performed on the same context. \label{changelog:fence_ctx}
+\ChangelogRef{subsec:shmem_fence}%
+%
+\item Clarified that \FUNC{shmem\_test\_all} and \FUNC{shmem\_test\_all\_vector}
+    routines return 1 when the test set is empty. \label{changelog:test_all}
+\ChangelogRef{subsec:shmem_test_all,subsec:shmem_test_all_vector}%
+%
+\item Clarified that \FUNC{shmem\_team\_split\_strided} and
+    \FUNC{shmem\_team\_split\_strided} return a nonzero value when the parent
+        team compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}. \label{changelog:split_strided_2d}
+\ChangelogRef{subsec:shmem_team_split_strided, subsec:shmem_team_split_2d}%
+%
+\item Corrected the level argument's recommended value in API notes for
+    \FUNC{shmem\_pcontrol} to indicate that the value should be greater than
+    2 to enable profiling with profile library defined effects and
+    additional arguments. \label{changelog:pcontrol}
+\ChangelogRef{subsec:shmem_pcontrol}
+%
+
 \end{enumerate}
 
 \section{Version 1.5}
@@ -1291,10 +1297,24 @@ clarification.
 These corrections have been applied to all subsequent versions of the
 specification and this section serves as a historical record of the changes
 made to assist users and implementers with applying the necessary corrections.
+Errata that result in a change to the specifciation are also included in
+Annex~\ref{sec:changelog}.
+For an implementation to comply with a particular version of \openshmem, it
+must account for all errata associated with that version as indicated below.
 
 \section{Version 1.5}
 
 \begin{enumerate}
+  \item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
+      \openshmem[1.5] Table 10, and clarified the types, names, and supporting
+      operations for team-based reductions
+        (\ref{changelog:v1.6}.\ref{changelog:reduction_table}).
+  \item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
+      across \acp{PE} in \openshmem reductions
+        (\ref{changelog:v1.6}.\ref{changelog:reduction_args}).
+  \item Clarified that \OPR{Fence} operations only guarantee ordering for operations
+     that are performed on the same context
+        (\ref{changelog:v1.6}.\ref{changelog:fence_ctx}).
   \item Clarified that \FUNC{shmem\_test\_all} and
      \FUNC{shmem\_test\_all\_vector} routines return 1 when the test set is empty
         (\ref{changelog:v1.6}.\ref{changelog:test_all}).
@@ -1306,16 +1326,6 @@ made to assist users and implementers with applying the necessary corrections.
      \FUNC{shmem\_pcontrol} to indicate that the value should be greater than 2 to enable
      profiling with profile library defined effects and additional arguments
         (\ref{changelog:v1.6}.\ref{changelog:pcontrol}).
-  \item Clarified that \OPR{Fence} operations only guarantee ordering for operations
-     that are performed on the same context
-        (\ref{changelog:v1.6}.\ref{changelog:fence_ctx}).
-  \item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
-      across \acp{PE} in \openshmem reductions
-        (\ref{changelog:v1.6}.\ref{changelog:reduction_args}).
-  \item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
-      \openshmem[1.5] Table 10, and clarified the types, names, and supporting
-      operations for team-based reductions
-        (\ref{changelog:v1.6}.\ref{changelog:reduction_table}).
 \end{enumerate}
 
 %end of setlength command that was started in frontmatter.tex
