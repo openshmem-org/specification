@@ -648,12 +648,13 @@ standard \ac{AMO} types in Table~\ref{stdamotypes}.
 \chapter{Changes to this Document}\label{sec:changelog}
 
 \section{Version 1.6}
+\label{changelog:v1.6}
 Major changes in \openshmem[1.6] include the addition of the new
 \FUNC{shmem\_team\_ptr}, \FUNC{shmem\_ibget}, and \FUNC{shmem\_ibput}
 functions.
 
 The following list describes the specific changes in \openshmem[1.6]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Added an inclusive (\FUNC{shmem\_sum\_inscan}) and exclusive 
 (\FUNC{shmem\_sum\_exscan}) collective summation operation. 
@@ -673,7 +674,7 @@ The following list describes the specific changes in \openshmem[1.6]:
 \ChangelogRef{subsec:shmem_signal_add, subsec:shmem_signal_set}%
 %
 \item Clarified that \OPR{Fence} operations only guarantee ordering for
-    operations that are performed on the same context.
+    operations that are performed on the same context. \label{changelog:fence_ctx}
 \ChangelogRef{subsec:shmem_fence}%
 %
 \item Added a team-based pointer query routine:
@@ -682,12 +683,12 @@ The following list describes the specific changes in \openshmem[1.6]:
 %
 \item Clarified that \FUNC{shmem\_team\_split\_strided} and
     \FUNC{shmem\_team\_split\_strided} return a nonzero value when the parent
-    team compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}.
+        team compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}. \label{changelog:split_strided_2d}
 \ChangelogRef{subsec:shmem_team_split_strided, subsec:shmem_team_split_2d}%
 %
 \item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
     \openshmem[1.5] Table 10, and clarified the types, names, and supporting
-    operations for team-based reductions.
+    operations for team-based reductions. \label{changelog:reduction_table}
 \ChangelogRef{teamreducetypes}%
 %
 \item Added the session routines, \FUNC{shmem\_ctx\_session\_start} and
@@ -710,7 +711,7 @@ The following list describes the specific changes in \openshmem[1.6]:
 \item Corrected the level argument's recommended value in API notes for
     \FUNC{shmem\_pcontrol} to indicate that the value should be greater than
     2 to enable profiling with profile library defined effects and
-    additional arguments.
+    additional arguments. \label{changelog:pcontrol}
 \ChangelogRef{subsec:shmem_pcontrol}
 %
 \item Clarified that \FUNC{shmem\_team\_get\_config} returns the current
@@ -726,7 +727,15 @@ The following list describes the specific changes in \openshmem[1.6]:
     stride argument is 0 or negative.
 \ChangelogRef{subsec:shmem_team_split_strided}
 %
-\end{itemize}
+\item Clarified that \FUNC{shmem\_test\_all} and \FUNC{shmem\_test\_all\_vector}
+    routines return 1 when the test set is empty. \label{changelog:test_all}
+\ChangelogRef{subsec:shmem_test_all,subsec:shmem_test_all_vector}%
+%
+\item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
+    across \acp{PE} in \openshmem reductions \label{changelog:reduction_args}
+\ChangelogRef{subsec:shmem_reductions}
+%
+\end{enumerate}
 
 \section{Version 1.5}
 Major changes in \openshmem[1.5] include the addition of new team-based
@@ -736,7 +745,7 @@ comparison functions, a \FUNC{shmem\_malloc\_with\_hints} function, a profiling
 interface, and the removal of the entire \Fortran \ac{API}.
 
 The following list describes the specific changes in \openshmem[1.5]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Removed \FUNC{SHMEM\_CACHE}.
 \ChangelogRef{dep:shmem_cache}%
@@ -887,7 +896,7 @@ environment variables.
 \item Clarified the atomicity guarantees of the \openshmem memory model.
 \ChangelogRef{subsec:amo_guarantees}%
 %
-\end{itemize}
+\end{enumerate}
 
 \section{Version 1.4}
 Major changes in \openshmem[1.4] include
@@ -902,7 +911,7 @@ atomic bitwise operations,
 and \Cstd[11] type-generic interfaces for point-to-point synchronization.
 
 The following list describes the specific changes in \openshmem[1.4]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item New communication management \ac{API}, including \FUNC{shmem\_ctx\_create};
     \FUNC{shmem\_ctx\_destroy}; and additional \ac{RMA}, \ac{AMO}, and memory ordering
@@ -1022,7 +1031,7 @@ synchronization routines.
 \item Clarified that complex-typed reductions in C are optionally supported.
 \ChangelogRef{subsec:shmem_reductions}%
 %
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -1035,7 +1044,7 @@ all-to-all collectives,
 and \Cstd[11] type-generic interfaces for \ac{RMA} and \ac{AMO} operations.
 
 The following list describes the specific changes in \openshmem[1.3]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Clarified implementation of \acp{PE} as threads.
 %
@@ -1076,7 +1085,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 \item Deprecation of \FUNC{SHMEM\_CACHE}.
 \ChangelogRef{dep:shmem_cache}%
 %
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -1091,7 +1100,7 @@ namespace standardization,
 and clarifications to several \ac{API} descriptions.
 
 The following list describes the specific changes in \openshmem[1.2]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Added specification of \VAR{pSync} initialization for all routines that use it.
 %
@@ -1147,7 +1156,7 @@ See \openshmem[1.4], Section 9.5.1.
       support across versions of the \openshmem Specification.
 \ChangelogRef{sec:dep}%
 %
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -1161,7 +1170,7 @@ the \ac{SGI} SHMEM specification,
 and general readabilty and usability improvements to the document structure.
 
 The following list describes the specific changes in \openshmem[1.1]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Clarifications of the completion semantics of memory synchronization
       interfaces.
@@ -1270,7 +1279,7 @@ collectives.
 \item Name changes for UV and ICE for \ac{SGI} systems.
 \ChangelogRef{sec:openshmem_history}%
 %
-\end{itemize}
+\end{enumerate}
 
 \chapter{Errata}\label{sec:errata}
 
@@ -1292,24 +1301,28 @@ implementers with applying the necessary corrections.
 
 \section{Version 1.5}
 
-\begin{itemize}
+\begin{enumerate}
   \item Clarified that \FUNC{shmem\_test\_all} and
      \FUNC{shmem\_test\_all\_vector} routines return 1 when the test set is empty
-        (\href{https://github.com/openshmem-org/specification/pull/466}{\#466}).
+        (\ref{changelog:v1.6}.\ref{changelog:test_all}).
   \item Clarified that \FUNC{shmem\_team\_split\_strided} and
      \FUNC{shmem\_team\_split\_2d} return nonzero when the parent team is
      \LibConstRef{SHMEM\_TEAM\_INVALID}
-        (\href{https://github.com/openshmem-org/specification/pull/461}{\#461}).
+        (\ref{changelog:v1.6}.\ref{changelog:split_strided_2d}).
   \item Corrected the \VAR{level} argument's recommended value in API notes for
      \FUNC{shmem\_pcontrol} to indicate that the value should be greater than 2 to enable
      profiling with profile library defined effects and additional arguments
-        (\href{https://github.com/openshmem-org/specification/pull/480}{\#480}).
-  \item Clarified that fence operations only guarantee ordering for operations
+        (\ref{changelog:v1.6}.\ref{changelog:pcontrol}).
+  \item Clarified that \OPR{Fence} operations only guarantee ordering for operations
      that are performed on the same context
-        (\href{https://github.com/openshmem-org/specification/pull/496}{\#496}).
+        (\ref{changelog:v1.6}.\ref{changelog:fence_ctx}).
   \item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
       across \acp{PE} in \openshmem reductions
-        (\href{https://github.com/openshmem-org/specification/pull/490}{\#490}).
-\end{itemize}
+        (\ref{changelog:v1.6}.\ref{changelog:reduction_args}).
+  \item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
+      \openshmem[1.5] Table 10, and clarified the types, names, and supporting
+      operations for team-based reductions
+        (\ref{changelog:v1.6}.\ref{changelog:reduction_table}).
+\end{enumerate}
 
 %end of setlength command that was started in frontmatter.tex
