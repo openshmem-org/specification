@@ -6,16 +6,16 @@
 
 %% C11
 \begin{C11synopsis}
-int @\FuncDecl{shmem\_sum\_inscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
-int @\FuncDecl{shmem\_sum\_exscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+int @\FuncDecl{shmem\_sum\_inscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
+int @\FuncDecl{shmem\_sum\_exscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 \end{C11synopsis}
 where \TYPE{} is one of the integer, real, or complex types supported
 for the SUM operation as specified by Table \ref{teamreducetypes}.
 
 %% C/C++
 \begin{Csynopsis}
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_inscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
-int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_exscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nreduce);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_inscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
+int @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_sum\_exscan}@(shmem_team_t team, TYPE *dest, const TYPE *source, size_t nelems);
 \end{Csynopsis}
 where \TYPE{} is one of the integer, real, or complex types supported
 for the SUM operation and has a corresponding \TYPENAME{} as specified
@@ -26,17 +26,17 @@ by Table \ref{teamreducetypes}.
     The team over which to perform the operation.
   }
   \apiargument{OUT}{dest}{
-    Symmetric address of an array, of length \VAR{nreduce} elements,
-    to receive the result of the scan routines.  The type of
+    Symmetric address of an array, of length \VAR{nelems} elements,
+    to receive the result of the scan operation.  The type of
     \dest{} should match that implied in the SYNOPSIS section.
   }
   \apiargument{IN}{source}{
-    Symmetric address of an array, of length \VAR{nreduce} elements,
-    that contains one element for each separate scan routine.
+    Symmetric address of an array, of length \VAR{nelems} elements,
+    that contains one element for each separate scan operation.
     The type of \source{} should match that implied in the SYNOPSIS
     section.
   }
-  \apiargument{IN}{nreduce}{
+  \apiargument{IN}{nelems}{
     The number of elements in the \dest{} and \source{} arrays.
   }
 \end{apiarguments}
@@ -49,7 +49,7 @@ by Table \ref{teamreducetypes}.
   multiple \acp{PE}.  The scan operations are performed with the SUM
   operator.
 
-  The \VAR{nreduce} argument determines the number of separate scan
+  The \VAR{nelems} argument determines the number of separate scan
   operations to perform.  The \source{} array on all \acp{PE}
   participating in the operation provides one element for each scan.
   The results of the scan operations are placed in the \dest{} array
@@ -75,10 +75,14 @@ by Table \ref{teamreducetypes}.
     \end{cases}
   \end{equation*}
 
+
+  The same \source{} and \dest{} arrays must be passed by all PEs that
+  participate in the collective.
   The \source{} and \dest{} arguments must either be the same
   symmetric address, or two different symmetric addresses
-  corresponding to buffers that do not overlap in memory. That is,
-  they must be completely overlapping or completely disjoint.
+  corresponding to buffers that do not overlap in memory.
+  That is, they must be completely overlapping (sometimes referred to as an
+  ``in place'' reduction) or completely disjoint.
 
   Team-based scan routines operate over all \acp{PE} in the provided
   team argument. All \acp{PE} in the provided team must participate in
