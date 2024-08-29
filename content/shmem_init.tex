@@ -16,9 +16,10 @@ void @\FuncDecl{shmem\_init}@(void);
 \apidescription{
     \FUNC{shmem\_init} allocates and initializes resources used by the \openshmem
     library. It is a collective operation that all \acp{PE} must call before any
-    other \openshmem routine may be called. At the end of the \openshmem program
-    which it initialized, the call to \FUNC{shmem\_init} must be matched with a
-    call to \FUNC{shmem\_finalize}.
+    other \openshmem routine may be called, except \FUNC{shmem\_query\_initialized} 
+    which checks the current initialized state of the library. At the end of the 
+    \openshmem program which it initialized, the call to \FUNC{shmem\_init} must 
+    be matched with a call to \FUNC{shmem\_finalize}.
 
     The \FUNC{shmem\_init} and \FUNC{shmem\_init\_thread} initialization
     routines may be called multiple times within an \openshmem program. A
