@@ -655,6 +655,10 @@ functions.
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{itemize}
 %
+\item Added an inclusive (\FUNC{shmem\_sum\_inscan}) and exclusive 
+(\FUNC{shmem\_sum\_exscan}) collective summation operation. 
+\ChangelogRef{subsec:shmem_scan}
+%
 \item Added support for initialization and finalization routines to be called
     multiple times, and added an initialization status query API
     \FUNC{shmem\_query\_initialized}.
