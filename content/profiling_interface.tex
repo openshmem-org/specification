@@ -1,74 +1,74 @@
-The objective of the \openshmem profiling interface is to ensure an 
-easy and flexible usage model for profiling (and other similar) 
-tool developers to interface their codes into \openshmem 
-implementations on different platforms. Since \openshmem is a 
-machine-independent standard with different implementations, it is 
-unreasonable to expect that the authors and developers of profiling 
-tools for \openshmem will have access to the source code that 
-implements \openshmem on any particular machine. It is, therefore,  
-necessary to provide a mechanism by which the implementors of such 
-tools can collect whatever performance information they wish 
+The objective of the \openshmem profiling interface is to ensure an
+easy and flexible usage model for profiling (and other similar)
+tool developers to interface their codes into \openshmem
+implementations on different platforms. Since \openshmem is a
+machine-independent standard with different implementations, it is
+unreasonable to expect that the authors and developers of profiling
+tools for \openshmem will have access to the source code that
+implements \openshmem on any particular machine. It is, therefore,
+necessary to provide a mechanism by which the implementors of such
+tools can collect whatever performance information they wish
 \emph{without} access to the underlying implementation.
 
-The \openshmem profiling interface places the following requirements 
-on implementations. 
+The \openshmem profiling interface places the following requirements
+on implementations.
 
 \begin{enumerate}
-\item An \openshmem implementation must provide a mechanism through 
-which all of the \openshmem defined functions may be accessible 
-with a name shift. This requires an alternate 
-entry point name, with the prefix \FUNC{pshmem\_} for each 
-\openshmem function. For \openshmem inlined functions (e.g., macros), 
-it is also required that the \FUNC{pshmem\_} version is supplied 
-although it is not possible to replace the \FUNC{shmem\_} version 
+\item An \openshmem implementation must provide a mechanism through
+which all of the \openshmem defined functions may be accessible
+with a name shift. This requires an alternate
+entry point name, with the prefix \FUNC{pshmem\_} for each
+\openshmem function. For \openshmem inlined functions (e.g., macros),
+it is also required that the \FUNC{pshmem\_} version is supplied
+although it is not possible to replace the \FUNC{shmem\_} version
 with a user-defined version at link time.
-\item It must be ensured that the \openshmem functions that are not 
-replaced as above, may still be linked into an executable image 
-without causing name clashes. 
-\item Documentation of the implementation of different language 
-bindings of the \openshmem interface must indicate if they 
-are layered on top of each other. Using this documentation,   
-developers can determine whether they need to implement the 
-profile interface for each binding or not. For example, it must 
-be noted that the \openshmem \Cstd[11] type-generic interfaces for 
+\item It must be ensured that the \openshmem functions that are not
+replaced as above, may still be linked into an executable image
+without causing name clashes.
+\item Documentation of the implementation of different language
+bindings of the \openshmem interface must indicate if they
+are layered on top of each other. Using this documentation,
+developers can determine whether they need to implement the
+profile interface for each binding or not. For example, it must
+be noted that the \openshmem \Cstd[11] type-generic interfaces for
 different \ac{RMA} and \ac{AMO} operations cannot have any equivalent
-\FUNC{pshmem\_} interfaces because the \Cstd[11] type-generic 
+\FUNC{pshmem\_} interfaces because the \Cstd[11] type-generic
 interfaces are implemented as macros.
-\item In the case where the implementation of different \ac{API}  
-feature sets is implemented through a layered approach using 
-``wrapper'' functions, the wrapper functions must be kept separate 
-from the rest of the library. This requirement allows the developers 
-to extract these functions from the original \openshmem library 
-and add them into the profiling library without bringing along any 
+\item In the case where the implementation of different \ac{API}
+feature sets is implemented through a layered approach using
+``wrapper'' functions, the wrapper functions must be kept separate
+from the rest of the library. This requirement allows the developers
+to extract these functions from the original \openshmem library
+and add them into the profiling library without bringing along any
 other code.
-\item A no-op routine, \FUNC{shmem\_pcontrol}, must be provided 
+\item A no-op routine, \FUNC{shmem\_pcontrol}, must be provided
 in the \openshmem library.
-\item It must be ensured that any \openshmem types or constants that are 
+\item It must be ensured that any \openshmem types or constants that are
 needed by the \FUNC{pshmem\_} interfaces are defined in \HEADER{pshmem.h}.
 \end{enumerate}
 
-Provided that an \openshmem implementation meets these requirements, 
-it is possible for the implementor of the profiling system 
-to intercept the \openshmem calls that are made by the user 
-program. The information required can be collected before and after 
-calling the underlying \openshmem implementation through the name 
-shifted entry points. 
+Provided that an \openshmem implementation meets these requirements,
+it is possible for the implementor of the profiling system
+to intercept the \openshmem calls that are made by the user
+program. The information required can be collected before and after
+calling the underlying \openshmem implementation through the name
+shifted entry points.
 
 \subsection{Control of Profiling}
 \label{sec:pshmem_control_profile}
-Any user code must be able to control the profiler dynamically 
-during runtime. Generally, this capability is used for the 
+Any user code must be able to control the profiler dynamically
+during runtime. Generally, this capability is used for the
 purposes of
 
 \begin{itemize}
-\item Enabling and disabling of profiling based on the current 
+\item Enabling and disabling of profiling based on the current
 state of the execution and calculation,
 \item Flushing of the trace buffers at noncritical execution
 regions,
 \item Adding user events to a trace file.
 \end{itemize}
 
-These functionalities can be achieved through the usage of 
+These functionalities can be achieved through the usage of
 \FUNC{shmem\_pcontrol}.
 
 \subsubsection{\textbf{SHMEM\_PCONTROL}}\label{subsec:shmem_pcontrol}
