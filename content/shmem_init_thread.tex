@@ -24,13 +24,19 @@ provided by the library. The allowed values for \VAR{provided} and
 \VAR{requested} are \CONST{SHMEM\_THREAD\_SINGLE}, \CONST{SHMEM\_THREAD\_FUNNELED},
 \CONST{SHMEM\_THREAD\_SERIALIZED}, and \CONST{SHMEM\_THREAD\_MULTIPLE}.
 
-An \openshmem program is initialized either by \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}.
-Once an \openshmem library initialization call has been performed, a subsequent
-initialization call in the same program results in undefined behavior.
+The \FUNC{shmem\_init} and \FUNC{shmem\_init\_thread} initialization
+routines may be called multiple times within an \openshmem program. A
+corresponding call to \FUNC{shmem\_finalize} must be made for each call to
+an \openshmem initialization routine. The \openshmem library must not be
+finalized until after the last call to \FUNC{shmem\_finalize} and may be
+re-initialized with a subsequent call to an initialization routine.
+
 If the call to \FUNC{shmem\_init\_thread}
 is unsuccessful in allocating and initializing resources for the 
 \openshmem library, then the behavior of any subsequent call 
 to the \openshmem library is undefined.
+
+
 }
 
 \apireturnvalues{
@@ -43,6 +49,9 @@ The \openshmem library can be initialized either by \FUNC{shmem\_init}
 or \FUNC{shmem\_init\_thread}. If the \openshmem library is initialized 
 by \FUNC{shmem\_init}, the library implementation can choose to 
 support any one of the defined thread levels.
+
+The \openshmem library may not be able to change the level of threading support
+provided after the first initialization call has been made.
 }
 
 \end{apidefinition}

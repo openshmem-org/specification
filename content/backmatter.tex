@@ -143,12 +143,6 @@ behavior.  For example, an implementation may try to continue or may abort
 immediately upon an \openshmem call into the uninitialized library.
 \tabularnewline
 \hline
-Multiple calls to initialization routines & In an \openshmem program where
-the initialization routines \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}
-have already been called, any subsequent calls to these initialization routines
-result in undefined behavior.
-\tabularnewline
-\hline
 Specifying invalid \ac{PE} numbers & For \openshmem routines that accept a
 \ac{PE} number as an argument, if the \ac{PE} number is invalid for the
 team associated with the operation (either implicitly or explicitly), the
@@ -661,6 +655,11 @@ functions.
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{itemize}
 %
+\item Added support for initialization and finalization routines to be called
+    multiple times, and added an initialization status query API
+    \FUNC{shmem\_query\_initialized}.
+\ChangelogRef{subsec:shmem_init, subsec:shmem_finalize, subsec:shmem_query_initialized}%
+%
 \item Added interleaved block transfer APIs \FUNC{shmem\_ibget} and
     \FUNC{shmem\_ibput}.
 \ChangelogRef{subsec:shmem_ibget, subsec:shmem_ibput}%
@@ -687,6 +686,10 @@ The following list describes the specific changes in \openshmem[1.6]:
     operations for team-based reductions.
 \ChangelogRef{teamreducetypes}%
 %
+\item Added the session routines, \FUNC{shmem\_ctx\_session\_start} and
+    \FUNC{shmem\_ctx\_session\_stop}, which allow users to pass hints to the
+    \openshmem library to apply runtime optimizations.
+\ChangelogRef{subsec:sessions}%
 \item Added fine grained completion routine: \FUNC{shmem\_pe\_quiet}.
 \ChangelogRef{subsec:shmem_pe_quiet}%
 %
@@ -694,11 +697,30 @@ The following list describes the specific changes in \openshmem[1.6]:
   functions from a single entry in \openshmem[1.5] into separate entries.
 \ChangelogRef{subsec:shmem_malloc, subsec:shmem_free, subsec:shmem_realloc,
   subsec:shmem_align}%
+%
+\item Clarified that the \FUNC{shmem\_\{malloc, free, realloc, align,
+    malloc\_with\_hints, calloc\}} functions are collective operations on
+    the world team.
+\ChangelogRef{subsec:shmem_malloc, subsec:shmem_free, subsec:shmem_realloc,
+  subsec:shmem_align, subsec:shmmallochint, subsec:shmem_calloc}%
 \item Corrected the level argument's recommended value in API notes for
     \FUNC{shmem\_pcontrol} to indicate that the value should be greater than
     2 to enable profiling with profile library defined effects and
     additional arguments.
 \ChangelogRef{subsec:shmem_pcontrol}
+%
+\item Clarified that \FUNC{shmem\_team\_get\_config} returns the current
+    configuration values, which may differ from the values assigned at the
+        time of the team's creation.
+\ChangelogRef{subsec:shmem_team_get_config}
+%
+\item Clarified the behavior of \FUNC{shmem\_team\_get\_config} when the
+    \VAR{config\_mask} is 0 and/or the \VAR{config} argument is a null pointer.
+\ChangelogRef{subsec:shmem_team_get_config}
+%
+\item Clarified the behavior of \FUNC{shmem\_team\_split\_strided} when the
+    stride argument is 0 or negative.
+\ChangelogRef{subsec:shmem_team_split_strided}
 %
 \end{itemize}
 

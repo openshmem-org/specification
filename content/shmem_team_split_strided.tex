@@ -50,10 +50,15 @@ A valid triplet is one such that:
   i \in \mathbb{Z}_{size-1}
 \end{equation*}
 where $\mathbb{Z}$ is the set of natural numbers ($0, 1, \dots$), $N$ is the
-number of \acp{PE} in the parent team and $size$ is a positive number indicating
-the number of \acp{PE} in the new team. The index $i$ specifies the number of
-the given PE in the new team. Thus, \acp{PE} in the new team remain in the same
+number of \acp{PE} in the parent team, $size$ is a positive number indicating
+the number of \acp{PE} in the new team, and $stride$ is an integer.
+The index $i$ specifies the number of the given PE in the new team.
+When $stride$ is greater than zero, PEs in the new team remain in the same
 relative order as in the parent team.
+When $stride$ is less than zero, PEs in the new team are in \textit{reverse}
+relative order with respect to the parent team.
+If a $stride$ value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
+then the $size$ argument passed must be 1, or the behavior is undefined.
 
 This routine must be called by all \acp{PE} in the parent team.
 All \acp{PE} must provide the same values for the \ac{PE} triplet.

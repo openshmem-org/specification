@@ -19,6 +19,9 @@ by a call to \FUNC{shmem\_init\_thread}, if the \openshmem library was
 initialized by \FUNC{shmem\_init\_thread}. If the library was initialized by
 \FUNC{shmem\_init}, the implementation can choose to provide any one of the defined
 thread levels, and \FUNC{shmem\_query\_thread} returns this thread level.
+
+This function may be called at any time, regardless of the thread safety
+level of the \openshmem library.
 }
 
 \apireturnvalues{
