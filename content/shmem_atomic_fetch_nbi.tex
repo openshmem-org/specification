@@ -28,9 +28,8 @@ where \TYPE{} is one of the extended \ac{AMO} types and has a corresponding
     The type of \VAR{fetch} should match that implied in the SYNOPSIS section.}
   \apiargument{OUT}{source}{Symmetric address of the source data object.
     The type of \source{} should match that implied in the SYNOPSIS section.}
-  \apiargument{IN}{pe}{An integer that indicates the \ac{PE} number from which
-    \VAR{source} is to be fetched.}
-
+  \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+    with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{

@@ -39,7 +39,8 @@ void @\FuncDecl{shmem\_ctx\_getmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays. For \FUNC{shmem\_getmem\_nbi} and
         \FUNC{shmem\_ctx\_getmem\_nbi}, elements are bytes.}
-    \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+      with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{
