@@ -252,11 +252,11 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     contains one element for each separate reduction routine.
     The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays. In teams based \ac{API} calls, \VAR{nreduce} must be of type size\_t.
-    In deprecated active-set based \ac{API} calls,
-    \VAR{nreduce} must be of type integer.}
+    arrays. In teams based \ac{API} calls, \VAR{nreduce} must be of type size\_t.}
 
 \begin{DeprecateBlock}
+\apiargument{IN}{nreduce}{In active-set based \ac{API} calls,
+    \VAR{nreduce} must be of type integer.}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.}
 \apiargument{IN}{logPE\_stride}{The log (base 2) of the stride between consecutive
@@ -273,7 +273,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 \end{apiarguments}
 
 \apidescription{
-    \openshmem reduction routines are collective routines over an active set or
+    \openshmem reduction routines are collective routines over an
     existing \openshmem team that compute one or more reductions across symmetric
     arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
     across a set of values.
@@ -294,6 +294,37 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     \acp{PE} in the provided team must participate in the reduction.
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
+
+    Before any \ac{PE} calls a reduction routine, the following conditions must be ensured:
+    \begin{itemize}
+    \item The \dest{} array on all \acp{PE} participating in the reduction
+      is ready to accept the results of the \OPR{reduction}.
+    \end{itemize}
+    Otherwise, the behavior is undefined.
+    
+    Upon return from a reduction routine, the following are true for the local
+    \ac{PE}:
+    \begin{itemize}
+    \item The \dest{} array is updated and the \source{} array may be safely reused.
+    \end{itemize}
+
+\begin{DeprecateBlock}
+    \openshmem reduction routines are collective routines over an active set 
+	that compute one or more reductions across symmetric
+    arrays on multiple \acp{PE}.  A reduction performs an associative binary routine
+    across a set of values.
+
+    The \VAR{nreduce} argument determines the number of separate reductions to
+    perform.  The \source{} array on all \acp{PE} participating in the reduction
+    provides one element for each reduction.  The results of the reductions are placed in the
+    \dest{} array on all \acp{PE} participating in the reduction.
+
+    The same \source{} and \dest{} arrays must be passed by all PEs that
+    participate in the collective.
+    The \source{} and \dest{} arguments must either be the same symmetric
+    address, or two different symmetric addresses corresponding to buffers that
+    do not overlap in memory. That is, they must be completely overlapping (sometimes referred to as an ``in place'' reduction) or
+    completely disjoint.
 
     Active-set-based sync routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
@@ -327,6 +358,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     \item If using active-set-based routines,
     the values in the \VAR{pSync} array are restored to the original values.
     \end{itemize}
+\end{DeprecateBlock}
 
     The complex-typed interfaces are only provided for sum and product reductions.
     When the \Cstd translation environment does not support complex types
