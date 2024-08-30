@@ -151,9 +151,9 @@ negative or greater than or equal to the size of the associated team.
 \tabularnewline
 \hline
 Use of non-symmetric variables & Some routines require remotely accessible
-variables to perform their function.  For example, a \PUT{} to a non-symmetric variable may
-be trapped where possible and the library may abort the program.  Another
-implementation may choose to continue execution with or without a warning.
+variables to perform their function.  For example, an \openshmem libray may detect a \PUT{} to a non-symmetric variable
+and choose to abort the program.  
+However, another implementation may choose to continue execution with or without a warning.
 \tabularnewline
 \hline
 Non-symmetric allocation of symmetric memory & The symmetric memory management routines are
