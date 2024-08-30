@@ -88,6 +88,17 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
+    Before any \ac{PE} calls a collect routine, the following conditions must
+    be ensured, otherwise the behavior is undefined:
+    \begin{itemize}
+        \item The \dest{} array on all \acp{PE} in the team is ready to
+            accept the result of the operation.
+        \item The \source{} buffer at the local \ac{PE} is ready to be read
+            by any \ac{PE} in the team.
+    \end{itemize}
+    The application does not need to synchronize to ensure that the \source{}
+    buffer is ready across all \acp{PE} prior to calling this routine.
+
 \begin{DeprecateBlock}
     \openshmem \FUNC{collect} and \FUNC{fcollect} routines perform a collective
     operation to concatenate \VAR{nelems}
