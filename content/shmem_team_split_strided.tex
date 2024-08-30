@@ -13,7 +13,7 @@ int @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int start
 \begin{apiarguments}
 \apiargument{IN}{parent\_team}{An \openshmem team.}
 
-\apiargument{IN}{start}{The first \acs{PE} number of the subset of \acp{PE} from the parent team that will form the new team. If the stride is less than zero, the first \acs{PE} number is the highest; if greater than zero, it is the lowest; if the stride is zero, it is the starting \acs{PE}.}
+\apiargument{IN}{start}{The first \acs{PE} number of the subset of \acp{PE} from the parent team that will form the new team. If the stride is less than zero, the first \acs{PE} number is the highest \acs{PE} of the parent team; if it is  greater than zero, it is the lowest; if the stride is zero, it is the starting \acs{PE}.}
 
 \apiargument{IN}{stride}{The stride between team \ac{PE}
 numbers in the parent team that comprise the subset of \acp{PE} that will form
