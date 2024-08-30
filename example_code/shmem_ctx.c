@@ -1,9 +1,6 @@
 #include <shmem.h>
 #include <stdio.h>
 
-long pwrk[SHMEM_REDUCE_MIN_WRKDATA_SIZE];
-long psync[SHMEM_REDUCE_SYNC_SIZE];
-
 long task_cntr = 0;  /* Next task counter */
 long tasks_done = 0; /* Tasks done by this PE */
 long total_done = 0; /* Total tasks done by all PEs */
@@ -11,9 +8,6 @@ long total_done = 0; /* Total tasks done by all PEs */
 int main(void) {
   int tl, i;
   long ntasks = 1024; /* Total tasks per PE */
-
-  for (i = 0; i < SHMEM_REDUCE_SYNC_SIZE; i++)
-    psync[i] = SHMEM_SYNC_VALUE;
 
   shmem_init_thread(SHMEM_THREAD_MULTIPLE, &tl);
   if (tl != SHMEM_THREAD_MULTIPLE)
@@ -49,7 +43,7 @@ int main(void) {
     shmem_ctx_destroy(ctx);
   }
 
-  shmem_long_sum_to_all(&total_done, &tasks_done, 1, 0, 0, npes, pwrk, psync);
+  shmem_long_sum_reduce(SHMEM_TEAM_WORLD, &total_done, &tasks_done, 1);
 
   int result = (total_done != ntasks * npes);
   shmem_finalize();
