@@ -91,11 +91,11 @@ by Table \ref{teamreducetypes}.
   \begin{itemize}
       \item The \dest{} array on all \acp{PE} in the team is ready to accept
           the result of the operation.
-      \item The \source{} buffer at the local \ac{PE} is ready to be read by
+      \item The \source{} array at the local \ac{PE} is ready to be read by
           any \ac{PE} in the team.
   \end{itemize}
   The application does not need to synchronize to ensure that the \source{}
-  buffer is ready across all \acp{PE} prior to calling this routine.
+  array is ready across all \acp{PE} prior to calling this routine.
   
   Upon return from a scan routine, the following are true for the
   local \ac{PE}: the \dest{} array is updated, and the \source{} array

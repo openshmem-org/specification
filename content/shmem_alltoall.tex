@@ -105,11 +105,11 @@ void @\FuncDecl{shmem\_alltoall64}@(void *dest, const void *source, size_t nelem
     \begin{itemize}
         \item The \dest{} array on all \acp{PE} in the team is ready to
             accept the result of the operation.
-        \item The \source{} buffer at the local \ac{PE} is ready to be
+        \item The \source{} array at the local \ac{PE} is ready to be
             read by any \ac{PE} in the team.
     \end{itemize}
     The application does not need to synchronize to ensure that the \source{}
-    buffer is ready across all \acp{PE} prior to calling this routine.
+    array is ready across all \acp{PE} prior to calling this routine.
 
     Upon return from a \FUNC{shmem\_alltoall} routine, the following is true for
     the local PE:
