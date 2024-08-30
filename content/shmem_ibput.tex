@@ -49,7 +49,7 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
 
 \apidescription{
     The \FUNC{shmem\_ibput} routines provide a method  for  copying strided data
-    blocks (specified by \VAR{sst}) of an array from a \source{} array on the
+    blocks (of size \VAR{bsize}) with stride  (specified by \VAR{sst}) of an array from a \source{} array on the
     local \ac{PE} to locations specified by stride \VAR{dst} on a \dest{} array
     on specified remote \ac{PE}. The routines return when the data has
     been copied out of the \VAR{source} array on the local \ac{PE} but not
