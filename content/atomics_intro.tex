@@ -29,6 +29,13 @@ Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
   The non-fetching routines include:
   \FUNC{shmem\_atomic\_\{set, inc, add, and, or, xor\}[\_nbi]}.
 
+\begin{DeprecateBlock}
+
+Starting in \openshmem[1.4], all \ac{AMO} functions added "\_atomic\_" to the function 
+name and deprecated the equivalent functions without "\_atomic\_" in the name.
+
+\end{DeprecateBlock}
+
 \end{itemize}
 
 \openshmem \ac{AMO} routines specified in this section have two variants. In
@@ -123,8 +130,7 @@ does not provide exact-width integer types with \HEADER{stdint.h}, an
     \label{bitamotypes}
   \end{center}
 \end{table}
-
-Starting in \openshmem[1.4], all \ac{AMO} functions added "\_atomic\_" to the function name. There were no semantic of argument changes to the functions, simply a name change.
+]
 
 
 
