@@ -85,13 +85,16 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
       the team.
     \end{itemize}
 
-    Before any \ac{PE} calls a broadcast routine, the following
-    conditions must be ensured:
+    Before any \ac{PE} calls a broadcast routine, the following conditions
+    must be ensured, otherwise the behavior is undefined:
     \begin{itemize}
-    \item The \dest{} array on all \acp{PE} participating in the broadcast
-      is ready to accept the broadcast data.
-	\end{itemize}
-    Otherwise, the behavior is undefined. 
+        \item The \dest{} array on all \acp{PE} in the team is ready to
+            accept the result of the operation.
+        \item The \source{} array at the local root \ac{PE} is ready to be
+            read by any \ac{PE} in the team.
+    \end{itemize}
+    The application does not need to synchronize to ensure that the \source{}
+    array is ready across all \acp{PE} prior to calling this routine.
 
 	Upon return from a team-based broadcast routine, the following are true for the local
     \ac{PE}:
