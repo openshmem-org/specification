@@ -6,7 +6,7 @@ machine-independent standard with different implementations, it is
 unreasonable to expect that the authors and developers of profiling
 tools for \openshmem will have access to the source code that
 implements \openshmem on any particular machine. It is, therefore,
-necessary to provide a mechanism by which the implementors of such
+necessary to provide a mechanism by which the implementers of such
 tools can collect whatever performance information they wish
 \emph{without} access to the underlying implementation.
 
@@ -48,7 +48,7 @@ needed by the \FUNC{pshmem\_} interfaces are defined in \HEADER{pshmem.h}.
 \end{enumerate}
 
 Provided that an \openshmem implementation meets these requirements,
-it is possible for the implementor of the profiling system
+it is possible for the implementer of the profiling system
 to intercept the \openshmem calls that are made by the user
 program. The information required can be collected before and after
 calling the underlying \openshmem implementation through the name
