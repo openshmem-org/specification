@@ -22,19 +22,19 @@ void *@\FuncDecl{shmem\_malloc\_with\_hints}@(size_t size, long hints);
     is a collective operation on the world team that returns a pointer to a block of at least
     \VAR{size} bytes, which shall be suitably aligned so that it may be
     assigned to a pointer to any type of object.  This space is allocated from
-    the symmetric heap (similar to \FUNC{shmem\_malloc}).  When the \VAR{size} is zero, 
-    the \FUNC{shmem\_malloc\_with\_hints} routine performs no action and returns a null pointer. 
-    
-    In addition to the \VAR{size} argument, the \VAR{hints} argument is provided by the user. 
+    the symmetric heap (similar to \FUNC{shmem\_malloc}).  When the \VAR{size} is zero,
+    the \FUNC{shmem\_malloc\_with\_hints} routine performs no action and returns a null pointer.
+
+    In addition to the \VAR{size} argument, the \VAR{hints} argument is provided by the user.
     The \VAR{hints} describes the expected manner in which the \openshmem program may use the allocated memory.
     The valid usage hints are described in Table~\ref{usagehints}. Multiple hints may be requested by combining them with a bitwise \CONST{OR} operation.
     A zero option can be given if no options are requested.
-    
-    The information provided by the \VAR{hints} is used to optimize for performance by the implementation. 
+
+    The information provided by the \VAR{hints} is used to optimize for performance by the implementation.
     If the implementation cannot optimize, the behavior is same as \FUNC{shmem\_malloc}.
-    If more than one hint is provided, the implementation will make the best effort to use one or more hints 
-    to optimize performance. 
-            
+    If more than one hint is provided, the implementation will make the best effort to use one or more hints
+    to optimize performance.
+
     The \FUNC{shmem\_malloc\_with\_hints} routine is provided  so that multiple \acp{PE} in a program can allocate symmetric,
     remotely accessible memory blocks.  When no action is performed, these
     routines return without performing a barrier. Otherwise, the routine will call a procedure that is semantically equivalent to \FUNC{shmem\_barrier\_all} on exit.

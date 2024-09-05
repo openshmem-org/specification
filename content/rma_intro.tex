@@ -32,10 +32,10 @@ context, the behavior is undefined. In the other variant, the context handle
 is not explicitly passed and thus, the operations are performed on the
 default context.
 
-Where appropriate compiler support is available, \openshmem provides type-generic 
+Where appropriate compiler support is available, \openshmem provides type-generic
 one-sided communication interfaces via \Cstd[11] generic selection
 (\Cstd[11]~\S6.5.1.1\footnote{Formally, the \Cstd[11] specification is ISO/IEC 9899:2011(E).})
-for block, scalar, and block-strided put and get communication. 
+for block, scalar, and block-strided put and get communication.
 Such type-generic routines are supported for the ``standard \ac{RMA} types''
 listed in Table \ref{stdrmatypes}.
 
@@ -78,5 +78,5 @@ does not provide exact-width integer types with \HEADER{stdint.h}, an
     \end{tabular}
     \TableCaptionRef{Standard \ac{RMA} Types and Names}
     \label{stdrmatypes}
-  \end{center} 
+  \end{center}
 \end{table}

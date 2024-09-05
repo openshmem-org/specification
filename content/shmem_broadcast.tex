@@ -60,7 +60,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 
 \end{apiarguments}
 
-\apidescription{   
+\apidescription{
     \openshmem broadcast routines are collective routines over an active set or
     valid \openshmem team.
     They copy the \source{} data object on the \ac{PE} specified by
@@ -82,7 +82,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
       between \CONST{0} and \VAR{N$-$1}, where \VAR{N} is the size of
       the team.
     \end{itemize}
-    
+
     For active-set-based broadcasts:
     \begin{itemize}
     \item The \dest{} object is updated on all \acp{PE} other than the

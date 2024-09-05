@@ -57,7 +57,7 @@ by Table \ref{teamreducetypes}.
 
   The \FUNC{shmem\_sum\_inscan} routine performs an inclusive scan
   operation, while the \FUNC{shmem\_sum\_exscan} routine performs an
-  exclusive scan operation.  
+  exclusive scan operation.
 
   For \FUNC{shmem\_sum\_inscan}, the value of the $j$-th element in
   the \VAR{dest} array on \ac{PE}~$i$ is defined as:
@@ -89,7 +89,7 @@ by Table \ref{teamreducetypes}.
   Before any \ac{PE} calls a scan routine, the \dest{} array on all
   \acp{PE} participating in the operation must be ready to accept the
   results of the operation.  Otherwise, the behavior is undefined.
-  
+
   Upon return from a scan routine, the following are true for the
   local \ac{PE}: the \dest{} array is updated, and the \source{} array
   may be safely reused.

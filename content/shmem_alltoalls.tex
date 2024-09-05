@@ -33,7 +33,7 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
 
 \apiargument{IN}{team}{A valid \openshmem team handle.}%
 
-\apiargument{OUT}{dest}{Symmetric address of a data object large enough to receive 
+\apiargument{OUT}{dest}{Symmetric address of a data object large enough to receive
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
     active set.
     The type of \dest{} should match that implied in the SYNOPSIS section.}
@@ -53,7 +53,7 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
   for \FUNC{shmem\_alltoalls\{32,64\}}, elements are 4 or 8 bytes,
   respectively.
 }
-    
+
 \begin{DeprecateBlock}
 \apiargument{IN}{PE\_start}{The lowest \ac{PE} number of the active set of
     \acp{PE}.}
@@ -82,7 +82,7 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
     The same \dest{} and \source{} arrays and same values for values of
     arguments \VAR{dst}, \VAR{sst}, \VAR{nelems} must be passed by all \acp{PE}
     that participate in the collective.
-    
+
     Given a \ac{PE} \VAR{i} that is the \kth \ac{PE}
     participating in the operation and a \ac{PE}
     \VAR{j} that is the \lth \ac{PE}
@@ -99,8 +99,7 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
     \item The pre- and post-conditions for symmetric objects.
     \item Typing constraints for \dest{} and \source{} data objects.
     \end{itemize}
-    
-} 
+}
 
 
 \apireturnvalues{

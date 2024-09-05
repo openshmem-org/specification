@@ -23,7 +23,7 @@ void *@\FuncDecl{shmem\_ptr}@(const void *dest, int pe);
     to a remotely accessible data object.  Providing this address to an argument
     of an \openshmem routine that requires a symmetric address results in
     undefined behavior.
-    
+
     The \FUNC{shmem\_ptr} routine can provide an efficient means to accomplish
     communication, for example when a sequence of reads and writes to a data
     object on a remote \ac{PE} does not match the access pattern provided in an
