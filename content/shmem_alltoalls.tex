@@ -35,10 +35,10 @@ void @\FuncDecl{shmem\_alltoalls64}@(void *dest, const void *source, ptrdiff_t d
 
 \apiargument{OUT}{dest}{Symmetric address of a data object large enough to receive
     the combined total of \VAR{nelems} elements from each \ac{PE} in the
-    active set.
+    participating \acp{PE}.
     The type of \dest{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{source}{Symmetric address of a data object that contains \VAR{nelems}
-    elements of data for each \ac{PE} in the active set, ordered according to
+    elements of data for each \ac{PE} in the participating \acp{PE}, ordered according to
     destination \ac{PE}.
     The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{dst}{The stride between consecutive elements of the \dest{}

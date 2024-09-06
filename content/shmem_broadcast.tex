@@ -45,7 +45,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
   respectively.
 }
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
-    the team or active set, from which the data is copied.}
+    the calling PEs, from which the data is copied.}
 
 \begin{DeprecateBlock}
 
@@ -61,8 +61,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 \end{apiarguments}
 
 \apidescription{
-    \openshmem broadcast routines are collective routines over an active set or
-    valid \openshmem team.
+    \openshmem team-based broadcast routines are collective routines over a valid \openshmem team.
     They copy the \source{} data object on the \ac{PE} specified by
     \VAR{PE\_root} to the \dest{} data object on the \acp{PE}
     participating in the collective operation.
@@ -75,6 +74,9 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
     \item The \dest{} object is updated on all \acp{PE}.
     \item All \acp{PE} in the \VAR{team} argument must participate in
       the operation.
+    \item Only \acp{PE} in the team  may call the routine.  If a
+      \ac{PE} not in the team calls a team-based
+      collective routine, the behavior is undefined.
     \item If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
       otherwise invalid, the behavior is undefined.
     \item \ac{PE} numbering is relative to the team. The specified
@@ -83,58 +85,81 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
       the team.
     \end{itemize}
 
+    Before any \ac{PE} calls a broadcast routine, the following conditions
+    must be ensured, otherwise the behavior is undefined:
+    \begin{itemize}
+        \item The \dest{} array on all \acp{PE} in the team is ready to
+            accept the result of the operation.
+        \item The \source{} array at the local root \ac{PE} is ready to be
+            read by any \ac{PE} in the team.
+    \end{itemize}
+    The application does not need to synchronize to ensure that the \source{}
+    array is ready across all \acp{PE} prior to calling this routine.
+
+    Upon return from a team-based broadcast routine, the following are true for the local
+    \ac{PE}:
+    \begin{itemize}
+        \item The \dest{} data object is updated.
+        \item The \source{} data object may be safely reused.
+    \end{itemize}
+
+\begin{DeprecateBlock}
+    \openshmem active-set broadcast routines are collective routines over an active set.
+    They copy the \source{} data object on the \ac{PE} specified by
+    \VAR{PE\_root} to the \dest{} data object on the \acp{PE}
+    participating in the collective operation.
+    The same \dest{} and \source{} data objects and the same value of
+    \VAR{PE\_root} must be passed by all \acp{PE} participating in the
+    collective operation.
+
     For active-set-based broadcasts:
     \begin{itemize}
-    \item The \dest{} object is updated on all \acp{PE} other than the
-      root \ac{PE}.
-    \item All \acp{PE} in the active set defined by the
-      \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet
-      must participate in the operation.
-    \item Only \acp{PE} in the active set may call the routine.  If a
-      \ac{PE} not in the active set calls an active-set-based
+        \item The \VAR{dest} object is updated on all PEs other than the root PE.
+        \item All \acp{PE} in the active set defined by the
+        \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet
+        must participate in the operation.
+       \item Only \acp{PE} in the active set may call the routine.  If a
+       \ac{PE} not in the active set calls an active-set-based
       collective routine, the behavior is undefined.
-    \item The values of arguments \VAR{PE\_root}, \VAR{PE\_start},
+      \item The values of arguments \VAR{PE\_root}, \VAR{PE\_start},
       \VAR{logPE\_stride}, and \VAR{PE\_size} must be the same value
       on all \acp{PE} in the active set.
-    \item The value of \VAR{PE\_root} must be between \CONST{0} and
+      \item The value of \VAR{PE\_root} must be between \CONST{0} and
       \VAR{PE\_size $-$ 1}.
-    \item The same \VAR{pSync} work array must be passed by all \acp{PE}
+      \item The same \VAR{pSync} work array must be passed by all \acp{PE}
       in the active set.
     \end{itemize}
 
-    Before any \ac{PE} calls a broadcast routine, the following
+    Before any \ac{PE} calls a active-set-based broadcast routine, the following
     conditions must be ensured:
     \begin{itemize}
-    \item The \dest{} array on all \acp{PE} participating in the broadcast
-      is ready to accept the broadcast data.
-    \item For active-set-based broadcasts, the
-      \VAR{pSync} array on all \acp{PE} in the
-      active set is not still in use from a prior call to an \openshmem
-      collective routine.
+         \item The \dest{} array on all \acp{PE} participating in the broadcast
+         is ready to accept the broadcast data.
+         \item The \VAR{pSync} array on all \acp{PE} in the
+         active set is not still in use from a prior call to an \openshmem
+         collective routine.
     \end{itemize}
     Otherwise, the behavior is undefined.
 
-    Upon return from a broadcast routine, the following are true for the local
+    Upon return from an active-based broadcast routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
-    \item For team-based broadcasts, the \dest{} data object is
-      updated.
-    \item For active-set-based broadcasts:
-      \begin{itemize}
-      \item If the current \ac{PE} is not the root \ac{PE}, the
-        \dest{} data object is updated.
+      \item If the current PE is not the root PE, the \dest{} data object is updated.
+      \item The \source{} data object may be safely reused.
       \item The values in the \VAR{pSync} array are restored to the
         original values.
-      \end{itemize}
-    \item The \source{} data object may be safely reused.
     \end{itemize}
+\end{DeprecateBlock}
 }
 
 
 \apireturnvalues{
   For team-based broadcasts, zero on successful local completion; otherwise, nonzero.
 
+\begin{DeprecateBlock}
   For active-set-based broadcasts, none.
+\end{DeprecateBlock}
+
 }
 
 \apinotes{
