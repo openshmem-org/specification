@@ -71,7 +71,7 @@ used with \CorCpp{} structures.
 The ``mem'' interfaces (e.g., \FUNC{shmem\_putmem}) have no alignment
 requirements.
 
-The \FUNC{shmem\_ptr} routine allows the programmer to query a {\em local
+The \FUNC{shmem\_ptr} and \FUNC{shmem\_team\_ptr} routines allow the application to query a {\em local
 address} to a remotely accessible data object at a specified \ac{PE}.  The
 resulting pointer is valid for direct memory access; however, providing this
 address as an argument of an \openshmem routine that requires a symmetric
