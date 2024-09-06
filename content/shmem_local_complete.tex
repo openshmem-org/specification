@@ -1,0 +1,52 @@
+\apisummary{
+    Waits for data to be copied out of the \VAR{source} array on all 
+    outstanding non-blocking \OPR{Put} and non-blocking \OPR{put-with-signal} 
+    issued by a \ac{PE}.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_local\_complete}@(void);
+void @\FuncDecl{shmem\_ctx\_local\_complete}@(shmem_ctx_t ctx);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to
+    perform the operation. When this argument is not provided, the operation is
+    performed on the default context.}
+\end{apiarguments}
+
+\apidescription{
+    The \FUNC{shmem\_local\_complete} routine ensures local completion of all 
+    non-blocking \OPR{Put} and non-blocking \OPR{put-with-signal} operations 
+    issued by a \ac{PE}. Local completion guarantees the reusability of the
+    \VAR{source} buffers associated with a \ac{PE} issuing the operation. 
+    Local completion does not guarantee any ordering and/or delivery of 
+    completion with any visibility guarantees on all \acp{PE}. 
+    Return from \FUNC{shmem\_local\_complete} just guarantees that the data has
+    been copied out of the \VAR{source} array on all previously posted
+    non-blocking \OPR{Put} and non-blocking \OPR{put-with-signal} operations
+    in the local \ac{PE}. Memory ordering routines as supported in
+    Section~\ref{subsec:memory_order} is still required to provide
+    mechanims to ensure ordering and/or delivery of completions on the
+    non-blocking \OPR{Put} and non-blocking \OPR{put-with-signal} operations.
+}
+
+
+\apireturnvalues{
+    None.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following example uses \FUNC{shmem\_quiet} in a \Cstd[11] program: }
+    {./example_code/shmem_local_complete_example.c}
+    {\FUNC{shmem\_local\_complete} allows reusing the \VAR{source} buffer
+    without waiting for the completion and global visibility on target process
+    \VAR{tpe}}
+\end{apiexamples}
+
+\end{apidefinition}
+
