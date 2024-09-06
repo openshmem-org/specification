@@ -13,8 +13,7 @@ int @\FuncDecl{shmem\_team\_split\_strided}@(shmem_team_t parent_team, int start
 \begin{apiarguments}
 \apiargument{IN}{parent\_team}{An \openshmem team.}
 
-\apiargument{IN}{start}{The lowest \ac{PE} number of the subset of \acp{PE} from
-the parent team that will form the new team.}
+\apiargument{IN}{start}{The first \acs{PE} number of the subset of \acp{PE} from the parent team that will form the new team. If the stride is less than zero, the first \acs{PE} number is the highest \acs{PE} of the parent team; if it is  greater than zero, it is the lowest; if the stride is zero, it is the starting \acs{PE}.}
 
 \apiargument{IN}{stride}{The stride between team \ac{PE}
 numbers in the parent team that comprise the subset of \acp{PE} that will form
@@ -59,6 +58,18 @@ When $stride$ is less than zero, PEs in the new team are in \textit{reverse}
 relative order with respect to the parent team.
 If a $stride$ value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
 then the $size$ argument passed must be 1, or the behavior is undefined.
+If the triplet provided to \FUNC{shmem\_team\_split\_strided} implies a
+wrap-around sequence, the input is considered invalid and the behavior is
+undefined.
+In other words, when $stride$ is nonzero, a newly created team must only
+include \acp{PE} whose subsequent parent \ac{PE} values are either all
+increasing (for positive $stride$) or all decreasing (for negative
+$stride$).
+That is, \textit{wrap-around} with respect to the parent team's \ac{PE} values
+is not permitted.
+For example, the list of \acp{PE} in the parent team should not start at a high
+number and then continue to include \acp{PE} in the lower end of the parent
+team's \ac{PE} range.
 
 This routine must be called by all \acp{PE} in the parent team.
 All \acp{PE} must provide the same values for the \ac{PE} triplet.
