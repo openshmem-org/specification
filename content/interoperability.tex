@@ -119,7 +119,7 @@ and the \ac{MPI} rank in \VAR{MPI\_COMM\_WORLD} of a process can be equal.
 This feature, however, may be provided by only some of the \openshmem and \ac{MPI}
 implementations (e.g., if both environments share the same underlying process
 manager) and is not portably guaranteed. A portable program should always
-use the standard functions in each model, namely, \FUNC{shmem\_team\_my\_pe} in \openshmem
+use the standard functions in each model, namely, \FUNC{shmem\_team\_my\_pe} or \FUNC{shmem\_my\_pe} in \openshmem 
 and \FUNC{MPI\_Comm\_rank} in \ac{MPI}, to query the process identification numbers
 in each communication environment and manage the mapping of identifiers in the
 program when necessary.
