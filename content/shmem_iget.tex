@@ -40,7 +40,8 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
         indicates contiguous data.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+      with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{
