@@ -35,7 +35,7 @@ int main(void) {
 
   if (mype == 0) {
     printf("Found %d maximal random numbers across all PEs.\n", maximal_values_total);
-    printf("A maximal number occured (at least once) at the following indices:\n");
+    printf("A maximal number occurred (at least once) at the following indices:\n");
     for (int i = 0; i < NELEMS; i++) {
       if (value_is_maximal_all[i] == 1) {
         printf("%d ", i);

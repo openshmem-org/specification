@@ -50,7 +50,7 @@ remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
 
 The \KEYWORD{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
 Each \ac{PE} is able to transfer data to a remote \dest{} array by simply
-specifying to an OpenSHMEM routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
+specifying to an \openshmem routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
 the local address of the symmetric data object that will receive the data.
 This local address resolution aids programmability because the address of the
 \dest{} need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to
@@ -151,8 +151,8 @@ negative or greater than or equal to the size of the associated team.
 \tabularnewline
 \hline
 Use of non-symmetric variables & Some routines require remotely accessible
-variables to perform their function.  For example, an \openshmem libray may detect a \PUT{} to a non-symmetric variable
-and choose to abort the program.  
+variables to perform their function.  For example, an \openshmem library may detect a \PUT{} to a non-symmetric variable
+and choose to abort the program.
 However, another implementation may choose to continue execution with or without a warning.
 \tabularnewline
 \hline
@@ -844,11 +844,11 @@ all \acp{PE}, including the root \ac{PE}.
 \ChangelogRef{p2psynctypes, dep:p2p_sync_types}%
 %
 \item Clarified that point-to-point synchronization routines preserve the
-  atomicity of OpenSHMEM \acp{AMO}.
+  atomicity of \openshmem \acp{AMO}.
 \ChangelogRef{subsec:amo_guarantees}%
 %
 \item Clarified that symmetric variables used as \VAR{ivar} arguments to
-  point-to-point synchronization routines must be updated using OpenSHMEM
+  point-to-point synchronization routines must be updated using \openshmem
   \acp{AMO}.
 \ChangelogRef{subsec:p2p_intro}%
 %
@@ -1182,7 +1182,7 @@ the introduction of the \HEADER{shmemx.h} header file for nonstandard \ac{API}
 extensions,
 clarifications to completion semantics and \ac{API} descriptions in agreement with
 the \ac{SGI} SHMEM specification,
-and general readabilty and usability improvements to the document structure.
+and general readability and usability improvements to the document structure.
 
 The following list describes the specific changes in \openshmem[1.1]:
 \begin{enumerate}
@@ -1300,13 +1300,13 @@ collectives.
 
 Errors or ambiguities in the \openshmem specification may be discovered after
 publication.
-Errata, or corrections, are included in the the sections below indicating the
-version of the OpenSHMEM specification that required the correction or
+Errata, or corrections, are included in the sections below indicating the
+version of the \openshmem specification that required the correction or
 clarification.
 These corrections have been applied to all subsequent versions of the
 specification and this section serves as a historical record of the changes
-made to assist users and implementers with applying the necessary corrections.
-Errata that result in a change to the specifciation are also included in
+made to assist users and implementors with applying the necessary corrections.
+Errata that result in a change to the specification are also included in
 Annex~\ref{sec:changelog}.
 For an implementation to comply with a particular version of \openshmem, it
 must account for all errata associated with that version as indicated below.
@@ -1328,7 +1328,7 @@ must account for all errata associated with that version as indicated below.
      \FUNC{shmem\_test\_all\_vector} routines return 1 when the test set is empty
         (\ref{changelog:v1.6}.\ref{changelog:test_all}).
   \item Clarified that \FUNC{shmem\_team\_split\_strided} and
-     \FUNC{shmem\_team\_split\_2d} return nonzero when the parent team is
+     \FUNC{shmem\_team\_split\_2d} return a nonzero value when the parent team is
      \LibConstRef{SHMEM\_TEAM\_INVALID}
         (\ref{changelog:v1.6}.\ref{changelog:split_strided_2d}).
   \item Corrected the \VAR{level} argument's recommended value in API notes for

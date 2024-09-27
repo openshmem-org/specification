@@ -16,9 +16,9 @@ void @\FuncDecl{shmem\_init}@(void);
 \apidescription{
     \FUNC{shmem\_init} allocates and initializes resources used by the \openshmem
     library. It is a collective operation that all \acp{PE} must call before any
-    other \openshmem routine may be called, except \FUNC{shmem\_query\_initialized} 
-    which checks the current initialized state of the library. In the 
-    \openshmem program which it initialized, each call to \FUNC{shmem\_init} must 
+    other \openshmem routine may be called, except \FUNC{shmem\_query\_initialized}
+    which checks the current initialized state of the library. In the
+    \openshmem program which it initialized, each call to \FUNC{shmem\_init} must
     be matched with a corresponding call to \FUNC{shmem\_finalize}.
 
     The \FUNC{shmem\_init} and \FUNC{shmem\_init\_thread} initialization
@@ -42,8 +42,6 @@ void @\FuncDecl{shmem\_init}@(void);
     users are encouraged to use \FUNC{shmem\_init}. An important difference between
     \FUNC{shmem\_init} and \FUNC{start\_pes} is that every call to
     \FUNC{shmem\_init} within a program must be matched with a call to \FUNC{shmem\_finalize}.
-    In the case of \FUNC{start\_pes}, any subsequent calls to \FUNC{start\_pes} after the
-    first one results in a no-op.
 }
 \end{DeprecateBlock}
 

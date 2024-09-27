@@ -1,6 +1,6 @@
 \chapter{Interoperability with Other Programming Models}\label{sec:interoperability}
 
-OpenSHMEM routines may be used in conjunction with the routines of other
+\openshmem routines may be used in conjunction with the routines of other
 communication libraries or parallel languages in the same program. This section
 describes the interoperability with other programming models, including
 clarification of undefined behaviors caused by mixed use of different models,
@@ -35,7 +35,7 @@ by a call to \FUNC{MPI\_Init} or \FUNC{MPI\_Init\_thread} and be finalized by a
 call to \FUNC{MPI\_Finalize}.
 
 \parimpnotes{
-  Portable implementations of OpenSHMEM and \ac{MPI} must ensure that the initialization
+  Portable implementations of \openshmem and \ac{MPI} must ensure that the initialization
   calls can be made in an arbitrary order within a program; the same rule also
   applies to the finalization calls. A software runtime that utilizes a shared
   communication resource for \openshmem and \ac{MPI} communication may maintain an

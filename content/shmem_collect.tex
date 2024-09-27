@@ -66,7 +66,7 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     \openshmem \FUNC{collect} and \FUNC{fcollect} routines perform a collective
     operation to concatenate \VAR{nelems}
     data items from the \source{} array into the
-    \dest{} array, over an \openshmem team in processor number order. 
+    \dest{} array, over an \openshmem team in \ac{PE} number order. 
     The resultant \dest{} array contains the contribution from
     \acp{PE} as follows:
 
@@ -104,7 +104,7 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     operation to concatenate \VAR{nelems}
     data items from the \source{} array into the
     \dest{} array, over an \openshmem active set
-    in processor number order. The resultant \dest{} array contains the contribution from
+    in \ac{PE} number order. The resultant \dest{} array contains the contribution from
 	\acp{PE} as follows:
     \begin{itemize}
         \item For an active set, the data from \ac{PE} \VAR{PE\_start} is first, then the
@@ -151,7 +151,7 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     with no performance degradation when \VAR{nelems} is a non-power-of-two value.
 \end{DeprecateBlock}
     The collective routines that operate on teams containing a
-    non-power-of-two of PEs do so with some performance degradation. They operate
+    non-power-of-two of \acp{PE} do so with some performance degradation. They operate
     with no performance degradation when \VAR{nelems} is a non-power-of-two value.
 
 }
