@@ -18,7 +18,7 @@ jobs:
     - name: Rename PDF
       run: mv main_spec.pdf openshmem-draft-${{ github.event.pull_request.head.sha }}.pdf
     - name: Upload PDF artifact
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: openshmem-draft-${{ github.event.pull_request.head.sha }}
         path: openshmem-draft-${{ github.event.pull_request.head.sha }}.pdf
