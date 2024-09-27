@@ -45,7 +45,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
   respectively.
 }
 \apiargument{IN}{PE\_root}{Zero-based ordinal of the \ac{PE}, with respect to
-    the calling PEs, from which the data is copied.}
+    the calling \acp{PE}, from which the data is copied.}
 
 \begin{DeprecateBlock}
 
@@ -114,7 +114,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
 
     For active-set-based broadcasts:
     \begin{itemize}
-        \item The \VAR{dest} object is updated on all PEs other than the root PE.
+        \item The \VAR{dest} object is updated on all \acp{PE} other than the root \ac{PE}.
         \item All \acp{PE} in the active set defined by the
         \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet
         must participate in the operation.
@@ -144,7 +144,7 @@ void @\FuncDecl{shmem\_broadcast64}@(void *dest, const void *source, size_t nele
     Upon return from an active-based broadcast routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
-      \item If the current PE is not the root PE, the \dest{} data object is updated.
+      \item If the current \ac{PE} is not the root \ac{PE}, the \dest{} data object is updated.
       \item The \source{} data object may be safely reused.
       \item The values in the \VAR{pSync} array are restored to the
         original values.

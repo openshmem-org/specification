@@ -1,10 +1,10 @@
 \apisummary{
     Registers the arrival of a \ac{PE} at a synchronization point.
-    This routine does not return until all other \acp{PE} in a given OpenSHMEM team
-    arrive at this synchronization point.
+    This routine does not return until all other \acp{PE} in a given \openshmem team
+    arrives at this synchronization point.
 \begin{DeprecateBlock}
     Registers the arrival of a \ac{PE} at a synchronization point.
-    This routine does not return until all other \acp{PE} in a given OpenSHMEM active set arrive at this synchronization point.
+    This routine does not return until all other \acp{PE} in a given \openshmem active set arrive at this synchronization point.
 \end{DeprecateBlock}
 }
 
@@ -95,7 +95,7 @@ void @\FuncDecl{shmem\_sync}@(int PE_start, int logPE_stride, int PE_size, long 
 \apinotes{
     The \FUNC{shmem\_sync} routine can be used to portably ensure that
     memory access operations observe remote updates in the order enforced by the
-    initiator \acp{PE}, provided that the initiator PE ensures completion of remote
+    initiator \acp{PE}, provided that the initiator \ac{PE} ensures completion of remote
     updates with a call to \FUNC{shmem\_quiet} prior to the call to the
     \FUNC{shmem\_sync} routine.
 }
