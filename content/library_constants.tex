@@ -84,6 +84,19 @@ ordering of memory store operations.
 See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
 \tabularnewline \hline
 %%
+\LibConstDecl{SHMEM\_CTX\_SESSION\_TOTAL\_OPS} &
+The bitwise flag which specifies that a session start routine should use the
+\VAR{total\_ops} member of the provided \CTYPE{shmem\_ctx\_session\_config\_t}
+configuration parameter as a hint. See \ref{subsec:shmem_ctx_session_config_t}
+for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CTX\_SESSION\_BATCH} &
+The session start option which specifies that operations in the given session
+are latency tolerant and may be candidates for batching. See
+\ref{subsec:shmem_ctx_session_start} for more detail about its use.
+\tabularnewline \hline
+%%
 \LibConstDecl{SHMEM\_SIGNAL\_SET} &
 An integer constant expression corresponding to the signal update set operation.
 See Section~\ref{subsec:shmem_put_signal} and

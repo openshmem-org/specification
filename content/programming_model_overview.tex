@@ -43,11 +43,11 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Symmetric Data Object Management}
 \begin{enumerate}
-  \item \OPR{Allocation}: All executing \acp{PE} must participate in the
+  \item \OPR{Allocation}: All executing \acp{PE} must collectively participate in the
       allocation of a symmetric data object with identical arguments.
-  \item  \OPR{Deallocation}: All executing \acp{PE} must participate in the
+  \item  \OPR{Deallocation}: All executing \acp{PE} must collectively participate in the
       deallocation of the same symmetric data object with identical arguments.
-  \item  \OPR{Reallocation}: All executing \acp{PE} must participate in the
+  \item  \OPR{Reallocation}: All executing \acp{PE} must collectively participate in the
       reallocation of the same symmetric data object with identical arguments.
 \end{enumerate}
 
@@ -81,9 +81,12 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{\acfp{AMO}}
 \begin{enumerate}
-    \item \OPR{Swap}: The \ac{PE} initiating the swap gets the old value of a
-        symmetric data object from a remote \ac{PE} and copies a new value to
-        that symmetric data object on the remote \ac{PE}.
+  \item \OPR{Fetch}: The \ac{PE} initiating the fetch returns the value of the
+      symmetric data object on the remote \ac{PE}.
+  \item \OPR{Set}: The \ac{PE} initiating the set copies a new value to the
+      symmetric data object on the remote \ac{PE}.
+  \item \OPR{Swap}: The \ac{PE} initiating the swap copies a new value to the
+      symmetric data object on the remote \ac{PE} and returns the old value.
   \item \OPR{Increment}: The \ac{PE} initiating the increment adds 1 to the
       symmetric data object on the remote \ac{PE}.
   \item \OPR{Add}: The \ac{PE} initiating the add specifies the value to be added
@@ -91,14 +94,14 @@ An overview of the \openshmem routines is described below:
   \item \OPR{Bitwise Operations}: The \ac{PE} initiating the bitwise
       operation specifies the operand value to the bitwise operation to be
       performed on the symmetric data object on the remote \ac{PE}.
-  \item \OPR{Compare and Swap}: The \ac{PE} initiating the swap gets the old value
-      of the symmetric data object based on a value to be compared and copies a
-      new value to the symmetric data object on the remote \ac{PE}.
-  \item \OPR{Fetch and Increment}: The \ac{PE} initiating the increment adds 1 to
-      the symmetric data object on the remote \ac{PE} and returns with the old
+  \item \OPR{Compare and Swap}: The \ac{PE} initiating the compare and swap
+      conditionally copies a new value to the symmetric data object on the
+      remote \ac{PE} and returns the old value.
+  \item \OPR{Fetch and Increment}: The \ac{PE} initiating the increment adds 1
+      to the symmetric data object on the remote \ac{PE} and returns the old
       value.
   \item \OPR{Fetch and Add}: The \ac{PE} initiating the add specifies the value to
-      be added to the symmetric data object on the remote \ac{PE} and returns with
+      be added to the symmetric data object on the remote \ac{PE} and returns
       the old value.
   \item \OPR{Fetch and Bitwise Operations}: The \ac{PE} initiating the bitwise
       operation specifies the operand value to the bitwise operation to be
@@ -108,9 +111,23 @@ An overview of the \openshmem routines is described below:
 
 \item \textbf{Signaling Operations}
 \begin{enumerate}
-  \item \OPR{Signaling Put}: The \source{} data is copied to the symmetric
-        object on the remote \ac{PE} and a flag on the remote \ac{PE} is subsequently
-        updated to signal completion.
+  \item \OPR{Put Signal}: The local \ac{PE} specifies the \source{} data object
+      to be copied to the symmetric data object on the remote \ac{PE} and
+      another symmetric data object on the remote \ac{PE} is subsequently
+      updated to signal completion.
+  \item \OPR{Signal Add}: The local \ac{PE} specifies a value to be added to
+      the symmetric data object on the remote \ac{PE}.
+  \item \OPR{Signal Set}: The local \ac{PE} specifies a value to be copied to
+      the symmetric data object on the remote \ac{PE}.
+  \item \OPR{Signal Fetch}: The local \ac{PE} returns the value of a local data
+      object.
+\end{enumerate}
+
+\item \textbf{Session Management}
+\begin{enumerate}
+  \item \OPR{Sessions}: Sessions are a mechanism for the application to inform
+      the implementation about an upcoming sequence of operations that exhibit
+      a pattern that may be suitable for runtime optimization.
 \end{enumerate}
 
 \item \textbf{Synchronization and Ordering}
@@ -135,7 +152,7 @@ An overview of the \openshmem routines is described below:
 \begin{enumerate}
   \item \OPR{Broadcast}: The \VAR{root} \ac{PE} specifies a symmetric data
       object to be copied to a symmetric data object on one or more remote
-      \acp{PE} (not including itself).
+      \acp{PE}.
   \item \OPR{Collection}: All \acp{PE} participating in the routine get the result
       of concatenated symmetric objects contributed by each of the \acp{PE} in
       another symmetric data object.
@@ -143,8 +160,11 @@ An overview of the \openshmem routines is described below:
       of an associative binary routine over elements of the specified symmetric
       data object on another symmetric data object.
   \item \OPR{All-to-All}: All \acp{PE} participating in the routine exchange
-      a fixed amount of contiguous or strided data with all other \acp{PE}
-      in the active set.
+      a fixed amount of contiguous or strided data with all other participating
+      \acp{PE}.
+  \item \OPR{Scan}: All \acp{PE} participating in the routine perform an
+      inclusive or exclusive prefix sum over elements of the specified
+      symmetric data object.
 \end{enumerate}
 
 \item \textbf{Mutual Exclusion}

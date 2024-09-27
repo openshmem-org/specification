@@ -48,7 +48,8 @@ void @\FuncDecl{shmem\_ctx\_putmem\_signal}@(shmem_ctx_t ctx, void *dest, const 
     remote \VAR{sig\_addr} signal data object.}
     \apiargument{IN}{sig\_op}{Signal operator that represents the type of update
     to be performed on the remote \VAR{sig\_addr} signal data object.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+      with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{

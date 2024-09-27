@@ -5,12 +5,12 @@
 \begin{apidefinition}
 
 \begin{C11synopsis}
-void @\FuncDecl{shmem\_signal\_set}@(shmem_ctx_t ctx, const uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_signal\_set}@(shmem_ctx_t ctx, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{C11synopsis}
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_signal\_set}@(const uint64_t *sig_addr, uint64_t signal, int pe);
-void @\FuncDecl{shmem\_ctx\_signal\_set}@(shmem_ctx_t ctx, const uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_signal\_set}@(uint64_t *sig_addr, uint64_t signal, int pe);
+void @\FuncDecl{shmem\_ctx\_signal\_set}@(shmem_ctx_t ctx, uint64_t *sig_addr, uint64_t signal, int pe);
 \end{Csynopsis}
 
 \begin{apiarguments}
@@ -27,9 +27,8 @@ void @\FuncDecl{shmem\_ctx\_signal\_set}@(shmem_ctx_t ctx, const uint64_t *sig_a
     Unsigned 64-bit value that is used for updating the remote
     \VAR{sig\_addr} signal data object.
   }
-  \apiargument{IN}{pe}{
-    \ac{PE} number of the remote \ac{PE}.
-  }
+  \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+    with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{

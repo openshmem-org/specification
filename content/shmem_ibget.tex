@@ -42,7 +42,8 @@ where \SIZE{} is one of \CONST{8, 16, 32, 64, 128}.
         arrays.}
     \apiargument{IN}{nblocks}{Number of blocks to be copied from the \source{} array
         to the \dest{} array.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+      with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{

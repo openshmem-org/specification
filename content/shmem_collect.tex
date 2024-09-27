@@ -66,21 +66,19 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     \openshmem \FUNC{collect} and \FUNC{fcollect} routines perform a collective
     operation to concatenate \VAR{nelems}
     data items from the \source{} array into the
-    \dest{} array, over an \openshmem team or active set
-    in processor number order. The resultant \dest{} array contains the contribution from
+    \dest{} array, over an \openshmem team in processor number order. 
+    The resultant \dest{} array contains the contribution from
     \acp{PE} as follows:
-    
+
     \begin{itemize}
-    \item For an active set, the data from \ac{PE} \VAR{PE\_start} is first, then the
-    contribution from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on.
-    \item For a team, the data from \ac{PE} number \CONST{0} in the team is first, then the
-    contribution from \ac{PE} \CONST{1} in the team, and so on.
+        \item For a team, the data from \ac{PE} number \CONST{0} in the team is first, then the
+        contribution from \ac{PE} \CONST{1} in the team, and so on.
     \end{itemize}
-    
+
     The collected result is written to the \dest{} array for all \acp{PE}
     that participate in the operation. The same \dest{} and \source{}
     arrays must be passed by all \acp{PE} that participate in the operation.
-    
+
     The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
     participating \acp{PE}, while the \FUNC{collect} routines allow \VAR{nelems} to
     vary from \ac{PE} to \ac{PE}.
@@ -90,24 +88,56 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
+    Before any \ac{PE} calls a collect routine, the following conditions must
+    be ensured, otherwise the behavior is undefined:
+    \begin{itemize}
+        \item The \dest{} array on all \acp{PE} in the team is ready to
+            accept the result of the operation.
+        \item The \source{} array at the local \ac{PE} is ready to be read
+            by any \ac{PE} in the team.
+    \end{itemize}
+    The application does not need to synchronize to ensure that the \source{}
+    array is ready across all \acp{PE} prior to calling this routine.
+
+\begin{DeprecateBlock}
+    \openshmem \FUNC{collect} and \FUNC{fcollect} routines perform a collective
+    operation to concatenate \VAR{nelems}
+    data items from the \source{} array into the
+    \dest{} array, over an \openshmem active set
+    in processor number order. The resultant \dest{} array contains the contribution from
+	\acp{PE} as follows:
+    \begin{itemize}
+        \item For an active set, the data from \ac{PE} \VAR{PE\_start} is first, then the
+   	contribution from \ac{PE} \VAR{PE\_start} + \VAR{PE\_stride} second, and so on.
+    \end{itemize}
+
+    The collected result is written to the \dest{} array for all \acp{PE}
+    that participate in the operation. The same \dest{} and \source{}
+    arrays must be passed by all \acp{PE} that participate in the operation.
+    
+    The \FUNC{fcollect} routines require that \VAR{nelems} be the same value in all
+    participating \acp{PE}, while the \FUNC{collect} routines allow \VAR{nelems} to
+    vary from \ac{PE} to \ac{PE}.
+
     Active-set-based collective routines operate over all \acp{PE} in the active set
     defined by the \VAR{PE\_start}, \VAR{logPE\_stride}, \VAR{PE\_size} triplet.
     As with all active-set-based collective routines,
     each of these routines assumes that
     only \acp{PE} in the active set call the routine. If a \ac{PE} not in the
     active set and calls this collective routine, the behavior is undefined.
-    
+
     The values of arguments \VAR{PE\_start}, \VAR{logPE\_stride}, and \VAR{PE\_size}
     must be the same value on all \acp{PE} in the active set. The same
     \VAR{pSync} work array must be passed by all \acp{PE} in the active set.
-    
+
     Upon return from a collective routine, the following are true for the local
     \ac{PE}:
     \begin{itemize}
-    \item The \dest{} array is updated and the \source{} array may be safely reused. 
+    \item The \dest{} array is updated and the \source{} array may be safely reused.
     \item For active-set-based collective routines, the values in the \VAR{pSync} array are
     restored to the original values.
     \end{itemize}
+\end{DeprecateBlock}
 }
 
 \apireturnvalues{
@@ -115,9 +145,15 @@ void @\FuncDecl{shmem\_fcollect64}@(void *dest, const void *source, size_t nelem
 }
 
 \apinotes{
+\begin{DeprecateBlock}
     The collective routines operate on active \ac{PE} sets that have a
     non-power-of-two \VAR{PE\_size} with some performance degradation.  They operate
     with no performance degradation when \VAR{nelems} is a non-power-of-two value.
+\end{DeprecateBlock}
+    The collective routines that operate on teams containing a
+    non-power-of-two of PEs do so with some performance degradation. They operate
+    with no performance degradation when \VAR{nelems} is a non-power-of-two value.
+
 }
 
 \begin{apiexamples}

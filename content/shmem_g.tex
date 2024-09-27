@@ -23,11 +23,14 @@ where \TYPE{} is one of the standard \ac{RMA} types and has a corresponding \TYP
   \apiargument{IN}{source}{Symmetric address of the source data object.
     The type of \source{} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{pe}{The number of the remote \ac{PE} on which \VAR{source} resides.}
+  \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} on which \VAR{source} resides 
+    relative to the team associated with the given \VAR{ctx} when provided, or the 
+    default context otherwise.}
 \end{apiarguments}
 
 \apidescription{
   These routines provide a very low latency get capability for single elements
-  of most basic types. 
+  of most basic types.
 }
 
 \apireturnvalues{

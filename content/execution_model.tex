@@ -10,7 +10,7 @@ threads, when supported by the \openshmem library.
 communicate and synchronize among executing \acp{PE}.  The \openshmem phase in
 a program begins with the first call to the initialization routine \FUNC{shmem\_init}
 or \FUNC{shmem\_init\_thread}, which must be performed before using any of the
-other \openshmem library routines. 
+other \openshmem library routines.
 An \openshmem program concludes its use of the \openshmem library when all \acp{PE}
 make their final call to
 \FUNC{shmem\_finalize} or any \ac{PE} calls \FUNC{shmem\_global\_exit}.

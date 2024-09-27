@@ -29,11 +29,18 @@ Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
   The non-fetching routines include:
   \FUNC{shmem\_atomic\_\{set, inc, add, and, or, xor\}[\_nbi]}.
 
+\begin{DeprecateBlock}
+
+Starting in \openshmem[1.4], all \ac{AMO} functions added "\_atomic\_" to the function 
+name and deprecated the equivalent functions without "\_atomic\_" in the name.
+
+\end{DeprecateBlock}
+
 \end{itemize}
 
 \openshmem \ac{AMO} routines specified in this section have two variants. In
 one of the variants, the context handle, \VAR{ctx}, is explicitly passed as
-an argument. In this variant, the operation is performed on the specified 
+an argument. In this variant, the operation is performed on the specified
 context. If the context handle \VAR{ctx} does not correspond to a valid
 context, the behavior is undefined. In the other variant, the context handle
 is not explicitly passed and thus, the operations are performed on the
@@ -56,7 +63,7 @@ The standard, extended, and bitwise \ac{AMO} types include some of the exact-wid
 integer types defined in \HEADER{stdint.h} by \Cstd[99]~\S7.18.1.1 and
 \Cstd[11]~\S7.20.1.1. When the \Cstd translation environment
 does not provide exact-width integer types with \HEADER{stdint.h}, an
-\openshmem implemementation is not required to provide support for these types.
+\openshmem implementation is not required to provide support for these types.
 
 \begin{table}[h]
   \begin{center}
@@ -123,3 +130,10 @@ does not provide exact-width integer types with \HEADER{stdint.h}, an
     \label{bitamotypes}
   \end{center}
 \end{table}
+]
+
+
+
+
+
+
