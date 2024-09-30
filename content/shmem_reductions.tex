@@ -295,7 +295,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
-    Before any \ac{PE} calls a reduction routine, the following conditions
+    Before the local \ac{PE} calls a reduction routine, the following conditions
     must be ensured, otherwise the behavior is undefined:
     \begin{itemize}
         \item The \dest{} array on all \acp{PE} in the team is ready to
