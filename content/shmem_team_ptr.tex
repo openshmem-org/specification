@@ -37,6 +37,9 @@ void *@\FuncDecl{shmem\_team\_ptr}@(shmem_team_t team, const void *dest, int pe)
     when it can be accessed using memory loads and stores.  Otherwise, a null
     pointer is returned.
 
+    If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_WORLD}, then
+    the behavior is identical to that of \FUNC{shmem\_ptr} with same \VAR{dest}
+    and \VAR{pe} arguments.
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID},
     then a null pointer is returned.
     If \VAR{team} is otherwise invalid, the behavior is undefined.
