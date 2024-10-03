@@ -29,10 +29,10 @@ The following semantics apply to the usage of these models:
 
 \begin{enumerate}
 \item
-In the \CONST{SHMEM\_THREAD\_FUNNELED} and \CONST{SHMEM\_THREAD\_SERIALIZED}
-thread levels, all invocations of \FUNC{shmem\_init\_thread} and
-\FUNC{shmem\_finalize} must be made by the same thread.
- 
+In the \CONST{SHMEM\_THREAD\_FUNNELED}, \CONST{SHMEM\_THREAD\_SERIALIZED}, and
+\CONST{SHMEM\_THREAD\_MULTIPLE} thread levels, the \FUNC{shmem\_finalize}
+call must be invoked by the same thread that called \FUNC{shmem\_init\_thread}.
+
 \item
 Any \openshmem operation initiated by a thread is considered an action of the
 \ac{PE} as a whole. The symmetric heap and symmetric variables scope are not
