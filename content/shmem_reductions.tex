@@ -373,7 +373,20 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 }
 
 \apireturnvalues{
-  Zero on successful local completion. Nonzero otherwise.
+    Zero on successful local completion. Nonzero otherwise.
+}
+
+\apinotes{
+    The binary operations performed by \openshmem reductions are intended to be
+    associative and commutative.
+    However, floating point arithmetic is not associative or commutative due to
+    the inherent inaccuracies of floating-point representations caused by
+    rounding errors, finite precision, and the order of the applied binary
+    operations.
+    This can lead to variations in the result of \openshmem arithmetic
+    reduction operations on floating-point datatypes, including NaN values.
+    A future version of the \openshmem specification may clarify the behavior
+    of reductions on floating point datatypes.
 }
 
 \begin{apiexamples}
