@@ -25,8 +25,8 @@ See Section~\ref{subsec:team} for more detail about its use.
 Handle of type \CTYPE{shmem\_team\_t} that corresponds to a team of \acp{PE}
 that share a memory domain.  \LibHandleRef{SHMEM\_TEAM\_SHARED} refers to
 the team of all PEs that would mutually return a non-null address from a
-call to \FUNC{shmem\_ptr} for all symmetric heap objects.  That is,
-\FUNC{shmem\_ptr} must return a non-null pointer to the local PE for all
+call to \FUNC{shmem\_ptr} or \FUNC{shmem\_team\_ptr} for all symmetric heap objects.  That is,
+\FUNC{shmem\_ptr} and \FUNC{shmem\_team\_ptr} must return a non-null pointer to the local PE for all
 symmetric heap objects on all target \acp{PE} in the team.  This means that
 symmetric heap objects on each \ac{PE} are
 directly load/store accessible by all \acp{PE} in the team.
