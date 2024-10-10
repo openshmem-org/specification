@@ -295,7 +295,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
-    Before any \ac{PE} calls a reduction routine, the following conditions
+    Before the local \ac{PE} calls a reduction routine, the following conditions
     must be ensured, otherwise the behavior is undefined:
     \begin{itemize}
         \item The \dest{} array on all \acp{PE} in the team is ready to
@@ -373,7 +373,19 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 }
 
 \apireturnvalues{
-  Zero on successful local completion. Nonzero otherwise.
+    Zero on successful local completion. Nonzero otherwise.
+}
+
+\apinotes{
+    The binary operations performed by \openshmem reductions are intended to be
+    associative and commutative.
+    However, floating point arithmetic is not associative or commutative due to
+    the inherent inaccuracies of floating-point representations caused by
+    rounding errors and finite precision.
+    This can lead to variations in the result of \openshmem arithmetic
+    reduction operations on floating-point datatypes, including NaN values.
+    A future version of the \openshmem specification may clarify the behavior
+    of reductions on floating point datatypes.
 }
 
 \begin{apiexamples}
