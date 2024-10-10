@@ -67,9 +67,9 @@ increasing (for positive $stride$) or all decreasing (for negative
 $stride$).
 That is, \textit{wrap-around} with respect to the parent team's \ac{PE} values
 is not permitted.
-For example, the list of \acp{PE} in the parent team should not start at a high
-number and then continue to include \acp{PE} in the lower end of the parent
-team's \ac{PE} range.
+For example, given a parent team with a size of 8 \acp{PE}, a call to 
+\FUNC{shmem\_team\_split\_strided} with the following arguments would
+be invalid: $start$ equal to 3, $stride$ equal to 3, and $size$ equal to 3.
 
 This routine must be called by all \acp{PE} in the parent team.
 All \acp{PE} must provide the same values for the \ac{PE} triplet.
