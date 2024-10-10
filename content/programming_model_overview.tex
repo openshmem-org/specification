@@ -2,7 +2,10 @@
 mechanisms to share information among \openshmem processes, or \acp{PE}, and
 private data objects that are accessible by only the \ac{PE} itself. The \ac{API}
 allows communication and synchronization operations on both private (local to
-the \ac{PE} initiating the operation) and remotely accessible data objects. The key
+the \ac{PE} initiating the operation) and remotely accessible data objects. A
+remote \ac{PE} is defined as any \ac{PE} whose remotely accessible data objects
+are accessible to the \ac{PE} initiating an operation and may include the
+initiating \ac{PE}. The key
 feature of \openshmem is that data transfer operations are
 \emph{one-sided} in nature. This means that a local \ac{PE} executing
 a data transfer routine does not require the participation of the remote \ac{PE}
