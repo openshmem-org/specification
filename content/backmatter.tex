@@ -749,6 +749,21 @@ The following list describes the specific changes in \openshmem[1.6]:
     additional arguments. \label{changelog:pcontrol}
 \ChangelogRef{subsec:shmem_pcontrol}
 %
+\item Added a \texttt{const} qualifier to the \VAR{cmp\_values} argument in the
+    following point-to-point synchronization routines:
+    \FUNC{shmem\_wait\_until\_all\_vector},
+    \FUNC{shmem\_wait\_until\_any\_vector},
+    \FUNC{shmem\_wait\_until\_some\_vector},
+    \FUNC{shmem\_test\_all\_vector}, \FUNC{shmem\_test\_any\_vector}, and
+    \FUNC{shmem\_test\_some\_vector}. \label{changelog:p2p_vector_const}
+\ChangelogRef{
+  subsec:shmem_wait_until_all_vector,
+  subsec:shmem_wait_until_any_vector,
+  subsec:shmem_wait_until_some_vector,
+  subsec:shmem_test_all_vector,
+  subsec:shmem_test_any_vector,
+  subsec:shmem_test_some_vector}%
+%
 
 \end{enumerate}
 
@@ -1335,6 +1350,14 @@ must account for all errata associated with that version as indicated below.
      \FUNC{shmem\_pcontrol} to indicate that the value should be greater than 2 to enable
      profiling with profile library defined effects and additional arguments
         (\ref{changelog:v1.6}.\ref{changelog:pcontrol}).
+  \item Added a \texttt{const} qualifier to the \VAR{cmp\_values} argument in the
+     following point-to-point synchronization routines:
+     \FUNC{shmem\_wait\_until\_all\_vector},
+     \FUNC{shmem\_wait\_until\_any\_vector},
+     \FUNC{shmem\_wait\_until\_some\_vector},
+     \FUNC{shmem\_test\_all\_vector}, \FUNC{shmem\_test\_any\_vector}, and
+     \FUNC{shmem\_test\_some\_vector}
+        (\ref{changelog:v1.6}.\ref{changelog:p2p_vector_const}).
 \end{enumerate}
 
 %end of setlength command that was started in frontmatter.tex
