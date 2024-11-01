@@ -198,7 +198,7 @@ Creating a team that implies a wrap-around sequence &
 If the triplet provided to \FUNC{shmem\_team\_split\_strided} implies a
 wrap-around sequence, the input is considered invalid and the behavior is
 undefined.
-In other words, when $stride$ is nonzero, a newly created team must only
+In other words, when \VAR{stride} is nonzero, a newly created team must only
 include \acp{PE} whose subsequent parent \ac{PE} values are either all
 increasing (for positive \VAR{stride}) or all decreasing (for negative
 \VAR{stride}).
