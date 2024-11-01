@@ -190,6 +190,20 @@ team, the user is responsible for destroying all contexts created from that team
 with the \LibConstRef{SHMEM\_CTX\_PRIVATE} option enabled; otherwise, the
 behavior is undefined.\tabularnewline
 \hline
+Creating a team that implies a wrap-around sequence &
+If the triplet provided to \FUNC{shmem\_team\_split\_strided} implies a
+wrap-around sequence, the input is considered invalid and the behavior is
+undefined.
+In other words, when $stride$ is nonzero, a newly created team must only
+include \acp{PE} whose subsequent parent \ac{PE} values are either all
+increasing (for positive $stride$) or all decreasing (for negative
+$stride$).
+That is, \textit{wrap-around} with respect to the parent team's \ac{PE} values
+is not permitted.
+For example, the list of \acp{PE} in the parent team should not start at a high
+number and then continue to include \acp{PE} in the lower end of the parent
+team's \ac{PE} range. \tabularnewline
+\hline
 \end{longtable}
 
 
