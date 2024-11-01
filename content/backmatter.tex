@@ -190,9 +190,9 @@ team, the user is responsible for destroying all contexts created from that team
 with the \LibConstRef{SHMEM\_CTX\_PRIVATE} option enabled; otherwise, the
 behavior is undefined.\tabularnewline
 \hline
-Creating a team with a $stride$ value equal to 0 and the $size$ value not equal to 1 &
-If a $stride$ value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
-then the $size$ argument passed must be 1, or the behavior is undefined. \tabularnewline
+Creating a team with a \VAR{stride} value equal to 0 and the \VAR{size} value not equal to 1 &
+If a \VAR{stride} value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
+then the \VAR{size} argument passed must be 1, or the behavior is undefined. \tabularnewline
 \hline
 Creating a team that implies a wrap-around sequence &
 If the triplet provided to \FUNC{shmem\_team\_split\_strided} implies a
@@ -200,13 +200,13 @@ wrap-around sequence, the input is considered invalid and the behavior is
 undefined.
 In other words, when $stride$ is nonzero, a newly created team must only
 include \acp{PE} whose subsequent parent \ac{PE} values are either all
-increasing (for positive $stride$) or all decreasing (for negative
-$stride$).
+increasing (for positive \VAR{stride}) or all decreasing (for negative
+\VAR{stride}).
 That is, \textit{wrap-around} with respect to the parent team's \ac{PE} values
 is not permitted.
 For example, given a parent team with a size of 8 \acp{PE}, a call to
 \FUNC{shmem\_team\_split\_strided} with the following arguments would
-be invalid: $start$ equal to 3, $stride$ equal to 3, and $size$ equal to 3. \tabularnewline
+be invalid: \VAR{start} equal to 3, \VAR{stride} equal to 3, and \VAR{size} equal to 3. \tabularnewline
 \hline
 \end{longtable}
 
