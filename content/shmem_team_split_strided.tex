@@ -49,27 +49,27 @@ A valid triplet is one such that:
   i \in \mathbb{Z}_{size-1}
 \end{equation*}
 where $\mathbb{Z}$ is the set of natural numbers ($0, 1, \dots$), $N$ is the
-number of \acp{PE} in the parent team, $size$ is a positive number indicating
-the number of \acp{PE} in the new team, and $stride$ is an integer.
+number of \acp{PE} in the parent team, \VAR{size} is a positive number indicating
+the number of \acp{PE} in the new team, and \VAR{stride} is an integer.
 The index $i$ specifies the number of the given \ac{PE} in the new team.
-When $stride$ is greater than zero, \acp{PE} in the new team remain in the same
+When \VAR{stride} is greater than zero, \acp{PE} in the new team remain in the same
 relative order as in the parent team.
-When $stride$ is less than zero, \acp{PE} in the new team are in \textit{reverse}
+When \VAR{stride} is less than zero, \acp{PE} in the new team are in \textit{reverse}
 relative order with respect to the parent team.
-If a $stride$ value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
-then the $size$ argument passed must be 1, or the behavior is undefined.
+If a \VAR{stride} value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
+then the \VAR{size} argument passed must be 1, or the behavior is undefined.
 If the triplet provided to \FUNC{shmem\_team\_split\_strided} implies a
 wrap-around sequence, the input is considered invalid and the behavior is
 undefined.
-In other words, when $stride$ is nonzero, a newly created team must only
+In other words, when \VAR{stride} is nonzero, a newly created team must only
 include \acp{PE} whose subsequent parent \ac{PE} values are either all
-increasing (for positive $stride$) or all decreasing (for negative
-$stride$).
+increasing (for positive \VAR{stride}) or all decreasing (for negative
+\VAR{stride}).
 That is, \textit{wrap-around} with respect to the parent team's \ac{PE} values
 is not permitted.
-For example, given a parent team with a size of 8 \acp{PE}, a call to 
+For example, given a parent team with a size of 8 \acp{PE}, a call to
 \FUNC{shmem\_team\_split\_strided} with the following arguments would
-be invalid: $start$ equal to 3, $stride$ equal to 3, and $size$ equal to 3.
+be invalid: \VAR{start} equal to 3, \VAR{stride} equal to 3, and \VAR{size} equal to 3.
 
 This routine must be called by all \acp{PE} in the parent team.
 All \acp{PE} must provide the same values for the \ac{PE} triplet.
