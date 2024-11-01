@@ -190,6 +190,10 @@ team, the user is responsible for destroying all contexts created from that team
 with the \LibConstRef{SHMEM\_CTX\_PRIVATE} option enabled; otherwise, the
 behavior is undefined.\tabularnewline
 \hline
+Creating a team with a $stride$ value equal to 0 and the $size$ value not equal to 1 &
+If a $stride$ value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
+then the $size$ argument passed must be 1, or the behavior is undefined. \tabularnewline
+\hline
 Creating a team that implies a wrap-around sequence &
 If the triplet provided to \FUNC{shmem\_team\_split\_strided} implies a
 wrap-around sequence, the input is considered invalid and the behavior is
