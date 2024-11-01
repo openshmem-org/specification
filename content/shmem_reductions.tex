@@ -252,7 +252,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     contains one element for each separate reduction routine.
     The type of \source{} should match that implied in the SYNOPSIS section.}
 \apiargument{IN}{nreduce}{The number of elements in the \dest{} and \source{}
-    arrays. In teams based \ac{API} calls, \VAR{nreduce} must be of type size\_t.}
+    arrays. In teams based \ac{API} calls, \VAR{nreduce} must be of type \CTYPE{size\_t}.}
 
 \begin{DeprecateBlock}
 \apiargument{IN}{nreduce}{In active-set based \ac{API} calls,
@@ -283,7 +283,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     provides one element for each reduction.  The results of the reductions are placed in the
     \dest{} array on all \acp{PE} participating in the reduction.
 
-    The same \source{} and \dest{} arrays must be passed by all PEs that
+    The same \source{} and \dest{} arrays must be passed by all \acp{PE} that
     participate in the collective.
     The \source{} and \dest{} arguments must either be the same symmetric
     address, or two different symmetric addresses corresponding to buffers that
@@ -295,7 +295,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     If \VAR{team} compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID} or is
     otherwise invalid, the behavior is undefined.
 
-    Before any \ac{PE} calls a reduction routine, the following conditions
+    Before the local \ac{PE} calls a reduction routine, the following conditions
     must be ensured, otherwise the behavior is undefined:
     \begin{itemize}
         \item The \dest{} array on all \acp{PE} in the team is ready to
@@ -323,7 +323,7 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
     provides one element for each reduction.  The results of the reductions are placed in the
     \dest{} array on all \acp{PE} participating in the reduction.
 
-    The same \source{} and \dest{} arrays must be passed by all PEs that
+    The same \source{} and \dest{} arrays must be passed by all \acp{PE} that
     participate in the collective.
     The \source{} and \dest{} arguments must either be the same symmetric
     address, or two different symmetric addresses corresponding to buffers that
@@ -373,17 +373,29 @@ where \TYPE{} is one of the integer, real, or complex types supported for the PR
 }
 
 \apireturnvalues{
-  Zero on successful local completion. Nonzero otherwise.
+    Zero on successful local completion. Nonzero otherwise.
+}
+
+\apinotes{
+    The binary operations performed by \openshmem reductions are intended to be
+    associative and commutative.
+    However, floating point arithmetic is not associative or commutative due to
+    the inherent inaccuracies of floating-point representations caused by
+    rounding errors and finite precision.
+    This can lead to variations in the result of \openshmem arithmetic
+    reduction operations on floating-point datatypes, including NaN values.
+    A future version of the \openshmem specification may clarify the behavior
+    of reductions on floating point datatypes.
 }
 
 \begin{apiexamples}
 
 \apicexample
-    {In the following \Cstd[11] example, each \ac{PE} intializes an array of
+    {In the following \Cstd[11] example, each \ac{PE} initializes an array of
     random integers with values between $0$ and $npes-1$, inclusively.  An OR
     reduction then tracks the array indices where maximal values occur (maximal
     values equal $npes - 1$), and a SUM reduction counts the total number of
-    maximal values across all PEs.
+    maximal values across all \acp{PE}.
     }
     {./example_code/shmem_reduce_example.c}
     {}
