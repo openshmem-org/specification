@@ -97,6 +97,28 @@ void @\FuncDecl{shmem\_ctx\_session\_start}@(shmem_ctx_t ctx, long options, cons
     about \VAR{shmem\_ctx\_session\_config\_t} parameters.
     } \hline
 
+\sessiontablerow{\LibConstRef{SHMEM\_CTX\_SESSION\_SAME\_AMO}}{
+    The \VAR{SHMEM\_CTX\_SESSION\_SAME\_AMO} hint indicates the session will
+    contain a series of calls to AMO routines where each call performs the same
+    atomic operation (e.g., using only the \textit{increment} operation) on the
+    same datatype (e.g., only on objects of type \textit{int}).
+    As a more specific example, this hint would apply to a session that
+    includes \textit{only} calls to \FUNC{shmem\_int\_atomic\_inc}.
+    However, this hint would not apply to a session that includes both calls to
+    \FUNC{shmem\_int\_atomic\_inc} and \FUNC{shmem\_int\_atomic\_fetch},
+    because the operation \textit{fetch} differs from \textit{increment}.
+    (Similarly, this hint would not apply to a session that includes both calls to
+    \FUNC{shmem\_int\_atomic\_inc} and \FUNC{shmem\_long\_atomic\_inc},
+    because the datatype \textit{long} differs from \textit{int}.)
+    This hint does not restrict the application from calling other RMA and/or
+    signaling routines within the session.
+
+    The \VAR{total\_ops} field of \VAR{config} indicates the expected maximum
+    number of calls to \openshmem RMA routines within the session.
+    See Section~\ref{subsec:shmem_ctx_session_config_t} for details about
+    \VAR{shmem\_ctx\_session\_config\_t} parameters.
+    } \hline
+
 \sessiontableend
 
 \apinotes{
