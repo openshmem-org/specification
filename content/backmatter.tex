@@ -667,9 +667,11 @@ standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
 \section{Version 1.6}
 \label{changelog:v1.6}
-Major changes in \openshmem[1.6] include the addition of the new
-\FUNC{shmem\_team\_ptr}, \FUNC{shmem\_ibget}, and \FUNC{shmem\_ibput}
-functions.
+Major changes in \openshmem[1.6] include the addition of inclusive and
+exclusive scan collective operations, session routines, support for multiple
+initialization and finalization calls, interleaved block transfer APIs,
+signal add and set APIs, and the
+\FUNC{shmem\_team\_ptr} function.
 
 The following list describes the specific changes in \openshmem[1.6]:
 \begin{enumerate}
@@ -872,6 +874,9 @@ all \acp{PE}, including the root \ac{PE}.
 %
 \item Added support for nonblocking \OPR{put-with-signal} functions.
 \ChangelogRef{subsec:shmem_put_signal_nbi}%
+%
+\item Added \FUNC{shmem\_signal\_fetch} function.
+\ChangelogRef{subsec:shmem_signal_fetch}%
 %
 \item Deprecated point-to-point synchronization types and names.
 \ChangelogRef{p2psynctypes, dep:p2p_sync_types}%
