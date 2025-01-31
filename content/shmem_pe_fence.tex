@@ -1,0 +1,37 @@
+\apisummary{
+    Assures ordering of delivery of memory store, blocking \PUT{}, 
+    \ac{AMO}, and \OPR{put-with-signal}, as well as nonblocking 
+    \PUT{}, \OPR{put-with-signal}, and \ac{AMO}
+    routines to symmetric data objects issued by the calling \ac{PE} at the target \ac{PE}.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+void @\FuncDecl{shmem\_fence}@(int target_pe);
+void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx, int target_pe);
+\end{Csynopsis}
+
+\begin{apiarguments}
+    \apiargument{IN}{ctx}{A context handle specifying the context on which to perform the operation.
+        When this argument is not provided, the operation is performed on
+        the default context.}
+	\apiargument{IN}{target\_pe}{The target \ac{PE} where the operations needs
+	to be completed}
+\end{apiarguments}
+
+\apidescription{
+	The \FUNC{shmem\_pe\_fence} routine assures ordering of operations similar
+	to \FUNC{shmem\_fence}, expect that ordering is ensured only between the
+	calling \ac{PE} and the target \ac{PE}. The ordering of operations between
+	any other \acp{PE} are not guaranteed by the \FUNC{shmem\_pe\_fence} routine.
+}
+
+\apireturnvalues{
+    None.
+}
+
+\apinotes{
+}
+
+\end{apidefinition}
