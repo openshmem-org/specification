@@ -1,0 +1,87 @@
+\apisummary{
+    Registers the arrival of a \ac{PE} at a synchronization point.
+    This routine initiates a nonblocking synchronization operation for a 
+    given \openshmem team and returns immediately without necessarily 
+    completing the operation.
+}
+
+\begin{apidefinition}
+
+\begin{C11synopsis}
+int @\FuncDecl{shmem\_sync\_nb}@(shmem_team_t team, shmem_req_h *request);
+\end{C11synopsis}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_team\_sync\_nb}@(shmem_team_t team, shmem_req_h *request);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+\apiargument{IN}{team}{A valid \openshmem team handle to a team.}%
+\apiargument{OUT}{request}{An opaque request handle identifying the synchronization
+operation.}
+
+\end{apiarguments}
+
+\apidescription{
+    \FUNC{shmem\_sync\_nb} is a collective nonblocking synchronization routine
+    over an existing \openshmem team.
+
+    {\bf Invocation and completion}: A call to the nonblocking sync routine
+    initiates the operation and returns immediately without necessarily
+    completing the operation. On success, an opaque request handle is created
+    and returned. The completion of the operation can be observed after one or
+    more calls to \FUNC{shmem\_req\_test} or a call to \FUNC{shmem\_req\_wait}.
+    When the completion of the operation is observed, the request handle is
+    deallocated and cannot be reused.
+
+    {\bf Synchronization semantics}:
+    The routine registers the arrival of a \ac{PE} at a synchronization point
+    in the program. This is a fast mechanism for synchronizing all \acp{PE}
+    that participate in this collective call. The routine ensures that all
+    \acp{PE} in the specified team have called \FUNC{shmem\_sync\_nb} when
+    the completion of the operation is observed.
+
+    All \acp{PE} in the provided team must participate
+    in the sync operation. If \VAR{team} compares equal to
+    \LibConstRef{SHMEM\_TEAM\_INVALID} or is otherwise invalid, the behavior
+    is undefined.
+
+    Upon completion of the operation, the following is true for the local PE:
+    \begin{itemize}
+    \item All \acp{PE} in the team have called \FUNC{shmem\_sync\_nb}.
+    \item Similar to the blocking \FUNC{shmem\_sync} routine, \FUNC{shmem\_sync\_nb}
+    only ensures the completion and visibility of previously issued memory stores and
+    does not ensure the completion of remote memory updates issued via OpenSHMEM routines.
+    \end{itemize}
+}
+
+\apireturnvalues{
+    Zero on successful local completion. Nonzero otherwise.
+}
+
+\apinotes{
+    The \FUNC{shmem\_sync\_nb} routine can be used to portably ensure that
+    memory access operations observe remote updates in the order enforced by the
+    initiator \acp{PE}, provided that the initiator PE ensures completion of remote
+    updates with a call to \FUNC{shmem\_quiet} prior to the call to the
+    \FUNC{shmem\_sync\_nb} routine.
+
+    Team handle error checking and integer return codes are currently undefined.
+    Implementations may define these behaviors as needed, but programs should
+    ensure portability by doing their own checks for invalid team handles and for
+    \LibConstRef{SHMEM\_TEAM\_INVALID}.
+}
+
+\begin{apiexamples}
+
+\apicexample
+    {The following \Cstd[11] example is analogous to the \FUNC{shmem\_sync}
+    example, but uses \FUNC{shmem\_sync\_nb} to overlap synchronization on two
+    teams.}
+    {./example_code/shmem_sync_nb_example.c}
+    {}
+
+\end{apiexamples}
+
+\end{apidefinition}
