@@ -340,7 +340,7 @@ Specifically, $(A, B) \in rdo$ only if there is an \openshmem fence operation $F
     \item $A$ is a memory access that is \relHB{} ordered before $Fop$, $B$ is an
         observable access issued by an operation that is \relHB{} ordered after $Fop$,
         and the context associated with $Fop$ does NOT have the
-        \CONST{SHMEM\_CTX\_NOSTORE} option enabled.
+        \CONST{SHMEM\_CTX\_RELAX\_FENCE} option enabled.
     \item $A$ is an observable access issued by a fence-ordered operation (defined
         below) that is \relHB{} ordered before $Fop$, $B$ is an observable access issued
         by an operation that is \relHB{} ordered after $Fop$, and $A$ and $B$ target the
@@ -361,11 +361,11 @@ In the above, "fence-ordered operations" are defined as blocking or nonblocking 
 \begin{itemize}
     \item $A$ is a memory access that is \relHB{} ordered before $QBop$, $B$ is an
         access that is \relHB{} ordered after $QBop$, and the context associated with
-        $QBop$ does NOT have the \CONST{SHMEM\_CTX\_NOSTORE} option enabled.
+        $QBop$ does NOT have the \CONST{SHMEM\_CTX\_RELAX\_FENCE} option enabled.
     \item $A$ is a memory access that is \relHB{} ordered before $QBop$, $B$ is an
         observable access issued by an operation that is \relHB{} ordered after $QBop$,
         and the context associated with $QBop$ does NOT have the
-        \CONST{SHMEM\_CTX\_NOSTORE} option enabled.
+        \CONST{SHMEM\_CTX\_RELAX\_FENCE} option enabled.
     \item $A$ is an observable access issued by an operation that is \relHB{} ordered
         before $QBop$ and $B$ is an access that is \relHB{} ordered after $QBop$.
     \item $A$ is an observable memory access issued by a qb-ordered operation (defined

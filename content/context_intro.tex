@@ -63,10 +63,22 @@ No options are enabled on the default context.
 \apitablerow{\LibConstRef{SHMEM\_CTX\_PRIVATE}}{
     The given context will be used only by the thread that created it.}
 
+\begin{DeprecateBlock}
 \apitablerow{\LibConstRef{SHMEM\_CTX\_NOSTORE}}{
     Quiet and fence operations performed on the given context are not
     required to enforce completion and ordering of memory accesses
     performed by the application.
     When ordering of memory accesses is needed, the application must
     perform a synchronization operation on a context without the
-    \CONST{SHMEM\_CTX\_NOSTORE} option enabled.}
+    \CONST{SHMEM\_CTX\_NOSTORE} option enabled.
+    This option is deprecated; use
+    \CONST{SHMEM\_CTX\_RELAX\_FENCE} instead.}
+\end{DeprecateBlock}
+
+\apitablerow{\LibConstRef{SHMEM\_CTX\_RELAX\_FENCE}}{
+    Quiet and fence operations performed on the given context are not
+    required to enforce completion and ordering of memory accesses
+    performed by the application.
+    When ordering of memory accesses is needed, the application must
+    perform a synchronization operation on a context without the
+    \CONST{SHMEM\_CTX\_RELAX\_FENCE} option enabled.}
