@@ -84,6 +84,12 @@ ordering of memory accesses.
 See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
 \tabularnewline \hline
 %%
+\LibConstDecl{SHMEM\_CTX\_RELAX\_SYNC} &
+The context creation option which specifies that synchronizing operations
+performed on the given context are not required to enforce local release order.
+See Section~\ref{subsec:shmem_ctx_create} for more detail about its use.
+\tabularnewline \hline
+%%
 \LibConstDecl{SHMEM\_CTX\_SESSION\_TOTAL\_OPS} &
 The bitwise flag which specifies that a session start routine should use the
 \VAR{total\_ops} member of the provided \CTYPE{shmem\_ctx\_session\_config\_t}

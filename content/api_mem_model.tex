@@ -295,7 +295,8 @@ In Section~\ref{subsubsec:api_integrate}, these new API relations are then used 
 \endhead
 \relILV{} &   & X &   & All \openshmem operations \tabularnewline\hline
 \relLCO{} &   & X &   & Blocking \openshmem operations \tabularnewline\hline
-\relRDO{} &   & X & X & Fence operations \tabularnewline\hline
+\relLRO{} &   & X &   & Fence, \ac{AMO}, signaling, point-to-point synchronization, and distributed locking operations \tabularnewline\hline
+\relRDO{} &   &   & X & Fence operations \tabularnewline\hline
 \relRCO{} & X & X & X & Quiet and barrier operations \tabularnewline\hline
 \relASW{} &   &   & X & \ac{AMO}, signaling, point-to-point synchronization, and distributed locking operations \tabularnewline\hline
 \TableCaptionRef{API-level ordering relations, access type pairs connected, and establishing operations.}\label{table:api_relations}
@@ -324,6 +325,15 @@ In Section~\ref{subsubsec:api_integrate}, these new API relations are then used 
     \item The operation event that issues $A$ is \relHB{} ordered before $B$, or is
         \relHB{} ordered before an operation event that issues $B$.
 \end{itemize}
+
+\textbf{Local Release Order (lro)}:
+\relLRO{} relates memory accesses prior to a synchronizing \openshmem operation with observable store accesses issued by that operation. This ensures, for example, that a data access prior to a remote signal are completed before any actions triggered by that signal take effect (e.g., a \PUT{} from a remote \ac{PE} to the data location). Specifically, $(A, B) \in lro$ only if all of the following are true:
+\begin{itemize}
+    \item $B$ is a write or read-modify-write access issued by a synchronizing \openshmem operation.
+    \item $A$ is a memory access that is \relHB{} ordered before the operation event that issues $B$, and the context associated with that operation does NOT have the \CONST{SHMEM\_CTX\_RELAX\_SYNC} option enabled.
+\end{itemize}
+
+In the above, "synchronizing \openshmem operations" are defined as any operation from the following categories: \ac{AMO}s, signaling operations, point-to-point synchronization routines, or distributed locking routines.
 
 \textbf{Remote Delivery Order (rdo)}:
 \relRDO{} relates accesses and operations separated by an \openshmem fence operation.

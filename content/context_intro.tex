@@ -82,3 +82,13 @@ No options are enabled on the default context.
     When ordering of memory accesses is needed, the application must
     perform a synchronization operation on a context without the
     \CONST{SHMEM\_CTX\_RELAX\_FENCE} option enabled.}
+
+\apitablerow{\LibConstRef{SHMEM\_CTX\_RELAX\_SYNC}}{
+    Synchronizing operations performed on the given context are not required
+    to order memory accesses that precede them before their observable write
+    or read-modify-write accesses.
+    When local release ordering is needed, the application must perform the
+    synchronizing operation on a context without the
+    \CONST{SHMEM\_CTX\_RELAX\_SYNC} option enabled, or use an explicit
+    \openshmem fence operation on a context without the
+    \CONST{SHMEM\_CTX\_RELAX\_FENCE} option enabled.}
