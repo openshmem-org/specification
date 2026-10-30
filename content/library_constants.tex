@@ -91,6 +91,18 @@ that they do not reference a valid request.
 When managed in this way, applications can use an equality comparison
 to test whether a given request handle references a valid request.
 See Section~\ref{subsec:nb_coll} for more detail about its use.
+%%
+\LibConstDecl{SHMEM\_CTX\_SESSION\_TOTAL\_OPS} &
+The bitwise flag which specifies that a session start routine should use the
+\VAR{total\_ops} member of the provided \CTYPE{shmem\_ctx\_session\_config\_t}
+configuration parameter as a hint. See \ref{subsec:shmem_ctx_session_config_t}
+for more detail about its use.
+\tabularnewline \hline
+%%
+\LibConstDecl{SHMEM\_CTX\_SESSION\_BATCH} &
+The session start option which specifies that operations in the given session
+are latency tolerant and may be candidates for batching. See
+\ref{subsec:shmem_ctx_session_start} for more detail about its use.
 \tabularnewline \hline
 %%
 \LibConstDecl{SHMEM\_SIGNAL\_SET} &

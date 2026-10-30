@@ -28,9 +28,8 @@ where \TYPE{} is one of the bitwise \ac{AMO} types and has a corresponding
     The type of \dest{} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{value}{The operand to the bitwise XOR operation.
     The type of \VAR{value} should match that implied in the SYNOPSIS section.}
-  \apiargument{IN}{pe}{An integer value for the \ac{PE} on which \VAR{dest}
-    is to be updated.}
-
+  \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+    with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{

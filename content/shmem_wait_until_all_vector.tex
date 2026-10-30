@@ -7,13 +7,13 @@
 
 \begin{C11synopsis}
 void @\FuncDecl{shmem\_wait\_until\_all\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
-    TYPE *cmp_values);
+    const TYPE *cmp_values);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
-void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_all\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values);
+void @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_all\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp, const TYPE *cmp_values);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a
 corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -34,7 +34,7 @@ corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \end{apiarguments}
 
-\apidescription{ 
+\apidescription{
     The \FUNC{shmem\_wait\_until\_all\_vector} routine waits until all entries
     in the wait set specified by \VAR{ivars} and \VAR{status} have satisfied
     the wait conditions at the calling \ac{PE}.  The \VAR{ivars}

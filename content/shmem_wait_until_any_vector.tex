@@ -7,14 +7,14 @@
 
 \begin{C11synopsis}
 size_t @\FuncDecl{shmem\_wait\_until\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status, int cmp,
-    TYPE *cmp_values);
+    const TYPE *cmp_values);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_any\_vector}@(TYPE *ivars, size_t nelems, const int *status,
-    int cmp, TYPE *cmp_values);
+    int cmp, const TYPE *cmp_values);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a
 corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -35,7 +35,7 @@ corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \end{apiarguments}
 
-\apidescription{ 
+\apidescription{
     The \FUNC{shmem\_wait\_until\_any\_vector} routine waits until any one
     entry in the wait set specified by \VAR{ivars} and \VAR{status} satisfies
     the wait condition at the calling \ac{PE}.  The \VAR{ivars} objects at the
@@ -74,7 +74,7 @@ corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
   \apicexample
       {The following \Cstd[11] example demonstrates the use of
       \FUNC{shmem\_wait\_until\_any\_vector} to wait on values that differ
-      between even PEs and odd PEs.}
+      between even \acp{PE} and odd \acp{PE}.}
       {./example_code/shmem_wait_until_any_vector.c}
       {}
 \end{apiexamples}

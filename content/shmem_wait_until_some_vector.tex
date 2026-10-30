@@ -7,14 +7,14 @@
 
 \begin{C11synopsis}
 size_t @\FuncDecl{shmem\_wait\_until\_some\_vector}@(TYPE *ivars, size_t nelems, size_t *indices,
-    const int *status, int cmp, TYPE *cmp_values);
+    const int *status, int cmp, const TYPE *cmp_values);
 \end{C11synopsis}
 where \TYPE{} is one of the standard \ac{AMO} types specified by
 Table \ref{stdamotypes}.
 
 \begin{Csynopsis}
 size_t @\FuncDecl{shmem\_\FuncParam{TYPENAME}\_wait\_until\_some\_vector}@(TYPE *ivars, size_t nelems, size_t *indices,
-    const int *status, int cmp, TYPE *cmp_values);
+    const int *status, int cmp, const TYPE *cmp_values);
 \end{Csynopsis}
 where \TYPE{} is one of the standard \ac{AMO} types and has a
 corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
@@ -37,7 +37,7 @@ corresponding \TYPENAME{} specified by Table~\ref{stdamotypes}.
 
 \end{apiarguments}
 
-\apidescription{ 
+\apidescription{
     The \FUNC{shmem\_wait\_until\_some\_vector} routine waits until
     at least one entry in the wait set specified by \VAR{ivars} and
     \VAR{status} satisfies the wait condition at the calling \ac{PE}.

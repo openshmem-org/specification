@@ -16,7 +16,7 @@ corresponding object with the same name, type, and size on all \acp{PE} where th
 accessible via the \openshmem \ac{API}\footnote{For efficiency reasons,
 the same offset (from an arbitrary memory address) for symmetric data
 objects might be used on all \acp{PE}. Further discussion about symmetric heap
-layout and implementation efficiency can be found in Section~\ref{subsec:shfree}}.
+layout and implementation efficiency can be found in Section~\ref{sec:memory_management}}.
 (For the definition of what is accessible, see the
 descriptions for \FUNC{shmem\_pe\_accessible} and \FUNC{shmem\_addr\_accessible}
 in Sections~\ref{subsec:shmem_pe_accessible} and
@@ -71,7 +71,7 @@ used with \CorCpp{} structures.
 The ``mem'' interfaces (e.g., \FUNC{shmem\_putmem}) have no alignment
 requirements.
 
-The \FUNC{shmem\_ptr} routine allows the programmer to query a {\em local
+The \FUNC{shmem\_ptr} and \FUNC{shmem\_team\_ptr} routines allow the application to query a {\em local
 address} to a remotely accessible data object at a specified \ac{PE}.  The
 resulting pointer is valid for direct memory access; however, providing this
 address as an argument of an \openshmem routine that requires a symmetric

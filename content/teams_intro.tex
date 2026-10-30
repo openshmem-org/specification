@@ -21,7 +21,7 @@ All predefined teams are valid for the duration of the \openshmem
 portion of an application.
 Any team successfully created by a \FUNC{shmem\_team\_split\_*}
 routine is valid until it is destroyed.
-All valid teams have a least one member.
+All valid teams have at least one member.
 
 \subsubsection*{Team Handles}
 
@@ -46,7 +46,7 @@ to test whether a given team handle references a valid team.
 
 \subsubsection*{Thread Safety}
 
-When it is allowed by the threading model provided by the OpenSHMEM
+When it is allowed by the threading model provided by the \openshmem
 library, a team may be used concurrently in non-collective operations
 (e.g., \FUNC{shmem\_team\_my\_pe}) by multiple threads within the
 \ac{PE} where it was created.
@@ -84,7 +84,7 @@ is detailed further in Section~\ref{subsec:shmem_team_config_t}.
 
 \acp{PE} in a newly created team are consecutively numbered starting with
 \ac{PE} number 0. \acp{PE} are ordered by their \ac{PE} number in
-the parent team. Team relative \ac{PE}
+the parent team. Team-relative \ac{PE}
 numbers can be used for point-to-point operations through team-based
 contexts (see Section~\ref{sec:ctx}) or using the translation routine
 \FUNC{shmem\_team\_translate\_pe}.
@@ -93,7 +93,7 @@ Split operations are collective and are subject to the constraints on
 team-based collectives specified in Section~\ref{subsec:coll}. In particular,
 in multithreaded executions, threads at a given \ac{PE} must not perform
 simultaneous split operations on the same parent team.
-Team creation operations are matched across participating PEs based
+Team creation operations are matched across participating \acp{PE} based
 on the order in which they are performed. Thus, team creation events must also
 occur in the same order on all \acp{PE} in the parent team.
 

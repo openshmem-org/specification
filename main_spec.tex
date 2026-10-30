@@ -41,8 +41,8 @@
 \section{OpenSHMEM Library \acs{API}}\label{sec:openshmem_library_api}
 
 \subsection{Library Setup, Exit, and Query Routines}
-The library setup and query interfaces that initialize and monitor the parallel
-environment of the \acp{PE}.
+This section specifies the library setup, exit, and query interfaces that initialize,
+finalize, and monitor the parallel environment of the \acp{PE}, respectively.
 
 \subsubsection{\textbf{SHMEM\_INIT}}\label{subsec:shmem_init}
 \input{content/shmem_init}
@@ -55,6 +55,10 @@ environment of the \acp{PE}.
 
 \subsubsection{\textbf{SHMEM\_FINALIZE}}\label{subsec:shmem_finalize}
 \input{content/shmem_finalize}
+
+\subsubsection{\textbf{SHMEM\_QUERY\_INITIALIZED}}
+\label{subsec:shmem_query_initialized}
+\input{content/shmem_query_initialized}
 
 \subsubsection{\textbf{SHMEM\_GLOBAL\_EXIT}}\label{subsec:shmem_global_exit}
 \input{content/shmem_global_exit}
@@ -92,16 +96,21 @@ environment of the \acp{PE}.
 \label{subsec:shmem_query_thread}
 \input{content/shmem_query_thread}
 
-
 \subsection{Memory Management Routines}
 \label{sec:memory_management}
+\input{content/memmgmt_intro.tex}
 
-\openshmem provides a set of \acp{API} for managing the symmetric heap. The
-\acp{API} allow one to dynamically allocate, deallocate, reallocate and align
-symmetric data objects in the symmetric heap.
-
-\subsubsection{\textbf{SHMEM\_MALLOC, SHMEM\_FREE, SHMEM\_REALLOC, SHMEM\_ALIGN}}\label{subsec:shfree}
+\subsubsection{\textbf{SHMEM\_MALLOC}}\label{subsec:shmem_malloc}
 \input{content/shmem_malloc.tex}
+
+\subsubsection{\textbf{SHMEM\_FREE}}\label{subsec:shmem_free}
+\input{content/shmem_free.tex}
+
+\subsubsection{\textbf{SHMEM\_REALLOC}}\label{subsec:shmem_realloc}
+\input{content/shmem_realloc.tex}
+
+\subsubsection{\textbf{SHMEM\_ALIGN}}\label{subsec:shmem_align}
+\input{content/shmem_align.tex}
 
 \subsubsection{\textbf{SHMEM\_MALLOC\_WITH\_HINTS}}\label{subsec:shmmallochint}
 \input{content/shmem_malloc_hints.tex}
@@ -160,7 +169,6 @@ symmetric data objects in the symmetric heap.
 \label{subsec:shmem_ctx_get_team}
 \input{content/shmem_ctx_get_team.tex}
 
-
 \subsection{Remote Memory Access Routines}\label{sec:rma}
 \input{content/rma_intro.tex}
 
@@ -174,6 +182,9 @@ symmetric data objects in the symmetric heap.
 \subsubsubsection{\textbf{SHMEM\_IPUT}}\label{subsec:shmem_iput}
 \input{content/shmem_iput.tex}
 
+\subsubsubsection{\textbf{SHMEM\_IBPUT}}\label{subsec:shmem_ibput}
+\input{content/shmem_ibput.tex}
+
 \subsubsubsection{\textbf{SHMEM\_GET}}\label{subsec:shmem_get}
 \input{content/shmem_get.tex}
 
@@ -182,6 +193,9 @@ symmetric data objects in the symmetric heap.
 
 \subsubsubsection{\textbf{SHMEM\_IGET}}\label{subsec:shmem_iget}
 \input{content/shmem_iget.tex}
+
+\subsubsubsection{\textbf{SHMEM\_IBGET}}\label{subsec:shmem_ibget}
+\input{content/shmem_ibget.tex}
 
 \subsubsection{Nonblocking Remote Memory Access Routines}\label{subsec:rma_nbi}
 
@@ -291,56 +305,7 @@ symmetric data objects in the symmetric heap.
 
 
 \subsection{Signaling Operations}\label{sec:shmem_signal}
-This section specifies the OpenSHMEM support for \OPR{put-with-signal},
-nonblocking \OPR{put-with-signal}, and \OPR{signal-fetch} routines. The
-put-with-signal routines provide a method for copying data from a contiguous
-local data object to a data object on a specified \ac{PE} and subsequently
-updating a remote flag to signal completion. The signal-fetch routine provides
-support for fetching a signal update operation.
-
-\openshmem \OPR{put-with-signal} routines specified in this section have two
-variants. In one of the variants, the context handle, \VAR{ctx}, is explicitly
-passed as an argument. In this variant, the operation is performed on the
-specified context. If the context handle \VAR{ctx} does not correspond to a
-valid context, the behavior is undefined. In the other variant, the context
-handle is not explicitly passed and thus, the operations are performed on the
-default context.
-
-\subsubsection{Atomicity Guarantees for Signaling Operations}
-\label{subsec:signal_atomicity}
-All signaling operations put-with-signal, nonblocking put-with-signal, and
-signal-fetch are performed on a signal data object, a remotely accessible
-symmetric object of type \VAR{uint64\_t}. A signal operator in the
-put-with-signal routine is a \openshmem library constant that determines the
-type of update to be performed as a signal on the signal data object.
-
-All signaling operations on the signal data object completes as if performed
-atomically with respect to the following:
-\begin{itemize}
-    \item other blocking or nonblocking variant of the put-with-signal routine
-    that updates the signal data object using the same signal update operator;
-    \item signal-fetch routine that fetches the signal data object; and
-    \item any point-to-point synchronization routine that accesses the signal
-    data object.
-\end{itemize}
-
-\subsubsection{Available Signal Operators}
-\label{subsec:signal_operator}
-
-With the atomicity guarantees as described in
-Section~\ref{subsec:signal_atomicity}, the following options can be used as a
-signal operator.
-
-    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_SET}}{An update to signal data
-    object is an atomic set operation. It writes an unsigned 64-bit value as a
-    signal into the signal data object on a remote \VAR{PE} as an atomic
-    operation.}
-
-    \apitablerow{\LibConstRef{SHMEM\_SIGNAL\_ADD}}{An update to signal data
-    object is an atomic add operation. It adds an unsigned 64-bit value as a
-    signal into the signal data object on a remote \VAR{PE} as an atomic
-    operation.}
-
+\input{content/signaling.tex}
 
 \subsubsection{\textbf{SHMEM\_PUT\_SIGNAL}}\label{subsec:shmem_put_signal}
 \input{content/shmem_put_signal.tex}
@@ -348,9 +313,27 @@ signal operator.
 \subsubsection{\textbf{SHMEM\_PUT\_SIGNAL\_NBI}}\label{subsec:shmem_put_signal_nbi}
 \input{content/shmem_put_signal_nbi.tex}
 
+\subsubsection{\textbf{SHMEM\_SIGNAL\_ADD}}\label{subsec:shmem_signal_add}
+\input{content/shmem_signal_add.tex}
+
 \subsubsection{\textbf{SHMEM\_SIGNAL\_FETCH}}\label{subsec:shmem_signal_fetch}
 \input{content/shmem_signal_fetch.tex}
 
+\subsubsection{\textbf{SHMEM\_SIGNAL\_SET}}\label{subsec:shmem_signal_set}
+\input{content/shmem_signal_set.tex}
+
+
+\subsection{Session Routines}\label{subsec:sessions}
+\input{content/sessions_intro.tex}
+
+\subsubsection{\textbf{SHMEM\_CTX\_SESSION\_CONFIG\_T}}\label{subsec:shmem_ctx_session_config_t}
+\input{content/shmem_ctx_session_config_t.tex}
+
+\subsubsection{\textbf{SHMEM\_CTX\_SESSION\_START}}\label{subsec:shmem_ctx_session_start}
+\input{content/shmem_ctx_session_start.tex}
+
+\subsubsection{\textbf{SHMEM\_CTX\_SESSION\_STOP}}\label{subsec:shmem_ctx_session_stop}
+\input{content/shmem_ctx_session_stop.tex}
 
 
 \subsection{Collective Routines}\label{subsec:coll}
@@ -383,6 +366,9 @@ signal operator.
 \subsubsection{\textbf{SHMEM\_REDUCTIONS}}\label{subsec:shmem_reductions}
 \input{content/shmem_reductions.tex}
 
+\subsubsection{\textbf{SHMEM\_SCAN}}\label{subsec:shmem_scan}
+\input{content/shmem_scan.tex}
+
 \newpage 
 \subsection{Nonblocking Collective Routines}\label{subsec:nb_coll}
 \input{content/nb_collectives_intro.tex}
@@ -398,10 +384,6 @@ signal operator.
 
 \subsubsection{\textbf{SHMEM\_REQ\_WAIT}}\label{subsec:shmem_collective_wait}
 \input{content/shmem_collective_wait.tex}
-
-
-
-
 
 \subsection{Point-To-Point Synchronization Routines}\label{subsec:p2p_intro}
 \input{content/p2p_sync_intro.tex}
@@ -489,6 +471,9 @@ routines}
 
 \subsubsection{\textbf{SHMEM\_QUIET}}\label{subsec:shmem_quiet}
 \input{content/shmem_quiet.tex}
+
+\subsubsection{\textbf{SHMEM\_PE\_QUIET}}\label{subsec:shmem_pe_quiet}
+\input{content/shmem_pe_quiet.tex}
 
 \subsubsection{Synchronization and Communication Ordering in OpenSHMEM}
 \input{content/synchronization_model.tex}

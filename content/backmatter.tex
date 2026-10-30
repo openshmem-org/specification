@@ -50,7 +50,7 @@ remote destination in \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}.
 
 The \KEYWORD{static} keyword makes the \VAR{dest} array symmetric on all \acp{PE}.
 Each \ac{PE} is able to transfer data to a remote \dest{} array by simply
-specifying to an OpenSHMEM routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
+specifying to an \openshmem routine such as \hyperref[subsec:shmem_put]{\FUNC{shmem\_put}}
 the local address of the symmetric data object that will receive the data.
 This local address resolution aids programmability because the address of the
 \dest{} need not be exchanged with the active side (\ac{PE} \CONST{0}) prior to
@@ -143,12 +143,6 @@ behavior.  For example, an implementation may try to continue or may abort
 immediately upon an \openshmem call into the uninitialized library.
 \tabularnewline
 \hline
-Multiple calls to initialization routines & In an \openshmem program where
-the initialization routines \FUNC{shmem\_init} or \FUNC{shmem\_init\_thread}
-have already been called, any subsequent calls to these initialization routines
-result in undefined behavior.
-\tabularnewline
-\hline
 Specifying invalid \ac{PE} numbers & For \openshmem routines that accept a
 \ac{PE} number as an argument, if the \ac{PE} number is invalid for the
 team associated with the operation (either implicitly or explicitly), the
@@ -157,9 +151,9 @@ negative or greater than or equal to the size of the associated team.
 \tabularnewline
 \hline
 Use of non-symmetric variables & Some routines require remotely accessible
-variables to perform their function.  For example, a \PUT{} to a non-symmetric variable may
-be trapped where possible and the library may abort the program.  Another
-implementation may choose to continue execution with or without a warning.
+variables to perform their function.  For example, an \openshmem library may detect a \PUT{} to a non-symmetric variable
+and choose to abort the program.
+However, another implementation may choose to continue execution with or without a warning.
 \tabularnewline
 \hline
 Non-symmetric allocation of symmetric memory & The symmetric memory management routines are
@@ -195,6 +189,24 @@ Destroying a team with unfreed private contexts & Before destroying a given
 team, the user is responsible for destroying all contexts created from that team
 with the \LibConstRef{SHMEM\_CTX\_PRIVATE} option enabled; otherwise, the
 behavior is undefined.\tabularnewline
+\hline
+Creating a team with a \VAR{stride} value equal to 0 and the \VAR{size} value not equal to 1 &
+If a \VAR{stride} value equal to 0 is passed to \FUNC{shmem\_team\_split\_strided},
+then the \VAR{size} argument passed must be 1, or the behavior is undefined. \tabularnewline
+\hline
+Creating a team that implies a wrap-around sequence &
+If the triplet provided to \FUNC{shmem\_team\_split\_strided} implies a
+wrap-around sequence, the input is considered invalid and the behavior is
+undefined.
+In other words, when \VAR{stride} is nonzero, a newly created team must only
+include \acp{PE} whose subsequent parent \ac{PE} values are either all
+increasing (for positive \VAR{stride}) or all decreasing (for negative
+\VAR{stride}).
+That is, \textit{wrap-around} with respect to the parent team's \ac{PE} values
+is not permitted.
+For example, given a parent team with a size of 8 \acp{PE}, a call to
+\FUNC{shmem\_team\_split\_strided} with the following arguments would
+be invalid: \VAR{start} equal to 3, \VAR{stride} equal to 3, and \VAR{size} equal to 3. \tabularnewline
 \hline
 \end{longtable}
 
@@ -276,10 +288,10 @@ supported before removal.
     \CorCpp: \FuncRef{\_num\_pes} & 1.2 & Current & \hyperref[subsec:shmem_n_pes]{\FUNC{shmem\_n\_pes}} \\ \hline
     \Fortran: \FuncRef{MY\_PE} & 1.2 & 1.4 & \hyperref[subsec:shmem_my_pe]{\FUNC{SHMEM\_MY\_PE}} \\ \hline
     \Fortran: \FuncRef{NUM\_PES} & 1.2 & 1.4 & \hyperref[subsec:shmem_n_pes]{\FUNC{SHMEM\_N\_PES}} \\ \hline
-    \CorCpp: \FuncRef{shmalloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_malloc}} \\ \hline
-    \CorCpp: \FuncRef{shfree} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_free}} \\ \hline
-    \CorCpp: \FuncRef{shrealloc} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_realloc}} \\ \hline
-    \CorCpp: \FuncRef{shmemalign} & 1.2 & Current & \hyperref[subsec:shfree]{\FUNC{shmem\_align}} \\ \hline
+    \CorCpp: \FuncRef{shmalloc} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_malloc}} \\ \hline
+    \CorCpp: \FuncRef{shfree} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_free}} \\ \hline
+    \CorCpp: \FuncRef{shrealloc} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_realloc}} \\ \hline
+    \CorCpp: \FuncRef{shmemalign} & 1.2 & Current & \hyperref[sec:memory_management]{\FUNC{shmem\_align}} \\ \hline
     \Fortran: \FuncRef{SHMEM\_PUT} & 1.2 & 1.4 & \hyperref[subsec:shmem_put]{\FUNC{SHMEM\_PUT8} or \FUNC{SHMEM\_PUT64}} \\ \hline
     %% Deprecated in 1.3
     \minitab{
@@ -654,26 +666,126 @@ standard \ac{AMO} types in Table~\ref{stdamotypes}.
 \chapter{Changes to this Document}\label{sec:changelog}
 
 \section{Version 1.6}
-Major changes in \openshmem[1.6] include the addition of a new
+\label{changelog:v1.6}
+Major changes in \openshmem[1.6] include the addition of inclusive and
+exclusive scan collective operations, session routines, support for multiple
+initialization and finalization calls, interleaved block transfer APIs,
+signal add and set APIs, and the
 \FUNC{shmem\_team\_ptr} function.
 
 The following list describes the specific changes in \openshmem[1.6]:
-\begin{itemize}
+\begin{enumerate}
+%
+\item Added an inclusive (\FUNC{shmem\_sum\_inscan}) and exclusive 
+(\FUNC{shmem\_sum\_exscan}) collective summation operation. 
+\ChangelogRef{subsec:shmem_scan}
+%
+\item Added support for initialization and finalization routines to be called
+    multiple times, and added an initialization status query API
+    \FUNC{shmem\_query\_initialized}.
+\ChangelogRef{subsec:shmem_init, subsec:shmem_finalize, subsec:shmem_query_initialized}%
+%
+\item Added interleaved block transfer APIs \FUNC{shmem\_ibget} and
+    \FUNC{shmem\_ibput}.
+\ChangelogRef{subsec:shmem_ibget, subsec:shmem_ibput}%
+%
+\item Added \FUNC{shmem\_signal\_add} and \FUNC{shmem\_signal\_set} to
+  update a remote flag without associated data transfer of a put-with-signal operation.
+\ChangelogRef{subsec:shmem_signal_add, subsec:shmem_signal_set}%
 %
 \item Added a team-based pointer query routine:
   \FUNC{shmem\_team\_ptr}.
 \ChangelogRef{subsec:shmem_team_ptr}%
 %
-\item Clarified that \FUNC{shmem\_team\_split\_strided} and
-    \FUNC{shmem\_team\_split\_strided} return a nonzero value when the parent
-    team compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}.
-\ChangelogRef{subsec:shmem_team_split_strided, subsec:shmem_team_split_2d}%
+\item Clarified that the behavior of \FUNC{shmem\_team\_split\_strided} is
+    undefined when the input \VAR{start}, \VAR{stride}, and \VAR{size} arguments
+    imply a \textit{wrap-around} with respect to the parent team's \acp{PE}.
+\ChangelogRef{subsec:shmem_team_split_strided}%
+%
+\item Added the session routines, \FUNC{shmem\_ctx\_session\_start} and
+    \FUNC{shmem\_ctx\_session\_stop}, which allow users to pass hints to the
+    \openshmem library to apply runtime optimizations.
+\ChangelogRef{subsec:sessions}%
+\item Added fine grained completion routine: \FUNC{shmem\_pe\_quiet}.
+\ChangelogRef{subsec:shmem_pe_quiet}%
+%
+\item Split the listings for the \FUNC{shmem\_\{malloc, free, realloc, align\}}
+  functions from a single entry in \openshmem[1.5] into separate entries.
+\ChangelogRef{subsec:shmem_malloc, subsec:shmem_free, subsec:shmem_realloc,
+  subsec:shmem_align}%
+%
+\item Clarified that the \FUNC{shmem\_\{malloc, free, realloc, align,
+    malloc\_with\_hints, calloc\}} functions are collective operations on
+    the world team.
+\ChangelogRef{subsec:shmem_malloc, subsec:shmem_free, subsec:shmem_realloc,
+  subsec:shmem_align, subsec:shmmallochint, subsec:shmem_calloc}%
+%
+\item Clarified that \FUNC{shmem\_team\_get\_config} returns the current
+    configuration values, which may differ from the values assigned at the
+        time of the team's creation.
+\ChangelogRef{subsec:shmem_team_get_config}
+%
+\item Clarified the behavior of \FUNC{shmem\_team\_get\_config} when the
+    \VAR{config\_mask} is 0 and/or the \VAR{config} argument is a null pointer.
+\ChangelogRef{subsec:shmem_team_get_config}
+%
+\item Clarified the behavior of \FUNC{shmem\_team\_split\_strided} when the
+    stride argument is 0 or negative.
+\ChangelogRef{subsec:shmem_team_split_strided}
+%
+\item Clarified the requirements for the source buffer before entering the
+    collective routines.
+\ChangelogRef{subsec:shmem_alltoall,subsec:shmem_broadcast,subsec:shmem_collect,subsec:shmem_reductions,subsec:shmem_scan}
+%
+\item Added a new Errata Section~\ref{sec:errata} that indicates errors or ambiguities in the
+    \openshmem specification and the version that required correction or clarification.
+\ChangelogRef{sec:errata}
 %
 \item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
     \openshmem[1.5] Table 10, and clarified the types, names, and supporting
-    operations for team-based reductions.
+    operations for team-based reductions. \label{changelog:reduction_table}
 \ChangelogRef{teamreducetypes}%
-\end{itemize}
+%
+\item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
+    across \acp{PE} in \openshmem reductions \label{changelog:reduction_args}
+\ChangelogRef{subsec:shmem_reductions}
+%
+\item Clarified that \OPR{Fence} operations only guarantee ordering for
+    operations that are performed on the same context. \label{changelog:fence_ctx}
+\ChangelogRef{subsec:shmem_fence}%
+%
+\item Clarified that \FUNC{shmem\_test\_all} and \FUNC{shmem\_test\_all\_vector}
+    routines return 1 when the test set is empty. \label{changelog:test_all}
+\ChangelogRef{subsec:shmem_test_all,subsec:shmem_test_all_vector}%
+%
+\item Clarified that \FUNC{shmem\_team\_split\_strided} and
+    \FUNC{shmem\_team\_split\_strided} return a nonzero value when the parent
+        team compares equal to \LibConstRef{SHMEM\_TEAM\_INVALID}. \label{changelog:split_strided_2d}
+\ChangelogRef{subsec:shmem_team_split_strided, subsec:shmem_team_split_2d}%
+%
+\item Corrected the level argument's recommended value in API notes for
+    \FUNC{shmem\_pcontrol} to indicate that the value should be greater than
+    2 to enable profiling with profile library defined effects and
+    additional arguments. \label{changelog:pcontrol}
+\ChangelogRef{subsec:shmem_pcontrol}
+%
+\item Added a \texttt{const} qualifier to the \VAR{cmp\_values} argument in the
+    following point-to-point synchronization routines:
+    \FUNC{shmem\_wait\_until\_all\_vector},
+    \FUNC{shmem\_wait\_until\_any\_vector},
+    \FUNC{shmem\_wait\_until\_some\_vector},
+    \FUNC{shmem\_test\_all\_vector}, \FUNC{shmem\_test\_any\_vector}, and
+    \FUNC{shmem\_test\_some\_vector}. \label{changelog:p2p_vector_const}
+\ChangelogRef{
+  subsec:shmem_wait_until_all_vector,
+  subsec:shmem_wait_until_any_vector,
+  subsec:shmem_wait_until_some_vector,
+  subsec:shmem_test_all_vector,
+  subsec:shmem_test_any_vector,
+  subsec:shmem_test_some_vector}%
+%
+
+\end{enumerate}
 
 \section{Version 1.5}
 Major changes in \openshmem[1.5] include the addition of new team-based
@@ -683,7 +795,7 @@ comparison functions, a \FUNC{shmem\_malloc\_with\_hints} function, a profiling
 interface, and the removal of the entire \Fortran \ac{API}.
 
 The following list describes the specific changes in \openshmem[1.5]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Removed \FUNC{SHMEM\_CACHE}.
 \ChangelogRef{dep:shmem_cache}%
@@ -763,15 +875,18 @@ all \acp{PE}, including the root \ac{PE}.
 \item Added support for nonblocking \OPR{put-with-signal} functions.
 \ChangelogRef{subsec:shmem_put_signal_nbi}%
 %
+\item Added \FUNC{shmem\_signal\_fetch} function.
+\ChangelogRef{subsec:shmem_signal_fetch}%
+%
 \item Deprecated point-to-point synchronization types and names.
 \ChangelogRef{p2psynctypes, dep:p2p_sync_types}%
 %
 \item Clarified that point-to-point synchronization routines preserve the
-  atomicity of OpenSHMEM \acp{AMO}.
+  atomicity of \openshmem \acp{AMO}.
 \ChangelogRef{subsec:amo_guarantees}%
 %
 \item Clarified that symmetric variables used as \VAR{ivar} arguments to
-  point-to-point synchronization routines must be updated using OpenSHMEM
+  point-to-point synchronization routines must be updated using \openshmem
   \acp{AMO}.
 \ChangelogRef{subsec:p2p_intro}%
 %
@@ -824,7 +939,7 @@ environment variables.
     symmetric heap management routines that perform no action do not perform a
     barrier; and that the \VAR{alignment} argument to \FUNC{shmem\_align} must
     be power of two multiple of \CONST{sizeof(void*)}.
-\ChangelogRef{subsec:shfree}%
+\ChangelogRef{subsec:shmem_malloc, subsec:shmem_align, subsec:shmem_realloc}%
 %
 \item Clarified that the \openshmem lock \ac{API} provides a non-reentrant mutex and
     that \FUNC{shmem\_clear\_lock} performs a quiet operation on the default
@@ -834,7 +949,7 @@ environment variables.
 \item Clarified the atomicity guarantees of the \openshmem memory model.
 \ChangelogRef{subsec:amo_guarantees}%
 %
-\end{itemize}
+\end{enumerate}
 
 \section{Version 1.4}
 Major changes in \openshmem[1.4] include
@@ -849,7 +964,7 @@ atomic bitwise operations,
 and \Cstd[11] type-generic interfaces for point-to-point synchronization.
 
 The following list describes the specific changes in \openshmem[1.4]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item New communication management \ac{API}, including \FUNC{shmem\_ctx\_create};
     \FUNC{shmem\_ctx\_destroy}; and additional \ac{RMA}, \ac{AMO}, and memory ordering
@@ -944,7 +1059,7 @@ synchronization routines.
 %
 \item Expanded the type support for \ac{RMA}, \ac{AMO}, and point-to-point
     synchronization operations.
-%% cleveref will compress a list of references by default. It is better to not                                                                                                                             
+%% cleveref will compress a list of references by default. It is better to not
 %% compress this list of *table* references because the clickable hyperref
 %% links are useful. You can tell cleveref to not compress the LHS and RHS by
 %% inserting an empty item between them; i.e., `,,`.
@@ -969,7 +1084,7 @@ synchronization routines.
 \item Clarified that complex-typed reductions in C are optionally supported.
 \ChangelogRef{subsec:shmem_reductions}%
 %
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -982,7 +1097,7 @@ all-to-all collectives,
 and \Cstd[11] type-generic interfaces for \ac{RMA} and \ac{AMO} operations.
 
 The following list describes the specific changes in \openshmem[1.3]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Clarified implementation of \acp{PE} as threads.
 %
@@ -1023,7 +1138,7 @@ The following list describes the specific changes in \openshmem[1.3]:
 \item Deprecation of \FUNC{SHMEM\_CACHE}.
 \ChangelogRef{dep:shmem_cache}%
 %
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -1038,7 +1153,7 @@ namespace standardization,
 and clarifications to several \ac{API} descriptions.
 
 The following list describes the specific changes in \openshmem[1.2]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Added specification of \VAR{pSync} initialization for all routines that use it.
 %
@@ -1075,10 +1190,10 @@ The following list describes the specific changes in \openshmem[1.2]:
 %
 \item \openshmem library \ac{API} normalization. All \Cstd symmetric memory management
       \ac{API} begins with \FUNC{shmem\_}.
-\ChangelogRef{subsec:shfree, dep:func_not_shmemunder}%
+\ChangelogRef{sec:memory_management, dep:func_not_shmemunder}%
 %
 \item Notes and clarifications added to \FUNC{shmem\_malloc}.
-\ChangelogRef{subsec:shfree}%
+\ChangelogRef{subsec:shmem_malloc}%
 %
 \item Deprecation of \Fortran \ac{API} routine \FUNC{SHMEM\_PUT}.
 \ChangelogRef{dep:fortran_shmem_put}%
@@ -1094,7 +1209,7 @@ See \openshmem[1.4], Section 9.5.1.
       support across versions of the \openshmem Specification.
 \ChangelogRef{sec:dep}%
 %
-\end{itemize}
+\end{enumerate}
 
 
 
@@ -1105,10 +1220,10 @@ the introduction of the \HEADER{shmemx.h} header file for nonstandard \ac{API}
 extensions,
 clarifications to completion semantics and \ac{API} descriptions in agreement with
 the \ac{SGI} SHMEM specification,
-and general readabilty and usability improvements to the document structure.
+and general readability and usability improvements to the document structure.
 
 The following list describes the specific changes in \openshmem[1.1]:
-\begin{itemize}
+\begin{enumerate}
 %
 \item Clarifications of the completion semantics of memory synchronization
       interfaces.
@@ -1173,7 +1288,7 @@ calls are encountered.
 \ChangelogRef{subsec:shmem_atomic_inc}%
 %
 \item Clarification of the size of the symmetric heap and when it is set.
-\ChangelogRef{subsec:shfree}%
+\ChangelogRef{sec:memory_management}%
 %
 \item Clarification of the integer and real sizes for \Fortran \ac{API}.
 \ChangelogRef{
@@ -1201,7 +1316,7 @@ include appropriate header files.
 \item Removing requirement that implementations should detect size mismatch and
 return error information for \FUNC{shmalloc} and ensuring consistent
 language.
-\ChangelogRef{subsec:shfree, sec:undefined}%
+\ChangelogRef{subsec:shmem_malloc, sec:undefined}%
 %
 \item \Fortran programming fixes for examples.
 \ChangelogRef{subsec:shmem_reductions, subsec:shmem_wait_until}%
@@ -1217,6 +1332,55 @@ collectives.
 \item Name changes for UV and ICE for \ac{SGI} systems.
 \ChangelogRef{sec:openshmem_history}%
 %
-\end{itemize}
+\end{enumerate}
+
+\chapter{Errata}\label{sec:errata}
+
+Errors or ambiguities in the \openshmem specification may be discovered after
+publication.
+Errata, or corrections, are included in the sections below indicating the
+version of the \openshmem specification that required the correction or
+clarification.
+These corrections have been applied to all subsequent versions of the
+specification and this section serves as a historical record of the changes
+made to assist users and implementors with applying the necessary corrections.
+Errata that result in a change to the specification are also included in
+Annex~\ref{sec:changelog}.
+For an implementation to comply with a particular version of \openshmem, it
+must account for all errata associated with that version as indicated below.
+
+\section{Version 1.5}
+
+\begin{enumerate}
+  \item Removed \openshmem[1.5] Table 9, which was an incomplete duplicate of
+      \openshmem[1.5] Table 10, and clarified the types, names, and supporting
+      operations for team-based reductions
+        (\ref{changelog:v1.6}.\ref{changelog:reduction_table}).
+  \item Clarified that \VAR{source} and \VAR{dest} arrays must be the same
+      across \acp{PE} in \openshmem reductions
+        (\ref{changelog:v1.6}.\ref{changelog:reduction_args}).
+  \item Clarified that \OPR{Fence} operations only guarantee ordering for operations
+     that are performed on the same context
+        (\ref{changelog:v1.6}.\ref{changelog:fence_ctx}).
+  \item Clarified that \FUNC{shmem\_test\_all} and
+     \FUNC{shmem\_test\_all\_vector} routines return 1 when the test set is empty
+        (\ref{changelog:v1.6}.\ref{changelog:test_all}).
+  \item Clarified that \FUNC{shmem\_team\_split\_strided} and
+     \FUNC{shmem\_team\_split\_2d} return a nonzero value when the parent team is
+     \LibConstRef{SHMEM\_TEAM\_INVALID}
+        (\ref{changelog:v1.6}.\ref{changelog:split_strided_2d}).
+  \item Corrected the \VAR{level} argument's recommended value in API notes for
+     \FUNC{shmem\_pcontrol} to indicate that the value should be greater than 2 to enable
+     profiling with profile library defined effects and additional arguments
+        (\ref{changelog:v1.6}.\ref{changelog:pcontrol}).
+  \item Added a \texttt{const} qualifier to the \VAR{cmp\_values} argument in the
+     following point-to-point synchronization routines:
+     \FUNC{shmem\_wait\_until\_all\_vector},
+     \FUNC{shmem\_wait\_until\_any\_vector},
+     \FUNC{shmem\_wait\_until\_some\_vector},
+     \FUNC{shmem\_test\_all\_vector}, \FUNC{shmem\_test\_any\_vector}, and
+     \FUNC{shmem\_test\_some\_vector}
+        (\ref{changelog:v1.6}.\ref{changelog:p2p_vector_const}).
+\end{enumerate}
 
 %end of setlength command that was started in frontmatter.tex

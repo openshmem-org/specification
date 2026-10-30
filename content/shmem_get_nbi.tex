@@ -39,12 +39,13 @@ void @\FuncDecl{shmem\_ctx\_getmem\_nbi}@(shmem_ctx_t ctx, void *dest, const voi
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{}
         arrays. For \FUNC{shmem\_getmem\_nbi} and
         \FUNC{shmem\_ctx\_getmem\_nbi}, elements are bytes.}
-    \apiargument{IN}{pe}{\ac{PE}  number of the remote \ac{PE}.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+      with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{
     The get routines provide a method for copying a contiguous symmetric data
-   object from a different \ac{PE} to a contiguous data object on the local
+   object from a remote \ac{PE} to a contiguous data object on the local
    \ac{PE}.   The routines return after initiating the operation.  The operation is considered
     complete after a subsequent call to \FUNC{shmem\_quiet}.
     At the completion of \FUNC{shmem\_quiet}, the

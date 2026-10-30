@@ -37,12 +37,13 @@ void @\FuncDecl{shmem\_ctx\_getmem}@(shmem_ctx_t ctx, void *dest, const void *so
       The type of \source{} should match that implied in the SYNOPSIS section.}
     \apiargument{IN}{nelems}{Number of elements in the \dest{} and \source{} arrays.
       For \FUNC{shmem\_getmem} and \FUNC{shmem\_ctx\_getmem}, elements are bytes.}
-    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE}.}
+    \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+      with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{
    The get routines provide a method for copying a contiguous symmetric data
-   object from a different \ac{PE} to a contiguous data object on the local
+   object from a remote \ac{PE} to a contiguous data object on the local
    \ac{PE}.  The routines return after the data has been delivered to the
    \dest{} array on the local \ac{PE}.
 }

@@ -1,25 +1,28 @@
 \emph{Collective routines} are defined as coordinated communication or synchronization
 operations performed by a group of \acp{PE}.
 
-\openshmem provides three types of collective routines:
+\openshmem provides four types of collective routines:
 
 \begin{enumerate}
-\item Collective routines that operate on teams use a team handle parameter to determine
-  which \acp{PE} will participate in the routine, and use resources encapsulated by the team object
-  to perform operations. See Section~\ref{subsec:team} for details on team management.
+    \item Collective routines that operate on teams use a team handle parameter to determine
+    which \acp{PE} will participate in the routine, and use resources encapsulated by the team object
+    to perform operations. See Section~\ref{subsec:team} for details on team management.
 
-\begin{DeprecateBlock}
-\item Collective routines that operate on active sets use a set of parameters to determine
-  which \acp{PE} will participate and what resources are used to perform operations.
-\end{DeprecateBlock}
+    \begin{DeprecateBlock}
+    \item Collective routines that operate on active sets use a set of parameters to determine
+    which \acp{PE} will participate and what resources are used to perform operations.
 
-\item Collective routines that accept neither team nor active set
-  parameters, which implicitly operate on the world team and, as
-  required, the default context.
+    \item Collective routines that do not accept active set
+    parameters and, as required, the default context.
+    \end{DeprecateBlock}
+
+    \item Collective routines that do not accept team
+    parameters, which implicitly operate on the world team and, as
+    required, the default context.
 \end{enumerate}
 
 Concurrent accesses to symmetric memory by an \openshmem collective
-routine and any other means of access---where at least one updates the
+routine and any other means of access---where at least one \ac{PE} updates the
 symmetric memory---results in undefined behavior.
 Since \acp{PE} can enter and exit collectives at different times,
 accessing such memory remotely may require additional synchronization.
@@ -55,6 +58,7 @@ The team-based collective routines defined in the \openshmem Specification are:
 \item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]collect[mem]}
 \item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]fcollect[mem]}
 \item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]\{and, or, xor, max, min, sum, prod\}\_reduce}
+\item \FUNC{shmem\_[\FuncParam{TYPENAME}\_]sum\_\{in, ex\}scan}
 \end{itemize}
 
 In addition, all team creation functions are collective operations. In addition to the ordering

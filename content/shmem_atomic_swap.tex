@@ -39,8 +39,8 @@ where \TYPE{} is one of \{\CTYPE{float}, \CTYPE{double}, \CTYPE{int},
     The type of \dest{} should match that implied in the SYNOPSIS section.}
   \apiargument{IN}{value}{The value to be atomically written to the remote \ac{PE}.
     The type of \VAR{value} should match that implied in the SYNOPSIS section.}
-  \apiargument{IN}{pe}{ An integer that indicates the \ac{PE} number on which
-    \dest{} is to be updated.}
+  \apiargument{IN}{pe}{\ac{PE} number of the remote \ac{PE} relative to the team associated
+    with the given \VAR{ctx} when provided, or the default context otherwise.}
 \end{apiarguments}
 
 \apidescription{
