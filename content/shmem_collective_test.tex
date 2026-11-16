@@ -1,0 +1,35 @@
+\apisummary{
+    The routine outputs the status of the operation identified by the request.
+}
+
+\begin{apidefinition}
+
+\begin{Csynopsis}
+int @\FuncDecl{shmem\_req\_test}@(shmem_req_h *request);
+\end{Csynopsis}
+
+\begin{apiarguments}
+
+  \apiargument{IN}{request}{Request handle}
+
+\end{apiarguments}
+
+\apidescription{
+    A call to \FUNC{shmem\_req\_test} returns immediately. If the
+    operation identified by the request is completed, it returns
+    zero, and the request object is deallocated and set to \LibConstRef{SHMEM\_REQ\_INVALID}. 
+    If the operation is not completed, it returns a non-negative integer.
+    If the request object is not valid (i.e., it is set to \LibConstRef{SHMEM\_REQ\_INVALID}),
+    no operation is performed and a negative value is returned.
+
+    In a multithreaded environment, \FUNC{shmem\_req\_test} can be called by
+    different threads but on different request objects. It is the responsibility
+    of the \openshmem user to ensure that proper synchronization is used to
+    prevent race conditions or deadlock.
+    }
+
+\apireturnvalues{
+    On success returns zero, otherwise returns a nonzero integer.
+    }
+
+\end{apidefinition}

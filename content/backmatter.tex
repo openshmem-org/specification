@@ -665,6 +665,28 @@ standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
 \chapter{Changes to this Document}\label{sec:changelog}
 
+\section{Version 1.7}
+\label{changelog:v1.7}
+Major changes in \openshmem[1.7] include the addition of nonblocking
+collective operations.
+
+The following list describes the specific changes in \openshmem[1.7]:
+\begin{enumerate}
+%
+\item Added nonblocking variants of the alltoall and broadcast collective
+    operations, \FUNC{shmem\_alltoall\_nb} and \FUNC{shmem\_broadcast\_nb}.
+\ChangelogRef{subsec:nb_coll,
+  subsec:shmem_alltoall_nb,
+  subsec:shmem_broadcast_nb}%
+%
+\item Added the \FUNC{shmem\_req\_test} and \FUNC{shmem\_req\_wait} routines and
+    the \CONST{SHMEM\_REQ\_INVALID} constant to query the completion of
+    nonblocking collective operations.
+\ChangelogRef{subsec:shmem_collective_test, subsec:shmem_collective_wait,
+  subsec:library_constants}%
+%
+\end{enumerate}
+
 \section{Version 1.6}
 \label{changelog:v1.6}
 Major changes in \openshmem[1.6] include the addition of inclusive and
