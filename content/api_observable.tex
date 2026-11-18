@@ -301,7 +301,7 @@ nelems):
     \tabularnewline\hline
 Collective Routine
     & \begin{BVerbatim}
-shmem_broadcast(team, dest, source, dst, PE_root):
+shmem_broadcast(team, dest, source, nelems, PE_root):
   for i in nelems:
     R1 = LD source[i], PE_root
     for pe in team:
@@ -310,12 +310,47 @@ shmem_broadcast(team, dest, source, dst, PE_root):
     \tabularnewline\hline
 Collective Routine
     & \begin{BVerbatim}
-shmem_[f]collect(team, dest, source, nelems):
+shmem_collect(team, dest, source, nelems_by_pe):
+  offset[pe_src] = prefix_sum(nelems_by_pe, pe_src)
   for pe_src in team:
-    for pe_dst in team
-      for i in nelems:
-        R1 = LD source[i], pe_src
-        ST R1 -> dest[nelems*pe_dst+i], pe_dst
+    for i in nelems_by_pe[pe_src]:
+      R1 = LD source[i], pe_src
+      for pe_dst in team:
+        ST R1 -> dest[offset[pe_src]+i], pe_dst
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_fcollect(team, dest, source, nelems):
+  for pe_src in team:
+    for i in nelems:
+      R1 = LD source[i], pe_src
+      for pe_dst in team:
+        ST R1 -> dest[nelems*team_idx(pe_src)+i], pe_dst
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_sum_inscan(team, dest, source, nelems):
+  for dest_pe in team:
+    for i in nelems:
+      R1 = 0
+      for pe_src in 0 : dest_pe:
+        R2 = LD source[i], pe_src
+        R1 = R1 + R2
+      ST R1 -> dest[i], dest_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_sum_exscan(team, dest, source, nelems):
+  for dest_pe in team:
+    for i in nelems:
+      R1 = 0
+      for pe_src in 0 : dest_pe-1:
+        R2 = LD source[i], pe_src
+        R1 = R1 + R2
+      ST R1 -> dest[i], dest_pe
     \end{BVerbatim}
     \tabularnewline\hline
 Collective Routine
