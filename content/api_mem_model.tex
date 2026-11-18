@@ -12,26 +12,28 @@ To precisely define what behavior the \openshmem interface guarantees for both u
     few bulk cache actions).
 
 This section describes how \openshmem extends the C11 memory consistency model. C11 is
-    chosen as an example because of its generality and ubiquity in the CPU domain, and
-    because it forms the basis for common GPU programming languages (for example, CUDA,
-    HIP). Section~\ref{subsubsec:api_pl_baseline} summarizes the baseline C11 memory
-    model, Sections~\ref{subsubsec:api_model_overview}-\ref{subsubsec:api_integrate}
-    describe how this programming language-level model is extended to provide API-level
-    semantics for \openshmem, and Section~\ref{subsubsec:api_scoped} describes how the
-    guarantees of the API-level model can be adapted for GPU memory models.
+    used as the reference programming-language memory model because it underlies the
+    rest of this specification. The API-level guarantees defined here are normative for
+    \openshmem implementations regardless of the programming-language memory model used
+    by an implementation. Section~\ref{subsubsec:api_pl_baseline} summarizes the
+    baseline C11 memory model,
+    Sections~\ref{subsubsec:api_model_overview}-\ref{subsubsec:api_integrate} describe
+    how this programming-language model is extended to provide API-level semantics for
+    \openshmem, and Section~\ref{subsubsec:api_scoped} describes how the guarantees of
+    the API-level model can be adapted for GPU memory models.
 
-\subsubsection{Baseline PL-level Axiomatic Memory Model (C11)}
-\label{subsubsec:api_pl_baseline}
+\subsubsection{Baseline PL-level Axiomatic Memory Model (C11)}\label{subsubsec:api_pl_baseline}
 
-A memory consistency model (MCM) defines what values loads are allowed to return in a
-    multi-threaded program. One common way to formally specify a MCM is via axioms over
-    relations between events in a dynamic execution. Axiomatic formalization begins by
-    considering all possible “candidate” executions of a parallel program. Loads may
-    return the value of a conflicting store anywhere else in the execution, or the
-    initial value at that memory location (i.e., allowing all possible reorderings). The
-    model then defines relations between accesses in the candidate executions, and using
-    axioms over these relations, defines which executions are legal (hence restricting
-    which reorderings are allowed by the compiler or hardware).
+A memory consistency model (MCM) specifies the executions that are permitted in a
+    multithreaded program, including the values that load operations may return. One
+    common way to formalize an MCM is through axioms over relations among events in an
+    execution graph. Axiomatic formalization begins by considering candidate executions
+    of a parallel program. In a candidate execution, each load is associated with a
+    write to the same memory location—including the initial write to that location—from
+    which it obtains its value. The model then defines relations among the events in
+    these candidate executions and uses axioms over those relations to determine which
+    executions are legal. These constraints limit the reorderings allowed by the
+    compilers and hardware.
 
 The C11 memory model is defined axiomatically in the C11 specification \S5.1.2.4.
     Although many prior works aim to mathematize or improve this formalism, the intent
@@ -98,9 +100,13 @@ Finally, the C11 specification states that, if a data race exists in a candidate
     the conforming candidate executions.
 
 \begin{description}
-\apinotes{Consume and sequential consistent memory orders are omitted from the above
-    formalism for simplicity, but this does not impact how the PL-level semantics are
-    extended for the API-level model.
+\apinotes{Consume and sequentially consistent memory orders are omitted from the above
+    formalism for simplicity, so the baseline summarized here is a subset of the full
+    C11 model. Language-level atomic accesses, including sequentially consistent
+    accesses, are treated as ordinary accesses by the API-level model and do not by
+    themselves synchronize with \openshmem operations. Accesses to the same location by
+    a language-level atomic and an \openshmem operation must be ordered by \relAHB{} to
+    avoid an API data race (Section~\ref{subsubsec:api_integrate}).
 Also, instead of the verbose prose axioms defined in the C11 specification, the C11
     axioms are expressed above using the more concise (and equivalent) representation
     outlined by Batty et al. in "Overhauling SC atomics in C11 and OpenCL" (Symposium on
@@ -110,18 +116,18 @@ Also, instead of the verbose prose axioms defined in the C11 specification, the 
 
 \subsubsection{API-Level Memory Model Overview}\label{subsubsec:api_model_overview}
 
-The \openshmem API-level memory model extends PL-level memory models like C11 to define
-    how \openshmem operations interact with memory. PL-level models use acquire and
-    release semantics to establish ordering relations between fine-grain loads, stores,
-    and fences. The API-level memory model must additionally operate on coarse-grain API
-    operations like \GET{}, \PUT{}, barrier, etc. that can execute asynchronously and
-    involve multiple \acp{PE}.
-Rather than defining allowed behavior by leveraging PL-level events and relations, we
-    can more flexibly capture the higher level ordering requirements of \openshmem by
-    defining new events and ordering relations. These can then be lowered to PL-level
-    relations transparently to the programmer, enabling a wide range of backend
-    implementations. We formalize allowed behavior by extending the axiomatic PL-level
-    memory model to incorporate these new events and relations.
+The \openshmem API-level memory model extends the C11 memory consistency model to define
+    how \openshmem operations interact with memory. C11 is the reference model for this
+    formalization; the resulting API-level guarantees apply regardless of the
+    programming-language memory model used by an implementation. PL-level models use
+    acquire and release semantics to establish ordering relations between fine-grain
+    loads, stores, and fences. The API-level model additionally specifies ordering for
+    coarse-grain operations such as \GET{}, \PUT{}, and barriers, which can execute
+    asynchronously and involve multiple \acp{PE}.
+The API-level model captures these higher-level ordering requirements by defining
+    operation events and API-level ordering relations. An implementation may lower these
+    relations to PL-level operations and relations, enabling different backend
+    implementations while preserving the API-level guarantees.
 
 To describe the desired \openshmem behavior, the API-level memory model makes the
     following additions to the existing PL-level model:
@@ -133,10 +139,10 @@ To describe the desired \openshmem behavior, the API-level memory model makes th
 	    the target \ac{PE}. This provides a basis for operation-level semantics across
 	    multiple \ac{PE} memories.
 	\item\label{mcmsteps:two} \textbf{Per-operation observable accesses}: For each
-	    operation type, Section~\ref{subsubsec:api_observable} defines a set of observable
-	    memory accesses (these are not related to the initiating thread by \relSB{}). This
-	    enables asynchrony since a thread can continue execution while observable accesses
-	    execute in the background.
+	    operation type, Section~\ref{subsubsec:api_observable} defines the minimum set of
+	    observable memory accesses entailed by that operation. These accesses are not
+	    related to the initiating thread by \relSB{}, which allows the thread to continue
+	    execution while observable accesses execute asynchronously.
 	\item\label{mcmsteps:four} \textbf{Coalesced collectives}:
 	    Section~\ref{subsubsec:api_fused} coalesces matched collective operation calls into
 	    a single event. This supports multi-PE collective operations and establishes
@@ -168,52 +174,48 @@ When defining behavior at the \openshmem API level, there are two key difference
         Therefore, the PL-level definition of memory location and memory conflicts is
         extended to include both the memory address and the target \ac{PE} ID of a
         memory access.
-    \item \openshmem API operations are treated as a new type of primitive in the API
-        memory model: the operation event. An operation event specifies its type, and
-        each type defines the set of minimum observable accesses triggered by the
-        operation (described next). Operation events participate in \relSB{} and derived
-        relations, similar to normal thread access events, but they do not participate
-        directly in access-based relations like \relMO{}, \relRF{}, and \relSW{} (though
-        their observable accesses may).
+    \item \openshmem operations are modeled as a distinct kind of event in the API memory
+        model: an operation event. Each operation event has a specified type, and each
+        type defines a set of minimum observable accesses that the operation entails, as
+        described below. Operation events participate in \relSB{} and in relations
+        derived from \relSB{}, alongside ordinary thread-access events. However,
+        operation events do not themselves participate directly in access-based relations
+        such as \relMO{}, \relRF{}, and \relSW{}; the observable accesses associated with
+        an operation event may participate in those relations.
 \end{enumerate}
 
-The \ac{PE} ID of an observable access generated by an operation event (referred to
-    going forward as "observable accesses") is defined in
-    Table~\ref{table:api_observable} as either the \ac{PE} of the calling thread
-    (\texttt{my\_pe}) or a \ac{PE} ID provided as a parameter to the operation.
-The \ac{PE} ID of a PL-level load, store, or RMW access (referred to going forward as
-    "normal accesses") is the \ac{PE} of the calling thread, unless the address is
-    derived from a \FUNC{shmem\_ptr} operation (in which case the \ac{PE} ID is the
-    target \ac{PE} of the \FUNC{shmem\_ptr} operation).
+The \ac{PE} ID of an observable access generated by an operation event (an ``observable
+    access'') is defined in Table~\ref{table:api_observable} as either the \ac{PE} of
+    the calling thread (\texttt{my\_pe}) or a \ac{PE} ID provided as a parameter to the
+    operation.
+A PL-level load, store, or RMW access is called an ``ordinary access.'' Its \ac{PE} ID
+    is the \ac{PE} of the calling thread, unless its address is derived from a
+    \FUNC{shmem\_ptr} operation, in which case its \ac{PE} ID is the target \ac{PE}
+    specified by that operation.
 
 \subsubsection{Per-Operation Observable Accesses}\label{subsubsec:api_observable}
 
-For the purposes of the API memory model, each \openshmem operation type defines the
-    minimum set of observable memory accesses performed by the operation. These accesses
-    are considered to be ``issued'' by the associated operation. These accesses must
-    occur as part of the operation, however the API-level model places no constraints on
-    the thread that executes observable accesses (i.e., they may or may not be executed
-    by the initiating thread), and it does not prevent an implementation from performing
-    other accesses (e.g., for implementation-internal synchronization, buffering, etc.
-    -- although data accessed in this way must not be accessed by code external to the
-    implementation).
-Observable accesses have the same semantics as normal accesses and take part in the same
-    relations, with two exceptions:
+For the purposes of the API memory model, each \openshmem operation type defines a
+    minimum set of observable memory accesses that the operation must perform. These
+    accesses are ``issued'' by the associated operation and must occur as part of it.
+    The model does not constrain which thread executes an observable access; it may be
+    executed by the initiating thread or another thread. An implementation may also
+    perform other accesses for internal purposes, such as synchronization or buffering,
+    but data accessed solely for those purposes must not be accessed by code outside the
+    implementation.
+Observable accesses have the same semantics as ordinary accesses and participate in the
+    same access-based relations, with two exceptions:
 \begin{enumerate}
   \item There is no \relSB{} ordering between a thread calling an \openshmem operation
-      and any observable accesses issued by that operation.\footnote{Although the
-      operation event itself is \relSB{} ordered with events in the calling thread, this
-      does not imply anything about observable access completion order by itself, and is
-      instead used to anchor and define API-level relations that order observable
-      accesses (defined in Section~\ref{subsubsec:api_relations}).}
-  Instead, Section~\ref{subsubsec:api_relations} defines the relations that constrain
-      observable access ordering at the API level.
-  \item There are no synchronization semantics (atomic, acquire/release ordering)
-      associated with observable accesses. Although the accesses may be lowered to
-      PL-level accesses with these semantics, at the API level, ordering relations and
-      data race conditions are defined at the level of the operation that issues them
-      (see Sections~\ref{subsubsec:api_relations} and~\ref{subsubsec:api_integrate},
-      respectively).
+      and observable accesses issued by that operation. The operation event itself is
+      \relSB{} ordered with events in the calling thread, but this alone does not
+      constrain the observable accesses. Instead, the API-level relations in
+      Section~\ref{subsubsec:api_relations} define their ordering.
+  \item Observable accesses do not have API-level atomic, acquire, or release semantics.
+      An implementation may lower them to PL-level accesses with such semantics, but
+      API-level ordering and data-race conditions are defined in terms of the issuing
+      operation (Sections~\ref{subsubsec:api_relations}
+      and~\ref{subsubsec:api_integrate}).
 \end{enumerate}
 %In addition, accesses performed by an implementation that are not included in the observable set must not modify data that may be observed from application code external to \openshmem operation implementations. 
 
@@ -276,9 +278,9 @@ Section~\ref{subsubsec:api_observable} details how operations trigger observable
     in an execution. To formalize ordering constraints on \openshmem operation behavior,
     this section defines a set of new API-level ordering relations.
 In the same way that PL-level relations (\relSB{}, \relSW{}, \relHB{}) are defined to
-    constrain ordering between normal memory accesses, these new API relations establish
-    ordering constraints between normal memory accesses, operations, and observable
-    accesses from those operations.
+    constrain ordering between ordinary memory accesses, these new API relations
+    establish ordering constraints between ordinary memory accesses, operations, and
+    observable accesses from those operations.
 Table~\ref{table:api_relations} summarizes what types of accesses each API-level
     relation may connect, and which \openshmem operations may establish it.
 In Section~\ref{subsubsec:api_integrate}, these new API relations are then used to
@@ -288,7 +290,7 @@ In Section~\ref{subsubsec:api_integrate}, these new API relations are then used 
 \normalsize
 \begin{longtable}{|p{0.18\textwidth}|>{\centering\arraybackslash}p{0.12\textwidth}|>{\centering\arraybackslash}p{0.12\textwidth}|>{\centering\arraybackslash}p{0.14\textwidth}|p{0.29\textwidth}|}
 \hline
-\textbf{API Relation} & \textbf{Normal $\leftrightarrow$ Normal} & \textbf{Normal $\leftrightarrow$ Observable} & \textbf{Observable $\leftrightarrow$ Observable} & \textbf{Established by:}
+\textbf{API Relation} & \textbf{Ordinary $\leftrightarrow$ Ordinary} & \textbf{Ordinary $\leftrightarrow$ Observable} & \textbf{Observable $\leftrightarrow$ Observable} & \textbf{Established by:}
 \tabularnewline\hline
 \endhead
 \relILV{} &   & X &   & All \openshmem operations \tabularnewline\hline
@@ -327,11 +329,11 @@ In Section~\ref{subsubsec:api_integrate}, these new API relations are then used 
 \relRDO{} relates accesses and operations separated by an \openshmem fence operation.
     However, this relation only establishes a partial and asymmetric connectivity; it
     only connects 1) observable accesses to the same \ac{PE} from operations \relHB{}
-    ordered before and after the fence, and 2) normal accesses \relHB{} ordered before a
-    fence and observable accesses from operations \relHB{} ordered after a fence.
-Note that normal accesses are not impacted by \relRDO{} if they are not \relHB{} ordered
-    before the fence, and observable accesses that target different \acp{PE} are not
-    connected by \relRDO{}.
+    ordered before and after the fence, and 2) ordinary accesses \relHB{} ordered before
+    a fence and observable accesses from operations \relHB{} ordered after a fence.
+Note that ordinary accesses are not impacted by \relRDO{} if they are not \relHB{}
+    ordered before the fence, and observable accesses that target different \acp{PE} are
+    not connected by \relRDO{}.
 Specifically, $(A, B) \in rdo$ only if there is an \openshmem fence operation $Fop$ and
     any of the following conditions are true:
 \begin{itemize}
@@ -425,8 +427,7 @@ Operations are ordered within the calling thread by \relSB{}, but their observab
 Note that~\ref{fig:api_execution} depicts only a representative sample of API relations,
     since an exhaustive depiction would be cluttered.
 
-\subsubsection{Updating the PL-Level Model to an API-Level Model}
-\label{subsubsec:api_integrate}
+\subsubsection{Updating the PL-Level Model to an API-Level Model}\label{subsubsec:api_integrate}
 
 We leverage the newly defined observable accesses and ordering relations to define the
     API-level memory model, which is based on the C11 model summarized in
@@ -439,22 +440,29 @@ We first define a new relation, \relAHB{} (\REL{api\_hb}), to be the transitive 
     \item $api\_hb := (hb \cup ilv \cup lco \cup rdo \cup rco \cup asw)^+$
 \end{itemize}
 
+OpenSHMEM \ac{AMO} operations do not provide mutual atomicity with language-level atomic
+    operations. Concurrent accesses to the same location by an \openshmem \ac{AMO} and a
+    language-level atomic operation must be ordered by \relAHB{}; otherwise, they
+    constitute an API data race and the behavior is undefined. This is consistent with
+    the atomicity restrictions in Section~\ref{subsec:amo_guarantees}.
+
 In addition, an \relADR{} is defined to relate any two accesses $A$ and $B$ where all of
     the following are true:
 \begin{itemize}
     \item $A$ and $B$ access the same memory location on the same \ac{PE}.
     \item At least one access is a modifying access (write or read-modify-write).
-    \item Both $A$ and $B$ are normal accesses and at least one of them is not atomic,
-        or both $A$ and $B$ are observable memory accesses issued by \openshmem
-        operations and at least one of them is issued by a non-synchronizing \openshmem
-        operation (defined in Section~\ref{subsubsec:api_relations}), or one of the
-        accesses is a normal memory access and the other is an observable memory access
-        issued by an \openshmem operation.
+    \item Both $A$ and $B$ are ordinary accesses and at least one of them is not atomic;
+        or both are observable memory accesses issued by \openshmem operations and at
+        least one is issued by a non-synchronizing \openshmem operation (defined in
+        Section~\ref{subsubsec:api_relations}); or one is an ordinary access and the
+        other is an observable access issued by an \openshmem operation.
     \item $A$ and $B$ are not related by \relAHB{}.
 \end{itemize}
 
-The following axioms are similarly updated to use \relAHB{} rather than \relHB{}, and to
-    extend RMW atomicity to \openshmem \ac{AMO}s:
+The following axioms are updated to use \relAHB{} rather than \relHB{}. The API-level
+    model also requires \openshmem \ac{AMO}s to satisfy read-modify-write atomicity,
+    subject to the atomicity-domain and datatype restrictions in
+    Section~\ref{subsec:amo_guarantees}:
 \begin{itemize}
     \item $acyclic(api\_hb)$: \relAHB{} cannot have any cycles.
     \item $irreflexive(rf;api\_hb)$: \relAHB{} must be consistent with the \relRF{}
@@ -468,9 +476,9 @@ The following axioms are similarly updated to use \relAHB{} rather than \relHB{}
     \item $irreflexive(rf;sb^{amo\_op} \cup (mo;mo;(sb^{amo\_op})^{-1};rf^{-1}) \cup
         (sb^{amo\_op};mo;rf))$: The observable read of an \openshmem \ac{AMO} must
         always read the last value (in \relMO{}) written before the observable write of
-        the \ac{AMO} (this is the \ac{AMO} analog of the PL-level RMW atomicity axiom).
-        In this axiom, $sb^{amo\_op}$ is defined as the $sb$ relation between the
-        observable read and write accesses issued by an \ac{AMO}.
+        the \ac{AMO} (the \ac{AMO} analog of the PL-level RMW atomicity axiom). Here,
+        $sb^{amo\_op}$ is the $sb$ relation between the observable read and write
+        accesses issued by an \ac{AMO}.
 \end{itemize}
 
 Finally, similar to the C11 memory model, if an \relADR{} exists in a candidate
@@ -480,29 +488,16 @@ Finally, similar to the C11 memory model, if an \relADR{} exists in a candidate
 
 \subsubsection{Compatibility with a Scoped Memory Model}\label{subsubsec:api_scoped}
 
-Memory models for accelerators like GPUs often extend CPU-oriented memory models like
-    C11 with the notion of synchronization scopes. Scopes are necessary to enable
-    efficient synchronization in a system with software-managed cache coherence. A scope
-    is a property assigned to each atomic access that corresponds to a grouping of
-    threads in a program execution. The threads in a grouping may share a cache in the
-    cache hierarchy, such that communication between those threads can occur more
-    efficiently at that cache level.
-When synchronizing between two threads, the synchronizing accesses must use a scope that
-    contains both synchronizing threads; if they do not, this represents a heterogeneous
-    race in the scoped memory model, and program behavior is undefined.
+Accelerator programming models often extend CPU-oriented memory models with
+    synchronization scopes. A scope applies to an atomic access and identifies the group
+    of threads with which that access may synchronize. In a scoped memory model,
+    synchronizing accesses must use a scope that includes both participating threads;
+    otherwise, the execution may be a heterogeneous data race under that model.
 
-Properly scoped synchronization is critical for GPU applications, but it is not
-    necessary to expose it at the level of the \openshmem API. Scopes are important for
-    communication between threads that share a cache level, but the threads
-    participating in inter-PE communication governed by \openshmem generally do not
-    share a cache.
-Of course, implementing \openshmem operations may require synchronization and
-    communication between threads in a \ac{PE} that can benefit from scopes, e.g., when
-    offloading a non-blocking operation to a helper thread. However, this
-    synchronization should be entirely performed within the \openshmem implementation
-    transparently to the user of the \openshmem API. In this way, \openshmem users and
-    implementers may freely and independently optimize their own code without agreeing
-    on the relative locations of \openshmem helper threads.
-This policy has the added benefit of retaining a single simple and portable API-level
-    interface for \openshmem that may be applied on top of memory models that may or may
-    not use scoped synchronization.
+The \openshmem API does not expose synchronization scopes. An implementation may use
+    appropriately scoped synchronization internally, for example when a nonblocking
+    operation is performed by a helper thread. Such implementation-internal
+    synchronization must be transparent to the user and must not require the user to
+    know the locations of implementation helper threads. The API-level guarantees remain
+    portable across implementations, whether or not their underlying memory models use
+    scopes.
