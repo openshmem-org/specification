@@ -2,6 +2,12 @@ An \ac{AMO} is a one-sided communication mechanism that combines memory read,
 update, or write operations with atomicity guarantees described in Section~%
 \ref{subsec:amo_guarantees}.  Similar to the \ac{RMA} routines, described in
 Section~\ref{sec:rma}, the \acp{AMO} are performed only on symmetric objects.
+OpenSHMEM \ac{AMO} operations do not provide mutual atomicity with
+language-level atomic operations. Concurrent accesses to the same location by
+an \openshmem \ac{AMO} and a language-level atomic operation must be ordered
+by the API-level memory model; otherwise, the behavior is undefined. See
+Section~\ref{subsec:amo_guarantees} for the atomicity restrictions and
+Section~\ref{subsubsec:api_integrate} for the API-level data-race definition.
 \openshmem defines two types of \ac{AMO} routines:
 
 \begin{itemize}

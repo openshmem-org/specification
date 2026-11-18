@@ -124,7 +124,9 @@ scenarios, all of which result in undefined behavior.
     \item \label{amo-scenario/4}
         When \openshmem atomic operations and non-\openshmem operations (e.g.,
         load and store operations) are used to access the same location
-        concurrently.
+        concurrently. This includes accesses by language-level atomic
+        operations: \openshmem atomic operations do not provide mutual
+        atomicity with language-level atomics.
 \end{enumerate}
 
 \SourceExample{./example_code/amo_scenario_1.c}{
@@ -160,4 +162,3 @@ scenarios, all of which result in undefined behavior.
   resolved by replacing the local increment operation with an \openshmem
   atomic increment.
 }
-
