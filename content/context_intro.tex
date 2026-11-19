@@ -65,8 +65,8 @@ No options are enabled on the default context.
 
 \apitablerow{\LibConstRef{SHMEM\_CTX\_NOSTORE}}{
     Quiet and fence operations performed on the given context are not
-    required to enforce completion and ordering of memory store
-    operations performed by the application.
-    When ordering of store operations is needed, the application must
+    required to enforce completion and ordering of memory accesses
+    performed by the application.
+    When ordering of memory accesses is needed, the application must
     perform a synchronization operation on a context without the
     \CONST{SHMEM\_CTX\_NOSTORE} option enabled.}

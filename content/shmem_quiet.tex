@@ -1,6 +1,6 @@
 \apisummary{
     Waits for completion of outstanding operations on symmetric data objects
-    issued by a \ac{PE}.
+    issued by a \ac{PE}, as well as prior memory accesses.
 }
 
 \begin{apidefinition}
@@ -34,7 +34,9 @@ void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
 \apinotes{
     \FUNC{shmem\_quiet} is most useful as a way of ensuring completion of
     several operations on symmetric data objects initiated by the calling
-    \ac{PE}. For example, one might use \FUNC{shmem\_quiet} to await delivery
+    \ac{PE}. 
+    It also ensures completion prior memory accesses.
+    For example, one might use \FUNC{shmem\_quiet} to await delivery
     of a block of data before issuing another \PUT{} or nonblocking
     \PUT{} routine, which sets a completion flag on another \ac{PE}.
     \FUNC{shmem\_quiet} is not usually needed if
@@ -46,8 +48,8 @@ void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
     user's responsibility to ensure ordering between operations issued by the
     threads in a \ac{PE} that target symmetric memory and calls by threads in
     that \ac{PE} to \FUNC{shmem\_quiet}. The \FUNC{shmem\_quiet} routine can
-    enforce memory store ordering only for the calling thread. Thus, to ensure
-    ordering for memory stores performed by a thread that is not the thread
+    enforce memory access ordering only for the calling thread. Thus, to ensure
+    ordering for memory accesses performed by a thread that is not the thread
     calling \FUNC{shmem\_quiet}, the update must be made visible to the calling
     thread according to the rules of the memory model associated with the
     threading environment.
@@ -61,6 +63,8 @@ void @\FuncDecl{shmem\_ctx\_quiet}@(shmem_ctx_t ctx);
     when using POSIX Threads, the user may call the
     \FUNC{pthread\_barrier\_wait} routine to ensure that all threads have issued
     operations before a thread calls \FUNC{shmem\_quiet}.
+    Section~\ref{subsubsec:api_relations} provides further details about
+    establishing ordering with accesses and operations in other threads.
 
     \FUNC{shmem\_quiet} does not have an effect on the ordering between memory
     accesses issued by the target \ac{PE}. \FUNC{shmem\_wait\_until},

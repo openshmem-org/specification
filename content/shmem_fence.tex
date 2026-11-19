@@ -1,5 +1,5 @@
 \apisummary{
-    Ensures ordering of delivery of operations on symmetric data objects.
+    Ensures ordering of delivery of operations on symmetric data objects, as well as ordering of prior memory accesses.
 }
 
 \begin{apidefinition}
@@ -17,7 +17,7 @@ void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
 
 \apidescription{
     This routine ensures ordering of delivery of operations on symmetric data
-    objects.
+    objects and ordering of prior memory accesses.
     Table~\ref{mem-order} lists the operations that are ordered
     by the \FUNC{shmem\_fence} routine.
     All operations on symmetric data objects issued to a particular
@@ -36,8 +36,10 @@ void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
 }
 
 \apinotes{
-    \FUNC{shmem\_fence} only provides per-\ac{PE} ordering guarantees and does not
-    guarantee completion of delivery.
+    \FUNC{shmem\_fence} orders prior remote operations with subsequent remote operations to the same \ac{PE}.
+    It also orders all prior normal memory accesses with subsequent remote observable accesses to any \ac{PE}.
+    For ordering of remote operations, \FUNC{shmem\_fence} does not guarantee the completion of prior remote operations;
+    only that their delivery will be ordered with subsequent operations.
     \FUNC{shmem\_fence} also does not have an effect on the ordering between memory
     accesses issued by the target \ac{PE}. \FUNC{shmem\_wait\_until}, \FUNC{shmem\_test},
     \FUNC{shmem\_barrier}, \FUNC{shmem\_barrier\_all} routines can be called by the target \ac{PE} to guarantee
@@ -55,8 +57,8 @@ void @\FuncDecl{shmem\_ctx\_fence}@(shmem_ctx_t ctx);
     In an \openshmem program with multithreaded \acp{PE}, it is the
     user's responsibility to ensure ordering between operations issued by the threads
     in a \ac{PE} that target symmetric memory and calls by threads in that \ac{PE} to
-    \FUNC{shmem\_fence}. The \FUNC{shmem\_fence} routine can enforce memory store ordering only for the
-    calling thread. Thus, to ensure ordering for memory stores performed by a thread that is
+    \FUNC{shmem\_fence}. The \FUNC{shmem\_fence} routine can enforce memory access ordering only for the
+    calling thread. Thus, to ensure ordering for memory accesses performed by a thread that is
     not the thread calling \FUNC{shmem\_fence}, the update must be made visible to the
     calling thread according to the rules of the memory model associated with
     the threading environment.
