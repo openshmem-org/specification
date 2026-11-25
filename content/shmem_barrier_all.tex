@@ -1,7 +1,7 @@
 \apisummary{
     Registers the arrival of a \ac{PE} at a barrier and blocks the \ac{PE}
     until all other \acp{PE} arrive at the barrier and all local
-    updates and remote memory updates on the default context are completed.
+    memory accesses and remote memory updates on the default context are completed.
 }
 
 \begin{apidefinition}
@@ -25,7 +25,7 @@ void @\FuncDecl{shmem\_barrier\_all}@(void);
     it may not be called concurrently by multiple threads in the same \ac{PE}.
 
     Prior to synchronizing with other \acp{PE}, \FUNC{shmem\_barrier\_all}
-    ensures completion of all previously issued memory stores and remote memory
+    ensures completion of all previously issued memory accesses and remote memory
     updates issued on the default context via \openshmem \acp{AMO} and
     \ac{RMA} routine calls such
     as \FUNC{shmem\_int\_add}, \FUNC{shmem\_put32},

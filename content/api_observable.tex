@@ -1,0 +1,582 @@
+
+\normalsize
+\begin{longtable}{|m{0.27\textwidth}|m{0.68\textwidth}|}
+\hline
+\textbf{Operation Category} & \textbf{Operation Type, Params, and Observable Accesses}
+\tabularnewline\hline
+\endhead
+%%
+Remote Access Routine
+    & \begin{BVerbatim}
+shmem_put[_nbi](dest, source, nelems, pe):
+  for i in nelems:
+    R1 = LD source[i], my_pe
+    ST R1 -> dest[i], pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Remote Access Routine
+    & \begin{BVerbatim}
+shmem_p(dest, value, pe):
+  ST value -> dest, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Remote Access Routine
+    & \begin{BVerbatim}
+shmem_iput(dest, source, dst, sst, nelems, pe):
+  for i in nelems:
+    R1 = LD source[i*sst], my_pe
+    ST R1 -> dest[i*dst], pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Remote Access Routine
+    & \begin{BVerbatim}
+shmem_get[_nbi](dest, source, nelems, pe):
+  for i in nelems:
+    R1 = LD source[i], pe
+    ST R1 -> dest[i], my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Remote Access Routine
+    & \begin{BVerbatim}
+shmem_g(source, pe):
+  return LD source, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Remote Access Routine
+    & \begin{BVerbatim}
+shmem_iget(dest, source, dst, sst, nelems, pe):
+  for i in nelems:
+    R1 = LD source[i*sst], pe
+    ST R1 -> dest[i*dst], my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch(source, pe):
+  return LD source, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_set(dest, value, pe):
+  ST value -> dest, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_compare_swap(dest, cond, value, pe):
+  R1 = LD dest, pe
+  if R1 == cond:
+    ST value -> dest, pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_swap(dest, value, pe):
+  R1 = LD dest, pe
+  ST value -> dest, pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_inc(dest, pe):
+  R1 = LD dest, pe
+  R2 = R1 + 1
+  ST R2 -> dest, pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_inc(dest, pe):
+  R1 = LD dest, pe
+  R2 = R1 + 1
+  ST R2 -> dest, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_add(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 + value
+  ST R2 -> dest, pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_add(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 + value
+  ST R2 -> dest, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_and(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 & value
+  ST R2 -> dest, pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_and(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 & value
+  ST R2 -> dest, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_or(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 | value
+  ST R2 -> dest, pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_or(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 | value
+  ST R2 -> dest, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_xor(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 ^ value
+  ST R2 -> dest, pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_xor(dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 ^ value
+  ST R2 -> dest, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_nbi(fetch, source, pe):
+  R1 = LD source, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_compare_swap_nbi(fetch, dest, cond,
+value, pe):
+  R1 = LD dest, pe
+  if R1 == cond:
+    ST value -> dest, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_swap_nbi(fetch, dest, value, pe):
+  R1 = LD dest, pe
+  ST value -> dest, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_inc_nbi(fetch, dest, pe):
+  R1 = LD dest, pe
+  R2 = R1 + 1
+  ST R2 -> dest, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_add_nbi(fetch, dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 + value
+  ST R2 -> dest, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_and_nbi(fetch, dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 & value
+  ST R2 -> dest, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_or_nbi(fetch, dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 | value
+  ST R2 -> dest, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Atomic Memory Operation
+    & \begin{BVerbatim}
+shmem_atomic_fetch_xor_nbi(fetch, dest, value, pe):
+  R1 = LD dest, pe
+  R2 = R1 ^ value
+  ST R2 -> dest, pe
+  ST R1 -> fetch, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Signaling Operation
+    & \begin{BVerbatim}
+shmem_put_signal[_nbi](dest, source, nelems,
+sig_addr, signal, sig_op, pe):
+  for i in nelems:
+    R1 = LD source[i], my_pe
+    ST R1 -> dest[i], pe
+  switch sig_op:
+  case SHMEM_SIGNAL_SET:
+    ST signal -> sig_addr, pe
+  case SHMEM_SIGNAL_ADD:
+    R3 = LD sig_addr, pe
+    R2 = R3 + signal
+    ST R2 -> sig_addr, pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Signaling Operation
+    & \begin{BVerbatim}
+shmem_signal_fetch(sig_addr):
+  return LD sig_addr, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_barrier_all():
+  <No observable accesses>
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_sync(team):
+  <No observable accesses>
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_sync_all():
+  <No observable accesses>
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_alltoall(team, dest, source, nelems):
+  chunk_size = nelems/size(team)
+  for pe_src in team:
+    for pe_dst in team
+      for i in chunk_size:
+        R1 = LD source[chunk_size*pe_dst+i], pe_src
+        ST R1 -> dest[chunk_size*pe_src+i], pe_dst
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_alltoalls(team, dest, source, dst, sst,
+nelems):
+  chunk_size = nelems/size(team)
+  for pe_src in team:
+    for pe_dst in team
+      for i in chunk_size:
+        src_idx = sst*(chunk_size*pe_dst+i)
+        dst_idx = dst*(chunk_size*pe_src+i)
+        R1 = LD source[src_idx], pe_src
+        ST R1 -> dest[dst_idx], pe_dst
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_broadcast(team, dest, source, nelems, PE_root):
+  for i in nelems:
+    R1 = LD source[i], PE_root
+    for pe in team:
+      ST R1 -> dest[i], pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_collect(team, dest, source, nelems_by_pe):
+  offset[pe_src] = prefix_sum(nelems_by_pe, pe_src)
+  for pe_src in team:
+    for i in nelems_by_pe[pe_src]:
+      R1 = LD source[i], pe_src
+      for pe_dst in team:
+        ST R1 -> dest[offset[pe_src]+i], pe_dst
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_fcollect(team, dest, source, nelems):
+  for pe_src in team:
+    for i in nelems:
+      R1 = LD source[i], pe_src
+      for pe_dst in team:
+        ST R1 -> dest[nelems*team_idx(pe_src)+i], pe_dst
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_sum_inscan(team, dest, source, nelems):
+  for dest_pe in team:
+    for i in nelems:
+      R1 = 0
+      for pe_src in 0 : dest_pe:
+        R2 = LD source[i], pe_src
+        R1 = R1 + R2
+      ST R1 -> dest[i], dest_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_sum_exscan(team, dest, source, nelems):
+  for dest_pe in team:
+    for i in nelems:
+      R1 = 0
+      for pe_src in 0 : dest_pe-1:
+        R2 = LD source[i], pe_src
+        R1 = R1 + R2
+      ST R1 -> dest[i], dest_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Collective Routine
+    & \begin{BVerbatim}
+shmem_<op>_reduce(team, dest, source, nreduce):
+  for i in nreduce:
+    R1 = op.init
+    for pe in team:
+      R2 = LD source[i], pe
+      R1 = op.func(R1, R2)
+    for pe in team:
+      ST R1 -> dest[i], pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_wait_until(ivar, cmp, cmp_value):
+  R1 = LD ivar, my_pe
+  while !cmp.test(R1, cmp_value):
+    R1 = LD ivar, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_wait_until_all(ivars, nelems, status,
+cmp, cmp_value):
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    while !cmp.test(R1, cmp_value):
+      R1 = LD ivars[i], my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_wait_until_any(ivars, nelems, status, cmp,
+cmp_value):
+  while(1):
+    for i in nelems:
+      R1 = LD ivars[i], my_pe
+      if cmp.test(R1, cmp_value):
+        return i
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_wait_until_some(ivars, nelems, indices,
+status, cmp, cmp_value):
+  num_found = 0
+  while num_found == 0:
+    for i in nelems:
+      R1 = LD ivars[i], my_pe
+      if cmp.test(R1, cmp_value):
+        ST i -> indices[num_found], my_pe
+        num_found += 1
+  return num_found
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_wait_until_all_vector(ivars, nelems, status,
+cmp, cmp_values):
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    R2 = LD cmp_values[i], my_pe
+    while !cmp.test(R1, R2):
+      R1 = LD ivars[i], my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_wait_until_any_vector(ivars, nelems, status,
+cmp, cmp_values):
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    R2 = LD cmp_values[i], my_pe
+    if cmp.test(R1, R2):
+      return i
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_wait_until_some_vector(ivars, nelems,
+indices, status, cmp, cmp_values):
+  num_found = 0
+  while num_found == 0:
+    for i in nelems:
+      R1 = LD ivars[i], my_pe
+      R2 = LD cmp_values[i], my_pe
+      if cmp.test(R1, R2):
+        ST i -> indices[num_found], my_pe
+        num_found += 1
+  return num_found
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_test(ivar, cmp, cmp_value):
+  R1 = LD ivar, my_pe
+  return cmp.test(R1, cmp_value) ? 1 : 0
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_test_all(ivars, nelems, status, cmp,
+cmp_value):
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    if !cmp.test(R1, cmp_value)
+      return 0
+  return 1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_test_any(ivars, nelems, status, cmp,
+cmp_value):
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    if cmp.test(R1, cmp_value)
+      return i
+  return SIZE_MAX
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_test_some(ivars, nelems, indices, status,
+cmp, cmp_value):
+  num_found = 0
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    if cmp.test(R1, cmp_value)
+      ST i -> indices[num_found], my_pe
+      num_found += 1
+  return num_found
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_test_all_vector(ivars, nelems, status, cmp,
+cmp_values):
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    R2 = LD cmp_values[i], my_pe
+    if !cmp.test(R1, R2)
+      return 0
+  return 1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_test_any_vector(ivars, nelems, status, cmp,
+cmp_values):
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    R2 = LD cmp_values[i], my_pe
+    if cmp.test(R1, R2)
+      return i
+  return SIZE_MAX
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_test_some_vector(ivars, nelems, indices,
+status, cmp, cmp_values):
+  num_found =0
+  for i in nelems:
+    R1 = LD ivars[i], my_pe
+    R2 = LD cmp_values[i], my_pe
+    if cmp.test(R1, R2)
+      ST i -> indices[num_found], my_pe
+      num_found += 1
+  return num_found
+    \end{BVerbatim}
+    \tabularnewline\hline
+Point-to-Point Synchronization Routine
+    & \begin{BVerbatim}
+shmem_signal_wait_until(sig_addr, cmp, cmp_value):
+  R1 = LD sig_addr, my_pe
+  while !cmp.test(R1, cmp_value):
+    R1 = LD sig_addr, my_pe
+  return R1
+    \end{BVerbatim}
+    \tabularnewline\hline
+Memory Ordering Routine
+    & \begin{BVerbatim}
+shmem_fence():
+  <No observable accesses>
+    \end{BVerbatim}
+    \tabularnewline\hline
+Memory Ordering Routine
+    & \begin{BVerbatim}
+shmem_quiet():
+  <No observable accesses>
+    \end{BVerbatim}
+    \tabularnewline\hline
+Distributed Locking Routine
+    & \begin{BVerbatim}
+shmem_clear_lock(lock):
+  ST UNSET -> lock, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Distributed Locking Routine
+    & \begin{BVerbatim}
+shmem_set_lock(lock):
+  R1 = LD lock, my_pe
+  while R1 != UNSET:
+    R1 = LD lock, my_pe
+  ST SET -> lock, my_pe
+    \end{BVerbatim}
+    \tabularnewline\hline
+Distributed Locking Routine
+    & \begin{BVerbatim}
+shmem_test_lock(lock):
+  R1 = LD lock, my_pe
+  if R1 == UNSET:
+    ST SET -> lock, my_pe
+    return 1
+  return 0
+    \end{BVerbatim}
+    \tabularnewline\hline
+
+%%
+%\EnvVarDecl{SHMEM\_INFO}
+%    & Any
+%    & Print helpful text about all these environment variables
+%    \tabularnewline\hline
+\TableCaptionRef{Observable accesses defined for each \openshmem operation
+    type.}\label{table:api_observable}
+\end{longtable}

@@ -419,6 +419,9 @@ supported before removal.
         & 1.5 & Current & Table~\ref{stdamotypes}: standard \ac{AMO} types \\ \hline
     %% Deprecated in 1.6
     %% Deprecated in 1.7
+    \LibConstRef{SHMEM\_CTX\_NOSTORE}
+        & 1.7 & Current
+        & \hyperref[subsec:library_constants]{\CONST{SHMEM\_CTX\_RELAX\_FENCE}} \\ \hline
     %% Notes
     %% - If a hyperref spans more than one line vertically, the clickable box
     %%   will also span more than one line. To prevent this, wrap the hyperref
@@ -664,6 +667,26 @@ standard \ac{AMO} types in Table~\ref{stdamotypes}.
 
 
 \chapter{Changes to this Document}\label{sec:changelog}
+
+\section{Version 1.7}
+\label{changelog:v1.7}
+Major changes in \openshmem[1.7] include the addition of a formal
+API-level memory model and clarifications to memory-access ordering and
+completion semantics.
+
+The following list describes the specific changes in \openshmem[1.7]:
+\begin{enumerate}
+%
+\item Added a formal API-level memory model defining operation events,
+    observable accesses, and the ordering relations guaranteed by
+    \openshmem. Clarified the memory-access ordering and completion semantics
+    of \openshmem operations, notably \FUNC{shmem\_fence}, \FUNC{shmem\_quiet}, and
+    \FUNC{shmem\_barrier\_all}, and updated the description of the
+    \CONST{SHMEM\_CTX\_NOSTORE} context option.
+\ChangelogRef{subsec:api_mem_model, subsec:shmem_fence, subsec:shmem_quiet,
+    subsec:shmem_barrier_all, subsec:shmem_ctx_create, subsec:library_constants}%
+%
+\end{enumerate}
 
 \section{Version 1.6}
 \label{changelog:v1.6}
